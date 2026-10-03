@@ -37,6 +37,7 @@
 
     { "id": "salve", "name": "Salve", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 2, "minRange": 1, "maxRange": 1, "durability": 8, "rank": "E", "price": 500, "heals": true, "healBase": 0, "description": "A prayer for a cut that will not close. Mends whoever stands beside you." },
     { "id": "beacon", "name": "Beacon", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 4, "rank": "C", "price": 800, "heals": true, "healBase": 0, "description": "The same prayer, said louder. Reaches a friend two tiles off." },
+    { "id": "maud_psalter", "name": "Maud's Psalter", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 4, "rank": "D", "heals": true, "healBase": 0, "boundTo": "maud", "description": "Placeholder. Her order's prayers in her own hand, and some of hers." },
     { "id": "radiance", "name": "Radiance", "type": "faith", "mt": 6, "hit": 85, "crit": 0, "wt": 4, "minRange": 1, "maxRange": 2, "durability": 5, "rank": "D", "price": 700, "description": "Faith turned outward. Light that stings anyone the healer must face." }
   ]
 }

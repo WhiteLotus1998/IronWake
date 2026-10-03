@@ -161,6 +161,12 @@ public static class ContentLoader
             {
                 throw new ContentException(files.Abilities.Name, ability.Id, "effect.item", $"'{item}' must be a {art.Weapon.ToString().ToLowerInvariant()} in weapons.json");
             }
+
+            if (ability.Effect is HealArtEffect { Item: { } spell } heal
+                && !(weapons.TryGetValue(spell, out var healing) && healing.Type == heal.Weapon && healing.Heals))
+            {
+                throw new ContentException(files.Abilities.Name, ability.Id, "effect.item", $"'{spell}' must be a healing {heal.Weapon.ToString().ToLowerInvariant()} spell in weapons.json");
+            }
         }
     }
 
@@ -1146,6 +1152,21 @@ public static class ContentLoader
                 }
 
                 return art;
+            case "heal_art":
+                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "factor", "item");
+                var healArt = new HealArtEffect(
+                    entry.ParseEnum<WeaponType>("effect.weapon", effect.String("weapon")),
+                    entry.ParseEnum<WeaponRank>("effect.rank", effect.String("rank")),
+                    effect.Int("factor"))
+                {
+                    Item = effect.Has("item") ? effect.String("item") : null,
+                };
+                if (healArt.Factor < 2)
+                {
+                    throw entry.Error("effect.factor", "must be at least 2: a heal art at the plain cast's heal is a Wait with extra steps");
+                }
+
+                return healArt;
             case "canto":
                 RequireOnly(entry, effect, "effect", "kind", "after");
                 if (effect.Has("after") && effect.String("after") != "heal")
@@ -1266,7 +1287,7 @@ public static class ContentLoader
 
                 return opening;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, mending, brace, sight, headcount, range, killheal, beside, aura, footing or opening");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, sight, headcount, range, killheal, beside, aura, footing or opening");
         }
     }
 

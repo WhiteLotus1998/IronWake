@@ -134,6 +134,23 @@ public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cos
 }
 
 /// <summary>
+/// A heal art (issue 635, round 261; Maud's Unasked): declared with the Item action on a healing
+/// spell of type <see cref="Weapon"/>, at rank <see cref="Rank"/> or above, on an ally who has
+/// neither moved, acted nor been shoved this phase. It restores <see cref="Factor"/> times the
+/// plain cast, never above the ally's max HP, and spends one use as the plain cast does; the ally's
+/// phase then ends where it stands, a Wait in place (it braces where <see cref="Brace"/> says so).
+/// The ally's turn is the price, so the art costs no extra use. <see cref="Item"/> makes it a
+/// signature art, declared only with that one spell.
+/// </summary>
+public sealed record HealArtEffect(WeaponType Weapon, WeaponRank Rank, int Factor) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.Declared;
+
+    /// <summary>The one healing spell this signature art is declared with, or null when any of its type will do.</summary>
+    public string? Item { get; init; }
+}
+
+/// <summary>
 /// Canto (issue 71, DESIGN.md section 7): after an Attack, Item or Wait the unit may move
 /// again on what its first move left of its Mov, through <see cref="Movement.Reach"/> from
 /// where it stands. The effect has no numbers; content decides which classes carry it.

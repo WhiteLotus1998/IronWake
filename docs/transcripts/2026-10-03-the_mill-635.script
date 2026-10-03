@@ -1,0 +1,34 @@
+wait maud
+move captain 4,7
+wait captain
+end
+move maud 6,7
+wait maud
+move captain 7,6
+wait captain
+end
+threat maud
+item maud 1 captain art unasked
+end
+item maud 1 captain art unasked
+end
+attack captain soldier-1
+wait maud
+end
+move captain 8,6
+attack captain archer-1
+move maud 7,6
+forecast maud archer-1 2
+attack maud archer-1 2
+end
+move captain 8,5
+attack captain archer-1
+threat maud from 4,7
+move maud 4,7
+wait maud
+end
+move captain 8,6
+attack captain archer-2
+end
+move captain 9,6
+attack captain archer-2

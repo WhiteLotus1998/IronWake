@@ -437,6 +437,17 @@ public static class ContentSerializer
                 }
 
                 break;
+            case HealArtEffect healArt:
+                writer.WriteString("kind", "heal_art");
+                writer.WriteString("weapon", healArt.Weapon.ToString().ToLowerInvariant());
+                writer.WriteString("rank", healArt.Rank.ToString());
+                writer.WriteNumber("factor", healArt.Factor);
+                if (healArt.Item is { } spell)
+                {
+                    writer.WriteString("item", spell);
+                }
+
+                break;
             case CantoEffect canto:
                 writer.WriteString("kind", "canto");
                 if (canto.AfterHeal)

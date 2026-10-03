@@ -1240,7 +1240,9 @@ public static class Program
             yield return $"  {reading.Item.Id} ({reading.Item.BoundTo}, {reading.Item.Type.ToString().ToLowerInvariant()} {reading.Item.Rank}): {against}, ceiling {SignatureCeiling.MaxRatio:F2}";
             foreach (var art in reading.Arts)
             {
-                yield return $"    {art.ArtId}: loses to the plain attack on {art.LosesTo} of {art.Targets} targets";
+                yield return art.ByConstruction
+                    ? $"    {art.ArtId}: a heal art, costs the ally its phase; judged in play (0099)"
+                    : $"    {art.ArtId}: loses to the plain attack on {art.LosesTo} of {art.Targets} targets";
             }
         }
     }

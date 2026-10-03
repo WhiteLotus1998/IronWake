@@ -30,9 +30,10 @@ public sealed record Attack(string UnitId, string TargetId, int? Slot = null, st
 /// <summary>
 /// Use the item in an inventory slot (section 7's Item action): a consumable heals its
 /// user and needs no target; a healing spell heals the ally named by <paramref name="TargetId"/>
-/// within its range. Ends the unit's action.
+/// within its range. Ends the unit's action. <paramref name="Art"/> names a heal art the unit
+/// knows (issue 635, <see cref="HealArtEffect"/>), declared with a healing spell before it is cast.
 /// </summary>
-public sealed record UseItem(string UnitId, int Slot, string? TargetId = null) : Command;
+public sealed record UseItem(string UnitId, int Slot, string? TargetId = null, string? Art = null) : Command;
 
 /// <summary>
 /// An enemy below 30 percent HP falls back to a healing tile it can reach this phase

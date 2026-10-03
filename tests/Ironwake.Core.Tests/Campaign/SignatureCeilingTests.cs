@@ -189,12 +189,12 @@ public class SignatureCeilingTests
     }
 
     [Fact]
-    public void TheSmokeRowPassesOnTheShippedHeirloomAtItsLastStage()
+    public void TheSmokeRowPassesOnTheShippedHeirloomAtItsLastStageAndMaudsPsalter()
     {
         var row = Ironwake.Sim.Program.CeilingGate(Shipped);
 
         Assert.True(row.Passed);
-        Assert.Equal("signature ceiling: 1 items, highest 1.14 of 1.15: ok", row.Line);
+        Assert.Equal("signature ceiling: 2 items, highest 1.14 of 1.15: ok", row.Line);
     }
 
     [Fact]
@@ -208,5 +208,59 @@ public class SignatureCeilingTests
         Assert.False(row.Passed);
         Assert.StartsWith("signature ceiling: test_vow deals ", row.Line);
         Assert.EndsWith(": FAILED", row.Line);
+    }
+    [Fact]
+    public void AHealingItemIsHeldToTheBestStockedHealAtOrBelowItsRank()
+    {
+        var psalter = Shipped.Weapon("maud_psalter");
+
+        Assert.Equal(new[] { "salve" }, SignatureCeiling.HealShop(Shipped, psalter).Select(w => w.Id));
+        Assert.Contains("beacon", SignatureCeiling.HealShop(Shipped, psalter with { Rank = WeaponRank.C }).Select(w => w.Id));
+    }
+
+    [Fact]
+    public void TheHealArmReadsHpPerCastTimesUsesAgainstTheComparator()
+    {
+        var maud = Shipped.Cast.Single(u => u.Id == "maud");
+        var reading = Read(Shipped, "maud_psalter");
+
+        var perCast = Ironwake.Core.Combat.Heal(Shipped.CombatantOf(maud, Shipped.Weapon("salve"), Shipped.Terrain["plain"], Shipped.StatsOf(maud).Hp), Shipped.Weapon("salve"));
+        Assert.Equal(perCast * 8.0, SignatureCeiling.Restored(Shipped, maud, Shipped.Weapon("salve")));
+        Assert.Equal(perCast * 4.0, SignatureCeiling.Restored(Shipped, maud, Shipped.Weapon("maud_psalter")));
+        Assert.Equal("salve", reading.Comparator!.Id);
+        Assert.Equal(0.5, reading.Ratio, 3);
+        Assert.True(reading.Passed);
+    }
+
+    [Fact]
+    public void AHealingItemOverTheCeilingFails()
+    {
+        var content = Shipped with { Weapons = Shipped.Weapons.SetItem("maud_psalter", Shipped.Weapon("maud_psalter") with { Durability = 10 }) };
+
+        var reading = Read(content, "maud_psalter");
+
+        Assert.False(reading.Passed);
+        Assert.Contains("restores 1.25 of salve, over the ceiling", reading.Failure);
+    }
+
+    [Fact]
+    public void AHealingItemWithNoShopHealFailsNamingTheRank()
+    {
+        var content = Shipped with { Weapons = Shipped.Weapons.SetItem("maud_psalter", Shipped.Weapon("maud_psalter") with { Type = WeaponType.Reason }) };
+        content = content with { Abilities = content.Abilities.Remove("unasked") };
+
+        var reading = Read(content, "maud_psalter");
+
+        Assert.False(reading.Passed);
+    }
+
+    [Fact]
+    public void AHealArtPassesByConstruction()
+    {
+        var reading = Read(Shipped, "maud_psalter");
+
+        var art = Assert.Single(reading.Arts);
+        Assert.Equal("unasked", art.ArtId);
+        Assert.True(art.ByConstruction && art.Passed);
     }
 }

@@ -17,7 +17,14 @@ public sealed record CeilingReading(Weapon Item, Weapon? Comparator, double Rati
 /// </summary>
 public sealed record ArtReading(string ArtId, int LosesTo, int Targets)
 {
-    public bool Passed => LosesTo > 0;
+    public bool Passed => ByConstruction || LosesTo > 0;
+
+    /// <summary>
+    /// A heal art (issue 635, round 260): it costs the ally its phase, so it restores less than a
+    /// plain cast plus that ally's own action whenever the action is worth anything, and play judges
+    /// it (DECISIONS/0099). It passes without a count.
+    /// </summary>
+    public bool ByConstruction { get; init; }
 }
 
 /// <summary>
@@ -33,7 +40,8 @@ public sealed record ArtReading(string ArtId, int LosesTo, int Targets)
 /// that strikes, with the first such weapon, on the same terrain at full HP, each struck at the
 /// attacking weapon's nearest range. The comparator is the shop weapon (one some campaign map
 /// stocks, else any priced weapon) of the item's type, at its rank up to <see cref="FloorRank"/>,
-/// with the most damage summed over the targets.
+/// with the most damage summed over the targets. A healing item takes the heal arm instead
+/// (<see cref="ReadHeal"/>, issue 635).
 /// </para>
 /// </summary>
 public static class SignatureCeiling
@@ -64,6 +72,11 @@ public static class SignatureCeiling
         if (!content.Class(owner.ClassId).CanUse(item.Type))
         {
             return new CeilingReading(item, null, 0, ValueList<ArtReading>.Empty, $"{owner.Id} cannot wield {item.Id} ({item.Type.ToString().ToLowerInvariant()})");
+        }
+
+        if (item.Heals)
+        {
+            return ReadHeal(content, owner, item);
         }
 
         var targets = Targets(content);
@@ -100,6 +113,52 @@ public static class SignatureCeiling
         }
 
         return new CeilingReading(item, comparator.Weapon, ratio, arts, failure);
+    }
+
+    /// <summary>
+    /// The heal arm (issue 635, rounds 260 and 261): a healing item's HP per cast at the owner's cast
+    /// card, the target uncapped, times its uses, against the same for the best shop heal of its type
+    /// at or below its rank (<see cref="HealShop"/>), at most <see cref="MaxRatio"/>. Range is not
+    /// priced: the item's edge is its reach and its art. Each heal art on it passes by construction.
+    /// </summary>
+    private static CeilingReading ReadHeal(GameContent content, Unit owner, Weapon item)
+    {
+        var arts = ValueList<ArtReading>.From(content.Abilities.Values
+            .Where(a => a.Effect is HealArtEffect art && art.Item == item.Id)
+            .Select(a => new ArtReading(a.Id, 0, 0) { ByConstruction = true }));
+        var comparator = HealShop(content, item)
+            .Select(w => (Weapon: w, Restored: Restored(content, owner, w)))
+            .OrderByDescending(x => x.Restored)
+            .ThenBy(x => x.Weapon.Id, StringComparer.Ordinal)
+            .FirstOrDefault();
+        if (comparator.Weapon is null)
+        {
+            return new CeilingReading(item, null, 0, arts, $"the shop sells no {item.Type.ToString().ToLowerInvariant()} heal at or below rank {item.Rank} to hold {item.Id} to");
+        }
+
+        var ratio = comparator.Restored <= 0 ? double.PositiveInfinity : Restored(content, owner, item) / comparator.Restored;
+        var failure = ratio > MaxRatio ? $"{item.Id} restores {ratio:F2} of {comparator.Weapon.Id}, over the ceiling of {MaxRatio:F2}" : null;
+        return new CeilingReading(item, comparator.Weapon, ratio, arts, failure);
+    }
+
+    /// <summary>What <paramref name="spell"/> restores over its uses in <paramref name="owner"/>'s hands at the cast card: HP per cast, never capped by a target, times uses.</summary>
+    public static double Restored(GameContent content, Unit owner, Weapon spell)
+    {
+        var healer = content.CombatantOf(owner, spell, content.Terrain[TerrainId], content.StatsOf(owner).Hp);
+        return (double)Combat.Heal(healer, spell) * spell.Durability;
+    }
+
+    /// <summary>
+    /// The shop heals a healing item is held to: unbound priced healing spells of its type at or below
+    /// its rank that some campaign map stocks, or, when the campaign stocks none of them, every priced one.
+    /// </summary>
+    public static IReadOnlyList<Weapon> HealShop(GameContent content, Weapon item)
+    {
+        var kin = content.Weapons.Values
+            .Where(w => w.BoundTo is null && w.Price is not null && w.Heals && w.Type == item.Type && w.Rank <= item.Rank)
+            .ToList();
+        var stocked = kin.Where(w => content.Campaign.Maps.Any(m => m.Stock.Contains(w.Id))).ToList();
+        return stocked.Count > 0 ? stocked : kin;
     }
 
     /// <summary>

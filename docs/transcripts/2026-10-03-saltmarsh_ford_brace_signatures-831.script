@@ -1,0 +1,127 @@
+move teodor 4,7
+wait teodor
+move wren 5,8
+wait wren
+move captain 6,8
+wait captain
+move ottilie 5,9
+wait ottilie
+end
+wait teodor
+move ottilie 3,7
+attack ottilie brigand-1
+move wren 3,8
+wait wren
+canto wren stay
+move captain 5,8
+wait captain
+end
+wait teodor
+move wren 4,6
+attack wren brigand-1
+canto wren stay
+move ottilie 3,8
+attack ottilie brigand-1
+move captain 3,7
+attack captain brigand-1
+end
+wait teodor
+move ottilie 6,9
+item ottilie 2
+move wren 7,8
+wait wren
+canto wren stay
+wait captain
+end
+recall 55
+move wren 3,9
+item wren 2
+canto wren stay
+wait captain
+end
+wait teodor
+move ottilie 3,8
+attack ottilie soldier-1 art aimed_shot
+attack captain soldier-1
+move wren 4,6
+attack wren soldier-1
+recall 70
+move wren 4,6
+attack wren soldier-1
+canto wren stay
+wait captain
+end
+wait teodor
+move wren 2,7
+attack wren soldier-1
+canto wren stay
+item ottilie 2
+item captain 2
+end
+move teodor 7,6
+wait teodor
+move captain 6,7
+wait captain
+move wren 5,7
+wait wren
+canto wren stay
+move ottilie 6,8
+wait ottilie
+end
+move teodor 10,5
+wait teodor
+move wren 8,6
+item wren 2
+canto wren stay
+move captain 9,7
+wait captain
+move ottilie 8,8
+wait ottilie
+end
+wait teodor
+move ottilie 10,6
+attack ottilie wingrider-1
+move wren 10,4
+attack wren archer-1
+canto wren stay
+move captain 9,5
+wait captain
+end
+item teodor 2
+attack wren archer-1
+canto wren 9,4
+wait captain
+wait ottilie
+end
+wait teodor
+move ottilie 11,4
+attack ottilie soldier-2
+move wren 10,4
+attack wren soldier-2
+canto wren 9,4
+move captain 10,4
+attack captain soldier-2
+end
+move captain 10,1
+wait captain
+move teodor 11,2
+item teodor 2
+move ottilie 10,3
+wait ottilie
+move wren 9,2
+wait wren
+canto wren stay
+end
+move teodor 11,1
+wait teodor
+move captain 10,4
+item captain 2
+move ottilie 10,2
+attack ottilie bandit_leader-1 art aimed_shot
+move wren 9,0
+attack wren bandit_leader-1
+canto wren 9,2
+end
+wait teodor
+move wren 10,1
+attack wren bandit_leader-1

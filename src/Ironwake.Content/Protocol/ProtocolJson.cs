@@ -509,6 +509,11 @@ public static class ProtocolJson
                 w.WriteString("unit", i.UnitId);
                 w.WriteNumber("slot", i.Slot);
                 w.WriteString("target", i.TargetId);
+                if (i.Art is not null)
+                {
+                    w.WriteString("art", i.Art);
+                }
+
                 break;
             case Retreat r:
                 w.WriteString("type", "retreat");
@@ -601,7 +606,7 @@ public static class ProtocolJson
         {
             "move" => new Move(RequiredString(e, "unit"), ReadCoord(e, "to"), e.TryGetProperty("via", out _) ? ReadCoord(e, "via") : null),
             "attack" => new Attack(RequiredString(e, "unit"), RequiredString(e, "target"), OptionalInt(e, "slot"), OptionalString(e, "art")),
-            "item" => new UseItem(RequiredString(e, "unit"), RequiredInt(e, "slot"), OptionalString(e, "target")),
+            "item" => new UseItem(RequiredString(e, "unit"), RequiredInt(e, "slot"), OptionalString(e, "target"), OptionalString(e, "art")),
             "retreat" => new Retreat(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "wait" => new Wait(RequiredString(e, "unit")),
             "watch" => new Watch(RequiredString(e, "unit")),

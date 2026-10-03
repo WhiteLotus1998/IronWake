@@ -2090,3 +2090,27 @@ Notes: Warm: I built the meeting and the camp lines. Transcript `docs/transcript
 - Found: the Recall browser lists the spared Keziah as `gives back 1 kill (Keziah)`. A talk is not a kill (0193); filed.
 
 — Code
+
+## 2026-10-03 — Saltmarsh Ford signatures sample, cold — Chat (copied from the Table, round 263)
+Seed: 831 (`play docs/samples/saltmarsh_ford_brace_signatures.map --seed 831 --script`, main at 522d2db)   Result: won, turn 14 of 18, rout, nobody dead; two Recalls
+Tension: 6/10   Choice: 7/10   Surprise: 5/10
+Best turn: Turn 11. Soldier-2 on the ford, 20 HP, one land tile adjacent (10,4). Teodor waits to order. Ottilie hits from 11,4 for 6. Wren steps onto 10,4, cuts for 8, and Cantos back to 9,4, which frees the only tile. The captain steps in for 9: 6 + 8 + 9 = 23 on a 20 HP soldier. Canto is the reason a one-tile ford takes three swords. That is the best thing 13.18 has done on this board.
+Notes: Transcript `docs/transcripts/2026-10-03-saltmarsh_ford_brace_signatures-831.txt`.
+- Recall 1 (turn 4): I mistyped Wren's retreat, she braced in place at 9 HP, and a 36% lance killed her. Recall 2 (turn 5): I swung the captain first into a miss and an 8-damage counter, which left him at 4 HP and in reach. Rewinding showed that the rolls follow the sequence, so I didn't attack with him at all and braced him instead. That was the right call: the soldier went for Ottilie.
+- Tension: the ford fight was tense twice, both times my own fault. The fort fight was a procedure: bait, strip the brace, hit. Choice: the order of strikes mattered every turn because of the orders, and the bait tile mattered. Surprise: Ottilie's crit on the leader, and the soldier choosing her over the braced captain.
+- The ledger refused three shots and Aimed Shot cleared each one (DECISIONS/0197).
+- The moment I stopped caring: turn 12 onward, alone against a stationary boss.
+
+— Chat
+
+## 2026-10-03 — The Mill with Maud's Psalter and Unasked (#635 slice 4), warm — Code
+Seed: 635 (`play content/maps/the_mill.map --seed 635 --content <scratch copy>`, the Psalter added to Maud's pack; no shipped path issues it yet)   Result: won, turn 9 of 12, rout, nobody lost; no Recall
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: Turn 4. The captain stood at 7,6 at 8 HP with the soldier adjacent at 11. Striking first was printed `Counter: lethal to Alder Fenn (8 against 8 hp)`, and the threat on his tile read `18 against 8`. Unasked took him to 22 and nailed him to 7,6, so he could not strike the soldier he had already half-killed. It was the right call for him. Then `end` printed `Lethal if all land: Maud`, and I ended anyway. The soldier walked past the held captain and went for Maud at 81%, and it missed. She countered it to 1. A captain held in place is a captain who cannot screen. That is the price round 261 meant, and I paid it without reading the line that told me so.
+Notes: Warm: I built the art. Transcript `docs/transcripts/2026-10-03-the_mill-635.txt`; the script replays only on a content copy with the Psalter in Maud's pack.
+- **Unasked was chosen twice, both on the captain, and both times the plain line was worse.** On turn 3 he was at 7 HP. The plain line was strike the archer (58%) and take a 7 heal. Unasked gave 14 and he held. On a two-unit board the ally is always the captain, so the choice is only "his strike or his HP". On a six-unit board it becomes "whose turn do I take", and that is where the art should be judged.
+- **The cost bit once, and it bit Maud, not the held unit.** That is the shape I want. The ally's phase and position are the price, and the board charges it to whoever the ally was standing in front of.
+- **4 uses go fast.** Two Unaskeds and half the Psalter was gone by turn 4. With Salve's 8 still in her pack, the Psalter is the spell for the turn that matters, and the Salve is for the rest.
+- Not tense: turns 6 to 9, two archers and a captain at full HP.
+
+— Code

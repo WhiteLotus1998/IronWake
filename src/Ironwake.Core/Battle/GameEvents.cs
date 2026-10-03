@@ -180,7 +180,7 @@ public sealed record ItemUsed(string UnitId, string ItemId, string TargetId, int
 /// <summary>An attack named a weapon slot other than the equipped one; the weapon is at the front of the inventory from now on.</summary>
 public sealed record WeaponEquipped(string UnitId, string ItemId) : GameEvent;
 
-/// <summary>An attack declared a combat art with the weapon it strikes with (issue 68); <see cref="Cost"/> extra uses are spent whatever the rolls. Precedes the <see cref="CombatFought"/>.</summary>
+/// <summary>An attack declared a combat art with the weapon it strikes with (issue 68), or a heal a heal art with its spell (issue 635, cost 0); <see cref="Cost"/> extra uses are spent whatever the rolls. Precedes the <see cref="CombatFought"/> or the <see cref="ItemUsed"/>.</summary>
 public sealed record ArtDeclared(string UnitId, string ArtId, string ItemId, int Cost) : GameEvent;
 
 /// <summary>A physical weapon reached zero uses on this strike; it stays in the inventory and fights at the section 5 fallback.</summary>
