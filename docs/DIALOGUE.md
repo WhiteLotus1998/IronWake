@@ -37,7 +37,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15). Critic's 617 (7/6/6): one answer at the 7,0 door; first levers if reopened.
 - **Saltmarsh Ford:** not tuned. North cut (0093): 7/7/6, 7/7/5. The spawn lever failed (0095); the next buys gate 1 back first. Retuned for Pell (#632).
 - **Sallow Grange:** the Reeve stays at 15,6; the yard mouth is the map's discovery, unnamed; a quiet route is quiet on the enemy phase too (#275).
-- **The Rookery (Rook 2, 0208):** not passed. Warm 8/6/6, Chat cold 8/6/8 (284): the courtyard cage at the 3,5 door stays. The holds never fired in either play; the one lever is their rings on the exit approach (#862), not a guard sentry or an earlier rider. A lost Escape side map keeps its living (#861).
+- **The Rookery (Rook 2, 0208):** not passed. Warm 8/6/6, Chat cold 8/6/8 (284): the courtyard cage at the 3,5 door stays. The holds never fired in either play; the one lever is their rings on the exit approach (#862), not a guard sentry or an earlier rider. A lost Escape side map keeps its living (#861, fixed).
 - **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. The bare keep (Chat cold, round 235, 7/7/6): walls and Long Draw bow kept, no lever on the stand-in.
 
 ## Experiments (state and kill criterion)

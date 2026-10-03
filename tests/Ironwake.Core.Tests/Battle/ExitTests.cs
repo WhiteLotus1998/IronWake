@@ -122,6 +122,17 @@ public class ExitTests
     }
 
     [Fact]
+    public void BeforeTheCaptainLeavesTheSurvivorsAreTheEscapedAndTheBoard()
+    {
+        var state = Start().Stood("wren", new Coord(2, 3)).Do(new Exit("wren"));
+        Assert.Equal(new[] { "wren", "hale" }, state.Survivors().Select(u => u.Id));
+
+        var alone = Start();
+        Assert.Empty(alone.LeftBehind());
+        Assert.Equal(alone.UnitsOf(Side.Player).Select(u => u.Id), alone.Survivors().Select(u => u.Id));
+    }
+
+    [Fact]
     public void ExitIsRefusedOffAnExitTile()
     {
         var rejection = Start().Refused(new Exit("wren"));
