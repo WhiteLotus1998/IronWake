@@ -1,0 +1,57 @@
+# Issue 633 slice 3: Code's warm hand play of the field's camp and first turns with Ansgar met and Rook picked, so Keziah comes back with the pickets, seed 634.
+# Played by `campaign --seed 634 --from the_field --pick rook --level 5 --script <this file>` (Captain difficulty, permadeath on, the company at level 5). Stopped at turn 4 with the pickets cleared. One Recall: turn 2, after Ansgar fell at 8,12.
+meet ansgar
+bench wren
+bench dunstan
+march
+move captain 3,12
+wait captain
+move ansgar 3,13
+wait ansgar
+move teodor 3,11
+wait teodor
+move ottilie 2,12
+wait ottilie
+move pell 2,11
+wait pell
+move maud 2,13
+wait maud
+end
+move captain 7,12
+talk captain keziah
+move ansgar 8,12
+wait ansgar
+move teodor 7,11
+wait teodor
+move maud 5,12
+wait maud
+move ottilie 6,12
+wait ottilie
+move pell 6,11
+wait pell
+end
+recall 28
+move ansgar 6,12
+wait ansgar
+move teodor 7,11
+wait teodor
+move pell 5,11
+wait pell
+move ottilie 5,12
+wait ottilie
+move maud 4,12
+wait maud
+end
+attack captain brigand-1
+move ansgar 8,13
+attack ansgar archer-2 iron_sword
+canto ansgar 6,14
+move pell 4,13
+attack pell soldier-3
+move teodor 5,13
+attack teodor soldier-3
+move ottilie 6,12
+attack ottilie archer-2
+move maud 5,14
+item maud 2 ansgar
+end

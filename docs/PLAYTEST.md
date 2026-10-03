@@ -2076,3 +2076,17 @@ Notes: Warm: I built the return and chose its tile. The `--level 5` start is a l
 - **The bed line did its work at the camp.** `Turned, she joins only if a bed is free (beds: 10/12)` sat under the roster. With two free there was no cost this time. The cost the slice is built for, a bed held back from a side character, needs a campaign run that fills them.
 
 — Code
+
+## 2026-10-03 — The field's camp and first turns with Ansgar met (#633 slice 3), warm — Code
+Seed: 634 (`campaign --from the_field --pick rook --level 5`, Captain, permadeath on)   Result: stopped at turn 4 of 20, pickets cleared, nobody lost; one Recall; Keziah spared by the captain on turn 2
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: Turn 2, after the Recall. I had parked Ansgar at 8,12 to screen the captain, and `threat` printed `28 against 22`. I took it anyway, and he died to the archer, the brigand and the soldier in that order. He was the man I had spent the camp's meeting on. On the replay he stood behind the captain at 6,12, the captain took the brigand's swing at 91% x2 counters, and on turn 3 Ansgar hit the archer and used his Canto to get back to Maud.
+Notes: Warm: I built the meeting and the camp lines. Transcript `docs/transcripts/2026-10-03-the_field-634.txt`.
+- **The real choice was the slot, not the bed.** The field has one bare slot. With Ansgar met and Rook picked, they compete for it, and the camp's deploy line shows it. I benched Wren and Dunstan to field Ansgar, which left Rook home, so only the captain could talk to Keziah. Meeting someone and turning someone pulled against each other through deployment, not through beds.
+- **The beds did not bind.** `beds: 9/12` under both lines. With today's twelve beds nothing is turned away at the field. The bed cost waits for the levy roster.
+- **The captain's spare was free here.** Keziah was asleep at 8,12, four tiles away. The captain walked up and talked on turn 2, which woke the pickets around him and cost him 10 HP. That is a price, but a small one. Chat's cold play still decides `talk`.
+- **The enemy hunted the newcomer.** Every picket went for Ansgar on both enemy phases (Def 3, 22 HP on open ground). A side character met at level 5 with no camp time is the company's softest horse, and the board knew it before I did.
+- Not tense: turns 3 and 4, cleanup. I stopped there because this slice changes the camp and the board is 0193's.
+- Found: the Recall browser lists the spared Keziah as `gives back 1 kill (Keziah)`. A talk is not a kill (0193); filed.
+
+— Code

@@ -41,6 +41,7 @@ public sealed class CampaignSession
           build <room>             Buy a room for the keep from the purse; each adds beds, and no bed free means a recruit will not join
           hire [<id>]              List the barracks' hires, or hire one into the company from the purse (once the barracks is built)
           pick <unit>              Fill the last seat with one of the two claimants; the other rides home (final)
+          meet <unit>              Take on the side character met at this camp, if a bed is free (final; one a map)
           build <edit> <x,y>       Buy one edit of the keep's menu at one of its placements
           bench <unit>             Keep a unit off the next map; the next in roster order fills its slot
           unbench <unit>           Return a benched unit to the deployment order
@@ -720,6 +721,7 @@ public sealed class CampaignSession
 
         lines.AddRange(LowLines(record, content));
         lines.AddRange(BranchLines(record, content));
+        lines.AddRange(MeetingLines(record, content));
         return lines;
     }
 
@@ -750,6 +752,42 @@ public sealed class CampaignSession
         {
             $"The last seat: {Claimant(branch[0])} or {Claimant(branch[1])} (pick <unit>). The one passed on rides home.",
             "They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.",
+        };
+    }
+
+    /// <summary>
+    /// The meeting as the Roster panel prints it at its camp (issue 633 slice 3, DESIGN section 14):
+    /// before it, who may be met, at what level, the command, and the bed rule with the beds as they
+    /// stand, or <c>no bed free: &lt;name&gt; will not join</c> when none is; after it, who joined.
+    /// Empty at every other camp.
+    /// </summary>
+    public static IReadOnlyList<string> MeetingLines(CampaignRecord record, GameContent content)
+    {
+        if (record.IsFinished(content) || record.NextMap(content).Meets is not { Count: > 0 } meets)
+        {
+            return Array.Empty<string>();
+        }
+
+        if (meets.FirstOrDefault(record.Met.Contains) is { } made)
+        {
+            return new[] { $"Met: {content.Unit(made).Name}, with the company." };
+        }
+
+        var level = record.JoinLevel(content);
+        string Side(string id) => $"{content.Unit(id).Name} ({content.Class(content.Unit(id).ClassId).Name}, level {Math.Max(content.Unit(id).Level, level)})";
+        if (meets.Select(id => record.Meet(id, content)).Where(r => !r.Accepted).Select(r => r.Text).ToList() is { } refused && refused.Count == meets.Count)
+        {
+            return meets.Select((id, i) => $"Met on the road: {Side(id)}. {char.ToUpperInvariant(refused[i][0])}{refused[i][1..]}.").ToList();
+        }
+
+        var beds = record.Beds(content) is { } total ? $" (beds: {record.BedsTaken + (record.Present(content).Count - record.Roster.Count)}/{total})" : "";
+        var them = Referent.For(content, meets[0], content.Unit(meets[0]).Name);
+        return new[]
+        {
+            $"Met on the road: {string.Join(" or ", meets.Select(Side))} (meet <unit>; one, final).",
+            meets.Count == 1
+                ? $"{content.Unit(meets[0]).Name} {them.Verb("joins", "join")} only if a bed is free{beds}, and a death never frees one. Not met, {them.Subject} {them.Verb("goes", "go")} on alone."
+                : $"The one met joins only if a bed is free{beds}, and a death never frees one.",
         };
     }
 
@@ -1127,6 +1165,9 @@ public sealed class CampaignSession
                 break;
             case ["pick", var claimant]:
                 Take(_record.PickClaimant(claimant, _content), text);
+                break;
+            case ["meet", var side]:
+                Take(_record.Meet(side, _content), text);
                 break;
             case ["build", var roomId] when _content.Campaign.Keep.Edit(roomId) is null:
                 Take(_record.BuildRoom(roomId, _content), text);

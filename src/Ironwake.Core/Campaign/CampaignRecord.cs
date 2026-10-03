@@ -230,6 +230,52 @@ public sealed record CampaignRecord(
     public ClaimantFate? Returned { get; init; }
 
     /// <summary>
+    /// The side characters met so far (issue 633 slice 3, DESIGN section 14), cast ids in the order met,
+    /// each from some map's <see cref="CampaignMap.Meets"/>. A side character met joins at that map's
+    /// camp like a joiner; one never met never joins. The endings read it.
+    /// </summary>
+    public ValueList<string> Met { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
+    /// Meets <paramref name="unitId"/> at the camp (issue 633 slice 3, DESIGN section 14): one of the
+    /// next map's <see cref="CampaignMap.Meets"/>, by id or by name in any case, who joins the company
+    /// for it like a joiner (<see cref="Present"/>, at no less than <see cref="JoinLevel"/>). At most
+    /// one meeting a map, and it is final. Refused when the next map offers no meeting, when the id is
+    /// not one it offers, once a meeting is made here, and when no bed is free or the company is full
+    /// (<c>no bed free: &lt;name&gt; will not join</c>, DECISIONS/0137): a bed held for someone else
+    /// is a bed the meeting cannot have.
+    /// </summary>
+    public ScreenResult Meet(string unitId, GameContent content)
+    {
+        if (IsFinished(content) || NextMap(content).Meets.Count == 0)
+        {
+            return ScreenResult.Refused(this, "nobody is met at this camp");
+        }
+
+        var meets = NextMap(content).Meets;
+        if (meets.FirstOrDefault(Met.Contains) is { } made)
+        {
+            return ScreenResult.Refused(this, $"the meeting is made: {content.Unit(made).Name} is with the company");
+        }
+
+        var named = meets.FirstOrDefault(id => string.Equals(id, unitId, StringComparison.OrdinalIgnoreCase) || string.Equals(content.Unit(id).Name, unitId, StringComparison.OrdinalIgnoreCase));
+        if (named is null)
+        {
+            return ScreenResult.Refused(this, $"'{unitId}' is not met here; meet {string.Join(" or ", meets)}");
+        }
+
+        var name = content.Unit(named).Name;
+        if (Room(content) <= Arriving(content).Count())
+        {
+            return ScreenResult.Refused(this, CompanyFull(content) ? $"company full ({CompanyCap}): {name} will not join" : $"no bed free: {name} will not join");
+        }
+
+        var level = Math.Max(content.Unit(named).Level, JoinLevel(content));
+        var met = this with { Met = Met.Add(named) };
+        return new ScreenResult(met, $"{name} joins the company at level {level}", true);
+    }
+
+    /// <summary>
     /// The level the passed claimant comes back at on the next map (issue 633, DESIGN section 14):
     /// the pick's level, or the company's <see cref="JoinLevel"/> once the pick has fallen, never
     /// below their own card's. Null when the next map brings nobody back.
@@ -368,7 +414,9 @@ public sealed record CampaignRecord(
             roster = roster.Where(u => u.Id != passed);
         }
 
-        return start with { Roster = ValueList<Unit>.From(roster), MapIndex = index, Seed = unchecked(seed - (ulong)index), Pick = pick };
+        var rosterList = roster.ToList();
+        var met = content.Campaign.Maps.Take(index).SelectMany(m => m.Meets).Where(id => rosterList.Any(u => u.Id == id));
+        return start with { Roster = ValueList<Unit>.From(rosterList), MapIndex = index, Seed = unchecked(seed - (ulong)index), Pick = pick, Met = ValueList<string>.From(met) };
     }
 
     /// <summary>
@@ -386,7 +434,7 @@ public sealed record CampaignRecord(
     /// </summary>
     public ValueList<Unit> Present(GameContent content)
     {
-        if (IsFinished(content) || (NextMap(content).Arrives.Count == 0 && NextMap(content).Joins.Count == 0 && NextMap(content).Branch.Count == 0))
+        if (IsFinished(content) || (NextMap(content).Arrives.Count == 0 && NextMap(content).Joins.Count == 0 && NextMap(content).Branch.Count == 0 && NextMap(content).Meets.Count == 0))
         {
             return Roster;
         }
@@ -430,7 +478,7 @@ public sealed record CampaignRecord(
     private IEnumerable<string> Arriving(GameContent content) =>
         IsFinished(content)
             ? Enumerable.Empty<string>()
-            : NextMap(content).Arrives.Concat(NextMap(content).Joins).Concat(NextMap(content).Branch.Where(id => id == Pick)).Where(id => Find(id) is null && !Fallen.Contains(id));
+            : NextMap(content).Arrives.Concat(NextMap(content).Joins).Concat(NextMap(content).Branch.Where(id => id == Pick)).Concat(NextMap(content).Meets.Where(Met.Contains)).Where(id => Find(id) is null && !Fallen.Contains(id));
 
     /// <summary>
     /// The keep's beds (issue 687, DESIGN section 13.20): the beds it starts with and every bought
@@ -537,15 +585,16 @@ public sealed record CampaignRecord(
     }
 
     /// <summary>
-    /// <paramref name="map"/> with every slot naming a branch claimant who is not with the company
-    /// (issue 633: before the branch, or passed on at it) turned into a bare slot: a unit who may be
+    /// <paramref name="map"/> with every slot naming a branch claimant or a side character who is not
+    /// with the company (issue 633: before the branch, or passed on at it; before the meeting, or never
+    /// met, slice 3) turned into a bare slot: a unit who may be
     /// absent holds a roster slot, not a named one (DESIGN section 14), so the slot is filled in roster
     /// order like any bare slot and never throws for want of her. A claimant who has fallen keeps the
     /// fallen's empty named slot.
     /// </summary>
     private MapDefinition ClaimantSlotsBare(MapDefinition map, GameContent content)
     {
-        var claimants = content.Campaign.Maps.SelectMany(m => m.Branch).ToHashSet(StringComparer.Ordinal);
+        var claimants = content.Campaign.Maps.SelectMany(m => m.Branch.Concat(m.Meets)).ToHashSet(StringComparer.Ordinal);
         if (claimants.Count == 0)
         {
             return map;

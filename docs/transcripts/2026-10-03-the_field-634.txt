@@ -1,0 +1,2273 @@
+Campaign, seed 626, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+-- The Field Before the Keep --
+Hollin is a sworn village, a day short of the keep. Nobody in it is
+hungry. Nobody is fighting. Every hearth is lit, which is more than
+Ironwake can say. Nobody will meet my eye.
+
+I asked a girl at the well her name. She said, "We're well, thank you,"
+and went back to the bucket.
+
+Past Hollin the keep is in sight across a field and a river. The rime on
+its walls has started to run.
+
+(Placeholder card until the writing pass. Defeat the Sworn Captain. Each
+group sleeps until a fight comes within its hearing.)
+
+-- Before map 9 of 10: The Field Before the Keep; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L5, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L5, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Rook: Skyrider L5, EXP 0; 1: Iron Lance 40/40
+  Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to The Field Before the Keep: Alder Fenn, Teodor, Ottilie, Pell, Maud, Wren (deploy 6 of 9)
+Keziah (Reaver, level 5) rides with the enemy on this map.
+Rook's talk turns her; the captain's spares her (talk <unit> keziah). Turned, she joins only if a bed is free (beds: 9/12), and a death never frees one.
+Met on the road: Ansgar (Outrider, level 5) (meet <unit>; one, final).
+Ansgar joins only if a bed is free (beds: 9/12), and a death never frees one. Not met, he goes on alone.
+== Keep ==
+Purse: 500
+Rooms: beds: 9/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Keep: Ironwake Keep; built: nothing; the purse holds 500
+  wall: Rebuild a wall, 400
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+  ditch: Dig a ditch, 300
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath applies
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 9, The Field Before the Keep. Defeat the boss by the end of turn 20. Captain Fenn must survive.
+> meet ansgar
+Ansgar joins the company at level 5
+> bench wren
+Wren is benched from The Field Before the Keep
+Deploys to The Field Before the Keep: Alder Fenn, Teodor, Ottilie, Pell, Maud, Dunstan (deploy 6 of 10)
+> bench dunstan
+Dunstan is benched from The Field Before the Keep
+Deploys to The Field Before the Keep: Alder Fenn, Teodor, Ottilie, Pell, Maud, Ansgar (deploy 6 of 10)
+> march
+Map 9 of 10: The Field Before the Keep, seed 634
+Objective: Defeat the boss by the end of turn 20. Captain Fenn must survive.
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 DB......^d...~~.....
+12 CA......k....~~.....
+13 EG.^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         1,13   hp 22/22  Plain
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        1,12   hp 24/24  Plain  captain
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          0,12   hp 18/18  Plain
+D  pell             Pell L5 adept              0,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          1,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> move captain 3,12
+Alder Fenn moves 1,12 -> 3,12 via 2,12
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 DB......^d...~~.....
+12 C..A....k....~~.....
+13 EG.^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         1,13   hp 22/22  Plain
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          0,12   hp 18/18  Plain
+D  pell             Pell L5 adept              0,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          1,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> wait captain
+Alder Fenn waits
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 DB......^d...~~.....
+12 C..A....k....~~.....
+13 EG.^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         1,13   hp 22/22  Plain
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          0,12   hp 18/18  Plain
+D  pell             Pell L5 adept              0,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          1,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> move ansgar 3,13
+Ansgar moves 1,13 -> 3,13 via 2,13
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 DB......^d...~~.....
+12 C..A....k....~~.....
+13 E..G......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          0,12   hp 18/18  Plain
+D  pell             Pell L5 adept              0,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          1,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 DB......^d...~~.....
+12 C..A....k....~~.....
+13 E..G......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          0,12   hp 18/18  Plain
+D  pell             Pell L5 adept              0,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          1,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> move teodor 3,11
+Teodor moves 1,11 -> 3,11 via 2,11
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 D..B....^d...~~.....
+12 C..A....k....~~.....
+13 E..G......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          0,12   hp 18/18  Plain
+D  pell             Pell L5 adept              0,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> wait teodor
+Teodor waits
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 D..B....^d...~~.....
+12 C..A....k....~~.....
+13 E..G......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          0,12   hp 18/18  Plain
+D  pell             Pell L5 adept              0,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> move ottilie 2,12
+Ottilie moves 0,12 -> 2,12 via 1,12
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 D..B....^d...~~.....
+12 ..CA....k....~~.....
+13 E..G......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              0,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> wait ottilie
+Ottilie waits
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 D..B....^d...~~.....
+12 ..CA....k....~~.....
+13 E..G......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              0,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> move pell 2,11
+Pell moves 0,11 -> 2,11 via 1,11
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..CA....k....~~.....
+13 E..G......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> wait pell
+Pell waits
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..CA....k....~~.....
+13 E..G......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           0,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> move maud 2,13
+Maud moves 0,13 -> 2,13 via 1,13
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..CA....k....~~.....
+13 ..EG......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> wait maud
+Maud waits
+The Field Before the Keep  turn 1 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..CA....k....~~.....
+13 ..EG......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain  done
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain  done
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait archer-3
+Archer 3 waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait keziah
+Keziah waits
+enemy: wait rider-1
+Rider waits
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: wait soldier-3
+Soldier 3 waits
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..CA....k....~~.....
+13 ..EG......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        3,12   hp 24/24  Plain  captain
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, asleep
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> move captain 7,12
+Alder Fenn moves 3,12 -> 7,12 via 4,12 5,12 6,12
+The pickets group wakes (proximity)
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..C....Ak....~~.....
+13 ..EG......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain
+k  keziah           Keziah L5 reaver           8,12   hp 25/25  Plain  group pickets, guard, awake
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Keziah came back with the enemy: the captain's spares her
+> talk captain keziah
+Alder Fenn talks Keziah round: spared, off the field (25 hp)
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..C....A.....~~.....
+13 ..EG......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ansgar 8,12
+Ansgar moves 3,13 -> 8,12 via 3,12 4,12 5,12 6,12 7,12
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..C....AG....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 0 movement: canto ansgar <x,y|stay>
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..C....AG....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain  canto 0
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 7,11
+Teodor moves 3,11 -> 7,11 via 4,11 5,11 6,11
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..D....B^d...~~.....
+12 ..C....AG....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain  canto 0
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..D....B^d...~~.....
+12 ..C....AG....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain  canto 0
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move maud 5,12
+Maud moves 2,13 -> 5,12 via 2,12 3,12 4,12
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..D....B^d...~~.....
+12 ..C..E.AG....~~.....
+13 ...^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain  canto 0
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           5,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait maud
+Maud waits
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..D....B^d...~~.....
+12 ..C..E.AG....~~.....
+13 ...^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain  canto 0
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           5,12   hp 18/18  Plain  done
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 6,12
+Ottilie moves 2,12 -> 6,12 via 3,12 4,12 5,12
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..D....B^d...~~.....
+12 .....ECAG....~~.....
+13 ...^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain  canto 0
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           5,12   hp 18/18  Plain  done
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ottilie
+Ottilie waits
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..D....B^d...~~.....
+12 .....ECAG....~~.....
+13 ...^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain  canto 0
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           5,12   hp 18/18  Plain  done
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 6,11
+Pell moves 2,11 -> 6,11 via 3,11 4,11 5,11
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ......DB^d...~~.....
+12 .....ECAG....~~.....
+13 ...^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain  canto 0
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           5,12   hp 18/18  Plain  done
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              6,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+Pell waits
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ......DB^d...~~.....
+12 .....ECAG....~~.....
+13 ...^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,12   hp 22/22  Plain  canto 0
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           5,12   hp 18/18  Plain  done
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              6,11   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+Lethal if all land: Ansgar (Archer 2 for 6, Brigand 1 for 12, Soldier 3 for 10, against 22 hp)
+Lethal if all land: Ottilie (Archer 2 for 7, Soldier 3 for 11, against 18 hp)
+Rapport Ansgar and Alder Fenn +4 (4)
+Rapport Alder Fenn and Ottilie +4 (4)
+Rapport Alder Fenn and Teodor +4 (4)
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: attack archer-2 ansgar
+Forecast Archer 2 -> Ansgar: acc 74% dmg 6 crit 1%; counter: none
+Archer 2 attacks Ansgar
+  Archer 2 hits Ansgar for 6 (hp 16)
+  Archer 2 hp 18, Ansgar hp 16
+enemy: wait archer-3
+Archer 3 waits
+enemy: move brigand-1 9,12
+Brigand 1 moves 10,14 -> 9,12 via 10,13 10,12
+enemy: attack brigand-1 ansgar
+Forecast Brigand 1 -> Ansgar: acc 54% dmg 12 crit 0%; counter with Iron Lance: acc 82% dmg 12 crit 4%
+Brigand 1 attacks Ansgar
+  Brigand 1 hits Ansgar for 12 (hp 4)
+  Ansgar hits Brigand 1 for 12 (hp 11)
+  Brigand 1 hp 11, Ansgar hp 4
+Ansgar gains 8 exp (8)
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait rider-1
+Rider waits
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: move soldier-3 8,13
+Soldier 3 moves 10,13 -> 8,13 via 9,13
+enemy: attack soldier-3 ansgar
+Forecast Soldier 3 -> Ansgar: acc 67% dmg 10 crit 0%; counter with Iron Lance: acc 79% dmg 9 crit 3%
+Soldier 3 attacks Ansgar
+  Soldier 3 hits Ansgar for 10 (hp 0)
+  Soldier 3 hp 21, Ansgar hp 0
+Ansgar falls at 8,12
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 3
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ......DB^d...~~.....
+12 .....ECA.f...~~.....
+13 ...^....e...F.......
+14 ...^^...........j...
+15 ....................
+
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          9,12   hp 11/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain
+E  maud             Maud L5 chaplain           5,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain
+D  pell             Pell L5 adept              6,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         8,13   hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> recall 28
+Recalled to state 28; 2 charges left
+Undone: gives back 12 enemy hp; returns Ansgar alive at 22 hp
+The rolls do not change: the same attack will roll the same
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..C....A.....~~.....
+13 ..EG......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         3,13   hp 22/22  Forest
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ansgar 6,12
+Ansgar moves 3,13 -> 6,12 via 3,12 4,12 5,12
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..C...GA.....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..DB....^d...~~.....
+12 ..C...GA.....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          3,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 7,11
+Teodor moves 3,11 -> 7,11 via 4,11 5,11 6,11
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..D....B^d...~~.....
+12 ..C...GA.....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ..D....B^d...~~.....
+12 ..C...GA.....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              2,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 5,11
+Pell moves 2,11 -> 5,11 via 3,11 4,11
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^d...~~.....
+12 ..C...GA.....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+Pell waits
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^d...~~.....
+12 ..C...GA.....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          2,12   hp 18/18  Plain
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 5,12
+Ottilie moves 2,12 -> 5,12 via 3,12 4,12
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^d...~~.....
+12 .....CGA.....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ottilie
+Ottilie waits
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^d...~~.....
+12 .....CGA.....~~.....
+13 ..E^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           2,13   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move maud 4,12
+Maud moves 2,13 -> 4,12 via 2,12 3,12
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^d...~~.....
+12 ....ECGA.....~~.....
+13 ...^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait maud
+Maud waits
+The Field Before the Keep  turn 2 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^d...~~.....
+12 ....ECGA.....~~.....
+13 ...^......e.F.......
+14 ...^^.....f.....j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 22/22  Plain  canto 2
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           9,11   hp 18/18  Forest  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          10,14  hp 23/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 24/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain  done
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+Rapport Ansgar and Alder Fenn +4 (4)
+Rapport Ansgar and Ottilie +6 (6)
+Rapport Alder Fenn and Teodor +4 (4)
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: move archer-2 8,12
+Archer 2 moves 9,11 -> 8,12 via 9,12
+enemy: attack archer-2 ansgar
+Forecast Archer 2 -> Ansgar: acc 74% dmg 6 crit 1%; counter: none
+Archer 2 attacks Ansgar
+  Archer 2 hits Ansgar for 6 (hp 16)
+  Archer 2 hp 18, Ansgar hp 16
+enemy: wait archer-3
+Archer 3 waits
+enemy: move brigand-1 7,13
+Brigand 1 moves 10,14 -> 7,13 via 10,13 9,13 8,13
+enemy: attack brigand-1 captain
+Forecast Brigand 1 -> Alder Fenn: acc 45% dmg 10 crit 0%; counter: acc 91% dmg 12 x2 crit 6%
+Brigand 1 attacks Alder Fenn
+  Brigand 1 hits Alder Fenn for 10 (hp 14)
+  Alder Fenn misses Brigand 1
+  Alder Fenn hits Brigand 1 for 12 (hp 11)
+  Brigand 1 hp 11, Alder Fenn hp 14
+Alder Fenn gains 8 exp (8)
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait rider-1
+Rider waits
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: move soldier-3 6,13
+Soldier 3 moves 10,13 -> 6,13 via 9,13 8,13 7,13
+enemy: attack soldier-3 ansgar
+Forecast Soldier 3 -> Ansgar: acc 67% dmg 10 crit 0%; counter with Iron Lance: acc 79% dmg 9 crit 3%
+Soldier 3 attacks Ansgar
+  Soldier 3 hits Ansgar for 10 (hp 6)
+  Ansgar misses Soldier 3
+  Soldier 3 hp 21, Ansgar hp 6
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^^...~~.....
+12 ....ECGAd....~~.....
+13 ...^..ef....F.......
+14 ...^^...........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 6/22   Plain
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 18/18  Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+f  brigand-1        Brigand L4 reaver          7,13   hp 11/23  Plain  group pickets, guard, awake
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         6,13   hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack captain brigand-1
+Forecast Alder Fenn -> Brigand 1: acc 91% dmg 12 x2 crit 6%; counter: acc 45% dmg 10 crit 0%
+Alder Fenn attacks Brigand 1
+  Alder Fenn hits Brigand 1 for 12 (hp 0)
+  Alder Fenn hp 14, Brigand 1 hp 0
+Alder Fenn gains 25 exp (33)
+Brigand 1 falls at 7,13
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^^...~~.....
+12 ....ECGAd....~~.....
+13 ...^..e.....F.......
+14 ...^^...........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,12   hp 6/22   Plain
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 18/18  Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         6,13   hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ansgar 8,13
+Ansgar moves 6,12 -> 8,13 via 7,12 7,13
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^^...~~.....
+12 ....EC.Ad....~~.....
+13 ...^..e.G...F.......
+14 ...^^...........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,13   hp 6/22   Plain
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 18/18  Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         6,13   hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack ansgar archer-2 iron_sword
+Forecast Ansgar -> Archer 2 with Iron Sword: acc 85% dmg 11 crit 3%; counter: none
+Ansgar equips Iron Sword
+Ansgar attacks Archer 2
+  Ansgar hits Archer 2 for 11 (hp 7)
+  Ansgar hp 6, Archer 2 hp 7
+Ansgar gains 8 exp (8)
+Ansgar may move again up to 3 movement: canto ansgar <x,y|stay>
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^^...~~.....
+12 ....EC.Ad....~~.....
+13 ...^..e.G...F.......
+14 ...^^...........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         8,13   hp 6/22   Plain  canto 3
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 7/18   Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         6,13   hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> canto ansgar 6,14
+Ansgar moves again 8,13 -> 6,14 via 7,13 7,14
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .....D.B^^...~~.....
+12 ....EC.Ad....~~.....
+13 ...^..e.....F.......
+14 ...^^.G.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 6/22   Plain  done
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 7/18   Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              5,11   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         6,13   hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 4,13
+Pell moves 5,11 -> 4,13 via 4,11 4,12
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .......B^^...~~.....
+12 ....EC.Ad....~~.....
+13 ...^D.e.....F.......
+14 ...^^.G.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 6/22   Plain  done
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 7/18   Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              4,13   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         6,13   hp 21/21  Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack pell soldier-3
+Forecast Pell -> Soldier 3 with Cinder: acc 99% dmg 14 crit 3%; counter: none
+Pell attacks Soldier 3
+  Pell hits Soldier 3 for 14 (hp 7)
+  Pell hp 17, Soldier 3 hp 7
+Pell gains 8 exp (8)
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 .......B^^...~~.....
+12 ....EC.Ad....~~.....
+13 ...^D.e.....F.......
+14 ...^^.G.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 6/22   Plain  done
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 7/18   Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              4,13   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         6,13   hp 7/21   Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          7,11   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 5,13
+Teodor moves 7,11 -> 5,13 via 6,11 5,11 5,12
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ........^^...~~.....
+12 ....EC.Ad....~~.....
+13 ...^DBe.....F.......
+14 ...^^.G.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 6/22   Plain  done
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 7/18   Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              4,13   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+e  soldier-3        Soldier L4 pikeman         6,13   hp 7/21   Plain  group pickets, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          5,13   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack teodor soldier-3
+Forecast Teodor -> Soldier 3: acc 77% dmg 10 crit 2%; counter: acc 72% dmg 8 crit 1%
+Teodor attacks Soldier 3
+  Teodor hits Soldier 3 for 10 (hp 0)
+  Teodor hp 23, Soldier 3 hp 0
+Teodor gains 25 exp (25)
+Soldier 3 falls at 6,13
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ........^^...~~.....
+12 ....EC.Ad....~~.....
+13 ...^DB......F.......
+14 ...^^.G.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 6/22   Plain  done
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 7/18   Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          5,12   hp 18/18  Plain
+D  pell             Pell L5 adept              4,13   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          5,13   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 6,12
+Ottilie moves 5,12 -> 6,12
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ........^^...~~.....
+12 ....E.CAd....~~.....
+13 ...^DB......F.......
+14 ...^^.G.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 6/22   Plain  done
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+d  archer-2         Archer L4 bowman           8,12   hp 7/18   Plain  group pickets, guard, awake
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain
+D  pell             Pell L5 adept              4,13   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          5,13   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack ottilie archer-2
+Forecast Ottilie -> Archer 2: acc 85% dmg 9 crit 6%; counter: acc 74% dmg 7 crit 0%
+Ottilie attacks Archer 2
+  Ottilie hits Archer 2 for 9 (hp 0)
+  Ottilie hp 18, Archer 2 hp 0
+Ottilie gains 25 exp (25)
+Archer 2 falls at 8,12
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ........^^...~~.....
+12 ....E.CA.....~~.....
+13 ...^DB......F.......
+14 ...^^.G.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 6/22   Plain  done
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           4,12   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              4,13   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          5,13   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move maud 5,14
+Maud moves 4,12 -> 5,14 via 5,12 5,13
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ........^^...~~.....
+12 ......CA.....~~.....
+13 ...^DB......F.......
+14 ...^^EG.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 6/22   Plain  done
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           5,14   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              4,13   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          5,13   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> item maud 2 ansgar
+Maud uses Salve on ansgar (7 left)
+Ansgar heals 8 (hp 14)
+Maud gains 16 exp (16)
+The Field Before the Keep  turn 3 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ........^^...~~.....
+12 ......CA.....~~.....
+13 ...^DB......F.......
+14 ...^^EG.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 14/22  Plain  done
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain  done
+E  maud             Maud L5 chaplain           5,14   hp 18/18  Plain  done
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain  done
+D  pell             Pell L5 adept              4,13   hp 17/17  Plain  done
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          5,13   hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-3
+Archer 3 waits
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait rider-1
+Rider waits
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Field Before the Keep  turn 4 of 20  player phase  defeat_boss  recall 2
+   01234567890123456789
+ 0 .....^^....~~~~~~MMM
+ 1 .....^^....~~~~~~.MM
+ 2 .........ba..~~.....
+ 3 ...^.......c.~~.....
+ 4 ...^^........~~..n..
+ 5 ...........^.~~..h..
+ 6 ...........^.~~...!.
+ 7 .....n.......==g....
+ 8 .....F.......==..i..
+ 9 ...........^.~~..n..
+10 ........^^...~~.....
+11 ........^^...~~.....
+12 ......CA.....~~.....
+13 ...^DB......F.......
+14 ...^^EG.........j...
+15 ....................
+
+G  ansgar           Ansgar L5 outrider         6,14   hp 14/22  Plain
+a  archer-1         Archer L4 bowman           10,2   hp 18/18  Fort (heals 20 percent, 3 hp)  group line, guard, asleep
+i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
+h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L5 cadet        7,12   hp 14/24  Plain  captain
+E  maud             Maud L5 chaplain           5,14   hp 18/18  Plain
+C  ottilie          Ottilie L5 bowman          6,12   hp 18/18  Plain
+D  pell             Pell L5 adept              4,13   hp 17/17  Plain
+j  rider-1          Rider L4 outrider          16,14  hp 21/21  Plain  group south, guard, asleep
+g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
+b  soldier-1        Soldier L4 pikeman         9,2    hp 21/21  Plain  group line, guard, asleep
+c  soldier-2        Soldier L4 pikeman         11,3   hp 21/21  Plain  group line, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
+B  teodor           Teodor L5 pikeman          5,13   hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Campaign stopped in The Field Before the Keep at turn 4, undecided

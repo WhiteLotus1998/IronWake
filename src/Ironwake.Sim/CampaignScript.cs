@@ -67,6 +67,12 @@ public static class CampaignScript
                 }
             }
 
+            if (SimPick.Meeting(client.Record, content) is { } side && client.Meet(side))
+            {
+                // Issue 633 slice 3: the Sim meets whoever a camp offers while a bed is free.
+                lines.Add($"meet {side}");
+            }
+
             bool marched;
             try
             {
