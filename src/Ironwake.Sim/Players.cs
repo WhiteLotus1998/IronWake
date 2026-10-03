@@ -139,7 +139,7 @@ public sealed class HeuristicPlayer : IPlayer
     /// Whether Ottilie's ledger (DESIGN.md 13.18) would refuse this attack from <paramref name="tile"/>.
     /// The heuristic plays no signature, but it obeys a refusal, so every plan it makes is legal.
     /// </summary>
-    private static bool LedgerRefuses(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit target) =>
+    internal static bool LedgerRefuses(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit target) =>
         Signatures.Of(state, content, unit) == SignatureKind.Ledger
         && Queries.Forecast(state, content, unit, target, tile) is { } forecast
         && Signatures.Refuses(state, content, unit, forecast.Attacker.DisplayedHit);
@@ -484,7 +484,7 @@ public sealed class HeuristicPlayer : IPlayer
     private static double KillsWith(SideForecast side, int hp, RollScheme scheme) =>
         side.Strikes ? RoundOutcomes(side, scheme).Where(o => o.Damage >= hp).Sum(o => o.P) : 0;
 
-    private static IReadOnlyList<Command> WithMove(BattleUnit unit, Coord tile, Command action) =>
+    internal static IReadOnlyList<Command> WithMove(BattleUnit unit, Coord tile, Command action) =>
         tile == unit.At ? new[] { action } : new Command[] { new Move(unit.Id, tile), action };
 
     /// <summary>
@@ -493,7 +493,7 @@ public sealed class HeuristicPlayer : IPlayer
     /// as it stays, and the approach toward the throne would otherwise put the first recruit
     /// to arrive exactly there. The captain may end anywhere in reach.
     /// </summary>
-    private static bool MayEndOn(BattleState state, GameContent content, BattleUnit unit, Coord tile) =>
+    internal static bool MayEndOn(BattleState state, GameContent content, BattleUnit unit, Coord tile) =>
         unit.IsCaptain || state.Map.Win != WinCondition.Seize || !state.Map.IsThrone(tile);
 
     /// <summary>

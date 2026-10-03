@@ -139,15 +139,20 @@ public static class Program
         if (args.Length > 0 && args[0] == "--supports")
         {
             var seeds = Gates.DefaultSeeds;
+            (string A, string B)? pair = null;
             for (var i = 1; i + 1 < args.Length; i++)
             {
                 if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
                 {
                     seeds = n;
                 }
+                else if (args[i] == "--pair" && i + 2 < args.Length)
+                {
+                    pair = (args[i + 1], args[i + 2]);
+                }
             }
 
-            return SupportTable(seeds);
+            return SupportTable(seeds, pair);
         }
 
         if (args.Length > 0 && args[0] == "--curve")
@@ -252,7 +257,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --levels [--seeds N] | --supports [--seeds N] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -340,8 +345,11 @@ public static class Program
         return 0;
     }
 
-    /// <summary>The supports' climb (issue 77): <see cref="SupportRun.Lines"/> over <see cref="LevelRun.Measure"/>'s runs.</summary>
-    public static int SupportTable(int seeds)
+    /// <summary>
+    /// The supports' climb (issue 77): <see cref="SupportRun.Lines"/> over <see cref="LevelRun.Measure"/>'s runs,
+    /// under <see cref="PairingPlayer"/> when <paramref name="pair"/> names a support pair (slice 5).
+    /// </summary>
+    public static int SupportTable(int seeds, (string A, string B)? pair = null)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -351,7 +359,13 @@ public static class Program
         }
 
         var content = ContentLoader.Load(contentDir);
-        foreach (var line in SupportRun.Lines(content, LevelRun.Measure(contentDir, content, seeds)))
+        if (pair is { } p && Supports.Pair(content.Campaign, p.A, p.B) is null)
+        {
+            Console.WriteLine($"supports: {p.A} and {p.B} are not a support pair in campaign.json");
+            return 1;
+        }
+
+        foreach (var line in SupportRun.Lines(content, LevelRun.Measure(contentDir, content, seeds, pair), pair))
         {
             Console.WriteLine(line);
         }

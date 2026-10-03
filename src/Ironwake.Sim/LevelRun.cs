@@ -78,8 +78,12 @@ public static class LevelRun
         return sorted.Count == 0 ? 0 : sorted[(sorted.Count - 1) / 2];
     }
 
-    /// <summary>Every run over seeds 1..<paramref name="seeds"/>.</summary>
-    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds)
+    /// <summary>
+    /// Every run over seeds 1..<paramref name="seeds"/>. With <paramref name="pair"/> set the player is
+    /// <see cref="PairingPlayer"/> for that support pair, each map's bench set by
+    /// <see cref="PairingPlayer.Deploy"/> so both members fight it (issue 77, slice 5).
+    /// </summary>
+    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, (string A, string B)? pair = null)
     {
         var runs = new List<Run>();
         for (var seed = 1; seed <= seeds; seed++)
@@ -99,9 +103,15 @@ public static class LevelRun
                 for (var attempt = 0; attempt < HeirloomRun.Attempts && won is null; attempt++)
                 {
                     var tried = record with { Seed = unchecked(record.Seed + (ulong)attempt * 7919UL) };
+                    if (pair is { } p)
+                    {
+                        tried = PairingPlayer.Deploy(tried, map, content, p.A, p.B);
+                    }
+
                     var start = tried.Begin(map, content);
                     var tally = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
-                    var end = Fight(start, content, seed, number, tally);
+                    IPlayer player = pair is { } q ? new PairingPlayer(q.A, q.B) : new HeuristicPlayer();
+                    var end = Fight(start, content, seed, number, tally, player);
                     if (end.Outcome.Result == BattleResult.Won)
                     {
                         won = end;
@@ -141,9 +151,8 @@ public static class LevelRun
     public static bool Ready(Unit unit, GameContent content) =>
         content.Classes.Values.Any(f => f.Advances is { } basis && Certifications.Check(unit with { ClassId = basis.Id }, f, null, CampaignRecord.IsCaptain(unit, content)).Count == 0);
 
-    private static BattleState Fight(BattleState state, GameContent content, int seed, int number, Dictionary<string, WeaponMix> weapons)
+    private static BattleState Fight(BattleState state, GameContent content, int seed, int number, Dictionary<string, WeaponMix> weapons, IPlayer player)
     {
-        var player = new HeuristicPlayer();
         while (!state.Outcome.IsOver)
         {
             var commands = state.Phase == Side.Player ? player.Next(state, content) : EnemyAi.Plan(state, content);
