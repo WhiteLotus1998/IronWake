@@ -7,8 +7,8 @@ namespace Ironwake.Core.Tests.Campaign;
 /// <summary>
 /// Issue 804 slice 2 (round 263, DESIGN 13.23): the campaign issues Kinsbane on the pick.
 /// <c>campaign.json</c>'s <c>issues</c> names a weapon for a cast member, and
-/// <see cref="CampaignRecord.Kitted"/> puts it in front of their pack in place of the first weapon of its
-/// type, so Keziah joins with the scythe and not her iron axe. A passed Keziah comes back on the field
+/// <see cref="CampaignRecord.Kitted"/> puts it in front of their pack beside their cast weapons (issue 851,
+/// round 276), so Keziah joins with the scythe ahead of her iron axe. A passed Keziah comes back on the field
 /// fed to the fourth tooth's count. The cast file is unchanged, so a battle outside the campaign carries none.
 /// </summary>
 public class IssuedWeaponTests
@@ -26,12 +26,48 @@ public class IssuedWeaponTests
     }
 
     [Fact]
-    public void KittedPutsTheIssuedWeaponInFrontInPlaceOfHerIronAxe()
+    public void KittedPutsTheIssuedWeaponInFrontBesideHerIronAxe()
     {
         var keziah = CampaignRecord.Kitted(Content.Unit("keziah"), Content);
 
-        Assert.Equal(new[] { Fresh(Kinsbane.ItemId), new ItemStack("iron_gauntlets", Content.Weapon("iron_gauntlets").Durability) }, keziah.Inventory.Items);
-        Assert.Contains(Content.Unit("keziah").Inventory.Items, s => s.ItemId == "iron_axe");
+        Assert.Equal(new[] { Fresh(Kinsbane.ItemId), Fresh("iron_axe"), Fresh("iron_gauntlets") }, keziah.Inventory.Items);
+    }
+
+    [Fact]
+    public void AFullPackDropsItsLastStackForTheIssuedWeapon()
+    {
+        var cast = Content.Unit("keziah");
+        var full = cast with { Inventory = new Inventory(ValueList<ItemStack>.From(Enumerable.Range(0, Inventory.Capacity).Select(i => i == 0 ? Fresh("iron_axe") : Fresh("iron_gauntlets")))) };
+
+        var keziah = CampaignRecord.Kitted(full, Content);
+
+        Assert.Equal(Inventory.Capacity, keziah.Inventory.Count);
+        Assert.Equal(new[] { Fresh(Kinsbane.ItemId), Fresh("iron_axe") }, keziah.Inventory.Items.Take(2));
+    }
+
+    [Fact]
+    public void TheIssuedScytheIsBoundToKeziah()
+    {
+        Assert.Equal("keziah", Content.Weapon(Kinsbane.ItemId).BoundTo);
+    }
+
+    [Fact]
+    public void TheCampRefusesToDropTheIssuedScythe()
+    {
+        var record = CampaignRecord.StartAt(Content, 804, "sallow_grange", pick: "keziah");
+
+        var drop = record.Drop("keziah", 0, Content);
+
+        Assert.False(drop.Accepted);
+        Assert.Equal("Kinsbane is bound to keziah and is never dropped", drop.Text);
+        Assert.True(record.Drop("keziah", 1, Content).Accepted);
+    }
+
+    [Fact]
+    public void TheBoundScytheStaysOutOfTheSignatureCeiling()
+    {
+        Assert.DoesNotContain(SignatureCeiling.Items(Content), w => w.Id == Kinsbane.ItemId);
+        Assert.Contains(SignatureCeiling.Items(Content), w => w.Id == "family_lance");
     }
 
     [Fact]
@@ -55,7 +91,7 @@ public class IssuedWeaponTests
 
         var keziah = record.Present(Content).Single(u => u.Id == "keziah");
         Assert.Equal(Fresh(Kinsbane.ItemId), keziah.Inventory.Items[0]);
-        Assert.DoesNotContain(keziah.Inventory.Items, s => s.ItemId == "iron_axe");
+        Assert.Equal(Fresh("iron_axe"), keziah.Inventory.Items[1]);
     }
 
     [Fact]

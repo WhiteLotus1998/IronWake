@@ -431,8 +431,10 @@ public sealed record CampaignRecord(
     /// heirloom bound to them (<see cref="Weapon.Heirloom"/>) at full uses after their cast pack, so
     /// the cast's own weapon stays in front and the heirloom is swung only by choice. The cast file
     /// is unchanged, so a battle outside the campaign carries no heirloom. A weapon the campaign
-    /// issues them (<see cref="CampaignRules.Issues"/>, issue 804) goes in front at full uses in place
-    /// of the first weapon of its type they carry: Keziah joins with Kinsbane, not her iron axe.
+    /// issues them (<see cref="CampaignRules.Issues"/>, issue 804) goes in front at full uses beside
+    /// their cast pack (issue 851, round 276): Keziah joins with Kinsbane ahead of her iron axe, so
+    /// carrying the scythe is the cost and each combat is feed or survive. A full pack drops its last
+    /// stack to make room.
     /// </summary>
     public static Unit Kitted(Unit unit, GameContent content)
     {
@@ -441,16 +443,12 @@ public sealed record CampaignRecord(
         {
             var issued = content.Weapon(issuedId);
             var items = inventory.Items.ToList();
-            var replaced = items.FindIndex(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Type == issued.Type);
-            if (replaced >= 0)
+            if (items.Count >= Inventory.Capacity)
             {
-                items.RemoveAt(replaced);
+                items.RemoveAt(items.Count - 1);
             }
 
-            if (items.Count < Inventory.Capacity)
-            {
-                items.Insert(0, new ItemStack(issued.Id, issued.Durability));
-            }
+            items.Insert(0, new ItemStack(issued.Id, issued.Durability));
 
             inventory = new Inventory(ValueList<ItemStack>.From(items));
         }
