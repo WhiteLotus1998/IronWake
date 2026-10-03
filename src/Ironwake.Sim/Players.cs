@@ -31,7 +31,7 @@ public sealed class RandomLegalPlayer : IPlayer
 /// <summary>
 /// Gate 1's baseline (issue 12): a planner of its own over <see cref="EnemyAi.Score"/> and
 /// <see cref="EnemyAi.AttackTiles"/>, per unit in id order. The best-scoring attack from
-/// the best tile with any weapon it carries (<see cref="Arms"/>, issue 746), with section 8's tie-breaks mirrored (exposure counted over enemy reach
+/// the best tile with any weapon it carries (<see cref="Arms"/>, issue 746), a hungering weapon not yet woken ahead of any other (the hunt, issue 804), with section 8's tie-breaks mirrored (exposure counted over enemy reach
 /// sets); else a heal below half HP (a healing spell on the most wounded ally in range,
 /// else a consumable on itself); else the approach: toward the nearest enemy by section
 /// 8's rule for Rout and Defeat Boss, toward the throne for Seize, toward the nearest exit
@@ -149,6 +149,14 @@ public sealed class HeuristicPlayer : IPlayer
         PlanUnit(state, content, unit, out _);
 
     /// <summary>
+    /// Whether an attack by <paramref name="unit"/> with <paramref name="weapon"/> from
+    /// <paramref name="slot"/> is the hunt (issue 804): a hungering weapon not yet woken
+    /// (DESIGN.md 13.23), which the planner prefers to any other weapon.
+    /// </summary>
+    public static bool Hunts(BattleUnit unit, int slot, Weapon weapon) =>
+        weapon.Hungers && !Kinsbane.Woken(unit.Unit.Inventory.Items[slot].Fed);
+
+    /// <summary>
     /// One player unit's commands on the board as it stands. <paramref name="refusedKill"/>
     /// is the highest kill probability among the attacks the veto refused for this unit,
     /// or null when it refused none.
@@ -214,7 +222,10 @@ public sealed class HeuristicPlayer : IPlayer
                             critSafe = sum.WithCrit < unit.Hp;
                         }
 
-                        var option = new Option(EnemyAi.Score(state, content, armed, tile, target), target.Id, tile, critSafe, avoid, exposed, cost, slot);
+                        var option = new Option(EnemyAi.Score(state, content, armed, tile, target), target.Id, tile, critSafe, avoid, exposed, cost, slot)
+                        {
+                            Hunt = Hunts(unit, slot, armWeapon),
+                        };
                         if (best is null || option.Beats(best))
                         {
                             best = option;
@@ -659,8 +670,21 @@ public sealed class HeuristicPlayer : IPlayer
     /// <summary>Section 8's order for the player's side: score, lower target id, then the captain's crit-safe key, then avoid, fewer enemies reaching the tile, cost, row-major.</summary>
     private sealed record Option(double Score, string TargetId, Coord Tile, bool CritSafe, int Avoid, int Exposed, int Cost, int Slot)
     {
+        /// <summary>
+        /// The hunt (issue 804, round 251: the Sim's player takes the hunt): an attack with a hungering
+        /// weapon not yet woken (DESIGN.md 13.23) beats any attack with another weapon, so its carrier
+        /// strikes with it whenever it can and every kill it makes feeds it; among such attacks the
+        /// score decides as usual.
+        /// </summary>
+        public bool Hunt { get; init; }
+
         public bool Beats(Option other)
         {
+            if (Hunt != other.Hunt)
+            {
+                return Hunt;
+            }
+
             if (Score != other.Score)
             {
                 return Score > other.Score;

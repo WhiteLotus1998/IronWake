@@ -47,6 +47,16 @@ public static class Kinsbane
     /// <summary>The Mt a weapon fed <paramref name="fed"/> times has grown.</summary>
     public static int MtBonus(int fed) => Math.Min(MtCap, Math.Max(0, fed) / KillsPerMt);
 
+    /// <summary>
+    /// The teeth on the blade (issue 804): one hooked tooth grows with each Mt step, so the count is
+    /// <see cref="MtBonus"/>, zero to <see cref="MtCap"/>, and at the last it wakes. The card and the
+    /// feed line print it as <c>teeth n/5</c>, the progress read on the weapon itself.
+    /// </summary>
+    public static int Teeth(int fed) => MtBonus(fed);
+
+    /// <summary>Whether the kill that took the count to <paramref name="fed"/> grew a tooth.</summary>
+    public static bool ToothGrew(int fed) => fed > 0 && Teeth(fed) > Teeth(fed - 1);
+
     /// <summary>Whether a weapon fed <paramref name="fed"/> times has woken: no drain, no starved form, no feed heal.</summary>
     public static bool Woken(int fed) => fed >= WakeKills;
 
@@ -171,7 +181,7 @@ public static class Kinsbane
     }
 
     /// <summary>
-    /// The unit card's line for a carrier (DESIGN.md 13.23): the weapon, its feed count and growth,
+    /// The unit card's line for a carrier (DESIGN.md 13.23): the weapon, its feed count, its teeth and growth,
     /// then its state: woken, starved, fed since the last phase start, or the drain coming at the
     /// next one. Null for a unit carrying no hungering weapon.
     /// </summary>
@@ -184,7 +194,7 @@ public static class Kinsbane
         }
 
         var stack = unit.Unit.Inventory.Items[slot];
-        var head = $"{content.ItemName(stack.ItemId)}: fed {stack.Fed}. Power +{MtBonus(stack.Fed)}.";
+        var head = $"{content.ItemName(stack.ItemId)}: fed {stack.Fed}, teeth {Teeth(stack.Fed)}/{MtCap}. Power +{MtBonus(stack.Fed)}.";
         var state = Woken(stack.Fed) ? "Woken: no drain."
             : stack.Starved ? "Starved: half Power, uses 1; any hit eases it (+" + EasedHeal + " HP), a kill feeds it."
             : unit.HasFed ? "Fed this phase."

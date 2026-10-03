@@ -155,6 +155,61 @@ public class KinsbaneTests
     }
 
     [Theory]
+    [InlineData(0, 0, false)]
+    [InlineData(2, 0, false)]
+    [InlineData(3, 1, true)]
+    [InlineData(4, 1, false)]
+    [InlineData(6, 2, true)]
+    [InlineData(14, 4, false)]
+    [InlineData(15, 5, true)]
+    [InlineData(16, 5, false)]
+    public void TheBladeGrowsAToothWithEachMtStepToFive(int fed, int teeth, bool grew)
+    {
+        Assert.Equal(teeth, Kinsbane.Teeth(fed));
+        Assert.Equal(grew, Kinsbane.ToothGrew(fed));
+    }
+
+    [Fact]
+    public void TheSimsPlayerTakesTheHuntWithAHungeringWeaponOverABetterScoringOne()
+    {
+        var start = WithScythe(Placed(), 23, starved: true, uses: 1);
+        var state = start.WithUnit(Keziah(start) with { At = new Coord(6, 7) });
+        var keziah = Keziah(state);
+        var brigand = state.Find("brigand-1")!;
+        var axe = keziah.Unit.Inventory.Items.ToList().FindIndex(s => s.ItemId == "iron_axe");
+        var from = new Coord(6, 6);
+
+        Assert.True(EnemyAi.Score(state, Shipped, keziah.WithSlotInFront(axe), from, brigand) > EnemyAi.Score(state, Shipped, keziah, from, brigand));
+
+        var attack = Assert.IsType<Attack>(Ironwake.Sim.HeuristicPlayer.PlanUnit(state, Shipped, keziah)[^1]);
+
+        Assert.Null(attack.Slot);
+    }
+
+    [Theory]
+    [InlineData(0, true)]
+    [InlineData(14, true)]
+    [InlineData(15, false)]
+    public void AWokenWeaponIsNoLongerHunted(int fed, bool hunts)
+    {
+        var keziah = Keziah(WithScythe(Placed(), 23, fed: fed));
+        var axe = keziah.Unit.Inventory.Items.ToList().FindIndex(s => s.ItemId == "iron_axe");
+
+        Assert.Equal(hunts, Ironwake.Sim.HeuristicPlayer.Hunts(keziah, 0, keziah.EquippedWeapon(Shipped)!));
+        Assert.False(Ironwake.Sim.HeuristicPlayer.Hunts(keziah, axe, Shipped.Weapon("iron_axe")));
+    }
+
+    [Fact]
+    public void TheFeedLineNamesTheToothOnlyWhenOneGrows()
+    {
+        var grew = new HungerFed("keziah", Kinsbane.ItemId, 6, 10, 20, 2, false);
+        var same = new HungerFed("keziah", Kinsbane.ItemId, 7, 10, 20, 2, false);
+
+        Assert.Contains("a tooth grows (teeth 2/5)", PlaySession.Describe(grew, Shipped, UnitNames.None), StringComparison.Ordinal);
+        Assert.DoesNotContain("tooth", PlaySession.Describe(same, Shipped, UnitNames.None), StringComparison.Ordinal);
+    }
+
+    [Theory]
     [InlineData(0, 4)]
     [InlineData(3, 5)]
     [InlineData(15, 7)]
@@ -349,12 +404,12 @@ public class KinsbaneTests
     [Fact]
     public void TheUnitCardPrintsTheCountTheGrowthAndTheStateComing()
     {
-        Assert.Equal("Kinsbane: fed 4. Power +1. Hungry: -5 HP at the next phase start.", Kinsbane.Card(Keziah(WithScythe(Placed(), 23, fed: 4)), Shipped));
-        Assert.Equal("Kinsbane: fed 4. Power +1. Hungry: -5 HP at the next phase start, and it starves.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 4)), Shipped));
-        Assert.Equal("Kinsbane: fed 4. Power +1. Fed this phase.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 4, hasFed: true)), Shipped));
-        Assert.StartsWith("Kinsbane: fed 0. Power +0. Starved: half Power, uses 1", Kinsbane.Card(Keziah(WithScythe(Placed(), 1, starved: true, uses: 1)), Shipped));
-        Assert.Equal("Kinsbane: fed 15. Power +5. Woken: no drain.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 15)), Shipped));
+        Assert.Equal("Kinsbane: fed 4, teeth 1/5. Power +1. Hungry: -5 HP at the next phase start.", Kinsbane.Card(Keziah(WithScythe(Placed(), 23, fed: 4)), Shipped));
+        Assert.Equal("Kinsbane: fed 4, teeth 1/5. Power +1. Hungry: -5 HP at the next phase start, and it starves.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 4)), Shipped));
+        Assert.Equal("Kinsbane: fed 4, teeth 1/5. Power +1. Fed this phase.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 4, hasFed: true)), Shipped));
+        Assert.StartsWith("Kinsbane: fed 0, teeth 0/5. Power +0. Starved: half Power, uses 1", Kinsbane.Card(Keziah(WithScythe(Placed(), 1, starved: true, uses: 1)), Shipped));
+        Assert.Equal("Kinsbane: fed 15, teeth 5/5. Power +5. Woken: no drain.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 15)), Shipped));
         Assert.Null(Kinsbane.Card(Placed().Find("captain")!, Shipped));
-        Assert.Contains(PlaySession.ShowLines(Placed(), Shipped, Keziah(Placed())), line => line.StartsWith("  Kinsbane: fed 0.", StringComparison.Ordinal));
+        Assert.Contains(PlaySession.ShowLines(Placed(), Shipped, Keziah(Placed())), line => line.StartsWith("  Kinsbane: fed 0, teeth 0/5.", StringComparison.Ordinal));
     }
 }
