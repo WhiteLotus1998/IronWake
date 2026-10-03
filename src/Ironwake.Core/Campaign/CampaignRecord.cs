@@ -15,6 +15,25 @@ public sealed record QuestWon(string QuestId, int MapIndex);
 /// <summary>Where a member of <see cref="CampaignRecord.Fallen"/> fell (issue 678): the unit's id and the display name of the board.</summary>
 public sealed record FellOn(string UnitId, string MapName);
 
+/// <summary>What became of the claimant passed on at the branch, on the map that brought them back (issue 633).</summary>
+public enum ClaimantFate
+{
+    /// <summary>The pick talked them round and a bed was free: they joined the company.</summary>
+    Turned,
+
+    /// <summary>The pick talked them round and no bed was free (or the company was full): they left the field and did not join.</summary>
+    TurnedAway,
+
+    /// <summary>The captain talked them round: they left the field alive and rode on.</summary>
+    Spared,
+
+    /// <summary>They died on the field.</summary>
+    Fell,
+
+    /// <summary>The map was won with them still standing against the company.</summary>
+    Stood,
+}
+
 /// <summary>
 /// A campaign between maps (issue 74, DESIGN section 9): the roster in roster order, the captain
 /// first, each unit as its last map left it (EXP, level, ranks, mastery, weapon uses); the ids of
@@ -205,6 +224,27 @@ public sealed record CampaignRecord(
     public string? Pick { get; init; }
 
     /// <summary>
+    /// What became of the passed claimant on the map that brought them back (issue 633), written when
+    /// it is won, or null before then (and in a campaign without a return). The endings (#634) read it.
+    /// </summary>
+    public ClaimantFate? Returned { get; init; }
+
+    /// <summary>
+    /// The level the passed claimant comes back at on the next map (issue 633, DESIGN section 14):
+    /// the pick's level, or the company's <see cref="JoinLevel"/> once the pick has fallen, never
+    /// below their own card's. Null when the next map brings nobody back.
+    /// </summary>
+    public int? ReturnLevel(GameContent content)
+    {
+        if (IsFinished(content) || NextMap(content).Return is null || Passed(content) is not { } passed || Returned is not null)
+        {
+            return null;
+        }
+
+        return Math.Max(content.Unit(passed).Level, Find(Pick!)?.Level ?? JoinLevel(content));
+    }
+
+    /// <summary>
     /// The claimant passed on at the branch (issue 633): the one of the two the record did not
     /// <see cref="Pick"/>, or null before the pick and in a campaign without a branch.
     /// </summary>
@@ -299,8 +339,12 @@ public sealed record CampaignRecord(
     /// campaign seed is shifted back by the map's index so that its battle plays on
     /// <paramref name="seed"/> itself, as <see cref="BattleSeed"/> promises for the opening map:
     /// <c>play &lt;map&gt; --seed N</c> reproduces its rolls. Refuses a map the campaign does not list.
+    /// With <paramref name="pick"/> (issue 633) a campaign opening after the branch has made it: the
+    /// pick is recorded and the passed claimant is off the roster, so a map that brings them back can
+    /// be played from its own camp; refused when the branch does not come before the map or does not
+    /// offer that claimant.
     /// </summary>
-    public static CampaignRecord StartAt(GameContent content, ulong seed, string mapId, string difficulty = NormalDifficulty, bool permadeath = true, string? origin = null, Pronoun? captain = null)
+    public static CampaignRecord StartAt(GameContent content, ulong seed, string mapId, string difficulty = NormalDifficulty, bool permadeath = true, string? origin = null, Pronoun? captain = null, string? pick = null)
     {
         var start = Start(content, seed, difficulty, permadeath, origin, captain);
         var index = content.Campaign.Maps.ToList().FindIndex(m => m.MapId == mapId);
@@ -312,7 +356,19 @@ public sealed record CampaignRecord(
         var captainId = content.Cast[0].Id;
         var startCaptain = start.Roster.Single(u => u.Id == captainId);
         var roster = ArrivedBefore(content, index).Select(u => u.Id == captainId ? startCaptain : u);
-        return start with { Roster = ValueList<Unit>.From(roster), MapIndex = index, Seed = unchecked(seed - (ulong)index) };
+        if (pick is not null)
+        {
+            var branchAt = content.Campaign.Maps.ToList().FindIndex(m => m.Branch.Contains(pick));
+            if (branchAt < 0 || branchAt >= index)
+            {
+                throw new ArgumentException($"'{pick}' is not a claimant offered before {mapId}");
+            }
+
+            var passed = content.Campaign.Maps[branchAt].Branch.First(id => id != pick);
+            roster = roster.Where(u => u.Id != passed);
+        }
+
+        return start with { Roster = ValueList<Unit>.From(roster), MapIndex = index, Seed = unchecked(seed - (ulong)index), Pick = pick };
     }
 
     /// <summary>
@@ -470,7 +526,14 @@ public sealed record CampaignRecord(
             .Select(p => p.RecruitId!)
             .ToList();
         roster.AddRange(fallenNamed.Select(content.Unit));
-        return BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1, Rapport = Rapport };
+        var battle = BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1, Rapport = Rapport };
+        if (ReturnLevel(content) is { } level && NextMap(content).Return is { } back && Passed(content) is { } passed)
+        {
+            var card = content.Unit(passed);
+            battle = battle.WithReturned(card.ScaledTo(level, content.Class(card.ClassId)), back.At, back.Group, back.Behavior, Pick!, content);
+        }
+
+        return battle;
     }
 
     /// <summary>
@@ -542,7 +605,7 @@ public sealed record CampaignRecord(
             }
         }
 
-        return this with
+        var won = this with
         {
             Roster = ValueList<Unit>.From(roster),
             Fallen = ValueList<string>.From(fallen),
@@ -556,6 +619,34 @@ public sealed record CampaignRecord(
             FreedUnitFell = FreedUnitFell || end.Bond == BondFate.Fell,
             Rapport = end.Rapport,
         };
+        return end.Return is { } bond ? won.AfterReturn(bond, opening, end, content) : won;
+    }
+
+    /// <summary>
+    /// The won record with the returned claimant's fate written (issue 633): turned by the pick, they
+    /// join the company as they took the field, at full uses, if a bed is free and the company has room
+    /// (<see cref="Room"/>, counted after the map's fallen, since a death never frees a bed), else they
+    /// are turned away; spared by the captain, they ride on; killed, they fell; left standing, they stood
+    /// against the company to the end.
+    /// </summary>
+    private CampaignRecord AfterReturn(ReturnBond bond, BattleState opening, BattleState end, GameContent content)
+    {
+        var fate = end.ReturnGone switch
+        {
+            ReturnFate.Turned => Room(content) > 0 ? ClaimantFate.Turned : ClaimantFate.TurnedAway,
+            ReturnFate.Spared => ClaimantFate.Spared,
+            ReturnFate.Fell => ClaimantFate.Fell,
+            _ => ClaimantFate.Stood,
+        };
+        if (fate != ClaimantFate.Turned)
+        {
+            return this with { Returned = fate };
+        }
+
+        var order = content.Cast.Select(u => u.Id).ToList();
+        var joined = opening.Find(bond.UnitId)!.Unit;
+        var roster = Roster.Append(joined).OrderBy(u => order.IndexOf(u.Id) is var at && at < 0 ? int.MaxValue : at);
+        return this with { Returned = fate, Roster = ValueList<Unit>.From(roster) };
     }
 
     /// <summary><see cref="FellOn"/> with each of <paramref name="ids"/> marked as fallen on <paramref name="mapName"/>.</summary>

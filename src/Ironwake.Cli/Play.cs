@@ -47,6 +47,7 @@ public sealed class PlaySession
           recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
           open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
           drop <unit>              On a ledge, bring the rock down as the action: each tile below takes 10 to anyone on it, and closes unless someone stands there
+          talk <unit> <target>     Beside the claimant who came back as a foe: the pick's talk turns them, the captain's spares them
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
           order <press|rally|fall back>  Commander's Word, once a map, as the captain's action: allies within 2 + Cha / 4 of the captain; press +1 Mov to those not moved, rally heals 15 percent, fall back lets those who acted move 2
           order <kind> preview [from <x,y>]  Who the order would reach from where the captain stands, or from a tile
@@ -632,6 +633,12 @@ public sealed class PlaySession
                 break;
             case "drop":
                 Error("usage: drop <unit>");
+                break;
+            case "talk" when words.Length == 3:
+                Apply(new Talk(words[1], words[2]));
+                break;
+            case "talk":
+                Error("usage: talk <unit> <target>");
                 break;
             case "order":
                 OrderWords(words);
@@ -1708,6 +1715,11 @@ public sealed class PlaySession
             rows.Add($"  {bondRow}");
         }
 
+        if (Returned.Line(state, content, names) is { } returnRow)
+        {
+            rows.Add($"  {returnRow}");
+        }
+
         if (wakes is { Count: > 0 })
         {
             rows.Add($"  stopping here wakes: {string.Join(", ", wakes.Select(w => $"{UnitNames.Group(w.Group)} ({(w.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(w))})"))}");
@@ -2426,6 +2438,7 @@ public sealed class PlaySession
         Recover r => $"recover {r.UnitId}",
         Open o => $"open {o.UnitId} {o.At}",
         Drop d => $"drop {d.UnitId}",
+        Talk t => $"talk {t.UnitId} {t.TargetId}",
         Order o => $"order {Orders.Word(o.Kind)}",
         FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
@@ -2512,6 +2525,10 @@ public sealed class PlaySession
                 return $"{names[b.UnitId]} breaks and flees ({b.Hp} hp)";
             case UnitFreed f:
                 return $"{names[f.UnitId]} lays down the weapon: freed ({f.Hp} hp)";
+            case UnitTalked t:
+                return t.Fate == ReturnFate.Turned
+                    ? $"{names[t.UnitId]} talks {names[t.TargetId]} round: turned, off the field ({t.Hp} hp)"
+                    : $"{names[t.UnitId]} talks {names[t.TargetId]} round: spared, off the field ({t.Hp} hp)";
             case MessengerEscaped m:
                 return $"{names[m.UnitId]} reaches the road at {m.At} and is gone: the word is out";
             case FrontFell f:

@@ -378,7 +378,7 @@ public static class MapRenderer
             {
                 if (unit.At.Y == y)
                 {
-                    row[unit.At.X] = Dusk.Seen(state, unit) ? letters[unit.PlacementIndex] : Dusk.Unseen;
+                    row[unit.At.X] = Dusk.Seen(state, unit) ? LetterOf(unit, letters, map, content) : Dusk.Unseen;
                 }
             }
 
@@ -396,7 +396,7 @@ public static class MapRenderer
             var terrain = map.TerrainAt(unit.At, content).Label(unit.MaxHp(content));
             var who = $"{unit.Unit.Name} L{unit.Unit.Level} {content.Class(unit.Unit.ClassId).Name.ToLowerInvariant()}";
             var hp = $"hp {unit.Hp}/{unit.MaxHp(content)}";
-            sb.Append(letters[unit.PlacementIndex]).Append("  ").Append($"{unit.Id,-16} {who,-26} {unit.At,-6} {hp,-9} {terrain}");
+            sb.Append(LetterOf(unit, letters, map, content)).Append("  ").Append($"{unit.Id,-16} {who,-26} {unit.At,-6} {hp,-9} {terrain}");
             if (unit.Side == Side.Enemy)
             {
                 var role = unit.IsBoss ? "boss" : unit.Behavior.ToString()!.ToLowerInvariant();
@@ -580,6 +580,11 @@ public static class MapRenderer
         if (Freed.Line(state, UnitNames.Of(state, content)) is { } bondLine)
         {
             sb.Append(bondLine).Append('\n');
+        }
+
+        if (Returned.Line(state, content, UnitNames.Of(state, content)) is { } returnLine)
+        {
+            sb.Append(returnLine).Append('\n');
         }
 
         if (MessengerLine(state, content) is { } messengerLine)
@@ -809,6 +814,22 @@ public static class MapRenderer
         }
 
         return letters;
+    }
+
+    /// <summary>
+    /// The letter <paramref name="unit"/> is drawn with: its placement's, or for a unit no placement
+    /// or spawn put there (the returned claimant, issue 633), the next enemy letter after the map's own.
+    /// </summary>
+    private static char LetterOf(BattleUnit unit, char[] letters, MapDefinition map, GameContent content)
+    {
+        if (unit.PlacementIndex >= 0 && unit.PlacementIndex < letters.Length)
+        {
+            return letters[unit.PlacementIndex];
+        }
+
+        var lower = Alphabet('a', content);
+        var enemies = map.Placements.Concat(map.Spawns()).Count(p => p is EnemyPlacement { IsBoss: false });
+        return lower[enemies % lower.Length];
     }
 
     /// <summary>

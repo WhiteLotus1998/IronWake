@@ -83,6 +83,17 @@ public sealed class UnitNames
             names[unit.Id] = unit.Unit.Name;
         }
 
+        // The returned claimant (issue 633) is placed by the campaign, not the map, and keeps their name and pronoun after leaving the board.
+        if (state.Return is { } bond
+            && (state.History.Count > 0 ? state.History[0].Units : state.Units).Concat(state.Units).FirstOrDefault(u => u.Id == bond.UnitId) is { } returned)
+        {
+            names[returned.Id] = returned.Unit.Name;
+            if ((returned.Unit.Pronoun ?? (content.Pronouns.TryGetValue(returned.Id, out var cast) ? cast : null)) is { } pronoun)
+            {
+                pronouns[returned.Id] = pronoun;
+            }
+        }
+
         var events = ImmutableDictionary.CreateBuilder<string, MapEventAction>(StringComparer.Ordinal);
         foreach (var mapEvent in map.Events)
         {

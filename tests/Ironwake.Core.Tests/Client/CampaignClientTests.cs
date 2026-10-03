@@ -153,4 +153,28 @@ public class CampaignClientTests
 
         Assert.Contains("ERROR: the campaign has no map 'nowhere'", output);
     }
+
+    [Fact]
+    public void APickWithoutFromIsRefused()
+    {
+        var output = ConsoleCapture.Run(() => Assert.Equal(2, CampaignSession.Run(new[] { "--pick", "rook", "--content", Fixture.RealContentDirectory() })));
+
+        Assert.Contains("ERROR: --pick makes the branch's pick for a campaign opening after it; give --from", output);
+    }
+
+    [Fact]
+    public void APickFromAMapBeforeTheBranchIsRefused()
+    {
+        var output = ConsoleCapture.Run(() => Assert.Equal(2, CampaignSession.Run(new[] { "--from", "harrow_weir", "--pick", "rook", "--content", Fixture.RealContentDirectory() })));
+
+        Assert.Contains("ERROR: 'rook' is not a claimant offered before harrow_weir", output);
+    }
+
+    [Fact]
+    public void ALevelWithoutFromIsRefused()
+    {
+        var output = ConsoleCapture.Run(() => Assert.Equal(2, CampaignSession.Run(new[] { "--level", "5", "--content", Fixture.RealContentDirectory() })));
+
+        Assert.Contains("ERROR: --level raises the company a campaign opens with on a later map; give --from", output);
+    }
 }

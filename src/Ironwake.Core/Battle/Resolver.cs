@@ -67,6 +67,9 @@ public static class Resolver
             case Drop drop:
                 (next, rejection) = ApplyDrop(state, content, drop, events);
                 break;
+            case Talk talk:
+                (next, rejection) = ApplyTalk(state, talk, events);
+                break;
             case Shove shove:
                 (next, rejection) = ApplyShove(state, content, shove, events);
                 if (rejection is null)
@@ -1368,6 +1371,31 @@ public static class Resolver
     }
 
     /// <summary>
+    /// Issue 633's talk: the pick or the captain, not yet acted, beside the returned claimant, talks
+    /// them round as its action, in place of Attack, Item or Wait, after its Move or without one
+    /// (<see cref="Returned"/>). They leave the board, which is not a kill. No Canto follows.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyTalk(BattleState state, Talk talk, List<GameEvent> events)
+    {
+        var unit = Acting(state, talk.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (Returned.Refusal(state, unit, talk.TargetId) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotTalk, refusal));
+        }
+
+        var target = state.Find(talk.TargetId)!;
+        var fate = Returned.FateOf(state, unit);
+        events.Add(new UnitTalked(unit.Id, target.Id, target.At, target.Hp, fate));
+        var next = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null });
+        return (next.WithoutUnit(target.Id) with { ReturnGone = fate }, null);
+    }
+
+    /// <summary>
     /// Why <paramref name="unit"/> cannot open a chest at <paramref name="at"/> (issue 649), in the
     /// order the rules are checked, or null when it can. Whether the unit may act at all is the
     /// caller's check.
@@ -1718,6 +1746,11 @@ public static class Resolver
             if (Rockfall.Refusal(state, unit) is null)
             {
                 yield return new Drop(unit.Id);
+            }
+
+            if (Returned.On(state) is { } returned && Returned.Refusal(state, unit, returned.Id) is null)
+            {
+                yield return new Talk(unit.Id, returned.Id);
             }
 
             if (unit.Side == Side.Player && state.Map.ShoveEnabled)

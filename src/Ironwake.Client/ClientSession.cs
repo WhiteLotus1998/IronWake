@@ -297,7 +297,8 @@ public sealed class ClientSession
 
     /// <summary>
     /// The action list for the selected unit (issue 786), empty with none selected or while the
-    /// enemy phase plays: one row per closed chest on or beside its tile (<c>open</c>), then, for
+    /// enemy phase plays: one row per closed chest on or beside its tile (<c>open</c>), then, for the
+    /// pick or the captain beside the claimant who came back as a foe, a <c>talk</c> row (issue 633), then, for
     /// the captain on a map where orders are open and unspent, one row per order (<c>order</c>),
     /// its line the console's <c>order ... preview</c> from <paramref name="from"/> (a hovered
     /// tile, to read a call from there before moving) or from where he stands.
@@ -317,6 +318,14 @@ public sealed class ClientSession
             var refusal = Resolver.Apply(State, Content, open).Rejection is { } rejected ? names.Message(rejected.Message) : null;
             var holds = string.Join(", ", chest.Items.Select(Content.ItemName));
             rows.Add(new ActionRow($"Open chest {chest.At.X},{chest.At.Y}", holds, open, refusal));
+        }
+
+        if (Returned.On(State) is { } returned && (unit.IsCaptain || unit.Id == State.Return!.PickId) && returned.At.DistanceTo(unit.At) == 1)
+        {
+            var talk = new Talk(unit.Id, returned.Id);
+            var refusal = Resolver.Apply(State, Content, talk).Rejection is { } rejected ? names.Message(rejected.Message) : null;
+            var fate = Returned.FateOf(State, unit) == ReturnFate.Turned ? "turns them: off the field, joins if a bed is free" : "spares them: off the field, never joins";
+            rows.Add(new ActionRow($"Talk to {names[returned.Id]}", fate, talk, refusal));
         }
 
         if (unit.IsCaptain && State.OrdersOpen && State.OrderCalled is null)

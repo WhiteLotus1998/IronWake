@@ -198,6 +198,13 @@ public static class ProtocolJson
                 WriteCoord(w, "at", f.At);
                 w.WriteNumber("hp", f.Hp);
                 break;
+            case UnitTalked t:
+                w.WriteString("unit", t.UnitId);
+                w.WriteString("target", t.TargetId);
+                WriteCoord(w, "at", t.At);
+                w.WriteNumber("hp", t.Hp);
+                w.WriteString("fate", t.Fate == ReturnFate.Turned ? "turned" : "spared");
+                break;
             case MessengerEscaped m:
                 w.WriteString("unit", m.UnitId);
                 WriteCoord(w, "at", m.At);
@@ -538,6 +545,11 @@ public static class ProtocolJson
                 w.WriteString("type", "drop");
                 w.WriteString("unit", drop.UnitId);
                 break;
+            case Talk talk:
+                w.WriteString("type", "talk");
+                w.WriteString("unit", talk.UnitId);
+                w.WriteString("target", talk.TargetId);
+                break;
             case Shove shove:
                 w.WriteString("type", "shove");
                 w.WriteString("unit", shove.UnitId);
@@ -599,13 +611,14 @@ public static class ProtocolJson
             "recover" => new Recover(RequiredString(e, "unit")),
             "open" => new Open(RequiredString(e, "unit"), ReadCoord(e, "at")),
             "drop" => new Drop(RequiredString(e, "unit")),
+            "talk" => new Talk(RequiredString(e, "unit"), RequiredString(e, "target")),
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
             "order" => new Order(ReadOrderKind(RequiredString(e, "kind"))),
             "fallBack" => new FallBack(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
             "undo" => new Undo(RequiredString(e, "unit")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, open, shove, order, fallBack, end, recall, or undo"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, watch, cover, canto, exit, recover, open, drop, talk, shove, order, fallBack, end, recall, or undo"),
         };
     }
 
@@ -1290,6 +1303,11 @@ public static class ProtocolJson
             w.WriteString("pick", pick);
         }
 
+        if (record.Returned is { } returned)
+        {
+            w.WriteString("returned", ClaimantFateName(returned));
+        }
+
         if (record.LoweredFrom.Count > 0)
         {
             w.WriteStartArray("loweredFrom");
@@ -1444,7 +1462,30 @@ public static class ProtocolJson
             LoweredFrom = ReadLoweredFrom(e, content),
             Origin = ReadOrigin(e, content),
             Pick = ReadPick(e, content),
+            Returned = ReadReturned(e),
         };
+    }
+
+    /// <summary>A returned claimant's fate's protocol name (issue 633).</summary>
+    private static string ClaimantFateName(ClaimantFate fate) => fate switch
+    {
+        ClaimantFate.Turned => "turned",
+        ClaimantFate.TurnedAway => "turnedAway",
+        ClaimantFate.Spared => "spared",
+        ClaimantFate.Fell => "fell",
+        _ => "stood",
+    };
+
+    /// <summary>The optional <c>returned</c> of a campaign record (issue 633), the passed claimant's fate; a record without one has not fought the return.</summary>
+    private static ClaimantFate? ReadReturned(JsonElement e)
+    {
+        if (OptionalString(e, "returned") is not { } text)
+        {
+            return null;
+        }
+
+        return Enum.GetValues<ClaimantFate>().Where(f => ClaimantFateName(f) == text).Select(f => (ClaimantFate?)f).FirstOrDefault()
+            ?? throw new ProtocolException($"returned '{text}' is not one of turned, turnedAway, spared, fell, stood");
     }
 
     /// <summary>The <c>rapport</c> array a board or a record carries (issues 16 and 77): each pair's ids and points.</summary>

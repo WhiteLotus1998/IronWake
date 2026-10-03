@@ -98,6 +98,15 @@ public static class ContentSerializer
                     writer.WriteEndArray();
                 }
 
+                if (map.Return is { } back)
+                {
+                    writer.WriteStartObject("return");
+                    writer.WriteString("at", $"{back.At.X},{back.At.Y}");
+                    writer.WriteString("group", back.Group);
+                    writer.WriteString("behavior", back.Behavior.ToString().ToLowerInvariant());
+                    writer.WriteEndObject();
+                }
+
                 if (map.EnemyLevel is { } enemyLevel)
                 {
                     writer.WriteNumber("enemyLevel", enemyLevel);

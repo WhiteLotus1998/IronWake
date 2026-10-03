@@ -17,7 +17,7 @@ namespace Ironwake.Cli;
 /// </summary>
 public sealed class CampaignSession
 {
-    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--origin id] [--captain he|she] [--scheme one|two] [--from map] [--log file] [--saves dir] [--load save | --resume]";
+    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--origin id] [--captain he|she] [--scheme one|two] [--from map [--pick claimant] [--level N]] [--log file] [--saves dir] [--load save | --resume]";
 
     /// <summary>Where the keyboard's saves go when <c>--saves</c> is not given; a scripted run keeps none unless it is.</summary>
     public const string DefaultSavesDirectory = "saves";
@@ -108,6 +108,8 @@ public sealed class CampaignSession
         var difficulty = CampaignRecord.NormalDifficulty;
         var scheme = RollScheme.TwoRollAverage;
         string? from = null;
+        string? pick = null;
+        int? level = null;
         string? log = null;
         string? savesDir = null;
         string? load = null;
@@ -144,6 +146,14 @@ public sealed class CampaignSession
                     break;
                 case "--from" when value is not null:
                     from = value;
+                    i++;
+                    break;
+                case "--pick" when value is not null:
+                    pick = value;
+                    i++;
+                    break;
+                case "--level" when value is not null && int.TryParse(value, out var parsedLevel) && parsedLevel >= Unit.MinLevel && parsedLevel <= Unit.MaxLevel:
+                    level = parsedLevel;
                     i++;
                     break;
                 case "--log" when value is not null:
@@ -183,6 +193,20 @@ public sealed class CampaignSession
         if (strict && script is null)
         {
             Console.WriteLine("ERROR: --strict applies to a scripted run; give --script");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if (pick is not null && from is null)
+        {
+            Console.WriteLine("ERROR: --pick makes the branch's pick for a campaign opening after it; give --from");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if (level is not null && from is null)
+        {
+            Console.WriteLine("ERROR: --level raises the company a campaign opens with on a later map; give --from");
             Console.WriteLine(Usage);
             return 2;
         }
@@ -279,7 +303,22 @@ public sealed class CampaignSession
             return 2;
         }
 
-        var record = from is null ? CampaignRecord.Start(content, seed, difficulty, permadeath, origin, captain) : CampaignRecord.StartAt(content, seed, from, difficulty, permadeath, origin, captain);
+        CampaignRecord record;
+        try
+        {
+            record = from is null ? CampaignRecord.Start(content, seed, difficulty, permadeath, origin, captain) : CampaignRecord.StartAt(content, seed, from, difficulty, permadeath, origin, captain, pick);
+        }
+        catch (ArgumentException e)
+        {
+            Console.WriteLine("ERROR: " + e.Message);
+            return 2;
+        }
+
+        if (level is { } floor)
+        {
+            record = record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u.ScaledTo(floor, content.Class(u.ClassId)))) };
+        }
+
         IReadOnlyList<string>? battleLines = null;
         if (load is not null)
         {
@@ -691,6 +730,11 @@ public sealed class CampaignSession
     /// </summary>
     public static IReadOnlyList<string> BranchLines(CampaignRecord record, GameContent content)
     {
+        if (ReturnLines(record, content) is { Count: > 0 } returnLines)
+        {
+            return returnLines;
+        }
+
         if (record.IsFinished(content) || record.NextMap(content).Branch is not { Count: 2 } branch)
         {
             return Array.Empty<string>();
@@ -706,6 +750,46 @@ public sealed class CampaignSession
         {
             $"The last seat: {Claimant(branch[0])} or {Claimant(branch[1])} (pick <unit>). The one passed on rides home.",
             "They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.",
+        };
+    }
+
+    /// <summary>
+    /// The return as the Roster panel prints it (issue 633 slice 2): at the camp before the map that
+    /// brings the passed claimant back, who comes, at what level, whose talk does what, and the bed
+    /// rule with the beds as they stand; at every camp after it, what became of them. Empty otherwise.
+    /// </summary>
+    public static IReadOnlyList<string> ReturnLines(CampaignRecord record, GameContent content)
+    {
+        if (record.Passed(content) is not { } passed)
+        {
+            return Array.Empty<string>();
+        }
+
+        var card = content.Unit(passed);
+        var them = Referent.For(content, passed, card.Name);
+        if (record.Returned is { } fate)
+        {
+            var words = fate switch
+            {
+                ClaimantFate.Turned => $"turned by {content.Unit(record.Pick!).Name}, and with the company",
+                ClaimantFate.TurnedAway => $"turned by {content.Unit(record.Pick!).Name}, and gone: no bed was free",
+                ClaimantFate.Spared => "spared, and gone",
+                ClaimantFate.Fell => "fell on the field",
+                _ => "stood against the company to the end, and rode off",
+            };
+            return new[] { $"{card.Name} came back with the enemy: {words}." };
+        }
+
+        if (record.ReturnLevel(content) is not { } level)
+        {
+            return Array.Empty<string>();
+        }
+
+        var beds = record.Beds(content) is { } total ? $" (beds: {record.BedsTaken}/{total})" : "";
+        return new[]
+        {
+            $"{card.Name} ({content.Class(card.ClassId).Name}, level {level}) rides with the enemy on this map.",
+            $"{content.Unit(record.Pick!).Name}'s talk turns {them.Object}; the captain's spares {them.Object} (talk <unit> {passed}). Turned, {them.Subject} {them.Verb("joins", "join")} only if a bed is free{beds}, and a death never frees one.",
         };
     }
 

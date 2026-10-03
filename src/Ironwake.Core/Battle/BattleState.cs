@@ -77,6 +77,20 @@ public sealed record BattleState(
     public BondFate? Bond { get; init; }
 
     /// <summary>
+    /// The claimant passed on at the branch, fighting for the enemy on this campaign battle, and the
+    /// pick whose talk turns them (issue 633, <see cref="Returned"/>); null on every other battle.
+    /// Set by <see cref="WithReturned"/>.
+    /// </summary>
+    public ReturnBond? Return { get; init; }
+
+    /// <summary>
+    /// How the returned claimant left the board (issue 633): null while they stand or on a battle
+    /// without one; <see cref="ReturnFate.Fell"/> when removed, which a talk marks
+    /// <see cref="ReturnFate.Turned"/> or <see cref="ReturnFate.Spared"/> over. A Recall restores it with the board.
+    /// </summary>
+    public ReturnFate? ReturnGone { get; init; }
+
+    /// <summary>
     /// The names of the map's fronts that have fallen (issue 692), sorted. A front falls once and
     /// stays fallen; a Recall restores the list with the board.
     /// </summary>
@@ -308,6 +322,25 @@ public sealed record BattleState(
         }
 
         return new BattleState(map, ValueList<BattleUnit>.From(units), 1, Side.Player, seed, scheme, map.RecallCharges, ValueList<BattleState>.Empty);
+    }
+
+    /// <summary>
+    /// This opening state with the claimant passed on at the branch placed for the enemy (issue 633,
+    /// <see cref="CampaignMap.Return"/>): <paramref name="unit"/> on <paramref name="at"/> in
+    /// <paramref name="group"/> under <paramref name="behavior"/>, bound to <paramref name="pickId"/>'s
+    /// talk. Placed by no map line, so their placement index is -1. Throws when the tile is taken or
+    /// they cannot stand on it, a content error the content tests hold the shipped campaign to.
+    /// </summary>
+    public BattleState WithReturned(Unit unit, Coord at, string group, Behavior behavior, string pickId, GameContent content)
+    {
+        if (Units.Any(u => u.At == at))
+        {
+            throw new ArgumentException($"the returned claimant '{unit.Id}' is placed on {at}, where a unit already stands", nameof(at));
+        }
+
+        var placed = Place(unit, Side.Enemy, at, Map, content) with { Group = group, Behavior = behavior, IsBoss = false, PlacementIndex = -1 };
+        var units = ValueList<BattleUnit>.From(Units.Append(placed).OrderBy(u => u.Id, StringComparer.Ordinal));
+        return this with { Units = units, Return = new ReturnBond(unit.Id, pickId) };
     }
 
     /// <summary>Whether a recruit is left for a bare slot (issue 689): on <c>deploy: all</c>, or short-handed (issue 795), the bare slots past the company stay empty.</summary>
@@ -603,7 +636,8 @@ public sealed record BattleState(
     /// This state with a unit removed by id. The unit must exist. Removing the messenger records
     /// it as fallen on its tile (<see cref="MessengerGone"/>); <see cref="Messenger.AfterMove"/>
     /// marks an escape over that. Removing the bound enemy of a <c>freed:</c> header records it
-    /// as fallen (<see cref="Bond"/>); <see cref="Freed.After"/> marks a freeing over that.
+    /// as fallen (<see cref="Bond"/>); <see cref="Freed.After"/> marks a freeing over that. Removing
+    /// the returned claimant records them as fallen (<see cref="ReturnGone"/>); a talk marks its fate over that.
     /// </summary>
     public BattleState WithoutUnit(string id)
     {
@@ -613,7 +647,8 @@ public sealed record BattleState(
             {
                 var gone = Messenger.Is(this, Units[i]) ? new MessengerFate(Units[i].At, Escaped: false) : MessengerGone;
                 var bond = Freed.IsBound(this, Units[i]) ? BondFate.Fell : Bond;
-                return this with { Units = Units.RemoveAt(i), MessengerGone = gone, Bond = bond };
+                var returned = Returned.Is(this, Units[i]) ? ReturnFate.Fell : ReturnGone;
+                return this with { Units = Units.RemoveAt(i), MessengerGone = gone, Bond = bond, ReturnGone = returned };
             }
         }
 
@@ -753,6 +788,16 @@ public sealed record BattleState(
         if (Bond is { } bondFate)
         {
             sb.Append("bond ").Append(bondFate == BondFate.Freed ? "freed" : "fell").Append('\n');
+        }
+
+        if (Return is { } returnBond)
+        {
+            sb.Append("return ").Append(returnBond.UnitId).Append(" pick ").Append(returnBond.PickId).Append('\n');
+        }
+
+        if (ReturnGone is { } returnFate)
+        {
+            sb.Append("returned ").Append(returnFate.ToString().ToLowerInvariant()).Append('\n');
         }
 
         foreach (var unit in Units)

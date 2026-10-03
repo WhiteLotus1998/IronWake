@@ -109,6 +109,14 @@ public sealed record Watch(string UnitId) : Command;
 /// </summary>
 public sealed record Cover(string UnitId, string AllyId) : Command;
 
+/// <summary>
+/// Talk to the claimant who came back as a foe (issue 633, <see cref="Returned"/>): the pick or the
+/// captain, orthogonally beside them, takes this as its action, in place of Attack, Item or Wait,
+/// after its Move or without one. The pick's talk turns them, the captain's spares them; either way
+/// they leave the board. No Canto follows. The enemy never talks.
+/// </summary>
+public sealed record Talk(string UnitId, string TargetId) : Command;
+
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
 

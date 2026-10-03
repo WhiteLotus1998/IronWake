@@ -2063,3 +2063,16 @@ Notes: Warm: I built the pick. Transcript `docs/transcripts/2026-10-03-ironwake_
 - **What the slice does not test.** The return. The pick's weight lands on the field, when the passed claimant comes back (#633 slice 2). Until then the passed one is only a line.
 
 — Code
+
+## 2026-10-03 — The Field Before the Keep with Rook come back (#633 slice 2), warm — Code
+Seed: 633 (`campaign --from the_field --pick keziah --level 5`, Captain, permadeath on)   Result: won, turn 12 of 20, nobody lost; three Recalls; Rook turned and joined (beds 11/12)
+Tension: 8/10   Choice: 7/10   Surprise: 8/10
+Best turn: Turn 3, after the Recall. Rook had flown over the hill at Keziah and Keziah's counter left her at 1 HP, so the one person I came to turn was a single axe swing from dead. Maud's Salve first (Keziah 7 to 15), then `talk keziah rook` with the pickets' three strikes on her (`20 against 15`). They all missed. The talk cost Keziah's strike and Maud's action in the middle of the fight, and it was the right price.
+Notes: Warm: I built the return and chose its tile. The `--level 5` start is a lab company, not a campaign's. Transcript `docs/transcripts/2026-10-03-the_field-633.txt`.
+- **The return is a threat, not a prop.** Rook comes back as a Skyrider at the pick's level, with Spd 11 and Mov 6 flying. On enemy phase 2 she went over the hill and killed Pell with a double before I had seen her move. That was the map's surprise and my first Recall. A flyer in the pickets changes the field's first fight, which was flat walking before (811's journal).
+- **The talker's own counter is the trap.** `threat keziah` on turn 2 printed her counter on Rook: 17 against 18 HP. Every tile where Keziah stands in Rook's path is a tile where Keziah may kill her. I put Keziah forward anyway, Rook went for her, and the counter left Rook at 1. The pick's kit and the passed claimant's HP set the choice, and the board prints both. Nothing printed says "keep her back to keep her alive"; the player finds it.
+- **The captain's spare was never tempting.** He was always busier. Whether the captain's talk is ever taken is a question for Chat's chair.
+- **The rest was the field.** The captain's Fall back pulled Teodor (7 HP) off the bridge after a 93% miss. Ottilie's bow did 0 to the Sentry and woke the line behind me. The boss came out to 15,6 to meet the bridge, then went home to heal. The last two Recalls were mine: I struck the boss on his fort without reading the forecast (5 x2) and ate an 11 counter to 1 HP; then Keziah's 47% missed. Pell's Cinder finished it on turn 12.
+- **The bed line did its work at the camp.** `Turned, she joins only if a bed is free (beds: 10/12)` sat under the roster. With two free there was no cost this time. The cost the slice is built for, a bed held back from a side character, needs a campaign run that fills them.
+
+— Code

@@ -46,6 +46,7 @@ public static class Script
             ("exit", 2) => new Exit(words[1]),
             ("recover", 2) => new Recover(words[1]),
             ("drop", 2) => new Drop(words[1]),
+            ("talk", 3) => new Talk(words[1], words[2]),
             ("shove", 3) => new Shove(words[1], words[2]),
             ("open", 3) when TryCoord(words[2], out var chest) => new Open(words[1], chest),
             ("order", 2 or 3) when OrderOf(words) is { } kind => new Order(kind),
