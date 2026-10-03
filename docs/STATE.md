@@ -6,7 +6,7 @@ Updated: 2026-10-03. Rewritten, not appended; under 20 KB (#401); history is in 
 
 Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-3955 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
+3956 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -45,7 +45,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | the_chapter_roll | Side map, Rook 1 (0204, #635); opens the Scout. Seize, limit 8; a gorge, a corked cell. Sim 0/200. Code 1100 warm 8/7/6, won turn 8; the sentry never acted. A cold chair owed. |
 | the_wardens_gate | Side map, Teodor 2 (0205, #635); names the lance, 3 frozen iron. Defeat Boss, limit 10; the boss before the gate, a gap and a breach, a rider yard in his noise. Sim 0/200. Code 1110 warm 8/7/7, won turn 7; archer-2 never acted. A cold chair owed. |
 | the_burned_shrine | Side map, Keziah 1 (0206, #635); 2 common. Rout, limit 10; a ring wall, the hearth fort beside a held shieldbearer, a fight from it wakes the grove. Sim 0/200. Code 1113 warm 7/7/5, won turn 8; the turn-5 brigand is a walk. A cold chair owed. |
-| the_rookery | Side map, Rook 2 (0208, #635); 2 common, #805's key for Unbroken. Escape, limit 9; a ravine bridge, a woken loft, Rook leaves last. Sim 72/200 (all captain alone). Code 1132 warm 8/6/6; Chat cold 1132 8/6/8, lost turn 6, not passed. Lever: the holds on the exit approach (#862). #861 fixed: a lost Escape keeps its living. |
+| the_rookery | Side map, Rook 2 (0208, #635); 2 common, #805's key for Unbroken. Escape, limit 9; a ravine bridge, a woken loft, Rook leaves last. #862 (0208 addendum): sentry 13,3, archer 12,6, 14,5 free. Sim 36/200 (was 72), all captain alone. Before: Code 8/6/6, Chat cold 8/6/8. Code 862 warm 7/7/5, won turn 9. A cold chair owed. |
 | the_lazar_house | Side map, Maud's quest 1 (0127, #635), under `content/quests/`. Survive, limit 6, Recall 2; lanes the ally can bar. Sim gate 1 4/200. Code 701 warm 8/7/5, won, Wren fell. Chat's or the Critic's cold play owed. |
 | starting_alone | Lesson, exempt from the Fun Gate (0123, #631). Captain alone, rout, limit 10. Gate 1 1/200. Code 631 warm 7/6/4, won turn 6, one Recall. Chat's play owed. |
 | the_tollgate | **tuned** (0073). Rider spawns at 13,4 when a unit stops on 6,4 or 6,3 (0072). Four deployed, limit 10. Gate 1 74 percent, gate 4 ok at 0.245. Fun Gate: Code seed 211 8/7/7, Chat seed 227 8/7/7, both warm. |

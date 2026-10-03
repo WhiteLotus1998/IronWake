@@ -1,0 +1,39 @@
+quest rook_2 wren
+threat wren from 6,5
+threat rook from 4,6
+move wren 6,5
+wait wren
+move rook 4,6
+wait rook
+end
+move wren 5,5
+attack wren wing_captain-1
+threat rook from 8,5
+move rook 8,5
+attack rook soldier-1
+end
+move wren 9,5
+wait rook
+end
+move wren 9,6
+attack wren wingrider-1
+move rook 14,5
+wait rook
+end
+attack wren wingrider-2
+wait rook
+end
+move wren 12,5
+attack wren archer-1
+wait rook
+end
+attack wren rider-1
+wait rook
+end
+move wren 14,6
+wait wren
+wait rook
+end
+exit wren
+exit rook
+leave

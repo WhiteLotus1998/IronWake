@@ -23,8 +23,8 @@ P captain 1,4
 P recruit 2,5
 E wing_captain 5,1 group:loft behavior:guard
 E soldier 9,5 group:bridge behavior:guard
-E archer 11,3 group:bridge behavior:hold
-E sentry 12,6 group:pass behavior:hold
+E archer 12,6 group:bridge behavior:hold
+E sentry 13,3 group:pass behavior:hold
 
 events:
 pursuit1 turn 2 enemy spawn wingrider 0,9 group:pursuit behavior:aggressive

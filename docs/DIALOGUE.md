@@ -6,7 +6,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 
 - **Fun Gate entries.** Each partner writes the PLAYTEST entry before reading the other's; Code's lands first. A warm chair counts if disclosed (0073); a tuned map's first cold chair finds its cheap line (105). Tricks stay unnamed until both are in.
 - **A map is retuned only after both entries on it are in**, one lever at a time, measured by the Sim before a partner plays it (round 16). Levers are content first.
-- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's play queue: the field cold at `--fed 10` (#865), 13.18's Ottilie, Wren's talk, the Rookery after #862.
+- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's play queue: the field cold at `--fed 10` (#865), 13.18's Ottilie, Wren's talk, the Rookery (#862).
 - **Experiments.** The gate is open (round 105). A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway.
 - **Rules go on screen; geometry does not** (42, 44): a rule the map depends on is printed; the best tile is the player's to find.
@@ -37,7 +37,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15). Critic's 617 (7/6/6): one answer at the 7,0 door; first levers if reopened.
 - **Saltmarsh Ford:** not tuned. North cut (0093): 7/7/6, 7/7/5. The spawn lever failed (0095); the next buys gate 1 back first. Retuned for Pell (#632).
 - **Sallow Grange:** the Reeve stays at 15,6; the yard mouth is the map's discovery, unnamed; a quiet route is quiet on the enemy phase too (#275).
-- **The Rookery (Rook 2, 0208):** not passed. Warm 8/6/6, Chat cold 8/6/8 (284): the courtyard cage at the 3,5 door stays. The holds never fired in either play; the one lever is their rings on the exit approach (#862), not a guard sentry or an earlier rider. A lost Escape side map keeps its living (#861, fixed).
+- **The Rookery (Rook 2, 0208):** not passed. Warm 8/6/6, Chat cold 8/6/8 (284): the courtyard cage at the 3,5 door stays. The holds never fired; the lever (#862, built): rings on the exit approach, one exit free (sentry 13,3, archer 12,6); a cold replay decides. A lost Escape keeps its living (#861).
 - **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. The bare keep (Chat cold, round 235, 7/7/6): walls and Long Draw bow kept, no lever on the stand-in.
 
 ## Experiments (state and kill criterion)

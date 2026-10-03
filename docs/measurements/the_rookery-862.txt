@@ -1,0 +1,11 @@
+The Rookery, issue 862: the bow holds' rings on the exit approach.
+Sim --full content/quests/the_rookery.map --seeds 200 --lead rook --lead wren, Release, two-roll average.
+Hold shots counted with a temporary instrument in Runner.Play, not committed: every enemy-phase Attack by archer-1 or sentry-1, the target's tile, gate 1's 200 games.
+
+arm                                   gate 1   captain alone   with the ally   games with a hold shot   shot on an exit
+before (archer 11,3, sentry 12,6)     72/200   72              0               0                        0
+archer 13,3, sentry 12,6 (tried)      34/200   34              0               182                      102 (archer on Rook at 14,4; 86 more at 14,2)
+built: archer 12,6, sentry 13,3       36/200   36              0               182                      107 (sentry on Rook at 14,4; 87 more at 14,2)
+
+Rings (bow 2, the sentry's lance 1): built, 14,4 is in the sentry's, 14,6 in the archer's, 14,5 in neither.
+The tried arm put a bow-only archer beside Rook's corner perch at 13,4, where she struck it at 79% x2 for 10 against 19 HP with no counter; the built arm puts the lance there.

@@ -340,13 +340,14 @@ public class SideMapCliTests
     /// <summary>
     /// Code's journaled play of Rook's quest 2 (side-map seed 1132), from a save at the camp
     /// after map 9 with Rook picked, the Chapter Roll won and the cast at level 7: the bridge
-    /// fight wakes the loft, Wren kills the Wing Captain and both pursuing wingriders, Rook
-    /// waits on the exit at 4 HP, and Wren leaves before her on turn 9.
+    /// fight wakes the loft, Wren kills the Wing Captain and both pursuing wingriders. On issue 862's
+    /// holds Rook waits on 14,5, the exit outside both rings, at 4 HP from turn 4, Wren kills the archer
+    /// on 12,6 to open 14,6, and leaves before her on turn 9.
     /// </summary>
     [Fact]
     public void TheJournaledRookeryPlayEscapesOnTurnNine()
     {
-        var script = Transcript("2026-10-03-the_rookery-1132.script");
+        var script = Transcript("2026-10-03-the_rookery-1132-862.script");
         var saves = Path.Combine(Path.GetTempPath(), "ironwake-rookery-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(saves);
         File.Copy(Transcript(Path.Combine("2026-10-03-the_rookery-1132.saves", "rookery.json")), Path.Combine(saves, "rookery.json"));
@@ -357,6 +358,7 @@ public class SideMapCliTests
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Rookery, seed 1132\n", output);
             Assert.Contains("The loft group wakes", output);
+            Assert.Contains("Archer falls at 12,6\n", output);
             Assert.Contains("escaped: wren rook\n", output);
             Assert.Contains("> leave\nRook wins rook_2; the stores take 2 common material; nobody fell\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
