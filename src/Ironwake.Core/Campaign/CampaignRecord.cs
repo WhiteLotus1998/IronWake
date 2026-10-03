@@ -235,6 +235,13 @@ public sealed record CampaignRecord(
     public string? Pick { get; init; }
 
     /// <summary>
+    /// The <see cref="MapIndex"/> on which <c>march sure</c> answered a <c>keziah_warning</c> map's
+    /// question (issue 871), or null. The question is asked once per map, so a retry of the same
+    /// map marches without it.
+    /// </summary>
+    public int? WarningConfirmed { get; init; }
+
+    /// <summary>
     /// What became of the passed claimant on the map that brought them back (issue 633), written when
     /// it is won, or null before then (and in a campaign without a return). The endings (#634) read it.
     /// </summary>
@@ -1499,6 +1506,26 @@ public sealed record CampaignRecord(
     /// </summary>
     public IReadOnlyList<string> Deployment(MapDefinition map, GameContent content) =>
         Begin(map, content).UnitsOf(Side.Player).OrderBy(u => u.PlacementIndex).Select(u => u.Id).ToList();
+
+    /// <summary>
+    /// The question a bare <c>march</c> asks before <paramref name="map"/> (issue 871), or null when it
+    /// marches: on a <c>keziah_warning</c> map with the hungering weapon's bearer in the deployment and
+    /// the question not yet answered on this map, Lotus's line (<see cref="Kinsbane.WarningLine"/>).
+    /// <c>march sure</c> answers it (<see cref="ConfirmWarning"/>); benching the bearer removes it.
+    /// </summary>
+    public string? MarchWarning(MapDefinition map, GameContent content)
+    {
+        if (!map.KeziahWarning || WarningConfirmed == MapIndex || Kinsbane.Bearer(content) is not { } bearer
+            || MarchRefusal(map, content) is not null || !Deployment(map, content).Contains(bearer))
+        {
+            return null;
+        }
+
+        return Kinsbane.WarningLine(Find(bearer)?.Name ?? bearer);
+    }
+
+    /// <summary>The record with this map's <see cref="MarchWarning"/> answered (issue 871): <c>march sure</c>.</summary>
+    public CampaignRecord ConfirmWarning() => this with { WarningConfirmed = MapIndex };
 
     /// <summary>
     /// Why <c>march</c> cannot open <paramref name="map"/>, or null when it can (issue 795): the

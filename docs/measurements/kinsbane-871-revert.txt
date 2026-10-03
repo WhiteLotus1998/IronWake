@@ -1,0 +1,49 @@
+# issue 871: --kinsbane (Release, 200 runs each arm, the same seeds as kinsbane-856-schedule.txt) on issue/871-kinsbane-revert-reach-gate. 0210's reach gate reverted (the drain fires at every phase start after the first, enemy near or not); teeth 2,4,5,8,12, Drain 5, heal 10, the hunt, unchanged. Rows add the walking drains (drains paid with no enemy on her strike set, Kinsbane.Smells read on the board the drain fired on) and her falls (tries she fell on). The committed and axe arms ran before keziah_warning was set on any map; the heeding arm ran with Sallow Grange flagged.
+
+## committed: ironwake-sim --kinsbane --seeds 200
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the scythe in front of her pack, her iron axe behind it, as the campaign issues it
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 2 p50 3 p75 4 (teeth p50 1/5), drains p50 2 (walking p50 0, p75 0), her falls 210, starved in 11, her attacks 250 (scythe 214), woken by its end in 0, ended starved in 7, the hunt ran on in 0
+  map 7 (her map 2): won 34, deployed in 34, tries p50 22, fed by its end p25 4 p50 5 p75 6 (teeth p50 3/5), drains p50 5 (walking p50 2, p75 2), her falls 796, starved in 18, her attacks 126 (scythe 70), woken by its end in 0, ended starved in 13, the hunt ran on in 0
+  map 8 (her map 3): won 34, deployed in 34, tries p50 2, fed by its end p25 5 p50 6 p75 7 (teeth p50 3/5), drains p50 3 (walking p50 1, p75 1), her falls 93, starved in 9, her attacks 33 (scythe 26), woken by its end in 0, ended starved in 8, the hunt ran on in 0
+  map 9 (her map 4): won 31, deployed in 31, tries p50 7, fed by its end p25 9 p50 10 p75 12 (teeth p50 4/5), drains p50 4 (walking p50 1, p75 2), her falls 274, starved in 7, her attacks 164 (scythe 134), woken by its end in 12, ended starved in 2, the hunt ran on in 11
+  map 10 (her map 5): won 9, deployed in 9, tries p50 24, fed by its end p25 12 p50 12 p75 12 (teeth p50 5/5), drains p50 2 (walking p50 0, p75 0), her falls 207, starved in 0, her attacks 49 (scythe 21), woken by its end in 9, ended starved in 0, the hunt ran on in 7
+  no try won map 1: 118
+  no try won map 7: 48
+  no try won map 9: 3
+  no try won map 10: 22
+  woken entering the keep (map 10, fed 12 by map 9's end): 12 of 31 reachers
+  teeth, over the 82 runs that won her first map (a run lost later counts as never):
+  tooth 1 (fed 2): grew in 74 of 82, median map 6
+  tooth 2 (fed 4): grew in 47 of 82, median map 7
+  tooth 3 (fed 5): grew in 34 of 82, median map never
+  tooth 4 (fed 8): grew in 30 of 82, median map never
+  tooth 5 (wakes, fed 12): grew in 20 of 82, median map never
+
+## heeding (Sallow Grange flagged): ironwake-sim --kinsbane --heeding --seeds 200
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the scythe in front of her pack, her iron axe behind it, as the campaign issues it; the heeding arm: benched on every keziah_warning map
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 2 p50 3 p75 4 (teeth p50 1/5), drains p50 2 (walking p50 0, p75 0), her falls 210, starved in 11, her attacks 250 (scythe 214), woken by its end in 0, ended starved in 7, the hunt ran on in 0
+  map 7 (her map 2): won 82, deployed in 0, tries p50 2, fed by its end p25 2 p50 3 p75 4 (teeth p50 1/5), drains p50 0 (walking p50 0, p75 0), her falls 0, starved in 0, her attacks 0 (scythe 0), woken by its end in 0, ended starved in 7, the hunt ran on in 0
+  map 8 (her map 3): won 82, deployed in 82, tries p50 2, fed by its end p25 3 p50 4 p75 5 (teeth p50 2/5), drains p50 3 (walking p50 1, p75 1), her falls 169, starved in 17, her attacks 79 (scythe 70), woken by its end in 0, ended starved in 16, the hunt ran on in 0
+  map 9 (her map 4): won 64, deployed in 64, tries p50 11, fed by its end p25 8 p50 9 p75 11 (teeth p50 4/5), drains p50 5 (walking p50 1, p75 2), her falls 915, starved in 17, her attacks 357 (scythe 297), woken by its end in 9, ended starved in 6, the hunt ran on in 8
+  map 10 (her map 5): won 12, deployed in 12, tries p50 33, fed by its end p25 12 p50 12 p75 12 (teeth p50 5/5), drains p50 2 (walking p50 0, p75 0), her falls 330, starved in 2, her attacks 72 (scythe 36), woken by its end in 11, ended starved in 1, the hunt ran on in 9
+  no try won map 1: 118
+  no try won map 9: 18
+  no try won map 10: 52
+  woken entering the keep (map 10, fed 12 by map 9's end): 9 of 64 reachers
+  teeth, over the 82 runs that won her first map (a run lost later counts as never):
+  tooth 1 (fed 2): grew in 79 of 82, median map 6
+  tooth 2 (fed 4): grew in 73 of 82, median map 8
+  tooth 3 (fed 5): grew in 66 of 82, median map 9
+  tooth 4 (fed 8): grew in 51 of 82, median map 9
+  tooth 5 (wakes, fed 12): grew in 20 of 82, median map never
+
+## axe control: ironwake-sim --kinsbane --axe --seeds 200
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the control arm: her iron axe in front, no scythe
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0 (walking p50 0, p75 0), her falls 258, starved in 0, her attacks 248 (scythe 0)
+  map 7 (her map 2): won 49, deployed in 49, tries p50 17, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0 (walking p50 0, p75 0), her falls 866, starved in 0, her attacks 185 (scythe 0)
+  map 8 (her map 3): won 49, deployed in 49, tries p50 2, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0 (walking p50 0, p75 0), her falls 89, starved in 0, her attacks 49 (scythe 0)
+  map 9 (her map 4): won 49, deployed in 49, tries p50 7, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0 (walking p50 0, p75 0), her falls 378, starved in 0, her attacks 257 (scythe 0)
+  map 10 (her map 5): won 7, deployed in 7, tries p50 32, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0 (walking p50 0, p75 0), her falls 194, starved in 0, her attacks 36 (scythe 0)
+  no try won map 1: 118
+  no try won map 7: 33
+  no try won map 10: 42

@@ -242,6 +242,15 @@ public sealed record MapDefinition(
     /// </summary>
     public FreedBond? Bond { get; init; }
 
+    /// <summary>
+    /// The <c>keziah_warning: on</c> header (issue 871, Lotus's ruling): a map where the hungering
+    /// weapon's walking drains run high, so a campaign asks once before marching with its bearer
+    /// deployed (<see cref="CampaignRecord.MarchWarning"/>). Refused on a map that places the bearer
+    /// by name and on <c>deploy: all</c> (<see cref="Kinsbane.WarningRefusal"/>), and on the bearer's
+    /// own side maps. Off by default.
+    /// </summary>
+    public bool KeziahWarning { get; init; }
+
     /// <summary>Whether <paramref name="unit"/> is oath-bound here (issue 691): an enemy whose group <see cref="Oathbound"/> names.</summary>
     public bool IsOathbound(BattleUnit unit) => unit.Side == Side.Enemy && unit.Group is { } group && Oathbound.Contains(group);
 

@@ -2350,3 +2350,13 @@ Notes: Warm: I moved the holds. Transcript `docs/transcripts/2026-10-03-the_rook
 - Not tense: turns 7 to 9, again.
 
 — Code
+
+## 2026-10-03 — Sallow Grange with Keziah, the drain reverted and the confirm, warm — Code
+Seed: 871 (`campaign --from sallow_grange --pick keziah --level 6`; Dunstan and Maud benched so she deploys; a bare `march` asked Lotus's question, `march sure` answered it)   Result: won on turn 8, seize, two Recalls, nobody fell
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: Turn 7. Keziah walks into the yard at 6 HP after four drains. The hexer stands at 18 HP with a counter at 99% for 15. Wren and Ottilie each double it to death, so the only way she feeds is to swing first: Kinsbane at 82% for 19. It hit, she healed to 16, and the first tooth grew. The Reeve died to the rest of the company the same turn.
+Notes: Warm: I built the revert. Transcript `docs/transcripts/2026-10-03-sallow_grange-871-kinsbane.*`.
+- **The question is honest.** She starts at 0,10, eleven tiles from the field group. She can't reach a fight on turn 2, so the drain takes 5 on the walk, which is the walking tax the flag names. Over the map she paid five drains, 25 HP, and fed twice.
+- **The drain made me take a bad bet.** On turns 3 and 4 I sent her at the fort archer for the feed: 49% into fort avoid, missed both, and Pell's counter took the kill. That detour cost her 10 HP and left her two turns behind the company. With the reach gate this would have been a free walk. Now it is a choice I got wrong, and Lotus's "decide when you want to take her" is exactly that.
+- **The company keeps stealing her kills.** Wren and Ottilie double nearly everything here, so feeding her meant holding them back. On turn 6 I spent a Recall. Teodor, at 7 HP, had fallen to the Reeve's javelin, and Ottilie's counter had killed the hexer. In the replay nobody woke the Reeve and nobody stood in the hexer's range, which left its kill for her. The other Recall (turn 2) undid Pell walking into the veteran's reach, and was not about the scythe.
+- Not tense: turn 5, the march east.

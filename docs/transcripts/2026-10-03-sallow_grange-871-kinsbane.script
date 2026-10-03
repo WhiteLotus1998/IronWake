@@ -1,0 +1,115 @@
+bench dunstan
+bench maud
+march sure
+move teodor 3,5
+wait teodor
+move wren 2,5
+wait wren
+move keziah 2,8
+wait keziah
+move ottilie 1,7
+wait ottilie
+wait pell
+wait captain
+end
+move keziah 4,6
+attack keziah brawler-1
+move ottilie 5,7
+attack ottilie archer-2
+move teodor 1,7
+wait teodor
+move wren 5,6
+attack wren archer-2
+move pell 2,4
+attack pell veteran-1
+move captain 1,8
+wait captain
+end
+recall 22
+move keziah 4,6
+attack keziah brawler-1
+move pell 2,4
+attack pell veteran-1
+move wren 3,4
+attack wren veteran-1
+move ottilie 5,7
+attack ottilie archer-2
+move captain 5,6
+attack captain archer-2
+move teodor 1,7
+wait teodor
+end
+move keziah 4,3
+attack keziah archer-1
+move captain 9,6
+wait captain
+move wren 6,5
+wait wren
+move ottilie 8,7
+wait ottilie
+move pell 5,5
+wait pell
+move teodor 5,7
+wait teodor
+end
+move pell 4,4
+attack pell archer-1
+attack keziah archer-1
+move wren 9,5
+wait wren
+move ottilie 9,7
+wait ottilie
+move teodor 8,6
+wait teodor
+wait captain
+end
+move keziah 8,3
+wait keziah
+move wren 11,5
+wait wren
+move captain 10,6
+wait captain
+move ottilie 10,7
+wait ottilie
+move teodor 9,6
+wait teodor
+move pell 7,5
+wait pell
+end
+move keziah 10,5
+wait keziah
+move wren 15,5
+attack wren grange_reeve-1
+move captain 12,5
+wait captain
+move ottilie 12,6
+wait ottilie
+move teodor 11,6
+wait teodor
+move pell 8,5
+wait pell
+end
+recall 91
+move keziah 10,5
+wait keziah
+wait wren
+wait captain
+wait ottilie
+move teodor 7,6
+wait teodor
+move pell 9,5
+wait pell
+end
+move keziah 12,7
+attack keziah hexer-1
+move ottilie 13,6
+attack ottilie grange_reeve-1
+move wren 15,5
+attack wren grange_reeve-1
+move captain 14,6
+attack captain grange_reeve-1
+wait pell
+wait teodor
+end
+move captain 16,6
+leave

@@ -84,7 +84,7 @@ public static class Program
             {
                 var side = quests.FirstOrDefault(q => q.Id == quest.MapId).Map
                     ?? throw new ContentException(ContentFiles.CampaignName, quest.Id, "map", $"no file {MapFiles.QuestsDirectory}/{quest.MapId}.map under {contentDir}");
-                if (CampaignRecord.QuestMapRefusal(side) is { } refusal)
+                if ((CampaignRecord.QuestMapRefusal(side) ?? Kinsbane.WarningRefusal(side, content, quest.MemberId)) is { } refusal)
                 {
                     throw new ContentException(ContentFiles.CampaignName, quest.Id, "map", refusal);
                 }

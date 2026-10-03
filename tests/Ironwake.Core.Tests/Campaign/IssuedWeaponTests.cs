@@ -130,9 +130,9 @@ public class IssuedWeaponTests
     }
 
     [Fact]
-    public void KinsbanesDescriptionNamesTheReachClause()
+    public void KinsbanesDescriptionDropsTheRevertedReachClause()
     {
-        Assert.Contains("if an enemy is in reach", Content.Weapon(Kinsbane.ItemId).Description, StringComparison.Ordinal);
+        Assert.DoesNotContain("in reach", Content.Weapon(Kinsbane.ItemId).Description, StringComparison.Ordinal);
     }
 
     [Fact]

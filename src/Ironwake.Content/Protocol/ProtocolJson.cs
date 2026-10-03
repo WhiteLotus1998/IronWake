@@ -1380,6 +1380,11 @@ public static class ProtocolJson
             w.WriteString("pick", pick);
         }
 
+        if (record.WarningConfirmed is { } confirmed)
+        {
+            w.WriteNumber("warningConfirmed", confirmed);
+        }
+
         if (record.Met.Count > 0)
         {
             w.WriteStartArray("met");
@@ -1550,6 +1555,7 @@ public static class ProtocolJson
             LoweredFrom = ReadLoweredFrom(e, content),
             Origin = ReadOrigin(e, content),
             Pick = ReadPick(e, content),
+            WarningConfirmed = OptionalInt(e, "warningConfirmed"),
             Returned = ReadReturned(e),
             Met = ReadMet(e, content),
         };

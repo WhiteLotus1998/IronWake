@@ -74,9 +74,11 @@ public static class CampaignScript
             }
 
             bool marched;
+            var sure = client.NextMap is { } next && client.Record.MarchWarning(next, content) is not null;
             try
             {
-                marched = client.March();
+                // Issue 871: the Sim takes the hungering bearer anyway, so it answers the question.
+                marched = client.March(sure);
             }
             catch (ArgumentException e)
             {
@@ -91,7 +93,7 @@ public static class CampaignScript
                 throw new InvalidOperationException($"march refused: {client.Status}");
             }
 
-            lines.Add("march");
+            lines.Add(sure ? "march sure" : "march");
             maps++;
             Fight(client, content, lines, touched, hand);
             Leave(client, lines);

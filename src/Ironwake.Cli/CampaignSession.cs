@@ -699,7 +699,7 @@ public sealed class CampaignSession
             return (null, e.Message);
         }
 
-        return CampaignRecord.QuestMapRefusal(map) is { } shape ? (null, shape)
+        return (CampaignRecord.QuestMapRefusal(map) ?? Kinsbane.WarningRefusal(map, content, content.Campaign.Quest(questId)!.MemberId)) is { } shape ? (null, shape)
             : CampaignRecord.QuestAlliesRefusal(map, allyIds) is { } count ? (null, count)
             : (map, null);
     }
@@ -789,10 +789,27 @@ public sealed class CampaignSession
             lines.Add("ERROR: " + e.Message);
         }
 
+        lines.AddRange(WarningLines(record, content, map));
         lines.AddRange(LowLines(record, content));
         lines.AddRange(BranchLines(record, content));
         lines.AddRange(MeetingLines(record, content));
         return lines;
+    }
+
+    /// <summary>
+    /// The Roster panel's word on a <c>keziah_warning</c> map (issue 871), before seats are chosen:
+    /// with the hungering weapon's bearer on the living roster, that the map is not ideal for them and
+    /// that <c>march</c> asks first if they deploy. Empty on any other map, or once asked and answered.
+    /// </summary>
+    public static IReadOnlyList<string> WarningLines(CampaignRecord record, GameContent content, MapDefinition map)
+    {
+        if (!map.KeziahWarning || record.WarningConfirmed == record.MapIndex || Kinsbane.Bearer(content) is not { } bearer
+            || record.Present(content).FirstOrDefault(u => u.Id == bearer) is not { } unit)
+        {
+            return Array.Empty<string>();
+        }
+
+        return new[] { $"This map is not ideal for {unit.Name}; march asks first if {unit.Name} deploys (bench {bearer} to leave her)." };
     }
 
     /// <summary>
@@ -1103,12 +1120,31 @@ public sealed class CampaignSession
 
             _commands++;
             var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            if (words is ["march"])
+            if (words is ["march"] or ["march", "sure"])
             {
                 if (_record.MarchRefusal(map, _content) is { } refusal)
                 {
                     Error(text, refusal);
                     return false;
+                }
+
+                if (_record.MarchWarning(map, _content) is { } warning)
+                {
+                    if (words is ["march"])
+                    {
+                        // Asked, not refused: the screen stays open for "march sure" or a bench,
+                        // and a strict script stops on this line.
+                        Error(text, warning + " (march sure, or bench the unit)");
+                        if (strict)
+                        {
+                            _out.WriteLine($"Strict: stopped at line {_line} ({text}); no later command applied");
+                            return null;
+                        }
+
+                        continue;
+                    }
+
+                    _record = _record.ConfirmWarning();
                 }
 
                 Lines(LowLines(_record, _content));

@@ -8,9 +8,9 @@ namespace Ironwake.Core;
 /// (<see cref="ItemStack.Fed"/>, <see cref="ItemStack.Starved"/>). The rule is the weapon's, on any
 /// map, for whoever carries it, equipped or not:
 /// <list type="bullet">
-/// <item>The drain: at each of its carrier's side's phase starts after the first, if the carrier
-/// fed it nothing since the last one (<see cref="BattleUnit.HasFed"/>) and an enemy stands in the
-/// carrier's reach (<see cref="Smells"/>, issue 854), the carrier loses
+/// <item>The drain: at each of its carrier's side's phase starts after the first, with an enemy near
+/// or not (issue 871, reverting 0210's reach gate at Lotus's wish), if the carrier
+/// fed it nothing since the last one (<see cref="BattleUnit.HasFed"/>), the carrier loses
 /// <see cref="Drain"/> HP, never below 1. A drain that would take the carrier to 1 or below sets
 /// it at 1 and starves the weapon.</item>
 /// <item>The feed: a kill by its carrier with it, a counter-kill included, counts one, heals the
@@ -90,6 +90,46 @@ public static class Kinsbane
         return weapon with { Mt = stack.Starved ? mt / 2 : mt };
     }
 
+    /// <summary>
+    /// The unit a <c>keziah_warning</c> map warns about (issue 871): whoever the hungering weapon is
+    /// bound to (<see cref="Weapon.BoundTo"/>), or null when the content has no such weapon or binding.
+    /// </summary>
+    public static string? Bearer(GameContent content) =>
+        content.Weapons.TryGetValue(ItemId, out var weapon) ? weapon.BoundTo : null;
+
+    /// <summary>
+    /// Lotus's line (issue 871), printed verbatim with the bearer's name when a campaign marches
+    /// onto a <c>keziah_warning</c> map with the bearer deployed.
+    /// </summary>
+    public static string WarningLine(string name) =>
+        $"This map is not ideal for {name}. Are you sure you want to continue with her?";
+
+    /// <summary>
+    /// Why <paramref name="map"/> may not carry <c>keziah_warning: on</c> (issue 871), or null when it
+    /// may: a map that places the bearer by name or fields the whole company (<c>deploy: all</c>)
+    /// leaves no choice to warn about, and neither does the bearer's own side map
+    /// (<paramref name="questMember"/>, the side map's member, null for a main map).
+    /// </summary>
+    public static string? WarningRefusal(MapDefinition map, GameContent content, string? questMember = null)
+    {
+        if (!map.KeziahWarning || Bearer(content) is not { } bearer)
+        {
+            return null;
+        }
+
+        if (map.DeploysAll)
+        {
+            return "keziah_warning: on is refused on a deploy: all map, which leaves nobody to bench";
+        }
+
+        if (map.Placements.Any(p => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit } named && named.RecruitId == bearer))
+        {
+            return $"keziah_warning: on is refused on a map that places '{bearer}' by name";
+        }
+
+        return questMember == bearer ? $"keziah_warning: on is refused on '{bearer}''s own side map" : null;
+    }
+
     /// <summary>The first slot holding a hungering weapon, or -1.</summary>
     public static int Slot(BattleUnit unit, GameContent content)
     {
@@ -122,11 +162,11 @@ public static class Kinsbane
     }
 
     /// <summary>
-    /// Whether the weapon smells blood for <paramref name="unit"/> (issue 854, round 276): some unit
-    /// of the other side stands on a tile the carrier could strike next phase, the strike set
-    /// <c>threat</c> and both planners read (<see cref="Threat.StruckByUnit"/>: its move plus every
-    /// usable weapon's range). With none, the drain skips that phase start, so the walk to a fight
-    /// costs nothing and the clock runs only inside it.
+    /// Whether some unit of the other side stands on a tile <paramref name="unit"/> could strike next
+    /// phase, the strike set <c>threat</c> and both planners read (<see cref="Threat.StruckByUnit"/>:
+    /// its move plus every usable weapon's range). A measurement only (issue 871): 0210 gated the
+    /// drain on it and that gate is reverted, so the Sim reads it to count the drains paid with no
+    /// enemy in reach, the walking tax a <c>keziah_warning</c> map warns of. It is never a rule.
     /// </summary>
     public static bool Smells(BattleState state, GameContent content, BattleUnit unit)
     {
@@ -137,9 +177,8 @@ public static class Kinsbane
     /// <summary>
     /// The drain at the start of <paramref name="side"/>'s phase, after heal and burn: each unit of
     /// the side carrying a hungering weapon pays <see cref="Coming"/> unless this is the side's
-    /// first phase (turn 1) or no enemy is in its reach (<see cref="Smells"/>), then every such
-    /// unit's <see cref="BattleUnit.HasFed"/> clears, so the next drain reads only kills from here on.
-    /// A skipped drain emits nothing.
+    /// first phase (turn 1), then every such unit's <see cref="BattleUnit.HasFed"/> clears, so the
+    /// next drain reads only kills from here on. A skipped drain emits nothing.
     /// </summary>
     public static BattleState AtPhaseStart(BattleState state, GameContent content, Side side, List<GameEvent> events)
     {
@@ -153,7 +192,7 @@ public static class Kinsbane
 
             var next = unit with { HasFed = false };
             var stack = unit.Unit.Inventory.Items[slot];
-            if (state.Turn > 1 && Coming(unit, content) is var (amount, starves) && (amount > 0 || !stack.Starved) && Smells(state, content, unit))
+            if (state.Turn > 1 && Coming(unit, content) is var (amount, starves) && (amount > 0 || !stack.Starved))
             {
                 var hp = unit.Hp - amount;
                 events.Add(new HungerDrained(unit.Id, stack.ItemId, amount, hp, starves));
@@ -212,7 +251,7 @@ public static class Kinsbane
     /// <summary>
     /// The unit card's line for a carrier (DESIGN.md 13.23): the weapon, its feed count, its teeth and growth,
     /// then its state: woken, starved, fed since the last phase start, or the drain coming at the
-    /// next one if an enemy is then in reach (issue 854). Null for a unit carrying no hungering weapon.
+    /// next one. Null for a unit carrying no hungering weapon.
     /// </summary>
     public static string? Card(BattleUnit unit, GameContent content)
     {
@@ -227,7 +266,7 @@ public static class Kinsbane
         var state = Woken(stack.Fed) ? "Woken: no drain. " + (unit.HuntRan ? "The hunt has run this map." : "A kill: move again (once a map).")
             : stack.Starved ? "Starved: half Power, uses 1; any hit eases it (+" + EasedHeal + " HP), a kill feeds it."
             : unit.HasFed ? "Fed this phase."
-            : Coming(unit, content) is var (amount, starves) ? $"Hungry: -{amount} HP at the next phase start, if an enemy is in reach" + (starves ? ", and it starves." : ".")
+            : Coming(unit, content) is var (amount, starves) ? $"Hungry: -{amount} HP at the next phase start" + (starves ? ", and it starves." : ".")
             : "";
         return $"{head} {state}".TrimEnd();
     }

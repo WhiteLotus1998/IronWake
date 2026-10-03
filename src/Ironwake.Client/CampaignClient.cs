@@ -215,8 +215,12 @@ public sealed class CampaignClient
         return true;
     }
 
-    /// <summary>Opens the next map as the battle, with its opening line in the log.</summary>
-    public bool March()
+    /// <summary>
+    /// Opens the next map as the battle, with its opening line in the log. On a <c>keziah_warning</c>
+    /// map with the hungering weapon's bearer deployed, a bare march is refused with Lotus's question
+    /// (issue 871) until <paramref name="sure"/> answers it, once per map.
+    /// </summary>
+    public bool March(bool sure = false)
     {
         if (!OnScreen() || NextMap is not { } map)
         {
@@ -226,6 +230,16 @@ public sealed class CampaignClient
         if (Record.MarchRefusal(map, Content) is { } refusal)
         {
             return Refuse(refusal);
+        }
+
+        if (Record.MarchWarning(map, Content) is { } warning)
+        {
+            if (!sure)
+            {
+                return Refuse(warning + " (march sure, or bench the unit)");
+            }
+
+            Record = Record.ConfirmWarning();
         }
 
         _log.Add(CampaignSession.MapLine(Record, Content, map));
