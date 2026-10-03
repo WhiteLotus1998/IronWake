@@ -1,0 +1,42 @@
+quest rook_2 dunstan
+move dunstan 4,5
+wait dunstan
+move rook 2,5
+wait rook
+end
+move dunstan 8,5
+attack dunstan soldier-1
+move rook 1,1
+wait rook
+end
+recall 10
+move dunstan 8,5
+attack dunstan soldier-1
+move rook 2,6
+wait rook
+end
+threat rook from 1,7
+attack dunstan soldier-1
+move rook 1,7
+wait rook
+end
+recall
+recall 22
+wait dunstan
+move rook 1,7
+wait rook
+end
+move dunstan 9,4
+wait dunstan
+wait rook
+end
+move dunstan 13,4
+wait dunstan
+attack rook wingrider-1
+end
+move dunstan 14,4
+wait dunstan
+move rook 2,3
+wait rook
+end
+leave

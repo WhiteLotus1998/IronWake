@@ -19,7 +19,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 - **Combat numbers** (0028): arm 4, burden vs full Str, speed twice in avoid, iron hit 15 lower, fort avoid 15.
 - **Wake rule:** proximity, radius 4, noise at 6, any death wakes the group, checked after every command (DESIGN 8). Guard bosses wake (0055); `wake_links` calls a second group (0080).
 - **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; options range over every weapon carried, the counter is what it last swung (#174); prefers a target that cannot counter. A `defeat_boss` boss plans under the exposure veto; a refused guard boss goes home (0077 to 0080); a throne-holder steps off only to strike (0063).
-- **The Sim's veto** covers every unit whose death loses the map, on the no-crit worst case, a certain kill (raw 100, one strike) removed (0024 to 0026). Recruits take no veto. Gate 4 is ablation with a relative threshold and a cast verdict (0019, 0020); on Escape it pairs units out (0068).
+- **The Sim's veto** covers every unit whose death loses the map, on the no-crit worst case, a certain kill (raw 100, one strike) removed (0024 to 0026). Recruits take no veto. Gate 4 is relative ablation with a cast verdict (0019, 0020); on Escape it pairs units out (0068).
 - **`threat`** prices the coming enemy phase with the planner's choices (DESIGN 8): one enemy per strike tile, announced spawns (0045), sleepers unnumbered, at dusk only what the player sees (#403), `from <tile>` names what a stop would wake (#458).
 - **Escape:** `exit` is a unit's action, the captain's wins, anyone left is fallen (0056); no Move needed (0074).
 - **Recall** restores the rolls, buying knowledge, never a change (DESIGN 7); returns only to a player-phase state (0032); the browser prints what it undoes (#75).
@@ -32,11 +32,12 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 ## Maps
 
 - **The Tollgate: `tuned`** (0073). The rider spawns on the door step (0072), no tell, surprise not a trap. Opens the beta and the showcase with its named roster.
-- **Brackwater Cut at dusk: `tuned`** (0078; Critic's cold 509, 7/6/7). Dusk hides what, never where.
-- **The showcase (#509, 0092):** done at 8/7; the forecast the centrepiece, animation never hides state, each art loses to the plain attack somewhere (#611).
-- **Harrow Weir: `tuned` on the crest, on gate 1 itself** (0088, 0100; 7/8/7 from both chairs; limit 15). Critic's 617 (7/6/6): one answer at the 7,0 door, choice narrows past the bridge; first levers if reopened.
-- **Saltmarsh Ford:** not tuned. North cut (0093): 7/7/6 and 7/7/5; plays as the pair, then the boss. The spawn lever (0095) failed; the next must buy gate 1 back first. Retuned for Pell's arrival under #632.
-- **Sallow Grange:** the Reeve stays at 15,6; sealing the yard mouth is the map's discovery, unnamed; a route is quiet only if quiet on the enemy phase too (#275).
+- **Brackwater Cut at dusk: `tuned`** (0078). Dusk hides what, never where.
+- **The showcase (#509, 0092):** done at 8/7; animation never hides state; each art loses to the plain attack somewhere (#611).
+- **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15). Critic's 617 (7/6/6): one answer at the 7,0 door; first levers if reopened.
+- **Saltmarsh Ford:** not tuned. North cut (0093): 7/7/6, 7/7/5. The spawn lever failed (0095); the next buys gate 1 back first. Retuned for Pell (#632).
+- **Sallow Grange:** the Reeve stays at 15,6; the yard mouth is the map's discovery, unnamed; a quiet route is quiet on the enemy phase too (#275).
+- **The Rookery (Rook 2, 0208):** not passed. Warm 8/6/6, Chat cold 8/6/8 (284): the courtyard cage at the 3,5 door stays. The holds never fired in either play; the one lever is their rings on the exit approach (#862), not a guard sentry or an earlier rider. A lost Escape side map keeps its living (#861).
 - **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. The bare keep (Chat cold, round 235, 7/7/6): walls and Long Draw bow kept, no lever on the stand-in.
 
 ## Experiments (state and kill criterion)
@@ -73,8 +74,8 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 - **Magic and faith** (round 201): Reason shows as Lore (id kept). Faith heals and may strike (#113). One goddess, three faiths; she speaks once, to Maud in quest 2, after map 5.
 - **The storyline** is `docs/STORY.md` draft 6 (244); open (#656): build to change it. Hask is the door, the Kin in his pommel shard, nudging, never erasing; his last line is Lotus's. Good: the reseal. Bad: a lost map. Secret (#790): Under the Hill (Kinsbane woken, both claimants, Marrit held, Pell's quest 2); Reseal or Fight (#806); Fight won kills the god.
 - **Rook's drake** (244): the last cold drake, church property, an animal; half-grown, Grown carries an ally, Unbroken breathes rime once a map (#805), rime wears to Water. **A Keziah run's flier:** Edda Vane, a Skyrider hire (#801); no flying side character.
-- **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake; the hound in the kill clip; three voice registers, three lines a map; the choice screen equal.
-- **The waking (250, 251; provisional):** once a map a woken scythe kill gives full Move again, no second strike; kept on a journal deciding a turn. **Levers (275 to 281):** the axe won Sallow 49/82 to 26. Kept: the scythe beside her axe, bound, drain carried, swung by the Sim only to kill (0209); no drain with no foe in reach (0210; Sallow 44/82), final for Sallow (Chat cold 857, 7/7/5; 281). Starved carries over on purpose; the camp prints it as `starved:`, its description has the reach clause (#856). Teeth 2,2,1,3,4, woken at 12 (0211). **Bar (279, set first):** Sallow 40/82, the keep no worse, four teeth by the field at p50, woken entering the keep in a third of reachers. All met (0211: 44, fed 10, 17 of 43, 9/43); the levers stop at Drain 5, heal 10.
+- **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake; three voice registers, three lines a map; the choice screen equal.
+- **The waking (250, 251; provisional):** once a map a woken scythe kill gives full Move again, no second strike; kept on a journal deciding a turn. **Levers (275 to 284), stopped:** the axe won Sallow 49/82 to 26. Kept: the scythe beside her axe, bound, drain carried, swung by the Sim only to kill (0209); no drain with no foe in reach (0210), final for Sallow (Chat cold 857, 7/7/5); `starved:` on the camp, the reach clause in the description (#856); teeth 2,2,1,3,4, woken at 12, Drain 5, heal 10 (0211). Round 279's bar, set first, met (283, 284): Sallow 44/82, fed 10 by the field, 17 of 43 woken entering the keep, the keep 9/43. Chat's cold field through the campaign reads it.
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling.
 - **Saves and difficulty** (#663, #664): camp saves only; Recruit and Tactician about 15 off `normal`; permadeath off returns the fallen Wounded (2); a captain or protect death loses.
 - **Supports** (#77; 0183 to 0189; 258, 259): 3 to 4 partners plus the captain, a kind per pair (#809); marriage an S bond (#634). Read beside a partner (best, not sum). C 16, B 28, A 48; a captain pair at the higher rate (4). After-Brackwater p50: committed captain pair near B, floor pairs C, none at A. A reachable by a committed human (else 44).
@@ -118,4 +119,4 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 
 ## Round index
 
-1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259 (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-257 writing, art; 258, 259 supports); #820 260 on (260, 261 Maud; 262, 263, 275 to 281 Kinsbane; 265 to 274 Teodor, `talk`, the field).
+1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259 (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-257 writing, art; 258, 259 supports); #820 260 on (260, 261 Maud; 262, 263, 275 to 284 Kinsbane; 265 to 274 Teodor, `talk`, the field; 284, 285 Rookery).
