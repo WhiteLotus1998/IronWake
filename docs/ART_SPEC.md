@@ -137,6 +137,7 @@ tile_hill
 tile_mountain
 tile_plain
 tile_planks
+tile_rime
 tile_road
 tile_split_planks
 tile_throne

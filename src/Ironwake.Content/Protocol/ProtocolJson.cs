@@ -183,6 +183,13 @@ public static class ProtocolJson
                 WriteCoord(w, "from", s.From);
                 WriteCoord(w, "to", s.To);
                 break;
+            case Breathed b:
+                w.WriteString("unit", b.UnitId);
+                WriteCoord(w, "from", b.From);
+                WriteCoords(w, "line", b.Line);
+                WriteStrings(w, "chilled", b.Chilled);
+                WriteCoords(w, "frozen", b.Frozen);
+                break;
             case Carried c:
                 w.WriteString("unit", c.UnitId);
                 w.WriteString("ally", c.AllyId);
@@ -587,6 +594,11 @@ public static class ProtocolJson
                 w.WriteString("unit", shove.UnitId);
                 w.WriteString("target", shove.TargetId);
                 break;
+            case Breathe breathe:
+                w.WriteString("type", "breathe");
+                w.WriteString("unit", breathe.UnitId);
+                WriteCoord(w, "toward", breathe.Toward);
+                break;
             case Carry carry:
                 w.WriteString("type", "carry");
                 w.WriteString("unit", carry.UnitId);
@@ -653,12 +665,13 @@ public static class ProtocolJson
             "talk" => new Talk(RequiredString(e, "unit"), RequiredString(e, "target")),
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
             "carry" => new Carry(RequiredString(e, "unit"), RequiredString(e, "ally"), ReadCoord(e, "to"), ReadCoord(e, "setDown")),
+            "breathe" => new Breathe(RequiredString(e, "unit"), ReadCoord(e, "toward")),
             "order" => new Order(ReadOrderKind(RequiredString(e, "kind"))),
             "fallBack" => new FallBack(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
             "undo" => new Undo(RequiredString(e, "unit")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, watch, cover, canto, exit, recover, open, drop, talk, shove, carry, order, fallBack, end, recall, or undo"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, watch, cover, canto, exit, recover, open, drop, talk, shove, carry, breathe, order, fallBack, end, recall, or undo"),
         };
     }
 
@@ -817,6 +830,21 @@ public static class ProtocolJson
             WriteStrings(w, "wagon", state.Wagon);
         }
 
+        if (state.Rime.Count > 0)
+        {
+            w.WriteStartArray("rime");
+            foreach (var tile in state.Rime)
+            {
+                w.WriteStartObject();
+                WriteCoord(w, "at", tile.At);
+                w.WriteString("side", Name(tile.Side));
+                w.WriteNumber("clock", tile.Clock);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
         if (state.Map.KeepsakesEnabled)
         {
             w.WriteStartArray("keepsakes");
@@ -957,6 +985,9 @@ public static class ProtocolJson
                 ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
                 : ValueList<Coord>.Empty,
             Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
+            Rime = e.TryGetProperty("rime", out var rime)
+                ? ValueList<RimeTile>.From(Array(rime, "rime").Select(r => new RimeTile(ReadCoord(r, "at"), ParseEnum<Side>(RequiredString(r, "side"), "side"), Math.Clamp(RequiredInt(r, "clock"), 1, 3))))
+                : ValueList<RimeTile>.Empty,
         };
     }
 
@@ -1029,6 +1060,11 @@ public static class ProtocolJson
         if (unit.Landed)
         {
             w.WriteBoolean("landed", true);
+        }
+
+        if (unit.Breathed)
+        {
+            w.WriteBoolean("breathed", true);
         }
 
         if (unit.Pressed)
@@ -1257,6 +1293,7 @@ public static class ProtocolJson
             LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
             Landed = e.TryGetProperty("landed", out _) && RequiredBool(e, "landed"),
+            Breathed = e.TryGetProperty("breathed", out _) && RequiredBool(e, "breathed"),
             Open = e.TryGetProperty("open", out var open) ? new OpenMark(RequiredString(open, "by"), RequiredInt(open, "def"), RequiredInt(open, "res")) : null,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,

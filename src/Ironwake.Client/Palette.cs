@@ -36,6 +36,7 @@ public static class Palette
         ["fire"] = new(112, 0, 0),
         ["planks"] = new(192, 168, 96),
         ["split_planks"] = new(112, 80, 16),
+        ["rime"] = new(150, 200, 225),
     };
 
     public static readonly Rgb UnknownTerrain = new(128, 128, 128);

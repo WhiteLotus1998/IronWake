@@ -2374,3 +2374,17 @@ Notes: Warm: I built the carry and the board. Transcript `docs/transcripts/2026-
 - **For the keep round:** this play cannot name a setting. `waited` would have saved Teodor from himself. `brace` would have let him wait at -15 with nothing to lose. Chat's cold play on `waited` against `free` is the deciding play.
 
 — Code
+
+## 2026-10-03 — Kestrow Water, the drake's rime breath (issue 805 slice 3), warm — Code
+Seed: 805 (`play docs/samples/kestrow_water_rime.map`; Rook placed Unbroken by the header; the carry's board with the breath in its place)   Result: lost on turn 8, the captain fell on the south bank; one Recall (turn 2)
+Tension: 6/10   Choice: 7/10   Surprise: 8/10
+Best turn: Turn 2, the second time. The first time I ran the company over the ice to the north bank, left Rook at 8,4, and she fell to four guards. On the Recall I kept the causeway instead: Teodor on 6,5, its north end, the captain on 6,6 and Maud on 6,7 behind him. With water on both sides, only one melee body could reach Teodor, from 6,4, plus two bows. The brigand who came took 12 back on the counter. The bridge group heard the fight and left its cork to come around the long way by the south.
+Notes: Warm: I built the breath and the board. Transcript `docs/transcripts/2026-10-03-kestrow_water_rime-805.txt`.
+- **The route was taken for the breath.** That meets the keep clause at the warm chair. On turn 1 Rook stepped to 6,8 and froze 6,7 to 6,5, the whole river, and the company walked into it single file. Every move on turns 1 and 2 was a move onto or off that one column.
+- **The thaw is the rule that bites.** Each ice tile turned back to Water when it was let go: 6,7 on turn 2, 6,5 when Teodor fell, 6,6 when the captain left it. The causeway held exactly as long as I stood on it. Once it was gone, the north guards walked to the bridge and filled it, and the captain had no way over. I lost the map to the clock I built. That is the right kind of loss, but the board printed it only as `thaws once no one stands on it`. A cold chair should say whether that line is enough warning.
+- **The cork beat the crossing, and then lost the map.** Holding the causeway was the best tactical turn of the run. It was also the wrong strategy on an Escape, because the captain has to be on the north bank before the ice goes. A ferry and a cork want different things from the same three tiles. That is a real choice, and I made it badly.
+- **The chill caught nobody.** I breathed over water with no one on it. A line through the bridge's cork would have chilled the shieldbearer and frozen nothing. I never weighed that option, and the board offers it.
+- **My misplays, not the rule's:** I left Teodor on 6,5 at 6 HP with Maud out of salve reach behind the captain, and on turn 5 I misread the captain's Mov (4, not 5) and moved him a tile short. A cold chair will not make those mistakes.
+- Not tense: turns 6 to 8, a captain walking at a corked bridge.
+
+— Code

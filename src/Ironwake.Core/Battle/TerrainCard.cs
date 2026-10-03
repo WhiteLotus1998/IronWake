@@ -71,6 +71,11 @@ public static class TerrainCard
             var chain = string.Join(", ", Planks.Chain(content, terrain).Select(t => t.Name));
             parts.Add($"Wears: each unit that walks off it wears it one step, a horse or armour two, a flyer none ({chain}).");
         }
+
+        if (terrain.ThawsTo is { } thawsTo)
+        {
+            parts.Add($"Thaws: it turns back to {content.TerrainById(thawsTo).Name} when the breather's side's next phase ends; a tile with a unit on it holds until it is empty.");
+        }
         if (map.WildfireEnabled && terrain.Id == Wildfire.ForestTerrainId)
         {
             parts.Add($"On this map a {Igniters(content)} hit on a unit here sets the tile alight.");

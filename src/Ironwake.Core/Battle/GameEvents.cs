@@ -66,6 +66,14 @@ public sealed record Cantoed(string UnitId, Coord From, Coord To, ValueList<Coor
 public sealed record Shoved(string UnitId, string TargetId, Coord From, Coord To) : GameEvent;
 
 /// <summary>
+/// A rider's drake breathed rime (issue 805, experiment) from <paramref name="From"/> along
+/// <paramref name="Line"/>: <paramref name="Chilled"/> are the units on it, each chilled by its own
+/// <see cref="UnitChilled"/> just after, and <paramref name="Frozen"/> the Water tiles turned to Rime
+/// ice, each by its own <see cref="TerrainChanged"/>.
+/// </summary>
+public sealed record Breathed(string UnitId, Coord From, ValueList<Coord> Line, ValueList<string> Chilled, ValueList<Coord> Frozen) : GameEvent;
+
+/// <summary>
 /// A rider's drake carried an ally (issue 805, experiment): the rider flew from <paramref name="From"/> to
 /// <paramref name="To"/> and set <paramref name="AllyId"/> down from <paramref name="AllyFrom"/> on
 /// <paramref name="SetDown"/>, which lands as <paramref name="Setting"/> says. The rider's own path is its

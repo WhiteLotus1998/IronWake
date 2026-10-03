@@ -32,6 +32,7 @@ public enum RejectionReason
     Unseen,
     CannotShove,
     CannotCarry,
+    CannotBreathe,
     CannotWatch,
     CannotCover,
     CannotTalk,

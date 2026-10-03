@@ -48,6 +48,7 @@ public static class Script
             ("drop", 2) => new Drop(words[1]),
             ("talk", 3) => new Talk(words[1], words[2]),
             ("shove", 3) => new Shove(words[1], words[2]),
+            ("breathe", 3) when TryCoord(words[2], out var toward) => new Breathe(words[1], toward),
             ("carry", 5) when TryCoord(words[3], out var carryTo) && TryCoord(words[4], out var setDown) => new Carry(words[1], words[2], carryTo, setDown),
             ("open", 3) when TryCoord(words[2], out var chest) => new Open(words[1], chest),
             ("order", 2 or 3) when OrderOf(words) is { } kind => new Order(kind),

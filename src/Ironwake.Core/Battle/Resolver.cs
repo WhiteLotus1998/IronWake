@@ -92,6 +92,9 @@ public static class Resolver
                 }
 
                 break;
+            case Breathe breathe:
+                (next, rejection) = ApplyBreathe(state, content, breathe, events);
+                break;
             case Canto canto:
                 (next, rejection) = ApplyCanto(state, content, canto, events);
                 if (rejection is null)
@@ -1309,6 +1312,26 @@ public static class Resolver
         return (next.WithUnit(landed), null);
     }
 
+    /// <summary>
+    /// Issue 805's rime breath: a rider with an Unbroken drake, once a map, as its action, chills every unit
+    /// on a line of three tiles and freezes its Water to Rime ice (<see cref="Rime"/>).
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyBreathe(BattleState state, GameContent content, Breathe breathe, List<GameEvent> events)
+    {
+        var rider = Acting(state, breathe.UnitId, out var rejection);
+        if (rider is null)
+        {
+            return (state, rejection);
+        }
+
+        if (Rime.Refusal(state, rider, breathe.Toward) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotBreathe, $"{rider.Id} cannot breathe: {refusal}"));
+        }
+
+        return (Rime.Apply(state, content, rider, breathe.Toward, events), null);
+    }
+
     /// <summary>The tile one step past <paramref name="target"/>, directly away from <paramref name="from"/>.</summary>
     public static Coord Beyond(Coord from, Coord target) =>
         new(target.X + (target.X - from.X), target.Y + (target.Y - from.Y));
@@ -1701,6 +1724,7 @@ public static class Resolver
             next = next with { LitGroups = ValueList<string>.Empty };
         }
 
+        next = Rime.AtPhaseChange(next, content, ended, nextPhase, events);
         next = Kinsbane.AtPhaseStart(next, content, nextPhase, events);
         next = LandBlows(next, content, nextPhase, events);
         if (nextPhase == Side.Player)

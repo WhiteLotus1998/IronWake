@@ -50,6 +50,7 @@ public sealed class PlaySession
           talk <unit> <target>     Beside the claimant who came back as a foe: the pick's talk turns them, the captain's spares them
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
           carry <unit> <ally> <x,y> <x,y>  On a carry map, a grown drake lifts an adjacent ally, flies to the first tile and sets it down on the second, as the rider's whole turn
+          breathe <unit> <x,y>     On a breath map, once a map, an unbroken drake breathes 3 tiles out through the adjacent tile, as the action: everyone on the line is chilled, Water freezes to Rime ice
           order <press|rally|fall back>  Commander's Word, once a map, as the captain's action: allies within 2 + Cha / 4 of the captain; press +1 Mov to those not moved, rally heals 15 percent, fall back lets those who acted move 2
           order <kind> preview [from <x,y>]  Who the order would reach from where the captain stands, or from a tile
           fallback <unit> <x,y|stay>  After a fall back order, an ally who had acted moves up to 2, if it wakes no one
@@ -668,6 +669,12 @@ public sealed class PlaySession
                 break;
             case "carry":
                 Error("usage: carry <unit> <ally> <x,y> <set down x,y>");
+                break;
+            case "breathe" when words.Length == 3 && TryCoord(words[2], out var toward):
+                Apply(new Breathe(words[1], toward));
+                break;
+            case "breathe":
+                Error("usage: breathe <unit> <x,y beside it>");
                 break;
             case "end" when words.Length == 1:
                 var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
@@ -2478,6 +2485,7 @@ public sealed class PlaySession
         FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
         Carry c => $"carry {c.UnitId} {c.AllyId} {c.To} {c.SetDown}",
+        Breathe b => $"breathe {b.UnitId} {b.Toward}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
@@ -2555,6 +2563,8 @@ public sealed class PlaySession
                     : $"{names[f.UnitId]} falls back {f.From} -> {f.To}" + (f.Path.Count > 1 ? " via " + string.Join(" ", f.Path.Take(f.Path.Count - 1)) : "");
             case Shoved s:
                 return $"{names[s.UnitId]} shoves {names[s.TargetId]} {s.From} -> {s.To}";
+            case Breathed b:
+                return $"{names[b.UnitId]}'s drake breathes rime from {b.From} over {string.Join(" ", b.Line)}" + (b.Frozen.Count > 0 ? $"; the water freezes at {string.Join(" ", b.Frozen)}" : "") + (b.Chilled.Count == 0 ? "; no one is caught" : "");
             case Carried c:
                 return $"{names[c.UnitId]}'s drake carries {names[c.AllyId]} {c.AllyFrom} -> {c.SetDown}; " + c.Setting switch
                 {

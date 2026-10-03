@@ -30,6 +30,7 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 | `terrain.fire` | `#943C0C` | ember, hatched over the tile's ground, never a fill |
 | `terrain.planks` | `#585030` | dark weathered boards, ink seams (rotten planks, 13.25, samples only) |
 | `terrain.split_planks` | `#383010` | the same boards near black, wet and sagging, a broken seam |
+| `terrain.rime` | `#6090C0` | water frozen pale, frost cracks (the drake's breath, issue 805, samples only) |
 | `player` | `#E8A33D` | lamplight amber: the player's tokens, HP, numerals |
 | `player.deep` | `#9A6420` | the amber token's base and shadow |
 | `enemy` | `#2F3742` | slate: the enemy's token |

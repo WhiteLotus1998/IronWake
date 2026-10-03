@@ -37,6 +37,7 @@ public static class LookPalette
         ["fire"] = Hex("943C0C"),
         ["planks"] = Hex("585030"),
         ["split_planks"] = Hex("383010"),
+        ["rime"] = Hex("6090C0"),
     };
 
     /// <summary>The terrain drawn hatched rather than filled, exempt from the world's chroma ceiling.</summary>

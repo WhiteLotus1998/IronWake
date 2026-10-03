@@ -1,0 +1,41 @@
+name: Kestrow Water, the breath
+size: 14x12
+win: escape
+turn_limit: 8
+recall: 3
+enemy_level: 2
+exit: 3,0 4,0 5,0 6,0 7,0 8,0
+announce: on
+breath: rook
+
+..............
+..^.......^...
+..............
+.....#...#....
+..............
+~~~~~~~~~~~=~~
+~~~~~~~~~~~=~~
+~~~~~~~~~~~=~~
+..............
+...^......^...
+..............
+..............
+
+units:
+P captain 5,9
+P recruit:rook 6,9
+P recruit:wren 5,10
+P recruit:teodor 7,10
+P recruit:pell 4,10
+P recruit:maud 6,10
+E soldier 4,2 group:bank behavior:guard
+E archer 8,2 group:bank behavior:guard
+E brigand 6,1 group:bank behavior:guard
+E shieldbearer 11,4 group:bridge behavior:guard
+E archer 10,1 group:bridge behavior:guard
+E brigand 12,3 group:bridge behavior:guard
+
+events:
+chase1 turn 2 enemy spawn rider 1,11 group:chase behavior:aggressive
+chase2 turn 2 enemy spawn brigand 7,11 group:chase behavior:aggressive
+chase3 turn 3 enemy spawn rider 12,11 group:chase behavior:aggressive

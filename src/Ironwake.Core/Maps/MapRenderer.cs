@@ -539,6 +539,11 @@ public static class MapRenderer
             sb.Append(carry).Append('\n');
         }
 
+        if (Rime.Line(state) is { } rime)
+        {
+            sb.Append(rime).Append('\n');
+        }
+
         if (ChestLegend(state.ClosedChests, content) is { } chests)
         {
             sb.Append(chests).Append('\n');

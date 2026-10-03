@@ -102,6 +102,14 @@ public sealed record Shove(string UnitId, string TargetId) : Command;
 public sealed record Carry(string UnitId, string AllyId, Coord To, Coord SetDown) : Command;
 
 /// <summary>
+/// Breathe rime (issue 805, experiment): on a <c>breath:</c> map, a rider whose drake is Unbroken, once a
+/// map, as its action, breathes a line of three tiles out through <paramref name="Toward"/>, the
+/// orthogonally adjacent tile, chilling everyone on it and freezing Water to Rime ice (<see cref="Rime"/>).
+/// The AI never breathes.
+/// </summary>
+public sealed record Breathe(string UnitId, Coord Toward) : Command;
+
+/// <summary>
 /// Watch (DESIGN.md 13.17, experiment): on an <c>overwatch: on</c> map, a unit whose equipped
 /// weapon reaches range 2 takes this as its action, in place of Attack, Item or Wait, after its
 /// Move or without one, and watches the tiles two steps from it until its side's next phase
