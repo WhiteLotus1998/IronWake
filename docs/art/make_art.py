@@ -741,6 +741,20 @@ def fx_frame(c, name, i, n, cx, cy):
             k = i - 5
             for a in rays[1::2]:
                 c.stroke([along((cx, cy), a, 20 + 18 * k), along((cx, cy), a, 34 + 20 * k)], 6 - 2 * k, FROST)
+    elif name == "spell_pell_commonplace":
+        # Pell's Commonplace: loose pages thrown flat from the caster's side, fanning on contact; it never catches, so no ember
+        for j in range(3):
+            if i < 5:
+                px, py = cx - 110 + 28 * i + 6 * j, cy - 30 + 30 * j - 4 * i * (j - 1)
+            else:
+                k = i - 4
+                px, py = cx + (j - 1) * 26 * k, cy - 18 * k + 14 * abs(j - 1) * k
+            a = 0.35 * (j - 1) + 0.25 * i
+            w, h = 14, 10
+            corners = [along(along((px, py), a, w), a + math.pi / 2, h), along(along((px, py), a, w), a - math.pi / 2, h),
+                       along(along((px, py), a, -w), a - math.pi / 2, h), along(along((px, py), a, -w), a + math.pi / 2, h)]
+            c.polygon(corners, TEXT if j != 1 else WHITE)
+            c.stroke([along((px, py), a + math.pi / 2, -4), along(along((px, py), a + math.pi / 2, -4), a, 10)], 2, SALT)
     elif name == "spell_radiance":
         spread = [0.2, 0.5, 0.85, 1.0, 1.0, 0.8, 0.5, 0.2][i]
         source = (cx, -30)

@@ -2141,3 +2141,16 @@ Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_burn
 - Not tense: turn 1 of the won play, the cork with nothing yet on the road.
 
 — Code
+
+## 2026-10-03 — The Undercroft, Pell's quest 2 (#635 slice 7), warm — Code
+Seed: 960 (`campaign --load undercroft --saves docs/transcripts/2026-10-03-the_undercroft-960.saves`, the cast at level 5 at the camp after map 6; ally Wren)   Result: won, turn 6 of 7, seize, nobody fell; no Recall
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: Turn 5. Pell stood at 14,1 on 7 HP after soaking the lector's shot, and the stacks were awake behind the wall. She stepped to 14,2 and killed the lector at 99 percent (the forecast printed the counter as lethal if she missed). Wren then walked through her, through the dead lector's tile, and stopped on 14,4, the one tile between the middle door and the desk. The hexer came to 12,4 and could only shoot Wren. Pell walked round her through 15,3 and sat at the desk on turn 6.
+Notes: Warm: I built the board, and I knew the quiet stops. Transcript `docs/transcripts/2026-10-03-the_undercroft-960.txt`.
+- Disclosed: two earlier runs from the same save. In the first, Pell killed the lector from 14,1 on turn 4. `end` printed `Lethal if all land: Pell (Hexer 1 for 7, against 6 hp)`, I ended anyway, and the hexer killed her. In the second, Wren stopped on 12,1, inside the hexer's radius, and the hexer shot her through the wall for 11. I stopped that run on turn 5.
+- **The walls are thin, and that is the board.** The north passage is quiet only on 5,1, 9,1 and 13,1. `threat ... from` names the wake, so the count is on the screen, but nothing points at it. Once you know the stops, turns 1 to 3 are a walk.
+- **The lector is the cork, and his own shot is the alarm.** His strike on the enemy phase is noise within 6 of the stacks, so the quiet route ends with them awake anyway. What it buys is time: they wake a phase late and come through the middle door, which one body can hold.
+- The sworn on the stair never caught anyone; they reached 8,1 by turn 5. On the loud routes they would matter more, and a cold chair should find out.
+- Not tense: turns 1 to 3.
+
+— Code

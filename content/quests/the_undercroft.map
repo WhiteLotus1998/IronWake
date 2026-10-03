@@ -1,0 +1,33 @@
+name: The Undercroft
+size: 17x11
+win: seize
+turn_limit: 7
+recall: 2
+enemy_level: 4
+announce: on
+
+#################
+#...............#
+#...##########.##
+#...#........#..#
+#...............T
+#...#........#..#
+#...##########.##
+#...............#
+##.####.###.###.#
+#...#...#...#...#
+#.###############
+
+units:
+P captain 2,2
+P recruit 2,3
+E brigand 7,4 group:stacks behavior:guard
+E hexer 11,4 group:stacks behavior:guard
+E soldier 6,9 group:cells behavior:guard
+E archer 10,9 group:cells behavior:guard
+E lector 14,3 group:reading behavior:hold
+
+events:
+stair1 turn 2 enemy spawn brigand 1,10 group:sworn behavior:aggressive
+stair2 turn 3 enemy spawn soldier 1,10 group:sworn behavior:aggressive
+stair3 turn 4 enemy spawn hexer 1,10 group:sworn behavior:aggressive

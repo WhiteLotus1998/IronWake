@@ -1,0 +1,32 @@
+quest pell_2 wren
+move pell 5,1
+wait pell
+move wren 4,1
+wait wren
+end
+move pell 9,1
+wait pell
+move wren 5,1
+wait wren
+end
+move pell 13,1
+wait pell
+move wren 9,1
+wait wren
+end
+threat pell from 14,1
+move pell 14,1
+wait pell
+move wren 13,1
+wait wren
+end
+move pell 14,2
+attack pell lector-1
+threat wren from 14,4
+move wren 14,4
+wait wren
+threat pell
+end
+move pell 16,4
+leave
+camp
