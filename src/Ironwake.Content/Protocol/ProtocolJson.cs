@@ -1429,7 +1429,14 @@ public static class ProtocolJson
     /// since the last map (issue 252), the side maps won and those fought since the last map when there are any (issue 635), and the edits bought for the keep in the order they were made
     /// (issue 288). A campaign is a file.
     /// </summary>
-    public static string Campaign(CampaignRecord record) => Write(w =>
+    public static string Campaign(CampaignRecord record) => Campaign(record, null);
+
+    /// <summary>
+    /// A campaign record as <see cref="Campaign(CampaignRecord)"/> writes it, with <paramref name="ending"/>
+    /// as its <c>ending</c> block when given (issue 807): the save written when a campaign is won.
+    /// <see cref="ReadCampaign"/> ignores the block; <see cref="ReadEnding"/> reads it.
+    /// </summary>
+    public static string Campaign(CampaignRecord record, CampaignEnding? ending) => Write(w =>
     {
         w.WriteStartObject();
         w.WriteNumber("protocolVersion", ProtocolVersion.Current);
@@ -1584,10 +1591,151 @@ public static class ProtocolJson
             WriteStrings(w, "wagon", record.Wagon);
         }
 
+        if (ending is not null)
+        {
+            WriteEnding(w, ending);
+        }
+
         w.WriteEndObject();
     });
 
-    /// <summary>Reads a campaign record written by <see cref="Campaign"/>; another protocol version is refused.</summary>
+    /// <summary>
+    /// The <c>ending</c> block (issue 807, docs/PROTOCOL.md): every field always written, absent
+    /// facts as null, so a sequel reads one fixed shape per <c>version</c>.
+    /// </summary>
+    private static void WriteEnding(Utf8JsonWriter w, CampaignEnding ending)
+    {
+        w.WriteStartObject("ending");
+        w.WriteNumber("version", ending.Version);
+        w.WriteString("ending", ending.Ending);
+        w.WriteString("seed", ending.Seed.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        w.WriteString("difficulty", ending.Difficulty);
+        w.WriteBoolean("permadeath", ending.Permadeath);
+        w.WriteStartObject("captain");
+        WriteStringOrNull(w, "origin", ending.CaptainOrigin);
+        WriteStringOrNull(w, "pronoun", ending.CaptainPronoun is { } pronoun ? PronounName(pronoun) : null);
+        w.WriteString("class", ending.CaptainClass);
+        w.WriteEndObject();
+        WriteStringOrNull(w, "pick", ending.Pick);
+        WriteStringOrNull(w, "passed", ending.Passed);
+        WriteStringOrNull(w, "passedFate", ending.PassedFate is { } fate ? ClaimantFateName(fate) : null);
+        WriteStrings(w, "lived", ending.Lived);
+        WriteStrings(w, "fallen", ending.Fallen);
+        w.WriteBoolean("freedUnitFell", ending.FreedUnitFell);
+        if (ending.Kinsbane is { } kinsbane)
+        {
+            w.WriteStartObject("kinsbane");
+            w.WriteString("bearer", kinsbane.Bearer);
+            w.WriteNumber("fed", kinsbane.Fed);
+            w.WriteNumber("teeth", kinsbane.Teeth);
+            w.WriteBoolean("woken", kinsbane.Woken);
+            w.WriteEndObject();
+        }
+        else
+        {
+            w.WriteNull("kinsbane");
+        }
+
+        if (ending.Drake is { } drake)
+        {
+            w.WriteStartObject("drake");
+            w.WriteString("stage", Drake.Word(drake.Stage));
+            w.WriteBoolean("riderLived", drake.RiderLived);
+            w.WriteEndObject();
+        }
+        else
+        {
+            w.WriteNull("drake");
+        }
+
+        WriteStrings(w, "rooms", ending.Rooms);
+        w.WriteEndObject();
+    }
+
+    private static void WriteStringOrNull(Utf8JsonWriter w, string name, string? value)
+    {
+        if (value is null)
+        {
+            w.WriteNull(name);
+        }
+        else
+        {
+            w.WriteString(name, value);
+        }
+    }
+
+    private static string PronounName(Pronoun pronoun) => pronoun switch
+    {
+        Pronoun.He => "he",
+        Pronoun.She => "she",
+        _ => "they",
+    };
+
+    /// <summary>
+    /// The <c>ending</c> block of a campaign save written by <see cref="Campaign(CampaignRecord, CampaignEnding)"/>
+    /// (issue 807), or null when the save has none (a campaign still marching). A block of another
+    /// version is refused, as is a field of the wrong shape, naming the field.
+    /// </summary>
+    public static CampaignEnding? ReadEnding(string json)
+    {
+        using var doc = Parse(json);
+        if (!doc.RootElement.TryGetProperty("ending", out var e) || e.ValueKind == JsonValueKind.Null)
+        {
+            return null;
+        }
+
+        if (e.ValueKind != JsonValueKind.Object)
+        {
+            throw new ProtocolException("field 'ending' is not an object");
+        }
+
+        var version = RequiredInt(e, "version");
+        if (version != CampaignEnding.CurrentVersion)
+        {
+            throw new ProtocolException($"ending version {version} is not this build's {CampaignEnding.CurrentVersion}");
+        }
+
+        if (!ulong.TryParse(RequiredString(e, "seed"), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var seed))
+        {
+            throw new ProtocolException("field 'ending.seed' is not an unsigned integer");
+        }
+
+        var captain = Required(e, "captain");
+        var pronounText = OptionalString(captain, "pronoun");
+        Pronoun? pronoun = pronounText is null ? null
+            : Enum.GetValues<Pronoun>().Where(p => PronounName(p) == pronounText).Select(p => (Pronoun?)p).FirstOrDefault()
+                ?? throw new ProtocolException($"ending.captain.pronoun '{pronounText}' is not one of he, she, they");
+        var fateText = OptionalString(e, "passedFate");
+        ClaimantFate? fate = fateText is null ? null
+            : Enum.GetValues<ClaimantFate>().Where(f => ClaimantFateName(f) == fateText).Select(f => (ClaimantFate?)f).FirstOrDefault()
+                ?? throw new ProtocolException($"ending.passedFate '{fateText}' is not one of turned, turnedAway, spared, fell, stood");
+        EndingKinsbane? kinsbane = e.TryGetProperty("kinsbane", out var k) && k.ValueKind != JsonValueKind.Null
+            ? new EndingKinsbane(RequiredString(k, "bearer"), RequiredInt(k, "fed"), RequiredInt(k, "teeth"), RequiredBool(k, "woken"))
+            : null;
+        EndingDrake? drake = e.TryGetProperty("drake", out var d) && d.ValueKind != JsonValueKind.Null
+            ? new EndingDrake(ReadStage(d, "stage", "ending.drake.stage"), RequiredBool(d, "riderLived"))
+            : null;
+        return new CampaignEnding(
+            version,
+            RequiredString(e, "ending"),
+            seed,
+            RequiredString(e, "difficulty"),
+            RequiredBool(e, "permadeath"),
+            OptionalString(captain, "origin"),
+            pronoun,
+            RequiredString(captain, "class"),
+            OptionalString(e, "pick"),
+            OptionalString(e, "passed"),
+            fate,
+            ReadStrings(e, "lived"),
+            ReadStrings(e, "fallen"),
+            RequiredBool(e, "freedUnitFell"),
+            kinsbane,
+            drake,
+            ReadStrings(e, "rooms"));
+    }
+
+    /// <summary>Reads a campaign record written by <see cref="Campaign(CampaignRecord)"/>; another protocol version is refused.</summary>
     public static CampaignRecord ReadCampaign(string json, GameContent content)
     {
         using var doc = Parse(json);
