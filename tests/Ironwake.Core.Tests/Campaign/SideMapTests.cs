@@ -168,6 +168,48 @@ public class SideMapTests
         Assert.Equal(text, MapFormat.Write(MapFormat.Parse(path, text, Content), Content));
     }
 
+    /// <summary>
+    /// Issue 925 (round 311): the archer is a house guard, so she comes to the water when the house
+    /// wakes, and she stands where she wakes it no sooner than it woke before: every tile a foot
+    /// unit can stand on, her own aside, is at least as close to the lector or the Sworn Captain
+    /// as to her, so proximity and noise find the house exactly where they found it without her.
+    /// </summary>
+    [Fact]
+    public void TheCountingHouseArcherWakesWithTheHouseAndNeverWakesItSooner()
+    {
+        var map = Side("the_counting_house");
+        var house = map.Placements.OfType<EnemyPlacement>().Where(e => e.Group == "house").ToList();
+        var archer = Assert.Single(house, e => e.TemplateId == "archer");
+        var others = house.Where(e => e != archer).ToList();
+
+        Assert.Equal(Behavior.Guard, archer.Behavior);
+        Assert.Equal(2, others.Count);
+        for (var y = 0; y < map.Height; y++)
+        {
+            for (var x = 0; x < map.Width; x++)
+            {
+                var tile = new Coord(x, y);
+                if (tile == archer.At || !map.TerrainAt(tile, Content).IsPassable(MovementType.Infantry))
+                {
+                    continue;
+                }
+
+                Assert.True(others.Min(e => e.At.DistanceTo(tile)) <= archer.At.DistanceTo(tile), $"{tile} is closer to the archer than to the rest of the house");
+            }
+        }
+    }
+
+    /// <summary>The guard above, falsified: the archer on her old canal tile, 7,3, is nearer the bank fight than the house is.</summary>
+    [Fact]
+    public void AnArcherOnTheCanalWouldWakeTheHouseSooner()
+    {
+        var map = Side("the_counting_house");
+        var others = map.Placements.OfType<EnemyPlacement>().Where(e => e.Group == "house" && e.TemplateId != "archer").ToList();
+        var bankFight = new Coord(7, 7);
+
+        Assert.True(new Coord(7, 3).DistanceTo(bankFight) < others.Min(e => e.At.DistanceTo(bankFight)));
+    }
+
     [Fact]
     public void OttiliesSecondQuestIsTheLongCountAnEscapeAtDuskThatPaysHerTally()
     {

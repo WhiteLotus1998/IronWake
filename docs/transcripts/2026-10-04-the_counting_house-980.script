@@ -1,0 +1,49 @@
+quest ottilie_1 teodor
+move ottilie 5,7
+attack ottilie soldier-1
+move teodor 4,7
+wait teodor
+end
+move ottilie 5,8
+attack ottilie brigand-1 art aimed_shot
+move teodor 5,7
+attack teodor soldier-1 art long_thrust
+end
+attack teodor brigand-2 art long_thrust
+move ottilie 4,6
+attack ottilie brigand-2 art aimed_shot
+end
+move teodor 4,8
+attack teodor brigand-2
+move ottilie 5,7
+attack ottilie soldier-1
+end
+move ottilie 4,5
+attack ottilie hexer-2 art aimed_shot
+move teodor 6,7
+item teodor 2
+end
+move teodor 4,8
+wait teodor
+move ottilie 4,7
+item ottilie 2
+end
+move teodor 7,7
+attack teodor archer-1
+move ottilie 5,5
+attack ottilie sworn_captain-1
+end
+move teodor 8,7
+attack teodor archer-1
+move ottilie 4,5
+item ottilie 2
+end
+attack teodor sworn_captain-1
+move ottilie 6,7
+wait ottilie
+end
+move teodor 9,7
+attack teodor archer-1
+move ottilie 9,6
+attack ottilie archer-1 art aimed_shot
+end

@@ -19,7 +19,7 @@ announce: on
 units:
 P captain 2,6
 P recruit 3,7
-E archer 7,3 group:bank behavior:hold
+E archer 11,2 group:house behavior:guard
 E soldier 7,7 group:bank behavior:hold
 E brigand 10,7 group:yard behavior:guard
 E hexer 9,6 group:yard behavior:guard
