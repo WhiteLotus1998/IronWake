@@ -36,14 +36,14 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 6, Raid on Ironwake. Defeat every enemy by the end of turn 7. Captain Fenn must survive.
 > quest maud_2 wren
 -- The First Shrine --
-Maud asked for a day and one pair of hands again. Kestrow's first shrine
-is a half-day off the weir road, older than the split, and she has never
-been inside it. Somebody else has.
+Maud wants the first shrine, a half-day off the weir road and older than
+the split. No rite-keeper alive has been inside. The causeway in is
+trodden to mud this month. "Somebody's put a man in the door. Move him.
+I'm going up to the altar."
 
-(Placeholder card until the writing pass. Get Maud onto the altar at 7,0
-by the end of turn 10. The map is lost if she falls. Pursuers cross the
-causeway at 7,6 from turn 2, announced; a unit that waits where it began
-its phase braces.)
+(Get Maud onto the altar at 7,0 by the end of turn 10. The map is lost
+if she falls. Pursuers cross the causeway at 7,6 from turn 2, announced;
+a unit that waits where it began its phase braces.)
 
 Side map: The First Shrine, seed 875
 Maud goes with Wren. This map is lost if Maud falls; who falls here is gone for good.
@@ -471,8 +471,10 @@ Battle won: seize; only recall is left, or leave
 > leave
 Maud wins maud_2; Maud receives Maud's Psalter; nobody fell
 -- After The First Shrine --
-(Placeholder until the writing pass: the goddess speaks to Maud once, at
-the altar, and tells her what the rite seals.)
+Maud kneels at the altar and says the rite, the words in order. At the
+response she stops. She stays on her knees longer than any prayer takes,
+listening, then says the response again with one word changed. On the
+road back she asks who has frostbite, and treats them first.
 
 (Maud carries Maud's Psalter now: a heal at range 1 to 2, bound to her.
 Its art, Unasked, doubles a heal on an ally who has not moved or acted,

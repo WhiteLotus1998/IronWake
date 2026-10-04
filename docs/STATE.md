@@ -4,7 +4,7 @@ Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git
 
 ## Where we are
 
-Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #994. All sixteen voice sheets are in (#908 to #912). #991: the lethal-counter line names its condition. #1001: scene scripts (0244); #77 slice 8 (0245): support conversations. #1002: Kinsbane's barks, cold read pending. #1003: Rook's two quest cards done (Chapter Roll, Rookery; read answered, round 348); five characters' cards and Bet's left. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
+Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #994. All sixteen voice sheets are in (#908 to #912). #991: the lethal-counter line names its condition. #1001: scene scripts (0244); #77 slice 8 (0245): support conversations. #1002: Kinsbane's barks, cold read pending. #1003: Rook's cards done (read answered, 348); Maud's written (anger spent mid-card), read pending; Pell, Teodor, Ottilie, Keziah, Bet left. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233; Rook's pick open, #973 built). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
 About 4440 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus, #406).
@@ -20,7 +20,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus, #406).
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` with a versioned `ending` block for a sequel (PROTOCOL.md), `pending` until #634 (slice 2).
 - #77 slice 8 (0245): `support <a> <b>` at a camp plays the lowest reached unseen tier, once, free (`supportsSeen`). #1004's C is the first text; #77 is `blocked` on a chair's A read.
-- #1003: a card is authored text plus its rules line in parentheses; Rook's named feeling stays booked for a Rookery scene. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
+- #1003: a card is authored text plus its rules line in parentheses; a side map's booked beats are spent in its card, never as the close (348). `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
 - #811: `docs/WRITING.md` is in (round 295). Voice sheets: all sixteen in (#908 to #915). #1001: scene scripts (0244), main-line maps only. Next: Chat's Starting Alone and Mill drafts (#1005), then scenes (#634); #813 can build on 0243's grammar.
 - 13.18 (#486): signatures behind `signatures: on`; ledger killed at 65 (0197); eight wait for boards.
 - #131's north cut is built (0093): the pair, then the boss. #524 failed its floor (0095); the next lever must buy gate 1 back. Open: turn 1 is a march.
