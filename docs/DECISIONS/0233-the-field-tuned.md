@@ -14,7 +14,7 @@ The field (campaign map 9) has carried `route_drift:` since #81 slice 4 (0226). 
 
 ## Next
 
-The before-route line reads `drift: on turn 5's enemy phase ...` and does not say "or later". This play showed that it can come later. Whether the line should say so is an Unsure on the PR, not part of this record.
+The before-route line reads `drift: on turn 5's enemy phase ...` and does not say "or later". This play showed that it can come later. Whether the line should say so is an Unsure on the PR, not part of this record. (#968 settled it: the line prints the current turn once the header's has passed.)
 
 ## Addendum, rounds 334 and 335 (2026-10-04)
 

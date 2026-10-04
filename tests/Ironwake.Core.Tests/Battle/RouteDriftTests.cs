@@ -205,6 +205,19 @@ public class RouteDriftTests
     }
 
     [Fact]
+    public void TheLineBeforeARouteIsFixedPrintsTheCurrentTurnOnceTheHeadersTurnHasPassed()
+    {
+        var late = ToEnemyPhase(Start(), 2, new List<GameEvent>()).Do(new EndPhase());
+        Assert.Equal(3, late.Turn);
+        Assert.Null(late.RouteTaken);
+
+        Assert.Equal(
+            "drift: on turn 3's enemy phase the untaken route's group wakes and makes for your crossing: the south group for 8,6 if the line group wakes first, the line group for 5,5 if the south group does",
+            Routes.Line(late));
+        Assert.Contains("drift: on turn 3's enemy phase", MapRenderer.Render(late, Starter));
+    }
+
+    [Fact]
     public void TheHeaderRoundTripsThroughTheWriter()
     {
         var map = MapFixture.Parse(Field());

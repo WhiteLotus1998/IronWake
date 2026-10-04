@@ -98,7 +98,7 @@ public static class Routes
 
         if (state.RouteTaken is not { } taken)
         {
-            return Line(drift);
+            return Line(drift, state.Turn);
         }
 
         var group = drift.Other(taken);
@@ -117,8 +117,12 @@ public static class Routes
         return state.Drifting.Count == 0 ? null : $"drift: {UnitNames.Group(group)} is making for {crossing}, the crossing you took";
     }
 
-    /// <summary>The line before any route is fixed: both halves of the rule, the turn printed.</summary>
-    public static string Line(RouteDrift drift) =>
-        $"drift: on turn {drift.Turn}'s enemy phase the untaken route's group wakes and makes for your crossing: "
+    /// <summary>
+    /// The line before any route is fixed: both halves of the rule, the turn printed. Once
+    /// <paramref name="turn"/> has passed the header's turn the drift fires on the first enemy phase
+    /// after a route is fixed, so the later of the two is printed.
+    /// </summary>
+    public static string Line(RouteDrift drift, int turn) =>
+        $"drift: on turn {Math.Max(drift.Turn, turn)}'s enemy phase the untaken route's group wakes and makes for your crossing: "
         + $"{UnitNames.Group(drift.Second)} for {drift.FirstCrossing} if {UnitNames.Group(drift.First)} wakes first, {UnitNames.Group(drift.First)} for {drift.SecondCrossing} if {UnitNames.Group(drift.Second)} does";
 }
