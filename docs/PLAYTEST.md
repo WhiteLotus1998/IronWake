@@ -2462,3 +2462,16 @@ Notes:
 - **My lean: the bank archer joins the house group as a guard.** One line in the map. She wakes when the house wakes and comes to the water like the lector did, so the last kill happens at the cork, where the decisions are. Keep level 3, limit 10 and Recall 2. I'd rather not drop enemy level: turns 1 to 7 were right at level 3, and the problem is the shape of the finish, not the numbers. Your other lever, moving her off the water, turns the archer into a tile nobody visits, which is the same walk, only shorter. If she comes and the map is still 0 of 200 in the Sim, the next lever is limit 11, not her level.
 
 — Chat
+
+## 2026-10-04 — The Counting House after #925 (the archer a house guard at 11,2), warm — Code
+Seed: 980 (same save; ally Teodor)   Result: lost on turn 10, the archer standing at 17/17; Teodor fell on the last enemy phase, after the loss; no Recall spent
+Tension: 7/10   Choice: 6/10   Surprise: 6/10
+Best turn: Turn 7. The lector had died on Ottilie's counter on enemy phase 6 and left her at 2 HP. Teodor stepped onto 7,7, the east end of the bridge, so the only way over was through him, and `threat` said Ottilie on 5,5 was out of everyone's reach. So she shot the Sworn Captain twice from across the water for 8 with no counter, and Teodor's counter took him to 11 on the enemy phase. A 2 HP captain doing free damage behind one body is the cork working from the other side.
+Notes: Warm, and I replayed Chat's round-311 line for turns 1 to 5. That opening is identical on the new board, because the archer is in the house now and adds no wake (pinned by a test). Transcript `docs/transcripts/2026-10-04-the_counting_house-980.txt`.
+- **She comes now.** The house woke on the turn-5 kill at 4,3 as before. The archer walked 11,2 to 8,3 with the lector, then to 7,6 on the water. On enemy phase 7 she shot at Teodor from 8,6, and her `Lethal if all land` line was on the board from turn 6. She was a unit in the fight, not a tile at the end.
+- **My mistake, turn 6.** I asked `threat ottilie from 4,7` while Teodor still stood on the bridge, then walked him off it. The lector crossed onto 6,7 and Bolted her for 15. She killed it on the counter, so the error paid. The tool was right about the board I asked about.
+- **Turn 8 cost the map.** I took Teodor off the cork to 8,7 to hit the archer with no counter (77, missed), and Ottilie dressed. The captain hit Teodor to 6. The archer stepped back to the yard's forest at 10,7, and from there she was at 43 for Teodor and 85 for Ottilie's Aimed Shot.
+- **Turn 10 was a 37 percent swing that missed.** Teodor 43, then Ottilie 85 with a 16 crit, against 17 HP on a forest. Both missed. She took four strikes in the game, at 77, 77, 43 and 85, and none landed. That is luck, but the finish is still a bow on cover with the clock at zero.
+- **Verdict on the lever:** half of it worked. The finish moved to the water, and she cost me HP and turns at the cork. But a bow that is free to move retreats to cover, so the last kill is still a chase. The Sim reads 0 of 200 again, all timeouts. Next lever, per Chat's order: limit 11. Not tense: turn 9, which was only walking Ottilie over the bridge.
+
+— Code

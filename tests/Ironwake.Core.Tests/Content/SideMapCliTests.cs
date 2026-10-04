@@ -130,16 +130,17 @@ public class SideMapCliTests
     }
 
     /// <summary>
-    /// Code's journaled play of Ottilie's quest 1 (side-map seed 980), from a save at the camp
-    /// after map 6: a shot at the bank archer on turn 2 wakes the house and the lector's
-    /// Radiance kills Ottilie over the canal (recalled), the road pair is fought on the near
-    /// bank, and on turn 8 a missed Heavy Cut leaves the Sworn Captain on the bridge to cross
-    /// it to Ottilie at 2 HP.
+    /// Code's journaled play of Ottilie's quest 1 (side-map seed 980) on #925's board, from a save
+    /// at the camp after map 6, with Teodor: the opening is Chat's round-311 line, the house wakes
+    /// on the turn-5 kill at 4,3 as before, and the archer, now a house guard at 11,2, comes to the
+    /// water with the lector and the Sworn Captain. The lector dies on Ottilie's counter, the
+    /// captain at the cork, and the archer, unhit in four strikes, stands on the forest at 10,7
+    /// when turn 10 ends.
     /// </summary>
     [Fact]
-    public void TheJournaledCountingHousePlayIsLostWhenTheBridgeIsLeftOpen()
+    public void TheJournaledCountingHousePlayBringsTheArcherToTheWater()
     {
-        var script = Transcript("2026-10-03-the_counting_house-980.script");
+        var script = Transcript("2026-10-04-the_counting_house-980.script");
         var saves = Path.Combine(Path.GetTempPath(), "ironwake-counting-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(saves);
         File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
@@ -150,7 +151,8 @@ public class SideMapCliTests
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Counting House, seed 980\n", output);
             Assert.Contains("The house group wakes (noise)\n", output);
-            Assert.Contains("> leave\nOttilie falls on ottilie_1, which closes for good; fallen for good: Wren, Ottilie\n", output);
+            Assert.Contains("Archer moves 11,2 -> 8,3 via 10,2 9,2 9,3\n", output);
+            Assert.Contains("Lost because turn 10 ended and 1 enemy still stands.\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
         finally
