@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -208,6 +208,11 @@ public static class MapFormat
         if (map.RouteDrift is { } routeDrift)
         {
             sb.Append("route_drift: ").Append(routeDrift).Append('\n');
+        }
+
+        if (map.Wind is { } wind)
+        {
+            sb.Append("wind: ").Append(wind).Append('\n');
         }
 
         if (map.Region != MapRegion.Seam)
@@ -408,7 +413,7 @@ public static class MapFormat
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
-            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header) };
+            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
@@ -1023,6 +1028,51 @@ public static class MapFormat
             }
 
             return ValueList<WakeLink>.From(links);
+        }
+
+        /// <summary>
+        /// The <c>wind:</c> header (DESIGN.md 13.28): <c>east</c>, or <c>east; turn 4 north</c>, a way
+        /// and then each turn it turns, in rising order, every turn from 2 to the turn limit, each a change.
+        /// </summary>
+        private WindRule? ParseWind(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("wind", out var entry))
+            {
+                return null;
+            }
+
+            var parts = entry.Value.Split(';', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            var known = "north, east, south, west";
+            if (parts.Length == 0 || Wind.Parse(parts[0]) is not { } start)
+            {
+                throw ErrorAt(entry.Line, $"wind: needs the way it blows first, one of {known}: 'wind: east; turn 4 north', got '{entry.Value}'");
+            }
+
+            var shifts = new List<WindShift>();
+            var way = start;
+            foreach (var part in parts.Skip(1))
+            {
+                var pieces = part.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (pieces.Length != 3 || pieces[0] != "turn" || !int.TryParse(pieces[1], out var turn) || Wind.Parse(pieces[2]) is not { } to)
+                {
+                    throw ErrorAt(entry.Line, $"wind: '{part}' is not a turn and a way, 'turn 4 north' ({known})");
+                }
+
+                if (turn < 2 || turn > map.TurnLimit || (shifts.Count > 0 && turn <= shifts[^1].Turn))
+                {
+                    throw ErrorAt(entry.Line, $"wind: turn {turn} must be after the last, from 2 to the turn limit {map.TurnLimit}");
+                }
+
+                if (to == way)
+                {
+                    throw ErrorAt(entry.Line, $"wind: on turn {turn} it already blows {pieces[2]}; a turn must change it");
+                }
+
+                shifts.Add(new WindShift(turn, to));
+                way = to;
+            }
+
+            return new WindRule(start, ValueList<WindShift>.From(shifts));
         }
 
         /// <summary>The <c>region:</c> header (issue 916): one of the region words; absent means the seam.</summary>

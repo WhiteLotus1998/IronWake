@@ -1814,6 +1814,10 @@ public sealed class PlaySession
         if (asleep.Count > 0)
         {
             rows.Add($"  {MapRenderer.WakeLegend(content)}");
+            if (Wind.Line(state.Map, content, state.Turn) is { } wind)
+            {
+                rows.Add($"  {wind}");
+            }
         }
 
         return UnitNames.Sentence(string.Join("\n", rows));

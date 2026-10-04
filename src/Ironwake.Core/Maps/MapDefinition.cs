@@ -268,6 +268,12 @@ public sealed record MapDefinition(
     public RouteDrift? RouteDrift { get; init; }
 
     /// <summary>
+    /// The <c>wind:</c> header (DESIGN.md 13.28, experiment, samples): the way the wind blows and the
+    /// turns it turns, which bend the wake radius (<see cref="Ironwake.Core.Wind"/>). Null for none.
+    /// </summary>
+    public WindRule? Wind { get; init; }
+
+    /// <summary>
     /// The <c>keziah_warning: on</c> header (issue 871, Lotus's ruling): a map where the hungering
     /// weapon's walking drains run high, so a campaign asks once before marching with its bearer
     /// deployed (<see cref="CampaignRecord.MarchWarning"/>). Refused on a map that places the bearer
