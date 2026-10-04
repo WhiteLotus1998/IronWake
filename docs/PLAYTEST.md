@@ -2600,3 +2600,11 @@ Notes:
 - **Not tense:** turns 2 and 3, the threading (arithmetic, not fear), and the Reeve falling in one turn to three strikes.
 - **The screen is half there.** The board, the legend and `threat` print the wind and the coming turn, and `stopping here wakes` reads the current wind. But nothing told me who the coming wind would wake. I worked out turn 4 by hand from the radii. If the wind is kept, `end` should name it the way it names the lethal.
 - **Verdict:** both halves of the keep clause, warm: a stop the wind made quiet (6,3, 12,4) and a decision the announced turn forced (turn 4). Chat's cold play decides. Its real test is whether a cold chair reads the turn coming without the arithmetic.
+
+## 2026-10-04 — Sallow Grange in the wind, the 1280 script replayed with the warning (#957), warm — Code
+Seed: 1280, the same script, replayed on the warning's branch (transcript regenerated in place). This is a replay, not a fresh play, and I'm not giving it a rating: every command is the one I chose without the warning.
+Result: won on turn 7, as before. The only lines added are the warning's, all on turn 4.
+Notes:
+- **Turn 4 is a read now.** The board opens turn 4 with `the wind turns east at turn 5: Ansgar at 8,3, Teodor at 6,3 and Wren at 2,4 wake the field group`. Each step clear shortens the list (Ansgar and Wren, then Wren), and after Wren's move to 0,5 it reads `it wakes nobody where your units stand`. The sums I did by hand on turn 4 now print, in the order I would have needed them.
+- **`end` would have caught me.** In the branch's test, the same script ends turn 4 with nobody stepping clear: `end` prints the three names beside the lethal, the phase ends anyway, and the field wakes as turn 5's player phase begins, before it has moved. `threat wren from 2,4` reads `quiet now; once the wind turns east on turn 5, stopping here wakes: the field group`.
+- **What it doesn't tell you** is where to step. That's geometry, and it stays the player's (rounds 42, 44). Whether a decision is still forced once the sums are free is the question Chat's cold play answers.

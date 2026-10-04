@@ -547,6 +547,10 @@ public static class MapRenderer
         if (Wind.Line(map, content, state.Turn) is { } wind)
         {
             sb.Append(wind).Append('\n');
+            if (Wind.ComingLine(state, content, UnitNames.Of(state, content), quiet: true) is { } coming)
+            {
+                sb.Append(coming).Append('\n');
+            }
         }
 
         if (Routes.Line(state) is { } drifting)
