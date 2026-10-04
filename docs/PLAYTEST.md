@@ -2687,3 +2687,17 @@ Notes:
 - **I was wrong in #966: the bug did change this play.** With the spent captain priced out, the sum at 14,3 no longer reached his 12. On enemy phase 9 the Foreman stepped off the hill and hit Teodor for 10, down to 1 HP. He did not walk home to 13,6. The old script stops at turn 10 under `--strict`, so that transcript records the play as it was on c39e811.
 - **The fixed veto made the end better.** The old turn 9 to 10 was him walking home to the one tile my whole western group covered. Under the fix he pressed the advantage he really had. That cost me a turn and Ottilie's 12 HP, and turn 10 became a real holding decision.
 - **Verdict:** the tuned verdict stands. The fix makes a Full Measure an actual window for the boss, which is what 0125's price was meant to be.
+
+## 2026-10-04 — The Oath Stone with the rider on turn 5 (#940), reseeded, warm — Code
+Save: `docs/transcripts/2026-10-04-the_oath_stone-1133.saves`, `--reseed 940` (side seed 1089), ally **Maud**. Transcript `docs/transcripts/2026-10-04-the_oath_stone-940-code.*`, replays under `--strict`.   Result: **won on turn 10.** One Recall spent (to turn 9). Nobody fell. Joab was freed.
+Disclosures: warm. I'd read every Oath Stone journal and built #939 and #940. I tried one throwaway turn-8 branch (Keziah holding the breach and striking the rider from 11,6) and dropped it. In that branch the rear brigand came through the breach onto her and left her at 4. I didn't retry any roll: after the turn-9 Recall, Maud's chip and Keziah's swing rolled what they had rolled before, and both hit, so this is one read.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 7. Keziah was on 11 HP with the drain on her. She killed the archer at 74 and Kinsbane woke ("I remember what I'm for"). Then I spent the hunt's 4 moves on staying put at 11,6, the tile north of the breach, so the rider coming round had only her to hit and not Maud at 7 HP behind her. Maud salved her to 26. The rider struck her for 11 and her counter missed. On turn 8 she killed it.
+Notes:
+- **Turns 5 to 7 were a fight on the road.** The rider and the brigand arrived together on enemy phase 5. Every turn from 6 asked who stood where: the rider came round through Joab's door tile (he doesn't cork his own side) and the brigand came up the south road. With Maud at 7 HP, Keziah had to stand between them and the drain had to stop. The issue asked for exactly this.
+- **The waking came from the archer, not the rider.** The camp fed her twice by turn 3 (fed 11). Her turn-6 miss on the archer cost a drain (16 to 11), and the turn-7 hit woke the blade. The rider was the fourth meal and fed power only.
+- **The door with the waking in view.** On turn 5, `forecast keziah joab-1` offered him as the waking kill. He needed two hits through a 68-percent 19 against her 21, so I passed. Spared, and freed at the end.
+- **The pincer was the best pressure this map has given me.** On turn 8 the brigand came round behind. In the first branch I moved Maud to 12,5 and ignored `end`'s `Lethal if all land: Maud`, and she died. The Recall put her at 13,2, out of the brigand's reach, chipping from range 2. The brigand took Keziah instead and missed at 60, and the envoy hit her to 3.
+- **The end was the one-point cliff, the other way round.** The envoy was at 8 after his heal on turn 10. Maud's last Radiance does 9. Kinsbane's 16 was a 54 with a lethal counter. Maud ended it.
+- My misplay: on turn 6 I walked Maud into the archer's 85 for 9 against her 7 HP without reading `threat`. It missed.
+

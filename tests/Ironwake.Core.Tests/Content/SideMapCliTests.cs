@@ -438,6 +438,7 @@ public class SideMapCliTests
 
     /// <summary>
     /// Code's journaled replay of Keziah's quest 2 on the board as slice 16 left it (side-map seed 1133),
+    /// played with the rear rider on turn 3 (issue 940 moved it to 5),
     /// from the same save at the camp after map 9: Joab named and bound at the door, the envoy a
     /// Boss on his fort. Keziah stood at the door on turn 3 with his counter lethal, went round,
     /// fed on the camp, and fell on turn 6 to the soldier's counter after two misses at 74, Joab never struck.
@@ -452,7 +453,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-04-the_oath_stone-1133-fort.saves", "oath.json")), Path.Combine(saves, "oath.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--script", script, "--strict", "--content", Fixture.OathRiderOnTurnThreeContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Oath Stone, seed 1133\n", output);
@@ -468,7 +469,7 @@ public class SideMapCliTests
     }
 
     /// <summary>
-    /// Code's journaled play of Keziah's quest 2 at issue 939's limit of 10 (side-map seed 1133), Chat's
+    /// Code's journaled play of Keziah's quest 2 at issue 939's limit of 10 (side-map seed 1133, the rear rider on turn 3 as before issue 940), Chat's
     /// round-317 line through turn 7, then Code's: the archer killed on turn 8, Maud's chip and Keziah
     /// standing at 13,3 after the turn-9 Recall, and on turn 10 the envoy at 24, out of a Cleave's reach;
     /// Keziah falls on enemy phase 10, Joab never moved. The forecast's kill rows read `On a kill:` and `Kills on hit:`.
@@ -482,12 +483,42 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-04-the_oath_stone-1133.saves", "oath.json")), Path.Combine(saves, "oath.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--script", script, "--strict", "--content", Fixture.OathRiderOnTurnThreeContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("The Oath Stone  turn 10 of 10  player phase", output);
             Assert.Contains("  Kills on hit: Keziah +10 HP", output);
             Assert.Contains("> leave\nKeziah falls on keziah_2, which closes for good; fallen for good: Keziah\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
+    /// Code's journaled play of Keziah's quest 2 with the rear rider on turn 5 (issue 940), from the
+    /// oath save reseeded to 940: the camp fed on turns 2 and 3, the archer's kill woke Kinsbane on
+    /// turn 7 and Keziah held the breach at 11,6 for Maud, the rider died on her on turn 8, and on
+    /// turn 10 Maud's last Radiance took the envoy from 8, after one Recall to turn 9 that kept Maud alive.
+    /// </summary>
+    [Fact]
+    public void TheJournaledOathStonePlayWithTheRiderOnTurnFiveIsWonOnTurnTen()
+    {
+        var script = Transcript("2026-10-04-the_oath_stone-940-code.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-oath-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-04-the_oath_stone-1133.saves", "oath.json")), Path.Combine(saves, "oath.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--reseed", "940", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("  turn 5, enemy phase: a rider arrives at 0,0 (aggressive). A unit standing on 0,0 stops it.\n", output);
+            Assert.Contains("Kinsbane, to Keziah: \"Keziah. I remember what I'm for.\"\n", output);
+            Assert.Contains("  Maud hits Sworn Captain for 9 (hp 0)\n", output);
+            Assert.Contains("Battle won: defeat_boss", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
         finally

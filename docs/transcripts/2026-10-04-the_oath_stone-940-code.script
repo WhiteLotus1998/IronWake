@@ -1,0 +1,56 @@
+quest keziah_2 maud
+move keziah 4,4
+wait keziah
+move maud 3,4
+wait maud
+end
+move maud 4,7
+attack maud brigand-1
+move keziah 5,7
+attack keziah brigand-1
+end
+move keziah 5,8
+attack keziah soldier-1
+move maud 5,7
+wait maud
+end
+threat keziah from 8,8
+move keziah 8,8
+wait keziah
+move maud 7,7
+wait maud
+end
+move maud 9,8
+wait maud
+move keziah 10,8
+wait keziah
+end
+forecast keziah archer-1 from 11,6
+threat keziah from 11,6
+move keziah 11,6
+attack keziah archer-1
+threat maud from 11,7
+move maud 11,7
+wait maud
+end
+attack keziah archer-1
+canto keziah stay
+item maud 2 keziah
+end
+move keziah 11,4
+attack keziah rider-1
+move maud 12,5
+wait maud
+end
+attack maud sworn_captain-1
+move keziah 12,4
+attack keziah sworn_captain-1
+end
+recall 87
+move maud 13,2
+attack maud sworn_captain-1
+move keziah 12,4
+attack keziah sworn_captain-1
+end
+attack maud sworn_captain-1
+leave

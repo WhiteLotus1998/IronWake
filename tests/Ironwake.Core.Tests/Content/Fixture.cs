@@ -109,6 +109,40 @@ internal static class Fixture
     /// </summary>
     public static string DoublingStrikeContentDirectory() => DoublingStrike.Value;
 
+    private static readonly Lazy<string> OathRiderOnTurnThree = new(() => WithOathRiderOnTurnThree(CopyFiles("ironwake-oath-rider-three-")));
+
+    /// <summary>
+    /// A copy of the real content directory whose Oath Stone sends its rear rider on turn 3, its
+    /// card saying so, and nothing else changed, for a play journaled before the rider came with the brigand on turn 5
+    /// (issue 940). Made once per test run.
+    /// </summary>
+    public static string OathRiderOnTurnThreeContentDirectory() => OathRiderOnTurnThree.Value;
+
+    private static string WithOathRiderOnTurnThree(string target)
+    {
+        var path = Path.Combine(target, MapFiles.QuestsDirectory, "the_oath_stone.map");
+        var text = File.ReadAllText(path);
+        const string now = "rear1 turn 5 enemy spawn rider";
+        if (!text.Contains(now, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{path}: no '{now}' line to put back on turn 3");
+        }
+
+        File.WriteAllText(path, text.Replace(now, "rear1 turn 3 enemy spawn rider", StringComparison.Ordinal));
+
+        // The quest card named the turn the pursuers come, and a transcript prints the card.
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        const string card = "More come up behind you from turn 5, announced.";
+        var campaign = File.ReadAllText(campaignPath);
+        if (!campaign.Contains(card, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{campaignPath}: no '{card}' to put back on turn 3");
+        }
+
+        File.WriteAllText(campaignPath, campaign.Replace(card, "More come up behind you from turn 3, announced.", StringComparison.Ordinal));
+        return target;
+    }
+
     /// <summary>
     /// Takes <c>single</c> off every art in <c>abilities.json</c> (issue 739): a play journaled before
     /// an art struck once doubled with it, and a transcript is a record of the build it was played on.

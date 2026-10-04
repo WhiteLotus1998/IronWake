@@ -29,5 +29,5 @@ E brigand 5,8 group:camp behavior:guard
 E soldier 6,9 group:camp behavior:guard
 
 events:
-rear1 turn 3 enemy spawn rider 0,0 group:rear behavior:aggressive
+rear1 turn 5 enemy spawn rider 0,0 group:rear behavior:aggressive
 rear2 turn 5 enemy spawn brigand 0,9 group:rear behavior:aggressive
