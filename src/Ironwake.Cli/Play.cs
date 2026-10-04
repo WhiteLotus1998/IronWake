@@ -48,7 +48,7 @@ public sealed class PlaySession
           open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
           drop <unit>              On a ledge, bring the rock down as the action: each tile below takes 10 to anyone on it, and closes unless someone stands there
           talk <unit> <target>     Beside the claimant who came back as a foe: the pick's talk turns them, the captain's spares them
-          dash <unit> <x,y>        On a dash map, a unit not yet moved or acted moves 2 past its Move, as its whole turn; struck at +15 Acc until its next phase
+          dash <unit> <x,y>        On a dash map, a unit not yet moved or acted moves with Move +2 (terrain costs the extra), as its whole turn; struck at +15 Acc until its next phase
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
           carry <unit> <ally> <x,y> <x,y>  On a carry map, a grown drake lifts an adjacent ally, flies to the first tile and sets it down on the second, as the rider's whole turn
           breathe <unit> <x,y>     On a breath map, once a map, an unbroken drake breathes 3 tiles out through the adjacent tile, as the action: everyone on the line is chilled, Water freezes to Rime ice

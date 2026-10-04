@@ -7,7 +7,8 @@ namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
 /// The dash (DESIGN.md 13.27, experiment): on a <c>dash: on</c> map a player unit that has neither
-/// moved nor acted may move <see cref="Winded.ExtraMov"/> tiles past its Move as its whole turn, and
+/// moved nor acted may move with its Move plus <see cref="Winded.ExtraMov"/>, terrain costing the
+/// extra (a dash through forest is shorter than one over open ground), as its whole turn, and
 /// is struck at <see cref="Winded.Hit"/> more hit until the player phase begins again. A map without
 /// the header, a unit that moved or was shoved, an enemy, and a tile past the dash's reach are refused.
 /// </summary>
@@ -83,6 +84,24 @@ public class DashTests
         var tooFar = new Coord(Mov(start, "hale") + Winded.ExtraMov + 1, 2);
 
         Assert.Equal(RejectionReason.OutOfReach, start.Try(new Dash("hale", tooFar)).Rejection?.Reason);
+    }
+
+    [Fact]
+    public void ADashIsMeasuredInMovementSoForestCostsOnTheExtra()
+    {
+        var woods = Field(dash: true, Line)
+            .Replace("................\n................\n................\n", "................\n................\n^^^^^^^^^^^^^^^^\n");
+        var start = BattleFixture.Start(map: woods);
+        var hale = start.Find("hale")!;
+        Assert.Equal(MovementType.Infantry, Starter.Class(hale.Unit.ClassId).Movement);
+        var budget = Mov(start, "hale") + Winded.ExtraMov;
+        var open = new Coord(budget, 2);
+        var throughWoods = new Coord(budget / 2, 2);
+
+        Assert.True(Start().Try(new Dash("hale", open)).Accepted);
+        Assert.Equal(RejectionReason.OutOfReach, start.Try(new Dash("hale", open)).Rejection?.Reason);
+        Assert.Equal(RejectionReason.OutOfReach, start.Try(new Dash("hale", new Coord(budget / 2 + 1, 2))).Rejection?.Reason);
+        Assert.True(start.Try(new Dash("hale", throughWoods)).Accepted);
     }
 
     [Fact]
