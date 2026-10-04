@@ -62,7 +62,7 @@ Grounded, dry, warm underneath (CLAUDE.md). In practice:
 6. The writer never grades their own scene. The other partner cold-reads it before merge, and the Story Editor routine joins when Lotus sets it up.
 7. The branch checker in the Sim proves every ending, conditional paragraph, near-miss line and Under the Hill reachable, and no card contradicts its record. It also prints the text for the rarest reachable combination, so we read the worst case and not just the default.
 8. A scene is done when it has been read in the client at real pacing. Lotus's playtest notes are the last pass.
-9. **Where text lives** (rounds 254 to 257). Scene text is a plain-text script file, one per scene; its conditions name record facts; line ids are stable and never reused. A line Lotus has stamped carries a `human:<hash>` lock (4 hex of the trimmed text); our passes skip locked lines, `--story-check` (#813) verifies them, and `--story-stamp` is Lotus's alone.
+9. **Where text lives** (rounds 254 to 257). Scene text is a plain-text script file, one per scene; its conditions name record facts; line ids are stable and never reused. A line Lotus has stamped carries a `human:<hash>` lock (4 hex of the trimmed text); our passes skip locked lines, `--story-check` (#813) verifies them, and `--story-stamp` is Lotus's alone. The format, the facts a condition names and the hash (FNV-1a 32 folded to 4 hex) are DECISIONS/0244; scripts live in `content/scenes/` (#1001).
 
 ## Status of existing text
 

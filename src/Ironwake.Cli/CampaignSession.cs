@@ -516,6 +516,11 @@ public sealed class CampaignSession
             }
 
             WriteEvent(MapLine(_record, _content, map));
+            if (resume is null)
+            {
+                Lines(SceneLines(_record, _content, ScenePoint.Before, _record.NextMap(_content).MapId, map.Name));
+            }
+
             var screen = new QuietWriter(_out);
             var battle = new PlaySession(_content, _record.Begin(map, _content, _scheme), screen, _scripted, _line);
             var replayed = 0;
@@ -570,6 +575,7 @@ public sealed class CampaignSession
                 WriteEvent(grown);
             }
             Lines(AfterCard(before, _content, map));
+            Lines(SceneLines(_record, _content, ScenePoint.After, before.NextMap(_content).MapId, map.Name));
         }
 
         if (_record.IsFinished(_content))
@@ -1177,6 +1183,7 @@ public sealed class CampaignSession
         }
 
         Lines(BeforeCard(_record, _content, map));
+        Lines(SceneLines(_record, _content, ScenePoint.Camp, _record.NextMap(_content).MapId, map.Name));
         Lines(TurnedAwayLines(_record, _content));
         Lines(JoinLines(_record, _content));
         Lines(CampLines(_contentDir, _content, _record, map, typed: true));
@@ -2082,6 +2089,41 @@ public sealed class CampaignSession
     /// <summary>The card printed once side map <paramref name="questId"/> is won on <paramref name="map"/> (issue 635), shaped as <see cref="BeforeCard"/>.</summary>
     public static IReadOnlyList<string> QuestAfterCard(GameContent content, MapDefinition map, string questId) =>
         Card($"-- After {map.Name} --", content.Campaign.Quest(questId)!.After);
+
+    /// <summary>
+    /// The scenes that play at <paramref name="point"/> of campaign map <paramref name="mapId"/>, named <paramref name="mapName"/> (issue 1001), shown
+    /// against <paramref name="record"/>: per scene with a line to show, the heading a card at that
+    /// point carries, then each shown line wrapped to <see cref="CardWidth"/>, a spoken one after its
+    /// speaker's name, and a blank line after the last. Empty when nothing plays there. Screen text,
+    /// as a card is, so the event log leaves it out.
+    /// </summary>
+    public static IReadOnlyList<string> SceneLines(CampaignRecord record, GameContent content, ScenePoint point, string mapId, string mapName)
+    {
+        var names = UnitNames.Of(record, content);
+        var lines = new List<string>();
+        foreach (var scene in SceneScripts.At(content, point, mapId))
+        {
+            var shown = SceneScripts.Shown(scene, record, content);
+            if (shown.Count == 0)
+            {
+                continue;
+            }
+
+            lines.Add(point == ScenePoint.After ? $"-- After {mapName} --" : $"-- {mapName} --");
+            foreach (var line in shown)
+            {
+                lines.AddRange(Wrap(line.Speaker == SceneScripts.Narration ? line.Text : $"{SpeakerName(names, content, line.Speaker)}: {line.Text}", CardWidth));
+            }
+
+            lines.Add("");
+        }
+
+        return lines;
+    }
+
+    /// <summary>A scene speaker's name: the record's name for a cast member or hire, else the unit template's.</summary>
+    private static string SpeakerName(UnitNames names, GameContent content, string speaker) =>
+        names[speaker] is var name && name != speaker ? name : content.Units.TryGetValue(speaker, out var unit) ? unit.Name : speaker;
 
     private static IReadOnlyList<string> Card(string heading, ValueList<string> paragraphs)
     {

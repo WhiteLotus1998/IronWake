@@ -21,7 +21,8 @@ public static class ContentSerializer
         new ContentFile(ContentFiles.RulesName, WriteRules(content)),
         new ContentFile(ContentFiles.ItemsName, WriteArray("items", content.Items.Values, WriteItem)),
         new ContentFile(ContentFiles.AbilitiesName, WriteArray("abilities", content.Abilities.Values, WriteAbility)),
-        content.Campaign == CampaignRules.None ? null : new ContentFile(ContentFiles.CampaignName, WriteCampaign(content.Campaign)));
+        content.Campaign == CampaignRules.None ? null : new ContentFile(ContentFiles.CampaignName, WriteCampaign(content.Campaign)),
+        content.Scenes.Select(s => new ContentFile(SceneFormat.Directory + "/" + s.Id + ".txt", SceneFormat.Write(s))).ToList());
 
     /// <summary>A map's text card (issue 631) as a string array under <paramref name="name"/>; nothing for an empty card.</summary>
     private static void WriteCard(Utf8JsonWriter writer, string name, ValueList<string> card)

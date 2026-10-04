@@ -38,7 +38,8 @@ public static class ContentLoader
             ReadFile(contentRoot, ContentFiles.RulesName),
             ReadFile(contentRoot, ContentFiles.ItemsName),
             ReadFile(contentRoot, ContentFiles.AbilitiesName),
-            File.Exists(Path.Combine(contentRoot, ContentFiles.CampaignName)) ? ReadFile(contentRoot, ContentFiles.CampaignName) : null);
+            File.Exists(Path.Combine(contentRoot, ContentFiles.CampaignName)) ? ReadFile(contentRoot, ContentFiles.CampaignName) : null,
+            SceneFiles(contentRoot));
 
         return Parse(files);
     }
@@ -87,7 +88,19 @@ public static class ContentLoader
             }
         }
 
-        return content;
+        return files.Scenes is { Count: > 0 } scenes
+            ? content with { Scenes = ValueList<Scene>.From(scenes.Select(f => SceneFormat.Parse(f, content))) }
+            : content;
+    }
+
+    /// <summary>The scene scripts under <paramref name="contentRoot"/>'s <see cref="SceneFormat.Directory"/> (issue 1001), in file-name order; empty when it has none.</summary>
+    private static IReadOnlyList<ContentFile> SceneFiles(string contentRoot)
+    {
+        var dir = Path.Combine(contentRoot, SceneFormat.Directory);
+        return Directory.Exists(dir)
+            ? Directory.GetFiles(dir, "*.txt").OrderBy(p => p, StringComparer.Ordinal)
+                .Select(p => new ContentFile(SceneFormat.Directory + "/" + Path.GetFileName(p), File.ReadAllText(p))).ToList()
+            : Array.Empty<ContentFile>();
     }
 
     /// <summary>

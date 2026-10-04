@@ -15,7 +15,8 @@ public sealed record ContentFiles(
     ContentFile Rules,
     ContentFile Items,
     ContentFile Abilities,
-    ContentFile? Campaign = null)
+    ContentFile? Campaign = null,
+    IReadOnlyList<ContentFile>? Scenes = null)
 {
     /// <summary>The campaign's purse, seal price and maps in order (issue 74); optional, since single maps play without it.</summary>
     public const string CampaignName = "campaign.json";

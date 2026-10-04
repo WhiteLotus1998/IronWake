@@ -171,6 +171,10 @@ A won campaign leaves one more save for a sequel, `ending.json` beside the other
 - `drake`: `stage` (`half-grown`, `grown`, `unbroken`) and `riderLived`, once the rider ever joined, else null;
 - `rooms` (the keep's rooms, in the order bought).
 
+## Scene
+
+A scene as it plays (issue 1001, DECISIONS/0244) is one JSON object, written by `ProtocolJson.Scene`: `scene` (the script's id), `point` (`before`, `camp` or `after`), `map` (the campaign map id it plays at) and `lines`, the lines whose conditions hold on the record it plays against, in order, each `id` (stable, never reused), `speaker` (a unit id or `narration`) and `text`. A renderer names the speaker itself; the console prints `Name: text`. Adding the shape left `protocolVersion` at 1.
+
 ## A bug report
 
 A seed, a map, and a `.jsonl` command list: `ironwake play the_tollgate --seed 163 --protocol --script report.jsonl`. The answers replay byte for byte on the same build; the first line's state carries both version numbers, so a report from another build is recognisable as one.

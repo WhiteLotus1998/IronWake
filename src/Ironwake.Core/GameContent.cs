@@ -43,6 +43,9 @@ public sealed record GameContent(
     /// <summary>The campaign of <c>campaign.json</c> (issue 74): its purse, seal price and maps; <see cref="CampaignRules.None"/> when the content has none.</summary>
     public CampaignRules Campaign { get; init; } = CampaignRules.None;
 
+    /// <summary>The scene scripts of <c>content/scenes</c> (issue 1001), in file-name order; empty when the content has none.</summary>
+    public ValueList<Scene> Scenes { get; init; } = ValueList<Scene>.Empty;
+
     /// <summary>
     /// Each cast member's signature kind by unit id (DESIGN.md 13.18, issue 486), from the cast
     /// file's optional <c>signature</c>; read only on a <c>signatures: on</c> map (<see cref="Core.Signatures"/>).
