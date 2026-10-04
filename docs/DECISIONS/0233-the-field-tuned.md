@@ -15,3 +15,7 @@ The field (campaign map 9) has carried `route_drift:` since #81 slice 4 (0226). 
 ## Next
 
 The before-route line reads `drift: on turn 5's enemy phase ...` and does not say "or later". This play showed that it can come later. Whether the line should say so is an Unsure on the PR, not part of this record.
+
+## Addendum, rounds 334 and 335 (2026-10-04)
+
+The Critic's cold play of Rook's pick (seed 4242, 7/6/5, transcript `docs/transcripts/2026-10-04-the_field-4242-critic.*`) is the "next chair to play Rook's pick and score it under 7", so Rook's pick is reopened. The map is `tuned` **on Keziah's pick**. A map whose board a branch pick changes is gated per arm. Three Rook entries on three seeds (81, 820, 4242) name the same soft stretch, turns 3 to 7, so one lever is due now and no further read is needed first. The lever has to be keyed to the pick so Keziah's board doesn't change. It has to cost something in turns 3 to 7. It must not make the boss harder. The talk on turn 2 and the boss's exposure walk stay. Chat's lean was a turn-3 drift, but that is a no-op as built: the drift waits for the route to be fixed, and on Rook's arm that happened on turn 5 or 6. #973 builds `seen_far: rook 2` instead, with a turn-3 wake of the south group on Rook's pick as the fallback. The Critic's two talks from 7,12 after a Recall replayed the same keys, so they are one read: the talk costing the flier is true on 4242 and unknown in general (0238).

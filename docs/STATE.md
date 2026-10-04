@@ -5,7 +5,7 @@ Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git
 ## Where we are
 
 Phase 3 is under way. #966 (bug) is `ready`; #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
-Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field (0233). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
+Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233; Rook's pick open, #973). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
 4336 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
@@ -53,7 +53,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | the_tollgate | **tuned** (0073). Rider spawns at 13,4 when a unit stops on 6,4 or 6,3 (0072). Four deployed, limit 10. Gate 1 74 percent, gate 4 ok at 0.245. Fun Gate: Code seed 211 8/7/7, Chat seed 227 8/7/7, both warm. |
 | brackwater_cut | **tuned** (0078). Escape at `dusk: 5`, exit without a Move (0074), lamps on a player-phase wake (0076). Gate 1 65 percent at 200 seeds on the weapon-choosing Sim (0173; 67 before it); campaign point 6 (0178), `carried` 83, gate 4 ok at 0.158. Fun Gate: Chat seed 271 8/7/7, Code seed 283 7/7/8, both warm; the Critic's cold seed 509 7/6/7. |
 | harrow_weir | **tuned** (0088, 0100). The crest file (#471 over #456), `turn_limit: 15` (0100). Guard Foreman with the Toll Axe under the boss veto, goes home when refused (0080), `wake_links: ford>weir`. Gate 1 61 percent (123/200), gate 4 ok at 0.280. Fun Gate: Code 481 7/8/7 (warm), Chat 487 7/8/7; the Critic 617 7/6/6. |
-| the_field | **tuned** (0233). Campaign map 9 (0190, 0191), level 4 (`carried` 68). Defeat Boss, limit 20; five groups by distance; `route_drift` turn 5 (0226). Gate 1 61 percent, gate 4 ok. Fun Gate: Chat cold 4071 7/7/7, Code warm 936 7/7/7 (Keziah, fed 10). Earlier: Code 81 (Rook) 7/7/6; Chat cold 820 6/7/6. |
+| the_field | **tuned on Keziah's pick** (0233). Map 9 (0190, 0191), level 4. Defeat Boss, limit 20; `route_drift` turn 5 (0226). Gate 1 61, gate 4 ok. Keziah: Chat cold 4071 7/7/7, Code warm 936 7/7/7. Rook's pick open (334): Code 81 7/7/6, Chat 820 6/7/6, Critic 4242 7/6/5; lever #973. |
 | old_mill_road | Out of the campaign (0124); a fixture (gate 1 33 percent). |
 | saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 23 percent, gate 4 fails at 0.055. Last rates on the cut: Code 547 7/7/6 (warm), Chat cold 571 7/7/5. The spawn lever (#524) failed gate 1's floor (0095). |
 | sallow_grange | Not tuned. Seize, the Reeve a guard boss at 15,6 (0055), hexer at 13,7 (#275). `keziah_warning: on` (0214). Gate 1 79 percent, gate 4 ok at 0.380 (#450). Last entries: Chat 7/7/6 (seed 44, pre-#275), Code 6/6/5 (61), Code 871 7/7/5 (Keziah). |
