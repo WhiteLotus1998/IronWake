@@ -11,10 +11,10 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway. An attack whose counter kills the attacker asks; `attack ... !` swings (336; #975).
 - **Rules go on screen, geometry does not** (42, 44); under gate 1's 60, `tuned` only by the stall clause (0100). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only on units in his reach is scenery (39, 72).
 
-## Rules, settled (details in DESIGN.md and the records named)
+## Rules, settled (details in DESIGN and the records)
 
 - **Forecast** prints the resolved probability; one hit function for forecast, resolver and planners (DESIGN 5); 100 only if certain, 0 only if impossible, else 1 to 99 (#452). Two rolls averaged (0023).
-- **Combat numbers** (0028): arm 4, burden vs full Str, speed twice in avoid, iron hit 15 lower, fort avoid 15.
+- **Combat numbers** (0028), **masteries** (0047): in DESIGN.
 - **Wake rule:** proximity, radius 4, noise at 6, any death wakes the group, checked after every command (DESIGN 8). Guard bosses wake (0055); `wake_links` calls a second group (0080).
 - **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; options range over every weapon carried, the counter is what it last swung (#174); prefers a target that cannot counter. A `defeat_boss` boss plans under the exposure veto; a refused guard boss goes home (0077 to 0080); a throne-holder steps off only to strike (0063).
 - **The Sim's veto** covers every unit whose death loses the map, no-crit worst case, a certain kill removed (0024 to 0026). Recruits take no veto. Gate 4 is relative ablation with a cast verdict (0019, 0020); on Escape it pairs units out (0068).
@@ -22,7 +22,6 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Escape:** `exit` is an action; the captain's wins, the rest fall (0056, 0074).
 - **Recall** restores the rolls, buying knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
-- **Masteries** (0047): 12 combats, a heal a point.
 - **Content:** a Lore or Faith member ships an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed; a sleeper in the open can be slipped past, in a corridor only woken.
 - **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill and the raid's wall are how someone is kept safe; a protection idea is a terrain feature or a map event, never a unit action. Cover's redraft is retired with it.
 - **Battalions dropped** (0044). A boss stun, if asked for, is a captain's order.
@@ -81,14 +80,14 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake; three voices, three lines a map (0221); choice screen (0222). Barks (#1002): never "cold" (a Kin tell on frost); the hate points at the feeder, not the keep; no puns on teeth or fed.
 - **The waking (250, 251; provisional; built, 0212):** once a map a woken scythe kill gives full Move again, no second strike. Levers stopped (286). **Lotus (#871; 0214): 0210's reach gate is reverted;** she drains with no foe near. A flagged map (only Sallow) asks `march sure`. `--fed 10` on the field reads right cold (315).
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling.
-- **Saves** (#663, #664): camp saves only; Recruit, Tactician ~15 off `normal`. Forge (#647): Refine +2/+3.
+- **Saves** (#663, #664): camp only; Recruit, Tactician ~15 off `normal`. Forge (#647): Refine +2/+3.
 - **Supports** (#77; 0183 to 0189; 258, 259): 3 to 4 partners plus the captain, a kind per pair (#809); marriage S (#634). Read beside a partner (best, not sum). C 16, B 28, A 48; a captain pair at the higher rate (4).
-- **Chests** (#649, #679): guarded or a puzzle; opening is the action; an enemy on one shuts it.
+- **Chests** (#649, #679): guarded or a puzzle; opening is an action; an enemy shuts one.
 
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723). Frozen iron is the rare Refine material and chills (#702).
 - **Second tier (#704; provisional):** gate L7, rank C. Campaign-only curve 1,1,2,3,2,6,7,6,4,8 (0161, 0178, 0191); a tuned map under 60 lowers the point, not the board; the bend reads `--curve`'s `carried` (#764). The branch pick joins at the living median at the raid's camp (#763). Money waits (0051).
 - **The captain's ladder at tier 1 (229; 0165; provisional):** the lance moved to the Champion; Hunter's Ground killed. Numbers before verbs. The Sim picks a weapon per attack (0171), blind to ignition.
-- **The ladder bar (232; provisional):** per map no class more than 10 under the unpromoted captain; across the five maps class means within 10 at 200 seeds, 5 at 400 before tuned.
+- **The ladder bar (232; provisional):** per map no class 10 under the unpromoted captain; class means within 10 at 200 seeds, 5 at 400 before tuned.
 - **The Vanguard's verb (rounds 235, 236; 0174; provisional):** durability killed as a hoarder. Share is the chooser's fingerprint: it can kill a verb, never keep one alone; a hand play must. The verb is **Opening** (#772): a struck, living enemy is open to allies (Def and Res -3) until the player phase ends; kill criterion in #772.
 
 ## How we write (Lotus, via #780, 2026-10-02)
@@ -97,28 +96,27 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The split (344, 345):** Chat writes the main scenes' beats and drafts, Code the supports' beats and prose; each cold-reads the other. Guards: the sheet's author has the binding read on that character (fix it or argue it, never merge over it); an S line an ending card quotes or a big scene pays off is scene-side, so no S beat sheet before its #634 card; every fifth support is read beside the four before it; of two that match, the newer changes. Writing PRs auto-merge on green; the cold read follows on the Table, its changes in a follow-up PR (Lotus, 2026-10-04; WRITING 6).
 - **Map 1 and 2 beats (344 to 346; #1005):** no journal voice; stage lines third person, present, plain. System lines are rules lines, outside the budget (#1001). Incidentals (two lines at most) need no sheet. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse in meals; one dry line, the region prediction. Keep silver planted once: the brigands' coin into Hask's purse, unremarked. The gate: an unnamed sworn sergeant, one line or none. The Mill: list match before the map. **An arrival scene ends on the arriving character's act.**
 - **Canon guard (346):** the sworn not literally feeling frost is not canon unless STORY adopts it as its own Table point. Map 1 carries one plant. The shrine script is the Kin's paper trail, never set dressing; old deeds use the copyists' hand (#1013).
-- **Cards (348 to 354):** a named feeling is spent mid-card, never as a closer, in its speaker's shape (Maud: feeling, prognosis, task); a scene-less side map spends its booked beats in its card. Rook's goes to the drake, ending on its act; Maud's anger at the Lazar House. Keep silver lines after the Grange name the keep. A card never commits a member to an unpicked door or branch; quest openers share no template. The goddess is never printed: her word is the charter's dropped "keep" (STORY), paid off in the finale rite. Maud and Pell never say "keep" in a spoken line before it, no exception; the Builder sweeps both sheets' cards when either lands (353). The charter prints once before the rite, as the page Pell tears out and hands the captain on the Undercroft after-card, never read aloud; it reaches Maud only as that page (353 to 355). Crossed runs: the later Chat round binds, main's text wins (352); a chain run re-reads the Table for round N+1 just before applying round N, merging main, or amending (354).
+- **Cards (348 to 354):** a named feeling is spent mid-card, never as a closer, in its speaker's shape (Maud: feeling, prognosis, task); a scene-less side map spends its booked beats in its card. Rook's goes to the drake, ending on its act; Maud's anger at the Lazar House. Keep silver lines after the Grange name the keep. A card never commits a member to an unpicked door or branch; quest openers share no template. The goddess is never printed: her word is the charter's dropped "keep" (STORY), paid off in the finale rite. Maud and Pell never say "keep" in a spoken line before it, no exception; the Builder sweeps both sheets' cards when either lands (353). The charter prints once before the rite, as the page Pell tears out and hands the captain on the Undercroft after-card, never read aloud; it reaches Maud only as that page (353 to 355). The lance's frost and letters sit on its socket, never the shaft (#1030). Crossed runs: the later Chat round binds, main's text wins (352); a chain run re-reads the Table for round N+1 just before applying round N, merging main, or amending (354).
 
-## Lotus's mechanics build (239, 240; #786)
-
-- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign, script parity, no stop-playing bug.
 
 ## Open, the Table's
 
 - The campaign's numbers (0051): prices, rewards, stock, the seal; steel's place in the stock is the first lever.
 - The class ladder's numbers (0058), the horse at level 4; weapon ranks; which combat arts exist.
-- Whether a rout should end a Seize map (#374).
-- The Sim's Canto on a clock map (#262).
+- Should a rout end a Seize map (#374)?
+- Sim Canto on a clock map (#262).
 - The wake tax floor, 6 to 44 percent, from the journals (0040's `--taxfloor`, 0.25 provisional).
-- Whether a trial fall costs more than the attempt.
+- Does a trial fall cost more than the attempt?
 
 ## Plumbing
 
+- **Lotus (#731, #786)** plays when both sign a `for-lotus` issue (client campaign, script parity, no stop-playing bug).
 - **Engine** (0008): Godot 4 .NET, core engine-free; a renderer reads the protocol (0046).
 - **Builder race** (#735, 0169): one Builder at a time by claim, wait and re-read; the earlier claim wins.
 - **Art:** human-made only (Lotus); packs recoloured to LOOK.md, licences first (#816).
+- **Casting (356 to 359):** the partners' one list is `docs/look/CASTING.md`, its rules there; Lotus picks.
 - **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Chroma under 32, one amber (0223).
 
 ## Round index
 
-1-118 rules, carry, dusk, brace; 119-342 showcase, story; #994 343 on (writing).
+1-118 rules, carry, dusk, brace; 119-342 showcase, story; #994 343-359 writing, casting; #1033 360 on.

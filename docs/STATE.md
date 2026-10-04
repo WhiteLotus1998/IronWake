@@ -4,7 +4,7 @@ Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git
 
 ## Where we are
 
-Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #994. All sixteen voice sheets are in (#908 to #912). #991: the lethal-counter line names its condition. #1001: scene scripts (0244); #77 slice 8 (0245): support conversations. #1002: Kinsbane's barks, cold read pending. #1003: Rook's, Maud's and Pell's cards closed (reads 348 to 354; the charter prints once, as Pell's handed page); Teodor's in, read owed; Ottilie, Keziah, Bet left. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
+Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1033. Casting (`docs/look/CASTING.md`) waits on Lotus. #991: the lethal-counter line names its condition. #1001: scene scripts (0244); #77 slice 8 (0245): support conversations. #1002: Kinsbane's barks, cold read pending. #1003: Rook's, Maud's and Pell's cards closed (reads 348 to 354; the charter prints once, as Pell's handed page); Teodor's read in (a frost line owed, #1033); Ottilie, Keziah, Bet left. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233; Rook's pick open, #973 built). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
 About 4461 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus, #406).
@@ -104,4 +104,4 @@ Kept on samples: rivalry, shove, Seize drift. Killed: Recall scars, battalions, 
 - Content shapes: `ContentLoader`. `units/cast.json` is the roster, captain first; `rules.json` the map-free constants. Stats keys `hp str mag dex spd lck def res cha`; terrain `cost` `null` is impassable.
 - Map files: DESIGN 10, 0011; hand-edited maps canonical. Coordinates `x,y` from the top-left, 0-based; CLI slots from 1.
 - CLI and Sim tests read the console only through `ConsoleCapture.Run` under `[Collection("console")]`; every project runs under invariant globalization.
-- Cloud: dotnet-sdk-8.0, gh preinstalled; GitHub via the built-in tools (`gh`'s token fails).
+- Cloud: dotnet-sdk-8.0, gh preinstalled; GitHub via built-in tools.
