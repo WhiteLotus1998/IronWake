@@ -6,7 +6,7 @@ Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git
 
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #994. All sixteen voice sheets are in (#908 to #912). #991: the lethal-counter line names its condition. #1001: scene scripts (0244); #77 slice 8 (0245): support conversations. #1002: Kinsbane's barks, cold read pending. #1003: Rook's, Maud's and Pell's cards closed (reads 348 to 354; the charter prints once, as Pell's handed page); Teodor's in, read owed; Ottilie, Keziah, Bet left. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233; Rook's pick open, #973 built). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-About 4440 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
+About 4461 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus, #406).
 
 ## Next
@@ -19,7 +19,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus, #406).
 - #916 (0227): `region:` picks the ground (frost seam, moss elsewhere, peat out); outland sand, ink-edged, kept once Chat looks at `docs/look/sand-916.png`.
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` with a versioned `ending` block for a sequel (PROTOCOL.md), `pending` until #634 (slice 2).
-- #77 slice 8 (0245): `support <a> <b>` at a camp plays the lowest reached unseen tier, once, free (`supportsSeen`). #1004's C is the first text; #77 is `blocked` on a chair's A read.
+- #77 slice 8 (0245): `support <a> <b>` at a camp plays the lowest reached unseen tier, once, free (`supportsSeen`). #1004's C ships (`content/scenes/wren_pell_c.txt`; Chat's read owed); B, A follow. #77 is `blocked` on a chair's A read.
 - #1003: card = authored text plus its rules line in parentheses; rules from 348 to 354 in DIALOGUE. Teodor's pair is in (Chat's read owed); Ottilie's is next. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
 - #811: `docs/WRITING.md` is in (round 295). Voice sheets: all sixteen in (#908 to #915). #1001: scene scripts (0244), main-line maps only. Next: Chat's Starting Alone and Mill drafts (#1005), then scenes (#634); #813 can build on 0243's grammar.
 - 13.18 (#486): signatures behind `signatures: on`; ledger killed at 65 (0197); eight wait for boards.
@@ -100,7 +100,7 @@ Kept on samples: rivalry, shove, Seize drift. Killed: Recall scars, battalions, 
 - Routines (ROUTINES.md): Builder slots at 02:00, 03:00 and 05:00 New York, plus the chain (one issue per merged Builder PR while `IRONWAKE_CHAIN` is `on`, with the 20-minute heartbeat; DECISIONS/0050's amendment, section 6); the Critic on Lotus's schedule, its `critic` issues the record; the Partner woken by Table comments.
 - `ci` parses `.github/workflows/*.yml` before the build (#970).
 - A PR changing the Sim's player (`Players.cs`, its planner, `EnemyAi` scoring) re-runs `--full --all` and rewrites the Maps cells it moves (#971).
-- Sim: `--smoke` (CI, gates 5 to 8, the signature ceiling, origin by class); `--heirloom <item>` (#646); `--kinsbane` (#804); `--levels` (#704, #738); `--supports [--pair <a> <b>]` (#77); `--ladder [--map <id>]` (#705); `--finale <map> [--level N]` (#692); `--full <map>|<file>|--all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D]` (gates 1 to 8, about a minute and a half per map at 200 seeds in Debug; not in CI); `--trace <map> <seed>` (a script the CLI replays under `--strict`); `--keep [<edit> <x,y>]...`; `--hitband`. Reads: `docs/measurements/`.
+- Sim: `--smoke` (CI, gates 5 to 8, the signature ceiling, origin by class); `--heirloom <item>` (#646); `--kinsbane` (#804); `--levels` (#704, #738); `--supports [--pair <a> <b>]` (#77); `--ladder [--map <id>]` (#705); `--finale <map> [--level N]` (#692); `--full <map>|<file>|--all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D]` (gates 1 to 8, ~90 s a map at 200 seeds in Debug; not in CI); `--trace <map> <seed>` (a script the CLI replays under `--strict`); `--keep [<edit> <x,y>]...`; `--hitband`. Reads: `docs/measurements/`.
 - Content shapes: `ContentLoader`. `units/cast.json` is the roster, captain first; `rules.json` the map-free constants. Stats keys `hp str mag dex spd lck def res cha`; terrain `cost` `null` is impassable.
 - Map files: DESIGN 10, 0011; hand-edited maps canonical. Coordinates `x,y` from the top-left, 0-based; CLI slots from 1.
 - CLI and Sim tests read the console only through `ConsoleCapture.Run` under `[Collection("console")]`; every project runs under invariant globalization.

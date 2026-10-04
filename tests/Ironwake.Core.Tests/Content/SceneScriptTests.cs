@@ -219,9 +219,9 @@ public class SceneScriptTests
         {
             var content = ContentLoader.Load(dir);
 
-            Assert.Equal(FixtureScene(), content.Scenes.Single());
+            Assert.Equal(FixtureScene(), content.Scenes.Single(s => s.Id == "fixture_alone"));
             var files = ContentSerializer.Write(content);
-            Assert.Equal("scenes/fixture_alone.txt", files.Scenes!.Single().Name);
+            Assert.Contains("scenes/fixture_alone.txt", files.Scenes!.Select(f => f.Name));
             Assert.Equal(content.Scenes, ContentLoader.Parse(files).Scenes);
         }
         finally
@@ -231,11 +231,11 @@ public class SceneScriptTests
     }
 
     [Fact]
-    public void TheShippedContentLoadsWithoutScenesAndPrintsNone()
+    public void TheShippedScenesAreSupportConversationsSoNoCampPrintsOne()
     {
         var record = CampaignRecord.Start(Real, 1);
 
-        Assert.Empty(Real.Scenes);
+        Assert.All(Real.Scenes, s => Assert.Equal(ScenePoint.Support, s.Point));
         Assert.Empty(Ironwake.Cli.CampaignSession.SceneLines(record, Real, ScenePoint.Camp, "starting_alone", "Starting Alone"));
     }
 

@@ -63,7 +63,7 @@ public class SupportTierTests
         var files = WithTiers(_ => { });
         var root = JsonNode.Parse(files.Rules.Text)!.AsObject();
         root["rivalry"]!.AsObject().Remove("supportTiers");
-        var loaded = ContentLoader.Parse(files with { Rules = new ContentFile(files.Rules.Name, root.ToJsonString()) });
+        var loaded = ContentLoader.Parse(files with { Scenes = null, Rules = new ContentFile(files.Rules.Name, root.ToJsonString()) });
         Assert.Empty(loaded.Rivalry.SupportTiers);
         Assert.Null(loaded.Rivalry.TierFor(500));
     }

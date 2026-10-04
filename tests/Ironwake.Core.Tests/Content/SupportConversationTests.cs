@@ -118,11 +118,24 @@ public class SupportConversationTests
         Assert.Equal("no unit 'maud' on the roster", record.SeeSupport("wren", "maud", content).Text);
         Assert.Equal("Wren and Wren are no support pair", record.SeeSupport("wren", "wren", content).Text);
         Assert.Equal("Wren and Pell have not reached support C", Company(content, 15).SeeSupport("wren", "pell", content).Text);
-        Assert.Equal("Wren and Pell have no conversation waiting", Company(Real, 16).SeeSupport("wren", "pell", Real).Text);
+        Assert.Equal("Wren and Pell have no conversation waiting", Company(With(), 16).SeeSupport("wren", "pell", With()).Text);
         var fallen = record with { Roster = ValueList<Unit>.From(record.Roster.Where(u => u.Id != "pell")), Fallen = ValueList<string>.Of("pell") };
         Assert.Equal("no unit 'pell' on the roster", fallen.SeeSupport("wren", "pell", content).Text);
         Assert.Empty(SceneScripts.Waiting(content, fallen));
         Assert.All(new[] { "nobody", "maud" }, id => Assert.Equal(record, record.SeeSupport(id, "pell", content).Record));
+    }
+
+    [Fact]
+    public void TheShippedWrenAndPellCPlaysAtCAndEndsOnTheQuire()
+    {
+        var scene = Real.Scenes.Single(s => s.Id == "wren_pell_c");
+        var lines = CampaignSession.ConversationLines(Company(Real, 16), Real, scene);
+
+        Assert.Equal(new SceneSupport("wren", "pell", "C"), scene.Support);
+        Assert.InRange(scene.Lines.Count, 1, 20);
+        Assert.Equal("-- Wren and Pell, support C --", lines[0]);
+        Assert.Equal("Wren and Pell talk (support C)", Company(Real, 16).SeeSupport("pell", "wren", Real).Text);
+        Assert.Contains("quire", scene.Lines[^1].Text);
     }
 
     [Fact]
@@ -158,7 +171,7 @@ public class SupportConversationTests
         Assert.Equal(record.SupportsSeen, ProtocolJson.ReadCampaign(json, content).SupportsSeen);
         Assert.DoesNotContain("supportsSeen", ProtocolJson.Campaign(Company(content, 16)));
         Assert.Empty(ProtocolJson.ReadCampaign(ProtocolJson.Campaign(Company(content, 16)), content).SupportsSeen);
-        var e = Assert.Throws<ProtocolException>(() => ProtocolJson.ReadCampaign(json, Real));
+        var e = Assert.Throws<ProtocolException>(() => ProtocolJson.ReadCampaign(json, With()));
         Assert.Contains("supportsSeen 'wren_pell_c' is not a support conversation", e.Message);
     }
 

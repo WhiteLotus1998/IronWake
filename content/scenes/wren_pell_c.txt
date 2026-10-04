@@ -1,0 +1,12 @@
+# Wren and Pell, support C: the margin. Beats: docs/beats/support_wren_pell.md (issue 1004). Code's prose; Chat's cold read follows on the Table.
+scene: wren_pell_c
+plays: support wren pell C
+
+c1 narration: Pell stops at a page of the copy with the browned fore-edge. A pencil tally runs down its margin.
+c2 pell: Cadet. Nothing has been written in this margin since it was copied.
+c3 wren: The men on the Grange's wall. Thirty-five. I counted them from the records room window, and I was right.
+c4 pell: A copyist would read your third group as four strokes and no cross. So would I. Thirty-four.
+c5 wren: My book's full.
+c6 pell: Then write smaller, and not in mine.
+c7 wren: Eleven quires in that satchel, seven blank. Three pounds and an ounce of nothing, and the captain put you down as light baggage.
+c8 narration: Pell unbuckles the satchel and sets one blank quire on the field book on Wren's knee.

@@ -145,7 +145,7 @@ public class IssuedWeaponTests
     }
 
     private static ContentFiles With(string issues) =>
-        ContentSerializer.Write(Content) with { Campaign = new ContentFile(ContentFiles.CampaignName, $$"""{ "startingPurse": 0, "certificationPrice": 0, "maps": [ { "map": "one", "reward": 0, "stock": [] } ], "issues": {{issues}} }""") };
+        ContentSerializer.Write(Content) with { Scenes = null, Campaign = new ContentFile(ContentFiles.CampaignName, $$"""{ "startingPurse": 0, "certificationPrice": 0, "maps": [ { "map": "one", "reward": 0, "stock": [] } ], "issues": {{issues}} }""") };
 
     [Fact]
     public void IssuesRoundTripThroughTheSerializer()
