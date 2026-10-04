@@ -42,6 +42,7 @@ public sealed class CampaignSession
           hire [<id>]              List the barracks' hires, or hire one into the company from the purse (once the barracks is built)
           pick <unit>              Fill the last seat with one of the two claimants; the other rides home (final)
           meet <unit>              Take on the side character met at this camp, if a bed is free (final; one a map)
+          support <unit> <unit>    Hear a support pair's waiting conversation, once each (listed on the Roster)
           build <edit> <x,y>       Buy one edit of the keep's menu at one of its placements
           bench <unit>             Keep a unit off the next map; the next in roster order fills its slot
           unbench <unit>           Return a benched unit to the deployment order
@@ -858,6 +859,7 @@ public sealed class CampaignSession
         lines.AddRange(LowLines(record, content));
         lines.AddRange(BranchLines(record, content));
         lines.AddRange(MeetingLines(record, content));
+        lines.AddRange(ConversationWaitingLines(record, content));
         lines.AddRange(ContestLines(record, content, map));
         return lines;
     }
@@ -1358,6 +1360,16 @@ public sealed class CampaignSession
                 break;
             case ["meet", var side]:
                 Take(_record.Meet(side, _content), text);
+                break;
+            case ["support", var a, var b]:
+                if (Take(_record.SeeSupport(a, b, _content), text))
+                {
+                    Lines(ConversationLines(_record, _content, _content.Scenes.First(s => s.Id == _record.SupportsSeen[^1])));
+                }
+
+                break;
+            case ["support", ..]:
+                Error(text, "usage: support <unit> <unit>");
                 break;
             case ["build", var roomId] when _content.Campaign.Keep.Edit(roomId) is null:
                 Take(_record.BuildRoom(roomId, _content), text);
@@ -2109,15 +2121,50 @@ public sealed class CampaignSession
                 continue;
             }
 
-            lines.Add(point == ScenePoint.After ? $"-- After {mapName} --" : $"-- {mapName} --");
-            foreach (var line in shown)
-            {
-                lines.AddRange(Wrap(line.Speaker is SceneScripts.Narration or SceneScripts.Rules ? line.Text : $"{SpeakerName(names, content, scene, line.Speaker)}: {line.Text}", CardWidth));
-            }
-
-            lines.Add("");
+            lines.AddRange(SceneBlock(names, content, scene, shown, point == ScenePoint.After ? $"-- After {mapName} --" : $"-- {mapName} --"));
         }
 
+        return lines;
+    }
+
+    /// <summary>
+    /// The support conversation <paramref name="scene"/> as <c>support</c> prints it at a camp (issue 77
+    /// slice 8): under <c>-- Wren and Pell, support C --</c>, each line shown on <paramref name="record"/>
+    /// as <see cref="SceneLines"/> prints a scene's, then a blank line. Screen text, so the event log
+    /// leaves it out.
+    /// </summary>
+    public static IReadOnlyList<string> ConversationLines(CampaignRecord record, GameContent content, Scene scene)
+    {
+        var names = UnitNames.Of(record, content);
+        var heading = scene.Support is { } at ? $"-- {names[at.A]} and {names[at.B]}, support {at.Tier} --" : $"-- {scene.Id} --";
+        return SceneBlock(names, content, scene, SceneScripts.Shown(scene, record, content), heading);
+    }
+
+    /// <summary>
+    /// The camp's word on the support conversations waiting (issue 77 slice 8), one line naming each
+    /// pair by name with the tier and the command: <c>Conversations: Wren and Pell C (support wren pell)</c>.
+    /// Empty when none waits.
+    /// </summary>
+    public static IReadOnlyList<string> ConversationWaitingLines(CampaignRecord record, GameContent content)
+    {
+        if (record.IsFinished(content) || SceneScripts.Waiting(content, record) is not { Count: > 0 } waiting)
+        {
+            return Array.Empty<string>();
+        }
+
+        var names = UnitNames.Of(record, content);
+        return new[] { "Conversations: " + string.Join(", ", waiting.Select(w => w.Support!).Select(at => $"{names[at.A]} and {names[at.B]} {at.Tier} (support {at.A} {at.B})")) };
+    }
+
+    private static IReadOnlyList<string> SceneBlock(UnitNames names, GameContent content, Scene scene, IReadOnlyList<SceneLine> shown, string heading)
+    {
+        var lines = new List<string> { heading };
+        foreach (var line in shown)
+        {
+            lines.AddRange(Wrap(line.Speaker is SceneScripts.Narration or SceneScripts.Rules ? line.Text : $"{SpeakerName(names, content, scene, line.Speaker)}: {line.Text}", CardWidth));
+        }
+
+        lines.Add("");
         return lines;
     }
 

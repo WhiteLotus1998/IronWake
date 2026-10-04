@@ -16,7 +16,8 @@ namespace Ironwake.Content;
 /// incidental: keeper = The keeper
 /// </code>
 /// <c>scene</c> is the file's name; <c>plays</c> is <c>before</c>, <c>camp</c> or <c>after</c> and a
-/// campaign map id; <c>beat</c> (optional) names the beat sheet that argued for more than
+/// campaign map id, or for a support conversation (issue 77 slice 8) <c>support</c>, the two members of
+/// a support pair of <c>campaign.json</c> in either order and a support tier (<c>plays: support wren pell C</c>); <c>beat</c> (optional) names the beat sheet that argued for more than
 /// <see cref="SceneScripts.LinesMax"/> lines; <c>retired</c> (optional) lists ids no line may take again;
 /// each <c>incidental</c> (optional, one a line) declares an unnamed speaker by a scene-local id and the
 /// name its lines print under, at most <see cref="SceneScripts.IncidentalLinesMax"/> lines each. A speaker
@@ -69,7 +70,7 @@ public static class SceneFormat
     {
         string? id = null;
         string? beat = null;
-        (ScenePoint Point, string MapId)? plays = null;
+        (ScenePoint Point, string MapId, SceneSupport? Support)? plays = null;
         var retired = new List<string>();
         var incidentals = new List<SceneIncidental>();
         var lines = new List<SceneLine>();
@@ -189,6 +190,11 @@ public static class SceneFormat
         }
 
         var budgeted = lines.Count(l => l.Speaker != SceneScripts.Rules);
+        if (at.Support is not null && budgeted > SceneScripts.SupportLinesMax)
+        {
+            throw new ContentException(file.Name, null, "plays", $"{budgeted} lines, over a support conversation's {SceneScripts.SupportLinesMax}");
+        }
+
         if (budgeted > SceneScripts.LinesMax && beat is null)
         {
             throw new ContentException(file.Name, null, "beat", $"{budgeted} lines, over {SceneScripts.LinesMax}; a longer scene names the beat sheet that argued for it");
@@ -218,6 +224,7 @@ public static class SceneFormat
 
         return new Scene(id, at.Point, at.MapId, ValueList<SceneLine>.From(lines))
         {
+            Support = at.Support,
             Retired = ValueList<string>.From(retired),
             Incidentals = ValueList<SceneIncidental>.From(incidentals),
             Beat = beat,
@@ -233,7 +240,8 @@ public static class SceneFormat
     {
         var sb = new StringBuilder();
         sb.Append("scene: ").Append(scene.Id).Append('\n');
-        sb.Append("plays: ").Append(PointWord(scene.Point)).Append(' ').Append(scene.MapId).Append('\n');
+        sb.Append("plays: ").Append(PointWord(scene.Point)).Append(' ')
+            .Append(scene.Support is { } support ? $"{support.A} {support.B} {support.Tier}" : scene.MapId).Append('\n');
         if (scene.Beat is { } beat)
         {
             sb.Append("beat: ").Append(beat).Append('\n');
@@ -274,6 +282,7 @@ public static class SceneFormat
     {
         ScenePoint.Before => "before",
         ScenePoint.Camp => "camp",
+        ScenePoint.Support => "support",
         _ => "after",
     };
 
@@ -281,9 +290,14 @@ public static class SceneFormat
         string.Join(" and ", condition.Facts.Select(f =>
             (f.Negated ? "not " : "") + string.Join(' ', new[] { Kinds.First(k => k.Value == f.Kind).Key }.Concat(f.Args))));
 
-    private static (ScenePoint, string) ParsePlays(ContentFile file, string where, string value, GameContent content)
+    private static (ScenePoint, string, SceneSupport?) ParsePlays(ContentFile file, string where, string value, GameContent content)
     {
         var words = value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (words.Length > 0 && words[0] == "support")
+        {
+            return (ScenePoint.Support, "", ParseSupport(file, where, words, content));
+        }
+
         ScenePoint? point = words.Length == 2 ? words[0] switch
         {
             "before" => ScenePoint.Before,
@@ -293,7 +307,7 @@ public static class SceneFormat
         } : null;
         if (point is null)
         {
-            throw new ContentException(file.Name, where, "plays", $"'{value}' is not 'before', 'camp' or 'after' and one map id");
+            throw new ContentException(file.Name, where, "plays", $"'{value}' is not 'before', 'camp' or 'after' and one map id, or 'support', a pair and a tier");
         }
 
         if (content.Campaign.Maps.All(m => m.MapId != words[1]))
@@ -301,7 +315,28 @@ public static class SceneFormat
             throw new ContentException(file.Name, where, "plays", $"'{words[1]}' is not a map of {ContentFiles.CampaignName}");
         }
 
-        return (point.Value, words[1]);
+        return (point.Value, words[1], null);
+    }
+
+    /// <summary>A support conversation's <c>plays</c> (issue 77 slice 8): <c>support</c>, a support pair in either order, a support tier; the pair kept in <c>campaign.json</c>'s order.</summary>
+    private static SceneSupport ParseSupport(ContentFile file, string where, string[] words, GameContent content)
+    {
+        if (words.Length != 4)
+        {
+            throw new ContentException(file.Name, where, "plays", $"'{string.Join(' ', words)}' is not 'support', two unit ids and a tier");
+        }
+
+        if (Supports.Pair(content.Campaign, words[1], words[2]) is not { } pair)
+        {
+            throw new ContentException(file.Name, where, "plays", $"'{words[1]}' and '{words[2]}' are not a support pair of {ContentFiles.CampaignName}");
+        }
+
+        if (content.Rivalry.SupportTiers.All(t => t.Name != words[3]))
+        {
+            throw new ContentException(file.Name, where, "plays", $"'{words[3]}' is not a support tier; say {string.Join(", ", content.Rivalry.SupportTiers.Select(t => t.Name))}");
+        }
+
+        return new SceneSupport(pair.A, pair.B, words[3]);
     }
 
     private static SceneIncidental ParseIncidental(ContentFile file, string where, string value, List<SceneIncidental> declared, GameContent content)

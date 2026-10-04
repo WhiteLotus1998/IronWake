@@ -138,6 +138,21 @@ public sealed class CampaignClient
     /// <summary>Meets the side character <paramref name="unitId"/> at the camp (issue 633 slice 3).</summary>
     public bool Meet(string unitId) => Screen(() => Record.Meet(unitId, Content));
 
+    /// <summary>
+    /// Plays the support conversation waiting for <paramref name="a"/> and <paramref name="b"/> (issue 77
+    /// slice 8), queued as a card in the lines the console prints.
+    /// </summary>
+    public bool SeeSupport(string a, string b)
+    {
+        if (!Screen(() => Record.SeeSupport(a, b, Content)))
+        {
+            return false;
+        }
+
+        QueueCard(CampaignSession.ConversationLines(Record, Content, Content.Scenes.First(s => s.Id == Record.SupportsSeen[^1])));
+        return true;
+    }
+
     /// <summary>Discards the stack in <paramref name="slot"/>, counted from 0 (issue 786).</summary>
     public bool Drop(string unitId, int slot) => Screen(() => Record.Drop(unitId, slot, Content));
 
