@@ -531,9 +531,44 @@ public class KinsbaneTests
         var state = WithScythe(Placed(), 1, starved: true, uses: 1);
         var lines = PlaySession.HungerLines(Shipped, Keziah(state), state.Find("brigand-1")!, null, true).ToList();
 
-        Assert.Equal(new[] { "  kill: keziah +10 HP, to max 23 (Kinsbane feeds, fed 1)", "  hit: keziah +5 HP, the starved form ends" }, lines);
+        Assert.Equal(new[] { "  on a kill: keziah +10 HP, to max 23 (Kinsbane feeds, fed 1)", "  hit: keziah +5 HP, the starved form ends" }, lines);
         Assert.Empty(PlaySession.HungerLines(Shipped, Keziah(state), state.Find("brigand-1")!, 1, true));
         Assert.Empty(PlaySession.HungerLines(Shipped, Keziah(WithScythe(Placed(), 20, fed: 13)), state.Find("brigand-1")!, null, true));
+    }
+
+    [Theory]
+    [InlineData(18, 18, "  kills on hit: keziah +10 HP")]
+    [InlineData(18, 30, "  on a kill: keziah +10 HP")]
+    [InlineData(17, 18, "  on a kill: keziah +10 HP")]
+    public void TheKillRowSaysKillsOnHitOnlyWhenOnePlainHitReachesTheFoesHp(int damage, int foeHp, string start)
+    {
+        var state = WithScythe(Placed(), 20);
+        var brigand = state.Find("brigand-1")! with { Hp = foeHp };
+        var forecast = new CombatForecast(new SideForecast(true, damage, 70, 70, 0, true), new SideForecast(true, 5, 60, 60, 0, false), RollScheme.OneRoll);
+
+        var lines = PlaySession.HungerLines(Shipped, Keziah(state), brigand, null, true, forecast: forecast).ToList();
+
+        Assert.StartsWith(start, lines[0]);
+    }
+
+    [Fact]
+    public void TheCountersKillRowReadsFromTheDefendersSideOfTheForecast()
+    {
+        var state = WithScythe(Placed(), 20);
+        var brigand = state.Find("brigand-1")! with { Hp = 10 };
+        var forecast = new CombatForecast(new SideForecast(true, 4, 70, 70, 0, false), new SideForecast(true, 10, 60, 60, 0, false), RollScheme.OneRoll);
+
+        var lines = PlaySession.HungerLines(Shipped, brigand, Keziah(state), null, true, forecast: forecast).ToList();
+
+        Assert.StartsWith("  kills on hit: keziah +10 HP", Assert.Single(lines));
+        Assert.StartsWith("  on a kill: keziah +10 HP", Assert.Single(PlaySession.HungerLines(Shipped, brigand with { Hp = 11 }, Keziah(state), null, true, forecast: forecast)));
+    }
+
+    [Fact]
+    public void TheKillLabelIsAConditionUnlessOneHitKills()
+    {
+        Assert.Equal("kills on hit:", Kinsbane.KillLabel(true));
+        Assert.Equal("on a kill:", Kinsbane.KillLabel(false));
     }
 
     [Fact]

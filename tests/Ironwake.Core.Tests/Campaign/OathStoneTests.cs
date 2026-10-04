@@ -148,7 +148,21 @@ public class OathStoneTests
 
         var text = PlaySession.ThreatText(state, Content, keziah, keziah.At, Queries.Threats(state, Content, keziah, keziah.At)!, Queries.SleepingThreats(state, Content, keziah, keziah.At)!);
 
-        Assert.Contains($"    Counter kill: Keziah +{Kinsbane.FeedHeal} HP, to max {keziah.MaxHp(Content)} (Kinsbane feeds, fed 1)", text);
+        Assert.Contains($"    Counter kills on hit: Keziah +{Kinsbane.FeedHeal} HP, to max {keziah.MaxHp(Content)} (Kinsbane feeds, fed 1)", text);
+    }
+
+    [Fact]
+    public void ACounterThatKillsOnlyIfEveryStrikeLandsSaysSo()
+    {
+        var state = Start(1);
+        var keziah = state.Find("keziah")!;
+        var striker = state.Find(Bound)! with { Hp = 14 };
+        var doubled = new CombatForecast(new SideForecast(true, 6, 70, 70, 0, false), new SideForecast(true, 8, 60, 60, 0, true), RollScheme.OneRoll);
+        var single = doubled with { Defender = doubled.Defender with { Damage = 14, Doubles = false } };
+
+        Assert.StartsWith("counter kills if all land: Keziah", Kinsbane.CounterFeedLine(keziah, striker, doubled, Content, "Keziah"));
+        Assert.StartsWith("counter kills on hit: Keziah", Kinsbane.CounterFeedLine(keziah, striker, single, Content, "Keziah"));
+        Assert.Null(Kinsbane.CounterFeedLine(keziah, striker, doubled with { Defender = doubled.Defender with { Doubles = false } }, Content, "Keziah"));
     }
 
     [Fact]

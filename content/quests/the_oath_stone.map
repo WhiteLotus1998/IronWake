@@ -1,7 +1,7 @@
 name: The Oath Stone
 size: 15x10
 win: defeat_boss
-turn_limit: 9
+turn_limit: 10
 recall: 2
 enemy_level: 6
 announce: on

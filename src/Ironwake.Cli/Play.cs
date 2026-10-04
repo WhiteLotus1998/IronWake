@@ -1059,7 +1059,7 @@ public sealed class PlaySession
                     _out.WriteLine(UnitNames.Sentence(line));
                 }
 
-                foreach (var line in HungerLines(_content, attacker!, target!, attack.Slot, forecast.Defender.Strikes, names, _state))
+                foreach (var line in HungerLines(_content, attacker!, target!, attack.Slot, forecast.Defender.Strikes, names, _state, forecast))
                 {
                     _out.WriteLine(UnitNames.Sentence(line));
                 }
@@ -1494,7 +1494,7 @@ public sealed class PlaySession
         lines.AddRange(BraceLines(unit, target, names));
         lines.AddRange(OpenLines(unit, target, names));
         lines.AddRange(BreakLines(state, content, unit, target, names));
-        lines.AddRange(HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state));
+        lines.AddRange(HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state, forecast));
         lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast, names));
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes, names));
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot, names));
@@ -2244,10 +2244,11 @@ public sealed class PlaySession
     /// Under a forecast (DESIGN.md 13.23, experiment): for the striker with the weapon it strikes
     /// with, then the target when it counters, the heal a kill would feed a hungering weapon, and in
     /// the starved form the hit that eases it (<see cref="Kinsbane.ForecastLines"/>), and for the striker
-    /// on its own phase of <paramref name="state"/> the hunt running on (issue 804). Silent for any
-    /// other weapon.
+    /// on its own phase of <paramref name="state"/> the hunt running on (issue 804). Given the
+    /// <paramref name="forecast"/>, a kill row reads <c>kills on hit:</c> when one plain hit by that
+    /// unit reaches the other's HP, else <c>on a kill:</c> (issue 939). Silent for any other weapon.
     /// </summary>
-    public static IEnumerable<string> HungerLines(GameContent content, BattleUnit attacker, BattleUnit target, int? slot, bool targetCounters, UnitNames? names = null, BattleState? state = null)
+    public static IEnumerable<string> HungerLines(GameContent content, BattleUnit attacker, BattleUnit target, int? slot, bool targetCounters, UnitNames? names = null, BattleState? state = null, CombatForecast? forecast = null)
     {
         names ??= UnitNames.None;
         var armed = slot is { } chosen && chosen >= 0 && chosen < attacker.Unit.Inventory.Count ? attacker.WithSlotInFront(chosen) : attacker;
@@ -2260,7 +2261,9 @@ public sealed class PlaySession
             }
 
             int? huntMov = state is not null && unit == armed && unit.Side == state.Phase ? Kinsbane.HuntMov(state, content, unit) : null;
-            foreach (var line in Kinsbane.ForecastLines(unit, content, unit.EquippedWeapon(content), unit.Unit.Inventory.Items[equipped], names[unit.Id], huntMov))
+            var side = forecast is null ? null : unit == armed ? forecast.Attacker : forecast.Defender;
+            var killsOnHit = side is { Strikes: true } && side.Damage >= (unit == armed ? target : armed).Hp;
+            foreach (var line in Kinsbane.ForecastLines(unit, content, unit.EquippedWeapon(content), unit.Unit.Inventory.Items[equipped], names[unit.Id], huntMov, killsOnHit))
             {
                 yield return line;
             }

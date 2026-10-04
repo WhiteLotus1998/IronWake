@@ -285,13 +285,16 @@ public static class Kinsbane
 
     /// <summary>
     /// The forecast's lines for <paramref name="unit"/> fighting with <paramref name="weapon"/>
-    /// equipped from <paramref name="stack"/> (DESIGN.md 13.23): <c>kill: +10 HP</c> when a kill
+    /// equipped from <paramref name="stack"/> (DESIGN.md 13.23): <c>on a kill: +10 HP</c> when a kill
     /// would heal it, and in the starved form the hit that eases it; for the striker on its own
     /// phase (<paramref name="huntMov"/> set, the Move <see cref="HuntMov"/> gives), the hunt running
-    /// on when the kill would leave it woken with the charge unspent (issue 804). Empty for any other weapon.
+    /// on when the kill would leave it woken with the charge unspent (issue 804). The kill rows read
+    /// <c>kills on hit:</c> when <paramref name="killsOnHit"/> says one plain hit takes the foe, so a
+    /// condition is never read as a promise (issue 939). Empty for any other weapon.
     /// </summary>
-    public static IEnumerable<string> ForecastLines(BattleUnit unit, GameContent content, Weapon? weapon, ItemStack stack, string name, int? huntMov = null)
+    public static IEnumerable<string> ForecastLines(BattleUnit unit, GameContent content, Weapon? weapon, ItemStack stack, string name, int? huntMov = null, bool killsOnHit = false)
     {
+        var kill = KillLabel(killsOnHit);
         if (weapon is not { Hungers: true })
         {
             yield break;
@@ -300,7 +303,7 @@ public static class Kinsbane
         if (!Woken(stack.Fed))
         {
             var max = unit.MaxHp(content);
-            yield return $"  kill: {name} +{FeedHeal} HP, to max {max} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})";
+            yield return $"  {kill} {name} +{FeedHeal} HP, to max {max} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})";
             if (stack.Starved)
             {
                 yield return $"  hit: {name} +{EasedHeal} HP, the starved form ends";
@@ -309,16 +312,23 @@ public static class Kinsbane
 
         if (huntMov is { } mov && WouldRunOn(unit, stack))
         {
-            yield return $"  kill: {name} moves again, {mov} movement (the hunt runs on, once a map)";
+            yield return $"  {kill} {name} moves again, {mov} movement (the hunt runs on, once a map)";
         }
     }
+
+    /// <summary>
+    /// The label that opens a kill row (issue 939, Design Table round 319): <c>kills on hit:</c> when one
+    /// plain hit takes the foe, else <c>on a kill:</c>, a condition and never a promise.
+    /// </summary>
+    public static string KillLabel(bool killsOnHit) => killsOnHit ? "kills on hit:" : "on a kill:";
 
     /// <summary>
     /// The <c>threat</c> row under an enemy strike on <paramref name="answering"/> (issue 635 slice 16,
     /// Design Table rounds 303 to 305): when it counters with an unwoken hungering weapon equipped and
     /// the counter kills <paramref name="striker"/> if every strike lands
     /// (<see cref="CombatForecast.CounterIsLethal"/>), the feed that kill would bring, so a carrier standing
-    /// next to a man she means to spare sees the enemy phase could choose for her. Null otherwise.
+    /// next to a man she means to spare sees the enemy phase could choose for her; it reads <c>counter kills on hit</c>
+    /// when one counter strike is enough and <c>counter kills if all land</c> otherwise (issue 939). Null otherwise.
     /// </summary>
     public static string? CounterFeedLine(BattleUnit answering, BattleUnit striker, CombatForecast forecast, GameContent content, string name)
     {
@@ -330,7 +340,7 @@ public static class Kinsbane
 
         var stack = answering.Unit.Inventory.Items[slot];
         return content.Weapon(stack.ItemId) is { Hungers: true } && !Woken(stack.Fed)
-            ? $"counter kill: {name} +{FeedHeal} HP, to max {answering.MaxHp(content)} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})"
+            ? $"counter {(forecast.Defender.Damage >= striker.Hp ? "kills on hit" : "kills if all land")}: {name} +{FeedHeal} HP, to max {answering.MaxHp(content)} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})"
             : null;
     }
 

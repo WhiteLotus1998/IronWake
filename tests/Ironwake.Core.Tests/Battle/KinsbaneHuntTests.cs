@@ -136,7 +136,7 @@ public class KinsbaneHuntTests
         var brigand = state.Find("brigand-1")!;
         var mov = FullMov(Keziah(state));
 
-        Assert.Equal(new[] { $"  kill: keziah moves again, {mov} movement (the hunt runs on, once a map)" }, PlaySession.HungerLines(Shipped, Keziah(state), brigand, null, true, state: state));
+        Assert.Equal(new[] { $"  on a kill: keziah moves again, {mov} movement (the hunt runs on, once a map)" }, PlaySession.HungerLines(Shipped, Keziah(state), brigand, null, true, state: state));
         Assert.Empty(PlaySession.HungerLines(Shipped, Keziah(state), brigand, null, true));
         Assert.Empty(PlaySession.HungerLines(Shipped, Keziah(WithScythe(Placed(), 12, huntRan: true)), brigand, null, true, state: state));
         Assert.Empty(PlaySession.HungerLines(Shipped, brigand, Keziah(state), null, true, state: state));
@@ -149,8 +149,8 @@ public class KinsbaneHuntTests
         var lines = PlaySession.HungerLines(Shipped, Keziah(state), state.Find("brigand-1")!, null, true, state: state).ToList();
 
         Assert.Equal(2, lines.Count);
-        Assert.StartsWith("  kill: keziah +10 HP", lines[0]);
-        Assert.StartsWith("  kill: keziah moves again", lines[1]);
+        Assert.StartsWith("  on a kill: keziah +10 HP", lines[0]);
+        Assert.StartsWith("  on a kill: keziah moves again", lines[1]);
     }
 
     [Fact]
