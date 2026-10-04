@@ -46,7 +46,7 @@ move teodor 5,7
 attack teodor archer-2
 forecast keziah brawler-1 from 4,7
 move keziah 4,7
-attack keziah brawler-1
+attack keziah brawler-1 !
 attack ottilie veteran-1
 forecast captain veteran-1 from 2,5
 move captain 2,5
@@ -122,7 +122,7 @@ move teodor 13,5
 attack teodor grange_reeve-1
 forecast keziah grange_reeve-1 from 13,7
 move keziah 13,7
-attack keziah grange_reeve-1
+attack keziah grange_reeve-1 !
 move captain 14,6
 wait captain
 move wren 12,6

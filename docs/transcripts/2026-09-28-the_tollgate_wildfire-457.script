@@ -44,7 +44,7 @@ end
 move captain 6,3
 attack captain toll_warden-1
 move pell 6,4
-attack pell toll_warden-1
+attack pell toll_warden-1 !
 move wren 6,2
 attack wren archer-1
 wait teodor

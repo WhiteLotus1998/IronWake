@@ -990,7 +990,7 @@ D  ottilie          Ottilie L1 bowman          14,6   hp 6/17   Plain  done
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          8,9    hp 8/21   Plain
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
-> attack teodor hexer-1
+> attack teodor hexer-1 !
 Forecast Teodor -> Hexer: acc 81% dmg 13 crit 1%; counter: acc 99% dmg 13 crit 2%
   Counter: lethal to Teodor (13 against 8 hp)
 Teodor attacks Hexer
@@ -1357,7 +1357,7 @@ a  soldier-1        Soldier L6 pikeman         12,6   hp 2/22   Plain  group van
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          11,6   hp 8/21   Plain
 B  wren             Wren L1 cadet              13,6   hp 10/20  Plain  done
-> attack teodor soldier-1
+> attack teodor soldier-1 !
 Forecast Teodor -> Soldier 1: acc 73% dmg 9 crit 1%; counter: acc 76% dmg 9 crit 1%
   Counter: lethal to Teodor (9 against 8 hp)
 Teodor attacks Soldier 1
@@ -2993,7 +2993,7 @@ D  ottilie          Ottilie L1 bowman          15,5   hp 12/17  Plain  done
 f  soldier-2        Soldier L6 pikeman         15,3   hp 7/22   Plain  group wave, aggressive
 C  teodor           Teodor L2 pikeman          11,7   hp 18/21  Plain
 B  wren             Wren L1 cadet              14,3   hp 10/20  Plain
-> attack wren soldier-2
+> attack wren soldier-2 !
 Forecast Wren -> Soldier 2: acc 82% dmg 7 crit 3%; counter: acc 65% dmg 10 crit 0%
   Counter: lethal to Wren (10 against 10 hp)
 Wren attacks Soldier 2

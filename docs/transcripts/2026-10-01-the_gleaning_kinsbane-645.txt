@@ -185,7 +185,7 @@ B  keziah           Keziah L1 reaver           4,6    hp 6/23   Plain
 D  pell             Pell L1 adept              3,8    hp 16/16  Plain
 e  soldier-1        Soldier L2 pikeman         5,3    hp 20/20  Plain  group hall, guard, awake
 C  wren             Wren L1 cadet              5,9    hp 20/20  Plain
-> attack keziah brigand-1
+> attack keziah brigand-1 !
 Forecast Keziah -> Brigand 1 with Kinsbane: acc 79% dmg 16 crit 2%; counter: acc 67% dmg 12 crit 0%
   Counter: lethal to Keziah (12 against 6 hp)
   Kill: Keziah +10 HP, to max 23 (Kinsbane feeds, fed 1)
@@ -602,7 +602,7 @@ B  keziah           Keziah L1 reaver           4,6    hp 6/23   Plain
 D  pell             Pell L1 adept              3,8    hp 3/16   Plain
 e  soldier-1        Soldier L2 pikeman         4,5    hp 6/20   Plain  group hall, guard, awake
 C  wren             Wren L1 cadet              4,8    hp 20/20  Plain
-> attack keziah soldier-1
+> attack keziah soldier-1 !
 Forecast Keziah -> Soldier with Kinsbane: acc 74% dmg 14 crit 1%; counter: acc 77% dmg 10 crit 0%
   Counter: lethal to Keziah (10 against 6 hp)
   Kill: Keziah +10 HP, to max 23 (Kinsbane feeds, fed 2)
@@ -1640,7 +1640,7 @@ A  captain          Alder Fenn L1 cadet        6,0    hp 22/22  Plain  captain  
 B  keziah           Keziah L2 reaver           9,3    hp 6/23   Plain  done
 D  pell             Pell L1 adept              5,2    hp 3/16   Plain
 C  wren             Wren L1 cadet              4,0    hp 8/20   Plain  done
-> attack pell bandit_leader-1
+> attack pell bandit_leader-1 !
 Forecast Pell -> Bandit Leader with Cinder: acc 72% dmg 9 crit 1%; counter: acc 65% dmg 14 crit 0%
   Counter: lethal to Pell (14 against 3 hp)
 Pell attacks Bandit Leader

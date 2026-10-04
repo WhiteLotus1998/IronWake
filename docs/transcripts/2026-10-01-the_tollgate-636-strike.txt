@@ -871,7 +871,7 @@ e  rider-1          Rider L3 outrider          8,4    hp 9/21   Plain  group fla
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 14/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
-> attack pell rider-1
+> attack pell rider-1 !
 Forecast Pell -> Rider with Cinder: acc 99% dmg 12 crit 2%; counter: acc 80% dmg 11 crit 0%
   Counter: lethal to Pell (11 against 5 hp)
 Pell attacks Rider

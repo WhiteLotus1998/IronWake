@@ -4,9 +4,9 @@ Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git
 
 ## Where we are
 
-Phase 3 is under way. #973: `seen_far: rook 2` on the field (0240). #940: the Oath Stone's rider on turn 5 (0239). #971 re-read the Maps gate cells (0171). #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
+Phase 3 is under way. #975: a lethal-counter `attack` needs a trailing `!` (0241). #973: `seen_far: rook 2` on the field (0240). #940: the Oath Stone's rider on turn 5 (0239). #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233; Rook's pick open, #973 built). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-4374 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
+4379 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next

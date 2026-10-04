@@ -47,7 +47,7 @@ move wren 7,3 preview
 move wren 7,3
 attack wren archer-2
 move ottilie 7,4
-attack ottilie archer-2
+attack ottilie archer-2 !
 move dunstan 6,6
 wait dunstan
 move captain 7,6

@@ -94,4 +94,4 @@ attack ottilie bandit_leader-1
 move captain 11,0
 attack captain bandit_leader-1
 move wren 10,1
-attack wren bandit_leader-1
+attack wren bandit_leader-1 !

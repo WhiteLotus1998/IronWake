@@ -10,7 +10,7 @@ move wren 5,5
 attack wren wing_captain-1
 threat rook from 8,5
 move rook 8,5
-attack rook soldier-1
+attack rook soldier-1 !
 end
 move wren 9,5
 wait rook

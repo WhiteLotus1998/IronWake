@@ -977,7 +977,7 @@ A front falls when an enemy stands on or moves through one of its tiles. A falle
 fronts: north 10,1 holding (2 defending, 25 hp); gate 10,5 10,6 holding (3 defending, 38 hp); south 10,10 holding (1 defending, 13 hp, hunted)
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Rider hunts the south next: 1 defender, 13 hp (weakest); strikes only its defenders
-> attack wren brigand-2
+> attack wren brigand-2 !
 Forecast Wren -> Brigand 2: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
   Counter: lethal to Wren (11 against 9 hp)
 Wren attacks Brigand 2
@@ -1411,7 +1411,7 @@ B  wren             Wren L1 cadet              10,1   hp 9/20   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 holding; gate 10,5 10,6 holding; south 10,10 holding
-> attack teodor soldier-2
+> attack teodor soldier-2 !
 Forecast Teodor -> Soldier 2: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
   Counter: lethal to Teodor (8 against 5 hp)
 Teodor attacks Soldier 2
@@ -1851,7 +1851,7 @@ B  wren             Wren L1 cadet              10,1   hp 9/20   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 holding; gate 10,5 10,6 holding; south 10,10 holding
-> attack teodor soldier-2
+> attack teodor soldier-2 !
 Forecast Teodor -> Soldier 2: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
   Counter: lethal to Teodor (8 against 5 hp)
 Teodor attacks Soldier 2
@@ -3081,7 +3081,7 @@ B  wren             Wren L1 cadet              15,7   hp 3/20   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding
-> attack dunstan brigand-5
+> attack dunstan brigand-5 !
 Forecast Dunstan -> Brigand 5: acc 77% dmg 11 crit 1%; counter: acc 73% dmg 8 crit 0%
   Counter: lethal to Dunstan (8 against 7 hp)
 Dunstan attacks Brigand 5

@@ -9,7 +9,7 @@ end
 attack captain brigand-1
 move teodor 4,6
 attack teodor soldier-1
-attack wren soldier-1
+attack wren soldier-1 !
 end
 move teodor 6,4
 wait teodor
@@ -26,4 +26,4 @@ move wren 5,3
 wait wren
 end
 move captain 8,1
-attack captain bandit_leader-1
+attack captain bandit_leader-1 !

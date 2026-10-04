@@ -81,4 +81,4 @@ move teodor 12,6
 move pell 11,6
 forecast pell weir_foreman-1 1
 forecast pell weir_foreman-1 2
-attack pell weir_foreman-1 2
+attack pell weir_foreman-1 2 !

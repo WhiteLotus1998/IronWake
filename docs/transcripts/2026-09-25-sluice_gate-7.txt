@@ -445,7 +445,7 @@ c  brigand-1        Brigand L1 reaver          5,4    hp 2/22   Plain  group eas
 A  captain          Alder Fenn L1 cadet        3,2    hp 22/22  Plain  captain
 C  teodor           Teodor L1 pikeman          3,1    hp 21/21  Forest
 B  wren             Wren L1 cadet              5,5    hp 11/20  Plain
-> attack wren brigand-1
+> attack wren brigand-1 !
 forecast wren -> brigand-1: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
 wren attacks brigand-1
   wren hits brigand-1 for 10 (hp 0)

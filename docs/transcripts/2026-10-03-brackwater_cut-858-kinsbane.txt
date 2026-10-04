@@ -2366,7 +2366,7 @@ D  wren             Wren L6 cadet              10,5   hp 22/22  Plain
 ?  unseen at 6,3 5,4 6,4 6,5 17,5 17,6 17,7
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> attack keziah heavy_rider-1 kinsbane
+> attack keziah heavy_rider-1 kinsbane !
 Forecast Keziah -> Heavy Rider 1 with Kinsbane: acc 74% dmg 15 crit 2%; counter with Steel Lance: acc 79% dmg 15 crit 0%
   Counter: lethal to Keziah (15 against 6 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 2)
@@ -3280,7 +3280,7 @@ D  wren             Wren L6 cadet              13,3   hp 22/22  Plain
 ?  unseen at 11,1 8,3 6,4 9,4
 dusk: sight 2, 1 next turn; 4 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> attack keziah heavy_rider-1 kinsbane
+> attack keziah heavy_rider-1 kinsbane !
 Forecast Keziah -> Heavy Rider 1 with Kinsbane: acc 74% dmg 15 crit 2%; counter with Steel Lance: acc 79% dmg 15 crit 0%
   Counter: lethal to Keziah (15 against 6 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 2)
@@ -3613,7 +3613,7 @@ D  wren             Wren L6 cadet              16,2   hp 22/22  Plain
 ?  unseen at 11,1 10,3 6,4 9,4 15,5 13,7
 dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> attack keziah brigand-2 kinsbane
+> attack keziah brigand-2 kinsbane !
 Forecast Keziah -> Brigand 2 with Kinsbane: acc 79% dmg 18 crit 3%; counter: acc 60% dmg 13 crit 0%
   Counter: lethal to Keziah (13 against 9 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 3)
@@ -3968,7 +3968,7 @@ D  wren             Wren L6 cadet              16,2   hp 22/22  Plain
 ?  unseen at 11,1 10,3 6,4 9,4 15,5 13,7
 dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> attack keziah brigand-2 kinsbane
+> attack keziah brigand-2 kinsbane !
 Forecast Keziah -> Brigand 2 with Kinsbane: acc 79% dmg 18 crit 3%; counter: acc 60% dmg 13 crit 0%
   Counter: lethal to Keziah (13 against 9 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 3)

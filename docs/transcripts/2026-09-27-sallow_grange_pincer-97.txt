@@ -990,7 +990,7 @@ D  teodor           Teodor L1 pikeman          3,5    hp 16/21  Plain
 C  wren             Wren L1 cadet              3,6    hp 6/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
-> attack wren brawler-1
+> attack wren brawler-1 !
 forecast wren -> brawler-1: acc 86% dmg 10 crit 4%; counter: acc 83% dmg 7 x2 crit 0%
   counter: lethal to wren (14 against 6 hp)
 wren attacks brawler-1
@@ -1196,7 +1196,7 @@ D  teodor           Teodor L1 pikeman          3,5    hp 16/21  Plain
 C  wren             Wren L1 cadet              3,6    hp 6/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
-> attack wren brawler-1
+> attack wren brawler-1 !
 forecast wren -> brawler-1: acc 97% dmg 10 crit 4%; counter: acc 83% dmg 7 x2 crit 0%
   counter: lethal to wren (14 against 6 hp)
   pincer: brawler-1 pinned by ansgar: wren acc +15

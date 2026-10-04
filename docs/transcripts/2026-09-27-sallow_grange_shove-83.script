@@ -36,7 +36,7 @@ attack ansgar archer-2
 recall 44
 move teodor 4,5
 attack teodor brawler-1
-attack wren brawler-1
+attack wren brawler-1 !
 move ansgar 5,6
 attack ansgar archer-2
 canto ansgar stay

@@ -24,12 +24,12 @@ item teodor 2
 end
 move teodor 9,1
 move ottilie 10,3
-attack ottilie hexer-1
+attack ottilie hexer-1 !
 recall 62
 move teodor 9,1
 attack teodor hexer-1
 move ottilie 10,3
-attack ottilie hexer-1
+attack ottilie hexer-1 !
 end
 recall 51
 move ottilie 14,4

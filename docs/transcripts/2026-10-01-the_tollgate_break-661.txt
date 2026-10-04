@@ -920,7 +920,7 @@ c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 2/23   Forest  group wo
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,6    hp 10/20  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
-> attack wren toll_brigand-1
+> attack wren toll_brigand-1 !
 forecast wren -> toll_brigand-1: acc 60% dmg 9 x2 crit 4%; counter: acc 41% dmg 11 crit 0%
   counter: lethal to wren (11 against 10 hp)
 wren attacks toll_brigand-1
@@ -1005,7 +1005,7 @@ c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 2/23   Forest  group wo
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 10/20  Hill
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
-> attack pell toll_brigand-1 cinder
+> attack pell toll_brigand-1 cinder !
 forecast pell -> toll_brigand-1 with Cinder: acc 87% dmg 13 crit 3%; counter: acc 26% dmg 12 crit 0%
   counter: lethal to pell (12 against 8 hp)
 pell attacks toll_brigand-1
@@ -1497,7 +1497,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 6/21   Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              8,4    hp 1/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
-> attack teodor rider-1
+> attack teodor rider-1 !
 forecast teodor -> rider-1: acc 76% dmg 11 crit 1%; counter: acc 39% dmg 7 crit 1%
   counter: lethal to teodor (7 against 6 hp)
 teodor attacks rider-1
@@ -1608,7 +1608,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 6/21   Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              8,4    hp 1/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
-> attack pell toll_warden-1 cinder
+> attack pell toll_warden-1 cinder !
 forecast pell -> toll_warden-1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 37% dmg 9 crit 0%
   counter: lethal to pell (9 against 8 hp)
 pell attacks toll_warden-1
@@ -1754,7 +1754,7 @@ D  pell             Pell L1 adept              6,3    hp 8/16   Plain
 C  teodor           Teodor L1 pikeman          7,5    hp 6/21   Forest
 B  wren             Wren L1 cadet              8,4    hp 1/20   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
-> attack pell archer-1 cinder
+> attack pell archer-1 cinder !
 forecast pell -> archer-1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%
   counter: lethal to pell (8 against 8 hp)
 pell attacks archer-1

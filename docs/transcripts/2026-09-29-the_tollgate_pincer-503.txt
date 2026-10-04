@@ -1473,7 +1473,7 @@ c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 3/23   Forest  group wo
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest
 pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
-> attack wren toll_brigand-1
+> attack wren toll_brigand-1 !
 forecast wren -> toll_brigand-1: acc 82% dmg 9 x2 crit 4%; counter: acc 13% dmg 10 crit 0%
   counter: lethal to wren (10 against 10 hp)
   pincer: toll_brigand-1 pinned by captain: wren acc +15
@@ -2277,7 +2277,7 @@ C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
-> attack pell toll_warden-1
+> attack pell toll_warden-1 !
 forecast pell -> toll_warden-1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 37% dmg 9 crit 0%
   counter: lethal to pell (9 against 8 hp)
 pell attacks toll_warden-1

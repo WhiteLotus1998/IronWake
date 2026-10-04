@@ -23,7 +23,7 @@ wait pell
 wait wren
 threat captain
 end
-attack wren brigand-2
+attack wren brigand-2 !
 attack teodor rider-1
 move ottilie 11,6
 attack ottilie soldier-1
@@ -37,7 +37,7 @@ wait dunstan
 end
 move ottilie 11,10
 attack ottilie soldier-2
-attack teodor soldier-2
+attack teodor soldier-2 !
 move wren 13,1
 wait wren
 wait pell
@@ -49,7 +49,7 @@ move dunstan 13,7
 wait dunstan
 move ottilie 11,10
 attack ottilie soldier-2
-attack teodor soldier-2
+attack teodor soldier-2 !
 threat pell from 10,6
 move pell 10,6
 wait pell
@@ -81,7 +81,7 @@ wait captain
 end
 move ottilie 13,8
 attack ottilie brigand-5
-attack dunstan brigand-5
+attack dunstan brigand-5 !
 wait wren
 wait captain
 end

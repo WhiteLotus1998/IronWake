@@ -39,7 +39,7 @@ attack teodor archer-2
 end
 move wren 8,5
 attack wren archer-2
-attack pell archer-1
+attack pell archer-1 !
 wait ansgar
 move captain 9,5
 wait captain

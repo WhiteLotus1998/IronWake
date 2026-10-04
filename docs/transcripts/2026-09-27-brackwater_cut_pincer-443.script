@@ -15,7 +15,7 @@ wait rook
 move wren 9,3
 wait wren
 end
-attack pell archer-2
+attack pell archer-2 !
 move rook 13,3
 wait rook
 move wren 10,2
@@ -65,7 +65,7 @@ threat wren
 threat pell
 threat captain
 end
-attack dunstan brigand-1
+attack dunstan brigand-1 !
 attack wren rider-1
 move rook 13,1
 attack rook brigand-1

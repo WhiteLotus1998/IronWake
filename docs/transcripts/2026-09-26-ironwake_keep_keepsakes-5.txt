@@ -1869,7 +1869,7 @@ E  pell             Pell L2 adept              9,5    hp 5/16   Plain
 k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          13,8   hp 15/21  Plain  done
 B  wren             Wren L1 cadet              10,7   hp 8/20   Plain  done
-> attack pell hexer-1
+> attack pell hexer-1 !
 forecast pell -> hexer-1: acc 99% dmg 9 crit 2%; counter: acc 99% dmg 6 crit 0%
 pell attacks hexer-1
   pell hits hexer-1 for 9 (hp 0)

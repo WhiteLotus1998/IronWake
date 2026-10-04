@@ -130,7 +130,7 @@ move ottilie 11,11
 wait ottilie
 end
 move teodor 14,7
-attack teodor sentry-1
+attack teodor sentry-1 !
 move pell 13,7
 attack pell sentry-1
 move captain 15,8

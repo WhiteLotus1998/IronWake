@@ -930,7 +930,7 @@ b  soldier-1        Soldier L3 pikeman         7,4    hp 13/21  Forest  group we
 e  soldier-2        Soldier L3 pikeman         10,2   hp 21/21  Plain  group east, aggressive
 D  wren             Wren L1 cadet              6,8    hp 20/20  Plain
 wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
-> attack rook hexer-1
+> attack rook hexer-1 !
 forecast rook -> hexer-1: acc 86% dmg 10 x2 crit 3%; counter: acc 98% dmg 9 crit 0%
   counter: lethal to rook (9 against 8 hp)
 rook attacks hexer-1

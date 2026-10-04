@@ -262,7 +262,7 @@ A  keziah           Keziah L7 reaver           4,3    hp 10/26  Plain  captain
 b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
 B  wren             Wren L7 cadet              2,3    hp 9/23   Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> attack keziah acolyte-1 iron_gauntlets
+> attack keziah acolyte-1 iron_gauntlets !
 Forecast Keziah -> Acolyte with Iron Gauntlets: acc 96% dmg 13 x4 crit 0%; counter: acc 97% dmg 12 crit 0%
   Counter: lethal to Keziah (12 against 10 hp)
 Keziah equips Iron Gauntlets
@@ -693,7 +693,7 @@ g  brigand-1        Brigand L5 reaver          3,0    hp 24/24  Plain  group bur
 e  hexer-1          Hexer L5 adept             7,6    hp 17/17  Plain  group grove, guard, awake
 A  keziah           Keziah L7 reaver           7,5    hp 6/26   Plain  captain
 B  wren             Wren L7 cadet              6,3    hp 10/23  Plain
-> attack keziah hexer-1 iron_gauntlets
+> attack keziah hexer-1 iron_gauntlets !
 Forecast Keziah -> Hexer with Iron Gauntlets: acc 96% dmg 13 x2 crit 2%; counter: acc 99% dmg 14 crit 0%
   Counter: lethal to Keziah (14 against 6 hp)
 Keziah attacks Hexer

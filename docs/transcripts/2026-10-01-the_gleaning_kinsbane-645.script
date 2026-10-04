@@ -3,7 +3,7 @@ wait keziah
 move pell 3,8
 wait pell
 end
-attack keziah brigand-1
+attack keziah brigand-1 !
 move wren 6,7
 attack wren brigand-2
 move captain 5,7
@@ -17,7 +17,7 @@ move wren 4,8
 wait wren
 wait pell
 end
-attack keziah soldier-1
+attack keziah soldier-1 !
 move pell 5,9
 wait pell
 move wren 3,8
@@ -62,7 +62,7 @@ attack wren bandit_leader-1
 move captain 6,0
 attack captain bandit_leader-1
 move pell 5,2
-attack pell bandit_leader-1
+attack pell bandit_leader-1 !
 end
 recall 85
 move pell 5,7

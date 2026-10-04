@@ -25,7 +25,7 @@ move ansgar 10,5
 attack ansgar soldier-2
 canto ansgar 8,5
 end
-attack ansgar soldier-2
+attack ansgar soldier-2 !
 threat ansgar
 canto ansgar 6,5
 move captain 10,4
@@ -34,13 +34,13 @@ move wren 8,4
 end
 recall
 recall 45
-attack ansgar soldier-2
+attack ansgar soldier-2 !
 canto ansgar 7,5
 move wren 7,3
 wait captain
 end
 recall 45
-attack ansgar soldier-2
+attack ansgar soldier-2 !
 threat ansgar from 7,5
 threat ansgar from 5,5
 canto ansgar 5,5

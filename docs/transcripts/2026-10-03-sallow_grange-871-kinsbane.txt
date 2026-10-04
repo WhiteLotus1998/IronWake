@@ -3122,7 +3122,7 @@ E  pell             Pell L6 adept              9,5    hp 8/17   Plain
 e  shieldbearer-1   Shieldbearer L7 bulwark    12,2   hp 27/27  Plain  group gate, hold
 D  teodor           Teodor L6 pikeman          7,6    hp 7/23   Plain
 C  wren             Wren L6 cadet              11,5   hp 22/22  Plain
-> attack keziah hexer-1
+> attack keziah hexer-1 !
 Forecast Keziah -> Hexer with Kinsbane: acc 82% dmg 19 crit 2%; counter: acc 99% dmg 15 crit 0%
   Counter: lethal to Keziah (15 against 6 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 2)

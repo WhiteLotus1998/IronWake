@@ -23,7 +23,7 @@ attack teodor archer-1
 wait captain
 wait wren
 end
-attack teodor soldier-1
+attack teodor soldier-1 !
 move captain 6,6
 attack captain brigand-1
 move wren 8,7
@@ -33,7 +33,7 @@ end
 move teodor 11,6
 item teodor 2
 move ottilie 10,4
-attack ottilie archer-1
+attack ottilie archer-1 !
 move wren 8,8
 attack wren soldier-2
 move captain 9,7

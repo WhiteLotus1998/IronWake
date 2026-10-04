@@ -1496,7 +1496,7 @@ D  teodor           Teodor L6 pikeman          5,7    hp 23/23  Plain  done
 b  veteran-1        Veteran L7 halberdier      3,5    hp 18/25  Plain  group field, guard, awake
 C  wren             Wren L6 cadet              3,6    hp 8/22   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> attack keziah brawler-1
+> attack keziah brawler-1 !
 Forecast Keziah -> Brawler with Kinsbane: acc 76% dmg 17 crit 3%; counter: acc 89% dmg 9 x2 crit 0%
   Counter: lethal to Keziah (18 against 16 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 1)
@@ -3533,7 +3533,7 @@ E  pell             Pell L6 adept              13,4   hp 17/17  Plain  done
 e  shieldbearer-1   Shieldbearer L7 bulwark    12,2   hp 27/27  Plain  group gate, hold
 D  teodor           Teodor L6 pikeman          13,5   hp 12/23  Plain  done
 C  wren             Wren L6 cadet              9,6    hp 8/22   Plain
-> attack keziah grange_reeve-1
+> attack keziah grange_reeve-1 !
 Forecast Keziah -> Grange Reeve with Kinsbane: acc 82% dmg 13 crit 1%; counter with Steel Lance: acc 80% dmg 14 crit 0%
   Counter: lethal to Keziah (14 against 11 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 2)

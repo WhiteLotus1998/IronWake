@@ -865,7 +865,7 @@ g  soldier-2        Soldier L5 pikeman         4,6    hp 22/22  Plain  group rea
 !  sworn_captain-1  Sworn Captain L5 pikeman   7,2    hp 8/28   Plain  group gate, boss, awake
 A  teodor           Teodor L7 pikeman          5,2    hp 20/24  Plain  captain
 B  wren             Wren L7 cadet              5,3    hp 2/23   Plain
-> attack wren rider-2
+> attack wren rider-2 !
 Forecast Wren -> Rider 2: acc 86% dmg 10 x2 crit 5%; counter: acc 52% dmg 9 crit 0%
   Counter: lethal to Wren (9 against 2 hp)
 Wren attacks Rider 2

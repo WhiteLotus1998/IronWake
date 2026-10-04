@@ -1286,7 +1286,7 @@ D  teodor           Teodor L1 pikeman          7,3    hp 16/21  Plain
 C  wren             Wren L1 cadet              8,5    hp 13/20  Plain  done
 ?  unseen at 12,2 15,6 13,7
 dusk: sight 2, 1 next turn; 3 unseen (?); no side strikes what it cannot see
-> attack pell archer-1
+> attack pell archer-1 !
 forecast pell -> archer-1: acc 91% dmg 10 crit 2%; counter: acc 86% dmg 8 crit 2%
 pell attacks archer-1
   pell misses archer-1

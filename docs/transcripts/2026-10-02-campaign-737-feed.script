@@ -182,7 +182,7 @@ move maud 11,2
 wait maud
 end
 move maud 8,2
-attack maud archer-2
+attack maud archer-2 !
 move dunstan 9,4
 attack dunstan archer-2
 end
@@ -602,7 +602,7 @@ item captain 3
 attack pell brigand-1 gust
 move ottilie 11,7
 attack ottilie soldier-1
-attack keziah soldier-1
+attack keziah soldier-1 !
 move ansgar 9,4
 attack ansgar longbowman-1 1
 canto ansgar 10,4

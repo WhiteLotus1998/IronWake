@@ -11,7 +11,7 @@ attack keziah brigand-1
 recall 13
 move maud 2,6
 attack maud brigand-1
-attack keziah brigand-1
+attack keziah brigand-1 !
 end
 move keziah 3,7
 attack keziah soldier-1
@@ -53,4 +53,4 @@ move maud 12,5
 attack maud sworn_captain-1
 end
 attack maud sworn_captain-1
-attack keziah sworn_captain-1
+attack keziah sworn_captain-1 !

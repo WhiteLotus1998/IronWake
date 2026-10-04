@@ -1262,7 +1262,7 @@ D  teodor           Teodor L1 pikeman          4,5    hp 4/21   Plain  heft 13  
 C  wren             Wren L1 cadet              3,6    hp 6/20   Plain  heft 11
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 shove: a player unit may push a unit beside it one tile straight away, as its action, if the tile beyond is open and, against an enemy, its heft is at least the target's
-> attack wren brawler-1
+> attack wren brawler-1 !
 forecast wren -> brawler-1: acc 86% dmg 10 crit 4%; counter: acc 83% dmg 7 x2 crit 0%
 wren attacks brawler-1
   wren hits brawler-1 for 10 (hp 0)

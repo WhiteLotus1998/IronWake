@@ -28,7 +28,7 @@ attack dunstan hexer-1
 move pell 5,4
 attack pell hexer-1
 move rook 6,2
-attack rook hexer-1
+attack rook hexer-1 !
 attack captain soldier-1
 move wren 6,6
 wait wren

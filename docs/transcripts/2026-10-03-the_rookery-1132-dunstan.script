@@ -32,7 +32,7 @@ wait rook
 end
 move dunstan 13,4
 wait dunstan
-attack rook wingrider-1
+attack rook wingrider-1 !
 end
 move dunstan 14,4
 wait dunstan

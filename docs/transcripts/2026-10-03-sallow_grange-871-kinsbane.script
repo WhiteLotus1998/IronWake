@@ -101,7 +101,7 @@ move pell 9,5
 wait pell
 end
 move keziah 12,7
-attack keziah hexer-1
+attack keziah hexer-1 !
 move ottilie 13,6
 attack ottilie grange_reeve-1
 move wren 15,5

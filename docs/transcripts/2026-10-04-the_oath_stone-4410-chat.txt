@@ -1281,7 +1281,7 @@ A  keziah           Keziah L7 reaver           12,4   hp 12/26  Plain  captain
 B  maud             Maud L7 chaplain           11,5   hp 4/19   Plain  unarmed
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 12/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
-> attack keziah sworn_captain-1
+> attack keziah sworn_captain-1 !
 Forecast Keziah -> Sworn Captain with Kinsbane: acc 54% dmg 16 crit 0%; counter: acc 81% dmg 14 crit 1%
   Counter: lethal to Keziah (14 against 12 hp)
   Joab is bound to Sworn Captain: freed when Sworn Captain falls
@@ -1421,7 +1421,7 @@ A  keziah           Keziah L7 reaver           12,4   hp 6/26   Plain  captain
 B  maud             Maud L7 chaplain           12,5   hp 4/19   Plain  unarmed
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 17/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
-> attack keziah sworn_captain-1 art cleave
+> attack keziah sworn_captain-1 art cleave !
 Forecast Keziah -> Sworn Captain with Kinsbane: acc 21% dmg 22 crit 10%; counter: acc 81% dmg 14 crit 1%
   Counter: lethal to Keziah (14 against 6 hp)
   Technique Cleave: Kinsbane at acc 50 power 20 crit 10 wt 10 range 1-1; spends up to 4 of 18 uses, 3 of them hit or miss

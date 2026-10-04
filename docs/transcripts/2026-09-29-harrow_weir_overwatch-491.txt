@@ -2225,7 +2225,7 @@ B  teodor           Teodor L1 pikeman          10,2   hp 1/21   Road  done
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
 watches: archer-1 at 14,4 over 14,2 13,3 15,3 12,4 13,5 15,5 14,6
-> attack ottilie weir_foreman-1
+> attack ottilie weir_foreman-1 !
 forecast ottilie -> weir_foreman-1: acc 82% dmg 6 crit 3%; counter: acc 54% dmg 12 crit 0%
   counter: lethal to ottilie (12 against 5 hp)
 ottilie attacks weir_foreman-1

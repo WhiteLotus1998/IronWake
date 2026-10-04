@@ -554,7 +554,7 @@ b  archer-1         Archer L1 bowman           6,0    hp 17/17  Plain  group mil
 A  captain          Alder Fenn L1 cadet        6,2    hp 18/22  Fort (heals 20 percent, 4 hp)  captain  done
 d  mill_bandit-1    Mill Bandit L2 reaver      6,1    hp 5/24   Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              5,1    hp 10/20  Plain
-> attack wren mill_bandit-1
+> attack wren mill_bandit-1 !
 Forecast Wren -> Mill Bandit: acc 85% dmg 9 crit 2%; counter: acc 85% dmg 10 crit 3%
   Counter: lethal to Wren (10 against 10 hp)
 Wren attacks Mill Bandit

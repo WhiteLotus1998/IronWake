@@ -747,7 +747,7 @@ B  teodor           Teodor L7 pikeman          9,1    hp 21/24  Road
 dusk: sight 1; it gets no darker; 2 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Ottilie cannot leave by turn 8, Teodor cannot leave by turn 8
-> attack ottilie hexer-1
+> attack ottilie hexer-1 !
 Forecast Ottilie -> Hexer 1: acc 90% dmg 11 x2 crit 6%; counter: acc 98% dmg 11 crit 0%
   Counter: lethal to Ottilie (11 against 8 hp)
 Ottilie attacks Hexer 1
@@ -866,7 +866,7 @@ B  teodor           Teodor L7 pikeman          9,1    hp 8/24   Road  done
 dusk: sight 1; it gets no darker; 2 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Ottilie cannot leave by turn 8, Teodor cannot leave by turn 8
-> attack ottilie hexer-1
+> attack ottilie hexer-1 !
 Forecast Ottilie -> Hexer 1: acc 90% dmg 11 x2 crit 6%; counter: acc 98% dmg 11 crit 0%
   Counter: lethal to Ottilie (11 against 8 hp)
 Ottilie attacks Hexer 1

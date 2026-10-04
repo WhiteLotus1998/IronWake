@@ -503,7 +503,7 @@ B  wren             Wren L1 cadet              4,11   hp 8/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path
 messenger at 8,2, not yet running, 2 of its phases from the road at 15,1 on open ground
-> attack wren brigand-1
+> attack wren brigand-1 !
 Forecast Wren -> Brigand 1: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 12 crit 0%
   Counter: lethal to Wren (12 against 8 hp)
 Wren attacks Brigand 1

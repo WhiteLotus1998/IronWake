@@ -51,7 +51,7 @@ move captain 7,5
 attack captain toll_brigand-1
 end
 move wren 5,5
-attack wren toll_brigand-1
+attack wren toll_brigand-1 !
 move pell 7,6
 wait pell
 wait captain
@@ -80,7 +80,7 @@ wait teodor
 move captain 6,3
 move pell 6,4
 attack captain toll_warden-1
-attack pell toll_warden-1
+attack pell toll_warden-1 !
 move wren 6,2
 attack wren archer-1
 end

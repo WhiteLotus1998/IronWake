@@ -74,5 +74,5 @@ end
 move teodor 7,4
 wait teodor
 move pell 6,3
-attack pell archer-1
+attack pell archer-1 !
 move captain 7,1

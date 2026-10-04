@@ -107,6 +107,6 @@ attack teodor grange_reeve-1
 move wren 13,7
 attack wren grange_reeve-1
 move ottilie 12,5
-attack ottilie grange_reeve-1
+attack ottilie grange_reeve-1 !
 end
 move captain 16,6

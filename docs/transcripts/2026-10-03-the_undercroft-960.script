@@ -21,7 +21,7 @@ move wren 13,1
 wait wren
 end
 move pell 14,2
-attack pell lector-1
+attack pell lector-1 !
 threat wren from 14,4
 move wren 14,4
 wait wren

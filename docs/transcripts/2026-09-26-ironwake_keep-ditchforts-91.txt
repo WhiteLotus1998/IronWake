@@ -2477,7 +2477,7 @@ E  pell             Pell L1 adept              13,5   hp 5/16   Plain
 k  soldier-4        Soldier L2 pikeman         10,8   hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          11,7   hp 21/21  Fort (heals 20 percent, 4 hp)
 B  wren             Wren L1 cadet              10,4   hp 9/20   Plain
-> attack wren brigand-4
+> attack wren brigand-4 !
 Forecast Wren -> Brigand 4: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
   Counter: lethal to Wren (11 against 9 hp)
 Wren attacks Brigand 4

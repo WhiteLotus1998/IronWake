@@ -77,7 +77,7 @@ wait captain
 end
 attack pell brigand-1 cinder
 move keziah 10,2
-attack keziah heavy_rider-1 kinsbane
+attack keziah heavy_rider-1 kinsbane !
 move wren 10,4
 wait wren
 move dunstan 9,3
@@ -105,7 +105,7 @@ end
 move dunstan 14,4
 wait dunstan
 move keziah 12,3
-attack keziah heavy_rider-1 kinsbane
+attack keziah heavy_rider-1 kinsbane !
 move captain 15,3
 wait captain
 move wren 16,2
@@ -115,7 +115,7 @@ wait pell
 end
 move pell 13,3
 attack pell brigand-2 cinder
-attack keziah brigand-2 kinsbane
+attack keziah brigand-2 kinsbane !
 move captain 12,4
 wait captain
 move wren 12,2
@@ -126,7 +126,7 @@ end
 recall 99
 move pell 12,2
 attack pell brigand-2 cinder
-attack keziah brigand-2 kinsbane
+attack keziah brigand-2 kinsbane !
 move wren 13,2
 wait wren
 move captain 13,3

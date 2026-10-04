@@ -590,7 +590,7 @@ e  rider-1          Rider L6 outrider          5,1    hp 22/22  Plain  group rea
 d  soldier-1        Soldier L6 pikeman         6,9    hp 22/22  Forest  group camp, guard, awake
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
-> attack keziah brigand-1 kinsbane
+> attack keziah brigand-1 kinsbane !
 Forecast Keziah -> Brigand 1 with Kinsbane: acc 79% dmg 22 crit 3%; counter: acc 60% dmg 13 crit 0%
   Counter: lethal to Keziah (13 against 11 hp)
   Kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 10)
@@ -992,7 +992,7 @@ e  rider-1          Rider L6 outrider          7,6    hp 22/22  Plain  group rea
 d  soldier-1        Soldier L6 pikeman         8,7    hp 15/22  Plain  group camp, guard, awake
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
-> attack keziah soldier-1 kinsbane
+> attack keziah soldier-1 kinsbane !
 Forecast Keziah -> Soldier with Kinsbane: acc 74% dmg 20 crit 2%; counter: acc 72% dmg 10 crit 0%
   Counter: lethal to Keziah (10 against 6 hp)
   Kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 11)

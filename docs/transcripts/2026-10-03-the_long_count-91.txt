@@ -596,7 +596,7 @@ B  wren             Wren L7 cadet              9,4    hp 12/23  Road
 dusk: sight 1; it gets no darker; 2 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Ottilie cannot leave by turn 8, Wren 2 turns to an exit (last start: turn 6)
-> attack wren brigand-2
+> attack wren brigand-2 !
 Forecast Wren -> Brigand 2: acc 91% dmg 12 x2 crit 6%; counter: acc 39% dmg 12 crit 0%
   Counter: lethal to Wren (12 against 12 hp)
 Wren attacks Brigand 2
@@ -830,7 +830,7 @@ B  wren             Wren L7 cadet              13,4   hp 12/23  Road
 dusk: sight 1; it gets no darker; 2 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Ottilie 1 turn to an exit (last start: turn 7), Wren 1 turn to an exit (last start: turn 7)
-> attack wren brigand-2
+> attack wren brigand-2 !
 Forecast Wren -> Brigand 2: acc 91% dmg 12 x2 crit 6%; counter: acc 39% dmg 12 crit 0%
   Counter: lethal to Wren (12 against 12 hp)
 Wren attacks Brigand 2

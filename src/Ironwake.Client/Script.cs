@@ -22,6 +22,12 @@ public static class Script
             return null;
         }
 
+        if (words[0] == "attack" && words.Length > 1 && words[^1] == "!")
+        {
+            // The console's confirm on a swing into a lethal counter (issue 975); the client's command is the same attack.
+            words = words[..^1];
+        }
+
         string? art = null;
         if (words[0] is "attack" or "item" && words.Length > 3)
         {

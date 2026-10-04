@@ -48,7 +48,7 @@ attack wren toll_warden-1
 move teodor 7,4
 wait teodor
 end
-attack wren toll_warden-1
+attack wren toll_warden-1 !
 attack pell rider-1
 move captain 8,5
 attack captain rider-1

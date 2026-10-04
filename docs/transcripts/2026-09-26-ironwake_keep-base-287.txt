@@ -535,7 +535,7 @@ E  pell             Pell L1 adept              12,4   hp 16/16  Plain  done
 e  soldier-2        Soldier L2 pikeman         10,7   hp 10/20  Plain  group van, aggressive
 C  teodor           Teodor L1 pikeman          11,7   hp 3/21   Plain
 B  wren             Wren L1 cadet              11,4   hp 14/20  Plain
-> attack teodor soldier-2
+> attack teodor soldier-2 !
 Forecast Teodor -> Soldier 2: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
   Counter: lethal to Teodor (8 against 3 hp)
 Teodor attacks Soldier 2

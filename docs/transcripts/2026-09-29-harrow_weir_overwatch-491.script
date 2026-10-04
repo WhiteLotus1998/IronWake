@@ -70,4 +70,4 @@ wait captain
 end
 move teodor 10,2
 attack teodor weir_foreman-1
-attack ottilie weir_foreman-1
+attack ottilie weir_foreman-1 !

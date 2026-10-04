@@ -36,7 +36,7 @@ wait wren
 attack pell rider-1
 wait teodor
 end
-attack wren brigand-2
+attack wren brigand-2 !
 move rook 5,2
 attack rook archer-2
 move pell 6,3

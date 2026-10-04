@@ -35,7 +35,7 @@ wait teodor
 wait dunstan
 end
 attack captain brigand-2
-attack wren brigand-3
+attack wren brigand-3 !
 move pell 9,4
 attack pell soldier-2
 move ottilie 8,5
@@ -46,7 +46,7 @@ move teodor 9,7
 wait teodor
 end
 recall 64
-attack wren brigand-3
+attack wren brigand-3 !
 move ottilie 8,7
 attack ottilie brigand-2
 move pell 9,4

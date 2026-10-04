@@ -35,7 +35,7 @@ attack captain soldier-1
 move keziah 9,8
 attack keziah hexer-1
 move teodor 8,9
-attack teodor hexer-1
+attack teodor hexer-1 !
 end
 recall 46
 move keziah 9,8
@@ -46,7 +46,7 @@ move wren 13,6
 attack wren soldier-1
 attack captain soldier-1
 move teodor 11,6
-attack teodor soldier-1
+attack teodor soldier-1 !
 move maud 15,6
 item maud 2 ottilie
 end
@@ -102,5 +102,5 @@ move ottilie 15,5
 attack ottilie soldier-2
 move captain 15,4
 attack captain soldier-2
-attack wren soldier-2
+attack wren soldier-2 !
 leave

@@ -640,7 +640,7 @@ D  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain  done
 E  pell             Pell L1 adept              9,5    hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          8,7    hp 8/21   Plain
 B  wren             Wren L1 cadet              8,4    hp 20/20  Plain
-> attack teodor brigand-1
+> attack teodor brigand-1 !
 forecast teodor -> brigand-1: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
 teodor attacks brigand-1
   teodor hits brigand-1 for 12 (hp 0)
@@ -1096,7 +1096,7 @@ D  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
 E  pell             Pell L1 adept              7,6    hp 16/16  Plain
 f  soldier-2        Soldier L2 pikeman         6,5    hp 12/20  Plain  group wave, aggressive
 B  wren             Wren L1 cadet              6,6    hp 1/20   Plain
-> attack wren brigand-3
+> attack wren brigand-3 !
 forecast wren -> brigand-3: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
 wren attacks brigand-3
   wren hits brigand-3 for 10 (hp 0)

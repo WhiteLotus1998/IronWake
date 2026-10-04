@@ -38,7 +38,7 @@ public sealed class PlaySession
           move <unit> <x,y>        Move a unit to a tile in its reach
           move <unit> <x,y> via <x,y>  Move by way of a tile: the cheapest route to it, then on, within the unit's Mov
           move <unit> <x,y> [via <x,y>] preview  The route the move would walk and the planks it would wear, without moving
-          attack <unit> <target> [slot|weapon] [art <id>]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first)
+          attack <unit> <target> [slot|weapon] [art <id>] [!]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first); a swing whose counter is lethal to the attacker is refused unless the line ends in !
           item <unit> <slot> [ally] Use the item in a slot; a healing spell names the ally
           wait <unit>              End the unit's action
           undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
@@ -547,6 +547,12 @@ public sealed class PlaySession
 
     private void Execute(string[] words)
     {
+        var swingAnyway = words[0] == "attack" && words.Length > 1 && words[^1] == "!";
+        if (swingAnyway)
+        {
+            words = words[..^1];
+        }
+
         var art = words[0] is "attack" or "forecast" or "item" ? TakeArt(ref words) : null;
         switch (words[0])
         {
@@ -575,14 +581,21 @@ public sealed class PlaySession
                 Error("usage: undo <unit>");
                 break;
             case "attack" when words.Length >= 3 && IsSlotText(words[3..]):
-                if (TrySlot(words[1], SlotText(words[3..]), out var attackSlot) && PrintForecast(words[1], words[2], attackSlot, art))
+                if (TrySlot(words[1], SlotText(words[3..]), out var attackSlot) && PrintForecast(words[1], words[2], attackSlot, art, out var lethalCounter))
                 {
-                    Apply(new Attack(words[1], words[2], attackSlot, art));
+                    if (lethalCounter is not null && !swingAnyway)
+                    {
+                        Error(LethalSwingRefusal(lethalCounter), $"{_command} !");
+                    }
+                    else
+                    {
+                        Apply(new Attack(words[1], words[2], attackSlot, art));
+                    }
                 }
 
                 break;
             case "attack":
-                Error("usage: attack <unit> <target> [slot|weapon] [art <id>]");
+                Error("usage: attack <unit> <target> [slot|weapon] [art <id>] [!]");
                 break;
             case "wait" when words.Length == 2:
                 Apply(new Wait(words[1]));
@@ -735,7 +748,7 @@ public sealed class PlaySession
             case "forecast" when TryForecastWords(words, out var slotText, out var from):
                 if (TrySlot(words[1], slotText, out var forecastSlot))
                 {
-                    PrintForecast(words[1], words[2], forecastSlot, art, from);
+                    PrintForecast(words[1], words[2], forecastSlot, art, out _, from);
                 }
 
                 break;
@@ -1431,8 +1444,9 @@ public sealed class PlaySession
     /// a tile it could still move to (issue 151). The from-tile line names the tile and
     /// its terrain, since the terrain is what the player is choosing between.
     /// </summary>
-    private bool PrintForecast(string unitId, string targetId, int? slot, string? art, Coord? from = null)
+    private bool PrintForecast(string unitId, string targetId, int? slot, string? art, out string? lethalCounter, Coord? from = null)
     {
+        lethalCounter = null;
         if (Find(unitId) is not { } unit)
         {
             return false;
@@ -1458,6 +1472,7 @@ public sealed class PlaySession
         }
 
         _out.WriteLine(ForecastText(_state, _content, unit, target, forecast, tile, from is not null, slot, art));
+        lethalCounter = LethalCounterLine(unit, target, forecast, RaisesWith(_state, _content, unit, slot), UnitNames.Of(_state, _content));
         return true;
     }
 
@@ -1538,6 +1553,16 @@ public sealed class PlaySession
     /// </summary>
     public static string LethalLine(LethalThreat lethal, UnitNames names) =>
         $"Lethal if all land: {names[lethal.Unit.Id]} ({string.Join(", ", lethal.Strikers.Select(s => $"{names[s.Enemy.Id]} for {s.Damage}"))}, against {lethal.Unit.Hp} hp)";
+
+    /// <summary>
+    /// The refusal of an <c>attack</c> whose forecast carries <paramref name="lethalCounter"/> (issue 975):
+    /// the attacker's own death is the one printed consequence a typed line does not execute unasked,
+    /// so the line is refused and nothing is spent. The refusal reads
+    /// <c>counter is lethal to Keziah (14 against 12 hp); add ! to swing anyway: </c>, and the caller
+    /// follows it with the line as typed and <c>!</c>, its ids kept as typed.
+    /// </summary>
+    public static string LethalSwingRefusal(string lethalCounter) =>
+        $"{lethalCounter.Trim().Replace("Counter: lethal to", "counter is lethal to")}; add ! to swing anyway: ";
 
     /// <summary>
     /// Under a forecast whose counter kills the attacker if every counter strike lands (issue 539):
@@ -2525,9 +2550,9 @@ public sealed class PlaySession
     /// Prints <paramref name="message"/> after <c>ERROR:</c> as a reader sees it (issue 615):
     /// unit ids as names, quoted ids as typed, sentence case; the scripted summary keeps the same text.
     /// </summary>
-    private void Error(string message)
+    private void Error(string message, string asTyped = "")
     {
-        message = UnitNames.Of(_state, _content).Message(message);
+        message = UnitNames.Of(_state, _content).Message(message) + asTyped;
         _out.WriteLine("ERROR: " + message);
         if (_scripted)
         {

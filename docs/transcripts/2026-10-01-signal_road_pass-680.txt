@@ -1763,7 +1763,7 @@ C  teodor           Teodor L1 pikeman          5,6    hp 21/21  Plain
 B  wren             Wren L1 cadet              6,7    hp 20/20  Plain
 messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path
 messenger: gone by the road at 15,2; the word is out
-> attack ansgar soldier-1
+> attack ansgar soldier-1 !
 Forecast Ansgar -> Soldier with Iron Lance: acc 76% dmg 9 crit 2%; counter: acc 72% dmg 10 crit 0%
   Counter: lethal to Ansgar (10 against 6 hp)
 Ansgar attacks Soldier

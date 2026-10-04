@@ -313,7 +313,7 @@ d  sentry-1         Sentry L6 sentinel         12,6   hp 29/29  Plain  group pas
 b  soldier-1        Soldier L6 pikeman         7,5    hp 4/22   Road  group bridge, guard, awake
 B  wren             Wren L7 cadet              5,5    hp 14/23  Road  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> attack rook soldier-1
+> attack rook soldier-1 !
 Forecast Rook -> Soldier: acc 79% dmg 8 x2 crit 4%; counter: acc 51% dmg 13 crit 0%
   Counter: lethal to Rook (13 against 4 hp)
 Rook attacks Soldier

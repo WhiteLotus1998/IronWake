@@ -72,9 +72,9 @@ move teodor 9,6
 wait teodor
 end
 move keziah 12,6
-attack keziah weir_foreman-1
+attack keziah weir_foreman-1 !
 recall 121
 move keziah 12,6
 wait keziah
 move pell 11,6
-attack pell weir_foreman-1
+attack pell weir_foreman-1 !

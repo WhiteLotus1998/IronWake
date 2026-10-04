@@ -38,7 +38,7 @@ attack teodor archer-1
 move ottilie 4,5
 item ottilie 2
 end
-attack teodor sworn_captain-1
+attack teodor sworn_captain-1 !
 move ottilie 6,7
 wait ottilie
 end

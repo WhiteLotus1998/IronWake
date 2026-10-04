@@ -1110,7 +1110,7 @@ a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group ho
 A  ottilie          Ottilie L5 bowman          4,5    hp 12/18  Plain  captain
 f  sworn_captain-1  Sworn Captain L3 pikeman   8,6    hp 3/27   Plain  group house, guard, awake
 B  teodor           Teodor L5 pikeman          8,7    hp 6/23   Plain
-> attack teodor sworn_captain-1
+> attack teodor sworn_captain-1 !
 Forecast Teodor -> Sworn Captain with Iron Lance: acc 81% dmg 8 crit 0%; counter: acc 82% dmg 11 crit 3%
   Counter: lethal to Teodor (11 against 6 hp)
 Teodor attacks Sworn Captain

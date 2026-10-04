@@ -1171,7 +1171,7 @@ D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
 C  wren             Wren L1 cadet              7,4    hp 11/20  Plain
 exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 rime: 6,5 6,6 (thaws once no one stands on it)
-> attack wren brigand-2
+> attack wren brigand-2 !
 Forecast Wren -> Brigand 2: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
   Counter: lethal to Wren (11 against 11 hp)
 Wren attacks Brigand 2

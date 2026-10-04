@@ -2511,7 +2511,7 @@ D  pell             Pell L1 adept              11,6   hp 3/16   Road
 e  soldier-1        Soldier L2 pikeman         11,10  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          12,7   hp 1/21   Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 7/28   Hill  group weir, boss, awake
-> attack pell weir_foreman-1 1
+> attack pell weir_foreman-1 1 !
 forecast pell -> weir_foreman-1 with Gust: acc 99% dmg 11 crit 6%; counter: acc 60% dmg 13 crit 1%
   counter: lethal to pell (13 against 3 hp)
 pell attacks weir_foreman-1

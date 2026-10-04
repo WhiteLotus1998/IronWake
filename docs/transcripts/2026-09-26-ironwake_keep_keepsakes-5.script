@@ -56,7 +56,7 @@ item teodor 2
 move wren 10,7
 attack wren hexer-1
 move pell 9,5
-attack pell hexer-1
+attack pell hexer-1 !
 move dunstan 11,8
 attack dunstan archer-2
 move ottilie 11,7

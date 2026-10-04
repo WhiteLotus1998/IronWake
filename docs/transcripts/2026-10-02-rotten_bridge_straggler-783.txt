@@ -1705,7 +1705,7 @@ E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Alder Fenn 4 turns to an exit (last start: turn 4), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 1 turn to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
-> attack ottilie archer-2
+> attack ottilie archer-2 !
 Forecast Ottilie -> Archer 2: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
   Counter: lethal to Ottilie (7 against 5 hp)
 Ottilie attacks Archer 2

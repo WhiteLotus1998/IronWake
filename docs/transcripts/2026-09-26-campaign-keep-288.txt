@@ -1145,7 +1145,7 @@ E  pell             Pell L1 adept              9,6    hp 16/16  Plain
 f  soldier-2        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain
-> attack wren brigand-3
+> attack wren brigand-3 !
 Forecast Wren -> Brigand 3: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
   Counter: lethal to Wren (11 against 9 hp)
 Wren attacks Brigand 3
@@ -1443,7 +1443,7 @@ E  pell             Pell L1 adept              9,6    hp 16/16  Plain
 f  soldier-2        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain
-> attack wren brigand-3
+> attack wren brigand-3 !
 Forecast Wren -> Brigand 3: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
   Counter: lethal to Wren (11 against 9 hp)
 Wren attacks Brigand 3

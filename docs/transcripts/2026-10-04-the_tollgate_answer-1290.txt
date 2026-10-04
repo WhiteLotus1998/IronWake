@@ -1930,7 +1930,7 @@ D  pell             Pell L1 adept              6,3    hp 7/16   Plain
 C  teodor           Teodor L1 pikeman          7,4    hp 9/21   Plain  done
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 one answer: a unit that counters makes no other counter until the next phase begins, on either side
-> attack pell archer-1
+> attack pell archer-1 !
 Forecast Pell -> Archer 1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%
   Counter: lethal to Pell (8 against 7 hp)
 Pell attacks Archer 1

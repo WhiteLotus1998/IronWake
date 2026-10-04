@@ -40,7 +40,7 @@ move teodor 6,4
 move dunstan 7,5
 end
 move pell 6,2
-attack pell archer-2
+attack pell archer-2 !
 move dunstan 7,1
 move captain 7,0
 move teodor 6,0

@@ -7,7 +7,7 @@ end
 move ottilie 5,4
 attack ottilie soldier-1
 move keziah 5,5
-attack keziah soldier-1 kinsbane
+attack keziah soldier-1 kinsbane !
 recall 0
 move keziah 3,3
 wait keziah
@@ -35,5 +35,5 @@ move ottilie 2,7
 item ottilie 2
 end
 move keziah 3,8
-attack keziah soldier-1 kinsbane
+attack keziah soldier-1 kinsbane !
 leave

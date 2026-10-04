@@ -2181,7 +2181,7 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group ba
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
-> attack pell hexer-1
+> attack pell hexer-1 !
 Forecast Pell -> Hexer with Cinder: acc 99% dmg 8 crit 2%; counter: acc 99% dmg 8 crit 0%
   Counter: lethal to Pell (8 against 8 hp)
 Pell attacks Hexer
@@ -2825,7 +2825,7 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group ba
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
-> attack pell hexer-1
+> attack pell hexer-1 !
 Forecast Pell -> Hexer with Cinder: acc 99% dmg 8 crit 2%; counter: acc 99% dmg 8 crit 0%
   Counter: lethal to Pell (8 against 8 hp)
 Pell attacks Hexer

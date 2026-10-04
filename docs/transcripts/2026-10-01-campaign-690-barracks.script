@@ -26,7 +26,7 @@ end
 move captain 10,4
 wait captain
 move dunstan 8,6
-attack dunstan brigand-1
+attack dunstan brigand-1 !
 move ottilie 10,7
 attack ottilie brigand-1
 move pell 7,4

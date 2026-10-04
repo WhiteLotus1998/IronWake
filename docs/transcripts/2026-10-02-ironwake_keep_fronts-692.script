@@ -32,7 +32,7 @@ attack dunstan soldier-1
 recall 53
 move ottilie 11,6
 attack ottilie soldier-1
-attack teodor soldier-2
+attack teodor soldier-2 !
 attack dunstan soldier-1
 move captain 9,5
 attack captain soldier-1
@@ -86,6 +86,6 @@ end
 attack pell brigand-6
 attack ottilie soldier-3
 move dunstan 14,7
-attack dunstan hexer-1
+attack dunstan hexer-1 !
 wait captain
 end
