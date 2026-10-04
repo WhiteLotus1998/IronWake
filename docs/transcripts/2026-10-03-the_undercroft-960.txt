@@ -44,7 +44,7 @@ March (march): map 7, Sallow Grange. Get the captain to the gate by the end of t
 Somebody came down the undercroft stair after the raid with a lamp and a
 can of oil. The door opens only to the garrison; Pell enlisted for that
 door, and has the key off the quartermaster before the captain finishes
-saying yes. "Hold them on the stair. I want the desk read before anyone
+saying yes. "The stair, not the door. I want the desk read before anyone
 brings the oil back down."
 
 (Get Pell onto the reading desk at 16,4 by the end of turn 7. The map is
@@ -881,10 +881,10 @@ Battle won: seize; only recall is left, or leave
 Pell wins pell_2; Pell receives Pell's Commonplace; the stores take 3 frozen iron; nobody fell
 -- After The Undercroft --
 Above the reading desk the charter is cut in the shrine script. Pell
-counts the anchor rings before she reads it: more rings than chains. She
-reads the charter twice without moving her lips, then copies it out. At
-the top of the stair she tears the page from her book and puts it in the
-captain's hand.
+counts the anchor rings before she reads it: more rings than chains.
+Then, aloud: "Let the iron keep it from waking, and let us keep the
+iron." Nothing more on the stair. At the top she reads it again to the
+whole company, before anyone sits.
 
 (Pell carries Pell's Commonplace now: Cinder's numbers, bound to her,
 and it never catches. Its art, Read Ahead, reaches one tile further for
