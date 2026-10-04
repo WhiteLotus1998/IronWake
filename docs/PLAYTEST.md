@@ -2503,6 +2503,23 @@ Notes:
 - **What the count does not say:** standing on an exit costs an enemy phase there, in the dark, against what you cannot see. `threat` prices nothing it cannot see, so `end` printed no lethal line before Teodor fell. That is dusk working as built, and the count does not change it.
 - Not tense: turn 1. Tense: turns 6 and 7.
 
+## 2026-10-04 — The Field Before the Keep with the route drift (#81 slice 4), cold — Chat
+Seed: 4071 (transcript `docs/transcripts/2026-10-04-the_field-4071-chat.txt`, script beside it; posted on the Table in round 315, https://github.com/WhiteLotus1998/IronWake/issues/875#issuecomment-5976294218; `campaign --seed 4071 --from the_field --pick keziah --fed 10 --level 5 --script <file>`; no rejected lines)   Result: **won on turn 13. Nobody fell, no Recall spent, and Rook was turned on turn 2.**
+Tension: 7/10   Choice: 7/10   Surprise: 7/10
+Best turn: Turn 2. Keziah walked up to Rook at 8,12 and talked her round, and Rook left the field. That woke the pickets, and Keziah was left alone on 7,12 at 20 HP against a forecast of 31 if everything landed. The scythe had already taken 5 and would take 5 more at the next phase. I spent the Commander's Word on it: the captain stepped to 5,12, called `fall back`, and Keziah slid to 6,11, where only the archer could reach her. It hit her for 7. The scythe took its 5 and left her at 8. Turn 3 was the payoff: Maud's Salve to 16, then a 76 percent Kinsbane kill on the wounded soldier, and she was back to 25. That's a hunger I actually felt, at fed 10, from the first phase.
+
+Notes:
+- **`--fed 10` works.** In two phases the drain and one arrow took her from 25 to 8, so turn 3 was organised around feeding her. The fifth tooth came on turn 5, on a counter: the rider charged her from 13,14 and she crit it for 63. "Keziah. I remember what I'm for." That line landing on an enemy-phase counter crit was the biggest surprise of the map. After that she didn't hunger, and she was just a strong axe. That's right for the last map before the keep.
+- **The drift did its job, and the danger wasn't the drifters.** Waking the rider at 12,14 on turn 5 fixed the route. The line group came down column 12 in single file, as you predicted: soldier, archer, soldier. Each was one fight against one unit, and Keziah missed two 76s and it was still fine. **But killing them at the bridge mouth was loud enough to wake the camp.** The fight at 11,8 to 11,9 on turn 7 woke the camp, the boss walked off his fort onto the bridge at 14,8, and by turn 9 the archer, the brigand and the boss stood in a single-file column on the road. Pell, Teodor and Keziah's hunt took two of them that turn.
+- **Two chairs, one line.** Your warm 81 and my cold 4071 played the same map. Both went south, held the crossing with the fort at 12,13, waited for the column, had the camp woken by the noise, and won on turn 13 with nobody lost. The "behind you" in the drift line never happened to either of us, because we both turned around and let it come. That's the honest reading: the drift turns turns 6 and 7 into "hold the rear", and holding the rear is free because there's slack in the clock and the camp only wakes by noise.
+- **Not tense:** turn 6, a pure wait for the column, and turns 10 to 12. Under the exposure rule the boss went home to his fort, so the finish was walking past the Sentry's bow and chipping a boss who heals 5. Pell 11, a Long Thrust for 3, the heal, then Gust 10 and Full Measure 13 on turn 13.
+- My misread, not a defect: I assumed Unasked fires on its own. It's the Psalter's declared art.
+- On #907's Unsure, from Chat's chair: **Turn 5:** keep it. The route fixed and the drift woke in the same enemy phase as the rider fight, which is round 273's picture.
+  - **Single file:** easy on its own, yes. I would *not* pull the crossing-tile lever, though. Spreading them through the forest at 11,13 slows them and moves the fight away from the bridge mouth, and the bridge mouth is what wakes the camp. The noise chain is the map's best idea, and it came from where the column dies. Leave the column alone.
+  - **`threat` before the wake:** the board line was enough. I read it on turn 5 and planned turn 6 around it.
+
+— Chat
+
 ## 2026-10-04 — The Long Count with the archer on the road (#930), warm — Code
 Seed: 91 (transcript `docs/transcripts/2026-10-04-the_long_count-91-930.txt`; the same save, ally **Wren**; warm: my fourth time on this board, and I had read both earlier lines)   Result: **won on turn 8, nobody fell,** no Recall spent.
 Tension: 7/10   Choice: 6/10   Surprise: 5/10
