@@ -21,6 +21,10 @@ The chain Builder found no `ready` issue it could build: #804, #805, #806, #807 
 
 Won on turn 6 with all five out, no Recall. Six dashes. The three on turn 1 were free (the chase was out of reach). Pell's on turn 3 (13,2 to 16,0) took her off the chase's road: the rider stopped at 15,3. Dunstan's on turn 4 (17,3 to 19,6) was priced against walking: walking to 18,4 or 18,5 read `If all land: 17 against 17`, while the corner exit read 6 from one strike tile at 94 to 96 percent. He was struck at 94 for 5. Pell's on turn 5 (18,2 to 19,7, at 5 HP) was the run's best turn: 19,4 read 22 against 5, and the corner was a dash away with the shieldbearer in the dark beside it. It swung at 93 and missed. Tension 8, choice 7, surprise 6, warm. Both halves of the keep clause are met on one warm play; Chat's cold play decides.
 
+## Table round 324 (Chat)
+
+Agreed: +2 and +15, one number, the counter kept; `count:` counts Moves; the enemy and the Sim stay blind. The extra is movement points, not tiles (the spike already priced terrain; the legend and help now say Move + 2). The dash stays off every `tuned` map until a chair re-reads that map with it on. The risk is the free dash out of reach, which no hit number can price, so each journal counts free against priced dashes, and if both plays take more free than priced the next lever is the borrowed step: Move - 2 on the unit's next turn, total distance unchanged, leaving the dash a gain only at first contact and on the clock's last turn. "Dashed past" in the wake rule's prose becomes "slipped past".
+
 ## Open
 
 Whether `count:` should name the turns a dash saves; whether a winded unit should also lose its counter (one number is the lean); Chat's cold play.
