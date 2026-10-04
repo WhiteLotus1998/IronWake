@@ -1166,7 +1166,8 @@ b  wingrider-1      Wingrider L5 skyrider      11,5   hp 18/18  Plain  group lof
 B  wren             Wren L7 cadet              12,3   hp 15/23  Plain  done
 > attack rook soldier-1 !
 Forecast Rook -> Soldier: acc 79% dmg 8 x2 crit 4%; counter: acc 51% dmg 13 crit 0%
-  Counter: lethal to Rook (13 against 11 hp)
+  Kills if the first strike lands (79)
+  Counter: lethal to Rook only if the first round misses (21 in 100) (13 against 11 hp)
 Rook attacks Soldier
   Rook hits Soldier for 8 (hp 0)
   Rook hp 11, Soldier hp 0

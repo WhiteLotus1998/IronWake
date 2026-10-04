@@ -587,7 +587,8 @@ d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2 !
 Forecast Ansgar -> Soldier 2 with Iron Lance: acc 76% dmg 9 crit 2%; counter: acc 72% dmg 10 crit 0%
-  Counter: lethal to Ansgar (10 against 10 hp)
+  Kills if the first strike lands (76)
+  Counter: lethal to Ansgar only if the first round misses (24 in 100) (10 against 10 hp)
 Ansgar attacks Soldier 2
   Ansgar hits Soldier 2 for 9 (hp 0)
   Ansgar hp 10, Soldier 2 hp 0
@@ -722,7 +723,8 @@ d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2 !
 Forecast Ansgar -> Soldier 2 with Iron Lance: acc 76% dmg 9 crit 2%; counter: acc 72% dmg 10 crit 0%
-  Counter: lethal to Ansgar (10 against 10 hp)
+  Kills if the first strike lands (76)
+  Counter: lethal to Ansgar only if the first round misses (24 in 100) (10 against 10 hp)
 Ansgar attacks Soldier 2
   Ansgar hits Soldier 2 for 9 (hp 0)
   Ansgar hp 10, Soldier 2 hp 0
@@ -835,7 +837,8 @@ d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2 !
 Forecast Ansgar -> Soldier 2 with Iron Lance: acc 76% dmg 9 crit 2%; counter: acc 72% dmg 10 crit 0%
-  Counter: lethal to Ansgar (10 against 10 hp)
+  Kills if the first strike lands (76)
+  Counter: lethal to Ansgar only if the first round misses (24 in 100) (10 against 10 hp)
 Ansgar attacks Soldier 2
   Ansgar hits Soldier 2 for 9 (hp 0)
   Ansgar hp 10, Soldier 2 hp 0

@@ -556,7 +556,8 @@ d  mill_bandit-1    Mill Bandit L2 reaver      6,1    hp 5/24   Plain  group mil
 B  wren             Wren L1 cadet              5,1    hp 10/20  Plain
 > attack wren mill_bandit-1 !
 Forecast Wren -> Mill Bandit: acc 85% dmg 9 crit 2%; counter: acc 85% dmg 10 crit 3%
-  Counter: lethal to Wren (10 against 10 hp)
+  Kills if the first strike lands (85)
+  Counter: lethal to Wren only if the first round misses (15 in 100) (10 against 10 hp)
 Wren attacks Mill Bandit
   Wren hits Mill Bandit for 9 (hp 0)
   Wren hp 10, Mill Bandit hp 0

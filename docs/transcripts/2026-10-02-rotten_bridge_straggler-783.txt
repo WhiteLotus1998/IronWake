@@ -1707,7 +1707,8 @@ count: Alder Fenn 4 turns to an exit (last start: turn 4), Dunstan 3 turns to an
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack ottilie archer-2 !
 Forecast Ottilie -> Archer 2: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
-  Counter: lethal to Ottilie (7 against 5 hp)
+  Kills if the first strike lands (82)
+  Counter: lethal to Ottilie only if the first round misses (18 in 100) (7 against 5 hp)
 Ottilie attacks Archer 2
   Ottilie hits Archer 2 for 8 (hp 0)
   Ottilie hp 5, Archer 2 hp 0

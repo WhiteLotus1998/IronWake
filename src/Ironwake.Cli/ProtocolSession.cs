@@ -359,7 +359,17 @@ public sealed class ProtocolSession
             ProtocolJson.WriteForecast(w, forecast);
             w.WriteString("weapon", unit.Unit.Inventory.Items[slot ?? unit.EquippedSlot(_content)].ItemId);
             WriteCounterWeapon(w, target, forecast);
-            w.WriteBoolean("counterLethal", PlaySession.LethalCounterLine(unit, target, forecast, PlaySession.RaisesWith(_state, _content, unit, slot)) is not null);
+            var lethal = PlaySession.LethalCounterLine(unit, target, forecast, PlaySession.RaisesWith(_state, _content, unit, slot)) is not null;
+            w.WriteBoolean("counterLethal", lethal);
+            if (lethal && forecast.FirstRoundMissChance(target.Hp) is { } miss)
+            {
+                w.WriteNumber("counterLethalIfMiss", miss);
+            }
+            else
+            {
+                w.WriteNull("counterLethalIfMiss");
+            }
+
             w.WriteString("text", PlaySession.ForecastText(_state, _content, unit, target, forecast, tile, from is not null, slot, art));
         });
     }

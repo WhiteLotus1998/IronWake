@@ -1495,6 +1495,11 @@ public sealed class PlaySession
         var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills) };
         if (LethalCounterLine(unit, target, forecast, raises, names) is { } lethal)
         {
+            if (FirstRoundKillLine(unit, target, forecast, raises) is { } kills)
+            {
+                lines.Add(kills);
+            }
+
             lines.Add(lethal);
         }
 
@@ -1569,10 +1574,32 @@ public sealed class PlaySession
     /// <c>  Counter: lethal to Wren (17 against 17 hp)</c>, read by
     /// <see cref="CombatForecast.CounterIsLethal"/>; null otherwise, and for a raise, which draws no counter.
     /// The unit is named as a reader sees it when <paramref name="names"/> is given (issue 615).
+    /// When one plain strike of the first round kills the target, the counter comes only if that round misses,
+    /// and the line says so with the chance (issue 991, <see cref="CombatForecast.FirstRoundMissChance"/>):
+    /// <c>  Counter: lethal to Keziah only if the first round misses (4 in 100) (11 against 10 hp)</c>.
     /// </summary>
-    public static string? LethalCounterLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, bool raises, UnitNames? names = null) =>
-        !raises && forecast.CounterIsLethal(unit.Hp, target.Hp)
-            ? $"  Counter: lethal to {(names ?? UnitNames.None)[unit.Id]} ({forecast.CounterIfAllLand} against {unit.Hp} hp)"
+    public static string? LethalCounterLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, bool raises, UnitNames? names = null)
+    {
+        if (raises || !forecast.CounterIsLethal(unit.Hp, target.Hp))
+        {
+            return null;
+        }
+
+        var condition = forecast.FirstRoundMissChance(target.Hp) is { } miss ? $" only if the first round misses ({miss} in 100)" : "";
+        return $"  Counter: lethal to {(names ?? UnitNames.None)[unit.Id]}{condition} ({forecast.CounterIfAllLand} against {unit.Hp} hp)";
+    }
+
+    /// <summary>
+    /// Above a conditioned lethal-counter line (issue 991), the other side of that chance: what the first round
+    /// kills with, <c>  Kills if the first strike lands (79)</c> for one strike and
+    /// <c>  Kills if any strike of the first round lands (96)</c> for a gauntlet, its figure <c>100</c> less the
+    /// miss chance so the two lines sum to 100. Null whenever <see cref="LethalCounterLine"/> carries no condition.
+    /// </summary>
+    public static string? FirstRoundKillLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, bool raises) =>
+        !raises && forecast.CounterIsLethal(unit.Hp, target.Hp) && forecast.FirstRoundMissChance(target.Hp) is { } miss
+            ? forecast.Attacker.StrikesPerRound > 1
+                ? $"  Kills if any strike of the first round lands ({100 - miss})"
+                : $"  Kills if the first strike lands ({100 - miss})"
             : null;
 
     /// <summary>

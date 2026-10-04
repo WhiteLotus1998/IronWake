@@ -873,7 +873,8 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 14/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 > attack pell rider-1 !
 Forecast Pell -> Rider with Cinder: acc 99% dmg 12 crit 2%; counter: acc 80% dmg 11 crit 0%
-  Counter: lethal to Pell (11 against 5 hp)
+  Kills if the first strike lands (99)
+  Counter: lethal to Pell only if the first round misses (1 in 100) (11 against 5 hp)
 Pell attacks Rider
   Pell hits Rider for 12 (hp 0)
   Pell hp 5, Rider hp 0

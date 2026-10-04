@@ -1255,7 +1255,8 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 2 turns to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 8), Rook 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 > attack dunstan brigand-1 !
 Forecast Dunstan -> Brigand 1: acc 77% dmg 11 crit 1%; counter: acc 73% dmg 9 crit 0%
-  Counter: lethal to Dunstan (9 against 5 hp)
+  Kills if the first strike lands (77)
+  Counter: lethal to Dunstan only if the first round misses (23 in 100) (9 against 5 hp)
 Dunstan attacks Brigand 1
   Dunstan hits Brigand 1 for 11 (hp 0)
   Dunstan hp 5, Brigand 1 hp 0

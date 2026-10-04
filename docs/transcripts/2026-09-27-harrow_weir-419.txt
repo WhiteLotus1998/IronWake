@@ -2403,7 +2403,8 @@ B  teodor           Teodor L1 pikeman          9,6    hp 8/21   Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 2/28   Hill  group weir, boss, awake
 > attack keziah weir_foreman-1 !
 Forecast Keziah -> Weir Foreman with Iron Gauntlets: acc 81% dmg 6 x2 crit 0%; counter: acc 60% dmg 12 crit 1%
-  Counter: lethal to Keziah (12 against 11 hp)
+  Kills if any strike of the first round lands (96)
+  Counter: lethal to Keziah only if the first round misses (4 in 100) (12 against 11 hp)
 Keziah attacks Weir Foreman
   Keziah misses Weir Foreman
   Keziah misses Weir Foreman
@@ -2551,7 +2552,8 @@ B  teodor           Teodor L1 pikeman          9,6    hp 8/21   Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 2/28   Hill  group weir, boss, awake
 > attack pell weir_foreman-1 !
 Forecast Pell -> Weir Foreman with Cinder: acc 94% dmg 12 crit 1%; counter: acc 67% dmg 13 crit 1%
-  Counter: lethal to Pell (13 against 3 hp)
+  Kills if the first strike lands (94)
+  Counter: lethal to Pell only if the first round misses (6 in 100) (13 against 3 hp)
 Pell attacks Weir Foreman
   Pell hits Weir Foreman for 12 (hp 0)
   Pell hp 3, Weir Foreman hp 0
