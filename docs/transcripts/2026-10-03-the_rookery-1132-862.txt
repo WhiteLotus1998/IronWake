@@ -56,7 +56,7 @@ Let them."
 turn 9. Rook leaving wins the map, and anyone still on the board is left
 behind as fallen, so Rook leaves last. The map is lost if Rook falls. On
 foot only the bridge at 7,5 and 8,5 crosses the ravine; an enemy bow's
-crit grounds her; over water she then cannot move. Riders from the
+crit grounds Rook; over water she then cannot move. Riders from the
 rookery behind from turn 2, announced.)
 
 Side map: The Rookery, seed 1132
@@ -1008,10 +1008,10 @@ Battle won: escape; only recall is left, or leave
 > leave
 Rook wins rook_2; the stores take 2 common material; nobody fell
 -- After The Rookery --
-The ledger lies open in the loft where it always has. Rook strikes the
-holding line, then her own, one stroke each, and leaves the pen across
-the page. Down the fell she talks to the drake the whole way, long
-sentences, unhurried. The wind off the tops takes most of it, and nobody
-asks for the rest.
+Rook strikes the holding line in the loft's ledger, then her own, and
+leaves the pen across the page. Halfway down the fell, to the drake: "It
+was only us two on that page, and now there's no page, and I'm lonely,
+with you breathing down my neck." The drake leans on her the rest of the
+way.
 
 Campaign stopped before Ironwake Keep: the script ended on the screen

@@ -56,11 +56,11 @@
   "quests": [
     { "id": "maud_1", "member": "maud", "part": 1, "map": "the_lazar_house", "common": 2,
       "before": [
-        "Maud asks for a day and one pair of hands. Her order kept a lazar house at Sorrel Bend until the armistice, then called its sisters home and left the sick with a keeper. The keeper has stopped writing. \"The carts come at dusk. Keep the strippers off the door till then. You won't be thanked.\"",
+        "The keeper at Sorrel Bend has stopped writing. Maud's order kept the lazar house there until the armistice, then called its sisters home and left the sick with him. \"The carts come at dusk. Keep the strippers off the door till then. You won't be thanked.\"",
         "(Hold out six turns. The lanes in are announced. A unit that ends its move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane for the rest of the map. The ford south cannot be barred.)"
       ],
       "after": [
-        "The carts come at dusk. They find the keeper in the well-house, and the meal bins full, bought by someone who never signed the book. Maud says the prayer over every bed, then the keeper's, with his name in it. She takes the order's blessing down off the ward door and feeds it to the stove."
+        "The carts come at dusk. They find the keeper in the well-house, and the meal bins full, bought by someone who never signed the book. Maud counts the beds: forty, twelve in use. \"I'm angry at the order. It'll keep. Who here hasn't eaten?\" She says the prayer over every bed, then over the keeper, with his name in it."
       ] },
     { "id": "bet_postern", "member": "bet", "part": 1, "map": "the_postern", "opensAfter": "brackwater_cut", "promotes": "sergeant",
       "before": [
@@ -69,11 +69,11 @@
       "ending": "Bet Lowry swore first, the one the oath could not hold, choosing it." },
     { "id": "maud_2", "member": "maud", "part": 2, "map": "the_first_shrine", "pays": "maud_psalter",
       "before": [
-        "Maud wants the first shrine, a half-day off the weir road and older than the split. No rite-keeper alive has been inside. The causeway in is trodden to mud this month. \"Somebody's put a man in the door. Move him. I'm going up to the altar.\"",
+        "Maud is going to the first shrine, a half-day off the weir road and older than the split. No rite-keeper alive has been inside. The causeway in is trodden to mud this month. \"Somebody's put a man in the door. Move him. I'm going up to the altar.\"",
         "(Get Maud onto the altar at 7,0 by the end of turn 10. The map is lost if she falls. Pursuers cross the causeway at 7,6 from turn 2, announced; a unit that waits where it began its phase braces.)"
       ],
       "after": [
-        "Maud kneels at the altar and says the rite, the words in order. At the response she stops. She stays on her knees longer than any prayer takes, listening, then says the response again with one word changed. On the road back she asks who has frostbite, and treats them first.",
+        "Maud kneels at the altar and says the rite, the words in order. At the response she stops. She stays on her knees longer than any prayer takes, listening, then says the response again with one word changed. On the road back she goes down the line looking at hands, and treats the frostbite first.",
         "(Maud carries Maud's Psalter now: a heal at range 1 to 2, bound to her. Its art, Unasked, doubles a heal on an ally who has not moved or acted, and that ally's phase ends where it stands.)"
       ] },
     { "id": "pell_1", "member": "pell", "part": 1, "map": "the_burned_school", "opensAfter": "the_tollgate", "common": 2,
@@ -125,7 +125,7 @@
         "(Seize: Rook stands on the roll room, 12,1, by the end of turn 8; its one door is 12,2. The map is lost if Rook falls. A flier crosses the gorge; on foot, only the road bridge crosses the gorge. A bow crit grounds a flier; over water she then cannot move. Pursuers from turn 2, announced.)"
       ],
       "after": [
-        "The roll enters the chapter's claim to the extra seat. Pinned under it, a receipt: paid in full, in new keep silver. Under that, the drake's number, and Rook's name on the line below. \"Someone in your keep bought a seat with us.\" She folds the receipt into her glove and leaves the roll open for the next reader.",
+        "The last page of the roll is the chapter's claim to the extra seat. Pinned under it, a receipt: paid in full, in new keep silver. Under that, the drake's number, and Rook's name on the line below. \"Your keep bought a seat with us.\" She folds the receipt into her glove and leaves the roll open.",
         "(The Drover is open to Rook at her second promotion: the other door above the Skyrider.)"
       ] },
     { "id": "teodor_2", "member": "teodor", "part": 2, "map": "the_wardens_gate", "names": "family_lance", "rare": 3,
@@ -148,10 +148,10 @@
     { "id": "rook_2", "member": "rook", "part": 2, "map": "the_rookery", "common": 2,
       "before": [
         "Rook asks for one more day. The ledger in the rookery's loft, on the fells above the chapter house, still lists one cold drake as a holding and one rider on the line below. The roost is full of the church's wingriders. \"I know every one of them by how they land. They'll follow. Let them.\"",
-        "(Escape: get everyone off the east edge, 14,4 to 14,6, by the end of turn 9. Rook leaving wins the map, and anyone still on the board is left behind as fallen, so Rook leaves last. The map is lost if Rook falls. On foot only the bridge at 7,5 and 8,5 crosses the ravine; an enemy bow's crit grounds her; over water she then cannot move. Riders from the rookery behind from turn 2, announced.)"
+        "(Escape: get everyone off the east edge, 14,4 to 14,6, by the end of turn 9. Rook leaving wins the map, and anyone still on the board is left behind as fallen, so Rook leaves last. The map is lost if Rook falls. On foot only the bridge at 7,5 and 8,5 crosses the ravine; an enemy bow's crit grounds Rook; over water she then cannot move. Riders from the rookery behind from turn 2, announced.)"
       ],
       "after": [
-        "The ledger lies open in the loft where it always has. Rook strikes the holding line, then her own, one stroke each, and leaves the pen across the page. Down the fell she talks to the drake the whole way, long sentences, unhurried. The wind off the tops takes most of it, and nobody asks for the rest."
+        "Rook strikes the holding line in the loft's ledger, then her own, and leaves the pen across the page. Halfway down the fell, to the drake: \"It was only us two on that page, and now there's no page, and I'm lonely, with you breathing down my neck.\" The drake leans on her the rest of the way."
       ] },
     { "id": "keziah_2", "member": "keziah", "part": 2, "map": "the_oath_stone", "common": 2,
       "before": [

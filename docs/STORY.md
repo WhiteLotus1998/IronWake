@@ -111,7 +111,8 @@ Each recruit has a reason to be here, a thing the captain can help with (their q
 ### Maud (Kestrow, chaplain; arrives on map 2)
 Twenty, the youngest rite-keeper Kestrow has ever sent, because the senior was killed on the road and nobody else would go. She's devout and stubborn, and she says the prayer over the enemy dead because nobody else will. Her flaw: she mends people who haven't asked for it, and she calls it duty when it's control.
 - **Why she's here:** her order sent her to Ironwake to perform the rite. The raiders on the mill road were waiting for *her*.
-- **What the captain helps with:** quest 1, the Lazar House: the sick her order abandoned at the armistice, who were fed by the pay that was stolen. Quest 2, the first shrine: the goddess speaks to her once and tells her what the rite really seals.
+- **What the captain helps with:** quest 1, the Lazar House: the sick her order abandoned at the armistice, who were fed by the pay that was stolen. Quest 2, the first shrine: the goddess speaks to her once, and only through the rite: Maud says the response again with one word changed. The goddess's words are never printed on a card.
+- **The changed word (round 349):** *keep*, the response's form of the charter's forgotten second clause. The regions dropped it; the goddess puts it back. It is printed nowhere before the Grange. The player hears it in the finale's rite: Maud says it whole with the word in, or, if she is dead, Pell reads it from the charter. So sample 6 ("They changed it wrong") is something Maud already knows when Pell quotes the old order.
 - **Grievance:** her church sells blessings to Kestrow's lords and prays over one side's dead.
 - **Crossing Hask:** he needs the rite to fail, and later he needs its words. He asks her to say them backwards, and he asks kindly.
 - **Her answer to Hask:** *"He'd feed them. All of them, every winter. I would kneel for that. I won't kneel to him for it."*
