@@ -688,11 +688,11 @@ Battle won: survive; only recall is left, or leave
 > leave
 Maud wins maud_1; fallen for good: Wren
 -- After The Lazar House --
-The carts come at dusk. They find the keeper in the well-house, and the
-meal bins full, bought by someone who never signed the book. Maud counts
-the beds: forty, twelve in use. "I'm angry at the order. It'll keep. Who
-here hasn't eaten?" She says the prayer over every bed, then over the
-keeper, with his name in it.
+The carts come at dusk. They find the keeper, and the meal bins full,
+bought by someone who never signed the book. Maud counts the beds:
+forty, twelve in use. "I'm angry at the order. It won't break tonight.
+Who here hasn't eaten?" She says the prayer over every bed, then over
+the keeper, with his name in it.
 
 > roster
 Roster: company 9/12
