@@ -1147,7 +1147,8 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain
 > attack wren brigand-3 !
 Forecast Wren -> Brigand 3: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
-  Counter: lethal to Wren (11 against 9 hp)
+  Kills if the first strike lands (88)
+  Counter: lethal to Wren only if the first round misses (12 in 100) (11 against 9 hp)
 Wren attacks Brigand 3
   Wren hits Brigand 3 for 10 (hp 0)
   Wren hp 9, Brigand 3 hp 0
@@ -1445,7 +1446,8 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain
 > attack wren brigand-3 !
 Forecast Wren -> Brigand 3: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
-  Counter: lethal to Wren (11 against 9 hp)
+  Kills if the first strike lands (88)
+  Counter: lethal to Wren only if the first round misses (12 in 100) (11 against 9 hp)
 Wren attacks Brigand 3
   Wren hits Brigand 3 for 10 (hp 0)
   Wren hp 9, Brigand 3 hp 0

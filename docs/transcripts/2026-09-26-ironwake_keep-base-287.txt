@@ -537,7 +537,8 @@ C  teodor           Teodor L1 pikeman          11,7   hp 3/21   Plain
 B  wren             Wren L1 cadet              11,4   hp 14/20  Plain
 > attack teodor soldier-2 !
 Forecast Teodor -> Soldier 2: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
-  Counter: lethal to Teodor (8 against 3 hp)
+  Kills if the first strike lands (76)
+  Counter: lethal to Teodor only if the first round misses (24 in 100) (8 against 3 hp)
 Teodor attacks Soldier 2
   Teodor hits Soldier 2 for 10 (hp 0)
   Teodor hp 3, Soldier 2 hp 0

@@ -386,7 +386,8 @@ d  soldier-1        Soldier L6 pikeman         3,8    hp 22/22  Plain  group cam
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > attack keziah brigand-1 !
 Forecast Keziah -> Brigand 1 with Kinsbane: acc 79% dmg 22 crit 3%; counter: acc 60% dmg 13 crit 0%
-  Counter: lethal to Keziah (13 against 8 hp)
+  Kills if the first strike lands (79)
+  Counter: lethal to Keziah only if the first round misses (21 in 100) (13 against 8 hp)
   Kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 10)
 Keziah attacks Brigand 1
   Keziah hits Brigand 1 for 22 (hp 0)

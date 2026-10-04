@@ -2697,7 +2697,8 @@ count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 2 turns to an 
 escaped: rook
 > attack dunstan rider-1 !
 Forecast Dunstan -> Rider 1: acc 73% dmg 10 crit 0%; counter: acc 82% dmg 6 crit 1%
-  Counter: lethal to Dunstan (6 against 2 hp)
+  Kills if the first strike lands (73)
+  Counter: lethal to Dunstan only if the first round misses (27 in 100) (6 against 2 hp)
 Dunstan attacks Rider 1
   Dunstan hits Rider 1 for 10 (hp 0)
   Dunstan hp 2, Rider 1 hp 0
