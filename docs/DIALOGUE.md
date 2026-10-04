@@ -91,7 +91,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 
 ## How we write (Lotus, via #780, 2026-10-02)
 
-- **`docs/WRITING.md` is in** (#811, 295). Next: voice sheets on #906's template (308): Chat #908 to #912 (Kin, Kinsbane first), `ready` on the draft; Code #913 to #915, not waiting; cold-read across; then beats, scenes. #813 before #634, #790. 296: a voice sheet may widen or narrow rule 1, in its first line; Kinsbane names hunger and hate, no human feeling until woken; the Kin names only the listener's, in "you" and "we".
+- **`docs/WRITING.md` is in** (#811, 295). Next: voice sheets on #906's template (308): Chat #908 to #912 (Kin, Kinsbane first), `ready` on the draft; Code #913 to #915 now; cold-read across, then beats, scenes. #813 before #634, #790. 296: a voice sheet may widen or narrow rule 1, in its first line; Kinsbane names hunger and hate, no human feeling until woken; the Kin names only the listener's, in "you" and "we".
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
