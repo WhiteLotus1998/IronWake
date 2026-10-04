@@ -1318,8 +1318,8 @@ count: Alder Fenn on an exit (leaves by turn 8), Dunstan 2 turns to an exit (las
 > threat captain
 Threat on Alder Fenn at 19,3 (Plain):
   Shieldbearer from 18,3 with Iron Lance (slot 1): acc 58% dmg 7 crit 0%; counter: acc 94% dmg 4 x2 crit 5%
-  If all land: 7 against 22 hp
-  Soldier: cannot see you (dark)
+  Soldier (once Shieldbearer lights you) from 19,4 with Iron Lance (slot 1): acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%
+  If all land: 15 against 22 hp
   And whatever is in the dark (?), unpriced
 > threat rook from 19,6
 Threat on Rook at 19,6 (Plain):
@@ -1539,6 +1539,7 @@ dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Alder Fenn on an exit (leaves by turn 8), Dunstan cannot leave by turn 8, Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Wren on an exit (leaves by turn 8)
 > end
+Lethal if all land: Pell (Shieldbearer for 10, Soldier for 11, against 16 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: something in the dark acts (x2)

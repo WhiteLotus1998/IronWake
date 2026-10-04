@@ -433,6 +433,18 @@ public sealed class ProtocolSession
                     w.WriteBoolean("raises", true);
                 }
 
+                if (line.LitBy is { } lighter)
+                {
+                    if (Hidden(_state.Find(lighter.Id) ?? lighter))
+                    {
+                        w.WriteNull("litBy");
+                    }
+                    else
+                    {
+                        w.WriteString("litBy", lighter.Id);
+                    }
+                }
+
                 w.WritePropertyName("forecast");
                 ProtocolJson.WriteForecast(w, line.Forecast);
                 WriteCounterWeapon(w, unit, line.Forecast);

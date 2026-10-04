@@ -1238,6 +1238,25 @@ public class CliPlayTests
     /// brawler's path, and Wren, Rook and the captain leave on turn 6.
     /// </summary>
     /// <summary>
+    /// Issue 987's acceptance on the board that found it (seed 1310): on turn 4 the shieldbearer
+    /// steps beside Rook and lights her for the soldier, which kills her; <c>threat rook</c> now
+    /// prices the soldier lit by it and <c>end</c> names Rook lethal. Turn 5's Wren is the same.
+    /// </summary>
+    [Fact]
+    public void OnTheBoardThatFoundItThreatPricesTheSoldierTheShieldbearerLights()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-10-04-brackwater_cut-1310.script", 1310, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("  Soldier (once Shieldbearer lights you) from 19,4 with Iron Lance (slot 1): acc 63% dmg 12 crit 0%;", output);
+        Assert.Contains("  If all land: 23 against 17 hp\n", output);
+        Assert.Contains("Lethal if all land: Rook (Shieldbearer for 11, Soldier for 12, against 17 hp)\n", output);
+        Assert.Contains("  If all land: 17 against 20 hp\n", output);
+        Assert.DoesNotContain("Soldier: cannot see you (dark)", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-10-04-brackwater_cut-1310.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 403's acceptance on the Critic's cold board (issue 399, seed 509): Dunstan on 16,6 at
     /// sight 1 is told the soldier's <c>?</c> at 15,4 is three tiles off, nearest first, unnamed.
     /// </summary>
