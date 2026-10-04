@@ -46,17 +46,18 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 10, Ironwake Keep. Hold out until the end of turn 8. Captain Fenn must survive.
 > quest rook_2 wren
 -- The Rookery --
-Rook asked for a day and one pair of hands again. Kestrow's rookery sits
-on the fells above the chapter house, and the ledger in its loft lists
-one cold drake as a holding and one rider on the line below it. She
-means to leave with both, and not be on the page.
+Rook asks for one more day. The ledger in the rookery's loft, on the
+fells above the chapter house, still lists one cold drake as a holding
+and one rider on the line below. The roost is full of the church's
+wingriders. "I know every one of them by how they land. They'll follow.
+Let them."
 
-(Placeholder card until the writing pass. Escape: get everyone off the
-east edge, 14,4 to 14,6, by the end of turn 9. Rook leaving wins the
-map, and anyone still on the board is left behind as fallen, so Rook
-leaves last. The map is lost if Rook falls. On foot only the bridge at
-7,5 and 8,5 crosses the ravine; a bow crit grounds a flier. Riders from
-the rookery behind from turn 2, announced.)
+(Escape: get everyone off the east edge, 14,4 to 14,6, by the end of
+turn 9. Rook leaving wins the map, and anyone still on the board is left
+behind as fallen, so Rook leaves last. The map is lost if Rook falls. On
+foot only the bridge at 7,5 and 8,5 crosses the ravine; an enemy bow's
+crit grounds her; over water she then cannot move. Riders from the
+rookery behind from turn 2, announced.)
 
 Side map: The Rookery, seed 1132
 Rook goes with Wren. This map is lost if Rook falls; who falls here is gone for good.
@@ -1007,7 +1008,10 @@ Battle won: escape; only recall is left, or leave
 > leave
 Rook wins rook_2; the stores take 2 common material; nobody fell
 -- After The Rookery --
-(Placeholder until the writing pass: the ledger, the line struck
-through, and the drake that is nobody's now.)
+The ledger lies open in the loft where it always has. Rook strikes the
+holding line, then her own, one stroke each, and leaves the pen across
+the page. Down the fell she talks to the drake the whole way, long
+sentences, unhurried. The wind off the tops takes most of it, and nobody
+asks for the rest.
 
 Campaign stopped before Ironwake Keep: the script ended on the screen
