@@ -111,7 +111,7 @@ Each recruit has a reason to be here, a thing the captain can help with (their q
 ### Maud (Kestrow, chaplain; arrives on map 2)
 Twenty, the youngest rite-keeper Kestrow has ever sent, because the senior was killed on the road and nobody else would go. She's devout and stubborn, and she says the prayer over the enemy dead because nobody else will. Her flaw: she mends people who haven't asked for it, and she calls it duty when it's control.
 - **Why she's here:** her order sent her to Ironwake to perform the rite. The raiders on the mill road were waiting for *her*.
-- **What the captain helps with:** quest 1, the Lazar House: the sick her order abandoned at the armistice, who were fed by the pay that was stolen. Quest 2, the first shrine: the goddess speaks to her once and tells her what the rite really seals.
+- **What the captain helps with:** quest 1, the Lazar House: the sick her order abandoned at the armistice, who were fed by the pay that was stolen. Quest 2, the first shrine: the goddess speaks to her once and tells her what the rite really seals. Her words are never printed (round 349). Maud says the response again with one word changed, and the word is the charter's dropped "keep": the goddess gives back the old order, so Maud already knows it when Pell quotes it at her. The player first hears the word in the finale's rite, Maud's, or Pell's from the charter.
 - **Grievance:** her church sells blessings to Kestrow's lords and prays over one side's dead.
 - **Crossing Hask:** he needs the rite to fail, and later he needs its words. He asks her to say them backwards, and he asks kindly.
 - **Her answer to Hask:** *"He'd feed them. All of them, every winter. I would kneel for that. I won't kneel to him for it."*
