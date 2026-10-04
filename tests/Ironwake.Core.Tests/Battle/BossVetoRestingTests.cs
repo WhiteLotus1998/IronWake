@@ -88,4 +88,21 @@ public class BossVetoRestingTests
         Assert.True(shut <= gone);
         Assert.True(shut < open);
     }
+    /// <summary>
+    /// <c>threat</c>'s refusal line reads the same veto (<see cref="Queries.Refusals"/> through
+    /// <see cref="EnemyAi.Refusal"/>): once the captain has spent Full Measure in his phase, the
+    /// boss the party held off is no longer named as refusing, and his strike is priced instead.
+    /// </summary>
+    [Fact]
+    public void ThreatStopsNamingARefusalOnceTheCaptainSpentFullMeasure()
+    {
+        var map = Field.Replace("P captain 1,1", "P captain 1,1\nP recruit 2,0");
+        var fresh = Start(roster: ValueList<Unit>.Of(Hale, Wren), map: map).Wake("hall");
+        var spent = fresh.WithUnit(fresh.Find("hale")! with { Spent = 1 });
+        var wren = fresh.Find("wren")!;
+
+        Assert.Single(Queries.Refusals(fresh, Starter, wren, wren.At)!);
+        Assert.Empty(Queries.Refusals(spent, Starter, wren, wren.At)!);
+        Assert.Contains(Queries.Threats(spent, Starter, wren, wren.At)!, line => line.Enemy.Id == "grange_reeve-1");
+    }
 }
