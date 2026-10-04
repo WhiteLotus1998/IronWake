@@ -917,8 +917,8 @@ a  archer-1         Archer L3 bowman           7,6    hp 17/17  Plain  group hou
 A  ottilie          Ottilie L5 bowman          4,7    hp 2/18   Plain  captain
 f  sworn_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
 B  teodor           Teodor L5 pikeman          7,7    hp 21/23  Plain  done
-> move ottilie 5,5
-Ottilie moves 4,7 -> 5,5 via 4,6 4,5
+> move ottilie 3,6
+Ottilie moves 4,7 -> 3,6 via 4,6
 The Counting House  turn 7 of 11  player phase  rout  recall 2
    0123456789012
  0 ^^...n~######
@@ -926,22 +926,18 @@ The Counting House  turn 7 of 11  player phase  rout  recall 2
  2 .....^~.#...#
  3 ......~......
  4 ..n..^~.#...#
- 5 .....A~f#####
- 6 .^....~a.....
+ 5 ......~f#####
+ 6 .^.A..~a.....
  7 ......=B..^..
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           7,6    hp 17/17  Plain  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          5,5    hp 2/18   Plain  captain
+A  ottilie          Ottilie L5 bowman          3,6    hp 2/18   Plain  captain
 f  sworn_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
 B  teodor           Teodor L5 pikeman          7,7    hp 21/23  Plain  done
-> attack ottilie sworn_captain-1
-Forecast Ottilie -> Sworn Captain: acc 88% dmg 4 x2 crit 4%; counter: none
-Ottilie attacks Sworn Captain
-  Ottilie hits Sworn Captain for 4 (hp 23)
-  Ottilie hits Sworn Captain for 4 (hp 19)
-  Ottilie hp 2, Sworn Captain hp 19
-Ottilie gains 6 exp (98)
+> item ottilie 2
+Ottilie uses Field Dressing (1 left)
+Ottilie heals 10 (hp 12)
 The Counting House  turn 7 of 11  player phase  rout  recall 2
    0123456789012
  0 ^^...n~######
@@ -949,14 +945,14 @@ The Counting House  turn 7 of 11  player phase  rout  recall 2
  2 .....^~.#...#
  3 ......~......
  4 ..n..^~.#...#
- 5 .....A~f#####
- 6 .^....~a.....
+ 5 ......~f#####
+ 6 .^.A..~a.....
  7 ......=B..^..
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           7,6    hp 17/17  Plain  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          5,5    hp 2/18   Plain  captain  done
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,5    hp 19/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain  done
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
 B  teodor           Teodor L5 pikeman          7,7    hp 21/23  Plain  done
 > end
 -- Player phase ends, turn 7 --
@@ -974,8 +970,8 @@ enemy: attack sworn_captain-1 teodor
 Forecast Sworn Captain -> Teodor: acc 82% dmg 11 crit 3%; counter with Iron Lance: acc 81% dmg 8 crit 0%
 Sworn Captain attacks Teodor
   Sworn Captain misses Teodor
-  Teodor hits Sworn Captain for 8 (hp 11)
-  Sworn Captain hp 11, Teodor hp 21
+  Teodor hits Sworn Captain for 8 (hp 19)
+  Sworn Captain hp 19, Teodor hp 21
 Teodor gains 6 exp (58)
 enemy: end
 -- Enemy phase ends, turn 7 --
@@ -987,17 +983,17 @@ The Counting House  turn 8 of 11  player phase  rout  recall 2
  2 .....^~.#...#
  3 ......~......
  4 ..n..^~.#...#
- 5 .....A~.#####
- 6 .^....~fa....
+ 5 ......~.#####
+ 6 .^.A..~fa....
  7 ......=B..^..
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          5,5    hp 2/18   Plain  captain
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 11/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 19/27  Plain  group house, guard, awake
 B  teodor           Teodor L5 pikeman          7,7    hp 21/23  Plain
-> move teodor 8,7
-Teodor moves 7,7 -> 8,7
+> move ottilie 5,6
+Ottilie moves 3,6 -> 5,6 via 4,6
 The Counting House  turn 8 of 11  player phase  rout  recall 2
    0123456789012
  0 ^^...n~######
@@ -1005,20 +1001,23 @@ The Counting House  turn 8 of 11  player phase  rout  recall 2
  2 .....^~.#...#
  3 ......~......
  4 ..n..^~.#...#
- 5 .....A~.#####
- 6 .^....~fa....
- 7 ......=.B.^..
+ 5 ......~.#####
+ 6 .^...A~fa....
+ 7 ......=B..^..
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          5,5    hp 2/18   Plain  captain
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 11/27  Plain  group house, guard, awake
-B  teodor           Teodor L5 pikeman          8,7    hp 21/23  Plain
-> attack teodor archer-1
-Forecast Teodor -> Archer with Iron Lance: acc 77% dmg 13 crit 2%; counter: none
-Teodor attacks Archer
-  Teodor misses Archer
-  Teodor hp 21, Archer hp 17
+A  ottilie          Ottilie L5 bowman          5,6    hp 12/18  Plain  captain
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 19/27  Plain  group house, guard, awake
+B  teodor           Teodor L5 pikeman          7,7    hp 21/23  Plain
+> attack ottilie sworn_captain-1 art aimed_shot
+Forecast Ottilie -> Sworn Captain: acc 99% dmg 4 crit 14%; counter: none
+  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 26 uses, 2 of them hit or miss
+Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
+Ottilie attacks Sworn Captain
+  Ottilie hits Sworn Captain for 4 (hp 15)
+  Ottilie hp 12, Sworn Captain hp 15
+Ottilie gains 6 exp (98)
 The Counting House  turn 8 of 11  player phase  rout  recall 2
    0123456789012
  0 ^^...n~######
@@ -1026,17 +1025,22 @@ The Counting House  turn 8 of 11  player phase  rout  recall 2
  2 .....^~.#...#
  3 ......~......
  4 ..n..^~.#...#
- 5 .....A~.#####
- 6 .^....~fa....
- 7 ......=.B.^..
+ 5 ......~.#####
+ 6 .^...A~fa....
+ 7 ......=B..^..
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          5,5    hp 2/18   Plain  captain
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 11/27  Plain  group house, guard, awake
-B  teodor           Teodor L5 pikeman          8,7    hp 21/23  Plain  done
-> move ottilie 4,5
-Ottilie moves 5,5 -> 4,5
+A  ottilie          Ottilie L5 bowman          5,6    hp 12/18  Plain  captain  done
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 15/27  Plain  group house, guard, awake
+B  teodor           Teodor L5 pikeman          7,7    hp 21/23  Plain
+> attack teodor sworn_captain-1
+Forecast Teodor -> Sworn Captain with Iron Lance: acc 81% dmg 8 crit 0%; counter: acc 82% dmg 11 crit 3%
+Teodor attacks Sworn Captain
+  Teodor hits Sworn Captain for 8 (hp 7)
+  Sworn Captain hits Teodor for 11 (hp 10)
+  Teodor hp 10, Sworn Captain hp 7
+Teodor gains 6 exp (64)
 The Counting House  turn 8 of 11  player phase  rout  recall 2
    0123456789012
  0 ^^...n~######
@@ -1044,53 +1048,30 @@ The Counting House  turn 8 of 11  player phase  rout  recall 2
  2 .....^~.#...#
  3 ......~......
  4 ..n..^~.#...#
- 5 ....A.~.#####
- 6 .^....~fa....
- 7 ......=.B.^..
+ 5 ......~.#####
+ 6 .^...A~fa....
+ 7 ......=B..^..
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          4,5    hp 2/18   Plain  captain
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 11/27  Plain  group house, guard, awake
-B  teodor           Teodor L5 pikeman          8,7    hp 21/23  Plain  done
-> item ottilie 2
-Ottilie uses Field Dressing (1 left)
-Ottilie heals 10 (hp 12)
-The Counting House  turn 8 of 11  player phase  rout  recall 2
-   0123456789012
- 0 ^^...n~######
- 1 ^.....=.#..F#
- 2 .....^~.#...#
- 3 ......~......
- 4 ..n..^~.#...#
- 5 ....A.~.#####
- 6 .^....~fa....
- 7 ......=.B.^..
- 8 ==....~....^M
-
-a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          4,5    hp 12/18  Plain  captain  done
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 11/27  Plain  group house, guard, awake
-B  teodor           Teodor L5 pikeman          8,7    hp 21/23  Plain  done
+A  ottilie          Ottilie L5 bowman          5,6    hp 12/18  Plain  captain  done
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 7/27   Plain  group house, guard, awake
+B  teodor           Teodor L5 pikeman          7,7    hp 10/23  Plain  done
 > end
+Lethal if all land: Teodor (Archer for 4, Sworn Captain for 11, against 10 hp)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --
-enemy: move archer-1 10,7
-Archer moves 8,6 -> 10,7 via 9,6 10,6
 enemy: attack archer-1 teodor
 Forecast Archer -> Teodor: acc 79% dmg 4 crit 3%; counter: none
 Archer attacks Teodor
-  Archer hits Teodor for 4 (hp 17)
-  Archer hp 17, Teodor hp 17
-enemy: move sworn_captain-1 8,6
-Sworn Captain moves 7,6 -> 8,6
+  Archer hits Teodor for 4 (hp 6)
+  Archer hp 17, Teodor hp 6
 enemy: attack sworn_captain-1 teodor
 Forecast Sworn Captain -> Teodor: acc 82% dmg 11 crit 3%; counter with Iron Lance: acc 81% dmg 8 crit 0%
 Sworn Captain attacks Teodor
-  Sworn Captain hits Teodor for 11 (hp 6)
-  Teodor hits Sworn Captain for 8 (hp 3)
-  Sworn Captain hp 3, Teodor hp 6
-Teodor gains 6 exp (64)
+  Sworn Captain hits Teodor for 11 (hp 0)
+  Sworn Captain hp 7, Teodor hp 0
+Teodor falls at 7,7
 enemy: end
 -- Enemy phase ends, turn 8 --
 -- Player phase, turn 9 --
@@ -1101,15 +1082,149 @@ The Counting House  turn 9 of 11  player phase  rout  recall 2
  2 .....^~.#...#
  3 ......~......
  4 ..n..^~.#...#
- 5 ....A.~.#####
- 6 .^....~.f....
- 7 ......=.B.a..
+ 5 ......~.#####
+ 6 .^...A~fa....
+ 7 ......=...^..
  8 ==....~....^M
 
-a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          4,5    hp 12/18  Plain  captain
-f  sworn_captain-1  Sworn Captain L3 pikeman   8,6    hp 3/27   Plain  group house, guard, awake
-B  teodor           Teodor L5 pikeman          8,7    hp 6/23   Plain
+a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          5,6    hp 12/18  Plain  captain
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 7/27   Plain  group house, guard, awake
+> recall 86
+Recalled to state 86; 1 charges left
+Undone: gives back 6 exp, 12 enemy hp; returns Teodor alive at 21 hp
+The rolls do not change: the same attack will roll the same
+The Counting House  turn 8 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^.A..~fa....
+ 7 ......=B..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 19/27  Plain  group house, guard, awake
+B  teodor           Teodor L5 pikeman          7,7    hp 21/23  Plain
+> move teodor 4,8
+Teodor moves 7,7 -> 4,8 via 6,7 5,7 4,7
+The Counting House  turn 8 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^.A..~fa....
+ 7 ......=...^..
+ 8 ==..B.~....^M
+
+a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 19/27  Plain  group house, guard, awake
+B  teodor           Teodor L5 pikeman          4,8    hp 21/23  Plain
+> wait teodor
+Teodor waits
+The Counting House  turn 8 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^.A..~fa....
+ 7 ......=...^..
+ 8 ==..B.~....^M
+
+a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 19/27  Plain  group house, guard, awake
+B  teodor           Teodor L5 pikeman          4,8    hp 21/23  Plain  done
+> wait ottilie
+Ottilie waits
+The Counting House  turn 8 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^.A..~fa....
+ 7 ......=...^..
+ 8 ==..B.~....^M
+
+a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain  done
+f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 19/27  Plain  group house, guard, awake
+B  teodor           Teodor L5 pikeman          4,8    hp 21/23  Plain  done
+> end
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
+enemy: move archer-1 5,7
+Archer moves 8,6 -> 5,7 via 7,6 7,7 6,7
+enemy: attack archer-1 teodor
+Forecast Archer -> Teodor: acc 79% dmg 4 crit 3%; counter: none
+Archer attacks Teodor
+  Archer hits Teodor for 4 (hp 17)
+  Archer hp 17, Teodor hp 17
+enemy: move sworn_captain-1 4,7
+Sworn Captain moves 7,6 -> 4,7 via 7,7 6,7 5,7
+enemy: attack sworn_captain-1 teodor
+Forecast Sworn Captain -> Teodor: acc 82% dmg 11 crit 3%; counter with Iron Lance: acc 81% dmg 8 crit 0%
+Sworn Captain attacks Teodor
+  Sworn Captain hits Teodor for 11 (hp 6)
+  Teodor hits Sworn Captain for 8 (hp 11)
+  Sworn Captain hp 11, Teodor hp 6
+Teodor gains 6 exp (64)
+enemy: end
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
+The Counting House  turn 9 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^.A..~......
+ 7 ....fa=...^..
+ 8 ==..B.~....^M
+
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain
+f  sworn_captain-1  Sworn Captain L3 pikeman   4,7    hp 11/27  Plain  group house, guard, awake
+B  teodor           Teodor L5 pikeman          4,8    hp 6/23   Plain
+> attack ottilie sworn_captain-1
+Forecast Ottilie -> Sworn Captain: acc 88% dmg 4 x2 crit 4%; counter: none
+Ottilie attacks Sworn Captain
+  Ottilie hits Sworn Captain for 4 (hp 7)
+  Ottilie hits Sworn Captain for 4 (hp 3)
+  Ottilie hp 12, Sworn Captain hp 3
+Ottilie gains 6 exp (98)
+The Counting House  turn 9 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^.A..~......
+ 7 ....fa=...^..
+ 8 ==..B.~....^M
+
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain  done
+f  sworn_captain-1  Sworn Captain L3 pikeman   4,7    hp 3/27   Plain  group house, guard, awake
+B  teodor           Teodor L5 pikeman          4,8    hp 6/23   Plain
 > attack teodor sworn_captain-1
 Forecast Teodor -> Sworn Captain with Iron Lance: acc 81% dmg 8 crit 0%; counter: acc 82% dmg 11 crit 3%
   Counter: lethal to Teodor (11 against 6 hp)
@@ -1118,25 +1233,8 @@ Teodor attacks Sworn Captain
   Teodor hp 6, Sworn Captain hp 0
 Teodor gains 20 exp (84)
 Teodor reaches rank D in lance
-Sworn Captain falls at 8,6
-The Counting House  turn 9 of 11  player phase  rout  recall 2
-   0123456789012
- 0 ^^...n~######
- 1 ^.....=.#..F#
- 2 .....^~.#...#
- 3 ......~......
- 4 ..n..^~.#...#
- 5 ....A.~.#####
- 6 .^....~......
- 7 ......=.B.a..
- 8 ==....~....^M
-
-a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          4,5    hp 12/18  Plain  captain
-B  teodor           Teodor L5 pikeman          8,7    hp 6/23   Plain  done
-> move ottilie 6,7
-Ottilie moves 4,5 -> 6,7 via 5,5 5,6 5,7
-The Counting House  turn 9 of 11  player phase  rout  recall 2
+Sworn Captain falls at 4,7
+The Counting House  turn 9 of 11  player phase  rout  recall 1
    0123456789012
  0 ^^...n~######
  1 ^.....=.#..F#
@@ -1144,30 +1242,13 @@ The Counting House  turn 9 of 11  player phase  rout  recall 2
  3 ......~......
  4 ..n..^~.#...#
  5 ......~.#####
- 6 .^....~......
- 7 ......A.B.a..
- 8 ==....~....^M
+ 6 .^.A..~......
+ 7 .....a=...^..
+ 8 ==..B.~....^M
 
-a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          6,7    hp 12/18  Road  captain
-B  teodor           Teodor L5 pikeman          8,7    hp 6/23   Plain  done
-> wait ottilie
-Ottilie waits
-The Counting House  turn 9 of 11  player phase  rout  recall 2
-   0123456789012
- 0 ^^...n~######
- 1 ^.....=.#..F#
- 2 .....^~.#...#
- 3 ......~......
- 4 ..n..^~.#...#
- 5 ......~.#####
- 6 .^....~......
- 7 ......A.B.a..
- 8 ==....~....^M
-
-a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          6,7    hp 12/18  Road  captain  done
-B  teodor           Teodor L5 pikeman          8,7    hp 6/23   Plain  done
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain  done
+B  teodor           Teodor L5 pikeman          4,8    hp 6/23   Plain  done
 > end
 -- Player phase ends, turn 9 --
 -- Enemy phase, turn 9 --
@@ -1176,11 +1257,10 @@ Forecast Archer -> Teodor: acc 79% dmg 4 crit 3%; counter: none
 Archer attacks Teodor
   Archer hits Teodor for 4 (hp 2)
   Archer hp 17, Teodor hp 2
-Teodor masters the Pikeman class and keeps Horsebane
 enemy: end
 -- Enemy phase ends, turn 9 --
 -- Player phase, turn 10 --
-The Counting House  turn 10 of 11  player phase  rout  recall 2
+The Counting House  turn 10 of 11  player phase  rout  recall 1
    0123456789012
  0 ^^...n~######
  1 ^.....=.#..F#
@@ -1188,16 +1268,16 @@ The Counting House  turn 10 of 11  player phase  rout  recall 2
  3 ......~......
  4 ..n..^~.#...#
  5 ......~.#####
- 6 .^....~......
- 7 ......A.B.a..
- 8 ==....~....^M
+ 6 .^.A..~......
+ 7 .....a=...^..
+ 8 ==..B.~....^M
 
-a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          6,7    hp 12/18  Road  captain
-B  teodor           Teodor L5 pikeman          8,7    hp 2/23   Plain
-> move teodor 9,7
-Teodor moves 8,7 -> 9,7
-The Counting House  turn 10 of 11  player phase  rout  recall 2
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain
+B  teodor           Teodor L5 pikeman          4,8    hp 2/23   Plain
+> move teodor 4,7
+Teodor moves 4,8 -> 4,7
+The Counting House  turn 10 of 11  player phase  rout  recall 1
    0123456789012
  0 ^^...n~######
  1 ^.....=.#..F#
@@ -1205,19 +1285,37 @@ The Counting House  turn 10 of 11  player phase  rout  recall 2
  3 ......~......
  4 ..n..^~.#...#
  5 ......~.#####
- 6 .^....~......
- 7 ......A..Ba..
+ 6 .^.A..~......
+ 7 ....Ba=...^..
  8 ==....~....^M
 
-a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          6,7    hp 12/18  Road  captain
-B  teodor           Teodor L5 pikeman          9,7    hp 2/23   Plain
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain
+B  teodor           Teodor L5 pikeman          4,7    hp 2/23   Plain
 > attack teodor archer-1
-Forecast Teodor -> Archer with Iron Lance: acc 43% dmg 12 crit 2%; counter: none
+Forecast Teodor -> Archer with Iron Lance: acc 77% dmg 13 crit 2%; counter: none
 Teodor attacks Archer
   Teodor misses Archer
   Teodor hp 2, Archer hp 17
-The Counting House  turn 10 of 11  player phase  rout  recall 2
+Teodor masters the Pikeman class and keeps Horsebane
+The Counting House  turn 10 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^.A..~......
+ 7 ....Ba=...^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain
+B  teodor           Teodor L5 pikeman          4,7    hp 2/23   Plain  done
+> move ottilie 3,7
+Ottilie moves 3,6 -> 3,7
+The Counting House  turn 10 of 11  player phase  rout  recall 1
    0123456789012
  0 ^^...n~######
  1 ^.....=.#..F#
@@ -1226,39 +1324,20 @@ The Counting House  turn 10 of 11  player phase  rout  recall 2
  4 ..n..^~.#...#
  5 ......~.#####
  6 .^....~......
- 7 ......A..Ba..
+ 7 ...ABa=...^..
  8 ==....~....^M
 
-a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          6,7    hp 12/18  Road  captain
-B  teodor           Teodor L5 pikeman          9,7    hp 2/23   Plain  done
-> move ottilie 9,6
-Ottilie moves 6,7 -> 9,6 via 7,7 7,6 8,6
-The Counting House  turn 10 of 11  player phase  rout  recall 2
-   0123456789012
- 0 ^^...n~######
- 1 ^.....=.#..F#
- 2 .....^~.#...#
- 3 ......~......
- 4 ..n..^~.#...#
- 5 ......~.#####
- 6 .^....~..A...
- 7 ......=..Ba..
- 8 ==....~....^M
-
-a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          9,6    hp 12/18  Plain  captain
-B  teodor           Teodor L5 pikeman          9,7    hp 2/23   Plain  done
-> attack ottilie archer-1 art aimed_shot
-Forecast Ottilie -> Archer: acc 85% dmg 8 crit 16%; counter: acc 77% dmg 7 crit 0%
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 24 uses, 2 of them hit or miss
-Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 12/18  Plain  captain
+B  teodor           Teodor L5 pikeman          4,7    hp 2/23   Plain  done
+> attack ottilie archer-1
+Forecast Ottilie -> Archer: acc 85% dmg 9 crit 6%; counter: acc 74% dmg 7 crit 0%
 Ottilie attacks Archer
   Ottilie misses Archer
   Archer hits Ottilie for 7 (hp 5)
   Ottilie hp 5, Archer hp 17
 Ottilie reaches rank D in bow
-The Counting House  turn 10 of 11  player phase  rout  recall 2
+The Counting House  turn 10 of 11  player phase  rout  recall 1
    0123456789012
  0 ^^...n~######
  1 ^.....=.#..F#
@@ -1266,30 +1345,104 @@ The Counting House  turn 10 of 11  player phase  rout  recall 2
  3 ......~......
  4 ..n..^~.#...#
  5 ......~.#####
- 6 .^....~..A...
- 7 ......=..Ba..
+ 6 .^....~......
+ 7 ...ABa=...^..
  8 ==....~....^M
 
-a  archer-1         Archer L3 bowman           10,7   hp 17/17  Forest  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          9,6    hp 5/18   Plain  captain  done
-B  teodor           Teodor L5 pikeman          9,7    hp 2/23   Plain  done
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 5/18   Plain  captain  done
+B  teodor           Teodor L5 pikeman          4,7    hp 2/23   Plain  done
+> recall 100
+Recalled to state 100; 0 charges left
+Undone: returns 7 hp to Ottilie
+The rolls do not change: the same attack will roll the same
+The Counting House  turn 10 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^.A..~......
+ 7 .....a=...^..
+ 8 ==..B.~....^M
+
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,6    hp 12/18  Plain  captain
+B  teodor           Teodor L5 pikeman          4,8    hp 2/23   Plain
+> move ottilie 3,7
+Ottilie moves 3,6 -> 3,7
+The Counting House  turn 10 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~......
+ 7 ...A.a=...^..
+ 8 ==..B.~....^M
+
+a  archer-1         Archer L3 bowman           5,7    hp 17/17  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 12/18  Plain  captain
+B  teodor           Teodor L5 pikeman          4,8    hp 2/23   Plain
+> attack ottilie archer-1 art aimed_shot
+Forecast Ottilie -> Archer: acc 99% dmg 9 crit 16%; counter: acc 77% dmg 7 crit 0%
+  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 24 uses, 2 of them hit or miss
+Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
+Ottilie attacks Archer
+  Ottilie hits Archer for 9 (hp 8)
+  Archer hits Ottilie for 7 (hp 5)
+  Ottilie hp 5, Archer hp 8
+Ottilie gains 6 exp (4)
+Ottilie reaches level 6: hp +1 dex +1 spd +1
+Ottilie reaches rank D in bow
+The Counting House  turn 10 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~......
+ 7 ...A.a=...^..
+ 8 ==..B.~....^M
+
+a  archer-1         Archer L3 bowman           5,7    hp 8/17   Plain  group house, guard, awake
+A  ottilie          Ottilie L6 bowman          3,7    hp 6/19   Plain  captain  done
+B  teodor           Teodor L5 pikeman          4,8    hp 2/23   Plain
+> item teodor 2
+Teodor uses Field Dressing (1 left)
+Teodor heals 10 (hp 12)
+The Counting House  turn 10 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~......
+ 7 ...A.a=...^..
+ 8 ==..B.~....^M
+
+a  archer-1         Archer L3 bowman           5,7    hp 8/17   Plain  group house, guard, awake
+A  ottilie          Ottilie L6 bowman          3,7    hp 6/19   Plain  captain  done
+B  teodor           Teodor L5 pikeman          4,8    hp 12/23  Plain  done
 > end
-Lethal if all land: Ottilie (Archer for 7, against 5 hp)
-Lethal if all land: Teodor (Archer for 4, against 2 hp)
+Lethal if all land: Ottilie (Archer for 7, against 6 hp)
 -- Player phase ends, turn 10 --
 -- Enemy phase, turn 10 --
-enemy: move archer-1 10,6
-Archer moves 10,7 -> 10,6
-enemy: attack archer-1 teodor
-Forecast Archer -> Teodor: acc 79% dmg 4 crit 3%; counter: none
-Archer attacks Teodor
-  Archer hits Teodor for 4 (hp 0)
-  Archer hp 17, Teodor hp 0
-Teodor falls at 9,7
-enemy: end
--- Enemy phase ends, turn 10 --
--- Player phase, turn 11 --
-The Counting House  turn 11 of 11  player phase  rout  recall 2
+enemy: attack archer-1 ottilie
+Forecast Archer -> Ottilie: acc 72% dmg 7 crit 0%; counter: acc 86% dmg 9 crit 6%
+Archer attacks Ottilie
+  Archer hits Ottilie for 7 (hp 0)
+  Archer hp 8, Ottilie hp 0
+Ottilie falls at 3,7
+The Counting House  turn 10 of 11  enemy phase  rout  recall 0
    0123456789012
  0 ^^...n~######
  1 ^.....=.#..F#
@@ -1297,10 +1450,14 @@ The Counting House  turn 11 of 11  player phase  rout  recall 2
  3 ......~......
  4 ..n..^~.#...#
  5 ......~.#####
- 6 .^....~..Aa..
- 7 ......=...^..
- 8 ==....~....^M
+ 6 .^....~......
+ 7 .....a=...^..
+ 8 ==..B.~....^M
 
-a  archer-1         Archer L3 bowman           10,6   hp 17/17  Plain  group house, guard, awake
-A  ottilie          Ottilie L5 bowman          9,6    hp 5/18   Plain  captain
-Campaign stopped in The Counting House at turn 11, undecided
+a  archer-1         Archer L3 bowman           5,7    hp 8/17   Plain  group house, guard, awake  done
+B  teodor           Teodor L5 pikeman          4,8    hp 12/23  Plain
+Battle lost: Ottilie is dead; no recall is left, so leave
+Lost because Ottilie fell.
+> leave
+Ottilie falls on ottilie_1, which closes for good; fallen for good: Ottilie
+Campaign stopped before Sallow Grange: the script ended on the screen
