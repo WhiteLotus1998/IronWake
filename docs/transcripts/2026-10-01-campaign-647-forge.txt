@@ -30,14 +30,11 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 4, The Tollgate. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
 > quest maud_1 wren
 -- The Lazar House --
-Maud asked for a day and one pair of hands. Before the levy, her order
-kept a lazar house at Sorrel Bend. The order called its sisters home at
-the armistice and left the sick with a keeper, and the keeper has
-stopped writing.
-
-She says the sick do not need a captain. They need someone to keep the
-strippers off the door until the carts come at dusk, and she does not
-expect to be thanked for it, by them or by me.
+Maud asks for a day and one pair of hands. Her order kept a lazar house
+at Sorrel Bend until the armistice, then called its sisters home and
+left the sick with a keeper. The keeper has stopped writing. "The carts
+come at dusk. Keep the strippers off the door till then. You won't be
+thanked."
 
 (Hold out six turns. The lanes in are announced. A unit that ends its
 move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane
@@ -698,12 +695,11 @@ Battle won: survive; only recall is left, or leave
 > leave
 Maud wins maud_1; the stores take 2 common material; fell and came back wounded: Wren
 -- After The Lazar House --
-The carts came at dusk. Maud said a prayer over every bed, and over the
-men in the yard, and then over the keeper, who we found in the
-well-house.
-
-She has not said whether the day was worth it. She has started asking
-the company whether they want the prayer before she says it.
+The carts come at dusk. They find the keeper in the well-house, and the
+meal bins full, bought by someone who never signed the book. Maud says
+the prayer over every bed, then the keeper's, with his name in it. She
+takes the order's blessing down off the ward door and feeds it to the
+stove.
 
 > roster
 Roster: company 10/12

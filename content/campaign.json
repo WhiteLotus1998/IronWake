@@ -56,13 +56,11 @@
   "quests": [
     { "id": "maud_1", "member": "maud", "part": 1, "map": "the_lazar_house", "common": 2,
       "before": [
-        "Maud asked for a day and one pair of hands. Before the levy, her order kept a lazar house at Sorrel Bend. The order called its sisters home at the armistice and left the sick with a keeper, and the keeper has stopped writing.",
-        "She says the sick do not need a captain. They need someone to keep the strippers off the door until the carts come at dusk, and she does not expect to be thanked for it, by them or by me.",
+        "Maud asks for a day and one pair of hands. Her order kept a lazar house at Sorrel Bend until the armistice, then called its sisters home and left the sick with a keeper. The keeper has stopped writing. \"The carts come at dusk. Keep the strippers off the door till then. You won't be thanked.\"",
         "(Hold out six turns. The lanes in are announced. A unit that ends its move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane for the rest of the map. The ford south cannot be barred.)"
       ],
       "after": [
-        "The carts came at dusk. Maud said a prayer over every bed, and over the men in the yard, and then over the keeper, who we found in the well-house.",
-        "She has not said whether the day was worth it. She has started asking the company whether they want the prayer before she says it."
+        "The carts come at dusk. They find the keeper in the well-house, and the meal bins full, bought by someone who never signed the book. Maud says the prayer over every bed, then the keeper's, with his name in it. She takes the order's blessing down off the ward door and feeds it to the stove."
       ] },
     { "id": "bet_postern", "member": "bet", "part": 1, "map": "the_postern", "opensAfter": "brackwater_cut", "promotes": "sergeant",
       "before": [
@@ -71,11 +69,11 @@
       "ending": "Bet Lowry swore first, the one the oath could not hold, choosing it." },
     { "id": "maud_2", "member": "maud", "part": 2, "map": "the_first_shrine", "pays": "maud_psalter",
       "before": [
-        "Maud asked for a day and one pair of hands again. Kestrow's first shrine is a half-day off the weir road, older than the split, and she has never been inside it. Somebody else has.",
-        "(Placeholder card until the writing pass. Get Maud onto the altar at 7,0 by the end of turn 10. The map is lost if she falls. Pursuers cross the causeway at 7,6 from turn 2, announced; a unit that waits where it began its phase braces.)"
+        "Maud wants the first shrine, a half-day off the weir road and older than the split. No rite-keeper alive has been inside. The causeway in is trodden to mud this month. \"Somebody's put a man in the door. Move him. I'm going up to the altar.\"",
+        "(Get Maud onto the altar at 7,0 by the end of turn 10. The map is lost if she falls. Pursuers cross the causeway at 7,6 from turn 2, announced; a unit that waits where it began its phase braces.)"
       ],
       "after": [
-        "(Placeholder until the writing pass: the goddess speaks to Maud once, at the altar, and tells her what the rite seals.)",
+        "Maud kneels at the altar and says the rite, the words in order. At the response she stops. She stays on her knees longer than any prayer takes, listening, then says the response again with one word changed. On the road back she asks who has frostbite, and treats them first.",
         "(Maud carries Maud's Psalter now: a heal at range 1 to 2, bound to her. Its art, Unasked, doubles a heal on an ally who has not moved or acted, and that ally's phase ends where it stands.)"
       ] },
     { "id": "pell_1", "member": "pell", "part": 1, "map": "the_burned_school", "opensAfter": "the_tollgate", "common": 2,
