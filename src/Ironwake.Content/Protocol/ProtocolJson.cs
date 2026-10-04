@@ -1480,6 +1480,46 @@ public static class ProtocolJson
     /// since the last map (issue 252), the side maps won and those fought since the last map when there are any (issue 635), and the edits bought for the keep in the order they were made
     /// (issue 288). A campaign is a file.
     /// </summary>
+    /// <summary>
+    /// A scene as it plays (issue 1001): <c>scene</c> (its id), <c>point</c> (<c>before</c>, <c>camp</c>
+    /// or <c>after</c>), <c>map</c> (the campaign map id), and <c>lines</c>, the lines shown on the
+    /// record it plays against, each <c>id</c>, <c>speaker</c> (a unit id, an incidental's id, <c>narration</c>
+    /// or <c>rules</c>) and <c>text</c>; then, when the scene declares any, <c>incidental</c>, each <c>id</c> and <c>name</c>.
+    /// </summary>
+    public static string Scene(Scene scene, IEnumerable<SceneLine> shown) => Write(w =>
+    {
+        w.WriteStartObject();
+        w.WriteString("scene", scene.Id);
+        w.WriteString("point", SceneFormat.PointWord(scene.Point));
+        w.WriteString("map", scene.MapId);
+        w.WriteStartArray("lines");
+        foreach (var line in shown)
+        {
+            w.WriteStartObject();
+            w.WriteString("id", line.Id);
+            w.WriteString("speaker", line.Speaker);
+            w.WriteString("text", line.Text);
+            w.WriteEndObject();
+        }
+
+        w.WriteEndArray();
+        if (scene.Incidentals.Count > 0)
+        {
+            w.WriteStartArray("incidental");
+            foreach (var incidental in scene.Incidentals)
+            {
+                w.WriteStartObject();
+                w.WriteString("id", incidental.Id);
+                w.WriteString("name", incidental.Name);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
+        w.WriteEndObject();
+    });
+
     public static string Campaign(CampaignRecord record) => Campaign(record, null);
 
     /// <summary>

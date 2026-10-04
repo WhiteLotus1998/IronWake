@@ -104,6 +104,7 @@ public sealed class CampaignClient
         }
 
         var lines = new List<string>(CampaignSession.BeforeCard(Record, Content, map));
+        lines.AddRange(CampaignSession.SceneLines(Record, Content, ScenePoint.Camp, Record.NextMap(Content).MapId, map.Name));
         lines.AddRange(CampaignSession.TurnedAwayLines(Record, Content));
         lines.AddRange(CampaignSession.CampLines(_contentDir, Content, Record, map, typed: true));
         return lines;
@@ -243,6 +244,7 @@ public sealed class CampaignClient
         }
 
         _log.Add(CampaignSession.MapLine(Record, Content, map));
+        QueueCard(CampaignSession.SceneLines(Record, Content, ScenePoint.Before, Record.NextMap(Content).MapId, map.Name));
         Battle = new ClientSession(Content, Record.Begin(map, Content, _scheme));
         Status = null;
         return true;
@@ -306,6 +308,7 @@ public sealed class CampaignClient
         Record = Record.AfterBattle(battle.State, Content);
         _log.Add(CampaignSession.WonLine(before, Record, battle.State, Content));
         QueueCard(CampaignSession.AfterCard(before, Content, battle.State.Map));
+        QueueCard(CampaignSession.SceneLines(Record, Content, ScenePoint.After, before.NextMap(Content).MapId, battle.State.Map.Name));
         if (Record.IsFinished(Content))
         {
             _log.Add(CampaignSession.CampaignWonLine(Record, Content));
@@ -335,6 +338,7 @@ public sealed class CampaignClient
         if (NextMap is { } map)
         {
             QueueCard(CampaignSession.BeforeCard(Record, Content, map));
+            QueueCard(CampaignSession.SceneLines(Record, Content, ScenePoint.Camp, Record.NextMap(Content).MapId, map.Name));
         }
     }
 

@@ -1,0 +1,16 @@
+# The fixture scene of issue 1001's tests: speakers, an incidental, a rules line, a block, conditions and a lock. Not game text.
+scene: fixture_alone
+plays: camp starting_alone
+retired: f9
+incidental: keeper = The keeper
+
+f1 narration: The road east is empty in both directions.
+f2 captain: Nobody on the list has come.
+f3 captain (if fallen maud): The chaplain's name is crossed through.
+if not fallen maud
+f4 captain (human:9485): The chaplain's name is still on it.
+f5 maud (if support maud captain C): You read it like a prayer.
+end
+f6 brigand: Keep walking.
+f7 keeper: Bodies off the road before dark.
+f8 rules: (forecast <unit> <target> prints a strike and its counter before you take it.)
