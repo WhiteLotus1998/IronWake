@@ -95,14 +95,17 @@ public static class Exposure
     /// move, so a strike tile another player unit stands on is open to it, since the phase
     /// plays in any order, and each strike tile holds one striker, the worst case over the
     /// seatings (<see cref="SeatedSum"/>, the count <c>threat</c>'s total makes, issue 253).
-    /// Each player unit is weighed at its worst plain damage over every weapon and tile.
+    /// Each player unit is weighed at its worst plain damage over every weapon and tile. A player
+    /// unit that rests through that phase (<see cref="BattleUnit.RestsNextPhase"/>, the cost of
+    /// Full Measure, issue 966) neither strikes nor moves in it: it is weighed at nothing, and the
+    /// tile it stands on stays shut to the others.
     /// </summary>
     public static int OfBoss(BattleState state, GameContent content, BattleUnit boss, Coord tile, BattleUnit? target = null, int? slot = null)
     {
         var (board, counter, _) = Plan(state, content, boss, tile, target, slot);
         var moved = board.Find(boss.Id)!;
         var me = moved.ToCombatant(board, content, countering: true);
-        var players = board.UnitsOf(Side.Player).ToList();
+        var players = board.UnitsOf(Side.Player).Where(p => !p.RestsNextPhase).ToList();
         var lines = new List<(int Weight, IReadOnlyList<Coord> Tiles)>();
         foreach (var player in players)
         {
