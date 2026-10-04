@@ -7,7 +7,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 - **Fun Gate entries.** Each partner writes before reading the other's; Code's lands first. A warm chair counts if disclosed (0073). Tricks stay unnamed until both are in. On a save each chair takes its own seed; one pinned seed is one read, and so is a roll retried after a Recall (0238, #963; 334). A map whose board a branch pick changes is gated per arm (334).
 - **A map is retuned only after both entries on it are in**, one lever at a time, measured by the Sim before a partner plays it (round 16). Levers are content first.
 - **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: the Starting Alone and Mill drafts (#1005), #805's cold plays, #931, Wren's talk, a Drover map (293), the dash, the wind, the one answer. Cold chairs owed: the Oath Stone; the Rookery, fresh seed, an ally who counters (341). Code owes Rook's arm a fresh seed.
-- **Experiments.** At most three spikes wait on a deciding play; a new one waits (330, 0237). With nothing `ready`, the Builder plays a tuned map warm instead. A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
+- **Experiments.** At most three spikes wait on a deciding play (330, 0237). With nothing `ready`, the Builder plays a tuned map warm instead. A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway. An attack whose counter kills the attacker asks; `attack ... !` swings (336; #975).
 - **Rules go on screen, geometry does not** (42, 44); under gate 1's 60, `tuned` only by the stall clause (0100). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only on units in his reach is scenery (39, 72).
 
@@ -50,7 +50,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 - **13.7 Dusk: kept** on Escape; Brackwater ships at `dusk: 5` (0062), Sallow stays in daylight. Sight and hearing `?`, never stacked; an enemy hears within 4, printed (#765).
 - **13.8 Carry the fallen (#295):** killed if neither play spends a move on an ignorable carrier. Chat cold decides.
 - **13.10 Retreat (0037, #215):** a refugee holds its refuge as Hold until 50 percent; the forecast prints it. Killed if Chat's cold `river_refuge_hold.map` changes no turn.
-- **Kept:** 13.11 two-weapon boss (0061); on samples 13.12 shove (0069), 13.13 pincer (0082, 0083; ships where the enemy can anvil).
+- **Kept:** 13.11 (0061); samples: 13.12 shove (0069), 13.13 pincer (0082, 0083).
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
 - **13.15 Wildfire: kept on its samples** (0085, 0110); a map shipping it needs an enemy route through forest the party holds. Killed: 13.16 windup (0094), 13.17 overwatch (0098, 0103), 13.19 cover (0099).
 - **13.21 The tide (0111, round 176; provisional):** content only, map events flood and drain a ford on announced turns. Kept if a journal shows a ford tile taken, refused or crossed for the schedule; Chat's cold play decides.
@@ -61,10 +61,10 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 - **13.27 The dash (#950, 0234; provisional):** Move +2 as the whole turn, winded (+15 against). Killed if no dash over a Move; more free than priced in both journals: the borrowed step. Code warm 8/7/6.
 - **13.28 The wind (#955, #957, 0235; provisional):** downwind wake radius +2, upwind -2; the board names who the coming turn wakes; never with `dusk:`. Killed if no play takes a stop, route or timing for it.
 - **13.29 The one answer (#960, 0236; provisional):** a unit that counters makes no other until the next phase. More free strikes than priced in both journals kills it. Swarm lever, unbuilt: a braced unit answers every strike.
-- **13.26 Rockfall (0182; provisional):** `drop` on a ledge strikes 10. Killed if nobody drops or every drop is free; 10,5 to Mountain if the cold play loses the dropper.
+- **13.26 Rockfall (0182; provisional):** `drop` on a ledge strikes 10. Killed if nobody drops or every drop is free; 10,5 to Mountain if a cold play loses the dropper.
 - **13.20 The keep as a home (0137, 0138, #687):** rooms cost from the repair budget, a bed a wall the finale lacks; beds gate arrivals, a death never frees one (0010). Killed if the raid purse buys every room and wall in both plays.
 
-## The campaign's story (rounds 186 to 211, 192; 0121; DESIGN 14)
+## The campaign's story (186 to 211; 0121; DESIGN 14)
 
 - **A levy company**, one arrival per map to the captain plus five (Maud, Pell, Teodor, Ottilie, the pick; 213); `cadet` shows as Levy. Captain male or female (#648). Map 1, Starting Alone, is Fun Gate exempt.
 - **The branch** (#633): Keziah against Rook; the passed one returns on map 9 (0010). **`talk` kept** (0193): cost a camp trade, a bait, a flier's turn (#844). #81's drift kept (0226). **The field is `tuned` on Keziah's pick** (#936, 0233). Rook's pick: **`seen_far: rook 2` kept** (#973, 0240; Chat warm 7/7/7, Code 7/8/6); tuned if Code's fresh seed reads surprise 7.
@@ -97,11 +97,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 - **The split (344, 345):** Chat writes the main scenes' beats and drafts, Code the supports' beats and prose; each cold-reads the other. Guards: the sheet's author has the binding read on that character (fix it or argue it, never merge over it); an S line an ending card quotes or a big scene pays off is scene-side, so no S beat sheet before its #634 card; every fifth support is read beside the four before it; of two that match, the newer changes. Writing PRs auto-merge on green; the cold read follows on the Table, its changes in a follow-up PR (Lotus, 2026-10-04; WRITING 6).
 - **Map 1 and 2 beats (344 to 346; #1005):** no journal voice; stage lines third person, present, plain. System lines are rules lines, outside the budget (#1001). Incidentals (two lines at most) need no sheet. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse in meals; one dry line, the region prediction. Keep silver planted once: the brigands' coin into Hask's purse, unremarked. The gate: an unnamed sworn sergeant, one line or none. The Mill: list match before the map. **An arrival scene ends on the arriving character's act.**
 - **Canon guard (346):** the sworn not literally feeling frost is not canon unless STORY adopts it as its own Table point. Map 1 carries one plant. The shrine script is the Kin's paper trail, never set dressing; old deeds use the copyists' hand (#1013).
-- **Cards (348; #1019):** a named feeling never closes a card or scene; Rook's is spent mid-card in the Rookery's, to the drake; it ends on the drake's act. A side map with no scene spends its booked beats in its quest card. After the Grange, keep silver lines name the keep, never "someone". **Maud's cards (349):** a card never commits a member to a class door or branch the player hasn't chosen; her anger is spent mid-card at the Lazar House; quest openers share no template. The goddess's words are never printed: the changed word is the charter's dropped "keep" (STORY), heard in the finale's rite.
+- **Cards (348; #1019):** a named feeling never closes a card or scene; Rook's is spent mid-card in the Rookery's, to the drake; it ends on the drake's act. A side map with no scene spends its booked beats in its quest card. After the Grange, keep silver lines name the keep, never "someone". **Maud's cards (349):** a card never commits a member to a class door or branch the player hasn't chosen; her anger is spent mid-card at the Lazar House; quest openers share no template. The goddess's words are never printed: the changed word is the charter's dropped "keep" (STORY), heard in the finale's rite. A spent feeling keeps its speaker's shape (350): Maud's is feeling, prognosis, task, never a line that stops on her own state.
 
 ## Lotus's mechanics build (239, 240; #786)
 
-- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign, mouse and keys, script parity, no stop-playing bug to Brackwater. Chat signs on parity, Code on a hand run.
+- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign, script parity, no stop-playing bug to Brackwater; Chat signs on parity, Code on a hand run.
 
 ## Open, the Table's
 
@@ -121,4 +121,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; 316-342 #935; #994 343 on (writing).
+1-44 rules; 45-118 carry, dusk, brace; 119-202 showcase, story; 203-342 #665 to #935; #994 343 on (writing).

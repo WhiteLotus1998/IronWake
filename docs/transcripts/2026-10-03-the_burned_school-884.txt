@@ -31,15 +31,16 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 5, Harrow Weir. Defeat the boss by the end of turn 15. Captain Fenn must survive.
 > quest pell_1 wren
 -- The Burned School --
-Pell asked for a day and one pair of hands. The shrine-school at Aldmere
-burned around her when she was fourteen. Somebody has been back since,
-and the rain has not finished the job they started.
+The shrine-school at Aldmere burned around Pell when she was fourteen.
+The roof never went back on, and the rain has had eight years at the
+shelves. Now somebody brings torches for what it left. "Whatever's dry
+comes out. The catalogue's chained under the lectern, so I'll know what
+we leave."
 
-(Placeholder card until the writing pass. Get Pell off the east edge,
-12,3 to 12,5, by the end of turn 7; anyone still on the board when she
-exits is left behind and falls. The map is lost if she falls. Three
-chests hold what the fire missed. The burners come in from the west road
-from turn 1, announced.)
+(Get Pell off the east edge, 12,3 to 12,5, by the end of turn 7; anyone
+still on the board when she exits is left behind and falls. The map is
+lost if she falls. Three chests hold what the fire missed. The burners
+come in from the west road from turn 1, announced.)
 
 Side map: The Burned School, seed 884
 Pell goes with Wren. This map is lost if Pell falls; who falls here is gone for good.
@@ -672,8 +673,10 @@ Battle won: escape; only recall is left, or leave
 > leave
 Pell wins pell_1; the stores take 2 common material; nobody fell
 -- After The Burned School --
-(Placeholder until the writing pass: what Pell carried out, and what she
-left.)
+Pell comes out with the catalogue under her arm, the chain still hanging
+off it. On the road she reads it through and marks the margin beside
+every book that stayed behind. That night she starts on the first of
+them from memory.
 
 > camp
 -- Before map 5 of 10: Harrow Weir; the purse holds 500 --
