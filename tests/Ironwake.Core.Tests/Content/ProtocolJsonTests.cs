@@ -100,6 +100,7 @@ public class ProtocolJsonTests
         { new MapEventFired("riders", true, "wall"), """{"type":"mapEventFired","name":"riders","blocked":true,"terrain":"wall"}""" },
         { new TerrainChanged(A, "plain"), """{"type":"terrainChanged","at":{"x":1,"y":2},"terrain":"plain"}""" },
         { new UnitSpawned("rider-1", B, "flank", Behavior.Aggressive), """{"type":"unitSpawned","unit":"rider-1","at":{"x":3,"y":4},"group":"flank","behavior":"aggressive"}""" },
+        { new UnitWinded("wren"), """{"type":"unitWinded","unit":"wren"}""" },
         { new FlagSet("gate_open"), """{"type":"flagSet","flag":"gate_open"}""" },
         { new FrontFell("north_breach"), """{"type":"frontFell","front":"north_breach"}""" },
     };
@@ -167,6 +168,7 @@ public class ProtocolJsonTests
         { new Drop("wren"), """{"type":"drop","unit":"wren"}""" },
         { new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3)), """{"type":"carry","unit":"rook","ally":"wren","to":{"x":5,"y":2},"setDown":{"x":5,"y":3}}""" },
         { new Breathe("rook", new Coord(3, 2)), """{"type":"breathe","unit":"rook","toward":{"x":3,"y":2}}""" },
+        { new Dash("wren", B), """{"type":"dash","unit":"wren","to":{"x":3,"y":4}}""" },
         { new Canto("ansgar", B), """{"type":"canto","unit":"ansgar","to":{"x":3,"y":4}}""" },
         { new EndPhase(), """{"type":"end"}""" },
         { new Recall(4), """{"type":"recall","toIndex":4}""" },

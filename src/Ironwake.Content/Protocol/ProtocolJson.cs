@@ -187,6 +187,9 @@ public static class ProtocolJson
                 WriteCoord(w, "to", f.To);
                 WriteCoords(w, "path", f.Path);
                 break;
+            case UnitWinded wd:
+                w.WriteString("unit", wd.UnitId);
+                break;
             case Shoved s:
                 w.WriteString("unit", s.UnitId);
                 w.WriteString("target", s.TargetId);
@@ -615,6 +618,11 @@ public static class ProtocolJson
                 w.WriteString("unit", shove.UnitId);
                 w.WriteString("target", shove.TargetId);
                 break;
+            case Dash dash:
+                w.WriteString("type", "dash");
+                w.WriteString("unit", dash.UnitId);
+                WriteCoord(w, "to", dash.To);
+                break;
             case Breathe breathe:
                 w.WriteString("type", "breathe");
                 w.WriteString("unit", breathe.UnitId);
@@ -687,12 +695,13 @@ public static class ProtocolJson
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
             "carry" => new Carry(RequiredString(e, "unit"), RequiredString(e, "ally"), ReadCoord(e, "to"), ReadCoord(e, "setDown")),
             "breathe" => new Breathe(RequiredString(e, "unit"), ReadCoord(e, "toward")),
+            "dash" => new Dash(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "order" => new Order(ReadOrderKind(RequiredString(e, "kind"))),
             "fallBack" => new FallBack(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
             "undo" => new Undo(RequiredString(e, "unit")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, watch, cover, canto, exit, recover, open, drop, talk, shove, carry, breathe, order, fallBack, end, recall, or undo"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, watch, cover, canto, exit, recover, open, drop, talk, shove, carry, breathe, dash, order, fallBack, end, recall, or undo"),
         };
     }
 
@@ -1092,6 +1101,11 @@ public static class ProtocolJson
             w.WriteBoolean("breathed", true);
         }
 
+        if (unit.Winded)
+        {
+            w.WriteBoolean("winded", true);
+        }
+
         if (unit.Pressed)
         {
             w.WriteBoolean("pressed", true);
@@ -1325,6 +1339,7 @@ public static class ProtocolJson
             Grounded = OptionalInt(e, "grounded") ?? 0,
             Landed = e.TryGetProperty("landed", out _) && RequiredBool(e, "landed"),
             Breathed = e.TryGetProperty("breathed", out _) && RequiredBool(e, "breathed"),
+            Winded = e.TryGetProperty("winded", out _) && RequiredBool(e, "winded"),
             Open = e.TryGetProperty("open", out var open) ? new OpenMark(RequiredString(open, "by"), RequiredInt(open, "def"), RequiredInt(open, "res")) : null,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,

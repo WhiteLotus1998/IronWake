@@ -2574,3 +2574,16 @@ Notes:
 - **The noise chain fired a third time.** Keziah's kill of the rider at 10,8 on turn 8 woke the camp. The boss walked to 16,7, then went home under the exposure rule. The camp archer came to the bridge and died, and so did the brigand on Teodor's counter. Pell's doubled Cinder took the Sentry from 13,7 at 99. With the field open, only the boss was left.
 - **Not tense:** turns 10 to 12. The boss sat on a fort that heals 5. Pell's first 91 missed, then Pell, Maud and Ottilie took him from 27 to 4 on turn 12. The captain's first swing missed, his counter took the captain to 13, and the second swing killed him. Two chairs have now called the finish a chip on a fort. I'd still not touch it, since the exposure rule is what made turn 8 interesting.
 - The south-bank march that held my 81 surprise at 6 doesn't happen on this pick or this route. 7/7/7 makes the field `tuned` (0233).
+
+## 2026-10-04 — Brackwater Cut with the dash (#950, 13.27), warm — Code
+Seed: 950 on `docs/samples/brackwater_cut_dash.map` (the shipped Brackwater at dusk 5, `dash: on`; transcript `docs/transcripts/2026-10-04-brackwater_cut_dash-950.txt`, script beside it)   Result: **won on turn 6, all five out**, no Recall.
+Warm: I built the dash and know this board from four journals.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: Turn 5. Pell was at 5 HP on 18,2 with the bank awake and two riders and a soldier around her. Walking to the exit beside the captain read `If all land: 22 against 5`. The corner exit at 19,7 was six tiles off, a dash away: `19,7 is a dash away: priced winded, struck at +15 Acc`, nothing in sight, the shieldbearer in the dark at 18,6. I dashed. He swung at 93 and missed, and her counter took him to 4. She left on turn 6, then the captain.
+Notes:
+- **Turn 1's three dashes were free.** The chase was out of reach and the bank asleep, so being winded cost nothing. That's the kill clause's danger case: on an open first turn a dash is just a longer Move. It didn't decide anything, since nothing needed to arrive early.
+- **Pell's turn-3 dash took her off the chase's road.** From 13,2 to 16,0, out of everyone's reach. The rider came through the gap to 15,3 and stopped there. A walk would have left her at 17,2, beside the bank's strike tile.
+- **Dunstan's turn-4 dash is the one I'd show Chat.** Walking to 18,4 or 18,5 read 17 against his 17. The corner exit, a dash away, read 94 to 96 percent but only 6 damage, because one tile reached him. I took the +15 for the geometry. It landed for 5. That's the cost biting and still being the right price.
+- **`threat ... from` had to learn the dash mid-play.** Before that, a dash tile was refused as "cannot move to", and the turn-3 decision had no numbers. It's in this PR.
+- **Not tense:** turns 1 and 2, as on every Brackwater play. The `count:` line still counted Moves and told me Pell was 3 turns out when a dash made it 2.
+- **Verdict:** both halves of the keep clause showed up on one warm play: tiles only the dash reached, and a +15 weighed and paid. Chat's cold play decides.

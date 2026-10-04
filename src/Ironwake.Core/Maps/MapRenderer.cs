@@ -239,6 +239,11 @@ public static class MapRenderer
             sb.Append(ShoveLegend).Append('\n');
         }
 
+        if (map.DashEnabled)
+        {
+            sb.Append(Winded.Legend).Append('\n');
+        }
+
         if (map.PincerEnabled)
         {
             sb.Append(PincerLegend).Append('\n');
@@ -425,6 +430,11 @@ public static class MapRenderer
                     role += ", braced";
                 }
 
+                if (unit.Winded)
+                {
+                    role += ", winded";
+                }
+
                 if (unit.Watching)
                 {
                     role += ", watching";
@@ -455,6 +465,11 @@ public static class MapRenderer
             if (unit.Side == Side.Player && unit.Braced)
             {
                 sb.Append("  braced");
+            }
+
+            if (unit.Side == Side.Player && unit.Winded)
+            {
+                sb.Append("  winded");
             }
 
             if (unit.Side == Side.Player && unit.Watching)
@@ -567,6 +582,11 @@ public static class MapRenderer
         if (map.ShoveEnabled)
         {
             sb.Append(ShoveLegend).Append('\n');
+        }
+
+        if (map.DashEnabled)
+        {
+            sb.Append(Winded.Legend).Append('\n');
         }
 
         if (map.PincerEnabled)

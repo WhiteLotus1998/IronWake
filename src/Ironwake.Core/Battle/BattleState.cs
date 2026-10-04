@@ -582,6 +582,18 @@ public sealed record BattleState(
     }
 
     /// <summary>
+    /// Where a dash may take <paramref name="unit"/> (DESIGN.md 13.27, <see cref="Winded"/>): the
+    /// section 4 reach on its Move plus <see cref="Winded.ExtraMov"/>, chill and pressing read as
+    /// for a Move. A unit held by a lock goes nowhere.
+    /// </summary>
+    public Reach DashReachOf(BattleUnit unit, GameContent content)
+    {
+        var unitClass = content.Class(unit.Unit.ClassId);
+        var mov = Lock.Holds(this, unit) ? 0 : Frost.Mov(unitClass.Mov + (unit.Pressed ? 1 : 0), unit) + Winded.ExtraMov;
+        return ReachOn(unit, content, mov);
+    }
+
+    /// <summary>
     /// The route of a <c>move ... via</c> (13.25, issue 782): the reach's path to <paramref name="via"/>,
     /// then the cheapest path from there to <paramref name="to"/> on the Mov left, the unit's own
     /// tile read as empty on the second leg. The entry carries the joined path and the total cost,

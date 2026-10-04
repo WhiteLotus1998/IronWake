@@ -1,0 +1,44 @@
+move dunstan 13,3
+wait dunstan
+dash captain 12,4
+dash wren 12,3
+dash rook 14,2
+move pell 10,3
+wait pell
+end
+move rook 16,1
+wait rook
+move captain 14,2
+wait captain
+move wren 15,2
+wait wren
+move dunstan 14,3
+wait dunstan
+move pell 13,2
+wait pell
+end
+move rook 19,3
+wait rook
+move wren 18,3
+wait wren
+move captain 18,2
+dash pell 16,0
+move dunstan 17,3
+wait dunstan
+end
+exit rook
+move captain 19,3
+wait captain
+move pell 18,2
+attack pell brawler-1
+move wren 19,5
+wait wren
+dash dunstan 19,6
+end
+exit wren
+exit dunstan
+dash pell 19,7
+wait captain
+end
+exit pell
+exit captain

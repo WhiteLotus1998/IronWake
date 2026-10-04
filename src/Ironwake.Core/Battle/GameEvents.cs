@@ -85,6 +85,12 @@ public sealed record Breathed(string UnitId, Coord From, ValueList<Coord> Line, 
 /// </summary>
 public sealed record Carried(string UnitId, string AllyId, Coord From, Coord To, Coord AllyFrom, Coord SetDown, CarrySetting Setting) : GameEvent;
 
+/// <summary>
+/// A unit dashed (DESIGN.md 13.27, experiment) and is winded until its side's next phase: strikes
+/// against it are at <see cref="Winded.Hit"/> more hit. Its path is its <see cref="UnitMoved"/>, emitted just before.
+/// </summary>
+public sealed record UnitWinded(string UnitId) : GameEvent;
+
 /// <summary>An enemy fell back to a healing tile instead of fighting (issue 33); it will not retreat again this battle.</summary>
 public sealed record UnitRetreated(string UnitId, Coord From, Coord To) : GameEvent;
 
