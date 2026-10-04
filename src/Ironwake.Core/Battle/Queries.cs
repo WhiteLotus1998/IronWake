@@ -226,6 +226,8 @@ public static class Queries
     /// Canto (issue 71) is asked from any tile its Canto can end on, since that is where it
     /// still chooses to stand. A strike a cover would swap onto the coverer (DESIGN.md 13.19)
     /// is priced against the coverer on the unit's tile and carries it as <see cref="ThreatLine.CoveredBy"/>.
+    /// On a <c>dash: on</c> map a tile only a dash reaches (DESIGN.md 13.27) is priced with the unit
+    /// winded, as it would stand there.
     /// Null when the unit cannot stand on the tile this phase, or
     /// when the state is not a player phase. Read-only.
     /// </summary>
@@ -581,13 +583,15 @@ public static class Queries
     private static (BattleState Board, BattleUnit? Moved, IReadOnlyDictionary<string, Coord> Arrivals)? ThreatBoard(BattleState state, GameContent content, BattleUnit unit, Coord from)
     {
         var standable = CanStandOn(state, content, unit, from) || state.CantoReachOf(unit, content)?.CanEnd(from) == true;
-        if (state.Phase != Side.Player || unit.Side != Side.Player || !standable)
+        var dashed = !standable && Winded.CanDashTo(state, content, unit, from);
+        if (state.Phase != Side.Player || unit.Side != Side.Player || !(standable || dashed))
         {
             return null;
         }
 
+        var asked = dashed ? unit with { Winded = true } : unit;
         var arrivals = new Dictionary<string, Coord>(StringComparer.Ordinal);
-        var ended = Resolver.Apply(Exposure.Board(state, content, unit, from), content, new EndPhase());
+        var ended = Resolver.Apply(Exposure.Board(state.WithUnit(asked), content, asked, from), content, new EndPhase());
         if (!ended.Accepted || ended.Next.Outcome.IsOver || ended.Next.Find(unit.Id) is not { } moved)
         {
             return (state, null, arrivals);

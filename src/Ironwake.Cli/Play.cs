@@ -48,6 +48,7 @@ public sealed class PlaySession
           open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
           drop <unit>              On a ledge, bring the rock down as the action: each tile below takes 10 to anyone on it, and closes unless someone stands there
           talk <unit> <target>     Beside the claimant who came back as a foe: the pick's talk turns them, the captain's spares them
+          dash <unit> <x,y>        On a dash map, a unit not yet moved or acted moves 2 past its Move, as its whole turn; struck at +15 Acc until its next phase
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
           carry <unit> <ally> <x,y> <x,y>  On a carry map, a grown drake lifts an adjacent ally, flies to the first tile and sets it down on the second, as the rider's whole turn
           breathe <unit> <x,y>     On a breath map, once a map, an unbroken drake breathes 3 tiles out through the adjacent tile, as the action: everyone on the line is chilled, Water freezes to Rime ice
@@ -659,6 +660,12 @@ public sealed class PlaySession
                 break;
             case "fallback":
                 Error("usage: fallback <unit> <x,y|stay>");
+                break;
+            case "dash" when words.Length == 3 && TryCoord(words[2], out var dashTo):
+                Apply(new Dash(words[1], dashTo));
+                break;
+            case "dash":
+                Error("usage: dash <unit> <x,y>");
                 break;
             case "shove" when words.Length == 3:
                 Apply(new Shove(words[1], words[2]));
@@ -1615,6 +1622,11 @@ public sealed class PlaySession
             return;
         }
 
+        if (!Queries.CanStandOn(_state, _content, unit, tile) && Winded.CanDashTo(_state, _content, unit, tile))
+        {
+            _out.WriteLine($"{tile} is a dash away: priced winded, struck at +{Winded.Hit} Acc");
+        }
+
         _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile), Queries.Anvils(_state, _content, unit, tile), Queries.StopWakes(_state, _content, unit, tile), Queries.Refusals(_state, _content, unit, tile)));
         if (BracedThreat(_state, _content, unit, tile) is { } braced)
         {
@@ -2518,6 +2530,7 @@ public sealed class PlaySession
         Order o => $"order {Orders.Word(o.Kind)}",
         FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
+        Dash d => $"dash {d.UnitId} {d.To}",
         Carry c => $"carry {c.UnitId} {c.AllyId} {c.To} {c.SetDown}",
         Breathe b => $"breathe {b.UnitId} {b.Toward}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
@@ -2600,6 +2613,8 @@ public sealed class PlaySession
                 return f.From == f.To
                     ? $"{names[f.UnitId]} holds at {f.To} (fall back)"
                     : $"{names[f.UnitId]} falls back {f.From} -> {f.To}" + (f.Path.Count > 1 ? " via " + string.Join(" ", f.Path.Take(f.Path.Count - 1)) : "");
+            case UnitWinded wd:
+                return $"{names[wd.UnitId]} dashed and is winded: struck at +{Winded.Hit} Acc until the player phase";
             case Shoved s:
                 return $"{names[s.UnitId]} shoves {names[s.TargetId]} {s.From} -> {s.To}";
             case Breathed b:

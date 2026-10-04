@@ -70,6 +70,19 @@ public static class Resolver
             case Talk talk:
                 (next, rejection) = ApplyTalk(state, talk, events);
                 break;
+            case Dash dash:
+                (next, rejection) = ApplyDash(state, content, dash, events);
+                if (rejection is null)
+                {
+                    next = MapEvents.AfterMove(next, content, next.Find(dash.UnitId)!, events);
+                    next = FireWatches(next, content, dash.UnitId, events);
+                    if (next.Find(dash.UnitId) is { } dasher)
+                    {
+                        next = Messenger.AfterMove(next, content, dasher, events);
+                    }
+                }
+
+                break;
             case Shove shove:
                 (next, rejection) = ApplyShove(state, content, shove, events);
                 if (rejection is null)
@@ -292,6 +305,42 @@ public static class Resolver
         events.Add(new UnitMoved(unit.Id, unit.At, move.To, entry.Path));
         int? canto = Signatures.HasCanto(state, content, unit) ? reach.Mov - entry.Cost : null;
         var moved = EndMove(state, unit, unit with { At = move.To, Moved = true, Canto = canto }, events);
+        return (Planks.AfterWalk(moved, content, unit, unit.At, entry.Path, events), null);
+    }
+
+    /// <summary>
+    /// DESIGN.md 13.27 (the dash, experiment): on a <c>dash: on</c> map a player unit that has
+    /// neither moved nor acted moves within <see cref="BattleState.DashReachOf"/>, its Move plus
+    /// <see cref="Winded.ExtraMov"/>, as its Move and its action both. It is left moved, acted and
+    /// winded (<see cref="UnitWinded"/>), with no Canto; the brace a Wait would have given is not
+    /// on offer. Planks wear under the path as under a Move.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyDash(BattleState state, GameContent content, Dash dash, List<GameEvent> events)
+    {
+        var unit = Acting(state, dash.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (Winded.Refusal(state, unit) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotDash, $"{unit.Id} cannot dash: {refusal}"));
+        }
+
+        var reach = state.DashReachOf(unit, content);
+        var entry = reach.EntryAt(dash.To);
+        if (entry is not { CanEnd: true })
+        {
+            var why = !state.Map.Contains(dash.To) ? "outside the map"
+                : entry is null ? $"not within {reach.Mov} movement from {unit.At} (a dash adds {Winded.ExtraMov})"
+                : "occupied by an ally";
+            return (state, new Rejection(RejectionReason.OutOfReach, $"{unit.Id} cannot dash to {dash.To}: {why}"));
+        }
+
+        events.Add(new UnitMoved(unit.Id, unit.At, dash.To, entry.Path));
+        events.Add(new UnitWinded(unit.Id));
+        var moved = EndMove(state, unit, unit with { At = dash.To, Moved = true, Acted = true, Canto = null, Braced = false, Winded = true }, events);
         return (Planks.AfterWalk(moved, content, unit, unit.At, entry.Path, events), null);
     }
 
@@ -1729,7 +1778,7 @@ public static class Resolver
                 events.Add(new UnitRested(unit.Id));
             }
 
-            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null, Landed = false });
+            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null, Landed = false });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };

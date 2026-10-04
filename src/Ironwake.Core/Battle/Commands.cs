@@ -94,6 +94,15 @@ public sealed record Drop(string UnitId) : Command;
 public sealed record Shove(string UnitId, string TargetId) : Command;
 
 /// <summary>
+/// Dash to <paramref name="To"/> (DESIGN.md 13.27, experiment): on a <c>dash: on</c> map, a player
+/// unit that has neither moved nor acted moves up to <see cref="Winded.ExtraMov"/> tiles past its
+/// Move, as its Move and its action both. It is winded until its side's next phase begins: every
+/// strike against it is at <see cref="Winded.Hit"/> more hit (<see cref="Winded"/>). No Canto
+/// follows, so it neither strikes nor exits that phase. The AI never dashes.
+/// </summary>
+public sealed record Dash(string UnitId, Coord To) : Command;
+
+/// <summary>
 /// Carry an ally on a grown drake (issue 805, experiment): on a <c>carry:</c> map, a rider whose drake
 /// is Grown or more, unmoved and not acted, lifts the orthogonally adjacent ally <paramref name="AllyId"/>,
 /// flies to <paramref name="To"/> as a Move of its own, and sets the ally down on <paramref name="SetDown"/>,

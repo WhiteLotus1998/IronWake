@@ -216,6 +216,13 @@ public sealed record MapDefinition(
     public CarryRule? Carry { get; init; }
 
     /// <summary>
+    /// The <c>dash: on</c> header (DESIGN.md 13.27, experiment, samples): a player unit may move
+    /// <see cref="Winded.ExtraMov"/> tiles past its Move as its whole turn, and is struck at
+    /// <see cref="Winded.Hit"/> more hit until its side's next phase (<see cref="Dash"/>). Off by default.
+    /// </summary>
+    public bool DashEnabled { get; init; }
+
+    /// <summary>
     /// The <c>breath:</c> header (issue 805, samples): the recruit placed with an Unbroken drake, whose
     /// breath the map plays (<see cref="Rime"/>); null for a map without the breath.
     /// </summary>

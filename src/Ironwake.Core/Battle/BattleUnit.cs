@@ -125,6 +125,12 @@ public sealed record BattleUnit(
     /// </summary>
     public bool Breathed { get; init; }
 
+    /// <summary>
+    /// Set when the unit dashed (DESIGN.md 13.27, <see cref="Winded"/>): until its side's next phase
+    /// begins, strikes against it are at <see cref="Winded.Hit"/> more hit.
+    /// </summary>
+    public bool Winded { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 

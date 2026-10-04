@@ -36,11 +36,12 @@ public static class Brace
 
     /// <summary>
     /// The hit modifier the board gives <paramref name="striker"/> against <paramref name="target"/>:
-    /// the pin (<see cref="Pincer.HitAgainst"/>) plus the brace. The one function
+    /// the pin (<see cref="Pincer.HitAgainst"/>) plus the brace plus the winded mark of a dash
+    /// (<see cref="Winded.HitAgainst"/>, DESIGN.md 13.27). The one function
     /// <see cref="BattleUnit.ToCombatant(BattleState, GameContent, bool, CombatArtEffect?, BattleUnit?)"/>
     /// and <see cref="EnemyAi.Score"/> both call, so the planner's target choice reads what the
     /// forecast and the resolver read.
     /// </summary>
     public static int StrikeHit(BattleState state, BattleUnit striker, BattleUnit? target) =>
-        Pincer.HitAgainst(state, striker, target) + HitAgainst(target);
+        Pincer.HitAgainst(state, striker, target) + HitAgainst(target) + Winded.HitAgainst(target);
 }
