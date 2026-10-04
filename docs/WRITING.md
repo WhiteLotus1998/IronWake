@@ -58,7 +58,7 @@ Grounded, dry, warm underneath (CLAUDE.md). In practice:
 2. **Beat sheet:** who wants what, what's left unsaid, what's different by the end, which branch conditions touch it, and whether anyone uses their one named feeling (rule 1).
 3. **Big scenes get three drafts** (emotional, voice, risk-taking), written by the same writer in three separate contexts that never see each other, so they don't converge. The other partner picks and stitches, then reruns the name test on the stitch. The big scenes: Hask's death, the Grange truce, the camp's answers to Hask, the Harrow Weir choice, Marrit's freeing, the title drop, each ending's final card, the bad ending, Under the Hill.
 4. **Named revision passes,** each a separate pass: (a) cut 30 percent (for cards and barks, the budget above instead); (b) the name test: hide the speakers, and if you can't tell who's talking, rewrite; (c) exposition: strike what the listener already knows; (d) the tic list; (e) the average test (rule 11).
-5. One scene or one support pair per PR.
+5. One scene or one support pair per PR. An incidental speaker (two lines at most, unnamed) needs no voice sheet, but passes the tic list and borrows no named character's image source (round 345).
 6. The writer never grades their own scene. The other partner cold-reads it before merge, and the Story Editor routine joins when Lotus sets it up.
 7. The branch checker in the Sim proves every ending, conditional paragraph, near-miss line and Under the Hill reachable, and no card contradicts its record. It also prints the text for the rarest reachable combination, so we read the worst case and not just the default.
 8. A scene is done when it has been read in the client at real pacing. Lotus's playtest notes are the last pass.
