@@ -11,7 +11,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway.
 - **Rules go on screen; geometry does not** (42, 44): a rule a map needs is printed; the best tile is the player's.
 - **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only on units stepping into his reach is scenery (39, 72).
-- **Reading the Sim.** The veto is frozen after #147; a stall under it is the baseline's. A map short of gate 1's 60 is `tuned` only under DESIGN 11's stall clause (0100).
+- **Reading the Sim.** The veto is frozen after #147; a stall under it is the baseline's. Under gate 1's 60, `tuned` only by DESIGN 11's stall clause (0100).
 
 ## Rules, settled (details in DESIGN.md and the records named)
 
@@ -35,11 +35,11 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 - **Brackwater Cut at dusk: `tuned`** (0078). Dusk hides what, never where.
 - **The showcase (#509, 0092):** done at 8/7; animation never hides state; each art loses to the plain attack somewhere (#611).
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15).
-- **Saltmarsh Ford:** not tuned. North cut (0093): 7/7/6, 7/7/5. The spawn lever failed (0095).
-- **Sallow Grange:** the Reeve stays at 15,6; the yard mouth is unnamed; a quiet route is quiet on the enemy phase too (#275).
+- **Saltmarsh Ford:** not tuned; north cut 7/7/6, 7/7/5 (0093); the spawn lever failed (0095).
+- **Sallow Grange:** the Reeve stays at 15,6; a quiet route is quiet on the enemy phase too (#275).
 - **The Rookery (Rook 2, 0208):** not passed; the cage stays (284). #862's ring (built): a cold replay decides. A lost Escape keeps its living (#861).
-- **The Counting House (Ottilie 1; 311, 312):** the opening is kept; the finish is the defect. Lever 1 (#925, 0228; 313): the archer a house guard at 11,2, adding no wake (7,3 wakes the house on turn 1). Sim 0/200; play decides; lever 2: limit 11.
-- **The Long Count (Ottilie 2; 313):** the clock is the defect; the fix is visibility (#928, 0229: the count on the board, `end` and `exit` warn), not a longer limit, until a cold chair plays with it. Lever 1: the held archer to 11,4 (#932).
+- **The Counting House (Ottilie 1; 311 to 314):** the opening is kept; the finish is the defect. Lever 1 (#925, 0228): the archer a house guard at 11,2; she comes, then retreats to forest (Code warm, lost; Sim 0/200). Lever 2 (#931): limit 11, then Chat cold.
+- **The Long Count (Ottilie 2; 313, 314):** both chairs lost the clock on turn 6: the fix is the count on screen (#928, 0229), no longer limit before a cold chair sees it. The held archer is scenery; to the road at 11,4, spotted by the soldier (#930).
 - **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. The bare keep (Chat cold, round 235, 7/7/6): walls and Long Draw bow kept, no lever on the stand-in.
 
 ## Experiments (state and kill criterion)
@@ -74,11 +74,11 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 - **13.23 Kinsbane** (#645; 195 to 201): Keziah's; an old outland god in the scythe. Quest 2, **The Oath Stone** (302 to 306; #635, #902; built, 0224, 0225), is a board, no verb: Joab of her mother's shrine, bound to the envoy, holds the short road. `KeziahOath` on a win, for #634: scythe kill `fed`, envoy's fall `spared`, her other weapon `refused`, anyone else `other`. Lever 1 built: the envoy keeps his fort; the camp second. Scenery if no chair weighs sparing him (0172). A passed Keziah returns at the fourth tooth (263; Fed 8).
 - **Origin** (#681, #648; 201): the captain's card only (stats, growths, a Word variant); a recruit's first captain support has an origin variant. Gate 1 within 5.
 - **Magic and faith** (round 201): Reason shows as Lore (id kept). Faith heals and may strike (#113). One goddess, three faiths; she speaks once, to Maud in quest 2, after map 5.
-- **The land** (Lotus; 300, 301): the seam is the tundra apex; Kestrow west, Sallow east, Aldmere south, the outlands beyond. Only the north's frost holds the Kin; Kinsbane hunts the lean season. Seam: maps 1, 2, 4, 6, 9, 10; Sallow 3, 7, 8; Aldmere 5; Kestrow quests only. Geography never retiles a tuned map. Grounds (Lotus, #892; 307 to 310; #916): frost `#949A9A` on the seam, cold moss `#649470` elsewhere; peat, heather out. Sand `#A89670` is the `region: outland` ground (no terrain id), Keziah's quests only: a scoped warm exception, hatch and tokens ink-edged; built (#916, 0227), kept once both have looked at `docs/look/sand-916.png` (both hatches, old hill, road). Region is a voice source, not a tic; Alder and Bet are the seam's, Bet's unmarked before the Postern.
+- **The land** (Lotus; 300, 301): the seam is the tundra apex; Kestrow west, Sallow east, Aldmere south, the outlands beyond. Only the north's frost holds the Kin; Kinsbane hunts the lean season. Seam: maps 1, 2, 4, 6, 9, 10; Sallow 3, 7, 8; Aldmere 5; Kestrow quests only. Geography never retiles a tuned map. Grounds (Lotus, #892; 307 to 310; #916): frost `#949A9A` on the seam, cold moss `#649470` elsewhere. Sand `#A89670` is the `region: outland` ground (no terrain id), Keziah's quests only: a scoped warm exception, hatch and tokens ink-edged; built (#916, 0227), kept once both have looked at `docs/look/sand-916.png` (both hatches, old hill, road). Region is a voice source, not a tic; Alder and Bet are the seam's, Bet's unmarked before the Postern.
 - **The storyline** is `docs/STORY.md` draft 6 (244); build to change it. Hask is the door, the Kin in his pommel shard, nudging, never erasing; his last line is Lotus's. Good: the reseal. Bad: a lost map. Secret (#790): Under the Hill (Kinsbane woken, both claimants, Marrit held, Pell's quest 2); Reseal or Fight (#806); Fight won kills the god.
 - **Rook's drake** (244): the last cold drake, church's; Grown carries an ally, Unbroken breathes rime once a map (#805), rime wears to Water. **The Drover** (Lotus, #872; 288 to 294; built, 0217) replaces the Scout: flying, Mov 7, Lookout, never doubles; a flat bite on lance hits; the long carry; deep rime (DESIGN 3). A utility flier, the lance the price; gate: Grown median 70% of the Sky Captain's damage, each phase (#882). Keziah's flier: Edda Vane (#801).
 - **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake; three voices, three lines a map (built, 0221: a starving drain, a tooth, the waking); the choice screen's lines (0222); placeholder text.
-- **The waking (250, 251; provisional; built, 0212):** once a map a woken scythe kill gives full Move again, no second strike. **Levers stopped (286):** scythe beside her axe (0209); `starved:` (#856); teeth 2,2,1,3,4, woken at 12, Drain 5, heal 10 (0211); Chat cold Brackwater 8/7/5. **Lotus (#871; 0214): 0210's reach gate is reverted;** she drains with no foe near, so taking her is the choice. A flagged map (walking drains p50 2+; only Sallow) asks `march sure`.
+- **The waking (250, 251; provisional; built, 0212):** once a map a woken scythe kill gives full Move again, no second strike. **Levers stopped (286):** 0209, #856, 0211 (teeth 2,2,1,3,4, woken at 12, Drain 5, heal 10); Chat cold Brackwater 8/7/5. **Lotus (#871; 0214): 0210's reach gate is reverted;** she drains with no foe near, so taking her is the choice. A flagged map (walking drains p50 2+; only Sallow) asks `march sure`.
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling.
 - **Saves and difficulty** (#663, #664): camp saves only; Recruit, Tactician about 15 off `normal`; permadeath off returns the fallen Wounded (2); a captain or protect death loses.
 - **Supports** (#77; 0183 to 0189; 258, 259): 3 to 4 partners plus the captain, a kind per pair (#809); marriage an S bond (#634). Read beside a partner (best, not sum). C 16, B 28, A 48; a captain pair at the higher rate (4). A reachable by a committed human (else 44).
@@ -99,7 +99,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 
 - **Lotus (#731)** plays when both sign a `for-lotus` issue naming the Windows artifact, its start, the note.
 - **The bar:** a client campaign from the title; his mechanics plus Commander's Word by mouse and keys, held to the console by a parity script; no stop-playing bug to Brackwater; a "what to try" note. No Fun Gate.
-- **Signing:** Chat after its console campaign through Brackwater and the parity transcript; Code after a hand run of the exe.
+- **Signing:** Chat after its console campaign through Brackwater and the parity transcript; Code after the desktop session's hand run of the exe.
 
 ## Open, the Table's
 
@@ -113,10 +113,10 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 ## Plumbing
 
 - **Engine** (0008): Godot 4 .NET in this repo; the core stays engine-free; any renderer consumes the versioned protocol (0046) and carries no rules.
-- **Builder race** (#735, 0169): one Builder at a time by claim; the earlier claim wins (ROUTINES.md section 2).
+- **Builder race** (#735, 0169; provisional): chain `on`; one Builder at a time by claim, wait and re-read, the earlier claim wins; in ROUTINES.md section 2 until Lotus pastes the prompt.
 - **Art:** human-made only (Lotus, 2026-10-03); the board's look is ours at $0; packs recoloured to LOOK.md, commissions at commercial rates, licences checked first; the list is `docs/ART_SHOPPING.md` (#816).
 - **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, a warm low fill on player figures only; 3 or 4 posterized steps, ink heavier on the silhouette; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Delivered art keeps its colour under chroma 32 with one amber accent, never the only side cue; tint for placeholders only (0223, built).
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262 to 288; `talk` 265 to 274; Drover 288 to 290); #875 291 on (WRITING 295, 296; art 298, 299; land 300, 301; Oath Stone 302 to 306; Counting House 311 to 313; Long Count 313).
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262 to 288; `talk` 265 to 274; Drover 288 to 290); #875 291 on (WRITING 295, 296; art 298, 299; land 300, 301; Oath Stone 302 to 306; Counting House 311 to 314; Long Count 313).
