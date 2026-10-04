@@ -6,7 +6,7 @@ Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history is in 
 
 Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-4195 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
+4238 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -14,12 +14,12 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - 13.2 Commander's Word is spiked (#85, 0136; DESIGN 13.2): `order <press|rally|fall back>` once a map as the captain's action, radius `2 + Cha / 4`; `fallback <unit> <x,y|stay>`; `order <kind> preview [from <x,y>]`. Open behind `orders: on` and on campaign maps from the second; the client calls it from its action list (#786). Code 85 warm 6/7/5 on `harrow_weir_orders.map`: the cost did not bite.
 - 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23): sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slices 1, 2, #851, #856 (0195, 0207, 0209, 0211): teeth 2,4,5,8,12, `--kinsbane [--axe|--heeding]`, issued beside the axe; 279's bar passes. Levers stop. Slice 3 (0212): the hunt runs on, a woken kill's full Move again once a map; `woken: keziah` on `the_gleaning_kinsbane_woken.map`. Code 804 8/7/6, woken 7/7/5; Chat cold 858 8/7/5. #865: `campaign ... --fed N` (Chat's field cold at 10 is open). #871 (0214, Lotus): the reach gate reverted; `keziah_warning: on` on Sallow alone (drains p50 2); `march` asks, `march sure` answers. The voice (0221): `kinsbaneSpoke` (a starving drain, a tooth, the waking), 3 a battle; placeholder; Code 804 warm 8/6/5. The choice screen (0222): `pitch` in `campaign.json`, each claimant's line under the offer until the pick; placeholder. What is left on #804 is art (the hound, the screen's staging), waiting on #535.
 - #805 slices 1 to 3 (0213, 0215, 0216): the stages; the carry (`carry:`, Code 805 warm 7/6/7); the breath (`breath:`, `breathe`; Code 805 warm 6/7/8). #872 (0217): the Drover replaces the Scout (never doubles; Drake Bite 3/5; Long Carry; Deep Rime). #882 (0217 amended): `--drover`'s gate is a price ceiling, Grown median at least 70% of the Sky Captain where he leads, per phase and level; passes (0.72 to 0.74). Code 805 warm as a Drover 7/6/6. Slice 4 (0218): a rider fallen for good takes the drake off the field (`drakeFlew` on the record; ending text waits on #634). #805's items are built; it closes on the carry and breath keep rounds.
-- #891 (0223): ART_SPEC's Figures section and Blender note; delivered figures keep their colour. #896: the scene tints only sheets on `generated.txt` (`ArtSpec.Tinted`).
-- #892 closed (Lotus's grounds); sand is #916.
+- #891 (0223): ART_SPEC's Figures; delivered figures keep their colour; #896 tints only `generated.txt` sheets.
+- #916 (0227): `region:` picks the ground (frost seam, moss elsewhere, peat out); outland sand, ink-edged, kept once Chat looks at `docs/look/sand-916.png`.
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` with a versioned `ending` block for a sequel (PROTOCOL.md), `pending` until #634 (slice 2).
 - #811: `docs/WRITING.md` is in (round 295). Voice sheets (#906, `docs/voices/`; Chat cold-reads): Alder (#913), Ottilie, Pell, Teodor (#914), Wren, Brannock, Dunstan, Ansgar (#915). Chat's (#908 to #912) land when drafted; then beats, scenes (#634).
-- 13.18 Lines on the board (#486, DESIGN 13.18): signatures behind `signatures: on`; verdicts in the experiments table; the ledger killed at 65 (0197), next shape a lean (she won't shoot another's target); the other eight wait for boards (`cast_audit.md`).
+- 13.18 (#486): signatures behind `signatures: on`; the ledger killed at 65 (0197), next shape a lean; the other eight wait for boards (`cast_audit.md`).
 - Standing rule (0099): a spike adding a player action names its cost; its keep round shows it biting.
 - #131's north cut is built (0093; Saltmarsh in Maps): the map plays as the pair, then the boss. The lever #524 failed its floor (0095); the next lever has to buy gate 1 back first. Open: turn 1 is a march.
 - #611 is built: six arts, the attack menu; Chat's Tollgate play with it closes #611. #535 slices 1 and 2 are built (0114, 0115); clips await #621.

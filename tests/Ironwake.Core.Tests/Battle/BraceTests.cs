@@ -422,7 +422,8 @@ public class BraceTests
         const string North = "enter 7,0 8,0 9,0 11,0 12,0 13,0 9,1 10,1 11,1 12,1 13,1 7,2 8,2 9,2 10,2 11,2 12,2 13,2 ";
 
         Assert.Equal(2, shippedText.Split(North).Length - 1);
-        Assert.Equal(File.ReadAllText(bracedPath).Replace("\r\n", "\n").Replace("effective_bows: on\n", ""), shippedText.Replace(North, "enter 10,4 9,4 11,4 10,5 "));
+        // The shipped map's region (issue 916) picks its ground and is not the braced file's to carry.
+        Assert.Equal(File.ReadAllText(bracedPath).Replace("\r\n", "\n").Replace("effective_bows: on\n", ""), shippedText.Replace(North, "enter 10,4 9,4 11,4 10,5 ").Replace("region: sallow\n", ""));
         Assert.Equal(shippedText, MapFormat.Write(MapFiles.Load(shippedPath, MapFixture.Content), Starter));
     }
 }

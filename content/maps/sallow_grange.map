@@ -4,6 +4,7 @@ win: seize
 turn_limit: 10
 recall: 3
 enemy_level: 3
+region: sallow
 keziah_warning: on
 
 ....^^^^^^^.......

@@ -1160,7 +1160,7 @@ public partial class Main : Node2D
             }
 
             var swatch = new Rect2(x, y - 11, 14, 14);
-            DrawRect(swatch, TerrainColour(id == "fire" ? "forest" : id));
+            DrawRect(swatch, RegionColour(id == "fire" ? "forest" : id));
             if (id == "fire")
             {
                 Hatch(swatch, TerrainColour("fire"), 2, 5);
@@ -1233,7 +1233,7 @@ public partial class Main : Node2D
         {
             entries.Add((r =>
             {
-                DrawRect(r, TerrainColour("plain"));
+                DrawRect(r, RegionColour("plain"));
                 DrawRect(r, UiColour("ink", 0.62f));
                 DrawRect(r, Muted, filled: false, width: 1);
             }, "unseen"));
