@@ -364,6 +364,80 @@ public class DuskTests
         Assert.Equal(dark ? 1 : 0, Dusk.UnseenNear(state, hale.At, 99).Count);
     }
 
+    /// <summary>
+    /// Issue 987's board, at sight 2: hale at 0,1; the shieldbearer at 3,1 hears him and steps
+    /// beside him; the <paramref name="lit"/> enemy at 4,0 is past hearing and does not know where
+    /// he is until a side-mate stands within sight of him. Ottilie at <paramref name="ottilie"/>.
+    /// The enemy phase acts in unit id order, so the shieldbearer acts before a soldier and after a brigand.
+    /// </summary>
+    private static BattleState Lit(string lit, string ottilie = "5,1", bool lighter = true) =>
+        BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(2, $"E {lit} 4,0 group:b behavior:aggressive" + (lighter ? "\nE shieldbearer 3,1 group:a behavior:aggressive" : ""))
+            .Replace("P recruit:ottilie 0,2", $"P recruit:ottilie {ottilie}"));
+
+    /// <summary>
+    /// Issue 987: an enemy that does not know where the unit is strikes it once a side-mate acting
+    /// before it stands within sight of it, so <c>threat</c> prices it, marks who lights the unit,
+    /// counts it in the total, and <c>end</c>'s lethal names the unit when the strikes reach its HP.
+    /// </summary>
+    [Fact]
+    public void ThreatPricesAnEnemyASideMateLightsTheUnitFor()
+    {
+        var state = Lit("soldier");
+        var hale = state.Find("hale")!;
+
+        var lines = Queries.Threats(state, Starter, hale, hale.At)!;
+        var lit = Assert.Single(lines, l => l.Enemy.Id == "soldier-1");
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, lines, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
+
+        Assert.Equal("shieldbearer-1", lit.LitBy?.Id);
+        Assert.Contains(lines, l => l.Enemy.Id == "shieldbearer-1" && l.LitBy is null);
+        Assert.Empty(Queries.Unseeing(state, Starter, hale, hale.At)!);
+        Assert.Equal(lines.Sum(l => l.IfAllLand), Queries.IfAllLand(lines));
+        Assert.Contains("\n  Soldier (once Shieldbearer lights you) from ", text);
+        Assert.DoesNotContain("cannot see you", text);
+
+        var weak = state.WithUnit(hale with { Hp = lines.Sum(l => l.IfAllLand) });
+        var lethal = Assert.Single(Queries.Lethal(weak, Starter), t => t.Unit.Id == "hale");
+        Assert.Contains(lethal.Strikers, s => s.Enemy.Id == "soldier-1");
+    }
+
+    /// <summary>
+    /// Issue 987's guard: with no side-mate to light the unit, or with the only one acting after
+    /// the enemy in the phase's order, the enemy stays <c>cannot see you (dark)</c> and out of the total.
+    /// </summary>
+    [Theory]
+    [InlineData("soldier", false)]
+    [InlineData("brigand", true)]
+    public void AnEnemyNoEarlierSideMateLightsTheUnitForStaysUnseeing(string enemy, bool lighter)
+    {
+        var state = Lit(enemy, lighter: lighter);
+        var hale = state.Find("hale")!;
+
+        var lines = Queries.Threats(state, Starter, hale, hale.At)!;
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, lines, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
+
+        Assert.DoesNotContain(lines, l => l.Enemy.Id == $"{enemy}-1");
+        Assert.Equal(new[] { $"{enemy}-1" }, Queries.Unseeing(state, Starter, hale, hale.At)!.Select(u => u.Id));
+        Assert.Contains($"\n  {char.ToUpperInvariant(enemy[0])}{enemy[1..]}: cannot see you (dark)", text);
+    }
+
+    /// <summary>
+    /// Issue 987: the lit line is what the enemy phase does. Played out with Ottilie out of the
+    /// way, the shieldbearer strikes hale and the soldier, lit by it, strikes him after.
+    /// </summary>
+    [Fact]
+    public void TheEnemyPhaseStrikesTheUnitTheLitLineNames()
+    {
+        var state = Lit("soldier", ottilie: "11,2");
+        var hale = state.Find("hale")!;
+        Assert.Contains(Queries.Threats(state, Starter, hale, hale.At)!, l => l.Enemy.Id == "soldier-1" && l.LitBy?.Id == "shieldbearer-1");
+
+        var plan = EnemyAi.Plan(state.Do(new EndPhase()), Starter);
+
+        Assert.Contains(plan, c => c is Attack { UnitId: "shieldbearer-1", TargetId: "hale" });
+        Assert.Contains(plan, c => c is Attack { UnitId: "soldier-1", TargetId: "hale" });
+    }
+
     [Fact]
     public void InDaylightNoEnemyIsUnseeing()
     {

@@ -228,6 +228,11 @@ public static class Queries
     /// is priced against the coverer on the unit's tile and carries it as <see cref="ThreatLine.CoveredBy"/>.
     /// On a <c>dash: on</c> map a tile only a dash reaches (DESIGN.md 13.27) is priced with the unit
     /// winded, as it would stand there.
+    /// On a dusk map (DESIGN.md 13.7) an enemy that does not know where the unit is, or whose side
+    /// cannot see it, strikes anyway once a side-mate acting before it in the phase stands within
+    /// sight of the unit (issue 987): such an enemy is priced on the board with that side-mate on
+    /// its strike tile and carries it as <see cref="ThreatLine.LitBy"/>, after the other lines
+    /// (<see cref="LitStrikes"/>).
     /// Null when the unit cannot stand on the tile this phase, or
     /// when the state is not a player phase. Read-only.
     /// </summary>
@@ -261,7 +266,94 @@ public static class Queries
             lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, forecast, arrives, StrikeTiles(board, content, enemy, moved), Windup.Raises(board, weapon)) { CoveredBy = covered?.Struck });
         }
 
+        foreach (var (enemy, lighter, lit, strike) in LitStrikes(board, content, moved, lines))
+        {
+            var carrier = lit.Carrying(enemy, strike.From);
+            var weapon = carrier.UsableWeaponAt(content, strike.Slot)!;
+            Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
+            lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, StrikeForecast(lit, content, carrier, moved, strike), arrives, StrikeTiles(lit, content, enemy, moved), Windup.Raises(lit, weapon)) { LitBy = lighter });
+        }
+
         return lines;
+    }
+
+    /// <summary>
+    /// The enemies that strike <paramref name="moved"/> on a dusk map only once a side-mate lights
+    /// it (issue 987): <see cref="Dusk.Knows"/> and the strike's own sight read the live board, so
+    /// an enemy that does not know where the unit is, or cannot see it from where it would strike,
+    /// does both once a side-mate that acted before it stands within sight of the unit. Each
+    /// enemy <see cref="Unseeing"/> would list is asked again on the board with a lighter moved to
+    /// one of its strike tiles within sight of the unit (an empty tile, or its own), the lighter
+    /// marked moved so the tile stays its own; the first lighter and tile in line order that lets
+    /// the enemy strike decide its line. A lighter is any enemy with a line in
+    /// <paramref name="lines"/> or found here, so a lit enemy lights the next. It must come before
+    /// the enemy in the phase's order (<see cref="EnemyAi.Plan"/> acts in unit order), except on a
+    /// <c>pincer: on</c> map, whose anvils reorder the phase. Like every line of
+    /// <see cref="Threats"/> it prices what the enemy would do were it to choose the unit. Empty in
+    /// daylight.
+    /// </summary>
+    private static List<(BattleUnit Enemy, BattleUnit Lighter, BattleState Lit, EnemyStrike Strike)> LitStrikes(BattleState board, GameContent content, BattleUnit moved, IReadOnlyList<ThreatLine> lines)
+    {
+        var found = new List<(BattleUnit, BattleUnit, BattleState, EnemyStrike)>();
+        if (Dusk.Sight(board) is not { } sight)
+        {
+            return found;
+        }
+
+        var order = board.UnitsOf(Side.Enemy).Select(u => u.Id).ToList();
+        var lighters = lines.Select(l => (Unit: board.Find(l.Enemy.Id) ?? l.Enemy, Tiles: l.Tiles ?? ValueList<Coord>.Of(l.From))).ToList();
+        var pending = board.UnitsOf(Side.Enemy)
+            .Where(e => board.EffectiveBehavior(e, content) is not null
+                && EnemyAi.StrikeOn(board, content, e, moved) is null
+                && EnemyAi.StrikeOn(board, content, e, moved, inDaylight: true) is not null)
+            .ToList();
+        var progress = true;
+        while (progress)
+        {
+            progress = false;
+            foreach (var enemy in pending.ToList())
+            {
+                if (LitBy(board, content, moved, enemy, lighters, order, sight) is not var (lighter, lit, strike))
+                {
+                    continue;
+                }
+
+                found.Add((enemy, lighter, lit, strike));
+                lighters.Add((enemy, StrikeTiles(lit, content, enemy, moved)));
+                pending.Remove(enemy);
+                progress = true;
+            }
+        }
+
+        return found;
+    }
+
+    private static (BattleUnit Lighter, BattleState Lit, EnemyStrike Strike)? LitBy(BattleState board, GameContent content, BattleUnit moved, BattleUnit enemy,
+        IReadOnlyList<(BattleUnit Unit, ValueList<Coord> Tiles)> lighters, List<string> order, int sight)
+    {
+        foreach (var (lighter, tiles) in lighters)
+        {
+            if (lighter.Id == enemy.Id || (!board.Map.PincerEnabled && order.IndexOf(lighter.Id) > order.IndexOf(enemy.Id)))
+            {
+                continue;
+            }
+
+            foreach (var tile in tiles)
+            {
+                if (tile.DistanceTo(moved.At) > sight || (board.UnitAt(tile) is { } there && there.Id != lighter.Id))
+                {
+                    continue;
+                }
+
+                var lit = board.WithUnit(lighter with { At = tile, Moved = true });
+                if (EnemyAi.StrikeOn(lit, content, enemy, moved) is { } strike)
+                {
+                    return (lighter, lit, strike);
+                }
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -279,7 +371,9 @@ public static class Queries
     /// The enemies on <see cref="Threats"/>' board that would strike <paramref name="unit"/> on
     /// <paramref name="from"/> in daylight but cannot this enemy phase only because they do not
     /// know where it is or their side cannot see it (DESIGN.md 13.7, issue 302), in unit order;
-    /// <c>threat</c> prices them at 0 and says why. Empty in daylight. Null exactly when
+    /// <c>threat</c> prices them at 0 and says why. An enemy a side-mate would light the unit for
+    /// is a line of <see cref="Threats"/> instead (<see cref="ThreatLine.LitBy"/>, issue 987), so
+    /// one listed here strikes the unit in no order of the phase. Empty in daylight. Null exactly when
     /// <see cref="Threats"/> is. Read-only.
     /// </summary>
     public static IReadOnlyList<BattleUnit>? Unseeing(BattleState state, GameContent content, BattleUnit unit, Coord from)
@@ -294,8 +388,10 @@ public static class Queries
             return Array.Empty<BattleUnit>();
         }
 
+        var lit = Threats(state, content, unit, from)!.Where(l => l.LitBy is not null).Select(l => l.Enemy.Id).ToHashSet(StringComparer.Ordinal);
         return board.UnitsOf(Side.Enemy)
-            .Where(e => board.EffectiveBehavior(e, content) is not null
+            .Where(e => !lit.Contains(e.Id)
+                && board.EffectiveBehavior(e, content) is not null
                 && EnemyAi.StrikeOn(board, content, e, moved) is null
                 && EnemyAi.StrikeOn(board, content, e, moved, inDaylight: true) is not null)
             .ToList();
@@ -658,6 +754,14 @@ public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon W
     /// unit's tile, when a cover would swap them; <see cref="Forecast"/> is then against it. Null otherwise.
     /// </summary>
     public BattleUnit? CoveredBy { get; init; }
+
+    /// <summary>
+    /// On a dusk map (DESIGN.md 13.7), the side-mate that lights the unit for this strike (issue
+    /// 987): the enemy neither knows where the unit is nor could see it on the phase-start board,
+    /// and strikes once that side-mate, acting before it, stands within sight of the unit.
+    /// <see cref="Forecast"/> is read with the side-mate on its strike tile. Null otherwise.
+    /// </summary>
+    public BattleUnit? LitBy { get; init; }
 }
 
 /// <summary>

@@ -1698,7 +1698,10 @@ public sealed class PlaySession
     /// keeps the bare <c>and whatever is in the dark</c> line. An enemy the player sees that
     /// would strike the unit in daylight but does not know where it is, or whose side cannot
     /// see it from where it would strike (<see cref="Queries.Unseeing"/>, issue 302), is priced
-    /// at 0 with the reason: <c>archer-1: cannot see you (dark)</c>. A move that wins the map
+    /// at 0 with the reason: <c>archer-1: cannot see you (dark)</c>; one that strikes once a
+    /// side-mate acting before it lights the unit (<see cref="ThreatLine.LitBy"/>, issue 987) is a
+    /// priced row instead, in the total, marked <c>(once shieldbearer-1 lights you)</c>, or
+    /// <c>(once a side-mate in the dark lights you)</c> when the player does not see that side-mate. A move that wins the map
     /// (<see cref="Queries.MoveWins"/>, issue 356) is one line saying so, since no enemy phase follows.
     /// On a <c>windup: on</c> map (DESIGN.md 13.16, issue 444) a blow already raised over the tile
     /// is a row before the strikes and is in the total, since it lands for certain at the enemy
@@ -1757,6 +1760,11 @@ public sealed class PlaySession
             foreach (var line in lines)
             {
                 var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
+                if (line.LitBy is { } lighter)
+                {
+                    arrives += Dusk.Seen(state, state.Find(lighter.Id) ?? lighter) ? $" (once {names[lighter.Id]} lights you)" : " (once a side-mate in the dark lights you)";
+                }
+
                 var covered = line.CoveredBy is { } by ? $"covered by {names[by.Id]}, strikes {names[by.Id]} on {tile}, " : "";
                 var answers = line.CoveredBy ?? unit;
                 rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
