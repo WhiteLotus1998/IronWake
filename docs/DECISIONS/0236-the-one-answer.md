@@ -26,3 +26,8 @@ Won on turn 8, nobody fell, one Recall. Three strike orders were taken for the a
 
 - `threat` prices each line's counter as if first. Ordering the enemy phase is the planner's, so the row says only that one counter fires; if a chair asks which, it is the planner's first striker, not printed.
 - The Sim plays with it (the planner reads it), but `--full` was not run on the sample: it is a sample, not a tuned map.
+
+## Amendment, round 330 (#935)
+
+- **The tally is priced or free.** A strike ordered for the answer counts as priced when the bait could have lost something real (HP that mattered, a tile in an enemy's reach, its life) and free when it could not (a counter that deals 0 or 1). If both partners' plays take more free than priced, the rule prices nothing and is killed; the swarm lever does not rescue that case.
+- **The swarm lever, named and not built:** a braced unit (13.14, Wait on its start tile) answers every strike. A unit that moved or struck counters once. If Chat's swarmed play reads as unfair or unreadable, this is the lever, not a cap on the enemy. A sample that tests it carries `brace: on` beside `one_answer: on`.

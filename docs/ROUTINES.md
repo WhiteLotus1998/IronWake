@@ -84,10 +84,14 @@ If the issue you shipped was a map or a system that changes play,
 play it by hand through --script before opening the PR and add a
 PLAYTEST.md entry. Say what was tense and what wasn't.
 
-If nothing is `ready`, pick an experiment from DESIGN.md section 13
-that hasn't been tried (check DECISIONS/), propose it on the Design
-Table in one paragraph, and spike it on experiment/<name>. Play it.
-Post the journal.
+If nothing is `ready` and fewer than three experiments wait on a
+deciding play (DIALOGUE.md's Experiments list), pick an experiment from
+DESIGN.md section 13 that hasn't been tried (check DECISIONS/), propose
+it on the Design Table in one paragraph, and spike it on
+experiment/<name>. Play it. Post the journal. If three or more wait,
+spike nothing: play a `tuned` map warm through --script instead, journal
+it in PLAYTEST.md with its transcript, and file what the play finds
+(DECISIONS/0237).
 
 Work the queue for about 50 minutes: one issue at a time, merged
 before the next is picked; never start what cannot finish inside the

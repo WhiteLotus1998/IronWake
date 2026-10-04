@@ -6,8 +6,8 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
 
 - **Fun Gate entries.** Each partner writes before reading the other's; Code's lands first. A warm chair counts if disclosed (0073). Tricks stay unnamed until both are in.
 - **A map is retuned only after both entries on it are in**, one lever at a time, measured by the Sim before a partner plays it (round 16). Levers are content first.
-- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: the Oath Stone at 10 (#939), #908, Wren's talk, the Rookery (#862), a Drover map (293), the dash (#950), the wind (#955), the one answer (#960).
-- **Experiments.** The gate is open (round 105). A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
+- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: the Oath Stone at 10 (#939), #908, Wren's talk, the Rookery (#862), a Drover map (293), the dash, the wind, the one answer.
+- **Experiments.** At most three spikes wait on a deciding play; a new one waits until the count is under three (330, 0237). With nothing `ready`, the Builder plays a tuned map warm instead. A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway.
 - **Rules go on screen; geometry does not** (42, 44): a rule a map needs is printed; the best tile is the player's.
 - **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only on units in his reach is scenery (39, 72).
@@ -15,7 +15,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
 
 ## Rules, settled (details in DESIGN.md and the records named)
 
-- **Forecast** prints the resolved probability; one hit function for forecast, resolver and planners (DESIGN 5); 100 only if certain, 0 only if impossible, else 1 to 99 (#452). Two-roll averaging (0023).
+- **Forecast** prints the resolved probability; one hit function for forecast, resolver and planners (DESIGN 5); 100 only if certain, 0 only if impossible, else 1 to 99 (#452). Two rolls averaged (0023).
 - **Combat numbers** (0028): arm 4, burden vs full Str, speed twice in avoid, iron hit 15 lower, fort avoid 15.
 - **Wake rule:** proximity, radius 4, noise at 6, any death wakes the group, checked after every command (DESIGN 8). Guard bosses wake (0055); `wake_links` calls a second group (0080).
 - **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; options range over every weapon carried, the counter is what it last swung (#174); prefers a target that cannot counter. A `defeat_boss` boss plans under the exposure veto; a refused guard boss goes home (0077 to 0080); a throne-holder steps off only to strike (0063).
@@ -45,25 +45,25 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
 ## Experiments (state and kill criterion)
 
 - **13.1 Rapport and Rivalry: kept** behind its header, symmetric arm, threatened-only accrual, threshold 16 (0043).
-- **13.2 Commander's Word (#85, 0136; rounds 206 to 209):** arm B only, radius `2 + Cha / 4`, `order <press|rally|fall back>` once a map after the captain's move, with `preview`; Fall back replaces Hold. Kept on Harrow Weir `orders: on` if a third of orders bind and a journal names a move for it (0099).
+- **13.2 Commander's Word (#85, 0136; rounds 206 to 209):** arm B only, radius `2 + Cha / 4`, `order <press|rally|fall back>` once a map after the captain's move, with `preview`; Fall back replaces Hold. Kept on Harrow Weir `orders: on` if a third of orders bind and a journal names a move for it.
 - **13.4 Grudges (0065, 0066):** the override is a veto, -20 crit avoid on the sworn unit; killed if neither replay (Chat's seed 23, #331) changes a decision.
 - **13.5 The keep: kept provisionally** (0059, 0060); the raid is in from both chairs (round 158); Chat's camp play decides.
-- **13.6 Certification trials: kept provisionally** (0057); #73 closes on Chat's cold Outrider trial. A trial only where the payout makes the bet worth refusing.
+- **13.6 Certification trials: kept provisionally** (0057); #73 closes on Chat's cold Outrider trial. A trial only where the payout is worth refusing.
 - **13.7 Dusk: kept** on Escape; Brackwater ships at `dusk: 5` (0062), Sallow stays in daylight. Phase-start sight and the hearing-radius `?`, never stacked. An enemy hears within the wake radius (4); the screen says so (#765).
 - **13.8 Carry the fallen (#295):** killed if in both plays nobody spends a move on a carrier they could ignore. Chat cold decides.
 - **13.10 Retreat (0037, #215):** a refugee holds its refuge as Hold until 50 percent; the forecast prints it. Killed if Chat's cold `river_refuge_hold.map` changes no turn.
-- **13.11 Two-weapon boss: kept** (0061). **13.12 Shove:** ally pushes, samples (0069). **13.13 Pincer:** on its samples (0082, 0083), ships where the enemy can anvil too.
+- **13.11 Two-weapon boss: kept** (0061). **13.12 Shove:** samples (0069). **13.13 Pincer:** on its samples (0082, 0083), ships where the enemy can anvil too.
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
 - **13.15 Wildfire: kept on its samples** (0085, 0110); a map shipping it needs an enemy route through forest the party holds. Killed: 13.16 windup (0094), 13.17 overwatch (0098, 0103), 13.19 cover (0099).
 - **13.21 The tide (0111, round 176; provisional):** content only, map events flood and drain a ford on announced turns. Kept if a journal shows a ford tile taken, refused or crossed for the schedule; Chat's cold play decides.
 - **13.22 The break (0112, rounds 181 to 183; provisional; DESIGN 13.22):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for the break. The board is Saltmarsh Ford (#606); the protocol leaves out the `break if` line until kept.
 - **13.24 The messenger (0135; provisional):** a runner fires `messenger` events at its edge. Kept if a strike or blocker is spent on it; killed if it can't run or be caught. Chat's cold #680 decides.
-- **13.18 Lines on the board (#486):** one printed fact per line; killed if no play takes a command for it over the best line. **Cadets (0097):** Teodor and Wren's Canto kept; Wren's talk unread. The ledger is killed (0197: Aimed Shot clears every refusal). Next (264, lean): she won't shoot an enemy another unit struck this phase.
+- **13.18 Lines on the board (#486):** one printed fact per line; killed if no play takes a command for it over the best line. **Cadets (0097):** Teodor and Wren's Canto kept; Wren's talk unread. The ledger is killed (0197). Next (264, lean): she won't shoot what another struck this phase.
 - **13.25 Rotten planks (0179; provisional):** Planks wear to Split planks to Water when left (horse or armour twice, flyer never); ally-held, crossed, not worn. Killed if no play chooses for the wear; Chat's cold #783 decides.
-- **13.27 The dash (#950, 0234; provisional; 323 to 325):** `dash` on `dash: on`: Move +2 in movement as the whole turn, winded (+15 against) until the next phase. Killed if no dash over a Move, or all free; more free than priced in both journals: the borrowed step (Move -2 next turn). Code 950 warm 8/7/6 (4 free, 2 priced); Chat cold.
-- **13.28 The wind (#955, 0235; provisional; 326 to 328):** `wind: <way>[; turn N <way>]`: downwind +2, upwind -2, tie across; deaths still wake; turns land at the player phase start. #957: board, `end`, `threat from` name who the coming turn wakes; no `wind:` with `dusk:`. Killed if no play takes a stop, route or timing for it. Chat cold decides. If upwind 2 opens fights free: upwind -1.
-- **13.29 The one answer (#960, 0236; provisional; 329):** `one_answer: on`: a unit that counters makes no other counter until the next phase, either side; the forecast says `(answered this phase)`. No action; the bait's exposure is the price. Killed if no play orders a strike for it, or the enemy swarm reads unfair. Code 1290 warm 7/8/6 (3 ordered, 2 not); Chat cold, swarmed on purpose.
-- **13.26 Rockfall (0182; provisional):** `drop <unit>` on a ledge as the action; the rock strikes 10; a held tile stays open. Killed if nobody drops or every drop is free. Turn-2 wave (247 to 249); 10,5 to Mountain if the cold play loses the dropper.
+- **13.27 The dash (#950, 0234; provisional; 323 to 325):** `dash` on `dash: on`: Move +2 in movement as the whole turn, winded (+15 against) until the next phase. Killed if no dash over a Move; more free than priced in both journals: the borrowed step (Move -2 next turn). Code 950 warm 8/7/6 (4 free, 2 priced).
+- **13.28 The wind (#955, 0235; provisional; 326 to 328):** `wind: <way>[; turn N <way>]`: downwind +2, upwind -2, tie across; deaths still wake; turns land at the player phase start. #957: board, `end`, `threat from` name who the coming turn wakes; no `wind:` with `dusk:`. Killed if no play takes a stop, route or timing for it. If upwind 2 opens fights free: upwind -1.
+- **13.29 The one answer (#960, 0236; provisional; 329, 330):** `one_answer: on`: a unit that counters makes no other counter until the next phase, either side; a counter that couldn't reach doesn't spend. Journals tally ordered strikes priced or free (the bait risked nothing); more free in both plays kills it. Swarm lever, named not built: a braced unit answers every strike (the deciding sample then needs `brace: on`). Code 1290 warm 7/8/6; Chat cold, swarmed on purpose.
+- **13.26 Rockfall (0182; provisional):** `drop <unit>` on a ledge as the action; the rock strikes 10; a held tile stays open. Killed if nobody drops or every drop is free. Turn-2 wave (247-249); 10,5 to Mountain if the cold play loses the dropper.
 - **13.20 The keep as a home (0137, 0138, #687):** rooms cost from the repair budget, a bed a wall the finale lacks; beds gate arrivals, a death never frees one (0010). Killed if the raid purse affords every room and wall in both plays.
 
 ## The campaign's story (rounds 186 to 211, 192; 0121; DESIGN 14)
@@ -91,7 +91,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723). Frozen iron is the rare Refine material and chills (#702).
 - **The second tier's level (#704; provisional):** gate L7, rank C. Campaign-only curve 1,1,2,3,2,6,7,6,4,8 (0161, 0178, 0191); a tuned map under 60 lowers the point, not the board; the bend reads `--curve`'s `carried` (#764). The branch pick joins at the living median at the raid's camp (#763). Money waits (0051).
 - **The captain's ladder at tier 1 (229; 0165; provisional):** the lance moved to the Champion; Hunter's Ground killed. Numbers before verbs. The Sim picks a weapon per attack (0171), blind to ignition.
-- **The ladder bar (round 232; provisional):** per map a floor (no class more than 10 under the unpromoted captain); across the ladder's five maps class means within 10 at 200 seeds; 5 at 400 before tuned. A board-dependent pick is choice.
+- **The ladder bar (round 232; provisional):** per map a floor (no class more than 10 under the unpromoted captain); across the ladder's five maps class means within 10 at 200 seeds; 5 at 400 before tuned. 
 - **The Vanguard's verb (rounds 235, 236; 0174; provisional):** durability killed as a hoarder. Share is the chooser's fingerprint: it can kill a verb, never keep one alone; a hand play must. The verb is **Opening** (#772): a struck, living enemy is open to allies (Def and Res -3) until the player phase ends; kill criterion in #772.
 
 ## How we write (Lotus, via #780, 2026-10-02)
@@ -100,7 +100,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
-- **Lotus (#731)** plays when both sign a `for-lotus` issue (Windows build, start, note). Bar: a client campaign from the title, his mechanics and the Word by mouse and keys, script parity, no stop-playing bug to Brackwater, a "what to try" note; no Fun Gate. Chat signs after its console campaign and parity transcript; Code after a hand run.
+- **Lotus (#731)** plays when both sign a `for-lotus` issue. Bar: a client campaign from the title, his mechanics and the Word by mouse and keys, script parity, no stop-playing bug to Brackwater, a "what to try" note. Chat signs after its console campaign and parity transcript; Code after a hand run.
 
 ## Open, the Table's
 
@@ -120,4 +120,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262 to 288; `talk` 265 to 274; Drover 288 to 290); #875 291-315; #935 316 on (field 316, 317; Oath Stone 317 to 319; Counting House 321; dash 323 to 325; wind 326 to 328; one answer 329).
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262-288; `talk` 265-274; Drover 288-290); #875 291-315; #935 316 on (field 316, 317; Oath Stone 317-319; Counting House 321; dash 323-325; wind 326-328; one answer 329, 330).
