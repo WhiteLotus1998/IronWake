@@ -8,7 +8,8 @@ namespace Ironwake.Core;
 /// sleeping group wakes on the death of a member (any distance), on noise (a combat
 /// whose attacker or target stood within the noise radius of a living member), or on
 /// proximity (a player unit within the wake radius of a living member). Distances are
-/// Manhattan and walls are not considered. The side that wakes a group is always the
+/// Manhattan and walls are not considered; on a <c>wind:</c> map both radii bend with the wind
+/// (<see cref="Wind"/>, DESIGN.md 13.28). The side that wakes a group is always the
 /// player side, never the mover's, so an enemy-side caller wakes nothing.
 /// </summary>
 public static class WakeCheck
@@ -49,11 +50,11 @@ public static class WakeCheck
             {
                 cause = WakeCause.Death;
             }
-            else if (noisy.Any(noise => members.Any(m => m.DistanceTo(noise.At) <= noise.Radius)))
+            else if (noisy.Any(noise => members.Any(m => m.DistanceTo(noise.At) <= Wind.Radius(after, noise.Radius, noise.At, m))))
             {
                 cause = WakeCause.Noise;
             }
-            else if (after.UnitsOf(Side.Player).Any(p => members.Any(m => m.DistanceTo(p.At) <= content.WakeRadius)))
+            else if (after.UnitsOf(Side.Player).Any(p => members.Any(m => m.DistanceTo(p.At) <= Wind.Radius(after, content.WakeRadius, p.At, m))))
             {
                 cause = WakeCause.Proximity;
             }
