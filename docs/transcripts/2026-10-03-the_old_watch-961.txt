@@ -37,14 +37,14 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 6, Raid on Ironwake. Defeat every enemy by the end of turn 7. Captain Fenn must survive.
 > quest teodor_1 wren
 -- The Old Watch --
-Teodor asked for a day and one pair of hands. His grandfather stood
-watch on a hill above Aldmere for thirty years, and is buried under it.
-Sworn men have been digging there since the spring.
+Teodor's grandfather stood watch on a hill above Aldmere for thirty
+years and is buried under its cairn. Sworn men have been digging there
+since the lambing. Teodor hears it out, then goes for his boots.
+"They'll have the stones off him by harvest."
 
-(Placeholder card until the writing pass. Defeat their captain on the
-cairn's fort at 7,0 by the end of turn 9. The map is lost if Teodor
-falls. The cairn's door at 7,2 is one tile wide. More come up the hill
-behind you from turn 3, announced.)
+(Defeat their captain on the cairn's fort at 7,0 by the end of turn 9.
+The map is lost if Teodor falls. The cairn's door at 7,2 is one tile
+wide. More come up the hill behind you from turn 3, announced.)
 
 Side map: The Old Watch, seed 961
 Teodor goes with Wren. This map is lost if Teodor falls; who falls here is gone for good.

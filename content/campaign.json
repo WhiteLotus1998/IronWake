@@ -96,11 +96,11 @@
         ] },
     { "id": "teodor_1", "member": "teodor", "part": 1, "map": "the_old_watch", "opensAfter": "harrow_weir", "wakes": "family_lance",
       "before": [
-        "Teodor asked for a day and one pair of hands. His grandfather stood watch on a hill above Aldmere for thirty years, and is buried under it. Sworn men have been digging there since the spring.",
-        "(Placeholder card until the writing pass. Defeat their captain on the cairn's fort at 7,0 by the end of turn 9. The map is lost if Teodor falls. The cairn's door at 7,2 is one tile wide. More come up the hill behind you from turn 3, announced.)"
+        "Teodor's grandfather stood watch on a hill above Aldmere for thirty years and is buried under its cairn. Sworn men have been digging there since the lambing. Teodor hears it out, then goes for his boots. \"They'll have the stones off him by harvest.\"",
+        "(Defeat their captain on the cairn's fort at 7,0 by the end of turn 9. The map is lost if Teodor falls. The cairn's door at 7,2 is one tile wide. More come up the hill behind you from turn 3, announced.)"
       ],
       "after": [
-        "(Placeholder until the writing pass: what the sworn were digging for, and what the lance does in his hands at the cairn.)",
+        "The sworn had the cairn half down and the shroud cut open at the hands, where a watchman is buried with what he carried. The hands were empty. Where Teodor leaned the lance on the cairn, frost has come up on the shaft. He lays the stones back one at a time before he touches it again.",
         "(The Family Lance's last stage waited on this. It wakes once Teodor has fought enough with it, now or later.)"
       ] },
     { "id": "ottilie_1", "member": "ottilie", "part": 1, "map": "the_counting_house", "opensAfter": "ironwake_raid", "common": 2,
@@ -131,11 +131,11 @@
       ] },
     { "id": "teodor_2", "member": "teodor", "part": 2, "map": "the_wardens_gate", "names": "family_lance", "rare": 3,
       "before": [
-        "Teodor asked for two days and one pair of hands. The prison's outer gate is a day north of Aldmere, under the hill, and the first warden's name is cut over it. Hask's sworn have been chipping at the stone around it for shards.",
-        "(Placeholder card until the writing pass. Defeat their captain on the fort before the gate, 7,2, by the end of turn 10. The map is lost if Teodor falls. The old wall at row 5 has two ways through: a one-tile gap at 4,5 and a breach at 10,5 and 11,5. Riders keep the east yard. More come up the road behind you from turn 3, announced.)"
+        "The prison's outer gate stands a day north of Aldmere, under the hill, with the first warden's name cut over it. Hask's sworn are chipping the stone around the name for shards. Teodor knows the road: his grandfather drove sheep past it every spring. \"He'd never let them drink there.\"",
+        "(Defeat their captain on the fort before the gate, 7,2, by the end of turn 10. The map is lost if Teodor falls. The old wall at row 5 has two ways through: a one-tile gap at 4,5 and a breach at 10,5 and 11,5. Riders keep the east yard. More come up the road behind you from turn 3, announced.)"
       ],
       "after": [
-        "(Placeholder until the writing pass: the name over the gate, and the lance that matches it.)",
+        "Over the gate the name is worn shallow, the sworn's chisel marks all round it. Teodor goes over it with a finger, letter by letter. Then he turns the lance over and scrapes the socket with his thumbnail until the same letters come up under the rust. He oils the socket that night, and the letters with it.",
         "(The Family Lance is the First Warden's Lance now. Once woken, its art Turn the Key strikes at -4 Power, once, never doubling; a hit the enemy survives locks it, Mov 0 until its side's next phase ends, while Teodor stands beside it. If he leaves or falls, the lock drops to a chill.)"
       ] },
     { "id": "keziah_1", "member": "keziah", "part": 1, "map": "the_burned_shrine", "opensAfter": "sallow_grange", "common": 2,

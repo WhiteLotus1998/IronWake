@@ -44,16 +44,16 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 8, Brackwater Cut. Get the captain out through an exit by the end of turn 8. Captain Fenn must survive.
 > quest teodor_2 wren
 -- The Warden's Gate --
-Teodor asked for two days and one pair of hands. The prison's outer gate
-is a day north of Aldmere, under the hill, and the first warden's name
-is cut over it. Hask's sworn have been chipping at the stone around it
-for shards.
+The prison's outer gate stands a day north of Aldmere, under the hill,
+with the first warden's name cut over it. Hask's sworn are chipping the
+stone around the name for shards. Teodor knows the road: his grandfather
+drove sheep past it every spring. "He'd never let them drink there."
 
-(Placeholder card until the writing pass. Defeat their captain on the
-fort before the gate, 7,2, by the end of turn 10. The map is lost if
-Teodor falls. The old wall at row 5 has two ways through: a one-tile gap
-at 4,5 and a breach at 10,5 and 11,5. Riders keep the east yard. More
-come up the road behind you from turn 3, announced.)
+(Defeat their captain on the fort before the gate, 7,2, by the end of
+turn 10. The map is lost if Teodor falls. The old wall at row 5 has two
+ways through: a one-tile gap at 4,5 and a breach at 10,5 and 11,5.
+Riders keep the east yard. More come up the road behind you from turn 3,
+announced.)
 
 Side map: The Warden's Gate, seed 1110
 Teodor goes with Wren. This map is lost if Teodor falls; who falls here is gone for good.
@@ -924,8 +924,11 @@ Battle won: defeat_boss; only recall is left, or leave
 > leave
 Teodor wins teodor_2; Family Lance is the First Warden's Lance now; the stores take 3 frozen iron; nobody fell
 -- After The Warden's Gate --
-(Placeholder until the writing pass: the name over the gate, and the
-lance that matches it.)
+Over the gate the name is worn shallow, the sworn's chisel marks all
+round it. Teodor goes over it with a finger, letter by letter. Then he
+turns the lance over and scrapes the socket with his thumbnail until the
+same letters come up under the rust. He oils the socket that night, and
+the letters with it.
 
 (The Family Lance is the First Warden's Lance now. Once woken, its art
 Turn the Key strikes at -4 Power, once, never doubling; a hit the enemy
