@@ -204,7 +204,7 @@ public partial class Main
         var speeds = SceneBackdrop.Layers.ToDictionary(l => l.Name, l => l.Speed);
         foreach (var (side, x) in new[] { (backdrop.Left, frame.Position.X), (backdrop.Right, frame.Position.X + half) })
         {
-            var ground = TerrainColour(side.Terrain == "fire" ? "forest" : side.Terrain);
+            var ground = RegionColour(side.Terrain == "fire" ? "forest" : side.Terrain);
 
             // The far ridge: a low silhouette in the ground's colour, darkened, drifting slowest.
             var ridge = new List<Vector2> { new(x, horizon) };

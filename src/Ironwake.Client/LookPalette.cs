@@ -1,3 +1,5 @@
+using Ironwake.Core;
+
 namespace Ironwake.Client;
 
 /// <summary>
@@ -21,11 +23,12 @@ public static class LookPalette
     /// <summary>
     /// The terrain colours by terrain id. Fire is the one warm world colour and is never drawn
     /// as a flat fill: LOOK.md draws it hatched over its ground, so a burning tile never reads
-    /// as one of ours.
+    /// as one of ours. Plain is the seam's ground, frost; a map in another region draws plain in
+    /// that region's ground instead (<see cref="GroundOf"/>, issue 916).
     /// </summary>
     public static readonly IReadOnlyDictionary<string, Rgb> Terrain = new Dictionary<string, Rgb>
     {
-        ["plain"] = Hex("7E9470"),
+        ["plain"] = Hex("949A9A"),
         ["road"] = Hex("B3AE9C"),
         ["forest"] = Hex("4F6E54"),
         ["hill"] = Hex("C8C8A0"),
@@ -39,6 +42,57 @@ public static class LookPalette
         ["split_planks"] = Hex("383010"),
         ["rime"] = Hex("6090C0"),
     };
+
+    /// <summary>
+    /// The grounds by name (issue 916, Lotus's pick on #892): frost for the seam, snow drawn on it
+    /// as detail; cold moss for every region but the outlands; and sand for the outlands, the one
+    /// ground warmer than the warm-ground margin, a scoped exception (rounds 307 to 310).
+    /// </summary>
+    public static readonly IReadOnlyDictionary<string, Rgb> Grounds = new Dictionary<string, Rgb>
+    {
+        ["frost"] = Hex("949A9A"),
+        ["moss"] = Hex("649470"),
+        ["sand"] = Hex("A89670"),
+    };
+
+    /// <summary>The ground each region draws plain in (issue 916): frost on the seam, sand in the outlands, cold moss elsewhere.</summary>
+    public static string GroundName(MapRegion region) => region switch
+    {
+        MapRegion.Seam => "frost",
+        MapRegion.Outland => "sand",
+        _ => "moss",
+    };
+
+    /// <summary>The colour plain is drawn in on a map in <paramref name="region"/>.</summary>
+    public static Rgb GroundOf(MapRegion region) => Grounds[GroundName(region)];
+
+    /// <summary>
+    /// A terrain's colour on a map in <paramref name="region"/>: plain in the region's ground,
+    /// every other terrain its own; null for a terrain the palette does not know.
+    /// </summary>
+    public static Rgb? TerrainIn(string id, MapRegion region) =>
+        id == "plain" ? GroundOf(region) : Terrain.TryGetValue(id, out var rgb) ? rgb : null;
+
+    /// <summary>The one region whose ground may be warm (issue 916, round 310): the outlands' sand.</summary>
+    public const MapRegion WarmGroundRegion = MapRegion.Outland;
+
+    /// <summary>The outland ground's lightness ceiling (round 307): brighter sand closes on hill and pulls amber under 33.</summary>
+    public const double OutlandLightnessCeiling = 66;
+
+    /// <summary>
+    /// Whether <paramref name="colour"/> may be the outland ground (issue 916): its chroma within
+    /// the world's ceiling and its lightness under <see cref="OutlandLightnessCeiling"/>, so the
+    /// exception never stretches to a bright desert sand.
+    /// </summary>
+    public static bool OutlandGroundHolds(Rgb colour) =>
+        ColourVision.Chroma(colour) <= WorldChromaCeiling && ColourVision.Lightness(colour) < OutlandLightnessCeiling;
+
+    /// <summary>
+    /// Whether the threat hatch's strokes and the player's discs carry a 1px <c>ui.ink</c> edge on
+    /// <paramref name="ground"/> (issue 916, round 307): on a warm ground, so the bone hatch reads
+    /// as a mark and not a peach tint, and amber stands off the sand.
+    /// </summary>
+    public static bool EdgedOn(Rgb ground) => IsWarmGround(ground);
 
     /// <summary>The terrain drawn hatched rather than filled, exempt from the world's chroma ceiling.</summary>
     public const string HatchedTerrain = "fire";
@@ -68,7 +122,8 @@ public static class LookPalette
     /// <summary>
     /// How far a ground's red may pass its blue before it counts as warm (issue 578, round 166):
     /// the old hill `#B89E6C` (76) was warm and turned the bone hatch peach; since round 170 no
-    /// ground but fire is, so the hatch is bone everywhere (issue 564).
+    /// ground but fire is, so the hatch is bone everywhere (issue 564), except the outland sand
+    /// (56, issue 916), on which the hatch carries an ink edge (<see cref="EdgedOn"/>).
     /// </summary>
     public const int WarmGroundMargin = 40;
 
@@ -90,7 +145,8 @@ public static class LookPalette
 
     /// <summary>Every named token with its value, as LOOK.md's table lists them.</summary>
     public static IEnumerable<(string Name, Rgb Colour)> Tokens =>
-        Terrain.Select(t => ($"terrain.{t.Key}", t.Value))
+        Terrain.Where(t => t.Key != "plain").Select(t => ($"terrain.{t.Key}", t.Value))
+            .Concat(Grounds.Select(g => ($"ground.{g.Key}", g.Value)))
             .Append(("player", Player))
             .Append(("player.deep", PlayerDeep))
             .Append(("enemy", Enemy))

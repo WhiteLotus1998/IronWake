@@ -49,7 +49,7 @@ def hex_rgb(value):
 
 # docs/LOOK.md's palette table; LookPalette holds the same values.
 TERRAIN = {
-    "plain": "7E9470", "road": "B3AE9C", "forest": "4F6E54", "hill": "C8C8A0",
+    "plain": "949A9A", "road": "B3AE9C", "forest": "4F6E54", "hill": "C8C8A0",
     "mountain": "77767C", "water": "41667F", "fort": "9FB0C4", "wall": "23272E",
     "throne": "E4E7EA", "fire": "943C0C",
     "planks": "585030", "split_planks": "383010", "rime": "6090C0",

@@ -269,6 +269,13 @@ public sealed record MapDefinition(
     /// </summary>
     public bool KeziahWarning { get; init; }
 
+    /// <summary>
+    /// The <c>region:</c> header (issue 916): where the map lies, which picks the ground plain is
+    /// drawn in (frost on the seam, cold moss in the regions, sand in the outlands). The seam by
+    /// default. No rule reads it.
+    /// </summary>
+    public MapRegion Region { get; init; } = MapRegion.Seam;
+
     /// <summary>Whether <paramref name="unit"/> is oath-bound here (issue 691): an enemy whose group <see cref="Oathbound"/> names.</summary>
     public bool IsOathbound(BattleUnit unit) => unit.Side == Side.Enemy && unit.Group is { } group && Oathbound.Contains(group);
 

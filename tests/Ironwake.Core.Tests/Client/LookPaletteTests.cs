@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using Ironwake.Client;
 using Ironwake.Content;
+using Ironwake.Core;
 using Ironwake.Core.Tests.Content;
 using static Ironwake.Client.ColourVision;
 
@@ -87,16 +88,118 @@ public partial class LookPaletteTests
     }
 
     [Fact]
-    public void NoGroundButFireIsWarm()
+    public void NoGroundButFireAndTheOutlandSandIsWarm()
     {
-        var warm = LookPalette.Terrain.Where(t => t.Key != LookPalette.HatchedTerrain && LookPalette.IsWarmGround(t.Value)).Select(t => t.Key);
-        Assert.Empty(warm);
+        Assert.Equal(new[] { LookPalette.WarmGroundRegion }, WarmRegions(LookPalette.GroundOf));
+        var warmTerrain = LookPalette.Terrain.Where(t => t.Key != LookPalette.HatchedTerrain && LookPalette.IsWarmGround(t.Value)).Select(t => t.Key);
+        Assert.Empty(warmTerrain);
+        Assert.Equal(new[] { "sand" }, LookPalette.Grounds.Where(g => LookPalette.IsWarmGround(g.Value)).Select(g => g.Key));
     }
+
+    [Fact]
+    public void ASecondWarmGroundFailsTheException()
+    {
+        var oldHill = new Rgb(0xB8, 0x9E, 0x6C);
+        var warm = WarmRegions(region => region == MapRegion.Sallow ? oldHill : LookPalette.GroundOf(region));
+        Assert.NotEqual(new[] { LookPalette.WarmGroundRegion }, warm);
+    }
+
+    private static MapRegion[] WarmRegions(Func<MapRegion, Rgb> ground) =>
+        Enum.GetValues<MapRegion>().Where(r => LookPalette.IsWarmGround(ground(r))).ToArray();
 
     [Fact]
     public void TheWarmGroundRuleRefusesTheOldHill()
     {
         Assert.True(LookPalette.IsWarmGround(new Rgb(0xB8, 0x9E, 0x6C)));
+    }
+
+    [Fact]
+    public void TheOutlandSandHoldsTheGuard()
+    {
+        Assert.True(LookPalette.OutlandGroundHolds(LookPalette.GroundOf(MapRegion.Outland)));
+    }
+
+    [Fact]
+    public void TheGuardRefusesABrightDesertSand()
+    {
+        var bright = new Rgb(0xC0, 0xA8, 0x78);
+        Assert.True(Chroma(bright) <= LookPalette.WorldChromaCeiling);
+        Assert.False(LookPalette.OutlandGroundHolds(bright));
+    }
+
+    [Fact]
+    public void TheInkEdgeIsDrawnOnEveryWarmGroundAndNoOther()
+    {
+        Assert.All(LookPalette.Grounds, g => Assert.Equal(LookPalette.IsWarmGround(g.Value), LookPalette.EdgedOn(g.Value)));
+        Assert.True(LookPalette.EdgedOn(LookPalette.GroundOf(MapRegion.Outland)));
+        Assert.False(LookPalette.EdgedOn(LookPalette.GroundOf(MapRegion.Seam)));
+        Assert.False(LookPalette.EdgedOn(LookPalette.GroundOf(MapRegion.Sallow)));
+    }
+
+    [Fact]
+    public void TheInkEdgeFiresOnTheOldHill()
+    {
+        Assert.True(LookPalette.EdgedOn(new Rgb(0xB8, 0x9E, 0x6C)));
+    }
+
+    [Fact]
+    public void TheSeamsGroundIsPlainsOwnColour()
+    {
+        Assert.Equal(LookPalette.Terrain["plain"], LookPalette.GroundOf(MapRegion.Seam));
+        Assert.Equal(LookPalette.Terrain["forest"], LookPalette.TerrainIn("forest", MapRegion.Outland));
+        Assert.Equal(LookPalette.Grounds["moss"], LookPalette.TerrainIn("plain", MapRegion.Aldmere));
+        Assert.Null(LookPalette.TerrainIn("lava", MapRegion.Seam));
+    }
+
+    public static TheoryData<MapRegion> Regions()
+    {
+        var data = new TheoryData<MapRegion>();
+        foreach (var region in Enum.GetValues<MapRegion>())
+        {
+            data.Add(region);
+        }
+
+        return data;
+    }
+
+    [Theory]
+    [MemberData(nameof(Regions))]
+    public void EachRegionsGroundStaysApartFromEveryOtherTerrain(MapRegion region)
+    {
+        var ground = LookPalette.GroundOf(region);
+        var failing = LookPalette.Terrain.Where(t => t.Key != "plain")
+            .Select(t => (t.Key, d: WorstDistance(ground, t.Value)))
+            .Where(x => x.d < Palette.TerrainSeparation)
+            .Select(x => $"{region} ground/{x.Key} {x.d:F1}");
+        Assert.Empty(failing);
+    }
+
+    [Theory]
+    [MemberData(nameof(Regions))]
+    public void EachSideStandsApartFromEachRegionsGround(MapRegion region)
+    {
+        var ground = LookPalette.GroundOf(region);
+        Assert.True(WorstDistance(LookPalette.Player, ground) >= Palette.UnitOnTerrainSeparation, $"player on {region}");
+        Assert.True(WorstDistance(LookPalette.Enemy, ground) >= Palette.UnitOnTerrainSeparation, $"enemy on {region}");
+    }
+
+    [Theory]
+    [MemberData(nameof(Regions))]
+    public void EveryMarkStandsApartFromEachRegionsGround(MapRegion region)
+    {
+        var ground = LookPalette.GroundOf(region);
+        var failing = LookPalette.Marks.Append(new("bone", LookPalette.EnemyBone))
+            .Select(m => (m.Key, d: WorstDistance(m.Value, ground)))
+            .Where(x => x.d < LookPalette.MarkSeparation)
+            .Select(x => $"{x.Key} on {region} {x.d:F1}");
+        Assert.Empty(failing);
+    }
+
+    [Theory]
+    [MemberData(nameof(Regions))]
+    public void EachRegionsGroundStaysUnderTheWorldsChromaCeiling(MapRegion region)
+    {
+        Assert.True(Chroma(LookPalette.GroundOf(region)) <= LookPalette.WorldChromaCeiling, region.ToString());
     }
 
     [Fact]

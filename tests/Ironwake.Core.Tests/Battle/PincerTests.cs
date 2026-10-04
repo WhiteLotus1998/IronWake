@@ -228,7 +228,8 @@ public class PincerTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var shippedPath = Path.Combine(repo, "content", "maps", "brackwater_cut.map");
         var samplePath = Path.Combine(repo, "docs", "samples", "brackwater_cut_pincer.map");
-        var shipped = File.ReadAllText(shippedPath).Replace("\r\n", "\n").Split('\n');
+        // The shipped map's region (issue 916) picks its ground and is not the sample's to carry.
+        var shipped = File.ReadAllText(shippedPath).Replace("\r\n", "\n").Split('\n').Where(l => l != "region: sallow").ToArray();
         var sampleText = File.ReadAllText(samplePath).Replace("\r\n", "\n");
         var sampleLines = sampleText.Split('\n');
 

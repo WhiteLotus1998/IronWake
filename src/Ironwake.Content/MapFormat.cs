@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -203,6 +203,11 @@ public static class MapFormat
         if (map.RouteDrift is { } routeDrift)
         {
             sb.Append("route_drift: ").Append(routeDrift).Append('\n');
+        }
+
+        if (map.Region != MapRegion.Seam)
+        {
+            sb.Append("region: ").Append(MapRegions.Word(map.Region)).Append('\n');
         }
 
         if (map.DifficultyId is { } difficulty)
@@ -397,7 +402,7 @@ public static class MapFormat
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
-            map = map with { RouteDrift = ParseRouteDrift(header, map) };
+            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
@@ -1012,6 +1017,18 @@ public static class MapFormat
             }
 
             return ValueList<WakeLink>.From(links);
+        }
+
+        /// <summary>The <c>region:</c> header (issue 916): one of the region words; absent means the seam.</summary>
+        private MapRegion ParseRegion(Dictionary<string, (string Value, int Line)> header)
+        {
+            if (!header.TryGetValue("region", out var entry))
+            {
+                return MapRegion.Seam;
+            }
+
+            return MapRegions.Parse(entry.Value)
+                ?? throw ErrorAt(entry.Line, $"region names '{entry.Value}'; known: {string.Join(", ", Enum.GetValues<MapRegion>().Select(MapRegions.Word))}");
         }
 
         private bool ParseOn(Dictionary<string, (string Value, int Line)> header, string key)

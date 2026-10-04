@@ -24,6 +24,19 @@ public partial class Main
     private static Color TerrainColour(string id, float alpha = 1f) =>
         Look(LookPalette.Terrain.TryGetValue(id, out var rgb) ? rgb : LookPalette.Ui["muted"], alpha);
 
+    /// <summary>The region of the map on screen (issue 916), the seam when none is.</summary>
+    private MapRegion Region => _client?.State.Map.Region ?? MapRegion.Seam;
+
+    /// <summary>A terrain's colour on the map on screen (issue 916): plain in the region's ground.</summary>
+    private Color RegionColour(string id, float alpha = 1f) =>
+        Look(LookPalette.TerrainIn(id, Region) ?? LookPalette.Ui["muted"], alpha);
+
+    /// <summary>
+    /// Whether the board's ground is warm, so the threat hatch's strokes and the player's discs
+    /// carry a 1px ink edge (issue 916, round 307): the outland sand, never the frost or the moss.
+    /// </summary>
+    private bool Edged => LookPalette.EdgedOn(LookPalette.GroundOf(Region));
+
     /// <summary>
     /// A vendored font from <c>fonts/</c> (issue 511; OFL, the licences beside the files and in
     /// <c>LICENSES</c>): read from the source tree when run from it, from the imported resource in
@@ -88,13 +101,51 @@ public partial class Main
             return;
         }
 
-        if (TileArt(id) is { } tile)
+        if (id == "plain" && map.Region != MapRegion.Seam)
         {
-            DrawTextureRect(tile, r, false);
+            // The plain tile's file is the seam's frost; another region draws its own ground (issue 916).
+            DrawRect(r, RegionColour(id));
             return;
         }
 
-        DrawRect(r, TerrainColour(id));
+        if (TileArt(id) is { } tile)
+        {
+            DrawTextureRect(tile, r, false);
+        }
+        else
+        {
+            DrawRect(r, TerrainColour(id));
+        }
+
+        if (id == "plain")
+        {
+            DrawSnow(r, at);
+        }
+    }
+
+    /// <summary>
+    /// Snow on the seam's frost as detail (issue 916, Lotus's pick on #892): two or three soft
+    /// drifts of the throne's white, placed by the tile's own coordinates so the field never tiles,
+    /// one tile in five left bare.
+    /// </summary>
+    private void DrawSnow(Rect2 r, Coord at)
+    {
+        var k = (at.X * 7 + at.Y * 13) % 5;
+        if (k == 4)
+        {
+            return;
+        }
+
+        var snow = TerrainColour("throne", 0.38f);
+        for (var i = 0; i < 2 + k % 2; i++)
+        {
+            var ox = (at.X * 31 + at.Y * 17 + i * 11) % 60 / 100f * _tile + 0.15f * _tile;
+            var oy = (at.X * 19 + at.Y * 29 + i * 23) % 60 / 100f * _tile + 0.2f * _tile;
+            DrawSetTransformMatrix(_frame * new Transform2D(0, new Vector2(1, 0.44f), 0, r.Position + new Vector2(ox, oy)));
+            DrawCircle(Vector2.Zero, 0.16f * _tile, snow);
+        }
+
+        DrawSetTransformMatrix(_frame);
     }
 
     /// <summary>
@@ -216,7 +267,8 @@ public partial class Main
     /// A diagonal hatch across <paramref name="r"/>, lines running bottom-left to top-right every
     /// <paramref name="spacing"/> pixels: the enemy's threat and fire's embers, never a fill.
     /// </summary>
-    private void Hatch(Rect2 r, Color colour, float width, float spacing)
+    /// <remarks>With <paramref name="edge"/> each stroke is laid over a stroke of that colour two pixels wider, a 1px edge either side (issue 916).</remarks>
+    private void Hatch(Rect2 r, Color colour, float width, float spacing, Color? edge = null)
     {
         var w = r.Size.X;
         var h = r.Size.Y;
@@ -225,6 +277,11 @@ public partial class Main
             // The line x + y = c inside the rectangle, from its lower-left end to its upper-right end.
             var start = new Vector2(Mathf.Max(0, c - h), Mathf.Min(h, c));
             var end = new Vector2(Mathf.Min(w, c), Mathf.Max(0, c - w));
+            if (edge is { } ink)
+            {
+                DrawLine(r.Position + start, r.Position + end, ink, width + 2, antialiased: true);
+            }
+
             DrawLine(r.Position + start, r.Position + end, colour, width, antialiased: true);
         }
     }
@@ -253,10 +310,13 @@ public partial class Main
         DrawRect(new Rect2(box.Position + new Vector2(size.X / 2 - 2 * S, size.Y * 0.3f), new Vector2(4 * S, 4 * S)), UiColour("ink"));
     }
 
-    /// <summary>The enemy's threat on a tile: a bone hatch, never a fill; no ground under it is warm, so it never blends to a peach (issue 564).</summary>
+    /// <summary>The enemy's threat on a tile: a bone hatch, never a fill; on the one warm ground, the outland sand, its strokes carry an ink edge so it never blends to a peach (issues 564, 916).</summary>
     /// <remarks>On a tile the dark hides (issue 601) it is laid again over the veil, so its stroke reads lighter than the veil would leave it, so dark ground never swallows it.</remarks>
-    private void DrawThreatMark(Coord at, bool faint = false, bool unseen = false) =>
-        Hatch(Cell(at).Grow(-1), MarkColour("threat", faint ? FaintThreat : unseen ? UnseenThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
+    private void DrawThreatMark(Coord at, bool faint = false, bool unseen = false)
+    {
+        var alpha = faint ? FaintThreat : unseen ? UnseenThreat : 0.5f;
+        Hatch(Cell(at).Grow(-1), MarkColour("threat", alpha), Mathf.Max(1, 1.5f * S), 9 * S, Edged ? UiColour("ink", alpha) : null);
+    }
 
     /// <summary>The hatch's alpha over the dark (issue 601): brighter than on seen ground, which the veil would otherwise dim to 0.19.</summary>
     private const float UnseenThreat = 0.4f;
@@ -345,6 +405,12 @@ public partial class Main
             DrawCircle(Vector2.Zero, radius, deep);
             DrawSetTransformMatrix(_frame * _tokenFrame);
             DrawCircle(centre, radius, fill);
+        }
+
+        if (player && Edged)
+        {
+            // The 1px ink edge on a warm ground (issue 916): amber stands off the sand.
+            DrawArc(centre, radius + 0.5f, 0, Mathf.Tau, 48, ink, -1);
         }
 
         var bone = Look(LookPalette.EnemyBone);

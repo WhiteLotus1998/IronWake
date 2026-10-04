@@ -282,8 +282,8 @@ public class OverwatchTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var shippedPath = Path.Combine(repo, "content", "maps", "sallow_grange.map");
         var samplePath = Path.Combine(repo, "docs", "samples", "sallow_grange_overwatch.map");
-        // The shipped map's campaign-only keziah_warning (issue 871) is not the sample's to carry.
-        var shipped = File.ReadAllText(shippedPath).Replace("\r\n", "\n").Split('\n').Where(l => l != "keziah_warning: on").ToList();
+        // The shipped map's campaign-only keziah_warning (issue 871) and its region (issue 916) are not the sample's to carry.
+        var shipped = File.ReadAllText(shippedPath).Replace("\r\n", "\n").Split('\n').Where(l => l != "keziah_warning: on" && l != "region: sallow").ToList();
         var sampleText = File.ReadAllText(samplePath).Replace("\r\n", "\n");
         var sampleLines = sampleText.Split('\n').ToList();
 
@@ -296,7 +296,7 @@ public class OverwatchTests
         var original = MapFiles.Load(shippedPath, MapFixture.Content);
         Assert.True(sample.OverwatchEnabled);
         Assert.False(original.OverwatchEnabled);
-        Assert.Equal(original with { OverwatchEnabled = true, KeziahWarning = false }, sample);
+        Assert.Equal(original with { OverwatchEnabled = true, KeziahWarning = false, Region = MapRegion.Seam }, sample);
         Assert.Equal(sampleText, MapFormat.Write(sample, Starter));
     }
 }

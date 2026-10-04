@@ -6,6 +6,7 @@ recall: 3
 enemy_level: 2
 announce: on
 wake_links: ford>weir
+region: aldmere
 
 ^^^....=..~~..MM
 ^^.....=..~~...M
