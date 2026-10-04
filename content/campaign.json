@@ -78,19 +78,19 @@
       ] },
     { "id": "pell_1", "member": "pell", "part": 1, "map": "the_burned_school", "opensAfter": "the_tollgate", "common": 2,
       "before": [
-        "Pell asked for a day and one pair of hands. The shrine-school at Aldmere burned around her when she was fourteen. Somebody has been back since, and the rain has not finished the job they started.",
-        "(Placeholder card until the writing pass. Get Pell off the east edge, 12,3 to 12,5, by the end of turn 7; anyone still on the board when she exits is left behind and falls. The map is lost if she falls. Three chests hold what the fire missed. The burners come in from the west road from turn 1, announced.)"
+        "The shrine-school at Aldmere burned around Pell when she was fourteen. The roof never went back on, and the rain has had eight years at the shelves. Now somebody brings torches for what it left. \"Whatever's dry comes out. The catalogue's chained under the lectern, so I'll know what we leave.\"",
+        "(Get Pell off the east edge, 12,3 to 12,5, by the end of turn 7; anyone still on the board when she exits is left behind and falls. The map is lost if she falls. Three chests hold what the fire missed. The burners come in from the west road from turn 1, announced.)"
       ],
       "after": [
-        "(Placeholder until the writing pass: what Pell carried out, and what she left.)"
+        "Pell comes out with the catalogue under her arm, the chain still hanging off it. On the road she reads it through and marks the margin beside every book that stayed behind. That night she starts on the first of them from memory."
       ] },
     { "id": "pell_2", "member": "pell", "part": 2, "map": "the_undercroft", "pays": "pell_commonplace", "rare": 3,
       "before": [
-        "Pell asked for a day and one pair of hands again. The undercroft under Ironwake opens only to the garrison, and she has been one since the levy. Somebody else came down after the raid with a lamp and a can of oil.",
-        "(Placeholder card until the writing pass. Get Pell onto the reading desk at 16,4 by the end of turn 7. The map is lost if she falls. The sworn come down the stair at 1,10 from turn 2, announced. Two groups sleep in the stacks and the cells; walls do not stop them hearing.)"
+        "Somebody came down the undercroft stair after the raid with a lamp and a can of oil. The door opens only to the garrison; Pell enlisted for that door, and has the key off the quartermaster before the captain finishes saying yes. \"Hold them on the stair. I want the desk read before anyone brings the oil back down.\"",
+        "(Get Pell onto the reading desk at 16,4 by the end of turn 7. The map is lost if she falls. The sworn come down the stair at 1,10 from turn 2, announced. Two groups sleep in the stacks and the cells; walls do not stop them hearing.)"
       ],
       "after": [
-        "(Placeholder until the writing pass: what Pell read at the desk about what the armistice seals, and that she means to tell the company before anyone else can.)",
+        "Above the reading desk the charter is cut in the shrine script. Pell counts the anchor rings before she reads it: more rings than chains. She reads the charter twice without moving her lips, then copies it out. At the top of the stair she tears the page from her book and puts it in the captain's hand.",
         "(Pell carries Pell's Commonplace now: Cinder's numbers, bound to her, and it never catches. Its art, Read Ahead, reaches one tile further for 2 less Power.)"
         ] },
     { "id": "teodor_1", "member": "teodor", "part": 1, "map": "the_old_watch", "opensAfter": "harrow_weir", "wakes": "family_lance",

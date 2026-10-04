@@ -41,15 +41,16 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 7, Sallow Grange. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
 > quest pell_2 wren
 -- The Undercroft --
-Pell asked for a day and one pair of hands again. The undercroft under
-Ironwake opens only to the garrison, and she has been one since the
-levy. Somebody else came down after the raid with a lamp and a can of
-oil.
+Somebody came down the undercroft stair after the raid with a lamp and a
+can of oil. The door opens only to the garrison; Pell enlisted for that
+door, and has the key off the quartermaster before the captain finishes
+saying yes. "Hold them on the stair. I want the desk read before anyone
+brings the oil back down."
 
-(Placeholder card until the writing pass. Get Pell onto the reading desk
-at 16,4 by the end of turn 7. The map is lost if she falls. The sworn
-come down the stair at 1,10 from turn 2, announced. Two groups sleep in
-the stacks and the cells; walls do not stop them hearing.)
+(Get Pell onto the reading desk at 16,4 by the end of turn 7. The map is
+lost if she falls. The sworn come down the stair at 1,10 from turn 2,
+announced. Two groups sleep in the stacks and the cells; walls do not
+stop them hearing.)
 
 Side map: The Undercroft, seed 960
 Pell goes with Wren. This map is lost if Pell falls; who falls here is gone for good.
@@ -879,9 +880,11 @@ Battle won: seize; only recall is left, or leave
 > leave
 Pell wins pell_2; Pell receives Pell's Commonplace; the stores take 3 frozen iron; nobody fell
 -- After The Undercroft --
-(Placeholder until the writing pass: what Pell read at the desk about
-what the armistice seals, and that she means to tell the company before
-anyone else can.)
+Above the reading desk the charter is cut in the shrine script. Pell
+counts the anchor rings before she reads it: more rings than chains. She
+reads the charter twice without moving her lips, then copies it out. At
+the top of the stair she tears the page from her book and puts it in the
+captain's hand.
 
 (Pell carries Pell's Commonplace now: Cinder's numbers, bound to her,
 and it never catches. Its art, Read Ahead, reaches one tile further for
