@@ -2036,6 +2036,17 @@ public sealed class PlaySession
     }
 
     /// <summary>
+    /// The tag a signature art carries on the unit's card (issue 969): <c>with &lt;item&gt;</c> for an
+    /// art declared only with its own item, and <c>with &lt;item&gt;, not carried</c> while that item is
+    /// not in the unit's inventory, so the card says what <see cref="Resolver.ChooseArt"/> will refuse.
+    /// Null for an art any weapon of its type declares.
+    /// </summary>
+    public static string? ArtItemTag(string? item, BattleUnit unit, GameContent content) =>
+        item is null ? null
+        : unit.Unit.Inventory.Items.Any(stack => stack.ItemId == item) ? $"with {content.ItemName(item)}"
+        : $"with {content.ItemName(item)}, not carried";
+
+    /// <summary>
     /// The lines <c>show &lt;unit&gt;</c> prints: who and where, the unit's description if it has one (issue 806), stats, weapon, items, ranks,
     /// arts, abilities, mastery, Canto, targets and rivalry. The Godot client's unit panel
     /// shows the same lines (issue 349). Units and arts read by the names a reader sees, every
@@ -2075,13 +2086,14 @@ public sealed class PlaySession
             .Select(type => $"{type.Label()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
         lines.Add($"  Ranks: {string.Join(", ", ranks)}");
         var arts = content.ArtsOf(unit.Unit).Select(a =>
-            $"{Named(a.Ability.Name, a.Ability.Id)} ({a.Art.Weapon.Label()} {a.Art.Rank}, cost {a.Art.Cost}): {a.Ability.Text}").ToList();
+            $"{Named(a.Ability.Name, a.Ability.Id)} ({a.Art.Weapon.Label()} {a.Art.Rank}, cost {a.Art.Cost}{(ArtItemTag(a.Art.Item, unit, content) is { } tag ? ", " + tag : "")}): {a.Ability.Text}").ToList();
         if (arts.Count > 0)
         {
             lines.Add($"  Techniques: {string.Join(", ", arts)}");
         }
 
-        var held = content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect).Select(a => $"{a.Name} ({a.Text.TrimEnd('.')})").ToList();
+        var held = content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect)
+            .Select(a => $"{a.Name} ({a.Text.TrimEnd('.')}{(ArtItemTag((a.Effect as HealArtEffect)?.Item, unit, content) is { } tag ? "; " + tag : "")})").ToList();
         if (held.Count > 0)
         {
             lines.Add($"  Abilities: {string.Join(", ", held)}");
