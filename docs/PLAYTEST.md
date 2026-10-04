@@ -2632,3 +2632,18 @@ Notes: Meals in a new order: brigand turn 2, soldier turn 3, the rider on turn 5
 - **The finding:** seed 1133 can't hit the envoy. Keziah's player-phase swing misses on every turn from 7 to 10, and her counter on 15 of 16 enemy-phase keys checked (the real `KeyedRng` and `Combat.Lands`). All three Oath Stone reads used 1133. Over seeds 1 to 5000 all four player-phase swings miss on 157 (3 percent). From the turn-8 board, a fair-dice win is an estimate of 55 to 60 percent: tense, not a wall, with two Recalls. "The fort is next" is withdrawn until a read on another seed.
 
 — Chat
+
+## 2026-10-04 — Harrow Weir, a tuned map replayed under 0237, warm — Code
+Seed: 1300 (`play harrow_weir --seed 1300 --scheme two --strict --script docs/transcripts/2026-10-04-harrow_weir-1300.script`; transcript beside it; main at c39e811)   Result: **won on turn 10 of 15.** Nobody fell and no Recall was spent.
+Warm: this is my fourth Harrow Weir, and I built the go-home rule (0080). It's the first run under 0237's no-spike rule.
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 5. Pell finished the cork (the shieldbearer at 6, Cinder from 9,6). Keziah at 9 HP had to come out of the soldier's reach, so the captain took the brawler from 7,9 instead of Ottilie. That left Ottilie unacted and out of the brigand's reach. Every unit's order mattered, and the turn-5 brigand still put Pell to 3.
+Notes:
+- **Teodor blocked the north rider** on 7,0 (turns 2 and 3), then took the north bridge alone and became the Foreman's punching bag for four phases. Two field dressings kept him up. It was a real choice, and it cost Teodor's damage for the whole map.
+- **The cork bit as designed.** Dunstan missed his 85, the Foreman stepped down to 12,6 and the pair put Dunstan to 5 in one phase. Only 10,6 and 9,6 reach 11,6, so the cork is two attacks a turn, and that's the right size.
+- **My mistake, not the screen's.** I read `threat teodor from 12,2` before pulling Dunstan back off 10,6. With Dunstan gone, 12,4 stopped being exposed, and the Foreman came off the hill and hit Teodor for 10. `threat` was honest for the board it read. I read it in the wrong order.
+- **Turns 7 to 8 were a walk.** The Foreman sat on 13,3 swinging at Teodor from range 2 while five units walked the bridge. Not tense.
+- **Turn 9:** Full Measure for 16 (99%) put him at 12, and Teodor's 60 missed. I held Ottilie back rather than take his 62% counter and then stand in the archer's range at 5 HP. On enemy phase 9 he refused everything and walked home to 13,6, which is the one tile at the bridge's end my whole western group could reach. Turn 10: Pell, at 3 HP, Gust 99% for exactly 12. The 1% would have killed her. 0080's open item ("the home tile is not vetoed") came true again: going home was the worst tile on the board for him.
+- **Filed #966 (bug):** `Exposure.OfBoss` counts a unit spent by Full Measure as a striker. It didn't change this play, since Teodor and Ottilie alone made 14 against 12, but the veto shouldn't price a captain who can't act.
+- **The archer never acted** (hold at 14,4, nobody entered its 2). The same thing happened in the Critic's 617 run. At the end it's scenery that shapes two tiles.
+- **Verdict:** the tuned verdict stands. Nothing here asks for a lever beyond 0080's open home-tile item, which this play adds one more data point to.
