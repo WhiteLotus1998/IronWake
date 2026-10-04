@@ -180,6 +180,14 @@ public sealed record CampaignRecord(
     public bool FreedUnitFell { get; init; }
 
     /// <summary>
+    /// Which side of the hunger Keziah's oath fell on (issue 635 slice 16, Design Table rounds 303 to 305):
+    /// set by <see cref="AfterQuest"/> on a won side map whose member bears the hungering weapon and whose
+    /// board binds an enemy with <c>freed:</c> (the Oath Stone), from how the bound man left it. Null until
+    /// then, and a lost side map writes nothing. Nothing reads it until the endings (#634).
+    /// </summary>
+    public OathSide? KeziahOath { get; init; }
+
+    /// <summary>
     /// The stage a rider's drake had reached when the rider fell for good (issue 805, STORY draft 6:
     /// the drake leaves the field and is seen over the fells), on a main map or a side map; null while
     /// no rider has. A fall with <see cref="Permadeath"/> off keeps the rider and the drake, so it never
@@ -1466,6 +1474,7 @@ public sealed record CampaignRecord(
             paid += "; the stores take " + string.Join(" and ", new[] { (common, Material.Common), (rare, Material.Rare) }.Where(m => m.Item1 > 0).Select(m => $"{m.Item1} {Forge.Label(m.Item2)}"));
         }
 
+        var oath = won && end.Map.Bond is not null && Kinsbane.Bearer(content) == quest.MemberId ? Oath.Of(end, quest.MemberId) : null;
         var record = this with
         {
             Roster = ValueList<Unit>.From(roster),
@@ -1478,6 +1487,7 @@ public sealed record CampaignRecord(
             RareMaterial = RareMaterial + rare,
             Wagon = won ? ValueList<string>.From(Wagon.Concat(end.Wagon)) : Wagon,
             Rapport = end.Rapport,
+            KeziahOath = oath ?? KeziahOath,
         };
         var dead = lost.Count > 0 ? $"; fallen for good: {string.Join(", ", lost)}"
             : wounded.Count > 0 ? $"; fell and came back wounded: {string.Join(", ", wounded)}"

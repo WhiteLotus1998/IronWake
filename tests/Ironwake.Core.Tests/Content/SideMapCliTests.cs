@@ -370,27 +370,27 @@ public class SideMapCliTests
     }
 
     /// <summary>
-    /// Code's journaled play of Keziah's quest 2 (side-map seed 1133), from a save at the camp
-    /// after map 9 with Keziah picked, the Burned Shrine won, Kinsbane fed 9 and the cast at
-    /// level 7: one Recall back to turn 1, the camp fed to the scythe, the envoy out and home
-    /// again past his bound man, and Keziah starved to 1 and killed on turn 6 by the soldier
-    /// she needed to eat.
+    /// Code's journaled replay of Keziah's quest 2 on the board as slice 16 left it (side-map seed 1133),
+    /// from the same save at the camp after map 9: Joab named and bound at the door, the envoy a
+    /// Boss on his fort. Keziah stood at the door on turn 3 with his counter lethal, went round,
+    /// fed on the camp, and fell on turn 6 to the soldier's counter after two misses at 74, Joab never struck.
+    /// (The slice 15 play of the same seed, on the old board, stays in its transcript as history.)
     /// </summary>
     [Fact]
     public void TheJournaledOathStonePlayIsLostOnTurnSix()
     {
-        var script = Transcript("2026-10-04-the_oath_stone-1133.script");
+        var script = Transcript("2026-10-04-the_oath_stone-1133-fort.script");
         var saves = Path.Combine(Path.GetTempPath(), "ironwake-oath-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(saves);
-        File.Copy(Transcript(Path.Combine("2026-10-04-the_oath_stone-1133.saves", "oath.json")), Path.Combine(saves, "oath.json"));
+        File.Copy(Transcript(Path.Combine("2026-10-04-the_oath_stone-1133-fort.saves", "oath.json")), Path.Combine(saves, "oath.json"));
         try
         {
             var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Oath Stone, seed 1133\n", output);
-            Assert.Contains("Marauder is bound to Sworn Captain: freed when Sworn Captain falls\n", output);
-            Assert.Contains("Kinsbane, to Keziah: \"Eat.\"\n", output);
+            Assert.Contains("Joab is bound to Sworn Captain: freed when Sworn Captain falls\n", output);
+            Assert.Contains("    Counter kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 11)\n", output);
             Assert.Contains("> leave\nKeziah falls on keziah_2, which closes for good; fallen for good: Keziah\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }

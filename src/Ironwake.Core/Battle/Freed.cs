@@ -20,6 +20,13 @@ public static class Freed
         && unit.PlacementIndex < state.Map.Placements.Count
         && state.Map.Placements[unit.PlacementIndex].At == bond.Bound;
 
+    /// <summary>
+    /// The record of a combat kill of the bound enemy by <paramref name="killer"/>, as the combat left
+    /// it (issue 635 slice 16): fed when it stands with a hungering weapon equipped, the condition a kill feeds on.
+    /// </summary>
+    public static BondKill KillBy(BattleUnit killer, GameContent content) =>
+        new(killer.Id, killer.Hp > 0 && killer.EquippedWeapon(content) is { Hungers: true });
+
     /// <summary>Whether <paramref name="unit"/> is a boss the bond answers to: an enemy boss of the header's group.</summary>
     public static bool IsBinder(MapDefinition map, BattleUnit unit) =>
         map.Bond is { } bond && unit.Side == Side.Enemy && unit.IsBoss && unit.Group == bond.BossGroup;
