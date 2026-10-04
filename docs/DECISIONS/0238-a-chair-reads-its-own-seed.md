@@ -17,3 +17,8 @@ Combat rolls are keyed (`RollKey.Combat`: seed, turn, phase, striker, target, st
 ## Kill criterion
 
 None. This is how a gate is counted, not a mechanic.
+
+## Built (#963)
+
+- The save holds one seed, the campaign's (`CampaignRecord.Seed`). Every battle seed is derived from it: the map's (`BattleSeed`), a side map's (`QuestSeed`) and a trial's. So `--reseed N` replaces the campaign seed. On the oath save the card reads `reseeded from 984 to N`, and the side-map line prints the Oath Stone's new seed where it used to print 1133. Every later battle in the run is on N's dice too, and every save written afterwards carries N.
+- With `--resume`, the reseed is accepted only when the suspend replays no lines. Replaying a battle's typed lines on other rolls would rebuild a different battle without saying so. A refused suspend is put back. Reseeding to the seed the save already pins is refused too.

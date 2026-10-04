@@ -17,7 +17,7 @@ namespace Ironwake.Cli;
 /// </summary>
 public sealed class CampaignSession
 {
-    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--origin id] [--captain he|she] [--scheme one|two] [--from map [--pick claimant [--fed N]] [--level N]] [--log file] [--saves dir] [--load save | --resume]";
+    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--origin id] [--captain he|she] [--scheme one|two] [--from map [--pick claimant [--fed N]] [--level N]] [--log file] [--saves dir] [--load save | --resume] [--reseed N]";
 
     /// <summary>Where the keyboard's saves go when <c>--saves</c> is not given; a scripted run keeps none unless it is.</summary>
     public const string DefaultSavesDirectory = "saves";
@@ -64,6 +64,9 @@ public sealed class CampaignSession
     private readonly SaveStore? _saves;
     private CampaignRecord _record;
     private IReadOnlyList<string>? _resume;
+
+    /// <summary>The seed the loaded save pinned, when <c>--reseed</c> replaced it (issue 963); null otherwise.</summary>
+    private ulong? _reseededFrom;
     private bool _strictStopped;
     private int _line;
     private int _commands;
@@ -79,6 +82,12 @@ public sealed class CampaignSession
 
     /// <summary>The event lines printed so far, each ending in <c>\n</c>.</summary>
     internal string EventLog => _log.ToString();
+
+    /// <summary>
+    /// The first card's line for a save replayed on a new seed (issue 963, DECISIONS/0238): every
+    /// roll after it is the new seed's, so a read taken from it is not the save's battle.
+    /// </summary>
+    internal static string ReseededLine(ulong from, ulong to) => $"reseeded from {from} to {to}: not the save's battle";
 
     /// <summary>Prints one event line to the console and to the event log.</summary>
     private void WriteEvent(string line)
@@ -146,6 +155,7 @@ public sealed class CampaignSession
         string? savesDir = null;
         string? load = null;
         var resume = false;
+        ulong? reseed = null;
         var permadeath = true;
         string? origin = null;
         Pronoun? captain = null;
@@ -207,6 +217,10 @@ public sealed class CampaignSession
                     break;
                 case "--resume":
                     resume = true;
+                    break;
+                case "--reseed" when value is not null && ulong.TryParse(value, out var parsedReseed):
+                    reseed = parsedReseed;
+                    i++;
                     break;
                 case "--permadeath" when value is "on" or "off":
                     permadeath = value == "on";
@@ -278,7 +292,14 @@ public sealed class CampaignSession
 
         if ((load is not null || resume) && seedGiven)
         {
-            Console.WriteLine($"ERROR: --seed {seed} starts a new campaign; a loaded or resumed campaign keeps the seed its save pins");
+            Console.WriteLine($"ERROR: --seed {seed} starts a new campaign; a loaded or resumed campaign keeps the seed its save pins; --reseed N replays it on a new seed");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if (reseed is { } unloaded && load is null && !resume)
+        {
+            Console.WriteLine($"ERROR: --reseed {unloaded} replays a save on a new seed; give --load or --resume");
             Console.WriteLine(Usage);
             return 2;
         }
@@ -420,7 +441,31 @@ public sealed class CampaignSession
             battleLines = lines;
         }
 
-        var session = new CampaignSession(content, contentDir, record, Console.Out, script is not null, scheme, saves, battleLines);
+        ulong? reseededFrom = null;
+        if (reseed is { } fresh)
+        {
+            var refusal = fresh == record.Seed
+                ? $"--reseed {fresh} is the seed the save already pins; give another"
+                : battleLines is { Count: > 0 }
+                    ? $"--reseed {fresh} would replay the suspended battle on other rolls; --load the camp's autosave and reseed that"
+                    : null;
+            if (refusal is not null)
+            {
+                if (resume)
+                {
+                    // The suspend is put back, so the refusal costs the player nothing.
+                    saves!.Suspend(record, battleLines ?? Array.Empty<string>());
+                }
+
+                Console.WriteLine("ERROR: " + refusal);
+                return 2;
+            }
+
+            reseededFrom = record.Seed;
+            record = record with { Seed = fresh };
+        }
+
+        var session = new CampaignSession(content, contentDir, record, Console.Out, script is not null, scheme, saves, battleLines) { _reseededFrom = reseededFrom };
         var code = session.Play(input, strict);
         if (log is not null)
         {
@@ -433,6 +478,10 @@ public sealed class CampaignSession
     private int Play(TextReader input, bool strict)
     {
         _out.WriteLine($"Campaign, seed {_record.Seed}, {RulesLine(_record, _content)}, scheme {_scheme}, {_content.Campaign.Maps.Count} maps");
+        if (_reseededFrom is { } pinned)
+        {
+            WriteEvent(ReseededLine(pinned, _record.Seed));
+        }
         if (CaptainLine(_record, _content) is { } captainLine)
         {
             _out.WriteLine(captainLine);
