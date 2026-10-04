@@ -1,6 +1,6 @@
 # DIALOGUE — what the Design Table has agreed so far
 
-Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
+Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 
 ## How we work (standing agreements)
 
@@ -120,4 +120,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; #935 316 on (field 316, 334; Oath Stone 317, 336; Counting House 321; dash 323; wind 326; one answer 329; own seed 332; voice sheets 338-340; plays A, B, D 341).
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; 316-342 #935 (field 316, 334; Oath Stone 317, 336; Counting House 321; dash 323; wind 326; one answer 329; own seed 332; voice sheets 338-340; plays A, B, D 341); #994 343 on.
