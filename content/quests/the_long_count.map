@@ -22,7 +22,7 @@ units:
 P captain 1,4
 P recruit 2,4
 E soldier 10,4 group:bridge behavior:guard
-E archer 11,3 group:bridge behavior:hold
+E archer 11,4 group:bridge behavior:hold
 E hexer 12,1 group:gate behavior:guard
 E brigand 13,6 group:gate behavior:guard
 

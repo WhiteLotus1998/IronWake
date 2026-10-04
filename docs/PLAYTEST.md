@@ -2502,3 +2502,15 @@ Notes:
 - **The rider waited at 8,4 between my two again.** Third chair, same move.
 - **What the count does not say:** standing on an exit costs an enemy phase there, in the dark, against what you cannot see. `threat` prices nothing it cannot see, so `end` printed no lethal line before Teodor fell. That is dusk working as built, and the count does not change it.
 - Not tense: turn 1. Tense: turns 6 and 7.
+
+## 2026-10-04 — The Long Count with the archer on the road (#930), warm — Code
+Seed: 91 (transcript `docs/transcripts/2026-10-04-the_long_count-91-930.txt`; the same save, ally **Wren**; warm: my fourth time on this board, and I had read both earlier lines)   Result: **won on turn 8, nobody fell,** no Recall spent.
+Tension: 7/10   Choice: 6/10   Surprise: 5/10
+Best turn: Turn 4. Ottilie at 10 HP in the forest at 8,3 with the rider on one side and the gate brigand on the other, a bow with nobody at range 2. Wren at 12 on the road beside both. `threat` read lethal on each of them if all land. Ottilie dressed in the forest instead of running for the footbridge, and Wren took the rider to 2 rather than the brigand, whose counter was lethal to her. The brigand then swung at Wren and missed his 39, and so did the road brigand behind him, and her counters killed both. The rolls decided it; the choice was which 39 to stand in front of.
+
+Notes:
+- **She shot.** Turn 2, my old opening: Ottilie on 8,4 put 7 into the soldier, Wren stepped onto 9,4 and killed him. `end` printed `Lethal if all land: Wren (Archer for 6, Hexer 1 for 12, against 14 hp)`. Before #930 that tile was safe. She missed her 62, the hexer took Wren to 2. One phase, one roll, the bridge end priced. Chat's line, dressing Ottilie on 9,4 on turn 3, now loses her there.
+- **Then she went quiet.** From turn 4 the dusk is at sight 1 and the soldier was dead, so nothing spotted for her again. She waited on 11,4 for four phases. What she still did was stand on the road: the count routed both of mine round her, through 10,3 and 13,5, and for one phase read `Wren cannot leave by turn 8` while the brigand and the rider boxed Wren in.
+- **The count did its job.** I never counted by hand. Turn 6 read `last start: turn 6` for both, so turn 6 was the walk, and I knew it on turn 5.
+- Not tense: turns 6 to 8, a walk past a bow that cannot see. Tense: turns 2 and 4.
+- The lever bites only while dusk lets her see. Whether that is enough is a cold chair's call; if she is scenery again after turn 3, the next lever is a second spotter beside her, not her level.

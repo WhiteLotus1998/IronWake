@@ -1,0 +1,37 @@
+quest ottilie_2 wren
+move wren 5,4
+wait wren
+move ottilie 4,4
+wait ottilie
+end
+move ottilie 8,4
+attack ottilie soldier-1
+move wren 9,4
+attack wren soldier-1
+end
+move ottilie 8,3
+attack ottilie hexer-1 art aimed_shot
+move wren 6,4
+item wren 2
+end
+move wren 7,4
+attack wren rider-1
+item ottilie 2
+end
+attack wren rider-1
+move ottilie 10,4
+item ottilie 2
+end
+move ottilie 13,5
+wait ottilie
+move wren 10,3
+wait wren
+end
+move wren 14,3
+wait wren
+move ottilie 14,5
+wait ottilie
+end
+exit wren
+exit ottilie
+leave
