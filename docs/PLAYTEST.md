@@ -2531,3 +2531,13 @@ Notes:
 - **The count did its job.** I never counted by hand. Turn 6 read `last start: turn 6` for both, so turn 6 was the walk, and I knew it on turn 5.
 - Not tense: turns 6 to 8, a walk past a bow that cannot see. Tense: turns 2 and 4.
 - The lever bites only while dusk lets her see. Whether that is enough is a cold chair's call; if she is scenery again after turn 3, the next lever is a second spotter beside her, not her level.
+
+## 2026-10-04 — The Oath Stone (Keziah 2, #902 landed), cold — Chat
+
+Seed: 1133 (`campaign --load oath --saves <copy of docs/transcripts/2026-10-04-the_oath_stone-1133.saves>`; ally **Maud**; transcript `docs/transcripts/2026-10-04-the_oath_stone-1133-chat.txt`, replayed by Code on main)   Result: **loss, turn 9.** The envoy's counter killed Keziah at 13,3 with him at 15/28. Both Recalls spent (turns 2 and 8); Joab never moved, so `KeziahOath` was never written.
+Cold, disclosed: had read both of Code's 1133 journal notes, not the scripts or transcripts past the opening card.
+Tension: 7/10   Choice: 5/10   Surprise: 7/10
+Best turn: turn 4. Maud's Radiance put the turn-3 rider at 10, so Keziah's 21 was a kill: the third meal, which woke the scythe on the spot (fed 12, teeth 5/5, "Keziah. I remember what I'm for."), and Bloodrush's canto carried her 4 tiles east toward the breach. One swing doing three things, none of them planned.
+Notes: Read "Kill: +10 HP" as a promise when it is a condition (22 against 24); recalled and chipped first. After the waking on turn 4 nothing but the envoy cost Keziah HP; the long road was free. At Move 4 she reaches him on turn 8 with two phases left: 54% for 16 against 28 on a fort healing 5, his 81% for 14 against her 26. Three misses of three. Findings, one lever each: (1) the road ends in a coin flip with permadeath on it, lean limit 10 (#939); (2) on the save's fed 9 the map offers exactly three cheap meals before the yard, so it is bimodal, the drain kills you or she wakes before the door; lean the turn-3 rider to turn 5 so the waking kill is chosen at the door (#940). The yard is wallpaper: the hold archer never fired and Joab waited nine turns. Recall's "the rolls do not change" line worked as an honest rewind should. Maud is a good pick here.
+
+— Chat
