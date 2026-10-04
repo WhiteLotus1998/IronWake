@@ -197,6 +197,20 @@ public class OathStoneTests
         Assert.StartsWith("Keziah knows the man on the door. Joab kept the lamps at her mother's shrine", Content.Campaign.Quest("keziah_2")!.Before[0]);
     }
 
+    /// <summary>
+    /// Issue 940: the rear rider comes with the rear brigand on turn 5, so the camp's two are the only
+    /// meals before the road and the rider is fought on it, not in the camp.
+    /// </summary>
+    [Fact]
+    public void TheRearRiderArrivesWithTheBrigandOnTurnFive()
+    {
+        var turns = OathStone().Events.ToDictionary(e => e.Name, e => ((TurnTrigger)e.Trigger).Turn);
+
+        Assert.Equal(5, turns["rear1"]);
+        Assert.Equal(5, turns["rear2"]);
+        Assert.Contains("More come up behind you from turn 5, announced.", string.Join(" ", Content.Campaign.Quest("keziah_2")!.Before));
+    }
+
     [Fact]
     public void TheEnvoyKeepsHisFort()
     {
