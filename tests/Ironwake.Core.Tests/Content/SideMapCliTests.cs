@@ -135,7 +135,8 @@ public class SideMapCliTests
     /// on the turn-5 kill at 4,3 as before, and the archer, now a house guard at 11,2, comes to the
     /// water with the lector and the Sworn Captain. The lector dies on Ottilie's counter, the
     /// captain at the cork, and the archer, unhit in four strikes, stands on the forest at 10,7
-    /// when turn 10 ends.
+    /// when turn 10 ends. Issue 931's eleventh turn lets her phase run: she shoots Teodor dead
+    /// and the script stops on turn 11, undecided.
     /// </summary>
     [Fact]
     public void TheJournaledCountingHousePlayBringsTheArcherToTheWater()
@@ -152,7 +153,39 @@ public class SideMapCliTests
             Assert.Contains("Side map: The Counting House, seed 980\n", output);
             Assert.Contains("The house group wakes (noise)\n", output);
             Assert.Contains("Archer moves 11,2 -> 8,3 via 10,2 9,2 9,3\n", output);
-            Assert.Contains("Lost because turn 10 ended and 1 enemy still stands.\n", output);
+            Assert.Contains("Teodor falls at 9,7\n", output);
+            Assert.Contains("Campaign stopped in The Counting House at turn 11, undecided\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
+    /// Code's journaled play of Ottilie's quest 1 (seed 980) at issue 931's limit of 11, from the
+    /// same save with Teodor: Chat's opening to turn 6, then Teodor falls back off the far bank on
+    /// turn 8 (a Recall spent to undo his death there), the archer and the Sworn Captain follow
+    /// him over the bridge, the captain dies on turn 9, and on turn 10 the archer, at 8 hp, shoots
+    /// Ottilie dead from 5,7 with `end` naming the lethal.
+    /// </summary>
+    [Fact]
+    public void TheJournaledElevenTurnCountingHousePlayDrawsTheArcherOverTheBridge()
+    {
+        var script = Transcript("2026-10-04-the_counting_house-980-931.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-counting-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Objective: Defeat every enemy by the end of turn 11. Ottilie must survive.\n", output);
+            Assert.Contains("Archer moves 8,6 -> 5,7 via 7,6 7,7 6,7\n", output);
+            Assert.Contains("Sworn Captain falls at 4,7\n", output);
+            Assert.Contains("Lost because Ottilie fell.\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
         finally

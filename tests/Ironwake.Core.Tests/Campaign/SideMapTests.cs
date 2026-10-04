@@ -168,6 +168,43 @@ public class SideMapTests
         Assert.Equal(text, MapFormat.Write(MapFormat.Parse(path, text, Content), Content));
     }
 
+    /// <summary>The turns a quest card's "by the end of turn N" promises that its map's limit does not keep.</summary>
+    private static List<int> CardTurnsOffTheLimit(IEnumerable<string> card, int turnLimit) =>
+        card.SelectMany(line => System.Text.RegularExpressions.Regex.Matches(line, @"end of turn (\d+)"))
+            .Select(m => int.Parse(m.Groups[1].Value, System.Globalization.CultureInfo.InvariantCulture))
+            .Where(turn => turn != turnLimit)
+            .ToList();
+
+    /// <summary>Issue 931: a quest's card names the turn its map is lost on, so the card moves with the map's limit.</summary>
+    [Fact]
+    public void EveryQuestCardNamesItsMapsTurnLimit()
+    {
+        foreach (var quest in Content.Campaign.Quests)
+        {
+            var map = Side(quest.MapId);
+
+            Assert.True(CardTurnsOffTheLimit(quest.Before, map.TurnLimit).Count == 0, $"{quest.Id}'s card names a turn other than {quest.MapId}'s limit {map.TurnLimit}");
+        }
+    }
+
+    /// <summary>The guard above, falsified: the Counting House's card from before issue 931 names turn 10 against the map's 11.</summary>
+    [Fact]
+    public void ACardStillOnTheOldLimitIsCaught()
+    {
+        var old = new[] { "(Placeholder card until the writing pass. Rout: every enemy falls by the end of turn 10. The map is lost if Ottilie falls.)" };
+
+        Assert.Equal(new[] { 10 }, CardTurnsOffTheLimit(old, Side("the_counting_house").TurnLimit));
+    }
+
+    /// <summary>Issue 931 (rounds 311 to 314): the Counting House's second lever is one more turn, and nothing else moves.</summary>
+    [Fact]
+    public void TheCountingHouseRunsElevenTurns()
+    {
+        var map = Side("the_counting_house");
+
+        Assert.Equal((11, 2, 3), (map.TurnLimit, map.RecallCharges, map.EnemyLevel));
+    }
+
     /// <summary>
     /// Issue 925 (round 311): the archer is a house guard, so she comes to the water when the house
     /// wakes, and she stands where she wakes it no sooner than it woke before: every tile a foot
