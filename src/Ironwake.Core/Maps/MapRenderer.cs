@@ -221,7 +221,7 @@ public static class MapRenderer
 
         if (map.RouteDrift is { } drift)
         {
-            sb.Append(Routes.Line(drift)).Append('\n');
+            sb.Append(Routes.Line(drift, 1)).Append('\n');
         }
 
         if (ExitLegend(map) is { } exits)
