@@ -54,7 +54,7 @@ public static class WakeCheck
             {
                 cause = WakeCause.Noise;
             }
-            else if (after.UnitsOf(Side.Player).Any(p => members.Any(m => m.DistanceTo(p.At) <= Wind.Radius(after, content.WakeRadius, p.At, m))))
+            else if (Wakers(after, content, group).Count > 0)
             {
                 cause = WakeCause.Proximity;
             }
@@ -77,6 +77,17 @@ public static class WakeCheck
         }
 
         return woke;
+    }
+
+    /// <summary>
+    /// The player units on <paramref name="after"/> within the wake radius of a living member of
+    /// <paramref name="group"/>, the radius bent by the wind on <paramref name="after"/>'s turn: the
+    /// proximity cause of <see cref="Run"/>, and the units the wind's warning names (issue 957).
+    /// </summary>
+    public static IReadOnlyList<BattleUnit> Wakers(BattleState after, GameContent content, string group)
+    {
+        var members = after.Units.Where(u => u.Group == group).Select(u => u.At).ToList();
+        return after.UnitsOf(Side.Player).Where(p => members.Any(m => m.DistanceTo(p.At) <= Wind.Radius(after, content.WakeRadius, p.At, m))).ToList();
     }
 }
 

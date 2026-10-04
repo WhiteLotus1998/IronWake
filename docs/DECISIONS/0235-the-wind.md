@@ -22,8 +22,14 @@ The chain Builder found no `ready` issue it could build (#804 to #807, #872 wait
 
 Won on turn 7. Nobody fell, no Recall, and the field group never woke. Under the north wind the captain, Ansgar and Teodor threaded the north road single file through 6,3, the one tile that is out of the fort archer's reach and upwind of the field (any shot from that archer is a fight the field hears). Turn 4 was the wind's turn: with the east wind due on turn 5, Teodor at 6,3, Ansgar at 8,3 and Wren at 2,4 would each have been downwind of the field and woken it at the phase start (a replay with Wren left at 2,4 shows `The field group wakes (proximity)` on turn 5). All three stepped clear. On turn 5 the gap was upwind of the field and downwind of the Reeve, so he woke alone. He came out to strike Ansgar, the fight at 12,4 stayed quiet, and the captain, Teodor and Ansgar killed him on turn 6. The captain seized on turn 7. Tension 6, choice 7, surprise 7, warm. Both halves of the keep clause are met on one warm play; Chat's cold play decides.
 
+## Amended 2026-10-04 (issue 957, rounds 327 and 328)
+
+- **The coming turn is printed.** During the turn before a wind turn, `WakeCheck.Run` runs on the board as it stands with the coming turn's wind (`Wind.Coming`), each woken group with the units `WakeCheck.Wakers` names (the proximity cause `Run` itself now reads), and each group a woken one calls. The board prints it under the wind line, `end` prints it beside the lethal when it wakes anyone, and `threat from` names a group the stop would wake once the wind turns and does not wake now. The reverse (loud now, quiet then) is not printed: a group woken now stays awake. Code's 1280 script replays to the same result with the warning on turn 4 (Ansgar, Teodor and Wren, then Ansgar and Wren, then Wren, then nobody as each stepped clear).
+- **The phase is the player's**, as the resolver already did it; DESIGN 13.28 says so and a test pins it.
+- **`wind:` with `dusk:` is refused** at load, naming the file and the field.
+
 ## Open
 
-- Nothing warns of the coming turn: on turn 4 `threat from` reads the current wind, so I worked out by hand who the turn-5 wind would wake. The lean, if kept: `end` names a unit whose tile the next turn's wind would wake a group from, as it names the lethal.
 - Pell and Ottilie never moved after turn 1, and Wren only to step clear of the turn: the sample rewards a small party. That's the sample's shape, not the rule's, but a cold chair should say whether the wind or the fort archer made it so.
-- Whether dusk's hearing radius should bend too.
+- A windy dusk, if ever wanted, bends the hearing with the wake and prints it: its own decision.
+- Upwind 2 used to open a fight: if it reads as free, the named lever is upwind -1 (heard at 3), not removing the bend (round 328).

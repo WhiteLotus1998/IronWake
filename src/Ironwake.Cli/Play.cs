@@ -692,6 +692,7 @@ public sealed class PlaySession
                 var endNames = UnitNames.Of(_state, _content);
                 var warnings = Queries.Lethal(_state, _content).Select(l => LethalLine(l, endNames))
                     .Concat(EscapeCount.PassedByEnding(_state, _content).Select(c => EscapeCount.Warning(c, _state.Map.TurnLimit, endNames)))
+                    .Concat(Wind.ComingLine(_state, _content, endNames, quiet: false) is { } windTurn ? new[] { UnitNames.Sentence(windTurn) } : Array.Empty<string>())
                     .ToList();
                 if (Apply(new EndPhase(), first: warnings.Count == 0 ? null : string.Join("\n", warnings)))
                 {
@@ -1685,6 +1686,9 @@ public sealed class PlaySession
     /// A stop that wakes a sleeping group (<see cref="Queries.StopWakes"/>, issue 458) is one row
     /// before the sleeping groups, naming each group and why, unpriced:
     /// <c>stopping here wakes: ford (proximity), weir (called by ford)</c>.
+    /// On a <c>wind:</c> map the turn before the wind turns (issue 957), a group the unit on the tile
+    /// would wake once it turns, and does not wake now, is one row after it (<see cref="Wind.StopWakesOnTurn"/>):
+    /// <c>quiet now; once the wind turns east on turn 5, stopping here wakes: the field group</c>.
     /// On a <c>cover: on</c> map (DESIGN.md 13.19, round 142) a strike a cover would swap is
     /// priced against the coverer on the tile, <c>covered by teodor, strikes teodor on 7,5</c>,
     /// and the total says the first strike swaps them and where the unit lands, the strikes after
@@ -1804,6 +1808,11 @@ public sealed class PlaySession
         if (wakes is { Count: > 0 })
         {
             rows.Add($"  stopping here wakes: {string.Join(", ", wakes.Select(w => $"{UnitNames.Group(w.Group)} ({(w.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(w))})"))}");
+        }
+
+        if (Wind.StopWakesOnTurn(state, content, unit, tile) is { Groups.Count: > 0 } windTurn)
+        {
+            rows.Add($"  quiet now; once the wind turns {Wind.Word(windTurn.Shift.To)} on turn {windTurn.Shift.Turn}, stopping here wakes: {string.Join(", ", windTurn.Groups.Select(UnitNames.Group))}");
         }
 
         foreach (var group in asleep)

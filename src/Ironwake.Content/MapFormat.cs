@@ -1033,12 +1033,18 @@ public static class MapFormat
         /// <summary>
         /// The <c>wind:</c> header (DESIGN.md 13.28): <c>east</c>, or <c>east; turn 4 north</c>, a way
         /// and then each turn it turns, in rising order, every turn from 2 to the turn limit, each a change.
+        /// Refused beside <c>dusk:</c> (issue 957).
         /// </summary>
         private WindRule? ParseWind(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
         {
             if (!header.TryGetValue("wind", out var entry))
             {
                 return null;
+            }
+
+            if (map.Dusk is not null)
+            {
+                throw ErrorAt(entry.Line, "wind: cannot ride with dusk: (issue 957); a dusk board prints the hearing radius unbent, so a windy dusk needs its own decision");
             }
 
             var parts = entry.Value.Split(';', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
