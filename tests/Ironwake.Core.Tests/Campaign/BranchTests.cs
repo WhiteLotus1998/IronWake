@@ -176,7 +176,7 @@ public class BranchTests
             new[]
             {
                 "The last seat: Keziah (Reaver) or Rook (Skyrider) (pick <unit>). The one passed on rides home.",
-                "Keziah: \"Everyone here is offering you a promise. I'm offering you something hungry.\"",
+                "Keziah: \"Everyone here is offering you a promise. Mine's hungry, and you'll hear it ask.\"",
                 "Rook: \"She's the last one. Pick me and you're the second person alive who knows her name.\"",
                 "They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.",
             },
