@@ -810,6 +810,7 @@ public static class Program
                 {
                     Console.WriteLine($"#   {passedLine}");
                 }
+                var scriptLine = enemy ? Script(command) : Script(state, content, command);
                 var result = Resolver.Apply(state, content, command);
                 if (!result.Accepted)
                 {
@@ -817,7 +818,7 @@ public static class Program
                     return 1;
                 }
 
-                Console.WriteLine((enemy ? "# enemy: " : "") + Script(command));
+                Console.WriteLine((enemy ? "# enemy: " : "") + scriptLine);
                 if (grudge is not null)
                 {
                     Console.WriteLine("#   " + grudge);
@@ -961,6 +962,26 @@ public static class Program
             return line;
         }
     }
+
+    /// <summary>
+    /// A player command as the CLI's script reader takes it on <paramref name="state"/>, before the
+    /// command is applied: an <c>attack</c> whose counter is lethal to the attacker ends in <c>!</c>,
+    /// since the CLI refuses that swing unconfirmed (issue 975), so a trace still replays under <c>--strict</c>.
+    /// </summary>
+    public static string Script(BattleState state, GameContent content, Command command) =>
+        Script(command) + (command is Attack attack && SwingsIntoLethalCounter(state, content, attack) ? " !" : "");
+
+    /// <summary>
+    /// True when <paramref name="attack"/>'s forecast on <paramref name="state"/> carries the console's
+    /// <c>Counter: lethal to</c> line (issue 539): a counter that kills the attacker if every strike lands,
+    /// never for a raise, which draws no counter, or a certain kill.
+    /// </summary>
+    public static bool SwingsIntoLethalCounter(BattleState state, GameContent content, Attack attack) =>
+        state.Find(attack.UnitId) is { } unit
+        && state.Find(attack.TargetId) is { } target
+        && !Windup.Raises(state, Resolver.ChooseWeapon(unit, content, attack.Slot).Weapon)
+        && Queries.Forecast(state, content, unit, target, attack.Slot) is { } forecast
+        && forecast.CounterIsLethal(unit.Hp, target.Hp);
 
     /// <summary>
     /// A command as the CLI's script reader takes it. Slots print one-based, as the CLI reads

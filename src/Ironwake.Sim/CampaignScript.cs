@@ -392,12 +392,13 @@ public static class CampaignScript
 
     private static void Submit(ClientSession battle, List<string> lines, Command command)
     {
+        var line = command is FallBack f && battle.State.Find(f.UnitId) is { } u && u.At == f.To ? $"fallback {f.UnitId} stay" : Program.Script(battle.State, battle.Content, command);
         if (!battle.Submit(command))
         {
             throw new InvalidOperationException($"{Program.Script(command)} was refused: {battle.Status}");
         }
 
-        lines.Add(command is FallBack f && battle.State.Find(f.UnitId) is { } u && u.At == f.To ? $"fallback {f.UnitId} stay" : Program.Script(command));
+        lines.Add(line);
         battle.Continue();
     }
 }
