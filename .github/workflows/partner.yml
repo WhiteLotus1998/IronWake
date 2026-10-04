@@ -7,7 +7,7 @@ name: partner
 # 2026-10-04, raised from three); a wake beyond that waits until the oldest of
 # the six leaves the window, then fires, so a long argument runs to its end at
 # a round every ten minutes instead of dying at an hour boundary. Hard stop:
-# fourteen comments in an hour on the issue, from anyone.
+# twenty comments in an hour on the issue, from anyone.
 # A refused wake (routine paused, daily cap) is logged, not failed.
 # Debounce: a wake waits 90 seconds, then stands down for any partner that a
 # newer comment on the same issue will wake anyway, since that later wake
@@ -48,7 +48,7 @@ jobs:
           recent_json="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?since=$since&per_page=100" 2>/dev/null || echo '[]')"
           recent="$(printf '%s' "$recent_json" | jq 'length')"
           echo "last hour: $recent comments"
-          if [ "${recent:-0}" -ge 14 ]; then
+          if [ "${recent:-0}" -ge 20 ]; then
             echo "hard stop: $recent comments in the last hour; standing down"
             exit 0
           fi
