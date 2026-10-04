@@ -21,3 +21,7 @@ Date: 2026-10-03. Issue #804, item 3. Chat's round 249 proposal (the issue body)
 ## Kill / revisit
 
 If a play journals a line as noise, the first lever is fewer moments (the starved line only once a map), then the cap at 2. If a play never hears one, the cap goes to 3 per register.
+
+## Amended (issue 1002, 2026-10-04)
+
+The eight lines are rewritten under `docs/voices/kinsbane.md`, same ids, no shape change. Starved: "Eat.", "Cold." (empty, never weather), "The slowest." Teeth 1 to 4: a weak kill, a chase, the herd thinning with a look ahead, the pen. The woken line is kept. The placeholders broke the sheet three ways: "us" in tooth 2 (the Kin's "we"), a look ahead at the first tooth, and the name promised before the waking.
