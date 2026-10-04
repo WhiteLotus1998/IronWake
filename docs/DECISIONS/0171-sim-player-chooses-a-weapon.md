@@ -53,3 +53,17 @@ Nothing is tuned on this (round 230): both partners read the list first.
 
 - Whether the score should price ignition (Cinder) and other side effects, for the player and the enemy alike. The enemy AI does not price it either.
 - The ladder's tier 1 bar and 0164's exemption read on the fixed Sim; the lever, if any, is the Table's.
+
+## Addendum, the 200-seed rows (#971, 2026-10-04)
+
+The read above was 100 seeds with `--curve`; STATE's Maps table kept its pre-0171 gate cells (0173 updated Brackwater's gate 1 and not its gate 4). `--full --all` in Release at 200 seeds, two rolls, on main at 80be971, the same numbers the Critic read at 96081ff:
+
+| Map | Gate 1 before | Gate 1 now | Gate 4 before | Gate 4 now |
+|---|---|---|---|---|
+| the_tollgate | 74 percent | 158/200 (79) | 0.245 | 0.215 |
+| brackwater_cut | 65 percent | 129/200 (65) | 0.158 | 0.282 |
+| harrow_weir | 123/200 (61) | 143/200 (71) | 0.280 | 0.205 |
+| saltmarsh_ford | 23 percent | 50/200 (25) | 0.055, fails | 0.075, fails |
+| sallow_grange | 79 percent | 161/200 (81) | 0.380 | 0.330 |
+
+The field, Old Mill Road, the Mill and Starting Alone already matched. No verdict moves: every `tuned` map clears gate 1, Saltmarsh still fails gates 1 and 4. DESIGN 11's Harrow Weir sentence (123 of 200, 0100) is a dated record and stays. From here a PR that changes the Sim's player re-runs `--full --all` and rewrites the cells it moves (STATE, standing notes).
