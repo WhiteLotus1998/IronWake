@@ -91,6 +91,12 @@ public sealed record Combatant
     public bool Blind { get; init; }
 
     /// <summary>
+    /// Whether this side has spent its answer: on a <c>one_answer: on</c> map it already countered
+    /// this phase, so it makes no counter until the next phase begins (DESIGN.md 13.29, <see cref="Answer"/>).
+    /// </summary>
+    public bool AnswerSpent { get; init; }
+
+    /// <summary>
     /// Whether this side is oath-bound (issue 691): an enemy in a group its map's <c>oathbound:</c>
     /// header names. Read by an ability whose condition asks for it (Unsworn), nothing else.
     /// </summary>
@@ -110,6 +116,6 @@ public sealed record Combatant
     /// </summary>
     public bool SingleStrike { get; init; }
 
-    /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, and not <see cref="Blind"/>.</summary>
-    public bool CanStrike(int distance) => !Blind && Weapon is not null && Weapon.InRange(distance);
+    /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, not <see cref="Blind"/>, and not <see cref="AnswerSpent"/>.</summary>
+    public bool CanStrike(int distance) => !Blind && !AnswerSpent && Weapon is not null && Weapon.InRange(distance);
 }

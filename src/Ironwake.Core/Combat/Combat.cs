@@ -191,7 +191,7 @@ public static class Combat
         }
 
         var defenderSide = defender.CanStrike(distance) ? ForSide(defender, attacker, distance, scheme) : SideForecast.None;
-        return new CombatForecast(ForSide(attacker, defender, distance, scheme), defenderSide, scheme);
+        return new CombatForecast(ForSide(attacker, defender, distance, scheme), defenderSide, scheme) { CounterAnswered = defender.AnswerSpent && (defender with { AnswerSpent = false }).CanStrike(distance) };
     }
 
     /// <summary>

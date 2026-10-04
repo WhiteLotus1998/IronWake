@@ -1,0 +1,78 @@
+move wren 4,8
+wait wren
+move captain 4,9
+wait captain
+move teodor 9,9
+wait teodor
+move pell 4,10
+wait pell
+end
+move wren 5,6
+attack wren archer-2
+move pell 5,7
+attack pell archer-2
+threat wren
+move captain 4,6
+wait captain
+move teodor 8,6
+wait teodor
+end
+move teodor 7,5
+attack teodor toll_brigand-1
+forecast captain toll_brigand-1 from 6,6
+move captain 6,6
+attack captain toll_brigand-1
+move wren 5,4
+wait wren
+move pell 5,6
+wait pell
+end
+move teodor 6,4
+wait teodor
+threat captain from 7,5
+threat pell from 6,5
+move captain 7,5
+wait captain
+move pell 6,5
+wait pell
+wait wren
+end
+attack captain rider-1
+attack teodor rider-1
+wait pell
+wait wren
+end
+move teodor 7,4
+wait teodor
+move pell 6,4
+attack pell toll_warden-1
+move captain 6,3
+attack captain toll_warden-1
+threat captain
+threat pell
+wait wren
+end
+attack teodor bandit_leader-1 art long_thrust
+move captain 6,2
+attack captain bandit_leader-1 art full_measure
+move pell 6,3
+attack pell bandit_leader-1
+threat pell
+threat wren from 6,4
+move wren 6,4
+wait wren
+end
+recall 76
+move captain 6,2
+attack captain archer-1
+move teodor 6,3
+attack teodor archer-1 art long_thrust
+threat pell
+wait pell
+wait wren
+end
+move teodor 7,4
+wait teodor
+move pell 6,3
+attack pell archer-1
+move captain 7,1

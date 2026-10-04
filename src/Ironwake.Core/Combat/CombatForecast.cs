@@ -53,6 +53,12 @@ public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int D
 public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender, RollScheme Scheme, int ArtCost = 0)
 {
     /// <summary>
+    /// Whether the defender would have countered but has spent its answer this phase on a
+    /// <c>one_answer: on</c> map (DESIGN.md 13.29, <see cref="Answer"/>), so the screen can say why there is no counter.
+    /// </summary>
+    public bool CounterAnswered { get; init; }
+
+    /// <summary>
     /// The most uses the attacker's weapon spends: one per strike it can make, or one for
     /// the whole combat with a gauntlet (issue 70), and an art's cost, paid hit or miss.
     /// </summary>

@@ -131,6 +131,12 @@ public sealed record BattleUnit(
     /// </summary>
     public bool Winded { get; init; }
 
+    /// <summary>
+    /// Set when the unit countered on a <c>one_answer: on</c> map (DESIGN.md 13.29, <see cref="Answer"/>):
+    /// until the next phase begins, on either side, it makes no counter.
+    /// </summary>
+    public bool Answered { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 
@@ -291,10 +297,11 @@ public sealed record BattleUnit(
     /// <summary>
     /// This unit as it answers a strike from <paramref name="attackerAt"/>: countering, and
     /// <see cref="Combatant.Blind"/> when its side cannot see that tile at dusk, since a counter
-    /// needs sight the same as a strike (DESIGN.md 13.7, issue 308). Every forecast, the
+    /// needs sight the same as a strike (DESIGN.md 13.7, issue 308), and <see cref="Combatant.AnswerSpent"/>
+    /// when it already countered this phase on a <c>one_answer: on</c> map (DESIGN.md 13.29). Every forecast, the
     /// resolver and the enemy planner build the answering side here, so all read one number.
     /// <paramref name="attacker"/> is the unit striking, for the sworn crit avoid (issue 331).
     /// </summary>
     public Combatant Answering(BattleState state, GameContent content, Coord attackerAt, BattleUnit? attacker = null) =>
-        ToCombatant(state, content, countering: true, against: attacker) with { Blind = !Dusk.Sees(state, Side, attackerAt) };
+        ToCombatant(state, content, countering: true, against: attacker) with { Blind = !Dusk.Sees(state, Side, attackerAt), AnswerSpent = Answer.Spent(state, this) };
 }

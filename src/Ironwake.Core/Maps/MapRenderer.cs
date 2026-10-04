@@ -249,6 +249,11 @@ public static class MapRenderer
             sb.Append(Winded.Legend).Append('\n');
         }
 
+        if (map.OneAnswerEnabled)
+        {
+            sb.Append(Answer.Legend).Append('\n');
+        }
+
         if (map.PincerEnabled)
         {
             sb.Append(PincerLegend).Append('\n');
@@ -440,6 +445,11 @@ public static class MapRenderer
                     role += ", winded";
                 }
 
+                if (unit.Answered)
+                {
+                    role += ", answered";
+                }
+
                 if (unit.Watching)
                 {
                     role += ", watching";
@@ -475,6 +485,11 @@ public static class MapRenderer
             if (unit.Side == Side.Player && unit.Winded)
             {
                 sb.Append("  winded");
+            }
+
+            if (unit.Side == Side.Player && unit.Answered)
+            {
+                sb.Append("  answered");
             }
 
             if (unit.Side == Side.Player && unit.Watching)
@@ -601,6 +616,11 @@ public static class MapRenderer
         if (map.DashEnabled)
         {
             sb.Append(Winded.Legend).Append('\n');
+        }
+
+        if (map.OneAnswerEnabled)
+        {
+            sb.Append(Answer.Legend).Append('\n');
         }
 
         if (map.PincerEnabled)

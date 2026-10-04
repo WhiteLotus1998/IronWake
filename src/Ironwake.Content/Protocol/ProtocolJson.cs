@@ -732,6 +732,11 @@ public static class ProtocolJson
             w.WriteNumber("artCost", forecast.ArtCost);
         }
 
+        if (forecast.CounterAnswered)
+        {
+            w.WriteBoolean("counterAnswered", true);
+        }
+
         w.WriteEndObject();
     }
 
@@ -739,7 +744,10 @@ public static class ProtocolJson
     {
         using var doc = Parse(json);
         var e = doc.RootElement;
-        return new CombatForecast(ReadSide(Required(e, "attacker")), ReadSide(Required(e, "defender")), ParseEnum<RollScheme>(RequiredString(e, "scheme"), "scheme"), OptionalInt(e, "artCost") ?? 0);
+        return new CombatForecast(ReadSide(Required(e, "attacker")), ReadSide(Required(e, "defender")), ParseEnum<RollScheme>(RequiredString(e, "scheme"), "scheme"), OptionalInt(e, "artCost") ?? 0)
+        {
+            CounterAnswered = e.TryGetProperty("counterAnswered", out _) && RequiredBool(e, "counterAnswered"),
+        };
     }
 
     /// <summary>Every tile of a reach in the order the core settled them (DECISIONS/0012), each with its cost, its path from the origin, and whether the unit may end its move there.</summary>
@@ -1106,6 +1114,11 @@ public static class ProtocolJson
             w.WriteBoolean("winded", true);
         }
 
+        if (unit.Answered)
+        {
+            w.WriteBoolean("answered", true);
+        }
+
         if (unit.Pressed)
         {
             w.WriteBoolean("pressed", true);
@@ -1340,6 +1353,7 @@ public static class ProtocolJson
             Landed = e.TryGetProperty("landed", out _) && RequiredBool(e, "landed"),
             Breathed = e.TryGetProperty("breathed", out _) && RequiredBool(e, "breathed"),
             Winded = e.TryGetProperty("winded", out _) && RequiredBool(e, "winded"),
+            Answered = e.TryGetProperty("answered", out _) && RequiredBool(e, "answered"),
             Open = e.TryGetProperty("open", out var open) ? new OpenMark(RequiredString(open, "by"), RequiredInt(open, "def"), RequiredInt(open, "res")) : null,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,

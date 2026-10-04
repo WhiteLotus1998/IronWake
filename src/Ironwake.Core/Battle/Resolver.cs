@@ -653,7 +653,7 @@ public static class Resolver
             attackerAfter = attackerAfter with { Spent = 1 };
         }
 
-        var targetAfter = SpendDurability(target with { Hp = result.DefenderHp }, result.Strikes, content, events);
+        var targetAfter = SpendDurability(target with { Hp = result.DefenderHp, Answered = target.Answered || Answer.Spends(state.Map, target.Id, result.Strikes) }, result.Strikes, content, events);
         attackerAfter = AwardExp(attackerAfter, targetAfter, result.Strikes, result.DefenderDied, content, state.Seed, events);
         targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, result.AttackerDied, content, state.Seed, events);
         attackerAfter = AwardRank(attackerAfter, weapon, result.Strikes, result.DefenderDied, events);
@@ -1778,7 +1778,7 @@ public static class Resolver
                 events.Add(new UnitRested(unit.Id));
             }
 
-            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null, Landed = false });
+            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null, Landed = false });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
