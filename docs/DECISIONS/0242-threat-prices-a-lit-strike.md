@@ -15,6 +15,8 @@ Date: 2026-10-04. Issue #987 (bug; found in a warm replay of Brackwater Cut, see
 
 `2026-09-27-brackwater_cut-241-lamps.txt` changes in two places: turn 4's `threat captain` prices the soldier lit by the shieldbearer (15 against 22, not 7), and turn 5's `end` names Pell lethal (shieldbearer 10, soldier 11, against 16). In the same play's enemy phase 5 the shieldbearer steps beside Wren and the soldier, lit by it, strikes her: the case this fixes.
 
+`2026-10-04-brackwater_cut-1310.txt`, the play that found it, is regenerated on this build: turn 4's `threat rook` prices the soldier (23 against 17) and `end` names Rook lethal (shieldbearer 11, soldier 12), which is what the enemy phase did; turn 5's `threat wren` reads 17 against 20. The script is unchanged and replays under `--strict`.
+
 ## Tests
 
-`DuskTests`: the lit enemy is priced, marked, totalled and named by `Lethal`; with no side-mate, or with the only one acting after it (a brigand before a shieldbearer), it stays `cannot see you (dark)`; the planner's enemy phase on the same board strikes the unit with both. The ordering guard was falsified by removing it (the brigand case fails). 4383 tests pass.
+`DuskTests`: the lit enemy is priced, marked, totalled and named by `Lethal`; with no side-mate, or with the only one acting after it (a brigand before a shieldbearer), it stays `cannot see you (dark)`; the planner's enemy phase on the same board strikes the unit with both. `CliPlayTests` pins the 1310 replay. The ordering guard was falsified by removing it (the brigand case fails). 4384 tests pass.

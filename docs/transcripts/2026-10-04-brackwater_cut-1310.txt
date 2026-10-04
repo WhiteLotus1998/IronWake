@@ -1286,10 +1286,11 @@ count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 2 turns to an 
 > threat rook
 Threat on Rook at 19,3 (Plain):
   Shieldbearer from 19,4 with Iron Lance (slot 1): acc 60% dmg 11 crit 0%; counter: acc 89% dmg 2 x2 crit 4%
-  If all land: 11 against 17 hp
-  Soldier: cannot see you (dark)
+  Soldier (once Shieldbearer lights you) from 19,4 with Iron Lance (slot 1): acc 63% dmg 12 crit 0%; counter: acc 79% dmg 7 crit 3%
+  If all land: 23 against 17 hp
   In the dark, unpriced: ? at 10,3 (9)
 > end
+Lethal if all land: Rook (Shieldbearer for 11, Soldier for 12, against 17 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
 Archer 2 heals 1 (hp 17)
@@ -1960,8 +1961,8 @@ count: Alder Fenn on an exit (leaves by turn 8), Dunstan 2 turns to an exit (las
 > threat wren
 Threat on Wren at 18,2 (Plain):
   Shieldbearer from 18,3 with Iron Lance (slot 1): acc 60% dmg 8 crit 0%; counter: acc 93% dmg 3 x2 crit 4%
-  If all land: 8 against 20 hp
-  Soldier: cannot see you (dark)
+  Soldier (once Shieldbearer lights you) from 18,3 with Iron Lance (slot 1): acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
+  If all land: 17 against 20 hp
   In the dark, unpriced: ? at 11,1 (8), ? at 10,2 (8), ? at 9,2 (9), ? at 10,3 (9)
 > end
 -- Player phase ends, turn 5 --
