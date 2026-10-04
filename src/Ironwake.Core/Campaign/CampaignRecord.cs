@@ -275,6 +275,58 @@ public sealed record CampaignRecord(
     public ValueList<string> Met { get; init; } = ValueList<string>.Empty;
 
     /// <summary>
+    /// The support conversations seen so far (issue 77 slice 8), scene ids in the order seen. Each
+    /// plays once; <see cref="SceneScripts.NextConversation"/> skips one seen.
+    /// </summary>
+    public ValueList<string> SupportsSeen { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
+    /// Plays the support conversation waiting for <paramref name="a"/> and <paramref name="b"/> at the
+    /// camp (issue 77 slice 8), each by id or by name in any case: the one
+    /// <see cref="SceneScripts.NextConversation"/> names, recorded in <see cref="SupportsSeen"/>, the
+    /// accepted text naming it (<c>Wren and Pell talk (support C)</c>). Refused, with the reason, when the
+    /// campaign is over, either is not on the living roster, the two are no support pair, the pair is
+    /// below C, or every conversation of a tier it has reached is seen or unwritten. Costs nothing.
+    /// </summary>
+    public ScreenResult SeeSupport(string a, string b, GameContent content)
+    {
+        if (IsFinished(content))
+        {
+            return ScreenResult.Refused(this, "the campaign is over");
+        }
+
+        Unit? Named(string text) => Roster.FirstOrDefault(u =>
+            string.Equals(u.Id, text, StringComparison.OrdinalIgnoreCase) || string.Equals(u.Name, text, StringComparison.OrdinalIgnoreCase));
+        if (Named(a) is not { } first)
+        {
+            return ScreenResult.Refused(this, $"no unit '{a}' on the roster");
+        }
+
+        if (Named(b) is not { } second)
+        {
+            return ScreenResult.Refused(this, $"no unit '{b}' on the roster");
+        }
+
+        if (Supports.Pair(content.Campaign, first.Id, second.Id) is not { } pair)
+        {
+            return ScreenResult.Refused(this, $"{first.Name} and {second.Name} are no support pair");
+        }
+
+        if (Supports.TierOf(content, pair.A, pair.B, RapportOf(pair.A, pair.B)) is null)
+        {
+            return ScreenResult.Refused(this, $"{first.Name} and {second.Name} have not reached support {content.Rivalry.SupportTiers.OrderBy(t => t.At).First().Name}");
+        }
+
+        if (SceneScripts.NextConversation(content, this, pair) is not { Support: { } at } scene)
+        {
+            return ScreenResult.Refused(this, $"{first.Name} and {second.Name} have no conversation waiting");
+        }
+
+        var seen = this with { SupportsSeen = SupportsSeen.Add(scene.Id) };
+        return new ScreenResult(seen, $"{Find(at.A)!.Name} and {Find(at.B)!.Name} talk (support {at.Tier})", true);
+    }
+
+    /// <summary>
     /// Meets <paramref name="unitId"/> at the camp (issue 633 slice 3, DESIGN section 14): one of the
     /// next map's <see cref="CampaignMap.Meets"/>, by id or by name in any case, who joins the company
     /// for it like a joiner (<see cref="Present"/>, at no less than <see cref="JoinLevel"/>). At most

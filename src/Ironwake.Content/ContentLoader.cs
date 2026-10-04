@@ -88,9 +88,23 @@ public static class ContentLoader
             }
         }
 
-        return files.Scenes is { Count: > 0 } scenes
-            ? content with { Scenes = ValueList<Scene>.From(scenes.Select(f => SceneFormat.Parse(f, content))) }
-            : content;
+        if (files.Scenes is not { Count: > 0 } sceneFiles)
+        {
+            return content;
+        }
+
+        var parsed = sceneFiles.Select(f => SceneFormat.Parse(f, content)).ToList();
+        var conversations = new HashSet<SceneSupport>();
+        foreach (var scene in parsed)
+        {
+            if (scene.Support is { } support && !conversations.Add(support))
+            {
+                throw new ContentException(SceneFormat.Directory + "/" + scene.Id + ".txt", null, "plays",
+                    $"a second conversation for {support.A} and {support.B} at {support.Tier}; a pair has one a tier");
+            }
+        }
+
+        return content with { Scenes = ValueList<Scene>.From(parsed) };
     }
 
     /// <summary>The scene scripts under <paramref name="contentRoot"/>'s <see cref="SceneFormat.Directory"/> (issue 1001), in file-name order; empty when it has none.</summary>

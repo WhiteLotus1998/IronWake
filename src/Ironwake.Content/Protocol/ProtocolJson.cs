@@ -1472,17 +1472,9 @@ public static class ProtocolJson
     }
 
     /// <summary>
-    /// A campaign record (issue 74) as one JSON object: the protocol version, the seed as a string
-    /// (a ulong does not survive every JSON reader), the difficulty, permadeath when it is off (issue 664;
-    /// a record without it reads as on), the captain's origin when one was chosen (issue 681), the branch's pick once made (issue 633), the difficulties it was lowered from when there are any (issue 677), the purse, the index of the next
-    /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
-    /// without the battle fields), the fallen and benched ids, and the certification trials tried
-    /// since the last map (issue 252), the side maps won and those fought since the last map when there are any (issue 635), and the edits bought for the keep in the order they were made
-    /// (issue 288). A campaign is a file.
-    /// </summary>
-    /// <summary>
-    /// A scene as it plays (issue 1001): <c>scene</c> (its id), <c>point</c> (<c>before</c>, <c>camp</c>
-    /// or <c>after</c>), <c>map</c> (the campaign map id), and <c>lines</c>, the lines shown on the
+    /// A scene as it plays (issue 1001): <c>scene</c> (its id), <c>point</c> (<c>before</c>, <c>camp</c>,
+    /// <c>after</c> or <c>support</c>), <c>map</c> (the campaign map id), or for a support conversation
+    /// (issue 77 slice 8) <c>a</c>, <c>b</c> and <c>tier</c> in its place, and <c>lines</c>, the lines shown on the
     /// record it plays against, each <c>id</c>, <c>speaker</c> (a unit id, an incidental's id, <c>narration</c>
     /// or <c>rules</c>) and <c>text</c>; then, when the scene declares any, <c>incidental</c>, each <c>id</c> and <c>name</c>.
     /// </summary>
@@ -1491,7 +1483,17 @@ public static class ProtocolJson
         w.WriteStartObject();
         w.WriteString("scene", scene.Id);
         w.WriteString("point", SceneFormat.PointWord(scene.Point));
-        w.WriteString("map", scene.MapId);
+        if (scene.Support is { } support)
+        {
+            w.WriteString("a", support.A);
+            w.WriteString("b", support.B);
+            w.WriteString("tier", support.Tier);
+        }
+        else
+        {
+            w.WriteString("map", scene.MapId);
+        }
+
         w.WriteStartArray("lines");
         foreach (var line in shown)
         {
@@ -1520,6 +1522,15 @@ public static class ProtocolJson
         w.WriteEndObject();
     });
 
+    /// <summary>
+    /// A campaign record (issue 74) as one JSON object: the protocol version, the seed as a string
+    /// (a ulong does not survive every JSON reader), the difficulty, permadeath when it is off (issue 664;
+    /// a record without it reads as on), the captain's origin when one was chosen (issue 681), the branch's pick once made (issue 633), the support conversations seen when there are any (issue 77 slice 8), the difficulties it was lowered from when there are any (issue 677), the purse, the index of the next
+    /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
+    /// without the battle fields), the fallen and benched ids, and the certification trials tried
+    /// since the last map (issue 252), the side maps won and those fought since the last map when there are any (issue 635), and the edits bought for the keep in the order they were made
+    /// (issue 288). A campaign is a file.
+    /// </summary>
     public static string Campaign(CampaignRecord record) => Campaign(record, null);
 
     /// <summary>
@@ -1577,6 +1588,17 @@ public static class ProtocolJson
         {
             w.WriteStartArray("met");
             foreach (var id in record.Met)
+            {
+                w.WriteStringValue(id);
+            }
+
+            w.WriteEndArray();
+        }
+
+        if (record.SupportsSeen.Count > 0)
+        {
+            w.WriteStartArray("supportsSeen");
+            foreach (var id in record.SupportsSeen)
             {
                 w.WriteStringValue(id);
             }
@@ -1889,6 +1911,7 @@ public static class ProtocolJson
             WarningConfirmed = OptionalInt(e, "warningConfirmed"),
             Returned = ReadReturned(e),
             Met = ReadMet(e, content),
+            SupportsSeen = ReadSupportsSeen(e, content),
         };
     }
 
@@ -1994,6 +2017,26 @@ public static class ProtocolJson
         }
 
         return ValueList<string>.From(met);
+    }
+
+    /// <summary>The optional <c>supportsSeen</c> array of a campaign record (issue 77 slice 8), ids of the content's support conversations; a record without one has seen none.</summary>
+    private static ValueList<string> ReadSupportsSeen(JsonElement e, GameContent content)
+    {
+        if (!e.TryGetProperty("supportsSeen", out _))
+        {
+            return ValueList<string>.Empty;
+        }
+
+        var seen = Array(Required(e, "supportsSeen"), "supportsSeen").Select(m => m.ValueKind == JsonValueKind.String ? m.GetString()! : throw new ProtocolException("supportsSeen entries must be strings")).ToList();
+        foreach (var id in seen)
+        {
+            if (!content.Scenes.Any(s => s.Id == id && s.Support is not null))
+            {
+                throw new ProtocolException($"supportsSeen '{id}' is not a support conversation of the content");
+            }
+        }
+
+        return ValueList<string>.From(seen);
     }
 
     /// <summary>The optional <c>fellOn</c> array of a campaign record (issue 678), the board each of the fallen fell on; a record written before it reads as none.</summary>

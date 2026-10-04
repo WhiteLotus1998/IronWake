@@ -11,6 +11,13 @@ public enum ScenePoint
 
     /// <summary>Once the map is won, after its after card.</summary>
     After,
+
+    /// <summary>
+    /// A support conversation (issue 77 slice 8): played at a camp by <c>support &lt;a&gt; &lt;b&gt;</c>
+    /// once its pair has reached its tier, once each. Its <see cref="Scene.Support"/> names the pair and
+    /// the tier, and its <see cref="Scene.MapId"/> is empty.
+    /// </summary>
+    Support,
 }
 
 /// <summary>The record facts a scene's condition may name (issue 1001); the set is closed.</summary>
@@ -74,14 +81,20 @@ public sealed record SceneLine(string Id, string Speaker, string Text)
 /// </summary>
 public sealed record SceneIncidental(string Id, string Name);
 
+/// <summary>The pair and tier a support conversation belongs to (issue 77 slice 8), the pair in <c>campaign.json</c>'s order.</summary>
+public sealed record SceneSupport(string A, string B, string Tier);
+
 /// <summary>
 /// A scene script (issue 1001), one file under <c>content/scenes</c>: its id (the file's name), the
 /// campaign point and main-line map it plays at, its lines in order, the ids it has retired, the
 /// incidental speakers it declares, and the beat sheet that argued for more than
-/// <see cref="SceneScripts.LinesMax"/> lines, when one did.
+/// <see cref="SceneScripts.LinesMax"/> lines, when one did. A support conversation has no map (its
+/// <see cref="MapId"/> is empty) and carries its <see cref="Support"/> pair and tier instead.
 /// </summary>
 public sealed record Scene(string Id, ScenePoint Point, string MapId, ValueList<SceneLine> Lines)
 {
+    public SceneSupport? Support { get; init; }
+
     public ValueList<string> Retired { get; init; } = ValueList<string>.Empty;
 
     public ValueList<SceneIncidental> Incidentals { get; init; } = ValueList<SceneIncidental>.Empty;
@@ -110,6 +123,9 @@ public static class SceneScripts
 
     /// <summary>The most lines a scene holds, its <see cref="Rules"/> lines aside, unless its <see cref="Scene.Beat"/> names the beat sheet that argued for more (WRITING.md).</summary>
     public const int LinesMax = 40;
+
+    /// <summary>The most lines a support conversation holds, its <see cref="Rules"/> lines aside (WRITING.md); a beat sheet does not lift it.</summary>
+    public const int SupportLinesMax = 20;
 
     /// <summary>The words a <c>returned</c> fact takes, the campaign record's own names (PROTOCOL.md).</summary>
     public static readonly IReadOnlyDictionary<string, ClaimantFate> FateWords = new Dictionary<string, ClaimantFate>(StringComparer.Ordinal)
@@ -158,6 +174,39 @@ public static class SceneScripts
     /// <summary>The scenes of <paramref name="content"/> that play at <paramref name="point"/> of <paramref name="mapId"/>, in id order.</summary>
     public static IReadOnlyList<Scene> At(GameContent content, ScenePoint point, string mapId) =>
         content.Scenes.Where(s => s.Point == point && s.MapId == mapId).OrderBy(s => s.Id, StringComparer.Ordinal).ToList();
+
+    /// <summary>
+    /// The support conversations waiting on <paramref name="record"/> (issue 77 slice 8): per support
+    /// pair of two living members, in <c>campaign.json</c>'s order, the conversation <see cref="NextConversation"/>
+    /// would play.
+    /// </summary>
+    public static IReadOnlyList<Scene> Waiting(GameContent content, CampaignRecord record) =>
+        content.Campaign.Supports.Select(p => NextConversation(content, record, p)).OfType<Scene>().ToList();
+
+    /// <summary>
+    /// The conversation <c>support &lt;a&gt; &lt;b&gt;</c> plays for <paramref name="pair"/> on
+    /// <paramref name="record"/> (issue 77 slice 8): with both members on the living roster, the
+    /// lowest tier the pair's rapport has reached whose conversation is written and not yet seen, so a
+    /// pair at B with C unseen plays C first. Null when none waits.
+    /// </summary>
+    public static Scene? NextConversation(GameContent content, CampaignRecord record, SupportPair pair)
+    {
+        if (record.Find(pair.A) is null || record.Find(pair.B) is null
+            || Supports.TierOf(content, pair.A, pair.B, record.RapportOf(pair.A, pair.B)) is not { } reached)
+        {
+            return null;
+        }
+
+        return content.Rivalry.SupportTiers
+            .Where(t => t.At <= reached.At)
+            .OrderBy(t => t.At)
+            .Select(t => Conversation(content, pair, t.Name))
+            .FirstOrDefault(s => s is not null && !record.SupportsSeen.Contains(s.Id));
+    }
+
+    /// <summary>The conversation written for <paramref name="pair"/> at tier <paramref name="tier"/> (issue 77 slice 8), or null when none is.</summary>
+    public static Scene? Conversation(GameContent content, SupportPair pair, string tier) =>
+        content.Scenes.FirstOrDefault(s => s.Support is { } at && at.Tier == tier && pair.Involves(at.A) && pair.Involves(at.B));
 
     /// <summary>The lines of <paramref name="scene"/> whose condition holds on <paramref name="record"/>, in order.</summary>
     public static IReadOnlyList<SceneLine> Shown(Scene scene, CampaignRecord record, GameContent content) =>
