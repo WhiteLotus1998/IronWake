@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -198,6 +198,11 @@ public static class MapFormat
         if (map.Bond is { } bond)
         {
             sb.Append("freed: ").Append(bond.Bound).Append(" by ").Append(bond.BossGroup).Append('\n');
+        }
+
+        if (map.RouteDrift is { } routeDrift)
+        {
+            sb.Append("route_drift: ").Append(routeDrift).Append('\n');
         }
 
         if (map.DifficultyId is { } difficulty)
@@ -392,6 +397,7 @@ public static class MapFormat
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
+            map = map with { RouteDrift = ParseRouteDrift(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
@@ -441,6 +447,63 @@ public static class MapFormat
             }
 
             return new FreedBond(at, group);
+        }
+
+        /// <summary>
+        /// The <c>route_drift:</c> header (issue 81): <c>group x,y; group x,y; turn N</c>, two distinct
+        /// groups each with a Guard member, placed or spawned, each with its route's crossing, a tile on
+        /// the map, and the turn the untaken route's group moves, 1 to the turn limit.
+        /// </summary>
+        private RouteDrift? ParseRouteDrift(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("route_drift", out var entry))
+            {
+                return null;
+            }
+
+            var parts = entry.Value.Split(';', StringSplitOptions.TrimEntries);
+            var turn = parts.Length == 3 ? parts[2].Split(' ', StringSplitOptions.RemoveEmptyEntries) : Array.Empty<string>();
+            if (parts.Length != 3 || turn.Length != 2 || turn[0] != "turn" || !int.TryParse(turn[1], out var when))
+            {
+                throw ErrorAt(entry.Line, $"route_drift: needs two route groups with their crossings and a turn: 'route_drift: line 12,7; south 12,13; turn 6', got '{entry.Value}'");
+            }
+
+            var enemies = map.Placements.OfType<EnemyPlacement>().Concat(map.Spawns()).ToList();
+            var routes = new List<(string Group, Coord Crossing)>();
+            foreach (var part in parts.Take(2))
+            {
+                var pieces = part.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var tile = pieces.Length == 2 ? pieces[1].Split(',') : Array.Empty<string>();
+                if (tile.Length != 2 || !int.TryParse(tile[0], out var x) || !int.TryParse(tile[1], out var y))
+                {
+                    throw ErrorAt(entry.Line, $"route_drift: '{part}' is not a group and its crossing, 'line 12,7'");
+                }
+
+                var crossing = new Coord(x, y);
+                if (!map.Contains(crossing))
+                {
+                    throw ErrorAt(entry.Line, $"route_drift: crossing {crossing} is outside the map");
+                }
+
+                if (enemies.All(e => e.Group != pieces[0] || e.Behavior != Behavior.Guard))
+                {
+                    throw ErrorAt(entry.Line, $"route_drift: group '{pieces[0]}' has no guard member, so nothing in it sleeps to drift");
+                }
+
+                routes.Add((pieces[0], crossing));
+            }
+
+            if (routes[0].Group == routes[1].Group)
+            {
+                throw ErrorAt(entry.Line, $"route_drift: group '{routes[0].Group}' is named twice; the two routes need two groups");
+            }
+
+            if (when < 1 || when > map.TurnLimit)
+            {
+                throw ErrorAt(entry.Line, $"route_drift: turn {when} is outside 1 to the turn limit {map.TurnLimit}");
+            }
+
+            return new RouteDrift(routes[0].Group, routes[0].Crossing, routes[1].Group, routes[1].Crossing, when);
         }
 
         /// <summary>

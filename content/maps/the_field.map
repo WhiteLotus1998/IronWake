@@ -4,6 +4,7 @@ win: defeat_boss
 turn_limit: 20
 recall: 3
 enemy_level: 1
+route_drift: line 12,8; south 12,14; turn 5
 
 .....^^....~~~~~~MMM
 .....^^....~~~~~~.MM

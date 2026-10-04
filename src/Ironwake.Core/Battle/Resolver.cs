@@ -209,9 +209,11 @@ public static class Resolver
 
         var next = after;
         var lamps = Dusk.Sight(after) is not null && before.Phase == Side.Player && after.Phase == Side.Player;
+        var woken = new List<string>();
         foreach (var woke in WakeCheck.Run(before, after, content, noisy, died))
         {
             next = next.Wake(woke.Group);
+            woken.Add(woke.Group);
             if (!lamps)
             {
                 events.Add(woke);
@@ -223,7 +225,7 @@ public static class Resolver
             next = next.Light(woke.Group);
         }
 
-        return next;
+        return Routes.AfterWake(next, woken);
     }
 
     /// <summary>The unit a command names, if it is on the board, on the acting side, and has not acted.</summary>
@@ -1744,7 +1746,7 @@ public static class Resolver
             next = Wildfire.Spread(next, events);
         }
 
-        return (Hunt.AtPhaseStart(MapEvents.AtPhaseStart(next, content, events), nextPhase), null);
+        return (Hunt.AtPhaseStart(Routes.AtPhaseStart(MapEvents.AtPhaseStart(next, content, events), events), nextPhase), null);
     }
 
     /// <summary>

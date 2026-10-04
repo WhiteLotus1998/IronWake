@@ -224,6 +224,11 @@ public static class ProtocolJson
                 WriteCoord(w, "at", f.At);
                 w.WriteNumber("hp", f.Hp);
                 break;
+            case RouteDrifted d:
+                w.WriteString("group", d.Group);
+                WriteCoord(w, "to", d.To);
+                WriteStrings(w, "units", d.Units);
+                break;
             case UnitTalked t:
                 w.WriteString("unit", t.UnitId);
                 w.WriteString("target", t.TargetId);

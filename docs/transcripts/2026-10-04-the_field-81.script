@@ -1,0 +1,148 @@
+march
+move teodor 4,12
+wait teodor
+move wren 4,13
+wait wren
+move captain 3,12
+wait captain
+move ottilie 2,12
+wait ottilie
+move pell 3,11
+move maud 2,13
+wait maud
+end
+move captain 5,11
+talk captain keziah
+move teodor 5,12
+attack teodor archer-2
+move pell 4,12
+attack pell archer-2
+move wren 5,13
+attack wren soldier-3
+move ottilie 4,13
+attack ottilie soldier-3
+move maud 3,12
+wait maud
+end
+attack pell brigand-1
+move captain 6,11
+attack captain brigand-1
+move maud 5,11
+item maud 2 teodor
+move teodor 7,13
+wait teodor
+move wren 8,14
+wait wren
+move ottilie 8,13
+wait ottilie
+end
+move teodor 11,13
+wait teodor
+move wren 10,14
+wait wren
+move ottilie 10,13
+wait ottilie
+move captain 9,12
+wait captain
+move pell 8,12
+move maud 8,11
+wait maud
+end
+move teodor 12,14
+wait teodor
+move wren 11,14
+wait wren
+move ottilie 11,13
+wait ottilie
+move captain 10,13
+wait captain
+move pell 10,12
+move maud 9,13
+wait maud
+end
+move ottilie 9,14
+wait ottilie
+move pell 11,12
+attack pell rider-1
+wait captain
+move teodor 12,13
+wait teodor
+wait wren
+item maud 2 ottilie
+end
+move pell 11,11
+attack pell soldier-2
+move teodor 12,11
+attack teodor soldier-2
+move wren 12,13
+wait wren
+move ottilie 11,13
+wait ottilie
+move maud 11,12
+wait maud
+wait captain
+end
+attack pell soldier-1
+move teodor 12,10
+attack teodor archer-1
+move ottilie 12,11
+attack ottilie archer-1
+move maud 11,10
+item maud 2 teodor
+move wren 12,12
+wait wren
+move captain 11,12
+wait captain
+end
+attack pell archer-3
+move ottilie 10,10
+attack ottilie archer-3
+item maud 2 pell
+wait teodor
+move wren 12,11
+wait wren
+wait captain
+end
+move ottilie 9,12
+wait ottilie
+move pell 10,11
+attack pell brigand-2
+move captain 10,10
+attack captain brigand-2
+move maud 10,12
+item maud 2 ottilie
+move teodor 12,9
+wait teodor
+move wren 12,10
+wait wren
+end
+move teodor 12,7
+attack teodor sworn_captain-1
+move wren 13,8
+attack wren sworn_captain-1
+move captain 12,8
+wait captain
+move pell 12,10
+wait pell
+move maud 11,10
+wait maud
+move ottilie 11,11
+wait ottilie
+end
+move teodor 14,7
+attack teodor sentry-1
+move pell 13,7
+attack pell sentry-1
+move captain 15,8
+wait captain
+move wren 12,8
+wait wren
+move maud 12,9
+item maud 2 wren
+move ottilie 12,10
+wait ottilie
+end
+move captain 18,7
+attack captain sworn_captain-1
+move pell 16,6
+attack pell sworn_captain-1
