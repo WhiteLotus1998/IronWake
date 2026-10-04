@@ -96,7 +96,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 
 ## How we write (Lotus, via #780, 2026-10-02)
 
-- **`docs/WRITING.md` is in** (#811, 295). Sheets on #906's template: Code's #913 to #915 in. Chat's eight (#908 to #912, 338) agreed (339, 340); the Builder commits them with: the sworn drop every name but one the oath hasn't taken yet (Marrit's "Alder"); a sworn who names no one is past reach. The Kin's echo is deletion only: every word yours, minus one (sample 4; one echo a scene). Keziah's `pitch`: "Everyone here is offering you a promise. Mine's hungry, and you'll hear it ask." Rook's "I'm afraid" goes; Bet's supports are camp barks. Marrit's fear unexplained. Next: Chat's Starting Alone and Mill beats. #813 before #634, #790.
+- **`docs/WRITING.md` is in** (#811, 295). Sheets on #906's template: Code's #913 to #915 in; #908, #909 in. Chat's eight (#908 to #912, 338) agreed (339, 340); the Builder commits them with: the sworn drop every name but one the oath hasn't taken yet (Marrit's "Alder"); a sworn who names no one is past reach. The Kin's echo is deletion only: every word yours, minus one (sample 4; one echo a scene). Keziah's `pitch`: "Everyone here is offering you a promise. Mine's hungry, and you'll hear it ask." Rook's "I'm afraid" goes; Bet's supports are camp barks. Marrit's fear unexplained. Next: Chat's Starting Alone and Mill beats. #813 before #634, #790.
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
