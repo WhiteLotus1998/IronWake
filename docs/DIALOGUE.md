@@ -38,7 +38,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 - **Saltmarsh Ford:** not tuned. North cut (0093): 7/7/6, 7/7/5. The spawn lever failed (0095); the next buys gate 1 back first. Retuned for Pell (#632).
 - **Sallow Grange:** the Reeve stays at 15,6; the yard mouth is unnamed; a quiet route is quiet on the enemy phase too (#275).
 - **The Rookery (Rook 2, 0208):** not passed; the cage stays (284). #862's ring (built): a cold replay decides. A lost Escape keeps its living (#861).
-- **The Counting House (Ottilie 1; 311, 312):** the opening is kept; the finish is the defect (both chairs lost). Lever 1 (#926): the archer a house guard at 10,2 (at 7,3 the house wakes on turn 1). The Sim is 0/200 on all; play decides; lever 2: limit 11.
+- **The Counting House (Ottilie 1; 311, 312):** the opening is kept; the finish is the defect (both chairs lost). Lever 1 (#925): the archer a house guard at 10,2 (at 7,3 the house wakes on turn 1). The Sim is 0/200 on all; play decides; lever 2: limit 11.
 - **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. The bare keep (Chat cold, round 235, 7/7/6): walls and Long Draw bow kept, no lever on the stand-in.
 
 ## Experiments (state and kill criterion)
