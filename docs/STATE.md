@@ -1,10 +1,10 @@
 # STATE
 
-Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git, PRs, `docs/DECISIONS/`.
+Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git and `docs/DECISIONS/`.
 
 ## Where we are
 
-Phase 3 is under way. #971: the Maps table's gate cells are re-read on the weapon-choosing Sim (0171 addendum). #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
+Phase 3 is under way. #971 re-read the Maps gate cells (0171). #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233; Rook's pick open, #973). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
 4349 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
@@ -50,14 +50,14 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | the_rookery | Side map, Rook 2 (0208, #635); 2 common, #805's key for Unbroken. Escape, limit 9; a ravine bridge, a woken loft, Rook leaves last. #862 (0208 addendum): sentry 13,3, archer 12,6, 14,5 free. Sim 36/200 (was 72), all captain alone. Before: Code 8/6/6, Chat cold 8/6/8. Code 862 warm 7/7/5. A cold chair owed. |
 | the_lazar_house | Side map, Maud's quest 1 (0127, #635). Survive, limit 6, Recall 2; lanes the ally can bar. Sim 4/200. Code 701 warm 8/7/5, Wren fell. A cold chair owed. |
 | starting_alone | Lesson, exempt from the Fun Gate (0123, #631). Captain alone, rout, limit 10. Gate 1 1/200. Code 631 warm 7/6/4, won turn 6, one Recall. Chat's play owed. |
-| the_tollgate | **tuned** (0073). Rider spawns at 13,4 when a unit stops on 6,4 or 6,3 (0072). Four deployed, limit 10. Gate 1 79 percent (158/200), gate 4 ok at 0.215 (#971, 200 seeds since 0171). Fun Gate: Code seed 211 8/7/7, Chat seed 227 8/7/7, both warm. |
-| brackwater_cut | **tuned** (0078). Escape at `dusk: 5`, exit without a Move (0074), lamps on a player-phase wake (0076). Gate 1 65 percent at 200 seeds on the weapon-choosing Sim (0173; 67 before it); campaign point 6 (0178), `carried` 83, gate 4 ok at 0.282 (#971). Fun Gate: Chat seed 271 8/7/7, Code seed 283 7/7/8, both warm; the Critic's cold seed 509 7/6/7. |
-| harrow_weir | **tuned** (0088, 0100). The crest file (#471 over #456), `turn_limit: 15` (0100). Guard Foreman with the Toll Axe under the boss veto, goes home when refused (0080), `wake_links: ford>weir`. Gate 1 71 percent (143/200), gate 4 ok at 0.205 (#971; 123/200 before 0171). Fun Gate: Code 481 7/8/7 (warm), Chat 487 7/8/7; the Critic 617 7/6/6. |
+| the_tollgate | **tuned** (0073). Rider spawns at 13,4 when a unit stops on 6,4 or 6,3 (0072). Four deployed, limit 10. Gate 1 79 percent (158/200), gate 4 ok at 0.215 (#971). Fun Gate: Code seed 211 8/7/7, Chat seed 227 8/7/7, both warm. |
+| brackwater_cut | **tuned** (0078). Escape at `dusk: 5`, exit without a Move (0074), lamps on a player-phase wake (0076). Gate 1 65 percent (0173); campaign point 6 (0178), `carried` 83, gate 4 ok at 0.282 (#971). Fun Gate: Chat seed 271 8/7/7, Code seed 283 7/7/8, both warm; the Critic's cold seed 509 7/6/7. |
+| harrow_weir | **tuned** (0088, 0100). The crest file (#471 over #456), `turn_limit: 15` (0100). Guard Foreman with the Toll Axe under the boss veto, goes home when refused (0080), `wake_links: ford>weir`. Gate 1 71 percent (143/200), gate 4 ok at 0.205 (#971). Fun Gate: Code 481 7/8/7 (warm), Chat 487 7/8/7; the Critic 617 7/6/6. |
 | the_field | **tuned on Keziah's pick** (0233). Map 9 (0190, 0191), level 4. Defeat Boss, limit 20; `route_drift` turn 5 (0226). Gate 1 61, gate 4 ok. Keziah: Chat cold 4071 7/7/7, Code warm 936 7/7/7. Rook's pick open (334): Code 81 7/7/6, Chat 820 6/7/6, Critic 4242 7/6/5; lever #973. |
-| old_mill_road | Out of the campaign (0124); a fixture (gate 1 33 percent). |
-| saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 25 percent (50/200), gate 4 fails at 0.075 (#971). Last rates on the cut: Code 547 7/7/6 (warm), Chat cold 571 7/7/5. The spawn lever (#524) failed gate 1's floor (0095). |
+| old_mill_road | A fixture, out of the campaign (0124); gate 1 33 percent. |
+| saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 25 percent (50/200), gate 4 fails at 0.075 (#971). On the cut: Code 547 7/7/6, Chat cold 571 7/7/5. The spawn lever (#524) failed gate 1's floor (0095). |
 | sallow_grange | Not tuned. Seize, the Reeve a guard boss at 15,6 (0055), hexer at 13,7 (#275). `keziah_warning: on` (0214). Gate 1 81 percent (161/200), gate 4 ok at 0.330 (#971). Last entries: Chat 7/7/6 (seed 44, pre-#275), Code 6/6/5 (61), Code 871 7/7/5 (Keziah). |
-| ironwake_raid | Not tuned, kept as a map (round 158). Campaign map 5 under `content/keep` (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat cold 301 7/7/5; never tuned for surprise; the van lever no longer waits on #556 (killed, 0103). |
+| ironwake_raid | Not tuned, kept as a map (round 158). Campaign map 5 under `content/keep` (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat cold 301 7/7/5; never tuned for surprise. |
 | ironwake_keep | Not tuned. The campaign's last map, survive, limit 8, fought on the record's keep (0059, 0060). Acceptance is play, not gate 1. Plays: Code 82, 287, 288; Chat 91. |
 
 ## Open experiments and the play that decides each
@@ -90,7 +90,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | 13.29 one answer | `docs/samples/the_tollgate_answer.map` (#960, 0236; Code 1290 warm 7/8/6: 3 ordered, 2 not) | Chat's cold play, swarmed on purpose |
 | 13.14 brace | kept (0084, round 121): spike on `harrow_weir_brace.map`, keep round on `saltmarsh_ford_brace.map` (Code 449, Chat cold 521) | in; shipped on Saltmarsh (0091); holds read on the next brace play with a hold |
 
-Kept on samples: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars (0010), battalions (0044), the windup (0094), overwatch (0098, 0103), cover (0099).
+Kept on samples: rivalry, shove, Seize drift. Killed: Recall scars, battalions, the windup, overwatch, cover (`docs/DECISIONS/`).
 
 ## Standing notes
 
@@ -98,9 +98,9 @@ Kept on samples: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars
 - Builder race guards (ROUTINES.md section 2, #735, 0169), bind every Builder that reads this file: with the chain on, a cron slot defers (rule 1); every Builder claims with a comment, waits 30 s and re-reads, the earlier claim winning (rule 2); a rotation re-checks first (rule 3). Pending: Lotus pastes section 2's prompt lines into the stored routine once (not a fork).
 - Routines (ROUTINES.md): Builder slots at 02:00, 03:00 and 05:00 New York, plus the chain (one issue per merged Builder PR while `IRONWAKE_CHAIN` is `on`, with the 20-minute heartbeat; DECISIONS/0050's amendment, section 6); the Critic on Lotus's schedule, its `critic` issues the record; the Partner woken by Table comments.
 - `ci` parses `.github/workflows/*.yml` before the build (#970).
-- A PR that changes the Sim's player (`src/Ironwake.Sim/Players.cs`, the planner it reads, or `EnemyAi` scoring) re-runs `--full --all` (Release, 200 seeds) and rewrites the Maps cells it moves, in the same PR (#971; 0171 moved five rows unnoticed).
+- A PR changing the Sim's player (`Players.cs`, its planner, `EnemyAi` scoring) re-runs `--full --all` and rewrites the Maps cells it moves (#971).
 - Sim: `--smoke` (CI, gates 5 to 8, the signature ceiling, origin by class); `--heirloom <item>` (#646); `--kinsbane` (#804); `--levels` (#704, #738); `--supports [--pair <a> <b>]` (#77); `--ladder [--map <id>]` (#705); `--finale <map> [--level N]` (#692); `--full <map>|<file>|--all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D]` (gates 1 to 8, about a minute and a half per map at 200 seeds in Debug; not in CI); `--trace <map> <seed>` (a script the CLI replays under `--strict`); `--keep [<edit> <x,y>]...`; `--hitband`. Reads: `docs/measurements/`.
 - Content shapes: `ContentLoader`. `units/cast.json` is the roster, captain first; `rules.json` the map-free constants. Stats keys `hp str mag dex spd lck def res cha`; terrain `cost` `null` is impassable.
 - Map files: DESIGN section 10 and 0011; hand-edited maps are canonical (`MapFormat.Write`). Coordinates are `x,y` from the top-left, 0-based; CLI slots count from 1.
 - CLI and Sim tests read the console only through `ConsoleCapture.Run` under `[Collection("console")]`; every project runs under invariant globalization.
-- Cloud: dotnet-sdk-8.0 and gh are preinstalled; GitHub goes through the built-in tools, since `gh`'s token check fails in the sandbox.
+- Cloud: dotnet-sdk-8.0 and gh are preinstalled; GitHub goes through the built-in tools (`gh`'s token check fails).
