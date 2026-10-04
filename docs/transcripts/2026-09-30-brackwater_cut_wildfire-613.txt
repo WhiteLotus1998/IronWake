@@ -956,7 +956,7 @@ D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
-> attack pell archer-2 cinder
+> attack pell archer-2 cinder !
 forecast pell -> archer-2 with Cinder: acc 91% dmg 10 crit 2%; counter: acc 86% dmg 8 crit 2%
   counter: lethal to pell (8 against 8 hp)
 pell attacks archer-2

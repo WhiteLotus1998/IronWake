@@ -271,7 +271,7 @@ move pell 9,4
 attack pell brigand-1
 move teodor 7,5
 attack teodor brigand-1
-attack wren soldier-1
+attack wren soldier-1 !
 end
 move captain 8,4
 attack captain soldier-1
@@ -319,7 +319,7 @@ move captain 7,4
 attack captain archer-2
 canto captain 8,4
 move dunstan 4,7
-attack dunstan brawler-1
+attack dunstan brawler-1 !
 attack pell brawler-1
 move teodor 3,2
 attack teodor archer-1
@@ -445,7 +445,7 @@ canto captain 8,11
 move maud 6,10
 attack maud brigand-1
 move ottilie 8,10
-attack ottilie archer-2
+attack ottilie archer-2 !
 move pell 9,12
 wait pell
 move teodor 12,12
@@ -517,7 +517,7 @@ buy salve maud
 buy iron_lance ansgar
 march
 move ansgar 7,7
-attack ansgar marauder-1
+attack ansgar marauder-1 !
 wait brannock
 wait captain
 canto captain 13,5
@@ -525,7 +525,7 @@ wait corin
 wait teodor
 end
 move brannock 11,7
-attack brannock marauder-1
+attack brannock marauder-1 !
 wait captain
 canto captain 15,5
 move corin 11,4
@@ -535,7 +535,7 @@ attack teodor marauder-1 4
 end
 wait captain
 canto captain 15,3
-attack corin marauder-1
+attack corin marauder-1 !
 end
 wait captain
 canto captain 15,8

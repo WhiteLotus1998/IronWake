@@ -3364,7 +3364,7 @@ E  pell             Pell L1 adept              10,7   hp 5/16   Plain  done
 e  sentry-1         Sentry L3 sentinel         12,2   hp 27/27  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,6   hp 6/21   Plain  done
 C  wren             Wren L1 cadet              13,7   hp 16/20  Plain  done
-> attack ottilie grange_reeve-1
+> attack ottilie grange_reeve-1 !
 Forecast Ottilie -> Grange Reeve: acc 85% dmg 4 crit 3%; counter: acc 63% dmg 10 crit 0%
   Counter: lethal to Ottilie (10 against 10 hp)
 Ottilie attacks Grange Reeve

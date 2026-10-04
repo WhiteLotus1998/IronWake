@@ -2516,7 +2516,7 @@ A  captain          Alder Fenn L1 cadet        11,0   hp 21/22  Plain  captain  
 D  ottilie          Ottilie L2 bowman          12,0   hp 15/18  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 12/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
-> attack wren bandit_leader-1
+> attack wren bandit_leader-1 !
 forecast wren -> bandit_leader-1: acc 63% dmg 6 crit 2%; counter with Toll Axe: acc 45% dmg 12 crit 0%
   counter: lethal to wren (12 against 12 hp)
 wren attacks bandit_leader-1

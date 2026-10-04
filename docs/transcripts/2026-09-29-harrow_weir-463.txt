@@ -2079,7 +2079,7 @@ B  teodor           Teodor L1 pikeman          12,6   hp 11/21  Plain
 forecast pell -> weir_foreman-1 with Cinder: acc 94% dmg 12 crit 1%; counter: acc 67% dmg 13 crit 1%
 > forecast pell weir_foreman-1 2
 forecast pell -> weir_foreman-1 with Gust: acc 99% dmg 11 crit 6%; counter: acc 60% dmg 13 crit 1%
-> attack pell weir_foreman-1 2
+> attack pell weir_foreman-1 2 !
 forecast pell -> weir_foreman-1 with Gust: acc 99% dmg 11 crit 6%; counter: acc 60% dmg 13 crit 1%
 pell equips Gust
 pell attacks weir_foreman-1

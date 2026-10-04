@@ -96,4 +96,4 @@ end
 move teodor 12,7
 wait teodor
 move pell 11,6
-attack pell weir_foreman-1 1
+attack pell weir_foreman-1 1 !

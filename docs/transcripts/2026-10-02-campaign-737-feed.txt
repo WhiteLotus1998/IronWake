@@ -4581,7 +4581,7 @@ The Lazar House  turn 5 of 6  player phase  survive  recall 0
 e  archer-2         Archer L1 bowman           8,4    hp 17/17  Road  group ford, aggressive
 B  dunstan          Dunstan L1 bulwark         10,4   hp 5/23   Road
 A  maud             Maud L2 chaplain           8,2    hp 7/18   Plain  captain
-> attack maud archer-2
+> attack maud archer-2 !
 Forecast Maud -> Archer 2: acc 98% dmg 10 crit 3%; counter: acc 86% dmg 8 crit 0%
   Counter: lethal to Maud (8 against 7 hp)
 Maud attacks Archer 2
@@ -16536,7 +16536,7 @@ c  longbowman-1     Longbowman L8 marksman     8,4    hp 19/19  Plain  group van
 C  ottilie          Ottilie L1 bowman          11,7   hp 17/17  Plain  done
 D  pell             Pell L7 adept              11,5   hp 17/17  Plain  done
 e  soldier-1        Soldier L8 pikeman         9,7    hp 9/23   Plain  group van, aggressive
-> attack keziah soldier-1
+> attack keziah soldier-1 !
 Forecast Keziah -> Soldier 1 with Iron Axe: acc 60% dmg 10 crit 0%; counter: acc 77% dmg 12 crit 1%
   Counter: lethal to Keziah (12 against 11 hp)
 Keziah attacks Soldier 1

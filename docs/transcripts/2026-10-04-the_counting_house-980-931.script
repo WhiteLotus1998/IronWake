@@ -43,7 +43,7 @@ wait teodor
 wait ottilie
 end
 attack ottilie sworn_captain-1
-attack teodor sworn_captain-1
+attack teodor sworn_captain-1 !
 end
 move teodor 4,7
 attack teodor archer-1

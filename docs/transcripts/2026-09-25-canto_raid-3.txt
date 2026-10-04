@@ -585,7 +585,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
-> attack ansgar soldier-2
+> attack ansgar soldier-2 !
 Forecast Ansgar -> Soldier 2 with Iron Lance: acc 76% dmg 9 crit 2%; counter: acc 72% dmg 10 crit 0%
   Counter: lethal to Ansgar (10 against 10 hp)
 Ansgar attacks Soldier 2
@@ -720,7 +720,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
-> attack ansgar soldier-2
+> attack ansgar soldier-2 !
 Forecast Ansgar -> Soldier 2 with Iron Lance: acc 76% dmg 9 crit 2%; counter: acc 72% dmg 10 crit 0%
   Counter: lethal to Ansgar (10 against 10 hp)
 Ansgar attacks Soldier 2
@@ -833,7 +833,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
-> attack ansgar soldier-2
+> attack ansgar soldier-2 !
 Forecast Ansgar -> Soldier 2 with Iron Lance: acc 76% dmg 9 crit 2%; counter: acc 72% dmg 10 crit 0%
   Counter: lethal to Ansgar (10 against 10 hp)
 Ansgar attacks Soldier 2

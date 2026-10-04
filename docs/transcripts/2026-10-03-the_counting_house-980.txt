@@ -801,7 +801,7 @@ b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group ban
 f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 B  wren             Wren L5 cadet              5,7    hp 11/22  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> attack wren hexer-1
+> attack wren hexer-1 !
 Forecast Wren -> Hexer 1: acc 92% dmg 12 x2 crit 4%; counter: acc 97% dmg 11 crit 0%
   Counter: lethal to Wren (11 against 11 hp)
 Wren attacks Hexer 1
@@ -1324,7 +1324,7 @@ A  ottilie          Ottilie L5 bowman          4,7    hp 2/18   Plain  captain  
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
 f  sworn_captain-1  Sworn Captain L3 pikeman   6,7    hp 7/27   Road  group house, guard, awake
 B  wren             Wren L5 cadet              5,7    hp 9/22   Plain
-> attack wren sworn_captain-1 art heavy_cut
+> attack wren sworn_captain-1 art heavy_cut !
 Forecast Wren -> Sworn Captain: acc 79% dmg 10 x2 crit 2%; counter: acc 68% dmg 12 crit 0%
   Counter: lethal to Wren (12 against 9 hp)
   Technique Heavy Cut: Iron Sword at acc 65 power 9 crit 0 wt 8 range 1-1; spends up to 4 of 30 uses, 2 of them hit or miss

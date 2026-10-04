@@ -1364,7 +1364,7 @@ C  teodor           Teodor L1 pikeman          6,6    hp 2/21   Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Plain
 wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
-> attack pell toll_warden-1
+> attack pell toll_warden-1 !
 forecast pell -> toll_warden-1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 73% dmg 10 crit 0%
   counter: lethal to pell (10 against 8 hp)
 pell attacks toll_warden-1

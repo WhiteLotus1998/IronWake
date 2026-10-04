@@ -62,9 +62,9 @@ wait wren
 move dunstan 15,8
 wait dunstan
 end
-attack pell soldier-2
+attack pell soldier-2 !
 move wren 15,4
-attack wren soldier-5
+attack wren soldier-5 !
 move captain 13,6
 attack captain archer-2
 end

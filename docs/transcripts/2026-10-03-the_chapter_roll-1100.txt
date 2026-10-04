@@ -947,7 +947,7 @@ a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorg
 c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
 b  wingrider-1      Wingrider L5 skyrider      9,6    hp 18/18  Plain  group loft, guard, awake
 B  wren             Wren L7 cadet              11,4   hp 5/23   Plain
-> attack rook soldier-1
+> attack rook soldier-1 !
 Forecast Rook -> Soldier: acc 79% dmg 8 x2 crit 4%; counter: acc 51% dmg 13 crit 0%
   Counter: lethal to Rook (13 against 11 hp)
 Rook attacks Soldier
@@ -1164,7 +1164,7 @@ a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorg
 c  soldier-1        Soldier L5 pikeman         12,2   hp 4/22   Plain  group yard, hold
 b  wingrider-1      Wingrider L5 skyrider      11,5   hp 18/18  Plain  group loft, guard, awake
 B  wren             Wren L7 cadet              12,3   hp 15/23  Plain  done
-> attack rook soldier-1
+> attack rook soldier-1 !
 Forecast Rook -> Soldier: acc 79% dmg 8 x2 crit 4%; counter: acc 51% dmg 13 crit 0%
   Counter: lethal to Rook (13 against 11 hp)
 Rook attacks Soldier

@@ -490,7 +490,7 @@ b  archer-1         Archer L1 bowman           6,0    hp 17/17  Plain  group mil
 A  captain          Alder Fenn L1 cadet        6,2    hp 18/22  Fort  captain  done
 d  mill_bandit-1    Mill Bandit L2 reaver      6,1    hp 5/24   Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              5,1    hp 10/20  Plain
-> attack wren mill_bandit-1
+> attack wren mill_bandit-1 !
 forecast wren -> mill_bandit-1: acc 85% dmg 9 crit 2%; counter: acc 85% dmg 10 crit 3%
 wren attacks mill_bandit-1
   wren hits mill_bandit-1 for 9 (hp 0)

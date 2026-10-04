@@ -4268,7 +4268,7 @@ signatures: each recruit with a signature plays it, flaw included; show <unit> p
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
-> attack wren bandit_leader-1
+> attack wren bandit_leader-1 !
 forecast wren -> bandit_leader-1: acc 72% dmg 6 crit 2%; counter with Toll Axe: acc 45% dmg 12 crit 0%
   signature: teodor's orders: wren acc +5
 wren attacks bandit_leader-1
@@ -4381,7 +4381,7 @@ signatures: each recruit with a signature plays it, flaw included; show <unit> p
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
-> attack wren bandit_leader-1
+> attack wren bandit_leader-1 !
 forecast wren -> bandit_leader-1: acc 72% dmg 6 crit 2%; counter with Toll Axe: acc 45% dmg 12 crit 0%
   signature: teodor's orders: wren acc +5
 wren attacks bandit_leader-1

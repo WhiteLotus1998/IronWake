@@ -18,7 +18,7 @@ attack ottilie rider-1
 attack wren rider-1
 end
 attack ottilie brigand-2
-attack wren brigand-2
+attack wren brigand-2 !
 end
 recall 45
 move ottilie 11,1
@@ -28,7 +28,7 @@ wait wren
 end
 move ottilie 12,2
 attack ottilie brigand-2
-attack wren brigand-2
+attack wren brigand-2 !
 end
 move wren 14,4
 wait wren

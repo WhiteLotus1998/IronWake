@@ -8,7 +8,7 @@ move wren 7,9
 attack wren brigand-2
 move keziah 5,7
 attack keziah brigand-1
-attack pell brigand-1
+attack pell brigand-1 !
 move captain 5,8
 wait captain
 end

@@ -2879,7 +2879,7 @@ C  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Road
 D  pell             Pell L2 adept              11,6   hp 3/16   Road
 B  teodor           Teodor L1 pikeman          13,2   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 12/28  Hill  group weir, boss, awake
-> attack pell weir_foreman-1 gust
+> attack pell weir_foreman-1 gust !
 Forecast Pell -> Weir Foreman with Gust: acc 99% dmg 12 crit 6%; counter: acc 56% dmg 13 crit 1%
   Counter: lethal to Pell (13 against 3 hp)
 Pell equips Gust

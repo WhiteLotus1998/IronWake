@@ -15,7 +15,7 @@ move wren 5,1
 attack wren soldier-1
 end
 attack captain mill_bandit-1
-attack wren mill_bandit-1
+attack wren mill_bandit-1 !
 end
 move captain 7,0
 attack captain archer-1

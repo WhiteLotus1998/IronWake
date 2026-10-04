@@ -307,7 +307,7 @@ d  soldier-1        Soldier L6 pikeman         5,6    hp 15/22  Plain  group cam
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 Marauder is bound to Sworn Captain: freed when Sworn Captain falls
-> attack keziah soldier-1 kinsbane
+> attack keziah soldier-1 kinsbane !
 Forecast Keziah -> Soldier with Kinsbane: acc 74% dmg 20 crit 2%; counter: acc 72% dmg 10 crit 0%
   Counter: lethal to Keziah (10 against 8 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 10)
@@ -1135,7 +1135,7 @@ e  rider-1          Rider L6 outrider          2,6    hp 22/22  Plain  group rea
 d  soldier-1        Soldier L6 pikeman         2,8    hp 2/22   Plain  group camp, guard, awake
 !  sworn_captain-1  Sworn Captain L6 pikeman   10,4   hp 28/28  Plain  group envoy, boss, awake
 Marauder is bound to Sworn Captain: freed when Sworn Captain falls
-> attack keziah soldier-1 kinsbane
+> attack keziah soldier-1 kinsbane !
 Forecast Keziah -> Soldier with Kinsbane: acc 74% dmg 13 crit 2%; counter: acc 72% dmg 10 crit 0%
   Counter: lethal to Keziah (10 against 1 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 11)

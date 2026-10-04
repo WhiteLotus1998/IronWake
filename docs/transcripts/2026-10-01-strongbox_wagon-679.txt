@@ -262,7 +262,7 @@ C  teodor           Teodor L1 pikeman          4,6    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
-> attack wren soldier-1
+> attack wren soldier-1 !
 Forecast Wren -> Soldier with Iron Sword: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
   Counter: lethal to Wren (9 against 9 hp)
 Wren attacks Soldier
@@ -587,7 +587,7 @@ Wagon Hollow  turn 5 of 10  player phase  rout  recall 3
 A  captain          Alder Fenn L1 cadet        8,1    hp 6/22   Plain  captain
 B  wren             Wren L1 cadet              5,3    hp 19/20  Plain
 chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
-> attack captain bandit_leader-1
+> attack captain bandit_leader-1 !
 Forecast Alder Fenn -> Bandit Leader: acc 74% dmg 8 crit 3%; counter with Toll Axe: acc 43% dmg 11 crit 0%
   Counter: lethal to Alder Fenn (11 against 6 hp)
 Alder Fenn attacks Bandit Leader

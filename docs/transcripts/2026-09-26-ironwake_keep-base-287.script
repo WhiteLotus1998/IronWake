@@ -13,7 +13,7 @@ move captain 13,4
 wait captain
 end
 attack pell brigand-2
-attack teodor soldier-2
+attack teodor soldier-2 !
 attack dunstan brigand-1
 attack ottilie brigand-1
 move wren 9,3

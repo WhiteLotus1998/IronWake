@@ -12,7 +12,7 @@ move wren 1,11
 wait wren
 end
 recall 20
-attack wren brigand-1
+attack wren brigand-1 !
 move pell 4,9
 attack pell soldier-2
 move captain 6,10

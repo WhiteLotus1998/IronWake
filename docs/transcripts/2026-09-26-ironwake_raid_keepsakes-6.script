@@ -41,7 +41,7 @@ move pell 9,5
 attack pell soldier-1
 #   pell vs soldier-1: hit 12; pell 16 hp, soldier-1 0 hp
 #   soldier-1 died at 8,6
-attack teodor brigand-1
+attack teodor brigand-1 !
 #   teodor vs brigand-1: hit 12; teodor 8 hp, brigand-1 0 hp
 #   brigand-1 died at 7,7
 move wren 7,5
@@ -77,7 +77,7 @@ recover dunstan
 show dunstan
 wait ottilie
 end
-attack wren brigand-3
+attack wren brigand-3 !
 move captain 7,5
 attack captain soldier-2
 attack pell soldier-2

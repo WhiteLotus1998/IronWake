@@ -7,7 +7,7 @@ wait captain
 end
 move keziah 5,7
 attack keziah brigand-1
-attack pell brigand-1
+attack pell brigand-1 !
 end
 recall 16
 move wren 5,7
@@ -63,6 +63,6 @@ move captain 6,6
 wait captain
 end
 move pell 8,3
-attack pell archer-1
+attack pell archer-1 !
 move keziah 9,3
 attack keziah archer-1

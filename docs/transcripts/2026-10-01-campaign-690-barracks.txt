@@ -879,7 +879,7 @@ D  ottilie          Ottilie L1 bowman          9,7    hp 17/17  Plain
 E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wave, aggressive
 B  wren             Wren L1 cadet              8,5    hp 14/20  Plain
-> attack dunstan brigand-1
+> attack dunstan brigand-1 !
 Forecast Dunstan -> Brigand 1: acc 77% dmg 11 crit 1%; counter: acc 73% dmg 8 crit 0%
   Counter: lethal to Dunstan (8 against 4 hp)
 Dunstan attacks Brigand 1

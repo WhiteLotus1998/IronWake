@@ -26,7 +26,7 @@ end
 attack pell soldier-1
 move ottilie 3,7
 attack ottilie brawler-1
-attack wren brawler-1
+attack wren brawler-1 !
 recall list
 recall 45
 forecast ansgar brawler-1 from 4,7
@@ -34,7 +34,7 @@ forecast ansgar brawler-1 from 5,6
 move ansgar 5,6
 attack ansgar brawler-1
 canto ansgar stay
-attack wren brawler-1
+attack wren brawler-1 !
 move teodor 4,5
 attack teodor archer-2
 move ottilie 5,7

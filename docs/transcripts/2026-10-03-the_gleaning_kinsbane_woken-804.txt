@@ -322,7 +322,7 @@ D  pell             Pell L1 adept              6,8    hp 3/16   Plain
 e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
 C  wren             Wren L1 cadet              7,9    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> attack pell brigand-1
+> attack pell brigand-1 !
 Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: acc 70% dmg 13 crit 0%
   Counter: lethal to Pell (13 against 3 hp)
 Pell attacks Brigand 1

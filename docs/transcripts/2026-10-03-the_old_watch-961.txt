@@ -484,7 +484,7 @@ e  brigand-3        Brigand L2 reaver          0,5    hp 22/22  Plain  group rea
 !  sworn_captain-1  Sworn Captain L3 pikeman   7,0    hp 20/27  Fort (heals 20 percent, 5 hp)  group cairn, boss, awake
 A  teodor           Teodor L4 pikeman          7,4    hp 21/22  Road  captain
 B  wren             Wren L4 cadet              7,5    hp 7/21   Road
-> attack wren brigand-1
+> attack wren brigand-1 !
 Forecast Wren -> Brigand 1: acc 89% dmg 11 x2 crit 5%; counter: acc 47% dmg 11 crit 0%
   Counter: lethal to Wren (11 against 7 hp)
 Wren attacks Brigand 1

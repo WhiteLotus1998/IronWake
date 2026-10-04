@@ -1007,7 +1007,7 @@ a  wing_captain-1   Wing Captain L6 sky captain 5,1    hp 19/19  Mountain  group
 e  wingrider-1      Wingrider L6 skyrider      1,6    hp 7/19   Plain  group pursuit, aggressive
 f  wingrider-2      Wingrider L6 skyrider      8,4    hp 19/19  Water  group pursuit, aggressive
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> attack rook wingrider-1
+> attack rook wingrider-1 !
 Forecast Rook -> Wingrider 1: acc 65% dmg 12 crit 2%; counter: acc 54% dmg 11 crit 0%
   Counter: lethal to Rook (11 against 8 hp)
 Rook attacks Wingrider 1

@@ -743,7 +743,7 @@ e  soldier-2        Soldier L2 pikeman         7,7    hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          10,4   hp 8/21   Plain
 B  wren             Wren L1 cadet              11,6   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
-> attack teodor soldier-1
+> attack teodor soldier-1 !
 Forecast Teodor -> Soldier 1: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
   Counter: lethal to Teodor (8 against 8 hp)
 Teodor attacks Soldier 1
@@ -1015,7 +1015,7 @@ e  soldier-2        Soldier L2 pikeman         9,8    hp 12/20  Plain  group for
 C  teodor           Teodor L1 pikeman          11,6   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              8,7    hp 11/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
-> attack ottilie archer-1
+> attack ottilie archer-1 !
 Forecast Ottilie -> Archer: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
   Counter: lethal to Ottilie (7 against 7 hp)
 Ottilie attacks Archer

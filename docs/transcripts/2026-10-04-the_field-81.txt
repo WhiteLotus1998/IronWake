@@ -5057,7 +5057,7 @@ g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bri
 !  sworn_captain-1  Sworn Captain L4 pikeman   16,6   hp 15/27  Plain  group camp, boss, awake
 B  teodor           Teodor L5 pikeman          14,7   hp 6/23   Road
 G  wren             Wren L5 cadet              13,8   hp 5/22   Road
-> attack teodor sentry-1
+> attack teodor sentry-1 !
 Forecast Teodor -> Sentry with Iron Lance: acc 93% dmg 4 x2 crit 3%; counter: acc 76% dmg 10 crit 0%
   Counter: lethal to Teodor (10 against 6 hp)
 Teodor attacks Sentry

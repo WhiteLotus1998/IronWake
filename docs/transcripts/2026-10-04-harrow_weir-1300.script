@@ -92,4 +92,4 @@ move teodor 13,2
 attack teodor weir_foreman-1
 end
 move pell 11,6
-attack pell weir_foreman-1 gust
+attack pell weir_foreman-1 gust !

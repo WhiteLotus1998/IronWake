@@ -1961,7 +1961,7 @@ D  teodor           Teodor L1 pikeman          13,4   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              0,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
-> attack ansgar grange_reeve-1
+> attack ansgar grange_reeve-1 !
 Forecast Ansgar -> Grange Reeve with Iron Lance: acc 79% dmg 7 crit 1%; counter with Toll Spear: acc 65% dmg 10 crit 1%
   Counter: lethal to Ansgar (10 against 10 hp)
 Ansgar attacks Grange Reeve

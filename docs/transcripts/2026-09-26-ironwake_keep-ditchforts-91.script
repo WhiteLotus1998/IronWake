@@ -79,7 +79,7 @@ move ottilie 12,7
 wait ottilie
 wait dunstan
 end
-attack wren brigand-4
+attack wren brigand-4 !
 move teodor 10,7
 attack teodor soldier-4
 move captain 11,8

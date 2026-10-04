@@ -57,7 +57,7 @@ wait captain
 end
 move captain 7,5
 attack captain soldier-1
-attack ansgar soldier-1
+attack ansgar soldier-1 !
 canto ansgar 7,2
 wait teodor
 wait wren

@@ -2401,7 +2401,7 @@ D  pell             Pell L1 adept              10,6   hp 3/16   Road
 e  soldier-1        Soldier L2 pikeman         11,10  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          9,6    hp 8/21   Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 2/28   Hill  group weir, boss, awake
-> attack keziah weir_foreman-1
+> attack keziah weir_foreman-1 !
 Forecast Keziah -> Weir Foreman with Iron Gauntlets: acc 81% dmg 6 x2 crit 0%; counter: acc 60% dmg 12 crit 1%
   Counter: lethal to Keziah (12 against 11 hp)
 Keziah attacks Weir Foreman
@@ -2549,7 +2549,7 @@ D  pell             Pell L1 adept              11,6   hp 3/16   Road
 e  soldier-1        Soldier L2 pikeman         11,10  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          9,6    hp 8/21   Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 2/28   Hill  group weir, boss, awake
-> attack pell weir_foreman-1
+> attack pell weir_foreman-1 !
 Forecast Pell -> Weir Foreman with Cinder: acc 94% dmg 12 crit 1%; counter: acc 67% dmg 13 crit 1%
   Counter: lethal to Pell (13 against 3 hp)
 Pell attacks Weir Foreman

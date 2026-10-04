@@ -14,7 +14,7 @@ item wren 2
 move teodor 7,4
 attack teodor soldier-1 family_lance art long_thrust
 end
-attack wren brigand-1
+attack wren brigand-1 !
 attack teodor brigand-2 family_lance art long_thrust
 end
 show teodor

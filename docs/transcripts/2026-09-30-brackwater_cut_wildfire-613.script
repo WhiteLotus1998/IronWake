@@ -22,7 +22,7 @@ move wren 10,5
 wait wren
 end
 move pell 12,2
-attack pell archer-2 cinder
+attack pell archer-2 cinder !
 move captain 14,3
 wait captain
 move dunstan 15,2

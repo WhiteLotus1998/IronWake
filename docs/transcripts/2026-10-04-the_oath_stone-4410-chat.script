@@ -44,11 +44,11 @@ canto keziah 12,4
 move maud 11,5
 wait maud
 end
-attack keziah sworn_captain-1
+attack keziah sworn_captain-1 !
 recall 88
 move maud 12,5
 item maud 2 keziah
 end
-attack keziah sworn_captain-1 art cleave
+attack keziah sworn_captain-1 art cleave !
 item maud 2 keziah
 end

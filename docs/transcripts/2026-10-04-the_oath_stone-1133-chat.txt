@@ -384,7 +384,7 @@ B  maud             Maud L7 chaplain           2,6    hp 19/19  Plain  done
 d  soldier-1        Soldier L6 pikeman         3,8    hp 22/22  Plain  group camp, guard, awake
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
-> attack keziah brigand-1
+> attack keziah brigand-1 !
 Forecast Keziah -> Brigand 1 with Kinsbane: acc 79% dmg 22 crit 3%; counter: acc 60% dmg 13 crit 0%
   Counter: lethal to Keziah (13 against 8 hp)
   Kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 10)
@@ -1444,7 +1444,7 @@ A  keziah           Keziah L7 reaver           13,3   hp 12/26  Plain  captain
 B  maud             Maud L7 chaplain           12,5   hp 7/19   Plain  unarmed  done
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 15/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
-> attack keziah sworn_captain-1
+> attack keziah sworn_captain-1 !
 Forecast Keziah -> Sworn Captain with Kinsbane: acc 54% dmg 16 crit 0%; counter: acc 81% dmg 14 crit 1%
   Counter: lethal to Keziah (14 against 12 hp)
   Joab is bound to Sworn Captain: freed when Sworn Captain falls

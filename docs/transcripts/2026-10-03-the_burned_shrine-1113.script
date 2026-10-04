@@ -6,7 +6,7 @@ end
 move wren 2,3
 attack wren brawler-1
 move keziah 4,3
-attack keziah acolyte-1 iron_gauntlets
+attack keziah acolyte-1 iron_gauntlets !
 end
 move keziah 7,3
 attack keziah shieldbearer-1 iron_gauntlets
@@ -23,7 +23,7 @@ move keziah 7,4
 attack keziah rider-1 iron_gauntlets
 end
 move keziah 7,5
-attack keziah hexer-1 iron_gauntlets
+attack keziah hexer-1 iron_gauntlets !
 move wren 7,6
 attack wren archer-1
 threat keziah

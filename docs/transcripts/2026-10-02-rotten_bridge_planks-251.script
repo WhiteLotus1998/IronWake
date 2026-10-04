@@ -16,7 +16,7 @@ attack pell soldier-1 cinder
 move captain 9,2
 attack captain brigand-3
 move ottilie 6,2
-attack ottilie archer-2
+attack ottilie archer-2 !
 recall 32
 move teodor 7,2
 attack teodor archer-2

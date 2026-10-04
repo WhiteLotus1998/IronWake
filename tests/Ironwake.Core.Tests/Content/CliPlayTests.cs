@@ -304,11 +304,11 @@ public class CliPlayTests
     [Fact]
     public void TheForecastPrintsBeforeAnAttackAndEventsRenderStrikeByStrike()
     {
-        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1\nattack wren brigand-1 1\nshow wren\nrecall 0\n");
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1\nattack wren brigand-1 1 !\nshow wren\nrecall 0\n");
 
         Assert.Contains("Alder Fenn moves 1,8 -> 1,4 via 1,7 1,6 1,5\n", output);
         Assert.Contains("> forecast wren brigand-1\nForecast Wren -> Brigand: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%\n", output);
-        Assert.Contains("> attack wren brigand-1 1\nForecast Wren -> Brigand:", output);
+        Assert.Contains("> attack wren brigand-1 1 !\nForecast Wren -> Brigand:", output);
         Assert.Contains("Wren attacks Brigand\n  Wren misses Brigand\n  Brigand misses Wren\n  Wren hits Brigand for 10", output);
         Assert.Contains("> show wren\nWren, Cadet L1, at 2,6 on Plain\n  HP ", output);
         Assert.Contains("Weapon: Iron Sword (acc 75 power 5 crit 0 wt 5 range 1-1)\n", output);
@@ -324,7 +324,7 @@ public class CliPlayTests
     [Fact]
     public void RecallListShowsWhatEachRewindGivesBackAndTheReplayedAttackRollsTheSame()
     {
-        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nattack wren brigand-1 1\nrecall list\nrecall 11\nattack wren brigand-1 1\n");
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nattack wren brigand-1 1 !\nrecall list\nrecall 11\nattack wren brigand-1 1 !\n");
 
         Assert.Contains("> recall list\nRecall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same\n"
             + "  State 0  turn 1  the start  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to Wren\n"
@@ -358,7 +358,7 @@ public class CliPlayTests
     [Fact]
     public void ARewindNamesTheKillItGivesBackAndOneOverMovesSaysMovesOnly()
     {
-        const string Script = "move captain 1,4\nmove wren 2,6\nend\nattack wren brigand-1 1\nattack wren brigand-1 1\nrecall 0\n";
+        const string Script = "move captain 1,4\nmove wren 2,6\nend\nattack wren brigand-1 1 !\nattack wren brigand-1 1 !\nrecall 0\n";
 
         Assert.Contains("> recall 0\nRecalled to state 0; 2 charges left\nUndone: gives back 1 kill (Brigand), 40 exp, 22 enemy hp\n", Play(out _, Script, seed: "5"));
         Assert.Contains("Wren falls at 2,6\n", Play(out _, Script, seed: "3"));

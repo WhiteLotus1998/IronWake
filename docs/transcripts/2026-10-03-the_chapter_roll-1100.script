@@ -31,7 +31,7 @@ wait rook
 end
 move wren 11,4
 move rook 11,2
-attack rook soldier-1
+attack rook soldier-1 !
 recall 68
 move wren 11,4
 item wren 2
@@ -40,7 +40,7 @@ end
 move wren 12,3
 attack wren soldier-1
 move rook 11,2
-attack rook soldier-1
+attack rook soldier-1 !
 end
 move rook 12,1
 leave

@@ -41,7 +41,7 @@ wait rook
 move dunstan 12,3
 wait dunstan
 end
-attack dunstan brigand-1
+attack dunstan brigand-1 !
 move rook 19,6
 wait rook
 move pell 19,5
