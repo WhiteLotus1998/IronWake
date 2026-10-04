@@ -1,0 +1,54 @@
+quest keziah_2 maud
+move keziah 4,4
+wait keziah
+move maud 3,4
+wait maud
+end
+move maud 4,7
+attack maud brigand-1
+move keziah 5,7
+attack keziah brigand-1
+end
+move keziah 5,8
+attack keziah soldier-1
+move maud 6,7
+wait maud
+end
+move maud 9,8
+wait maud
+move keziah 8,8
+wait keziah
+end
+move maud 8,6
+attack maud rider-1
+move keziah 8,5
+attack keziah rider-1
+canto keziah 9,8
+end
+move keziah 11,6
+attack keziah archer-1
+move maud 10,8
+wait maud
+end
+move keziah 12,5
+wait keziah
+move maud 11,5
+wait maud
+end
+move keziah 12,4
+attack keziah sworn_captain-1
+move maud 11,4
+item maud 2 keziah
+end
+recall 76
+move maud 11,4
+attack maud sworn_captain-1
+wait keziah
+end
+attack maud sworn_captain-1
+move keziah 12,4
+attack keziah sworn_captain-1
+end
+item maud 2 keziah
+attack keziah sworn_captain-1 art cleave
+end
