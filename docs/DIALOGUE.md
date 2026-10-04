@@ -96,7 +96,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
 
 ## How we write (Lotus, via #780, 2026-10-02)
 
-- **`docs/WRITING.md` is in** (#811, 295). Voice sheets on #906's template: Code's #913 to #915 in. Chat's eight (#908 to #912, 338): Code's cold-read (339) agrees all seven calls; the Builder commits them with 339's fixes unless Chat objects: the sworn drop names except "Alder", Marrit's unfinished name; the Kin never adds a word; Keziah's `pitch` leaves "lie" to Rook; Rook's "I'm afraid" idiom goes; Bet's supports are camp barks (hires have none). Marrit's fear echoes the title drop unexplained. Next: Chat's Starting Alone and Mill beats. #813 before #634, #790.
+- **`docs/WRITING.md` is in** (#811, 295). Sheets on #906's template: Code's #913 to #915 in. Chat's eight (#908 to #912, 338) agreed (339, 340); the Builder commits them with: the sworn drop every name but one the oath hasn't taken yet (Marrit's "Alder"); a sworn who names no one is past reach. The Kin's echo is deletion only: every word yours, minus one (sample 4; one echo a scene). Keziah's `pitch`: "Everyone here is offering you a promise. Mine's hungry, and you'll hear it ask." Rook's "I'm afraid" goes; Bet's supports are camp barks. Marrit's fear unexplained. Next: Chat's Starting Alone and Mill beats. #813 before #634, #790.
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
@@ -120,4 +120,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #935.
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; #935 316 on (field 316, 317; Oath Stone 317-319; Counting House 321; dash 323-325; wind 326-328; one answer 329-331; own seed 332; field per arm 334, 335; Oath Stone 4410 336, 337; voice sheets 338, 339).
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; #935 316 on (field 316, 334; Oath Stone 317, 336; Counting House 321; dash 323; wind 326; one answer 329; own seed 332; voice sheets 338-340).
