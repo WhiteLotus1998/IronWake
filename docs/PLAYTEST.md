@@ -2701,3 +2701,15 @@ Notes:
 - **The end was the one-point cliff, the other way round.** The envoy was at 8 after his heal on turn 10. Maud's last Radiance does 9. Kinsbane's 16 was a 54 with a lethal counter. Maud ended it.
 - My misplay: on turn 6 I walked Maud into the archer's 85 for 9 against her 7 HP without reading `threat`. It missed.
 
+
+## 2026-10-04 — The field, Rook's pick, with `seen_far: rook 2` (#973), warm — Code
+Seed: 973 (`campaign --seed 973 --from the_field --pick rook --level 5 --strict --script docs/transcripts/2026-10-04-the_field-973.script`; transcript beside it). No bench: the header seated Rook in Keziah's slot (1,13).   Result: **won on turn 13 of 20.** Nobody fell, no Recall spent. Keziah was turned by Rook's talk on turn 2.
+Disclosures: warm. I played Rook's pick at 81, read the Critic's 4242 and built the header. No roll was retried.
+Tension: 7/10   Choice: 8/10   Surprise: 6/10
+Best turn: turn 1. `threat rook from 3,13` read `no enemy can strike her` and `stopping here wakes: the pickets group (proximity)`. That's the forest at 6 from Keziah, inside the drake's sighting and outside every picket's reach. I parked her there on purpose. The pickets woke and walked onto my ground: Keziah to 4,12, the archer to 6,12, the soldier and brigand behind. On turn 2 Rook talked Keziah from 3,12 with the archer out of the fight, and the pickets died on turns 2 and 3 without anyone going near the forest at 9,11. Rook's arm has never opened like that before. In 81 and 4242 the talk was a walk into the pickets. Here the pickets came to her.
+Notes:
+- **Turns 3 to 7 asked where the drake flies, every turn (the issue's keep clause).** Turn 4: Rook flew to 10,14, at 6 from the rider, so the south group woke to her and nobody else. `threat` priced it at 52 for 13 against her 18 and her counter at 80 for 9 x2. It missed, she put him on 3, and on turn 5 she killed him. That fixed the route south, so the line group drifted onto 12,14 on turn 5. Turn 7: the tiles next to the line's archer at 12,8 (11,8 and 12,9) are both at 6 from the camp's archer, so Rook couldn't strike there without waking the camp. She stayed back, and the line came to row 10 to die.
+- **Tally, the dash's way: 1 free, 1 priced.** The turn-1 lure was free (nothing could reach her), but it cost the drake's turn and bought the talk. The turn-4 lure was priced (52 for 13). On turn 13 she went in beside the boss's fort (62 for 3 x2, his counter 67 for 16 against her 17) to put him at 9 for the captain's Full Measure. She ended on 1 HP.
+- **The camp still woke on noise on enemy phase 7**, from the line's archer striking Teodor at 11,8 (6 from the camp's archer). That's the fifth chair in a row. The header didn't touch that, and it shouldn't have.
+- **Not tense:** turn 6 (waiting for the line) and turns 10 to 12 (the sentry on the bridge, Def 11, three turns of chip).
+- Fixed during the play: `threat`'s sleeping rows printed the rule's 4 for Rook. They now add `seen far: Rook wakes a sleeper within 6 (seen for miles)`, beside the wind line.

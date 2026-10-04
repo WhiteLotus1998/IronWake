@@ -219,6 +219,11 @@ public static class MapRenderer
             sb.Append(wind).Append('\n');
         }
 
+        if (map.SeenFar is { } seenFar && content.Units.TryGetValue(seenFar.UnitId, out var seenCard))
+        {
+            sb.Append(seenFar.Line(seenCard.Name, content)).Append('\n');
+        }
+
         if (map.RouteDrift is { } drift)
         {
             sb.Append(Routes.Line(drift, 1)).Append('\n');
@@ -566,6 +571,12 @@ public static class MapRenderer
             {
                 sb.Append(coming).Append('\n');
             }
+        }
+
+        if (map.SeenFar is { } far && state.UnitsOf(Side.Player).FirstOrDefault(u => far.For(u) > 0) is { } seenUnit
+            && state.Units.Any(u => u is { Behavior: Behavior.Guard, Group: { } group } && !state.IsAwake(group)))
+        {
+            sb.Append(far.Line(seenUnit.Unit.Name, content)).Append('\n');
         }
 
         if (Routes.Line(state) is { } drifting)

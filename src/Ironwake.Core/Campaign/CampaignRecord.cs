@@ -656,7 +656,7 @@ public sealed record CampaignRecord(
     /// </summary>
     public BattleState Begin(MapDefinition map, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
     {
-        map = ClaimantSlotsBare(NextMap(content).Prepare(map), content);
+        map = Seated(NextMap(content).Prepare(map), content);
         var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
         var roster = Present(content).Where(u => map.DeploysAll || !Benched.Contains(u.Id)).ToList();
         var turnedAway = TurnedAway(content);
@@ -673,6 +673,28 @@ public sealed record CampaignRecord(
         }
 
         return battle;
+    }
+
+    /// <summary>
+    /// <paramref name="map"/>'s player slots as this record fills them: the claimant slots made bare
+    /// (<see cref="ClaimantSlotsBare"/>), then a <c>seen_far:</c> unit (issue 973) who is with the
+    /// company, not benched and not placed by name seated by name in the first bare slot (<see cref="Bench"/>
+    /// refuses to bench it, so only a record benched before the header held it out), so the sighting cannot
+    /// be dodged by leaving the unit home. A map with no bare slot left seats nobody.
+    /// </summary>
+    private MapDefinition Seated(MapDefinition map, GameContent content)
+    {
+        map = ClaimantSlotsBare(map, content);
+        if (map.SeenFar is not { } far || map.DeploysAll || Present(content).All(u => u.Id != far.UnitId) || Benched.Contains(far.UnitId)
+            || map.Placements.Any(p => p is PlayerPlacement { RecruitId: { } id } && id == far.UnitId))
+        {
+            return map;
+        }
+
+        var at = map.Placements.ToList().FindIndex(p => p is PlayerPlacement { Slot: PlayerSlot.AnyRecruit });
+        return at < 0
+            ? map
+            : map with { Placements = map.Placements.SetItem(at, new PlayerPlacement(map.Placements[at].At, PlayerSlot.NamedRecruit, far.UnitId)) };
     }
 
     /// <summary>
@@ -718,7 +740,7 @@ public sealed record CampaignRecord(
         var sides = entry.Meets.FirstOrDefault(Met.Contains) is { } made
             ? new List<string> { made }
             : entry.Meets.Where(id => Meet(id, content).Accepted).ToList();
-        var players = ClaimantSlotsBare(entry.Prepare(map), content).Placements.OfType<PlayerPlacement>().ToList();
+        var players = Seated(entry.Prepare(map), content).Placements.OfType<PlayerPlacement>().ToList();
         if (sides.Count == 0 || players.Any(p => p.RecruitId == pick))
         {
             return null;
@@ -1518,7 +1540,7 @@ public sealed record CampaignRecord(
     /// goes to the next recruit in roster order. Anyone <see cref="Present"/> for it may be benched,
     /// so a joiner, the branch's pick or a side character met at this camp is benched like a member
     /// (issue 842) and still joins the roster after the map. Refused for the captain, the map's
-    /// protected recruit, a recruit the map places by name, a unit not present, or one already benched.
+    /// protected recruit, its <c>seen_far:</c> unit (issue 973), a recruit the map places by name, a unit not present, or one already benched.
     /// </summary>
     public ScreenResult Bench(string unitId, MapDefinition map, GameContent content)
     {
@@ -1535,6 +1557,11 @@ public sealed record CampaignRecord(
         if (map.ProtectId == unit.Id)
         {
             return ScreenResult.Refused(this, $"{map.Name} must protect {unit.Id}, who cannot be benched");
+        }
+
+        if (map.SeenFar?.UnitId == unit.Id)
+        {
+            return ScreenResult.Refused(this, $"{map.Name} sees {unit.Name} from far off; {unit.Name} flies here");
         }
 
         if (map.DeploysAll)

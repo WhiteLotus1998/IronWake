@@ -280,6 +280,12 @@ public sealed record MapDefinition(
     public WindRule? Wind { get; init; }
 
     /// <summary>
+    /// The <c>seen_far:</c> header (issue 973): a unit a sleeping Guard member hears farther than the
+    /// wake rule's radius while it stands on the player side (<see cref="Ironwake.Core.SeenFar"/>). Null for none.
+    /// </summary>
+    public SeenFar? SeenFar { get; init; }
+
+    /// <summary>
     /// The <c>keziah_warning: on</c> header (issue 871, Lotus's ruling): a map where the hungering
     /// weapon's walking drains run high, so a campaign asks once before marching with its bearer
     /// deployed (<see cref="CampaignRecord.MarchWarning"/>). Refused on a map that places the bearer

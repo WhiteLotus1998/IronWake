@@ -143,6 +143,29 @@ internal static class Fixture
         return target;
     }
 
+    private static readonly Lazy<string> FieldUnseen = new(() => WithFieldUnseen(CopyFiles("ironwake-field-unseen-")));
+
+    /// <summary>
+    /// A copy of the real content directory whose field carries no <c>seen_far:</c> header, so Rook's
+    /// pick is not seated there and nothing else changes, for a play journaled before the drake was seen
+    /// (issue 973). Made once per test run.
+    /// </summary>
+    public static string FieldUnseenContentDirectory() => FieldUnseen.Value;
+
+    private static string WithFieldUnseen(string target)
+    {
+        var path = Path.Combine(target, "maps", "the_field.map");
+        var text = File.ReadAllText(path);
+        const string header = "seen_far: rook 2\n";
+        if (!text.Contains(header, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{path}: no '{header.TrimEnd()}' line to take off");
+        }
+
+        File.WriteAllText(path, text.Replace(header, string.Empty, StringComparison.Ordinal));
+        return target;
+    }
+
     /// <summary>
     /// Takes <c>single</c> off every art in <c>abilities.json</c> (issue 739): a play journaled before
     /// an art struck once doubled with it, and a transcript is a record of the build it was played on.

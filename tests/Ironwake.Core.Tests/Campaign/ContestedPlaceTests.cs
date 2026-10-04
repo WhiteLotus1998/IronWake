@@ -8,7 +8,9 @@ namespace Ironwake.Core.Tests.Campaign;
 /// <summary>
 /// Issue 844 (round 271): the camp prints the trade when the pick and a side character compete for a
 /// map's open places. On the field the board names five members and Keziah; with Rook as the pick,
-/// Keziah's slot is the one bare slot, and Rook and Ansgar contest it. Rules go on screen.
+/// Keziah's slot is the one bare slot, and Rook and Ansgar contest it. Rules go on screen. Since
+/// issue 973 the field sees Rook from far off and seats her, so the contest is read on the field
+/// with that header taken off, and the shipped field has none.
 /// </summary>
 public class ContestedPlaceTests
 {
@@ -20,15 +22,17 @@ public class ContestedPlaceTests
 
     private static CampaignRecord AtTheField(string pick) => CampaignRecord.StartAt(Content, 844, "the_field", pick: pick);
 
-    private static IReadOnlyList<string> Lines(CampaignRecord record, string map = "the_field") =>
-        CampaignSession.ContestLines(record, Content, Map(map));
+    /// <summary>The field without its <c>seen_far:</c> header (issue 973): Rook's pick holds no seat by it.</summary>
+    private static MapDefinition Unseen() => Map("the_field") with { SeenFar = null };
+
+    private static IReadOnlyList<string> Lines(CampaignRecord record) => CampaignSession.ContestLines(record, Content, Unseen());
 
     [Fact]
     public void TheFieldNamesItsOneOpenPlaceWhenAnsgarIsOnOfferAndRookIsThePick()
     {
         var record = AtTheField("rook");
 
-        var contest = record.ContestedPlaces(Map("the_field"), Content);
+        var contest = record.ContestedPlaces(Unseen(), Content);
 
         Assert.NotNull(contest);
         Assert.Equal(1, contest.Value.Open);
@@ -39,7 +43,7 @@ public class ContestedPlaceTests
     [Fact]
     public void TheContestedPlaceLinePrintsInTheRosterPanel()
     {
-        var panel = CampaignSession.RosterPanelLines(AtTheField("rook"), Content, Map("the_field"));
+        var panel = CampaignSession.RosterPanelLines(AtTheField("rook"), Content, Unseen());
 
         Assert.Contains("The Field Before the Keep has one open place: Ansgar or Rook", panel);
     }
@@ -51,6 +55,15 @@ public class ContestedPlaceTests
         Assert.True(met.Accepted, met.Text);
 
         Assert.Equal(new[] { "The Field Before the Keep has one open place: Ansgar or Rook" }, Lines(met.Record));
+    }
+
+    [Fact]
+    public void NoContestedPlaceWhenTheMapSeesThePickAndSeatsHer()
+    {
+        var record = AtTheField("rook");
+
+        Assert.Null(record.ContestedPlaces(Map("the_field"), Content));
+        Assert.Empty(CampaignSession.ContestLines(record, Content, Map("the_field")));
     }
 
     [Fact]
@@ -79,6 +92,6 @@ public class ContestedPlaceTests
     [Fact]
     public void NoContestedPlaceOnAMapWithoutAMeeting()
     {
-        Assert.Empty(Lines(CampaignRecord.StartAt(Content, 844, "sallow_grange", pick: "rook"), "sallow_grange"));
+        Assert.Empty(CampaignSession.ContestLines(CampaignRecord.StartAt(Content, 844, "sallow_grange", pick: "rook"), Content, Map("sallow_grange")));
     }
 }

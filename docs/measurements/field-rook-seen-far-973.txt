@@ -1,0 +1,8 @@
+# Issue 973: the field on Rook's pick, gates 1 and 4 with and without seen_far: rook 2 (ironwake-sim --full <the_field with 'P recruit:rook 1,13' in Keziah's slot>, 200 seeds, two-roll average)
+# The heuristic player does not lure, so the header reads as neutral here; the choice it offers is measured by plays.
+## without the header
+gate 1 beatable: the_field (Rook's pick), heuristic wins 48/200 (24 %), winning turn median 12 p90 18 limit 20, losses 86 timeout 66 captain 0 protected, quiet tail 1.5, refused kill p50 0.9892 over 86, at the stall p50 0.0507 over 80, route line 72 drifted 3 won 11 p50 11 lost 3.5; south 128 drifted 14 won 37 p50 12 lost 3.8; none 0 drifted 0 won 0, two-roll average: FAILED
+gate 4 no dead weight: the_field (Rook's pick), 5 recruits x 200 seeds, median drop 0.060: FAILED
+## with seen_far: rook 2
+gate 1 beatable: the_field (Rook's pick), heuristic wins 49/200 (24 %), winning turn median 12 p90 18 limit 20, losses 85 timeout 66 captain 0 protected, quiet tail 1.5, refused kill p50 0.9892 over 85, at the stall p50 0.0530 over 79, route line 72 drifted 3 won 11 p50 11 lost 3.5; south 128 drifted 14 won 38 p50 12 lost 3.7; none 0 drifted 0 won 0, two-roll average: FAILED
+gate 4 no dead weight: the_field (Rook's pick), 5 recruits x 200 seeds, median drop 0.065: FAILED
