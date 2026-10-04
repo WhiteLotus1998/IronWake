@@ -132,6 +132,7 @@ public sealed class CampaignSession
     public static int Run(string[] args)
     {
         ulong seed = 1;
+        var seedGiven = false;
         string? script = null;
         var strict = false;
         var contentDir = "content";
@@ -154,6 +155,7 @@ public sealed class CampaignSession
             switch (args[i])
             {
                 case "--seed" when value is not null && ulong.TryParse(value, out seed):
+                    seedGiven = true;
                     i++;
                     break;
                 case "--script" when value is not null:
@@ -270,6 +272,13 @@ public sealed class CampaignSession
         if ((load is not null || resume) && (from is not null || (load is not null && resume)))
         {
             Console.WriteLine("ERROR: --load, --resume and --from each pick where the campaign starts; give one");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if ((load is not null || resume) && seedGiven)
+        {
+            Console.WriteLine($"ERROR: --seed {seed} starts a new campaign; a loaded or resumed campaign keeps the seed its save pins");
             Console.WriteLine(Usage);
             return 2;
         }

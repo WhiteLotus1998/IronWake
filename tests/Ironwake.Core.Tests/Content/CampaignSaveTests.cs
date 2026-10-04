@@ -147,6 +147,31 @@ public class CampaignSaveTests
         Assert.Contains($"ERROR: no suspended battle in {dir}\n", output);
     }
 
+    [Theory]
+    [InlineData("--load")]
+    [InlineData("--resume")]
+    public void SeedWithALoadedOrResumedCampaignIsRefusedSinceTheSavePinsTheSeed(string start)
+    {
+        var dir = TempDir();
+        try
+        {
+            Run(out _, "march\nend\nquit\n", "--saves", dir);
+            var startArgs = start == "--load" ? new[] { "--load", "auto-1" } : new[] { "--resume" };
+            var args = new[] { "--seed", "4402", "--saves", dir }.Concat(startArgs).ToArray();
+
+            var refused = Run(out var refusedExit, "", args);
+
+            Assert.Equal(2, refusedExit);
+            Assert.Contains("ERROR: --seed 4402 starts a new campaign; a loaded or resumed campaign keeps the seed its save pins\n", refused);
+            Assert.DoesNotContain("Campaign, seed", refused);
+            Assert.True(new SaveStore(dir).HasSuspend);
+        }
+        finally
+        {
+            Directory.Delete(dir, true);
+        }
+    }
+
     [Fact]
     public void EveryCampAutosavesAndASaveNamedThereLoadsWithLoad()
     {
@@ -248,7 +273,8 @@ public class CampaignSaveTests
         File.WriteAllText(path, script);
         try
         {
-            var args = new[] { "campaign", "--seed", "3", "--script", path, "--content", Fixture.RealContentDirectory() }.Concat(extra).ToArray();
+            var seed = extra.Contains("--load") || extra.Contains("--resume") ? Array.Empty<string>() : new[] { "--seed", "3" };
+            var args = new[] { "campaign" }.Concat(seed).Concat(new[] { "--script", path, "--content", Fixture.RealContentDirectory() }).Concat(extra).ToArray();
             var code = 0;
             var output = ConsoleCapture.Run(() => code = Ironwake.Cli.Program.Main(args));
             exit = code;
