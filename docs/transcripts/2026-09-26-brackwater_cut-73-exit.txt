@@ -32,6 +32,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 4 turns to an exit (last start: turn 5)
 > move dunstan 13,3
 Dunstan moves 9,3 -> 13,3 via 10,3 11,3 12,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -66,6 +67,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 3 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 5)
 > wait dunstan
 Dunstan waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -100,6 +102,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 3 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 5)
 > move rook 12,4
 Rook moves 8,2 -> 12,4 via 9,2 10,2 10,3 11,3 12,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -134,6 +137,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 4 turns to an exit (last start: turn 5)
 > wait rook
 Rook waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -168,6 +172,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 4 turns to an exit (last start: turn 5)
 > move captain 10,4
 Alder Fenn moves 8,4 -> 10,4 via 9,4
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -202,6 +207,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 4 turns to an exit (last start: turn 5)
 > wait captain
 Alder Fenn waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -236,6 +242,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 4 turns to an exit (last start: turn 5)
 > move pell 10,3
 Pell moves 7,3 -> 10,3 via 8,3 9,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -270,6 +277,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren no way to an exit
 > wait pell
 Pell waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -304,6 +312,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren no way to an exit
 > move wren 10,5
 Wren moves 8,5 -> 10,5 via 9,5
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -338,6 +347,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
 > wait wren
 Wren waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -372,6 +382,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
 > end
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
@@ -442,6 +453,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
 > move rook 12,6
 Rook moves 12,4 -> 12,6 via 12,5
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -476,6 +488,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
 > wait rook
 Rook waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -510,6 +523,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
 > move captain 12,4
 Alder Fenn moves 10,4 -> 12,4 via 10,3 11,3 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -544,6 +558,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
 > wait captain
 Alder Fenn waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -578,6 +593,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
 > move pell 13,2
 Pell moves 10,3 -> 13,2 via 11,3 12,3 12,2
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -612,6 +628,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
 > wait pell
 Pell waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -646,6 +663,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
 > move wren 12,3
 Wren moves 10,5 -> 12,3 via 10,4 10,3 11,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -680,6 +698,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              12,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait wren
 Wren waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -714,6 +733,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              12,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait dunstan
 Dunstan waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -748,6 +768,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              12,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > end
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -818,6 +839,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              12,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move wren 14,3
 Wren moves 12,3 -> 14,3 via 13,3
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -852,6 +874,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait wren
 Wren waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -886,6 +909,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move dunstan 12,3
 Dunstan moves 13,3 -> 12,3
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -920,6 +944,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait dunstan
 Dunstan waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -954,6 +979,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move captain 13,4
 Alder Fenn moves 12,4 -> 13,4
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -988,6 +1014,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait captain
 Alder Fenn waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -1022,6 +1049,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move pell 14,2
 Pell moves 13,2 -> 14,2
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -1056,6 +1084,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait pell
 Pell waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -1090,6 +1119,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move rook 12,5
 Rook moves 12,6 -> 12,5
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -1124,6 +1154,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait rook
 Rook waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -1158,6 +1189,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > end
 Lethal if all land: Rook (Archer 1 for 19, against 17 hp)
 -- Player phase ends, turn 3 --
@@ -1241,6 +1273,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    15,3   hp 19/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         13,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 3 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > recall 55
 Recalled to state 55; 2 charges left
 Undone: gives back 28 exp, 17 enemy hp; returns Rook alive at 17 hp, 9 hp to Dunstan
@@ -1277,6 +1310,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              12,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move pell 14,2
 Pell moves 13,2 -> 14,2
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1311,6 +1345,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              12,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait pell
 Pell waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1345,6 +1380,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              12,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move wren 14,3
 Wren moves 12,3 -> 14,3 via 13,3
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1379,6 +1415,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait wren
 Wren waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1413,6 +1450,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move dunstan 12,3
 Dunstan moves 13,3 -> 12,3
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1447,6 +1485,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait dunstan
 Dunstan waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1481,6 +1520,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move captain 13,4
 Alder Fenn moves 12,4 -> 13,4
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1515,6 +1555,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait captain
 Alder Fenn waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1549,6 +1590,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move rook 13,2
 Rook moves 12,6 -> 13,2 via 12,5 12,4 12,3 12,2
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1583,6 +1625,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait rook
 Rook waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1617,6 +1660,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > end
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1682,6 +1726,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move pell 13,3
 Pell moves 14,2 -> 13,3 via 13,2
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1716,6 +1761,7 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > attack pell brigand-1
 Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Brigand 1
@@ -1754,6 +1800,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move wren 16,1
 Wren moves 14,3 -> 16,1 via 14,2 14,1 15,1
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1786,6 +1833,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait wren
 Wren waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1818,6 +1866,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move captain 15,2
 Alder Fenn moves 13,4 -> 15,2 via 13,3 13,2 14,2
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1850,6 +1899,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > wait captain
 Alder Fenn waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1882,6 +1932,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > move rook 18,1
 Rook moves 13,2 -> 18,1 via 13,1 14,1 15,1 16,1 17,1
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1914,6 +1965,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > wait rook
 Rook waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1946,6 +1998,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > wait dunstan
 Dunstan waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1978,6 +2031,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > end
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -2057,6 +2111,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 3 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > move pell 15,3
 Pell moves 13,3 -> 15,3 via 14,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2089,6 +2144,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 3 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > attack pell brawler-1
 Forecast Pell -> Brawler with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Brawler
@@ -2125,6 +2181,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 3 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > move captain 16,3
 Alder Fenn moves 15,2 -> 16,3 via 16,2
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2157,6 +2214,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 3 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > attack captain brawler-1
 Forecast Alder Fenn -> Brawler: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
 Alder Fenn attacks Brawler
@@ -2193,6 +2251,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 3 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 8), Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > move wren 18,3
 Wren moves 16,1 -> 18,3 via 16,2 16,3 17,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2224,6 +2283,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 3 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 8), Rook 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 > wait wren
 Wren waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2255,6 +2315,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 3 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 8), Rook 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 > move rook 19,6
 Rook moves 18,1 -> 19,6 via 19,1 19,2 19,3 19,4 19,5
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2286,6 +2347,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 3 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 8), Rook on an exit (leaves by turn 8), Wren 1 turn to an exit (last start: turn 8)
 > wait rook
 Rook waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2317,6 +2379,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 3 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 8), Rook on an exit (leaves by turn 8), Wren 1 turn to an exit (last start: turn 8)
 > wait dunstan
 Dunstan waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2348,6 +2411,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,1   hp 23/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 3 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 8), Rook on an exit (leaves by turn 8), Wren 1 turn to an exit (last start: turn 8)
 > end
 Lethal if all land: Dunstan (Hexer for 12, Rider 1 for 6, against 8 hp)
 Lethal if all land: Pell (Shieldbearer for 10, Soldier for 11, against 16 hp)
@@ -2426,6 +2490,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    18,2   hp 17/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         15,2   hp 9/21   Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 12/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 3 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 8), Rook on an exit (leaves by turn 8), Wren 1 turn to an exit (last start: turn 8)
 > exit rook
 Rook leaves through the exit at 19,6
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
@@ -2456,6 +2521,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    18,2   hp 17/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         15,2   hp 9/21   Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 12/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 3 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 escaped: rook
 > move captain 16,2
 Alder Fenn moves 16,3 -> 16,2
@@ -2487,6 +2553,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    18,2   hp 17/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         15,2   hp 9/21   Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 12/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 2 turns to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 escaped: rook
 > attack captain soldier-1
 Forecast Alder Fenn -> Soldier: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
@@ -2522,6 +2589,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 h  shieldbearer-1   Shieldbearer L3 bulwark    18,2   hp 17/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 12/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 2 turns to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 escaped: rook
 > attack wren shieldbearer-1
 Forecast Wren -> Shieldbearer: acc 93% dmg 3 x2 crit 4%; counter: acc 60% dmg 8 crit 0%
@@ -2558,6 +2626,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 h  shieldbearer-1   Shieldbearer L3 bulwark    18,2   hp 11/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 12/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 2 turns to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 escaped: rook
 > move pell 18,4
 Pell moves 15,3 -> 18,4 via 16,3 17,3 18,3
@@ -2588,6 +2657,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 h  shieldbearer-1   Shieldbearer L3 bulwark    18,2   hp 11/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,3   hp 12/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 2 turns to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 escaped: rook
 > attack pell shieldbearer-1
 Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 13 crit 3%; counter: none
@@ -2623,6 +2693,7 @@ a  rider-1          Rider L3 outrider          11,3   hp 1/21   Plain  group cha
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 D  wren             Wren L1 cadet              18,3   hp 12/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 2 turns to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 escaped: rook
 > attack dunstan rider-1
 Forecast Dunstan -> Rider 1: acc 73% dmg 10 crit 0%; counter: acc 82% dmg 6 crit 1%
@@ -2657,6 +2728,7 @@ E  pell             Pell L2 adept              18,4   hp 5/16   Plain  done
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 D  wren             Wren L1 cadet              18,3   hp 12/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Dunstan 2 turns to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 escaped: rook
 > end
 Lethal if all land: Dunstan (Brigand 2 for 9, Hexer for 12, against 2 hp)
@@ -2709,6 +2781,7 @@ E  pell             Pell L2 adept              18,4   hp 5/16   Plain
 b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
 D  wren             Wren L1 cadet              18,3   hp 12/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Pell 1 turn to an exit (last start: turn 8), Wren 1 turn to an exit (last start: turn 8)
 escaped: rook
 > move wren 19,4
 Wren moves 18,3 -> 19,4 via 19,3
@@ -2736,6 +2809,7 @@ E  pell             Pell L2 adept              18,4   hp 5/16   Plain
 b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
 D  wren             Wren L1 cadet              19,4   hp 12/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Pell 1 turn to an exit (last start: turn 8), Wren on an exit (leaves by turn 8)
 escaped: rook
 > exit wren
 Wren leaves through the exit at 19,4
@@ -2762,6 +2836,7 @@ f  hexer-1          Hexer L3 adept             11,3   hp 16/16  Plain  group cha
 E  pell             Pell L2 adept              18,4   hp 5/16   Plain
 b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Pell 1 turn to an exit (last start: turn 8)
 escaped: rook wren
 > move pell 19,5
 Pell moves 18,4 -> 19,5 via 19,4
@@ -2788,6 +2863,7 @@ f  hexer-1          Hexer L3 adept             11,3   hp 16/16  Plain  group cha
 E  pell             Pell L2 adept              19,5   hp 5/16   Plain
 b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8), Pell on an exit (leaves by turn 8)
 escaped: rook wren
 > exit pell
 Pell leaves through the exit at 19,5
@@ -2813,6 +2889,7 @@ A  captain          Alder Fenn L1 cadet        16,2   hp 22/22  Plain  captain
 f  hexer-1          Hexer L3 adept             11,3   hp 16/16  Plain  group chase, aggressive
 b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 8)
 escaped: rook wren pell
 > move captain 19,3
 Alder Fenn moves 16,2 -> 19,3 via 17,2 18,2 19,2
@@ -2838,6 +2915,7 @@ A  captain          Alder Fenn L1 cadet        19,3   hp 22/22  Plain  captain
 f  hexer-1          Hexer L3 adept             11,3   hp 16/16  Plain  group chase, aggressive
 b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn on an exit (leaves by turn 8)
 escaped: rook wren pell
 > exit captain
 Alder Fenn leaves through the exit at 19,3

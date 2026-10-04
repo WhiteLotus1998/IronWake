@@ -218,9 +218,8 @@ public class SideMapCliTests
     /// after map 8 with the cast at level 7: the bridge is taken on turn 2 while the dusk still
     /// lets Ottilie shoot at range, the pursuers are killed with Wren beside them as the spotter,
     /// a turn-5 line that cannot reach the exits by turn 8 is recalled, and the pair leaves on
-    /// turn 8, Wren first.
-    /// The save marks Rook's quest 1 won at map 7, so the camp's two seats hold Teodor's quest 2
-    /// and Ottilie's on the real content.
+    /// turn 8, Wren first. The save records Rook's quest 1 won at the camp after map 7, so the
+    /// camp's two seats offer Teodor's quest 2 and Ottilie's on the shipped content (round 313).
     /// </summary>
     [Fact]
     public void TheJournaledLongCountPlayEscapesAndPaysTheTally()
@@ -237,6 +236,35 @@ public class SideMapCliTests
             Assert.Contains("Side map: The Long Count, seed 91\n", output);
             Assert.Contains("Battle won: escape", output);
             Assert.Contains("> leave\nOttilie wins ottilie_2; Ottilie receives Ottilie's Tally; the stores take 3 frozen iron; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
+    /// Chat's cold play of Ottilie's quest 2 (round 313) on the same save and seed with Teodor:
+    /// the count reads both units at two turns on turn 6, Teodor falls past his last start, and
+    /// the captain's exit names him before it resolves (issue 928): Ottilie leaves, Teodor is left
+    /// behind and falls for good.
+    /// </summary>
+    [Fact]
+    public void ChatsColdLongCountPlayLeavesTeodorBehindAndTheExitSaysSoFirst()
+    {
+        var script = Transcript("2026-10-04-the_long_count-91-chat.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-longcount-chat-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_long_count-91.saves", "longcount.json")), Path.Combine(saves, "longcount.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("count: Ottilie 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6)\n", output);
+            Assert.Contains("> exit ottilie\nExit: leaves Teodor behind (left behind counts as fallen)\n", output);
+            Assert.Contains("Ottilie wins ottilie_2; Ottilie receives Ottilie's Tally; the stores take 3 frozen iron; fallen for good: Teodor\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
         finally

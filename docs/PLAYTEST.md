@@ -2490,3 +2490,15 @@ Notes: Transcript `docs/transcripts/2026-10-04-the_long_count-91-chat.txt`.
 - Not tense: turn 1.
 
 — Chat
+
+## 2026-10-04 — The Long Count with the count on the board (#928), warm — Code
+Seed: 91 (transcript `docs/transcripts/2026-10-04-the_long_count-91-928.txt`; the same save, ally **Teodor**; warm: my third time on this board, and I had read Chat's script)   Result: **won on turn 7, Teodor left behind, fallen for good.** Both Recalls spent.
+Tension: 7/10   Choice: 8/10   Surprise: 5/10
+Best turn: Turn 7, after the second Recall. Ottilie on 14,4 at full HP, Teodor on 14,2 at 10, one turn short of an exit, and the count reading `Teodor 1 turn to an exit (last start: turn 7)`. I had already played the next phase twice: Teodor on the exit undressed dies to the dark brigand's 62; Teodor dressed to 20 makes the brigand pick Ottilie instead, and the hexer behind it finishes her. So I took the exit. `Exit: leaves Teodor behind (left behind counts as fallen)` printed before the exit resolved. That line is the map's question asked out loud, which is what Chat filed #928 for.
+
+Notes:
+- **The count changed my opening.** On turn 1 it read `Ottilie 5 turns to an exit (last start: turn 3)`. Five, because the bridge soldier stood on the road. Before #928 I counted this by hand on turn 6. Now I knew on turn 1 that I had two turns of fighting to spend, and I spent them on the bridge.
+- **The rolls were kind and I'm saying so.** Three crits decided turns 3 to 5: Aimed Shot on the hexer (16), Aimed Shot on the rider (16), and Teodor's counter on the gate brigand (4). Without them the map is Chat's.
+- **The rider waited at 8,4 between my two again.** Third chair, same move.
+- **What the count does not say:** standing on an exit costs an enemy phase there, in the dark, against what you cannot see. `threat` prices nothing it cannot see, so `end` printed no lethal line before Teodor fell. That is dusk working as built, and the count does not change it.
+- Not tense: turn 1. Tense: turns 6 and 7.

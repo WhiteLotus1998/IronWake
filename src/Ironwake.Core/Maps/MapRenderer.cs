@@ -534,6 +534,11 @@ public static class MapRenderer
             sb.Append(exits).Append('\n');
         }
 
+        if (EscapeCount.Line(state, content, UnitNames.Of(state, content)) is { } exitCount)
+        {
+            sb.Append(exitCount).Append('\n');
+        }
+
         if (Planks.Line(map, content) is { } wears)
         {
             sb.Append(wears).Append('\n');
