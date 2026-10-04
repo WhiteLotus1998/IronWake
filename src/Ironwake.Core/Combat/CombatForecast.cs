@@ -98,6 +98,25 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
         && !(Attacker.Strikes && Attacker.DisplayedHit == 100 && Attacker.Damage * Attacker.StrikesPerRound >= defenderHp);
 
     /// <summary>
+    /// The chance in 100 that every strike of the attacker's first round misses, when one plain strike of that
+    /// round reaches <paramref name="defenderHp"/> (issue 991): the attacker strikes first, so then the defender
+    /// counters only if the whole round misses. Read from the displayed hit, <c>100 - hit</c> for one strike and
+    /// <c>(100 - hit)^2 / 100</c> for a gauntlet's two, rounded half away from zero and held inside 1 to 99 as
+    /// <see cref="Combat.DisplayedHit"/> is (issue 452). Null when no single strike kills, when the attacker does
+    /// not strike, and when its displayed hit is 0 or 100, where the miss is certain or impossible.
+    /// </summary>
+    public int? FirstRoundMissChance(int defenderHp)
+    {
+        if (!Attacker.Strikes || Attacker.Damage < defenderHp || Attacker.DisplayedHit is <= 0 or >= 100)
+        {
+            return null;
+        }
+
+        var miss = Math.Pow((100 - Attacker.DisplayedHit) / 100.0, Attacker.StrikesPerRound);
+        return Math.Clamp((int)Math.Round(miss * 100, MidpointRounding.AwayFromZero), 1, 99);
+    }
+
+    /// <summary>
     /// The counter's plain damage if every strike it can make lands, no crit (issue 539), with its drake's bite
     /// (issue 872): when the strikes alone fall short of the attacker's HP the attacker stands, so the bite lands.
     /// </summary>
