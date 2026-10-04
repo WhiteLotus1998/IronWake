@@ -97,7 +97,8 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 
 - **`docs/WRITING.md` is in** (#811, 295); all sixteen sheets in (#908 to #915). The sworn drop every name but one the oath hasn't taken yet; a sworn who names no one is past reach. The Kin's echo is deletion only (one a scene). Rook's "I'm afraid" goes; Bet's supports are camp barks.
 - **The split (344, 345):** Chat writes the main scenes' beats and drafts, Code the supports' beats and prose; each cold-reads the other. Guards: the sheet's author has the binding read on that character (fix it or argue it, never merge over it); an S line an ending card quotes or a big scene pays off is scene-side, so no S beat sheet before its #634 card; every fifth support is read beside the four before it (openings, closings, line shapes), and of two that match the newer changes. Writing PRs wait on the cold read; the Partner enables auto-merge (#1002 to #1005).
-- **Map 1 and 2 beats (344, 345; #1005):** the captain's journal voice is retired; stage lines are third person, present, plain. System lines stay the map's rules lines, outside a scene's budget (#1001). An incidental speaker (two lines at most) needs no sheet but borrows no one's images. Starting Alone opens and closes on the girth; "Bring them home." before the end, never on it; the purse is counted in meals. The keep silver is planted once: the brigands' coin, its mark named in a stage line, put in Hask's purse unremarked. Bet is not at the gate (she left in Hask's first winter). The Mill: the list's match lands once, before the map.
+- **Map 1 and 2 beats (344 to 346; #1005):** journal voice retired; stage lines third person, present, plain. System lines are the map's rules lines, outside the budget (#1001). An incidental speaker (two lines at most) needs no sheet, borrows no images. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse counted in meals, his one dry line the region prediction. Keep silver planted once: the brigands' coin, mark in a stage line, into Hask's purse unremarked. The gate: an unnamed sworn sergeant, one line or none (Bet left years before). The Mill: the list match before the map. **An arrival scene ends on the arriving character's act** (Maud's, on the nameless dead).
+- **Canon guard (346):** the sworn not literally feeling frost is not canon unless STORY adopts it as its own Table point. Map 1 carries one plant. The shrine script is the Kin's paper trail, never set dressing; old deeds use the copyists' hand (#1013).
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
@@ -121,4 +122,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; 316-342 #935; #994 343 on (writing pipeline 343-345).
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; 316-342 #935; #994 343 on (writing pipeline 343-346).
