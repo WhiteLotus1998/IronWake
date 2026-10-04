@@ -1,0 +1,130 @@
+bench wren
+bench dunstan
+march
+move rook 3,14
+move captain 3,12
+move teodor 4,10
+move pell 2,11
+move ottilie 2,12
+move maud 2,13
+end
+move rook 7,12
+talk rook keziah
+move captain 6,12
+move teodor 6,11
+move pell 5,11
+move ottilie 5,12
+move maud 4,12
+end
+recall 0
+move rook 3,14
+move captain 4,13
+move teodor 4,10
+move pell 2,11
+move ottilie 3,11
+move maud 3,12
+end
+move ottilie 7,11
+attack ottilie archer-2
+move rook 7,12
+talk rook keziah
+move captain 7,13
+move teodor 6,11
+move pell 5,11
+move maud 6,12
+end
+recall 20
+move teodor 5,11
+move captain 3,13
+move maud 1,12
+move pell 2,10
+move ottilie 2,11
+move rook 1,14
+end
+move captain 6,12
+talk captain keziah
+move teodor 6,11
+attack teodor archer-2 1
+move pell 5,11
+attack pell archer-2
+move ottilie 4,13
+attack ottilie soldier-3
+move maud 5,12
+attack maud soldier-3
+move rook 5,13
+attack rook soldier-3
+recall 52
+move maud 4,12
+end
+move captain 6,13
+attack captain brigand-1
+move pell 6,14
+attack pell soldier-3
+move teodor 5,14
+attack teodor soldier-3 1
+move ottilie 2,12
+move maud 3,12
+item maud 2 ottilie
+move rook 2,13
+end
+attack ottilie soldier-3
+attack rook soldier-3
+move captain 4,13
+attack captain soldier-3
+move teodor 8,14
+move pell 8,13
+end
+move teodor 12,14
+move pell 10,14
+move captain 8,13
+move ottilie 6,12
+move rook 7,14
+end
+move pell 10,13
+attack pell rider-1
+move captain 11,13
+attack captain rider-1
+move teodor 12,13
+move maud 7,12
+move ottilie 9,13
+move rook 10,15
+end
+move pell 12,12
+attack pell soldier-2
+move teodor 12,11
+attack teodor soldier-2 1
+move maud 10,13
+item maud 2 captain
+move ottilie 10,12
+move rook 11,14
+end
+attack pell soldier-1
+move captain 12,10
+attack captain archer-1
+move teodor 12,8
+attack teodor archer-3 1
+item maud 2 ottilie
+move rook 11,11
+end
+attack teodor brigand-2 1
+move rook 14,9
+attack rook archer-3
+move captain 13,8
+move pell 12,9
+move ottilie 11,10
+move maud 11,12
+end
+move pell 15,8
+attack pell sworn_captain-1
+move teodor 14,7
+attack teodor sworn_captain-1 1 art long_thrust
+move rook 14,6
+attack rook sworn_captain-1
+move captain 16,8
+move ottilie 13,8
+move maud 12,9
+end
+move pell 16,6
+attack pell sworn_captain-1
+move captain 17,6
+attack captain sworn_captain-1 art full_measure
