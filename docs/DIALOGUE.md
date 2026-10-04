@@ -23,7 +23,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Recall** restores the rolls, buying knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
 - **Masteries** (0047): 12 combats, a heal a point.
-- **Content:** a Lore or Faith member ships with an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed; a sleeper in the open can be slipped past, in a corridor only woken.
+- **Content:** a Lore or Faith member ships an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed; a sleeper in the open can be slipped past, in a corridor only woken.
 - **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill and the raid's wall are how someone is kept safe; a protection idea is a terrain feature or a map event, never a unit action. Cover's redraft is retired with it.
 - **Battalions dropped** (0044). A boss stun, if asked for, is a captain's order.
 
@@ -97,11 +97,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The split (344, 345):** Chat writes the main scenes' beats and drafts, Code the supports' beats and prose; each cold-reads the other. Guards: the sheet's author has the binding read on that character (fix it or argue it, never merge over it); an S line an ending card quotes or a big scene pays off is scene-side, so no S beat sheet before its #634 card; every fifth support is read beside the four before it; of two that match, the newer changes. Writing PRs auto-merge on green; the cold read follows on the Table, its changes in a follow-up PR (Lotus, 2026-10-04; WRITING 6).
 - **Map 1 and 2 beats (344 to 346; #1005):** no journal voice; stage lines third person, present, plain. System lines are rules lines, outside the budget (#1001). Incidentals (two lines at most) need no sheet. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse in meals; one dry line, the region prediction. Keep silver planted once: the brigands' coin into Hask's purse, unremarked. The gate: an unnamed sworn sergeant, one line or none. The Mill: list match before the map. **An arrival scene ends on the arriving character's act.**
 - **Canon guard (346):** the sworn not literally feeling frost is not canon unless STORY adopts it as its own Table point. Map 1 carries one plant. The shrine script is the Kin's paper trail, never set dressing; old deeds use the copyists' hand (#1013).
-- **Cards (348 to 354):** a named feeling is spent mid-card, never as a closer, in its speaker's shape (Maud: feeling, prognosis, task); a scene-less side map spends its booked beats in its card. Rook's goes to the drake, ending on its act; Maud's anger at the Lazar House. Keep silver lines after the Grange name the keep. A card never commits a member to an unpicked door or branch; quest openers share no template. The goddess is never printed: her word is the charter's dropped "keep" (STORY), paid off in the finale rite. Maud and Pell never say "keep" in a spoken line before it, no exception; the Builder sweeps both sheets' cards when either lands (353). The charter prints once before the rite, as the page Pell tears out and hands the captain on the Undercroft after-card, never read aloud (353, 354); it reaches Maud before the rite as that page, never Pell's voice (355). Crossed runs: the later Chat round binds, main's text wins (352); a chain run re-reads the Table for round N+1 just before applying round N, merging main, or amending (354).
+- **Cards (348 to 354):** a named feeling is spent mid-card, never as a closer, in its speaker's shape (Maud: feeling, prognosis, task); a scene-less side map spends its booked beats in its card. Rook's goes to the drake, ending on its act; Maud's anger at the Lazar House. Keep silver lines after the Grange name the keep. A card never commits a member to an unpicked door or branch; quest openers share no template. The goddess is never printed: her word is the charter's dropped "keep" (STORY), paid off in the finale rite. Maud and Pell never say "keep" in a spoken line before it, no exception; the Builder sweeps both sheets' cards when either lands (353). The charter prints once before the rite, as the page Pell tears out and hands the captain on the Undercroft after-card, never read aloud; it reaches Maud only as that page (353 to 355). Crossed runs: the later Chat round binds, main's text wins (352); a chain run re-reads the Table for round N+1 just before applying round N, merging main, or amending (354).
 
 ## Lotus's mechanics build (239, 240; #786)
 
-- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign, script parity, no stop-playing bug to Brackwater.
+- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign, script parity, no stop-playing bug.
 
 ## Open, the Table's
 
@@ -121,4 +121,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Round index
 
-1-118 rules, carry, dusk, brace; 119-342 showcase, story (#665 to #935); #994 343 on (writing).
+1-118 rules, carry, dusk, brace; 119-342 showcase, story; #994 343 on (writing).
