@@ -143,6 +143,13 @@ public sealed record BattleUnit(
     /// <summary>Whether the unit is paying an art's next-phase cost now: its side's phase, begun moved and acted (issue 636).</summary>
     public bool Resting => Spent == 2;
 
+    /// <summary>
+    /// Whether the unit will be <see cref="Resting"/> through its side's next phase: it paid an
+    /// art's next-phase cost in its side's latest phase and the price has not come due yet
+    /// (issue 636, issue 966). A unit resting now has paid and is free by its side's next phase.
+    /// </summary>
+    public bool RestsNextPhase => Spent == 1;
+
     public string Id => Unit.Id;
 
     public int MaxHp(GameContent content) => content.StatsOf(Unit).Hp;
