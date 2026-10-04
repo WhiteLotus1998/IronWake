@@ -7,7 +7,7 @@ namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
 /// The dash (DESIGN.md 13.27, experiment): on a <c>dash: on</c> map a player unit that has neither
-/// moved nor acted may move <see cref="Winded.ExtraMov"/> tiles past its Move as its whole turn, and
+/// moved nor acted may move <see cref="Winded.ExtraMov"/> movement points past its Move as its whole turn, and
 /// is struck at <see cref="Winded.Hit"/> more hit until the player phase begins again. A map without
 /// the header, a unit that moved or was shoved, an enemy, and a tile past the dash's reach are refused.
 /// </summary>

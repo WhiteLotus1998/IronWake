@@ -3,7 +3,7 @@ namespace Ironwake.Core;
 /// <summary>
 /// The dash (DESIGN.md 13.27, experiment), behind a map's <c>dash: on</c> header. Brace prices
 /// standing still; the dash prices running. A player unit that has neither moved nor acted may
-/// move up to <see cref="ExtraMov"/> tiles past its Move (<see cref="Dash"/>), and that is its
+/// move on its Move plus <see cref="ExtraMov"/> movement points, terrain priced as for a Move (<see cref="Dash"/>), and that is its
 /// Move and its action both: no strike, no item, no exit, no Canto. Until its side's next phase
 /// begins it is winded, and every strike against it is at <see cref="Hit"/> more hit. The winded
 /// mark sits in the striker's hit slot beside the pin and the brace (<see cref="Brace.StrikeHit"/>),
@@ -12,14 +12,14 @@ namespace Ironwake.Core;
 /// </summary>
 public static class Winded
 {
-    /// <summary>The tiles a dash adds to the unit's Move (DESIGN.md 13.27, provisional).</summary>
+    /// <summary>The movement points a dash adds to the unit's Move (DESIGN.md 13.27, provisional).</summary>
     public const int ExtraMov = 2;
 
     /// <summary>The hit a strike against a winded unit gains (DESIGN.md 13.27, provisional).</summary>
     public const int Hit = 15;
 
     /// <summary>The line a <c>dash: on</c> map prints under its board, so the rule is on screen.</summary>
-    public const string Legend = "dash: a unit that has not moved or acted may move 2 tiles past its Move, as its whole turn; it is struck at +15 Acc until its side's next phase";
+    public const string Legend = "dash: a unit that has not moved or acted may move on Move + 2, as its whole turn; it is struck at +15 Acc until its side's next phase";
 
     /// <summary>The hit modifier a strike against <paramref name="target"/> carries: plus <see cref="Hit"/> when it is winded, else 0.</summary>
     public static int HitAgainst(BattleUnit? target) =>
