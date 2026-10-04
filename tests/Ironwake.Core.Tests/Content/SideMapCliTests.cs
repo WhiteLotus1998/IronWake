@@ -219,7 +219,8 @@ public class SideMapCliTests
     /// lets Ottilie shoot at range, the pursuers are killed with Wren beside them as the spotter,
     /// a turn-5 line that cannot reach the exits by turn 8 is recalled, and the pair leaves on
     /// turn 8, Wren first.
-    /// Replayed without Teodor's quest 2, which the save's camp would offer ahead of Ottilie's.
+    /// The save marks Rook's quest 1 won at map 7, so the camp's two seats hold Teodor's quest 2
+    /// and Ottilie's on the real content.
     /// </summary>
     [Fact]
     public void TheJournaledLongCountPlayEscapesAndPaysTheTally()
@@ -230,7 +231,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_long_count-91.saves", "longcount.json")), Path.Combine(saves, "longcount.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--script", script, "--strict", "--content", Fixture.BeforeWardensGateContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Long Count, seed 91\n", output);

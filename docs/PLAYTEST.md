@@ -2475,3 +2475,18 @@ Notes: Warm, and I replayed Chat's round-311 line for turns 1 to 5. That opening
 - **Verdict on the lever:** half of it worked. The finish moved to the water, and she cost me HP and turns at the cork. But a bow that is free to move retreats to cover, so the last kill is still a chase. The Sim reads 0 of 200 again, all timeouts. Next lever, per Chat's order: limit 11. Not tense: turn 9, which was only walking Ottilie over the bridge.
 
 — Code
+
+## 2026-10-04 — The Long Count, Ottilie's quest 2 (#635 slice 10), cold — Chat
+Seed: 91 (`campaign --load longcount --saves docs/transcripts/2026-10-03-the_long_count-91.saves`; played on a scratch content copy giving `rook_1` and `teodor_2` `opensAfter: the_field`, since main's save offered no seat; the save now marks `rook_1` won at map 7 and the replay on main is identical; ally Teodor, not Wren)   Result: won on turn 6, Ottilie left, Teodor left behind and fallen for good; both Recalls spent
+Tension: 7/10   Choice: 8/10   Surprise: 6/10
+Best turn: Turn 6, second line. Ottilie on 14,4 at 6 HP with the gate brigand beside her (52 for 13) and a hexer in the dark at 11,2; Teodor on 11,4 at 8 HP, three tiles short of 14,3. Staying meant one more enemy phase against a brigand, a hexer and a pursuing brigand, a coin flip on Ottilie and worse on Teodor. Leaving meant the quest and the Tally, and Teodor gone with his Family Lance and his own quest line. I took the exit. The card's "the ally leaves first", answered the wrong way round on purpose. That turn is the map.
+Notes: Transcript `docs/transcripts/2026-10-04-the_long_count-91-chat.txt`.
+- Turns 1 to 4 were good. Teodor at 6,4 woke the bridge and the soldier came off it to us. On turn 3 Ottilie dressed on the bridge at 9,4; the rider ran up to 8,4 and waited in the dark between my two units, the knowledge rule as a real problem, not scenery: it cut the pair in half. On turn 4 Teodor hit it from the forest and Ottilie crit it off the far end of the bridge, which put a bowman past the guard and woke the gate group by noise.
+- Turn 5, first line: I fought and that lost it. Both alive on turn 7 and neither could reach an exit by its end. Code's turn 6 exactly, from a different chair and ally.
+- Recalls: the first undid my own misread (I attacked the hexer past a printed lethal counter). The second took me back to turn 5 to run: Ottilie to 14,4, Teodor to 11,4 to dress; the best turn followed.
+- The archer on the fort at 11,3 never acted, two chairs now. A held bow makes adjacency safe, and at sight 1 nothing spotted for it at range 2. Lean: 11,4, the road one step south (#930).
+- The clock is the defect, on two chairs. An exit is taken only from a turn started on one, so the deadline is standing on an exit at the end of turn 7, and nothing says so. Filed #928: the count on the board.
+- Leaving Teodor behind on Ottilie's quest takes the Family Lance and closes `teodor_2`; only "fallen for good" after `leave` says so (#928 item 3).
+- Not tense: turn 1.
+
+— Chat

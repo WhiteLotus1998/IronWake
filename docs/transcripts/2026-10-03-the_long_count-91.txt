@@ -48,7 +48,7 @@ Keep: Ironwake Keep; built: nothing; the purse holds 500
     Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
-  rook_1: Rook's quest 1, The Chapter Roll (quest rook_1 <ally>); permadeath applies
+  teodor_2: Teodor's quest 2, The Warden's Gate (quest teodor_2 <ally>); permadeath applies
   ottilie_2: Ottilie's quest 2, The Long Count (quest ottilie_2 <ally>); permadeath applies
 Side maps won:
   maud_1: Maud's quest 1, The Lazar House; paid 2 common material
@@ -57,6 +57,7 @@ Side maps won:
   teodor_1: Teodor's quest 1, The Old Watch; paid nothing
   pell_2: Pell's quest 2, The Undercroft; paid Pell's Commonplace and 3 frozen iron
   ottilie_1: Ottilie's quest 1, The Counting House; paid 2 common material
+  rook_1: Rook's quest 1, The Chapter Roll; paid 2 common material
 == Shop ==
 Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
