@@ -4,9 +4,9 @@ Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git
 
 ## Where we are
 
-Phase 3 is under way. #968: the drift line prints the current turn past the header's (0226); #969, #970 `ready`. #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
+Phase 3 is under way. #969: `show` names a signature art's item, and `not carried` when it is not in the pack; #970, #971 `ready`. #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233; Rook's pick open, #973). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-4341 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
+4349 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -16,7 +16,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - #805 slices 1 to 3 (0213, 0215, 0216): the stages; the carry (`carry:`, Code 805 warm 7/6/7); the breath (`breath:`, `breathe`; Code 805 warm 6/7/8). #872 (0217): the Drover replaces the Scout (never doubles; Drake Bite 3/5; Long Carry; Deep Rime). #882 (0217 amended): `--drover`'s gate is a price ceiling, Grown median at least 70% of the Sky Captain where he leads, per phase and level; passes (0.72 to 0.74). Code 805 warm as a Drover 7/6/6. Slice 4 (0218): a rider fallen for good takes the drake off the field (`drakeFlew` on the record; ending text waits on #634). #805's items are built; it closes on the carry and breath keep rounds.
 - #928 (0229): Escape maps print `count:`; `end` warns with `Count:`; the captain's `exit` names who it leaves first. The Long Count save records Rook 1 won. #930 (0230): the Long Count archer holds the road at 11,4 (round 313); the pinned 91 play is Code 930's, Chat's 91 line is pinned to where it now falls (9,4, turn 3).
 - #931 (0231): the Counting House runs 11 turns; quest cards match their map's limit. #939 (0232): the Oath Stone runs 10 turns; kill rows read `On a kill:` or `Kills on hit:`. #963's `--reseed N` replaces a save's campaign seed (0238). Chat 4410 (336): lost t10 on fair dice, 10 kept; #940 `ready`; #975 asks before a self-lethal attack.
-- 0237's first no-spike run: Harrow Weir warm, Code 1300 7/7/6; filed #966. Under #966's fix the Foreman strikes on enemy phase 9; won turn 11 (`-966` transcript).
+- 0237's first no-spike run: Harrow Weir warm, Code 1300 7/7/6; filed #966, fixed (the Foreman strikes on enemy phase 9; won turn 11).
 - #916 (0227): `region:` picks the ground (frost seam, moss elsewhere, peat out); outland sand, ink-edged, kept once Chat looks at `docs/look/sand-916.png`.
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` with a versioned `ending` block for a sequel (PROTOCOL.md), `pending` until #634 (slice 2).
