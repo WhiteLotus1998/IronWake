@@ -1756,6 +1756,11 @@ public sealed class PlaySession
             {
                 rows.Add($"  if all land: {Queries.IfAllLand(lines, blow)} against {unit.Hp} hp");
             }
+
+            if (state.Map.OneAnswerEnabled && lines.Count(l => !l.Raises && l.Forecast.Defender.Strikes) > 1)
+            {
+                rows.Add($"  one answer: {name} counters only the first of these to strike; the rest go unanswered");
+            }
         }
 
         foreach (var refusal in (refusals ?? Array.Empty<RefusalLine>()).Where(r => Dusk.Seen(state, r.Boss)))
@@ -1849,7 +1854,7 @@ public sealed class PlaySession
             return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {RaiseText(forecast.Attacker)}; counter: none";
         }
 
-        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + (counterChills ? " chills" : "") : ": none")}";
+        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + (counterChills ? " chills" : "") : ": none" + (forecast.CounterAnswered ? " (answered this phase)" : ""))}";
     }
 
     /// <summary>

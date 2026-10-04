@@ -223,6 +223,12 @@ public sealed record MapDefinition(
     public bool DashEnabled { get; init; }
 
     /// <summary>
+    /// The <c>one_answer: on</c> header (DESIGN.md 13.29, experiment, samples): a unit that counters
+    /// makes no further counter until the next phase begins, on either side (<see cref="Answer"/>). Off by default.
+    /// </summary>
+    public bool OneAnswerEnabled { get; init; }
+
+    /// <summary>
     /// The <c>breath:</c> header (issue 805, samples): the recruit placed with an Unbroken drake, whose
     /// breath the map plays (<see cref="Rime"/>); null for a map without the breath.
     /// </summary>

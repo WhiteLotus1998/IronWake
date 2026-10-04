@@ -1,12 +1,12 @@
 # STATE
 
-Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history: git, PRs, `docs/DECISIONS/`.
+Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git, PRs, `docs/DECISIONS/`.
 
 ## Where we are
 
-Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. Nothing is `ready`: #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952) and 13.28 the wind (#955, #957) are spiked. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
+Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. Nothing is `ready`: #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field (0233). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-4320 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
+4328 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -16,7 +16,6 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - #805 slices 1 to 3 (0213, 0215, 0216): the stages; the carry (`carry:`, Code 805 warm 7/6/7); the breath (`breath:`, `breathe`; Code 805 warm 6/7/8). #872 (0217): the Drover replaces the Scout (never doubles; Drake Bite 3/5; Long Carry; Deep Rime). #882 (0217 amended): `--drover`'s gate is a price ceiling, Grown median at least 70% of the Sky Captain where he leads, per phase and level; passes (0.72 to 0.74). Code 805 warm as a Drover 7/6/6. Slice 4 (0218): a rider fallen for good takes the drake off the field (`drakeFlew` on the record; ending text waits on #634). #805's items are built; it closes on the carry and breath keep rounds.
 - #928 (0229): Escape maps print `count:`; `end` warns with `Count:`; the captain's `exit` names who it leaves first. The Long Count save records Rook 1 won. #930 (0230): the Long Count archer holds the road at 11,4 (round 313); the pinned 91 play is Code 930's, Chat's 91 line is pinned to where it now falls (9,4, turn 3).
 - #931 (0231): the Counting House runs 11 turns; quest cards match their map's limit. #939 (0232): the Oath Stone runs 10 turns; kill rows read `On a kill:` or `Kills on hit:`. Next: Chat's cold read, then #940 (rider on turn 5).
-- #891 (0223): ART_SPEC's Figures; delivered figures keep their colour; #896 tints only `generated.txt` sheets.
 - #916 (0227): `region:` picks the ground (frost seam, moss elsewhere, peat out); outland sand, ink-edged, kept once Chat looks at `docs/look/sand-916.png`.
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` with a versioned `ending` block for a sequel (PROTOCOL.md), `pending` until #634 (slice 2).
@@ -86,8 +85,9 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | #805 the drake's carry | `docs/samples/kestrow_water_carry.map` (0215; Code 805 warm in on `free`: no setting named) | Chat's cold play on `waited` and `free` |
 | #805 the rime breath | `docs/samples/kestrow_water_rime.map` (0216; Code 805 warm in: a route taken for it, the thaw decided) | Chat's cold play |
 | #872 the Drover | the rime sample with Rook a Drover (0217; Code 805 warm: Deep Rime decided) | a campaign chair journals her; Chat's cold pick, her or the Captain (round 294) |
-| 13.27 dash | `docs/samples/brackwater_cut_dash.map` (#950, 0234; Code 950 warm 8/7/6: 4 free, 2 priced) | Chat's cold play; more free than priced in both names the borrowed step (#952) |
-| 13.28 wind | `docs/samples/sallow_grange_wind.map` (#955, 0235; Code 1280 warm 6/7/7 in: 6,3 quiet, turn 4 forced by the turn; #957 prints it) | Chat's cold play: does an announced turn force a decision? |
+| 13.27 dash | `docs/samples/brackwater_cut_dash.map` (#950, 0234; Code 950 warm 8/7/6: 4 free, 2 priced) | Chat's cold play; more free than priced: the borrowed step (#952) |
+| 13.28 wind | `docs/samples/sallow_grange_wind.map` (#955, 0235; Code 1280 warm 6/7/7 in; #957 prints the coming turn) | Chat's cold play: does a turn force a decision? |
+| 13.29 one answer | `docs/samples/the_tollgate_answer.map` (#960, 0236; Code 1290 warm 7/8/6: 3 ordered, 2 not) | Chat's cold play, swarmed on purpose |
 | 13.14 brace | kept (0084, round 121): spike on `harrow_weir_brace.map`, keep round on `saltmarsh_ford_brace.map` (Code 449, Chat cold 521) | in; shipped on Saltmarsh (0091); holds read on the next brace play with a hold |
 
 Kept on samples: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars (0010), battalions (0044), the windup (0094), overwatch (0098, 0103), cover (0099).
