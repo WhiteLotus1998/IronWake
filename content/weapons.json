@@ -20,12 +20,12 @@
     { "id": "post_maul", "name": "Post Maul", "type": "axe", "mt": 9, "hit": 60, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 20, "rank": "E", "windup": true, "description": "A fence-driver's maul. The swing takes a while; the landing does not." },
     { "id": "kinsbane", "name": "Kinsbane", "type": "axe", "mt": 9, "hit": 70, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 20, "rank": "E", "hungers": true, "boundTo": "keziah", "description": "Placeholder. Drains 5 HP unfed. Kills heal 10.",
       "voice": {
-        "starved": [ { "id": "kb_starved_eat", "text": "Eat." }, { "id": "kb_starved_cold", "text": "Cold." }, { "id": "kb_starved_now", "text": "The slowest." } ],
+        "starved": [ { "id": "kb_starved_eat", "text": "Eat." }, { "id": "kb_starved_cold", "text": "Marrow." }, { "id": "kb_starved_now", "text": "The slowest." } ],
         "tooth": [
           { "id": "kb_tooth_1", "text": "That one was limping before you reached it." },
-          { "id": "kb_tooth_2", "text": "Better. That one ran, and you had to run it down." },
-          { "id": "kb_tooth_3", "text": "The herd is thinning. Next time, find me one with teeth." },
-          { "id": "kb_tooth_4", "text": "Penned meat, that one. Never ran. Find whoever keeps the pen." } ],
+          { "id": "kb_tooth_2", "text": "Better. It ran, and you had to run it down." },
+          { "id": "kb_tooth_3", "text": "The herd is thinning. Next time, one that bites back." },
+          { "id": "kb_tooth_4", "text": "Penned meat, that one. Never had to run. Find whoever fattened it." } ],
         "woken": [ { "id": "kb_woken", "text": "{name}. I remember what I'm for." } ] } },
     { "id": "family_lance", "name": "Family Lance", "type": "lance", "mt": 5, "hit": 60, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E", "boundTo": "teodor", "description": "Older than the house that kept it. Heavier than it should be.",
       "heirloom": { "fromMap": 5, "first": "rusted", "held": "Placeholder. The rust holds; it waits on Teodor.", "named": "the First Warden's Lance", "stages": [
