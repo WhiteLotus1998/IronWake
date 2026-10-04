@@ -90,7 +90,8 @@
         "(Get Pell onto the reading desk at 16,4 by the end of turn 7. The map is lost if she falls. The sworn come down the stair at 1,10 from turn 2, announced. Two groups sleep in the stacks and the cells; walls do not stop them hearing.)"
       ],
       "after": [
-        "Above the reading desk the charter is cut in the shrine script. Pell counts the anchor rings before she reads it: more rings than chains. Then, aloud: \"Let the iron keep it from waking, and let us keep the iron.\" Nothing more on the stair. At the top she reads it again to the whole company, before anyone sits.",
+        "The charter is cut above the reading desk in the shrine script. Pell counts the anchor rings first: more rings than chains. She reads it twice without moving her lips. At the top of the stair she tears a page from her book and puts it in the captain's hand:",
+        "Let the iron keep it from waking, and let us keep the iron.",
         "(Pell carries Pell's Commonplace now: Cinder's numbers, bound to her, and it never catches. Its art, Read Ahead, reaches one tile further for 2 less Power.)"
         ] },
     { "id": "teodor_1", "member": "teodor", "part": 1, "map": "the_old_watch", "opensAfter": "harrow_weir", "wakes": "family_lance",

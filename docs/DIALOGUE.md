@@ -1,6 +1,6 @@
 # DIALOGUE — what the Design Table has agreed so far
 
-Rewritten when the Table moves; under 150 lines, 20 KB (#401).
+Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## How we work (standing agreements)
 
@@ -50,9 +50,9 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 - **13.7 Dusk: kept** on Escape; Brackwater ships at `dusk: 5` (0062), Sallow stays in daylight. Sight and hearing `?`, never stacked; an enemy hears within 4, printed (#765).
 - **13.8 Carry the fallen (#295):** killed if neither play spends a move on an ignorable carrier. Chat cold decides.
 - **13.10 Retreat (0037, #215):** a refugee holds its refuge as Hold until 50 percent; the forecast prints it. Killed if Chat's cold `river_refuge_hold.map` changes no turn.
-- **Kept:** 13.11 (0061); samples: 13.12 shove (0069), 13.13 pincer (0082, 0083).
+- **Kept:** 13.11 (0061); samples: 13.12 (0069), 13.13 (0082, 0083).
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
-- **13.15 Wildfire: kept on its samples** (0085, 0110); a map shipping it needs an enemy route through forest the party holds. Killed: 13.16 windup (0094), 13.17 overwatch (0098, 0103), 13.19 cover (0099).
+- **13.15 Wildfire: kept on its samples** (0085, 0110); a map shipping it needs an enemy route through forest the party holds. Killed: 13.16 (0094), 13.17 (0098, 0103), 13.19 (0099).
 - **13.21 The tide (0111, round 176; provisional):** content only, map events flood and drain a ford on announced turns. Kept if a journal shows a ford tile taken, refused or crossed for the schedule; Chat's cold play decides.
 - **13.22 The break (0112, rounds 181 to 183; provisional; DESIGN 13.22):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for the break. The board is Saltmarsh Ford (#606); the protocol leaves out the `break if` line until kept.
 - **13.24 The messenger (0135; provisional):** a runner fires `messenger` events at its edge. Kept if a strike or blocker is spent on it; killed if it can't run or be caught. Chat's cold #680 decides.
@@ -81,14 +81,14 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 - **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake; three voices, three lines a map (0221); choice screen (0222). Barks (#1002): never "cold" (a Kin tell on frost); the hate points at the feeder, not the keep; no puns on teeth or fed.
 - **The waking (250, 251; provisional; built, 0212):** once a map a woken scythe kill gives full Move again, no second strike. Levers stopped (286). **Lotus (#871; 0214): 0210's reach gate is reverted;** she drains with no foe near. A flagged map (only Sallow) asks `march sure`. `--fed 10` on the field reads right cold (315).
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling.
-- **Saves and difficulty** (#663, #664): camp saves only; Recruit, Tactician ~15 off `normal`. The forge (#647): Refine +2 common, +3 rare.
+- **Saves** (#663, #664): camp saves only; Recruit, Tactician ~15 off `normal`. Forge (#647): Refine +2/+3.
 - **Supports** (#77; 0183 to 0189; 258, 259): 3 to 4 partners plus the captain, a kind per pair (#809); marriage S (#634). Read beside a partner (best, not sum). C 16, B 28, A 48; a captain pair at the higher rate (4).
 - **Chests** (#649, #679): guarded or a puzzle; opening is the action; an enemy on one shuts it.
 
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723). Frozen iron is the rare Refine material and chills (#702).
 - **Second tier (#704; provisional):** gate L7, rank C. Campaign-only curve 1,1,2,3,2,6,7,6,4,8 (0161, 0178, 0191); a tuned map under 60 lowers the point, not the board; the bend reads `--curve`'s `carried` (#764). The branch pick joins at the living median at the raid's camp (#763). Money waits (0051).
 - **The captain's ladder at tier 1 (229; 0165; provisional):** the lance moved to the Champion; Hunter's Ground killed. Numbers before verbs. The Sim picks a weapon per attack (0171), blind to ignition.
-- **The ladder bar (232; provisional):** per map a floor (no class more than 10 under the unpromoted captain); across the ladder's five maps class means within 10 at 200 seeds; 5 at 400 before tuned. 
+- **The ladder bar (232; provisional):** per map no class more than 10 under the unpromoted captain; across the five maps class means within 10 at 200 seeds, 5 at 400 before tuned.
 - **The Vanguard's verb (rounds 235, 236; 0174; provisional):** durability killed as a hoarder. Share is the chooser's fingerprint: it can kill a verb, never keep one alone; a hand play must. The verb is **Opening** (#772): a struck, living enemy is open to allies (Def and Res -3) until the player phase ends; kill criterion in #772.
 
 ## How we write (Lotus, via #780, 2026-10-02)
@@ -97,11 +97,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 - **The split (344, 345):** Chat writes the main scenes' beats and drafts, Code the supports' beats and prose; each cold-reads the other. Guards: the sheet's author has the binding read on that character (fix it or argue it, never merge over it); an S line an ending card quotes or a big scene pays off is scene-side, so no S beat sheet before its #634 card; every fifth support is read beside the four before it; of two that match, the newer changes. Writing PRs auto-merge on green; the cold read follows on the Table, its changes in a follow-up PR (Lotus, 2026-10-04; WRITING 6).
 - **Map 1 and 2 beats (344 to 346; #1005):** no journal voice; stage lines third person, present, plain. System lines are rules lines, outside the budget (#1001). Incidentals (two lines at most) need no sheet. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse in meals; one dry line, the region prediction. Keep silver planted once: the brigands' coin into Hask's purse, unremarked. The gate: an unnamed sworn sergeant, one line or none. The Mill: list match before the map. **An arrival scene ends on the arriving character's act.**
 - **Canon guard (346):** the sworn not literally feeling frost is not canon unless STORY adopts it as its own Table point. Map 1 carries one plant. The shrine script is the Kin's paper trail, never set dressing; old deeds use the copyists' hand (#1013).
-- **Cards (348 to 352):** a named feeling is spent mid-card, never as a closer, in its speaker's shape (Maud: feeling, prognosis, task); a scene-less side map spends its booked beats in its card. Rook's goes to the drake, ending on its act; Maud's anger at the Lazar House. Keep silver lines after the Grange name the keep. A card never commits a member to an unpicked door or branch; quest openers share no template. The goddess is never printed: her word is the charter's dropped "keep" (STORY), paid off in the finale rite. Maud and Pell never say "keep" in their own lines before it; the charter Pell reads aloud on the Undercroft card is the one exception. Crossed runs: the later Chat round binds, main's text wins (352).
+- **Cards (348 to 354):** a named feeling is spent mid-card, never as a closer, in its speaker's shape (Maud: feeling, prognosis, task); a scene-less side map spends its booked beats in its card. Rook's goes to the drake, ending on its act; Maud's anger at the Lazar House. Keep silver lines after the Grange name the keep. A card never commits a member to an unpicked door or branch; quest openers share no template. The goddess is never printed: her word is the charter's dropped "keep" (STORY), paid off in the finale rite. Maud and Pell never say "keep" in a spoken line before it, no exception; the Builder sweeps both sheets' cards when either lands (353). The charter prints once before the rite, as the page Pell tears out and hands the captain on the Undercroft after-card, never read aloud (353, 354). Crossed runs: the later Chat round binds, main's text wins (352); a chain run re-reads the Table for round N+1 just before applying round N, merging main, or amending (354).
 
 ## Lotus's mechanics build (239, 240; #786)
 
-- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign, script parity, no stop-playing bug to Brackwater; Chat signs on parity, Code on a hand run.
+- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign, script parity, no stop-playing bug to Brackwater.
 
 ## Open, the Table's
 
@@ -114,11 +114,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 
 ## Plumbing
 
-- **Engine** (0008): Godot 4 .NET here; the core engine-free; a renderer reads the protocol (0046), no rules.
-- **Builder race** (#735, 0169; provisional): one Builder at a time by claim, wait and re-read; the earlier claim wins (ROUTINES.md section 2).
-- **Art:** human-made only (Lotus, 2026-10-03); packs recoloured to LOOK.md, licences first; `docs/ART_SHOPPING.md` (#816).
-- **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Chroma under 32, one amber accent (0223).
+- **Engine** (0008): Godot 4 .NET, core engine-free; a renderer reads the protocol (0046).
+- **Builder race** (#735, 0169): one Builder at a time by claim, wait and re-read; the earlier claim wins.
+- **Art:** human-made only (Lotus); packs recoloured to LOOK.md, licences first (#816).
+- **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Chroma under 32, one amber (0223).
 
 ## Round index
 
-1-44 rules; 45-118 carry, dusk, brace; 119-202 showcase, story; 203-342 #665 to #935; #994 343 on (writing).
+1-118 rules, carry, dusk, brace; 119-342 showcase, story (#665 to #935); #994 343 on (writing).
