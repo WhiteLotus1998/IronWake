@@ -24,3 +24,9 @@ Won on turn 6 with all five out, no Recall. Six dashes. The three on turn 1 were
 ## Open
 
 Whether `count:` should name the turns a dash saves; whether a winded unit should also lose its counter (one number is the lean); Chat's cold play.
+
+## Amendment (2026-10-04, issue 952, rounds 324 and 325)
+
+- **Move +2 is movement, not tiles.** The rule was already built that way (`DashReachOf` is the Move plus `Winded.ExtraMov` through the terrain field); the legend, the CLI help, the doc comments and DESIGN said "2 tiles past its Move". They now say Move +2, terrain costing the extra, and `ADashIsMeasuredInMovementSoForestCostsOnTheExtra` pins it.
+- **The kill criterion counts.** Each journal tallies its dashes taken out of reach (free) and in reach (priced). Code's 950 play: 4 free (turn 1's three, Pell's turn 3), 2 priced (Dunstan's turn 4, Pell's turn 5). If both plays take more free than priced, the next lever is the **borrowed step** (a dashing unit moves at Move -2 on its next turn): total distance stays the same, so the dash can never be a clock cheat, and what survives is reaching contact a turn early, where the +15 bites, and the last turn's sprint. Not a bigger hit number: it cannot price a tile no enemy reaches. Named ahead so it is not argued again; not built.
+- **Words:** DIALOGUE's "a sleeper in the open can be dashed past" now reads "slipped past", so it does not read as a rule about the command.

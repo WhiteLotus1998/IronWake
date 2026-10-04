@@ -217,7 +217,7 @@ public sealed record MapDefinition(
 
     /// <summary>
     /// The <c>dash: on</c> header (DESIGN.md 13.27, experiment, samples): a player unit may move
-    /// <see cref="Winded.ExtraMov"/> tiles past its Move as its whole turn, and is struck at
+    /// with its Move plus <see cref="Winded.ExtraMov"/>, terrain costing the extra, as its whole turn, and is struck at
     /// <see cref="Winded.Hit"/> more hit until its side's next phase (<see cref="Dash"/>). Off by default.
     /// </summary>
     public bool DashEnabled { get; init; }
