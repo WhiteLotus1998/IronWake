@@ -1252,11 +1252,11 @@ Battle won: seize; no recall is left, so leave
 > leave
 Rook wins rook_1; the stores take 2 common material; nobody fell
 -- After The Chapter Roll --
-The roll enters the chapter's claim to the extra seat. Pinned under it,
-a receipt: paid in full, in new keep silver. Under that, the drake's
-number, and Rook's name on the line below. "Someone in your keep bought
-a seat with us." She folds the receipt into her glove and leaves the
-roll open for the next reader.
+The last page of the roll is the chapter's claim to the extra seat.
+Pinned under it, a receipt: paid in full, in new keep silver. Under
+that, the drake's number, and Rook's name on the line below. "Your keep
+bought a seat with us." She folds the receipt into her glove and leaves
+the roll open.
 
 (The Drover is open to Rook at her second promotion: the other door
 above the Skyrider.)
