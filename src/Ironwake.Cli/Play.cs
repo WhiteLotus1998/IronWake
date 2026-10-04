@@ -1832,6 +1832,11 @@ public sealed class PlaySession
             {
                 rows.Add($"  {wind}");
             }
+
+            if (state.Map.SeenFar is { } far && far.For(unit) > 0)
+            {
+                rows.Add($"  {far.Line(unit.Unit.Name, content)}");
+            }
         }
 
         return UnitNames.Sentence(string.Join("\n", rows));

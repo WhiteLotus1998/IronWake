@@ -98,7 +98,9 @@ public class MeetingTests
     public void AMetSideCharacterCanBeBenchedAndTheBareSlotGoesToThePick()
     {
         var record = CampaignRecord.StartAt(Content, 820, "the_field", pick: "rook");
-        var field = Map("the_field");
+
+        // Without its seen_far header (issue 973), which seats Rook, so the bare slot is filled in roster order.
+        var field = Map("the_field") with { SeenFar = null };
         foreach (var id in new[] { "wren", "dunstan" })
         {
             record = record.Bench(id, field, Content).Record;

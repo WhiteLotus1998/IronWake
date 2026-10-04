@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -220,6 +220,11 @@ public static class MapFormat
             sb.Append("wind: ").Append(wind).Append('\n');
         }
 
+        if (map.SeenFar is { } seenFar)
+        {
+            sb.Append("seen_far: ").Append(seenFar).Append('\n');
+        }
+
         if (map.Region != MapRegion.Seam)
         {
             sb.Append("region: ").Append(MapRegions.Word(map.Region)).Append('\n');
@@ -419,7 +424,7 @@ public static class MapFormat
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
-            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map) };
+            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
@@ -1085,6 +1090,37 @@ public static class MapFormat
             }
 
             return new WindRule(start, ValueList<WindShift>.From(shifts));
+        }
+
+        /// <summary>
+        /// The <c>seen_far:</c> header (issue 973): a unit id in the content and the tiles it adds,
+        /// <c>rook 2</c>, from <see cref="SeenFar.MinExtra"/> to <see cref="SeenFar.MaxExtra"/>. The unit
+        /// needs no <c>P</c> line: a campaign seats it from the roster.
+        /// </summary>
+        private SeenFar? ParseSeenFar(Dictionary<string, (string Value, int Line)> header)
+        {
+            if (!header.TryGetValue("seen_far", out var entry))
+            {
+                return null;
+            }
+
+            var parts = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 2 || !int.TryParse(parts[1], out var extra))
+            {
+                throw ErrorAt(entry.Line, $"seen_far: needs a unit and the tiles it adds, 'seen_far: rook 2', got '{entry.Value}'");
+            }
+
+            if (!_content.Units.ContainsKey(parts[0]))
+            {
+                throw ErrorAt(entry.Line, $"seen_far: '{parts[0]}' is not a unit in the content");
+            }
+
+            if (extra < SeenFar.MinExtra || extra > SeenFar.MaxExtra)
+            {
+                throw ErrorAt(entry.Line, $"seen_far: {extra} tiles is out of range; from {SeenFar.MinExtra} to {SeenFar.MaxExtra}");
+            }
+
+            return new SeenFar(parts[0], extra);
         }
 
         /// <summary>The <c>region:</c> header (issue 916): one of the region words; absent means the seam.</summary>

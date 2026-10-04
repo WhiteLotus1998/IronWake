@@ -1,4 +1,4 @@
-# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script 631 --difficulty recruit --permadeath off --variant 14`.
+# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script 631 --difficulty recruit --permadeath off --variant 66`.
 # Played by `campaign --seed 631 --difficulty recruit --permadeath off`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 632);
 # the heuristic player fights the rest; each camp takes the actions not yet taken that the record accepts.
 march
@@ -422,155 +422,134 @@ move ottilie 3,11
 wait ottilie
 move pell 4,11
 wait pell
+move rook 7,13
+wait rook
 move teodor 4,12
 wait teodor
-move wren 3,12
-wait wren
 end
-move captain 8,11
-wait captain
-canto captain 8,11
+move captain 9,14
+attack captain archer-2
+canto captain 9,14
 move maud 4,10
 attack maud keziah
-move ottilie 6,12
-attack ottilie brigand-1
-move pell 6,13
-attack pell archer-2 2
-move teodor 5,14
-attack teodor brigand-1
-move wren 6,11
-wait wren
-end
-move captain 7,11
-attack captain soldier-3
-canto captain 4,11
-move maud 5,12
-attack maud soldier-3
-move ottilie 8,11
+move ottilie 6,11
 attack ottilie soldier-3
-move pell 10,13
-wait pell
-move teodor 9,14
-wait teodor
-move wren 6,7
-wait wren
+move pell 5,12
+attack pell soldier-3
+move teodor 8,12
+attack teodor brigand-1
 end
-move captain 4,6
+move captain 8,11
+attack captain archer-2
+canto captain 8,11
+move maud 6,10
+attack maud brigand-1
+move ottilie 8,10
+attack ottilie archer-2
+move pell 9,12
+wait pell
+move teodor 12,12
+wait teodor
+end
+move captain 11,13
 wait captain
-canto captain 4,6
-move maud 7,11
+canto captain 11,13
+move maud 8,9
 item maud 2 ottilie
-move ottilie 11,12
+move ottilie 8,6
 wait ottilie
-move pell 14,13
+move pell 12,13
 wait pell
-move teodor 13,14
+move teodor 15,13
 wait teodor
-move wren 6,3
-wait wren
 end
-move captain 5,2
-attack captain soldier-1
-canto captain 5,2
-move maud 7,7
+move captain 15,14
+wait captain
+canto captain 15,14
+move maud 8,5
 wait maud
-move ottilie 13,13
-attack ottilie rider-1
-move pell 15,13
-attack pell rider-1 2
-move teodor 15,12
+move ottilie 8,3
+attack ottilie soldier-1
+move pell 14,13
+attack pell rider-1
+move teodor 12,12
+item teodor 2
+end
+move captain 16,10
+attack captain archer-3
+canto captain 16,10
+attack ottilie archer-1
+move pell 15,12
+attack pell archer-3
+move teodor 12,8
 wait teodor
 end
-move captain 5,1
-attack captain archer-1
-canto captain 5,1
-move maud 6,7
-attack maud soldier-2
-move ottilie 15,11
-wait ottilie
+attack captain sworn_captain-1
+canto captain 19,8
 move pell 15,9
 attack pell sentry-1
-move teodor 15,8
-wait teodor
-end
-move captain 6,4
-attack captain archer-1
-canto captain 6,4
-move ottilie 14,8
-attack ottilie brigand-2
-move pell 17,9
-attack pell archer-3 2
 attack teodor brigand-2
 end
-move captain 11,4
+move captain 17,7
 wait captain
-canto captain 11,4
-move ottilie 13,8
-attack ottilie brigand-2
-move pell 17,7
-attack pell sworn_captain-1 2
-move teodor 17,6
-attack teodor sworn_captain-1
-end
-move captain 13,7
-wait captain
-canto captain 13,7
-move ottilie 12,5
-item ottilie 2
+canto captain 18,6
+move pell 15,8
 attack pell sworn_captain-1
 leave
 certify pell scholar
+bench wren
+bench ottilie
+bench pell
+bench dunstan
+bench maud
+bench rook
+repair captain 1
+buy obsidian_sword captain
+buy iron_axe wren
+repair teodor 1
+buy steel_lance teodor
+repair ottilie 1
+buy iron_bow ottilie
+buy bolt pell
+repair dunstan 1
+buy iron_axe dunstan
+buy salve maud
+buy iron_lance ansgar
 march
+move ansgar 7,7
+attack ansgar marauder-1
+wait brannock
 wait captain
 canto captain 13,5
-wait dunstan
-wait ottilie
-wait pell
+wait corin
 wait teodor
-wait wren
 end
+move brannock 11,7
+attack brannock marauder-1
 wait captain
 canto captain 15,5
-move dunstan 11,7
-attack dunstan marauder-1
-move ottilie 11,8
-attack ottilie marauder-1
-move pell 11,3
-attack pell veteran-1
-move teodor 11,4
-attack teodor veteran-1
-move wren 11,7
-attack wren marauder-1
+move corin 11,4
+attack corin veteran-1
+move teodor 11,7
+attack teodor marauder-1 4
 end
 wait captain
-canto captain 15,5
-move ottilie 11,5
-attack ottilie brigand-1
-attack pell brigand-1
-move teodor 9,3
-attack teodor longbowman-1
-attack wren soldier-1
-end
-move captain 12,6
-attack captain soldier-1
-canto captain 13,6
-move ottilie 9,4
-attack ottilie longbowman-1
-move teodor 6,3
-attack teodor brigand-2
-end
-attack captain soldier-1
-canto captain 13,6
-move teodor 7,3
-attack teodor archer-1
+canto captain 15,3
+attack corin marauder-1
 end
 wait captain
-canto captain 14,6
+canto captain 15,8
 end
 wait captain
-canto captain 15,9
+canto captain 15,11
 end
 wait captain
-canto captain 12,11
+canto captain 11,11
+end
+wait captain
+canto captain 15,11
+end
+wait captain
+canto captain 11,11
 end
 leave

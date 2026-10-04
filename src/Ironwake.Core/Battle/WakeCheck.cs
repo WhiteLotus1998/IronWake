@@ -9,7 +9,8 @@ namespace Ironwake.Core;
 /// whose attacker or target stood within the noise radius of a living member), or on
 /// proximity (a player unit within the wake radius of a living member). Distances are
 /// Manhattan and walls are not considered; on a <c>wind:</c> map both radii bend with the wind
-/// (<see cref="Wind"/>, DESIGN.md 13.28). The side that wakes a group is always the
+/// (<see cref="Wind"/>, DESIGN.md 13.28), and on a <c>seen_far:</c> map the proximity radius
+/// around its unit grows (<see cref="SeenFar"/>, issue 973). The side that wakes a group is always the
 /// player side, never the mover's, so an enemy-side caller wakes nothing.
 /// </summary>
 public static class WakeCheck
@@ -81,13 +82,16 @@ public static class WakeCheck
 
     /// <summary>
     /// The player units on <paramref name="after"/> within the wake radius of a living member of
-    /// <paramref name="group"/>, the radius bent by the wind on <paramref name="after"/>'s turn: the
+    /// <paramref name="group"/>, the radius bent by the wind on <paramref name="after"/>'s turn and grown around a
+    /// <c>seen_far:</c> unit (issue 973): the
     /// proximity cause of <see cref="Run"/>, and the units the wind's warning names (issue 957).
     /// </summary>
     public static IReadOnlyList<BattleUnit> Wakers(BattleState after, GameContent content, string group)
     {
         var members = after.Units.Where(u => u.Group == group).Select(u => u.At).ToList();
-        return after.UnitsOf(Side.Player).Where(p => members.Any(m => m.DistanceTo(p.At) <= Wind.Radius(after, content.WakeRadius, p.At, m))).ToList();
+        return after.UnitsOf(Side.Player)
+            .Where(p => members.Any(m => m.DistanceTo(p.At) <= Wind.Radius(after, content.WakeRadius, p.At, m) + (after.Map.SeenFar?.For(p) ?? 0)))
+            .ToList();
     }
 }
 

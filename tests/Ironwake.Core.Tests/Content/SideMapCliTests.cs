@@ -252,7 +252,8 @@ public class SideMapCliTests
     /// 11,4, shoots Wren on the bridge end on turn 2 with `end` naming the lethal, and holds the
     /// road shut, so the pair goes round her, Wren first through the exit on turn 8. The save
     /// records Rook's quest 1 won at the camp after map 7, so the camp's two seats offer Teodor's
-    /// quest 2 and Ottilie's on the shipped content (round 313).
+    /// quest 2 and Ottilie's on the shipped content (round 313). The camp after it deploys for the
+    /// field as it read before the drake was seen there (issue 973), so it replays on that content.
     /// </summary>
     [Fact]
     public void TheJournaledLongCountPlayEscapesPastTheRoadArcher()
@@ -263,7 +264,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_long_count-91.saves", "longcount.json")), Path.Combine(saves, "longcount.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--script", script, "--strict", "--content", Fixture.FieldUnseenContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Long Count, seed 91\n", output);
