@@ -20,7 +20,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus, #406).
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` with a versioned `ending` block for a sequel (PROTOCOL.md), `pending` until #634 (slice 2).
 - #77 slice 8 (0245): `support <a> <b>` at a camp plays the lowest reached unseen tier, once, free (`supportsSeen`). #1004's C is the first text; #77 is `blocked` on a chair's A read.
-- #1003: a card is authored text plus its rules line in parentheses; Rook's named feeling stays booked for a Rookery scene, Maud's (anger, the Lazar House) and the goddess's one speech for scenes too; cards are third person, present. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
+- #1003: a card is authored text plus its rules line in parentheses; named feelings and the goddess's one speech stay booked for scenes; cards are third person, present. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
 - #811: `docs/WRITING.md` is in (round 295). Voice sheets: all sixteen in (#908 to #915). #1001: scene scripts (0244), main-line maps only. Next: Chat's Starting Alone and Mill drafts (#1005), then scenes (#634); #813 can build on 0243's grammar.
 - 13.18 (#486): signatures behind `signatures: on`; ledger killed at 65 (0197); eight wait for boards.
 - #131's north cut is built (0093): the pair, then the boss. #524 failed its floor (0095); the next lever must buy gate 1 back. Open: turn 1 is a march.
