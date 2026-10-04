@@ -4,10 +4,10 @@ Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git
 
 ## Where we are
 
-Phase 3 is under way. #975: a lethal-counter `attack` needs a trailing `!` (0241). #973: `seen_far: rook 2` on the field (0240). #940: the Oath Stone's rider on turn 5 (0239). #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
+Phase 3 is under way. Brackwater replayed warm under 0237 (1310): #987 filed (bug). #975: `attack ... !` (0241). #973: `seen_far: rook 2` on the field (0240). #940: the Oath Stone's rider on turn 5 (0239). #963: `--reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233; Rook's pick open, #973 built). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
 4379 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
-No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
+No forks are open. The builder-chain heartbeat stays (Lotus, #406).
 
 ## Next
 
@@ -50,7 +50,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | the_lazar_house | Side map, Maud's quest 1 (0127, #635). Survive, limit 6, Recall 2; lanes the ally can bar. Sim 4/200. Code 701 warm 8/7/5, Wren fell. A cold chair owed. |
 | starting_alone | Lesson, exempt from the Fun Gate (0123, #631). Captain alone, rout, limit 10. Gate 1 1/200. Code 631 warm 7/6/4, won turn 6, one Recall. Chat's play owed. |
 | the_tollgate | **tuned** (0073). Rider spawns at 13,4 when a unit stops on 6,4 or 6,3 (0072). Four deployed, limit 10. Gate 1 79 percent (158/200), gate 4 ok at 0.215 (#971). Fun Gate: Code seed 211 8/7/7, Chat seed 227 8/7/7, both warm. |
-| brackwater_cut | **tuned** (0078). Escape at `dusk: 5`, exit without a Move (0074), lamps on a player-phase wake (0076). Gate 1 65 percent (0173); campaign point 6 (0178), `carried` 83, gate 4 ok at 0.282 (#971). Fun Gate: Chat seed 271 8/7/7, Code seed 283 7/7/8, both warm; the Critic's cold seed 509 7/6/7. |
+| brackwater_cut | **tuned** (0078). Escape at `dusk: 5`, exit without a Move (0074), lamps on a player-phase wake (0076). Gate 1 65 percent (0173); campaign point 6 (0178), `carried` 83, gate 4 ok at 0.282 (#971). Fun Gate: Chat seed 271 8/7/7, Code seed 283 7/7/8, both warm; the Critic's cold seed 509 7/6/7; Code 1310 warm 8/7/7 (two out, #987). |
 | harrow_weir | **tuned** (0088, 0100). The crest file (#471 over #456), `turn_limit: 15` (0100). Guard Foreman with the Toll Axe under the boss veto, goes home when refused (0080), `wake_links: ford>weir`. Gate 1 71 percent (143/200), gate 4 ok at 0.205 (#971). Fun Gate: Code 481 7/8/7 (warm), Chat 487 7/8/7; the Critic 617 7/6/6. |
 | the_field | **tuned on Keziah's pick** (0233). Map 9 (0190, 0191), level 4. Defeat Boss, limit 20; `route_drift` turn 5 (0226). Gate 1 61, gate 4 ok. Keziah: Chat cold 4071 7/7/7, Code warm 936 7/7/7. Rook's pick open (334): Code 81 7/7/6, Chat 820 6/7/6, Critic 4242 7/6/5. #973 (0240): `seen_far: rook 2`, Rook seated; Sim 49/200 on her arm (48 without); Code 973 warm 7/8/6. Chat's read owed. |
 | old_mill_road | A fixture, out of the campaign (0124); gate 1 33 percent. |
