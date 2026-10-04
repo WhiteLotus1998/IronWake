@@ -162,7 +162,7 @@ public class CampaignSaveTests
             var refused = Run(out var refusedExit, "", args);
 
             Assert.Equal(2, refusedExit);
-            Assert.Contains("ERROR: --seed 4402 starts a new campaign; a loaded or resumed campaign keeps the seed its save pins\n", refused);
+            Assert.Contains("ERROR: --seed 4402 starts a new campaign; a loaded or resumed campaign keeps the seed its save pins; --reseed N replays it on a new seed\n", refused);
             Assert.DoesNotContain("Campaign, seed", refused);
             Assert.True(new SaveStore(dir).HasSuspend);
         }
