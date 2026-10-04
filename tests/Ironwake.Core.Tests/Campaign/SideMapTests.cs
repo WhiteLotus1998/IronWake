@@ -818,7 +818,7 @@ public class SideMapTests
 
     /// <summary>The shipped content's files with <paramref name="quests"/> as the campaign's side maps.</summary>
     private static ContentFiles WithQuests(string quests) =>
-        ContentSerializer.Write(Content) with { Campaign = new ContentFile(ContentFiles.CampaignName, $$"""{ "startingPurse": 0, "certificationPrice": 0, "maps": [ { "map": "one", "reward": 0, "stock": [] } ], "quests": [ {{quests}} ] }""") };
+        ContentSerializer.Write(Content) with { Scenes = null, Campaign = new ContentFile(ContentFiles.CampaignName, $$"""{ "startingPurse": 0, "certificationPrice": 0, "maps": [ { "map": "one", "reward": 0, "stock": [] } ], "quests": [ {{quests}} ] }""") };
 
     [Fact]
     public void ASideMapRoundTripsThroughTheSerializer()

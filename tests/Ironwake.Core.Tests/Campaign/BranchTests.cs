@@ -199,7 +199,7 @@ public class BranchTests
 
     /// <summary>The shipped content's files with <paramref name="maps"/> as the campaign's maps.</summary>
     private static ContentFiles With(string maps) =>
-        ContentSerializer.Write(Content) with { Campaign = new ContentFile(ContentFiles.CampaignName, $$"""{ "startingPurse": 0, "certificationPrice": 0, "maps": [ {{maps}} ] }""") };
+        ContentSerializer.Write(Content) with { Scenes = null, Campaign = new ContentFile(ContentFiles.CampaignName, $$"""{ "startingPurse": 0, "certificationPrice": 0, "maps": [ {{maps}} ] }""") };
 
     [Fact]
     public void ABranchRoundTripsThroughTheSerializer()
