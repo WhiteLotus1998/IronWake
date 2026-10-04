@@ -246,6 +246,69 @@ public class SideMapTests
         Assert.Equal(text, MapFormat.Write(MapFormat.Parse(path, text, Content), Content));
     }
 
+    /// <summary>
+    /// Issue 930 (round 313): the bridge archer holds the road at 11,4, off the fort. The bridge
+    /// soldier stands beside her and beside 9,4, the bridge's east end, so at dusk sight 1 he
+    /// spots that tile for her and her bow reaches it.
+    /// </summary>
+    [Fact]
+    public void TheLongCountArcherHoldsTheRoadWithTheSoldierSpottingTheBridgeEnd()
+    {
+        var map = Side("the_long_count");
+        var bridge = map.Placements.OfType<EnemyPlacement>().Where(e => e.Group == "bridge").ToList();
+        var archer = Assert.Single(bridge, e => e.TemplateId == "archer");
+        var soldier = Assert.Single(bridge, e => e.TemplateId == "soldier");
+        var bridgeEnd = new Coord(9, 4);
+
+        Assert.Equal((new Coord(11, 4), Behavior.Hold), (archer.At, archer.Behavior));
+        Assert.Equal(1, soldier.At.DistanceTo(archer.At));
+        Assert.Equal(1, soldier.At.DistanceTo(bridgeEnd));
+        Assert.True(Content.Weapon("iron_bow").InRange(archer.At.DistanceTo(bridgeEnd)));
+    }
+
+    /// <summary>
+    /// Issue 930: the move wakes the bridge no sooner. Every standable tile west of the river,
+    /// where the party walks before it crosses, is at least as close to the bridge soldier as to
+    /// the archer, so proximity and noise find the bridge group exactly where they found it before.
+    /// </summary>
+    [Fact]
+    public void TheLongCountArcherNeverWakesTheBridgeSooner()
+    {
+        var map = Side("the_long_count");
+        var soldier = map.Placements.OfType<EnemyPlacement>().Single(e => e.Group == "bridge" && e.TemplateId == "soldier");
+        var archer = map.Placements.OfType<EnemyPlacement>().Single(e => e.Group == "bridge" && e.TemplateId == "archer");
+
+        Assert.Empty(WestBankTilesNearer(map, archer.At, soldier.At));
+    }
+
+    /// <summary>The guard above, falsified: an archer on the near side of the soldier, 10,5, is nearer the west bank than he is.</summary>
+    [Fact]
+    public void AnArcherSouthOfTheSoldierWouldWakeTheBridgeSooner()
+    {
+        var map = Side("the_long_count");
+        var soldier = map.Placements.OfType<EnemyPlacement>().Single(e => e.Group == "bridge" && e.TemplateId == "soldier");
+
+        Assert.Contains(new Coord(8, 5), WestBankTilesNearer(map, new Coord(10, 5), soldier.At));
+    }
+
+    private static List<Coord> WestBankTilesNearer(MapDefinition map, Coord archer, Coord soldier)
+    {
+        var nearer = new List<Coord>();
+        for (var y = 0; y < map.Height; y++)
+        {
+            for (var x = 0; x < 9; x++)
+            {
+                var tile = new Coord(x, y);
+                if (map.TerrainAt(tile, Content).IsPassable(MovementType.Infantry) && archer.DistanceTo(tile) < soldier.DistanceTo(tile))
+                {
+                    nearer.Add(tile);
+                }
+            }
+        }
+
+        return nearer;
+    }
+
     [Fact]
     public void RooksFirstQuestIsTheChapterRollASeizeThatPaysMaterialAndOpensTheDrover()
     {

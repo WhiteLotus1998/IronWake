@@ -214,17 +214,17 @@ public class SideMapCliTests
     }
 
     /// <summary>
-    /// Code's journaled play of Ottilie's quest 2 (side-map seed 91), from a save at the camp
-    /// after map 8 with the cast at level 7: the bridge is taken on turn 2 while the dusk still
-    /// lets Ottilie shoot at range, the pursuers are killed with Wren beside them as the spotter,
-    /// a turn-5 line that cannot reach the exits by turn 8 is recalled, and the pair leaves on
-    /// turn 8, Wren first. The save records Rook's quest 1 won at the camp after map 7, so the
-    /// camp's two seats offer Teodor's quest 2 and Ottilie's on the shipped content (round 313).
+    /// Code's journaled play of Ottilie's quest 2 (side-map seed 91) on #930's board, from a save
+    /// at the camp after map 8 with the cast at level 7 and Wren: the archer holds the road at
+    /// 11,4, shoots Wren on the bridge end on turn 2 with `end` naming the lethal, and holds the
+    /// road shut, so the pair goes round her, Wren first through the exit on turn 8. The save
+    /// records Rook's quest 1 won at the camp after map 7, so the camp's two seats offer Teodor's
+    /// quest 2 and Ottilie's on the shipped content (round 313).
     /// </summary>
     [Fact]
-    public void TheJournaledLongCountPlayEscapesAndPaysTheTally()
+    public void TheJournaledLongCountPlayEscapesPastTheRoadArcher()
     {
-        var script = Transcript("2026-10-03-the_long_count-91.script");
+        var script = Transcript("2026-10-04-the_long_count-91-930.script");
         var saves = Path.Combine(Path.GetTempPath(), "ironwake-longcount-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(saves);
         File.Copy(Transcript(Path.Combine("2026-10-03-the_long_count-91.saves", "longcount.json")), Path.Combine(saves, "longcount.json"));
@@ -234,7 +234,8 @@ public class SideMapCliTests
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Long Count, seed 91\n", output);
-            Assert.Contains("Battle won: escape", output);
+            Assert.Contains("Lethal if all land: Wren (Archer for 6, Hexer 1 for 12, against 14 hp)\n", output);
+            Assert.Contains("enemy: attack archer-1 wren\n", output);
             Assert.Contains("> leave\nOttilie wins ottilie_2; Ottilie receives Ottilie's Tally; the stores take 3 frozen iron; nobody fell\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
@@ -245,13 +246,14 @@ public class SideMapCliTests
     }
 
     /// <summary>
-    /// Chat's cold play of Ottilie's quest 2 (round 313) on the same save and seed with Teodor:
-    /// the count reads both units at two turns on turn 6, Teodor falls past his last start, and
-    /// the captain's exit names him before it resolves (issue 928): Ottilie leaves, Teodor is left
-    /// behind and falls for good.
+    /// Chat's cold line of round 313, replayed on #930's board: the bridge still wakes on Teodor's
+    /// first step, as it did with the archer on the fort, and Ottilie dressing on the bridge end at
+    /// 9,4 on turn 3 is now in the road archer's range, so the archer, the gate hexer and the rider
+    /// strike her there and she falls; the line stops at its next command. The 2026-10-04 transcript
+    /// stays as the record of the old board.
     /// </summary>
     [Fact]
-    public void ChatsColdLongCountPlayLeavesTeodorBehindAndTheExitSaysSoFirst()
+    public void ChatsColdLongCountLineFallsOnTheBridgeEndUnderTheRoadArcher()
     {
         var script = Transcript("2026-10-04-the_long_count-91-chat.script");
         var saves = Path.Combine(Path.GetTempPath(), "ironwake-longcount-chat-" + Guid.NewGuid().ToString("N"));
@@ -261,11 +263,12 @@ public class SideMapCliTests
         {
             var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
-            Assert.Equal(1, exit);
-            Assert.Contains("count: Ottilie 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6)\n", output);
-            Assert.Contains("> exit ottilie\nExit: leaves Teodor behind (left behind counts as fallen)\n", output);
-            Assert.Contains("Ottilie wins ottilie_2; Ottilie receives Ottilie's Tally; the stores take 3 frozen iron; fallen for good: Teodor\n", output);
-            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+            Assert.Equal(3, exit);
+            Assert.Contains("> move teodor 6,4\nTeodor moves 2,4 -> 6,4", output);
+            Assert.Contains("The bridge group wakes (proximity); their lamps are lit (Soldier 10,4, Archer 11,4)\n", output);
+            Assert.Contains("enemy: attack archer-1 ottilie\n", output);
+            Assert.Contains("Ottilie falls at 9,4\n", output);
+            Assert.Contains("Campaign stopped in The Long Count at turn 3, decided and not left\n", output);
         }
         finally
         {

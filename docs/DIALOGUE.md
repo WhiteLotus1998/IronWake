@@ -39,7 +39,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #935.
 - **Sallow Grange:** the Reeve stays at 15,6; a quiet route is quiet on the enemy phase too (#275).
 - **The Rookery (Rook 2, 0208):** not passed; the cage stays (284). #862's ring (built): a cold replay decides. A lost Escape keeps its living (#861).
 - **The Counting House (Ottilie 1; 311 to 314):** opening kept, finish the defect. Lever 1 (#925, 0228): the archer a house guard at 11,2; she comes, then retreats to forest (Code warm lost; Sim 0/200). Lever 2 (#931): limit 11, then Chat cold.
-- **The Long Count (Ottilie 2; 313, 314):** both chairs lost the clock on turn 6: the fix is the count on screen (#928, 0229), no longer limit before a cold chair sees it; no warning for a wrong-way last start, and dusk keeps the exit's dark (315). The held archer is scenery; to the road at 11,4, spotted by the soldier (#930).
+- **The Long Count (Ottilie 2; 313, 314):** both chairs lost the clock on turn 6: the fix is the count on screen (#928, 0229), no longer limit before a cold chair sees it; no warning for a wrong-way last start, and dusk keeps the exit's dark (315). The held archer is scenery; to the road at 11,4, spotted by the soldier (#930, built 0230).
 - **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. The bare keep (Chat cold, round 235, 7/7/6): walls and Long Draw bow kept, no lever on the stand-in.
 
 ## Experiments (state and kill criterion)
