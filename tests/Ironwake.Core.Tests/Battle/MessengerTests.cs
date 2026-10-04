@@ -1,3 +1,4 @@
+using Ironwake.Cli;
 using Ironwake.Content;
 using Ironwake.Core.Tests.Content;
 using Ironwake.Core.Tests.Maps;
@@ -200,6 +201,40 @@ public class MessengerTests
 
         Assert.Equal("messenger: gone by the road at 6,2; the word is out", MapRenderer.MessengerLine(result.Next, Starter));
         Assert.Contains("messenger escaped 6,2", result.Next.Canonical());
+    }
+
+    /// <summary>
+    /// Issue 829: a Recall over the messenger's escape gives the escape back, not a kill, and the
+    /// relief it called has not arrived yet. Its HP stays out of the enemy hp, since it left with it.
+    /// </summary>
+    [Fact]
+    public void ARecallOverTheMessengersEscapeGivesBackTheEscapeNotAKill()
+    {
+        var now = EnemyPhase(Start(map: Field())).Next;
+
+        var cost = RecallCost.Of(now, 0);
+
+        Assert.Empty(cost.KillsGivenBack);
+        Assert.Equal(0, cost.EnemyHpBack);
+        Assert.Equal("rider-1", cost.EscapeGivenBack);
+        Assert.Contains(cost.ArrivalsUndone, id => now.Find(id)!.Group == "relief");
+        var names = UnitNames.Of(now, Starter);
+        var text = PlaySession.UndoText(cost, names);
+        Assert.StartsWith($"gives back {names["rider-1"]}'s escape; returns ", text);
+        Assert.Contains(" not yet arrived", text);
+    }
+
+    /// <summary>Issue 829's guard: a messenger killed, not escaped, is a kill the Recall gives back.</summary>
+    [Fact]
+    public void ARecallOverTheMessengersDeathGivesBackAKill()
+    {
+        var state = Start(map: Field());
+        var dead = state.WithoutUnit("rider-1") with { History = state.History.Add(state) };
+
+        var cost = RecallCost.Of(dead, dead.History.Count - 1);
+
+        Assert.Null(cost.EscapeGivenBack);
+        Assert.Equal(new[] { "rider-1" }, cost.KillsGivenBack);
     }
 
     [Fact]

@@ -6,15 +6,16 @@ namespace Ironwake.Core;
 /// spending a charge. A rewind undoes both sides' work, so the kills, EXP and levels the
 /// player earned since are given back, the HP the enemies lost since comes back to them, a
 /// returned claimant talked off the board since (issue 633) comes back as a talk, not a kill,
+/// a messenger gone by its road or a bound enemy freed since (issue 829) comes back as that, not a kill,
 /// reinforcements that arrived since have not arrived yet, and the player units lost and
 /// the HP the player lost since are returned. Pure: it reads two states and changes neither.
 /// </summary>
 /// <param name="ToIndex">The history index the Recall would return to.</param>
 /// <param name="Turn">The turn of that state.</param>
-/// <param name="KillsGivenBack">Enemies alive then and dead now, in id order; a claimant talked off the board is not one (issue 826).</param>
+/// <param name="KillsGivenBack">Enemies alive then and dead now, in id order; a claimant talked off the board, an escaped messenger or a freed enemy is not one (issues 826, 829).</param>
 /// <param name="ExpGivenBack">EXP player units earned since, levels counted at 100 each, over the units alive both then and now.</param>
 /// <param name="LevelsGivenBack">Level-ups player units gained since, over the same units.</param>
-/// <param name="EnemyHpBack">HP the enemies alive then have lost since, a dead one counted from its HP then to 0; a talked claimant left with their HP and is not counted.</param>
+/// <param name="EnemyHpBack">HP the enemies alive then have lost since, a dead one counted from its HP then to 0; a talked claimant, an escaped messenger or a freed enemy left with their HP and is not counted.</param>
 /// <param name="ArrivalsUndone">Enemies on the board now that were not on it then (map-event spawns), in id order.</param>
 /// <param name="UnitsReturned">Player units alive then and dead now, in id order; a unit that left through an exit since is not dead (issue 269).</param>
 /// <param name="HpByUnit">HP each player unit alive then has lost since, a dead one counted from its HP then to 0, in id order; a unit that lost nothing, or was healed since, is not listed (issue 552).</param>
@@ -34,6 +35,18 @@ public sealed record RecallCost(
     /// off it since, with the fate the talk gave, or null. A talk is not a kill (DECISIONS/0193).
     /// </summary>
     public TalkReturn? TalkGivenBack { get; init; }
+
+    /// <summary>
+    /// The escape a Recall gives back (issue 829): the messenger on the board then and gone by its
+    /// road since, by id, or null. An escape is not a kill (DESIGN.md 13.24).
+    /// </summary>
+    public string? EscapeGivenBack { get; init; }
+
+    /// <summary>
+    /// The freeing a Recall gives back (issue 829): the bound enemy on the board then and freed by
+    /// her bond's boss falling since, by id, or null. A freeing is not a kill (issue 750).
+    /// </summary>
+    public string? FreedGivenBack { get; init; }
 
     /// <summary>HP the player units alive then have lost since, summed over <see cref="HpByUnit"/>.</summary>
     public int HpReturned => HpByUnit.Sum(entry => entry.Hp);
@@ -57,12 +70,26 @@ public sealed record RecallCost(
         var kills = new List<string>();
         var enemyHp = 0;
         TalkReturn? talk = null;
+        string? escape = null;
+        string? freed = null;
         foreach (var enemy in then.UnitsOf(Side.Enemy))
         {
             var now = state.Find(enemy.Id);
             if (now is null && TalkedSince(then, state, enemy) is { } fate)
             {
                 talk = new TalkReturn(enemy.Id, fate);
+                continue;
+            }
+
+            if (now is null && EscapedSince(then, state, enemy))
+            {
+                escape = enemy.Id;
+                continue;
+            }
+
+            if (now is null && FreedSince(then, state, enemy))
+            {
+                freed = enemy.Id;
                 continue;
             }
 
@@ -116,6 +143,8 @@ public sealed record RecallCost(
             ValueList<HpReturn>.From(hp))
         {
             TalkGivenBack = talk,
+            EscapeGivenBack = escape,
+            FreedGivenBack = freed,
         };
     }
 
@@ -130,9 +159,25 @@ public sealed record RecallCost(
             ? now.ReturnGone
             : null;
 
+    /// <summary>
+    /// Whether <paramref name="enemy"/> left the board by the messenger's road between
+    /// <paramref name="then"/> and <paramref name="now"/>: they are the messenger, the earlier state
+    /// has no messenger fate, and the present one says escaped.
+    /// </summary>
+    private static bool EscapedSince(BattleState then, BattleState now, BattleUnit enemy) =>
+        Messenger.Is(then, enemy) && then.MessengerGone is null && now.MessengerGone is { Escaped: true };
+
+    /// <summary>
+    /// Whether <paramref name="enemy"/> was freed between <paramref name="then"/> and
+    /// <paramref name="now"/>: the bond names them, the earlier state has no bond fate, and the
+    /// present one says freed.
+    /// </summary>
+    private static bool FreedSince(BattleState then, BattleState now, BattleUnit enemy) =>
+        Freed.IsBound(then, enemy) && then.Bond is null && now.Bond == BondFate.Freed;
+
     /// <summary>Whether the Recall undoes none of the things this record counts: only moves and waits since.</summary>
     public bool IsEmpty =>
-        KillsGivenBack.Count == 0 && TalkGivenBack is null && ExpGivenBack == 0 && LevelsGivenBack == 0 && EnemyHpBack == 0
+        KillsGivenBack.Count == 0 && TalkGivenBack is null && EscapeGivenBack is null && FreedGivenBack is null && ExpGivenBack == 0 && LevelsGivenBack == 0 && EnemyHpBack == 0
         && ArrivalsUndone.Count == 0 && UnitsReturned.Count == 0 && HpReturned == 0;
 
     private static int TotalExp(Unit unit) => unit.Level * 100 + unit.Exp;

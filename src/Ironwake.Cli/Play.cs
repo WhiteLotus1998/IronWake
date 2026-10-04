@@ -1253,7 +1253,8 @@ public sealed class PlaySession
     /// number (issue 552): a returned unit is named with the HP it comes back at, and each other
     /// unit with the HP it gets back, read from <see cref="RecallCost.HpByUnit"/>. Units read by
     /// <paramref name="names"/> (issue 615): <c>returns Teodor alive at 17 hp, 14 hp to Wren</c>.
-    /// A talk is named apart from the kills (issue 826): <c>gives back Keziah's talk (spared)</c>.
+    /// A talk is named apart from the kills (issue 826): <c>gives back Keziah's talk (spared)</c>;
+    /// so are a messenger's escape and a freeing (issue 829): <c>gives back Rider's escape</c>, <c>gives back Brigand freed</c>.
     /// </summary>
     public static string UndoText(RecallCost cost, UnitNames names)
     {
@@ -1271,6 +1272,16 @@ public sealed class PlaySession
         if (cost.TalkGivenBack is { } talk)
         {
             back.Add($"{names[talk.Id]}'s talk ({talk.Fate.ToString().ToLowerInvariant()})");
+        }
+
+        if (cost.EscapeGivenBack is { } escape)
+        {
+            back.Add($"{names[escape]}'s escape");
+        }
+
+        if (cost.FreedGivenBack is { } freed)
+        {
+            back.Add($"{names[freed]} freed");
         }
 
         if (cost.ExpGivenBack > 0)

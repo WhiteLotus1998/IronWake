@@ -137,6 +137,37 @@ public class FreedTests
         Assert.Null(back.Next.Bond);
     }
 
+    /// <summary>
+    /// Issue 829: a Recall over a freeing gives the freeing back, not a kill. The browser names it
+    /// apart, and the freed enemy's HP stays out of the enemy hp, since she left with it.
+    /// </summary>
+    [Fact]
+    public void ARecallOverAFreeingGivesBackTheFreeingNotAKill()
+    {
+        var now = Kill(Boss).Next;
+
+        var cost = RecallCost.Of(now, 0);
+
+        Assert.Equal(new[] { Boss }, cost.KillsGivenBack);
+        Assert.Equal(now.History[0].Find(Boss)!.Hp, cost.EnemyHpBack);
+        Assert.Equal(Bound, cost.FreedGivenBack);
+        var names = UnitNames.Of(now, Starter);
+        Assert.StartsWith($"gives back 1 kill ({names[Boss]}), {names[Bound]} freed, ", PlaySession.UndoText(cost, names));
+    }
+
+    /// <summary>Issue 829's guard: the bound enemy killed, not freed, is a kill the Recall gives back.</summary>
+    [Fact]
+    public void ARecallOverTheBoundEnemysDeathGivesBackAKill()
+    {
+        var now = Kill(Bound).Next;
+
+        var cost = RecallCost.Of(now, 0);
+
+        Assert.Null(cost.FreedGivenBack);
+        Assert.Equal(new[] { Bound }, cost.KillsGivenBack);
+        Assert.Equal(1, cost.EnemyHpBack);
+    }
+
     [Fact]
     public void TheBondPrintsOnTheBoardThreatAndTheForecastsOfTheBossAndTheBound()
     {
