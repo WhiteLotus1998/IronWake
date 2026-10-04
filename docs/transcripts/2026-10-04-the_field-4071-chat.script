@@ -1,0 +1,146 @@
+march
+move keziah 3,12
+wait keziah
+move teodor 4,11
+wait teodor
+move captain 3,11
+wait captain
+move ottilie 2,12
+wait ottilie
+move pell 2,10
+wait pell
+move maud 2,13
+wait maud
+end
+move keziah 7,12
+talk keziah rook
+move captain 5,12
+order fall back
+fallback keziah 6,11
+move teodor 6,12
+move ottilie 3,12
+move pell 4,10
+move maud 4,12
+wait teodor
+wait ottilie
+wait pell
+wait maud
+end
+move keziah 7,11
+move maud 6,11
+item maud 2 keziah
+attack keziah soldier-3
+move captain 7,12
+attack captain brigand-1
+move teodor 8,12
+attack teodor archer-2
+move pell 7,10
+attack pell archer-2 art overcast
+move ottilie 6,12
+wait ottilie
+end
+move maud 8,11
+item maud 2 teodor
+move keziah 10,12
+wait keziah
+move captain 10,13
+wait captain
+move pell 9,12
+wait pell
+move ottilie 8,13
+wait ottilie
+end
+move keziah 12,14
+wait keziah
+move captain 12,13
+wait captain
+move teodor 11,13
+wait teodor
+move ottilie 10,13
+wait ottilie
+move pell 11,12
+wait pell
+move maud 10,12
+wait maud
+end
+move keziah 12,12
+wait keziah
+end
+move keziah 11,10
+move pell 12,12
+attack pell soldier-2
+attack keziah soldier-2
+move teodor 12,11
+attack teodor soldier-2
+move maud 11,11
+item maud 2 keziah
+move ottilie 11,12
+wait ottilie
+wait captain
+end
+move pell 10,10
+attack pell soldier-1
+move keziah 10,8
+attack keziah archer-1
+move ottilie 11,10
+attack ottilie archer-1 art aimed_shot
+move teodor 11,9
+attack teodor archer-1
+move maud 10,9
+item maud 2 keziah
+move captain 12,10
+wait captain
+end
+move keziah 11,8
+attack keziah archer-3
+canto keziah 9,9
+move pell 12,9
+attack pell brigand-2
+move teodor 12,8
+attack teodor brigand-2
+move maud 10,10
+item maud 2 ottilie
+wait captain
+end
+move teodor 16,8
+wait teodor
+move captain 14,8
+wait captain
+move keziah 12,8
+wait keziah
+move pell 13,8
+wait pell
+move maud 12,9
+item maud 2 keziah
+move ottilie 11,8
+wait ottilie
+end
+move teodor 17,8
+wait teodor
+move pell 16,9
+wait pell
+move keziah 16,8
+wait keziah
+move captain 15,9
+wait captain
+move maud 14,8
+wait maud
+move ottilie 13,8
+wait ottilie
+end
+move pell 18,8
+attack pell sworn_captain-1
+move teodor 17,7
+attack teodor sworn_captain-1 art long_thrust
+move captain 17,8
+wait captain
+move maud 16,9
+item maud 2 keziah
+move ottilie 15,9
+wait ottilie
+wait keziah
+end
+attack pell sworn_captain-1 2
+move captain 18,7
+attack captain sworn_captain-1 art full_measure
+leave
