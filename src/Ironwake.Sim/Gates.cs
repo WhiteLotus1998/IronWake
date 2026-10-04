@@ -65,6 +65,12 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// </summary>
     public int RecruitsOut { get; init; }
 
+    /// <summary>The route taken on a <c>route_drift:</c> map (issue 81, <see cref="BattleState.RouteTaken"/>): null when neither route group woke, or on any other map.</summary>
+    public string? Route { get; init; }
+
+    /// <summary>Whether the untaken route's group moved for the drift in this game (issue 81, <see cref="RouteDrifted"/>).</summary>
+    public bool RouteDrifted { get; init; }
+
     /// <summary>
     /// The ids of the player units counted in <see cref="RecruitsOut"/>, the captain aside,
     /// so gate 4 on an Escape map can leave the benched recruit out of the baseline's count
@@ -192,6 +198,7 @@ public static class Runner
         var weapons = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
         var items = new Dictionary<string, ItemMix>(StringComparer.Ordinal);
         var lastCombatTurn = 0;
+        var drifted = false;
         var playerWatch = WatchCounts.Zero;
         var enemyWatch = WatchCounts.Zero;
         var pins = PinCounts.Zero;
@@ -255,6 +262,7 @@ public static class Runner
                     covers = covers.After(e);
                 }
 
+                drifted |= result.Events.OfType<RouteDrifted>().Any();
                 if (result.Events.OfType<CombatFought>().Any())
                 {
                     lastCombatTurn = state.Turn;
@@ -289,6 +297,8 @@ public static class Runner
             Items = items,
             Camp = state.Outcome.Result == BattleResult.Won ? LevelRun.Read(start, state, content) : null,
             RecruitsOut = state.Survivors().Count(u => !u.IsCaptain),
+            Route = state.RouteTaken,
+            RouteDrifted = drifted,
             Out = state.Survivors().Where(u => !u.IsCaptain).Select(u => u.Id).ToHashSet(StringComparer.Ordinal),
         };
     }
@@ -412,7 +422,34 @@ public static class Gates
         var winning = games.Where(g => g.Won).Select(g => g.Turns).OrderBy(t => t).ToList();
         var turns = winning.Count == 0 ? "no wins" : $"winning turn median {Percentile(winning, 0.5)} p90 {Percentile(winning, 0.9)} limit {map.TurnLimit}";
         var passed = rate >= BeatableRate;
-        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {EscapeSurvivors(games, map)}{Watches(games, map)}{Pins(games, map)}{Covers(games, map)}{Name(scheme)}: {Verdict(passed)}", passed), games);
+        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {EscapeSurvivors(games, map)}{Watches(games, map)}{Pins(games, map)}{Covers(games, map)}{RouteRows(games, map)}{Name(scheme)}: {Verdict(passed)}", passed), games);
+    }
+
+    /// <summary>
+    /// On a <c>route_drift:</c> map (issue 81), each route's games: how many took it, won, the median
+    /// winning turn and the mean recruits lost in a win, as <c>route line 90 drifted 30 won 60 p50 12
+    /// lost 1.2; south ...; none 4 drifted 0 won 0, </c>, the drifted count the games in which the
+    /// untaken route's group moved for it; nothing on any other map. Round 273's kill test reads it: the
+    /// drift has erased the route choice when both routes win on the same turn with the same losses.
+    /// </summary>
+    public static string RouteRows(IReadOnlyList<GameResult> games, MapDefinition map)
+    {
+        if (map.RouteDrift is not { } drift || games.Count == 0)
+        {
+            return "";
+        }
+
+        string Row(string name, string? route)
+        {
+            var taken = games.Where(g => g.Route == route).ToList();
+            var won = taken.Where(g => g.Won).ToList();
+            var turns = won.Select(g => g.Turns).OrderBy(t => t).ToList();
+            return won.Count == 0
+                ? $"{name} {taken.Count} drifted {taken.Count(g => g.RouteDrifted)} won 0"
+                : string.Create(CultureInfo.InvariantCulture, $"{name} {taken.Count} drifted {taken.Count(g => g.RouteDrifted)} won {won.Count} p50 {Percentile(turns, 0.5)} lost {won.Average(g => g.Recruits - g.RecruitsOut):0.0}");
+        }
+
+        return $"route {Row(drift.First, drift.First)}; {Row(drift.Second, drift.Second)}; {Row("none", null)}, ";
     }
 
     /// <summary>

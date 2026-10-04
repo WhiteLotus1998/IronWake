@@ -255,6 +255,12 @@ public sealed record MapDefinition(
     public FreedBond? Bond { get; init; }
 
     /// <summary>
+    /// The <c>route_drift:</c> header (issue 81): two route groups and their crossings, and the turn
+    /// the untaken route's group moves (<see cref="Routes"/>). Null for none.
+    /// </summary>
+    public RouteDrift? RouteDrift { get; init; }
+
+    /// <summary>
     /// The <c>keziah_warning: on</c> header (issue 871, Lotus's ruling): a map where the hungering
     /// weapon's walking drains run high, so a campaign asks once before marching with its bearer
     /// deployed (<see cref="CampaignRecord.MarchWarning"/>). Refused on a map that places the bearer

@@ -105,6 +105,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `unitRetreated` | `unit`, `from`, `to` |
 | `unitBroke` | `unit`, `at`, `hp` (a unit whose boss fell while it stood at or below half HP left the board on a `break: on` map; not a death; DESIGN 13.22, experiment) |
 | `unitFreed` | `unit`, `at`, `hp` (the enemy a `freed:` header binds to a boss's group left the board when a boss of that group fell; not a death; issue 750) |
+| `routeDrifted` | `group`, `to`, `units` (on a `route_drift:` map the untaken route's group woke as an enemy phase began and its units make for `to`, the crossing of the route the party took; once a battle; issue 81) |
 | `unitTalked` | `unit`, `target`, `at`, `hp`, `fate` (`turned` or `spared`: the pick or the captain talked the returned claimant round, who left the board; not a death; issue 633) |
 | `frontFell` | `front` (the front of that name fell: an enemy stands on one of its tiles; the map goes on and the front's `falls` events fire next; issue 692) |
 | `messengerEscaped` | `unit`, `at` (the map's messenger reached its road at `at` and left the board, not a death; its `messenger` events fire next; DESIGN 13.24, experiment) |

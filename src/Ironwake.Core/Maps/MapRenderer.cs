@@ -214,6 +214,11 @@ public static class MapRenderer
             sb.Append(called).Append('\n');
         }
 
+        if (map.RouteDrift is { } drift)
+        {
+            sb.Append(Routes.Line(drift)).Append('\n');
+        }
+
         if (ExitLegend(map) is { } exits)
         {
             sb.Append(exits).Append('\n');
@@ -517,6 +522,11 @@ public static class MapRenderer
         if (LinkLegend(map, group => !state.IsAwake(group)) is { } called)
         {
             sb.Append(called).Append('\n');
+        }
+
+        if (Routes.Line(state) is { } drifting)
+        {
+            sb.Append(drifting).Append('\n');
         }
 
         if (ExitLegend(map) is { } exits)

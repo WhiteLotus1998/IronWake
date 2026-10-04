@@ -2591,6 +2591,8 @@ public sealed class PlaySession
                 return $"{names[b.UnitId]} breaks and flees ({b.Hp} hp)";
             case UnitFreed f:
                 return $"{names[f.UnitId]} lays down the weapon: freed ({f.Hp} hp)";
+            case RouteDrifted d:
+                return $"{UnitNames.Group(d.Group)} wakes and makes for {d.To}, the crossing you took: {string.Join(", ", d.Units.Select(id => names[id]))}";
             case UnitTalked t:
                 return t.Fate == ReturnFate.Turned
                     ? $"{names[t.UnitId]} talks {names[t.TargetId]} round: turned, off the field ({t.Hp} hp)"

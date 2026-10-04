@@ -96,6 +96,13 @@ public sealed record UnitBroke(string UnitId, Coord At, int Hp) : GameEvent;
 public sealed record UnitFreed(string UnitId, Coord At, int Hp) : GameEvent;
 
 /// <summary>
+/// The untaken route's group moved (issue 81, <see cref="Routes"/>): on a <c>route_drift:</c> map,
+/// group <paramref name="Group"/> woke as an enemy phase began and its <paramref name="Units"/> make
+/// for <paramref name="To"/>, the crossing of the route the party took. Once a battle.
+/// </summary>
+public sealed record RouteDrifted(string Group, Coord To, ValueList<string> Units) : GameEvent;
+
+/// <summary>
 /// <paramref name="UnitId"/> talked the returned claimant <paramref name="TargetId"/> round (issue 633), who
 /// left the board from <paramref name="At"/> with <paramref name="Hp"/>: not a kill. <paramref name="Fate"/>
 /// says whether the pick turned them or the captain spared them.

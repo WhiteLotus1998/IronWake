@@ -385,6 +385,12 @@ public static class EnemyAi
         IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool veto)
     {
         Func<Coord, bool>? refused = veto ? tile => BossVetoRefuses(state, content, unit, tile) : null;
+        if (Routes.CrossingFor(state, unit) is { } crossing
+            && MarchTo(state, content, unit, new[] { crossing }, reach, playerReach, refused) is { } drifting)
+        {
+            return drifting;
+        }
+
         if (Hunt.Is(state, unit) && Hunt.Hunted(state) is { } front)
         {
             return (known.Count == 0 ? null : Approach(state, content, unit, weapon, reach, known, playerReach, refused))
@@ -865,12 +871,21 @@ public static class EnemyAi
     /// front's tiles, the party left out of the field as in <see cref="Drift"/>, ties as
     /// <see cref="Approach"/> breaks them; null when no reachable tile has a path, which means Wait.
     /// </summary>
-    public static Coord? March(BattleState state, GameContent content, BattleUnit unit, Front front, Reach reach, IReadOnlyList<Reach> playerReach, Func<Coord, bool>? refused = null)
+    public static Coord? March(BattleState state, GameContent content, BattleUnit unit, Front front, Reach reach, IReadOnlyList<Reach> playerReach, Func<Coord, bool>? refused = null) =>
+        MarchTo(state, content, unit, front.Tiles, reach, playerReach, refused);
+
+    /// <summary>
+    /// The reachable tile with the lowest remaining path cost to any of <paramref name="goal"/>, the
+    /// party left out of the field as in <see cref="Drift"/>, ties as <see cref="Approach"/> breaks
+    /// them; null when no reachable tile has a path. The hunter's march (<see cref="March"/>) and the
+    /// untaken route's drift on its crossing (<see cref="Routes"/>, issue 81) both read it.
+    /// </summary>
+    public static Coord? MarchTo(BattleState state, GameContent content, BattleUnit unit, IReadOnlyCollection<Coord> goal, Reach reach, IReadOnlyList<Reach> playerReach, Func<Coord, bool>? refused = null)
     {
         var movement = Grounding.MovementOf(unit, content);
         Occupant GroundOnly(Coord at) =>
             at == unit.At || state.UnitAt(at) is { Side: Side.Player } ? Occupant.None : state.OccupantAt(at, unit.Side);
-        var distances = Movement.DistancesTo(state.Map, content, front.Tiles, movement, GroundOnly);
+        var distances = Movement.DistancesTo(state.Map, content, goal, movement, GroundOnly);
         return distances.From(unit.At) is null ? null : Toward(state, content, unit, distances, reach, playerReach, refused);
     }
 

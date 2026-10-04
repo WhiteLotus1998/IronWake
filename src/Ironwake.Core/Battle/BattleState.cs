@@ -118,6 +118,23 @@ public sealed record BattleState(
     public string? Hunting { get; init; }
 
     /// <summary>
+    /// The route taken on a <c>route_drift:</c> map (issue 81, <see cref="Routes"/>): the first of the
+    /// header's two groups to wake. Null until one does, and on a map without the header. A Recall
+    /// restores it with the board.
+    /// </summary>
+    public string? RouteTaken { get; init; }
+
+    /// <summary>Whether the <c>route_drift:</c> header's drift has come due and been spent (issue 81). Once only; a Recall restores it.</summary>
+    public bool Drifted { get; init; }
+
+    /// <summary>
+    /// The ids of the untaken route's units still making for the taken route's crossing (issue 81,
+    /// <see cref="Routes"/>), in id order; a unit leaves the list as a phase begins with it within
+    /// <see cref="Routes.ArriveRadius"/> of the crossing. A Recall restores it with the board.
+    /// </summary>
+    public ValueList<string> Drifting { get; init; }
+
+    /// <summary>
     /// The order the captain has called this map (DESIGN.md 13.2, issue 85), or null while it is
     /// unspent. Once a map; a Recall restores it with the board.
     /// </summary>
@@ -806,6 +823,17 @@ public sealed record BattleState(
         if (Hunting is { } hunting)
         {
             sb.Append("hunting ").Append(hunting).Append('\n');
+        }
+
+        if (Map.RouteDrift is not null)
+        {
+            sb.Append("route ").Append(RouteTaken ?? "-").Append(Drifted ? " drifted" : " pending");
+            foreach (var id in Drifting)
+            {
+                sb.Append(' ').Append(id);
+            }
+
+            sb.Append('\n');
         }
 
         if (MessengerGone is { } fate)
