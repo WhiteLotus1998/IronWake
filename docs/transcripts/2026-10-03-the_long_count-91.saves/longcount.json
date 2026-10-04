@@ -547,6 +547,10 @@
     {
       "quest": "ottilie_1",
       "mapIndex": 6
+    },
+    {
+      "quest": "rook_1",
+      "mapIndex": 7
     }
   ]
 }

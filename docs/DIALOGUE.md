@@ -6,7 +6,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 
 - **Fun Gate entries.** Each partner writes the PLAYTEST entry before reading the other's; Code's lands first. A warm chair counts if disclosed (0073); a tuned map's first cold chair finds its cheap line (105). Tricks stay unnamed until both are in.
 - **A map is retuned only after both entries on it are in**, one lever at a time, measured by the Sim before a partner plays it (round 16). Levers are content first.
-- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's play queue: The Long Count, the field (#907), the Oath Stone once #902 lands, #908, Wren's talk, the Rookery (#862), a Drover map (293).
+- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's play queue: the field (#907), the Oath Stone once #902 lands, #908, Wren's talk, the Rookery (#862), a Drover map (293).
 - **Experiments.** The gate is open (round 105). A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway.
 - **Rules go on screen; geometry does not** (42, 44): a rule a map needs is printed; the best tile is the player's.
@@ -38,7 +38,8 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 - **Saltmarsh Ford:** not tuned. North cut (0093): 7/7/6, 7/7/5. The spawn lever failed (0095).
 - **Sallow Grange:** the Reeve stays at 15,6; the yard mouth is unnamed; a quiet route is quiet on the enemy phase too (#275).
 - **The Rookery (Rook 2, 0208):** not passed; the cage stays (284). #862's ring (built): a cold replay decides. A lost Escape keeps its living (#861).
-- **The Counting House (Ottilie 1; 311, 312):** the opening is kept; the finish is the defect (both chairs lost). Lever 1 (#925, 0228): the archer a house guard at 11,2, where she adds no wake (at 7,3 the house wakes on turn 1). The Sim is 0/200 on all; play decides; lever 2: limit 11.
+- **The Counting House (Ottilie 1; 311, 312):** the opening is kept; the finish is the defect. Lever 1 (#925, 0228; 313): the archer a house guard at 11,2, adding no wake (7,3 wakes the house on turn 1). Sim 0/200; play decides; lever 2: limit 11.
+- **The Long Count (Ottilie 2; 313):** the clock is the defect; the fix is visibility (#928, 0229: the count on the board, `end` and `exit` warn), not a longer limit, until a cold chair plays with it. Lever 1: the held archer to 11,4 (#932).
 - **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. The bare keep (Chat cold, round 235, 7/7/6): walls and Long Draw bow kept, no lever on the stand-in.
 
 ## Experiments (state and kill criterion)
@@ -98,7 +99,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 
 - **Lotus (#731)** plays when both sign a `for-lotus` issue naming the Windows artifact, its start, the note.
 - **The bar:** a client campaign from the title; his mechanics plus Commander's Word by mouse and keys, held to the console by a parity script; no stop-playing bug to Brackwater; a "what to try" note. No Fun Gate.
-- **Signing:** Chat after its console campaign through Brackwater and the parity transcript; Code after the desktop session's hand run of the exe.
+- **Signing:** Chat after its console campaign through Brackwater and the parity transcript; Code after a hand run of the exe.
 
 ## Open, the Table's
 
@@ -112,10 +113,10 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 ## Plumbing
 
 - **Engine** (0008): Godot 4 .NET in this repo; the core stays engine-free; any renderer consumes the versioned protocol (0046) and carries no rules.
-- **Builder race** (#735, 0169; provisional): chain `on`; one Builder at a time by claim, wait and re-read, the earlier claim wins; in ROUTINES.md section 2 until Lotus pastes the prompt.
+- **Builder race** (#735, 0169): one Builder at a time by claim; the earlier claim wins (ROUTINES.md section 2).
 - **Art:** human-made only (Lotus, 2026-10-03); the board's look is ours at $0; packs recoloured to LOOK.md, commissions at commercial rates, licences checked first; the list is `docs/ART_SHOPPING.md` (#816).
 - **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, a warm low fill on player figures only; 3 or 4 posterized steps, ink heavier on the silhouette; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Delivered art keeps its colour under chroma 32 with one amber accent, never the only side cue; tint for placeholders only (0223, built).
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262 to 288; Teodor, `talk` 265 to 274; Rookery 284; Drover 288 to 290); #875 291 on (WRITING 295, 296; art 298, 299; land 300, 301; Oath Stone 302 to 306; Counting House 311).
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262 to 288; `talk` 265 to 274; Drover 288 to 290); #875 291 on (WRITING 295, 296; art 298, 299; land 300, 301; Oath Stone 302 to 306; Counting House 311 to 313; Long Count 313).

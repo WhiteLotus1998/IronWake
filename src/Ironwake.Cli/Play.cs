@@ -615,7 +615,7 @@ public sealed class PlaySession
                 Error("usage: canto <unit> <x,y|stay>");
                 break;
             case "exit" when words.Length == 2:
-                Apply(new Exit(words[1]));
+                Apply(new Exit(words[1]), first: ExitLine(words[1]));
                 break;
             case "exit":
                 Error("usage: exit <unit>");
@@ -682,8 +682,11 @@ public sealed class PlaySession
                 var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
                     ? Rivalry.Exposed(_state, _content).Select(u => new ExposureEntry(_state.History.Count, _state.Turn, u.Id)).ToList()
                     : new List<ExposureEntry>();
-                var lethal = Queries.Lethal(_state, _content);
-                if (Apply(new EndPhase(), first: lethal.Count == 0 ? null : string.Join("\n", lethal.Select(l => LethalLine(l, UnitNames.Of(_state, _content))))))
+                var endNames = UnitNames.Of(_state, _content);
+                var warnings = Queries.Lethal(_state, _content).Select(l => LethalLine(l, endNames))
+                    .Concat(EscapeCount.PassedByEnding(_state, _content).Select(c => EscapeCount.Warning(c, _state.Map.TurnLimit, endNames)))
+                    .ToList();
+                if (Apply(new EndPhase(), first: warnings.Count == 0 ? null : string.Join("\n", warnings)))
                 {
                     _exposure.AddRange(exposed);
                     EnemyPhase();
@@ -1497,6 +1500,26 @@ public sealed class PlaySession
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot, names));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast, names));
         return UnitNames.Sentence(string.Join("\n", lines));
+    }
+
+    /// <summary>
+    /// What the captain's <c>exit</c> costs, printed before it resolves (issue 928): <c>Exit: leaves Teodor behind</c>,
+    /// every player unit still on the board by name, and in a campaign that being left behind counts as
+    /// falling (<see cref="CampaignRecord"/> scores it so on every map). Null for anyone but the captain,
+    /// and when nobody would be left.
+    /// </summary>
+    private string? ExitLine(string unitId)
+    {
+        if (_state.Find(unitId) is not { IsCaptain: true } captain || _state.Map.Win != WinCondition.Escape)
+        {
+            return null;
+        }
+
+        var names = UnitNames.Of(_state, _content);
+        var left = _state.UnitsOf(Side.Player).Where(u => u.Id != captain.Id).Select(u => names[u.Id]).ToList();
+        return left.Count == 0
+            ? null
+            : $"Exit: leaves {string.Join(", ", left)} behind" + (_campaign ? " (left behind counts as fallen)" : "");
     }
 
     /// <summary>

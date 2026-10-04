@@ -24,6 +24,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 3 turns to an exit (last start: turn 5), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 > move dunstan 13,3
 Dunstan moves 9,3 -> 13,3 via 10,3 11,3 12,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -50,6 +51,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 3 turns to an exit (last start: turn 5), Wren 4 turns to an exit (last start: turn 4)
 > move captain 10,3
 Alder Fenn moves 8,4 -> 10,3 via 8,3 9,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -76,6 +78,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 3 turns to an exit (last start: turn 5), Wren no way to an exit
 > move pell 9,3
 Pell moves 7,3 -> 9,3 via 8,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -102,6 +105,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 3 turns to an exit (last start: turn 5), Wren no way to an exit
 > move wren 10,4
 Wren moves 8,5 -> 10,4 via 8,4 9,4
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -128,6 +132,7 @@ D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 3 turns to an exit (last start: turn 5), Wren 3 turns to an exit (last start: turn 5)
 > move rook 10,1
 Rook moves 8,2 -> 10,1 via 8,1 9,1
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -154,6 +159,7 @@ D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 > attack rook archer-2
 Forecast Rook -> Archer 2: acc 54% dmg 7 crit 3%; counter: none
 Rook attacks Archer 2
@@ -184,6 +190,7 @@ D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 > end
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
@@ -224,6 +231,7 @@ D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 > attack rook archer-2
 Forecast Rook -> Archer 2: acc 54% dmg 7 crit 3%; counter: none
 Rook attacks Archer 2
@@ -253,6 +261,7 @@ D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 > move captain 14,3
 Alder Fenn moves 10,3 -> 14,3 via 11,3 12,3 13,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -279,6 +288,7 @@ D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 > move dunstan 12,3
 Dunstan moves 13,3 -> 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -305,6 +315,7 @@ D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 > move pell 13,3
 Pell moves 9,3 -> 13,3 via 10,3 11,3 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -331,6 +342,7 @@ D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 > move wren 12,4
 Wren moves 10,4 -> 12,4 via 10,3 11,3 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -357,6 +369,7 @@ D  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > end
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -403,6 +416,7 @@ D  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 ?  unseen at 2,3 4,3 5,3 6,3 8,3 17,5 17,6 17,7
 dusk: sight 3, 2 next turn; 8 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > move rook 13,2
 Rook moves 10,1 -> 13,2 via 10,0 11,0 12,0 13,0 13,1
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -430,6 +444,7 @@ D  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 ?  unseen at 2,3 4,3 5,3 6,3 8,3 17,5 17,6 17,7
 dusk: sight 3, 2 next turn; 8 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > move wren 14,5
 Wren moves 12,4 -> 14,5 via 13,4 14,4
 The bank group wakes (proximity); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)
@@ -461,6 +476,7 @@ D  wren             Wren L1 cadet              14,5   hp 20/20  Plain
 ?  unseen at 2,3 4,3 5,3 6,3 8,3
 dusk: sight 3, 2 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > end
 Lethal if all land: Wren (Brawler for 14, Soldier for 9, against 20 hp)
 -- Player phase ends, turn 3 --
@@ -542,6 +558,7 @@ D  wren             Wren L1 cadet              14,5   hp 6/20   Plain
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
 dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 > move pell 13,5
 Pell moves 13,3 -> 13,5 via 13,4
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -572,6 +589,7 @@ D  wren             Wren L1 cadet              14,5   hp 6/20   Plain
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
 dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 > attack pell brawler-1
 Forecast Pell -> Brawler with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Brawler
@@ -606,6 +624,7 @@ D  wren             Wren L1 cadet              14,5   hp 6/20   Plain
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
 dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > move wren 13,4
 Wren moves 14,5 -> 13,4 via 14,4
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -635,6 +654,7 @@ D  wren             Wren L1 cadet              13,4   hp 6/20   Plain
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
 dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > item wren 2
 Wren uses Field Dressing (2 left)
 Wren heals 10 (hp 16)
@@ -665,6 +685,7 @@ D  wren             Wren L1 cadet              13,4   hp 16/20  Plain  done
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
 dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > move rook 14,2
 Rook moves 13,2 -> 14,2
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -694,6 +715,7 @@ D  wren             Wren L1 cadet              13,4   hp 16/20  Plain  done
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
 dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 6)
 > move dunstan 14,4
 Dunstan moves 12,3 -> 14,4 via 13,3 14,3
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -721,6 +743,7 @@ D  wren             Wren L1 cadet              13,4   hp 16/20  Plain  done
 ?  unseen at 11,1 2,3 4,3 5,3 9,3 10,3 11,3
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 6)
 > end
 Lethal if all land: Dunstan (Shieldbearer for 5, Soldier for 6, against 11 hp)
 Lethal if all land: Rook (Shieldbearer for 11, Soldier for 12, against 17 hp)
@@ -798,6 +821,7 @@ D  wren             Wren L1 cadet              13,4   hp 10/20  Plain
 ?  unseen at 11,1 13,2 15,2 6,3 8,3 11,3 12,3
 dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > attack pell brigand-1
 Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Brigand 1
@@ -828,6 +852,7 @@ D  wren             Wren L1 cadet              13,4   hp 10/20  Plain
 ?  unseen at 11,1 13,2 15,2 6,3 8,3 11,3 12,3
 dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > move captain 18,3
 Alder Fenn moves 14,3 -> 18,3 via 15,3 16,3 17,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
@@ -853,6 +878,7 @@ D  wren             Wren L1 cadet              13,4   hp 10/20  Plain
 ?  unseen at 11,1 13,2 15,2 6,3 8,3 11,3 12,3
 dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > move dunstan 16,6
 Dunstan moves 14,4 -> 16,6 via 14,5 14,6 15,6
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
@@ -877,6 +903,7 @@ D  wren             Wren L1 cadet              13,4   hp 10/20  Plain
 ?  unseen at 11,1 13,2 15,2 6,3 8,3 11,3 12,3 15,4
 dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > threat dunstan
 Threat on Dunstan at 16,6 (Plain): no enemy in sight can strike him next phase
   In the dark, unpriced: ? at 15,4 (3), ? at 15,2 (5), ? at 13,2 (7), ? at 12,3 (7), ? at 11,3 (8)

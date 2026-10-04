@@ -34,6 +34,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              6,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 4 turns to an exit (last start: turn 4), Ottilie 3 turns to an exit (last start: turn 5), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move dunstan 4,9
 Dunstan moves 1,10 -> 4,9 via 1,9 2,9 3,9
@@ -68,6 +69,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              6,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 3 turns to an exit (last start: turn 5), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait dunstan
 Dunstan waits
@@ -102,6 +104,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              6,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 3 turns to an exit (last start: turn 5), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move wren 5,9
 Wren moves 6,8 -> 5,9 via 5,8
@@ -136,6 +139,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 3 turns to an exit (last start: turn 5), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait wren
 Wren waits
@@ -170,6 +174,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 3 turns to an exit (last start: turn 5), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move ottilie 6,6
 Ottilie moves 5,8 -> 6,6 via 5,7 5,6
@@ -204,6 +209,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait ottilie
 Ottilie waits
@@ -238,6 +244,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 3 turns to an exit (last start: turn 5), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move pell 7,6
 Pell moves 8,8 -> 7,6 via 8,7 8,6
@@ -272,6 +279,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait pell
 Pell waits
@@ -306,6 +314,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move captain 6,8
 Alder Fenn moves 6,7 -> 6,8
@@ -340,6 +349,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait captain
 Alder Fenn waits
@@ -374,6 +384,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait teodor
 Teodor waits
@@ -408,6 +419,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move rook 5,7
 Rook moves 7,8 -> 5,7 via 7,7 6,7
@@ -442,6 +454,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait rook
 Rook waits
@@ -476,6 +489,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > end
 Lethal if all land: Wren (Archer 1 for 5, Brigand 1 for 10, Rider 1 for 8, against 20 hp)
@@ -550,6 +564,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 6 turns to an exit (last start: turn 2)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack teodor rider-1
 Forecast Teodor -> Rider 1: acc 76% dmg 11 crit 1%; counter: acc 74% dmg 8 crit 1%
@@ -588,6 +603,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 6 turns to an exit (last start: turn 2)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack dunstan brigand-1
 Forecast Dunstan -> Brigand 1: acc 77% dmg 11 crit 1%; counter: acc 73% dmg 8 crit 0%
@@ -625,6 +641,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 6 turns to an exit (last start: turn 2)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move captain 7,8
 Alder Fenn moves 6,8 -> 7,8
@@ -657,6 +674,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 6 turns to an exit (last start: turn 2)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack captain archer-1
 Forecast Alder Fenn -> Archer 1: acc 87% dmg 11 crit 4%; counter: none
@@ -692,6 +710,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 6 turns to an exit (last start: turn 2)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move ottilie 8,6
 Ottilie moves 6,6 -> 8,6 via 7,6
@@ -724,6 +743,7 @@ B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack ottilie archer-1
 Forecast Ottilie -> Archer 1: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
@@ -761,6 +781,7 @@ e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gat
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move pell 6,8
 Pell moves 7,6 -> 6,8 via 6,6 6,7
@@ -792,6 +813,7 @@ e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gat
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack pell archer-1
 Forecast Pell -> Archer 1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 85% dmg 8 crit 2%
@@ -827,6 +849,7 @@ e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gat
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move rook 9,7
 Rook moves 5,7 -> 9,7 via 6,7 7,7 8,7
@@ -857,6 +880,7 @@ e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gat
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack rook brigand-2
 Forecast Rook -> Brigand 2: acc 82% dmg 9 x2 crit 4%; counter: acc 51% dmg 14 crit 0%
@@ -893,6 +917,7 @@ e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gat
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move wren 9,9
 Wren moves 5,9 -> 9,9 via 6,9 7,9 8,9
@@ -923,6 +948,7 @@ e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gat
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              9,9    hp 20/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack wren brigand-2
 Forecast Wren -> Brigand 2: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
@@ -959,6 +985,7 @@ e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gat
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > end
 -- Player phase ends, turn 2 --
@@ -1004,6 +1031,7 @@ e  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Planks  group ga
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 5 turns to an exit (last start: turn 3), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell 5 turns to an exit (last start: turn 3), Rook 2 turns to an exit (last start: turn 6), Teodor 4 turns to an exit (last start: turn 4), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move rook 12,5
 Rook moves 9,7 -> 12,5 via 9,6 9,5 10,5 11,5
@@ -1033,6 +1061,7 @@ e  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Planks  group ga
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 5 turns to an exit (last start: turn 3), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell 5 turns to an exit (last start: turn 3), Rook 2 turns to an exit (last start: turn 6), Teodor 4 turns to an exit (last start: turn 4), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait rook
 Rook waits
@@ -1062,6 +1091,7 @@ e  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Planks  group ga
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 5 turns to an exit (last start: turn 3), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell 5 turns to an exit (last start: turn 3), Rook 2 turns to an exit (last start: turn 6), Teodor 4 turns to an exit (last start: turn 4), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move pell 6,6
 Pell moves 6,8 -> 6,6 via 6,7
@@ -1091,6 +1121,7 @@ e  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Planks  group ga
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 5 turns to an exit (last start: turn 3), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell 4 turns to an exit (last start: turn 4), Rook 2 turns to an exit (last start: turn 6), Teodor 4 turns to an exit (last start: turn 4), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack pell soldier-1
 Forecast Pell -> Soldier with Cinder: acc 99% dmg 12 crit 2%; counter: none
@@ -1124,6 +1155,7 @@ e  soldier-1        Soldier L2 pikeman         6,4    hp 8/20   Planks  group ga
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 5 turns to an exit (last start: turn 3), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell 4 turns to an exit (last start: turn 4), Rook 2 turns to an exit (last start: turn 6), Teodor 4 turns to an exit (last start: turn 4), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move ottilie 7,5 preview
 preview: Ottilie would move 8,6 -> 7,5 via 7,6; wears nothing
@@ -1155,6 +1187,7 @@ e  soldier-1        Soldier L2 pikeman         6,4    hp 8/20   Planks  group ga
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 5 turns to an exit (last start: turn 3), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell 4 turns to an exit (last start: turn 4), Rook 2 turns to an exit (last start: turn 6), Teodor 4 turns to an exit (last start: turn 4), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack ottilie soldier-1
 Forecast Ottilie -> Soldier: acc 82% dmg 6 crit 4%; counter: none
@@ -1188,6 +1221,7 @@ e  soldier-1        Soldier L2 pikeman         6,4    hp 2/20   Planks  group ga
 B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 5 turns to an exit (last start: turn 3), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell 4 turns to an exit (last start: turn 4), Rook 2 turns to an exit (last start: turn 6), Teodor 4 turns to an exit (last start: turn 4), Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move teodor 6,5
 Teodor moves 7,7 -> 6,5 via 7,6 7,5
@@ -1217,6 +1251,7 @@ e  soldier-1        Soldier L2 pikeman         6,4    hp 2/20   Planks  group ga
 B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 5 turns to an exit (last start: turn 3), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell 4 turns to an exit (last start: turn 4), Rook 2 turns to an exit (last start: turn 6), Teodor cannot leave by turn 8, Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack teodor soldier-1
 Forecast Teodor -> Soldier: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
@@ -1250,6 +1285,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
 B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move dunstan 6,7
 Dunstan moves 4,9 -> 6,7 via 4,8 4,7 5,7
@@ -1278,6 +1314,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
 B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait dunstan
 Dunstan waits
@@ -1306,6 +1343,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
 B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
 E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 3 turns to an exit (last start: turn 5)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move wren 7,7
 Wren moves 9,9 -> 7,7 via 9,8 9,7 8,7
@@ -1334,6 +1372,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
 B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
 E  wren             Wren L1 cadet              7,7    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > item wren 2
 Wren uses Field Dressing (2 left)
@@ -1363,6 +1402,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
 B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
 E  wren             Wren L1 cadet              7,7    hp 19/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move captain 8,7
 Alder Fenn moves 7,8 -> 8,7 via 7,7
@@ -1391,6 +1431,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
 B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
 E  wren             Wren L1 cadet              7,7    hp 19/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait captain
 Alder Fenn waits
@@ -1419,6 +1460,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
 B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
 E  wren             Wren L1 cadet              7,7    hp 19/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 3 turns to an exit (last start: turn 5), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > end
 Lethal if all land: Ottilie (Archer 2 for 7, Brigand 3 for 12, against 17 hp)
@@ -1492,6 +1534,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,7    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 4 turns to an exit (last start: turn 4), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell 4 turns to an exit (last start: turn 4), Rook 2 turns to an exit (last start: turn 6), Teodor cannot leave by turn 8, Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move pell 6,4
 Pell moves 6,6 -> 6,4 via 6,5
@@ -1523,6 +1566,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,7    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 4 turns to an exit (last start: turn 4), Dunstan cannot leave by turn 8, Ottilie 4 turns to an exit (last start: turn 4), Pell cannot leave by turn 8, Rook 2 turns to an exit (last start: turn 6), Teodor cannot leave by turn 8, Wren 4 turns to an exit (last start: turn 4)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack pell brigand-3
 Forecast Pell -> Brigand 3 with Cinder: acc 99% dmg 13 crit 3%; counter: acc 70% dmg 13 crit 0%
@@ -1558,6 +1602,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,7    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move wren 7,3 preview
 preview: Wren would move 7,7 -> 7,3 via 7,6 7,5 7,4; would wear 7,4 (Split planks)
@@ -1591,6 +1636,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan cannot leave by turn 8, Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5 7,5; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack wren archer-2
 Forecast Wren -> Archer 2: acc 85% dmg 10 crit 3%; counter: none
@@ -1625,6 +1671,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan cannot leave by turn 8, Ottilie 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5 7,5; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move ottilie 7,4
 Ottilie moves 7,5 -> 7,4
@@ -1656,6 +1703,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 4 turns to an exit (last start: turn 4), Dunstan 3 turns to an exit (last start: turn 5), Ottilie 1 turn to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack ottilie archer-2
 Forecast Ottilie -> Archer 2: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
@@ -1691,6 +1739,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 4 turns to an exit (last start: turn 4), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move dunstan 6,6
 Dunstan moves 6,7 -> 6,6
@@ -1720,6 +1769,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 4 turns to an exit (last start: turn 4), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait dunstan
 Dunstan waits
@@ -1749,6 +1799,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 4 turns to an exit (last start: turn 4), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move captain 7,6
 Alder Fenn moves 8,7 -> 7,6 via 8,6
@@ -1778,6 +1829,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait captain
 Alder Fenn waits
@@ -1807,6 +1859,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait teodor
 Teodor waits
@@ -1836,6 +1889,7 @@ H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks  done
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 6), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move rook 10,1
 Rook moves 12,5 -> 10,1 via 12,4 12,3 12,2 12,1 11,1
@@ -1865,6 +1919,7 @@ H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks  done
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait rook
 Rook waits
@@ -1894,6 +1949,7 @@ H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain  done
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks  done
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > end
 -- Player phase ends, turn 4 --
@@ -1954,6 +2010,7 @@ H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack captain rider-3
 Forecast Alder Fenn -> Rider 3: acc 87% dmg 10 crit 4%; counter: acc 62% dmg 8 crit 0%
@@ -1987,6 +2044,7 @@ H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack dunstan rider-2
 Forecast Dunstan -> Rider 2: acc 73% dmg 10 crit 0%; counter: acc 82% dmg 6 crit 1%
@@ -2020,6 +2078,7 @@ H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Teodor 2 turns to an exit (last start: turn 6), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move teodor 6,1 preview
 preview: Teodor would move 6,5 -> 6,1 via 6,4 6,3 6,2; would wear 6,5 (Split planks)
@@ -2050,6 +2109,7 @@ H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Teodor 1 turn to an exit (last start: turn 7), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait teodor
 Teodor waits
@@ -2077,6 +2137,7 @@ H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
 E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Teodor 1 turn to an exit (last start: turn 7), Wren 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move wren 7,0
 Wren moves 7,3 -> 7,0 via 7,2 7,1
@@ -2104,6 +2165,7 @@ H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
 E  wren             Wren L1 cadet              7,0    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Teodor 1 turn to an exit (last start: turn 7), Wren on an exit (leaves by turn 8)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait wren
 Wren waits
@@ -2131,6 +2193,7 @@ H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
 E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Teodor 1 turn to an exit (last start: turn 7), Wren on an exit (leaves by turn 8)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > move rook 10,0
 Rook moves 10,1 -> 10,0
@@ -2158,6 +2221,7 @@ H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
 E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7), Rook on an exit (leaves by turn 8), Teodor 1 turn to an exit (last start: turn 7), Wren on an exit (leaves by turn 8)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait rook
 Rook waits
@@ -2185,6 +2249,7 @@ H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain  done
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
 E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7), Rook on an exit (leaves by turn 8), Teodor 1 turn to an exit (last start: turn 7), Wren on an exit (leaves by turn 8)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait pell
 Pell waits
@@ -2212,6 +2277,7 @@ H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain  done
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
 E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7), Rook on an exit (leaves by turn 8), Teodor 1 turn to an exit (last start: turn 7), Wren on an exit (leaves by turn 8)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > wait ottilie
 Ottilie waits
@@ -2239,6 +2305,7 @@ H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain  done
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
 E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7), Rook on an exit (leaves by turn 8), Teodor 1 turn to an exit (last start: turn 7), Wren on an exit (leaves by turn 8)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > end
 -- Player phase ends, turn 5 --
@@ -2277,6 +2344,7 @@ H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
 E  wren             Wren L1 cadet              7,0    hp 10/20  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7), Rook on an exit (leaves by turn 8), Teodor 1 turn to an exit (last start: turn 7), Wren on an exit (leaves by turn 8)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > exit wren
 Wren leaves through the exit at 7,0
@@ -2302,6 +2370,7 @@ D  pell             Pell L1 adept              6,4    hp 16/16  Planks
 H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Rook on an exit (leaves by turn 8), Teodor 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 escaped: wren
 > exit rook
@@ -2327,6 +2396,7 @@ C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
 D  pell             Pell L1 adept              6,4    hp 16/16  Planks
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Teodor 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 escaped: wren rook
 > move dunstan 6,3 preview
@@ -2355,6 +2425,7 @@ C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
 D  pell             Pell L1 adept              6,4    hp 16/16  Planks
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 1 turn to an exit (last start: turn 7), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Teodor 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 escaped: wren rook
 > wait dunstan
@@ -2380,6 +2451,7 @@ C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
 D  pell             Pell L1 adept              6,4    hp 16/16  Planks
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 1 turn to an exit (last start: turn 7), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Teodor 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 escaped: wren rook
 > move captain 7,2 preview
@@ -2408,6 +2480,7 @@ C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
 D  pell             Pell L1 adept              6,4    hp 16/16  Planks
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Teodor 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 escaped: wren rook
 > wait captain
@@ -2433,6 +2506,7 @@ C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
 D  pell             Pell L1 adept              6,4    hp 16/16  Planks
 B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Teodor 1 turn to an exit (last start: turn 7)
 wears: Planks 6,4; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 escaped: wren rook
 > move teodor 5,0
@@ -2458,6 +2532,7 @@ C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
 D  pell             Pell L1 adept              6,4    hp 16/16  Planks
 B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Teodor on an exit (leaves by turn 8)
 wears: Planks 6,4; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 escaped: wren rook
 > wait teodor
@@ -2483,6 +2558,7 @@ C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
 D  pell             Pell L1 adept              6,4    hp 16/16  Planks
 B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7), Ottilie 1 turn to an exit (last start: turn 7), Pell 1 turn to an exit (last start: turn 7), Teodor on an exit (leaves by turn 8)
 wears: Planks 6,4; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 escaped: wren rook
 > move pell 6,0
@@ -2509,6 +2585,7 @@ C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
 D  pell             Pell L1 adept              6,0    hp 16/16  Plain
 B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7), Ottilie 1 turn to an exit (last start: turn 7), Pell on an exit (leaves by turn 8), Teodor on an exit (leaves by turn 8)
 wears: Split planks 6,4 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook
 > wait pell
@@ -2534,6 +2611,7 @@ C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
 D  pell             Pell L1 adept              6,0    hp 16/16  Plain  done
 B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7), Ottilie 1 turn to an exit (last start: turn 7), Pell on an exit (leaves by turn 8), Teodor on an exit (leaves by turn 8)
 wears: Split planks 6,4 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook
 > move ottilie 7,0
@@ -2560,6 +2638,7 @@ C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain
 D  pell             Pell L1 adept              6,0    hp 16/16  Plain  done
 B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan cannot leave by turn 8, Ottilie on an exit (leaves by turn 8), Pell on an exit (leaves by turn 8), Teodor on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook
 > wait ottilie
@@ -2585,6 +2664,7 @@ C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain  done
 D  pell             Pell L1 adept              6,0    hp 16/16  Plain  done
 B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan cannot leave by turn 8, Ottilie on an exit (leaves by turn 8), Pell on an exit (leaves by turn 8), Teodor on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook
 > end
@@ -2614,6 +2694,7 @@ C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain
 D  pell             Pell L1 adept              6,0    hp 16/16  Plain
 B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan cannot leave by turn 8, Ottilie on an exit (leaves by turn 8), Pell on an exit (leaves by turn 8), Teodor on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook
 > exit teodor
@@ -2638,6 +2719,7 @@ G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain
 C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain
 D  pell             Pell L1 adept              6,0    hp 16/16  Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7), Ottilie on an exit (leaves by turn 8), Pell on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook teodor
 > exit pell
@@ -2661,6 +2743,7 @@ A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
 G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain
 C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7), Ottilie on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook teodor pell
 > exit ottilie
@@ -2683,6 +2766,7 @@ Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
 A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
 G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 1 turn to an exit (last start: turn 7)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook teodor pell ottilie
 > move dunstan 6,0 preview
@@ -2707,6 +2791,7 @@ Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
 A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
 G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook teodor pell ottilie
 > wait dunstan
@@ -2729,6 +2814,7 @@ Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
 A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
 G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook teodor pell ottilie
 > move captain 8,0
@@ -2751,6 +2837,7 @@ Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
 A  captain          Alder Fenn L1 cadet        8,0    hp 14/22  Plain  captain
 G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn on an exit (leaves by turn 8), Dunstan on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook teodor pell ottilie
 > wait captain
@@ -2773,6 +2860,7 @@ Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
 A  captain          Alder Fenn L1 cadet        8,0    hp 14/22  Plain  captain  done
 G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn on an exit (leaves by turn 8), Dunstan on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook teodor pell ottilie
 > end
@@ -2799,6 +2887,7 @@ Rotten Bridge, the straggler  turn 8 of 8  player phase  escape  recall 3
 A  captain          Alder Fenn L1 cadet        8,0    hp 14/22  Plain  captain
 G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn on an exit (leaves by turn 8), Dunstan on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook teodor pell ottilie
 > exit dunstan
@@ -2820,6 +2909,7 @@ Rotten Bridge, the straggler  turn 8 of 8  player phase  escape  recall 3
 
 A  captain          Alder Fenn L1 cadet        8,0    hp 14/22  Plain  captain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Alder Fenn on an exit (leaves by turn 8)
 wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
 escaped: wren rook teodor pell ottilie dunstan
 > exit captain

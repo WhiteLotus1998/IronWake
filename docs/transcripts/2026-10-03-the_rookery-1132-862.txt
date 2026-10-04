@@ -85,6 +85,7 @@ a  wing_captain-1   Wing Captain L6 sky captain 5,1    hp 19/19  Mountain  group
 B  wren             Wren L7 cadet              2,5    hp 23/23  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 3 turns to an exit (last start: turn 6), Wren no way to an exit
 > threat wren from 6,5
 Threat on Wren at 6,5 (Road):
   Soldier from 7,5 with Iron Lance (slot 1): acc 52% dmg 9 crit 0%; counter: acc 86% dmg 9 x2 crit 5%
@@ -120,6 +121,7 @@ a  wing_captain-1   Wing Captain L6 sky captain 5,1    hp 19/19  Mountain  group
 B  wren             Wren L7 cadet              6,5    hp 23/23  Road
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 3 turns to an exit (last start: turn 6), Wren no way to an exit
 > wait wren
 Wren waits
 The Rookery  turn 1 of 9  player phase  escape  recall 2
@@ -143,6 +145,7 @@ a  wing_captain-1   Wing Captain L6 sky captain 5,1    hp 19/19  Mountain  group
 B  wren             Wren L7 cadet              6,5    hp 23/23  Road  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 3 turns to an exit (last start: turn 6), Wren no way to an exit
 > move rook 4,6
 Rook moves 1,4 -> 4,6 via 2,4 2,5 3,5 4,5
 The Rookery  turn 1 of 9  player phase  escape  recall 2
@@ -166,6 +169,7 @@ a  wing_captain-1   Wing Captain L6 sky captain 5,1    hp 19/19  Mountain  group
 B  wren             Wren L7 cadet              6,5    hp 23/23  Road  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 2 turns to an exit (last start: turn 7), Wren no way to an exit
 > wait rook
 Rook waits
 The Rookery  turn 1 of 9  player phase  escape  recall 2
@@ -189,6 +193,7 @@ a  wing_captain-1   Wing Captain L6 sky captain 5,1    hp 19/19  Mountain  group
 B  wren             Wren L7 cadet              6,5    hp 23/23  Road  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 2 turns to an exit (last start: turn 7), Wren no way to an exit
 > end
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
@@ -240,6 +245,7 @@ b  soldier-1        Soldier L6 pikeman         7,5    hp 4/22   Road  group brid
 a  wing_captain-1   Wing Captain L6 sky captain 4,5    hp 8/19   Road  group loft, guard, awake
 B  wren             Wren L7 cadet              6,5    hp 14/23  Road
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 2 turns to an exit (last start: turn 7), Wren no way to an exit
 > move wren 5,5
 Wren moves 6,5 -> 5,5
 The Rookery  turn 2 of 9  player phase  escape  recall 2
@@ -262,6 +268,7 @@ b  soldier-1        Soldier L6 pikeman         7,5    hp 4/22   Road  group brid
 a  wing_captain-1   Wing Captain L6 sky captain 4,5    hp 8/19   Road  group loft, guard, awake
 B  wren             Wren L7 cadet              5,5    hp 14/23  Road
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 2 turns to an exit (last start: turn 7), Wren no way to an exit
 > attack wren wing_captain-1
 Forecast Wren -> Wing Captain: acc 80% dmg 12 crit 3%; counter: acc 65% dmg 11 crit 0%
 Wren attacks Wing Captain
@@ -288,6 +295,7 @@ d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pas
 b  soldier-1        Soldier L6 pikeman         7,5    hp 4/22   Road  group bridge, guard, awake
 B  wren             Wren L7 cadet              5,5    hp 14/23  Road  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 2 turns to an exit (last start: turn 7), Wren no way to an exit
 > threat rook from 8,5
 Threat on Rook at 8,5 (Road):
   Soldier from 7,5 with Iron Lance (slot 1): acc 51% dmg 13 crit 0%; counter: acc 79% dmg 8 x2 crit 4%
@@ -313,6 +321,7 @@ d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pas
 b  soldier-1        Soldier L6 pikeman         7,5    hp 4/22   Road  group bridge, guard, awake
 B  wren             Wren L7 cadet              5,5    hp 14/23  Road  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 1 turn to an exit (last start: turn 8), Wren no way to an exit
 > attack rook soldier-1
 Forecast Rook -> Soldier: acc 79% dmg 8 x2 crit 4%; counter: acc 51% dmg 13 crit 0%
   Counter: lethal to Rook (13 against 4 hp)
@@ -339,6 +348,7 @@ A  rook             Rook L7 skyrider           8,5    hp 4/19   Road  captain  d
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L7 cadet              5,5    hp 14/23  Road  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 1 turn to an exit (last start: turn 8), Wren 3 turns to an exit (last start: turn 6)
 > end
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -374,6 +384,7 @@ d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pas
 e  wingrider-1      Wingrider L6 skyrider      4,7    hp 19/19  Plain  group pursuit, aggressive
 B  wren             Wren L7 cadet              5,5    hp 14/23  Road
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 1 turn to an exit (last start: turn 8), Wren 3 turns to an exit (last start: turn 6)
 > move wren 9,5
 Wren moves 5,5 -> 9,5 via 6,5 7,5 8,5
 The Rookery  turn 3 of 9  player phase  escape  recall 2
@@ -395,6 +406,7 @@ d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pas
 e  wingrider-1      Wingrider L6 skyrider      4,7    hp 19/19  Plain  group pursuit, aggressive
 B  wren             Wren L7 cadet              9,5    hp 14/23  Road
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > wait rook
 Rook waits
 The Rookery  turn 3 of 9  player phase  escape  recall 2
@@ -416,6 +428,7 @@ d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pas
 e  wingrider-1      Wingrider L6 skyrider      4,7    hp 19/19  Plain  group pursuit, aggressive
 B  wren             Wren L7 cadet              9,5    hp 14/23  Road
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > end
 Lethal if all land: Rook (Wingrider 1 for 11, against 4 hp)
 -- Player phase ends, turn 3 --
@@ -461,6 +474,7 @@ e  wingrider-1      Wingrider L6 skyrider      8,6    hp 19/19  Water  group pur
 f  wingrider-2      Wingrider L6 skyrider      7,6    hp 19/19  Water  group pursuit, aggressive
 B  wren             Wren L7 cadet              9,5    hp 14/23  Road
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > move wren 9,6
 Wren moves 9,5 -> 9,6
 The Rookery  turn 4 of 9  player phase  escape  recall 2
@@ -483,6 +497,7 @@ e  wingrider-1      Wingrider L6 skyrider      8,6    hp 19/19  Water  group pur
 f  wingrider-2      Wingrider L6 skyrider      7,6    hp 19/19  Water  group pursuit, aggressive
 B  wren             Wren L7 cadet              9,6    hp 14/23  Plain
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > attack wren wingrider-1
 Forecast Wren -> Wingrider 1: acc 74% dmg 13 crit 3%; counter: acc 56% dmg 7 crit 0%
 Wren attacks Wingrider 1
@@ -509,6 +524,7 @@ d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pas
 f  wingrider-2      Wingrider L6 skyrider      7,6    hp 19/19  Water  group pursuit, aggressive
 B  wren             Wren L7 cadet              9,6    hp 14/23  Plain  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook 1 turn to an exit (last start: turn 8), Wren 2 turns to an exit (last start: turn 7)
 > move rook 14,5
 Rook moves 8,5 -> 14,5 via 9,5 10,5 11,5 12,5 13,5
 The Rookery  turn 4 of 9  player phase  escape  recall 2
@@ -530,6 +546,7 @@ d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pas
 f  wingrider-2      Wingrider L6 skyrider      7,6    hp 19/19  Water  group pursuit, aggressive
 B  wren             Wren L7 cadet              9,6    hp 14/23  Plain  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 2 turns to an exit (last start: turn 7)
 > wait rook
 Rook waits
 The Rookery  turn 4 of 9  player phase  escape  recall 2
@@ -551,6 +568,7 @@ d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pas
 f  wingrider-2      Wingrider L6 skyrider      7,6    hp 19/19  Water  group pursuit, aggressive
 B  wren             Wren L7 cadet              9,6    hp 14/23  Plain  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 2 turns to an exit (last start: turn 7)
 > end
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -596,6 +614,7 @@ d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pas
 f  wingrider-2      Wingrider L6 skyrider      8,6    hp 6/19   Water  group pursuit, aggressive
 B  wren             Wren L7 cadet              9,6    hp 14/23  Plain
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 2 turns to an exit (last start: turn 7)
 > attack wren wingrider-2
 Forecast Wren -> Wingrider 2: acc 74% dmg 13 crit 3%; counter: acc 56% dmg 7 crit 0%
 Wren attacks Wingrider 2
@@ -622,6 +641,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L7 cadet              9,6    hp 14/23  Plain  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 2 turns to an exit (last start: turn 7)
 > wait rook
 Rook waits
 The Rookery  turn 5 of 9  player phase  escape  recall 2
@@ -643,6 +663,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain  d
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L7 cadet              9,6    hp 14/23  Plain  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 2 turns to an exit (last start: turn 7)
 > end
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
@@ -676,6 +697,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L7 cadet              9,6    hp 14/23  Plain
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 2 turns to an exit (last start: turn 7)
 > move wren 12,5
 Wren moves 9,6 -> 12,5 via 9,5 10,5 11,5
 The Rookery  turn 6 of 9  player phase  escape  recall 2
@@ -697,6 +719,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L7 cadet              12,5   hp 14/23  Road
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 1 turn to an exit (last start: turn 8)
 > attack wren archer-1
 Forecast Wren -> Archer: acc 86% dmg 11 x2 crit 5%; counter: none
 Wren attacks Archer
@@ -724,6 +747,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              12,5   hp 15/24  Road  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 1 turn to an exit (last start: turn 8)
 > wait rook
 Rook waits
 The Rookery  turn 6 of 9  player phase  escape  recall 2
@@ -744,6 +768,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain  d
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              12,5   hp 15/24  Road  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 1 turn to an exit (last start: turn 8)
 > end
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
@@ -780,6 +805,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              12,5   hp 15/24  Road
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 1 turn to an exit (last start: turn 8)
 > attack wren rider-1
 Forecast Wren -> Rider: acc 86% dmg 10 x2 crit 5%; counter: acc 49% dmg 10 crit 0%
 Wren attacks Rider
@@ -805,6 +831,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              12,5   hp 15/24  Road  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 1 turn to an exit (last start: turn 8)
 > wait rook
 Rook waits
 The Rookery  turn 7 of 9  player phase  escape  recall 2
@@ -824,6 +851,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain  d
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              12,5   hp 15/24  Road  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 1 turn to an exit (last start: turn 8)
 > end
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
@@ -849,6 +877,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              12,5   hp 15/24  Road
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren 1 turn to an exit (last start: turn 8)
 > move wren 14,6
 Wren moves 12,5 -> 14,6 via 13,5 14,5
 The Rookery  turn 8 of 9  player phase  escape  recall 2
@@ -868,6 +897,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              14,6   hp 15/24  Plain
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren on an exit (leaves by turn 9)
 > wait wren
 Wren waits
 The Rookery  turn 8 of 9  player phase  escape  recall 2
@@ -887,6 +917,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              14,6   hp 15/24  Plain  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren on an exit (leaves by turn 9)
 > wait rook
 Rook waits
 The Rookery  turn 8 of 9  player phase  escape  recall 2
@@ -906,6 +937,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain  d
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              14,6   hp 15/24  Plain  done
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren on an exit (leaves by turn 9)
 > end
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --
@@ -931,6 +963,7 @@ A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 B  wren             Wren L8 cadet              14,6   hp 15/24  Plain
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9), Wren on an exit (leaves by turn 9)
 > exit wren
 Wren leaves through the exit at 14,6
 The Rookery  turn 9 of 9  player phase  escape  recall 2
@@ -949,6 +982,7 @@ The Rookery  turn 9 of 9  player phase  escape  recall 2
 A  rook             Rook L7 skyrider           14,5   hp 4/19   Road  captain
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Rook on an exit (leaves by turn 9)
 escaped: wren
 > exit rook
 Rook leaves through the exit at 14,5

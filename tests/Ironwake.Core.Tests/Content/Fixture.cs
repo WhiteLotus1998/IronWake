@@ -423,16 +423,6 @@ internal static class Fixture
         return target;
     }
 
-    private static readonly Lazy<string> BeforeWardensGate = new(() => WithoutQuest(CopyFiles("ironwake-before-wardens-gate-"), "teodor_2"));
-
-    /// <summary>
-    /// A copy of the real content directory without Teodor's quest 2 (issue 635 slice 12). A camp
-    /// that has won Teodor's quest 1 offers it ahead of a quest opened later, so a side map journaled
-    /// at such a camp before it existed replays only without it. Made once per test run under the
-    /// temp directory.
-    /// </summary>
-    public static string BeforeWardensGateContentDirectory() => BeforeWardensGate.Value;
-
     /// <summary>Takes the side map <paramref name="questId"/> out of the campaign's quests in the copy at <paramref name="target"/>.</summary>
     public static string WithoutQuest(string target, string questId)
     {

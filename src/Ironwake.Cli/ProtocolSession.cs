@@ -99,6 +99,7 @@ public sealed class ProtocolSession
     {
         var events = new List<GameEvent?>();
         var lethal = command is EndPhase ? Queries.Lethal(_state, _content, PlayerView) : null;
+        var passed = command is EndPhase ? EscapeCount.PassedByEnding(_state, _content) : null;
         var result = Resolver.Apply(_state, _content, command);
         if (!result.Accepted)
         {
@@ -176,10 +177,33 @@ public sealed class ProtocolSession
                 w.WriteEndArray();
             }
 
+            if (passed is not null)
+            {
+                w.WriteStartArray("countPassed");
+                foreach (var count in passed)
+                {
+                    w.WriteStringValue(count.Unit.Id);
+                }
+
+                w.WriteEndArray();
+            }
+
             w.WritePropertyName("state");
             ProtocolJson.WriteState(w, _state, _content, full: false, PlayerView);
             w.WriteEndObject();
         });
+    }
+
+    private static void WriteNullable(Utf8JsonWriter w, string name, int? value)
+    {
+        if (value is { } v)
+        {
+            w.WriteNumber(name, v);
+        }
+        else
+        {
+            w.WriteNull(name);
+        }
     }
 
     private string Query(JsonElement request)
@@ -224,9 +248,38 @@ public sealed class ProtocolSession
             });
         }
 
+        if (name == "count")
+        {
+            return Ok(name, w =>
+            {
+                w.WriteNumber("turnLimit", _state.Map.TurnLimit);
+                w.WriteStartArray("counts");
+                foreach (var count in EscapeCount.Of(_state, _content))
+                {
+                    w.WriteStartObject();
+                    w.WriteString("unit", count.Unit.Id);
+                    WriteNullable(w, "phases", count.Phases);
+                    WriteNullable(w, "lastStart", count.LastStart);
+                    WriteNullable(w, "leavesOn", count.LeavesOn);
+                    w.WriteBoolean("canLeave", count.CanLeave(_state.Map.TurnLimit));
+                    w.WriteEndObject();
+                }
+
+                w.WriteEndArray();
+                if (EscapeCount.Line(_state, _content, UnitNames.Of(_state, _content)) is { } line)
+                {
+                    w.WriteString("text", line);
+                }
+                else
+                {
+                    w.WriteNull("text");
+                }
+            });
+        }
+
         if (name is not ("reachable" or "targets" or "forecast" or "threat"))
         {
-            throw new ProtocolException($"query '{name}' is not one of: state, reachable, targets, forecast, threat, terrain, about");
+            throw new ProtocolException($"query '{name}' is not one of: state, reachable, targets, forecast, threat, terrain, about, count");
         }
 
         var unitId = ProtocolJson.RequiredString(request, "unit");

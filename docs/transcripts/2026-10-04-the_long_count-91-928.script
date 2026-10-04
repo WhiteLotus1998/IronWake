@@ -1,0 +1,38 @@
+quest ottilie_2 teodor
+move teodor 5,4
+wait teodor
+move ottilie 4,4
+wait ottilie
+end
+move teodor 9,4
+attack teodor soldier-1
+move ottilie 8,4
+attack ottilie soldier-1 art aimed_shot
+end
+move ottilie 8,3
+attack ottilie hexer-1 art aimed_shot
+item teodor 2
+end
+move ottilie 7,3
+attack ottilie rider-1 art aimed_shot
+move teodor 10,3
+attack teodor archer-1
+end
+move ottilie 10,4
+wait ottilie
+move teodor 10,2
+attack teodor brigand-1
+end
+move ottilie 14,4
+wait ottilie
+move teodor 14,2
+wait teodor
+end
+move teodor 14,3
+wait teodor
+wait ottilie
+end
+recall 73
+recall 72
+exit ottilie
+leave
