@@ -6,9 +6,15 @@ namespace Ironwake.Core.Tests;
 /// expectation is written with; a test that captured the console on its own would pass
 /// on Linux and fail on Windows, as three did (issue 64 before it). Tests that use it
 /// share the process-wide console and must carry <c>[Collection("console")]</c>.
+/// When the environment variable <c>IRONWAKE_CAPTURE_DIR</c> names a directory, every capture
+/// is also written there as its own file, so <c>tools/rejournal.py</c> can regenerate the
+/// journaled transcripts after a change to what the console prints (see that tool).
 /// </summary>
 internal static class ConsoleCapture
 {
+    /// <summary>The variable that turns on <see cref="Run"/>'s copy of each capture.</summary>
+    public const string CaptureDirVariable = "IRONWAKE_CAPTURE_DIR";
+
     /// <summary>
     /// Runs <paramref name="run"/> with <see cref="Console.Out"/> captured, from
     /// <paramref name="workingDirectory"/> when one is given, restoring both afterwards,
@@ -35,6 +41,12 @@ internal static class ConsoleCapture
             Console.SetOut(previous);
         }
 
-        return writer.ToString().Replace("\r\n", "\n");
+        var captured = writer.ToString().Replace("\r\n", "\n");
+        if (Environment.GetEnvironmentVariable(CaptureDirVariable) is { Length: > 0 } dir && Directory.Exists(dir))
+        {
+            File.WriteAllText(Path.Combine(dir, Guid.NewGuid().ToString("N") + ".txt"), captured);
+        }
+
+        return captured;
     }
 }
