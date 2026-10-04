@@ -22,3 +22,18 @@ src/Ironwake.Godot/assets/sound/:
     A clip from elsewhere replaces one only under the same file name, only with a CC0 licence
     stated at its source, and gets its own entry here naming that source; an ambiguous
     licence means the clip is cut, never guessed.
+
+Art packs chosen by Lotus on 2026-10-04, read and recorded before any file enters the repo (the
+originals stay outside git; files made from them get their own entries here when they land):
+
+  Quaternius: Universal Base Characters, Universal Animation Library 1 and 2 (itch.io free
+    tiers), LowPoly RPG Characters (opengameart.org). https://quaternius.com
+    Licence: CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/ (each pack's
+    License.txt). No credit required; credited in CREDITS.md.
+
+  Justin Nichol: FLARE portrait packs one to five (opengameart.org/content/flare-portrait-pack-
+    number-one, -two .. -five; collaborator Clint Bellanger).
+    Licence: CC BY-SA 3.0, https://creativecommons.org/licenses/by-sa/3.0/ (as stated on each
+    page; the zips carry no licence file). Obligations: credit Justin Nichol, link the licence,
+    state that the portraits were modified; the modified portraits are CC BY-SA 3.0; no DRM or
+    added terms on those files that stop others doing what the licence allows.
