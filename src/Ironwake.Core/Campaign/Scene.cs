@@ -55,7 +55,8 @@ public sealed record SceneCondition(ValueList<SceneFact> Facts);
 
 /// <summary>
 /// One line of a scene script (issue 1001): its stable <see cref="Id"/>, never reused once retired;
-/// its <see cref="Speaker"/>, a unit id or <see cref="SceneScripts.Narration"/>; and its text. A line shows
+/// its <see cref="Speaker"/>, a unit id, an incidental the scene declares, <see cref="SceneScripts.Narration"/>
+/// or <see cref="SceneScripts.Rules"/>; and its text. A line shows
 /// only while its <see cref="Condition"/> holds, the line's own facts and its block's together. A line
 /// Lotus has stamped carries <see cref="Lock"/>, <see cref="SceneScripts.LockHash"/> of its text.
 /// </summary>
@@ -67,13 +68,23 @@ public sealed record SceneLine(string Id, string Speaker, string Text)
 }
 
 /// <summary>
+/// An incidental speaker a scene declares (round 345): an unnamed person with at most
+/// <see cref="SceneScripts.IncidentalLinesMax"/> lines and no voice sheet, by a scene-local id and the
+/// name a line prints under (<c>The keeper</c>).
+/// </summary>
+public sealed record SceneIncidental(string Id, string Name);
+
+/// <summary>
 /// A scene script (issue 1001), one file under <c>content/scenes</c>: its id (the file's name), the
-/// campaign point and main-line map it plays at, its lines in order, the ids it has retired, and the
-/// beat sheet that argued for more than <see cref="SceneScripts.LinesMax"/> lines, when one did.
+/// campaign point and main-line map it plays at, its lines in order, the ids it has retired, the
+/// incidental speakers it declares, and the beat sheet that argued for more than
+/// <see cref="SceneScripts.LinesMax"/> lines, when one did.
 /// </summary>
 public sealed record Scene(string Id, ScenePoint Point, string MapId, ValueList<SceneLine> Lines)
 {
     public ValueList<string> Retired { get; init; } = ValueList<string>.Empty;
+
+    public ValueList<SceneIncidental> Incidentals { get; init; } = ValueList<SceneIncidental>.Empty;
 
     public string? Beat { get; init; }
 }
@@ -84,10 +95,20 @@ public static class SceneScripts
     /// <summary>The speaker of a line nobody says.</summary>
     public const string Narration = "narration";
 
+    /// <summary>
+    /// The speaker of a system line (round 345, WRITING.md's Scope): a rules line a card used to carry,
+    /// such as the commands a lesson teaches or the line naming who must not fall. Printed bare, outside
+    /// <see cref="LinesMax"/>, under no word cap and none of WRITING's rules 1 to 11.
+    /// </summary>
+    public const string Rules = "rules";
+
+    /// <summary>The most lines one incidental speaker has in a scene (round 345).</summary>
+    public const int IncidentalLinesMax = 2;
+
     /// <summary>The most words a spoken line holds (WRITING.md).</summary>
     public const int SpokenWordsMax = 25;
 
-    /// <summary>The most lines a scene holds unless its <see cref="Scene.Beat"/> names the beat sheet that argued for more (WRITING.md).</summary>
+    /// <summary>The most lines a scene holds, its <see cref="Rules"/> lines aside, unless its <see cref="Scene.Beat"/> names the beat sheet that argued for more (WRITING.md).</summary>
     public const int LinesMax = 40;
 
     /// <summary>The words a <c>returned</c> fact takes, the campaign record's own names (PROTOCOL.md).</summary>

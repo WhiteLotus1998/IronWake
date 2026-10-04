@@ -32,8 +32,9 @@ public class SceneScriptTests
         Assert.Equal(ScenePoint.Camp, scene.Point);
         Assert.Equal("starting_alone", scene.MapId);
         Assert.Equal(new[] { "f9" }, scene.Retired);
-        Assert.Equal(new[] { "f1", "f2", "f3", "f4", "f5", "f6" }, scene.Lines.Select(l => l.Id));
-        Assert.Equal(new[] { SceneScripts.Narration, "captain", "captain", "captain", "maud", "brigand" }, scene.Lines.Select(l => l.Speaker));
+        Assert.Equal(new[] { "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8" }, scene.Lines.Select(l => l.Id));
+        Assert.Equal(new[] { SceneScripts.Narration, "captain", "captain", "captain", "maud", "brigand", "keeper", SceneScripts.Rules }, scene.Lines.Select(l => l.Speaker));
+        Assert.Equal(new SceneIncidental("keeper", "The keeper"), scene.Incidentals.Single());
         Assert.Null(scene.Lines[0].Condition);
         Assert.Equal(new SceneFact(SceneFactKind.Fallen, ValueList<string>.Of("maud"), false), scene.Lines[2].Condition!.Facts.Single());
         Assert.Equal(new SceneFact(SceneFactKind.Fallen, ValueList<string>.Of("maud"), true), scene.Lines[3].Condition!.Facts.Single());
@@ -48,10 +49,10 @@ public class SceneScriptTests
         var scene = FixtureScene();
         var start = CampaignRecord.Start(Real, 1);
 
-        Assert.Equal(new[] { "f1", "f2", "f4", "f6" }, SceneScripts.Shown(scene, start, Real).Select(l => l.Id));
-        Assert.Equal(new[] { "f1", "f2", "f3", "f6" }, SceneScripts.Shown(scene, start with { Fallen = ValueList<string>.Of("maud") }, Real).Select(l => l.Id));
+        Assert.Equal(new[] { "f1", "f2", "f4", "f6", "f7", "f8" }, SceneScripts.Shown(scene, start, Real).Select(l => l.Id));
+        Assert.Equal(new[] { "f1", "f2", "f3", "f6", "f7", "f8" }, SceneScripts.Shown(scene, start with { Fallen = ValueList<string>.Of("maud") }, Real).Select(l => l.Id));
         var supported = start with { Rapport = ValueList<Rapport>.Of(new Rapport("captain", "maud", 16)) };
-        Assert.Equal(new[] { "f1", "f2", "f4", "f5", "f6" }, SceneScripts.Shown(scene, supported, Real).Select(l => l.Id));
+        Assert.Equal(new[] { "f1", "f2", "f4", "f5", "f6", "f7", "f8" }, SceneScripts.Shown(scene, supported, Real).Select(l => l.Id));
     }
 
     [Fact]
@@ -117,6 +118,7 @@ public class SceneScriptTests
     [InlineData("a captain (human:ad8b) (human:ad8b): x", "lock", "one lock")]
     [InlineData("a captain (if drake grown big): x", "if", "takes 0 or 1")]
     [InlineData("a captain (if freed-fell maud): x", "if", "takes 0")]
+    [InlineData("a keeper: x", "speaker", "not a unit id")]
     [InlineData("just words", null, "not a header")]
     [InlineData("a captain:", null, "not a header")]
     public void ABadLineFailsLoadNamingTheFileTheEntryAndTheField(string body, string? field, string problem)
@@ -162,6 +164,33 @@ public class SceneScriptTests
         Assert.Equal(SceneScripts.LinesMax + 1, scene.Lines.Count);
         Assert.Equal("round 999", scene.Beat);
         Assert.Equal(SceneScripts.LinesMax, Parse(string.Concat(Enumerable.Range(1, SceneScripts.LinesMax).Select(i => $"l{i} narration: Line {i}.\n"))).Lines.Count);
+    }
+
+    [Fact]
+    public void AnIncidentalSpeakerIsDeclaredOnceAndSpeaksAtMostTwice()
+    {
+        static Scene With(string header, string body) =>
+            SceneFormat.Parse(new ContentFile("scenes/x.txt", $"scene: x\nplays: after starting_alone\n{header}\n{body}"), Real);
+
+        Assert.Equal(2, With("incidental: girl = A girl at the well", "a girl: We're well.\nb girl: Thank you.").Lines.Count);
+        var third = Assert.Throws<ContentException>(() => With("incidental: girl = A girl at the well", "a girl: One.\nb girl: Two.\nc girl: Three."));
+        Assert.Equal(("c", "speaker"), (third.Entry, third.Field));
+        Assert.Equal("incidental", Assert.Throws<ContentException>(() => With("incidental: maud = Not her", "a maud: x")).Field);
+        Assert.Equal("incidental", Assert.Throws<ContentException>(() => With("incidental: rules = Nobody", "a narration: x")).Field);
+        Assert.Equal("incidental", Assert.Throws<ContentException>(() => With("incidental: girl = One\nincidental: girl = Two", "a narration: x")).Field);
+        Assert.Equal("incidental", Assert.Throws<ContentException>(() => With("incidental: girl", "a narration: x")).Field);
+    }
+
+    [Fact]
+    public void RulesLinesSitOutsideTheBudgetAndTheWordCap()
+    {
+        var body = string.Concat(Enumerable.Range(1, SceneScripts.LinesMax).Select(i => $"l{i} narration: Line {i}.\n"))
+            + "r1 rules: " + string.Join(' ', Enumerable.Repeat("word", 40)) + "\n";
+
+        var scene = Parse(body);
+
+        Assert.Equal(SceneScripts.LinesMax + 1, scene.Lines.Count);
+        Assert.Equal("beat", Fails(body + "l41 narration: One more.\n").Field);
     }
 
     [Fact]
@@ -217,7 +246,9 @@ public class SceneScriptTests
         var json = ProtocolJson.Scene(scene, SceneScripts.Shown(scene, CampaignRecord.Start(Real, 1), Real));
 
         Assert.StartsWith("{\"scene\":\"fixture_alone\",\"point\":\"camp\",\"map\":\"starting_alone\",\"lines\":[{\"id\":\"f1\",\"speaker\":\"narration\",\"text\":\"The road east is empty in both directions.\"}", json);
-        Assert.Contains("{\"id\":\"f6\",\"speaker\":\"brigand\",\"text\":\"Keep walking.\"}]}", json);
+        Assert.Contains("{\"id\":\"f6\",\"speaker\":\"brigand\",\"text\":\"Keep walking.\"}", json);
+        Assert.Contains("{\"id\":\"f8\",\"speaker\":\"rules\",", json);
+        Assert.EndsWith("],\"incidental\":[{\"id\":\"keeper\",\"name\":\"The keeper\"}]}", json);
         Assert.DoesNotContain("\"f3\"", json);
     }
 
@@ -242,7 +273,7 @@ public class SceneScriptTests
             var code = 0;
             var output = ConsoleCapture.Run(() => code = Ironwake.Cli.Program.Main(new[] { "campaign", "--seed", "631", "--script", path, "--content", dir, "--log", log }));
 
-            Assert.Contains("you have three.)\n\n-- Starting Alone --\nThe road east is empty in both directions.\nAlder Fenn: Nobody on the list has come.\nAlder Fenn: The chaplain's name is still on it.\nBrigand: Keep walking.\n\n-- Before map 1 of 10", output);
+            Assert.Contains("you have three.)\n\n-- Starting Alone --\nThe road east is empty in both directions.\nAlder Fenn: Nobody on the list has come.\nAlder Fenn: The chaplain's name is still on it.\nBrigand: Keep walking.\nThe keeper: Bodies off the road before dark.\n(forecast <unit> <target> prints a strike and its counter before you\ntake it.)\n\n-- Before map 1 of 10", output);
             Assert.Contains("\n-- Starting Alone --\nAlder Fenn: East, then.\n\n", output);
             Assert.True(output.IndexOf("Alder Fenn: East, then.", StringComparison.Ordinal) > output.IndexOf("-- Before map 1 of 10", StringComparison.Ordinal));
             Assert.Contains("by way of the mill.\n\n-- After Starting Alone --\nThe road is quiet again.\n\n-- The Mill --\n", output);

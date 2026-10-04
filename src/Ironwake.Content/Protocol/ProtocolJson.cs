@@ -1483,7 +1483,8 @@ public static class ProtocolJson
     /// <summary>
     /// A scene as it plays (issue 1001): <c>scene</c> (its id), <c>point</c> (<c>before</c>, <c>camp</c>
     /// or <c>after</c>), <c>map</c> (the campaign map id), and <c>lines</c>, the lines shown on the
-    /// record it plays against, each <c>id</c>, <c>speaker</c> (a unit id or <c>narration</c>) and <c>text</c>.
+    /// record it plays against, each <c>id</c>, <c>speaker</c> (a unit id, an incidental's id, <c>narration</c>
+    /// or <c>rules</c>) and <c>text</c>; then, when the scene declares any, <c>incidental</c>, each <c>id</c> and <c>name</c>.
     /// </summary>
     public static string Scene(Scene scene, IEnumerable<SceneLine> shown) => Write(w =>
     {
@@ -1502,6 +1503,20 @@ public static class ProtocolJson
         }
 
         w.WriteEndArray();
+        if (scene.Incidentals.Count > 0)
+        {
+            w.WriteStartArray("incidental");
+            foreach (var incidental in scene.Incidentals)
+            {
+                w.WriteStartObject();
+                w.WriteString("id", incidental.Id);
+                w.WriteString("name", incidental.Name);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
         w.WriteEndObject();
     });
 

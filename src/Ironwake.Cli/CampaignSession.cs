@@ -2094,7 +2094,7 @@ public sealed class CampaignSession
     /// The scenes that play at <paramref name="point"/> of campaign map <paramref name="mapId"/>, named <paramref name="mapName"/> (issue 1001), shown
     /// against <paramref name="record"/>: per scene with a line to show, the heading a card at that
     /// point carries, then each shown line wrapped to <see cref="CardWidth"/>, a spoken one after its
-    /// speaker's name, and a blank line after the last. Empty when nothing plays there. Screen text,
+    /// speaker's name and a narration or rules line bare, and a blank line after the last. Empty when nothing plays there. Screen text,
     /// as a card is, so the event log leaves it out.
     /// </summary>
     public static IReadOnlyList<string> SceneLines(CampaignRecord record, GameContent content, ScenePoint point, string mapId, string mapName)
@@ -2112,7 +2112,7 @@ public sealed class CampaignSession
             lines.Add(point == ScenePoint.After ? $"-- After {mapName} --" : $"-- {mapName} --");
             foreach (var line in shown)
             {
-                lines.AddRange(Wrap(line.Speaker == SceneScripts.Narration ? line.Text : $"{SpeakerName(names, content, line.Speaker)}: {line.Text}", CardWidth));
+                lines.AddRange(Wrap(line.Speaker is SceneScripts.Narration or SceneScripts.Rules ? line.Text : $"{SpeakerName(names, content, scene, line.Speaker)}: {line.Text}", CardWidth));
             }
 
             lines.Add("");
@@ -2121,9 +2121,10 @@ public sealed class CampaignSession
         return lines;
     }
 
-    /// <summary>A scene speaker's name: the record's name for a cast member or hire, else the unit template's.</summary>
-    private static string SpeakerName(UnitNames names, GameContent content, string speaker) =>
-        names[speaker] is var name && name != speaker ? name : content.Units.TryGetValue(speaker, out var unit) ? unit.Name : speaker;
+    /// <summary>A scene speaker's name: the scene's for an incidental, the record's for a cast member or hire, else the unit template's.</summary>
+    private static string SpeakerName(UnitNames names, GameContent content, Scene scene, string speaker) =>
+        scene.Incidentals.FirstOrDefault(i => i.Id == speaker)?.Name
+            ?? (names[speaker] is var name && name != speaker ? name : content.Units.TryGetValue(speaker, out var unit) ? unit.Name : speaker);
 
     private static IReadOnlyList<string> Card(string heading, ValueList<string> paragraphs)
     {

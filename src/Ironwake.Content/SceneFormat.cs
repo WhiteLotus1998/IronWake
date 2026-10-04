@@ -13,10 +13,15 @@ namespace Ironwake.Content;
 /// plays: after the_mill
 /// beat: round 350
 /// retired: m4, m9
+/// incidental: keeper = The keeper
 /// </code>
 /// <c>scene</c> is the file's name; <c>plays</c> is <c>before</c>, <c>camp</c> or <c>after</c> and a
 /// campaign map id; <c>beat</c> (optional) names the beat sheet that argued for more than
-/// <see cref="SceneScripts.LinesMax"/> lines; <c>retired</c> (optional) lists ids no line may take again.
+/// <see cref="SceneScripts.LinesMax"/> lines; <c>retired</c> (optional) lists ids no line may take again;
+/// each <c>incidental</c> (optional, one a line) declares an unnamed speaker by a scene-local id and the
+/// name its lines print under, at most <see cref="SceneScripts.IncidentalLinesMax"/> lines each. A speaker
+/// is a unit id, a declared incidental, <c>narration</c>, or <c>rules</c> for a system line, which the
+/// line budget and the word cap skip.
 /// Then each line is <c>&lt;id&gt; &lt;speaker&gt; [(if &lt;condition&gt;)] [(human:&lt;hash&gt;)]: &lt;text&gt;</c>,
 /// and <c>if &lt;condition&gt;</c> on its own line opens a block that <c>end</c> closes; blocks do not
 /// nest, and a line in one shows only when the block's condition and its own both hold. A condition is
@@ -30,7 +35,7 @@ public static class SceneFormat
     /// <summary>The directory, under the content root, the scene scripts live in.</summary>
     public const string Directory = "scenes";
 
-    private static readonly Regex Header = new(@"^(scene|plays|beat|retired):\s*(.*)$", RegexOptions.CultureInvariant);
+    private static readonly Regex Header = new(@"^(scene|plays|beat|retired|incidental):\s*(.*)$", RegexOptions.CultureInvariant);
 
     private static readonly Regex Line = new(
         @"^(?<id>[a-z0-9_]+) (?<speaker>[a-z0-9_]+)(?<tags>(?: \((?:if [^()]*|human:[^()]*)\))*): (?<text>.*)$",
@@ -66,6 +71,7 @@ public static class SceneFormat
         string? beat = null;
         (ScenePoint Point, string MapId)? plays = null;
         var retired = new List<string>();
+        var incidentals = new List<SceneIncidental>();
         var lines = new List<SceneLine>();
         SceneCondition? block = null;
         var blockOpenedAt = 0;
@@ -101,6 +107,9 @@ public static class SceneFormat
                         break;
                     case "plays":
                         plays = ParsePlays(file, where, value, content);
+                        break;
+                    case "incidental":
+                        incidentals.Add(ParseIncidental(file, where, value, incidentals, content));
                         break;
                     case "beat":
                         beat = value.Length > 0 ? value : throw new ContentException(file.Name, where, "beat", "names no beat sheet");
@@ -150,7 +159,7 @@ public static class SceneFormat
                 throw new ContentException(file.Name, where, null, "not a header, a line ('<id> <speaker>: <text>'), 'if <condition>' or 'end'");
             }
 
-            lines.Add(ParseLine(file, line, block, content));
+            lines.Add(ParseLine(file, line, block, incidentals, content));
         }
 
         if (block is not null)
@@ -179,9 +188,18 @@ public static class SceneFormat
             throw new ContentException(file.Name, null, null, "the scene has no lines");
         }
 
-        if (lines.Count > SceneScripts.LinesMax && beat is null)
+        var budgeted = lines.Count(l => l.Speaker != SceneScripts.Rules);
+        if (budgeted > SceneScripts.LinesMax && beat is null)
         {
-            throw new ContentException(file.Name, null, "beat", $"{lines.Count} lines, over {SceneScripts.LinesMax}; a longer scene names the beat sheet that argued for it");
+            throw new ContentException(file.Name, null, "beat", $"{budgeted} lines, over {SceneScripts.LinesMax}; a longer scene names the beat sheet that argued for it");
+        }
+
+        foreach (var incidental in incidentals)
+        {
+            if (lines.Where(l => l.Speaker == incidental.Id).Skip(SceneScripts.IncidentalLinesMax).FirstOrDefault() is { } extra)
+            {
+                throw new ContentException(file.Name, extra.Id, "speaker", $"'{incidental.Id}' is an incidental speaker, at most {SceneScripts.IncidentalLinesMax} lines a scene; more needs a voice sheet");
+            }
         }
 
         var seen = new HashSet<string>(StringComparer.Ordinal);
@@ -201,6 +219,7 @@ public static class SceneFormat
         return new Scene(id, at.Point, at.MapId, ValueList<SceneLine>.From(lines))
         {
             Retired = ValueList<string>.From(retired),
+            Incidentals = ValueList<SceneIncidental>.From(incidentals),
             Beat = beat,
         };
     }
@@ -223,6 +242,11 @@ public static class SceneFormat
         if (scene.Retired.Count > 0)
         {
             sb.Append("retired: ").Append(string.Join(", ", scene.Retired)).Append('\n');
+        }
+
+        foreach (var incidental in scene.Incidentals)
+        {
+            sb.Append("incidental: ").Append(incidental.Id).Append(" = ").Append(incidental.Name).Append('\n');
         }
 
         sb.Append('\n');
@@ -280,18 +304,34 @@ public static class SceneFormat
         return (point.Value, words[1]);
     }
 
-    private static SceneLine ParseLine(ContentFile file, Match line, SceneCondition? block, GameContent content)
+    private static SceneIncidental ParseIncidental(ContentFile file, string where, string value, List<SceneIncidental> declared, GameContent content)
+    {
+        var parts = value.Split('=', 2, StringSplitOptions.TrimEntries);
+        if (parts.Length != 2 || !Id.IsMatch(parts[0]) || parts[1].Length == 0)
+        {
+            throw new ContentException(file.Name, where, "incidental", $"'{value}' is not '<id> = <name>'");
+        }
+
+        if (parts[0] is SceneScripts.Narration or SceneScripts.Rules || content.Units.ContainsKey(parts[0]) || declared.Any(d => d.Id == parts[0]))
+        {
+            throw new ContentException(file.Name, where, "incidental", $"'{parts[0]}' is already a speaker");
+        }
+
+        return new SceneIncidental(parts[0], parts[1]);
+    }
+
+    private static SceneLine ParseLine(ContentFile file, Match line, SceneCondition? block, List<SceneIncidental> incidentals, GameContent content)
     {
         var id = line.Groups["id"].Value;
         var speaker = line.Groups["speaker"].Value;
         var text = line.Groups["text"].Value.Trim();
-        if (speaker != SceneScripts.Narration && !content.Units.ContainsKey(speaker))
+        if (speaker is not (SceneScripts.Narration or SceneScripts.Rules) && !content.Units.ContainsKey(speaker) && incidentals.All(i => i.Id != speaker))
         {
-            throw new ContentException(file.Name, id, "speaker", $"'{speaker}' is not a unit id or '{SceneScripts.Narration}'");
+            throw new ContentException(file.Name, id, "speaker", $"'{speaker}' is not a unit id, a declared incidental, '{SceneScripts.Narration}' or '{SceneScripts.Rules}'");
         }
 
         var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
-        if (speaker != SceneScripts.Narration && words > SceneScripts.SpokenWordsMax)
+        if (speaker is not (SceneScripts.Narration or SceneScripts.Rules) && words > SceneScripts.SpokenWordsMax)
         {
             throw new ContentException(file.Name, id, "text", $"{words} words; a spoken line holds at most {SceneScripts.SpokenWordsMax}");
         }
