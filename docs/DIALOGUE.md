@@ -9,8 +9,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 - **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: the Starting Alone and Mill drafts (#1005), #805's cold plays, #931, Wren's talk, a Drover map (293), the dash, the wind, the one answer. Cold chairs owed: the Oath Stone; the Rookery, fresh seed, an ally who counters (341). Code owes Rook's arm a fresh seed.
 - **Experiments.** At most three spikes wait on a deciding play; a new one waits (330, 0237). With nothing `ready`, the Builder plays a tuned map warm instead. A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway. An attack whose counter kills the attacker asks; `attack ... !` swings (336; #975).
-- **Rules go on screen, geometry does not** (42, 44).
-- **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only on units in his reach is scenery (39, 72).
+- **Rules go on screen, geometry does not** (42, 44). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only on units in his reach is scenery (39, 72).
 - **Reading the Sim.** Under gate 1's 60, `tuned` only by the stall clause (0100).
 
 ## Rules, settled (details in DESIGN.md and the records named)
@@ -68,11 +67,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 
 ## The campaign's story (rounds 186 to 211, 192; 0121; DESIGN 14)
 
-- **A levy company**, one arrival per map to the captain plus five (Maud, Pell, Teodor, Ottilie, the pick; 213); `cadet` shows as Levy. Captain male or female (#648). Map 1 is Starting Alone, exempt from the Fun Gate.
+- **A levy company**, one arrival per map to the captain plus five (Maud, Pell, Teodor, Ottilie, the pick; 213); `cadet` shows as Levy. Captain male or female (#648). Map 1, Starting Alone, is Fun Gate exempt.
 - **The branch** (#633): Keziah against Rook; the passed one returns on map 9 (0010). **`talk` kept** (0193): cost a camp trade, a bait, a flier's turn (#844). #81's drift kept (0226). **The field is `tuned` on Keziah's pick** (#936, 0233). Rook's pick: **`seen_far: rook 2` kept** (#973, 0240; Chat warm 7/7/7, Code 7/8/6); tuned if Code's fresh seed reads surprise 7.
-- **The pool is the ten we have;** the four side characters (213) are met by choice, one a map at most.
+- **The pool is the ten we have;** four side characters (213) met by choice, one a map at most.
 - **Quests (192; 260):** a main member's two are trial-shape side maps, quest 2 larger, paying the signature item; quest 1 after their second map, quest 2 two later, two an interlude; permadeath. Gate: a cold chair 7+ on tension and choice, and the Sim. The slot table follows STORY (Pell after 4 and 6, Wren none). Quest 1 pays a class door where one exists; quest-1 second signatures ship with the first, once 13.18 is kept.
-- **Signature items:** the best shop weapon of its rank plus its own art (0099), or a little better with none; at most 15 percent over it per combat. Bound. **Maud's Psalter (260, 261; built, 0196):** rank D, art **Unasked**: double heal on an ally unmoved and unacted, capped at max HP; ends as a Wait. Heal arm at most 1.15 against the best stocked heal at or below its rank.
+- **Signature items:** the best shop weapon of its rank plus its own art (0099), or a little better with none; at most 15 percent over it per combat. Bound. **Maud's Psalter (260, 261; built, 0196):** rank D, art **Unasked**: double heal on an ally unmoved and unacted, capped at max HP; ends as a Wait. Heal arm at most 1.15 of the best stocked heal at its rank or below.
 - **The heirloom is Teodor's lance** (#646): four stages on a hidden counter, none before map 5, numbers honest. Quest 1 holds it at sound until won, then wakes at 10. Quest 2 (built, 0205) names it `the First Warden's Lance` and pays **Turn the Key** (269 to 271): woken only, -4 Mt, cost 3; a hit on a survivor locks it while Teodor stays beside it. A lost quest reopens.
 - **13.23 Kinsbane** (#645): Keziah's; an outland god in the scythe. Quest 2, **The Oath Stone** (0224, 0225), a board, no verb: Joab holds the short road; a win records `KeziahOath` (#634). Limit 10, the fort and its cliff kept (0232). **#940 kept** (0239): Chat warm 8/7/7, Code 8/7/6; a cold chair gates. #991: the lethal-counter line names the first-round miss chance.
 - **Origin** (#681, #648; 201): the captain's card only, a first support by origin; gate 1 within 5.
@@ -85,7 +84,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling.
 - **Saves and difficulty** (#663, #664): camp saves only; Recruit, Tactician ~15 off `normal`. The forge (#647): Refine +2 common, +3 rare.
 - **Supports** (#77; 0183 to 0189; 258, 259): 3 to 4 partners plus the captain, a kind per pair (#809); marriage S (#634). Read beside a partner (best, not sum). C 16, B 28, A 48; a captain pair at the higher rate (4).
-- **Chests** (#649, #679; built): guarded or a puzzle; opening is the action; overflow to the wagon; an enemy on one shuts it.
+- **Chests** (#649, #679): guarded or a puzzle; opening is the action; an enemy on one shuts it.
 
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723). Frozen iron is the rare Refine material and chills (#702).
 - **Second tier (#704; provisional):** gate L7, rank C. Campaign-only curve 1,1,2,3,2,6,7,6,4,8 (0161, 0178, 0191); a tuned map under 60 lowers the point, not the board; the bend reads `--curve`'s `carried` (#764). The branch pick joins at the living median at the raid's camp (#763). Money waits (0051).
@@ -96,13 +95,14 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 ## How we write (Lotus, via #780, 2026-10-02)
 
 - **`docs/WRITING.md` is in** (#811, 295); all sixteen sheets in (#908 to #915). The sworn drop every name but one the oath hasn't taken yet; a sworn who names no one is past reach. The Kin's echo is deletion only (one a scene). Rook's "I'm afraid" goes; Bet's supports are camp barks.
-- **The split (344, 345):** Chat writes the main scenes' beats and drafts, Code the supports' beats and prose; each cold-reads the other. Guards: the sheet's author has the binding read on that character (fix it or argue it, never merge over it); an S line an ending card quotes or a big scene pays off is scene-side, so no S beat sheet before its #634 card; every fifth support is read beside the four before it (openings, closings, line shapes), and of two that match the newer changes. Writing PRs wait on the cold read; the Partner enables auto-merge (#1002 to #1005).
-- **Map 1 and 2 beats (344 to 346; #1005):** journal voice retired; stage lines third person, present, plain. System lines are the map's rules lines, outside the budget (#1001). An incidental speaker (two lines at most) needs no sheet, borrows no images. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse counted in meals, his one dry line the region prediction. Keep silver planted once: the brigands' coin, mark in a stage line, into Hask's purse unremarked. The gate: an unnamed sworn sergeant, one line or none (Bet left years before). The Mill: the list match before the map. **An arrival scene ends on the arriving character's act** (Maud's, on the nameless dead).
+- **The split (344, 345):** Chat writes the main scenes' beats and drafts, Code the supports' beats and prose; each cold-reads the other. Guards: the sheet's author has the binding read on that character (fix it or argue it, never merge over it); an S line an ending card quotes or a big scene pays off is scene-side, so no S beat sheet before its #634 card; every fifth support is read beside the four before it; of two that match, the newer changes. Writing PRs auto-merge on green; the cold read follows on the Table, its changes in a follow-up PR (Lotus, 2026-10-04; WRITING 6).
+- **Map 1 and 2 beats (344 to 346; #1005):** no journal voice; stage lines third person, present, plain. System lines are rules lines, outside the budget (#1001). Incidentals (two lines at most) need no sheet. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse in meals; one dry line, the region prediction. Keep silver planted once: the brigands' coin into Hask's purse, unremarked. The gate: an unnamed sworn sergeant, one line or none. The Mill: list match before the map. **An arrival scene ends on the arriving character's act.**
 - **Canon guard (346):** the sworn not literally feeling frost is not canon unless STORY adopts it as its own Table point. Map 1 carries one plant. The shrine script is the Kin's paper trail, never set dressing; old deeds use the copyists' hand (#1013).
+- **Cards (348; #1019):** a named feeling never closes a card or scene; Rook's is spent mid-card in the Rookery's, to the drake; it ends on the drake's act. A side map with no scene spends its booked beats in its quest card. After the Grange, keep silver lines name the keep, never "someone".
 
-## Lotus's mechanics build (rounds 239, 240; #786)
+## Lotus's mechanics build (239, 240; #786)
 
-- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign from the title, mouse and keys, script parity, no stop-playing bug to Brackwater, a "what to try" note. Chat signs on its parity transcript, Code on a hand run.
+- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign from the title, mouse and keys, script parity, no stop-playing bug to Brackwater, a note. Chat signs on its parity transcript, Code on a hand run.
 
 ## Open, the Table's
 
@@ -117,9 +117,9 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 
 - **Engine** (0008): Godot 4 .NET in this repo; the core stays engine-free; any renderer consumes the versioned protocol (0046) and carries no rules.
 - **Builder race** (#735, 0169; provisional): one Builder at a time by claim, wait and re-read; the earlier claim wins (ROUTINES.md section 2).
-- **Art:** human-made only (Lotus, 2026-10-03); packs recoloured to LOOK.md, commissions at commercial rates, licences first; the list is `docs/ART_SHOPPING.md` (#816).
+- **Art:** human-made only (Lotus, 2026-10-03); packs recoloured to LOOK.md, commissions paid, licences first; the list is `docs/ART_SHOPPING.md` (#816).
 - **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Delivered art under chroma 32, one amber accent (0223).
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; 316-342 #935; #994 343 on (writing pipeline 343-346).
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; 316-342 #935; #994 343 on (writing pipeline 343-348).

@@ -127,7 +127,7 @@
         "(Seize: Rook stands on the roll room, 12,1, by the end of turn 8; its one door is 12,2. The map is lost if Rook falls. A flier crosses the gorge; on foot, only the road bridge crosses the gorge. A bow crit grounds a flier; over water she then cannot move. Pursuers from turn 2, announced.)"
       ],
       "after": [
-        "The roll enters the chapter's claim to the extra seat. Pinned under it, a receipt: paid in full, in new keep silver. Under that, the drake's number, and Rook's name on the line below. \"Someone in your keep bought a seat with us.\" She folds the receipt into her glove and leaves the roll open for the next reader.",
+        "The last page of the roll is the chapter's claim to the extra seat. Pinned under it, a receipt: paid in full, in new keep silver. Under that, the drake's number, and Rook's name on the line below. \"Your keep bought a seat with us.\" She folds the receipt into her glove and leaves the roll open.",
         "(The Drover is open to Rook at her second promotion: the other door above the Skyrider.)"
       ] },
     { "id": "teodor_2", "member": "teodor", "part": 2, "map": "the_wardens_gate", "names": "family_lance", "rare": 3,
@@ -150,10 +150,10 @@
     { "id": "rook_2", "member": "rook", "part": 2, "map": "the_rookery", "common": 2,
       "before": [
         "Rook asks for one more day. The ledger in the rookery's loft, on the fells above the chapter house, still lists one cold drake as a holding and one rider on the line below. The roost is full of the church's wingriders. \"I know every one of them by how they land. They'll follow. Let them.\"",
-        "(Escape: get everyone off the east edge, 14,4 to 14,6, by the end of turn 9. Rook leaving wins the map, and anyone still on the board is left behind as fallen, so Rook leaves last. The map is lost if Rook falls. On foot only the bridge at 7,5 and 8,5 crosses the ravine; an enemy bow's crit grounds her; over water she then cannot move. Riders from the rookery behind from turn 2, announced.)"
+        "(Escape: get everyone off the east edge, 14,4 to 14,6, by the end of turn 9. Rook leaving wins the map, and anyone still on the board is left behind as fallen, so Rook leaves last. The map is lost if Rook falls. On foot only the bridge at 7,5 and 8,5 crosses the ravine; an enemy bow's crit grounds Rook; over water she then cannot move. Riders from the rookery behind from turn 2, announced.)"
       ],
       "after": [
-        "The ledger lies open in the loft where it always has. Rook strikes the holding line, then her own, one stroke each, and leaves the pen across the page. Down the fell she talks to the drake the whole way, long sentences, unhurried. The wind off the tops takes most of it, and nobody asks for the rest."
+        "Rook strikes the holding line in the loft's ledger, then her own, and leaves the pen across the page. Halfway down the fell, to the drake: \"It was only us two on that page, and now there's no page, and I'm lonely, with you breathing down my neck.\" The drake leans on her the rest of the way."
       ] },
     { "id": "keziah_2", "member": "keziah", "part": 2, "map": "the_oath_stone", "common": 2,
       "before": [
