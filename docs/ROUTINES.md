@@ -22,7 +22,11 @@ can work:
    exits 0 with "no gates registered yet".
 2. Add .github/workflows/ci.yml with one job named `ci`: setup-dotnet
    (8.x), restore, build, test, and
-   `dotnet run --project src/Ironwake.Sim -- --smoke`.
+   `dotnet run --project src/Ironwake.Sim -- --smoke`. (Since #970 the
+   job first parses every `.github/workflows/*.yml` with
+   `tests/workflows/parse_workflows.py` and shows the parse refusing
+   `tests/workflows/cr-in-run-block.yml`, the #654 bytes, so a workflow
+   GitHub would refuse cannot pass the required check.)
 3. Add .gitignore for .NET and a short README pointing at docs/DESIGN.md
    and CLAUDE.md.
 4. Create docs/DIALOGUE.md (heading, "Nothing agreed yet beyond
@@ -210,7 +214,7 @@ comments.
 - A scheduled pass that did not run leaves no trace of its own; the next pass of that routine says so in its issue, and the Builder's next STATE.md mentions it if a `critic` issue is missing for a slot. (The Critic's two missed passes in the week of 2026-09-20 were found by the Critic itself on the 25th, #155.)
 - A run that dies mid-issue leaves `in-progress` on the issue. The next Builder run takes over anything `in-progress` for more than 20 hours with no open PR, resuming from the pushed branch if there is one.
 - A PR that ends up conflicting or red waits; the next Builder run rebases and repairs it before taking new work. Every run rebases on `main` before opening its PR.
-- A failed `partner` or `ci` workflow run is filed as a `bug` by the Critic; three in a row on one routine gets the Critic's summary labeled `fork`.
+- A workflow file that does not parse fails the required `ci` check before the build (#970), so it cannot auto-merge. A failed `partner` or `ci` workflow run is filed as a `bug` by the Critic; three in a row on one routine gets the Critic's summary labeled `fork`.
 - Lotus's daily owner check (a local scheduled task in his desktop app) reports fork issues, stuck PRs, failed workflow runs, and what merged in the last day.
 - The cloud sandbox image carries stale third-party PPAs; every prompt knows to delete them from `/etc/apt/sources.list.d/` if `apt-get update` fails.
 - Routine runs count against Lotus's plan usage (the all-models weekly bar, and the Fable bar that the Partner and the Critic draw on since the Builder moved to Opus 5.5, DECISIONS/0009) and a daily per-account run cap. If wakes are being skipped, the nightly Builder still answers the Table; if usage bites, the cut order is in DECISIONS/0009.

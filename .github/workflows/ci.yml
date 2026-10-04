@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Workflow files parse
+        run: python3 tests/workflows/parse_workflows.py .github/workflows/*.yml
+      - name: The workflow parse fires on the #654 bytes
+        run: |
+          if python3 tests/workflows/parse_workflows.py tests/workflows/cr-in-run-block.yml; then echo "::error::parse_workflows.py passed a file with a carriage return in a run block"; exit 1; fi
+          echo "cr-in-run-block.yml refused"
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.x

@@ -4,7 +4,7 @@ Updated: 2026-10-04. Rewritten, not appended; under 20 KB (#401); history in git
 
 ## Where we are
 
-Phase 3 is under way. #969: `show` names a signature art's item, and `not carried` when it is not in the pack; #970, #971 `ready`. #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
+Phase 3 is under way. #970: `ci` parses the workflow files first; #971 `ready`. #963 built `campaign --load <save> --reseed N` (0238). #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked. The showcase (#509, 0092) is closed at 8/7 (round 169).
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233; Rook's pick open, #973). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
 4349 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
@@ -97,6 +97,7 @@ Kept on samples: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars
 - Repo is public (0006); `main` is protected by the `ci` check and PRs auto-merge on green. Routine pushes use `issue/<n>-<slug>`, falling back to `claude/`.
 - Builder race guards (ROUTINES.md section 2, #735, 0169), bind every Builder that reads this file: with the chain on, a cron slot defers (rule 1); every Builder claims with a comment, waits 30 s and re-reads, the earlier claim winning (rule 2); a rotation re-checks first (rule 3). Pending: Lotus pastes section 2's prompt lines into the stored routine once (not a fork).
 - Routines (ROUTINES.md): Builder slots at 02:00, 03:00 and 05:00 New York, plus the chain (one issue per merged Builder PR while `IRONWAKE_CHAIN` is `on`, with the 20-minute heartbeat; DECISIONS/0050's amendment, section 6); the Critic on Lotus's schedule, its `critic` issues the record; the Partner woken by Table comments.
+- `ci` parses `.github/workflows/*.yml` before the build (#970).
 - Sim: `--smoke` (CI, gates 5 to 8, the signature ceiling, origin by class); `--heirloom <item>` (#646); `--kinsbane` (#804); `--levels` (#704, #738); `--supports [--pair <a> <b>]` (#77); `--ladder [--map <id>]` (#705); `--finale <map> [--level N]` (#692); `--full <map>|<file>|--all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D]` (gates 1 to 8, about a minute and a half per map at 200 seeds in Debug; not in CI); `--trace <map> <seed>` (a script the CLI replays under `--strict`); `--keep [<edit> <x,y>]...`; `--hitband`. Reads: `docs/measurements/`.
 - Content shapes: `ContentLoader`. `units/cast.json` is the roster, captain first; `rules.json` the map-free constants. Stats keys `hp str mag dex spd lck def res cha`; terrain `cost` `null` is impassable.
 - Map files: DESIGN section 10 and 0011; hand-edited maps are canonical (`MapFormat.Write`). Coordinates are `x,y` from the top-left, 0-based; CLI slots count from 1.
