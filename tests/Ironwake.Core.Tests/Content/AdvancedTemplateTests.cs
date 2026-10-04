@@ -37,14 +37,17 @@ public class AdvancedTemplateTests
         Assert.True(Shipped.StatsOf(template).Hp >= Shipped.StatsOf(under).Hp);
     }
 
-    /// <summary>A unique class (issue 706) is one cast member's other door, never fielded by the enemy, so it has no template.</summary>
+    /// <summary>
+    /// A unique class (issue 706) is one cast member's other door, never fielded by the enemy, so it has no template.
+    /// A named enemy (Joab, issue 635 slice 16) is a person in the form's class, not a second template of it.
+    /// </summary>
     [Fact]
     public void EveryAdvancedFormHasExactlyOneTemplate()
     {
         var cast = Shipped.Cast.Select(u => u.Id).ToHashSet(StringComparer.Ordinal);
         foreach (var form in Shipped.Classes.Values.Where(c => c.Advances is not null && !c.Captain && c.Unique is null))
         {
-            Assert.Single(Shipped.Units.Values, u => !cast.Contains(u.Id) && u.ClassId == form.Id);
+            Assert.Single(Shipped.Units.Values, u => !cast.Contains(u.Id) && !u.Named && u.ClassId == form.Id);
         }
     }
 

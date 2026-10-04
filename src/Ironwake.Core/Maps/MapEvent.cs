@@ -78,3 +78,11 @@ public enum BondFate
     /// <summary>It was killed (or otherwise removed) before its boss fell.</summary>
     Fell,
 }
+
+/// <summary>
+/// Who killed the bound enemy of a <c>freed:</c> header in a combat (issue 635 slice 16, the Oath
+/// Stone): the unit whose strike or counter took the last of its HP, and whether that kill fed a
+/// hungering weapon (DESIGN.md 13.23), which is the killer standing after the combat with one equipped,
+/// the condition <see cref="Kinsbane.AfterCombat"/> feeds on.
+/// </summary>
+public sealed record BondKill(string KillerId, bool Fed);

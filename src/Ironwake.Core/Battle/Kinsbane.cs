@@ -314,6 +314,27 @@ public static class Kinsbane
     }
 
     /// <summary>
+    /// The <c>threat</c> row under an enemy strike on <paramref name="answering"/> (issue 635 slice 16,
+    /// Design Table rounds 303 to 305): when it counters with an unwoken hungering weapon equipped and
+    /// the counter kills <paramref name="striker"/> if every strike lands
+    /// (<see cref="CombatForecast.CounterIsLethal"/>), the feed that kill would bring, so a carrier standing
+    /// next to a man she means to spare sees the enemy phase could choose for her. Null otherwise.
+    /// </summary>
+    public static string? CounterFeedLine(BattleUnit answering, BattleUnit striker, CombatForecast forecast, GameContent content, string name)
+    {
+        var slot = answering.EquippedSlot(content);
+        if (slot < 0 || !forecast.CounterIsLethal(striker.Hp, answering.Hp))
+        {
+            return null;
+        }
+
+        var stack = answering.Unit.Inventory.Items[slot];
+        return content.Weapon(stack.ItemId) is { Hungers: true } && !Woken(stack.Fed)
+            ? $"counter kill: {name} +{FeedHeal} HP, to max {answering.MaxHp(content)} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})"
+            : null;
+    }
+
+    /// <summary>
     /// The Mov the hunt gives back (issue 804): the carrier's full Move this phase as
     /// <see cref="BattleState.ReachOf"/> reads it (a Press counted, the chill taken off, 0 while locked).
     /// </summary>

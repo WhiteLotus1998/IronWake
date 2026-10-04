@@ -83,6 +83,13 @@ public sealed record BattleState(
     public BondFate? Bond { get; init; }
 
     /// <summary>
+    /// Who killed the bound enemy of the map's <c>freed:</c> header, when a combat did (issue 635
+    /// slice 16): null while it stands, when it was freed, or when anything but a combat removed it.
+    /// A Recall restores it with the board.
+    /// </summary>
+    public BondKill? BondKilledBy { get; init; }
+
+    /// <summary>
     /// The claimant passed on at the branch, fighting for the enemy on this campaign battle, and the
     /// pick whose talk turns them (issue 633, <see cref="Returned"/>); null on every other battle.
     /// Set by <see cref="WithReturned"/>.
@@ -809,6 +816,11 @@ public sealed record BattleState(
         if (Bond is { } bondFate)
         {
             sb.Append("bond ").Append(bondFate == BondFate.Freed ? "freed" : "fell").Append('\n');
+        }
+
+        if (BondKilledBy is { } bondKill)
+        {
+            sb.Append("bond killed by ").Append(bondKill.KillerId).Append(bondKill.Fed ? " fed" : " unfed").Append('\n');
         }
 
         if (Return is { } returnBond)

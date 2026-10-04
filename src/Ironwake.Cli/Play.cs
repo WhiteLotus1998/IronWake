@@ -1685,6 +1685,11 @@ public sealed class PlaySession
                 var covered = line.CoveredBy is { } by ? $"covered by {names[by.Id]}, strikes {names[by.Id]} on {tile}, " : "";
                 var answers = line.CoveredBy ?? unit;
                 rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
+                if (!line.Raises && line.Forecast.Defender.Strikes && Kinsbane.CounterFeedLine(answers, line.Enemy, line.Forecast, content, names[answers.Id]) is { } feed)
+                {
+                    rows.Add($"    {feed}");
+                }
+
                 if (line.Raises)
                 {
                     rows.Add($"    windup: no strike; {names[line.Enemy.Id]} raises over {tile}, lands next enemy phase for {line.Forecast.Attacker.Damage}, sure, unless a hit from within its reach breaks it (not in the total)");

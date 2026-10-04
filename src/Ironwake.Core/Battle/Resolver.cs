@@ -629,6 +629,16 @@ public static class Resolver
             next = LeaveKeepsake(next, attackerAfter, content, events).WithoutUnit(unit.Id);
         }
 
+        if (result.DefenderDied && Freed.IsBound(state, target))
+        {
+            next = next with { BondKilledBy = Freed.KillBy(attackerAfter, content) };
+        }
+
+        if (result.AttackerDied && Freed.IsBound(state, unit))
+        {
+            next = next with { BondKilledBy = Freed.KillBy(targetAfter, content) };
+        }
+
         if (result.DefenderDied && !result.AttackerDied)
         {
             next = SwearGrudges(next, content, target, unit, events);

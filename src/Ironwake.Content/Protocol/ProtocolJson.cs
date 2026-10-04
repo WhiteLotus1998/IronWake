@@ -1381,6 +1381,11 @@ public static class ProtocolJson
         return new DrakeState(stage, flown);
     }
 
+    /// <summary>The record's <c>keziahOath</c> (issue 635 slice 16): one of the four words, any other refused.</summary>
+    private static OathSide ReadOath(JsonElement e) =>
+        Oath.Parse(RequiredString(e, "keziahOath"))
+            ?? throw new ProtocolException($"field 'keziahOath' must be one of {string.Join(", ", Enum.GetValues<OathSide>().Select(Oath.Word))}");
+
     /// <summary>A drake's stage (issue 805) as the screen words it, under <paramref name="field"/>; any other word refused, named as <paramref name="label"/>.</summary>
     private static DrakeStage ReadStage(JsonElement e, string field, string? label = null)
     {
@@ -1467,6 +1472,11 @@ public static class ProtocolJson
         if (record.DrakeFlew is { } flew)
         {
             w.WriteString("drakeFlew", Drake.Word(flew));
+        }
+
+        if (record.KeziahOath is { } oath)
+        {
+            w.WriteString("keziahOath", Oath.Word(oath));
         }
 
         if (record.Rapport.Count > 0)
@@ -1797,6 +1807,7 @@ public static class ProtocolJson
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
             FreedUnitFell = e.TryGetProperty("freedUnitFell", out _) && RequiredBool(e, "freedUnitFell"),
             DrakeFlew = e.TryGetProperty("drakeFlew", out _) ? ReadStage(e, "drakeFlew") : null,
+            KeziahOath = e.TryGetProperty("keziahOath", out _) ? ReadOath(e) : null,
             Rapport = e.TryGetProperty("rapport", out var rapport) ? ReadRapport(rapport) : ValueList<Rapport>.Empty,
             LoweredFrom = ReadLoweredFrom(e, content),
             Origin = ReadOrigin(e, content),

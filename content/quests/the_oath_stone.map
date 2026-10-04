@@ -22,8 +22,8 @@ freed: 9,4 by envoy
 units:
 P captain 1,4
 P recruit 1,5
-B sworn_captain 12,3 group:envoy behavior:guard
-E marauder 9,4 group:oath behavior:hold
+B sworn_captain 12,3 group:envoy behavior:boss
+E joab 9,4 group:oath behavior:hold
 E archer 11,5 group:envoy behavior:hold
 E brigand 5,8 group:camp behavior:guard
 E soldier 6,9 group:camp behavior:guard

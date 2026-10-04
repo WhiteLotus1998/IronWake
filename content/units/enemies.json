@@ -218,6 +218,18 @@
       "inventory": [ { "item": "steel_axe" } ]
     },
     {
+      "id": "joab",
+      "name": "Joab",
+      "named": true,
+      "class": "berserker",
+      "description": "Kept the lamps at Keziah's mother's shrine. Sworn to the Kin now.",
+      "level": 1,
+      "stats": { "hp": 20, "str": 6, "mag": 0, "dex": 3, "spd": 4, "lck": 1, "def": 2, "res": 0, "cha": 1 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 25, "lck": 10, "def": 20, "res": 10, "cha": 5 },
+      "ranks": { "axe": "D" },
+      "inventory": [ { "item": "steel_axe" } ]
+    },
+    {
       "id": "longbowman",
       "name": "Longbowman",
       "class": "marksman",
