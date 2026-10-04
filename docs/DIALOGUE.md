@@ -1,6 +1,6 @@
 # DIALOGUE — what the Design Table has agreed so far
 
-Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
+Rewritten when the Table moves; under 150 lines, 20 KB (#401).
 
 ## How we work (standing agreements)
 
@@ -9,8 +9,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 - **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: the Starting Alone and Mill drafts (#1005), #805's cold plays, #931, Wren's talk, a Drover map (293), the dash, the wind, the one answer. Cold chairs owed: the Oath Stone; the Rookery, fresh seed, an ally who counters (341). Code owes Rook's arm a fresh seed.
 - **Experiments.** At most three spikes wait on a deciding play; a new one waits (330, 0237). With nothing `ready`, the Builder plays a tuned map warm instead. A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway. An attack whose counter kills the attacker asks; `attack ... !` swings (336; #975).
-- **Rules go on screen, geometry does not** (42, 44). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only on units in his reach is scenery (39, 72).
-- **Reading the Sim.** Under gate 1's 60, `tuned` only by the stall clause (0100).
+- **Rules go on screen, geometry does not** (42, 44); under gate 1's 60, `tuned` only by the stall clause (0100). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only on units in his reach is scenery (39, 72).
 
 ## Rules, settled (details in DESIGN.md and the records named)
 
@@ -23,7 +22,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 - **Escape:** `exit` is an action; the captain's wins, the rest fall (0056, 0074).
 - **Recall** restores the rolls, buying knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
-- **Masteries** (0047): 12 combats, a heal a point; maps 4 to 8 owe each a target.
+- **Masteries** (0047): 12 combats, a heal a point.
 - **Content:** a Lore or Faith member ships with an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed; a sleeper in the open can be slipped past, in a corridor only woken.
 - **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill and the raid's wall are how someone is kept safe; a protection idea is a terrain feature or a map event, never a unit action. Cover's redraft is retired with it.
 - **Battalions dropped** (0044). A boss stun, if asked for, is a captain's order.
@@ -39,19 +38,19 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 - **The Rookery (Rook 2, 0208):** not passed; the cage and #862's ring stay; no lever before a cold chair. The card's bow-crit line becomes a warning (#1003). Lean, unfiled: a loft reward for the early captain kill. A lost Escape keeps its living (#861).
 - **The Counting House (Ottilie 1; 311 to 314, 321):** opening kept, finish the defect. Lever 1 (#925, 0228): archer guards 11,2. Lever 2 (#931, 0231): limit 11; quest cards match their map's limit. Chat cold decides, fresh seed.
 - **The Long Count (Ottilie 2; 313 to 315):** the count on screen (#928, 0229); dusk keeps the exit dark; the archer at 11,4 (#930, 0230).
-- **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. Bare keep (Chat cold, 235, 7/7/6): walls and Long Draw bow kept, no lever.
+- **The raid and the keep:** acceptance is play, not gate 1 (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. Bare keep (Chat cold, 235, 7/7/6): walls and Long Draw bow kept, no lever.
 
 ## Experiments (state and kill criterion)
 
 - **13.1 Rapport and Rivalry: kept** behind its header, symmetric arm, threatened-only accrual, threshold 16 (0043).
 - **13.2 Commander's Word (#85, 0136; rounds 206 to 209):** arm B only, radius `2 + Cha / 4`, `order <press|rally|fall back>` once a map after the captain's move, with `preview`; Fall back replaces Hold. Kept on Harrow Weir `orders: on` if a third of orders bind and a journal names a move for it.
-- **13.4 Grudges (0065, 0066):** the override is a veto, -20 crit avoid on the sworn unit; killed if neither replay (Chat's seed 23, #331) changes a decision.
-- **13.5 The keep: kept provisionally** (0059, 0060); the raid is in from both chairs (round 158); Chat's camp play decides.
+- **13.4 Grudges (0065, 0066):** a veto, -20 crit avoid on the sworn unit; killed if Chat's seed 23 replay (#331) changes no decision.
+- **13.5 The keep: kept provisionally** (0059, 0060); Chat's camp play decides.
 - **13.6 Certification trials: kept provisionally** (0057); #73 closes on Chat's cold Outrider trial. A trial only where the payout is worth refusing.
 - **13.7 Dusk: kept** on Escape; Brackwater ships at `dusk: 5` (0062), Sallow stays in daylight. Sight and hearing `?`, never stacked; an enemy hears within 4, printed (#765).
 - **13.8 Carry the fallen (#295):** killed if neither play spends a move on an ignorable carrier. Chat cold decides.
 - **13.10 Retreat (0037, #215):** a refugee holds its refuge as Hold until 50 percent; the forecast prints it. Killed if Chat's cold `river_refuge_hold.map` changes no turn.
-- **13.11 Two-weapon boss: kept** (0061). **13.12 Shove:** samples (0069). **13.13 Pincer:** samples (0082, 0083), ships where the enemy can anvil.
+- **Kept:** 13.11 two-weapon boss (0061); on samples 13.12 shove (0069), 13.13 pincer (0082, 0083; ships where the enemy can anvil).
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
 - **13.15 Wildfire: kept on its samples** (0085, 0110); a map shipping it needs an enemy route through forest the party holds. Killed: 13.16 windup (0094), 13.17 overwatch (0098, 0103), 13.19 cover (0099).
 - **13.21 The tide (0111, round 176; provisional):** content only, map events flood and drain a ford on announced turns. Kept if a journal shows a ford tile taken, refused or crossed for the schedule; Chat's cold play decides.
@@ -98,11 +97,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 - **The split (344, 345):** Chat writes the main scenes' beats and drafts, Code the supports' beats and prose; each cold-reads the other. Guards: the sheet's author has the binding read on that character (fix it or argue it, never merge over it); an S line an ending card quotes or a big scene pays off is scene-side, so no S beat sheet before its #634 card; every fifth support is read beside the four before it; of two that match, the newer changes. Writing PRs auto-merge on green; the cold read follows on the Table, its changes in a follow-up PR (Lotus, 2026-10-04; WRITING 6).
 - **Map 1 and 2 beats (344 to 346; #1005):** no journal voice; stage lines third person, present, plain. System lines are rules lines, outside the budget (#1001). Incidentals (two lines at most) need no sheet. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse in meals; one dry line, the region prediction. Keep silver planted once: the brigands' coin into Hask's purse, unremarked. The gate: an unnamed sworn sergeant, one line or none. The Mill: list match before the map. **An arrival scene ends on the arriving character's act.**
 - **Canon guard (346):** the sworn not literally feeling frost is not canon unless STORY adopts it as its own Table point. Map 1 carries one plant. The shrine script is the Kin's paper trail, never set dressing; old deeds use the copyists' hand (#1013).
-- **Cards (348; #1019):** a named feeling never closes a card or scene; Rook's is spent mid-card in the Rookery's, to the drake; it ends on the drake's act. A side map with no scene spends its booked beats in its quest card. After the Grange, keep silver lines name the keep, never "someone".
+- **Cards (348; #1019):** a named feeling never closes a card or scene; Rook's is spent mid-card in the Rookery's, to the drake; it ends on the drake's act. A side map with no scene spends its booked beats in its quest card. After the Grange, keep silver lines name the keep, never "someone". **Maud's cards (349):** a card never commits a member to a class door or branch the player hasn't chosen; her anger is spent mid-card at the Lazar House; quest openers share no template. The goddess's words are never printed: the changed word is the charter's dropped "keep" (STORY), heard in the finale's rite.
 
 ## Lotus's mechanics build (239, 240; #786)
 
-- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign from the title, mouse and keys, script parity, no stop-playing bug to Brackwater, a note. Chat signs on its parity transcript, Code on a hand run.
+- **Lotus (#731)** plays when both sign a `for-lotus` issue: a client campaign, mouse and keys, script parity, no stop-playing bug to Brackwater. Chat signs on parity, Code on a hand run.
 
 ## Open, the Table's
 
@@ -115,11 +114,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB (#401). Live #994.
 
 ## Plumbing
 
-- **Engine** (0008): Godot 4 .NET in this repo; the core stays engine-free; any renderer consumes the versioned protocol (0046) and carries no rules.
+- **Engine** (0008): Godot 4 .NET here; the core engine-free; a renderer reads the protocol (0046), no rules.
 - **Builder race** (#735, 0169; provisional): one Builder at a time by claim, wait and re-read; the earlier claim wins (ROUTINES.md section 2).
-- **Art:** human-made only (Lotus, 2026-10-03); packs recoloured to LOOK.md, commissions paid, licences first; the list is `docs/ART_SHOPPING.md` (#816).
-- **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Delivered art under chroma 32, one amber accent (0223).
+- **Art:** human-made only (Lotus, 2026-10-03); packs recoloured to LOOK.md, licences first; `docs/ART_SHOPPING.md` (#816).
+- **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Chroma under 32, one amber accent (0223).
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; 316-342 #935; #994 343 on (writing pipeline 343-348).
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; 203-315 #665 to #875; 316-342 #935; #994 343 on (writing).
