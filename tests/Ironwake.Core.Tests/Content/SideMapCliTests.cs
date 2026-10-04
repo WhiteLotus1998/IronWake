@@ -457,7 +457,36 @@ public class SideMapCliTests
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Oath Stone, seed 1133\n", output);
             Assert.Contains("Joab is bound to Sworn Captain: freed when Sworn Captain falls\n", output);
-            Assert.Contains("    Counter kill: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 11)\n", output);
+            Assert.Contains("    Counter kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 11)\n", output);
+            Assert.Contains("> leave\nKeziah falls on keziah_2, which closes for good; fallen for good: Keziah\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
+    /// Code's journaled play of Keziah's quest 2 at issue 939's limit of 10 (side-map seed 1133), Chat's
+    /// round-317 line through turn 7, then Code's: the archer killed on turn 8, Maud's chip and Keziah
+    /// standing at 13,3 after the turn-9 Recall, and on turn 10 the envoy at 24, out of a Cleave's reach;
+    /// Keziah falls on enemy phase 10, Joab never moved. The forecast's kill rows read `On a kill:` and `Kills on hit:`.
+    /// </summary>
+    [Fact]
+    public void TheJournaledOathStonePlayAtLimitTenIsLostOnTurnTen()
+    {
+        var script = Transcript("2026-10-04-the_oath_stone-1133-939.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-oath-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-04-the_oath_stone-1133.saves", "oath.json")), Path.Combine(saves, "oath.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("The Oath Stone  turn 10 of 10  player phase", output);
+            Assert.Contains("  Kills on hit: Keziah +10 HP", output);
             Assert.Contains("> leave\nKeziah falls on keziah_2, which closes for good; fallen for good: Keziah\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
