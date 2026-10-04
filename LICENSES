@@ -37,3 +37,14 @@ originals stay outside git; files made from them get their own entries here when
     page; the zips carry no licence file). Obligations: credit Justin Nichol, link the licence,
     state that the portraits were modified; the modified portraits are CC BY-SA 3.0; no DRM or
     added terms on those files that stop others doing what the licence allows.
+
+Contact sheets under docs/look/ (for picking only; not shipped in the game):
+
+  portraits-nichol-contact.png
+    Thumbnails of Justin Nichol's FLARE portraits, packs one to five, tagged P01 to P30 (index in
+    docs/look/portraits-nichol-index.txt). Licence: CC BY-SA 3.0,
+    https://creativecommons.org/licenses/by-sa/3.0/ ; resized and labelled for Ironwake, and
+    this sheet is CC BY-SA 3.0 as well.
+
+  bodies-quaternius-preview.png
+    Quaternius's Universal Base Characters preview image, unmodified. Licence: CC0 1.0.
