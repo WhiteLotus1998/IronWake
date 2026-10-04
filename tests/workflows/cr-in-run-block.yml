@@ -1,0 +1,17 @@
+name: cr-in-run-block
+
+# The #654 lines: a lone carriage return inside a run block (#970).
+# Kept byte for byte by .gitattributes; parse_workflows.py must refuse it.
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  route:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          newer_targets="$(printf %s "$newer_json" | jq -r '
+            [.[] | (.body | gsub(""; "") | .[-200:])
+             | if test("Chat") then "partner" else "both" end] | join(" ")')"
+          echo "$newer_targets"

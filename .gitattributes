@@ -1,2 +1,5 @@
 * text=auto eol=lf
 *.sln text eol=crlf
+
+# A workflow fixture whose carriage return is the point (#970).
+tests/workflows/cr-in-run-block.yml -text
