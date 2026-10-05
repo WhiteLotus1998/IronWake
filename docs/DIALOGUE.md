@@ -6,7 +6,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **Fun Gate entries.** Each partner writes before reading the other's; Code's lands first. A warm chair counts if disclosed (0073). Tricks stay unnamed until both are in. On a save each chair takes its own seed; one pinned seed is one read, and so is a roll retried after a Recall (0238, #963; 334). A board a branch pick changes is gated per arm, gate 1 too; the file's number is the arm it seats (334, 364).
 - **A map is retuned only after both entries on it are in**, one lever at a time, measured by the Sim before a partner plays it (round 16). Levers are content first.
-- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: Starting Alone and Mill drafts (#1005), #805's cold plays, #931, Wren's talk, a Drover map (293), the dash, the wind, the one answer. Cold chairs owed: the Oath Stone; the Rookery, fresh seed, an ally who counters (341); the field on Rook's pick as shipped, the Critic (0250).
+- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: #805's cold plays, #931, Wren's talk, a Drover map (293), the dash, the wind, the one answer. Cold chairs owed: the Oath Stone; the Rookery, fresh seed, an ally who counters (341); the field on Rook's pick as shipped, the Critic (0250).
 - **Experiments.** At most three spikes wait on a deciding play (330, 0237). With nothing `ready`, the Builder plays a tuned map warm instead. A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway. An attack whose counter kills the attacker asks; `attack ... !` swings (336; #975).
 - **The claimant's death is printed first** (372, #1068): any lethal forecast row on the returned claimant opens `<name> falls for good (the claimant)`; one helper, no veto, no ending named.
@@ -34,7 +34,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15). Two Harrow wins in a row by baiting the Foreman reopen #1067 (0251), a content lever.
 - **Saltmarsh Ford:** not tuned (0093); the spawn lever failed (0095).
 - **Sallow Grange:** the Reeve stays at 15,6 (#275).
-- **The Rookery (Rook 2, 0208):** not passed; the cage and #862's ring stay; no lever before a cold chair. The card's bow-crit line becomes a warning (#1003). Lean, unfiled: a loft reward for the early captain kill. A lost Escape keeps its living (#861).
+- **The Rookery (Rook 2, 0208):** not passed; cage and #862's ring stay; no lever before a cold chair. A lost Escape keeps its living (#861).
 - **The Counting House (Ottilie 1; 311 to 314, 321):** opening kept, finish the defect. Lever 1 (#925, 0228): archer guards 11,2. Lever 2 (#931, 0231): limit 11; quest cards match their map's limit. Chat cold decides, fresh seed.
 - **The Long Count (Ottilie 2; 313 to 315):** the count on screen (#928, 0229); dusk keeps the exit dark; the archer at 11,4 (#930, 0230).
 - **The raid and the keep:** acceptance is play, not gate 1 (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. Bare keep (Chat cold, 235, 7/7/6): walls and Long Draw bow kept, no lever.
@@ -93,7 +93,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **`docs/WRITING.md` is in** (#811, 295); all sixteen sheets in (#908 to #915). The sworn drop every name but one the oath hasn't taken yet; a sworn who names no one is past reach. The Kin's echo is deletion only (one a scene). Rook's "I'm afraid" goes; Bet's supports are camp barks.
 - **The split (344, 345):** Chat writes the main scenes' beats and drafts, Code the supports' beats and prose; each cold-reads the other. Guards: the sheet's author has the binding read on that character (never merged over); an S line an ending card quotes or a big scene pays off is scene-side, so no S beat sheet before its #634 card; every fifth support is read beside the four before it; of two that match, the newer changes. Writing PRs auto-merge; cold reads follow on the Table (WRITING 6).
-- **Map 1 and 2 beats (344 to 346; #1005):** no journal voice; stage lines third person, present, plain. System lines are rules lines, outside the budget (#1001). Incidentals (two lines at most) need no sheet. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse in meals; one dry line, the region prediction. Keep silver planted once: the brigands' coin into Hask's purse, unremarked. The gate: an unnamed sworn sergeant, one line or none. The Mill: list match before the map. **An arrival scene ends on the arriving character's act.**
+- **Map 1 and 2 beats (344 to 346; #1005):** no journal voice; stage lines third person, present, plain. System lines are rules lines, outside the budget (#1001). Incidentals (two lines at most) need no sheet. Starting Alone opens and closes on the girth, "Bring them home." before the end; the purse in meals; one dry line, the region prediction. Keep silver planted once: the brigands' coin into Hask's purse, unremarked. The gate: an unnamed sworn sergeant, one line or none. The Mill: list match before the map. **An arrival scene ends on the arriving character's act.** Chat's four drafts agreed (373, 374) with both cold reads' eight edits, no mint mark; enemy counts pinned by test; one scene per PR.
 - **Canon guard (346):** the sworn not literally feeling frost is not canon unless STORY adopts it as its own Table point. Map 1 carries one plant. The shrine script is the Kin's paper trail, never set dressing; old deeds use the copyists' hand (#1013).
 - **Wren and Pell (360, 365, 367):** No line gives the captain an estimate; a misread figure shows both readings; Pell states consequences, never ground; Wren's nearness is a body memory, never said. A gives two facts, never the conclusion; a callback names the figure, never the trust.
 - **Cards (348 to 367):** a named feeling is spent mid-card, never as a closer, in its speaker's shape (Maud: feeling, prognosis, task); a scene-less side map spends its booked beats in its card. Keep silver lines after the Grange name the keep. A card never commits a member to an unpicked door or branch; quest openers share no template. The goddess is never printed: her word is the charter's dropped "keep", paid off in the finale rite; Maud and Pell never say "keep" before it, and the Builder sweeps both sheets' cards as either lands (353). The charter prints once before the rite, as the page Pell hands the captain on the Undercroft after-card, never read aloud (353 to 355). No card ends on its speaker's trade-image joke; a closer that refuses is an act, never a negation (363). Keziah's warmth is never a body she picks; one superstition a card; Hask's offer is worded once, both arms quote it (367). Crossed runs: the later Chat round binds (352, 354).
@@ -107,6 +107,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - Sim Canto on a clock map (#262).
 - The wake tax floor, 6 to 44 percent, from the journals (0040's `--taxfloor`, 0.25 provisional).
 - Does a trial fall cost more than the attempt?
+- Training (Lotus, 374): Chat's yard, teacher and student both spend the interlude, capped by the teacher; no thaw. Lotus picks.
 
 ## Plumbing
 
@@ -115,8 +116,8 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Builder race** (#735, 0169): one Builder at a time, earlier claim wins.
 - **Art:** human-made only (Lotus); licences first (#816).
 - **Casting (356 to 362):** `docs/look/CASTING.md`; Lotus picks. No hire has a portrait; Bet's arrives at the Cold Kitchen, P28 (363).
-- **Character style** (Lotus; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Chroma under 32, one amber (0223).
+- **Character style** (Lotus; #891, 0223): Blender, packs; cold key, warm fill, posterized, heavy ink; chroma under 32, one amber.
 
 ## Round index
 
-1-118 rules; 119-342 story; 343-359 writing; #1033 360-371 (366 Lotus's notes); #1063 372 on.
+1-118 rules; 119-342 story; 343-359 writing; 360-371 (#1033); 372 on (#1063).
