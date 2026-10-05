@@ -1,3 +1,4 @@
+using Ironwake.Cli;
 using Ironwake.Content;
 using Ironwake.Content.Protocol;
 using Ironwake.Core.Tests.Content;
@@ -101,6 +102,39 @@ public class WoundedTests
 
         Assert.Null(after.Find("wren"));
         Assert.Equal(ValueList<string>.Of("wren"), after.Fallen);
+    }
+
+    [Fact]
+    public void AWonMainMapNamesWhoFellAndCameBackWoundedWithPermadeathOff()
+    {
+        var record = Off(2);
+        var end = Won(record, u => u.Id != "wren");
+
+        var line = CampaignSession.WonLine(record, record.AfterBattle(end, Content), end, Content);
+
+        Assert.EndsWith("; fell and came back wounded: Wren", line);
+    }
+
+    [Fact]
+    public void AWonMainMapNamesWhoFellForGoodWithPermadeathOn()
+    {
+        var record = Off(2) with { Permadeath = true };
+        var end = Won(record, u => u.Id != "wren");
+
+        var line = CampaignSession.WonLine(record, record.AfterBattle(end, Content), end, Content);
+
+        Assert.EndsWith("; fallen: Wren", line);
+    }
+
+    [Fact]
+    public void AWonMainMapWhereEveryoneStandsSaysNobodyFell()
+    {
+        var record = Off(2);
+        var end = Won(record);
+
+        var line = CampaignSession.WonLine(record, record.AfterBattle(end, Content), end, Content);
+
+        Assert.EndsWith("; nobody fell", line);
     }
 
     [Fact]
