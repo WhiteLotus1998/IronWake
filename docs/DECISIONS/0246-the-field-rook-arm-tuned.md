@@ -1,4 +1,4 @@
-# 0246 — The field is `tuned` on Rook's pick
+# 0246 — The field on Rook's pick: the Fun Gate is met (amended: gate 1 owed)
 
 Date: 2026-10-05. Rounds 334 to 342 (#935); DIALOGUE's condition "tuned if Code's fresh seed reads surprise 7".
 
@@ -15,3 +15,8 @@ The field has been `tuned` on Keziah's pick since 0233. Rook's pick was reopened
 ## Next
 
 Turns 8 to 11 (the south-bank march to the camp) are still the arm's softest stretch, in 1340 as in earlier plays. A chair that scores Rook's arm under 7 reopens it (0233's rule).
+
+## Amendment (round 364, #1033; #1044)
+
+- **Gates are read per arm on a branch-changed board, gate 1 included**, the same as the Fun Gate (334). The file-level number is the arm the file seats. So the field is `tuned` on Keziah's pick only; on Rook's pick the Fun Gate is met (above) and gate 1 is owed at 49/200. The stall clause cannot cover it (71 wins short, 66 timeouts).
+- The reading above, that 49 is the Sim not playing the arm's opening, is withdrawn as an excuse. The three-way run on this head (`docs/measurements/field-rook-arm-diagnostic.txt`) shows Keziah 122, empty slot 46, Rook 49: Rook's seat does not cost the baseline, and the heuristic makes 76 attacks with her in 200 games (Keziah 788). #1044 diagnoses that first, then allows at most one pick-keyed lever under 0240's constraints.
