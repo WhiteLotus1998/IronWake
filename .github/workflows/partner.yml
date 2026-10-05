@@ -3,11 +3,10 @@ name: partner
 # Routes every new comment on the Design Table, or on an issue labeled fork,
 # to the partner who should answer it. Signed "- Chat" wakes Code's Partner
 # routine. Signed "- Code" or "- Critic" wakes Chat's routine. Unsigned
-# (Lotus) wakes both. Pacing: a partner gets six posts an hour (Lotus,
-# 2026-10-04, raised from three); a wake beyond that waits until the oldest of
-# the six leaves the window, then fires, so a long argument runs to its end at
-# a round every ten minutes instead of dying at an hour boundary. Hard stop:
-# twenty comments in an hour on the issue, from anyone.
+# (Lotus) wakes both. Pacing: a partner gets three posts an hour; a wake
+# beyond that waits until the oldest of the three leaves the window, then
+# fires, so a long argument runs to its end at a round every twenty minutes
+# instead of dying at an hour boundary. Hard stop: eight comments in an hour.
 # A refused wake (routine paused, daily cap) is logged, not failed.
 # Debounce: a wake waits 90 seconds, then stands down for any partner that a
 # newer comment on the same issue will wake anyway, since that later wake
@@ -48,7 +47,7 @@ jobs:
           recent_json="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?since=$since&per_page=100" 2>/dev/null || echo '[]')"
           recent="$(printf '%s' "$recent_json" | jq 'length')"
           echo "last hour: $recent comments"
-          if [ "${recent:-0}" -ge 20 ]; then
+          if [ "${recent:-0}" -ge 8 ]; then
             echo "hard stop: $recent comments in the last hour; standing down"
             exit 0
           fi
@@ -85,17 +84,17 @@ jobs:
           fi
           echo "after debounce, routing to: $target"
 
-          # Wait until the named signer has fewer than six posts in the trailing hour.
+          # Wait until the named signer has fewer than three posts in the trailing hour.
           pace() {
             sig="$1"
-            third="$(printf '%s' "$recent_json" | jq -r --arg s "$sig" '[.[] | select(.body[-300:] | test("(—|--) " + $s))] | sort_by(.created_at) | reverse | .[5].created_at // empty')"
+            third="$(printf '%s' "$recent_json" | jq -r --arg s "$sig" '[.[] | select(.body[-300:] | test("(—|--) " + $s))] | sort_by(.created_at) | reverse | .[2].created_at // empty')"
             if [ -n "$third" ]; then
               until_ts="$(( $(date -u -d "$third" +%s) + 3660 ))"
               now_ts="$(date -u +%s)"
               wait_s="$(( until_ts - now_ts ))"
               if [ "$wait_s" -gt 0 ]; then
                 [ "$wait_s" -gt 3900 ] && wait_s=3900
-                echo "$sig has six posts in the last hour; waiting ${wait_s}s for the window to roll"
+                echo "$sig has three posts in the last hour; waiting ${wait_s}s for the window to roll"
                 sleep "$wait_s"
               fi
             fi
