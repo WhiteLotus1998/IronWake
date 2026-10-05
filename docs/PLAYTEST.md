@@ -3107,3 +3107,17 @@ Result: **lost on turn 10.** Keziah fell with the envoy at 7. Both Recalls were 
 - Verdict: nothing asks for a lever. The end is the same coin as 5127 and 940. Screen finding: equipping reorders the pack, so a slot number can go stale.
 
 Transcript: `docs/transcripts/2026-10-05-the_oath_stone-7781-chat.txt`, the script beside it. Code replayed it under `--strict` (side map seed 7930, lost on turn 10, envoy at 7, as journaled; it stops before `leave`), and checked the counterfactual off the play: `kinsbane` named hits for 16 and kills. Filed #1114. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5998283214).
+
+## 2026-10-05 — The Lazar House on the Drover's route (#1100), warm — Code
+
+Seed: the parity campaign 644 (Recruit, permadeath off), run as `tests/parity/campaign/full-campaign-644.script` writes it up to the camp before Sallow Grange. From there it's played by hand: `campaign --load sallow --saves <copy of docs/transcripts/2026-10-05-the_lazar_house-670-drover.saves>`, side map seed 670, ally **Rook** (L1, lance E, 0 points). This is the first map of round 378's hybrid route. Warm: Code built the map's notes (0127) and played it before (701).
+Result: **lost on turn 5 of 6.** Maud fell on the fort to two archers and the hexer, with Radiance spent. Rook fell twice, and both falls were recalled. The third time she fell for keeps (wounded, permadeath off). Tension 8, choice 5, surprise 6.
+- T1: Rook baited the brigand from 4,4. It missed, and her counter left it at 2.
+- T2 to T3, first line: Rook took the kill, then sat at 8 in the archer's reach. On T3 the salve and the south door put her at 15 against an archer and a pike, 21 if both landed, and they both did. Recalled to T3. The north door was no better: archer 9, a brigand miss, then the **hexer acts on the phase it arrives in** and its 8 finished her. Recalled to T2.
+- T2, second line (**best turn**): Maud killed the 2-hp brigand from 3,4 with Radiance, and Rook took the fort itself (43 percent for 7). Nobody was hurt.
+- T3: Rook plugged 3,1 so the brigand couldn't reach Maud, and died to the same archer-plus-hexer sum. Her counter left the brigand at 2 again, and Maud took it on T4.
+- T4 to T5: Maud alone on the fort, countering everything for 10, and on T4 every swing at her but the first missed. Radiance ran out on the hexer's counter. On T5 two archers and the hexer took her from 14 to 0.
+- The finding, for the route rather than the map: a level 1 Skyrider can't be the ally that holds this board. The archers ground her for 9, the hexer arrives in range for 8, and her 17 hp is two swings. The lane bars never came within reach (8,1 and 10,4 are 7 or more from where she starts). Stopped caring T5, once Radiance was gone.
+- Text bug: the opening line says "who falls here is gone for good" with permadeath off. The record wounds them instead, and says so at `leave`.
+
+Transcript: `docs/transcripts/2026-10-05-the_lazar_house-670-drover.txt`, with the script and save beside it.

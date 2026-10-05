@@ -1,0 +1,36 @@
+build barracks
+build barracks_wing
+hire corin
+build wall 10,3
+quest maud_1 rook
+move rook 4,4
+wait rook
+wait maud
+end
+attack rook brigand-1
+wait maud
+end
+move rook 3,3
+wait rook
+item maud salve rook
+end !
+recall 19
+move rook 3,1
+wait rook
+item maud salve rook
+end !
+recall 9
+move maud 3,4
+attack maud brigand-1
+move rook 3,2
+wait rook
+end
+move rook 3,1
+wait rook
+move maud 3,2
+wait maud
+end !
+attack maud brigand-2
+end !
+end !
+leave
