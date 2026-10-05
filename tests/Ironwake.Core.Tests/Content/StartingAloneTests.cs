@@ -135,9 +135,8 @@ public class StartingAloneTests
             Assert.Contains("Hask: Don't write, Alder. Bring them home.\n", output);
             Assert.Contains("rewinds to a player turn you name; you have three.)\n\nObjective:", output);
             Assert.Contains("Starting Alone won: rout; reward 300, the purse holds 800; nobody fell\n-- After Starting Alone --\nThree dead on the waystation road.", output);
-            Assert.Contains("into Hask's purse and draws the\nstring.\n\n-- The Mill --\nThe mill road follows a stream", output);
+            Assert.Contains("into Hask's purse and draws the\nstring.\n\n-- Before map 2 of 10: The Mill; the purse holds 800 --\n", output);
             Assert.DoesNotContain("Three dead on a road nobody will remember", output);
-            Assert.Contains("\n-- Before map 2 of 10: The Mill; the purse holds 800 --\n", output);
             var scene = output[output.IndexOf("-- Starting Alone --", StringComparison.Ordinal)..output.IndexOf("Objective:", StringComparison.Ordinal)];
             Assert.All(scene.Split('\n'), line => Assert.True(line.Length <= Ironwake.Cli.CampaignSession.CardWidth, line));
             Assert.DoesNotContain("Bring them home", File.ReadAllText(log));
