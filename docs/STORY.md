@@ -287,3 +287,12 @@ Lotus's note is in `docs/FUTURE.md`: a sequel carries the save and continues fro
 ## What the captain learns
 
 Hask is right that the three are the wound, right that the faiths bless the wars, and right that the armistice is a schedule. **His oath would end war, and it would be warm.** He's wrong about one thing, and the campaign is the argument: he thinks a peace nobody can leave is better than a peace people have to keep choosing, and he never sees that the first kind has nobody left in it. The captain starts with a list of names they didn't choose, one of them crossed out. They end it by choosing every one, getting the crossed-out one back if they can, and climbing the hill again next year because they want to.
+
+## Open idea, not confirmed (Lotus, 2026-10-05)
+
+Recorded so it isn't lost. It hasn't been decided, and Lotus will develop it.
+
+- **"Kinsbane" is the weapon, not the god.** The god inside the scythe is **Bane**.
+- **The Kin is Bane's other half.** Bane and the Kin are two halves of one being.
+- **The secret ending:** after the fight with the half-woken Kin under the hill, its half is **sealed inside the scythe** with Bane's.
+- **After both halves are sealed:** to be figured out (Lotus).
