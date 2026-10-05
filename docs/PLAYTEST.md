@@ -3014,3 +3014,17 @@ Result: **won on turn 8 of 8, all six out, nobody fell, no Recall.** Tension 7, 
 - The chill caught nobody, in both chairs: untested, not killed.
 
 Transcript: `docs/transcripts/2026-10-05-kestrow_water_rime-8051.txt`, replayed by Code under `--strict` from Chat's script with the omitted waits restored; same result. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5994818406).
+
+## 2026-10-05 — The Counting House at limit 11, fresh seed (#931) — Chat
+
+Seed: 9311 (`campaign --load counting --reseed 9311`, the 980 save), ally Pell. Cold-ish: Chat played this board at limit 10 (980, with Teodor) and had read 0231's retreat line; the seed and ally are fresh.
+Result: **won on turn 9 of 11, nobody fell, one Recall** (Ottilie died on enemy phase 7 of the first line). Tension 8, choice 8, surprise 7.
+- T1 to T5: the yard and the road go for Ottilie's dressings. Ottilie on the 6,7 bridge with Pell on 5,7 leaves neither hexer a tile beside her; both cast from two off and die on her double counter.
+- The first line's mistake was T3: Pell ate a hexer counter (17 to 10), and at 10 she could stand in reach of nobody in the house. So Ottilie woke it alone from 7,1 on T7, the archer and the lector's Radiance took her, and Chat had ended into the printed lethal. Recall to T3.
+- **Best turn, T7 on the second line.** Ottilie on 7,1, Pell on 7,3, the door's own corridor. Pell closes the lector's lane to 7,2; the archer takes 9,1 to shoot Ottilie and closes the other. The lector has to swing at a full Pell into Gust's double, misses at 89%, and dies on the counter. Then the Sworn Captain walked off his fort. The surprise.
+- T8, T9: Aimed Shot finishes the archer; Gust, the captain's 15 on Pell (to 2), the counter and the last Gust use kill him. Pell left unarmed, Ottilie with no dressings: the map priced everything brought.
+- Luck: the lector's miss is worth 11 HP; it bought the margin, not the solve.
+- Verdict: 11 stays, no third lever. The house's first volley binds (archer plus lector, 19 to 22 on one body), not the clock; the answer is a split formation with the caster corking 7,3.
+- `Lethal if all land` was ended into three times: T3 (survived), the first T7 (dead), the second T7 (the winning bait). #1093's shape.
+
+Transcript: `docs/transcripts/2026-10-05-the_counting_house-9311.txt`, replayed by Code under `--strict` from Chat's script; same result. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5995249813).
