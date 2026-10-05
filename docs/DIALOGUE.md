@@ -6,8 +6,9 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **Fun Gate entries.** Each partner writes before reading the other's; Code's lands first. A warm chair counts if disclosed (0073). Tricks stay unnamed until both are in. On a save each chair takes its own seed; one pinned seed is one read, and so is a roll retried after a Recall (0238, #963; 334). A board a branch pick changes is gated per arm, gate 1 too; the file's number is the arm it seats (334, 364).
 - **A map is retuned only after both entries on it are in**, one lever at a time, measured by the Sim before a partner plays it (round 16). Levers are content first.
-- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: the Drover, cold, once #1100's save (lance C, Grown) lands (373); no script seed reaches it, so the route is a hand-played prefix (378, lean). Cold chairs owed: the Oath Stone; the Rookery, fresh seed, an ally who counters (341); Rook's field as shipped, the Critic (0250).
+- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: the Drover, cold, once #1100's save (lance C, Grown) lands (373); the route is hand-played side maps in the script, the heuristic on the main line, `--until-certify` deciding (379, agreed). Cold chairs owed, all the Critic's (Chat has played each): the Oath Stone; the Rookery, fresh seed, a countering ally (341); Rook's field as shipped (0250).
 - **Experiments.** At most three spikes wait on a deciding play (330, 0237); with nothing `ready`, the Builder plays a tuned map warm. A header lives only on a sample until a keep round names shipped maps. STATE names each experiment's deciding play. A kill criterion is agreed before it; a new player action names its cost.
+- **A slot number never goes stale silently** (379, #1114): a numbered weapon a swing moved since the pack's last listing is refused, naming both; front stays equipped.
 - **`end` names the lethal** (rounds 158, 159; #558): a line per unit `threat` kills. **It asks** (#1093, 0253); `end !` ends anyway. So does an attack whose counter kills; `attack ... !` swings (336; #975).
 - **The claimant's death is printed first** (372, #1068): any lethal forecast row on the returned claimant opens `<name> falls for good (the claimant)`; one helper, no veto, no ending named.
 - **Rules go on screen, geometry does not** (42, 44); under gate 1's 60, `tuned` only by a DESIGN 11 clause (0100, 0250). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only in his reach is scenery (39, 72).
@@ -31,7 +32,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **The Tollgate: `tuned`** (0073); rider on the door step (0072). Opens the beta.
 - **Brackwater Cut at dusk: `tuned`** (0078). Dusk hides what, never where.
-- **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). Two bait wins in a row reopen #1067 (0251). Massing the crest so the Foreman freezes is a solve (#1087; 39, 72, 68): a cold chair's crest mass with no Foreman swing ships the archer out of Pell's turn-5 reach, Sim first; their brief omits the veto. Neither tripwire advances the other.
+- **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). Two bait wins in a row reopen #1067 (0251). A crest mass that freezes the Foreman is a solve (#1087): a cold chair's mass with no Foreman swing moves the archer out of Pell's turn-5 reach, Sim first; briefs omit the veto. Tripwires are independent.
 - **Saltmarsh Ford:** not tuned (0093; spawn lever failed, 0095). **Sallow Grange:** the Reeve stays at 15,6 (#275).
 - **The Rookery (0208):** not passed; cage and #862's ring stay; no lever before a cold chair. A lost Escape keeps its living (#861).
 - **The Counting House (311 to 321):** opening kept. Levers: archer guards 11,2 (#925); limit 11 (#931) stays, no third lever: Chat cold-ish 8/8/7, seed 9311, won T9; the first volley binds. Gate: Code's fresh-seed read.
@@ -51,12 +52,12 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.21 The tide (0111, 176; provisional):** map events flood and drain a ford on announced turns. Kept if a journal shows a ford tile taken, refused or crossed for the schedule; Chat's cold play decides.
 - **13.22 The break (0112, 181 to 183; provisional):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for the break. The board is Saltmarsh Ford (#606).
 - **13.24 The messenger (0135):** a runner fires `messenger` at its edge. Kept if a strike or blocker is spent on it. Chat's cold #680 decides.
-- **13.18 Lines on the board (#486):** one printed fact per line; killed if no play takes a command for it over the best line. **Cadets (0097):** Teodor and Wren's Canto kept. Talk **kept on `saltmarsh_ford_talk.map`** (378, 0258): binds, not yet costs (Chat 5150 held Wren for the pair; the captain's forecast matched); a second band, 9,4 to 12,7, wakes the fort. Tripwire: no campaign journal naming a costly talk-held swing returns it as a quest-1 softening. Next (264, lean): she won't shoot what another struck this phase.
+- **13.18 Lines on the board (#486):** one printed fact per line; killed if no play takes a command for it over the best line. **Cadets (0097):** Teodor and Wren's Canto kept. Talk **kept on `saltmarsh_ford_talk.map`** (378, 0258): binds, not yet costs; a second band, 9,4 to 12,7, wakes the fort. No campaign journal naming a costly talk-held swing returns it as a quest-1 softening. Next (264, lean): she won't shoot what another struck this phase.
 - **13.25 Rotten planks (0179):** planks wear to water; killed if no play chooses for it. Chat's cold #783 decides.
-- **13.27 The dash: kept on its sample** (374, 0255). Both chairs 4 free, 2 priced; no borrowed step unless a `tuned` re-read shows a free dash beat the clock. At dusk, winded is a bet.
-- **13.28 The wind: kept on its sample** (375, 0256). Steers, not yet costs; a campaign `wind:` map puts the downwind side on the short road. A fight's noise on `forecast`: #1106.
-- **13.29 The one answer: kept on its sample** (376, 0257). It decides who enters the enemy phase whole; the enemy-phase half is rare, readable; swarm lever unbuilt. A campaign `one_answer:` map fields a 1-2 answerer at a choke.
-- **13.26 Rockfall (0182):** killed if nobody drops or every drop is free. **13.8 Carry (#295):** killed if no carrier moves.
+- **13.27 The dash: kept on its sample** (374, 0255). No borrowed step unless a `tuned` re-read shows a free dash beat the clock. At dusk, winded is a bet.
+- **13.28 The wind: kept on its sample** (375, 0256). Steers, not yet costs; a campaign `wind:` map puts the quiet road on the long side. Noise on `forecast`: #1106.
+- **13.29 The one answer: kept on its sample** (376, 0257). Decides who enters the enemy phase whole; swarm lever unbuilt; a campaign `one_answer:` map fields a 1-2 answerer at a choke.
+- **13.26 Rockfall (0182):** killed if no drop, or all free. **13.8 Carry (#295):** killed if no carrier moves.
 - **13.20 The keep as a home (0137, 0138, #687):** rooms cost repair budget; beds gate arrivals, a death frees none (0010). Killed if the raid purse buys every room and wall in both plays.
 
 ## The campaign's story (186 to 211; 0121; DESIGN 14)
@@ -67,7 +68,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Quests (192; 260):** a main member's two are trial-shape side maps, quest 2 larger, paying the signature item; quest 1 after their second map, quest 2 two later, two an interlude; permadeath. Gate: a cold chair 7+ on tension and choice, and the Sim. The slot table follows STORY (Pell after 4 and 6, Wren none). Quest 1 pays a class door where one exists; quest-1 second signatures ship with the first, once 13.18 is kept.
 - **Signature items:** the best shop weapon of its rank plus its own art (0099), or a little better with none; at most 15 percent over it per combat. Bound. **Maud's Psalter (260, 261; built, 0196):** rank D, art **Unasked**: double heal on an ally unmoved and unacted, capped at max HP; ends as a Wait. Heal arm at most 1.15 of the best stocked heal at its rank or below.
 - **The heirloom is Teodor's lance** (#646): four stages on a hidden counter, none before map 5, numbers honest. Quest 1 holds it at sound until won, then wakes at 10. Quest 2 (built, 0205) names it `the First Warden's Lance` and pays **Turn the Key** (269 to 271): woken only, -4 Mt, cost 3; a hit on a survivor locks it while Teodor stays beside it. A lost quest reopens.
-- **13.23 Kinsbane** (#645): Keziah's; an outland god in the scythe. Quest 2, **The Oath Stone** (0224, 0225), a board, no verb: A win records `KeziahOath` (#634). Limit 10, the fort and its cliff kept (0232). **#940 kept** (0239): Chat warm 8/7/7, Code 8/7/6; a cold chair gates.
+- **13.23 Kinsbane** (#645): Keziah's; an outland god in the scythe. Quest 2, **The Oath Stone** (0224, 0225), a board, no verb: A win records `KeziahOath` (#634). Limit 10, the fort and its cliff kept (0232). **#940 kept** (0239): Chat warm 8/7/7, Code 8/7/6; a cold chair gates. Chat 7781 warm, Teodor, 8/7/6, lost by misplay (379).
 - **Origin** (#681, #648): the captain's card and a first support only.
 - **Magic and faith** (201): Reason shows as Lore. Faith heals, strikes (#113). One goddess, three faiths; she speaks once, to Maud.
 - **The land** (Lotus; 300, 301): the seam is the tundra apex; Kestrow west, Sallow east, Aldmere south, outlands beyond. Only the north's frost holds the Kin; Kinsbane hunts the lean season. Seam: maps 1, 2, 4, 6, 9, 10; Sallow 3, 7, 8; Aldmere 5; Kestrow quests only. Geography never retiles a tuned map. Grounds (#892, #916; 0227): frost on the seam, moss elsewhere, sand for Keziah's outland quests. Region voices, never a tic.
@@ -107,11 +108,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Plumbing
 
-- **Lotus** plays a `for-lotus` issue both sign (#731, #786). **Engine** (0008, 0046): Godot 4 .NET reads the protocol.
+- **Lotus** plays `for-lotus` issues both sign (#731). **Engine** (0046): Godot 4 .NET reads the protocol.
 - **Builder race** (#735, 0169): one Builder at a time, earlier claim wins.
 - **Art:** human-made only (Lotus); licences first (#816).
 - **Casting (356 to 362):** `docs/look/CASTING.md`; Lotus picks. No hire has a portrait; Bet's arrives at the Cold Kitchen, P28 (363).
-- **Character style** (Lotus; #891, 0223): Blender, packs; cold key, warm fill, posterized, heavy ink; chroma under 32, one amber.
+- **Character style** (Lotus; 0223): Blender; cold key, warm fill, posterized, heavy ink; chroma under 32, one amber.
 
 ## Round index
 

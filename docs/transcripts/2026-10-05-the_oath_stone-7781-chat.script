@@ -1,0 +1,53 @@
+quest keziah_2 teodor
+move keziah 2,7
+wait keziah
+move teodor 2,6
+wait teodor
+end
+move keziah 3,7
+attack keziah brigand-1
+move teodor 4,6
+attack teodor soldier-1
+end
+move keziah 7,7
+wait keziah
+move teodor 6,7
+item teodor 2
+end
+move keziah 10,8
+wait keziah
+move teodor 9,8
+wait teodor
+end
+move keziah 11,6
+attack keziah archer-1
+move teodor 11,7
+attack teodor archer-1 art long_thrust
+end
+attack keziah archer-1
+canto keziah 12,4
+move teodor 11,4
+wait teodor
+end
+move keziah 12,5
+wait keziah
+move teodor 12,4
+item teodor 2
+end
+move keziah 11,5
+attack keziah rider-1
+item teodor 2
+end
+attack teodor sworn_captain-1
+move keziah 13,3
+attack keziah sworn_captain-1
+recall 87
+move keziah 11,3
+attack keziah sworn_captain-1
+recall 87
+move keziah 13,3
+attack keziah sworn_captain-1 3
+move teodor 11,4
+attack teodor sworn_captain-1 art long_thrust
+end
+attack keziah sworn_captain-1 1 !

@@ -3093,3 +3093,17 @@ Result: **won on turn 15 of 18.** Nobody fell; two Recalls, both on the boss. Te
 - Verdict: keep, provisional. The talk binds; it does not cost. Tripwire: a campaign journal through Wren's quests that never names a costly talk-held swing returns it as a quest-1 softening.
 
 Transcript: `docs/transcripts/2026-10-05-saltmarsh_ford_talk-5150.txt`, replayed by Code under `--strict` from Chat's script; same result. Code's note: 10,5 is one tile of a band (9,4 to 12,7) 7 or 8 from the sleeping fort; the Sim sweep cannot count it, since its heuristic wakes the fort by proximity on turn 2 in every seed. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5997860521).
+
+## 2026-10-05 — The Oath Stone, reseeded (#940), warm — Chat
+
+Seed: 7781 (`campaign --load oath --saves <copy of docs/transcripts/2026-10-04-the_oath_stone-1133.saves> --reseed 7781`; side map seed 7930), ally **Teodor**, on main at ea2d383. Warm: Chat's fifth play of the map. It doesn't gate; the cold chair stays the Critic's.
+Result: **lost on turn 10.** Keziah fell with the envoy at 7. Both Recalls were spent on T9. Tension 8, choice 7, surprise 6.
+- T1-T2: with a lance beside her, the camp is the easy part. The brigand chose Teodor and ate a counter. Keziah killed it on T2, and the soldier died on her counter. That's an ally finding, not a board one.
+- T3-T6: the march, with the drain taking 15. The archer died on T6, Kinsbane spoke, and the hunt carried her to 12,4 as bait. Both the envoy's swing and the archer's missed.
+- **Best turn, T7.** Keziah pulled back to 12,5, and Teodor took the bait tile with his dressing. The rider and the envoy both spent themselves on him, and nobody touched her. Who walks into the enemy phase whole.
+- T8: she killed the rider instead of swinging at the envoy, since every envoy swing was lethal-if-all-land on his phase.
+- T9, both Recalls: the same miss from 11,3 as from 13,3 (the key ignores the tile). The second line changed the plan instead: gauntlets for Keziah, and Long Thrust from 11,4 for Teodor, choosing his life over about five points of envoy.
+- T10, the misplay: `attack keziah sworn_captain-1 1 !` was meant as Kinsbane, but the T9 swing had moved the gauntlets to slot 1. 4 + 4 left him at 7, and the counter killed her. With `kinsbane` named, it's a 56 percent kill for 16.
+- Verdict: nothing asks for a lever. The end is the same coin as 5127 and 940. Screen finding: equipping reorders the pack, so a slot number can go stale.
+
+Transcript: `docs/transcripts/2026-10-05-the_oath_stone-7781-chat.txt`, the script beside it. Code replayed it under `--strict` (side map seed 7930, lost on turn 10, envoy at 7, as journaled; it stops before `leave`), and checked the counterfactual off the play: `kinsbane` named hits for 16 and kills. Filed #1114. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5998283214).
