@@ -1257,6 +1257,22 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Code's warm replay of the Tollgate under DECISIONS/0237 (seed 1320): the boss's Toll Axe
+    /// reaches 7,4 over the corridor wall at range 2, and the captain seizes on turn 8 with the
+    /// archer dead and the boss at 8.
+    /// </summary>
+    [Fact]
+    public void TheTollgateReplayOnSeed1320SeizesOnTurn8()
+    {
+        var output = RunShipped("the_tollgate.map", "2026-10-05-the_tollgate-1320.script", 1320, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("  Bandit Leader hits Teodor for 11 (hp 1)\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-10-05-the_tollgate-1320.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 403's acceptance on the Critic's cold board (issue 399, seed 509): Dunstan on 16,6 at
     /// sight 1 is told the soldier's <c>?</c> at 15,4 is three tiles off, nearest first, unnamed.
     /// </summary>
