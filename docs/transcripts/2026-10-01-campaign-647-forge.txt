@@ -40,7 +40,7 @@ move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane
 for the rest of the map. The ford south cannot be barred.)
 
 Side map: The Lazar House, seed 719
-Maud goes with Wren. This map is lost if Maud falls; who falls here is gone for good.
+Maud goes with Wren. This map is lost if Maud falls; who falls here comes back wounded.
   when one of yours stops on 8,1: 8,0 becomes wall, unless one who cannot enter wall stands on it.
   when one of yours stops on 10,4: 11,4 becomes wall, unless one who cannot enter wall stands on it.
   turn 2, enemy phase: a brigand arrives at 8,0 (aggressive). A unit standing on 8,0 stops it.
