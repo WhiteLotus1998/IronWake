@@ -330,7 +330,7 @@
       "movement": "infantry",
       "mov": 4,
       "hidden": true,
-      "abilities": ["hold_the_gate"],
+      "abilities": ["banked"],
       "weapons": ["lance", "sword"],
       "mastery": "unsworn",
       "masteryPoints": 12,

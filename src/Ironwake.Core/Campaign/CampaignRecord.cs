@@ -1372,7 +1372,7 @@ public sealed record CampaignRecord(
     /// <summary>
     /// Why <paramref name="map"/> cannot be played as a side map (issue 635), or null when it can:
     /// one <c>captain</c> slot (the member's), at least one bare <c>recruit</c> slot (one per
-    /// ally; one on a member's quest, more on a board like the Postern, issue 691), no recruit
+    /// ally; one on a member's quest, more on a board like the Cold Kitchen, issue 691), no recruit
     /// placed by name, and no certification header.
     /// </summary>
     public static string? QuestMapRefusal(MapDefinition map)

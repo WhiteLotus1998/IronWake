@@ -524,7 +524,7 @@ public class SideMapTests
         var maps = (ulong)Content.Campaign.Maps.Count;
         var start = record.Seed + (2 * maps) + (ulong)record.MapIndex;
 
-        Assert.Equal(new[] { start, start + maps, start + (2 * maps), start + (3 * maps), start + (4 * maps) }, new[] { "maud_1", "bet_postern", "maud_2", "pell_1", "pell_2" }.Select(id => record.QuestSeed(id, Content)));
+        Assert.Equal(new[] { start, start + maps, start + (2 * maps), start + (3 * maps), start + (4 * maps) }, new[] { "maud_1", "bet_kitchen", "maud_2", "pell_1", "pell_2" }.Select(id => record.QuestSeed(id, Content)));
     }
 
     [Fact]
@@ -603,7 +603,7 @@ public class SideMapTests
     [InlineData("maud_1", "captain", "captain is the captain and stays with the company; pick another ally")]
     [InlineData("maud_1", "maud", "maud is the side map's own; pick an ally beside maud")]
     [InlineData("maud_1", "nobody", "no unit 'nobody' on the roster")]
-    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern, maud_2, pell_1, pell_2, teodor_1, ottilie_1, ottilie_2, rook_1, teodor_2, keziah_1, rook_2, keziah_2")]
+    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_kitchen, maud_2, pell_1, pell_2, teodor_1, ottilie_1, ottilie_2, rook_1, teodor_2, keziah_1, rook_2, keziah_2")]
     public void ASideMapIsRefusedTheCaptainTheMemberAStrangerAndAnUnknownQuest(string quest, string ally, string refusal)
     {
         Assert.Equal(refusal, At("the_tollgate").QuestRefusal(quest, ally, Content));
