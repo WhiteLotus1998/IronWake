@@ -3121,3 +3121,17 @@ Result: **lost on turn 5 of 6.** Maud fell on the fort to two archers and the he
 - Text bug: the opening line says "who falls here is gone for good" with permadeath off. The record wounds them instead, and says so at `leave`.
 
 Transcript: `docs/transcripts/2026-10-05-the_lazar_house-670-drover.txt`, with the script and save beside it.
+
+## 2026-10-05 — The Burned School on the Drover's route (#1100), warm — Code
+
+Seed: the parity campaign 644 (Recruit, permadeath off), continuing run 1's chair at the camp before Sallow Grange: `campaign --load sallow --saves <copy of docs/transcripts/2026-10-05-the_lazar_house-670-drover.saves> --script docs/transcripts/2026-10-05-the_burned_school-700-drover.script`. The script replays run 1's lines and then plays `pell_1` on side map seed 700, with **Rook** as the ally (L1, wounded: Dex and Spd -2, lance E 0). Warm: I built the board (0199) and played it before (884).
+Result: **won on turn 6 of 7**, escape, nobody fell, no Recall used, no chest opened. Rook left first, then Pell. Rook ended on EXP 70 (no level yet), lance E 22, Bow Sense 7 of 12. Tension 6, choice 5, surprise 4.
+- T1: Pell's Cinder from 7,4 took the shieldbearer to 5. Rook missed twice from 8,4, then **killed it on the counter** in the enemy phase (3 and 3). That was her first 35 EXP.
+- T2: Rook's free swing at the hill archer missed (60), and Pell's Cinder killed it. The road east was open by turn 2.
+- T3: Pell took the lead brigand to 3. Rook missed the kill (80), and `end` refused: `Lethal if all land: Rook` (brigand 14 at 58, hexer 8 at 98). I ended with `!`. The axe missed and the hexer hit, leaving her at 9.
+- T4 (**best turn**): Rook on 9 hp against the 3-hp brigand. `attack` refused too: the counter is lethal only if her first strike misses (20 in 100). I swung with `!`, she hit, and that was 35 more EXP. Pell walked onto the dead brigand's tile and Overcast-Cindered the hexer.
+- T5 to T6: both onto the exits, ahead of a brigand and a soldier still five tiles back. Rook exited, then Pell.
+- **What wasn't tense:** everything after T4. I skipped all three chests, because the route needs Rook alive and fed, not a duplicate Gust. 884 predicted this: without the chests the board is a cork and a walk. The route chair plays a side map for EXP, so it plays the least interesting version of it.
+- For the route: a wounded L1 Skyrider gets kills here only behind Pell's Cinder. Two kills in six turns is 70 EXP, so lance C by the keep (80 points from 22) needs her swinging every turn of every map left. The heuristic main maps won't do that, and that's the next run's finding to watch.
+
+Transcript: `docs/transcripts/2026-10-05-the_burned_school-700-drover.txt`, with its script beside it (the save is run 1's).
