@@ -66,6 +66,8 @@ public class ProtocolJsonTests
         { new KinsbaneSpoke("keziah", "kinsbane", "kb_starved_eat", "Eat."), """{"type":"kinsbaneSpoke","unit":"keziah","item":"kinsbane","line":"kb_starved_eat","text":"Eat."}""" },
         { new HungerEased("keziah", "kinsbane", 5, 6), """{"type":"hungerEased","unit":"keziah","item":"kinsbane","healed":5,"hpAfter":6}""" },
         { new UnitChilled("brigand-1", "teodor", Side.Enemy), """{"type":"unitChilled","unit":"brigand-1","by":"teodor","side":"enemy"}""" },
+        { new UnitFrosted("brigand-1", "rook", 1, 7, true, false, Side.Enemy), """{"type":"unitFrosted","unit":"brigand-1","by":"rook","damage":1,"hpAfter":7,"held":true,"side":"enemy"}""" },
+        { new UnitFrosted("hask", "rook", 1, 30, false, true, Side.Enemy), """{"type":"unitFrosted","unit":"hask","by":"rook","damage":1,"hpAfter":30,"held":false,"boss":true,"side":"enemy"}""" },
         { new UnitChilled("teodor", "rider-1", Side.Player, Next: true), """{"type":"unitChilled","unit":"teodor","by":"rider-1","side":"player","next":true}""" },
         { new UnitLocked("rider-1", "teodor", Side.Enemy), """{"type":"unitLocked","unit":"rider-1","by":"teodor","side":"enemy"}""" },
         { new UnitLocked("rider-1", "teodor", Side.Enemy, Next: true), """{"type":"unitLocked","unit":"rider-1","by":"teodor","side":"enemy","next":true}""" },

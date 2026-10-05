@@ -303,9 +303,11 @@ public static class Resolver
         }
 
         events.Add(new UnitMoved(unit.Id, unit.At, move.To, entry.Path));
-        int? canto = Signatures.HasCanto(state, content, unit) ? reach.Mov - entry.Cost : null;
-        var moved = EndMove(state, unit, unit with { At = move.To, Moved = true, Canto = canto }, events);
-        return (Planks.AfterWalk(moved, content, unit, unit.At, entry.Path, events), null);
+        int? canto = Signatures.HasCanto(state, content, unit) && unit.Frosted == 0 ? reach.Mov - entry.Cost : null;
+        var flewFrom = move.To != unit.At && Grounding.MovementOf(unit, content) == MovementType.Flying ? unit.At : (Coord?)null;
+        var moved = EndMove(state, unit, unit with { At = move.To, Moved = true, Canto = canto, FlewFrom = flewFrom }, events);
+        moved = Planks.AfterWalk(moved, content, unit, unit.At, entry.Path, events);
+        return (DrakeFrost.AfterMove(moved, content, unit, move.To, events), null);
     }
 
     /// <summary>
@@ -402,6 +404,7 @@ public static class Resolver
     private static BattleState OpenCanto(BattleState state, GameContent content, string unitId, bool healed)
     {
         if (state.Find(unitId) is not { } unit
+            || unit.Frosted > 0
             || !(Signatures.HasCanto(state, content, unit) || (healed && AbilityRules.HasCantoAfterHeal(content.AbilitiesOf(unit.Unit)))))
         {
             return state;
@@ -1731,7 +1734,7 @@ public static class Resolver
         events.Add(new PhaseEnded(ended, state.Turn));
         if (nextTurn > state.Map.TurnLimit)
         {
-            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Open = null });
+            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false, Pressed = false, FallingBack = false, FlewFrom = null, Open = null });
             return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared), LitGroups = ValueList<string>.Empty }, null);
         }
 
@@ -1764,7 +1767,7 @@ public static class Resolver
                 events.Add(new UnitRested(unit.Id));
             }
 
-            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null });
+            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };

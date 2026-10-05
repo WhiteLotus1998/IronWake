@@ -577,6 +577,16 @@ public static class ContentSerializer
                 writer.WriteString("kind", "deep_rime");
                 writer.WriteNumber("rounds", deep.Rounds);
                 break;
+            case DrakeFrostEffect frost:
+                writer.WriteString("kind", "drake_frost");
+                writer.WriteNumber("damage", frost.Damage);
+                writer.WriteNumber("rest", frost.Rest);
+                break;
+            case StoopEffect stoop:
+                writer.WriteString("kind", "stoop");
+                writer.WriteNumber("flight", stoop.Flight);
+                writer.WriteNumber("damage", stoop.Damage);
+                break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
         }

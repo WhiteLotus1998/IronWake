@@ -1,0 +1,73 @@
+certify rook skycaptain
+march
+move rook 10,1
+attack rook archer-2
+move captain 10,4
+wait captain
+move wren 10,5
+wait wren
+move dunstan 10,3
+wait dunstan
+move pell 9,4
+wait pell
+end
+show rook
+attack rook archer-2
+threat captain from 14,3
+move captain 14,3
+wait captain
+move dunstan 12,3
+wait dunstan
+move pell 11,3
+wait pell
+move wren 10,3
+wait wren
+end
+move rook 9,2
+attack rook heavy_rider-1
+move captain 16,2
+wait captain
+move dunstan 15,3
+wait dunstan
+move pell 14,2
+wait pell
+move wren 14,3
+wait wren
+end
+recall 54
+move rook 14,1
+wait rook
+move captain 16,2
+wait captain
+move dunstan 15,3
+wait dunstan
+move pell 14,2
+wait pell
+move wren 13,3
+wait wren
+end
+move rook 17,3
+attack rook soldier-1
+move captain 19,3
+wait captain
+move pell 18,2
+wait pell
+move dunstan 17,1
+wait dunstan
+end
+threat rook from 18,0
+move rook 18,0
+wait rook
+move pell 19,4
+wait pell
+move dunstan 18,1
+wait dunstan
+wait captain
+end
+exit pell
+move rook 19,6
+wait rook
+wait captain
+end
+exit captain
+leave

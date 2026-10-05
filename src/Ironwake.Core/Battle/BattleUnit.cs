@@ -80,6 +80,23 @@ public sealed record BattleUnit(
     public int Chill { get; init; }
 
     /// <summary>
+    /// The frost hold's clock (issue 1127, <see cref="DrakeFrost"/>), counted as the chill's is
+    /// (<see cref="Frost.AtPhaseChange"/>): 0 not held; 1 struck by a drake's frost, its side's next phase
+    /// not yet begun; 2 that phase under way, cleared when it ends. While it is not 0 the unit's Mov is at
+    /// most 1 and it is owed no Canto (<see cref="DrakeFrost.Mov"/>).
+    /// </summary>
+    public int Frosted { get; init; }
+
+    /// <summary>The turn the unit's drake frost last fired (issue 1127, <see cref="DrakeFrost"/>), or null when it has not this battle.</summary>
+    public int? FrostTurn { get; init; }
+
+    /// <summary>
+    /// The tile the unit took off from on a Move it flew this phase (issue 1127, <see cref="Stoop"/>), or null when it
+    /// has not flown; cleared when any phase ends.
+    /// </summary>
+    public Coord? FlewFrom { get; init; }
+
+    /// <summary>
     /// Set when the unit's woken hungering weapon ran the hunt on (issue 804, <see cref="Kinsbane.RunsOn"/>):
     /// a Canto of its full Move after a kill, once a battle. Never cleared; board state, so Recall restores it.
     /// </summary>
@@ -266,6 +283,7 @@ public sealed record BattleUnit(
     /// partner's tier beside it joins the aura (<see cref="Supports.Bonus"/>, issue 77).
     /// An art that strikes once makes the side <see cref="Combatant.SingleStrike"/> (issue 739).
     /// An open unit answering a strike by an ally of its opener reads its Def and Res lower (<see cref="Opening.Lowered"/>, issue 772).
+    /// A strike, never a counter, carries the Sky Captain's Stoop after a long flight (<see cref="Ironwake.Core.Stoop"/>, issue 1127).
     /// </summary>
     public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null)
     {
@@ -291,7 +309,7 @@ public sealed record BattleUnit(
             combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, WeaponBroken(content), hit, crit, beside + Opening.Lowered(Open!, combatant.Stats));
         }
 
-        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true }, Aura = Formation.Aura(state, content, this) + Supports.Bonus(state, content, this) };
+        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true }, Aura = Formation.Aura(state, content, this) + Supports.Bonus(state, content, this), Stoop = countering ? 0 : Ironwake.Core.Stoop.Bonus(content, this) };
     }
 
     /// <summary>

@@ -312,6 +312,14 @@ public sealed record HeirloomTurned(string UnitId, string ItemId, int Stage, str
 public sealed record UnitChilled(string UnitId, string ByUnitId, Side Side, bool Next = false) : GameEvent;
 
 /// <summary>
+/// A drake's frost struck an enemy beside the tile its rider landed on (issue 1127, <see cref="DrakeFrost"/>):
+/// <paramref name="Damage"/> taken, <paramref name="HpAfter"/> left, never below 1. <paramref name="Held"/> is true
+/// when it is held to Mov 1 with no Canto until <paramref name="Side"/>'s next phase ends; a boss
+/// (<paramref name="Boss"/>) never is. <paramref name="Next"/> is true when it was struck on its own side's phase.
+/// </summary>
+public sealed record UnitFrosted(string UnitId, string ByUnitId, int Damage, int HpAfter, bool Held, bool Boss, Side Side, bool Next = false) : GameEvent;
+
+/// <summary>
 /// A hit with a locking art locked a unit that survived it (issue 635, <see cref="Lock"/>): Mov 0 until
 /// its side's next phase ends while <paramref name="ByUnitId"/> stands beside it. <paramref name="Next"/>
 /// is true when it was struck on its own side's phase.

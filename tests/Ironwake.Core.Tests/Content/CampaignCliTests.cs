@@ -165,7 +165,7 @@ public class CampaignCliTests
             Assert.Contains("  Scholar (from Adept; adds faith (strike spells only)): level 7, lore C", output);
             Assert.Contains("  Warden (from Chaplain; adds sword, Far Mending): level 7, faith C", output);
             Assert.Contains("  Berserker (from Reaver; adds Blood Price): level 7, axe C", output);
-            Assert.Contains("  Sky Captain (from Skyrider; adds +1 Mov): level 7, lance C", output);
+            Assert.Contains("  Sky Captain (from Skyrider; adds +1 Mov, Drake Frost, Stoop): level 7, lance C", output);
             Assert.Contains("  Vanguard: level 3 -- needs level 3, has 1\n", output);
             Assert.Contains("  Commander (from Marshal; adds cavalry, lance, +2 Mov): level 10, sword C -- needs to be a Marshal first;", output);
             Assert.Contains("  Champion (from Vanguard; adds lance, axe): level 10, sword C -- needs to be a Vanguard first; needs level 10, has 1; needs sword C, has E\n", output);

@@ -959,7 +959,8 @@ public sealed class PlaySession
 
     /// <summary>
     /// The move preview (issue 782): <c>preview: Dunstan would move 6,8 -&gt; 7,5 via 6,7 7,7 7,6; wears nothing</c>,
-    /// or <c>; would wear 6,5 (Water)</c>, each worn tile with what it would become. Nothing moves.
+    /// or <c>; would wear 6,5 (Water)</c>, each worn tile with what it would become, then the drake's frost the landing
+    /// would fire (issue 1127, <see cref="DrakeFrost.Preview"/>). Nothing moves.
     /// </summary>
     private void PreviewMove(Move move)
     {
@@ -976,6 +977,10 @@ public sealed class PlaySession
             ? "wears nothing"
             : "would wear " + string.Join(", ", preview.Worn.Select(w => $"{w.At} ({(_content.Terrain.TryGetValue(w.TerrainId, out var terrain) ? terrain.Name : w.TerrainId)})"));
         _out.WriteLine($"preview: {names[walk.UnitId]} would move {walk.From} -> {walk.To}{route}; {wear}");
+        if (Find(walk.UnitId) is { } rider && DrakeFrost.Preview(_state, _content, rider, walk.To, names) is { } frost)
+        {
+            _out.WriteLine(frost);
+        }
     }
 
     /// <summary>
@@ -1797,6 +1802,7 @@ public sealed class PlaySession
     /// one, the tile it strikes from, and the forecast line the enemy phase would print,
     /// then the total if every strike lands against the unit's HP, one enemy per strike
     /// tile (<see cref="Queries.IfAllLand(IReadOnlyList{ThreatLine})"/>, issue 253). Spends nothing.
+    /// A move there that would fire a drake's frost (issue 1127) prints its line first and is priced on the frosted board.
     /// </summary>
     private void PrintThreat(string unitId, Coord? from)
     {
@@ -1812,7 +1818,14 @@ public sealed class PlaySession
         }
 
         var tile = from ?? unit.At;
-        if (Queries.Threats(_state, _content, unit, tile) is not { } lines)
+        var board = _state;
+        var frost = Queries.CanStandOn(_state, _content, unit, tile) ? DrakeFrost.Preview(_state, _content, unit, tile, UnitNames.Of(_state, _content)) : null;
+        if (frost is not null)
+        {
+            board = DrakeFrost.Strike(_state, _content, unit, tile, new List<GameEvent>());
+        }
+
+        if (Queries.Threats(board, _content, unit, tile) is not { } lines)
         {
             Error(unit.Canto is not null && unit.Acted ? $"{unit.Id} cannot canto to {tile}" : unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
             return;
@@ -1823,8 +1836,13 @@ public sealed class PlaySession
             _out.WriteLine($"{tile} is a dash away: priced winded, struck at +{Winded.Hit} Acc");
         }
 
-        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile), Queries.Anvils(_state, _content, unit, tile), Queries.StopWakes(_state, _content, unit, tile), Queries.Refusals(_state, _content, unit, tile)));
-        if (BracedThreat(_state, _content, unit, tile) is { } braced)
+        if (frost is not null)
+        {
+            _out.WriteLine(frost + "; priced held");
+        }
+
+        _out.WriteLine(ThreatText(board, _content, unit, tile, lines, Queries.SleepingThreats(board, _content, unit, tile)!, Queries.Unseeing(board, _content, unit, tile), Queries.MoveWins(board, _content, unit, tile), Queries.Anvils(board, _content, unit, tile), Queries.StopWakes(board, _content, unit, tile), Queries.Refusals(board, _content, unit, tile)));
+        if (BracedThreat(board, _content, unit, tile) is { } braced)
         {
             _out.WriteLine(braced);
         }
@@ -2133,10 +2151,10 @@ public sealed class PlaySession
     /// <summary>
     /// One side of a forecast as the console prints it: displayed Acc first, then damage, doubles and crit (issue 701);
     /// <c>grounds N%</c> in place of the crit when the side's crit grounds a flier instead of tripling (issue 723);
-    /// a single-strike class says <c>x1, never doubles</c>, and a drake's bite <c>; drake bites 5, no roll</c> (issue 872).
+    /// a single-strike class says <c>x1, never doubles</c>, a dive <c>; Stoop +2 on the first strike</c> (issue 1127), and a drake's bite <c>; drake bites 5, no roll</c> (issue 872).
     /// </summary>
     private static string StrikeText(SideForecast side) =>
-        $"acc {side.DisplayedHit}% dmg {side.Damage}{(side.StrikeCount > 1 ? $" x{side.StrikeCount}" : side.NeverDoubles ? " x1, never doubles," : "")} {(side.CritGrounds ? "grounds" : "crit")} {side.CritChance}%{(side.Bite > 0 ? $"; drake bites {side.Bite} if a strike hits and both stand, no roll" : "")}";
+        $"acc {side.DisplayedHit}% dmg {side.Damage}{(side.StrikeCount > 1 ? $" x{side.StrikeCount}" : side.NeverDoubles ? " x1, never doubles," : "")} {(side.CritGrounds ? "grounds" : "crit")} {side.CritChance}%{(side.Stoop > 0 ? $"; Stoop +{side.Stoop} on the first strike" : "")}{(side.Bite > 0 ? $"; drake bites {side.Bite} if a strike hits and both stand, no roll" : "")}";
 
     /// <summary>
     /// The strike columns of an attack that raises a blow (DESIGN.md 13.16, issue 447): the
@@ -2314,7 +2332,7 @@ public sealed class PlaySession
             lines.Add($"  Techniques: {string.Join(", ", arts)}");
         }
 
-        var held = content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect)
+        var held = content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect && !(a.Effect is DrakeFrostEffect && unit.Unit.Drake is null) && !(a.Effect is StoopEffect && unit.Unit.Drake is not null))
             .Select(a => $"{a.Name} ({a.Text.TrimEnd('.')}{(ArtItemTag((a.Effect as HealArtEffect)?.Item, unit, content) is { } tag ? "; " + tag : "")})").ToList();
         if (held.Count > 0)
         {
@@ -2369,6 +2387,16 @@ public sealed class PlaySession
         else if (Frost.CardLine(state, unit) is { } chilled)
         {
             lines.Add("  " + chilled);
+        }
+
+        if (DrakeFrost.HeldLine(state, unit) is { } frosted)
+        {
+            lines.Add("  " + frosted);
+        }
+
+        if (DrakeFrost.CardLine(state, content, unit) is { } frost)
+        {
+            lines.Add("  " + frost);
         }
 
         if (Opening.CardLine(state, unit, UnitNames.Of(state, content)) is { } open)
@@ -2915,6 +2943,9 @@ public sealed class PlaySession
                 return $"{names[o.UnitId]} is open: allies of {names[o.ByUnitId]} strike it at Def -{o.Def}, Res -{o.Res} until the phase ends";
             case UnitChilled c:
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
+            case UnitFrosted f:
+                return $"the drake's frost strikes {names[f.UnitId]} for {f.Damage} (hp {f.HpAfter})"
+                    + (f.Held ? $"; held to {DrakeFrost.HoldMov} tile, no Canto, until {Frost.Until(f.Side, f.Next)}" : f.Boss ? "; a boss: no hold" : "; already held");
             case UnitLocked l:
                 return $"{names[l.UnitId]} is locked by {names[l.ByUnitId]}: Mov 0 until {Frost.Until(l.Side, l.Next)} while {names[l.ByUnitId]} stands beside";
             case LockDropped d:

@@ -1463,8 +1463,36 @@ public static class ContentLoader
                 }
 
                 return deep;
+            case "drake_frost":
+                RequireOnly(entry, effect, "effect", "kind", "damage", "rest");
+                var frost = new DrakeFrostEffect(effect.Int("damage"), effect.Int("rest"));
+                if (frost.Damage < 0)
+                {
+                    throw entry.Error("effect.damage", "must not be negative");
+                }
+
+                if (frost.Rest < 0)
+                {
+                    throw entry.Error("effect.rest", "must not be negative");
+                }
+
+                return frost;
+            case "stoop":
+                RequireOnly(entry, effect, "effect", "kind", "flight", "damage");
+                var stoop = new StoopEffect(effect.Int("flight"), effect.Int("damage"));
+                if (stoop.Flight < 1)
+                {
+                    throw entry.Error("effect.flight", "must be at least 1");
+                }
+
+                if (stoop.Damage < 1)
+                {
+                    throw entry.Error("effect.damage", "must be at least 1");
+                }
+
+                return stoop;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, range, killheal, beside, aura, footing, opening, bite, long_carry or deep_rime");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, range, killheal, beside, aura, footing, opening, bite, long_carry, deep_rime, drake_frost or stoop");
         }
     }
 

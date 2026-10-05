@@ -35,7 +35,7 @@ public sealed record CombatResult(ValueList<StrikeEvent> Strikes, int AttackerHp
 /// <see cref="RollKey.Combat"/> documents, and the crit roll is drawn only when the hit landed.
 /// When the exchange is over and both stand, a side with a <see cref="SideForecast.Bite"/> one of whose
 /// strikes hit bites once (issue 872): the attacker's drake, or else the defender's; one bite a combat.
-/// The bite draws no roll.
+/// The bite draws no roll. A side's <see cref="SideForecast.Stoop"/> is added to its first strike when it hits (issue 1127).
 /// </summary>
 public static class CombatResolver
 {
@@ -98,7 +98,7 @@ public static class CombatResolver
             var hit = Combat.Lands(side.HitChance, rollA, rollB, scheme);
             var crit = hit
                 && rng.Roll(RollKey.Combat(context.Turn, context.Phase, striker.Id, target.Id, strikeIndex, CombatRoll.Crit)) < side.CritChance;
-            var damage = !hit ? 0 : crit ? side.CritDamage : side.Damage;
+            var damage = !hit ? 0 : (crit ? side.CritDamage : side.Damage) + (strikeIndex == 0 ? side.Stoop : 0);
             targetHp = Math.Max(0, targetHp - damage);
             strikes = strikes.Add(new StrikeEvent(strikes.Count, striker.Id, target.Id, hit, crit, damage, targetHp));
         }
