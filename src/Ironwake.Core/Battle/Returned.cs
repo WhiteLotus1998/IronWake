@@ -38,6 +38,21 @@ public static class Returned
     public static bool Is(BattleState state, BattleUnit unit) =>
         state.Return is { } bond && unit.Side == Side.Enemy && unit.Id == bond.UnitId;
 
+    /// <summary>
+    /// The clause a lethal forecast row opens with when the unit it would kill is the returned claimant
+    /// (issue 1068, Design Table round 372): <c>Rook falls for good (the claimant)</c>, by the name a
+    /// reader sees, on either arm of the branch. It names the loss and nothing more: no ending, no veto.
+    /// Null for any other unit; whether the row is lethal is the caller's check.
+    /// </summary>
+    public static string? Falls(BattleState state, BattleUnit unit, UnitNames names) =>
+        Is(state, unit) ? $"{names[unit.Id]} falls for good (the claimant)" : null;
+
+    /// <summary>
+    /// <paramref name="rest"/> with <paramref name="falls"/> before it (issue 1068): the cost first, then the
+    /// gain, <c>Rook falls for good (the claimant); Keziah +10 HP</c>. <paramref name="rest"/> alone when null.
+    /// </summary>
+    public static string Lead(string? falls, string rest) => falls is null ? rest : $"{falls}; {rest}";
+
     /// <summary>The returned claimant on the board, or null when the battle has none or they have left it.</summary>
     public static BattleUnit? On(BattleState state) =>
         state.Return is { } bond && state.Find(bond.UnitId) is { Side: Side.Enemy } unit ? unit : null;
