@@ -6,8 +6,8 @@ Updated: 2026-10-05. Under 20 KB (#401); history in git, `docs/DECISIONS/`.
 
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1063. Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804, #806, #807 and #872 are `blocked` on plays, #634 or #535; 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked; the dash is kept (0255).
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
-About 4507 tests green; `ci`, `ci-windows` run; `godot-*` not required.
-No forks are open. The chain heartbeat stays (#406). #1069: race guards cover warm plays, spikes (0169). #1093 (0253): `end` asks on a lethal; `end !` ends anyway. #1094 (0254): the drake's carry (`free`) and breath are open on every campaign battle, main or side, no header. #1005 is done. The Table (#1063) is past 30 comments; rotate it next.
+About 4525 tests green; `ci`, `ci-windows` run; `godot-*` not required.
+No forks are open. The chain heartbeat stays (#406). #1093 (0253): `end` asks on a lethal; `end !` ends anyway. #1094 (0254): the carry and breath on every campaign battle. #1097 (0256): Wren's talk sample, `saltmarsh_ford_talk.map`. The Table (#1063) is past 30 comments; rotate it next.
 
 ## Next
 
@@ -79,7 +79,7 @@ No forks are open. The chain heartbeat stays (#406). #1069: race guards cover wa
 | 13.2 Commander's Word | `docs/samples/harrow_weir_orders.map` (#85, 0136; Code 85 warm in: moved for the order, the cost did not bite) | Chat's cold play |
 | 13.24 messenger | `docs/samples/signal_road_pass.map` (#680; 0135 amended; Code 680 warm in: a unit held its path, the runner was never struck) | Chat's cold play of the pass |
 | 13.22 break | `docs/samples/saltmarsh_ford_break.map` (#606, 0112; Code 661 on the Tollgate and 667 here in, nothing broke on either) | Chat's cold play on Saltmarsh |
-| 13.18 signatures | `docs/samples/saltmarsh_ford_brace_signatures.map` (#486, 0097; Code 563, Chat cold 113 and 587 in) | the ledger killed at 65 (0197, Chat cold 831); its next shape (round 263) waits to be built, then a cold play |
+| 13.18 signatures | `docs/samples/saltmarsh_ford_brace_signatures.map` (#486, 0097; Code 563, Chat cold 113 and 587 in); Wren's talk on `saltmarsh_ford_talk.map` (#1097, 0256) | the ledger killed at 65 (0197, Chat cold 831), its next shape (round 263) unbuilt; the talk: Chat's cold play of the talk sample, or killed |
 | 13.25 rotten planks | `rotten_bridge_planks.map` (0179; Code 251, Chat 4 7/7/8) and `rotten_bridge_straggler.map` (#783; Code 783 warm, no cut on offer) | Chat's cold play of the straggler |
 | 13.26 rockfall | `docs/samples/scree_gorge_rockfall.map` (0182; Code 811 warm 8/7/7) | Chat's cold play |
 | #872 the Drover | the rime sample with Rook a Drover (0217; Code 805 warm: Deep Rime decided) | a campaign chair journals her; Chat's cold pick, her or the Captain (round 294) |
