@@ -2800,3 +2800,19 @@ Notes:
 - **Rook's counter crit the brigand** (5 percent, 30) on enemy phase 10. That was luck, and it spared a turn.
 - **Not tense:** turns 3 and 4 (cleanup, then a walk), and turns 8 to 11, the march round the south bank to the camp. That's shorter than the old stretch and has the lure in it, but turn 11 was empty.
 - **Verdict:** 7+ on all three, with the best turn named. With Chat's 5150 at 7/7/7, this meets DIALOGUE's condition, and Rook's arm is `tuned` (0246).
+
+## 2026-10-05 — The Tollgate, a tuned map replayed under 0237, warm — Code
+Seed: 1320 (`play the_tollgate --seed 1320 --strict --script docs/transcripts/2026-10-05-the_tollgate-1320.script`; transcript beside it; main at 383f36d)   Result: **won on turn 8 of 10.** Nobody fell and no Recall was spent. The boss was left at 8.
+Warm: this is my tenth or so Tollgate, and I built the rider trigger. It's the third tuned map replayed under 0237's no-spike rule, after Harrow Weir (1300) and Brackwater Cut (1310).
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 7. The warden was dead and the archer at 6,1 was the only door to the gate: 7,1's other neighbours are the boss and the wall. Wren went first from 5,1 (85 for 10), because what the captain could spend depended on her roll. If she missed, Full Measure was a certain 19 for the kill, and it would cost the captain turn 8 beside the boss's 62 for 16. If she hit, Feint at 99 for 9 finished the archer and kept his legs. She hit, the Feint landed, and the boss's one swing put the captain at 6 and took 18 back. On turn 8 he walked 6,1 to the gate.
+Notes:
+- **Turns 1 to 3 were a walk, and the woods pair died in one turn.** Pell and Teodor's 47 percent took the brigand, and Wren and the captain the archer, with every swing landing. That's luck, not the map. 739 spent six misses on the same brigand. The one cost was the brigand's counter to Pell for 13, which left her at 3 for the rest of the map and kept her out of every later turn but one.
+- **The rider was a gift this time.** I stepped Teodor onto 6,4 on turn 4 with Pell already out of its Mov. The rider took the one target it had, ate Teodor's 76 percent counter, and died to Pell's 99 on turn 5. The trigger keeps the corridor from being free, but once it's priced it's a kill.
+- **Surprise: the Toll Axe over the wall.** On enemy phase 6 the boss struck Teodor at 7,4 from 7,2, at range 2 across the corridor wall, for 11 (12 to 1). `threat teodor from 7,4` would have printed exactly that, and the transcript asks it after the fact. My mistake, not the screen's. It's the same hand axe that 739 met on turn 7, from the other side.
+- **My mistake twice, both with a dressing in the pack.** On turn 5 Teodor's Long Thrust missed, the warden's counter put him at 2, and I ended into a printed `Lethal if all land: Teodor`. The warden's 31 percent missed. I should have spent the dressing instead of the wait.
+- **The cork still works.** The warden on 6,2 behind the one-tile gap took two turns and both of the corridor's tiles (6,3 for a sword, 6,4 for range 2). Wren's Heavy Cut left him at 2, and he died to her counter on his own phase.
+- **The archer and the boss never moved**, and that's the map. The keep holds, so 6,3, 6,2 and 7,4 are a priced kill zone and not a swarm.
+- **Verdict:** the tuned verdict stands, and the play files nothing. The soft approach (turns 1 to 3) is the same note as every Tollgate entry, and it's the map's shape, not a bug.
+
+— Code
