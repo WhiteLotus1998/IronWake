@@ -6,8 +6,8 @@ namespace Ironwake.Core.Tests.Content;
 /// <summary>
 /// The Mill, the campaign's second map (issue 632, DESIGN section 14): Maud holds the miller's
 /// house alone and is protected, so leaving her to it loses the map, and Code's journaled play
-/// replays to its transcript; its before scene (issue 1005) holds on the board and prints after
-/// <c>march</c>.
+/// replays to its transcript; its before and after scenes (issue 1005) hold on the board, the
+/// before scene printed after <c>march</c>, the after scene below the won line.
 /// </summary>
 [Collection("console")]
 public class TheMillTests
@@ -77,6 +77,62 @@ public class TheMillTests
         Assert.Equal("water", map.TerrainIdAt(new Coord(6, maud.At.Y)));
         Assert.True(captain.At.X < 6 && maud.At.X > 6, $"captain {captain.At}, Maud {maud.At}");
         Assert.Empty(content.Campaign.Maps[1].Before);
+    }
+
+    /// <summary>
+    /// The after scene (issue 1005, rounds 373 and 374) has Maud pray "at each of the four": a rout
+    /// leaves every enemy dead, so the line holds only while the board fields four, and it fails here
+    /// before it can come untrue on the screen. Its t1 brings her "from the house", which holds
+    /// whoever struck last, because she starts on the fort the before scene barred.
+    /// </summary>
+    [Fact]
+    public void TheAfterScenesFourDeadMatchTheBoardsEnemies()
+    {
+        var content = MapFixture.Content;
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "the_mill.map"), content);
+        var scene = content.Scenes.Single(s => s.Id == "the_mill_after");
+
+        Assert.Equal(ScenePoint.After, scene.Point);
+        Assert.StartsWith("When the last raider is down, Maud comes from the house", scene.Lines[0].Text, StringComparison.Ordinal);
+        Assert.Contains(scene.Lines, l => l.Text.Contains("At each of the four she kneels", StringComparison.Ordinal));
+        Assert.Equal(WinCondition.Rout, map.Win);
+        Assert.Equal(4, map.Placements.Count(p => p.Side == Side.Enemy));
+        var maud = Assert.Single(map.Placements.OfType<PlayerPlacement>(), p => p.RecruitId == "maud");
+        Assert.Equal("fort", map.TerrainIdAt(maud.At));
+        Assert.Empty(content.Campaign.Maps[1].After);
+    }
+
+    /// <summary>
+    /// The Mill's after card is replaced by its scene (issue 1005): winning the map in the campaign
+    /// prints the scene below the won line and above the next camp, inside the card width; the old
+    /// card's "Two names on the list" is retired, and none of the scene is in the log.
+    /// </summary>
+    [Fact]
+    public void WinningTheMillPrintsItsAfterSceneBelowTheWonLine()
+    {
+        var alone = File.ReadAllText(Transcript("2026-10-01-starting_alone-631.script"));
+        var mill = string.Join("\n", File.ReadAllLines(Transcript("2026-10-01-the_mill-632.script")).Take(25)) + "\n";
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-mill-" + Guid.NewGuid().ToString("N") + ".script");
+        var log = Path.ChangeExtension(path, ".log");
+        File.WriteAllText(path, "march\n" + alone + "leave\nmarch\n" + mill + "leave\n");
+        try
+        {
+            var output = Run(out _, "campaign", "--seed", "631", "--script", path, "--content", Fixture.RealContentDirectory(), "--log", log);
+
+            Assert.Contains("The Mill won: rout; reward 600, the purse holds 1400; nobody fell\n-- After The Mill --\nWhen the last raider is down, Maud comes from the house", output);
+            Assert.Contains("Maud: They stopped me at the crossing and asked for the rite-keeper by\n", output);
+            Assert.Contains("as long as a name would take, and goes on.\n\n-- Before map 3 of 10: Saltmarsh Ford;", output);
+            Assert.DoesNotContain("Two names on the list", output);
+            var start = output.IndexOf("-- After The Mill --", StringComparison.Ordinal);
+            var scene = output[start..output.IndexOf("-- Before map 3 of 10", start, StringComparison.Ordinal)];
+            Assert.All(scene.Split('\n'), line => Assert.True(line.Length <= Ironwake.Cli.CampaignSession.CardWidth, line));
+            Assert.DoesNotContain("goes on.", File.ReadAllText(log));
+        }
+        finally
+        {
+            File.Delete(path);
+            File.Delete(log);
+        }
     }
 
     /// <summary>
