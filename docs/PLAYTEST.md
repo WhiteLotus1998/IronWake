@@ -3159,3 +3159,17 @@ Seed: the parity campaign 644 (Recruit, permadeath off), continuing run 2's chai
 **The route is closed on this chair.** `maud_1` lost again here, and it reopens only after Brackwater. Both seat schedules run 1 found for `rook_1` before the field need it won before Brackwater, so `rook_1` never gets a seat, and the Grown drake this issue asks for never comes. The door alone, from L3 with two main maps left, is 400 EXP and 43 rank points. Sallow was her best map, every swing I could set up for her, and it made 190 EXP and 15 points. Both maps would have to beat that while her EXP per kill falls with each level.
 
 Transcript: `docs/transcripts/2026-10-05-sallow_grange-650-drover.txt` (both maps), with the script beside it (the save is run 1's).
+
+## 2026-10-05 — Brackwater Cut with Rook as a Sky Captain, drake frost (#1127), warm — Code
+
+**Won on turn 7 (escape): the captain and Pell out; Rook fell twice, Dunstan and Wren once (permadeath off, so wounded). Tension 8, choice 7, surprise 6.** Warm: I built the frost an hour before. The chair is #1100's synthetic save (Rook L7, lance C, Grown), certified to the Sky Captain at the camp; map seed 651, dusk. One Recall spent, to turn 3.
+
+- **T1:** Rook flew to the water at 10,1 beside the fort archer. The frost struck it for 1 and held it (a hold-behaviour archer, so the hold cost it nothing); she took it to 7 and finished it on T2. The frost line in `move ... preview` and `threat from` read right the first time.
+- **T3, line 1, the frost's real test:** a Heavy Rider (Canto) came out of the dusk onto Wren. Rook landed at 9,2 beside it. `threat from` printed the frost first and then `If all land: 28 against 20 hp`. The rider is adjacent, so the hold doesn't stop it hitting her, exactly as Chat said on the Table. She doubled it dead at 79%, so the hold bought nothing. In the enemy phase a second rider and a Hexer, both unseen and unpriced, killed her where the frost had put her. That is the price Lotus described, landing in the middle, and it cost the whole unit.
+- **T3, line 2 (Recall):** Rook stayed out and the riders killed Wren instead.
+- **T4, best turn:** Rook flew 14,1 to 17,3, landing between the two bank guards who block the exits. `Frost: 2 enemies, 1 damage, held to 1 tile; priced held`, then `19 against 20 hp`. Both were held, she killed the soldier (9 hp after the frost) on the first strike, and the captain walked through the hole onto 19,3. That turn felt like the class.
+- **The moment I stopped caring:** T5 and T6. Rook at 11 hp on the dusk's edge, with sight 1 and everything unpriced. I parked her twice and a Brawler out of the dark killed her twice. That's my chair, not the frost. Dunstan also fell after my two mistyped moves.
+
+**For the kill clause:** no hold stopped a whole push for free. On T4 it held two guards for one phase, while the chase group, the Hexer and the Brawler were all still coming. Both holds landed on units that were adjacent to her and could hit her anyway, so what the hold protects is everyone else. One tile of Mov matters most on cavalry with Canto, and the frost never caught one alive. The cooldown stays at one turn. The keep play is still owed.
+
+Transcript: `docs/transcripts/2026-10-05-brackwater_cut-651-skycaptain.txt`, script beside it (run with `campaign --load brackwater` on a copy of `2026-10-05-drake_warden-644-synthetic.saves`).
