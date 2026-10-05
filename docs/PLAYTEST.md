@@ -2881,3 +2881,18 @@ Notes:
 - **Verdict:** the tuned verdict stands, and the play files nothing. The rider as a priced kill is the second entry to say so; if Chat's next Tollgate says it too, it is a content note for the Table, not a bug.
 
 — Code
+
+## 2026-10-05 — The field on Rook's pick, a tuned map replayed under 0237, warm — Code
+Seed: 1390 (`campaign --seed 1390 --from the_field --pick rook --level 5 --strict --script docs/transcripts/2026-10-05-the_field-1390.script`; transcript beside it; main at fe97718)   Result: **won on turn 15 of 20.** Nobody fell and no Recall was spent. Keziah was turned by Rook's talk on turn 2.
+Warm: my fourth Rook arm (81, 973, 1340), and I built `seen_far` and the drift. It's the fifth tuned board replayed under 0237. Turn 1 is 1340's, on purpose (the arm's opening); from turn 2 on I played the other line: the south crossing, where 1340 went north.
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 15. The boss sat on his fort at 24 of 27. Pell's Cinder from 19,7 took him to 13, then Maud missed her 87 and Ottilie missed both of her 68s. Teodor's 58 from 18,7 hit for 6 and ate the 82 percent counter (8 left), leaving 7. The fort changed the captain's choice. On open ground Feint is the 100 percent finisher, but here it read 98 for 4 x2 and needed both hits (96). Full Measure read 99 for 14. I took Full Measure, it landed, and the map ended before the phase it costs.
+Notes:
+- **The pickets fell by turn 3 again.** Rook's 4,14 lure, the turn-2 talk, and the captain's crit on the archer (12 then 36). Teodor took both of the brigand's and the soldier's strikes at 4,13 and dropped to 5. That's the fourth entry with this opening, and it's the arm's opening, not a tile trick.
+- **Turn 5 was the price of the south route.** Rook woke the rider from 10,14 at 52 for 13 and missed both of her 80 percent counters, so she was at 5. Pell's Overcast and the captain's Feint killed it on turn 6. The drift then sent the line group down column 12 for 12,14, but they arrived one at a time: soldier-2 first onto Teodor's bait at 10,13, then the archer, then soldier-1. They died across turns 8 and 9 without reaching two of mine at once. **The south route turns the drift into a conveyor.** 1340's north route met the drifted rider as a surprise. Here the drifted group was a queue. It's one play, so I'm logging it as a note, not filing it as a lever.
+- **The boss sallied when Rook woke the camp, the third chair in a row to see it.** On enemy phase 11 he walked to 18,10. `threat` showed him refusing every strike tile, and he went home on phase 12. This time he never came out again, so turns 13 and 14 were a siege. The fort's heal (5) and Def made Ottilie's bow 2 x2 and Rook's lance 3 x2 into a lethal counter, which leaves the kill to magic and the captain's Full Measure. The choice of who goes in is real.
+- **Not tense:** turns 4, 9 and 10 (walks), and turns 13 and 14 (setting up the siege, with nothing able to strike anyone).
+- **Surprise is a 6 because nothing here was new to me.** The drift, the sally and the fort all played as on 1340, just from another bank.
+- **Verdict:** the tuned verdict stands, and the play files nothing. The south route's queue is a note for the cold chair Rook's arm owes. If that chair also takes the south and finds the drift a queue, the content lever is the drifted group's spacing (or its wake turn), not the route.
+
+— Code
