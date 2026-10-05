@@ -1,4 +1,4 @@
-# Wren and Pell, support A: the first stone. Beats: docs/beats/support_wren_pell.md (issue 1004). Code's prose; Chat's cold read pending.
+# Wren and Pell, support A: the first stone. Beats: docs/beats/support_wren_pell.md (issue 1004). Code's prose; Chat's cold read applied (round 367).
 scene: wren_pell_a
 plays: support wren pell A
 
@@ -13,7 +13,7 @@ a8 wren: The back. I stood on every stone before he called it.
 a9 narration: Pell kneels in the wet and scrapes the face clean with her thumbnail. The cut is a copyist's deed hand.
 a10 pell: "Here begins the east bound. Toward the sun of the long day, by stones, to the thorn and over the water."
 a11 narration: Wren lays the chain out from the stone on that bearing and walks it, the field book open in her other hand.
-a12 wren: Nine chains to the cairn. Two to the first, three to the second, and a figure for every stone after.
-a13 wren: Over the ford to the ninth, on fourteen, in your hand. Every stone he set sits on the old bound.
+a12 wren: Nine chains to the cairn. Two to the first, three to the second.
+a13 wren: Over the ford to the ninth, on fourteen. His figure for the ninth sits on the old bound. The stone doesn't.
 a14 pell: Wren. Hold the book still.
 a15 narration: Pell writes the stone's reading into the margin of the field book, small.

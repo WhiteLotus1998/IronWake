@@ -169,6 +169,18 @@ public class SupportConversationTests
     }
 
     [Fact]
+    public void WrenAndPellAPutsTheNinthStonesFigureOnTheBoundAndTheStoneOffItWithoutNamingTheTrust()
+    {
+        var a13 = Real.Scenes.Single(s => s.Id == "wren_pell_a").Lines.Single(l => l.Id == "a13");
+
+        Assert.Equal("wren", a13.Speaker);
+        Assert.Contains("on fourteen", a13.Text);
+        Assert.Contains("His figure for the ninth sits on the old bound.", a13.Text);
+        Assert.EndsWith("The stone doesn't.", a13.Text);
+        Assert.DoesNotContain("in your hand", a13.Text);
+    }
+
+    [Fact]
     public void PellFirstSaysWrensNameInTheirA()
     {
         bool PellNamesWren(string id) => Real.Scenes.Single(s => s.Id == id).Lines.Any(l => l.Speaker == "pell" && l.Text.Contains("Wren", StringComparison.Ordinal));
