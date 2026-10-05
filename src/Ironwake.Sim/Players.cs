@@ -42,7 +42,10 @@ public sealed class RandomLegalPlayer : IPlayer
 /// captain, and the recruit a <c>protect:</c> header names, by section 7's loss order.
 /// A plan is refused when <see cref="Exposure"/>'s no-crit sum over the whole cycle
 /// reaches that unit's current HP, and among plans that pass, one a crit cannot kill on
-/// is preferred ahead of the tile keys. Every other recruit plays without a veto. The
+/// is preferred ahead of the tile keys. Every other recruit plays without a veto on its
+/// strikes; its approach is section 8's unless that tile is lethal by the same sum, when it
+/// takes the captain's approach key instead (issue 1044), so a fast recruit no longer
+/// outruns its party into a group it meets alone. The
 /// planner knows nothing of the wake rule and walks into sleeping groups; that is the
 /// baseline gate 1 measures. A unit owed a Canto takes it before any other unit acts, to
 /// the safest tile in its Canto reach by <see cref="PlanCanto"/> (issue 262).
@@ -583,7 +586,9 @@ public sealed class HeuristicPlayer : IPlayer
     /// enemy on Rout and Defeat Boss, the reachable tile nearest the throne on Seize, the
     /// nearest exit on Escape. A unit the veto covers (<see cref="LosesTheMap"/>) refuses
     /// tiles whose no-crit exposure reaches its HP when any tile passes, and prefers a tile
-    /// a crit cannot kill on; every other recruit takes <see cref="EnemyAi.Approach"/>.
+    /// a crit cannot kill on; every other recruit takes <see cref="EnemyAi.Approach"/>, unless
+    /// that tile's no-crit exposure reaches its HP, when it takes the veto's key with lethal
+    /// tiles last and crit-lethal ones after the rest (issue 1044).
     /// </summary>
     private static Coord? Approach(
         BattleState state, GameContent content, BattleUnit unit, Weapon? weapon, Reach reach,
@@ -608,6 +613,15 @@ public sealed class HeuristicPlayer : IPlayer
             return chosen;
         }
 
+        // Section 8's approach, and whether it ends where the cycle's no-crit sum kills (issue 1044).
+        var careful = LosesTheMap(state, unit);
+        (Coord? At, bool Lethal) Blind(Weapon armed)
+        {
+            var at = EnemyAi.Approach(state, content, unit, armed, reach, enemies, enemyReach);
+            careful = at is { } end && Exposure.Of(state, content, unit, end).NoCrit >= unit.Hp;
+            return (at, careful);
+        }
+
         Distances? toward = null;
         switch (state.Map.Win)
         {
@@ -623,9 +637,9 @@ public sealed class HeuristicPlayer : IPlayer
                     return null;
                 }
 
-                if (!LosesTheMap(state, unit))
+                if (!LosesTheMap(state, unit) && Blind(weapon) is var blind && !blind.Lethal)
                 {
-                    return EnemyAi.Approach(state, content, unit, weapon, reach, enemies, enemyReach);
+                    return blind.At;
                 }
 
                 toward = TowardNearestEnemy(weapon);
@@ -641,9 +655,9 @@ public sealed class HeuristicPlayer : IPlayer
 
         if (toward is null && weapon is not null && state.Map.Win is WinCondition.Seize or WinCondition.Escape)
         {
-            if (!LosesTheMap(state, unit))
+            if (!LosesTheMap(state, unit) && Blind(weapon) is var blind && !blind.Lethal)
             {
-                return EnemyAi.Approach(state, content, unit, weapon, reach, enemies, enemyReach);
+                return blind.At;
             }
 
             toward = TowardNearestEnemy(weapon);
@@ -665,7 +679,7 @@ public sealed class HeuristicPlayer : IPlayer
 
             var lethal = false;
             var critLethal = false;
-            if (LosesTheMap(state, unit))
+            if (careful)
             {
                 var sum = Exposure.Of(state, content, unit, tile);
                 lethal = sum.NoCrit >= unit.Hp;
