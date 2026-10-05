@@ -3041,3 +3041,17 @@ Result: **lost on turn 8 of 9.** Wren escaped on turn 7; Rook fell on the exit a
 - Verdict for #1094: the carry decided T2 and nothing else, and it decided it the way 0252 says, as a door-count verb. It did not pay the map's price for free: the map collected a body (Rook, so the map) because the rider spent her HP on her own fight. No lever. A cold chair would see the carry line on the board from turn 1.
 
 Transcript: `docs/transcripts/2026-10-05-the_rookery-1132-carry.txt`.
+
+## 2026-10-05 — Brackwater Cut with the dash (#950, 13.27), cold-ish — Chat
+
+Seed: 2706 on `docs/samples/brackwater_cut_dash.map` as shipped. Cold-ish: Chat had read #950's body, Code's comment on it and DIALOGUE's "more free than priced" line, not Code's transcript or script.
+Result: **won on turn 6.** Rook, Dunstan and the captain out; Pell and Wren fell; one Recall (the captain died on enemy phase 6 of the first line, recalled to the start of turn 5). Tension 8, choice 6, surprise 7.
+- T1, T2: the borrowed step. The captain and Pell dashed through the gap at 11,3 past the archer's ring; Rook dashed on T2. Nothing could reach them. Free, as in 950.
+- T2, a mistake recorded as made: the captain walked to 15,3 to see the bank, woke all three guards, and `undo` was refused. Pulling them onto Dunstan opened the south exits but left the rest bunched when the chase came through the gap.
+- **Best turn, T4, Dunstan's dash.** At 10 HP in the forest at 15,4 with the brawler, soldier and shieldbearer around him, every walk tile read 19 against 10; the dash to 18,6 read 6 against 10, winded, 96% instead of 81%. The +15 weighed and taken; it landed, he lived at 4 and killed the soldier on T5 at 73% on `!`. The keep clause, met cold. The one time the forecast showed two numbers for one body and made a pick.
+- T4, unseen cost: Pell killed the rider where she stood to free Wren and was left planted; the threat line showed only the shieldbearer, and the brawler came out of the dark at 5 tiles for 9 x2. Dusk working; a misread, not the dash.
+- T5, the dash at dusk: the soldier dropped back into the dark, so `threat` on Wren's dash tile 19,8 read "no enemy in sight can strike her" with `? at 18,5 (4)` unpriced below it. Winded at 5 HP, struck at 85%, dead (at 70% too). In the first line the captain's Full Measure on the exit held him there for phase 6 and the chase killed him. The Recall sent Rook out first and kept the captain still.
+- Tally, final line: 4 free (the captain and Pell T1, Rook T2, the captain to 19,7 T4), 2 priced (Dunstan, Wren). Surprise came from dusk and the exit rule (you must start a turn on an exit to leave, so the dash onto one is winded for the phase you are most exposed), not from the dash.
+- Verdict: keep on its sample. The free T1 dashes are like Canto on an empty board; the price turns up where the board gets tight. The borrowed step would charge Dunstan's dash twice to fix a turn nobody remembers. At dusk, winded is a bet, not a price.
+
+Transcript: `docs/transcripts/2026-10-05-brackwater_cut_dash-2706.txt`, replayed by Code under `--strict` from Chat's script; same result. Code's correction: in the first line Wren was not struck on enemy phase 5 (the bank spent itself on Rook at 18,4); sending Rook out first is what turned the soldier onto her. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5996557346).
