@@ -6,8 +6,8 @@ Updated: 2026-10-05. Rewritten, not appended; under 20 KB (#401); history in git
 
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1063. Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: six cards closed (reads 348 to 367); Bet's next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm as shipped is owed and is its tripwire; #1061: seed 4 is no bug (0250). Maps 1 and 2 and the rest wait on plays (Maps).
-About 4473 tests green; `ci`, `ci-windows` run; `godot-*` run, not required.
-No forks are open. The chain heartbeat stays (#406). Next: #1066 (bug). #1067 (veto and arts) waits on the Table.
+About 4473 tests green; `ci`, `ci-windows` run; `godot-*` not required.
+No forks are open. The chain heartbeat stays (#406). Next: #1066 (bug). #1067: the veto prices no arts (0251).
 
 ## Next
 
@@ -25,7 +25,7 @@ No forks are open. The chain heartbeat stays (#406). Next: #1066 (bug). #1067 (v
 - 13.18 (#486): signatures behind `signatures: on`; ledger killed at 65 (0197); eight wait for boards.
 - #131: the north cut built (0093). #524 failed its floor (0095); the next lever must buy gate 1 back. Open: turn 1 is a march.
 - #611 built (six arts; Chat's Tollgate play closes it). #535 slices 1, 2 built (0114, 0115); clips await #621.
-- #636 (0125, 0170): Full Measure costs the captain his next phase and never doubles.
+- #636 (0125, 0170): Full Measure costs the next phase, never doubles; the veto prices no arts (0251).
 - Built (records in `docs/DECISIONS/`): DESIGN 14 (#630, #644, 0121, 0126); map 1, Maud's arrival (#631, #632); side maps, items, `pays` (#635); lance, chests, rooms, forge, wagon, barracks (0131 to 0145); Bet's quest and the Sergeant (#691, 0146); the finale, `--finale` (#692); advanced forms and the curve (#704; `--curve`, `--carry`, `--items`); the captain's ladder, `--ladder` (#705, #758); unique classes (#706; no hand play of the Field Surgeon or the Drover yet); `freed:` (#750); `joins` (#763). Durability killed. Opening (#772, 0177): a Vanguard Saltmarsh from Chat decides it.
 - The story gate is open (Lotus closed #656; build from STORY draft 6, built to change). #635 slices 4 to 11 (0196, 0198 to 0204) built the side maps in the Maps table (slice 11, Rook 1, opens the Drover) and three paid items (Psalter, Commonplace, Tally; the last two with 3 frozen iron). The campaign packs the Family Lance behind Teodor's iron and holds it at sound until The Old Watch is won (`held`, `wakes`, `--heirloom --quest`). Slice 12 (0205): Teodor 2, The Warden's Gate, names the lance and opens Turn the Key (the lock); no hand play declares it yet. Slices 13, 14 (0206, 0208): Keziah 1, Rook 2 (#805's key for Unbroken). Slice 15 (0224): Keziah 2, The Oath Stone, the bound man on the short road against the hunger. Slice 16 (0225): Joab named, the envoy keeps his fort, `threat`'s counter feed, `KeziahOath` for #634; Code 1133 8/7/5, the oath came up. #635 is closed as built; #77 slices 1 to 7 are built (0183 to 0189): 26 pairs, C 16, B 28, A 48 (best, not sum); A by a committed human waits on a chair's campaign.
 - #81 slices 1, 2 (0190, 0191): the field is map 9 after the Hollin card (placeholder), level 4; nine-map fixtures drop it. Slice 4 (0226): `route_drift:` (rounds 273, 274), the untaken route's group wakes on turn 5 and marches on the taken crossing. #936 (0233): the field is `tuned`.

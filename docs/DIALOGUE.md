@@ -17,7 +17,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Forecast** prints the resolved probability; one hit function for forecast, resolver and planners (DESIGN 5); 100 only if certain, 0 only if impossible, else 1 to 99 (#452). Two rolls averaged (0023).
 - **Combat numbers** (0028), **masteries** (0047): in DESIGN.
 - **Wake rule:** proximity, radius 4, noise at 6, any death wakes the group, checked after every command (DESIGN 8). Guard bosses wake (0055); `wake_links` calls a second group (0080).
-- **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; options range over every weapon carried, the counter is what it last swung (#174); prefers a target that cannot counter. A `defeat_boss` boss plans under the exposure veto; a refused guard boss goes home (0077 to 0080); a throne-holder steps off only to strike (0063).
+- **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; options range over every weapon carried, the counter is what it last swung (#174); prefers a target that cannot counter. A `defeat_boss` boss plans under the exposure veto, plain weapons only, arts unpriced (372, 0251); a refused guard boss goes home (0077 to 0080); a throne-holder steps off only to strike (0063).
 - **The Sim's veto** covers every unit whose death loses the map, no-crit worst case, a certain kill removed (0024 to 0026). Recruits take no veto; one on a lethal approach tile takes the captain's key: gate 1 is a crude player, never a blind one (368, #1054). Gate 4 is relative ablation, cast verdict (0019, 0020); on Escape it pairs units out (0068).
 - **`threat`** prices the coming enemy phase with the planner's choices (DESIGN 8): one enemy per strike tile, announced spawns (0045), sleepers unnumbered, at dusk only what the player sees (#403), `from <tile>` names what a stop would wake (#458).
 - **Escape:** `exit` is an action; the captain's wins, the rest fall (0056).
@@ -31,9 +31,9 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **The Tollgate: `tuned`** (0073); the rider spawns on the door step (0072). Opens the beta.
 - **Brackwater Cut at dusk: `tuned`** (0078). Dusk hides what, never where.
-- **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15).
-- **Saltmarsh Ford:** not tuned; north cut 7/7/6, 7/7/5 (0093); the spawn lever failed (0095).
-- **Sallow Grange:** the Reeve stays at 15,6; a quiet route is quiet on the enemy phase too (#275).
+- **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15). Two Harrow wins in a row by baiting the Foreman reopen #1067 (0251), a content lever.
+- **Saltmarsh Ford:** not tuned (0093); the spawn lever failed (0095).
+- **Sallow Grange:** the Reeve stays at 15,6 (#275).
 - **The Rookery (Rook 2, 0208):** not passed; the cage and #862's ring stay; no lever before a cold chair. The card's bow-crit line becomes a warning (#1003). Lean, unfiled: a loft reward for the early captain kill. A lost Escape keeps its living (#861).
 - **The Counting House (Ottilie 1; 311 to 314, 321):** opening kept, finish the defect. Lever 1 (#925, 0228): archer guards 11,2. Lever 2 (#931, 0231): limit 11; quest cards match their map's limit. Chat cold decides, fresh seed.
 - **The Long Count (Ottilie 2; 313 to 315):** the count on screen (#928, 0229); dusk keeps the exit dark; the archer at 11,4 (#930, 0230).
@@ -119,4 +119,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Round index
 
-1-118 rules; 119-342 showcase, story; 343-359 writing, casting; #1033 360-371 (366 Lotus's notes; 368 careful recruits; 371 Rook on hand plays); #1063 372 on.
+1-118 rules; 119-342 story; 343-359 writing; #1033 360-371 (366 Lotus's notes); #1063 372 on.
