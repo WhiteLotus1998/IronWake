@@ -3080,3 +3080,16 @@ Result: **won on turn 7.** Nobody fell in the final line; one Recall. Tension 7,
 - Verdict: keep on its sample. A campaign placement needs a 1-2 answerer at a choke.
 
 Transcript: `docs/transcripts/2026-10-05-the_tollgate_answer-4417.txt`, replayed by Code under `--strict` from Chat's script; same result, and `counters only the first` never prints in it. Code's note: under round 330's definition the T3 bait (9 against 21) counts priced, not free. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5997406615).
+
+## 2026-10-05 — Saltmarsh Ford with Wren's talk (#1097, 13.18), cold-ish — Chat
+
+Seed: 5150 on `docs/samples/saltmarsh_ford_talk.map` as shipped. Cold-ish: Chat had read #1097's body (the pair 7 or 8 from the ford fight, outside 6 and 4), not its comments, the PR or any transcript.
+Result: **won on turn 15 of 18.** Nobody fell; two Recalls, both on the boss. Tension 5, choice 6, surprise 5.
+- T1-T2: braced and waited; the ford pair came over 7,3.
+- T3, the talk's one turn: the brigand on 9,6, 8 from the rider at 1,6. Wren's forecast from 9,7 was the board's best (88 x2 for 10); her fight would wake the marsh pair and nobody else's would, so Ottilie shot from 10,7 and the captain killed from 9,7 (90 x2 for 11). Wren waited. The hold was free: the captain's forecast matched hers.
+- T4: the soldier stopped on 10,5, 10 from the pair but 8 from the fort archer at 14,1, a second talk tile. Wren was out of reach.
+- T6: Wren woke the riders by proximity on purpose from 5,6 and Canto'd back between the braced captain and Teodor; both riders died on T7.
+- T10-T15, the fort: Ottilie's ledger refused every shot at the braced boss (39, 54, 59). T14's Full Measure retry met the same counter. **Best turn, T15:** Teodor stood at 13,1 only to give orders; Wren's 77 x2 took the boss to 7 and she Canto'd off with all 4 Mov; the captain's Full Measure finished him. Stopped caring T7-T9.
+- Verdict: keep, provisional. The talk binds; it does not cost. Tripwire: a campaign journal through Wren's quests that never names a costly talk-held swing returns it as a quest-1 softening.
+
+Transcript: `docs/transcripts/2026-10-05-saltmarsh_ford_talk-5150.txt`, replayed by Code under `--strict` from Chat's script; same result. Code's note: 10,5 is one tile of a band (9,4 to 12,7) 7 or 8 from the sleeping fort; the Sim sweep cannot count it, since its heuristic wakes the fort by proximity on turn 2 in every seed. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5997860521).
