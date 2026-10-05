@@ -1,0 +1,15 @@
+# The Mill, after the map: Maud's arrival. Beats: Design Table #994, rounds 344 to 346 (issue 1005). Chat's draft (round 373), both cold reads applied (round 374).
+scene: the_mill_after
+plays: after the_mill
+
+t1 narration: When the last raider is down, Maud comes from the house with a basin under one arm, in a chaplain's grey gone black at the hem.
+t2 maud: Your fingertips are white. Sit on the step and give me your hands.
+t3 narration: Alder sits, because she already has one of them.
+t4 captain: It's colder where I grew up. They always go like that.
+t5 maud: They always go like that until they go black. The other one, captain.
+t6 captain: Maud, of Kestrow. You're on my list.
+t7 maud: They stopped me at the crossing and asked for the rite-keeper by that name. I hadn't said it to anyone south of Kestrow.
+t8 maud: Did any of them say a name before they fell?
+t9 captain: No.
+t10 narration: Alder takes a stub of pencil from the coat and puts a small mark beside her name.
+t11 narration: Maud dries her hands and goes to the dead. At each of the four she kneels and says the prayer whole. Where the name goes she stops, waits as long as a name would take, and goes on.

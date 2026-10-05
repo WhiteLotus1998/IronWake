@@ -7,11 +7,7 @@
       "stock": ["iron_sword", "field_dressing"] },
     { "map": "the_mill", "reward": 600, "enemyLevel": 1,
       "stock": ["iron_sword", "iron_lance", "iron_bow", "field_dressing"],
-      "arrives": ["maud"],
-      "after": [
-        "Maud asked whether I was hurt before she asked my name. Then she said a prayer over the men we had killed, which I had not expected and did not stop.",
-        "Two names on the list are standing in the same place now. I read it twice this morning to be sure."
-      ] },
+      "arrives": ["maud"] },
     { "map": "saltmarsh_ford", "reward": 800, "enemyLevel": 2,
       "stock": ["iron_sword", "iron_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "salve", "field_dressing"] },
     { "map": "the_tollgate", "reward": 1000, "enemyLevel": 3,

@@ -7,7 +7,7 @@ Updated: 2026-10-05. Rewritten, under 20 KB (#401); history in git, `docs/DECISI
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1063. Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
 About 4491 tests green; `ci`, `ci-windows` run; `godot-*` not required.
-No forks are open. The chain heartbeat stays (#406). #1069: race guards cover warm plays, spikes (0169). #1068: a lethal row on the returned claimant names her loss first (`Returned.Falls`). #1005: Starting Alone's two cards and the Mill's before card are their scenes (before after `march`, after below the won line).
+No forks are open. The chain heartbeat stays (#406). #1069: race guards cover warm plays, spikes (0169). #1068: a lethal row on the returned claimant names her loss first (`Returned.Falls`). #1005 is done: maps 1 and 2 open and close on Chat's four scenes, no cards (before after `march`, after below the won line).
 
 ## Next
 
@@ -20,7 +20,7 @@ No forks are open. The chain heartbeat stays (#406). #1069: race guards cover wa
 - #807 slice 1 (0220): a won campaign writes `ending.json` with a versioned `ending` block for a sequel (PROTOCOL.md), `pending` until #634 (slice 2).
 - #77 slice 8 (0245): `support <a> <b>` at a camp plays the lowest reached unseen tier, once, free (`supportsSeen`). #1004: C, B, A ship; can close. #77 is `blocked` on a chair's A read.
 - #1003: card = text plus its rules line in parentheses (348 to 363); reads through 367 applied; Keziah's Oath Stone feeling waits for #634. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
-- #811: `docs/WRITING.md` and all sixteen voice sheets are in. #1001: scene scripts (0244), main-line maps. #1005: Chat's four drafts agreed (rounds 373, 374); Three scenes are in, their cards gone; `the_mill_after` (t1, t7 per round 374) replaces the Mill's after card and closes #1005. Then scenes (#634); #813 builds on 0243.
+- #811: `docs/WRITING.md` and all sixteen voice sheets are in. #1001: scene scripts (0244), main-line maps. #1005: all four scenes are in (rounds 373, 374), their cards gone. Then scenes (#634); #813 builds on 0243.
 - 13.18 (#486): signatures behind `signatures: on`; ledger killed at 65 (0197); eight wait for boards.
 - #131: the north cut built (0093). #524 failed its floor (0095); the next lever must buy gate 1 back. Open: turn 1 is a march.
 - #611 built (six arts; Chat's Tollgate play closes it). #535 slices 1, 2 built (0114, 0115); clips await #621.
