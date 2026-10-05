@@ -48,16 +48,15 @@ March (march): map 10, Ironwake Keep. Hold out until the end of turn 8. Captain 
 > quest keziah_2 maud
 -- The Oath Stone --
 Keziah knows the man on the door. Joab kept the lamps at her mother's
-shrine; he is sworn now. Hask has sent an envoy to the old outland stone
-on the moor, offering her people a seat and a god, and Joab stands bound
-to the envoy.
+shrine; he is sworn now, bound to the envoy Hask sent to the outland
+stone on the moor with a seat and a god for her people. "He'll know me,
+and he won't say my name. Leave him to me."
 
-(Placeholder card until the writing pass. Defeat Boss: defeat the envoy,
-who keeps the fort at 12,3, by the end of turn 10. The map is lost if
-Keziah falls. Joab holds the yard's west door at 9,4, bound to the
-envoy: if the envoy falls first, Joab lays down the axe, freed. A breach
-in the south wall at 11,7 is the long way round. More come up behind you
-from turn 3, announced.)
+(Defeat Boss: defeat the envoy, who keeps the fort at 12,3, by the end
+of turn 10. The map is lost if Keziah falls. Joab holds the yard's west
+door at 9,4, bound to the envoy: if the envoy falls first, Joab lays
+down the axe, freed. A breach in the south wall at 11,7 is the long way
+round. More come up behind you from turn 3, announced.)
 
 Side map: The Oath Stone, seed 1133
 Keziah goes with Maud. This map is lost if Keziah falls; who falls here is gone for good.
