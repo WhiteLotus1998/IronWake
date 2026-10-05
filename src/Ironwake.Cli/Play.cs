@@ -39,7 +39,7 @@ public sealed class PlaySession
           move <unit> <x,y> via <x,y>  Move by way of a tile: the cheapest route to it, then on, within the unit's Mov
           move <unit> <x,y> [via <x,y>] preview  The route the move would walk and the planks it would wear, without moving
           attack <unit> <target> [slot|weapon] [art <id>] [!]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first); a swing whose counter is lethal to the attacker is refused unless the line ends in !
-          item <unit> <slot> [ally] Use the item in a slot; a healing spell names the ally
+          item <unit> <slot|item> [ally] Use the item in a slot or named by id; a healing spell names the ally
           wait <unit>              End the unit's action
           undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
           canto <unit> <x,y|stay>  After acting, a unit with Move Again moves on what its move left, or stays
@@ -71,6 +71,7 @@ public sealed class PlaySession
           help                     This list
         At dusk no side strikes what it cannot see, and an enemy knows a unit its side sees or that stands within its hearing, the radius the dusk line prints
         Slots count from 1, as show lists them; a weapon may be named instead, by id or name (gust, iron bow)
+        A swing moves its weapon to slot 1; a number that names another item than the last listing showed is refused
         A scripted run ends with a summary of every rejected line; --strict stops at the first
         """;
 
@@ -113,12 +114,52 @@ public sealed class PlaySession
     }
     private string _command = "";
 
+    /// <summary>
+    /// Each unit's pack as it was last listed (issue 1114): item ids by slot, taken for every
+    /// unit when the battle opens, on <c>show</c>, and when a refused slot prints the unit's
+    /// slots. A typed slot number is checked against it, since a swing moves the weapon it
+    /// used to the front and a number read before that swing would name another weapon.
+    /// </summary>
+    private readonly Dictionary<string, IReadOnlyList<string>> _listed = new();
+
     private PlaySession(GameContent content, BattleState state, TextWriter output, bool scripted)
     {
         _content = content;
         _state = state;
         _out = output;
         _scripted = scripted;
+        foreach (var unit in state.Units)
+        {
+            Listed(unit);
+        }
+    }
+
+    /// <summary>Records <paramref name="unit"/>'s pack as listed now (issue 1114).</summary>
+    private void Listed(BattleUnit unit) =>
+        _listed[unit.Id] = unit.Unit.Inventory.Items.Select(item => item.ItemId).ToList();
+
+    /// <summary>
+    /// The refusal for a slot number that no longer holds what the unit's last listing showed
+    /// there (issue 1114), or null when the number still holds it or the unit was never listed.
+    /// Names both items and the two ways to fix the command, ending before the <c>show</c>
+    /// command that the caller appends as typed.
+    /// </summary>
+    internal static string? StaleSlot(GameContent content, BattleUnit unit, string name, IReadOnlyList<string>? listed, int slot)
+    {
+        if (listed is null)
+        {
+            return null;
+        }
+
+        var now = unit.Unit.Inventory.Items[slot];
+        var was = slot < listed.Count ? listed[slot] : null;
+        if (was == now.ItemId)
+        {
+            return null;
+        }
+
+        var wasText = was is null ? "empty" : content.ItemName(was);
+        return $"slot {slot + 1} is {Heirloom.Name(now, content)} now; it was {wasText} when {name}'s pack was last listed; name the weapon, or ";
     }
 
     /// <summary>
@@ -746,7 +787,7 @@ public sealed class PlaySession
             case "recall":
                 Error("usage: recall <n> | recall list  (history holds " + _state.History.Count + " states)");
                 break;
-            case "item" when words.Length is 3 or 4 && int.TryParse(words[2], out _):
+            case "item" when words.Length is 3 or 4:
                 if (TrySlot(words[1], words[2], out var itemSlot))
                 {
                     var ally = words.Length == 4 ? words[3] : null;
@@ -755,7 +796,7 @@ public sealed class PlaySession
 
                 break;
             case "item":
-                Error("usage: item <unit> <slot> [ally] [art <id>]");
+                Error("usage: item <unit> <slot|item id> [ally] [art <id>]");
                 break;
             case "forecast" when TryForecastWords(words, out var slotText, out var from):
                 if (TrySlot(words[1], slotText, out var forecastSlot))
@@ -790,6 +831,7 @@ public sealed class PlaySession
                 if (Find(words[1]) is { } unit)
                 {
                     Show(unit);
+                    Listed(unit);
                 }
 
                 break;
@@ -2092,7 +2134,9 @@ public sealed class PlaySession
     /// sees, so the core's zero-based message never reaches the screen. Text that is not a
     /// number names a carried item by id or display name, ignoring case, a space standing for
     /// the id's <c>_</c> (issue 477); a name that matches no slot, or more than one, is refused
-    /// with the unit's slots listed by number and name.
+    /// with the unit's slots listed by number and name. A number whose slot holds another item
+    /// than the unit's last listing showed there is refused naming both (issue 1114); a name
+    /// is never checked against the listing.
     /// </summary>
     private bool TrySlot(string unitId, string? text, out int? slot)
     {
@@ -2120,6 +2164,7 @@ public sealed class PlaySession
             var slots = count == 0
                 ? "carries nothing"
                 : "slots: " + string.Join(", ", unit.Unit.Inventory.Items.Select((item, at) => $"{at + 1} {Heirloom.Name(item, _content)}"));
+            Listed(unit);
             Error(named.Count == 0
                 ? $"{unit.Id} carries no '{text}'; {slots}"
                 : $"{unit.Id} carries '{text}' in slots {string.Join(" and ", named.Select(at => at + 1))}; give the slot number; {slots}");
@@ -2129,6 +2174,12 @@ public sealed class PlaySession
         if (typed < 1 || typed > count)
         {
             Error(count == 0 ? $"{unit.Id} carries nothing" : $"{unit.Id} has nothing in slot {typed}; slots run 1-{count}");
+            return false;
+        }
+
+        if (StaleSlot(_content, unit, UnitNames.Of(_state, _content)[unit.Id], _listed.GetValueOrDefault(unit.Id), typed - 1) is { } stale)
+        {
+            Error(stale, $"show {unit.Id}");
             return false;
         }
 

@@ -64,7 +64,7 @@ order press
 move ottilie 7,6
 attack ottilie soldier-1
 move pell 8,7
-attack pell soldier-1 2 art overcast
+attack pell soldier-1 cinder art overcast
 move teodor 8,6
 attack teodor soldier-1
 move rook 8,5

@@ -44,10 +44,56 @@ public class WeaponNameSlotTests
     [Fact]
     public void AttackByNameStrikesWithThatWeaponAfterAnEquipReordersTheSlots()
     {
-        var output = Play("move pell 2,4\nattack pell brigand-1 gust\nforecast pell brigand-1 cinder\nforecast pell brigand-1 1\n");
+        var output = Play("move pell 2,4\nattack pell brigand-1 gust\nforecast pell brigand-1 cinder\nshow pell\nforecast pell brigand-1 1\n");
 
         Assert.Contains("> attack pell brigand-1 gust\nForecast Pell -> Brigand 1 with Gust:", output);
         Assert.Contains("> forecast pell brigand-1 cinder\nForecast Pell -> Brigand 1 with Cinder:", output);
+        Assert.Contains("> forecast pell brigand-1 1\nForecast Pell -> Brigand 1 with Gust:", output);
+    }
+
+    [Fact]
+    public void AStaleSlotNumberIsRefusedNamingBothWeapons()
+    {
+        var output = Play("move pell 2,4\nattack pell brigand-1 gust\nforecast pell brigand-1 1\nattack pell brigand-1 1\n");
+
+        const string refusal = "ERROR: Slot 1 is Gust now; it was Cinder when Pell's pack was last listed; name the weapon, or show pell\n";
+        Assert.Contains("> forecast pell brigand-1 1\n" + refusal, output);
+        Assert.Contains("> attack pell brigand-1 1\n" + refusal, output);
+    }
+
+    [Fact]
+    public void AStaleSlotNumberIsRefusedEvenWithTheBang()
+    {
+        var output = Play("move pell 2,4\nattack pell brigand-1 gust\nattack pell brigand-1 1 !\n");
+
+        Assert.Contains("> attack pell brigand-1 1 !\nERROR: Slot 1 is Gust now; it was Cinder when Pell's pack was last listed; name the weapon, or show pell\n", output);
+    }
+
+    [Fact]
+    public void ASlotNumberReReadAfterShowIsAccepted()
+    {
+        var output = Play("move pell 2,4\nattack pell brigand-1 gust\nshow pell\nforecast pell brigand-1 2\n");
+
+        Assert.Contains("  Items: 1: Gust", output);
+        Assert.Contains("> forecast pell brigand-1 2\nForecast Pell -> Brigand 1 with Cinder:", output);
+        Assert.DoesNotContain("ERROR", output);
+    }
+
+    [Fact]
+    public void ASlotNumberUnmovedBySwingsIsAccepted()
+    {
+        var output = Play("move pell 2,4\nattack pell brigand-1 1\nforecast pell brigand-1 1\n");
+
+        Assert.Contains("> forecast pell brigand-1 1\nForecast Pell -> Brigand 1 with Cinder:", output);
+        Assert.DoesNotContain("ERROR", output);
+    }
+
+    [Fact]
+    public void TheSlotsARefusedNamePrintsCountAsAListing()
+    {
+        var output = Play("move pell 2,4\nattack pell brigand-1 gust\nforecast pell brigand-1 bolt\nforecast pell brigand-1 1\n");
+
+        Assert.Contains("ERROR: Pell carries no 'bolt'; slots: 1 Gust, 2 Cinder\n", output);
         Assert.Contains("> forecast pell brigand-1 1\nForecast Pell -> Brigand 1 with Gust:", output);
     }
 

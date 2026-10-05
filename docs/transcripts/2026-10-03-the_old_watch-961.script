@@ -5,7 +5,7 @@ move wren 7,5
 wait wren
 end
 move teodor 7,6
-item teodor 3
+item teodor field_dressing
 move wren 7,4
 attack wren sworn_captain-1
 end

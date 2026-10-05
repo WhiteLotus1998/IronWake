@@ -92,7 +92,7 @@ attack captain bandit_leader-1
 move ottilie 10,3
 wait ottilie
 move wren 1,5
-item wren 2
+item wren field_dressing
 end
 wait captain
 move ottilie 10,2
@@ -123,7 +123,7 @@ end
 move captain 5,6
 attack captain archer-2
 move pell 6,7
-attack pell toll_brigand-1 2
+attack pell toll_brigand-1 gust
 move teodor 5,7
 wait teodor
 move wren 4,7
@@ -318,7 +318,7 @@ attack pell archer-1
 move teodor 9,3
 wait teodor
 move wren 3,0
-item wren 2
+item wren field_dressing
 end
 move captain 12,3
 attack captain shieldbearer-1
@@ -434,7 +434,7 @@ attack maud soldier-3
 move ottilie 5,11
 attack ottilie archer-2
 move pell 6,11
-attack pell keziah 2
+attack pell keziah cinder
 move rook 7,12
 attack rook archer-2
 move teodor 6,13
@@ -473,7 +473,7 @@ attack maud rider-1
 move ottilie 6,4
 attack ottilie soldier-1
 move pell 8,2
-attack pell soldier-2 2
+attack pell soldier-2 gust
 end !
 move captain 12,3
 wait captain
@@ -508,7 +508,7 @@ end !
 attack captain brigand-2
 canto captain 16,11
 move maud 12,7
-item maud 2 pell
+item maud salve pell
 move pell 14,7
 attack pell sentry-1
 end
@@ -557,7 +557,7 @@ attack maud marauder-1
 wait wren
 end !
 move ansgar 8,7
-attack ansgar marauder-1 2 !
+attack ansgar marauder-1 iron_sword !
 canto ansgar 8,7
 wait brannock
 wait captain
@@ -573,7 +573,7 @@ wait corin
 wait wren
 end !
 move captain 11,8
-attack captain brigand-1 3
+attack captain brigand-1 obsidian_sword
 canto captain 11,8
 move corin 11,7
 attack corin soldier-1
@@ -585,7 +585,7 @@ attack captain longbowman-1
 canto captain 10,4
 end
 move captain 11,0
-item captain 3
+item captain field_dressing
 canto captain 11,0
 end
 wait captain

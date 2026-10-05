@@ -61,7 +61,7 @@ end
 move keziah 11,6
 attack keziah weir_foreman-1 2
 move pell 10,6
-attack pell weir_foreman-1 2
+attack pell weir_foreman-1 cinder
 move ottilie 5,4
 attack ottilie brigand-3
 move captain 7,5
