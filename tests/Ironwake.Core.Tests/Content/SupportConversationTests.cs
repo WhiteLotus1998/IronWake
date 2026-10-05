@@ -154,6 +154,31 @@ public class SupportConversationTests
     }
 
     [Fact]
+    public void TheShippedWrenAndPellAPlaysAfterBAndEndsOnPellWritingInTheFieldBooksMargin()
+    {
+        var scene = Real.Scenes.Single(s => s.Id == "wren_pell_a");
+        var heardB = Company(Real, 48).SeeSupport("wren", "pell", Real).Record.SeeSupport("wren", "pell", Real).Record;
+        var lines = CampaignSession.ConversationLines(heardB, Real, scene);
+
+        Assert.Equal(new SceneSupport("wren", "pell", "A"), scene.Support);
+        Assert.InRange(scene.Lines.Count, 1, 20);
+        Assert.Equal("-- Wren and Pell, support A --", lines[0]);
+        Assert.Equal("Wren and Pell talk (support A)", heardB.SeeSupport("pell", "wren", Real).Text);
+        Assert.Equal(new[] { "wren_pell_c", "wren_pell_b", "wren_pell_a" }, heardB.SeeSupport("pell", "wren", Real).Record.SupportsSeen);
+        Assert.Contains("margin of the field book", scene.Lines[^1].Text);
+    }
+
+    [Fact]
+    public void PellFirstSaysWrensNameInTheirA()
+    {
+        bool PellNamesWren(string id) => Real.Scenes.Single(s => s.Id == id).Lines.Any(l => l.Speaker == "pell" && l.Text.Contains("Wren", StringComparison.Ordinal));
+
+        Assert.False(PellNamesWren("wren_pell_c"));
+        Assert.False(PellNamesWren("wren_pell_b"));
+        Assert.True(PellNamesWren("wren_pell_a"));
+    }
+
+    [Fact]
     public void TheRosterNamesTheWaitingConversationAndItsCommand()
     {
         var content = With(("wren_pell_c", WrenPellC));

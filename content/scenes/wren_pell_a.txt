@@ -1,0 +1,19 @@
+# Wren and Pell, support A: the first stone. Beats: docs/beats/support_wren_pell.md (issue 1004). Code's prose; Chat's cold read pending.
+scene: wren_pell_a
+plays: support wren pell A
+
+a1 narration: The oldest stone on the east line stands to Pell's waist in wet grass, its face gone green. Her hem is dark to the knee.
+a2 pell: Two miles from the road, and nothing filed in any of it.
+a3 wren: Eleven hundred and six paces, yours, and you take short ones in grass. Under half a mile.
+a4 wren: If that face gives a bearing, I can run his line from a stone nobody could have moved.
+a5 pell: Cadet. The Grange's originals already put every stone where he set it. You don't need this one for that.
+a6 wren: I held his chain the season he set them. If one moved that season, I was standing there.
+a7 pell: Which end of the chain?
+a8 wren: The back. I stood on every stone before he called it.
+a9 narration: Pell kneels in the wet and scrapes the face clean with her thumbnail. The cut is a copyist's deed hand.
+a10 pell: "Here begins the east bound. Toward the sun of the long day, by stones, to the thorn and over the water."
+a11 narration: Wren lays the chain out from the stone on that bearing and walks it, the field book open in her other hand.
+a12 wren: Nine chains to the cairn. Two to the first, three to the second, and a figure for every stone after.
+a13 wren: Over the ford to the ninth, on fourteen, in your hand. Every stone he set sits on the old bound.
+a14 pell: Wren. Hold the book still.
+a15 narration: Pell writes the stone's reading into the margin of the field book, small.
