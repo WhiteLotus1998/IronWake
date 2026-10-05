@@ -2092,6 +2092,7 @@ b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell weir_foreman-1 cinder
 Forecast Pell -> Weir Foreman with Cinder: acc 94% dmg 12 crit 1%; counter: acc 67% dmg 13 crit 1%
+  Fighting here wakes: the ford group (noise, heard from 13,6)
 Pell attacks Weir Foreman
   Pell hits Weir Foreman for 12 (hp 16)
   Weir Foreman misses Pell

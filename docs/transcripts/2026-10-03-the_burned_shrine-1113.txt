@@ -342,6 +342,7 @@ B  wren             Wren L7 cadet              2,3    hp 9/23   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack keziah shieldbearer-1 iron_gauntlets
 Forecast Keziah -> Shieldbearer with Iron Gauntlets: acc 98% dmg 4 x4 crit 3%; counter: acc 39% dmg 7 crit 0%
+  Fighting here wakes: the grove group (noise, heard from 7,3 and 7,2)
 Keziah attacks Shieldbearer
   Keziah hits Shieldbearer for 4 (hp 22)
   Keziah hits Shieldbearer for 4 (hp 18)

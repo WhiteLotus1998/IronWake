@@ -1828,6 +1828,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 count: Alder Fenn 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > attack captain rider-2
 Forecast Alder Fenn -> Rider 2: acc 87% dmg 10 crit 4%; counter: acc 62% dmg 8 crit 0%
+  Fighting here wakes: the bank group (noise, heard from 19,2 and 19,3)
 Alder Fenn attacks Rider 2
   Alder Fenn hits Rider 2 for 10 (hp 11)
   Rider 2 misses Alder Fenn

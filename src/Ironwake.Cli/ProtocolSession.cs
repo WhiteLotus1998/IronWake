@@ -415,6 +415,31 @@ public sealed class ProtocolSession
                 w.WriteNull("counterLethalIfMiss");
             }
 
+            w.WriteStartArray("wakes");
+            foreach (var woke in Queries.FightWakes(_state, _content, unit, target, tile))
+            {
+                w.WriteStartObject();
+                w.WriteString("group", woke.Group);
+                w.WriteString("cause", woke.CalledBy is null ? "noise" : "call");
+                if (woke.CalledBy is { } by)
+                {
+                    w.WriteString("by", by);
+                }
+
+                w.WriteStartArray("heardFrom");
+                foreach (var heard in woke.HeardFrom)
+                {
+                    w.WriteStartObject();
+                    w.WriteNumber("x", heard.X);
+                    w.WriteNumber("y", heard.Y);
+                    w.WriteEndObject();
+                }
+
+                w.WriteEndArray();
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
             w.WriteString("text", PlaySession.ForecastText(_state, _content, unit, target, forecast, tile, from is not null, slot, art));
         });
     }

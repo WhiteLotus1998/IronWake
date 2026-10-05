@@ -648,6 +648,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 > attack teodor sworn_captain-1 art long_thrust
 Forecast Teodor -> Sworn Captain: acc 92% dmg 10 crit 1% chills; counter: none
   Technique Long Thrust: Family Lance at acc 80 power 7 crit 0 wt 10 range 1-2; spends up to 3 of 38 uses, 2 of them hit or miss
+  Fighting here wakes: the yard group (noise, heard from 7,2)
 Teodor declares Long Thrust with Family Lance, spending 2 extra uses
 Teodor attacks Sworn Captain
   Teodor hits Sworn Captain for 10 (hp 18)

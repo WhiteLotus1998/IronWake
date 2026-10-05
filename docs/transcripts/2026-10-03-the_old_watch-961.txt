@@ -97,6 +97,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 > attack teodor soldier-1 family_lance art long_thrust
 Forecast Teodor -> Soldier 1: acc 83% dmg 11 crit 2%; counter: none
   Technique Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 40 uses, 2 of them hit or miss
+  Fighting here wakes: the east group (noise, heard from 7,4 and 7,2), the west group (noise, heard from 7,4 and 7,2)
 Teodor equips Family Lance
 Teodor declares Long Thrust with Family Lance, spending 2 extra uses
 Teodor attacks Soldier 1

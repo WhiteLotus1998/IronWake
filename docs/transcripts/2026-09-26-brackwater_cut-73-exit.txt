@@ -1764,6 +1764,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
 > attack pell brigand-1
 Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
+  Fighting here wakes: the bank group (noise, heard from 13,3)
 Pell attacks Brigand 1
   Pell hits Brigand 1 for 13 (hp 0)
   Pell hp 16, Brigand 1 hp 0

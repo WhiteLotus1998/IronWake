@@ -1548,7 +1548,27 @@ public sealed class PlaySession
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes, names));
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot, names));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast, names));
+        if (FightWakesLine(state, content, unit, target, tile) is { } wakes)
+        {
+            lines.Add(wakes);
+        }
+
         return UnitNames.Sentence(string.Join("\n", lines));
+    }
+
+    /// <summary>
+    /// The row under a forecast whose fight would wake a sleeping group by its noise (issue 1106), in
+    /// <c>threat</c>'s words: <c>  fighting here wakes: the field group (noise, heard from 10,2)</c>, naming the
+    /// fight's tiles that reach the group, and <c>(called by ...)</c> for a group a <c>wake_links:</c> call brings.
+    /// Read from <see cref="Queries.FightWakes"/>, so a group the stop alone wakes is <c>threat</c>'s line, not
+    /// this one. Null when the fight wakes nothing.
+    /// </summary>
+    public static string? FightWakesLine(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, Coord tile)
+    {
+        var wakes = Queries.FightWakes(state, content, unit, target, tile);
+        return wakes.Count == 0
+            ? null
+            : $"  fighting here wakes: {string.Join(", ", wakes.Select(w => $"{UnitNames.Group(w.Group)} ({(w.CalledBy is { } by ? "called by " + UnitNames.Group(by) : "noise, heard from " + string.Join(" and ", w.HeardFrom))})"))}";
     }
 
     /// <summary>

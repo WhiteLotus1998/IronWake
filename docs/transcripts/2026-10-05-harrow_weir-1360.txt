@@ -1716,6 +1716,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 called: group weir wakes when group ford does
 > attack ottilie brigand-3
 Forecast Ottilie -> Brigand 3: acc 86% dmg 8 crit 5%; counter: none
+  Fighting here wakes: the ford group (noise, heard from 9,7), the weir group (noise, heard from 9,7)
 Ottilie attacks Brigand 3
   Ottilie hits Brigand 3 for 8 (hp 14)
   Ottilie hp 17, Brigand 3 hp 14
@@ -1882,6 +1883,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 called: group weir wakes when group ford does
 > attack keziah brigand-3
 Forecast Keziah -> Brigand 3 with Iron Axe: acc 72% dmg 14 crit 2%; counter: acc 63% dmg 12 crit 0%
+  Fighting here wakes: the ford group (noise, heard from 8,7 and 9,7), the weir group (noise, heard from 8,7 and 9,7)
 Keziah attacks Brigand 3
   Keziah misses Brigand 3
   Brigand 3 hits Keziah for 12 (hp 11)
@@ -1984,6 +1986,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 called: group weir wakes when group ford does
 > attack ottilie brigand-3
 Forecast Ottilie -> Brigand 3: acc 86% dmg 8 crit 5%; counter: none
+  Fighting here wakes: the ford group (noise, heard from 9,7), the weir group (noise, heard from 9,7)
 Ottilie attacks Brigand 3
   Ottilie hits Brigand 3 for 8 (hp 14)
   Ottilie hp 17, Brigand 3 hp 14

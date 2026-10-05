@@ -81,6 +81,17 @@ public static class WakeCheck
     }
 
     /// <summary>
+    /// The tiles of <paramref name="noisy"/> whose noise reaches a living member of <paramref name="group"/> on
+    /// <paramref name="after"/>, at each noise's radius bent by the wind on that board: the noise cause of
+    /// <see cref="Run"/>, tile by tile, in <paramref name="noisy"/>'s order without repeats (issue 1106).
+    /// </summary>
+    public static IReadOnlyList<Coord> HeardFrom(BattleState after, string group, IReadOnlyCollection<Noise> noisy)
+    {
+        var members = after.Units.Where(u => u.Group == group).Select(u => u.At).ToList();
+        return noisy.Where(noise => members.Any(m => m.DistanceTo(noise.At) <= Wind.Radius(after, noise.Radius, noise.At, m))).Select(n => n.At).Distinct().ToList();
+    }
+
+    /// <summary>
     /// The player units on <paramref name="after"/> within the wake radius of a living member of
     /// <paramref name="group"/>, the radius bent by the wind on <paramref name="after"/>'s turn and grown around a
     /// <c>seen_far:</c> unit (issue 973): the

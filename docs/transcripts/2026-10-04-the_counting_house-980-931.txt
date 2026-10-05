@@ -104,6 +104,7 @@ B  teodor           Teodor L5 pikeman          3,7    hp 23/23  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie soldier-1
 Forecast Ottilie -> Soldier: acc 85% dmg 7 crit 6%; counter: none
+  Fighting here wakes: the yard group (noise, heard from 5,7 and 7,7)
 Ottilie attacks Soldier
   Ottilie hits Soldier for 7 (hp 14)
   Ottilie hp 18, Soldier hp 14
@@ -662,6 +663,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 > attack ottilie hexer-2 art aimed_shot
 Forecast Ottilie -> Hexer 2: acc 99% dmg 10 x2 crit 16%; counter: acc 98% dmg 11 crit 0%
   Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 4 of 32 uses, 2 of them hit or miss
+  Fighting here wakes: the house group (noise, heard from 4,3)
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Hexer 2
   Ottilie hits Hexer 2 for 10 (hp 6)
