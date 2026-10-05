@@ -1,0 +1,51 @@
+# Issue 1044 step 1b (round 368): Rook seated on the field with the seen_far header off, on 0248's baseline.
+# Head f0787c2, Release, two-roll average, 200 seeds. ironwake-sim --full <the_field with the 1,13 slot edited>.
+# field_rook.map: recruit:keziah at 1,13 replaced by recruit:rook. field_rook_nosf.map: the same with the
+# `seen_far: rook 2` line deleted. field_empty.map: the 1,13 line deleted. Wins + losses + timeouts = 200.
+
+| seat at 1,13 | seen_far | wins | losses | timeouts | Rook atk / dmg / abs | Rook drop (se) | gate 4 on Rook |
+|---|---|---|---|---|---|---|---|
+| Rook  | rook 2 | 86 | 60 | 54 | 426 / 5549 / 310 | -0.025 (0.049) | DEAD WEIGHT |
+| Rook  | off    | 99 | 63 | 38 | 171 / 2685 / 597 |  0.040 (0.050) | DEAD WEIGHT |
+| empty | -      | 91 | 74 | 35 | -                | -              | -           |
+
+Reading, against round 368's test ("near 91 or above: the header's cost; near 86: her kit"):
+- With the header off, Rook's seat wins 99, above the empty slot's 91. Round 368's first branch holds: the
+  86-versus-91 gap is the header doing its job (13 wins between the two Rook rows), and the dead-weight
+  verdict on the file arm is expected. It is written down, not levered.
+- Gate 4 still flags her with the header off: her seat adds 8 wins over the empty slot, a drop of 0.040
+  under one standard error. Her kit is light on this board too, but the measured gap is the header's.
+- Gate 1 on the arm stays owed either way: 99 with the header off is still under 120. The header explains
+  13 of the 34 missing wins, not all of them, so step 2's lever is still needed and is not a header change.
+- Routes, for the record only (0248: not evidence): with the header off the route drift fires in 72 of 180
+  south games (11 of 196 with it), read as a Rook who does not wake the line early leaving it asleep
+  at turn 5 (not traced). Her attacks fall from 426 to 171, plausibly for the same reason.
+
+The three rows above are the full gate-1 and gate-4 lines of each run, condensed. The raw lines follow.
+
+## field_rook
+gate 1 beatable: field_rook.map, heuristic wins 86/200 (43 %), winning turn median 13 p90 17 limit 20, losses 60 timeout 54 captain 0 protected, quiet tail 1.8, refused kill p50 0.9711 over 60, at the stall p50 0.0314 over 52, route line 4 drifted 1 won 0; south 196 drifted 11 won 86 p50 13 lost 3.7; none 0 drifted 0 won 0, two-roll average: FAILED
+gate 4 no dead weight: field_rook.map, 5 recruits x 200 seeds, median drop 0.225: FAILED
+  maud: drop 0.175 se 0.048 own [atk 698 dmg 9356 heal 136 abs 556] rest baseline [atk 3183 dmg 43829 heal 0 abs 3150] rest benched [atk 3578 dmg 49312 heal 0 abs 3737] benched losses 82 timeout 67 captain 0 protected, refused kill p50 0.9892 over 82, at the stall p50 0.0355 over 76
+  ottilie: drop 0.240 se 0.048 own [atk 768 dmg 4907 heal 0 abs 543] rest baseline [atk 3113 dmg 48278 heal 136 abs 3163] rest benched [atk 2839 dmg 47979 heal 72 abs 4005] benched losses 74 timeout 88 captain 0 protected, refused kill p50 0.9243 over 74, at the stall p50 0.0335 over 70
+  pell: drop 0.375 se 0.048 own [atk 1041 dmg 17773 heal 0 abs 397] rest baseline [atk 2840 dmg 35412 heal 136 abs 3309] rest benched [atk 3386 dmg 42863 heal 147 abs 4071] benched losses 101 timeout 88 captain 0 protected, refused kill p50 0.8784 over 101, at the stall p50 0.0484 over 89
+  rook: drop -0.025 se 0.049 own [atk 426 dmg 5549 heal 0 abs 310] rest baseline [atk 3455 dmg 47636 heal 136 abs 3396] rest benched [atk 4065 dmg 52872 heal 152 abs 3203] benched losses 74 timeout 35 captain 0 protected, refused kill p50 0.8674 over 74, at the stall p50 0.0318 over 70 DEAD WEIGHT
+  teodor: drop 0.225 se 0.046 own [atk 474 dmg 5012 heal 0 abs 708] rest baseline [atk 3407 dmg 48173 heal 136 abs 2998] rest benched [atk 3214 dmg 47851 heal 37 abs 3705] benched losses 88 timeout 71 captain 0 protected, refused kill p50 0.9824 over 88, at the stall p50 0.0355 over 81
+
+## field_rook_nosf
+gate 1 beatable: field_rook_nosf.map, heuristic wins 99/200 (49 %), winning turn median 13 p90 16 limit 20, losses 63 timeout 38 captain 0 protected, quiet tail 1.2, refused kill p50 0.9539 over 63, at the stall p50 0.0318 over 57, route line 20 drifted 19 won 7 p50 12 lost 3.7; south 180 drifted 72 won 92 p50 13 lost 3.6; none 0 drifted 0 won 0, two-roll average: FAILED
+gate 4 no dead weight: field_rook_nosf.map, 5 recruits x 200 seeds, median drop 0.320: FAILED
+  maud: drop 0.365 se 0.049 own [atk 704 dmg 9434 heal 135 abs 438] rest baseline [atk 3134 dmg 44129 heal 0 abs 3458] rest benched [atk 3083 dmg 47918 heal 0 abs 4531] benched losses 84 timeout 90 captain 0 protected, refused kill p50 0.9824 over 84, at the stall p50 0.0355 over 76
+  ottilie: drop 0.320 se 0.051 own [atk 596 dmg 4472 heal 0 abs 622] rest baseline [atk 3242 dmg 49091 heal 135 abs 3274] rest benched [atk 2650 dmg 47307 heal 32 abs 4221] benched losses 84 timeout 81 captain 0 protected, refused kill p50 0.9892 over 84, at the stall p50 0.0389 over 78
+  pell: drop 0.480 se 0.049 own [atk 1147 dmg 18911 heal 0 abs 364] rest baseline [atk 2691 dmg 34652 heal 135 abs 3532] rest benched [atk 2870 dmg 41328 heal 100 abs 4577] benched losses 94 timeout 103 captain 0 protected, refused kill p50 0.9824 over 94, at the stall p50 0.0496 over 83
+  rook: drop 0.040 se 0.050 own [atk 171 dmg 2685 heal 0 abs 597] rest baseline [atk 3667 dmg 50878 heal 135 abs 3299] rest benched [atk 4065 dmg 52872 heal 152 abs 3203] benched losses 74 timeout 35 captain 0 protected, refused kill p50 0.8674 over 74, at the stall p50 0.0318 over 70 DEAD WEIGHT
+  teodor: drop 0.245 se 0.050 own [atk 666 dmg 7012 heal 0 abs 723] rest baseline [atk 3172 dmg 46551 heal 135 abs 3173] rest benched [atk 3244 dmg 49562 heal 79 abs 4179] benched losses 75 timeout 75 captain 0 protected, refused kill p50 0.9892 over 75, at the stall p50 0.0379 over 70
+
+## field_empty
+gate 1 beatable: field_empty.map, heuristic wins 91/200 (46 %), winning turn median 14 p90 16 limit 20, losses 74 timeout 35 captain 0 protected, quiet tail 1.9, refused kill p50 0.8674 over 74, at the stall p50 0.0318 over 70, route line 24 drifted 13 won 6 p50 14 lost 2.2; south 176 drifted 13 won 85 p50 14 lost 2.2; none 0 drifted 0 won 0, two-roll average: FAILED
+gate 4 no dead weight: field_empty.map, 4 recruits x 200 seeds, median drop 0.340: ok
+  maud: drop 0.330 se 0.049 own [atk 552 dmg 8070 heal 152 abs 438] rest baseline [atk 3513 dmg 44802 heal 0 abs 2765] rest benched [atk 2911 dmg 45632 heal 0 abs 4177] benched losses 85 timeout 90 captain 0 protected, refused kill p50 0.9824 over 85, at the stall p50 0.0489 over 76
+  ottilie: drop 0.310 se 0.048 own [atk 1085 dmg 6291 heal 0 abs 658] rest baseline [atk 2980 dmg 46581 heal 152 abs 2545] rest benched [atk 2390 dmg 45869 heal 8 abs 4006] benched losses 90 timeout 81 captain 0 protected, refused kill p50 0.9799 over 90, at the stall p50 0.0484 over 81
+  pell: drop 0.455 se 0.048 own [atk 1315 dmg 20969 heal 0 abs 365] rest baseline [atk 2750 dmg 31903 heal 152 abs 2838] rest benched [atk 2689 dmg 37950 heal 54 abs 4061] benched losses 106 timeout 94 captain 0 protected, refused kill p50 0.8729 over 106, at the stall p50 0.0945 over 91
+  teodor: drop 0.350 se 0.048 own [atk 572 dmg 6820 heal 0 abs 796] rest baseline [atk 3493 dmg 46052 heal 152 abs 2407] rest benched [atk 2652 dmg 43504 heal 96 abs 3622] benched losses 88 timeout 91 captain 0 protected, refused kill p50 0.9892 over 88, at the stall p50 0.0351 over 77
+
