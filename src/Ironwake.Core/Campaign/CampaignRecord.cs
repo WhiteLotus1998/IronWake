@@ -75,6 +75,13 @@ public sealed record CampaignRecord(
     /// </summary>
     public ValueList<string> QuestsTried { get; init; } = ValueList<string>.Empty;
 
+    /// <summary>
+    /// The side maps offered at a camp the company has left (issue 1129), tried or not, in the
+    /// order first offered: <see cref="QuestsOffered"/> seats a quest never offered ahead of these.
+    /// A record written before it carries none, and its open quests all seat as never offered.
+    /// </summary>
+    public ValueList<string> QuestsSeen { get; init; } = ValueList<string>.Empty;
+
     /// <summary>The ids of the side maps won (<see cref="QuestsWon"/>), what a unique class's unlock reads (issue 706).</summary>
     public IReadOnlyCollection<string> WonQuestIds => QuestsWon.Select(w => w.QuestId).ToList();
 
@@ -862,6 +869,7 @@ public sealed record CampaignRecord(
             Benched = ValueList<string>.Empty,
             TrialsTried = ValueList<TrialAttempt>.Empty,
             QuestsTried = ValueList<string>.Empty,
+            QuestsSeen = SeenAfterCamp(content),
             Wagon = ValueList<string>.From(Wagon.Concat(end.Wagon)),
             FreedUnitFell = FreedUnitFell || end.Bond == BondFate.Fell,
             Rapport = end.Rapport,
@@ -1280,10 +1288,11 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// The side maps this interlude offers (issue 635, DESIGN section 14): every quest not yet won
-    /// whose member stands on the roster and whose opening index has come, earliest opening first
+    /// whose member stands on the roster and whose opening index has come, a quest never offered
+    /// before ahead of one in <see cref="QuestsSeen"/> (issue 1129), then earliest opening first
     /// and then in file order, at most <see cref="SideMapsPerInterlude"/> less the ones already won
-    /// here. A quest tried here and lost stays in its seat, closed until the next map. Empty once
-    /// the campaign is finished.
+    /// here. A quest tried here and lost stays in its seat, closed until the next map, and reopens
+    /// behind the fresh ones. Empty once the campaign is finished.
     /// </summary>
     public IReadOnlyList<CampaignQuest> QuestsOffered(GameContent content)
     {
@@ -1296,11 +1305,18 @@ public sealed record CampaignRecord(
         return content.Campaign.Quests
             .Select((quest, order) => (quest, order, opens: QuestOpensAt(quest, content)))
             .Where(q => q.opens is { } at && at <= MapIndex && Find(q.quest.MemberId) is not null && !QuestsWon.Any(w => w.QuestId == q.quest.Id))
-            .OrderBy(q => q.opens).ThenBy(q => q.order)
+            .OrderBy(q => QuestsSeen.Contains(q.quest.Id)).ThenBy(q => q.opens).ThenBy(q => q.order)
             .Take(Math.Max(0, seats))
             .Select(q => q.quest)
             .ToList();
     }
+
+    /// <summary>
+    /// <see cref="QuestsSeen"/> once this camp is left (issue 1129): the quests it offered join it,
+    /// those already in it keeping their place.
+    /// </summary>
+    private ValueList<string> SeenAfterCamp(GameContent content) =>
+        ValueList<string>.From(QuestsSeen.Concat(QuestsOffered(content).Select(q => q.Id).Where(id => !QuestsSeen.Contains(id))));
 
     /// <summary>
     /// Why <paramref name="questId"/> may not be fought now with <paramref name="allyId"/> beside

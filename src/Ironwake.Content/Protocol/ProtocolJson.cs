@@ -1678,6 +1678,12 @@ public static class ProtocolJson
         {
             WriteStrings(w, "questsTried", record.QuestsTried);
         }
+
+        if (record.QuestsSeen.Count > 0)
+        {
+            WriteStrings(w, "questsSeen", record.QuestsSeen);
+        }
+
         w.WriteStartArray("keep");
         foreach (var work in record.Keep)
         {
@@ -1893,6 +1899,7 @@ public static class ProtocolJson
             TrialsTried = ReadTrialsTried(e),
             QuestsWon = ReadQuestsWon(e, content),
             QuestsTried = e.TryGetProperty("questsTried", out _) ? ReadStrings(e, "questsTried") : ValueList<string>.Empty,
+            QuestsSeen = e.TryGetProperty("questsSeen", out _) ? ReadStrings(e, "questsSeen") : ValueList<string>.Empty,
             FellOn = ReadFellOn(e),
             Keep = ReadKeep(e, content),
             Rooms = ReadRooms(e, content),
