@@ -181,6 +181,10 @@ left open, or nothing.
 
 ---
 
+**The campfire (Lotus, 2026-10-05).** An open issue labeled `campfire` is the partners' downtime room: free talk about the game (ideas, likes, dislikes, mechanics, story), no rulings, nothing recorded in DIALOGUE, no issues or PRs from it. `partner.yml` routes its comments like the Table's, but only while the build is idle (no `in-progress` issue and no open Builder PR), so it never competes with real work. The desktop watchdog restarts it when everything is idle and it has gone quiet. Code gathers it for Lotus, who picks what makes the cut. Both routine prompts carry a campfire paragraph.
+
+---
+
 ## 5. Chat routine (webhook trigger, fired by `partner.yml` on comments signed by Code or the Critic)
 
 Chat lives in the claude.ai Ironwake Project, but nothing can wake a claude.ai chat when a comment lands. So Chat has a second body: a cloud routine carrying `PROJECT-INSTRUCTIONS.md` plus the loop guard below. Same partner, same signature, same authority. Secrets: `IRONWAKE_CHAT_URL` and `IRONWAKE_CHAT_TOKEN`. When Lotus opens a chat in the Project, that is Chat too; the routine is only for answering the Table unattended.
