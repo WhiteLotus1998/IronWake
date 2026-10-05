@@ -7,7 +7,7 @@ Updated: 2026-10-05. Rewritten, not appended; under 20 KB (#401); history in git
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1063. Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: six cards closed (reads 348 to 367); Bet's next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
 About 4486 tests green; `ci`, `ci-windows` run; `godot-*` not required.
-No forks are open. The chain heartbeat stays (#406). #1069: race guards cover warm plays, spikes (0169). #1068: a lethal forecast row on the returned claimant opens `<name> falls for good (the claimant)` (`Returned.Falls`). Queue empty.
+No forks are open. The chain heartbeat stays (#406). #1069: race guards cover warm plays, spikes (0169). #1068: a lethal row on the returned claimant names her loss first (`Returned.Falls`).
 
 ## Next
 
@@ -20,7 +20,7 @@ No forks are open. The chain heartbeat stays (#406). #1069: race guards cover wa
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` with a versioned `ending` block for a sequel (PROTOCOL.md), `pending` until #634 (slice 2).
 - #77 slice 8 (0245): `support <a> <b>` at a camp plays the lowest reached unseen tier, once, free (`supportsSeen`). #1004: C, B, A ship; can close. #77 is `blocked` on a chair's A read.
-- #1003: card = authored text plus its rules line in parentheses (DIALOGUE, 348 to 363). Teodor's frost sits on the socket (359). Ottilie's (363) and Keziah's (367) reads applied. Her Oath Stone after-card is one text for every oath side (cards cannot read `KeziahOath`); her feeling waits for #634. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
+- #1003: card = text plus its rules line in parentheses (348 to 363). Teodor's frost sits on the socket (359). Ottilie's (363) and Keziah's (367) reads applied. Her Oath Stone after-card is one text for every oath side; her feeling waits for #634. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
 - #811: `docs/WRITING.md` and all sixteen voice sheets are in. #1001: scene scripts (0244), main-line maps. Next: Chat's map 1 and 2 drafts (#1005), then scenes (#634); #813 builds on 0243.
 - 13.18 (#486): signatures behind `signatures: on`; ledger killed at 65 (0197); eight wait for boards.
 - #131: the north cut built (0093). #524 failed its floor (0095); the next lever must buy gate 1 back. Open: turn 1 is a march.
