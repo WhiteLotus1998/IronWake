@@ -106,11 +106,18 @@ public sealed class ProtocolSession
         }
     }
 
+    /// <summary>
+    /// Whether an <c>end</c> is refused with <c>lethalUnconfirmed</c> while a unit is lethal if all
+    /// land (issue 1120): the player's setting under the difficulty in play; <c>anyway</c> is
+    /// accepted either way.
+    /// </summary>
+    public bool ConfirmLethal { get; init; } = true;
+
     private string Command(Command command, bool anyway = false)
     {
         var events = new List<GameEvent?>();
         var lethal = command is EndPhase ? Queries.Lethal(_state, _content, PlayerView) : null;
-        if (lethal is { Count: > 0 } && !anyway && _state.Phase == Side.Player && !_state.Outcome.IsOver)
+        if (lethal is { Count: > 0 } && ConfirmLethal && !anyway && _state.Phase == Side.Player && !_state.Outcome.IsOver)
         {
             return LethalEndRefusal(lethal);
         }

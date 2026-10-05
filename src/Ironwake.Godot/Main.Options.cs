@@ -121,11 +121,11 @@ public partial class Main
 
     /// <summary>
     /// E in a battle: ends the phase, unless the confirm is on and a unit has neither moved nor
-    /// acted, when it asks first; E again with the confirm up ends it.
+    /// acted, or the lethal confirm asks and a unit is lethal if all land, when it asks first; E again with the confirm up ends it.
     /// </summary>
     private void EndPressed()
     {
-        if (_confirm is null && EndTurnConfirm.Lines(_client!.State, _client.Content, _options.ConfirmEndTurn) is { } lines)
+        if (_confirm is null && EndTurnConfirm.Lines(_client!.State, _client.Content, _options.ConfirmEndTurn, LethalConfirmAsks()) is { } lines)
         {
             _confirm = lines;
             return;
@@ -134,6 +134,12 @@ public partial class Main
         _confirm = null;
         _client!.Submit(new EndPhase());
     }
+
+    /// <summary>Whether the lethal confirm asks (issue 1120): the option, under the campaign's difficulty (never on Tactician).</summary>
+    private bool LethalConfirmAsks() =>
+        _campaign is { } campaign && _content!.Difficulties.TryGetValue(campaign.Record.Difficulty, out var playing)
+            ? playing.AsksOnLethal(_options.ConfirmLethal)
+            : _options.ConfirmLethal;
 
     /// <summary>The confirm's keys: E or Enter ends the phase, Esc goes back; nothing else reaches the board. True when the input was the confirm's.</summary>
     private bool ConfirmInput(InputEvent input)

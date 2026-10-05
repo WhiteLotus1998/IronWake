@@ -17,7 +17,7 @@ namespace Ironwake.Cli;
 /// </summary>
 public sealed class CampaignSession
 {
-    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--origin id] [--captain he|she] [--scheme one|two] [--from map [--pick claimant [--fed N]] [--level N]] [--log file] [--saves dir] [--load save | --resume] [--reseed N]";
+    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--confirm-lethal on|off] [--origin id] [--captain he|she] [--scheme one|two] [--from map [--pick claimant [--fed N]] [--level N]] [--log file] [--saves dir] [--load save | --resume] [--reseed N]";
 
     /// <summary>Where the keyboard's saves go when <c>--saves</c> is not given; a scripted run keeps none unless it is.</summary>
     public const string DefaultSavesDirectory = "saves";
@@ -97,6 +97,20 @@ public sealed class CampaignSession
         _log.WriteLine(line);
     }
 
+    /// <summary>The player's lethal-confirm setting (issue 1120): <c>--confirm-lethal</c>, else the profile's line, else on.</summary>
+    private bool _confirmLethal = true;
+
+    /// <summary>Whether a battle begun now refuses <c>end</c> on a lethal: the setting under the campaign's difficulty, which a camp may lower.</summary>
+    private bool LethalConfirmAsks => LethalConfirmFor(_content, _record, _confirmLethal);
+
+    /// <summary>
+    /// Whether a battle of <paramref name="record"/> refuses <c>end</c> on a lethal (issue 1120): the
+    /// <paramref name="setting"/> under the record's difficulty; a difficulty the content does not
+    /// declare leaves the setting alone.
+    /// </summary>
+    public static bool LethalConfirmFor(GameContent content, CampaignRecord record, bool setting) =>
+        content.Difficulties.TryGetValue(record.Difficulty, out var playing) ? playing.AsksOnLethal(setting) : setting;
+
     private CampaignSession(GameContent content, string contentDir, CampaignRecord record, TextWriter output, bool scripted, RollScheme scheme, SaveStore? saves, IReadOnlyList<string>? resume)
     {
         _saves = saves;
@@ -158,6 +172,7 @@ public sealed class CampaignSession
         var resume = false;
         ulong? reseed = null;
         var permadeath = true;
+        bool? confirmLethal = null;
         string? origin = null;
         Pronoun? captain = null;
         for (var i = 0; i < args.Length; i++)
@@ -182,6 +197,10 @@ public sealed class CampaignSession
                     break;
                 case "--difficulty" when value is not null:
                     difficulty = value;
+                    i++;
+                    break;
+                case "--confirm-lethal" when PlaySession.OnOff(value) is { } lethalSetting:
+                    confirmLethal = lethalSetting;
                     i++;
                     break;
                 case "--scheme" when value is not null && RollSchemes.Parse(value) is { } parsedScheme:
@@ -466,7 +485,7 @@ public sealed class CampaignSession
             record = record with { Seed = fresh };
         }
 
-        var session = new CampaignSession(content, contentDir, record, Console.Out, script is not null, scheme, saves, battleLines) { _reseededFrom = reseededFrom };
+        var session = new CampaignSession(content, contentDir, record, Console.Out, script is not null, scheme, saves, battleLines) { _reseededFrom = reseededFrom, _confirmLethal = confirmLethal ?? saves?.ReadOptions().Options.ConfirmLethal ?? true };
         var code = session.Play(input, strict);
         if (log is not null)
         {
@@ -523,7 +542,7 @@ public sealed class CampaignSession
             }
 
             var screen = new QuietWriter(_out);
-            var battle = new PlaySession(_content, _record.Begin(map, _content, _scheme), screen, _scripted, _line);
+            var battle = new PlaySession(_content, _record.Begin(map, _content, _scheme), screen, _scripted, _line) { ConfirmLethal = LethalConfirmAsks };
             var replayed = 0;
             if (resume is not null)
             {
@@ -717,7 +736,7 @@ public sealed class CampaignSession
         {
             WriteEvent(opening);
         }
-        var battle = new PlaySession(_content, _record.BeginTrial(trial, unitId, _content, _scheme), _out, _scripted, _line);
+        var battle = new PlaySession(_content, _record.BeginTrial(trial, unitId, _content, _scheme), _out, _scripted, _line) { ConfirmLethal = LethalConfirmAsks };
         battle.WritePendingEvents();
         _out.WriteLine("Objective: " + Objective.Line(battle.State, _content));
         _out.Write(MapRenderer.Render(battle.State, _content));
@@ -1153,7 +1172,7 @@ public sealed class CampaignSession
             WriteEvent(opening);
         }
 
-        var battle = new PlaySession(_content, _record.BeginQuest(map, questId, allyId, _content, _scheme), _out, _scripted, _line);
+        var battle = new PlaySession(_content, _record.BeginQuest(map, questId, allyId, _content, _scheme), _out, _scripted, _line) { ConfirmLethal = LethalConfirmAsks };
         battle.WritePendingEvents();
         _out.WriteLine("Objective: " + Objective.Line(battle.State, _content));
         _out.Write(MapRenderer.Render(battle.State, _content));

@@ -44,6 +44,19 @@ public sealed record Difficulty(string Id, Stats StatPercent, int EnemyLevelOffs
     /// </summary>
     public int Tier { get; init; }
 
+    /// <summary>
+    /// Whether this difficulty lets the end-turn lethal confirm ask (issue 1120, DECISIONS/0260):
+    /// true by default, false on Tactician, where ending a phase with a unit lethal if all land is
+    /// never refused whatever the player's setting. The lethal lines print either way.
+    /// </summary>
+    public bool LethalConfirm { get; init; } = true;
+
+    /// <summary>
+    /// Whether <c>end</c> is refused while a unit is lethal if all land (issue 1120): the player's
+    /// <paramref name="setting"/>, and only where <see cref="LethalConfirm"/> allows it.
+    /// </summary>
+    public bool AsksOnLethal(bool setting) => setting && LethalConfirm;
+
     /// <summary>What the screens call this difficulty: its <see cref="Name"/>, else its id.</summary>
     public string DisplayName => Name ?? Id;
 

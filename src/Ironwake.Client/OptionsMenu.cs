@@ -22,6 +22,7 @@ public static class OptionsMenu
         ("speed", "Enemy phase speed", Options.Speeds),
         ("scenes", "Battle scenes", Options.SceneValues),
         ("confirm-end-turn", "Confirm end turn while units are unmoved", new[] { "on", "off" }),
+        ("confirm-lethal", "Confirm end turn while a unit is lethal", new[] { "on", "off" }),
         ("reach-on-hover", "Show enemy reach on hover", new[] { "on", "off" }),
         ("ui-scale", "UI scale", Options.UiScales.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToList()),
         ("sound", "Sound", new[] { "on", "off" }),
@@ -71,7 +72,8 @@ public static class OptionsMenu
 /// The end-turn confirm (issue 677): with the option on, ending a player phase while any of the
 /// player's units has neither moved nor acted asks first, saying how many and who, and the
 /// lines <c>end</c> prints for a unit the coming enemy phase kills if every strike lands
-/// (issue 558). E again ends the phase; Esc goes back.
+/// (issue 558). With the lethal confirm asking (issue 1120: the <c>confirm-lethal</c> option under
+/// the difficulty in play), a lethal line alone asks too. E again ends the phase; Esc goes back.
 /// </summary>
 public static class EndTurnConfirm
 {
@@ -79,29 +81,33 @@ public static class EndTurnConfirm
     public const string Answer = "E again ends the phase, Esc goes back.";
 
     /// <summary>
-    /// The confirm's lines, or null when ending the phase needs no confirm: the option is off,
-    /// the battle is decided, it is not the player's phase, or every unit has moved or acted.
+    /// The confirm's lines, or null when ending the phase needs no confirm: both confirms are off,
+    /// the battle is decided, it is not the player's phase, or every unit has moved or acted and
+    /// no unit is lethal under an asking lethal confirm.
     /// </summary>
-    public static IReadOnlyList<string>? Lines(BattleState state, GameContent content, bool confirmOn)
+    public static IReadOnlyList<string>? Lines(BattleState state, GameContent content, bool confirmOn, bool lethalOn = false)
     {
-        if (!confirmOn || state.Outcome.IsOver || state.Phase != Side.Player)
+        if ((!confirmOn && !lethalOn) || state.Outcome.IsOver || state.Phase != Side.Player)
         {
             return null;
         }
 
         var names = UnitNames.Of(state, content);
-        var unmoved = state.UnitsOf(Side.Player).Where(u => !u.Moved && !u.Acted).ToList();
-        if (unmoved.Count == 0)
+        var unmoved = confirmOn ? state.UnitsOf(Side.Player).Where(u => !u.Moved && !u.Acted).ToList() : new List<BattleUnit>();
+        var lethal = Queries.Lethal(state, content);
+        if (unmoved.Count == 0 && (!lethalOn || lethal.Count == 0))
         {
             return null;
         }
 
-        var who = string.Join(", ", unmoved.Select(u => names[u.Id]));
-        var lines = new List<string>
+        var lines = new List<string>();
+        if (unmoved.Count > 0)
         {
-            unmoved.Count == 1 ? $"1 unit has not moved: {who}." : $"{unmoved.Count} units have not moved: {who}.",
-        };
-        lines.AddRange(Queries.Lethal(state, content).Select(l => PlaySession.LethalLine(l, names)));
+            var who = string.Join(", ", unmoved.Select(u => names[u.Id]));
+            lines.Add(unmoved.Count == 1 ? $"1 unit has not moved: {who}." : $"{unmoved.Count} units have not moved: {who}.");
+        }
+
+        lines.AddRange(lethal.Select(l => PlaySession.LethalLine(l, names)));
         lines.Add(Answer);
         return lines;
     }

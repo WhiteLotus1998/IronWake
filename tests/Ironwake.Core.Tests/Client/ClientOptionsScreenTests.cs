@@ -28,7 +28,7 @@ public class ClientOptionsScreenTests
     public void TheOptionsRowsAreTheProfilesKeysInScreenOrder()
     {
         Assert.Equal(
-            new[] { "speed", "scenes", "confirm-end-turn", "reach-on-hover", "ui-scale", "sound", "volume" },
+            new[] { "speed", "scenes", "confirm-end-turn", "confirm-lethal", "reach-on-hover", "ui-scale", "sound", "volume" },
             OptionsMenu.Rows.Select(r => r.Key));
     }
 
@@ -43,6 +43,7 @@ public class ClientOptionsScreenTests
     [InlineData("speed", new[] { "2x", "5x", "instant", "1x" })]
     [InlineData("scenes", new[] { "all", "map", "key" })]
     [InlineData("confirm-end-turn", new[] { "off", "on" })]
+    [InlineData("confirm-lethal", new[] { "off", "on" })]
     [InlineData("reach-on-hover", new[] { "off", "on" })]
     [InlineData("ui-scale", new[] { "125", "150", "100" })]
     [InlineData("sound", new[] { "off", "on" })]
