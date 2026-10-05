@@ -2930,3 +2930,19 @@ Notes:
 - **Verdict:** the tuned verdict stands on one warm play, but it's the weakest Harrow I've journaled for tension, and #1087 says why.
 
 — Code
+
+## 2026-10-05 — Brackwater Cut, the door held from the east, a tuned map replayed under 0237, warm — Code
+Seed: 1420 (`play brackwater_cut --seed 1420 --strict --script docs/transcripts/2026-10-05-brackwater_cut-1420.script`; transcript beside it; main at 43024c4)   Result: **won on turn 8 of 8, two out of five.** Rook and the captain escaped. Dunstan, Pell and Wren fell. One of the three Recalls was spent (turn 4).
+Warm: my eleventh Brackwater and the third under 0237. 1310 sneaked north, 1370 lured the bank off the exits. This time I tried a third line: cork the gap from the east side, on 12,3, where only one chaser at a time can stand next to the cork.
+Tension: 8/10   Choice: 7/10   Surprise: 7/10
+Best turn: turn 6. The rider had come through the gap after Dunstan fell and stood on 14,4 at 11 HP, between the captain and the exits. Pell was on 6 HP with her Cinder spent, one turn from an exit. Running would most likely have got her killed on the edge anyway. Instead she stood still and threw Gust at 100 for exactly 11, the only strike that saved her escape turn, and it crit. That one cast made the captain's walk to 19,8 and Rook's to 19,6 survivable.
+Notes:
+- **Turn 1 was 1370's opening, and it landed again.** Rook's 54 and Pell's 91 took the fort archer.
+- **The east-side cork works against the chase and fails against the bank.** From 12,3 only the gap tile can reach the cork, and the chase queued: one brigand and the archer each phase. But I woke the bank on turn 3 with Wren on the 15,4 forest, and the bank came round behind. On the first turn 4, `end` named Pell lethal (Brawler for 18), and I didn't read it. The brawler killed Pell from 14,3, and the soldier walked into her tile and killed the captain from behind at 12,3. The cork had its back to the bank.
+- **The Recall bought the shape, and the rolls stayed honest.** Back at turn 4 with the captain on 14,3, the brawler had no seat next to Pell. It went for Wren in the forest instead, and Dunstan held the door. The brigand missed at 73, and Dunstan's counter crit for 33. Nothing I did changed that roll (keyed rolls). The difference was who stood where.
+- **Turn 5 was the tensest phase.** The captain's Feint at 92 missed the brawler on the forest, and its counter took him to 10. Wren swung with `!` at 56 against a 44-in-100 lethal counter and killed it. Then Dunstan, on 2 HP, stayed on the cork on purpose and died to the archer. The rider came through, caught Wren on a 28, and the soldier left Pell on 5.
+- **Pell's Cinder ran out mid-map** (`Pell's Cinder is spent for this battle`). Two Overcasts and a counter used seven charges. Gust was what was left, and Gust was enough.
+- **Not tense:** turn 2, the walk to the door. That's one soft turn, as in 1370.
+- **Verdict:** the tuned verdict stands, and the play files nothing. Holding the door is a real third line, and it costs more than the other two: three bodies and a Recall, against 1370's one body and two Recalls. Dusk did its job, too. On turn 7 the soldier couldn't see the captain at 19,8, five tiles off and out of hearing, so it went for Rook instead, and missed. Brackwater has now given me three different lines, each with a different price, and that's what a tuned map should do.
+
+— Code

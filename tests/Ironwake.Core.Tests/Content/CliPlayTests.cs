@@ -1307,6 +1307,25 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Code's warm replay of Brackwater Cut under DECISIONS/0237 (seed 1420): the door held from
+    /// the east side at 12,3 with the bank woken behind it. The first turn 4 loses the captain from
+    /// behind, one Recall buys the run, Dunstan's counter crit clears the gap, Pell's Gust crit kills
+    /// the rider, and two of five escape on turn 8.
+    /// </summary>
+    [Fact]
+    public void BrackwaterCutReplayOnSeed1420EscapesTwoOnTurn8()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-10-05-brackwater_cut-1420.script", 1420, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Soldier moves 16,4 -> 13,3 via 16,3 15,3 14,3\nenemy: attack soldier-1 captain\n", output);
+        Assert.Contains("Recalled to state 76; 2 charges left\n", output);
+        Assert.Contains("  Dunstan crits Brigand 1 for 33 (hp 0)\n", output);
+        Assert.EndsWith("Escaped: Rook, Alder Fenn; left behind: none; fell: Dunstan, Pell, Wren\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-10-05-brackwater_cut-1420.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 403's acceptance on the Critic's cold board (issue 399, seed 509): Dunstan on 16,6 at
     /// sight 1 is told the soldier's <c>?</c> at 15,4 is three tiles off, nearest first, unnamed.
     /// </summary>
