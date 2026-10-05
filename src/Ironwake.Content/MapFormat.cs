@@ -424,7 +424,7 @@ public static class MapFormat
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
-            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header) };
+            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
@@ -1095,19 +1095,22 @@ public static class MapFormat
         /// <summary>
         /// The <c>seen_far:</c> header (issue 973): a unit id in the content and the tiles it adds,
         /// <c>rook 2</c>, from <see cref="SeenFar.MinExtra"/> to <see cref="SeenFar.MaxExtra"/>. The unit
-        /// needs no <c>P</c> line: a campaign seats it from the roster.
+        /// needs no <c>P</c> line: a campaign seats it from the roster. An optional second part names a
+        /// group that sees the unit coming and the turn it wakes on (issue 1044): <c>rook 2; south turn 3</c>,
+        /// a group with a Guard member, the turn from 1 to the turn limit.
         /// </summary>
-        private SeenFar? ParseSeenFar(Dictionary<string, (string Value, int Line)> header)
+        private SeenFar? ParseSeenFar(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
         {
             if (!header.TryGetValue("seen_far", out var entry))
             {
                 return null;
             }
 
-            var parts = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length != 2 || !int.TryParse(parts[1], out var extra))
+            var halves = entry.Value.Split(';', StringSplitOptions.TrimEntries);
+            var parts = halves[0].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (halves.Length > 2 || parts.Length != 2 || !int.TryParse(parts[1], out var extra))
             {
-                throw ErrorAt(entry.Line, $"seen_far: needs a unit and the tiles it adds, 'seen_far: rook 2', got '{entry.Value}'");
+                throw ErrorAt(entry.Line, $"seen_far: needs a unit and the tiles it adds, 'seen_far: rook 2', and may name a group and its turn, 'seen_far: rook 2; south turn 3', got '{entry.Value}'");
             }
 
             if (!_content.Units.ContainsKey(parts[0]))
@@ -1120,7 +1123,28 @@ public static class MapFormat
                 throw ErrorAt(entry.Line, $"seen_far: {extra} tiles is out of range; from {SeenFar.MinExtra} to {SeenFar.MaxExtra}");
             }
 
-            return new SeenFar(parts[0], extra);
+            if (halves.Length == 1)
+            {
+                return new SeenFar(parts[0], extra);
+            }
+
+            var coming = halves[1].Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (coming.Length != 3 || coming[1] != "turn" || !int.TryParse(coming[2], out var turn))
+            {
+                throw ErrorAt(entry.Line, $"seen_far: '{halves[1]}' is not a group and its turn, 'south turn 3'");
+            }
+
+            if (!map.Placements.OfType<EnemyPlacement>().Any(p => p.Group == coming[0] && p.Behavior == Behavior.Guard))
+            {
+                throw ErrorAt(entry.Line, $"seen_far: group '{coming[0]}' has no guard member, so nothing in it sleeps to see {parts[0]} coming");
+            }
+
+            if (turn < 1 || turn > map.TurnLimit)
+            {
+                throw ErrorAt(entry.Line, $"seen_far: turn {turn} is outside 1 to the turn limit {map.TurnLimit}");
+            }
+
+            return new SeenFar(parts[0], extra, coming[0], turn);
         }
 
         /// <summary>The <c>region:</c> header (issue 916): one of the region words; absent means the seam.</summary>

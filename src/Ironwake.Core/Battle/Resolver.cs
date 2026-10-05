@@ -1795,7 +1795,7 @@ public static class Resolver
             next = Wildfire.Spread(next, events);
         }
 
-        return (Hunt.AtPhaseStart(Routes.AtPhaseStart(MapEvents.AtPhaseStart(next, content, events), events), nextPhase), null);
+        return (Hunt.AtPhaseStart(Routes.AtPhaseStart(SeenFar.AtPhaseStart(MapEvents.AtPhaseStart(next, content, events), events), events), nextPhase), null);
     }
 
     /// <summary>

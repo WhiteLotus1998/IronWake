@@ -87,7 +87,8 @@ public static class Routes
 
     /// <summary>
     /// The line the board prints under the wake legend on a <c>route_drift:</c> map while the drift
-    /// is still to come or under way; null once it is spent and every drifter has arrived or fallen.
+    /// is still to come or under way; null once it is spent and every drifter has arrived or fallen,
+    /// and null when a route group woke without fixing the route, since no drift can follow.
     /// </summary>
     public static string? Line(BattleState state)
     {
@@ -98,7 +99,9 @@ public static class Routes
 
         if (state.RouteTaken is not { } taken)
         {
-            return Line(drift, state.Turn);
+            // A route group woken before any route is fixed (a seen_far sighting, issue 1044) leaves no
+            // drift to come: whichever group wakes next fixes the route, and the other is already up.
+            return state.IsAwake(drift.First) || state.IsAwake(drift.Second) ? null : Line(drift, state.Turn);
         }
 
         var group = drift.Other(taken);

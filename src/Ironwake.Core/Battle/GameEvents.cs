@@ -236,6 +236,9 @@ public enum WakeCause
 
     /// <summary>A group linked to it by the map's <c>wake_links:</c> header woke (issue 393).</summary>
     Call,
+
+    /// <summary>The map's <c>seen_far:</c> header names the group, and it saw its unit coming on the header's turn (issue 1044).</summary>
+    Sighted,
 }
 
 /// <summary>

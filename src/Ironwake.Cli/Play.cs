@@ -2797,7 +2797,7 @@ public sealed class PlaySession
             case PhaseBegan p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase, turn {p.Turn} --";
             case GroupWoke g:
-                return $"{UnitNames.Group(g.Group)} wakes ({(g.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(g))})"
+                return $"{UnitNames.Group(g.Group)} wakes ({(g.Cause == WakeCause.Sighted && g.CalledBy is { } seen ? names[seen] + " seen coming" : g.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(g))})"
                     + (g.Lamps.Count > 0 ? $"; their lamps are lit ({string.Join(", ", g.Lamps.Select(l => $"{names[l.UnitId]} {l.At}"))})" : "");
             case MapEventFired m:
                 return names.Event(m.Name, m.Blocked, m.Terrain is null ? null : content.Terrain.TryGetValue(m.Terrain, out var barring) ? barring.Name : m.Terrain);

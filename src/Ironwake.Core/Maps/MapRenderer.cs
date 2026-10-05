@@ -579,6 +579,11 @@ public static class MapRenderer
             sb.Append(far.Line(seenUnit.Unit.Name, content)).Append('\n');
         }
 
+        if (SeenFar.ComingLine(state) is { } sighted)
+        {
+            sb.Append(sighted).Append('\n');
+        }
+
         if (Routes.Line(state) is { } drifting)
         {
             sb.Append(drifting).Append('\n');
