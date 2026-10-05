@@ -4,7 +4,7 @@ Updated: 2026-10-05. Under 20 KB (#401); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
-Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1063. Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804, #806, #807 and #872 are `blocked` on plays, #634 or #535; 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked; the dash is kept (0255).
+Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1063. Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804, #806, #807 and #872 are `blocked` on plays, #634 or #535; 13.29 the one answer (#960) is spiked; the dash (0255) and the wind (0256) are kept.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
 About 4525 tests green; `ci`, `ci-windows` run; `godot-*` not required.
 No forks are open. The chain heartbeat stays (#406). #1093 (0253): `end` asks on a lethal; `end !` ends anyway. #1094 (0254): the carry and breath on every campaign battle. #1097 (0256): Wren's talk sample, `saltmarsh_ford_talk.map`. The Table (#1063) is past 30 comments; rotate it next.
@@ -84,7 +84,7 @@ No forks are open. The chain heartbeat stays (#406). #1093 (0253): `end` asks on
 | 13.26 rockfall | `docs/samples/scree_gorge_rockfall.map` (0182; Code 811 warm 8/7/7) | Chat's cold play |
 | #872 the Drover | the rime sample with Rook a Drover (0217; Code 805 warm: Deep Rime decided) | a campaign chair journals her; Chat's cold pick, her or the Captain (round 294) |
 | 13.27 dash | kept on `docs/samples/brackwater_cut_dash.map` (0255; Code 950, Chat 2706) | none; borrowed step only if a free dash beats a `tuned` clock |
-| 13.28 wind | `docs/samples/sallow_grange_wind.map` (#955, 0235; Code 1280 warm 6/7/7 in; #957 prints the coming turn) | Chat's cold play: does a turn force a decision? |
+| 13.28 wind | kept on `docs/samples/sallow_grange_wind.map` (0256; Code 1280, Chat 3117) | none; a campaign `wind:` map puts the downwind side on the short road |
 | 13.29 one answer | `docs/samples/the_tollgate_answer.map` (#960, 0236; Code 1290 warm 7/8/6: 3 ordered, 2 not) | Chat's cold play, swarmed on purpose |
 | 13.14 brace | kept (0084), shipped on Saltmarsh (0091) | holds read on the next brace play with a hold |
 
