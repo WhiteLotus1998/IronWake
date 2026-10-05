@@ -1,0 +1,1692 @@
+Campaign, seed 644, difficulty Recruit, permadeath off, scheme TwoRollAverage, 10 maps
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 7 of 10: Sallow Grange; the purse holds 4030 --
+== Roster ==
+  Alder Fenn (captain): Ranger L6, EXP 22; 1: Iron Sword 13/40 (repair 270), 2: Field Dressing 2/3; ladder: Ranger, then Pathfinder at 10
+  Wren: Cadet L2, EXP 0, Wounded (2); 1: Iron Sword 30/40 (repair 100), 2: Field Dressing 2/3
+  Teodor: Pikeman L1, EXP 0, Wounded (2); 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L2, EXP 0, Wounded (2); 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
+  Pell: Adept L4, EXP 78; 1: Gust 6/6, 2: Cinder 8/8
+  Dunstan: Bulwark L1, EXP 0, Wounded (2); 1: Iron Lance 38/40 (repair 20)
+  Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
+  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Sallow Grange: Alder Fenn, Dunstan, Wren, Teodor, Pell, Ottilie (deploy 6 of 9)
+== Keep ==
+Purse: 4030
+Rooms: beds: 9/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 1 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Keep: Ironwake Keep; built: nothing; the purse holds 4030
+  wall: Rebuild a wall, 400
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+  ditch: Dig a ditch, 300
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath is off: who falls comes back wounded
+  pell_1: Pell's quest 1, The Burned School (quest pell_1 <ally>); permadeath is off: who falls comes back wounded
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 7, Sallow Grange. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+> build barracks
+Barracks built for 500, the purse holds 3530; beds: 9/14; hire <id> takes Corin Ashby, Bet Lowry, Ines Tarrow, Mattias Grue for 300 each
+> build barracks_wing
+Barracks wing built for 300, the purse holds 3230; beds: 9/15; hire <id> takes Tamsin Hale, Wat Dunmore, Edda Vane for 300 each
+> hire corin
+Corin Ashby joins as a Cadet at L1 for 300, the purse holds 2930; beds: 10/15
+> build wall 10,3
+Built for 400, the purse holds 2530: wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+> quest maud_1 rook
+-- The Lazar House --
+The keeper at Sorrel Bend has stopped writing. Maud's order kept the
+lazar house there until the armistice, then called its sisters home and
+left the sick with him. Maud packs the basin. "The carts come at dusk.
+Nobody strips this door till then. You won't be thanked."
+
+(Hold out six turns. The lanes in are announced. A unit that ends its
+move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane
+for the rest of the map. The ford south cannot be barred.)
+
+Side map: The Lazar House, seed 670
+Maud goes with Rook. This map is lost if Maud falls; who falls here comes back wounded.
+  when one of yours stops on 8,1: 8,0 becomes wall, unless one who cannot enter wall stands on it.
+  when one of yours stops on 10,4: 11,4 becomes wall, unless one who cannot enter wall stands on it.
+  turn 2, enemy phase: a brigand arrives at 8,0 (aggressive). A unit standing on 8,0 stops it.
+  turn 2, enemy phase: a soldier arrives at 11,4 (aggressive). A unit standing on 11,4 stops it.
+  turn 3, enemy phase: an archer arrives at 6,7 (aggressive). A unit standing on 6,7 stops it.
+  turn 3, enemy phase: a hexer arrives at 8,0 (aggressive). A unit standing on 8,0 stops it.
+  turn 4, enemy phase: a brigand arrives at 11,4 (aggressive). A unit standing on 11,4 stops it.
+  turn 5, enemy phase: a brigand arrives at 6,7 (aggressive). A unit standing on 6,7 stops it.
+Objective: Hold out until the end of turn 6. Maud must survive.
+The Lazar House  turn 1 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 ...B.=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 16/16  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 20/20  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           3,4    hp 17/17  Plain
+> move rook 4,4
+Rook moves 3,4 -> 4,4
+The Lazar House  turn 1 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 ....B=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 16/16  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 20/20  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           4,4    hp 17/17  Plain
+> wait rook
+Rook waits
+The Lazar House  turn 1 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 ....B=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 16/16  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 20/20  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           4,4    hp 17/17  Plain  done
+> wait maud
+Maud waits
+The Lazar House  turn 1 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 ....B=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 16/16  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 20/20  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+B  rook             Rook L1 skyrider           4,4    hp 17/17  Plain  done
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 7,4
+Archer 1 moves 9,6 -> 7,4 via 9,5 9,4 8,4
+enemy: wait archer-1
+Archer 1 waits
+enemy: move brigand-1 5,4
+Brigand 1 moves 8,3 -> 5,4 via 7,3 6,3 5,3
+enemy: attack brigand-1 rook
+Forecast Brigand 1 -> Rook: acc 51% dmg 14 crit 0%; counter: acc 82% dmg 9 x2 crit 4%
+Brigand 1 attacks Rook
+  Brigand 1 misses Rook
+  Rook hits Brigand 1 for 9 (hp 11)
+  Rook hits Brigand 1 for 9 (hp 2)
+  Brigand 1 hp 2, Rook hp 17
+Rook gains 10 exp (10)
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Lazar House  turn 2 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 ....Ba=b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          5,4    hp 2/20   Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           4,4    hp 17/17  Plain
+> attack rook brigand-1
+Forecast Rook -> Brigand 1: acc 82% dmg 9 x2 crit 4%; counter: acc 51% dmg 14 crit 0%
+Rook attacks Brigand 1
+  Rook hits Brigand 1 for 9 (hp 0)
+  Rook hp 17, Brigand 1 hp 0
+Rook gains 30 exp (40)
+Brigand 1 falls at 5,4
+The Lazar House  turn 2 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 ....B==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           4,4    hp 17/17  Plain  done
+> wait maud
+Maud waits
+The Lazar House  turn 2 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 ....B==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+B  rook             Rook L1 skyrider           4,4    hp 17/17  Plain  done
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Brigand 2 arrives at 8,0 with the north group, aggressive
+Reinforcements arrive
+  Soldier arrives at 11,4 with the east group, aggressive
+enemy: move archer-1 6,4
+Archer 1 moves 7,4 -> 6,4
+enemy: attack archer-1 rook
+Forecast Archer 1 -> Rook: acc 70% dmg 9 grounds 21%; counter: none
+Archer 1 attacks Rook
+  Archer 1 hits Rook for 9 (hp 8)
+  Archer 1 hp 16, Rook hp 8
+enemy: move brigand-2 5,1
+Brigand 2 moves 8,0 -> 5,1 via 8,1 7,1 6,1
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move soldier-1 7,4
+Soldier moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Lazar House  turn 3 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....c...n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 ....B=bd====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           4,4    hp 8/17   Plain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> move rook 3,3
+Rook moves 4,4 -> 3,3 via 3,4
+The Lazar House  turn 3 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....c...n.M
+ 2 ..#A#.......
+ 3 ..#B#....^..
+ 4 .....=bd====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           3,3    hp 8/17   Plain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> wait rook
+Rook waits
+The Lazar House  turn 3 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....c...n.M
+ 2 ..#A#.......
+ 3 ..#B#....^..
+ 4 .....=bd====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           3,3    hp 8/17   Plain  done
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> item maud salve rook
+Maud uses Salve on rook (7 left)
+Rook heals 7 (hp 15)
+Maud gains 16 exp (16)
+The Lazar House  turn 3 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....c...n.M
+ 2 ..#A#.......
+ 3 ..#B#....^..
+ 4 .....=bd====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+B  rook             Rook L1 skyrider           3,3    hp 15/17  Plain  done
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> end !
+Lethal if all land: Maud (Archer 1 for 6, Brigand 2 for 11, against 17 hp)
+Lethal if all land: Rook (Archer 1 for 9, Soldier for 12, against 15 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Archer 2 arrives at 6,7 with the ford group, aggressive
+Reinforcements arrive
+  Hexer arrives at 8,0 with the north group, aggressive
+enemy: move archer-1 5,3
+Archer 1 moves 6,4 -> 5,3 via 6,3
+enemy: attack archer-1 rook
+Forecast Archer 1 -> Rook: acc 70% dmg 9 grounds 21%; counter: none
+Archer 1 attacks Rook
+  Archer 1 hits Rook for 9 (hp 6)
+  Archer 1 hp 16, Rook hp 6
+enemy: move archer-2 5,4
+Archer 2 moves 6,7 -> 5,4 via 6,6 6,5 6,4
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-2 3,1
+Brigand 2 moves 5,1 -> 3,1 via 4,1
+enemy: attack brigand-2 maud
+Forecast Brigand 2 -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3%
+Brigand 2 attacks Maud
+  Brigand 2 hits Maud for 11 (hp 6)
+  Maud hits Brigand 2 for 11 (hp 9)
+  Brigand 2 hp 9, Maud hp 6
+Maud gains 10 exp (26)
+enemy: move hexer-1 5,1
+Hexer moves 8,0 -> 5,1 via 8,1 7,1 6,1
+enemy: wait hexer-1
+Hexer waits
+enemy: move soldier-1 3,4
+Soldier moves 7,4 -> 3,4 via 6,4 5,4 4,4
+enemy: attack soldier-1 rook
+Forecast Soldier -> Rook: acc 63% dmg 12 crit 0%; counter: acc 79% dmg 7 crit 3%
+Soldier attacks Rook
+  Soldier hits Rook for 12 (hp 0)
+  Soldier hp 18, Rook hp 0
+Rook falls at 3,3; her drake leaves the field
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Maud heals 3 (hp 9)
+The Lazar House  turn 4 of 6  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..c.f...n.M
+ 2 ..#A#.......
+ 3 ..#.#b...^..
+ 4 ...d.e======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,3    hp 16/16  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,4    hp 16/16  Road  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          3,1    hp 9/20   Plain  group north, aggressive
+f  hexer-1          Hexer L1 adept             5,1    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 9/17   Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         3,4    hp 18/18  Plain  group east, aggressive
+> recall 19
+Recalled to state 19; 2 charges left
+Undone: gives back 26 exp, 11 enemy hp; returns Rook alive at 8 hp, 8 hp to Maud, Archer 2 not yet arrived, Hexer not yet arrived
+The rolls do not change: the same attack will roll the same
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....c...n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 ....B=bd====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           4,4    hp 8/17   Plain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> move rook 3,1
+Rook moves 4,4 -> 3,1 via 3,4 3,3 3,2
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.c...n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....=bd====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           3,1    hp 8/17   Plain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> wait rook
+Rook waits
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.c...n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....=bd====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           3,1    hp 8/17   Plain  done
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> item maud salve rook
+Maud uses Salve on rook (7 left)
+Rook heals 7 (hp 15)
+Maud gains 16 exp (16)
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.c...n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....=bd====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+B  rook             Rook L1 skyrider           3,1    hp 15/17  Plain  done
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> end !
+Lethal if all land: Rook (Archer 1 for 9, Brigand 2 for 14, against 15 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Archer 2 arrives at 6,7 with the ford group, aggressive
+Reinforcements arrive
+  Hexer arrives at 8,0 with the north group, aggressive
+enemy: move archer-1 3,3
+Archer 1 moves 6,4 -> 3,3 via 5,4 4,4 3,4
+enemy: attack archer-1 rook
+Forecast Archer 1 -> Rook: acc 70% dmg 9 grounds 21%; counter: none
+Archer 1 attacks Rook
+  Archer 1 hits Rook for 9 (hp 6)
+  Archer 1 hp 16, Rook hp 6
+enemy: move archer-2 6,3
+Archer 2 moves 6,7 -> 6,3 via 6,6 6,5 6,4
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-2 4,1
+Brigand 2 moves 5,1 -> 4,1
+enemy: attack brigand-2 rook
+Forecast Brigand 2 -> Rook: acc 51% dmg 14 crit 0%; counter: acc 82% dmg 9 x2 crit 4%
+Brigand 2 attacks Rook
+  Brigand 2 misses Rook
+  Rook hits Brigand 2 for 9 (hp 11)
+  Rook hits Brigand 2 for 9 (hp 2)
+  Brigand 2 hp 2, Rook hp 6
+Rook gains 10 exp (50)
+enemy: move hexer-1 5,1
+Hexer moves 8,0 -> 5,1 via 8,1 7,1 6,1
+enemy: attack hexer-1 rook
+Forecast Hexer -> Rook: acc 98% dmg 8 crit 0%; counter: none
+Hexer attacks Rook
+  Hexer hits Rook for 8 (hp 0)
+  Hexer hp 15, Rook hp 0
+Rook falls at 3,1; her drake leaves the field
+enemy: move soldier-1 6,1
+Soldier moves 7,4 -> 6,1 via 7,3 7,2 7,1
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Lazar House  turn 4 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...cfd..n.M
+ 2 ..#A#.......
+ 3 ..#b#.e..^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           3,3    hp 16/16  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 16/16  Plain  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          4,1    hp 2/20   Plain  group north, aggressive
+f  hexer-1          Hexer L1 adept             5,1    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         6,1    hp 18/18  Plain  group east, aggressive
+> recall 9
+Recalled to state 9; 1 charge left
+Undone: gives back 1 kill (Brigand 1), 16 exp, 2 enemy hp; returns Rook alive at 17 hp, Archer 2 not yet arrived, Brigand 2 not yet arrived, Hexer not yet arrived, Soldier not yet arrived
+The rolls do not change: the same attack will roll the same
+The Lazar House  turn 2 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 ....Ba=b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          5,4    hp 2/20   Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           4,4    hp 17/17  Plain
+> move maud 3,4
+Maud moves 3,2 -> 3,4 via 3,3
+The Lazar House  turn 2 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 ...ABa=b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          5,4    hp 2/20   Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           4,4    hp 17/17  Plain
+> attack maud brigand-1
+Forecast Maud -> Brigand 1: acc 98% dmg 11 crit 3%; counter: none
+Maud attacks Brigand 1
+  Maud hits Brigand 1 for 11 (hp 0)
+  Maud hp 17, Brigand 1 hp 0
+Maud gains 30 exp (30)
+Brigand 1 falls at 5,4
+The Lazar House  turn 2 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 ...AB==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           4,4    hp 17/17  Plain
+> move rook 3,2
+Rook moves 4,4 -> 3,2 via 3,4 3,3
+The Lazar House  turn 2 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#B#.......
+ 3 ..#.#....^..
+ 4 ...A.==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)
+> wait rook
+Rook waits
+The Lazar House  turn 2 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#B#.......
+ 3 ..#.#....^..
+ 4 ...A.==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  done
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Brigand 2 arrives at 8,0 with the north group, aggressive
+Reinforcements arrive
+  Soldier arrives at 11,4 with the east group, aggressive
+enemy: move archer-1 5,2
+Archer 1 moves 7,4 -> 5,2 via 7,3 7,2 6,2
+enemy: attack archer-1 rook
+Forecast Archer 1 -> Rook: acc 43% dmg 7 grounds 21%; counter: none
+Archer 1 attacks Rook
+  Archer 1 misses Rook
+  Archer 1 hp 16, Rook hp 17
+enemy: move brigand-2 5,1
+Brigand 2 moves 8,0 -> 5,1 via 8,1 7,1 6,1
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move soldier-1 7,4
+Soldier moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Lazar House  turn 3 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....c...n.M
+ 2 ..#B#b......
+ 3 ..#.#....^..
+ 4 ...A.==d====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,2    hp 16/16  Plain  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> move rook 3,1
+Rook moves 3,2 -> 3,1
+The Lazar House  turn 3 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.c...n.M
+ 2 ..#F#b......
+ 3 ..#.#....^..
+ 4 ...A.==d====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,2    hp 16/16  Plain  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           3,1    hp 17/17  Plain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> wait rook
+Rook waits
+The Lazar House  turn 3 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.c...n.M
+ 2 ..#F#b......
+ 3 ..#.#....^..
+ 4 ...A.==d====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,2    hp 16/16  Plain  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           3,1    hp 17/17  Plain  done
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> move maud 3,2
+Maud moves 3,4 -> 3,2 via 3,3
+The Lazar House  turn 3 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.c...n.M
+ 2 ..#A#b......
+ 3 ..#.#....^..
+ 4 .....==d====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,2    hp 16/16  Plain  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  rook             Rook L1 skyrider           3,1    hp 17/17  Plain  done
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> wait maud
+Maud waits
+The Lazar House  turn 3 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.c...n.M
+ 2 ..#A#b......
+ 3 ..#.#....^..
+ 4 .....==d====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,2    hp 16/16  Plain  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 20/20  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+B  rook             Rook L1 skyrider           3,1    hp 17/17  Plain  done
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+> end !
+Lethal if all land: Rook (Archer 1 for 9, Brigand 2 for 14, against 17 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Archer 2 arrives at 6,7 with the ford group, aggressive
+Reinforcements arrive
+  Hexer arrives at 8,0 with the north group, aggressive
+enemy: move archer-1 4,0
+Archer 1 moves 5,2 -> 4,0 via 5,1 4,1
+enemy: attack archer-1 rook
+Forecast Archer 1 -> Rook: acc 70% dmg 9 grounds 21%; counter: none
+Archer 1 attacks Rook
+  Archer 1 hits Rook for 9 (hp 8)
+  Archer 1 hp 16, Rook hp 8
+enemy: move archer-2 6,3
+Archer 2 moves 6,7 -> 6,3 via 6,6 6,5 6,4
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-2 4,1
+Brigand 2 moves 5,1 -> 4,1
+enemy: attack brigand-2 rook
+Forecast Brigand 2 -> Rook: acc 51% dmg 14 crit 0%; counter: acc 82% dmg 9 x2 crit 4%
+Brigand 2 attacks Rook
+  Brigand 2 misses Rook
+  Rook hits Brigand 2 for 9 (hp 11)
+  Rook hits Brigand 2 for 9 (hp 2)
+  Brigand 2 hp 2, Rook hp 8
+Rook gains 10 exp (20)
+enemy: move hexer-1 5,1
+Hexer moves 8,0 -> 5,1 via 8,1 7,1 6,1
+enemy: attack hexer-1 rook
+Forecast Hexer -> Rook: acc 98% dmg 8 crit 0%; counter: none
+Hexer attacks Rook
+  Hexer hits Rook for 8 (hp 0)
+  Hexer hp 15, Rook hp 0
+Rook falls at 3,1; her drake leaves the field
+enemy: move soldier-1 3,4
+Soldier moves 7,4 -> 3,4 via 6,4 5,4 4,4
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Lazar House  turn 4 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^b^^^.^^M
+ 1 ^...cf...n.M
+ 2 ..#A#.......
+ 3 ..#.#.e..^..
+ 4 ...d.=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           4,0    hp 16/16  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 16/16  Plain  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          4,1    hp 2/20   Plain  group north, aggressive
+f  hexer-1          Hexer L1 adept             5,1    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         3,4    hp 18/18  Plain  group east, aggressive
+> attack maud brigand-2
+Forecast Maud -> Brigand 2: acc 98% dmg 11 crit 3%; counter: none
+Maud attacks Brigand 2
+  Maud hits Brigand 2 for 11 (hp 0)
+  Maud hp 17, Brigand 2 hp 0
+Maud gains 30 exp (60)
+Brigand 2 falls at 4,1
+The Lazar House  turn 4 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^b^^^.^^M
+ 1 ^....f...n.M
+ 2 ..#A#.......
+ 3 ..#.#.e..^..
+ 4 ...d.=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           4,0    hp 16/16  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 16/16  Plain  group ford, aggressive
+f  hexer-1          Hexer L1 adept             5,1    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         3,4    hp 18/18  Plain  group east, aggressive
+> end !
+Lethal if all land: Maud (Archer 1 for 6, Archer 2 for 6, Hexer for 3, Soldier for 9, against 17 hp)
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Reinforcements arrive
+  Brigand 3 arrives at 11,4 with the east group, aggressive
+enemy: move archer-1 3,0
+Archer 1 moves 4,0 -> 3,0
+enemy: attack archer-1 maud
+Forecast Archer 1 -> Maud: acc 65% dmg 6 crit 0%; counter: acc 80% dmg 10 crit 2%
+Archer 1 attacks Maud
+  Archer 1 hits Maud for 6 (hp 11)
+  Maud hits Archer 1 for 10 (hp 6)
+  Archer 1 hp 6, Maud hp 11
+Maud gains 10 exp (70)
+enemy: move archer-2 5,2
+Archer 2 moves 6,3 -> 5,2 via 6,2
+enemy: attack archer-2 maud
+Forecast Archer 2 -> Maud: acc 65% dmg 6 crit 0%; counter: acc 97% dmg 10 crit 2%
+Archer 2 attacks Maud
+  Archer 2 misses Maud
+  Maud hits Archer 2 for 10 (hp 6)
+  Archer 2 hp 6, Maud hp 11
+Maud gains 10 exp (80)
+enemy: move brigand-3 7,4
+Brigand 3 moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move hexer-1 4,1
+Hexer moves 5,1 -> 4,1
+enemy: attack hexer-1 maud
+Forecast Hexer -> Maud: acc 90% dmg 3 crit 0%; counter: acc 97% dmg 6 crit 2%
+Hexer attacks Maud
+  Hexer misses Maud
+  Maud hits Hexer for 6 (hp 9)
+  Hexer hp 9, Maud hp 11
+Maud's Radiance is spent for this battle
+Maud gains 10 exp (90)
+enemy: move soldier-1 3,3
+Soldier moves 3,4 -> 3,3
+enemy: attack soldier-1 maud
+Forecast Soldier -> Maud: acc 51% dmg 9 crit 0%; counter: none
+Soldier attacks Maud
+  Soldier misses Maud
+  Soldier hp 18, Maud hp 11
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Maud heals 3 (hp 14)
+The Lazar House  turn 5 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^b^^^^.^^M
+ 1 ^...f....n.M
+ 2 ..#A#e......
+ 3 ..#d#....^..
+ 4 .....==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           3,0    hp 6/16   Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,2    hp 6/16   Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 20/20  Road  group east, aggressive
+f  hexer-1          Hexer L1 adept             4,1    hp 9/15   Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 14/17  Fort (heals 20 percent, 3 hp)  captain  unarmed
+d  soldier-1        Soldier L1 pikeman         3,3    hp 18/18  Plain  group east, aggressive
+> end !
+Lethal if all land: Maud (Archer 1 for 6, Archer 2 for 6, Hexer for 3, Soldier for 9, against 14 hp)
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Reinforcements arrive
+  Brigand 4 arrives at 6,7 with the ford group, aggressive
+enemy: attack archer-1 maud
+Forecast Archer 1 -> Maud: acc 58% dmg 6 crit 0%; counter: none
+Archer 1 attacks Maud
+  Archer 1 hits Maud for 6 (hp 8)
+  Archer 1 hp 6, Maud hp 8
+enemy: attack archer-2 maud
+Forecast Archer 2 -> Maud: acc 58% dmg 6 crit 0%; counter: none
+Archer 2 attacks Maud
+  Archer 2 hits Maud for 6 (hp 2)
+  Archer 2 hp 6, Maud hp 2
+enemy: move brigand-3 6,1
+Brigand 3 moves 7,4 -> 6,1 via 7,3 7,2 7,1
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move brigand-4 6,3
+Brigand 4 moves 6,7 -> 6,3 via 6,6 6,5 6,4
+enemy: wait brigand-4
+Brigand 4 waits
+enemy: attack hexer-1 maud
+Forecast Hexer -> Maud: acc 90% dmg 3 crit 0%; counter: none
+Hexer attacks Maud
+  Hexer hits Maud for 3 (hp 0)
+  Hexer hp 9, Maud hp 0
+Maud falls at 3,2
+The Lazar House  turn 5 of 6  enemy phase  survive  recall 1
+   012345678901
+ 0 ^^^b^^^^.^^M
+ 1 ^...f.g..n.M
+ 2 ..#F#e......
+ 3 ..#d#.h..^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           3,0    hp 6/16   Forest  group yard, aggressive  done
+e  archer-2         Archer L1 bowman           5,2    hp 6/16   Plain  group ford, aggressive  done
+g  brigand-3        Brigand L1 reaver          6,1    hp 20/20  Plain  group east, aggressive  done
+h  brigand-4        Brigand L1 reaver          6,3    hp 20/20  Plain  group ford, aggressive  done
+f  hexer-1          Hexer L1 adept             4,1    hp 9/15   Plain  group north, aggressive  done
+d  soldier-1        Soldier L1 pikeman         3,3    hp 18/18  Plain  group east, aggressive
+Battle lost: Maud is dead; only recall is left, or leave
+Lost because Maud fell.
+> leave
+Side map maud_1 is lost: Maud is dead; it opens again after the next map; fell and came back wounded: Maud, Rook
+> quest pell_1 rook
+-- The Burned School --
+The shrine-school at Aldmere burned around Pell when she was fourteen.
+The roof never went back on, and the rain has had eight years at the
+shelves. Now somebody brings torches for what it left. "Whatever's dry
+comes out. The catalogue's chained under the lectern, so I'll know what
+we leave."
+
+(Get Pell off the east edge, 12,3 to 12,5, by the end of turn 7; anyone
+still on the board when she exits is left behind and falls. The map is
+lost if she falls. Three chests hold what the fire missed. The burners
+come in from the west road from turn 1, announced.)
+
+Side map: The Burned School, seed 700
+Pell goes with Rook. This map is lost if Pell falls; who falls here comes back wounded.
+  turn 1, enemy phase: a brigand arrives at 0,4 (aggressive). A unit standing on 0,4 stops it.
+  turn 2, enemy phase: a hexer arrives at 0,3 (aggressive). A unit standing on 0,3 stops it.
+  turn 3, enemy phase: a brigand arrives at 0,6 (aggressive). A unit standing on 0,6 stops it.
+  turn 4, enemy phase: a soldier arrives at 2,8 (aggressive). A unit standing on 2,8 stops it.
+Objective: Get the captain out through an exit by the end of turn 7. Pell must survive.
+The Burned School  turn 1 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..b.
+ 3 ....##.##...>
+ 4 ==...BA..a..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+b  archer-1         Archer L2 bowman           11,2   hp 16/16  Hill  group road, hold
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+A  pell             Pell L4 adept              6,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           5,4    hp 17/17  Plain
+a  shieldbearer-1   Shieldbearer L2 bulwark    9,4    hp 22/22  Plain  group road, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 5 turns to an exit (last start: turn 2), Rook 3 turns to an exit (last start: turn 4)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move pell 7,4
+Pell moves 6,4 -> 7,4
+The Burned School  turn 1 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..b.
+ 3 ....##.##...>
+ 4 ==...B.A.a..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+b  archer-1         Archer L2 bowman           11,2   hp 16/16  Hill  group road, hold
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+A  pell             Pell L4 adept              7,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           5,4    hp 17/17  Plain
+a  shieldbearer-1   Shieldbearer L2 bulwark    9,4    hp 22/22  Plain  group road, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 5 turns to an exit (last start: turn 2), Rook 3 turns to an exit (last start: turn 4)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack pell shieldbearer-1 cinder
+Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 17 crit 3%; counter: none
+Pell equips Cinder
+Pell attacks Shieldbearer
+  Pell hits Shieldbearer for 17 (hp 5)
+  Pell hp 17, Shieldbearer hp 5
+Pell gains 6 exp (84)
+The Burned School  turn 1 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..b.
+ 3 ....##.##...>
+ 4 ==...B.A.a..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+b  archer-1         Archer L2 bowman           11,2   hp 16/16  Hill  group road, hold
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+A  pell             Pell L4 adept              7,4    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           5,4    hp 17/17  Plain
+a  shieldbearer-1   Shieldbearer L2 bulwark    9,4    hp 5/22   Plain  group road, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 5 turns to an exit (last start: turn 2), Rook 3 turns to an exit (last start: turn 4)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move rook 8,4
+Rook moves 5,4 -> 8,4 via 6,4 7,4
+The Burned School  turn 1 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..b.
+ 3 ....##.##...>
+ 4 ==.....ABa..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+b  archer-1         Archer L2 bowman           11,2   hp 16/16  Hill  group road, hold
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+A  pell             Pell L4 adept              7,4    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           8,4    hp 17/17  Plain
+a  shieldbearer-1   Shieldbearer L2 bulwark    9,4    hp 5/22   Plain  group road, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 5 turns to an exit (last start: turn 2), Rook 4 turns to an exit (last start: turn 3)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack rook shieldbearer-1
+Forecast Rook -> Shieldbearer: acc 87% dmg 3 x2 crit 3%; counter: acc 67% dmg 11 crit 0%
+Rook attacks Shieldbearer
+  Rook misses Shieldbearer
+  Shieldbearer misses Rook
+  Rook misses Shieldbearer
+  Rook hp 17, Shieldbearer hp 5
+The Burned School  turn 1 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..b.
+ 3 ....##.##...>
+ 4 ==.....ABa..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+b  archer-1         Archer L2 bowman           11,2   hp 16/16  Hill  group road, hold
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+A  pell             Pell L4 adept              7,4    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           8,4    hp 17/17  Plain  done
+a  shieldbearer-1   Shieldbearer L2 bulwark    9,4    hp 5/22   Plain  group road, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 5 turns to an exit (last start: turn 2), Rook 4 turns to an exit (last start: turn 3)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+Reinforcements arrive
+  Brigand 2 arrives at 0,4 with the burners group, aggressive
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 4,4
+Brigand 2 moves 0,4 -> 4,4 via 1,4 2,4 3,4
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: attack shieldbearer-1 rook
+Forecast Shieldbearer -> Rook: acc 67% dmg 11 crit 0%; counter: acc 87% dmg 3 x2 crit 3%
+Shieldbearer attacks Rook
+  Shieldbearer misses Rook
+  Rook hits Shieldbearer for 3 (hp 2)
+  Rook hits Shieldbearer for 3 (hp 0)
+  Shieldbearer hp 0, Rook hp 17
+Rook gains 35 exp (35)
+Shieldbearer falls at 9,4
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Burned School  turn 2 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..b.
+ 3 ....##.##...>
+ 4 ==..d..AB...>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+b  archer-1         Archer L2 bowman           11,2   hp 16/16  Hill  group road, hold
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          4,4    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L4 adept              7,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           8,4    hp 17/17  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 2 turns to an exit (last start: turn 5), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move rook 11,3
+Rook moves 8,4 -> 11,3 via 9,4 9,3 10,3
+The Burned School  turn 2 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..b.
+ 3 ....##.##..B>
+ 4 ==..d..A....>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+b  archer-1         Archer L2 bowman           11,2   hp 16/16  Hill  group road, hold
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          4,4    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L4 adept              7,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           11,3   hp 17/17  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 2 turns to an exit (last start: turn 5), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack rook archer-1
+Forecast Rook -> Archer: acc 60% dmg 8 crit 2%; counter: none
+Rook attacks Archer
+  Rook misses Archer
+  Rook hp 17, Archer hp 16
+The Burned School  turn 2 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..b.
+ 3 ....##.##..B>
+ 4 ==..d..A....>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+b  archer-1         Archer L2 bowman           11,2   hp 16/16  Hill  group road, hold
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          4,4    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L4 adept              7,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           11,3   hp 17/17  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 2 turns to an exit (last start: turn 5), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move pell 9,2
+Pell moves 7,4 -> 9,2 via 8,4 9,4 9,3
+The Burned School  turn 2 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#A.b.
+ 3 ....##.##..B>
+ 4 ==..d.......>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+b  archer-1         Archer L2 bowman           11,2   hp 16/16  Hill  group road, hold
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          4,4    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L4 adept              9,2    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           11,3   hp 17/17  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack pell archer-1 cinder
+Forecast Pell -> Archer with Cinder: acc 95% dmg 16 crit 2%; counter: acc 82% dmg 7 crit 2%
+Pell attacks Archer
+  Pell hits Archer for 16 (hp 0)
+  Pell hp 17, Archer hp 0
+Pell gains 20 exp (4)
+Pell reaches level 5: lck +1
+Archer falls at 11,2
+The Burned School  turn 2 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#A.n.
+ 3 ....##.##..B>
+ 4 ==..d.......>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          4,4    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L5 adept              9,2    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           11,3   hp 17/17  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Hexer arrives at 0,3 with the burners group, aggressive
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 8,4
+Brigand 2 moves 4,4 -> 8,4 via 5,4 6,4 7,4
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move hexer-1 3,4
+Hexer moves 0,3 -> 3,4 via 1,3 2,3 3,3
+enemy: wait hexer-1
+Hexer waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Burned School  turn 3 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#A.n.
+ 3 ....##.##..B>
+ 4 ==.e....d...>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          8,4    hp 20/20  Plain  group burners, aggressive
+e  hexer-1          Hexer L2 adept             3,4    hp 15/15  Plain  group burners, aggressive
+A  pell             Pell L5 adept              9,2    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           11,3   hp 17/17  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move pell 9,3
+Pell moves 9,2 -> 9,3
+The Burned School  turn 3 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ....##.##A.B>
+ 4 ==.e....d...>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          8,4    hp 20/20  Plain  group burners, aggressive
+e  hexer-1          Hexer L2 adept             3,4    hp 15/15  Plain  group burners, aggressive
+A  pell             Pell L5 adept              9,3    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           11,3   hp 17/17  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack pell brigand-2 cinder
+Forecast Pell -> Brigand 2 with Cinder: acc 99% dmg 17 crit 4%; counter: none
+Pell attacks Brigand 2
+  Pell hits Brigand 2 for 17 (hp 3)
+  Pell hp 17, Brigand 2 hp 3
+Pell gains 4 exp (8)
+The Burned School  turn 3 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ....##.##A.B>
+ 4 ==.e....d...>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          8,4    hp 3/20   Plain  group burners, aggressive
+e  hexer-1          Hexer L2 adept             3,4    hp 15/15  Plain  group burners, aggressive
+A  pell             Pell L5 adept              9,3    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           11,3   hp 17/17  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move rook 9,4
+Rook moves 11,3 -> 9,4 via 10,3 9,3
+The Burned School  turn 3 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ....##.##A..>
+ 4 ==.e....dB..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          8,4    hp 3/20   Plain  group burners, aggressive
+e  hexer-1          Hexer L2 adept             3,4    hp 15/15  Plain  group burners, aggressive
+A  pell             Pell L5 adept              9,3    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           9,4    hp 17/17  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack rook brigand-2
+Forecast Rook -> Brigand 2: acc 80% dmg 9 crit 3%; counter: acc 58% dmg 14 crit 0%
+Rook attacks Brigand 2
+  Rook misses Brigand 2
+  Brigand 2 misses Rook
+  Rook hp 17, Brigand 2 hp 3
+The Burned School  turn 3 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ....##.##A..>
+ 4 ==.e....dB..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          8,4    hp 3/20   Plain  group burners, aggressive
+e  hexer-1          Hexer L2 adept             3,4    hp 15/15  Plain  group burners, aggressive
+A  pell             Pell L5 adept              9,3    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           9,4    hp 17/17  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> end !
+Lethal if all land: Rook (Brigand 2 for 14, Hexer for 8, against 17 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Brigand 3 arrives at 0,6 with the burners group, aggressive
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: attack brigand-2 rook
+Forecast Brigand 2 -> Rook: acc 58% dmg 14 crit 0%; counter: acc 80% dmg 9 crit 3%
+Brigand 2 attacks Rook
+  Brigand 2 misses Rook
+  Rook misses Brigand 2
+  Brigand 2 hp 3, Rook hp 17
+enemy: move brigand-3 0,2
+Brigand 3 moves 0,6 -> 0,2 via 0,5 0,4 0,3
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move hexer-1 7,4
+Hexer moves 3,4 -> 7,4 via 4,4 5,4 6,4
+enemy: attack hexer-1 rook
+Forecast Hexer -> Rook: acc 98% dmg 8 crit 0%; counter: none
+Hexer attacks Rook
+  Hexer hits Rook for 8 (hp 9)
+  Hexer hp 15, Rook hp 9
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Burned School  turn 4 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 fc..#.$.#..n.
+ 3 ....##.##A..>
+ 4 ==.....edB..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+d  brigand-2        Brigand L2 reaver          8,4    hp 3/20   Plain  group burners, aggressive
+f  brigand-3        Brigand L2 reaver          0,2    hp 20/20  Plain  group burners, aggressive
+e  hexer-1          Hexer L2 adept             7,4    hp 15/15  Plain  group burners, aggressive
+A  pell             Pell L5 adept              9,3    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           9,4    hp 9/17   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack rook brigand-2 !
+Forecast Rook -> Brigand 2: acc 80% dmg 9 crit 3%; counter: acc 58% dmg 14 crit 0%
+  Kills if the first strike lands (80)
+  Counter: lethal to Rook only if the first round misses (20 in 100) (14 against 9 hp)
+Rook attacks Brigand 2
+  Rook hits Brigand 2 for 9 (hp 0)
+  Rook hp 9, Brigand 2 hp 0
+Rook gains 35 exp (70)
+Brigand 2 falls at 8,4
+The Burned School  turn 4 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 fc..#.$.#..n.
+ 3 ....##.##A..>
+ 4 ==.....e.B..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          0,2    hp 20/20  Plain  group burners, aggressive
+e  hexer-1          Hexer L2 adept             7,4    hp 15/15  Plain  group burners, aggressive
+A  pell             Pell L5 adept              9,3    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           9,4    hp 9/17   Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move pell 8,4
+Pell moves 9,3 -> 8,4 via 9,4
+The Burned School  turn 4 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 fc..#.$.#..n.
+ 3 ....##.##...>
+ 4 ==.....eAB..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          0,2    hp 20/20  Plain  group burners, aggressive
+e  hexer-1          Hexer L2 adept             7,4    hp 15/15  Plain  group burners, aggressive
+A  pell             Pell L5 adept              8,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           9,4    hp 9/17   Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack pell hexer-1 cinder art overcast
+Forecast Pell -> Hexer with Cinder: acc 99% dmg 17 crit 3%; counter: acc 98% dmg 5 crit 0%
+  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 5 uses, 2 of them hit or miss
+Pell declares Overcast with Cinder, spending 2 extra uses
+Pell attacks Hexer
+  Pell hits Hexer for 17 (hp 0)
+  Pell hp 17, Hexer hp 0
+Pell gains 15 exp (23)
+Hexer falls at 7,4
+The Burned School  turn 4 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 fc..#.$.#..n.
+ 3 ....##.##...>
+ 4 ==......AB..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          0,2    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L5 adept              8,4    hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           9,4    hp 9/17   Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Reinforcements arrive
+  Soldier arrives at 2,8 with the burners group, aggressive
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-3 3,3
+Brigand 3 moves 0,2 -> 3,3 via 1,2 2,2 3,2
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move soldier-1 2,4
+Soldier moves 2,8 -> 2,4 via 2,7 2,6 2,5
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Burned School  turn 5 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ...f##.##...>
+ 4 ==g.....AB..>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          3,3    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L5 adept              8,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           9,4    hp 9/17   Plain
+g  soldier-1        Soldier L2 pikeman         2,4    hp 18/18  Plain  group burners, aggressive
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 6)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move rook 12,5
+Rook moves 9,4 -> 12,5 via 10,4 11,4 12,4
+The Burned School  turn 5 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ...f##.##...>
+ 4 ==g.....A...>
+ 5 ....##.##..^B
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          3,3    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L5 adept              8,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           12,5   hp 9/17   Plain
+g  soldier-1        Soldier L2 pikeman         2,4    hp 18/18  Plain  group burners, aggressive
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook on an exit (leaves by turn 7)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> wait rook
+Rook waits
+The Burned School  turn 5 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ...f##.##...>
+ 4 ==g.....A...>
+ 5 ....##.##..^B
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          3,3    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L5 adept              8,4    hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           12,5   hp 9/17   Plain  done
+g  soldier-1        Soldier L2 pikeman         2,4    hp 18/18  Plain  group burners, aggressive
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell 1 turn to an exit (last start: turn 6), Rook on an exit (leaves by turn 7)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move pell 12,4
+Pell moves 8,4 -> 12,4 via 9,4 10,4 11,4
+The Burned School  turn 5 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ...f##.##...>
+ 4 ==g.........A
+ 5 ....##.##..^B
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          3,3    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L5 adept              12,4   hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           12,5   hp 9/17   Plain  done
+g  soldier-1        Soldier L2 pikeman         2,4    hp 18/18  Plain  group burners, aggressive
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell on an exit (leaves by turn 7), Rook on an exit (leaves by turn 7)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> wait pell
+Pell waits
+The Burned School  turn 5 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ...f##.##...>
+ 4 ==g.........A
+ 5 ....##.##..^B
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          3,3    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L5 adept              12,4   hp 17/17  Plain  captain  done
+B  rook             Rook L1 skyrider           12,5   hp 9/17   Plain  done
+g  soldier-1        Soldier L2 pikeman         2,4    hp 18/18  Plain  group burners, aggressive
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell on an exit (leaves by turn 7), Rook on an exit (leaves by turn 7)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-3 6,4
+Brigand 3 moves 3,3 -> 6,4 via 3,4 4,4 5,4
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move soldier-1 5,4
+Soldier moves 2,4 -> 5,4 via 3,4 4,4
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The Burned School  turn 6 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ....##.##...>
+ 4 ==...gf.....A
+ 5 ....##.##..^B
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          6,4    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L5 adept              12,4   hp 17/17  Plain  captain
+B  rook             Rook L1 skyrider           12,5   hp 9/17   Plain
+g  soldier-1        Soldier L2 pikeman         5,4    hp 18/18  Plain  group burners, aggressive
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell on an exit (leaves by turn 7), Rook on an exit (leaves by turn 7)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> exit rook
+Rook leaves through the exit at 12,5
+The Burned School  turn 6 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ....##.##...>
+ 4 ==...gf.....A
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          6,4    hp 20/20  Plain  group burners, aggressive
+A  pell             Pell L5 adept              12,4   hp 17/17  Plain  captain
+g  soldier-1        Soldier L2 pikeman         5,4    hp 18/18  Plain  group burners, aggressive
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+count: Pell on an exit (leaves by turn 7)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+escaped: rook
+> exit pell
+Pell leaves through the exit at 12,4
+The Burned School  turn 6 of 7  player phase  escape  recall 3
+   0123456789012
+ 0 ^^n.......^^M
+ 1 ^$..#####..^.
+ 2 .c..#.$.#..n.
+ 3 ....##.##...>
+ 4 ==...gf.....>
+ 5 ....##.##..^>
+ 6 .^..#.$.#....
+ 7 .^..#####.^^.
+ 8 ^^.....^^..MM
+
+c  brigand-1        Brigand L2 reaver          1,2    hp 20/20  Plain  group chapel, guard, asleep
+f  brigand-3        Brigand L2 reaver          6,4    hp 20/20  Plain  group burners, aggressive
+g  soldier-1        Soldier L2 pikeman         5,4    hp 18/18  Plain  group burners, aggressive
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 12,3 12,4 12,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+escaped: rook pell
+Battle won: escape; only recall is left, or leave
+> leave
+Pell wins pell_1; the stores take 2 common material; nobody fell
+-- After The Burned School --
+Pell comes out with the catalogue under her arm, the chain still hanging
+off it. On the road she reads it through and marks the margin beside
+every book that stayed behind. That night she starts on the first of
+them from memory.
+
+> show rook
+  Rook: Skyrider L1, EXP 70, Wounded (2); 1: Iron Lance 32/40 (repair 80)
+    Wounded (2): Dex -2, Spd -2 for 2 more main maps
+    HP 17  Str 5 Mag 0 Dex 4 Spd 7 Lck 4 Def 1 Res 4 Cha 2
+    Ranks: lance E (22)
+    Mastery: Bow Sense (7 of 12 combats)
+Campaign stopped before Sallow Grange: the script ended on the screen
