@@ -31,13 +31,13 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **The Tollgate: `tuned`** (0073); the rider spawns on the door step (0072). Opens the beta.
 - **Brackwater Cut at dusk: `tuned`** (0078). Dusk hides what, never where.
-- **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15). Two Harrow wins in a row by baiting the Foreman reopen #1067 (0251), a content lever.
+- **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). Two bait wins in a row reopen #1067 (0251). Massing the crest so the Foreman freezes is a solve (#1087; 39, 72, 68): a cold chair's crest mass with no Foreman swing ships the archer out of Pell's turn-5 reach, Sim first; their brief omits the veto. Neither tripwire advances the other.
 - **Saltmarsh Ford:** not tuned (0093); the spawn lever failed (0095).
 - **Sallow Grange:** the Reeve stays at 15,6 (#275).
-- **The Rookery (Rook 2, 0208):** not passed; cage and #862's ring stay; no lever before a cold chair. A lost Escape keeps its living (#861).
-- **The Counting House (Ottilie 1; 311 to 314, 321):** opening kept, finish the defect. Lever 1 (#925, 0228): archer guards 11,2. Lever 2 (#931, 0231): limit 11; quest cards match their map's limit. Chat cold decides, fresh seed.
-- **The Long Count (Ottilie 2; 313 to 315):** the count on screen (#928, 0229); dusk keeps the exit dark; the archer at 11,4 (#930, 0230).
-- **The raid and the keep:** acceptance is play, not gate 1 (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. Bare keep (Chat cold, 235, 7/7/6): walls and Long Draw bow kept, no lever.
+- **The Rookery (0208):** not passed; cage and #862's ring stay; no lever before a cold chair. A lost Escape keeps its living (#861).
+- **The Counting House (311 to 321):** opening kept. Levers: archer guards 11,2 (#925); limit 11 (#931), quest cards match it. Chat cold decides, fresh seed.
+- **The Long Count (313 to 315):** the count on screen (#928, 0229); dusk keeps the exit dark; archer at 11,4 (#930).
+- **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its one lever is the van a column west. Bare keep (Chat cold, 235): walls and Long Draw kept.
 
 ## Experiments (state and kill criterion)
 
