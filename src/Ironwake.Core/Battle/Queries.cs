@@ -649,6 +649,33 @@ public static class Queries
     }
 
     /// <summary>
+    /// The sleeping groups the noise of <paramref name="unit"/> fighting <paramref name="target"/> from
+    /// <paramref name="from"/> would wake (issue 1106): <see cref="WakeCheck.Run"/> on the board with the
+    /// unit moved there, once with the fight's two tiles as noise at <see cref="Signatures.NoiseRadius"/>
+    /// (the resolver's own tiles and radius) and once without, keeping the groups only the noisy run
+    /// wakes, so what <see cref="StopWakes"/> already names for the stop is not repeated. Each noise
+    /// wake names the fight's tiles that reach a living member at the radius the wind bends on that
+    /// board; a <c>wake_links:</c> call names its caller and no tile. No death is counted. Empty in an
+    /// enemy phase and for an enemy unit. Read-only.
+    /// </summary>
+    public static IReadOnlyList<FightWake> FightWakes(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, Coord from)
+    {
+        if (state.Phase != Side.Player || unit.Side != Side.Player)
+        {
+            return Array.Empty<FightWake>();
+        }
+
+        var board = state.WithUnit(unit with { At = from });
+        var radius = Signatures.NoiseRadius(state, content, unit, target);
+        var noisy = new[] { new Noise(from, radius), new Noise(target.At, radius) };
+        var quiet = WakeCheck.Run(state, board, content, Array.Empty<Noise>(), Array.Empty<string>()).Select(w => w.Group).ToHashSet(StringComparer.Ordinal);
+        return WakeCheck.Run(state, board, content, noisy, Array.Empty<string>())
+            .Where(w => !quiet.Contains(w.Group))
+            .Select(w => new FightWake(w.Group, w.CalledBy, w.Cause == WakeCause.Noise ? ValueList<Coord>.From(WakeCheck.HeardFrom(board, w.Group, noisy)) : ValueList<Coord>.Empty))
+            .ToList();
+    }
+
+    /// <summary>
     /// Whether <paramref name="unit"/> ending its move on <paramref name="from"/> wins the
     /// battle there and then (issue 356): the board with the unit on the tile and nothing else
     /// changed reads <see cref="BattleResult.Won"/>, as the captain on a Seize throne does. No
@@ -709,6 +736,9 @@ public static class Queries
         return (board, moved, arrivals);
     }
 }
+
+/// <summary>A sleeping group a fight would wake (issue 1106): by noise heard from <paramref name="HeardFrom"/>, or called by <paramref name="CalledBy"/> through <c>wake_links:</c>.</summary>
+public sealed record FightWake(string Group, string? CalledBy, ValueList<Coord> HeardFrom);
 
 /// <summary>
 /// One anvil plan <see cref="Queries.Anvils"/> lists (issue 457): <paramref name="Anvil"/> could

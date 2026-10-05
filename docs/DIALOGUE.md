@@ -51,7 +51,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.21 The tide (0111, 176; provisional):** map events flood and drain a ford on announced turns. Kept if a journal shows a ford tile taken, refused or crossed for the schedule; Chat's cold play decides.
 - **13.22 The break (0112, 181 to 183; provisional):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for the break. The board is Saltmarsh Ford (#606).
 - **13.24 The messenger (0135):** a runner fires `messenger` at its edge. Kept if a strike or blocker is spent on it. Chat's cold #680 decides.
-- **13.18 Lines on the board (#486):** one printed fact per line; killed if no play takes a command for it over the best line. **Cadets (0097):** Teodor and Wren's Canto kept. Talk **kept on `saltmarsh_ford_talk.map`** (378, 0258): binds, not yet costs (Chat 5150 held Wren for the pair; the captain's forecast matched); a second band, 9,4 to 12,7, wakes the fort. Tripwire: no campaign journal naming a costly talk-held swing returns it as a quest-1 softening. Next (264, lean): she won't shoot what another struck this phase.
+- **13.18 Lines on the board (#486):** one printed fact per line; killed if no play takes a command for it over the best line. **Cadets (0097):** Teodor and Wren's Canto kept. Talk **kept on `saltmarsh_ford_talk.map`** (378, 0258): binds, not yet costs (Chat 5150 held Wren for the pair; the captain's forecast matched); a second band, 9,4 to 12,7, wakes the fort; `forecast` names it (#1106). Tripwire: no campaign journal naming a costly talk-held swing returns it as a quest-1 softening. Next (264, lean): she won't shoot what another struck this phase.
 - **13.25 Rotten planks (0179):** planks wear to water; killed if no play chooses for it. Chat's cold #783 decides.
 - **13.27 The dash: kept on its sample** (374, 0255). Both chairs 4 free, 2 priced; no borrowed step unless a `tuned` re-read shows a free dash beat the clock. At dusk, winded is a bet.
 - **13.28 The wind: kept on its sample** (375, 0256). Steers, not yet costs; a campaign `wind:` map puts the downwind side on the short road. A fight's noise on `forecast`: #1106.
@@ -115,4 +115,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Round index
 
-1-118 rules; 119-342 story; 343-359 writing; 360-371 (#1033); 372 on (#1063).
+1-118 rules; 119-342 story; 343-359 writing; 360-371 (#1033); 372-378 (#1063); 379 on (#1112).

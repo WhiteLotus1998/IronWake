@@ -2762,6 +2762,7 @@ Forecast Keziah -> Rider from 15,14 (Plain) with Kinsbane: acc 76% dmg 21 crit 2
 Forecast Keziah -> Rider from 16,13 (Plain) with Kinsbane: acc 76% dmg 21 crit 2%; counter: acc 72% dmg 11 crit 0%
   Kills on hit: Keziah +10 HP, to max 25 (Kinsbane feeds, fed 12)
   Kills on hit: Keziah moves again, 4 movement (the hunt runs on, once a map)
+  Fighting here wakes: the camp group (noise, heard from 16,13)
 > move keziah 15,14
 Keziah moves 12,13 -> 15,14 via 13,13 14,13 15,13
 The south group wakes (proximity)

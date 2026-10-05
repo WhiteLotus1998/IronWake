@@ -502,6 +502,7 @@ B  wren             Wren L7 cadet              8,5    hp 23/23  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren wingrider-2
 Forecast Wren -> Wingrider 2: acc 76% dmg 13 crit 4%; counter: acc 54% dmg 7 crit 0%
+  Fighting here wakes: the yard group (noise, heard from 8,5 and 8,4)
 Wren attacks Wingrider 2
   Wren hits Wingrider 2 for 13 (hp 5)
   Wingrider 2 hits Wren for 7 (hp 16)
