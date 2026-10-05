@@ -1,13 +1,13 @@
-# Wren and Pell, support B: fourteen. Beats: docs/beats/support_wren_pell.md (issue 1004). Code's prose.
+# Wren and Pell, support B: fourteen. Beats: docs/beats/support_wren_pell.md (issue 1004). Code's prose; Chat's cold read applied (round 365).
 scene: wren_pell_b
 plays: support wren pell B
 
 b1 narration: Pell has Wren's field book open in her lap and her fair copy beside it. Her pen stops on the east line.
-b2 pell: Cadet. Your fourth figure on the east line reads forty, and there's no nought, only a thumbprint. Fourteen.
-b3 wren: It's forty. I've walked that line on forty since the Grange, and forty makes the eleventh stone the moved one.
-b4 pell: Copied as fourteen, the line turns at the ninth stone. You've drawn the ninth in the ford.
-b5 wren: Cairn to the first, two chains. First to the second, three. Then the rise, the thorn, the ditch, the bank, and the ninth.
+b2 pell: Cadet. Your fourth figure on the east line. There's a stroke before the four, and the nought is a thumbprint. Fourteen.
+b3 wren: It's forty. I've carried it as forty since the Grange, and forty makes the eleventh stone the moved one.
+b4 pell: Copied as fourteen, the line turns at the ninth stone, not the eleventh.
+b5 wren: Cairn to the first, two chains. First to the second, three. Then the rise, the thorn, the ford up to my knees, and the ninth.
 b6 wren: Fourteen.
 b7 pell: Your fifth figure next. You make a one and a seven with the same stroke.
 b8 narration: Wren takes the pencil from behind her ear and lays it in the gutter of the field book.
-b9 narration: Pell writes fourteen over the thumbprint with Wren's pencil, in her own hand. Wren leaves the book where it is, in Pell's lap.
+b9 narration: Pell writes fourteen over the thumbprint with Wren's pencil, in her own hand. Wren reads her the fifth figure, the book still in Pell's lap.
