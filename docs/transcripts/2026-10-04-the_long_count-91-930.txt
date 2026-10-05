@@ -230,6 +230,7 @@ exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its ac
 count: Ottilie 3 turns to an exit (last start: turn 5), Wren 4 turns to an exit (last start: turn 4)
 > attack ottilie soldier-1
 Forecast Ottilie -> Soldier: acc 83% dmg 7 crit 6%; counter: none
+  Fighting here wakes: the gate group (noise, heard from 10,4)
 Ottilie attacks Soldier
   Ottilie hits Soldier for 7 (hp 15)
   Ottilie hp 19, Soldier hp 15

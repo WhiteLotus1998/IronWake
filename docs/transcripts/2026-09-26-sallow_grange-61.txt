@@ -533,6 +533,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell archer-1
 Forecast Pell -> Archer 1 with Cinder: acc 91% dmg 10 crit 2%; counter: acc 86% dmg 8 crit 2%
+  Fighting here wakes: the field group (noise, heard from 4,2)
 Pell attacks Archer 1
   Pell hits Archer 1 for 10 (hp 7)
   Archer 1 misses Pell

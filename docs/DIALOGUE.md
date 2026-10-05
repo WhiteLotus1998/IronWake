@@ -68,7 +68,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Quests (192; 260):** a main member's two are trial-shape side maps, quest 2 larger, paying the signature item; quest 1 after their second map, quest 2 two later, two an interlude; permadeath. Gate: a cold chair 7+ on tension and choice, and the Sim. The slot table follows STORY (Pell after 4 and 6, Wren none). Quest 1 pays a class door where one exists; quest-1 second signatures ship with the first, once 13.18 is kept.
 - **Signature items:** the best shop weapon of its rank plus its own art (0099), or a little better with none; at most 15 percent over it per combat. Bound. **Maud's Psalter (260, 261; built, 0196):** rank D, art **Unasked**: double heal on an ally unmoved and unacted, capped at max HP; ends as a Wait. Heal arm at most 1.15 of the best stocked heal at its rank or below.
 - **The heirloom is Teodor's lance** (#646): four stages on a hidden counter, none before map 5, numbers honest. Quest 1 holds it at sound until won, then wakes at 10. Quest 2 (built, 0205) names it `the First Warden's Lance` and pays **Turn the Key** (269 to 271): woken only, -4 Mt, cost 3; a hit on a survivor locks it while Teodor stays beside it. A lost quest reopens.
-- **13.23 Kinsbane** (#645): Keziah's; an outland god in the scythe. Quest 2, **The Oath Stone** (0224, 0225), a board, no verb: A win records `KeziahOath` (#634). Limit 10, the fort and its cliff kept (0232). **#940 kept** (0239): Chat warm 8/7/7, Code 8/7/6; a cold chair gates. Chat 7781 warm, Teodor, 8/7/6, lost by misplay (379).
+- **13.23 Kinsbane** (#645): Keziah's; an outland god in the scythe. Quest 2, **The Oath Stone** (0224, 0225), a board, no verb: A win records `KeziahOath` (#634). Limit 10, the fort and its cliff kept (0232). **#940 kept** (0239): Chat warm 8/7/7, Code 8/7/6; a cold chair gates. Chat 7781 warm 8/7/6, lost by misplay (379).
 - **Origin** (#681, #648): the captain's card and a first support only.
 - **Magic and faith** (201): Reason shows as Lore. Faith heals, strikes (#113). One goddess, three faiths; she speaks once, to Maud.
 - **The land** (Lotus; 300, 301): the seam is the tundra apex; Kestrow west, Sallow east, Aldmere south, outlands beyond. Only the north's frost holds the Kin; Kinsbane hunts the lean season. Seam: maps 1, 2, 4, 6, 9, 10; Sallow 3, 7, 8; Aldmere 5; Kestrow quests only. Geography never retiles a tuned map. Grounds (#892, #916; 0227): frost on the seam, moss elsewhere, sand for Keziah's outland quests. Region voices, never a tic.
@@ -112,8 +112,8 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Builder race** (#735, 0169): one Builder at a time, earlier claim wins.
 - **Art:** human-made only (Lotus); licences first (#816).
 - **Casting (356 to 362):** `docs/look/CASTING.md`; Lotus picks. No hire has a portrait; Bet's arrives at the Cold Kitchen, P28 (363).
-- **Character style** (Lotus; 0223): Blender; cold key, warm fill, posterized, heavy ink; chroma under 32, one amber.
+- **Character style** (0223): Blender; cold key, warm fill, posterized, heavy ink; chroma under 32, one amber.
 
 ## Round index
 
-1-118 rules; 119-342 story; 343-359 writing; 360-371 (#1033); 372 on (#1063).
+1-118 rules; 119-342 story; 343-359 writing; 360-371 (#1033); 372-378 (#1063); 379 on (#1112).

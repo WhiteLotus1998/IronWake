@@ -5426,6 +5426,7 @@ B  teodor           Teodor L5 pikeman          8,7    hp 9/23   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell sentry-1 2
 Forecast Pell -> Sentry with Gust: acc 100% dmg 14 x2 crit 10%; counter: none
+  Fighting here wakes: the camp group (noise, heard from 13,7 and 15,7)
 Pell equips Gust
 Pell attacks Sentry
   Pell hits Sentry for 14 (hp 13)
