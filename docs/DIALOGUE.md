@@ -114,7 +114,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Engine** (0008): Godot 4 .NET, core engine-free; a renderer reads the protocol (0046).
 - **Builder race** (#735, 0169): one Builder at a time by claim, wait and re-read; the earlier claim wins.
 - **Art:** human-made only (Lotus); packs recoloured to LOOK.md, licences first (#816).
-- **Casting (356 to 359):** the partners' one list is `docs/look/CASTING.md`, its rules there; Lotus picks.
+- **Casting (356 to 362):** one list, `docs/look/CASTING.md`; Lotus picks. Bet's face is open (361, 362).
 - **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Chroma under 32, one amber (0223).
 
 ## Round index

@@ -1,6 +1,6 @@
 # CASTING
 
-The partners' one casting list for Lotus (Design Table #994, rounds 356 to 359). Lotus signs off on the final mapping; nothing is integrated before that. Sheets: `portraits-nichol-contact.png` (index `portraits-nichol-index.txt`) and `bodies-quaternius-preview.png`.
+The partners' one casting list for Lotus (Design Table #994 rounds 356 to 359; #1033 rounds 361 and 362, after Lotus's calls relayed in #1033). Lotus signs off on the final mapping; nothing is integrated before that. Sheets: `portraits-nichol-contact.png` (index `portraits-nichol-index.txt`) and `bodies-quaternius-preview.png`.
 
 ## Rules
 
@@ -8,29 +8,33 @@ The partners' one casting list for Lotus (Design Table #994, rounds 356 to 359).
 - **Licence.** CC BY-SA 3.0: every edit stays BY-SA and carries Nichol's credit, however heavily repainted.
 - **Look.** Every edit takes LOOK.md's cold palette and one amber accent. Portraits are 192 px busts facing right (ART_SPEC); mirror where needed.
 - **Bodies.** Superhero only where the story fits a trained, larger-than-life body: Marrit and Dunstan. Everyone else is To be determined until the Regular and Teen bodies (Quaternius Source) are in hand. Hask and Alder are ordinary on purpose: the captain never shares a silhouette with Hask's champions, and Hask's body says he is dying while the board says he is strongest.
+- **Hires.** Bet must look like any other hire until the Postern (0146). There are seven hires (Barracks: Corin, Bet, Ines, Mattias; Barracks wing: Tamsin, Wat, Edda), four of them women, and the unused pack has two women (P15, P28; P16 is a dog, P21 is ruled out).
+
+## Lotus's calls (#1033)
+
+- **Alder, both genders:** custom portraits. P03 and P04 are freed.
+- **P04 stays in use** for a big, heavy-armour type: the partners propose the Sworn Captain (below).
+- **P28 is not Ottilie.** P21 is not Bet.
+- **Rook:** P10 is a man; Lotus is open to making Rook male. The partners recommend it (below). Lotus decides.
 
 ## The list
 
-| Character | Portrait | Why this face | Edits | Body | Why this body |
-|---|---|---|---|---|---|
-| Alder (m) | P04 | Early twenties, steady, gives orders without speeches | Garrison mail; amber cloak clasp | TBD | The ordinary body in the company; probably Regular |
-| Alder (f) | P03 | Same age, a level look, a hilt over the shoulder | Leather to slate; amber hilt wrap | TBD | As Alder (m) |
-| Maud | P02 | Twenty, young and stubborn at once; the staff reads as the rite | Ears out; Kestrow grey; plain iron staff head | TBD | A rite-keeper, the youngest sent; Regular or Teen |
-| Pell | P09, Real person: needs adjusting | Pale, unsmiling, hooded; corrects you without heat | Ears out; burned page edge at the frame | TBD | A novice reader, nothing trained; Regular, slight |
-| Teodor | P30, Real person: needs adjusting | Young, open, kind before clever; a shaft already over the shoulder | Widen jaw and neck; rusted lance at the frame | TBD | Farm bulk, never drilled; a scaled-up Regular |
-| Ottilie | P28, Real person: needs adjusting | The one half-smile among the women, and she jokes | Age down to twenty-five; shawl to Sallow grey-green; amber ledger ribbon | TBD | A merchant's daughter with a bow; Regular |
-| Keziah | P01 | Stern now, generous a line later | Circlet to an ash-bead cord; hunting leathers; amber on the beads, never the scythe | TBD | The larger-than-life thing in her tile is Kinsbane, not her; Regular |
-| Rook | P10, Real person: needs adjusting | The fur collar is Kestrow; a stare that assumes you are lying | Frost at the collar; drake scale on the strap | TBD | A rider, lean by trade; the drake is the big body; Regular |
-| Wren | P13, Real person: needs adjusting | Caught mid-word and warm: she counts out loud and talks to everyone | Ears out; age down to nineteen (the largest edit on the list); surveyor's chain at the frame | TBD | Nineteen, a cadet; Teen is worth testing |
-| Brannock | P07, Real person: needs adjusting | Broad, bearded, unhurried; hands you bread instead of an answer | Age to thirty; lay-brother's plain collar | TBD | A cook's bulk; a scaled-up Regular |
-| Ansgar | P05 | The hood is the runner, the face half turned away | Age down; courier's satchel strap | TBD | Eighteen, a boy who runs; likely Teen |
-| Bet | P21, Real person: needs adjusting | Fifties, a dry smile, ordinary on purpose | Pikeman's quilted jack; no keep insignia | TBD | Must look like every other hire (0146); Regular |
-| Dunstan | P06 | Plate, a beard, a face that corrects your stance | Age to forty; grey beard; shield rim at the frame | Superhero | A career shield sergeant who held a bridge two days against the sworn: the one ordinary man built to their scale |
-| Hask | P26, Real person: needs adjusting | An old soldier, not a priest: bald, lined, in scale | The wound's pallor; command cloak; the pommel shard if the bust shows the hilt | TBD | Sixties and dying (STORY); broad in heavy plate and cloak. If any portrait is bought new, it is his |
-| Marrit | P19, Real person: needs adjusting | Pale, dark-haired, armoured, halfway to a husk | Piercings out; no amber (sworn); warmer key light on her freed card only | Superhero | His champion and first sworn: what Hask built, the body he cannot have |
+Each entry: who they are, why this face, the edit, the body.
 
-Unused: P08, P11, P12, P14 to P18, P20, P22 to P25, P27, P29. No NPC faces yet; P12 is the Reeve's base if a card ever prints him.
+- **Alder (m, f).** Custom, both. The one face the player looks at every turn.
+- **Maud, P02.** Twenty, the youngest rite-keeper Kestrow ever sent, because the senior was killed on the road. Prays over the enemy dead; mends people who did not ask and calls control duty. *Face:* young and stubborn at once, a set jaw on a girl's face: a twenty-year-old doing an older priest's job. *Edit:* ears out; Kestrow grey; plain iron rite-staff. *Body:* Regular or Teen.
+- **Pell, P09, Real person: needs adjusting.** Twenty-two, a shrine-school novice whose school burned. Enlisted because the undercroft is the one archive nobody has opened. Trusts a page over a person. *Face:* pale, unsmiling, hooded, a life spent indoors. *Edit:* ears out; burned page edge at the frame. *Body:* Regular, slight.
+- **Teodor, P30, Real person: needs adjusting.** Eldest of nine on an Aldmere farm; the levy's pay feeds the other eight; fights with his grandfather's rusted lance. Obeys anyone who sounds like his grandfather. *Face:* the openest face in the pack, kind before clever. *Edit:* widen jaw and neck; rusted lance at the frame. *Body:* scaled-up Regular.
+- **Ottilie, P03.** A Sallow merchant's daughter with a bow, "a long-range accountant". She stays a bowman: the Marksman's extra tile is her door. *Face:* level and amused, leather already on. *Edit:* the hilt over the shoulder repainted as a quiver's fletching at the same angle; Sallow grey-green; amber ledger ribbon. Fictional pack, no structural repaint. *Body:* Regular. (If Lotus wants the sword itself: a short merchant's sword at the hip beside the bow; the partners would rather not.)
+- **Keziah, P01.** An outlander whose family shrine was burned by all three regions; carries Kinsbane, a scythe with a hungry god in it, and the hunger is the only thing that ever wanted her. *Face:* stern, generous a line later, used to being the only outlander in the room. *Edit:* circlet to an ash-bead cord; amber on the beads, never the scythe. *Body:* Regular; the big thing in her tile is the god.
+- **Rook, P10, Real person: needs adjusting. Recommended male.** The church's property, one ledger line below the drake he escorts; kinder to the animal than to people; tests everyone; may ride with Hask at map 9. *Face:* the fur collar is Kestrow's fells; a stare that assumes you are lying. *Edit:* frost at the collar; drake scale on the strap. *Body:* Regular, lean. *Cost of male:* a pronoun sweep (cast.json, about eight campaign.json lines, STORY and the sheets, a few test strings, about forty transcripts by rejournal); the drake stays "she"; Edda keeps a woman in the skyrider class. *If Rook stays a woman:* P15, a weaker fit.
+- **Wren, P13, Real person: needs adjusting.** Nineteen, a surveyor's daughter whose father was hanged for moving stones he never moved. Counts out loud, hard to lie to, sure of herself. *Face:* caught mid-word, warm. *Edit:* ears out; age to nineteen (the largest edit); surveyor's chain at the frame. *Body:* Teen worth testing.
+- **Brannock, P07, Real person: needs adjusting.** Thirty, an Aldmere parish lay-brother and cook whose parish burned while nobody came; wants someone to blame more than he wants to know who. *Is he a badass:* not by training; the portrait as painted sells a sellsword. *Face:* kept, because the stare is a grieving man looking for a fight, which is his flaw. *Edit:* keep the mail (the levy's, worn for the first time); a lay-brother's plain wool collar under it; hair trimmed to a cook's length; no scars, no trophies. Reads dangerous, turns out gentle. *Body:* scaled-up Regular.
+- **Ansgar, P05.** Eighteen, a courier Sallow sold to Hask's companies; ran the night before his swearing and felt the warmth start. Runs, and would like to stop. *Face:* the hood, half turned to the road behind. *Edit:* age down; courier's satchel strap. *Body:* Teen, likely.
+- **Dunstan, P06.** Forty, a Kestrow shield sergeant ordered to hold a bridge while his lords fled; held it two days against the sworn. Holds anything for anyone. *Face:* plate and a beard, a man who corrects your stance first. *Edit:* age to forty; grey beard; shield rim. *Body:* Superhero.
+- **Hask, P26, Real person: needs adjusting.** Sixties, held the border thirty years, raised the captain, swore his disbanded men to a buried god for peace; dying of an old wound. *Face:* an old soldier, bald and lined, in scale. *Edit:* the wound's pallor; command cloak; pommel shard if the hilt shows. *Body:* ordinary, broad in plate and cloak. If a second portrait is bought new, it is his.
+- **Marrit, P19, Real person: needs adjusting.** Alder's sword teacher, told dead; Hask's first sworn and champion, eight years under the oath. *Face:* pale, dark-haired, armoured, warm once and held at one temperature since. *Edit:* piercings out; no amber; warmer key light on the freed card only. *Body:* Superhero.
+- **The Sworn Captain, P04.** Not one man: `sworn_captain` is the template for the officer on five maps (the Field; the Oath Stone, the Old Watch and the Warden's Gate as boss; the Counting House as a guard). So P04 is the face of the rank. Every sworn captain is a boy of the oath's first winter, twenty-four now and never once cold. *Face:* Alder's age, a straight stare with nothing behind it: what Alder could have been. *Edit:* heavy plate, well fed. *Body:* Regular in heavy plate; the armour is what is big.
+- **Bet: one open choice, both views.** A pikeman hire ("twenty years on a town gate"); in truth Ironwake's own gate sergeant, the one the oath did not take, who found the captain on the step; fifties, dry, says none of it. *Chat (361):* P28 now, aged to the fifties in a quilted jack, and every hire gets a pack face with the same edit (P14 Corin, P27 Mattias, a woman for Ines), or none do. *Code (362):* no hire has a face before the Postern, Bet included; at the Postern Bet's card gets P28. The face arrives with the truth. Reason: seven hires with four women cannot be faced from a pack with two spare women.
 
-## Settled between the partners
-
-Round 357 (Code) and 358 (Chat) differed on Hask's portrait and body and on Rook; Chat conceded all three. Round 359 (Code) took Chat's P13 for Wren over "none fits". The list above has no open choice; every pick is Lotus's to change.
+Unused: P08, P11, P12 (the Reeve's base if a card prints him), P14, P16 to P18, P20, P22 to P25, P27, P29; P15 if Rook is male; P21 is ruled out.
