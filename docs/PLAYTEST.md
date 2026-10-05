@@ -2849,3 +2849,19 @@ Notes:
 - **Verdict:** the tuned verdict stands. The win came five turns early because the woken boss approached into an art kill. If the Table prices arts (#1067), this line closes and the crest puzzle is back.
 
 — Code
+
+## 2026-10-05 — Brackwater Cut, a tuned map replayed under 0237, warm — Code
+Seed: 1370 (`play brackwater_cut --seed 1370 --strict --script docs/transcripts/2026-10-05-brackwater_cut-1370.script`; transcript beside it; main at 912987d)   Result: **won on turn 8 of 8, four out of five.** Rook, Pell, Wren and the captain escaped. Dunstan fell. Two of the three Recalls were spent (turns 5 and 7).
+Warm: my tenth Brackwater, and the second under 0237's no-spike rule, after 1310. 1310 sneaked north and lost three; this time I went and got the bank instead of creeping past it.
+Tension: 8/10   Choice: 8/10   Surprise: 7/10
+Best turn: turn 4. On turn 3 Wren stopped on 14,4, four from the shieldbearer, on purpose. The bank woke with its lamps lit and, being Guard turned Aggressive, walked off the exits toward her: the shieldbearer to 14,5, the soldier to 16,3, the brawler into the dark at 13,7. On turn 4 the soldier stood in sight on open plain. Pell's Overcast from 15,2 was 99 for 17 with no counter, and the captain's Feint at 99 for 7 finished it, keeping Full Measure. The exits had nobody on them for the first time in any Brackwater I've played.
+Notes:
+- **Turn 1 was a clean opening.** Rook's 54 for 7 on the fort archer landed, and Pell's Cinder from 10,2 (91 for 10) killed it before it shot anyone. 1310 missed the same 54 twice.
+- **Surprise: the bank turned on the cork.** Dunstan held the gap at 11,3 against the chase, as in 1310. On enemy phase 4 the shieldbearer didn't go for the party. It walked to 12,3 and struck Dunstan from behind, and `count:` said `Dunstan no way to an exit`. The lure I was proud of had boxed my own wall in. Pell's second Overcast (99 for 18) killed the shieldbearer on turn 5 and opened him a road.
+- **At sight 1 the screen goes quiet, and that's the map.** From turn 5 every `threat` was `no enemy in sight can strike` plus a list of `?` tiles with distances. All of it was honest: it told me where, never what. I built a box round Pell on turn 5 (Dunstan 13,3, the captain 15,3, Wren 14,4, Rook 14,2), and the brawler I'd last seen at 12,4 came through the one seat I'd given a flier: 83 for 10 x2 against Rook's 17. That's my mistake. I knew it was the brawler and that Rook has Def 1. The Recall (0238) bought the knowledge: the captain took 14,2 instead, and Rook flew to 19,3 and left on turn 6.
+- **Turn 7 cost the second Recall.** Pell on 19,3 took the brawler's 94 for 9 x2 against 16. Replayed with the knowledge, Pell went to 19,6, five steps from the brawler's 16,3, so it couldn't reach a seat beside her. Wren took 19,5 and spent a dressing to 20, so the brawler's 14 couldn't kill her. The brawler went for the captain instead (one 6 landed, and his counter left it at 2). Then the hexer came out of the dark at 98 for 11. The captain exited on 5 of 22. That was the tensest phase of the play, and there was nothing more to spend on it.
+- **Dunstan was the price.** At 6 HP after the brigand's 9, he ran with the rest on turn 6 and the rider caught him on 17,3. I couldn't find a line that kept the cork and got him out too. `count:` had already said his last start was turn 5.
+- **Not tense:** turn 2, the walk through the gap. That's one turn of soft stretch, where 1310 had two.
+- **Verdict:** the tuned verdict stands, and the play files nothing. Luring the bank is a real second line beside 1310's sneak north, and it cost a body and two Recalls. Neither line is free, so this is a choice, not a solve. It's the second 0237 play running to file nothing (after 1350), but #1066 to #1068 came from today's other plays, so 0237's two-day tripwire is nowhere near.
+
+— Code

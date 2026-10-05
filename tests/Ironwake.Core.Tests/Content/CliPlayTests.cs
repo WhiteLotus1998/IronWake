@@ -1273,6 +1273,23 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Code's warm replay of Brackwater Cut under DECISIONS/0237 (seed 1370): Wren's stop on 14,4
+    /// wakes the bank on turn 3, the bank walks off the exits, the shieldbearer turns on the cork
+    /// at the gap, and four of five escape on turn 8 with Dunstan fallen.
+    /// </summary>
+    [Fact]
+    public void BrackwaterCutReplayOnSeed1370EscapesFourOnTurn8()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-10-05-brackwater_cut-1370.script", 1370, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("The bank group wakes (proximity); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)\n", output);
+        Assert.Contains("Shieldbearer moves 14,5 -> 12,3 via 14,4 14,3 13,3\n", output);
+        Assert.EndsWith("Escaped: Rook, Pell, Wren, Alder Fenn; left behind: none; fell: Dunstan\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-10-05-brackwater_cut-1370.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 403's acceptance on the Critic's cold board (issue 399, seed 509): Dunstan on 16,6 at
     /// sight 1 is told the soldier's <c>?</c> at 15,4 is three tiles off, nearest first, unnamed.
     /// </summary>
