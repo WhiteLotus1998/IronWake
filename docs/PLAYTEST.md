@@ -2833,3 +2833,19 @@ Notes:
 - **Verdict:** the tuned verdict stands, and the play files nothing. The empty turns 4 to 7 are the same mid-map march 936 noted. The drift fills it only once a group wakes, and this time I woke one late on purpose.
 
 — Code
+
+## 2026-10-05 — Harrow Weir, a tuned map replayed under 0237, warm — Code
+Seed: 1360 (`play harrow_weir --seed 1360 --scheme two --strict --script docs/transcripts/2026-10-05-harrow_weir-1360.script`; transcript beside it; main at 4ba6c66)   Result: **won on turn 9 of 15.** Nobody fell. Two Recalls spent, both on turn 6.
+Warm: I've played this board a dozen times, and this is its second replay under 0237, after 1300. It is the fifth tuned board replayed under the rule.
+Tension: 7/10   Choice: 7/10   Surprise: 8/10
+Best turn: turn 8 into 9. The Foreman had walked off his hill to 12,9. `threat teodor` from 10,10 said he would come to 12,10 and swing at Teodor from range 2, where Teodor can't answer. I placed everyone else and re-checked after each move: he still came. He took 10 off Teodor and stood on open plain. Dunstan hit him for 9, Teodor's Long Thrust from his own tile for 7, and the captain's Full Measure for 17 at 100. By the veto's count he was never exposed there. The veto prices plain weapons, so the two arts are invisible to it. That's #1067, for the Table.
+Notes:
+- **I let the rider spawn.** 1300 blocked 7,0 with Teodor. This time I waited for it with Teodor on 5,3 (Horsebane) and Ottilie pulled out of its reach, since a bow can't answer at range 1. It took Teodor's counter, and Pell finished it from range 2.
+- **Turn 6 is where I spent the Recalls, and the second was my error.** Keziah's 72 into the south brigand missed, and his counter left her at 11 against a 12 strike. I recalled and swung Keziah again, expecting a fresh roll. The screen had already told me "the same attack will roll the same". The second Recall bought the plan I should have made the first time: Ottilie, then Dunstan from 9,6, then Teodor's Long Thrust from 8,6 for the kill. Two charges for one lesson. The rule is printed and right, so nothing gets filed for it.
+- **The fight at 9,7 woke the ford and the weir by noise**, and that is what moved the boss. A woken guard boss with no strike in reach approaches (0080), so he came down the east bank. The bridge pocket and the shieldbearer never mattered. The ford was open once the brawler came west and died at 9,8, and the soldier stepped onto the bridge into Dunstan's counter and Pell.
+- **Not tense:** turns 2, 4 and 5 were walks. Turn 5 was spent learning that Pell's Mov 4 can't make 9,6 before turn 7.
+- **The shieldbearer and the archer never acted.** That's the same as 1300's note about the archer.
+- **Filed:** #1066, `1 charges left` after the second Recall, a CLI plural bug in 73 transcripts. #1067, the veto doesn't price arts, a question rather than a bug. My lean is to keep it: baiting the veto is meant to be a skill.
+- **Verdict:** the tuned verdict stands. The win came five turns early because the woken boss approached into an art kill. If the Table prices arts (#1067), this line closes and the crest puzzle is back.
+
+— Code

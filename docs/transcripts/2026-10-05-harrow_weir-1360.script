@@ -1,0 +1,102 @@
+move pell 2,4
+attack pell brigand-1
+move ottilie 3,5
+attack ottilie brigand-1
+move captain 3,4
+attack captain brigand-1
+move teodor 4,5
+wait teodor
+move keziah 3,6
+wait keziah
+move dunstan 2,7
+wait dunstan
+end
+move dunstan 5,6
+wait dunstan
+move captain 5,4
+wait captain
+move teodor 5,3
+wait teodor
+move pell 3,3
+wait pell
+move ottilie 4,4
+wait ottilie
+move keziah 4,6
+wait keziah
+end
+move ottilie 3,6
+wait ottilie
+end
+move pell 3,2
+attack pell rider-1
+move dunstan 6,6
+wait dunstan
+move teodor 6,4
+wait teodor
+move captain 6,5
+wait captain
+move keziah 5,7
+wait keziah
+move ottilie 5,6
+wait ottilie
+end
+move teodor 8,2
+wait teodor
+move pell 7,2
+wait pell
+move captain 7,3
+wait captain
+move ottilie 6,4
+wait ottilie
+end
+move ottilie 7,7
+attack ottilie brigand-3
+move keziah 8,7
+attack keziah brigand-3
+recall 87
+move keziah 8,7
+attack keziah brigand-3
+recall 87
+move ottilie 7,7
+attack ottilie brigand-3
+move dunstan 9,6
+attack dunstan brigand-3
+move teodor 8,6
+attack teodor brigand-3 art long_thrust
+move pell 8,4
+wait pell
+move captain 7,5
+wait captain
+move keziah 6,6
+wait keziah
+end
+move pell 8,7
+attack pell brawler-1
+move teodor 9,7
+attack teodor brawler-1
+move ottilie 5,6
+attack ottilie brigand-2
+move keziah 4,6
+attack keziah brigand-2
+move captain 8,8
+wait captain
+wait dunstan
+end
+move pell 8,6
+attack pell soldier-1
+move teodor 10,10
+wait teodor
+move dunstan 9,9
+wait dunstan
+move ottilie 7,8
+wait ottilie
+move keziah 6,8
+wait keziah
+move captain 9,10
+wait captain
+end
+move dunstan 11,10
+attack dunstan weir_foreman-1
+attack teodor weir_foreman-1 art long_thrust
+move captain 12,11
+attack captain weir_foreman-1 art full_measure
