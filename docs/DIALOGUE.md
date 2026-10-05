@@ -9,7 +9,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: the Drover, cold, once #1100's save (lance C, Grown) lands (373); the route is hand-played side maps in the script, the heuristic on the main line, `--until-certify` deciding (379, agreed). Cold chairs owed, all the Critic's (Chat has played each): the Oath Stone; the Rookery, fresh seed, a countering ally (341); Rook's field as shipped (0250).
 - **Experiments.** At most three spikes wait on a deciding play (330, 0237); with nothing `ready`, the Builder plays a tuned map warm. A header lives only on a sample until a keep round names shipped maps. STATE names each experiment's deciding play. A kill criterion is agreed before it; a new player action names its cost.
 - **A slot number never goes stale silently** (379, #1114): a numbered weapon a swing moved since the pack's last listing is refused, naming both; front stays equipped.
-- **`end` names the lethal** (rounds 158, 159; #558): a line per unit `threat` kills. **It asks** (#1093, 0253); `end !` ends anyway. So does an attack whose counter kills; `attack ... !` swings (336; #975).
+- **`end` names the lethal** (rounds 158, 159; #558): a line per unit `threat` kills. It asks only if Options say so on Recruit or Captain, never on Tactician (0260, #1120). An attack whose counter kills still asks; `attack ... !` swings (336; #975).
 - **The claimant's death is printed first** (372, #1068): any lethal forecast row on the returned claimant opens `<name> falls for good (the claimant)`; one helper, no veto, no ending named.
 - **Rules go on screen, geometry does not** (42, 44); under gate 1's 60, `tuned` only by a DESIGN 11 clause (0100, 0250). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only in his reach is scenery (39, 72).
 
@@ -55,7 +55,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.18 Lines on the board (#486):** one printed fact per line; killed if no play takes a command for it over the best line. **Cadets (0097):** Teodor and Wren's Canto kept. Talk **kept on `saltmarsh_ford_talk.map`** (378, 0258): binds, not yet costs; a second band, 9,4 to 12,7, wakes the fort. No campaign journal naming a costly talk-held swing returns it as a quest-1 softening. Next (264, lean): she won't shoot what another struck this phase.
 - **13.25 Rotten planks (0179):** planks wear to water; killed if no play chooses for it. Chat's cold #783 decides.
 - **13.27 The dash: kept on its sample** (374, 0255). No borrowed step unless a `tuned` re-read shows a free dash beat the clock. At dusk, winded is a bet.
-- **13.28 The wind: kept on its sample** (375, 0256). Steers, not yet costs; a campaign `wind:` map puts the quiet road on the long side. Noise on `forecast`: #1106.
+- **13.28 The wind: samples only, never the campaign** (Lotus, 0260). His beta play keeps or kills it.
 - **13.29 The one answer: kept on its sample** (376, 0257). Decides who enters the enemy phase whole; swarm lever unbuilt; a campaign `one_answer:` map fields a 1-2 answerer at a choke.
 - **13.26 Rockfall (0182):** killed if no drop, or all free. **13.8 Carry (#295):** killed if no carrier moves.
 - **13.20 The keep as a home (0137, 0138, #687):** rooms cost repair budget; beds gate arrivals, a death frees none (0010). Killed if the raid purse buys every room and wall in both plays.
