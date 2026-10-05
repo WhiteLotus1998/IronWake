@@ -5,12 +5,6 @@
   "maps": [
     { "map": "starting_alone", "reward": 300, "enemyLevel": 1,
       "stock": ["iron_sword", "field_dressing"],
-      "before": [
-        "The appointment came with a seal, a coat, and a list. The list is the company: ten names from three regions, owed to Ironwake under the armistice. None of them has arrived. I read it every morning anyway. So far it is the only part of the job I have done.",
-        "The keep is two days east. Someone has followed me since the ford, and the waystation ahead has a fort with its gate still on. A fort keeps the weather off. It does not keep anyone from shooting at it.",
-        "What the crown taught me before it sent me, which was not a lot: read the blow before you swing it. Know who answers back and who cannot. A sword answers a sword. It does not answer a bow.",
-        "(forecast <unit> <target> prints a strike and its counter before you take it. threat <unit> prints who can reach you next phase. recall rewinds to a player turn you name; you have three.)"
-      ],
       "after": [
         "Three dead on a road nobody will remember. I have nobody to add to the list yet, which is its own kind of report.",
         "The waystation keeper says a Kestrow chaplain bound for Ironwake was taken off the mill road two days back. Her name is on my list. East it is, by way of the mill."

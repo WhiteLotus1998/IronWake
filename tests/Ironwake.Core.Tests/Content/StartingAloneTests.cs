@@ -35,8 +35,27 @@ public class StartingAloneTests
         Assert.Equal(WinCondition.Rout, map.Win);
         Assert.Equal(3, map.RecallCharges);
         Assert.Equal(3, map.Placements.Count(p => p.Side == Side.Enemy));
-        Assert.NotEmpty(content.Campaign.Maps[0].Before);
+        Assert.Empty(content.Campaign.Maps[0].Before);
         Assert.NotEmpty(content.Campaign.Maps[0].After);
+    }
+
+    /// <summary>
+    /// Hask's line in the before scene (issue 1005, round 374), "The bowman will keep to the high
+    /// ground and let you come to him", is a prediction the board keeps: the map's one archer is a
+    /// guard on a hill, so it fails here before it can come untrue on the screen.
+    /// </summary>
+    [Fact]
+    public void TheBeforeScenesBowmanLineHoldsOnTheBoard()
+    {
+        var content = MapFixture.Content;
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "starting_alone.map"), content);
+        var scene = content.Scenes.Single(s => s.Id == "starting_alone_before");
+
+        Assert.Equal(ScenePoint.Before, scene.Point);
+        Assert.Contains(scene.Lines, l => l.Speaker == "hask" && l.Text.Contains("The bowman will keep to the high ground", StringComparison.Ordinal));
+        var archer = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.TemplateId == "archer");
+        Assert.Equal(Behavior.Guard, archer.Behavior);
+        Assert.Equal("hill", map.TerrainIdAt(archer.At));
     }
 
     /// <summary>
@@ -78,11 +97,12 @@ public class StartingAloneTests
     }
 
     /// <summary>
-    /// The campaign prints Starting Alone's card before its screen's heading, and its after card
-    /// once the map is won, below the won line; neither is an event, so neither is in the log.
+    /// Starting Alone's before card is replaced by its scene (issue 1005): the campaign opens on the
+    /// screen's heading, prints the scene after <c>march</c> and the map line, rules line last, and
+    /// its after card once the map is won, below the won line; none of it is an event, so none is in the log.
     /// </summary>
     [Fact]
-    public void TheCampaignPrintsTheBeforeCardAheadOfTheScreenAndTheAfterCardBelowTheWonLine()
+    public void TheCampaignPrintsTheBeforeSceneAfterMarchAndTheAfterCardBelowTheWonLine()
     {
         var battle = File.ReadAllText(Transcript("2026-10-01-starting_alone-631.script"));
         var path = Path.Combine(Path.GetTempPath(), "ironwake-alone-" + Guid.NewGuid().ToString("N") + ".script");
@@ -92,14 +112,16 @@ public class StartingAloneTests
         {
             var output = Run(out _, "campaign", "--seed", "631", "--script", path, "--content", Fixture.RealContentDirectory(), "--log", log);
 
-            Assert.StartsWith("Campaign, seed 631, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps\n-- Starting Alone --\nThe appointment came with a seal, a coat, and a list.", output);
-            Assert.Contains("you have three.)\n\n-- Before map 1 of 10: Starting Alone; the purse holds 500 --\n", output);
+            Assert.StartsWith("Campaign, seed 631, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps\n-- Before map 1 of 10: Starting Alone; the purse holds 500 --\n", output);
+            Assert.Contains("Map 1 of 10: Starting Alone, seed 631\n-- Starting Alone --\nIronwake, before sunrise.", output);
+            Assert.Contains("Hask: Don't write, Alder. Bring them home.\n", output);
+            Assert.Contains("rewinds to a player turn you name; you have three.)\n\nObjective:", output);
             Assert.Contains("Starting Alone won: rout; reward 300, the purse holds 800; nobody fell\n-- After Starting Alone --\nThree dead on a road nobody will remember.", output);
             Assert.Contains("is, by way of the mill.\n\n-- The Mill --\nThe mill road follows a stream", output);
             Assert.Contains("\n-- Before map 2 of 10: The Mill; the purse holds 800 --\n", output);
-            var card = output[output.IndexOf("-- Starting Alone --", StringComparison.Ordinal)..output.IndexOf("-- Before map 1", StringComparison.Ordinal)];
-            Assert.All(card.Split('\n'), line => Assert.True(line.Length <= Ironwake.Cli.CampaignSession.CardWidth, line));
-            Assert.DoesNotContain("The appointment", File.ReadAllText(log));
+            var scene = output[output.IndexOf("-- Starting Alone --", StringComparison.Ordinal)..output.IndexOf("Objective:", StringComparison.Ordinal)];
+            Assert.All(scene.Split('\n'), line => Assert.True(line.Length <= Ironwake.Cli.CampaignSession.CardWidth, line));
+            Assert.DoesNotContain("Bring them home", File.ReadAllText(log));
         }
         finally
         {

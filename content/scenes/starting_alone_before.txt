@@ -1,0 +1,22 @@
+# Starting Alone, before the map. Beats: Design Table #994, rounds 344 to 346 (issue 1005). Chat's draft (round 373), both cold reads applied (round 374).
+scene: starting_alone_before
+plays: before starting_alone
+incidental: sergeant = The sergeant
+
+b1 narration: Ironwake, before sunrise. Rime whitens the walls to the hoardings. In the yard Hask has both hands on the girth of Alder's horse.
+b2 hask: He still blows his belly out for the cinch. You were nine the first time he had you off on the road.
+b3 narration: Hask waits for the horse to breathe out and takes the strap up a hole.
+b4 captain: None of them has reported, sir.
+b5 hask: They won't come to a keep. They'll come to whoever walks to their door.
+b6 narration: Alder unfolds the list against the saddle. Ten names in a clerk's hand. The first is struck through, and Alder's thumb stays on it.
+b7 captain: Who struck the first line?
+b8 hask: The clerk copied the armistice roll, and the roll is eight winters stale. Ask at every door twice.
+b9 narration: He hands up a purse. It is lighter than a purse for ten should be, and he does not pretend otherwise.
+b10 hask: Bread and a bed for ten until the thaw. Not a week past it.
+b11 hask: Aldmere will swear it sent its men, and Sallow will swear Aldmere lied. Kestrow won't answer the letter.
+b12 hask: Count them before you draw. The bowman will keep to the high ground and let you come to him.
+b13 captain: I'll write from each door.
+b14 hask: Don't write, Alder. Bring them home.
+b15 sergeant: She sticks at the half in a frost, Warden. Give her a minute.
+b16 narration: Hask puts two fingers under the girth. It is tight. He checks it again anyway, and behind him the gate starts to grind open.
+r1 rules: (forecast <unit> <target> prints a strike and its counter before you take it. threat <unit> prints who can reach you next phase. recall rewinds to a player turn you name; you have three.)

@@ -208,6 +208,7 @@ internal static class Fixture
         campaign.AsObject().Remove("quests");
         campaign.AsObject().Remove("issues");
         File.WriteAllText(campaignPath, campaign.ToJsonString());
+        WithoutScenesOffTheCampaign(target);
         return target;
     }
 
@@ -313,7 +314,8 @@ internal static class Fixture
     /// The Mill's place with nobody arriving (issue 632): a campaign journaled before the story
     /// order opens on Old Mill Road as map 1 with the whole cast, and its battle seeds count from there.
     /// The side maps (issue 635) go too, since no such script was journaled with one on offer, and so
-    /// does the scythe the campaign issues Keziah (issue 804), which no such build issued.
+    /// does the scythe the campaign issues Keziah (issue 804), which no such build issued, and so do
+    /// the scenes on either map (issue 1005).
     /// </summary>
     public static string WithoutStartingAlone(string target)
     {
@@ -335,7 +337,34 @@ internal static class Fixture
         campaign.AsObject().Remove("quests");
         campaign.AsObject().Remove("issues");
         File.WriteAllText(campaignPath, campaign.ToJsonString());
+
+        WithoutScenesOffTheCampaign(target);
         return target;
+    }
+
+    /// <summary>
+    /// Deletes each scene script in the copy at <paramref name="target"/> whose <c>before</c>,
+    /// <c>camp</c> or <c>after</c> point names a map its <c>campaign.json</c> no longer lists, so a
+    /// copy that cuts the campaign's maps still loads (issue 1005).
+    /// </summary>
+    private static void WithoutScenesOffTheCampaign(string target)
+    {
+        var scenes = Path.Combine(target, SceneFormat.Directory);
+        if (!Directory.Exists(scenes))
+        {
+            return;
+        }
+
+        var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(Path.Combine(target, ContentFiles.CampaignName)))!;
+        var maps = campaign["maps"]!.AsArray().Select(m => (string)m!["map"]!).ToHashSet();
+        foreach (var scene in Directory.GetFiles(scenes, "*.txt"))
+        {
+            var plays = (File.ReadLines(scene).FirstOrDefault(l => l.StartsWith("plays:", StringComparison.Ordinal)) ?? "").Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (plays.Length == 3 && plays[1] is "before" or "camp" or "after" && !maps.Contains(plays[2]))
+            {
+                File.Delete(scene);
+            }
+        }
     }
 
     private static readonly Lazy<string> BeforeSecondTier = new(() => WithoutAdvancedForms(CopyRealContent("ironwake-before-second-tier-")));

@@ -49,13 +49,19 @@ public class StoryCardTests
         }
     }
 
+    /// <summary>
+    /// Starting Alone has no before card since its scene replaced it (issue 1005): a new campaign
+    /// opens on no card, and <c>march</c> queues the scene, as the console prints it after the map line.
+    /// </summary>
     [Fact]
-    public void ANewCampaignOpensOnTheFirstMapsBeforeCard()
+    public void ANewCampaignOpensOnNoCardAndMarchQueuesTheFirstMapsBeforeScene()
     {
         var client = Client();
 
+        Assert.Null(client.Card);
+        Script.PlayCampaign(client, "march\n");
         Assert.Equal("-- Starting Alone --", client.Card![0]);
-        Assert.Equal(CampaignSession.BeforeCard(client.Record, Content, client.NextMap!), client.Card);
+        Assert.Contains("Hask: Don't write, Alder. Bring them home.", client.Card);
         client.DismissCard();
         Assert.Null(client.Card);
     }
@@ -78,7 +84,7 @@ public class StoryCardTests
             at = found + text.Length;
         }
 
-        Assert.DoesNotContain("The appointment", log);
+        Assert.DoesNotContain("Bring them home", log);
         Assert.DoesNotContain("-- After Starting Alone --", log);
     }
 
@@ -86,11 +92,10 @@ public class StoryCardTests
     public void ALostMapQueuesTheLostCard()
     {
         var client = Client();
-        client.DismissCard();
         Script.PlayCampaign(client, "march\n" + string.Concat(Enumerable.Repeat("end\n", 12)) + "leave\n");
 
         Assert.True(client.Over);
-        Assert.Equal(CampaignSession.LostCard, client.Card);
+        Assert.Equal(CampaignSession.LostCard, Drain(client)[^1]);
     }
 
     [Fact]
