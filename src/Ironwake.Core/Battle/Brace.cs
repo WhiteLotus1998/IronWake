@@ -18,7 +18,7 @@ public static class Brace
 
     /// <summary>
     /// Whether <paramref name="unit"/> braces when it waits now: on a <c>brace: on</c> map, or on
-    /// any map for a unit holding Hold the Gate (issue 691, <see cref="BraceEffect"/>), only
+    /// any map for a unit holding Banked (issue 691, <see cref="BraceEffect"/>), only
     /// on the tile it began its phase on (it has neither moved nor been shoved), and never a
     /// Guard whose group still sleeps, since a sleeper caught off guard is the ambush the wake
     /// rule promises. A unit a drake set down on a <c>carry: brace</c> map braces on any map (issue 805).

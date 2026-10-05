@@ -10,17 +10,17 @@ namespace Ironwake.Core.Tests.Campaign;
 /// <summary>
 /// The hire who is not what the menu says (issue 691, amended by issue 706): Bet Lowry's request
 /// opens at the first camp after map 8 at which she stands in the company, never before and never
-/// without her. The Postern takes her and three allies; a win makes her a Sergeant, a hidden class
+/// without her. The Cold Kitchen takes her and three allies; a win makes her a Sergeant, a hidden class
 /// whose mastery, Unsworn (+10 Acc and +10 Crit against the oath-bound), she holds at once, and
-/// whose Hold the Gate braces her on a Wait in place on any map. Alive at the end, her ending line
+/// whose Banked braces her on a Wait in place on any map. Alive at the end, her ending line
 /// is her own.
 /// </summary>
-public class PosternTests
+public class ColdKitchenTests
 {
     private static readonly GameContent Content = MapFixture.Content;
 
-    private static MapDefinition Postern() =>
-        MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_postern" + MapFiles.Extension), Content);
+    private static MapDefinition ColdKitchen() =>
+        MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_cold_kitchen" + MapFiles.Extension), Content);
 
     /// <summary>
     /// A record before map <paramref name="mapId"/> with Bet hired from the barracks and the member
@@ -39,10 +39,10 @@ public class PosternTests
 
     private static readonly string[] Allies = { "wren", "teodor", "maud" };
 
-    /// <summary>The Postern's opening with the enemies gone and Bet on the seat, decided as a win.</summary>
+    /// <summary>The Cold Kitchen's opening with the enemies gone and Bet on the seat, decided as a win.</summary>
     private static BattleState Won(CampaignRecord record)
     {
-        var opening = record.BeginQuest(Postern(), "bet_postern", Allies, Content);
+        var opening = record.BeginQuest(ColdKitchen(), "bet_kitchen", Allies, Content);
         var units = opening.UnitsOf(Side.Player).Select(u => u.Id == "bet" ? u with { At = new Coord(8, 3) } : u);
         var won = opening with { Units = ValueList<BattleUnit>.From(units), History = ValueList<BattleState>.Of(opening) };
         Assert.Equal(BattleResult.Won, won.Outcome.Result);
@@ -52,9 +52,9 @@ public class PosternTests
     [Fact]
     public void BetsRequestIsNotOfferedBeforeTheCampAfterMapEight()
     {
-        Assert.DoesNotContain(WithBet("brackwater_cut").QuestsOffered(Content), q => q.Id == "bet_postern");
-        Assert.Contains(WithBet("ironwake_keep").QuestsOffered(Content), q => q.Id == "bet_postern");
-        Assert.Equal("side map bet_postern is not open before this map", WithBet("brackwater_cut").QuestRefusal("bet_postern", Allies, Content));
+        Assert.DoesNotContain(WithBet("brackwater_cut").QuestsOffered(Content), q => q.Id == "bet_kitchen");
+        Assert.Contains(WithBet("ironwake_keep").QuestsOffered(Content), q => q.Id == "bet_kitchen");
+        Assert.Equal("side map bet_kitchen is not open before this map", WithBet("brackwater_cut").QuestRefusal("bet_kitchen", Allies, Content));
     }
 
     [Fact]
@@ -62,43 +62,43 @@ public class PosternTests
     {
         var without = CampaignRecord.StartAt(Content, 691, "ironwake_keep");
 
-        Assert.DoesNotContain(without.QuestsOffered(Content), q => q.Id == "bet_postern");
-        Assert.DoesNotContain(Content.Campaign.Quests.Where(q => q.Id != "bet_postern"), q => q.MemberId == "bet");
+        Assert.DoesNotContain(without.QuestsOffered(Content), q => q.Id == "bet_kitchen");
+        Assert.DoesNotContain(Content.Campaign.Quests.Where(q => q.Id != "bet_kitchen"), q => q.MemberId == "bet");
     }
 
     [Fact]
     public void BetsRequestDoesNotFireTwice()
     {
-        var after = WithBet("ironwake_keep").AfterQuest(Won(WithBet("ironwake_keep")), "bet_postern", Content);
+        var after = WithBet("ironwake_keep").AfterQuest(Won(WithBet("ironwake_keep")), "bet_kitchen", Content);
 
         Assert.True(after.Accepted, after.Text);
-        Assert.DoesNotContain(after.Record.QuestsOffered(Content), q => q.Id == "bet_postern");
-        Assert.Equal("side map bet_postern is won already", after.Record.QuestRefusal("bet_postern", Allies, Content));
+        Assert.DoesNotContain(after.Record.QuestsOffered(Content), q => q.Id == "bet_kitchen");
+        Assert.Equal("side map bet_kitchen is won already", after.Record.QuestRefusal("bet_kitchen", Allies, Content));
     }
 
     [Fact]
-    public void ThePosternTakesBetAndThreeAlliesEachOnce()
+    public void TheColdKitchenTakesBetAndThreeAlliesEachOnce()
     {
-        var map = Postern();
+        var map = ColdKitchen();
         var record = WithBet("ironwake_keep");
 
         Assert.Equal(3, CampaignRecord.QuestAllies(map));
         Assert.Equal(4, map.Deploy);
-        Assert.Equal("The Postern takes 3 allies, not 1", CampaignRecord.QuestAlliesRefusal(map, new[] { "wren" }));
+        Assert.Equal("The Cold Kitchen takes 3 allies, not 1", CampaignRecord.QuestAlliesRefusal(map, new[] { "wren" }));
         Assert.Null(CampaignRecord.QuestAlliesRefusal(map, Allies));
-        Assert.Equal("wren is named twice; pick each ally once", record.QuestRefusal("bet_postern", new[] { "wren", "wren", "maud" }, Content));
-        Assert.Equal("captain is the captain and stays with the company; pick another ally", record.QuestRefusal("bet_postern", new[] { "captain", "wren", "maud" }, Content));
-        Assert.Null(record.QuestRefusal("bet_postern", Allies, Content));
+        Assert.Equal("wren is named twice; pick each ally once", record.QuestRefusal("bet_kitchen", new[] { "wren", "wren", "maud" }, Content));
+        Assert.Equal("captain is the captain and stays with the company; pick another ally", record.QuestRefusal("bet_kitchen", new[] { "captain", "wren", "maud" }, Content));
+        Assert.Null(record.QuestRefusal("bet_kitchen", Allies, Content));
 
-        var opening = record.BeginQuest(map, "bet_postern", Allies, Content);
+        var opening = record.BeginQuest(map, "bet_kitchen", Allies, Content);
         Assert.Equal(new[] { "bet", "maud", "teodor", "wren" }, opening.UnitsOf(Side.Player).Select(u => u.Id).Order(StringComparer.Ordinal));
         Assert.Equal(new Coord(0, 3), opening.Find("bet")!.At);
     }
 
     [Fact]
-    public void ThePosternsEnemiesAreAllOathBound()
+    public void TheColdKitchensEnemiesAreAllOathBound()
     {
-        var opening = WithBet("ironwake_keep").BeginQuest(Postern(), "bet_postern", Allies, Content);
+        var opening = WithBet("ironwake_keep").BeginQuest(ColdKitchen(), "bet_kitchen", Allies, Content);
 
         Assert.All(opening.UnitsOf(Side.Enemy), e => Assert.True(opening.Map.IsOathbound(e), e.Id));
         Assert.All(opening.UnitsOf(Side.Player), p => Assert.False(opening.Map.IsOathbound(p), p.Id));
@@ -106,29 +106,29 @@ public class PosternTests
     }
 
     [Fact]
-    public void AWonPosternMakesBetASergeantWithUnswornMastered()
+    public void AWonColdKitchenMakesBetASergeantWithUnswornMastered()
     {
         var record = WithBet("ironwake_keep");
-        var after = record.AfterQuest(Won(record), "bet_postern", Content);
+        var after = record.AfterQuest(Won(record), "bet_kitchen", Content);
         var bet = after.Record.Find("bet")!;
 
-        Assert.Equal("bet wins bet_postern; bet becomes a Sergeant; nobody fell", after.Text);
+        Assert.Equal("bet wins bet_kitchen; bet becomes a Sergeant; nobody fell", after.Text);
         Assert.Equal("sergeant", bet.ClassId);
         Assert.Contains("unsworn", bet.Abilities);
         Assert.Equal(Content.Class("sergeant").MasteryPoints, bet.Mastery.Points("sergeant"));
-        Assert.Contains(Content.AbilitiesOf(bet), a => a.Id == "hold_the_gate");
+        Assert.Contains(Content.AbilitiesOf(bet), a => a.Id == "banked");
         Assert.Equal(record.Find("bet")!.Level, bet.Level);
         Assert.Equal("pikeman", record.Find("bet")!.ClassId);
     }
 
     [Fact]
-    public void ALostPosternLeavesBetAPikeman()
+    public void ALostColdKitchenLeavesBetAPikeman()
     {
         var record = WithBet("ironwake_keep");
-        var opening = record.BeginQuest(Postern(), "bet_postern", Allies, Content);
+        var opening = record.BeginQuest(ColdKitchen(), "bet_kitchen", Allies, Content);
         var lost = opening with { Turn = opening.Map.TurnLimit + 1, History = ValueList<BattleState>.Of(opening) };
 
-        var after = record.AfterQuest(lost, "bet_postern", Content);
+        var after = record.AfterQuest(lost, "bet_kitchen", Content);
 
         Assert.Equal(BattleResult.Lost, lost.Outcome.Result);
         Assert.Equal("pikeman", after.Record.Find("bet")!.ClassId);
@@ -139,7 +139,7 @@ public class PosternTests
     {
         var sergeant = Content.Class("sergeant");
         var record = WithBet("ironwake_keep");
-        var promoted = record.AfterQuest(Won(record), "bet_postern", Content).Record with { Purse = 5000 };
+        var promoted = record.AfterQuest(Won(record), "bet_kitchen", Content).Record with { Purse = 5000 };
 
         Assert.True(sergeant.Hidden);
         Assert.Equal(new[] { WeaponType.Lance, WeaponType.Sword }, sergeant.Weapons);
@@ -223,13 +223,37 @@ public class PosternTests
     }
 
     [Fact]
-    public void BetsEndingLineIsHerOwnOnceThePosternIsWon()
+    public void BetsEndingLineIsHerOwnOnceTheColdKitchenIsWon()
     {
         var record = WithBet("ironwake_keep");
-        var promoted = record.AfterQuest(Won(record), "bet_postern", Content).Record;
+        var promoted = record.AfterQuest(Won(record), "bet_kitchen", Content).Record;
 
         Assert.Equal(new[] { "Bet Lowry served at the keep." }, CampaignSession.EndingLines(record, Content));
         Assert.Equal(new[] { "Bet Lowry swore first, the one the oath could not hold, choosing it." }, CampaignSession.EndingLines(promoted, Content));
+    }
+
+    /// <summary>
+    /// Bet was the garrison's cook, not its gate sergeant (issue 1042, Lotus's draft 6 notes): nothing
+    /// her request prints, her menu line, her map's title, its keeper or her Sergeant's brace, names a
+    /// gate or a postern.
+    /// </summary>
+    [Fact]
+    public void NothingBetsRequestPrintsNamesAGate()
+    {
+        var quest = Content.Campaign.Quest("bet_kitchen")!;
+        var printed = new List<string>(quest.Before)
+        {
+            Content.Campaign.Keep.Hire("bet")!.Line,
+            ColdKitchen().Name,
+            Content.Units["bakehouse_keeper"].Name,
+            Content.Abilities["banked"].Name,
+            Content.Abilities["banked"].Text,
+        };
+
+        Assert.Equal("Cooked for a garrison twenty years. Still counts heads at supper.", Content.Campaign.Keep.Hire("bet")!.Line);
+        Assert.Equal("The Cold Kitchen", ColdKitchen().Name);
+        Assert.All(printed, line => Assert.DoesNotContain("gate", line, StringComparison.OrdinalIgnoreCase));
+        Assert.All(printed, line => Assert.DoesNotContain("postern", line, StringComparison.OrdinalIgnoreCase));
     }
 
     [Fact]
@@ -243,21 +267,21 @@ public class PosternTests
     }
 
     [Fact]
-    public void NoListingNamesTheSergeantBeforeThePosternIsWon()
+    public void NoListingNamesTheSergeantBeforeTheColdKitchenIsWon()
     {
         var record = WithBet("ironwake_keep");
         var map = MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), MapFiles.KeepDirectory, "ironwake_keep" + MapFiles.Extension), Content);
         var camp = string.Join("\n", CampaignSession.CampLines(Fixture.RealContentDirectory(), Content, record, map));
 
         Assert.DoesNotContain("Sergeant", camp, StringComparison.Ordinal);
-        Assert.DoesNotContain("Sergeant", string.Join("\n", Content.Campaign.Quest("bet_postern")!.Before), StringComparison.Ordinal);
-        Assert.Contains("bet_postern: Bet Lowry's request, The Postern (quest bet_postern <ally> <ally> <ally>)", camp, StringComparison.Ordinal);
+        Assert.DoesNotContain("Sergeant", string.Join("\n", Content.Campaign.Quest("bet_kitchen")!.Before), StringComparison.Ordinal);
+        Assert.Contains("bet_kitchen: Bet Lowry's request, The Cold Kitchen (quest bet_kitchen <ally> <ally> <ally>)", camp, StringComparison.Ordinal);
     }
 
     [Fact]
-    public void ThePosternIsCanonical()
+    public void TheColdKitchenIsCanonical()
     {
-        var path = Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_postern.map");
+        var path = Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_cold_kitchen.map");
         var text = File.ReadAllText(path).ReplaceLineEndings("\n");
 
         Assert.Equal(text, MapFormat.Write(MapFormat.Parse(path, text, Content), Content));
@@ -291,14 +315,14 @@ public class PosternTests
     [Fact]
     public void TheLoaderHoldsAHiresQuestToItsShape()
     {
-        Assert.Equal(("bet_postern", "member"), Fails(q => q.Remove("opensAfter")));
-        Assert.Equal(("bet_postern", "opensAfter"), Fails(q => q["opensAfter"] = "nowhere"));
-        Assert.Equal(("bet_postern", "promotes"), Fails(q => q["promotes"] = "pikeman"));
+        Assert.Equal(("bet_kitchen", "member"), Fails(q => q.Remove("opensAfter")));
+        Assert.Equal(("bet_kitchen", "opensAfter"), Fails(q => q["opensAfter"] = "nowhere"));
+        Assert.Equal(("bet_kitchen", "promotes"), Fails(q => q["promotes"] = "pikeman"));
         Assert.Equal(("maud_1", "ending"), Fails(q => q["ending"] = "Maud stayed.", "maud_1"));
     }
 
     /// <summary>The loader's entry and field for the real campaign with one quest edited.</summary>
-    private static (string?, string?) Fails(Action<JsonObject> edit, string questId = "bet_postern")
+    private static (string?, string?) Fails(Action<JsonObject> edit, string questId = "bet_kitchen")
     {
         var files = ContentSerializer.Write(Content);
         var campaign = JsonNode.Parse(files.Campaign!.Text)!;

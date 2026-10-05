@@ -207,7 +207,7 @@ public class BarracksTests
         var lines = CampaignSession.RoomLines(WithBarracks(), Content);
         Assert.Contains("Hires: 300 each, joining at L1, the company's average less 2; hire <id>", lines);
         Assert.Contains(lines, l => l.StartsWith("  corin: Corin Ashby (he), Cadet L1, Iron Sword; hp ", StringComparison.Ordinal) && l.Contains("; growths hp "));
-        Assert.Contains("    Twenty years on a town gate. Has opinions about gates.", lines);
+        Assert.Contains("    Cooked for a garrison twenty years. Still counts heads at supper.", lines);
         Assert.DoesNotContain(lines, l => l.StartsWith("  tamsin", StringComparison.Ordinal));
         var bet = Barracks.Recruit(Menu.Hire("bet")!, 1, Content).EffectiveStats(Content.Class("pikeman"));
         Assert.Contains(lines, l => l.StartsWith($"  bet: Bet Lowry (she), Pikeman L1, Iron Lance; hp {bet.Hp} str {bet.Str} ", StringComparison.Ordinal));

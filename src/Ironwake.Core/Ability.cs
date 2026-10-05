@@ -176,7 +176,7 @@ public sealed record CantoEffect : AbilityEffect
 }
 
 /// <summary>
-/// Hold the Gate (issue 691): the holder braces on a Wait in place on every map, as a
+/// Banked (issue 691, renamed by issue 1042): the holder braces on a Wait in place on every map, as a
 /// <c>brace: on</c> map lets every unit do (<see cref="Brace"/>). The effect has no numbers;
 /// the brace's own are the rule's.
 /// </summary>

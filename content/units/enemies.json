@@ -147,8 +147,8 @@
       "inventory": [ { "item": "steel_lance" }, { "item": "toll_spear" } ]
     },
     {
-      "id": "postern_keeper",
-      "name": "Postern Keeper",
+      "id": "bakehouse_keeper",
+      "name": "Bakehouse Keeper",
       "class": "pikeman",
       "level": 3,
       "stats": { "hp": 24, "str": 7, "mag": 0, "dex": 6, "spd": 5, "lck": 3, "def": 5, "res": 2, "cha": 4 },
