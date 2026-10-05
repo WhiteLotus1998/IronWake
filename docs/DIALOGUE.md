@@ -6,10 +6,10 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **Fun Gate entries.** Each partner writes before reading the other's; Code's lands first. A warm chair counts if disclosed (0073). Tricks stay unnamed until both are in. On a save each chair takes its own seed; one pinned seed is one read, and so is a roll retried after a Recall (0238, #963; 334). A board a branch pick changes is gated per arm, gate 1 too; the file's number is the arm it seats (334, 364).
 - **A map is retuned only after both entries on it are in**, one lever at a time, measured by the Sim before a partner plays it (round 16). Levers are content first.
-- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: the Starting Alone and Mill drafts (#1005), #805's cold plays, #931, Wren's talk, a Drover map (293), the dash, the wind, the one answer. Cold chairs owed: the Oath Stone; the Rookery, fresh seed, an ally who counters (341).
+- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue: Starting Alone and Mill drafts (#1005), #805's cold plays, #931, Wren's talk, a Drover map (293), the dash, the wind, the one answer. Cold chairs owed: the Oath Stone; the Rookery, fresh seed, an ally who counters (341); the field on Rook's pick as shipped, the Critic (0250).
 - **Experiments.** At most three spikes wait on a deciding play (330, 0237). With nothing `ready`, the Builder plays a tuned map warm instead. A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play; one adding a player action names its cost.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP, then the phase ends anyway. An attack whose counter kills the attacker asks; `attack ... !` swings (336; #975).
-- **Rules go on screen, geometry does not** (42, 44); under gate 1's 60, `tuned` only by stall clause (0100). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only in his reach is scenery (39, 72).
+- **Rules go on screen, geometry does not** (42, 44); under gate 1's 60, `tuned` only by a DESIGN 11 clause (0100, 0250). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only in his reach is scenery (39, 72).
 
 ## Rules, settled (details in DESIGN and the records)
 
@@ -19,7 +19,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; options range over every weapon carried, the counter is what it last swung (#174); prefers a target that cannot counter. A `defeat_boss` boss plans under the exposure veto; a refused guard boss goes home (0077 to 0080); a throne-holder steps off only to strike (0063).
 - **The Sim's veto** covers every unit whose death loses the map, no-crit worst case, a certain kill removed (0024 to 0026). Recruits take no veto; one on a lethal approach tile takes the captain's key: gate 1 is a crude player, never a blind one (368, #1054). Gate 4 is relative ablation, cast verdict (0019, 0020); on Escape it pairs units out (0068).
 - **`threat`** prices the coming enemy phase with the planner's choices (DESIGN 8): one enemy per strike tile, announced spawns (0045), sleepers unnumbered, at dusk only what the player sees (#403), `from <tile>` names what a stop would wake (#458).
-- **Escape:** `exit` is an action; the captain's wins, the rest fall (0056, 0074).
+- **Escape:** `exit` is an action; the captain's wins, the rest fall (0056).
 - **Recall** restores the rolls, buying knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
 - **Content:** a Lore or Faith member ships an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed; a sleeper in the open can be slipped past, in a corridor only woken.
@@ -30,7 +30,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **The Tollgate: `tuned`** (0073); the rider spawns on the door step (0072). Opens the beta.
 - **Brackwater Cut at dusk: `tuned`** (0078). Dusk hides what, never where.
-- **The showcase (#509, 0092):** done; animation never hides state (#611).
+- **The showcase (0092):** done; animation never hides state (#611).
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15).
 - **Saltmarsh Ford:** not tuned; north cut 7/7/6, 7/7/5 (0093); the spawn lever failed (0095).
 - **Sallow Grange:** the Reeve stays at 15,6; a quiet route is quiet on the enemy phase too (#275).
@@ -46,25 +46,25 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.4 Grudges (0065, 0066):** a veto, -20 crit avoid on the sworn unit; killed if Chat's seed 23 replay (#331) changes no decision.
 - **13.5 The keep, 13.6 trials: kept provisionally** (0059, 0060, 0057); Chat's camp play and cold Outrider trial (#73) decide.
 - **13.7 Dusk: kept** on Escape; Brackwater ships at `dusk: 5` (0062), Sallow stays in daylight. Sight and hearing `?`, never stacked; an enemy hears within 4, printed (#765).
-- **13.10 Retreat (0037, #215):** a refugee holds its refuge as Hold until 50 percent; the forecast prints it. Killed if Chat's cold `river_refuge_hold.map` changes no turn.
-- **Kept:** 13.11 (0061); samples 13.12, 13.13 (0069, 0082).
+- **13.10 Retreat (0037, #215):** a refugee holds as Hold until 50 percent, printed. Killed if Chat's cold `river_refuge_hold.map` changes no turn.
+- **Kept:** 13.11, 13.12, 13.13 (0061, 0069, 0082).
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
-- **13.15 Wildfire: kept on its samples** (0085, 0110). Killed: 13.16, 13.17, 13.19 (0094, 0098, 0099).
+- **13.15 Wildfire: kept on samples** (0085, 0110). Killed: 13.16, 13.17, 13.19.
 - **13.21 The tide (0111, round 176; provisional):** content only, map events flood and drain a ford on announced turns. Kept if a journal shows a ford tile taken, refused or crossed for the schedule; Chat's cold play decides.
 - **13.22 The break (0112, rounds 181 to 183; provisional; DESIGN 13.22):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for the break. The board is Saltmarsh Ford (#606).
 - **13.24 The messenger (0135):** a runner fires `messenger` at its edge. Kept if a strike or blocker is spent on it. Chat's cold #680 decides.
 - **13.18 Lines on the board (#486):** one printed fact per line; killed if no play takes a command for it over the best line. **Cadets (0097):** Teodor and Wren's Canto kept; Wren's talk unread. The ledger is killed (0197). Next (264, lean): she won't shoot what another struck this phase.
-- **13.25 Rotten planks (0179):** planks wear to water. Killed if no play chooses for the wear; Chat's cold #783 decides.
+- **13.25 Rotten planks (0179):** planks wear to water; killed if no play chooses for it. Chat's cold #783 decides.
 - **13.27 The dash (#950, 0234; provisional):** Move +2 as the whole turn, winded (+15 against). Killed if no dash over a Move; more free than priced in both journals: the borrowed step. Code warm 8/7/6.
 - **13.28 The wind (#955, #957, 0235; provisional):** downwind wake radius +2, upwind -2; the board names who the coming turn wakes; never with `dusk:`. Killed if no play takes a stop, route or timing for it.
 - **13.29 The one answer (#960, 0236; provisional):** a unit that counters makes no other until the next phase. More free strikes than priced in both journals kills it. Swarm lever, unbuilt: a braced unit answers every strike.
-- **13.26 Rockfall (0182):** `drop` strikes 10; killed if nobody drops or every drop is free. **13.8 Carry (#295):** killed if no play moves a carrier.
+- **13.26 Rockfall (0182):** `drop` strikes 10; killed if nobody drops or every drop is free. **13.8 Carry (#295):** killed if no carrier moves.
 - **13.20 The keep as a home (0137, 0138, #687):** rooms cost repair budget; beds gate arrivals, a death frees none (0010). Killed if the raid purse buys every room and wall in both plays.
 
 ## The campaign's story (186 to 211; 0121; DESIGN 14)
 
 - **A levy company**, one arrival per map to the captain plus five (Maud, Pell, Teodor, Ottilie, the pick; 213); `cadet` shows as Levy. Captain male or female (#648). Map 1, Starting Alone, is Fun Gate exempt.
-- **The branch** (#633): Keziah against Rook; the passed one returns on map 9 (0010). **`talk` kept** (0193): cost a camp trade, a bait, a flier's turn (#844). #81's drift kept (0226). **The field is `tuned` on Keziah's pick** (0233). Rook's (0246, 364): Fun Gate met, gate 1 owed (86 of 120). Seats 86, 99 (`seen_far` off), 91 (empty): one cluster (369); the header costs timeouts, never levered; the Sim parks her; no `cast.json` without a hand play. South wake t3: 89, not shipped (0249); next: round 370. The Sim's route split is no evidence; 0233 stands on hand plays.
+- **The branch** (#633): Keziah against Rook; the passed one returns on map 9 (0010). **`talk` kept** (0193): cost a camp trade, a bait, a flier's turn (#844). #81's drift kept (0226). **The field is `tuned`** on Keziah's pick (0233) and on Rook's (0246, 0250; 364 to 371), hers on hand plays, gate 1 86 (DESIGN 11's pick-keyed clause, hers alone). Seats 86, 99, 91 one cluster; the Sim parks her; `cast.json` shut without a hand play. Tripwire: a cold loss or all Recalls gone by turn 3 reopens it for a turn 2 to 3 lever; a cold play of the shipped arm is owed. Declined: turn 2 to 9 levers, a recruit strike veto, the south wake (0249). The Sim's route split is no evidence; 0233 stands on hand plays.
 - **The pool is the ten we have;** four side characters (213) met by choice, one a map at most.
 - **Quests (192; 260):** a main member's two are trial-shape side maps, quest 2 larger, paying the signature item; quest 1 after their second map, quest 2 two later, two an interlude; permadeath. Gate: a cold chair 7+ on tension and choice, and the Sim. The slot table follows STORY (Pell after 4 and 6, Wren none). Quest 1 pays a class door where one exists; quest-1 second signatures ship with the first, once 13.18 is kept.
 - **Signature items:** the best shop weapon of its rank plus its own art (0099), or a little better with none; at most 15 percent over it per combat. Bound. **Maud's Psalter (260, 261; built, 0196):** rank D, art **Unasked**: double heal on an ally unmoved and unacted, capped at max HP; ends as a Wait. Heal arm at most 1.15 of the best stocked heal at its rank or below.
@@ -75,11 +75,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The land** (Lotus; 300, 301): the seam is the tundra apex; Kestrow west, Sallow east, Aldmere south, outlands beyond. Only the north's frost holds the Kin; Kinsbane hunts the lean season. Seam: maps 1, 2, 4, 6, 9, 10; Sallow 3, 7, 8; Aldmere 5; Kestrow quests only. Geography never retiles a tuned map. Grounds (#892, #916; 0227): frost on the seam, moss elsewhere, sand for Keziah's outland quests. Region voices, never a tic.
 - **The storyline** is `docs/STORY.md` draft 6 (244); build to change it. Hask is the door, the Kin in his pommel shard, nudging, never erasing; his last line is Lotus's. Good: the reseal. Bad: a lost map. Secret (#790): Under the Hill (Kinsbane woken, both claimants, Marrit held, Pell's quest 2); Reseal or Fight (#806); Fight won kills the god.
 - **Lotus's draft 6 notes (366):** draft 6 is frozen for his own pass; only agreed notes fold in, pending ones as marked "proposed" paragraphs. The name Rook goes to the bulwark; the rider (female, silver hair, ice-blue eyes, face custom) keeps id and name until Lotus names her. Bet was the garrison's cook, the foundling at the oven wall; the Postern is the Cold Kitchen, Hold the Gate is Banked (#1042, 0247). Pending Lotus: siding with Hask (lean: one Grange choice to the bad card, captain sworn first) and magic (lean: element families inside Lore, Faith keeps its name, a drain grimoire in our own skin, Water never chills, no spell ignores a tile); Pell's pronoun.
-- **Rook's drake** (244): the last cold drake, church's; Grown carries an ally, Unbroken breathes rime once a map (#805), rime wears to Water. **Drover** (Lotus, #872; 288 to 294; built, 0217) replaces the Scout: flying, Mov 7, never doubles; a bite on lance hits; the long carry; deep rime (DESIGN 3). Gate: Grown median 70% of the Sky Captain's damage (#882). Keziah's flier: Edda Vane (#801).
+- **Rook's drake** (244): the last cold drake; Grown carries an ally, Unbroken breathes rime once a map (#805); it wears to Water. **Drover** (Lotus, #872; 288 to 294; built, 0217) replaces the Scout: flying, Mov 7, never doubles; a bite on lance hits; the long carry; deep rime (DESIGN 3). Gate: Grown median 70% of the Sky Captain's damage (#882). Keziah's flier: Edda Vane (#801).
 - **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake; three voices, three lines a map (0221); choice screen (0222). Barks (#1002): never "cold" (a Kin tell on frost); the hate points at the feeder, not the keep; no puns on teeth or fed.
 - **The waking (250, 251; provisional; built, 0212):** once a map a woken scythe kill gives full Move again, no second strike. Levers stopped (286). **Lotus (#871; 0214): 0210's reach gate is reverted;** she drains with no foe near. A flagged map (only Sallow) asks `march sure`. `--fed 10` on the field reads right cold (315).
 - **The company** (213, 214): cap 12 living, cast 10; a map deploys 6, the keep all (#689). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling.
-- **Saves** (#663, #664): camp only. Forge (#647): Refine +2/+3.
+- **Saves** camp only (#663, #664). Forge: Refine +2/+3 (#647).
 - **Supports** (#77; 0183 to 0189): 3 to 4 partners plus the captain, a kind per pair (#809); marriage S (#634). Best partner, not sum. C 16, B 28, A 48.
 - **Chests** (#649, #679): guarded or a puzzle; opening is an action.
 
@@ -110,13 +110,13 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Plumbing
 
-- **Lotus (#731, #786)** plays when both sign a `for-lotus` issue (client campaign, script parity, no blocking bug).
-- **Engine** (0008): Godot 4 .NET, core engine-free; a renderer reads the protocol (0046).
+- **Lotus** plays when both sign a `for-lotus` issue (#731, #786).
+- **Engine** (0008, 0046): Godot 4 .NET; a renderer reads the protocol.
 - **Builder race** (#735, 0169): one Builder at a time, earlier claim wins.
 - **Art:** human-made only (Lotus); licences first (#816).
-- **Casting (356 to 362):** one list, `docs/look/CASTING.md`; Lotus picks. No hire has a portrait; Bet's arrives at the Cold Kitchen, P28 (363).
-- **Character style** (Lotus; 298, 299; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Chroma under 32, one amber (0223).
+- **Casting (356 to 362):** `docs/look/CASTING.md`; Lotus picks. No hire has a portrait; Bet's arrives at the Cold Kitchen, P28 (363).
+- **Character style** (Lotus; #891): Blender, packs. Cold north key, warm fill on player figures; 3 or 4 posterized steps, heavy silhouette ink; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Chroma under 32, one amber (0223).
 
 ## Round index
 
-1-118 rules, carry, dusk, brace; 119-342 showcase, story; #994 343-359 writing, casting; #1033 360 on (366 Lotus's draft 6 notes; 368 careful recruits; 369 one cluster).
+1-118 rules; 119-342 showcase, story; 343-359 writing, casting; #1033 360 on (366 Lotus's notes; 368 careful recruits; 369 one cluster; 371 Rook on hand plays).
