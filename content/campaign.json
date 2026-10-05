@@ -100,24 +100,24 @@
         "(Defeat their captain on the cairn's fort at 7,0 by the end of turn 9. The map is lost if Teodor falls. The cairn's door at 7,2 is one tile wide. More come up the hill behind you from turn 3, announced.)"
       ],
       "after": [
-        "The sworn had the cairn half down and the shroud cut open at the hands, where a watchman is buried with what he carried. The hands were empty. Where Teodor leaned the lance on the cairn, frost has come up on the shaft. He lays the stones back one at a time before he touches it again.",
+        "The sworn had the cairn half down and the shroud cut open at the hands, where a watchman is buried with what he carried. The hands were empty. Where Teodor leaned the lance on the cairn, frost has come up on the socket, and nowhere else on the hill. He lays the stones back one at a time before he touches it again.",
         "(The Family Lance's last stage waited on this. It wakes once Teodor has fought enough with it, now or later.)"
       ] },
     { "id": "ottilie_1", "member": "ottilie", "part": 1, "map": "the_counting_house", "opensAfter": "ironwake_raid", "common": 2,
       "before": [
-        "Ottilie asked for a day and one pair of hands. Her house's bills were marked paid at a counting house on the Sallow canal, and nobody there will say who signed for the money.",
-        "(Placeholder card until the writing pass. Rout: every enemy falls by the end of turn 11. The map is lost if Ottilie falls. The canal is crossed only at the bridges, 6,1 and 6,7; a bow reaches over it and a sword does not. More come up the near bank from turn 2, announced.)"
+        "The crown's bills on Ottilie's firm were marked paid the week it went under, at a counting house on the Sallow canal. The house keeps two books: one for the guild, one for whoever pays the lock-keeper. \"The guild's book says paid. I want the other one. If they won't sell, I'll take it at cost.\"",
+        "(Rout: every enemy falls by the end of turn 11. The map is lost if Ottilie falls. The canal is crossed only at the bridges, 6,1 and 6,7; a bow reaches over it and a sword does not. More come up the near bank from turn 2, announced.)"
       ],
       "after": [
-        "(Placeholder until the writing pass: the ledger in the strongroom, and the seal at the foot of the page.)"
+        "The second book is in the strongroom. Her firm's line is there: received from the crown, paid out the same day, to bearer, and the Warden's seal at the foot of the page. \"Hask. I had him down as honest. I'm ashamed of that.\" She cuts the page loose and files it under her father's last line."
       ] },
     { "id": "ottilie_2", "member": "ottilie", "part": 2, "map": "the_long_count", "pays": "ottilie_tally", "rare": 3,
       "before": [
-        "Ottilie asked for a night and one pair of hands. The seal on the counting house's page was Hask's, and his own books sit in a Sallow bookroom two days east. Nobody in the regions will believe a copy.",
-        "(Placeholder card until the writing pass. Escape: Ottilie leaves by the east road, 14,3 to 14,5, by the end of turn 8; whoever is still on the board then is lost, so the ally leaves first. The map is lost if Ottilie falls. Dusk: sight is 4 on turn 1 and one less each turn, never under 1; nobody strikes what their side cannot see. Riders come down the road behind you from turn 2, announced.)"
+        "Hask kept his own books, in a Sallow bookroom two days east: which raiders he paid, and which villages they burned for it. Nobody in the regions will believe a copy. Ottilie empties her satchel to make room. \"A copy trades at a discount. I want the originals out before somebody thinks to burn them.\"",
+        "(Escape: Ottilie leaves by the east road, 14,3 to 14,5, by the end of turn 8; whoever is still on the board then is lost, so the ally leaves first. The map is lost if Ottilie falls. Dusk: sight is 4 on turn 1 and one less each turn, never under 1; nobody strikes what their side cannot see. Riders come down the road behind you from turn 2, announced.)"
       ],
       "after": [
-        "(Placeholder until the writing pass: the books on a table in a Sallow square, and the people reading their own villages' names in Hask's hand.)",
+        "Ottilie sets Hask's books out on a trestle in the Sallow market square. By noon there is a line. People find their villages by the date of the burning, then the sum, in his hand. A Kestrow quarryman and an Aldmere miller share one page. At dusk a guildsman asks her price for the set. She doesn't name one.",
         "(Ottilie carries Ottilie's Tally now: the Iron Bow's numbers, bound to her. Its art, Paid in Full, looses one arrow at +6 Power and -25 Acc that never doubles.)"
       ] },
     { "id": "rook_1", "member": "rook", "part": 1, "map": "the_chapter_roll", "opensAfter": "sallow_grange", "common": 2,

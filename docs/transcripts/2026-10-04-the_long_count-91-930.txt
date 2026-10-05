@@ -64,16 +64,17 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 9, The Field Before the Keep. Defeat the boss by the end of turn 20. Captain Fenn must survive.
 > quest ottilie_2 wren
 -- The Long Count --
-Ottilie asked for a night and one pair of hands. The seal on the
-counting house's page was Hask's, and his own books sit in a Sallow
-bookroom two days east. Nobody in the regions will believe a copy.
+Hask kept his own books, in a Sallow bookroom two days east: which
+raiders he paid, and which villages they burned for it. Nobody in the
+regions will believe a copy. Ottilie empties her satchel to make room.
+"A copy trades at a discount. I want the originals out before somebody
+thinks to burn them."
 
-(Placeholder card until the writing pass. Escape: Ottilie leaves by the
-east road, 14,3 to 14,5, by the end of turn 8; whoever is still on the
-board then is lost, so the ally leaves first. The map is lost if Ottilie
-falls. Dusk: sight is 4 on turn 1 and one less each turn, never under 1;
-nobody strikes what their side cannot see. Riders come down the road
-behind you from turn 2, announced.)
+(Escape: Ottilie leaves by the east road, 14,3 to 14,5, by the end of
+turn 8; whoever is still on the board then is lost, so the ally leaves
+first. The map is lost if Ottilie falls. Dusk: sight is 4 on turn 1 and
+one less each turn, never under 1; nobody strikes what their side cannot
+see. Riders come down the road behind you from turn 2, announced.)
 
 Side map: The Long Count, seed 91
 Ottilie goes with Wren. This map is lost if Ottilie falls; who falls here is gone for good.
@@ -971,9 +972,11 @@ Battle won: escape; only recall is left, or leave
 > leave
 Ottilie wins ottilie_2; Ottilie receives Ottilie's Tally; the stores take 3 frozen iron; nobody fell
 -- After The Long Count --
-(Placeholder until the writing pass: the books on a table in a Sallow
-square, and the people reading their own villages' names in Hask's
-hand.)
+Ottilie sets Hask's books out on a trestle in the Sallow market square.
+By noon there is a line. People find their villages by the date of the
+burning, then the sum, in his hand. A Kestrow quarryman and an Aldmere
+miller share one page. At dusk a guildsman asks her price for the set.
+She doesn't name one.
 
 (Ottilie carries Ottilie's Tally now: the Iron Bow's numbers, bound to
 her. Its art, Paid in Full, looses one arrow at +6 Power and -25 Acc

@@ -42,14 +42,16 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 7, Sallow Grange. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
 > quest ottilie_1 teodor
 -- The Counting House --
-Ottilie asked for a day and one pair of hands. Her house's bills were
-marked paid at a counting house on the Sallow canal, and nobody there
-will say who signed for the money.
+The crown's bills on Ottilie's firm were marked paid the week it went
+under, at a counting house on the Sallow canal. The house keeps two
+books: one for the guild, one for whoever pays the lock-keeper. "The
+guild's book says paid. I want the other one. If they won't sell, I'll
+take it at cost."
 
-(Placeholder card until the writing pass. Rout: every enemy falls by the
-end of turn 11. The map is lost if Ottilie falls. The canal is crossed
-only at the bridges, 6,1 and 6,7; a bow reaches over it and a sword does
-not. More come up the near bank from turn 2, announced.)
+(Rout: every enemy falls by the end of turn 11. The map is lost if
+Ottilie falls. The canal is crossed only at the bridges, 6,1 and 6,7; a
+bow reaches over it and a sword does not. More come up the near bank
+from turn 2, announced.)
 
 Side map: The Counting House, seed 980
 Ottilie goes with Teodor. This map is lost if Ottilie falls; who falls here is gone for good.
