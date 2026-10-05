@@ -4,11 +4,7 @@
   "advancedCertificationPrice": 1000,
   "maps": [
     { "map": "starting_alone", "reward": 300, "enemyLevel": 1,
-      "stock": ["iron_sword", "field_dressing"],
-      "after": [
-        "Three dead on a road nobody will remember. I have nobody to add to the list yet, which is its own kind of report.",
-        "The waystation keeper says a Kestrow chaplain bound for Ironwake was taken off the mill road two days back. Her name is on my list. East it is, by way of the mill."
-      ] },
+      "stock": ["iron_sword", "field_dressing"] },
     { "map": "the_mill", "reward": 600, "enemyLevel": 1,
       "stock": ["iron_sword", "iron_lance", "iron_bow", "field_dressing"],
       "arrives": ["maud"],

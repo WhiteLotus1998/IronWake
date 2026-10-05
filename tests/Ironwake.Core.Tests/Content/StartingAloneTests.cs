@@ -36,7 +36,25 @@ public class StartingAloneTests
         Assert.Equal(3, map.RecallCharges);
         Assert.Equal(3, map.Placements.Count(p => p.Side == Side.Enemy));
         Assert.Empty(content.Campaign.Maps[0].Before);
-        Assert.NotEmpty(content.Campaign.Maps[0].After);
+        Assert.Empty(content.Campaign.Maps[0].After);
+    }
+
+    /// <summary>
+    /// The after scene (issue 1005, round 374) opens "Three dead on the waystation road": a rout
+    /// leaves every enemy dead, so the line holds only while the board fields three, and it fails
+    /// here before it can come untrue on the screen.
+    /// </summary>
+    [Fact]
+    public void TheAfterScenesThreeDeadMatchTheBoardsEnemies()
+    {
+        var content = MapFixture.Content;
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "starting_alone.map"), content);
+        var scene = content.Scenes.Single(s => s.Id == "starting_alone_after");
+
+        Assert.Equal(ScenePoint.After, scene.Point);
+        Assert.StartsWith("Three dead on the waystation road.", scene.Lines[0].Text, StringComparison.Ordinal);
+        Assert.Equal(WinCondition.Rout, map.Win);
+        Assert.Equal(3, map.Placements.Count(p => p.Side == Side.Enemy));
     }
 
     /// <summary>
@@ -97,12 +115,12 @@ public class StartingAloneTests
     }
 
     /// <summary>
-    /// Starting Alone's before card is replaced by its scene (issue 1005): the campaign opens on the
-    /// screen's heading, prints the scene after <c>march</c> and the map line, rules line last, and
-    /// its after card once the map is won, below the won line; none of it is an event, so none is in the log.
+    /// Starting Alone's cards are replaced by its scenes (issue 1005): the campaign opens on the
+    /// screen's heading, prints the before scene after <c>march</c> and the map line, rules line last,
+    /// and the after scene once the map is won, below the won line; none of it is an event, so none is in the log.
     /// </summary>
     [Fact]
-    public void TheCampaignPrintsTheBeforeSceneAfterMarchAndTheAfterCardBelowTheWonLine()
+    public void TheCampaignPrintsTheBeforeSceneAfterMarchAndTheAfterSceneBelowTheWonLine()
     {
         var battle = File.ReadAllText(Transcript("2026-10-01-starting_alone-631.script"));
         var path = Path.Combine(Path.GetTempPath(), "ironwake-alone-" + Guid.NewGuid().ToString("N") + ".script");
@@ -116,12 +134,14 @@ public class StartingAloneTests
             Assert.Contains("Map 1 of 10: Starting Alone, seed 631\n-- Starting Alone --\nIronwake, before sunrise.", output);
             Assert.Contains("Hask: Don't write, Alder. Bring them home.\n", output);
             Assert.Contains("rewinds to a player turn you name; you have three.)\n\nObjective:", output);
-            Assert.Contains("Starting Alone won: rout; reward 300, the purse holds 800; nobody fell\n-- After Starting Alone --\nThree dead on a road nobody will remember.", output);
-            Assert.Contains("is, by way of the mill.\n\n-- The Mill --\nThe mill road follows a stream", output);
+            Assert.Contains("Starting Alone won: rout; reward 300, the purse holds 800; nobody fell\n-- After Starting Alone --\nThree dead on the waystation road.", output);
+            Assert.Contains("into Hask's purse and draws the\nstring.\n\n-- The Mill --\nThe mill road follows a stream", output);
+            Assert.DoesNotContain("Three dead on a road nobody will remember", output);
             Assert.Contains("\n-- Before map 2 of 10: The Mill; the purse holds 800 --\n", output);
             var scene = output[output.IndexOf("-- Starting Alone --", StringComparison.Ordinal)..output.IndexOf("Objective:", StringComparison.Ordinal)];
             Assert.All(scene.Split('\n'), line => Assert.True(line.Length <= Ironwake.Cli.CampaignSession.CardWidth, line));
             Assert.DoesNotContain("Bring them home", File.ReadAllText(log));
+            Assert.DoesNotContain("draws the string", File.ReadAllText(log));
         }
         finally
         {
