@@ -3135,3 +3135,27 @@ Result: **won on turn 6 of 7**, escape, nobody fell, no Recall used, no chest op
 - For the route: a wounded L1 Skyrider gets kills here only behind Pell's Cinder. Two kills in six turns is 70 EXP, so lance C by the keep (80 points from 22) needs her swinging every turn of every map left. The heuristic main maps won't do that, and that's the next run's finding to watch.
 
 Transcript: `docs/transcripts/2026-10-05-the_burned_school-700-drover.txt`, with its script beside it (the save is run 1's).
+
+## 2026-10-05 — Sallow Grange and the Lazar House on the Drover's route (#1100), warm — Code
+
+Seed: the parity campaign 644 (Recruit, permadeath off), continuing run 2's chair at the camp before Sallow Grange: `campaign --load sallow --saves <copy of docs/transcripts/2026-10-05-the_lazar_house-670-drover.saves> --script docs/transcripts/2026-10-05-sallow_grange-650-drover.script`. Round 378 had the heuristic on the main line. I played Sallow by hand instead, because run 2's finding was pace: the heuristic doesn't field Rook. Battle seed 650. Dunstan and Maud were benched so Rook could deploy, since Teodor and Ottilie are placed by name. Then `maud_1` on side map seed 671, Rook as the ally. Warm: I've played both boards before (61, 871; 701, 670).
+
+**Sallow Grange: won turn 7 of 10.** Ottilie fell (wounded), and 3 of the 4 Recalls were spent. Tension 7, choice 7, surprise 6.
+- T1: the captain on 3,6 woke the field group and killed the brawler on his own counter (12 x2).
+- T2, three Recalls: Rook's 76 percent swing at the 4-hp veteran missed, and the counter killed her. I tried a second tile, then a re-cut chip order (Long Thrust, Heavy Cut) to land her swing on another roll. **It missed every time: a swing's roll is keyed to the attack, not to where it falls in the turn.** The board says so (`the same attack will roll the same`), and I paid two charges to believe it. Pell took the kill.
+- T3: Pell put the fort archer at 3, and Rook finished it at 47 percent with no counter. Her first kill here: L2.
+- T5: the captain alone on 11,6 baited the Reeve off the gate. He threw the Toll Spear and missed.
+- T6: the captain put the Reeve at 10. Ottilie took the hexer to 8 and 12 back. Rook killed the hexer on the first strike: lance D. Then the Reeve killed Ottilie, who had 5 hp left.
+- **T7, best turn:** Teodor's Long Thrust took the Reeve to 8 and Wren's double to 2. Rook's first strike missed, his counter left her at 2 of 18, and her second strike killed him. That's a boss kill, L3. The captain walked to the gate.
+- Text bug, filed: the won line says `nobody fell` with Ottilie wounded on the board. The side-map line counts the wounded, but the main-map line only counts falls for good.
+
+**The Lazar House: lost on turn 4 of 6.** Maud fell; all three Recalls were spent. Tension 8, choice 6, surprise 5.
+- Line 1: Rook baited the brigand on T1 and took 13. That put her short of the north bar on T2, and the arriving brigand killed her.
+- Line 2 (Recall to T1): Rook started away from the bar. The T1 brigand walked onto row 1, which is the only lane to 8,1, so the bar was out of reach. She killed it from 5,1, and the archer and the north brigand killed her in the enemy phase.
+- Line 3 (last Recall, T2): Rook went into the pocket at 3,3 behind Maud's fort, which melee can only reach from 3,4. She killed the archer on T3 and fell to the north brigand. Maud killed the 2-hp brigand on T4, then took 11 from brigand 2 and 5 from the hexer on the fort, on her own phase's heal.
+- **My misplay:** on T2 of line 3 I parked Rook in the pocket and checked `threat` only after waiting. Rook on 3,1 would have been the better tile. It's the fort's only melee door, she counters 10 x2 there, and Maud would have been out of every melee reach.
+- **Finding for the route:** a fall on a side map with permadeath off loses the EXP toward the next level (the permadeath toggle, by rule). Rook left at L3 EXP 0, so the 60 she earned at Sallow is gone. She stands at L3, lance D 37, Wounded (2).
+
+**The route is closed on this chair.** `maud_1` lost again here, and it reopens only after Brackwater. Both seat schedules run 1 found for `rook_1` before the field need it won before Brackwater, so `rook_1` never gets a seat, and the Grown drake this issue asks for never comes. The door alone, from L3 with two main maps left, is 400 EXP and 43 rank points. Sallow was her best map, every swing I could set up for her, and it made 190 EXP and 15 points. Both maps would have to beat that while her EXP per kill falls with each level.
+
+Transcript: `docs/transcripts/2026-10-05-sallow_grange-650-drover.txt` (both maps), with the script beside it (the save is run 1's).
