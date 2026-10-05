@@ -53,6 +53,12 @@ public enum AbilityTrigger
 
     /// <summary>When the holder's drake breathes: the Drake Warden's Deep Rime (issue 872).</summary>
     OnBreath,
+
+    /// <summary>When the holder ends a Move it flew beside an enemy: the Sky Captain's drake frost (issue 1127).</summary>
+    OnLanding,
+
+    /// <summary>On the holder's first strike of an attack after a long flight: the Sky Captain's Stoop (issue 1127).</summary>
+    OnDive,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -294,6 +300,29 @@ public sealed record DeepRimeEffect(int Rounds) : AbilityEffect
 }
 
 /// <summary>
+/// The Sky Captain's drake frost (issue 1127, DECISIONS/0262; <see cref="DrakeFrost"/>): when a rider with a drake
+/// ends a Move it flew with an enemy orthogonally beside it, the drake's frost strikes every such enemy for
+/// <see cref="Damage"/>, never below 1, and holds each but a boss to Mov 1 for its next phase. It then rests
+/// <see cref="Rest"/> turns: fired on turn N, it is ready again on turn N + Rest + 1. Read on the rider's
+/// <see cref="Unit.Drake"/>: no drake, no frost.
+/// </summary>
+public sealed record DrakeFrostEffect(int Damage, int Rest) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnLanding;
+}
+
+/// <summary>
+/// The Sky Captain's Stoop (issue 1127, DECISIONS/0262; <see cref="Stoop"/>): when the holder attacks after
+/// flying at least <see cref="Flight"/> tiles this phase, counted from the tile it took off from to the tile
+/// it strikes from, its first strike of the combat deals <see cref="Damage"/> more when it hits. A rider with a
+/// drake never stoops: the drake's frost is hers instead.
+/// </summary>
+public sealed record StoopEffect(int Flight, int Damage) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnDive;
+}
+
+/// <summary>
 /// Which opponents a combat modifier answers to: a weapon type, a movement type, both
 /// (both must match), or neither (every opponent). An opponent with no weapon never
 /// matches a weapon condition. <see cref="Oathbound"/> also asks that the opponent be
@@ -462,6 +491,14 @@ public static class AbilityRules
     public static int DeepRime(ValueList<Ability> abilities, Unit unit) =>
         unit.Drake is not { Stage: DrakeStage.Unbroken } ? 0
         : abilities.Select(a => a.Effect).OfType<DeepRimeEffect>().Select(d => d.Rounds).DefaultIfEmpty(0).Max();
+
+    /// <summary>The drake frost <paramref name="unit"/> carries (issue 1127, <see cref="DrakeFrostEffect"/>): the first among <paramref name="abilities"/> while it rides a drake, else null.</summary>
+    public static DrakeFrostEffect? DrakeFrost(ValueList<Ability> abilities, Unit unit) =>
+        unit.Drake is null ? null : abilities.Select(a => a.Effect).OfType<DrakeFrostEffect>().FirstOrDefault();
+
+    /// <summary>The Stoop <paramref name="unit"/> carries (issue 1127, <see cref="StoopEffect"/>): the first among <paramref name="abilities"/> while it rides no drake, else null.</summary>
+    public static StoopEffect? Stoop(ValueList<Ability> abilities, Unit unit) =>
+        unit.Drake is not null ? null : abilities.Select(a => a.Effect).OfType<StoopEffect>().FirstOrDefault();
 
     /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>
     public static bool Braces(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is BraceEffect);

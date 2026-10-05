@@ -31,8 +31,9 @@ public static class RollSchemes
 /// <see cref="Bite"/> is what the side's drake adds once after the exchange when one of its strikes hit and
 /// both units stand (issue 872, <see cref="BiteEffect"/>), 0 for every side without one; never a strike.
 /// <see cref="NeverDoubles"/> marks a side in a single-strike class (<see cref="UnitClass.SingleStrike"/>), so the line can say why.
+/// <see cref="Stoop"/> is what the side's first strike adds when it hits (issue 1127, <see cref="Ironwake.Core.Stoop"/>), 0 for every side that does not stoop.
 /// </summary>
-public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1, bool CritGrounds = false, int Bite = 0, bool NeverDoubles = false)
+public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1, bool CritGrounds = false, int Bite = 0, bool NeverDoubles = false, int Stoop = 0)
 {
     public static SideForecast None { get; } = new(false, 0, 0, 0, 0, false);
 
@@ -78,11 +79,11 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
 
     /// <summary>
     /// The attacker's plain damage over the strikes it lives to make (<see cref="AttackerStrikesLivedFor"/>), no crit,
-    /// and its drake's bite (issue 872) when the counter, every strike landing, leaves it standing: the bite needs both
+    /// its first strike's Stoop (issue 1127), and its drake's bite (issue 872) when the counter, every strike landing, leaves it standing: the bite needs both
     /// units up after the exchange, and if the strikes alone kill, the bite adds nothing that matters.
     /// </summary>
     public int AttackerDamageLivedFor(int attackerHp) =>
-        Attacker.Damage * AttackerStrikesLivedFor(attackerHp)
+        Attacker.Damage * AttackerStrikesLivedFor(attackerHp) + Attacker.Stoop
         + (Attacker.Bite > 0 && Defender.Damage * Defender.StrikeCount < attackerHp ? Attacker.Bite : 0);
 
     /// <summary>
@@ -107,7 +108,7 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     /// </summary>
     public int? FirstRoundMissChance(int defenderHp)
     {
-        if (!Attacker.Strikes || Attacker.Damage < defenderHp || Attacker.DisplayedHit is <= 0 or >= 100)
+        if (!Attacker.Strikes || Attacker.Damage + Attacker.Stoop < defenderHp || Attacker.DisplayedHit is <= 0 or >= 100)
         {
             return null;
         }

@@ -116,6 +116,12 @@ public sealed record Combatant
     /// </summary>
     public bool SingleStrike { get; init; }
 
+    /// <summary>
+    /// What this side's first strike of the combat adds when it hits (issue 1127, <see cref="Ironwake.Core.Stoop"/>):
+    /// the Sky Captain's dive after a long flight, read on the board; 0 off the board and for every counter.
+    /// </summary>
+    public int Stoop { get; init; }
+
     /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, not <see cref="Blind"/>, and not <see cref="AnswerSpent"/>.</summary>
     public bool CanStrike(int distance) => !Blind && !AnswerSpent && Weapon is not null && Weapon.InRange(distance);
 }

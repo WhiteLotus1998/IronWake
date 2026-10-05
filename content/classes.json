@@ -209,6 +209,7 @@
       "advances": "skyrider",
       "movement": "flying",
       "mov": 7,
+      "abilities": ["drake_frost", "stoop"],
       "weapons": ["lance"],
       "mastery": "wind_rider",
       "masteryPoints": 12,

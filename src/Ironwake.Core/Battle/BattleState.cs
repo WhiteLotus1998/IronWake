@@ -589,7 +589,7 @@ public sealed record BattleState(
     public Reach ReachOf(BattleUnit unit, GameContent content)
     {
         var unitClass = content.Class(unit.Unit.ClassId);
-        var mov = Lock.Holds(this, unit) ? 0 : Frost.Mov(unitClass.Mov + (unit.Pressed ? 1 : 0), unit);
+        var mov = Lock.Holds(this, unit) ? 0 : DrakeFrost.Mov(Frost.Mov(unitClass.Mov + (unit.Pressed ? 1 : 0), unit), unit);
         return ReachOn(unit, content, mov);
     }
 
@@ -601,7 +601,7 @@ public sealed record BattleState(
     public Reach DashReachOf(BattleUnit unit, GameContent content)
     {
         var unitClass = content.Class(unit.Unit.ClassId);
-        var mov = Lock.Holds(this, unit) ? 0 : Frost.Mov(unitClass.Mov + (unit.Pressed ? 1 : 0), unit) + Winded.ExtraMov;
+        var mov = Lock.Holds(this, unit) ? 0 : DrakeFrost.Mov(Frost.Mov(unitClass.Mov + (unit.Pressed ? 1 : 0), unit) + Winded.ExtraMov, unit);
         return ReachOn(unit, content, mov);
     }
 

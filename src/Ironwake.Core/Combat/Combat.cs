@@ -214,7 +214,8 @@ public static class Combat
             StrikesPerRound: Armed(striker).Type.StrikesPerRound(),
             CritGrounds: Armed(striker).GroundsAgainst(target.Movement),
             Bite: Bite(striker, distance),
-            NeverDoubles: striker.Class.SingleStrike);
+            NeverDoubles: striker.Class.SingleStrike,
+            Stoop: striker.Stoop);
     }
 
     private static Weapon Armed(Combatant unit) =>

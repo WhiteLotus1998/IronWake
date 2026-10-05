@@ -340,6 +340,24 @@ public static class ProtocolJson
                 }
 
                 break;
+            case UnitFrosted f:
+                w.WriteString("unit", f.UnitId);
+                w.WriteString("by", f.ByUnitId);
+                w.WriteNumber("damage", f.Damage);
+                w.WriteNumber("hpAfter", f.HpAfter);
+                w.WriteBoolean("held", f.Held);
+                if (f.Boss)
+                {
+                    w.WriteBoolean("boss", true);
+                }
+
+                w.WriteString("side", Name(f.Side));
+                if (f.Next)
+                {
+                    w.WriteBoolean("next", true);
+                }
+
+                break;
             case UnitLocked l:
                 w.WriteString("unit", l.UnitId);
                 w.WriteString("by", l.ByUnitId);
@@ -1139,6 +1157,21 @@ public static class ProtocolJson
             w.WriteNumber("grounded", unit.Grounded);
         }
 
+        if (unit.Frosted > 0)
+        {
+            w.WriteNumber("frosted", unit.Frosted);
+        }
+
+        if (unit.FrostTurn is { } frostTurn)
+        {
+            w.WriteNumber("frostTurn", frostTurn);
+        }
+
+        if (unit.FlewFrom is { } flewFrom)
+        {
+            WriteCoord(w, "flewFrom", flewFrom);
+        }
+
         if (unit.Open is { } open)
         {
             w.WriteStartObject("open");
@@ -1350,6 +1383,9 @@ public static class ProtocolJson
             Chill = OptionalInt(e, "chill") ?? 0,
             LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
+            Frosted = OptionalInt(e, "frosted") ?? 0,
+            FrostTurn = OptionalInt(e, "frostTurn"),
+            FlewFrom = e.TryGetProperty("flewFrom", out _) ? ReadCoord(e, "flewFrom") : null,
             Breathed = e.TryGetProperty("breathed", out _) && RequiredBool(e, "breathed"),
             Winded = e.TryGetProperty("winded", out _) && RequiredBool(e, "winded"),
             Answered = e.TryGetProperty("answered", out _) && RequiredBool(e, "answered"),
@@ -2151,11 +2187,16 @@ public static class ProtocolJson
             w.WriteBoolean("neverDoubles", true);
         }
 
+        if (side.Stoop > 0)
+        {
+            w.WriteNumber("stoop", side.Stoop);
+        }
+
         w.WriteEndObject();
     }
 
     private static SideForecast ReadSide(JsonElement e) => new(
-        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1, e.TryGetProperty("critGrounds", out _) && RequiredBool(e, "critGrounds"), OptionalInt(e, "bite") ?? 0, e.TryGetProperty("neverDoubles", out _) && RequiredBool(e, "neverDoubles"));
+        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1, e.TryGetProperty("critGrounds", out _) && RequiredBool(e, "critGrounds"), OptionalInt(e, "bite") ?? 0, e.TryGetProperty("neverDoubles", out _) && RequiredBool(e, "neverDoubles"), OptionalInt(e, "stoop") ?? 0);
 
     private static readonly string[] StatKeys = { "hp", "str", "mag", "dex", "spd", "lck", "def", "res", "cha" };
 
