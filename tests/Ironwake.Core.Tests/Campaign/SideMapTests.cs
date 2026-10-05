@@ -780,6 +780,46 @@ public class SideMapTests
     }
 
     [Fact]
+    public void AReopenedLostQuestSitsBehindAnyQuestNeverOffered()
+    {
+        var content = With(Quest("wren_1", "wren", 1), Quest("teodor_1", "teodor", 1), Quest("maud_1", "maud", 1));
+        var record = At("the_tollgate", content) with { QuestsSeen = ValueList<string>.Of("wren_1", "teodor_1") };
+
+        Assert.Equal(new[] { "maud_1", "wren_1" }, record.QuestsOffered(content).Select(q => q.Id));
+    }
+
+    [Fact]
+    public void WithNoQuestNeverOfferedTheLostQuestsAreOfferedInOpeningOrder()
+    {
+        var content = With(Quest("wren_1", "wren", 1), Quest("teodor_1", "teodor", 1), Quest("maud_1", "maud", 1));
+        var record = At("the_tollgate", content) with { QuestsSeen = ValueList<string>.Of("maud_1", "teodor_1", "wren_1") };
+
+        Assert.Equal(new[] { "wren_1", "teodor_1" }, record.QuestsOffered(content).Select(q => q.Id));
+    }
+
+    [Fact]
+    public void LeavingACampRecordsTheQuestsItOfferedAsSeen()
+    {
+        var record = At("the_tollgate") with { QuestsSeen = ValueList<string>.Of("bet_kitchen") };
+        Assert.Equal(new[] { "maud_1" }, record.QuestsOffered(Content).Select(q => q.Id));
+        var tollgate = MapFiles.Load(MapFiles.CampaignPath(Fixture.RealContentDirectory(), Content, "the_tollgate"), Content);
+        var opening = record.Begin(tollgate, Content);
+        var won = opening with { Map = opening.Map with { Win = WinCondition.Rout }, Units = ValueList<BattleUnit>.From(opening.UnitsOf(Ironwake.Core.Side.Player)), History = ValueList<BattleState>.Of(opening) };
+
+        Assert.Equal(ValueList<string>.Of("bet_kitchen", "maud_1"), record.AfterBattle(won, Content).QuestsSeen);
+    }
+
+    [Fact]
+    public void TheQuestsSeenRoundTripAndAnOldRecordReadsNone()
+    {
+        var record = At("the_mill") with { QuestsSeen = ValueList<string>.Of("maud_1") };
+
+        Assert.Equal(record.QuestsSeen, ProtocolJson.ReadCampaign(ProtocolJson.Campaign(record), Content).QuestsSeen);
+        Assert.DoesNotContain("questsSeen", ProtocolJson.Campaign(At("the_mill")));
+        Assert.Empty(ProtocolJson.ReadCampaign(ProtocolJson.Campaign(At("the_mill")), Content).QuestsSeen);
+    }
+
+    [Fact]
     public void ABoardIsASideMapOnlyWithABareSlotAndNoNamedRecruitOrCertification()
     {
         var board = Side("the_lazar_house");
