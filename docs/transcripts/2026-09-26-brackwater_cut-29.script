@@ -37,7 +37,7 @@ move dunstan 15,3
 wait dunstan
 move rook 16,3
 wait rook
-end
+end !
 recall 54
 move dunstan 12,3
 wait dunstan
@@ -52,7 +52,7 @@ wait wren
 wait captain
 wait rook
 wait dunstan
-end
+end !
 attack pell hexer-1 !
 move dunstan 13,0
 wait dunstan
@@ -62,14 +62,14 @@ move wren 13,3
 wait wren
 move rook 12,4
 wait rook
-end
+end !
 attack captain rider-1
 move pell 13,2
 attack pell soldier-1
 attack wren soldier-1
 move dunstan 17,0
 wait dunstan
-end
+end !
 recall 96
 attack pell hexer-1 !
 move dunstan 13,0
@@ -87,12 +87,12 @@ attack wren soldier-1
 move rook 14,2
 wait rook
 wait dunstan
-end
+end !
 move captain 16,3
 wait captain
 move wren 17,3
 wait wren
 wait dunstan
-end
+end !
 move captain 19,3
 exit captain

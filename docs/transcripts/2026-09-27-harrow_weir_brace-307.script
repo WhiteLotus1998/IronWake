@@ -91,7 +91,7 @@ move ottilie 9,6
 attack ottilie shieldbearer-1
 move teodor 8,6
 wait teodor
-end
+end !
 move keziah 8,5
 wait keziah
 move teodor 12,6

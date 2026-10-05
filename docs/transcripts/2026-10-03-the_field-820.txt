@@ -1083,7 +1083,7 @@ e  soldier-3        Soldier L4 pikeman         6,13   hp 21/21  Plain  group pic
 !  sworn_captain-1  Sworn Captain L4 pikeman   18,6   hp 27/27  Fort (heals 20 percent, 5 hp)  group camp, boss, asleep
 B  teodor           Teodor L5 pikeman          3,13   hp 13/23  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Rook (Brigand 1 for 15, Soldier 3 for 13, against 18 hp)
 Rapport Alder Fenn and Ottilie +4 (4)
 Rapport Alder Fenn and Rook +4 (4)

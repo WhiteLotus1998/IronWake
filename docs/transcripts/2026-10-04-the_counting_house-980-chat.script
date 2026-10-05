@@ -8,7 +8,7 @@ move ottilie 5,8
 attack ottilie brigand-1 art aimed_shot
 move teodor 5,7
 attack teodor soldier-1 art long_thrust
-end
+end !
 attack teodor brigand-2 art long_thrust
 move ottilie 4,6
 attack ottilie brigand-2 art aimed_shot

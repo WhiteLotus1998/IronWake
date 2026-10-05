@@ -322,7 +322,7 @@ b  soldier-1        Soldier L3 pikeman         7,7    hp 6/21   Plain  group ban
 f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 B  teodor           Teodor L5 pikeman          5,7    hp 23/23  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Ottilie (Brigand 2 for 13, Hexer 1 for 11, against 18 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --

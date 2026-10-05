@@ -124,6 +124,6 @@ move ottilie 14,6
 wait ottilie
 move teodor 14,7
 wait teodor
-end
+end !
 move pell 15,5
 attack pell weir_foreman-1

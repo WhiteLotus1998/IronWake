@@ -634,7 +634,7 @@ B  teodor           Teodor L1 pikeman          10,5   hp 10/21  Hill  done
 G  wren             Wren L1 cadet              7,1    hp 5/20   Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 ledges (drop, an action): 10,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
-> end
+> end !
 Lethal if all land: Dunstan (Brigand for 8, Rider 2 for 6, Rider 3 for 6, against 17 hp)
 Lethal if all land: Teodor (Archer 1 for 4, Rider 2 for 7, against 10 hp)
 -- Player phase ends, turn 2 --
@@ -1014,7 +1014,7 @@ B  teodor           Teodor L1 pikeman          10,4   hp 10/21  Hill  done
 G  wren             Wren L1 cadet              7,0    hp 5/20   Plain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 ledges (drop, an action): 10,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
-> end
+> end !
 Lethal if all land: Dunstan (Archer 1 for 3, Marauder for 14, against 5 hp)
 Lethal if all land: Pell (Marauder for 19, against 16 hp)
 -- Player phase ends, turn 3 --
@@ -1319,7 +1319,7 @@ g  rider-3          Rider L2 outrider          7,5    hp 1/20   Plain  group wav
 B  teodor           Teodor L1 pikeman          10,4   hp 6/21   Hill  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
-> end
+> end !
 Lethal if all land: Pell (Marauder for 19, against 5 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -1523,7 +1523,7 @@ g  rider-3          Rider L2 outrider          10,6   hp 1/20   Plain  group wav
 B  teodor           Teodor L1 pikeman          10,3   hp 2/21   Mountain  done
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
-> end
+> end !
 Lethal if all land: Ottilie (Marauder for 18, against 17 hp)
 Lethal if all land: Teodor (Archer 1 for 3, Rider 3 for 6, against 2 hp)
 -- Player phase ends, turn 5 --

@@ -3806,7 +3806,7 @@ D  wren             Wren L6 cadet              12,2   hp 22/22  Plain  done
 ?  unseen at 11,1 10,3 6,4 9,4 14,5 15,5 13,7
 dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> end
+> end !
 Lethal if all land: Keziah (Brigand 2 for 13, against 9 hp)
 Rapport Alder Fenn and Keziah +4 (4)
 Rapport Keziah and Pell +3 (6)
@@ -4161,7 +4161,7 @@ D  wren             Wren L6 cadet              13,2   hp 22/22  Plain  done
 ?  unseen at 11,1 10,3 6,4 9,4 14,5 15,5 13,7
 dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> end
+> end !
 Lethal if all land: Keziah (Brigand 2 for 13, against 9 hp)
 Rapport Alder Fenn and Keziah +4 (4)
 Rapport Alder Fenn and Wren +4 (4)

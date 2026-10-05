@@ -621,7 +621,7 @@ e  rider-1          Rider L6 outrider          5,1    hp 22/22  Plain  group rea
 d  soldier-1        Soldier L6 pikeman         6,9    hp 22/22  Forest  group camp, guard, awake
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
-> end
+> end !
 Lethal if all land: Ottilie (Rider for 11, Soldier for 10, against 19 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -903,7 +903,7 @@ e  rider-1          Rider L6 outrider          5,5    hp 22/22  Plain  group rea
 d  soldier-1        Soldier L6 pikeman         6,6    hp 15/22  Plain  group camp, guard, awake
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
-> end
+> end !
 Lethal if all land: Keziah (Rider for 11, Soldier for 10, against 11 hp)
 Lethal if all land: Ottilie (Rider for 11, Soldier for 10, against 9 hp)
 -- Player phase ends, turn 5 --

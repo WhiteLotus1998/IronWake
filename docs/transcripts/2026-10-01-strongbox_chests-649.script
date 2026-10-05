@@ -31,7 +31,7 @@ move captain 8,9
 wait captain
 move ottilie 5,7
 wait ottilie
-end
+end !
 recall 53
 move teodor 7,9
 item teodor 2
@@ -40,41 +40,41 @@ attack wren soldier-1
 move captain 7,8
 wait captain
 wait ottilie
-end
+end !
 move wren 9,9
 attack wren soldier-1
 attack captain archer-1
 move ottilie 5,7
 attack ottilie archer-1 steel_bow
-end
+end !
 move captain 8,7
 attack captain archer-2
 move ottilie 7,7
 attack ottilie archer-2 steel_bow
 move wren 6,9
 item wren 2
-end
+end !
 move wren 6,8
 attack wren soldier-2
 move captain 8,8
 attack captain soldier-2
 move ottilie 5,5
 wait ottilie
-end
+end !
 move ottilie 4,3
 wait ottilie
 move captain 10,6
 wait captain
 move wren 8,6
 item wren 2
-end
+end !
 move ottilie 3,1
 open ottilie 3,0
 move captain 12,4
 wait captain
 move wren 10,4
 wait wren
-end
+end !
 attack captain shieldbearer-1
 move wren 13,3
 attack wren shieldbearer-1

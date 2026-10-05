@@ -16,7 +16,7 @@ attack ottilie archer-1
 attack teodor brigand-1
 wait dunstan
 wait captain
-end
+end !
 attack ottilie brigand-2
 attack teodor brigand-1
 move wren 12,3
@@ -34,7 +34,7 @@ wait ottilie
 wait pell
 wait dunstan
 wait wren
-end
+end !
 attack dunstan brigand-3
 move captain 12,8
 wait captain
@@ -42,7 +42,7 @@ move teodor 11,7
 attack teodor soldier-2
 wait pell
 wait wren
-end
+end !
 move teodor 13,7
 item teodor 2
 move captain 11,7
@@ -50,7 +50,7 @@ attack captain soldier-2
 attack pell hexer-1
 wait dunstan
 wait wren
-end
+end !
 attack pell brigand-4
 move dunstan 12,5
 wait dunstan
@@ -58,4 +58,4 @@ move wren 11,4
 wait wren
 wait captain
 wait teodor
-end
+end !

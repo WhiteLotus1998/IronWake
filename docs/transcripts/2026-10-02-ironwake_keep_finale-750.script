@@ -40,7 +40,7 @@ move brannock 13,9
 wait brannock
 threat pell
 threat captain
-end
+end !
 recall
 recall 36
 move wren 10,1
@@ -101,7 +101,7 @@ wait ansgar
 wait ottilie
 wait captain
 wait brannock
-end
+end !
 move ottilie 11,5
 attack ottilie finale_hunter-1
 wait captain
@@ -117,4 +117,4 @@ move dunstan 14,10
 wait dunstan
 move brannock 12,10
 wait brannock
-end
+end !

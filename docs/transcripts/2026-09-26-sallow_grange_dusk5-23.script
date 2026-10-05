@@ -23,7 +23,7 @@ move ottilie 3,7
 wait ottilie
 move ansgar 4,8
 wait ansgar
-end
+end !
 move pell 4,4
 attack pell soldier-1
 move ottilie 6,7
@@ -36,7 +36,7 @@ move captain 5,5
 attack captain brawler-1
 move teodor 7,3
 attack teodor archer-2
-end
+end !
 move wren 8,5
 attack wren archer-2
 attack pell archer-1 !
@@ -96,7 +96,7 @@ wait wren
 move pell 10,5
 wait pell
 wait ansgar
-end
+end !
 attack ottilie grange_reeve-1
 attack teodor grange_reeve-1
 move captain 15,6

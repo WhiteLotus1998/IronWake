@@ -93,7 +93,7 @@ move dunstan 8,7
 wait dunstan
 move teodor 7,4
 wait teodor
-end
+end !
 move keziah 12,7
 wait keziah
 move ottilie 12,6

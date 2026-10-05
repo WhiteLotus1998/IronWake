@@ -385,7 +385,7 @@ D  teodor           Teodor L6 pikeman          3,5    hp 23/23  Plain  done
 b  veteran-1        Veteran L7 halberdier      7,5    hp 25/25  Plain  group field, guard, awake
 C  wren             Wren L6 cadet              2,5    hp 22/22  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Teodor (Archer 2 for 4, Brawler for 12, Veteran for 12, against 23 hp)
 Rapport Teodor and Wren +5 (5)
 -- Player phase ends, turn 1 --
@@ -829,7 +829,7 @@ D  teodor           Teodor L6 pikeman          1,7    hp 7/23   Plain  done
 b  veteran-1        Veteran L7 halberdier      4,4    hp 10/25  Plain  group field, guard, awake
 C  wren             Wren L6 cadet              5,6    hp 22/22  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Pell (Veteran for 17, against 17 hp)
 Rapport Ottilie and Wren +5 (5)
 -- Player phase ends, turn 2 --
@@ -2732,7 +2732,7 @@ E  pell             Pell L6 adept              8,5    hp 8/17   Plain  done
 e  shieldbearer-1   Shieldbearer L7 bulwark    12,2   hp 27/27  Plain  group gate, hold
 D  teodor           Teodor L6 pikeman          11,6   hp 7/23   Plain  done
 C  wren             Wren L6 cadet              15,5   hp 9/22   Plain  done
-> end
+> end !
 Lethal if all land: Ottilie (Grange Reeve for 14, Hexer for 12, against 19 hp)
 Lethal if all land: Teodor (Grange Reeve for 7, against 7 hp)
 Lethal if all land: Wren (Grange Reeve for 9, against 9 hp)

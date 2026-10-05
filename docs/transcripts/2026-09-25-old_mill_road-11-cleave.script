@@ -20,7 +20,7 @@ move wren 6,1
 attack wren mill_bandit-1
 move captain 7,2
 attack captain mill_bandit-1 art cleave
-end
+end !
 attack captain mill_bandit-1
 end
 forecast captain archer-1 art cleave from 8,2

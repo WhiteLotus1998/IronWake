@@ -700,7 +700,7 @@ D  ottilie          Ottilie L1 bowman          12,7   hp 17/17  Plain  done
 a  soldier-1        Soldier L6 pikeman         10,4   hp 22/22  Plain  group van, aggressive
 C  teodor           Teodor L1 pikeman          10,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Ottilie (Archer for 8, Soldier 1 for 11, against 17 hp)
 Rapport Alder Fenn and Wren +4 (4)
 Rapport Keziah and Ottilie +3 (3)
@@ -1023,7 +1023,7 @@ D  ottilie          Ottilie L1 bowman          14,6   hp 6/17   Plain  done
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          8,9    hp 8/21   Plain  done
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
-> end
+> end !
 Lethal if all land: Keziah (Archer for 8, against 1 hp)
 Lethal if all land: Maud (Archer for 18, against 17 hp)
 Lethal if all land: Ottilie (Archer for 8, against 6 hp)
@@ -1796,7 +1796,7 @@ D  ottilie          Ottilie L1 bowman          14,6   hp 13/17  Plain  done
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          14,7   hp 15/21  Plain  done
 B  wren             Wren L1 cadet              14,5   hp 10/20  Plain  done
-> end
+> end !
 Lethal if all land: Keziah (Archer for 8, against 7 hp)
 Lethal if all land: Wren (Brigand 2 for 13, against 10 hp)
 Rapport Alder Fenn and Wren +4 (8)
@@ -2543,7 +2543,7 @@ D  ottilie          Ottilie L1 bowman          15,4   hp 13/17  Plain  done
 f  soldier-2        Soldier L6 pikeman         12,3   hp 22/22  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          11,8   hp 18/21  Plain  done
 B  wren             Wren L1 cadet              15,6   hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Maud (Soldier 2 for 24, against 17 hp)
 Rapport Alder Fenn and Ottilie +4 (4)
 -- Player phase ends, turn 5 --
@@ -2851,7 +2851,7 @@ D  ottilie          Ottilie L1 bowman          15,4   hp 12/17  Plain  done
 f  soldier-2        Soldier L6 pikeman         15,3   hp 15/22  Plain  group wave, aggressive
 C  teodor           Teodor L2 pikeman          11,7   hp 18/21  Plain  done
 B  wren             Wren L1 cadet              14,3   hp 10/20  Plain  done
-> end
+> end !
 Lethal if all land: Wren (Soldier 2 for 10, against 10 hp)
 Rapport Alder Fenn and Ottilie +4 (8)
 Rapport Alder Fenn and Wren +4 (8)

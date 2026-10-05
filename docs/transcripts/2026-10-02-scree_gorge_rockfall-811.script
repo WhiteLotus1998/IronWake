@@ -15,7 +15,7 @@ attack teodor archer-2
 move ottilie 7,4
 attack ottilie archer-2
 move wren 8,4
-end
+end !
 attack pell brigand-1
 move captain 6,5
 attack captain archer-1

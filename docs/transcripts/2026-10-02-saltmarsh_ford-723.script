@@ -40,7 +40,7 @@ end
 move wren 10,1
 attack wren bandit_leader-1
 wait teodor
-end
+end !
 recall 63
 wait wren
 move captain 9,6

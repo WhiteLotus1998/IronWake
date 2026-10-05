@@ -1286,7 +1286,7 @@ C  wren             Wren L1 cadet              6,3    hp 20/20  Plain  done
 exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Alder Fenn 1 turn to an exit (last start: turn 7), Maud 2 turns to an exit (last start: turn 6), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Teodor 1 turn to an exit (last start: turn 7), Wren 1 turn to an exit (last start: turn 7)
 rime: 4,5 4,6 4,7 (thaws once no one stands on it)
-> end
+> end !
 Lethal if all land: Wren (Archer 2 for 6, Brigand 2 for 11, Shieldbearer for 8, against 20 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --

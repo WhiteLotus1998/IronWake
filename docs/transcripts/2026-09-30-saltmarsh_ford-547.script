@@ -22,7 +22,7 @@ move teodor 11,7
 wait teodor
 wait wren
 wait captain
-end
+end !
 move teodor 12,5
 attack teodor archer-1
 move captain 11,6
@@ -30,7 +30,7 @@ attack captain archer-1
 move ottilie 10,7
 attack ottilie soldier-1
 attack wren soldier-1
-end
+end !
 recall 44
 move captain 11,6
 attack captain archer-1
@@ -69,7 +69,7 @@ attack ottilie bandit_leader-1
 attack wren bandit_leader-1
 wait captain
 wait teodor
-end
+end !
 move ottilie 11,2
 wait ottilie
 wait wren

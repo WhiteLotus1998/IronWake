@@ -14,7 +14,7 @@ move maud 6,7
 move rook 5,5
 threat captain
 threat wren
-end
+end !
 help
 move rook 4,5
 attack rook soldier-1
@@ -26,7 +26,7 @@ move maud 6,5
 item maud 2 maud
 threat maud
 threat rook
-end
+end !
 attack captain shieldbearer-1
 move rook 4,2
 attack rook archer-1
@@ -35,7 +35,7 @@ move wren 7,4
 wait wren
 attack pell rider-1
 wait teodor
-end
+end !
 attack wren brigand-2 !
 move rook 5,2
 attack rook archer-2
@@ -46,7 +46,7 @@ move wren 7,0
 move teodor 6,1
 threat captain
 threat teodor
-end
+end !
 forecast rook rider-2 from 8,3
 move rook 8,3
 attack rook rider-2
@@ -54,7 +54,7 @@ move pell 8,2
 attack pell rider-2
 move teodor 7,4
 attack teodor rider-2
-end
+end !
 attack pell rider-2
 move teodor 7,0
 end

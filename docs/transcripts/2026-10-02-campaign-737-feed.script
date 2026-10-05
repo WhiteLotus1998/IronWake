@@ -31,11 +31,11 @@ end
 attack maud brigand-1
 move captain 7,7
 wait captain
-end
+end !
 move captain 8,4
 attack captain soldier-1
 attack maud soldier-1
-end
+end !
 move captain 9,6
 attack captain archer-2
 attack maud archer-2
@@ -155,12 +155,12 @@ item maud 2 dunstan
 end
 attack maud brigand-2
 wait dunstan
-end
+end !
 recall 34
 attack maud brigand-2
 move dunstan 3,1
 wait dunstan
-end
+end !
 recall 0
 move maud 6,1
 wait maud
@@ -175,7 +175,7 @@ end
 move maud 8,2
 attack maud archer-1
 attack dunstan soldier-1
-end
+end !
 move dunstan 10,4
 wait dunstan
 move maud 11,2
@@ -185,7 +185,7 @@ move maud 8,2
 attack maud archer-2 !
 move dunstan 9,4
 attack dunstan archer-2
-end
+end !
 leave
 repair captain 1
 repair wren 1
@@ -461,7 +461,7 @@ repair captain 1
 march
 move captain 3,6
 wait captain
-end
+end !
 move pell 2,6
 attack pell veteran-1
 move ottilie 4,7
@@ -596,7 +596,7 @@ move captain 11,7
 attack captain marauder-1 3
 move keziah 10,7
 wait keziah
-end
+end !
 move captain 13,6
 item captain 3
 attack pell brigand-1 gust
@@ -606,7 +606,7 @@ attack keziah soldier-1 !
 move ansgar 9,4
 attack ansgar longbowman-1 1
 canto ansgar 10,4
-end
+end !
 move captain 14,3
 item captain 3
 move pell 14,4
@@ -625,7 +625,7 @@ move captain 11,4
 attack captain brigand-2 1
 move ottilie 12,7
 attack ottilie archer-1
-end
+end !
 attack ansgar archer-1 1
 canto ansgar 15,5
 move captain 10,7

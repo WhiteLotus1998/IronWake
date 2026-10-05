@@ -2815,7 +2815,7 @@ B  teodor           Teodor L1 pikeman          14,6   hp 11/21  Plain  done
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > item captain 2 pell
 ERROR: Field Dressing heals its user; it cannot be used on Pell
-> end
+> end !
 Lethal if all land: Keziah (Weir Foreman for 12, against 11 hp)
 Lethal if all land: Pell (Brigand 3 for 13, Weir Foreman for 13, against 3 hp)
 Lethal if all land: Teodor (Brigand 3 for 10, Weir Foreman for 10, against 11 hp)

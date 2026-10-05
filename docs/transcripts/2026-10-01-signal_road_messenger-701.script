@@ -10,7 +10,7 @@ move pell 4,9
 attack pell soldier-2
 move wren 1,11
 wait wren
-end
+end !
 recall 20
 attack wren brigand-1 !
 move pell 4,9
@@ -47,11 +47,11 @@ move pell 9,3
 attack pell rider-1
 move captain 9,2
 attack captain rider-1
-end
+end !
 move captain 10,4
 attack captain soldier-1
 attack pell archer-1
 move teodor 7,3
 attack teodor archer-1
 wait wren
-end
+end !

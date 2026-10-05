@@ -1058,7 +1058,7 @@ E  pell             Pell L1 adept              9,6    hp 16/16  Plain  done
 f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Wren (Brigand 2 for 11, Brigand 3 for 11, against 20 hp)
 Rapport Alder Fenn and Pell +4 (8)
 Rapport Pell and Wren +4 (8)
@@ -1376,7 +1376,7 @@ E  pell             Pell L1 adept              9,4    hp 16/16  Plain  done
 f  soldier-2        Soldier L2 pikeman         8,3    hp 2/20   Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          9,7    hp 10/21  Plain  done
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
-> end
+> end !
 Lethal if all land: Ottilie (Soldier 2 for 10, against 7 hp)
 Lethal if all land: Wren (Soldier 2 for 9, against 9 hp)
 Rapport Alder Fenn and Ottilie +4 (4)

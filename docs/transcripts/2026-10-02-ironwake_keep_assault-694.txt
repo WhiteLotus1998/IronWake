@@ -1552,7 +1552,7 @@ B  wren             Wren L1 cadet              9,1    hp 14/20  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 holding; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Wren (Archer 1 for 6, Brigand 3 for 11, Soldier 2 for 9, against 14 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -2373,7 +2373,7 @@ B  wren             Wren L1 cadet              15,2   hp 8/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 2 for 5, Brigand 6 for 10, Soldier 2 for 8, Soldier 5 for 8, against 14 hp)
 Lethal if all land: Dunstan (Brigand 6 for 8, against 1 hp)
 Lethal if all land: Ottilie (Archer 1 for 7, Archer 2 for 7, Brigand 6 for 12, Soldier 2 for 10, Soldier 3 for 10, Soldier 5 for 10, against 7 hp)
@@ -2674,7 +2674,7 @@ B  wren             Wren L1 cadet              15,4   hp 8/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 1 for 5, Archer 2 for 5, Brigand 5 for 10, Brigand 6 for 10, Hexer for 10, Soldier 3 for 8, against 9 hp)
 Lethal if all land: Pell (Archer 1 for 8, Archer 2 for 8, Brigand 3 for 13, Brigand 5 for 13, Brigand 6 for 13, against 5 hp)
 Lethal if all land: Wren (Archer 1 for 6, Archer 2 for 6, Brigand 3 for 11, Brigand 5 for 11, Brigand 6 for 11, against 8 hp)

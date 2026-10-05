@@ -35,7 +35,7 @@ wait pell
 wait captain
 wait dunstan
 wait rook
-end
+end !
 move wren 15,3
 wait wren
 move captain 17,0

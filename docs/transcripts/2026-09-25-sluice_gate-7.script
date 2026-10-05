@@ -17,7 +17,7 @@ move captain 3,2
 wait captain
 move wren 5,5
 wait wren
-end
+end !
 attack wren brigand-1 !
 move teodor 7,1
 attack teodor archer-1

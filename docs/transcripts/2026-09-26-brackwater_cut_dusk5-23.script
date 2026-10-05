@@ -29,7 +29,7 @@ wait captain
 move dunstan 18,0
 wait dunstan
 wait rook
-end
+end !
 recall 56
 move dunstan 18,0
 wait dunstan
@@ -59,12 +59,12 @@ move captain 14,0
 attack captain rider-2
 wait wren
 wait dunstan
-end
+end !
 recall 117
 attack pell brigand-1
 wait wren
 wait dunstan
-end
+end !
 attack pell brawler-1
 move captain 19,1
 wait captain

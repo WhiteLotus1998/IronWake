@@ -22,7 +22,7 @@ move ottilie 2,7
 wait ottilie
 move ansgar 1,7
 wait ansgar
-end
+end !
 attack pell soldier-1
 move ottilie 3,7
 attack ottilie brawler-1
@@ -80,7 +80,7 @@ wait pell
 move wren 11,6
 wait wren
 wait ansgar
-end
+end !
 move pell 12,6
 attack pell grange_reeve-1
 move wren 14,5

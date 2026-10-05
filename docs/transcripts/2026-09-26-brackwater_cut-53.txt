@@ -303,7 +303,7 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 count: Alder Fenn 3 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 7), Pell 3 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 7), Wren 3 turns to an exit (last start: turn 6)
-> end
+> end !
 Lethal if all land: Pell (Archer 2 for 8, against 8 hp)
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
@@ -1165,7 +1165,7 @@ D  wren             Wren L1 cadet              15,1   hp 20/20  Plain  done
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 count: Alder Fenn 2 turns to an exit (last start: turn 7), Dunstan 2 turns to an exit (last start: turn 7), Pell 2 turns to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 7), Wren 2 turns to an exit (last start: turn 7)
-> end
+> end !
 Lethal if all land: Dunstan (Brigand 1 for 9, against 8 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --

@@ -47,12 +47,12 @@ move wren 6,3
 attack wren toll_warden-1
 move teodor 7,4
 wait teodor
-end
+end !
 attack wren toll_warden-1 !
 attack pell rider-1
 move captain 8,5
 attack captain rider-1
-end
+end !
 recall 58
 attack pell toll_warden-1
 move captain 8,5
@@ -76,7 +76,7 @@ move wren 6,2
 attack wren archer-1
 move captain 6,4
 item captain 2
-end
+end !
 move captain 7,1
 leave
 shop

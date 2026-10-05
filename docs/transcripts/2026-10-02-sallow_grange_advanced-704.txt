@@ -403,7 +403,7 @@ D  teodor           Teodor L1 pikeman          2,4    hp 21/21  Plain  done
 b  veteran-1        Veteran L3 halberdier      7,5    hp 23/23  Plain  group field, guard, awake
 C  wren             Wren L1 cadet              3,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Wren (Archer for 6, Brawler for 14, Veteran for 11, against 20 hp)
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
@@ -1248,7 +1248,7 @@ D  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain  done
 b  veteran-1        Veteran L3 halberdier      7,5    hp 23/23  Plain  group field, guard, awake
 C  wren             Wren L1 cadet              3,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Wren (Archer for 6, Brawler for 14, against 20 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -2818,7 +2818,7 @@ E  pell             Pell L1 adept              9,4    hp 16/16  Plain  done
 e  sentry-1         Sentry L3 sentinel         12,2   hp 27/27  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,6   hp 14/21  Plain  done
 C  wren             Wren L1 cadet              13,6   hp 16/20  Plain  done
-> end
+> end !
 Lethal if all land: Ottilie (Grange Reeve for 14, against 10 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
@@ -3044,7 +3044,7 @@ E  pell             Pell L1 adept              9,4    hp 16/16  Plain  done
 e  sentry-1         Sentry L3 sentinel         12,2   hp 27/27  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,6   hp 14/21  Plain  done
 C  wren             Wren L1 cadet              13,6   hp 16/20  Plain  done
-> end
+> end !
 Lethal if all land: Ansgar (Grange Reeve for 10, against 4 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --

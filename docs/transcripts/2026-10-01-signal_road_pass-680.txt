@@ -485,7 +485,7 @@ C  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              6,10   hp 20/20  Plain  done
 messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path
 messenger at 7,1, running, 2 of its phases from the road at 15,2 on open ground
-> end
+> end !
 Lethal if all land: Ansgar (Archer 1 for 7, Soldier for 10, against 13 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -1326,7 +1326,7 @@ C  teodor           Teodor L1 pikeman          5,6    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              6,8    hp 20/20  Plain  done
 messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path
 messenger at 12,2, running, 1 of its phases from the road at 15,2 on open ground
-> end
+> end !
 Lethal if all land: Ansgar (Archer 1 for 7, against 6 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1654,7 +1654,7 @@ C  teodor           Teodor L1 pikeman          5,6    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              6,7    hp 20/20  Plain  done
 messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path
 messenger at 12,2, running, 1 of its phases from the road at 15,2 on open ground
-> end
+> end !
 Lethal if all land: Ansgar (Soldier for 10, against 6 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -2887,7 +2887,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 8/21   Forest  done
 B  wren             Wren L1 cadet              9,8    hp 2/20   Plain  done
 messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path
 messenger: gone by the road at 15,2; the word is out
-> end
+> end !
 Lethal if all land: Wren (Archer 2 for 6, against 2 hp)
 -- Player phase ends, turn 9 --
 -- Enemy phase, turn 9 --

@@ -98,7 +98,7 @@ move keziah 9,8
 wait keziah
 move captain 10,10
 wait captain
-end
+end !
 recall 133
 move teodor 9,4
 attack teodor weir_foreman-1

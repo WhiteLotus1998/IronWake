@@ -17,18 +17,18 @@ end
 move wren 8,5
 attack wren wingrider-2
 wait rook
-end
+end !
 move rook 10,6
 attack rook deacon-1
 attack wren wingrider-1
-end
+end !
 recall 55
 forecast wren deacon-1 from 10,6
 move wren 10,6
 attack wren deacon-1
 move rook 11,3
 wait rook
-end
+end !
 move wren 11,4
 move rook 11,2
 attack rook soldier-1 !
@@ -41,6 +41,6 @@ move wren 12,3
 attack wren soldier-1
 move rook 11,2
 attack rook soldier-1 !
-end
+end !
 move rook 12,1
 leave

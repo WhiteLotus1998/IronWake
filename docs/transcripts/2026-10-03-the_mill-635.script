@@ -11,7 +11,7 @@ threat maud
 item maud 1 captain art unasked
 end
 item maud 1 captain art unasked
-end
+end !
 attack captain soldier-1
 wait maud
 end
@@ -20,7 +20,7 @@ attack captain archer-1
 move maud 7,6
 forecast maud archer-1 2
 attack maud archer-1 2
-end
+end !
 move captain 8,5
 attack captain archer-1
 threat maud from 4,7

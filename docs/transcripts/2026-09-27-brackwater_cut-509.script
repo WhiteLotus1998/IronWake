@@ -13,14 +13,14 @@ move wren 12,4
 end
 move rook 13,2
 move wren 14,5
-end
+end !
 move pell 13,5
 attack pell brawler-1
 move wren 13,4
 item wren 2
 move rook 14,2
 move dunstan 14,4
-end
+end !
 attack pell brigand-1
 move captain 18,3
 move dunstan 16,6

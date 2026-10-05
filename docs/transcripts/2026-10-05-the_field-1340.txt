@@ -2881,7 +2881,7 @@ B  teodor           Teodor L5 pikeman          9,9    hp 15/23  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 seen far: Rook wakes a sleeper within 6 (seen for miles)
 drift: the south group is making for 12,8, the crossing you took
-> end
+> end !
 Lethal if all land: Rook (Soldier 1 for 13, Soldier 2 for 13, against 18 hp)
 Lethal if all land: Teodor (Soldier 1 for 8, Soldier 2 for 8, against 15 hp)
 Rapport Alder Fenn and Ottilie +4 (4)

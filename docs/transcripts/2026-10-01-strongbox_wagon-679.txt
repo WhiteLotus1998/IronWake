@@ -148,7 +148,7 @@ C  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              3,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
-> end
+> end !
 Lethal if all land: Wren (Brigand for 11, Soldier for 9, against 20 hp)
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
@@ -540,7 +540,7 @@ A  captain          Alder Fenn L1 cadet        7,1    hp 6/22   Plain  captain  
 C  teodor           Teodor L1 pikeman          8,2    hp 5/21   Plain  done
 B  wren             Wren L1 cadet              5,3    hp 19/20  Plain  done
 chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
-> end
+> end !
 Lethal if all land: Alder Fenn (Bandit Leader for 11, against 6 hp)
 Lethal if all land: Teodor (Bandit Leader for 11, against 5 hp)
 -- Player phase ends, turn 4 --

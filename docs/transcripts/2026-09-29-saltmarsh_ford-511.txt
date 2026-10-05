@@ -893,7 +893,7 @@ D  ottilie          Ottilie L1 bowman          11,5   hp 9/17   Plain  done
 e  soldier-2        Soldier L2 pikeman         6,6    hp 11/20  Plain  group ford, aggressive
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              6,5    hp 13/20  Plain  done
-> end
+> end !
 Lethal if all land: Wren (Brigand for 11, Soldier 2 for 9, against 13 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --

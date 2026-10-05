@@ -74,7 +74,7 @@ move captain 7,5
 wait captain
 move dunstan 8,7
 wait dunstan
-end
+end !
 move pell 10,6
 attack pell shieldbearer-1
 move keziah 8,8
@@ -87,7 +87,7 @@ move captain 4,6
 attack captain brigand-2
 move teodor 7,4
 wait teodor
-end
+end !
 recall 121
 move keziah 8,8
 wait keziah

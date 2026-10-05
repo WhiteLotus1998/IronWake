@@ -58,7 +58,7 @@ wait ottilie
 move keziah 9,7
 wait keziah
 wait teodor
-end
+end !
 recall 80
 move ottilie 7,9
 attack ottilie soldier-1
@@ -67,5 +67,5 @@ wait captain
 move keziah 8,9
 wait keziah
 wait teodor
-end
+end !
 attack pell weir_foreman-1

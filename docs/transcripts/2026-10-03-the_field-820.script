@@ -24,7 +24,7 @@ move ottilie 4,12
 attack ottilie archer-2
 move captain 5,12
 attack captain archer-2
-end
+end !
 move pell 4,11
 attack pell soldier-3
 move rook 2,12

@@ -23,7 +23,7 @@ move keziah 6,13
 attack keziah brigand-1
 move maud 4,12
 wait maud
-end
+end !
 recall 36
 move keziah 6,13
 wait keziah
@@ -85,7 +85,7 @@ move maud 6,6
 wait maud
 threat pell
 threat teodor
-end
+end !
 attack captain archer-1
 attack teodor archer-1
 move pell 10,4
@@ -96,7 +96,7 @@ move keziah 6,7
 wait keziah
 move maud 8,6
 attack maud soldier-2
-end
+end !
 recall 141
 move pell 10,3
 attack pell archer-1

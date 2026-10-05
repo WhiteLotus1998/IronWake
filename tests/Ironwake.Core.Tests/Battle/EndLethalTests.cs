@@ -7,7 +7,8 @@ namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
 /// Issue 558 (rounds 158 and 159): before a player phase ends, <c>end</c> names every player
-/// unit whose <c>threat</c> total reaches its HP, then ends the phase anyway. The names come
+/// unit whose <c>threat</c> total reaches its HP; since issue 1093 it then asks, and <c>end !</c>
+/// ends the phase anyway (<see cref="Ironwake.Core.Tests.Content.EndAsksTests"/>). The names come
 /// from <see cref="Queries.Lethal"/>, which reads the same lines and the same seated sum as
 /// <c>threat</c>, so the two cannot disagree.
 /// </summary>
@@ -157,6 +158,6 @@ public sealed class EndLethalTests
         var repo = Directory.GetParent(Ironwake.Core.Tests.Content.Fixture.RealContentDirectory())!.FullName;
         var transcript = File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-541.txt")).ReplaceLineEndings("\n");
 
-        Assert.Contains("> end\nLethal if all land: Wren (Brigand for 11, against 11 hp)\n-- Player phase ends, turn 7 --\n-- Enemy phase, turn 7 --\n", transcript);
+        Assert.Contains("> end !\nLethal if all land: Wren (Brigand for 11, against 11 hp)\n-- Player phase ends, turn 7 --\n-- Enemy phase, turn 7 --\n", transcript);
     }
 }

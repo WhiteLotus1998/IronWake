@@ -24,7 +24,7 @@ move teodor 4,11
 wait teodor
 move maud 2,12
 wait maud
-end
+end !
 attack pell brigand-1
 attack captain brigand-1
 move ottilie 3,13

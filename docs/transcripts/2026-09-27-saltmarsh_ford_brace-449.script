@@ -54,7 +54,7 @@ attack wren soldier-2
 move ottilie 10,5
 attack ottilie soldier-2
 wait captain
-end
+end !
 move wren 12,6
 wait wren
 move captain 10,3
@@ -74,7 +74,7 @@ item captain 2
 item wren 2
 move teodor 10,4
 item teodor 2
-end
+end !
 move ottilie 12,2
 item ottilie 2
 move captain 11,0
@@ -83,7 +83,7 @@ move teodor 10,1
 attack teodor bandit_leader-1
 move wren 10,4
 wait wren
-end
+end !
 move ottilie 12,0
 attack ottilie bandit_leader-1
 move captain 11,2

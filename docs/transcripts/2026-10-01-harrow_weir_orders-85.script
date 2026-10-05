@@ -90,7 +90,7 @@ move dunstan 13,4
 wait dunstan
 move captain 12,4
 item captain 2 pell
-end
+end !
 recall 121
 move ottilie 14,5
 attack ottilie weir_foreman-1

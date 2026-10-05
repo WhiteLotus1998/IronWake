@@ -27,7 +27,7 @@ attack keziah brigand-1
 wait captain
 wait wren
 wait maud
-end
+end !
 attack maud soldier-1
 move ottilie 14,6
 attack ottilie soldier-1
@@ -36,7 +36,7 @@ move keziah 9,8
 attack keziah hexer-1
 move teodor 8,9
 attack teodor hexer-1 !
-end
+end !
 recall 46
 move keziah 9,8
 attack keziah hexer-1 iron_gauntlets
@@ -61,7 +61,7 @@ wait wren
 move captain 13,5
 wait captain
 wait ottilie
-end
+end !
 recall 67
 move keziah 13,8
 wait keziah
@@ -86,7 +86,7 @@ move teodor 11,8
 item teodor 2
 move wren 15,6
 item wren 2
-end
+end !
 move maud 12,9
 attack maud brigand-3
 move teodor 11,7
@@ -97,7 +97,7 @@ item ottilie 2
 item captain 2
 move keziah 12,6
 wait keziah
-end
+end !
 move ottilie 15,5
 attack ottilie soldier-2
 move captain 15,4

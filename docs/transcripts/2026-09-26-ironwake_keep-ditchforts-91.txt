@@ -2077,7 +2077,7 @@ E  pell             Pell L2 adept              11,4   hp 6/17   Fort (heals 20 p
 k  soldier-4        Soldier L2 pikeman         6,8    hp 10/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          7,8    hp 13/21  Plain  done
 B  wren             Wren L1 cadet              7,4    hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Alder Fenn (Brigand 4 for 10, Soldier 4 for 8, against 14 hp)
 Lethal if all land: Teodor (Brigand 4 for 10, Soldier 4 for 8, against 13 hp)
 -- Player phase ends, turn 6 --

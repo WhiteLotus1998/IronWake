@@ -1841,7 +1841,7 @@ D  pell             Pell L1 adept              10,6   hp 16/16  Plain  done
 d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 20/21  Plain  done
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain  done
-> end
+> end !
 Lethal if all land: Pell (Archer for 8, Soldier 2 for 11, against 16 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
@@ -2407,7 +2407,7 @@ A  captain          Alder Fenn L1 cadet        10,5   hp 22/22  Plain  captain  
 D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,1   hp 7/22   Plain  done
-> end
+> end !
 Lethal if all land: Wren (Bandit Leader for 15, against 7 hp)
 Rapport Pell and Wren +4 (4)
 -- Player phase ends, turn 8 --

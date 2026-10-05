@@ -26,7 +26,7 @@ move ottilie 3,12
 wait ottilie
 move maud 3,11
 wait maud
-end
+end !
 recall list
 recall 26
 move teodor 5,11
@@ -53,7 +53,7 @@ move ottilie 4,12
 wait ottilie
 move pell 3,12
 wait pell
-end
+end !
 attack keziah soldier-3
 attack captain archer-2
 move teodor 5,11
@@ -162,6 +162,6 @@ move teodor 16,8
 wait teodor
 move maud 15,7
 item maud 2 captain
-end
+end !
 attack pell sworn_captain-1
 leave

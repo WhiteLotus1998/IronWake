@@ -47,7 +47,7 @@ move rook 16,1
 wait rook
 wait pell
 threat dunstan
-end
+end !
 recall 76
 move pell 16,1
 wait pell
@@ -64,15 +64,15 @@ threat rook
 threat wren
 threat pell
 threat captain
-end
+end !
 attack dunstan brigand-1 !
 attack wren rider-1
 move rook 13,1
 attack rook brigand-1
 move captain 18,0
 wait captain
-end
+end !
 threat captain from 19,3
 move captain 19,3
 wait captain
-end
+end !

@@ -41,7 +41,7 @@ wait rook
 move dunstan 15,3
 wait dunstan
 threat rook
-end
+end !
 recall 80
 move captain 19,1
 wait captain

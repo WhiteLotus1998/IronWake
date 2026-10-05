@@ -2963,7 +2963,7 @@ D  pell             Pell L1 adept              8,6    hp 3/16   Road  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
-> end
+> end !
 Lethal if all land: Pell (Weir Foreman for 13, against 3 hp)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --

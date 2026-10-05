@@ -37,7 +37,7 @@ move keziah 4,8
 wait keziah
 move captain 3,6
 wait captain
-end
+end !
 move ottilie 3,8
 wait ottilie
 move pell 5,7
@@ -50,7 +50,7 @@ move teodor 6,7
 attack teodor veteran-1
 move captain 4,6
 wait captain
-end
+end !
 move wren 7,5
 wait wren
 move keziah 8,7

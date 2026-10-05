@@ -39,7 +39,7 @@ attack wren archer-1
 move pell 10,1
 attack pell archer-1
 wait dunstan
-end
+end !
 recall 73
 move captain 10,6
 attack captain soldier-2
@@ -61,10 +61,10 @@ move wren 15,2
 wait wren
 move dunstan 15,8
 wait dunstan
-end
+end !
 attack pell soldier-2 !
 move wren 15,4
 attack wren soldier-5 !
 move captain 13,6
 attack captain archer-2
-end
+end !

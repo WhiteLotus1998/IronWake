@@ -41,7 +41,7 @@ move dunstan 19,3
 exit dunstan
 move wren 18,2
 wait wren
-end
+end !
 move pell 19,3
 exit pell
 move wren 19,3

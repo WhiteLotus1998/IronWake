@@ -65,7 +65,7 @@ attack captain soldier-4
 move ottilie 12,7
 wait ottilie
 wait dunstan
-end
+end !
 recall 108
 move pell 13,5
 wait pell

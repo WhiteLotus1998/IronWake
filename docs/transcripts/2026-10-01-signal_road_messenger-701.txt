@@ -426,7 +426,7 @@ B  wren             Wren L1 cadet              1,11   hp 8/20   Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path
 messenger at 8,2, not yet running, 2 of its phases from the road at 15,1 on open ground
-> end
+> end !
 Lethal if all land: Wren (Soldier 2 for 9, against 8 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1512,7 +1512,7 @@ C  teodor           Teodor L1 pikeman          6,6    hp 21/21  Plain
 B  wren             Wren L1 cadet              6,9    hp 8/20   Plain
 messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path
 messenger: off the board (road at 15,1)
-> end
+> end !
 Lethal if all land: Pell (Archer 1 for 8, Soldier 1 for 11, against 16 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
@@ -1716,7 +1716,7 @@ C  teodor           Teodor L1 pikeman          7,3    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              6,9    hp 8/20   Plain  done
 messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path
 messenger: off the board (road at 15,1)
-> end
+> end !
 Lethal if all land: Pell (Archer 1 for 8, against 5 hp)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --

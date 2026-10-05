@@ -966,10 +966,16 @@ public static class Program
     /// <summary>
     /// A player command as the CLI's script reader takes it on <paramref name="state"/>, before the
     /// command is applied: an <c>attack</c> whose counter is lethal to the attacker ends in <c>!</c>,
-    /// since the CLI refuses that swing unconfirmed (issue 975), so a trace still replays under <c>--strict</c>.
+    /// since the CLI refuses that swing unconfirmed (issue 975), and an <c>end</c> while a unit is lethal
+    /// if all land ends in <c>!</c> for the same reason (issue 1093), so a trace still replays under <c>--strict</c>.
     /// </summary>
     public static string Script(BattleState state, GameContent content, Command command) =>
-        Script(command) + (command is Attack attack && SwingsIntoLethalCounter(state, content, attack) ? " !" : "");
+        Script(command) + (command switch
+        {
+            Attack attack when SwingsIntoLethalCounter(state, content, attack) => " !",
+            EndPhase when state.Phase == Side.Player && !state.Outcome.IsOver && Queries.Lethal(state, content).Count > 0 => " !",
+            _ => "",
+        });
 
     /// <summary>
     /// True when <paramref name="attack"/>'s forecast on <paramref name="state"/> carries the console's

@@ -24,7 +24,7 @@ move ottilie 3,8
 attack ottilie brigand-1
 move captain 3,7
 attack captain brigand-1
-end
+end !
 wait teodor
 move ottilie 6,9
 item ottilie 2
@@ -32,7 +32,7 @@ move wren 7,8
 wait wren
 canto wren stay
 wait captain
-end
+end !
 recall 55
 move wren 3,9
 item wren 2

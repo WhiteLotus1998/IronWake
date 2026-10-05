@@ -42,7 +42,7 @@ attack teodor toll_warden-1 art long_thrust
 move wren 5,5
 wait wren
 wait captain
-end
+end !
 threat teodor from 7,4
 move teodor 7,4
 item teodor 2
@@ -53,7 +53,7 @@ move captain 5,4
 wait captain
 move pell 6,5
 wait pell
-end
+end !
 move teodor 9,4
 item teodor 2
 move wren 5,1

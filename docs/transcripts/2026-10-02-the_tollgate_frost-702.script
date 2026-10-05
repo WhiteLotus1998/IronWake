@@ -59,7 +59,7 @@ move captain 5,4
 wait captain
 move wren 4,5
 wait wren
-end
+end !
 recall 85
 attack teodor toll_warden-1 art long_thrust
 move pell 5,4

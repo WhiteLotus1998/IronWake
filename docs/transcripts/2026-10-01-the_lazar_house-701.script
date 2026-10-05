@@ -16,14 +16,14 @@ move maud 3,2
 attack maud soldier-1
 move wren 5,1
 attack wren archer-1
-end
+end !
 attack maud soldier-1
 move wren 3,1
 item wren 2
 end
 item maud 2 wren
 wait wren
-end
+end !
 leave
 roster
 record

@@ -49,7 +49,7 @@ attack wren soldier-2
 attack captain brigand-1
 move ottilie 9,8
 attack ottilie brigand-1
-end
+end !
 item captain 2
 item wren 2
 item teodor 2

@@ -32,7 +32,7 @@ attack rook hexer-1 !
 attack captain soldier-1
 move wren 6,6
 wait wren
-end
+end !
 recall 54
 move pell 6,5
 attack pell soldier-1

@@ -34,7 +34,7 @@ move pell 12,5
 wait pell
 wait captain
 wait dunstan
-end
+end !
 move ottilie 11,10
 attack ottilie soldier-2
 attack teodor soldier-2 !
@@ -43,7 +43,7 @@ wait wren
 wait pell
 wait captain
 wait dunstan
-end
+end !
 recall 75
 move dunstan 13,7
 wait dunstan
@@ -56,7 +56,7 @@ wait pell
 move wren 13,1
 wait wren
 wait captain
-end
+end !
 attack pell hexer-1
 move ottilie 10,10
 attack ottilie archer-2
@@ -64,13 +64,13 @@ move wren 14,4
 wait wren
 wait dunstan
 wait captain
-end
+end !
 move wren 15,7
 wait wren
 wait dunstan
 wait ottilie
 wait captain
-end
+end !
 recall 123
 move wren 15,7
 wait wren
@@ -78,10 +78,10 @@ wait dunstan
 move ottilie 13,10
 wait ottilie
 wait captain
-end
+end !
 move ottilie 13,8
 attack ottilie brigand-5
 attack dunstan brigand-5 !
 wait wren
 wait captain
-end
+end !

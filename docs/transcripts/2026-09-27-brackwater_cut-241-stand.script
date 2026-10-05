@@ -50,7 +50,7 @@ move captain 19,4
 wait captain
 move wren 19,3
 wait wren
-end
+end !
 exit wren
 exit pell
 exit captain

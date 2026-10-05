@@ -72,7 +72,7 @@ move captain 10,11
 wait captain
 move teodor 7,4
 wait teodor
-end
+end !
 move pell 12,8
 attack pell weir_foreman-1
 move keziah 12,11

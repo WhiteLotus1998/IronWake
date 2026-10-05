@@ -74,7 +74,7 @@ wait dunstan
 wait rook
 move captain 18,1
 item captain 2
-end
+end !
 move dunstan 19,3
 exit dunstan
 move captain 19,3

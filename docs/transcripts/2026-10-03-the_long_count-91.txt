@@ -419,7 +419,7 @@ B  wren             Wren L7 cadet              9,4    hp 12/23  Road  done
 dusk: sight 2, 1 next turn; 2 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Ottilie 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
-> end
+> end !
 Lethal if all land: Wren (Brigand 1 for 12, against 12 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --

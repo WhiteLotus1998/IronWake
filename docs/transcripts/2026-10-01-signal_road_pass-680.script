@@ -14,7 +14,7 @@ wait captain
 move teodor 5,9
 wait teodor
 wait wren
-end
+end !
 threat ansgar from 15,5
 move ansgar 15,5
 wait ansgar
@@ -43,7 +43,7 @@ move teodor 5,6
 attack teodor archer-1
 move wren 6,8
 wait wren
-end
+end !
 recall 35
 move teodor 5,6
 attack teodor archer-1
@@ -54,7 +54,7 @@ attack ansgar archer-1
 canto ansgar 6,6
 move captain 7,6
 wait captain
-end
+end !
 move captain 7,5
 attack captain soldier-1
 attack ansgar soldier-1 !
@@ -98,6 +98,6 @@ move wren 9,8
 attack wren archer-2
 move ansgar 5,4
 wait ansgar
-end
+end !
 move captain 10,6
 attack captain archer-2

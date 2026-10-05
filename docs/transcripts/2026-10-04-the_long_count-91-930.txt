@@ -308,7 +308,7 @@ B  wren             Wren L7 cadet              9,4    hp 14/23  Road  done
 dusk: sight 3, 2 next turn; no side strikes what it cannot see; the enemy hears within 4
 exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Ottilie 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
-> end
+> end !
 Lethal if all land: Wren (Archer for 6, Hexer 1 for 12, against 14 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -568,7 +568,7 @@ B  wren             Wren L7 cadet              7,4    hp 12/23  Road  done
 dusk: sight 1; it gets no darker; 2 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Ottilie 3 turns to an exit (last start: turn 5), Wren cannot leave by turn 8
-> end
+> end !
 Lethal if all land: Ottilie (Brigand 1 for 12, Rider for 9, against 19 hp)
 Lethal if all land: Wren (Brigand 1 for 12, Rider for 9, against 12 hp)
 -- Player phase ends, turn 4 --

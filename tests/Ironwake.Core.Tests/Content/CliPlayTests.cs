@@ -247,7 +247,7 @@ public class CliPlayTests
     [Fact]
     public void ThreatListsWhatEachEnemyWillStrikeWithAndTheEnemyPhasePrintsTheSame()
     {
-        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nthreat wren from 4,6\nmove wren 4,6\nthreat wren from 3,7\nthreat wren\nwait wren\nend\n");
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend !\nthreat wren from 4,6\nmove wren 4,6\nthreat wren from 3,7\nthreat wren\nwait wren\nend !\n");
 
         const string Archer = "Archer 2 from 5,5 with Iron Bow (slot 1): acc 70% dmg 6 crit 0%; counter: none";
         const string Brigand = "Brigand from 3,6 with Iron Axe (slot 1): acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%";
@@ -1730,7 +1730,7 @@ public class CliPlayTests
         var lines = File.ReadAllLines(Path.Combine(repo, "docs", "transcripts", script)).Where(l => l.Length > 0).ToList();
         var kept = lines.Take(lines.Count - dropTail).Select(l => l.Replace("shieldbearer-1", "weir_shieldbearer-1", StringComparison.Ordinal));
         var path = Path.Combine(Path.GetTempPath(), "ironwake-456-" + Guid.NewGuid().ToString("N") + ".script");
-        File.WriteAllText(path, string.Join("\n", kept) + (dropTail > 0 ? "\nend\n" : "\n"));
+        File.WriteAllText(path, string.Join("\n", kept) + (dropTail > 0 ? "\nend !\n" : "\n"));
         try
         {
             return Run(out _, "play", "harrow_weir", "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", path, "--content", Fixture.RealContentDirectory());
@@ -2337,7 +2337,7 @@ public class CliPlayTests
     public void AnAnnouncedMapListsItsEventsAtTheStartAndMapListsThoseStillToFire()
     {
         var path = Path.Combine(Path.GetTempPath(), "ironwake-play-" + Guid.NewGuid().ToString("N") + ".script");
-        File.WriteAllText(path, "end\nend\nend\nmap\n");
+        File.WriteAllText(path, "end !\nend !\nend !\nmap\n");
         try
         {
             var weir = Run(out _, "play", "harrow_weir", "--seed", "7", "--script", path, "--content", Fixture.RealContentDirectory());

@@ -52,7 +52,7 @@ attack pell toll_warden-1
 move captain 6,2
 attack captain archer-1
 wait wren
-end
+end !
 move teodor 6,5
 move pell 6,3
 attack pell bandit_leader-1

@@ -94,7 +94,7 @@ move dunstan 9,7
 wait dunstan
 move ottilie 8,6
 wait ottilie
-end
+end !
 move keziah 13,4
 attack keziah archer-1
 move captain 12,3
@@ -107,7 +107,7 @@ move ottilie 11,6
 wait ottilie
 move dunstan 10,6
 wait dunstan
-end
+end !
 move teodor 14,5
 attack teodor archer-1
 move pell 12,4
@@ -142,5 +142,5 @@ wait captain
 wait teodor
 wait dunstan
 wait keziah
-end
+end !
 attack pell weir_foreman-1

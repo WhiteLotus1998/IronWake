@@ -38,7 +38,7 @@ move captain 9,5
 attack captain soldier-1
 move pell 10,5
 attack pell soldier-1
-end
+end !
 move dunstan 13,7
 wait dunstan
 move captain 10,6
@@ -58,7 +58,7 @@ move ottilie 12,6
 wait ottilie
 threat captain
 wait captain
-end
+end !
 recall 95
 move captain 12,8
 wait captain
@@ -70,7 +70,7 @@ move dunstan 14,10
 wait dunstan
 move wren 15,3
 wait wren
-end
+end !
 move captain 13,11
 wait captain
 move dunstan 14,11
@@ -82,10 +82,10 @@ wait pell
 move wren 15,6
 wait wren
 threat captain
-end
+end !
 attack pell brigand-6
 attack ottilie soldier-3
 move dunstan 14,7
 attack dunstan hexer-1 !
 wait captain
-end
+end !

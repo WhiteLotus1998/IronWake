@@ -39,6 +39,13 @@ public class ProtocolSessionTests
             }
 
             var w = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (w[0] == "end" && w.Length == 2 && w[1] == "!")
+            {
+                // The console's confirm on an end with a unit lethal if all land (issue 1093) is the protocol's "anyway".
+                yield return """{"type":"end","anyway":true}""";
+                continue;
+            }
+
             Command? command = w[0] switch
             {
                 "move" => new Move(w[1], Coord(w[2])),

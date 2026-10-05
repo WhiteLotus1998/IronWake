@@ -12,7 +12,7 @@ end
 move ottilie 8,3
 attack ottilie hexer-1
 item wren 2
-end
+end !
 move ottilie 8,2
 attack ottilie rider-1
 attack wren rider-1

@@ -357,7 +357,7 @@ d  archer-2         Archer L1 bowman           9,6    hp 17/17  Forest  group ro
 A  captain          Alder Fenn L1 cadet        7,6    hp 22/22  Plain  captain  done
 B  maud             Maud L1 chaplain           6,7    hp 17/17  Plain  done
 a  soldier-1        Soldier L1 pikeman         7,5    hp 11/20  Plain  group mill, guard, awake
-> end
+> end !
 Lethal if all land: Maud (Archer 2 for 8, Soldier for 11, against 17 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -565,7 +565,7 @@ b  archer-1         Archer L1 bowman           8,5    hp 9/17   Fort (heals 20 p
 d  archer-2         Archer L1 bowman           9,6    hp 17/17  Forest  group road, aggressive
 A  captain          Alder Fenn L1 cadet        8,6    hp 22/22  Plain  captain  done
 B  maud             Maud L1 chaplain           7,6    hp 9/17   Plain  done
-> end
+> end !
 Lethal if all land: Maud (Archer 1 for 8, Archer 2 for 8, against 9 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --

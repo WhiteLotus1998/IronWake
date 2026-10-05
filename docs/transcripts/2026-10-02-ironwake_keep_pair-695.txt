@@ -915,7 +915,7 @@ A unit defends the front nearest it, within 3 tiles. The hunter strikes only the
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
-> end
+> end !
 Lethal if all land: Ottilie (Archer 1 for 7, Brigand 1 for 13, Soldier 1 for 10, against 19 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -1520,7 +1520,7 @@ Threat on Alder Fenn at 10,5 (Plain):
   If all land: 11 against 25 hp
   Front: defends the gate
   Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
-> end
+> end !
 Lethal if all land: Ottilie (Archer 1 for 7, Brigand 1 for 13, against 19 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -1837,7 +1837,7 @@ A unit defends the front nearest it, within 3 tiles. The hunter strikes only the
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
-> end
+> end !
 Lethal if all land: Ottilie (Archer 1 for 7, Brigand 1 for 13, against 19 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -2164,7 +2164,7 @@ Threat on Wren at 10,1 (Plain):
   If all land: 18 against 15 hp
   Front: defends the north
   Sworn Hunter hunts the north next: 2 defenders, 33 hp (weakest); strikes only its defenders
-> end
+> end !
 Lethal if all land: Ottilie (Archer 1 for 7, Archer 2 for 7, Brigand 1 for 13, Hexer for 11, against 19 hp)
 Lethal if all land: Teodor (Archer 2 for 4, Brigand 1 for 10, against 13 hp)
 Lethal if all land: Wren (Archer 1 for 6, Sworn Hunter for 12, against 15 hp)
@@ -2542,7 +2542,7 @@ A unit defends the front nearest it, within 3 tiles. The hunter strikes only the
 Sworn Hunter hunts the north next: no defenders (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
-> end
+> end !
 Lethal if all land: Ottilie (Archer 1 for 7, Archer 2 for 7, Brigand 1 for 13, against 18 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
@@ -2961,7 +2961,7 @@ Threat on Dunstan at 10,10 (Plain):
   If all land: 2 against 18 hp
   Front: defends the south
   Sworn Hunter hunts the south next: 2 defenders, 37 hp (weakest); strikes only its defenders
-> end
+> end !
 Lethal if all land: Pell (Archer 1 for 9, against 9 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
@@ -3217,7 +3217,7 @@ Threat on Alder Fenn at 9,5 (Plain):
   If all land: 27 against 25 hp
   Front: defends the gate
   Sworn Hunter hunts the south next: 2 defenders, 37 hp (weakest); strikes only its defenders
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 1 for 3, Archer 2 for 3, Archer 3 for 3, Brigand 4 for 9, Brigand 5 for 9, against 25 hp)
 Lethal if all land: Ottilie (Archer 2 for 7, Archer 3 for 7, Brigand 4 for 13, Brigand 5 for 13, against 18 hp)
 -- Player phase ends, turn 7 --
@@ -3471,7 +3471,7 @@ Threat on Teodor at 11,10 (Plain):
   If all land: 25 against 14 hp
   Front: defends the south
   Sworn Hunter hunts the south next: 2 defenders, 32 hp (weakest); strikes only its defenders
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 1 for 2, Archer 2 for 2, Archer 3 for 2, Brigand 4 for 8, Brigand 6 for 8, against 13 hp)
 Lethal if all land: Ottilie (Archer 1 for 7, Archer 2 for 7, Brigand 4 for 13, Brigand 6 for 13, Soldier 5 for 10, against 15 hp)
 Lethal if all land: Teodor (Archer 2 for 4, Brigand 6 for 10, Sworn Hunter for 11, against 14 hp)
@@ -3671,7 +3671,7 @@ A unit defends the front nearest it, within 3 tiles. The hunter strikes only the
 Sworn Hunter hunts the south next: no defenders (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter, Hask
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 1 for 2, Archer 2 for 2, Archer 3 for 2, Soldier 5 for 5, against 1 hp)
 Lethal if all land: Ottilie (Archer 2 for 7, Archer 3 for 7, Brigand 6 for 13, Soldier 5 for 10, against 5 hp)
 -- Player phase ends, turn 9 --

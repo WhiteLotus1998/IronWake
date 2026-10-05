@@ -75,7 +75,7 @@ wait captain
 threat keziah
 threat teodor
 threat pell
-end
+end !
 forecast keziah brigand-3
 move teodor 12,6
 move pell 11,6

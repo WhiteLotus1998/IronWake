@@ -19,7 +19,7 @@ threat rook from 1,7
 attack dunstan soldier-1
 move rook 1,7
 wait rook
-end
+end !
 recall
 recall 22
 wait dunstan
@@ -38,5 +38,5 @@ move dunstan 14,4
 wait dunstan
 move rook 2,3
 wait rook
-end
+end !
 leave

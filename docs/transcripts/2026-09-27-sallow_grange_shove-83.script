@@ -20,7 +20,7 @@ wait ottilie
 wait ansgar
 wait captain
 wait pell
-end
+end !
 forecast pell soldier-1 from 3,4
 forecast ottilie brawler-1 from 3,7
 move pell 3,4

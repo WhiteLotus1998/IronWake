@@ -50,11 +50,11 @@ wait teodor
 wait wren
 move ottilie 10,2
 attack ottilie bandit_leader-1
-end
+end !
 attack captain bandit_leader-1
 forecast teodor bandit_leader-1
 attack teodor bandit_leader-1
 move wren 9,0
 forecast wren bandit_leader-1
 attack wren bandit_leader-1
-end
+end !

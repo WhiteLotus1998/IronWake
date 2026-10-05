@@ -45,7 +45,7 @@ move keziah 13,3
 move maud 12,5
 attack maud sworn_captain-1
 attack keziah sworn_captain-1
-end
+end !
 recall 77
 move keziah 13,3
 wait keziah

@@ -292,7 +292,7 @@ Starting Alone  turn 4 of 10  player phase  rout  recall 3
 
 b  archer-1         Archer L1 bowman           5,1    hp 17/17  Plain  group hill, guard, awake
 A  captain          Alder Fenn L1 cadet        5,2    hp 3/22   Plain  captain  done
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer for 5, against 3 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --

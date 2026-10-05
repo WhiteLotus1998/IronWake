@@ -42,7 +42,7 @@ threat bet
 threat teodor
 threat ottilie
 threat maud
-end
+end !
 threat bet from 5,2
 forecast maud postern_keeper-1 from 2,3
 move maud 2,3

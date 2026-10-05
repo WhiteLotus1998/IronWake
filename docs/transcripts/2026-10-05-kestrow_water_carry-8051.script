@@ -34,7 +34,7 @@ move captain 8,8
 attack captain brigand-3
 move wren 10,8
 item wren 2
-end
+end !
 attack pell archer-1 cinder !
 move teodor 11,5
 attack teodor shieldbearer-1

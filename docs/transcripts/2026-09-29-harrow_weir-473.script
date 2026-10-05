@@ -73,7 +73,7 @@ threat captain
 threat teodor
 threat ottilie
 threat keziah
-end
+end !
 recall 84
 move keziah 7,6
 wait keziah

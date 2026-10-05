@@ -87,7 +87,18 @@ public sealed class ProtocolSession
                 throw new ProtocolException("a request is a JSON object");
             }
 
-            return request.TryGetProperty("query", out _) ? Query(request) : Command(ProtocolJson.ReadCommand(request));
+            if (request.TryGetProperty("query", out _))
+            {
+                return Query(request);
+            }
+
+            var anyway = request.TryGetProperty("anyway", out var flag) && flag.ValueKind switch
+            {
+                JsonValueKind.True => true,
+                JsonValueKind.False => false,
+                _ => throw new ProtocolException("field 'anyway' must be true or false"),
+            };
+            return Command(ProtocolJson.ReadCommand(request), anyway);
         }
         catch (ProtocolException e)
         {
@@ -95,10 +106,15 @@ public sealed class ProtocolSession
         }
     }
 
-    private string Command(Command command)
+    private string Command(Command command, bool anyway = false)
     {
         var events = new List<GameEvent?>();
         var lethal = command is EndPhase ? Queries.Lethal(_state, _content, PlayerView) : null;
+        if (lethal is { Count: > 0 } && !anyway && _state.Phase == Side.Player && !_state.Outcome.IsOver)
+        {
+            return LethalEndRefusal(lethal);
+        }
+
         var passed = command is EndPhase ? EscapeCount.PassedByEnding(_state, _content) : null;
         var result = Resolver.Apply(_state, _content, command);
         if (!result.Accepted)
@@ -154,27 +170,7 @@ public sealed class ProtocolSession
             w.WriteEndArray();
             if (lethal is not null)
             {
-                w.WriteStartArray("lethal");
-                foreach (var threat in lethal)
-                {
-                    w.WriteStartObject();
-                    w.WriteString("unit", threat.Unit.Id);
-                    w.WriteNumber("total", threat.Total);
-                    w.WriteNumber("hp", threat.Unit.Hp);
-                    w.WriteStartArray("strikers");
-                    foreach (var striker in threat.Strikers)
-                    {
-                        w.WriteStartObject();
-                        w.WriteString("enemy", striker.Enemy.Id);
-                        w.WriteNumber("damage", striker.Damage);
-                        w.WriteEndObject();
-                    }
-
-                    w.WriteEndArray();
-                    w.WriteEndObject();
-                }
-
-                w.WriteEndArray();
+                WriteLethal(w, lethal);
             }
 
             if (passed is not null)
@@ -192,6 +188,55 @@ public sealed class ProtocolSession
             ProtocolJson.WriteState(w, _state, _content, full: false, PlayerView);
             w.WriteEndObject();
         });
+    }
+
+    /// <summary>
+    /// The refusal of an <c>end</c> while a unit is lethal if all land (issue 1093): reason
+    /// <c>lethalUnconfirmed</c>, the console's lines as the message, and the same <c>lethal</c> array an
+    /// ended phase carries, so a renderer can show the warned death before it asks again with
+    /// <c>"anyway": true</c>. Nothing is applied.
+    /// </summary>
+    private string LethalEndRefusal(IReadOnlyList<LethalThreat> lethal)
+    {
+        var names = UnitNames.Of(_state, _content);
+        var message = string.Join("\n", lethal.Select(l => PlaySession.LethalLine(l, names)))
+            + $"\nlethal if all land: {string.Join(", ", lethal.Select(l => names[l.Unit.Id]))}; send \"anyway\": true to end anyway";
+        return ProtocolJson.Write(w =>
+        {
+            w.WriteStartObject();
+            w.WriteBoolean("ok", false);
+            w.WriteStartObject("error");
+            w.WriteString("reason", "lethalUnconfirmed");
+            w.WriteString("message", message);
+            w.WriteEndObject();
+            WriteLethal(w, lethal);
+            w.WriteEndObject();
+        });
+    }
+
+    private static void WriteLethal(Utf8JsonWriter w, IReadOnlyList<LethalThreat> lethal)
+    {
+        w.WriteStartArray("lethal");
+        foreach (var threat in lethal)
+        {
+            w.WriteStartObject();
+            w.WriteString("unit", threat.Unit.Id);
+            w.WriteNumber("total", threat.Total);
+            w.WriteNumber("hp", threat.Unit.Hp);
+            w.WriteStartArray("strikers");
+            foreach (var striker in threat.Strikers)
+            {
+                w.WriteStartObject();
+                w.WriteString("enemy", striker.Enemy.Id);
+                w.WriteNumber("damage", striker.Damage);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+            w.WriteEndObject();
+        }
+
+        w.WriteEndArray();
     }
 
     private static void WriteNullable(Utf8JsonWriter w, string name, int? value)

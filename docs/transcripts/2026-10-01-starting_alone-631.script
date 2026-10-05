@@ -19,7 +19,7 @@ forecast captain archer-1 from 5,2
 forecast captain archer-1 1 art feint from 5,2
 move captain 5,2
 attack captain archer-1 1
-end
+end !
 recall list
 recall 22
 threat captain from 5,4

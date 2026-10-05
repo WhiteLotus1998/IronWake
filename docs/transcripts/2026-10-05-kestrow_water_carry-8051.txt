@@ -1299,7 +1299,7 @@ C  wren             Wren L1 cadet              10,8   hp 19/20  Plain  done
 exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Alder Fenn no way to an exit, Maud no way to an exit, Pell no way to an exit, Rook 2 turns to an exit (last start: turn 6), Teodor no way to an exit, Wren no way to an exit
 carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
-> end
+> end !
 Lethal if all land: Maud (Rider 1 for 11, Rider 2 for 11, against 17 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --

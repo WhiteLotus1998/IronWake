@@ -16,7 +16,7 @@ wait wren
 move ottilie 7,2
 wait ottilie
 wait teodor
-end
+end !
 attack pell brigand-1
 move dunstan 7,4
 wait dunstan
@@ -27,7 +27,7 @@ wait wren
 wait ottilie
 move teodor 10,4
 wait teodor
-end
+end !
 exit wren
 move pell 6,3
 attack pell rider-4
@@ -36,14 +36,14 @@ move ottilie 8,2
 attack ottilie rider-4
 move captain 7,2
 attack captain rider-4
-end
+end !
 move ottilie 6,2
 attack ottilie marauder-1
 move captain 9,0
 wait captain
 move teodor 10,3
 wait teodor
-end
+end !
 move ottilie 6,1
 attack ottilie marauder-1
 wait captain

@@ -19,7 +19,7 @@ wait pell
 move ottilie 1,7
 wait ottilie
 wait ansgar
-end
+end !
 move ottilie 4,8
 attack ottilie soldier-1
 move pell 3,7
@@ -32,7 +32,7 @@ move ansgar 5,6
 attack ansgar archer-2
 canto ansgar stay
 attack teodor brawler-1
-end
+end !
 move ottilie 4,7
 wait ottilie
 item teodor 2

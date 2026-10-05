@@ -7,7 +7,7 @@ attack ottilie wingrider-2
 attack captain wingrider-1
 move wren 4,7
 attack wren wingrider-2
-end
+end !
 move ottilie 2,9
 attack ottilie wingrider-2
 move wren 4,8
