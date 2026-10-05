@@ -1,0 +1,42 @@
+# Issue 1044 step 2 (rounds 368, 369): the announced turn-3 wake of the south group on Rook's pick, measured.
+# Head 1966dd0 plus the spike on branch experiment/seen-coming-1044 (not on main), Release, two-roll average,
+# 200 seeds. ironwake-sim --full <the_field with recruit:keziah at 1,13 replaced by recruit:rook>.
+# field_rook.map keeps `seen_far: rook 2`; field_rook_t3.map has `seen_far: rook 2; south turn 3`: with Rook
+# on the board, the south group (the rider at 16,14) wakes as turn 3's enemy phase begins, printed on the
+# board from turn 1. The sighting does not fix the route_drift route. Wins + losses + timeouts = 200.
+
+| seat at 1,13 | lever | wins | losses | timeouts | Rook atk / dmg / abs | Rook drop (se) |
+|---|---|---|---|---|---|---|
+| Rook | none (0248 baseline, field-rook-seen-far-off-1044.txt) | 86 | 60 | 54 | 426 / 5549 / 310 | -0.025 (0.049) |
+| Rook | south wakes turn 3 | 89 | 64 | 47 | 385 / 5353 / 380 | -0.010 (0.049) |
+
+Reading, against round 369 (report each column, say which one moved):
+- Wins +3, losses +4, timeouts -7. The lever moved the timeout column, about evenly into wins and losses,
+  and every change is inside one se of a two-row difference (about 14 at 200 seeds). Its sign is unknown.
+- It misses 120 by 31. Under 0246 amended and round 368 it is not a gate-1 lever, and it lowered nothing,
+  so it is not a recorded tension lever either. It does not ship on the field (DECISIONS/0249).
+- Gates 2, 3, 5 to 8 passed on the lever row. Gate 4 flagged Rook as on the baseline.
+
+## Three timeout seeds traced on the baseline (round 369 point 4)
+
+`ironwake-sim --trace field_rook.map <seed>`, seeds 1 to 40: 15 won, 7 captain deaths, 18 timeouts. The
+first three timeouts are 4, 7 and 9; 11 and 14 were read as well and match.
+
+| seed | recruits fallen (turn) | boss hp at the limit | captain swings at the boss |
+|---|---|---|---|
+| 4  | rook 4, pell 4, ottilie 5, teodor 6; maud lives | 13 of 25 | 0 (waits 13 turns) |
+| 7  | rook 2, ottilie 2, maud 5, teodor 7, pell 8 | 15 | 0 (waits 12) |
+| 9  | teodor 2, rook 4, ottilie 5, pell 6, maud 7 | 15 | 0 (waits 12) |
+| 11 | rook 4, pell 6, teodor 7, maud 7, ottilie 8 | 14 | 0 |
+| 14 | rook 4, ottilie 5, teodor 6, pell 7, maud 9 | 14 | 0 |
+
+- The timeouts are not boards with the party intact. In all five the company is gone by turn 9 (seed 4
+  keeps Maud), and the captain spends the last ten-odd turns alone against a boss whose round is 10+6+6
+  (seed 4, turn 9: the captain from 23 to 1). The veto refuses every swing at him, rightly. So the
+  timeouts are losses on the clock. They do not point at the limit or at the boss's approach.
+- Rook falls on turn 2 to 4 in all five. Three ways: a strike she takes into a counter (seed 7, turn 2:
+  brigand-1 at 8,13); a stop beside the sleeping rider, which wakes and strikes her, since the key prices
+  only woken enemies (seed 4, turn 3, 14,13); and `attack ... !` into a lethal counter (seeds 4 and 9).
+  A recruit's strike takes no veto by design (0248), so this is the crude player, not the board.
+- Where the arm loses its games is turns 2 to 9, the pickets and the south group, and that loss goes
+  past Rook: four recruits fall in each traced game. Hand plays on this arm (Chat 5150, Code 1340) won.
