@@ -179,6 +179,41 @@ public class CampaignCliTests
         }
     }
 
+    /// <summary>
+    /// Issue 1126 (Lotus's rename): Rook's unique class shows as the Drake Warden, its id `drover` kept,
+    /// and no line naming it reads a bare "Warden", the Chaplain's advanced form.
+    /// </summary>
+    [Fact]
+    public void RooksClassIsShownAsTheDrakeWardenAndNeverAsABareWarden()
+    {
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-campaign-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(path, "classes\n");
+        try
+        {
+            var output = Run(out _, "campaign", "--seed", "3", "--script", path, "--content", Fixture.RealContentDirectory());
+            var lines = output.Split('\n');
+
+            Assert.Equal("Drake Warden", Ironwake.Core.Tests.Maps.MapFixture.Content.Class("drover").Name);
+            Assert.Single(lines, l => l.StartsWith("  Drake Warden (from Skyrider;", StringComparison.Ordinal) && l.Contains("[Rook's other door; loses doubling]", StringComparison.Ordinal));
+            Assert.Single(lines, l => l.StartsWith("  Warden (from Chaplain;", StringComparison.Ordinal));
+            foreach (var line in lines.Where(l => l.Contains("Rook", StringComparison.Ordinal) || l.Contains("Skyrider", StringComparison.Ordinal)))
+            {
+                for (var at = line.IndexOf("Warden", StringComparison.Ordinal); at >= 0; at = line.IndexOf("Warden", at + 1, StringComparison.Ordinal))
+                {
+                    Assert.True(at >= 6 && line.Substring(at - 6, 6) == "Drake ", $"a bare Warden names Rook's class: {line}");
+                }
+            }
+
+            var card = Ironwake.Core.Tests.Maps.MapFixture.Content.Campaign.Quests.Single(q => q.Id == "rook_1").After;
+            Assert.Contains(card, l => l.Contains("The Drake Warden is open to Rook", StringComparison.Ordinal));
+            Assert.DoesNotContain(Ironwake.Core.Tests.Maps.MapFixture.Content.Campaign.Quests.SelectMany(q => q.Before.Concat(q.After)), l => l.Contains("Drover", StringComparison.Ordinal));
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
     private static string Play(out int exit, string script, params string[] extra)
     {
         var path = Path.Combine(Path.GetTempPath(), "ironwake-campaign-" + Guid.NewGuid().ToString("N") + ".script");

@@ -51,7 +51,7 @@ public enum AbilityTrigger
     /// <summary>After the holder's own attack lands a hit on an enemy it leaves alive: the Vanguard's Opening (issue 772).</summary>
     OnHit,
 
-    /// <summary>When the holder's drake breathes: the Drover's Deep Rime (issue 872).</summary>
+    /// <summary>When the holder's drake breathes: the Drake Warden's Deep Rime (issue 872).</summary>
     OnBreath,
 }
 
@@ -263,7 +263,7 @@ public sealed record OpeningEffect(int Def, int Res) : AbilityEffect
 }
 
 /// <summary>
-/// The Drover's drake bite (issue 872, DESIGN section 3): in a combat at distance 1 in which one of the
+/// The Drake Warden's drake bite (issue 872, DESIGN section 3): in a combat at distance 1 in which one of the
 /// holder's lance strikes hits and both units still stand after the exchange, the drake bites the
 /// opponent once for a fixed <see cref="HalfGrown"/> while the drake is Half-grown and <see cref="Grown"/>
 /// from Grown on, through no Def. It is added damage, not a strike: it never rolls, never crits, and
@@ -276,7 +276,7 @@ public sealed record BiteEffect(int HalfGrown, int Grown) : AbilityEffect
 }
 
 /// <summary>
-/// The Drover's long carry (issue 872): from Grown, after the holder sets a carried ally down
+/// The Drake Warden's long carry (issue 872): from Grown, after the holder sets a carried ally down
 /// (<see cref="DrakeCarry"/>) it may move again on the Move the carry left, a Canto with no strike.
 /// </summary>
 public sealed record LongCarryEffect : AbilityEffect
@@ -285,7 +285,7 @@ public sealed record LongCarryEffect : AbilityEffect
 }
 
 /// <summary>
-/// The Drover's deep rime (issue 872): at Unbroken, the Rime ice the holder's breath makes (<see cref="Rime"/>)
+/// The Drake Warden's deep rime (issue 872): at Unbroken, the Rime ice the holder's breath makes (<see cref="Rime"/>)
 /// holds <see cref="Rounds"/> more full rounds, an enemy phase and a player phase each, before it thaws.
 /// </summary>
 public sealed record DeepRimeEffect(int Rounds) : AbilityEffect

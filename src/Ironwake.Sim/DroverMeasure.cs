@@ -112,7 +112,7 @@ public static class DroverMeasure
     /// <summary>The report <c>--drover</c> prints: per level and stage, the sidegrade measures, the table, and the price ceiling per phase; the last line is the verdict.</summary>
     public static IReadOnlyList<string> Lines(GameContent content, RollScheme scheme)
     {
-        var lines = new List<string> { "drover: Rook in the Drover against the Sky Captain, expected damage per combat on plain (issues 872, 882)" };
+        var lines = new List<string> { "drover: Rook as the Drake Warden against the Sky Captain, expected damage per combat on plain (issues 872, 882)" };
         var failed = false;
         foreach (var level in Levels)
         {

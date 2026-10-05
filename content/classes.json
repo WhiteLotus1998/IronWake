@@ -217,7 +217,7 @@
     },
     {
       "id": "drover",
-      "name": "Drover",
+      "name": "Drake Warden",
       "advances": "skyrider",
       "unique": "rook",
       "unlockedBy": "rook_1",

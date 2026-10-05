@@ -87,7 +87,7 @@ public sealed record UnitClass(
 
     /// <summary>
     /// Whether a unit in the class strikes once in every combat whatever the speed gap (issue 872, the
-    /// Drover): it never doubles, on its own attacks or on its counters (<see cref="Combat.Doubles"/>).
+    /// Drake Warden): it never doubles, on its own attacks or on its counters (<see cref="Combat.Doubles"/>).
     /// </summary>
     public bool SingleStrike { get; init; }
 
@@ -112,6 +112,6 @@ public enum SidegradeMeasure
     /// <summary>Str (Mag for a spell) plus the Mt of the strongest weapon the class strikes with (issue 706).</summary>
     Damage,
 
-    /// <summary>The strikes one combat may make: 2 for a class that can double, 1 for one that never does (issue 872, the Drover).</summary>
+    /// <summary>The strikes one combat may make: 2 for a class that can double, 1 for one that never does (issue 872, the Drake Warden).</summary>
     Doubling,
 }
