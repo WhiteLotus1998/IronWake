@@ -1,0 +1,29 @@
+using Ironwake.Cli;
+
+namespace Ironwake.Core.Tests.Content;
+
+/// <summary>
+/// Code's warm replay of Harrow Weir under DECISIONS/0237 (seed 1360): a fight with the
+/// south brigand at 9,7 wakes the ford and, through the link, the weir; the woken Foreman,
+/// with no strike in reach, walks off his hill down the east bank, strikes Teodor from
+/// 12,10 on a tile the plain-weapon veto passes, and falls there on turn 9 to Dunstan,
+/// Teodor's Long Thrust and the captain's Full Measure, after two Recalls on turn 6.
+/// </summary>
+[Collection("console")]
+public class HarrowWeirReplayTests
+{
+    [Fact]
+    public void HarrowWeirReplayOnSeed1360IsWonOnTurn9()
+    {
+        var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(root, "docs", "transcripts", "2026-10-05-harrow_weir-1360.script");
+        var args = new[] { "play", "harrow_weir", "--seed", "1360", "--scheme", "two", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
+
+        var output = ConsoleCapture.Run(() => Program.Main(args));
+
+        Assert.Contains("The weir group wakes (noise)\n", output);
+        Assert.Contains("Weir Foreman moves 12,9 -> 12,10\n", output);
+        Assert.Contains("Battle won: defeat_boss\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(root, "docs", "transcripts", "2026-10-05-harrow_weir-1360.txt")).ReplaceLineEndings("\n"), output);
+    }
+}
