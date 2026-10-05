@@ -139,6 +139,21 @@ public class SupportConversationTests
     }
 
     [Fact]
+    public void TheShippedWrenAndPellBPlaysAfterCAndEndsOnTheFieldBookInPellsLap()
+    {
+        var scene = Real.Scenes.Single(s => s.Id == "wren_pell_b");
+        var heardC = Company(Real, 28).SeeSupport("wren", "pell", Real).Record;
+        var lines = CampaignSession.ConversationLines(heardC, Real, scene);
+
+        Assert.Equal(new SceneSupport("wren", "pell", "B"), scene.Support);
+        Assert.InRange(scene.Lines.Count, 1, 20);
+        Assert.Equal("-- Wren and Pell, support B --", lines[0]);
+        Assert.Equal("Wren and Pell talk (support B)", heardC.SeeSupport("pell", "wren", Real).Text);
+        Assert.Equal("Wren and Pell have no conversation waiting", Company(Real, 27).SeeSupport("wren", "pell", Real).Record.SeeSupport("wren", "pell", Real).Text);
+        Assert.EndsWith("in Pell's lap.", scene.Lines[^1].Text);
+    }
+
+    [Fact]
     public void TheRosterNamesTheWaitingConversationAndItsCommand()
     {
         var content = With(("wren_pell_c", WrenPellC));
