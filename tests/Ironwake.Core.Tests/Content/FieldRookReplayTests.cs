@@ -27,4 +27,28 @@ public class FieldRookReplayTests
         Assert.DoesNotContain("Recalled to state", output);
         Assert.Equal(File.ReadAllText(Path.Combine(root, "docs", "transcripts", "2026-10-05-the_field-1390.txt")).ReplaceLineEndings("\n"), output);
     }
+
+    /// <summary>
+    /// Code's warm replay of the field on Rook's pick under DECISIONS/0237 (seed 1440): the captain
+    /// spares Keziah on turn 2 instead of Rook turning her, the north route is taken, so the drift
+    /// sends the rider to 12,8 alone; the boss sallies twice, refuses and goes home, and falls on his
+    /// fort on turn 13 to Pell's Gust, Maud's Radiance and the captain's Full Measure, with no Recall
+    /// spent.
+    /// </summary>
+    [Fact]
+    public void TheFieldOnRooksPickReplayOnSeed1440IsWonOnTurn13WithKeziahSpared()
+    {
+        var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(root, "docs", "transcripts", "2026-10-05-the_field-1440.script");
+        var args = new[] { "campaign", "--seed", "1440", "--from", "the_field", "--pick", "rook", "--level", "5", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
+
+        var output = ConsoleCapture.Run(() => Program.Main(args));
+
+        Assert.Contains("Alder Fenn talks Keziah round: spared, off the field (14 hp)\n", output);
+        Assert.Contains("The south group wakes and makes for 12,8, the crossing you took: Rider\n", output);
+        Assert.Contains("Sworn Captain moves 18,6 -> 15,5 via 18,5 17,5 16,5\n", output);
+        Assert.Contains("Sworn Captain falls at 18,6\n", output);
+        Assert.DoesNotContain("Recalled to state", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(root, "docs", "transcripts", "2026-10-05-the_field-1440.txt")).ReplaceLineEndings("\n"), output);
+    }
 }
