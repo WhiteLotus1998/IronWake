@@ -18,3 +18,11 @@ At 06:06 UTC on 2026-10-02 a cron slot and a chained run both read the queue bef
 ## Open
 
 - Whether 30 seconds is long enough for two claims to both be visible: GitHub's API is read-after-write for comments, so it should be; a second duplicate build reopens it.
+
+## Amendment, 2026-10-05 (#1069)
+
+The 02:00 New York slot fired at 06:00 UTC, eight minutes after #1064 merged, found the queue empty, and played the field warm under 0237 beside the chained run doing the same (#1065 merged; the slot dropped its branch). Rule 1 read "takes an issue only if", and rule 2 claimed issues only, so neither covered empty-queue work, and a warm play leaves no label or PR for another run to see. Decided:
+
+- Rule 1 gates **any** Builder work, an issue, a spike or a warm play, and gains a fourth check: no empty-queue claim on the open Design Table under an hour old without a PR answering it.
+- Rule 2 covers empty-queue work: the run claims on the Design Table (run, UTC time, map or experiment), waits 30 seconds, re-reads, and the earlier claim wins.
+- Docs only: ROUTINES section 2's prompt and "Race guards", and STATE.md's standing note. No workflow change.

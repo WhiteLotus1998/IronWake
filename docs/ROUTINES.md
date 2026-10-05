@@ -67,12 +67,14 @@ this stored text: the file is newer.
 Start by reading docs/STATE.md, docs/DIALOGUE.md, docs/DESIGN.md. Then
 read the Design Table issue. If Chat has posted since your last reply,
 reply first, signed "— Code", and update docs/DIALOGUE.md if anything
-was agreed. Before taking an issue, apply the race guards: while the
-repo variable IRONWAKE_CHAIN is `on`, a scheduled slot waits 90
-seconds and takes an issue only if no open issue took `in-progress` in
-the last hour, no Builder PR (`issue/`, `claude/issue-`, `experiment/`)
-is open, and the newest Builder merge is more than 30 minutes old;
-otherwise it stops here. Then pick the highest-priority open issue
+was agreed. Before any Builder work (an issue, a spike, or a warm
+play), apply the race guards: while the repo variable IRONWAKE_CHAIN
+is `on`, a scheduled slot waits 90 seconds and goes on only if no open
+issue took `in-progress` in the last hour, no Builder PR (`issue/`,
+`claude/issue-`, `experiment/`) is open, the newest Builder merge is
+more than 30 minutes old, and no empty-queue claim on the Design Table
+(below) is under an hour old without a PR answering it; otherwise it
+stops here. Then pick the highest-priority open issue
 labeled `ready` that is not `blocked` or `in-progress` (priority:
 `bug`, then lowest phase, then lowest number), claim it (label
 `in-progress`, post a one-line claim comment naming this run, wait 30
@@ -88,7 +90,11 @@ If the issue you shipped was a map or a system that changes play,
 play it by hand through --script before opening the PR and add a
 PLAYTEST.md entry. Say what was tense and what wasn't.
 
-If nothing is `ready` and fewer than three experiments wait on a
+If nothing is `ready`, claim the empty-queue work before doing it:
+post a one-line claim on the Design Table naming this run, the UTC
+time, and the map or experiment, wait 30 seconds, re-read the Table,
+and if an earlier claim from another run is there, exit. Then, if
+fewer than three experiments wait on a
 deciding play (DIALOGUE.md's Experiments list), pick an experiment from
 DESIGN.md section 13 that hasn't been tried (check DECISIONS/), propose
 it on the Design Table in one paragraph, and spike it on
@@ -109,11 +115,11 @@ the PR as a draft.
 
 At 06:06 UTC on 2026-10-02 a cron slot and a chained run both read the queue before either labeled, built #704 slice 4 twice and rotated the Table twice (#732). The label alone cannot settle that tie, because two runs can both read the queue before either writes it. These three guards bind every Builder body, cron or chained, and every Code body that rotates the Table.
 
-1. **Chain on, the slot defers.** While `IRONWAKE_CHAIN` is `on`, a scheduled Builder slot does housekeeping and the Table first, then waits 90 seconds, and takes an issue only if all three hold: no open issue took `in-progress` in the last hour; no Builder PR (`issue/`, `claude/issue-`, `experiment/`) is open; the newest Builder merge into `main` is more than 30 minutes old. If any fails, the chain owns the queue and the slot exits without taking one. With the chain off, the slot works the queue as the prompt says.
-2. **Claim, then verify.** Every Builder body, chained or cron, claims an issue in this order: label it `in-progress`; post a one-line claim comment on it naming the run (the slot's New York time, or "chain run woken by #N's merge") and the UTC time; wait 30 seconds; re-read the issue's comments. If a claim comment from another run carries an earlier timestamp, that run owns the issue: drop the work unpushed and exit (a chained run) or go back to the queue (a cron run, which may take the next issue under rule 1). Comment timestamps settle the tie the label cannot; GitHub orders them, not the runs' clocks.
+1. **Chain on, the slot defers.** While `IRONWAKE_CHAIN` is `on`, a scheduled Builder slot does housekeeping and the Table first, then waits 90 seconds, and does any Builder work at all (an issue, an experiment spike, or a 0237 warm play) only if all four hold: no open issue took `in-progress` in the last hour; no Builder PR (`issue/`, `claude/issue-`, `experiment/`) is open; the newest Builder merge into `main` is more than 30 minutes old; no empty-queue claim (rule 2) on the open Design Table is under an hour old without a merged or open PR answering it. If any fails, the chain owns the queue and the slot exits without building, spiking or playing (#1069: on 2026-10-05 the 02:00 slot read rule 1 as about issues only and played the field warm beside the chained run, eight minutes after #1064 merged). With the chain off, the slot works the queue as the prompt says.
+2. **Claim, then verify.** Every Builder body, chained or cron, claims an issue in this order: label it `in-progress`; post a one-line claim comment on it naming the run (the slot's New York time, or "chain run woken by #N's merge") and the UTC time; wait 30 seconds; re-read the issue's comments. If a claim comment from another run carries an earlier timestamp, that run owns the issue: drop the work unpushed and exit (a chained run) or go back to the queue (a cron run, which may take the next issue under rule 1). Comment timestamps settle the tie the label cannot; GitHub orders them, not the runs' clocks. Empty-queue work has no issue to claim, so a run that spikes an experiment or plays a map warm claims on the open Design Table instead, with the same comment (run, UTC time, and the map or experiment), the same 30-second wait and re-read, and the same rule: the earlier claim wins and the later run exits unpushed (#1069).
 3. **Rotation re-checks.** A body rotating the Design Table (CLAUDE.md, "Where we talk") re-lists open `design-table` issues immediately before opening the next one, not only at the start of the run. If one opened since, it opens nothing and posts there. If two are ever open, the older stays and the newer is closed as a duplicate pointing to it (#732 was).
 
-**The stored prompt.** The prompt above is what Lotus's stored Builder routine should carry; the lines to paste once are its opening paragraph ("Read docs/ROUTINES.md section 2 at run time ...") and the sentences from "Before taking an issue, apply the race guards" to "and run the session protocol on it", placed just before the step that picks an issue (the paragraph that opens "The loop." in the stored text as of 2026-10-02, which carries no `in-progress` check at all). Until it is pasted the stored prompt carries neither, and what carries the guards is `docs/STATE.md`: every Builder prompt, cron or chained, starts by reading it, and its standing note sends the run here. Rule 2 is the one that holds even against a run that skims: a chained run and a slot that both take one issue both claim, and the later claim loses on GitHub's timestamps. The paste is a convenience ask, not a fork; after it, later changes to this section land without another paste.
+**The stored prompt.** The prompt above is what Lotus's stored Builder routine should carry; the lines to paste once are its opening paragraph ("Read docs/ROUTINES.md section 2 at run time ...") and the sentences from "Before any Builder work" to "and run the session protocol on it" and the empty-queue claim sentence after them, placed just before the step that picks an issue (the paragraph that opens "The loop." in the stored text as of 2026-10-02, which carries no `in-progress` check at all). Until it is pasted the stored prompt carries neither, and what carries the guards is `docs/STATE.md`: every Builder prompt, cron or chained, starts by reading it, and its standing note sends the run here. Rule 2 is the one that holds even against a run that skims: a chained run and a slot that both take one issue both claim, and the later claim loses on GitHub's timestamps. The paste is a convenience ask, not a fork; after it, later changes to this section land without another paste.
 
 ---
 
