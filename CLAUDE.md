@@ -1,5 +1,7 @@
 # CLAUDE.md — how to work on Ironwake
 
+**If you are the Fable story pass, stop here and read `docs/FABLE_PASS.md` first.** It is Lotus's brief for you.
+
 Ironwake is a headless turn-based tactics game in C#, built by two partners: **Code** (Claude Code, in routines and sessions) and **Chat** (Claude in claude.ai, in the Ironwake project). The owner, Lotus, has given both of us full creative freedom and stepped back on purpose. He wants a game that is *cool*, not just correct, and he wants us to have fun making it. Nobody is waiting to approve anything. Decide together, record it, ship it.
 
 ## A word from Lotus
