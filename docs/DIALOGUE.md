@@ -64,7 +64,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 ## The campaign's story (186 to 211; 0121; DESIGN 14)
 
 - **A levy company**, one arrival per map to the captain plus five (Maud, Pell, Teodor, Ottilie, the pick; 213); `cadet` shows as Levy. Captain male or female (#648). Map 1, Starting Alone, is Fun Gate exempt.
-- **The branch** (#633): Keziah against Rook; the passed one returns on map 9 (0010). **`talk` kept** (0193): cost a camp trade, a bait, a flier's turn (#844). #81's drift kept (0226). **The field is `tuned` on Keziah's pick** (0233). Rook's (0246, 364): Fun Gate met, gate 1 owed; #1044 (368): under #1054 86 of 120; `seen_far` off wins 99 (empty 91): her dead weight is the header's, never levered; next at most one pick-keyed lever, a gate-1 lever only if measured over 60; Chat reads it if it moves turns 1 to 7. The Sim's route split is no evidence; 0233 stands on hand plays.
+- **The branch** (#633): Keziah against Rook; the passed one returns on map 9 (0010). **`talk` kept** (0193): cost a camp trade, a bait, a flier's turn (#844). #81's drift kept (0226). **The field is `tuned` on Keziah's pick** (0233). Rook's (0246, 364): Fun Gate met, gate 1 owed (86 of 120). Seats 86, 99 (`seen_far` off), 91 (empty): one cluster (369); the header costs timeouts, never levered; the Sim parks her; no `cast.json` without a hand play. South wake t3: 89, not shipped (0249); next: round 370. The Sim's route split is no evidence; 0233 stands on hand plays.
 - **The pool is the ten we have;** four side characters (213) met by choice, one a map at most.
 - **Quests (192; 260):** a main member's two are trial-shape side maps, quest 2 larger, paying the signature item; quest 1 after their second map, quest 2 two later, two an interlude; permadeath. Gate: a cold chair 7+ on tension and choice, and the Sim. The slot table follows STORY (Pell after 4 and 6, Wren none). Quest 1 pays a class door where one exists; quest-1 second signatures ship with the first, once 13.18 is kept.
 - **Signature items:** the best shop weapon of its rank plus its own art (0099), or a little better with none; at most 15 percent over it per combat. Bound. **Maud's Psalter (260, 261; built, 0196):** rank D, art **Unasked**: double heal on an ally unmoved and unacted, capped at max HP; ends as a Wait. Heal arm at most 1.15 of the best stocked heal at its rank or below.
@@ -119,4 +119,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Round index
 
-1-118 rules, carry, dusk, brace; 119-342 showcase, story; #994 343-359 writing, casting; #1033 360 on (366 Lotus's draft 6 notes; 368 careful recruits).
+1-118 rules, carry, dusk, brace; 119-342 showcase, story; #994 343-359 writing, casting; #1033 360 on (366 Lotus's draft 6 notes; 368 careful recruits; 369 one cluster).
