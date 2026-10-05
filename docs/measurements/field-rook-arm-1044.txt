@@ -1,0 +1,49 @@
+# Issue 1044 step 1: why the heuristic barely uses Rook on the field (Rook's pick). Head 3f09f30, Release, two-roll average.
+# The board is the_field.map with the 1,13 slot changed (recruit:rook, recruit:keziah, or the line dropped).
+
+## Traces: ironwake-sim --trace field_rook.map <seed>, seeds 1 to 30
+
+Every seed opens the same way: Rook (Skyrider, move 7, 17 HP, Def 2) takes section 8's approach to 7,13,
+six tiles ahead of the party, and wakes the pickets alone (seen_far: rook 2). The archer, the brigand and
+a soldier strike her in the enemy phase (seed 1: 9, 9, 12 against 17 HP).
+
+  Rook dies on turn 1: 24 seeds; on turn 2: 6 seeds; alive after turn 2: 0 of 30.
+  Rook's attacks across the 30 seeds: 6 (one each in the six turn-2 deaths).
+  Won by the party anyway: 10 of 30.
+
+Seed 1, turn 1 (the full script is what --trace prints):
+  move rook 7,13
+  #   group pickets woke (Proximity)
+  # enemy: attack archer-2 rook          archer-2 vs rook: hit 9
+  # enemy: attack brigand-1 rook         brigand-1 vs rook: miss miss hit 9
+  # enemy: attack soldier-3 rook         soldier-3 vs rook: hit 12; rook 0 hp, died at 7,13
+
+Reading: neither the bows' exposure refusal nor the level-1 stats. The veto covers only the captain (and a
+protect: unit), so every other recruit approaches by section 8 with no exposure check, and the fastest one
+arrives alone. Keziah (move 5) arrives with the party; Rook (move 7) does not. The 76 attacks in 200 games
+in field-rook-arm-diagnostic.txt are the games where she survives turn 1 or 2. This is the baseline's
+known blindness ("walks into sleeping groups"), and it bites hardest on the fastest unit.
+
+## Spike: a recruit whose section-8 approach tile is lethal by the veto's no-crit sum takes the captain's
+## approach key instead (lethal tiles last). Branch issue/1044-careful-approach-spike, not on main.
+
+--full <seat> --seeds 200, three seats run in parallel:
+
+| seat at 1,13 | wins before | wins after | route line (games/won) after | south after |
+|---|---|---|---|---|
+| Keziah  | 122 | 134 | 6 / 4   | 194 / 130 |
+| empty   | 46  | 91  | 24 / 6  | 176 / 85 |
+| Rook    | 49  | 86  | 4 / 0   | 196 / 86 |
+
+  Rook after: atk 426 (was 76), dmg 5549, abs 310; gate 4 drop -0.025, DEAD WEIGHT (the empty slot wins 91, Rook 86).
+  The arm is still under 120/200 (60 percent): 86.
+
+--full --all --seeds 200, gate 1 wins, before -> after:
+  brackwater_cut 129 -> 129; harrow_weir 143 -> 137; old_mill_road 65 -> 57; sallow_grange 161 -> 161;
+  saltmarsh_ford 50 -> 50; starting_alone 1 -> 1; the_field 122 -> 134; the_mill 133 -> 133; the_tollgate 158 -> 167.
+  Gate 4: no verdict changes (saltmarsh_ford fails before and after at 0.075).
+
+The full-campaign parity script (tests/parity/campaign/full-campaign-631.script, issue 786) under the spike:
+  --campaign-script 631 --difficulty recruit --permadeath off --variant V, V from 0 to 200: no variant wins
+  (before, 66 to 69 won; 60 to 80 under the spike lose on maps 8 to 10, before mostly on map 7).
+  The script's seed is named in .github/workflows/ci.yml's godot parity step, so re-seeding it is that file's change.
