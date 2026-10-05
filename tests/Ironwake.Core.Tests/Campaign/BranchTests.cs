@@ -116,7 +116,7 @@ public class BranchTests
     public void ThePickSaysWhoTakesTheSeatAtWhatLevelAndWhoRidesHome()
     {
         var record = AtTheRaid();
-        var level = Math.Max(Content.Unit("rook").Level, record.JoinLevel(Content));
+        var level = Math.Max(Content.Unit("rook").Level, record.SeatLevel(Content));
 
         Assert.Equal($"Rook takes the seat at level {level}; Keziah rides home", record.PickClaimant("rook", Content).Text);
     }

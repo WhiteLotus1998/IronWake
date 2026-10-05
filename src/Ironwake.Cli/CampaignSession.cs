@@ -1874,12 +1874,14 @@ public sealed class CampaignSession
 
     /// <summary>
     /// One line per recruit joining at the next map below the living company's median (issue 763),
-    /// printed where they are met: <c>&lt;name&gt; joins at level N (the company's median)</c>.
+    /// printed where they are met: <c>&lt;name&gt; joins at level N (the company's median)</c>, or
+    /// <c>(the seat)</c> for the picked claimant raised above the median by the branch's seat (issue 1130).
     /// </summary>
     public static IReadOnlyList<string> JoinLines(CampaignRecord record, GameContent content)
     {
         var names = UnitNames.Of(record, content);
-        return record.RaisedOnJoining(content).Select(j => $"{names[j.Id]} joins at level {j.Level} (the company's median)").ToList();
+        var median = record.JoinLevel(content);
+        return record.RaisedOnJoining(content).Select(j => $"{names[j.Id]} joins at level {j.Level} ({(j.Level > median ? "the seat" : "the company's median")})").ToList();
     }
 
     private void Lines(IEnumerable<string> lines)

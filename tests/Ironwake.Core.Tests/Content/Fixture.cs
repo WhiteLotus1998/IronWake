@@ -429,6 +429,9 @@ internal static class Fixture
             // Issue 633: the same builds had no branch; Rook joined at the raid's camp and Keziah was on the roster from map 1.
             map.Remove("branch");
             map.Remove("pitch");
+            // Issue 1130: nor a seat; Rook joined at the median like any joiner.
+            map.Remove("seatLevel");
+            map.Remove("seatRank");
             map["joins"] = new System.Text.Json.Nodes.JsonArray("rook");
         }
 

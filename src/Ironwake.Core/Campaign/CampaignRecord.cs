@@ -374,7 +374,7 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// The level the passed claimant comes back at on the next map (issue 633, DESIGN section 14):
-    /// the pick's level, or the company's <see cref="JoinLevel"/> once the pick has fallen, never
+    /// the pick's level, or the seat's (<see cref="SeatLevel"/>) once the pick has fallen, never
     /// below their own card's. Null when the next map brings nobody back.
     /// </summary>
     public int? ReturnLevel(GameContent content)
@@ -384,7 +384,7 @@ public sealed record CampaignRecord(
             return null;
         }
 
-        return Math.Max(content.Unit(passed).Level, Find(Pick!)?.Level ?? JoinLevel(content));
+        return Math.Max(content.Unit(passed).Level, Find(Pick!)?.Level ?? SeatLevel(content));
     }
 
     /// <summary>
@@ -399,7 +399,7 @@ public sealed record CampaignRecord(
     /// <summary>
     /// Picks <paramref name="unitId"/> at the branch's camp (issue 633): one of the next map's two
     /// claimants, by id or by name in any case, who joins the company for it like a joiner (<see cref="Present"/>, at no less than
-    /// <see cref="JoinLevel"/>); the other rides home and never joins. Refused when the next map
+    /// <see cref="SeatLevel"/>, trained in their main weapon by <see cref="Trained"/>); the other rides home and never joins. Refused when the next map
     /// offers no branch, when the id is not one of its claimants, and once the pick is made: the
     /// choice is final.
     /// </summary>
@@ -425,7 +425,7 @@ public sealed record CampaignRecord(
         unitId = named;
 
         var passed = branch.First(id => id != unitId);
-        var level = Math.Max(content.Unit(unitId).Level, JoinLevel(content));
+        var level = Math.Max(content.Unit(unitId).Level, SeatLevel(content));
         var picked = this with { Pick = unitId };
         return new ScreenResult(picked, $"{content.Unit(unitId).Name} takes the seat at level {level}; {content.Unit(passed).Name} rides home", true);
     }
@@ -485,7 +485,9 @@ public sealed record CampaignRecord(
     /// With <paramref name="pick"/> (issue 633) a campaign opening after the branch has made it: the
     /// pick is recorded and the passed claimant is off the roster, so a map that brings them back can
     /// be played from its own camp; refused when the branch does not come before the map or does not
-    /// offer that claimant.
+    /// offer that claimant. The pick carries the seat's rank floor (<see cref="Trained"/>, issue 1130)
+    /// but, like every member here, their cast card's level: a map opened this way is fought on its
+    /// own named roster, and <c>--level</c> raises everyone alike.
     /// </summary>
     public static CampaignRecord StartAt(GameContent content, ulong seed, string mapId, string difficulty = NormalDifficulty, bool permadeath = true, string? origin = null, Pronoun? captain = null, string? pick = null)
     {
@@ -509,6 +511,7 @@ public sealed record CampaignRecord(
 
             var passed = content.Campaign.Maps[branchAt].Branch.First(id => id != pick);
             roster = roster.Where(u => u.Id != passed);
+            roster = roster.Select(u => u.Id == pick ? Trained(u, content) : u);
         }
 
         var rosterList = roster.ToList();
@@ -578,7 +581,8 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// The roster with the next map's arrivals and joiners joined (issues 632 and 763, DESIGN section 14),
-    /// each at no less than <see cref="JoinLevel"/>, every unit in cast order: who the next battle may
+    /// each at no less than <see cref="JoinLevel"/> (the picked claimant at <see cref="SeatLevel"/>, <see cref="Trained"/>),
+    /// every unit in cast order: who the next battle may
     /// deploy and who comes back from it, deployed or not. Equal to <see cref="Roster"/> on a map nobody
     /// arrives on or joins at, and once the campaign is finished.
     /// </summary>
@@ -590,7 +594,10 @@ public sealed record CampaignRecord(
         }
 
         var level = JoinLevel(content);
-        var arrivals = Arriving(content).Take(Room(content)).Select(content.Unit).Select(u => Kitted(u, content).ScaledTo(level, content.Class(u.ClassId))).ToList();
+        var seat = SeatLevel(content);
+        var arrivals = Arriving(content).Take(Room(content)).Select(content.Unit)
+            .Select(u => u.Id == Pick ? Trained(Kitted(u, content), content).ScaledTo(seat, content.Class(u.ClassId)) : Kitted(u, content).ScaledTo(level, content.Class(u.ClassId)))
+            .ToList();
         var order = content.Cast.Select(u => u.Id).ToList();
         return ValueList<Unit>.From(Roster.Concat(arrivals).OrderBy(u => order.IndexOf(u.Id) is var at && at < 0 ? int.MaxValue : at));
     }
@@ -615,13 +622,44 @@ public sealed record CampaignRecord(
     }
 
     /// <summary>
+    /// The level the picked claimant joins at, at least (issue 1130, rounds 380 and 381): the branch
+    /// map's authored <see cref="CampaignMap.SeatLevel"/>, or <see cref="JoinLevel"/> when that is
+    /// higher. Nothing here reads the company's top level, so feeding one unit never raises the pick
+    /// (Lotus). <see cref="JoinLevel"/> alone in a campaign whose branch authors no seat.
+    /// </summary>
+    public int SeatLevel(GameContent content) =>
+        Math.Max(BranchMap(content)?.SeatLevel ?? Unit.MinLevel, JoinLevel(content));
+
+    /// <summary>
+    /// A claimant as the seat trains them (issue 1130): rank points in their main weapon, the type of
+    /// the first weapon on their cast card, raised to the branch map's <see cref="CampaignMap.SeatRank"/>
+    /// (30 is rank D), never lowered. The pick joins this way and the passed claimant returns this way,
+    /// so neither faces the other a rank short. Unchanged for a unit no branch names.
+    /// </summary>
+    public static Unit Trained(Unit unit, GameContent content)
+    {
+        if (content.Campaign.Maps.FirstOrDefault(m => m.Branch.Contains(unit.Id)) is not { SeatRank: > 0 } map
+            || content.Unit(unit.Id).Inventory.Items.Select(s => content.Weapons.GetValueOrDefault(s.ItemId)).FirstOrDefault(w => w is not null) is not { } main
+            || unit.Skill.Points(main.Type) >= map.SeatRank)
+        {
+            return unit;
+        }
+
+        return unit with { Skill = unit.Skill.With(main.Type, map.SeatRank) };
+    }
+
+    /// <summary>The campaign map that offers the branch, or null in a campaign without one.</summary>
+    private static CampaignMap? BranchMap(GameContent content) => content.Campaign.Maps.FirstOrDefault(m => m.Branch.Count > 0);
+
+    /// <summary>
     /// The next map's arrivals and joiners (issue 763) whom <see cref="JoinLevel"/> raises, each with the
     /// level it joins at, in content order; the turned away are left out, since they never join.
     /// </summary>
     public IReadOnlyList<(string Id, int Level)> RaisedOnJoining(GameContent content)
     {
         var level = JoinLevel(content);
-        return Arriving(content).Take(Room(content)).Where(id => content.Unit(id).Level < level).Select(id => (id, level)).ToList();
+        var seat = SeatLevel(content);
+        return Arriving(content).Take(Room(content)).Select(id => (Id: id, Level: id == Pick ? seat : level)).Where(j => content.Unit(j.Id).Level < j.Level).ToList();
     }
 
     /// <summary>The next map's arrivals and joiners not yet on the roster or fallen, in content order (issues 632, 763).</summary>
@@ -727,7 +765,7 @@ public sealed record CampaignRecord(
         var battle = BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1, Rapport = Rapport };
         if (ReturnLevel(content) is { } level && NextMap(content).Return is { } back && Passed(content) is { } passed)
         {
-            var card = Returning(content.Unit(passed), content);
+            var card = Trained(Returning(content.Unit(passed), content), content);
             battle = battle.WithReturned(card.ScaledTo(level, content.Class(card.ClassId)), back.At, back.Group, back.Behavior, Pick!, content);
         }
 

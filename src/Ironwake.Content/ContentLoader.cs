@@ -378,6 +378,36 @@ public static class ContentLoader
                 }
             }
 
+            int? seatLevel = null;
+            if (node.Has("seatLevel"))
+            {
+                if (branch.Count == 0)
+                {
+                    throw node.Error("seatLevel", "needs a branch on this map; it is the picked claimant's join level");
+                }
+
+                seatLevel = node.Int("seatLevel");
+                if (seatLevel < Unit.MinLevel || seatLevel > Unit.MaxLevel)
+                {
+                    throw node.Error("seatLevel", $"must be between {Unit.MinLevel} and {Unit.MaxLevel}");
+                }
+            }
+
+            var seatRank = 0;
+            if (node.Has("seatRank"))
+            {
+                if (branch.Count == 0)
+                {
+                    throw node.Error("seatRank", "needs a branch on this map; it is the picked claimant's main-weapon rank points");
+                }
+
+                seatRank = node.Int("seatRank");
+                if (seatRank < 0)
+                {
+                    throw node.Error("seatRank", "must be at least 0");
+                }
+            }
+
             var meets = node.StringArrayOrEmpty("meets");
             if (meets.Count > 2)
             {
@@ -480,6 +510,8 @@ public static class ContentLoader
                 Joins = ValueList<string>.From(joins),
                 Branch = ValueList<string>.From(branch),
                 Pitch = ValueList<string>.From(pitch),
+                SeatLevel = seatLevel,
+                SeatRank = seatRank,
                 Meets = ValueList<string>.From(meets),
                 Return = back,
                 EnemyLevel = enemyLevel,

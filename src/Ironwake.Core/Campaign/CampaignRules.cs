@@ -43,6 +43,20 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
     /// </summary>
     public ValueList<string> Branch { get; init; } = ValueList<string>.Empty;
 
+    /// <summary>
+    /// The level the picked claimant joins at, at least (issue 1130, rounds 380 and 381): an authored
+    /// floor that reads nothing of the company but its median (<see cref="CampaignRecord.SeatLevel"/>),
+    /// so feeding one unit never raises the pick. Null for a branch that joins at the median alone.
+    /// </summary>
+    public int? SeatLevel { get; init; }
+
+    /// <summary>
+    /// The rank points the picked claimant holds in their main weapon at least (issue 1130): the type
+    /// of the first weapon on their cast card. 30 is rank D. Also the returned claimant's floor. Zero
+    /// for none.
+    /// </summary>
+    public int SeatRank { get; init; }
+
     /// <summary>The most words a claimant's <see cref="Pitch"/> line holds: WRITING.md's spoken line.</summary>
     public const int PitchWordsMax = 25;
 
