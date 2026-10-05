@@ -265,6 +265,7 @@ public class SceneScriptTests
             ("fixture_march.txt", "scene: fixture_march\nplays: before starting_alone\n\nm1 captain: East, then.\n"),
             ("fixture_won.txt", "scene: fixture_won\nplays: after starting_alone\n\nw1 narration: The road is quiet again.\nw2 captain (if fallen captain): Never shown.\n"));
         File.Delete(Path.Combine(dir, SceneFormat.Directory, "starting_alone_before.txt"));
+        File.Delete(Path.Combine(dir, SceneFormat.Directory, "starting_alone_after.txt"));
         var battle = File.ReadAllText(Path.Combine(Repo, "docs", "transcripts", "2026-10-01-starting_alone-631.script"));
         var path = Path.Combine(Path.GetTempPath(), "ironwake-scenes-" + Guid.NewGuid().ToString("N") + ".script");
         var log = Path.ChangeExtension(path, ".log");
@@ -277,7 +278,7 @@ public class SceneScriptTests
             Assert.Contains("10 maps\n-- Starting Alone --\nThe road east is empty in both directions.\nAlder Fenn: Nobody on the list has come.\nAlder Fenn: The chaplain's name is still on it.\nBrigand: Keep walking.\nThe keeper: Bodies off the road before dark.\n(forecast <unit> <target> prints a strike and its counter before you\ntake it.)\n\n-- Before map 1 of 10", output);
             Assert.Contains("\n-- Starting Alone --\nAlder Fenn: East, then.\n\n", output);
             Assert.True(output.IndexOf("Alder Fenn: East, then.", StringComparison.Ordinal) > output.IndexOf("-- Before map 1 of 10", StringComparison.Ordinal));
-            Assert.Contains("by way of the mill.\n\n-- After Starting Alone --\nThe road is quiet again.\n\n-- The Mill --\n", output);
+            Assert.Contains("nobody fell\n-- After Starting Alone --\nThe road is quiet again.\n\n-- The Mill --\n", output);
             Assert.DoesNotContain("Never shown", output);
             Assert.DoesNotContain("Keep walking", File.ReadAllText(log));
         }

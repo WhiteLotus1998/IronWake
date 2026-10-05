@@ -1,0 +1,11 @@
+# Starting Alone, after the map. Beats: Design Table #994, rounds 344 to 346 (issue 1005). Chat's draft (round 373), both cold reads applied (round 374).
+scene: starting_alone_after
+plays: after starting_alone
+incidental: keeper = The keeper
+
+a1 narration: Three dead on the waystation road. The keeper comes out of the fort with a barrow and no questions.
+a2 keeper: Help me get them off the road before dark. I've a milk cart through at first light.
+a3 captain: Has anyone come through for Ironwake?
+a4 keeper: A Kestrow chaplain, two days back, walking your way. Men went after her on the mill road.
+a5 narration: Before the barrow takes them, Alder goes through their coats. Each carries the same coin: silver so new the rims are still sharp.
+a6 narration: Alder turns one over, then tips them all into Hask's purse and draws the string.
