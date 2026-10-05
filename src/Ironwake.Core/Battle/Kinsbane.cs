@@ -290,9 +290,10 @@ public static class Kinsbane
     /// phase (<paramref name="huntMov"/> set, the Move <see cref="HuntMov"/> gives), the hunt running
     /// on when the kill would leave it woken with the charge unspent (issue 804). The kill rows read
     /// <c>kills on hit:</c> when <paramref name="killsOnHit"/> says one plain hit takes the foe, so a
-    /// condition is never read as a promise (issue 939). Empty for any other weapon.
+    /// condition is never read as a promise (issue 939). <paramref name="falls"/>, the returned claimant's clause
+    /// (<see cref="Returned.Falls"/>, issue 1068), opens the feed row ahead of the heal. Empty for any other weapon.
     /// </summary>
-    public static IEnumerable<string> ForecastLines(BattleUnit unit, GameContent content, Weapon? weapon, ItemStack stack, string name, int? huntMov = null, bool killsOnHit = false)
+    public static IEnumerable<string> ForecastLines(BattleUnit unit, GameContent content, Weapon? weapon, ItemStack stack, string name, int? huntMov = null, bool killsOnHit = false, string? falls = null)
     {
         var kill = KillLabel(killsOnHit);
         if (weapon is not { Hungers: true })
@@ -303,7 +304,7 @@ public static class Kinsbane
         if (!Woken(stack.Fed))
         {
             var max = unit.MaxHp(content);
-            yield return $"  {kill} {name} +{FeedHeal} HP, to max {max} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})";
+            yield return $"  {kill} {Returned.Lead(falls, $"{name} +{FeedHeal} HP, to max {max} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})")}";
             if (stack.Starved)
             {
                 yield return $"  hit: {name} +{EasedHeal} HP, the starved form ends";
@@ -328,9 +329,11 @@ public static class Kinsbane
     /// the counter kills <paramref name="striker"/> if every strike lands
     /// (<see cref="CombatForecast.CounterIsLethal"/>), the feed that kill would bring, so a carrier standing
     /// next to a man she means to spare sees the enemy phase could choose for her; it reads <c>counter kills on hit</c>
-    /// when one counter strike is enough and <c>counter kills if all land</c> otherwise (issue 939). Null otherwise.
+    /// when one counter strike is enough and <c>counter kills if all land</c> otherwise (issue 939). When the striker
+    /// is the returned claimant, <paramref name="falls"/> (<see cref="Returned.Falls"/>, issue 1068) opens the row
+    /// ahead of the heal: <c>counter kills on hit: Rook falls for good (the claimant); Keziah +10 HP ...</c>. Null otherwise.
     /// </summary>
-    public static string? CounterFeedLine(BattleUnit answering, BattleUnit striker, CombatForecast forecast, GameContent content, string name)
+    public static string? CounterFeedLine(BattleUnit answering, BattleUnit striker, CombatForecast forecast, GameContent content, string name, string? falls = null)
     {
         var slot = answering.EquippedSlot(content);
         if (slot < 0 || !forecast.CounterIsLethal(striker.Hp, answering.Hp))
@@ -340,9 +343,16 @@ public static class Kinsbane
 
         var stack = answering.Unit.Inventory.Items[slot];
         return content.Weapon(stack.ItemId) is { Hungers: true } && !Woken(stack.Fed)
-            ? $"counter {(forecast.Defender.Damage >= striker.Hp ? "kills on hit" : "kills if all land")}: {name} +{FeedHeal} HP, to max {answering.MaxHp(content)} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})"
+            ? $"{CounterKillLabel(forecast, striker)} {Returned.Lead(falls, $"{name} +{FeedHeal} HP, to max {answering.MaxHp(content)} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})")}"
             : null;
     }
+
+    /// <summary>
+    /// The label that opens a lethal counter row (issue 939): <c>counter kills on hit:</c> when one counter strike
+    /// reaches <paramref name="striker"/>'s HP, else <c>counter kills if all land:</c>.
+    /// </summary>
+    public static string CounterKillLabel(CombatForecast forecast, BattleUnit striker) =>
+        forecast.Defender.Damage >= striker.Hp ? "counter kills on hit:" : "counter kills if all land:";
 
     /// <summary>
     /// The Mov the hunt gives back (issue 804): the carrier's full Move this phase as

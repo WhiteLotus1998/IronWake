@@ -6,8 +6,8 @@ Updated: 2026-10-05. Rewritten, not appended; under 20 KB (#401); history in git
 
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1063. Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: six cards closed (reads 348 to 367); Bet's next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
-About 4477 tests green; `ci`, `ci-windows` run; `godot-*` not required.
-No forks are open. The chain heartbeat stays (#406). #1067: the veto prices no arts (0251). #1069: race guards cover warm plays, spikes (0169). Next: #1068.
+About 4486 tests green; `ci`, `ci-windows` run; `godot-*` not required.
+No forks are open. The chain heartbeat stays (#406). #1069: race guards cover warm plays, spikes (0169). #1068: a lethal forecast row on the returned claimant opens `<name> falls for good (the claimant)` (`Returned.Falls`). Queue empty.
 
 ## Next
 

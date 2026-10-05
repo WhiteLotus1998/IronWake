@@ -1496,6 +1496,12 @@ public sealed class PlaySession
         var names = UnitNames.Of(state, content);
         var (chills, counterChills) = Chills(content, unit, target, slot);
         var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills) };
+        var hunger = HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state, forecast).ToList();
+        if (ClaimantLine(state, unit, target, forecast, raises, names, hunger) is { } claimant)
+        {
+            lines.Add(claimant);
+        }
+
         if (LethalCounterLine(unit, target, forecast, raises, names) is { } lethal)
         {
             if (FirstRoundKillLine(unit, target, forecast, raises) is { } kills)
@@ -1525,12 +1531,43 @@ public sealed class PlaySession
         lines.AddRange(BraceLines(unit, target, names));
         lines.AddRange(OpenLines(unit, target, names));
         lines.AddRange(BreakLines(state, content, unit, target, names));
-        lines.AddRange(HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state, forecast));
+        lines.AddRange(hunger);
         lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast, names));
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes, names));
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot, names));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast, names));
         return UnitNames.Sentence(string.Join("\n", lines));
+    }
+
+    /// <summary>
+    /// The first row under a forecast that would kill the returned claimant (issue 1068, Design Table round 372),
+    /// from any attacker: <c>  kills on hit: Rook falls for good (the claimant)</c> when one plain strike reaches
+    /// her HP, <c>  kills if all land: ...</c> when the strikes the attacker lives for do
+    /// (<see cref="CombatForecast.AttackerDamageLivedFor"/>); and with her as the striker, <c>  counter kills on hit: ...</c>
+    /// when the counter is lethal (<see cref="CombatForecast.CounterIsLethal"/>). A Kinsbane feed row in
+    /// <paramref name="hunger"/> that already carries the clause is taken out of it and printed here instead, so the
+    /// loss leads and never prints twice. Null for any other unit, a windup and a forecast that cannot kill her.
+    /// </summary>
+    private static string? ClaimantLine(BattleState state, BattleUnit unit, BattleUnit target, CombatForecast forecast, bool raises, UnitNames names, List<string> hunger)
+    {
+        var (falls, label) = raises ? (null, "")
+            : Returned.Falls(state, target, names) is { } struck && forecast.Attacker.Strikes && forecast.AttackerDamageLivedFor(unit.Hp) >= target.Hp
+                ? (struck, forecast.Attacker.Damage >= target.Hp ? "kills on hit:" : "kills if all land:")
+            : Returned.Falls(state, unit, names) is { } striking && forecast.CounterIsLethal(unit.Hp, target.Hp)
+                ? (striking, Kinsbane.CounterKillLabel(forecast, unit))
+            : ((string?)null, "");
+        if (falls is null)
+        {
+            return null;
+        }
+
+        if (hunger.FirstOrDefault(h => h.Contains(falls, StringComparison.Ordinal)) is { } merged)
+        {
+            hunger.Remove(merged);
+            return merged;
+        }
+
+        return $"  {label} {falls}";
     }
 
     /// <summary>
@@ -1798,9 +1835,14 @@ public sealed class PlaySession
                 var covered = line.CoveredBy is { } by ? $"covered by {names[by.Id]}, strikes {names[by.Id]} on {tile}, " : "";
                 var answers = line.CoveredBy ?? unit;
                 rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
-                if (!line.Raises && line.Forecast.Defender.Strikes && Kinsbane.CounterFeedLine(answers, line.Enemy, line.Forecast, content, names[answers.Id]) is { } feed)
+                var falls = !line.Raises && line.Forecast.CounterIsLethal(line.Enemy.Hp, answers.Hp) ? Returned.Falls(state, line.Enemy, names) : null;
+                if (!line.Raises && line.Forecast.Defender.Strikes && Kinsbane.CounterFeedLine(answers, line.Enemy, line.Forecast, content, names[answers.Id], falls) is { } feed)
                 {
                     rows.Add($"    {feed}");
+                }
+                else if (falls is not null)
+                {
+                    rows.Add($"    {Kinsbane.CounterKillLabel(line.Forecast, line.Enemy)} {falls}");
                 }
 
                 if (line.Raises)
@@ -2372,8 +2414,10 @@ public sealed class PlaySession
 
             int? huntMov = state is not null && unit == armed && unit.Side == state.Phase ? Kinsbane.HuntMov(state, content, unit) : null;
             var side = forecast is null ? null : unit == armed ? forecast.Attacker : forecast.Defender;
-            var killsOnHit = side is { Strikes: true } && side.Damage >= (unit == armed ? target : armed).Hp;
-            foreach (var line in Kinsbane.ForecastLines(unit, content, unit.EquippedWeapon(content), unit.Unit.Inventory.Items[equipped], names[unit.Id], huntMov, killsOnHit))
+            var foe = unit == armed ? target : armed;
+            var killsOnHit = side is { Strikes: true } && side.Damage >= foe.Hp;
+            var falls = killsOnHit && state is not null ? Returned.Falls(state, foe, names) : null;
+            foreach (var line in Kinsbane.ForecastLines(unit, content, unit.EquippedWeapon(content), unit.Unit.Inventory.Items[equipped], names[unit.Id], huntMov, killsOnHit, falls))
             {
                 yield return line;
             }
