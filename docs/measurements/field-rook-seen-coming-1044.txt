@@ -34,9 +34,11 @@ first three timeouts are 4, 7 and 9; 11 and 14 were read as well and match.
   keeps Maud), and the captain spends the last ten-odd turns alone against a boss whose round is 10+6+6
   (seed 4, turn 9: the captain from 23 to 1). The veto refuses every swing at him, rightly. So the
   timeouts are losses on the clock. They do not point at the limit or at the boss's approach.
-- Rook falls on turn 2 to 4 in all five. Three ways: a strike she takes into a counter (seed 7, turn 2:
-  brigand-1 at 8,13); a stop beside the sleeping rider, which wakes and strikes her, since the key prices
-  only woken enemies (seed 4, turn 3, 14,13); and `attack ... !` into a lethal counter (seeds 4 and 9).
+- Rook falls on turn 2 to 4 in all five. Two ways: a strike she takes into a counter (seed 7, turn 2:
+  brigand-1 at 8,13), and `attack ... !` into a lethal counter (seeds 4 and 9). On seed 4 her turn-3
+  stop at 14,13 wakes the south group itself; the key prices the rider awake there at 12 against her 17
+  HP, the rider strikes her for 12, and she falls on turn 4 to her own swing into its counter (corrected
+  by #1061; FieldRookSeedFourTests).
   A recruit's strike takes no veto by design (0248), so this is the crude player, not the board.
 - Where the arm loses its games is turns 2 to 9, the pickets and the south group, and that loss goes
   past Rook: four recruits fall in each traced game. Hand plays on this arm (Chat 5150, Code 1340) won.

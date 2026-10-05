@@ -119,4 +119,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Round index
 
-1-118 rules; 119-342 showcase, story; 343-359 writing, casting; #1033 360 on (366 Lotus's notes; 368 careful recruits; 369 one cluster; 371 Rook on hand plays).
+1-118 rules; 119-342 showcase, story; 343-359 writing, casting; #1033 360-371 (366 Lotus's notes; 368 careful recruits; 371 Rook on hand plays); #1063 372 on.
