@@ -1,0 +1,183 @@
+certify rook drover
+repair captain 1
+repair rook 1
+buy steel_lance rook
+march
+move rook 10,1
+attack rook archer-2 2
+move captain 10,3
+wait captain
+move dunstan 10,4
+wait dunstan
+move pell 9,3
+wait pell
+move wren 10,5
+wait wren
+end
+move rook 14,4
+threat rook
+wait rook
+move captain 14,3
+wait captain
+move pell 13,3
+wait pell
+move dunstan 12,3
+wait dunstan
+move wren 11,3
+wait wren
+end
+attack rook shieldbearer-1
+move captain 15,3
+attack captain soldier-1
+move pell 14,5
+attack pell brawler-1
+recall 54
+move pell 13,5
+attack pell brawler-1
+move dunstan 16,3
+wait dunstan
+move wren 14,3
+wait wren
+end
+move pell 13,4
+attack pell brawler-1
+move captain 18,3
+wait captain
+move dunstan 19,3
+wait dunstan
+move wren 15,3
+wait wren
+wait rook
+end
+exit dunstan
+move wren 19,3
+wait wren
+move rook 19,4
+wait rook
+move captain 19,5
+wait captain
+end
+exit wren
+exit rook
+exit captain
+leave
+repair rook 1
+repair captain 1
+meet ansgar
+march
+move rook 7,12
+talk rook keziah
+move captain 6,12
+wait captain
+move teodor 4,12
+wait teodor
+move pell 3,11
+wait pell
+move ottilie 2,12
+wait ottilie
+move maud 3,13
+wait maud
+end !
+move captain 6,13
+attack captain soldier-3
+move pell 6,12
+attack pell brigand-1
+move teodor 7,11
+attack teodor archer-2
+move rook 3,12
+wait rook
+item maud salve rook
+move ottilie 4,11
+wait ottilie
+end
+item maud salve rook
+move pell 8,12
+attack pell archer-2
+move captain 10,13
+wait captain
+move teodor 9,12
+wait teodor
+move ottilie 7,11
+wait ottilie
+move rook 7,12
+wait rook
+end
+move rook 11,10
+wait rook
+move pell 10,10
+wait pell
+move captain 11,11
+wait captain
+move teodor 12,12
+wait teodor
+move ottilie 10,12
+wait ottilie
+move maud 7,13
+wait maud
+end
+move rook 12,9
+wait rook
+move pell 11,10
+wait pell
+move teodor 12,11
+wait teodor
+move ottilie 10,11
+wait ottilie
+move maud 10,12
+wait maud
+wait captain
+end
+move rook 12,8
+attack rook archer-3
+move maud 12,12
+item maud salve teodor
+move teodor 13,8
+wait teodor
+move captain 12,7
+wait captain
+move pell 11,9
+wait pell
+move ottilie 10,10
+wait ottilie
+end
+attack teodor brigand-2
+move pell 12,11
+attack pell rider-1
+move captain 12,5
+attack captain archer-1
+move maud 12,9
+item maud salve rook
+wait rook
+move ottilie 11,7
+wait ottilie
+end
+attack ottilie soldier-1
+attack captain soldier-1
+move rook 12,6
+wait rook
+move pell 12,7
+wait pell
+wait teodor
+wait maud
+end
+attack pell soldier-1
+move maud 11,8
+item maud salve ottilie
+wait rook
+wait teodor
+wait ottilie
+wait captain
+end
+move teodor 16,7
+attack teodor sworn_captain-1 1
+move rook 16,5
+attack rook sworn_captain-1 1
+wait pell
+wait ottilie
+wait maud
+wait captain
+end
+move rook 17,6
+attack rook sworn_captain-1 1 !
+leave
+roster

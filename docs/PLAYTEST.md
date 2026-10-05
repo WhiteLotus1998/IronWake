@@ -3173,3 +3173,21 @@ Transcript: `docs/transcripts/2026-10-05-sallow_grange-650-drover.txt` (both map
 **For the kill clause:** no hold stopped a whole push for free. On T4 it held two guards for one phase, while the chase group, the Hexer and the Brawler were all still coming. Both holds landed on units that were adjacent to her and could hit her anyway, so what the hold protects is everyone else. One tile of Mov matters most on cavalry with Canto, and the frost never caught one alive. The cooldown stays at one turn. The keep play is still owed.
 
 Transcript: `docs/transcripts/2026-10-05-brackwater_cut-651-skycaptain.txt`, script beside it (run with `campaign --load brackwater` on a copy of `2026-10-05-drake_warden-644-synthetic.saves`).
+
+## 2026-10-05 — The Drake Warden, cold, on the synthetic 644 save (#1100): Brackwater Cut 651, the Field 652 — Chat
+
+Copied from the Table (#1112, comment 6005059467). Recruit, permadeath off, as saved. Certified Rook to the Drake Warden (1000) and bought her a Steel Lance.
+
+**Brackwater Cut: won T6 of 8, 1 Recall, Pell fell (wounded). Tension 6, choice 6, surprise 5.**
+- T1: Rook flew over the water to 10,1 and hit the gate archer for 12 of 17; the bite took the last 5. No roll, so kills plan to the hit point.
+- Misplays: Rook scouted to 14,4 and woke the bank group (it came to us, fine). T3, Pell priced from 13,5 and moved to 14,5, took the brawler's double; Recall. T4, Pell left at 1 hp in the dark, killed by a rider I couldn't see: the "I missed it" death, kept, since the dark is unpriced.
+- Never used the carry. The one time I wanted it, Rook ended T2 diagonal to Wren.
+
+**The Field: won T11 of 20, no Recalls, nobody fell. Tension 8, choice 7, surprise 7.**
+- **T1, best turn:** Rook flew 6 to 7,12 and turned Keziah. The pickets woke; `end` asked once (29 against 20), I typed `!`, and archer, brigand and soldier all came. She ended the phase at 3 hp, her counters and the bite having left the brigand at 1 and the soldier at 2.
+- T5 baited the camp across the bridge; T6 killed the archer on it (15 + 5 on 17); Teodor and the captain corked; the boss priced the bridgehead too exposed and went home.
+- T10 Teodor and Rook took the Sworn Captain to 3; T11 Rook killed him on his fort at 74 with a lethal counter behind it. L8.
+
+**What it says:** the bite is the class; keep the Drake Warden as built, 8/7/7. Long Carry went unused in two maps and on the boss map was a downgrade (it trades her 15 for Pell's 12); in a cold hand her identity is exact damage, not the carrier. The Sworn Captain shuttled off his fort three times without striking (#1138). The keep's default deploy benched Rook and Keziah (#1139). Caveat: the save is synthetic, so an L7 Rook beside L1 Teodor and Maud flatters her; this answers how she plays, not how strong she is.
+
+Transcript: `docs/transcripts/2026-10-05-drake_warden-644-chat.txt`, script beside it (`campaign --load brackwater` on a copy of `2026-10-05-drake_warden-644-synthetic.saves`).

@@ -469,6 +469,36 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Chat's cold Drake Warden chair (issue 1100, Table comment 6005059467): issue 1133's synthetic
+    /// Brackwater camp, Rook certified to the Drake Warden, Brackwater Cut won on turn 6 with Pell
+    /// fallen and one Recall, then the Field won on turn 11 with Keziah turned on turn 1 and the
+    /// Sworn Captain killed on his fort. The boss's off-fort shuttle on turns 5 to 10 is issue 1138.
+    /// </summary>
+    [Fact]
+    public void TheJournaledColdDrakeWardenChairWinsBrackwaterAndTheField()
+    {
+        var script = Transcript("2026-10-05-drake_warden-644-chat.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-drake-warden-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-05-drake_warden-644-synthetic.saves", "brackwater.json")), Path.Combine(saves, "brackwater.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "brackwater", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Pell falls at 13,4\n", output);
+            Assert.Contains("Sworn Captain moves 18,6 -> 16,7 via 17,6 16,6\n", output);
+            Assert.Contains("Sworn Captain falls at 18,6\n", output);
+            Assert.Contains("  Rook: Drake Warden L8, EXP 20;", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Code's journaled replay of Keziah's quest 2 on the board as slice 16 left it (side-map seed 1133),
     /// played with the rear rider on turn 3 (issue 940 moved it to 5),
     /// from the same save at the camp after map 9: Joab named and bound at the door, the envoy a
