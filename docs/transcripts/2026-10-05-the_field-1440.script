@@ -1,0 +1,133 @@
+march
+move captain 4,12
+wait captain
+move teodor 3,11
+wait teodor
+move pell 2,11
+wait pell
+move ottilie 2,12
+wait ottilie
+move maud 1,12
+wait maud
+move rook 2,13
+wait rook
+end
+talk captain keziah
+move pell 5,11
+attack pell archer-2 art overcast
+move teodor 5,12
+wait teodor
+move ottilie 4,11
+wait ottilie
+move maud 3,12
+item maud 2 captain
+move rook 3,13
+wait rook
+end
+attack pell soldier-3 2
+move teodor 6,12
+attack teodor brigand-1
+move rook 7,11
+attack rook brigand-1
+move maud 5,12
+item maud 2 pell
+move captain 6,10
+wait captain
+move ottilie 5,10
+wait ottilie
+end
+item teodor 2
+move maud 6,11
+item maud 2 captain
+wait pell
+move rook 7,12
+wait rook
+move ottilie 7,10
+wait ottilie
+wait captain
+end
+move rook 9,8
+wait rook
+move captain 7,9
+wait captain
+move ottilie 6,9
+wait ottilie
+move teodor 7,10
+wait teodor
+move pell 6,10
+wait pell
+move maud 5,10
+wait maud
+end
+move captain 7,8
+order press
+move ottilie 7,6
+attack ottilie soldier-1
+move pell 8,7
+attack pell soldier-1 2 art overcast
+move teodor 8,6
+attack teodor soldier-1
+move rook 8,5
+attack rook archer-1
+move maud 7,7
+item maud 2 pell
+end
+attack pell soldier-2 gust
+end
+move captain 9,7
+attack captain rider-1 art feint
+attack ottilie rider-1
+move maud 9,8
+item maud 2 captain
+move pell 11,8
+wait pell
+move teodor 11,7
+wait teodor
+move rook 10,6
+wait rook
+end
+move rook 12,6
+wait rook
+move teodor 12,7
+wait teodor
+move captain 12,8
+wait captain
+move pell 10,8
+wait pell
+move maud 10,9
+wait maud
+move ottilie 10,7
+wait ottilie
+end
+move teodor 13,7
+attack teodor archer-3
+move pell 12,7
+attack pell archer-3 gust
+move ottilie 13,8
+attack ottilie archer-3
+move maud 11,7
+item maud 2 pell
+end
+move teodor 14,7
+attack teodor brigand-2
+move pell 13,7
+attack pell brigand-2 gust
+move maud 14,8
+item maud 2 teodor
+end
+attack teodor sentry-1
+attack pell sentry-1 gust
+move ottilie 15,7
+attack ottilie sworn_captain-1
+move captain 15,8
+wait captain
+move rook 14,6
+wait rook
+end
+move pell 17,7
+attack pell sworn_captain-1 gust
+move maud 18,8
+attack maud sworn_captain-1
+move captain 17,6
+attack captain sworn_captain-1 art full_measure
+leave
