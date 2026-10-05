@@ -46,8 +46,8 @@ March (march): map 8, Brackwater Cut. Get the captain out through an exit by the
 -- The Burned Shrine --
 Keziah's mother kept a shrine on a knoll off the west road. Each region
 has burned it once. Now someone is stripping the lead off what is left
-of the roof, standing on her floor to do it. "I need one of you.
-Whoever's warmest. I'll feed you after."
+of the roof, standing on her floor to do it. "I need one of you. Whoever
+packed a second blanket. I'll feed you after."
 
 (Rout: defeat every enemy by the end of turn 10. The map is lost if
 Keziah falls. The ring wall has a west door at 4,3 and a breach at 7,5.
@@ -922,8 +922,8 @@ Battle won: rout; only recall is left, or leave
 Keziah wins keziah_1; the stores take 2 common material; nobody fell
 -- After The Burned Shrine --
 The hearthstone is cracked through. Keziah sweeps the ash off it with a
-bough, right to left, the way a keeper does, and sets her own supper in
-the offering bowl. "Freezing in here. Nobody lights that, it's hers."
-She eats nothing and sleeps across the door.
+bough and sets her own supper in the offering bowl. "Freezing in here.
+Nobody lights that, it's hers." She eats nothing and sleeps across the
+door.
 
 Campaign stopped before Brackwater Cut: the script ended on the screen
