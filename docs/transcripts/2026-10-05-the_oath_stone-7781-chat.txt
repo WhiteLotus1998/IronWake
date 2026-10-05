@@ -1,0 +1,1481 @@
+Campaign, seed 7781, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+reseeded from 984 to 7781: not the save's battle
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 10 of 10: Ironwake Keep; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L7, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L7, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L7, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L7, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L7, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Ansgar: Outrider L7, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Keziah: Reaver L7, EXP 0; 1: Kinsbane 20/20, 2: Iron Axe 40/40, 3: Iron Gauntlets 40/40
+  Brannock: Cadet L7, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Ironwake Keep: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 10)
+== Keep ==
+Purse: 500
+Rooms: beds: 10/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Keep: Ironwake Keep; built: nothing; the purse holds 500
+  wall: Rebuild a wall, 400
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+  ditch: Dig a ditch, 300
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  keziah_2: Keziah's quest 2, The Oath Stone (quest keziah_2 <ally>); permadeath applies
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+  pell_1: Pell's quest 1, The Burned School; paid 2 common material
+  maud_2: Maud's quest 2, The First Shrine; paid Maud's Psalter
+  teodor_1: Teodor's quest 1, The Old Watch; paid nothing
+  pell_2: Pell's quest 2, The Undercroft; paid Pell's Commonplace and 3 frozen iron
+  ottilie_1: Ottilie's quest 1, The Counting House; paid 2 common material
+  teodor_2: Teodor's quest 2, The Warden's Gate; paid 3 frozen iron
+  ottilie_2: Ottilie's quest 2, The Long Count; paid Ottilie's Tally and 3 frozen iron
+  keziah_1: Keziah's quest 1, The Burned Shrine; paid 2 common material
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 10, Ironwake Keep. Hold out until the end of turn 8. Captain Fenn must survive.
+> quest keziah_2 teodor
+-- The Oath Stone --
+Keziah knows the man on the door. Joab kept the lamps at her mother's
+shrine; he is sworn now, bound to the envoy Hask sent to the outland
+stone on the moor with a seat and a god for her people. "He'll know me,
+and he won't say my name. Leave him to me."
+
+(Defeat Boss: defeat the envoy, who keeps the fort at 12,3, by the end
+of turn 10. The map is lost if Keziah falls. Joab holds the yard's west
+door at 9,4, bound to the envoy: if the envoy falls first, Joab lays
+down the axe, freed. A breach in the south wall at 11,7 is the long way
+round. More come up behind you from turn 5, announced.)
+
+Side map: The Oath Stone, seed 7930
+Keziah goes with Teodor. This map is lost if Keziah falls; who falls here is gone for good.
+  turn 5, enemy phase: a rider arrives at 0,0 (aggressive). A unit standing on 0,0 stops it.
+  turn 5, enemy phase: a brigand arrives at 0,9 (aggressive). A unit standing on 0,9 stops it.
+Objective: Defeat the boss by the end of turn 10. Keziah must survive.
+The Oath Stone  turn 1 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .A.......a....#
+ 5 .Bn......#.b..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^....cn.......^
+ 9 ^^....d^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+c  brigand-1        Brigand L6 reaver          5,8    hp 24/24  Plain  group camp, guard, asleep
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           1,4    hp 26/26  Plain  captain
+d  soldier-1        Soldier L6 pikeman         6,9    hp 22/22  Forest  group camp, guard, asleep
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          1,5    hp 24/24  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 2,7
+Keziah moves 1,4 -> 2,7 via 1,5 1,6 2,6
+The camp group wakes (proximity)
+The Oath Stone  turn 1 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 .Bn......#.b..#
+ 6 ....^....#....#
+ 7 ..A......##.###
+ 8 ^....cn.......^
+ 9 ^^....d^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+c  brigand-1        Brigand L6 reaver          5,8    hp 24/24  Plain  group camp, guard, awake
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           2,7    hp 26/26  Plain  captain
+d  soldier-1        Soldier L6 pikeman         6,9    hp 22/22  Forest  group camp, guard, awake
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          1,5    hp 24/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> wait keziah
+Keziah waits
+The Oath Stone  turn 1 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 .Bn......#.b..#
+ 6 ....^....#....#
+ 7 ..A......##.###
+ 8 ^....cn.......^
+ 9 ^^....d^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+c  brigand-1        Brigand L6 reaver          5,8    hp 24/24  Plain  group camp, guard, awake
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           2,7    hp 26/26  Plain  captain  done
+d  soldier-1        Soldier L6 pikeman         6,9    hp 22/22  Forest  group camp, guard, awake
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          1,5    hp 24/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 2,6
+Teodor moves 1,5 -> 2,6 via 1,6
+The Oath Stone  turn 1 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ..B.^....#....#
+ 7 ..A......##.###
+ 8 ^....cn.......^
+ 9 ^^....d^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+c  brigand-1        Brigand L6 reaver          5,8    hp 24/24  Plain  group camp, guard, awake
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           2,7    hp 26/26  Plain  captain  done
+d  soldier-1        Soldier L6 pikeman         6,9    hp 22/22  Forest  group camp, guard, awake
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          2,6    hp 24/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> wait teodor
+Teodor waits
+The Oath Stone  turn 1 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ..B.^....#....#
+ 7 ..A......##.###
+ 8 ^....cn.......^
+ 9 ^^....d^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+c  brigand-1        Brigand L6 reaver          5,8    hp 24/24  Plain  group camp, guard, awake
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           2,7    hp 26/26  Plain  captain  done
+d  soldier-1        Soldier L6 pikeman         6,9    hp 22/22  Forest  group camp, guard, awake
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          2,6    hp 24/24  Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 3,6
+Brigand 1 moves 5,8 -> 3,6 via 5,7 4,7 3,7
+enemy: attack brigand-1 teodor
+Forecast Brigand 1 -> Teodor: acc 62% dmg 10 crit 0%; counter with Iron Lance: acc 80% dmg 13 crit 4%
+Brigand 1 attacks Teodor
+  Brigand 1 hits Teodor for 10 (hp 14)
+  Teodor hits Brigand 1 for 13 (hp 11)
+  Brigand 1 hp 11, Teodor hp 14
+Teodor gains 8 exp (8)
+enemy: wait joab-1
+Joab waits
+enemy: move soldier-1 4,7
+Soldier moves 6,9 -> 4,7 via 5,9 5,8 5,7
+enemy: wait soldier-1
+Soldier waits
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Kinsbane drains Keziah 5 (hp 21)
+The Oath Stone  turn 2 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ..Bc^....#....#
+ 7 ..A.d....##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+c  brigand-1        Brigand L6 reaver          3,6    hp 11/24  Plain  group camp, guard, awake
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           2,7    hp 21/26  Plain  captain
+d  soldier-1        Soldier L6 pikeman         4,7    hp 22/22  Plain  group camp, guard, awake
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          2,6    hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 3,7
+Keziah moves 2,7 -> 3,7
+The Oath Stone  turn 2 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ..Bc^....#....#
+ 7 ...Ad....##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+c  brigand-1        Brigand L6 reaver          3,6    hp 11/24  Plain  group camp, guard, awake
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           3,7    hp 21/26  Plain  captain
+d  soldier-1        Soldier L6 pikeman         4,7    hp 22/22  Plain  group camp, guard, awake
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          2,6    hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack keziah brigand-1
+Forecast Keziah -> Brigand 1 with Kinsbane: acc 79% dmg 22 crit 3%; counter: acc 60% dmg 13 crit 0%
+  Kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 10)
+Keziah attacks Brigand 1
+  Keziah hits Brigand 1 for 22 (hp 0)
+  Keziah hp 21, Brigand 1 hp 0
+Keziah gains 25 exp (25)
+Kinsbane feeds: fed 10, power +4; Keziah heals 5 (hp 26)
+Brigand 1 falls at 3,6
+The Oath Stone  turn 2 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ..B.^....#....#
+ 7 ...Ad....##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           3,7    hp 26/26  Plain  captain  done
+d  soldier-1        Soldier L6 pikeman         4,7    hp 22/22  Plain  group camp, guard, awake
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          2,6    hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 4,6
+Teodor moves 2,6 -> 4,6 via 3,6
+The Oath Stone  turn 2 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....B....#....#
+ 7 ...Ad....##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           3,7    hp 26/26  Plain  captain  done
+d  soldier-1        Soldier L6 pikeman         4,7    hp 22/22  Plain  group camp, guard, awake
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          4,6    hp 14/24  Forest
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack teodor soldier-1
+Forecast Teodor -> Soldier with Iron Lance: acc 76% dmg 11 crit 3%; counter: acc 37% dmg 6 crit 0%
+Teodor attacks Soldier
+  Teodor hits Soldier for 11 (hp 11)
+  Soldier hits Teodor for 6 (hp 8)
+  Teodor hp 8, Soldier hp 11
+Teodor gains 8 exp (16)
+The Oath Stone  turn 2 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....B....#....#
+ 7 ...Ad....##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           3,7    hp 26/26  Plain  captain  done
+d  soldier-1        Soldier L6 pikeman         4,7    hp 11/22  Plain  group camp, guard, awake
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          4,6    hp 8/24   Forest  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer waits
+enemy: wait joab-1
+Joab waits
+enemy: attack soldier-1 keziah
+Forecast Soldier -> Keziah: acc 72% dmg 10 crit 0%; counter with Kinsbane: acc 74% dmg 20 crit 2%
+  Kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 11)
+Soldier attacks Keziah
+  Soldier misses Keziah
+  Keziah hits Soldier for 20 (hp 0)
+  Soldier hp 0, Keziah hp 26
+Keziah gains 25 exp (50)
+Kinsbane feeds: fed 11, power +4
+Soldier falls at 4,7
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Oath Stone  turn 3 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....B....#....#
+ 7 ...A.....##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           3,7    hp 26/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          4,6    hp 8/24   Forest
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 7,7
+Keziah moves 3,7 -> 7,7 via 4,7 5,7 6,7
+The Oath Stone  turn 3 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....B....#....#
+ 7 .......A.##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           7,7    hp 26/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          4,6    hp 8/24   Forest
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> wait keziah
+Keziah waits
+The Oath Stone  turn 3 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....B....#....#
+ 7 .......A.##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           7,7    hp 26/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          4,6    hp 8/24   Forest
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 6,7
+Teodor moves 4,6 -> 6,7 via 5,6 6,6
+The Oath Stone  turn 3 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#....#
+ 7 ......BA.##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           7,7    hp 26/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          6,7    hp 8/24   Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> item teodor 2
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 18)
+The Oath Stone  turn 3 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#....#
+ 7 ......BA.##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           7,7    hp 26/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          6,7    hp 18/24  Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: wait archer-1
+Archer waits
+enemy: wait joab-1
+Joab waits
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Kinsbane drains Keziah 5 (hp 21)
+The Oath Stone  turn 4 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#....#
+ 7 ......BA.##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           7,7    hp 21/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          6,7    hp 18/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 10,8
+Keziah moves 7,7 -> 10,8 via 8,7 8,8 9,8
+The Oath Stone  turn 4 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#....#
+ 7 ......B..##.###
+ 8 ^.....n...A...^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           10,8   hp 21/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          6,7    hp 18/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> wait keziah
+Keziah waits
+The Oath Stone  turn 4 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#....#
+ 7 ......B..##.###
+ 8 ^.....n...A...^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           10,8   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          6,7    hp 18/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 9,8
+Teodor moves 6,7 -> 9,8 via 7,7 8,7 8,8
+The Oath Stone  turn 4 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n..BA...^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           10,8   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          9,8    hp 18/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> wait teodor
+Teodor waits
+The Oath Stone  turn 4 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n..BA...^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           10,8   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          9,8    hp 18/24  Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: wait archer-1
+Archer waits
+enemy: wait joab-1
+Joab waits
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Kinsbane drains Keziah 5 (hp 16)
+The Oath Stone  turn 5 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n..BA...^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           10,8   hp 16/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          9,8    hp 18/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 11,6
+Keziah moves 10,8 -> 11,6 via 11,8 11,7
+The Oath Stone  turn 5 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#.A..#
+ 7 .........##.###
+ 8 ^.....n..B....^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           11,6   hp 16/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          9,8    hp 18/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack keziah archer-1
+Forecast Keziah -> Archer with Kinsbane: acc 74% dmg 22 crit 2%; counter: none
+  Kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 12)
+  Kills on hit: Keziah moves again, 4 movement (the hunt runs on, once a map)
+Keziah attacks Archer
+  Keziah misses Archer
+  Keziah hp 16, Archer hp 19
+The Oath Stone  turn 5 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#.A..#
+ 7 .........##.###
+ 8 ^.....n..B....^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           11,6   hp 16/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          9,8    hp 18/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 11,7
+Teodor moves 9,8 -> 11,7 via 10,8 11,8
+The Oath Stone  turn 5 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#.A..#
+ 7 .........##B###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 19/19  Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           11,6   hp 16/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,7   hp 18/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack teodor archer-1 art long_thrust
+Forecast Teodor -> Archer: acc 76% dmg 10 crit 3%; counter: acc 80% dmg 4 crit 3%
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 38 uses, 2 of them hit or miss
+Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
+Teodor attacks Archer
+  Teodor hits Archer for 10 (hp 9)
+  Archer hits Teodor for 4 (hp 14)
+  Teodor hp 14, Archer hp 9
+Teodor gains 8 exp (24)
+The Oath Stone  turn 5 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#.A..#
+ 7 .........##B###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 9/19   Plain  group envoy, hold
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           11,6   hp 16/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,7   hp 14/24  Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Reinforcements arrive
+  Rider arrives at 0,0 with the rear group, aggressive
+Reinforcements arrive
+  Brigand 2 arrives at 0,9 with the rear group, aggressive
+enemy: attack archer-1 teodor
+Forecast Archer -> Teodor: acc 80% dmg 4 crit 3%; counter: none
+Archer attacks Teodor
+  Archer misses Teodor
+  Archer hp 9, Teodor hp 14
+enemy: move brigand-2 2,8
+Brigand 2 moves 0,9 -> 2,8 via 0,8 1,8
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait joab-1
+Joab waits
+enemy: move rider-1 5,1
+Rider moves 0,0 -> 5,1 via 0,1 1,1 2,1 3,1 4,1
+enemy: wait rider-1
+Rider waits
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Kinsbane drains Keziah 5 (hp 11)
+The Oath Stone  turn 6 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .....e...#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#.b..#
+ 6 ....^....#.A..#
+ 7 .........##B###
+ 8 ^.f...n.......^
+ 9 ^^....^^......^
+
+b  archer-1         Archer L6 bowman           11,5   hp 9/19   Plain  group envoy, hold
+f  brigand-2        Brigand L6 reaver          2,8    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           11,6   hp 11/26  Plain  captain
+e  rider-1          Rider L6 outrider          5,1    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,7   hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack keziah archer-1
+Forecast Keziah -> Archer with Kinsbane: acc 74% dmg 22 crit 2%; counter: none
+  Kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 12)
+  Kills on hit: Keziah moves again, 4 movement (the hunt runs on, once a map)
+Keziah attacks Archer
+  Keziah hits Archer for 22 (hp 0)
+  Keziah hp 11, Archer hp 0
+Keziah gains 25 exp (75)
+Kinsbane feeds: fed 12, power +5, a tooth grows (teeth 5/5); Keziah heals 10 (hp 21); it wakes and hungers no more
+Kinsbane, to Keziah: "Keziah. I remember what I'm for."
+Archer falls at 11,5
+The hunt runs on: Keziah may move again, 4 movement
+Keziah may move again up to 4 movement: canto keziah <x,y|stay>
+The Oath Stone  turn 6 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .....e...#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a....#
+ 5 ..n......#....#
+ 6 ....^....#.A..#
+ 7 .........##B###
+ 8 ^.f...n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          2,8    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           11,6   hp 21/26  Plain  captain  canto 4
+e  rider-1          Rider L6 outrider          5,1    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,7   hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> canto keziah 12,4
+Keziah moves again 11,6 -> 12,4 via 11,5 11,4
+The Oath Stone  turn 6 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .....e...#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a..A.#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##B###
+ 8 ^.f...n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          2,8    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           12,4   hp 21/26  Plain  captain  done
+e  rider-1          Rider L6 outrider          5,1    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,7   hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 11,4
+Teodor moves 11,7 -> 11,4 via 11,6 11,5
+The Oath Stone  turn 6 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .....e...#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a.BA.#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.f...n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          2,8    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           12,4   hp 21/26  Plain  captain  done
+e  rider-1          Rider L6 outrider          5,1    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,4   hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> wait teodor
+Teodor waits
+The Oath Stone  turn 6 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .....e...#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........a.BA.#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.f...n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          2,8    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           12,4   hp 21/26  Plain  captain  done
+e  rider-1          Rider L6 outrider          5,1    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,4   hp 14/24  Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: move brigand-2 3,5
+Brigand 2 moves 2,8 -> 3,5 via 2,7 2,6 3,6
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait joab-1
+Joab waits
+enemy: move rider-1 8,4
+Rider moves 5,1 -> 8,4 via 6,1 7,1 8,1 8,2 8,3
+enemy: wait rider-1
+Rider waits
+enemy: attack sworn_captain-1 keziah
+Forecast Sworn Captain -> Keziah: acc 81% dmg 14 crit 1%; counter with Kinsbane: acc 54% dmg 16 crit 0%
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Sworn Captain attacks Keziah
+  Sworn Captain misses Keziah
+  Keziah misses Sworn Captain
+  Sworn Captain hp 28, Keziah hp 21
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+The Oath Stone  turn 7 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 ........ea.BA.#
+ 5 ..nf.....#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          3,5    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           12,4   hp 21/26  Plain  captain
+e  rider-1          Rider L6 outrider          8,4    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,4   hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 12,5
+Keziah moves 12,4 -> 12,5
+The Oath Stone  turn 7 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 ........ea.B..#
+ 5 ..nf.....#..A.#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          3,5    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           12,5   hp 21/26  Plain  captain
+e  rider-1          Rider L6 outrider          8,4    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,4   hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> wait keziah
+Keziah waits
+The Oath Stone  turn 7 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 ........ea.B..#
+ 5 ..nf.....#..A.#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          3,5    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           12,5   hp 21/26  Plain  captain  done
+e  rider-1          Rider L6 outrider          8,4    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,4   hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 12,4
+Teodor moves 11,4 -> 12,4
+The Oath Stone  turn 7 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 ........ea..B.#
+ 5 ..nf.....#..A.#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          3,5    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           12,5   hp 21/26  Plain  captain  done
+e  rider-1          Rider L6 outrider          8,4    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 14/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> item teodor 2
+Teodor uses Field Dressing (1 left)
+Teodor heals 10 (hp 24)
+The Oath Stone  turn 7 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 ........ea..B.#
+ 5 ..nf.....#..A.#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          3,5    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           12,5   hp 21/26  Plain  captain  done
+e  rider-1          Rider L6 outrider          8,4    hp 22/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 24/24  Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: move brigand-2 6,4
+Brigand 2 moves 3,5 -> 6,4 via 3,4 4,4 5,4
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait joab-1
+Joab waits
+enemy: move rider-1 11,4
+Rider moves 8,4 -> 11,4 via 9,4 10,4
+enemy: attack rider-1 teodor
+Forecast Rider -> Teodor: acc 73% dmg 8 crit 0%; counter with Iron Lance: acc 76% dmg 12 crit 3%
+Rider attacks Teodor
+  Rider hits Teodor for 8 (hp 16)
+  Teodor hits Rider for 12 (hp 10)
+  Rider hp 10, Teodor hp 16
+Teodor gains 8 exp (32)
+enemy: attack sworn_captain-1 teodor
+Forecast Sworn Captain -> Teodor: acc 82% dmg 11 crit 2%; counter with Iron Lance: acc 56% dmg 6 crit 1%
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Sworn Captain attacks Teodor
+  Sworn Captain misses Teodor
+  Teodor hits Sworn Captain for 6 (hp 22)
+  Sworn Captain hp 22, Teodor hp 16
+Teodor gains 8 exp (40)
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+The Oath Stone  turn 8 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 ......f..a.eB.#
+ 5 ..n......#..A.#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          6,4    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           12,5   hp 21/26  Plain  captain
+e  rider-1          Rider L6 outrider          11,4   hp 10/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 22/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 16/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 11,5
+Keziah moves 12,5 -> 11,5
+The Oath Stone  turn 8 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 ......f..a.eB.#
+ 5 ..n......#.A..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          6,4    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L7 reaver           11,5   hp 21/26  Plain  captain
+e  rider-1          Rider L6 outrider          11,4   hp 10/22  Plain  group rear, aggressive
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 22/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 16/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack keziah rider-1
+Forecast Keziah -> Rider with Kinsbane: acc 74% dmg 22 crit 2%; counter: acc 72% dmg 11 crit 0%
+Keziah attacks Rider
+  Keziah hits Rider for 22 (hp 0)
+  Keziah hp 21, Rider hp 0
+Keziah gains 25 exp (0)
+Keziah reaches level 8: dex +1 def +1
+Kinsbane feeds: fed 13, power +5
+Rider falls at 11,4
+The Oath Stone  turn 8 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 ......f..a..B.#
+ 5 ..n......#.A..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          6,4    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           11,5   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 22/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 16/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> item teodor 2
+Teodor uses Field Dressing (0 left)
+Teodor heals 8 (hp 24)
+The Oath Stone  turn 8 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 ......f..a..B.#
+ 5 ..n......#.A..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          6,4    hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           11,5   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 22/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 24/24  Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
+Sworn Captain heals 5 (hp 27)
+enemy: move brigand-2 10,4
+Brigand 2 moves 6,4 -> 10,4 via 7,4 8,4 9,4
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait joab-1
+Joab waits
+enemy: attack sworn_captain-1 teodor
+Forecast Sworn Captain -> Teodor: acc 82% dmg 11 crit 2%; counter with Iron Lance: acc 56% dmg 6 crit 1%
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Sworn Captain attacks Teodor
+  Sworn Captain hits Teodor for 11 (hp 13)
+  Teodor hits Sworn Captain for 6 (hp 21)
+  Sworn Captain hp 21, Teodor hp 13
+Teodor gains 8 exp (48)
+enemy: end
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........af.B.#
+ 5 ..n......#.A..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           11,5   hp 21/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 21/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 13/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack teodor sworn_captain-1
+Forecast Teodor -> Sworn Captain with Iron Lance: acc 56% dmg 6 crit 1%; counter: acc 82% dmg 11 crit 2%
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Teodor attacks Sworn Captain
+  Teodor hits Sworn Captain for 6 (hp 15)
+  Sworn Captain hits Teodor for 11 (hp 2)
+  Teodor hp 2, Sworn Captain hp 15
+Teodor gains 8 exp (56)
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........af.B.#
+ 5 ..n......#.A..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           11,5   hp 21/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 15/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 2/24   Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 13,3
+Keziah moves 11,5 -> 13,3 via 11,4 12,4 13,4
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!A#
+ 4 .........af.B.#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           13,3   hp 21/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 15/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 2/24   Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack keziah sworn_captain-1
+Forecast Keziah -> Sworn Captain with Kinsbane: acc 56% dmg 16 crit 1%; counter: acc 81% dmg 13 crit 1%
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Keziah attacks Sworn Captain
+  Keziah misses Sworn Captain
+  Sworn Captain misses Keziah
+  Keziah hp 21, Sworn Captain hp 15
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 2
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!A#
+ 4 .........af.B.#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           13,3   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 15/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 2/24   Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> recall 87
+Recalled to state 87; 1 charge left
+Undone: gives back 8 exp, 6 enemy hp; returns 11 hp to Teodor
+The rolls do not change: the same attack will roll the same
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 1
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........af.B.#
+ 5 ..n......#.A..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           11,5   hp 21/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 21/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 13/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 11,3
+Keziah moves 11,5 -> 11,3 via 11,4
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 1
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#.A!.#
+ 4 .........af.B.#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           11,3   hp 21/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 21/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 13/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack keziah sworn_captain-1
+Forecast Keziah -> Sworn Captain with Kinsbane: acc 56% dmg 16 crit 1%; counter: acc 81% dmg 13 crit 1%
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Keziah attacks Sworn Captain
+  Keziah misses Sworn Captain
+  Sworn Captain misses Keziah
+  Keziah hp 21, Sworn Captain hp 21
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 1
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#.A!.#
+ 4 .........af.B.#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           11,3   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 21/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 13/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> recall 87
+Recalled to state 87; 0 charges left
+Undone: moves only
+The rolls do not change: the same attack will roll the same
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 0
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........af.B.#
+ 5 ..n......#.A..#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           11,5   hp 21/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 21/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 13/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move keziah 13,3
+Keziah moves 11,5 -> 13,3 via 11,4 12,4 13,4
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 0
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!A#
+ 4 .........af.B.#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           13,3   hp 21/26  Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 21/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 13/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack keziah sworn_captain-1 3
+Forecast Keziah -> Sworn Captain with Iron Gauntlets: acc 80% dmg 4 x2 crit 1%; counter: acc 81% dmg 13 crit 1%
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Keziah equips Iron Gauntlets
+Keziah attacks Sworn Captain
+  Keziah misses Sworn Captain
+  Keziah hits Sworn Captain for 4 (hp 17)
+  Sworn Captain misses Keziah
+  Keziah hp 21, Sworn Captain hp 17
+Keziah gains 6 exp (6)
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 0
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!A#
+ 4 .........af.B.#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           13,3   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 17/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          12,4   hp 13/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 11,4
+Teodor moves 12,4 -> 11,4
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 0
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!A#
+ 4 .........afB..#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           13,3   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 17/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,4   hp 13/24  Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack teodor sworn_captain-1 art long_thrust
+Forecast Teodor -> Sworn Captain: acc 56% dmg 3 crit 1%; counter: none
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 32 uses, 2 of them hit or miss
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
+Teodor attacks Sworn Captain
+  Teodor hits Sworn Captain for 3 (hp 14)
+  Teodor hp 13, Sworn Captain hp 14
+Teodor gains 8 exp (56)
+The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 0
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!A#
+ 4 .........afB..#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 24/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           13,3   hp 21/26  Plain  captain  done
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 14/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,4   hp 13/24  Plain  done
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 9 --
+-- Enemy phase, turn 9 --
+Sworn Captain heals 5 (hp 19)
+enemy: attack brigand-2 teodor
+Forecast Brigand 2 -> Teodor: acc 62% dmg 10 crit 0%; counter with Iron Lance: acc 80% dmg 13 crit 4%
+Brigand 2 attacks Teodor
+  Brigand 2 hits Teodor for 10 (hp 3)
+  Teodor hits Brigand 2 for 13 (hp 11)
+  Brigand 2 hp 11, Teodor hp 3
+Teodor gains 8 exp (64)
+enemy: wait joab-1
+Joab waits
+enemy: attack sworn_captain-1 keziah
+Forecast Sworn Captain -> Keziah: acc 81% dmg 13 crit 1%; counter with Iron Gauntlets: acc 80% dmg 4 x2 crit 1%
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Sworn Captain attacks Keziah
+  Sworn Captain hits Keziah for 13 (hp 8)
+  Keziah misses Sworn Captain
+  Keziah hits Sworn Captain for 4 (hp 15)
+  Sworn Captain hp 15, Keziah hp 8
+Keziah gains 6 exp (12)
+enemy: end
+-- Enemy phase ends, turn 9 --
+-- Player phase, turn 10 --
+The Oath Stone  turn 10 of 10  player phase  defeat_boss  recall 0
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!A#
+ 4 .........afB..#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 11/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+A  keziah           Keziah L8 reaver           13,3   hp 8/26   Plain  captain
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 15/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,4   hp 3/24   Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+> attack keziah sworn_captain-1 1 !
+Forecast Keziah -> Sworn Captain with Iron Gauntlets: acc 80% dmg 4 x2 crit 1%; counter: acc 81% dmg 13 crit 1%
+  Counter: lethal to Keziah (13 against 8 hp)
+  Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Keziah attacks Sworn Captain
+  Keziah hits Sworn Captain for 4 (hp 11)
+  Keziah hits Sworn Captain for 4 (hp 7)
+  Sworn Captain hits Keziah for 13 (hp 0)
+  Keziah hp 0, Sworn Captain hp 7
+Keziah falls at 13,3
+The Oath Stone  turn 10 of 10  player phase  defeat_boss  recall 0
+   012345678901234
+ 0 ^^..n....######
+ 1 .........#..^.#
+ 2 ...^.....#....#
+ 3 .........#..!.#
+ 4 .........afB..#
+ 5 ..n......#....#
+ 6 ....^....#....#
+ 7 .........##.###
+ 8 ^.....n.......^
+ 9 ^^....^^......^
+
+f  brigand-2        Brigand L6 reaver          10,4   hp 11/24  Plain  group rear, aggressive
+a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
+!  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 7/28   Fort (heals 20 percent, 5 hp)  group envoy, boss
+B  teodor           Teodor L7 pikeman          11,4   hp 3/24   Plain
+Joab is bound to Sworn Captain: freed when Sworn Captain falls
+Battle lost: Keziah is dead; no recall is left, so leave
+Lost because Keziah fell.
+Campaign stopped in The Oath Stone at turn 10, decided and not left
