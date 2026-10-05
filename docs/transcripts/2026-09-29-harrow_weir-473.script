@@ -78,7 +78,7 @@ recall 84
 move keziah 7,6
 wait keziah
 move pell 10,6
-attack pell weir_foreman-1 1
+attack pell weir_foreman-1 gust
 move teodor 11,6
 forecast teodor weir_foreman-1
 attack teodor weir_foreman-1
@@ -96,4 +96,4 @@ end
 move teodor 12,7
 wait teodor
 move pell 11,6
-attack pell weir_foreman-1 1 !
+attack pell weir_foreman-1 gust !

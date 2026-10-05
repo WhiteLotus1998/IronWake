@@ -2852,7 +2852,7 @@ B  teodor           Teodor L5 pikeman          7,10   hp 23/23  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 seen far: Rook wakes a sleeper within 6 (seen for miles)
 drift: the south group is making for 12,8, the crossing you took
-> attack pell soldier-1 2 art overcast
+> attack pell soldier-1 cinder art overcast
 Forecast Pell -> Soldier 1 with Cinder: acc 99% dmg 19 crit 3%; counter: none
   Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 3 uses, 2 of them hit or miss
 Pell equips Cinder

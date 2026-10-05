@@ -81,7 +81,7 @@ public class CliPlayTests
         Assert.Contains("  Items: 1: Iron Sword x38\n", output);
         Assert.Contains("Slots count from 1", output);
         Assert.Contains("--strict stops at the first", output);
-        Assert.Contains("  item <unit> <slot> [ally] Use the item in a slot", output);
+        Assert.Contains("  item <unit> <slot|item> [ally] Use the item in a slot or named by id", output);
         Assert.DoesNotContain("unavailable", output);
     }
 
@@ -98,7 +98,7 @@ public class CliPlayTests
     [InlineData("wait", "ERROR: Usage: wait <unit>")]
     [InlineData("end now", "ERROR: Usage: end")]
     [InlineData("recall x", "ERROR: Usage: recall <n>")]
-    [InlineData("item captain", "ERROR: Usage: item <unit> <slot> [ally]")]
+    [InlineData("item captain", "ERROR: Usage: item <unit> <slot|item id> [ally]")]
     [InlineData("item captain 1", "ERROR: Iron Sword is a weapon, not an item; attack with it")]
     [InlineData("forecast captain", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
     [InlineData("forecast captain brigand-1 from", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
@@ -2688,7 +2688,7 @@ public class SimFullTests
     public void ATraceWithAnItemLineReplaysInTheCliUnderStrict()
     {
         var trace = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 20));
-        Assert.Contains("\nitem wren 2\n", trace);
+        Assert.Contains("\nitem wren field_dressing\n", trace);
         Assert.DoesNotContain("\nenemy:", trace);
         Assert.Contains("\n# enemy: wait archer-1\n", trace);
         var outcome = System.Text.RegularExpressions.Regex.Match(trace, "# (Won|Lost) on turn (\\d+): (.*)\n$");
@@ -2710,7 +2710,7 @@ public class SimFullTests
             Assert.Equal(0, exit);
             Assert.DoesNotContain("Rejected ", output);
             Assert.DoesNotContain("Strict: stopped", output);
-            Assert.Contains("> item wren 2\nWren uses Field Dressing", output);
+            Assert.Contains("> item wren field_dressing\nWren uses Field Dressing", output);
             Assert.Contains($"turn {turn} of ", output);
             Assert.DoesNotContain($"turn {turn + 1} of ", output);
             Assert.EndsWith($"Battle {outcome.Groups[1].Value.ToLowerInvariant()}: {outcome.Groups[3].Value}\n", output);

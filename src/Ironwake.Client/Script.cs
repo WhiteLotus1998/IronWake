@@ -9,7 +9,7 @@ namespace Ironwake.Client;
 /// a query (<c>forecast</c>, <c>order ... preview</c>, <c>threat</c>, <c>show</c>, <c>reach</c>,
 /// <c>map</c>, <c>help</c>, a bare <c>recall</c> or <c>recall list</c>), a blank line or a
 /// <c>#</c> comment is skipped, as none of them prints an event. Slots count from 1, as the
-/// console reads them.
+/// console reads them, or name an item by id.
 /// </summary>
 public static class Script
 {
@@ -45,8 +45,8 @@ public static class Script
             ("move", 3) when TryCoord(words[2], out var to) => new Move(words[1], to),
             ("move", 5) when words[3] == "via" && TryCoord(words[2], out var to) && TryCoord(words[4], out var via) => new Move(words[1], to, via),
             ("attack", 3) => new Attack(words[1], words[2], null, art),
-            ("attack", 4) when int.TryParse(words[3], out var slot) => new Attack(words[1], words[2], slot - 1, art),
-            ("item", 3 or 4) when int.TryParse(words[2], out var slot) => new UseItem(words[1], slot - 1, words.Length == 4 ? words[3] : null, art),
+            ("attack", 4) when SlotOf(state, words[1], words[3]) is { } slot => new Attack(words[1], words[2], slot, art),
+            ("item", 3 or 4) when SlotOf(state, words[1], words[2]) is { } slot => new UseItem(words[1], slot, words.Length == 4 ? words[3] : null, art),
             ("wait", 2) => new Wait(words[1]),
             ("canto", 3) when words[2] == "stay" && state.Find(words[1]) is { } stayer => new Canto(stayer.Id, stayer.At),
             ("canto", 3) when TryCoord(words[2], out var to) => new Canto(words[1], to),
@@ -67,6 +67,26 @@ public static class Script
             ("undo", 2) => new Undo(words[1]),
             _ => null,
         };
+    }
+
+    /// <summary>
+    /// The zero-based slot a script word names for <paramref name="unitId"/>: a one-based number,
+    /// or an item id the unit carries in exactly one slot, ignoring case (issue 1114, as the
+    /// Sim's trace writes a weapon whose slot a swing may have moved). Null when it names none.
+    /// </summary>
+    private static int? SlotOf(BattleState state, string unitId, string word)
+    {
+        if (int.TryParse(word, out var typed))
+        {
+            return typed - 1;
+        }
+
+        var named = state.Find(unitId)?.Unit.Inventory.Items
+            .Select((item, at) => (item, at))
+            .Where(entry => string.Equals(entry.item.ItemId, word, StringComparison.OrdinalIgnoreCase))
+            .Select(entry => entry.at)
+            .ToList();
+        return named is [var only] ? only : null;
     }
 
     /// <summary>

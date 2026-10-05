@@ -69,8 +69,8 @@ wait keziah
 move teodor 11,6
 attack teodor weir_foreman-1
 move pell 10,6
-forecast pell weir_foreman-1 2
-attack pell weir_foreman-1 2
+forecast pell weir_foreman-1 cinder
+attack pell weir_foreman-1 cinder
 wait captain
 threat keziah
 threat teodor

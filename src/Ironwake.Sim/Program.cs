@@ -988,12 +988,31 @@ public static class Program
     /// if all land ends in <c>!</c> for the same reason (issue 1093), so a trace still replays under <c>--strict</c>.
     /// </summary>
     public static string Script(BattleState state, GameContent content, Command command) =>
-        Script(command) + (command switch
+        (command switch
+        {
+            Attack { Slot: { } slot } a when UniqueItemAt(state, a.UnitId, slot) is { } id => $"attack {a.UnitId} {a.TargetId} {id}",
+            UseItem u when UniqueItemAt(state, u.UnitId, u.Slot) is { } id => u.TargetId is { } t ? $"item {u.UnitId} {id} {t}" : $"item {u.UnitId} {id}",
+            _ => Script(command),
+        }) + (command switch
         {
             Attack attack when SwingsIntoLethalCounter(state, content, attack) => " !",
             EndPhase when state.Phase == Side.Player && !state.Outcome.IsOver && Queries.Lethal(state, content).Count > 0 => " !",
             _ => "",
         });
+
+    /// <summary>
+    /// The item id in <paramref name="unitId"/>'s zero-based <paramref name="slot"/> when no other
+    /// slot of the pack holds the same id, else null (issue 1114). A trace names a weapon or item
+    /// this way because a swing reorders the pack and the CLI refuses a slot number the last
+    /// listing showed holding something else; a duplicate keeps its number, since either copy
+    /// is the same choice.
+    /// </summary>
+    public static string? UniqueItemAt(BattleState state, string unitId, int slot) =>
+        state.Find(unitId) is { } unit && slot >= 0 && slot < unit.Unit.Inventory.Count
+        && unit.Unit.Inventory.Items[slot].ItemId is var id
+        && unit.Unit.Inventory.Items.Count(item => item.ItemId == id) == 1
+            ? id
+            : null;
 
     /// <summary>
     /// True when <paramref name="attack"/>'s forecast on <paramref name="state"/> carries the console's

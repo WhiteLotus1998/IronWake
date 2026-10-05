@@ -233,7 +233,7 @@ a  soldier-1        Soldier L2 pikeman         7,2    hp 9/20   Plain  group cai
 !  sworn_captain-1  Sworn Captain L3 pikeman   7,3    hp 27/27  Plain  group cairn, boss, awake
 A  teodor           Teodor L4 pikeman          7,6    hp 11/22  Plain  captain
 B  wren             Wren L4 cadet              7,5    hp 21/21  Road
-> item teodor 3
+> item teodor field_dressing
 Teodor uses Field Dressing (2 left)
 Teodor heals 10 (hp 21)
 The Old Watch  turn 2 of 9  player phase  defeat_boss  recall 2
