@@ -2865,3 +2865,19 @@ Notes:
 - **Verdict:** the tuned verdict stands, and the play files nothing. Luring the bank is a real second line beside 1310's sneak north, and it cost a body and two Recalls. Neither line is free, so this is a choice, not a solve. It's the second 0237 play running to file nothing (after 1350), but #1066 to #1068 came from today's other plays, so 0237's two-day tripwire is nowhere near.
 
 — Code
+
+## 2026-10-05 — The Tollgate, a tuned map replayed under 0237, warm — Code
+Seed: 1380 (`play the_tollgate --seed 1380 --strict --script docs/transcripts/2026-10-05-the_tollgate-1380.script`; transcript beside it; main at 1bfceb4)   Result: **won on turn 10 of 10.** Nobody fell, no Recall was spent, and every enemy died, the boss included.
+Warm: my second Tollgate under 0237 (after 1320) and I built the rider trigger. This time I came at the woods from the east (Pell and Teodor up the 8 and 9 columns) instead of 1320's west pair.
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 8. The warden was dead and the archer at 6,1 was the last door. Wren went in first from 6,2 at 85 for 10, with the captain's Feint (99 for 9) to finish. She missed. That left two lines: the captain's plain swing at 87 for 11, which leaves the archer alive and a seize on 9 or 10 depending on rolls, or Full Measure at 100 for 19, a certain kill that spends turn 9 and puts the seize on the last turn of the map. I took the certain kill (it crit for 57). For the first time in any of my Tollgate plays, the turn limit was the price of a decision and not a formality.
+Notes:
+- **Turns 1 and 2 were a walk again.** The woods pair holds, so the approach only decides which side you strike from. It's the map's shape, the same note as every Tollgate entry.
+- **Pell's opener costs her the map, for the second replay running.** Gust on the brigand at 95 for 12 drew the 54 percent counter for 13, and she spent turns 3 to 10 at 3 HP. On 1320 it was the same brigand and the same 13. She was still the map's best unit: the rider at 100 for 11 with no counter on turn 6 and the boss at 100 for 11 with no counter on turn 9, both from range 2.
+- **The rider is a gift once priced, twice now.** Teodor stopped on 6,4 to Long Thrust the warden, the rider spawned, `threat` showed it would take Teodor at 39 percent into a 76 percent counter, and that is what it did. Pell finished it the next turn. 1320 said the same. The trigger keeps the corridor from being free, but a player who reads `threat` turns it into experience.
+- **The cork took three turns.** Two Long Thrusts from 6,4 (76 for 7 each, both hit) and the captain's Feint from 6,3 at 99 for exactly the 7 left. Only one unit can stand on each of 6,4 and 6,3, so the corridor sets the pace, not the damage.
+- **Turn 7's stand was the tense one.** The captain on 6,3 after the warden's kill read `If all land: 16 against 17 hp` from the archer and the boss's Toll Axe over the wall. Both missed.
+- **The boss died to his own counter's absence.** Wren's double counter on enemy phase 8 put him at 10, and Pell's Gust from 6,3 needed no roll. With no enemy left, the map still asked for the walk to 7,1, and the CLI said so.
+- **Verdict:** the tuned verdict stands, and the play files nothing. The rider as a priced kill is the second entry to say so; if Chat's next Tollgate says it too, it is a content note for the Table, not a bug.
+
+— Code
