@@ -1,0 +1,9 @@
+# The Mill, before the map. Beats: Design Table #994, rounds 344 to 346 (issue 1005). Chat's draft (round 373), both cold reads applied (round 374; no edits here).
+scene: the_mill_before
+plays: before the_mill
+
+m1 narration: The mill road follows a stream that outlived its mill. On the far bank the miller's house has its shutters barred from inside, and smoke still comes from the chimney.
+m2 narration: The woodpile by its door is down to the last row. Two arrows stand in the shutter.
+m3 narration: Alder finds the line on the list. Maud. Kestrow. Chaplain.
+m4 narration: Alder ties the horse to the dead mill's wheel and goes on afoot.
+r1 rules: (This map is lost if Maud falls. She strikes at range 1 or 2 with Radiance and heals with her Salve. A fight within 6 tiles of a sleeping group wakes it; threat names what a stop would wake.)

@@ -66,15 +66,25 @@ public class StoryCardTests
         Assert.Null(client.Card);
     }
 
+    /// <summary>
+    /// The Mill has no before card since its scene replaced it (issue 1005): a won Starting Alone
+    /// queues its after scene and the Mill's camp opens on no card, then <c>march</c> queues the
+    /// Mill's before scene, all in the order the console prints them.
+    /// </summary>
     [Fact]
-    public void AWonMapQueuesItsAfterCardThenTheNextCampsBeforeCardInTheConsolesOrder()
+    public void AWonMapQueuesItsAfterSceneThenMarchQueuesTheNextMapsBeforeSceneInTheConsolesOrder()
     {
         var client = Client();
         var log = Script.PlayCampaign(client, AloneScript());
         var cards = Drain(client);
-        var output = ConsoleOutput(AloneScript(), Seed);
+        Assert.Equal(new[] { "-- Starting Alone --", "-- After Starting Alone --" }, cards.Select(c => c[0]));
+
+        log += Script.PlayCampaign(client, "march\n");
+        cards.AddRange(Drain(client));
+        var output = ConsoleOutput(AloneScript() + "march\n", Seed);
 
         Assert.Equal(new[] { "-- Starting Alone --", "-- After Starting Alone --", "-- The Mill --" }, cards.Select(c => c[0]));
+        Assert.Contains("Alder ties the horse to the dead mill's wheel and goes on afoot.", cards[2]);
         var at = 0;
         foreach (var card in cards)
         {
@@ -86,6 +96,7 @@ public class StoryCardTests
 
         Assert.DoesNotContain("Bring them home", log);
         Assert.DoesNotContain("-- After Starting Alone --", log);
+        Assert.DoesNotContain("goes on afoot", log);
     }
 
     [Fact]

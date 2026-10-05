@@ -278,7 +278,7 @@ public class SceneScriptTests
             Assert.Contains("10 maps\n-- Starting Alone --\nThe road east is empty in both directions.\nAlder Fenn: Nobody on the list has come.\nAlder Fenn: The chaplain's name is still on it.\nBrigand: Keep walking.\nThe keeper: Bodies off the road before dark.\n(forecast <unit> <target> prints a strike and its counter before you\ntake it.)\n\n-- Before map 1 of 10", output);
             Assert.Contains("\n-- Starting Alone --\nAlder Fenn: East, then.\n\n", output);
             Assert.True(output.IndexOf("Alder Fenn: East, then.", StringComparison.Ordinal) > output.IndexOf("-- Before map 1 of 10", StringComparison.Ordinal));
-            Assert.Contains("nobody fell\n-- After Starting Alone --\nThe road is quiet again.\n\n-- The Mill --\n", output);
+            Assert.Contains("nobody fell\n-- After Starting Alone --\nThe road is quiet again.\n\n-- Before map 2 of 10: The Mill", output);
             Assert.DoesNotContain("Never shown", output);
             Assert.DoesNotContain("Keep walking", File.ReadAllText(log));
         }
