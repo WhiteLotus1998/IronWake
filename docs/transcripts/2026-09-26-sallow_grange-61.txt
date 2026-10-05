@@ -1313,7 +1313,7 @@ D  teodor           Teodor L1 pikeman          6,4    hp 9/21   Plain  done
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > recall 56
-Recalled to state 56; 1 charges left
+Recalled to state 56; 1 charge left
 Undone: gives back 14 exp, 11 enemy hp; returns 6 hp to Alder Fenn, 12 hp to Teodor
 The rolls do not change: the same attack will roll the same
 Sallow Grange  turn 4 of 10  player phase  seize  recall 1

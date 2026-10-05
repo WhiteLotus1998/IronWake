@@ -309,7 +309,7 @@ d  soldier-1        Soldier L6 pikeman         3,8    hp 22/22  Plain  group cam
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > recall 13
-Recalled to state 13; 1 charges left
+Recalled to state 13; 1 charge left
 Undone: gives back 24 exp, 22 enemy hp
 The rolls do not change: the same attack will roll the same
 The Oath Stone  turn 2 of 10  player phase  defeat_boss  recall 1

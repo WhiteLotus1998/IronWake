@@ -1179,8 +1179,11 @@ public sealed class PlaySession
             .Select(i => $"turn {_state.History[i].Turn} state {i}")
             .ToList();
         var list = starts.Count == 0 ? "none yet" : string.Join(", ", starts);
-        _out.WriteLine($"Player turns start at: {list}; history holds {_state.History.Count} states; {_state.RecallCharges} charges left");
+        _out.WriteLine($"Player turns start at: {list}; history holds {_state.History.Count} states; {ChargesLeft(_state.RecallCharges)}");
     }
+
+    /// <summary>How many Recall charges are left, as printed: "1 charge left", "N charges left" (issue 1066).</summary>
+    public static string ChargesLeft(int charges) => charges == 1 ? "1 charge left" : $"{charges} charges left";
 
     /// <summary>The line a rewind prints under what it undoes: rolls are keyed (section 7), so a Recall is a choice and never a reroll.</summary>
     public const string SameRolls = "The rolls do not change: the same attack will roll the same";
@@ -1243,7 +1246,7 @@ public sealed class PlaySession
         var spent = total - state.RecallCharges;
         var rows = new List<RecallRow>
         {
-            new(null, $"Recall: {state.RecallCharges} of {total} charges left, {spent} spent; a spent charge does not come back, and the same attack will roll the same"),
+            new(null, $"Recall: {state.RecallCharges} of {total} {(total == 1 ? "charge" : "charges")} left, {spent} spent; a spent charge does not come back, and the same attack will roll the same"),
         };
         if (state.RecallCharges < 1)
         {
@@ -2814,7 +2817,7 @@ public sealed class PlaySession
             case SupportReached s:
                 return $"{names[s.A]} and {names[s.B]} reach support {s.Tier}";
             case Recalled r:
-                return $"recalled to state {r.ToIndex}; {r.ChargesLeft} charges left";
+                return $"recalled to state {r.ToIndex}; {ChargesLeft(r.ChargesLeft)}";
             case ItemUsed i:
                 return $"{names[i.UnitId]} uses {content.ItemName(i.ItemId)}" + (i.TargetId == i.UnitId ? "" : " on " + i.TargetId) + $" ({i.UsesLeft} left)";
             case WeaponEquipped w:

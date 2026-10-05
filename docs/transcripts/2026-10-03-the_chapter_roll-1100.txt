@@ -740,7 +740,7 @@ B  wren             Wren L7 cadet              8,5    hp 9/23   Plain
 Battle lost: Rook is dead; only recall is left, or leave
 Lost because Rook fell.
 > recall 55
-Recalled to state 55; 1 charges left
+Recalled to state 55; 1 charge left
 Undone: gives back 2 kills (Brigand, Deacon), 26 exp, 54 enemy hp; returns Rook alive at 11 hp, 7 hp to Wren
 The rolls do not change: the same attack will roll the same
 The Chapter Roll  turn 5 of 8  player phase  seize  recall 1

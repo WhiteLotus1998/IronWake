@@ -931,7 +931,7 @@ b  archer-1         Archer L2 bowman           7,1    hp 17/17  Plain  group cai
 A  teodor           Teodor L4 pikeman          7,4    hp 21/22  Road  captain
 B  wren             Wren L4 cadet              7,6    hp 14/21  Plain
 > recall 76
-Recalled to state 76; 1 charges left
+Recalled to state 76; 1 charge left
 Undone: moves only
 The rolls do not change: the same attack will roll the same
 The Old Watch  turn 7 of 9  player phase  defeat_boss  recall 1

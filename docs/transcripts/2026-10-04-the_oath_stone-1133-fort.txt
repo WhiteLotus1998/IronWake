@@ -778,7 +778,7 @@ Threat on Keziah at 4,5 (Plain):
   If all land: 21 against 10 hp
   Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > recall 48
-Recalled to state 48; 1 charges left
+Recalled to state 48; 1 charge left
 Undone: gives back 8 exp, 21 enemy hp; returns 11 hp to Keziah
 The rolls do not change: the same attack will roll the same
 The Oath Stone  turn 5 of 10  player phase  defeat_boss  recall 1

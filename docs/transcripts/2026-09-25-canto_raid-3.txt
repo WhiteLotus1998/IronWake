@@ -818,7 +818,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 20/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         8,5    hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
 > recall 45
-Recalled to state 45; 1 charges left
+Recalled to state 45; 1 charge left
 Undone: gives back 1 kill (Soldier 2), 2 enemy hp; returns Ansgar alive at 10 hp
 The rolls do not change: the same attack will roll the same
 Hit and Run Raid  turn 5 of 10  player phase  rout  recall 1

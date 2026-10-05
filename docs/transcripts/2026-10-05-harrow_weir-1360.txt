@@ -1917,7 +1917,7 @@ B  teodor           Teodor L1 pikeman          8,2    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > recall 87
-Recalled to state 87; 1 charges left
+Recalled to state 87; 1 charge left
 Undone: returns 12 hp to Keziah
 The rolls do not change: the same attack will roll the same
 Harrow Weir  turn 6 of 15  player phase  defeat_boss  recall 1
