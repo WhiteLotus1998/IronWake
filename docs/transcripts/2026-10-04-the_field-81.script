@@ -81,7 +81,7 @@ wait ottilie
 move maud 11,12
 wait maud
 wait captain
-end
+end !
 attack pell soldier-1
 move teodor 12,10
 attack teodor archer-1

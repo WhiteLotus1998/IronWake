@@ -324,7 +324,7 @@ b  soldier-1        Soldier L3 pikeman         7,7    hp 6/21   Plain  group ban
 f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 B  teodor           Teodor L5 pikeman          5,7    hp 23/23  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Ottilie (Brigand 2 for 13, Hexer 1 for 11, against 18 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -1059,7 +1059,7 @@ a  archer-1         Archer L3 bowman           8,6    hp 17/17  Plain  group hou
 A  ottilie          Ottilie L5 bowman          5,6    hp 12/18  Plain  captain  done
 f  sworn_captain-1  Sworn Captain L3 pikeman   7,6    hp 7/27   Plain  group house, guard, awake
 B  teodor           Teodor L5 pikeman          7,7    hp 10/23  Plain  done
-> end
+> end !
 Lethal if all land: Teodor (Archer for 4, Sworn Captain for 11, against 10 hp)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --
@@ -1435,7 +1435,7 @@ The Counting House  turn 10 of 11  player phase  rout  recall 0
 a  archer-1         Archer L3 bowman           5,7    hp 8/17   Plain  group house, guard, awake
 A  ottilie          Ottilie L6 bowman          3,7    hp 6/19   Plain  captain  done
 B  teodor           Teodor L5 pikeman          4,8    hp 12/23  Plain  done
-> end
+> end !
 Lethal if all land: Ottilie (Archer for 7, against 6 hp)
 -- Player phase ends, turn 10 --
 -- Enemy phase, turn 10 --

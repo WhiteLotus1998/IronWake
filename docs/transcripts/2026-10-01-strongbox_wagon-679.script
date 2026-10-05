@@ -5,7 +5,7 @@ move captain 2,4
 wait captain
 move teodor 2,5
 wait teodor
-end
+end !
 attack captain brigand-1
 move teodor 4,6
 attack teodor soldier-1
@@ -24,6 +24,6 @@ move teodor 8,2
 attack teodor bandit_leader-1
 move wren 5,3
 wait wren
-end
+end !
 move captain 8,1
 attack captain bandit_leader-1 !

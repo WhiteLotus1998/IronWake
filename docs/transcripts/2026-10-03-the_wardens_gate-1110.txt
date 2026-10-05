@@ -806,7 +806,7 @@ g  soldier-2        Soldier L5 pikeman         8,6    hp 22/22  Plain  group rea
 !  sworn_captain-1  Sworn Captain L5 pikeman   7,2    hp 8/28   Plain  group gate, boss, awake
 A  teodor           Teodor L7 pikeman          5,2    hp 20/24  Plain  captain  done
 B  wren             Wren L7 cadet              5,3    hp 2/23   Plain  done
-> end
+> end !
 Lethal if all land: Wren (Rider 1 for 9, Rider 2 for 9, against 2 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --

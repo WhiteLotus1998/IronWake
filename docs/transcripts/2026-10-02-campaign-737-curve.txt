@@ -808,7 +808,7 @@ c  brigand-1        Brigand L1 reaver          10,5   hp 11/22  Plain  group roa
 A  captain          Alder Fenn L2 cadet        7,7    hp 23/23  Plain  captain  done
 B  maud             Maud L1 chaplain           8,5    hp 17/17  Fort (heals 20 percent, 3 hp)  done
 a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, awake
-> end
+> end !
 Lethal if all land: Maud (Archer 2 for 6, Brigand for 11, against 17 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -930,7 +930,7 @@ b  archer-1         Archer L1 bowman           9,3    hp 17/17  Road  group mill
 d  archer-2         Archer L1 bowman           9,7    hp 17/17  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        8,4    hp 16/23  Plain  captain  done
 B  maud             Maud L1 chaplain           8,5    hp 9/17   Fort (heals 20 percent, 3 hp)  done
-> end
+> end !
 Lethal if all land: Maud (Archer 1 for 6, Archer 2 for 6, against 9 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1033,7 +1033,7 @@ b  archer-1         Archer L1 bowman           9,3    hp 5/17   Road  group mill
 d  archer-2         Archer L1 bowman           8,6    hp 7/17   Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        9,4    hp 13/23  Plain  captain  done
 B  maud             Maud L1 chaplain           8,5    hp 12/17  Fort (heals 20 percent, 3 hp)  done
-> end
+> end !
 Lethal if all land: Maud (Archer 1 for 6, Archer 2 for 6, against 12 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -9680,7 +9680,7 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 ?  unseen at 11,1 5,3 8,3 10,3 5,4 7,4 6,5
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> end
+> end !
 Lethal if all land: Pell (Shieldbearer for 12, Soldier for 26, against 16 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --

@@ -10,7 +10,7 @@ move wren 4,5
 wait wren
 move teodor 3,5
 wait teodor
-end
+end !
 recall 0
 move ansgar 1,9
 wait ansgar

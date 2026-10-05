@@ -1193,7 +1193,7 @@ B  teodor           Teodor L5 pikeman          4,11   hp 23/23  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 seen far: Rook wakes a sleeper within 6 (seen for miles)
 drift: on turn 5's enemy phase the untaken route's group wakes and makes for your crossing: the south group for 12,8 if the line group wakes first, the line group for 12,14 if the south group does
-> end
+> end !
 Lethal if all land: Ottilie (Brigand 1 for 13, Soldier 3 for 11, against 18 hp)
 Rapport Alder Fenn and Pell +4 (4)
 -- Player phase ends, turn 2 --

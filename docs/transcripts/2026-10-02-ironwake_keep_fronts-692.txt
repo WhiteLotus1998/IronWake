@@ -1313,7 +1313,7 @@ B  wren             Wren L1 cadet              10,1   hp 14/20  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 holding; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Teodor (Archer 2 for 5, against 3 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1903,7 +1903,7 @@ B  wren             Wren L1 cadet              13,1   hp 2/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 1 for 5, Archer 2 for 5, Hexer for 10, Soldier 3 for 8, against 17 hp)
 Lethal if all land: Pell (Archer 1 for 8, Archer 2 for 8, Hexer for 7, Soldier 3 for 11, against 16 hp)
 Lethal if all land: Wren (Archer 1 for 6, Brigand 3 for 11, Brigand 5 for 11, against 2 hp)
@@ -2355,7 +2355,7 @@ B  wren             Wren L1 cadet              15,3   hp 2/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Wren (Archer 1 for 6, against 2 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
@@ -2826,7 +2826,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding
 Threat on Alder Fenn at 13,11 (Plain):
   Archer 2 from 13,9 with Iron Bow (slot 1): acc 68% dmg 5 crit 0%; counter: none
   If all land: 5 against 12 hp
-> end
+> end !
 Lethal if all land: Ottilie (Archer 2 for 7, Brigand 6 for 12, against 17 hp)
 Lethal if all land: Pell (Archer 2 for 8, Brigand 6 for 13, against 16 hp)
 Lethal if all land: Wren (Archer 1 for 6, Archer 2 for 6, Brigand 6 for 11, Hexer for 10, Soldier 3 for 9, against 2 hp)
@@ -3117,7 +3117,7 @@ o  soldier-5        Soldier L2 pikeman         11,8   hp 20/20  Plain  group ins
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 2 for 5, Hexer for 10, against 7 hp)
 Lethal if all land: Ottilie (Archer 2 for 7, Brigand 6 for 12, Hexer for 10, against 5 hp)
 Lethal if all land: Pell (Archer 2 for 8, Brigand 6 for 13, Hexer for 7, Soldier 3 for 11, against 16 hp)

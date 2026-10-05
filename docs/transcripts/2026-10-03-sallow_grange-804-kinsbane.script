@@ -25,7 +25,7 @@ move pell 3,8
 wait pell
 move captain 2,6
 wait captain
-end
+end !
 recall
 recall 20
 move keziah 2,9
@@ -40,7 +40,7 @@ move pell 2,8
 wait pell
 move captain 2,6
 wait captain
-end
+end !
 forecast teodor archer-2 from 5,7
 move teodor 5,7
 attack teodor archer-2
@@ -97,7 +97,7 @@ move pell 10,5
 wait pell
 move wren 9,6
 wait wren
-end
+end !
 recall
 recall 97
 forecast ottilie hexer-1 from 12,6

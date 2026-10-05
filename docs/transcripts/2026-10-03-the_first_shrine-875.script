@@ -9,7 +9,7 @@ move maud 6,3
 attack maud brigand-1
 move wren 8,4
 item wren 2
-end
+end !
 forecast maud brigand-2
 attack maud brigand-2
 threat wren from 7,2

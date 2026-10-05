@@ -77,7 +77,7 @@ move teodor 8,7
 item teodor 2
 wait wren
 wait captain
-end
+end !
 move pell 10,7
 attack pell soldier-2
 move wren 7,5
@@ -102,7 +102,7 @@ move teodor 10,4
 wait teodor
 move captain 10,5
 wait captain
-end
+end !
 recall 98
 move wren 10,3
 wait wren

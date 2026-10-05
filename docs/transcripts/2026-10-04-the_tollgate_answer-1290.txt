@@ -1602,7 +1602,7 @@ D  pell             Pell L2 adept              6,3    hp 7/16   Plain  done
 C  teodor           Teodor L1 pikeman          7,4    hp 3/21   Plain  done
 B  wren             Wren L1 cadet              6,4    hp 20/20  Forest  done
 one answer: a unit that counters makes no other counter until the next phase begins, on either side
-> end
+> end !
 Lethal if all land: Pell (Archer 1 for 8, against 7 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
@@ -1819,7 +1819,7 @@ D  pell             Pell L1 adept              6,4    hp 7/16   Forest  done
 C  teodor           Teodor L1 pikeman          6,3    hp 9/21   Plain  done
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
 one answer: a unit that counters makes no other counter until the next phase begins, on either side
-> end
+> end !
 Lethal if all land: Teodor (Archer 1 for 5, Bandit Leader for 11, against 9 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --

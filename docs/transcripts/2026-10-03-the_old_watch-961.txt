@@ -1319,7 +1319,7 @@ The Old Watch  turn 9 of 9  player phase  defeat_boss  recall 0
 !  sworn_captain-1  Sworn Captain L3 pikeman   7,0    hp 2/27   Fort (heals 20 percent, 5 hp)  group cairn, boss, awake
 A  teodor           Teodor L4 pikeman          8,1    hp 11/22  Plain  captain  done
 B  wren             Wren L4 cadet              7,1    hp 1/21   Plain  done
-> end
+> end !
 Lethal if all land: Wren (Sworn Captain for 13, against 1 hp)
 -- Player phase ends, turn 9 --
 -- Enemy phase, turn 9 --

@@ -21,7 +21,7 @@ move ottilie 5,6
 attack ottilie brigand-1
 move keziah 5,7
 attack keziah brigand-1 kinsbane !
-end
+end !
 move ottilie 3,5
 attack ottilie rider-1
 move keziah 4,5
@@ -32,7 +32,7 @@ move ottilie 7,7
 attack ottilie soldier-1
 move keziah 6,7
 attack keziah soldier-1 kinsbane
-end
+end !
 threat keziah
 move keziah 8,8
 attack keziah soldier-1 kinsbane !

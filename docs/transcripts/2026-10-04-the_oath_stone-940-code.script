@@ -32,7 +32,7 @@ attack keziah archer-1
 threat maud from 11,7
 move maud 11,7
 wait maud
-end
+end !
 attack keziah archer-1
 canto keziah stay
 item maud 2 keziah
@@ -45,12 +45,12 @@ end
 attack maud sworn_captain-1
 move keziah 12,4
 attack keziah sworn_captain-1
-end
+end !
 recall 87
 move maud 13,2
 attack maud sworn_captain-1
 move keziah 12,4
 attack keziah sworn_captain-1
-end
+end !
 attack maud sworn_captain-1
 leave

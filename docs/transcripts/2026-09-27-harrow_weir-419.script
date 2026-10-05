@@ -70,7 +70,7 @@ move dunstan 8,8
 attack dunstan brawler-1
 move teodor 9,6
 wait teodor
-end
+end !
 move keziah 12,6
 attack keziah weir_foreman-1 !
 recall 121

@@ -83,7 +83,7 @@ public class StartingAloneTests
     [Fact]
     public void HoldingTheFortWithoutStrikingBackLosesTheCaptain()
     {
-        var output = Play(out var exit, "move captain 5,4\nwait captain\nend\nwait captain\nend\nend\nend\nend\n", "3");
+        var output = Play(out var exit, "move captain 5,4\nwait captain\nend !\nwait captain\nend !\nend !\nend !\nend !\n", "3");
 
         Assert.Equal(1, exit);
         Assert.Contains("Hexer attacks Alder Fenn", output);

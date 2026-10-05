@@ -707,7 +707,7 @@ e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pic
 B  teodor           Teodor L5 pikeman          6,11   hp 23/23  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 drift: on turn 5's enemy phase the untaken route's group wakes and makes for your crossing: the south group for 12,8 if the line group wakes first, the line group for 12,14 if the south group does
-> end
+> end !
 Lethal if all land: Rook (Archer 2 for 9, Brigand 1 for 15, Soldier 3 for 13, against 18 hp)
 Rapport Alder Fenn and Ottilie +4 (4)
 Rapport Alder Fenn and Rook +4 (4)
@@ -1493,7 +1493,7 @@ e  soldier-3        Soldier L4 pikeman         10,13  hp 21/21  Plain  group pic
 B  teodor           Teodor L5 pikeman          6,11   hp 23/23  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 drift: on turn 5's enemy phase the untaken route's group wakes and makes for your crossing: the south group for 12,8 if the line group wakes first, the line group for 12,14 if the south group does
-> end
+> end !
 Lethal if all land: Rook (Archer 2 for 9, Brigand 1 for 15, against 18 hp)
 Rapport Alder Fenn and Rook +4 (4)
 -- Player phase ends, turn 2 --
@@ -2539,7 +2539,7 @@ e  soldier-3        Soldier L4 pikeman         6,13   hp 15/21  Plain  group pic
 B  teodor           Teodor L5 pikeman          6,11   hp 23/23  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 drift: on turn 5's enemy phase the untaken route's group wakes and makes for your crossing: the south group for 12,8 if the line group wakes first, the line group for 12,14 if the south group does
-> end
+> end !
 Lethal if all land: Ottilie (Brigand 1 for 13, Soldier 3 for 11, against 18 hp)
 Rapport Alder Fenn and Teodor +4 (4)
 -- Player phase ends, turn 3 --
@@ -5193,7 +5193,7 @@ G  rook             Rook L5 skyrider           14,6   hp 2/18   Water  done
 g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bridge, hold
 !  sworn_captain-1  Sworn Captain L4 pikeman   15,6   hp 4/27   Plain  group camp, boss, awake
 B  teodor           Teodor L6 pikeman          14,7   hp 11/23  Road  done
-> end
+> end !
 Lethal if all land: Rook (Sentry for 11, against 2 hp)
 Rapport Alder Fenn and Pell +4 (8)
 -- Player phase ends, turn 11 --

@@ -23,7 +23,7 @@ move maud 3,12
 item maud 2 captain
 move rook 3,13
 wait rook
-end
+end !
 attack pell soldier-3 2
 move teodor 6,12
 attack teodor brigand-1

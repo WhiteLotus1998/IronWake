@@ -77,7 +77,7 @@ move pell 10,5
 wait pell
 move ottilie 10,4
 wait ottilie
-end
+end !
 move ansgar 14,8
 wait ansgar
 move pell 13,6

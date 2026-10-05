@@ -792,7 +792,7 @@ Threat on Pell at 7,4 (Plain):
   Bandit Leader from 7,2 with Toll Axe (slot 2): acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 12 crit 1%
   Rider from 8,4 with Iron Lance (slot 1): acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
   If all land: 25 against 16 hp
-> end
+> end !
 Lethal if all land: Pell (Bandit Leader for 14, Rider for 11, against 16 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --

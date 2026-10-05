@@ -552,7 +552,7 @@ c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yar
 b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, awake
 f  wingrider-2      Wingrider L5 skyrider      8,4    hp 5/18   Plain  group pursuit, aggressive
 B  wren             Wren L7 cadet              8,5    hp 16/23  Plain  done
-> end
+> end !
 Lethal if all land: Rook (Deacon for 8, Wingrider 2 for 11, against 19 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -690,7 +690,7 @@ a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorg
 c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
 b  wingrider-1      Wingrider L5 skyrider      7,5    hp 5/18   Plain  group loft, guard, awake
 B  wren             Wren L7 cadet              8,5    hp 9/23   Plain  done
-> end
+> end !
 Lethal if all land: Rook (Brigand for 16, Wingrider 1 for 11, against 3 hp)
 Lethal if all land: Wren (Brigand for 12, Wingrider 1 for 7, against 9 hp)
 -- Player phase ends, turn 5 --
@@ -857,7 +857,7 @@ a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorg
 c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
 b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
 B  wren             Wren L7 cadet              10,6   hp 5/23   Forest  done
-> end
+> end !
 Lethal if all land: Wren (Brigand for 11, Wingrider 1 for 6, against 5 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
@@ -1190,7 +1190,7 @@ A  rook             Rook L7 skyrider           11,2   hp 11/19  Plain  captain  
 a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
 b  wingrider-1      Wingrider L5 skyrider      11,5   hp 18/18  Plain  group loft, guard, awake
 B  wren             Wren L7 cadet              12,3   hp 15/23  Plain  done
-> end
+> end !
 Lethal if all land: Rook (Wingrider 1 for 11, against 11 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --

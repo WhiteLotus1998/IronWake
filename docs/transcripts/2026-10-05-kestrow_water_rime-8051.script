@@ -34,7 +34,7 @@ wait captain
 wait rook
 wait wren
 wait maud
-end
+end !
 move pell 4,2
 attack pell shieldbearer-1 cinder
 attack wren brigand-2 !

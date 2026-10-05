@@ -54,12 +54,12 @@ move captain 6,3
 attack captain toll_warden-1
 move pell 6,4
 attack pell toll_warden-1 cinder !
-end
+end !
 move captain 6,2
 attack captain archer-1
 move pell 6,3
 attack pell archer-1 cinder !
 item wren 2
 item teodor 2
-end
+end !
 move captain 7,1

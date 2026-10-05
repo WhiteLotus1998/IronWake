@@ -14,7 +14,7 @@ attack rook soldier-1 !
 end
 move wren 9,5
 wait rook
-end
+end !
 move wren 9,6
 attack wren wingrider-1
 move rook 14,5

@@ -343,7 +343,7 @@ B  keziah           Keziah L1 reaver           4,6    hp 16/23  Plain  done
 D  pell             Pell L1 adept              3,8    hp 16/16  Plain  done
 e  soldier-1        Soldier L2 pikeman         5,3    hp 20/20  Plain  group hall, guard, awake
 C  wren             Wren L1 cadet              6,7    hp 9/20   Plain  done
-> end
+> end !
 Lethal if all land: Keziah (Brigand 2 for 12, Brigand 3 for 12, Soldier for 10, against 16 hp)
 Lethal if all land: Wren (Brigand 2 for 11, against 9 hp)
 -- Player phase ends, turn 2 --
@@ -551,7 +551,7 @@ B  keziah           Keziah L1 reaver           4,6    hp 16/23  Plain  done
 D  pell             Pell L1 adept              3,8    hp 16/16  Plain  done
 e  soldier-1        Soldier L2 pikeman         5,3    hp 20/20  Plain  group hall, guard, awake
 C  wren             Wren L1 cadet              4,8    hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Keziah (Brigand 3 for 12, Soldier for 10, against 16 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -1123,7 +1123,7 @@ A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  
 B  keziah           Keziah L1 reaver           4,2    hp 11/23  Plain  done
 D  pell             Pell L1 adept              5,2    hp 3/16   Plain  done
 C  wren             Wren L1 cadet              4,3    hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Pell (Bandit Leader for 14, against 3 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
@@ -1666,7 +1666,7 @@ c  archer-1         Archer L2 bowman           10,3   hp 6/17   Plain  group fie
 A  captain          Alder Fenn L1 cadet        6,0    hp 22/22  Plain  captain  done
 B  keziah           Keziah L2 reaver           9,3    hp 6/23   Plain  done
 C  wren             Wren L1 cadet              4,0    hp 8/20   Plain  done
-> end
+> end !
 Lethal if all land: Wren (Bandit Leader for 17, against 8 hp)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --

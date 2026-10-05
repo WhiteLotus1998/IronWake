@@ -8,7 +8,7 @@ move dunstan 11,3
 wait dunstan
 move wren 10,3
 wait wren
-end
+end !
 recall list
 recall 3
 threat pell

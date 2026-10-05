@@ -15,7 +15,7 @@ move captain 4,7
 wait captain
 move teodor 8,6
 wait teodor
-end
+end !
 recall 15
 move pell 5,8
 wait pell
@@ -73,7 +73,7 @@ attack pell archer-1
 wait captain
 wait teodor
 wait wren
-end
+end !
 move captain 6,3
 wait captain
 wait teodor

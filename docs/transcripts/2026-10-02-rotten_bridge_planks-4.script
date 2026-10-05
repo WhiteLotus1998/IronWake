@@ -21,7 +21,7 @@ move captain 5,6
 attack captain rider-1
 move rook 2,3
 wait teodor
-end
+end !
 attack teodor brigand-2
 attack pell brigand-1
 move captain 7,7
@@ -30,7 +30,7 @@ move dunstan 7,6
 attack dunstan archer-1
 move ottilie 6,4
 attack ottilie archer-2
-end
+end !
 move pell 6,5
 attack pell brigand-3
 move ottilie 6,3

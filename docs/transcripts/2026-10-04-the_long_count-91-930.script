@@ -8,7 +8,7 @@ move ottilie 8,4
 attack ottilie soldier-1
 move wren 9,4
 attack wren soldier-1
-end
+end !
 move ottilie 8,3
 attack ottilie hexer-1 art aimed_shot
 move wren 6,4
@@ -17,7 +17,7 @@ end
 move wren 7,4
 attack wren rider-1
 item ottilie 2
-end
+end !
 attack wren rider-1
 move ottilie 10,4
 item ottilie 2

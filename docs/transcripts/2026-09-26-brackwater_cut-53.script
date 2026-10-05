@@ -8,7 +8,7 @@ move dunstan 11,3
 wait dunstan
 move wren 10,3
 wait wren
-end
+end !
 recall list
 recall 3
 threat pell
@@ -41,7 +41,7 @@ move pell 14,1
 wait pell
 move wren 15,1
 wait wren
-end
+end !
 move captain 18,1
 wait captain
 move wren 19,1

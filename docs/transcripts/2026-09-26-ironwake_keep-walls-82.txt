@@ -619,7 +619,7 @@ E  pell             Pell L1 adept              12,4   hp 16/16  Plain  done
 e  soldier-2        Soldier L2 pikeman         5,7    hp 20/20  Plain  group van, aggressive
 C  teodor           Teodor L1 pikeman          11,7   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain
-> end
+> end !
 Lethal if all land: Wren (Brigand 2 for 11, against 11 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1233,7 +1233,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          13,7   hp 16/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
-> end
+> end !
 Lethal if all land: Ottilie (Archer 2 for 7, Hexer for 10, against 10 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
@@ -1512,7 +1512,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          11,7   hp 8/21   Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
-> end
+> end !
 Lethal if all land: Teodor (Archer 2 for 5, Soldier 2 for 8, against 8 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
@@ -1773,7 +1773,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 2 for 5, Brigand 4 for 10, against 14 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
@@ -2007,7 +2007,7 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 k  soldier-4        Soldier L2 pikeman         6,7    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain  done
-> end
+> end !
 Lethal if all land: Wren (Archer 2 for 6, Soldier 3 for 9, against 11 hp)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --

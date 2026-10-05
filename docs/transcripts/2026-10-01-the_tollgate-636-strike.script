@@ -32,7 +32,7 @@ move wren 5,4
 move pell 7,4
 threat captain
 threat pell
-end
+end !
 move pell 8,5
 attack pell rider-1 !
 attack teodor toll_warden-1 art long_thrust

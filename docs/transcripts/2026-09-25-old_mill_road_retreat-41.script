@@ -5,7 +5,7 @@ move captain 3,7
 attack captain archer-2
 move wren 2,6
 attack wren brigand-1
-end
+end !
 recall
 recall 11
 move captain 2,6
@@ -23,7 +23,7 @@ end
 attack captain soldier-1
 move wren 6,7
 item wren 2
-end
+end !
 forecast captain mill_bandit-1 from 7,1
 move captain 7,1
 attack captain mill_bandit-1

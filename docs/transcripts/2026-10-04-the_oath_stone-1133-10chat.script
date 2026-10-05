@@ -48,7 +48,7 @@ end
 attack maud sworn_captain-1
 move keziah 12,4
 attack keziah sworn_captain-1
-end
+end !
 item maud 2 keziah
 attack keziah sworn_captain-1 art cleave
-end
+end !

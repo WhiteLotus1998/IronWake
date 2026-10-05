@@ -22,9 +22,10 @@ public static class Script
             return null;
         }
 
-        if (words[0] == "attack" && words.Length > 1 && words[^1] == "!")
+        if (words[0] is "attack" or "end" && words.Length > 1 && words[^1] == "!")
         {
-            // The console's confirm on a swing into a lethal counter (issue 975); the client's command is the same attack.
+            // The console's confirm on a swing into a lethal counter (issue 975) or an end with a unit
+            // lethal if all land (issue 1093); the client's command is the same attack or end.
             words = words[..^1];
         }
 

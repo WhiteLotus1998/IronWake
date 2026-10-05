@@ -1539,7 +1539,7 @@ D  wren             Wren L1 cadet              19,4   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 count: Alder Fenn on an exit (leaves by turn 8), Dunstan cannot leave by turn 8, Pell 1 turn to an exit (last start: turn 7), Rook 1 turn to an exit (last start: turn 7), Wren on an exit (leaves by turn 8)
-> end
+> end !
 Lethal if all land: Pell (Shieldbearer for 10, Soldier for 11, against 16 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --

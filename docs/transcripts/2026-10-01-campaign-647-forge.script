@@ -16,14 +16,14 @@ move maud 3,2
 attack maud soldier-1
 move wren 5,1
 attack wren archer-1
-end
+end !
 attack maud soldier-1
 move wren 3,1
 item wren 2
 end
 item maud 2 wren
 wait wren
-end
+end !
 leave
 roster
 show wren
@@ -54,7 +54,7 @@ move captain 6,4
 wait captain
 move teodor 8,5
 wait teodor
-end
+end !
 move teodor 7,5
 attack teodor rider-1
 attack captain rider-1
@@ -65,11 +65,11 @@ move teodor 6,3
 attack teodor toll_warden-1
 wait captain
 wait wren
-end
+end !
 move wren 6,3
 attack wren toll_warden-1
 wait captain
-end
+end !
 attack wren toll_warden-1
 recall 36
 move captain 6,4
@@ -88,7 +88,7 @@ attack pell toll_warden-1 !
 attack captain toll_warden-1
 move wren 5,4
 wait wren
-end
+end !
 move captain 5,1
 attack captain archer-1
 move wren 6,2
@@ -97,7 +97,7 @@ move pell 6,3
 attack pell archer-1
 move teodor 6,4
 wait teodor
-end
+end !
 move captain 7,1
 leave
 keep

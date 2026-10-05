@@ -57,7 +57,7 @@ public sealed class PlaySession
           fallback <unit> <x,y|stay>  After a fall back order, an ally who had acted moves up to 2, if it wakes no one
           cover <unit> <ally>      On a cover map, take the first strike aimed at the ally beside it, as the action
           watch <unit>             On an overwatch map, strike the first foe to end a move in the unit's ring, as the action
-          end                      End the player phase; the enemy phase plays out, each enemy attack printing its forecast first
+          end [!]                  End the player phase; the enemy phase plays out, each enemy attack printing its forecast first. Refused while a unit is lethal if all land; end ! ends anyway
           recall <n>               Rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              Every state recall can return to, the command that made it, and what a rewind there gives back
           recall                   List the state each player turn started at, and the charges left
@@ -547,7 +547,7 @@ public sealed class PlaySession
 
     private void Execute(string[] words)
     {
-        var swingAnyway = words[0] == "attack" && words.Length > 1 && words[^1] == "!";
+        var swingAnyway = words[0] is "attack" or "end" && words.Length > 1 && words[^1] == "!";
         if (swingAnyway)
         {
             words = words[..^1];
@@ -703,7 +703,19 @@ public sealed class PlaySession
                     ? Rivalry.Exposed(_state, _content).Select(u => new ExposureEntry(_state.History.Count, _state.Turn, u.Id)).ToList()
                     : new List<ExposureEntry>();
                 var endNames = UnitNames.Of(_state, _content);
-                var warnings = Queries.Lethal(_state, _content).Select(l => LethalLine(l, endNames))
+                var lethalNow = Queries.Lethal(_state, _content);
+                if (lethalNow.Count > 0 && !swingAnyway && _state.Phase == Side.Player && !_state.Outcome.IsOver)
+                {
+                    foreach (var lethal in lethalNow)
+                    {
+                        _out.WriteLine(LethalLine(lethal, endNames));
+                    }
+
+                    Error(LethalEndRefusal(lethalNow.Select(l => endNames[l.Unit.Id])), "end !");
+                    break;
+                }
+
+                var warnings = lethalNow.Select(l => LethalLine(l, endNames))
                     .Concat(EscapeCount.PassedByEnding(_state, _content).Select(c => EscapeCount.Warning(c, _state.Map.TurnLimit, endNames)))
                     .Concat(Wind.ComingLine(_state, _content, endNames, quiet: false) is { } windTurn ? new[] { UnitNames.Sentence(windTurn) } : Array.Empty<string>())
                     .ToList();
@@ -715,7 +727,7 @@ public sealed class PlaySession
 
                 break;
             case "end":
-                Error("usage: end");
+                Error("usage: end [!]");
                 break;
             case "recall" when words.Length == 2 && int.TryParse(words[1], out var index):
                 var undone = index >= 0 && index < _state.History.Count ? RecallCost.Of(_state, index) : null;
@@ -1598,6 +1610,15 @@ public sealed class PlaySession
     /// </summary>
     public static string LethalLine(LethalThreat lethal, UnitNames names) =>
         $"Lethal if all land: {names[lethal.Unit.Id]} ({string.Join(", ", lethal.Strikers.Select(s => $"{names[s.Enemy.Id]} for {s.Damage}"))}, against {lethal.Unit.Hp} hp)";
+
+    /// <summary>
+    /// The refusal of an <c>end</c> while a unit is lethal if all land (issue 1093): the warned death is
+    /// read before the phase ends, not after, so <c>end</c> prints the lethal lines and ends nothing.
+    /// The refusal reads <c>lethal if all land: Wren, Maud; add ! to end anyway: </c>, and the caller
+    /// follows it with <c>end !</c>, which prints the same lines and ends the phase. Bait stays legal.
+    /// </summary>
+    public static string LethalEndRefusal(IEnumerable<string> names) =>
+        $"lethal if all land: {string.Join(", ", names)}; add ! to end anyway: ";
 
     /// <summary>
     /// The refusal of an <c>attack</c> whose forecast carries <paramref name="lethalCounter"/> (issue 975):

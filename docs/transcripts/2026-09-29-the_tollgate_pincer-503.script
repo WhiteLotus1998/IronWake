@@ -30,7 +30,7 @@ move teodor 7,5
 attack teodor toll_brigand-1
 move captain 8,6
 wait captain
-end
+end !
 recall list
 recall 30
 move wren 5,6
@@ -49,7 +49,7 @@ attack pell archer-2
 attack wren archer-2
 move captain 7,5
 attack captain toll_brigand-1
-end
+end !
 move wren 5,5
 attack wren toll_brigand-1 !
 move pell 7,6

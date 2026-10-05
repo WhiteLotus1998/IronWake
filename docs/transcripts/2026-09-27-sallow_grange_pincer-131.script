@@ -21,7 +21,7 @@ wait pell
 move ottilie 2,7
 wait ottilie
 wait ansgar
-end
+end !
 attack pell soldier-1
 move teodor 4,5
 forecast teodor archer-2

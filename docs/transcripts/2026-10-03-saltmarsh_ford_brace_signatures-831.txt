@@ -904,7 +904,7 @@ signatures: each recruit with a signature plays it, flaw included; show <unit> p
   ottilie: ledger: refuses a strike or a watch shot under 65 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
-> end
+> end !
 Lethal if all land: Wren (Soldier 1 for 9, against 9 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1140,7 +1140,7 @@ signatures: each recruit with a signature plays it, flaw included; show <unit> p
   ottilie: ledger: refuses a strike or a watch shot under 65 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
-> end
+> end !
 Lethal if all land: Wren (Soldier 1 for 9, against 9 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --

@@ -11,7 +11,7 @@ move captain 1,6
 wait captain
 move ansgar 2,9
 wait ansgar
-end
+end !
 attack pell soldier-1
 move wren 4,6
 attack wren archer-2
@@ -51,7 +51,7 @@ move pell 10,6
 watch pell
 move teodor 10,7
 wait teodor
-end
+end !
 attack wren grange_reeve-1
 move captain 13,5
 attack captain grange_reeve-1

@@ -53,7 +53,7 @@ move pell 18,2
 wait pell
 move rook 19,2
 wait rook
-end
+end !
 attack pell shieldbearer-1
 exit wren
 move rook 19,4

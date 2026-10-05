@@ -11,7 +11,7 @@ move teodor 8,7
 wait teodor
 move wren 8,4
 wait wren
-end
+end !
 move captain 8,2
 wait captain
 move dunstan 8,7
@@ -22,7 +22,7 @@ move pell 9,5
 attack pell soldier-1
 move wren 8,5
 attack wren soldier-1
-end
+end !
 move captain 10,4
 wait captain
 move dunstan 8,6
@@ -33,7 +33,7 @@ move pell 7,4
 attack pell brigand-2
 move wren 7,7
 attack wren hexer-1
-end
+end !
 move captain 8,3
 attack captain soldier-2
 move ottilie 8,6

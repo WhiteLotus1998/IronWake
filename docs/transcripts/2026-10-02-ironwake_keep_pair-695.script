@@ -22,7 +22,7 @@ move ottilie 11,5
 attack ottilie soldier-1
 wait teodor
 wait dunstan
-end
+end !
 recall
 recall 26
 move wren 10,1
@@ -39,14 +39,14 @@ move dunstan 11,10
 wait dunstan
 threat ottilie
 threat captain
-end
+end !
 attack teodor soldier-2
 wait wren
 wait pell
 wait captain
 wait ottilie
 wait dunstan
-end
+end !
 attack pell finale_hunter-1
 item wren 2
 wait captain
@@ -54,7 +54,7 @@ wait ottilie
 wait teodor
 wait dunstan
 threat wren
-end
+end !
 threat pell from 11,5
 move pell 11,5
 wait pell
@@ -64,7 +64,7 @@ item teodor 2
 move dunstan 10,10
 attack dunstan brigand-1
 wait captain
-end
+end !
 move captain 9,5
 attack captain brigand-1
 move pell 10,5
@@ -75,21 +75,21 @@ wait teodor
 wait dunstan
 threat teodor
 threat dunstan
-end
+end !
 attack captain soldier-4
 attack ottilie brigand-4
 attack dunstan archer-2
 wait teodor
 forecast captain hask-1 from 1,6
 threat captain
-end
+end !
 item teodor 2
 attack captain brigand-5
 item ottilie 2
 wait dunstan
 threat teodor
-end
+end !
 move ottilie 11,6
 attack ottilie soldier-5
 attack captain brigand-4
-end
+end !

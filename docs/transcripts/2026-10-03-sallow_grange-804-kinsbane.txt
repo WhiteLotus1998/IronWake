@@ -836,7 +836,7 @@ D  teodor           Teodor L6 pikeman          4,7    hp 23/23  Plain  done
 b  veteran-1        Veteran L7 halberdier      7,5    hp 25/25  Plain  group field, guard, awake
 C  wren             Wren L6 cadet              3,6    hp 22/22  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Keziah (Archer 2 for 7, Brawler for 18, against 21 hp)
 Lethal if all land: Teodor (Archer 2 for 4, Brawler for 12, Veteran for 12, against 23 hp)
 Lethal if all land: Wren (Archer 2 for 6, Brawler for 16, Veteran for 14, against 22 hp)
@@ -1318,7 +1318,7 @@ D  teodor           Teodor L6 pikeman          4,7    hp 23/23  Plain  done
 b  veteran-1        Veteran L7 halberdier      7,5    hp 25/25  Plain  group field, guard, awake
 C  wren             Wren L6 cadet              3,6    hp 22/22  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Teodor (Archer 2 for 4, Brawler for 12, Veteran for 12, against 23 hp)
 Lethal if all land: Wren (Archer 2 for 6, Brawler for 16, Veteran for 14, against 22 hp)
 Rapport Alder Fenn and Wren +4 (4)
@@ -2888,7 +2888,7 @@ E  pell             Pell L6 adept              10,5   hp 17/17  Plain  done
 e  shieldbearer-1   Shieldbearer L7 bulwark    12,2   hp 27/27  Plain  group gate, hold
 D  teodor           Teodor L6 pikeman          12,5   hp 23/23  Plain  done
 C  wren             Wren L6 cadet              9,6    hp 8/22   Plain  done
-> end
+> end !
 Lethal if all land: Keziah (Grange Reeve for 10, Hexer for 15, against 1 hp)
 Rapport Alder Fenn and Ottilie +4 (4)
 Rapport Alder Fenn and Pell +4 (4)

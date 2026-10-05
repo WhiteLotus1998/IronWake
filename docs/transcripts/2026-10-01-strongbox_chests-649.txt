@@ -1038,7 +1038,7 @@ C  teodor           Teodor L1 pikeman          8,10   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              9,7    hp 11/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
-> end
+> end !
 Lethal if all land: Teodor (Archer 1 for 5, Soldier 1 for 8, against 13 hp)
 Lethal if all land: Wren (Archer 1 for 6, Soldier 1 for 9, against 11 hp)
 -- Player phase ends, turn 4 --
@@ -1319,7 +1319,7 @@ C  teodor           Teodor L1 pikeman          7,9    hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,8   hp 11/20  Road  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
-> end
+> end !
 Lethal if all land: Teodor (Archer 1 for 5, Soldier 1 for 8, against 13 hp)
 Lethal if all land: Wren (Archer 1 for 6, Soldier 1 for 9, against 11 hp)
 -- Player phase ends, turn 4 --
@@ -1517,7 +1517,7 @@ e  soldier-2        Soldier L1 pikeman         8,6    hp 20/20  Plain  group cam
 B  wren             Wren L1 cadet              9,9    hp 11/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
-> end
+> end !
 Lethal if all land: Ottilie (Archer 2 for 7, Soldier 2 for 10, against 17 hp)
 Lethal if all land: Wren (Archer 2 for 6, Soldier 2 for 9, against 11 hp)
 -- Player phase ends, turn 5 --
@@ -2523,7 +2523,7 @@ A  captain          Alder Fenn L1 cadet        10,6   hp 8/22   Road  captain  d
 D  ottilie          Ottilie L1 bowman          9,3    hp 7/17   Plain  done
 f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
 B  wren             Wren L2 cadet              14,1   hp 10/21  Plain  done
-> end
+> end !
 Lethal if all land: Ottilie (Shieldbearer for 9, against 7 hp)
 -- Player phase ends, turn 11 --
 -- Enemy phase, turn 11 --

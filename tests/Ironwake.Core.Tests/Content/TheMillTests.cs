@@ -21,7 +21,7 @@ public class TheMillTests
     public void LeavingMaudToHoldTheFortAloneLosesTheMap()
     {
         var path = Path.Combine(Path.GetTempPath(), "ironwake-mill-" + Guid.NewGuid().ToString("N") + ".script");
-        File.WriteAllText(path, string.Concat(Enumerable.Repeat("wait captain\nwait maud\nend\n", 4)));
+        File.WriteAllText(path, string.Concat(Enumerable.Repeat("wait captain\nwait maud\nend !\n", 4)));
         try
         {
             var output = Run(out var exit, "play", "the_mill", "--seed", "2", "--script", path, "--content", Fixture.RealContentDirectory());

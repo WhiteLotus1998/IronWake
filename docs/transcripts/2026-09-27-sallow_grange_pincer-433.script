@@ -24,7 +24,7 @@ wait wren
 move ansgar 4,7
 wait ansgar
 canto ansgar stay
-end
+end !
 move wren 7,4
 attack wren soldier-1
 move ansgar 7,7

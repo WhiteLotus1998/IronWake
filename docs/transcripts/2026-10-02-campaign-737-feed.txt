@@ -806,7 +806,7 @@ c  brigand-1        Brigand L1 reaver          10,5   hp 11/22  Plain  group roa
 A  captain          Alder Fenn L2 cadet        7,7    hp 23/23  Plain  captain  done
 B  maud             Maud L1 chaplain           8,5    hp 17/17  Fort (heals 20 percent, 3 hp)  done
 a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, awake
-> end
+> end !
 Lethal if all land: Maud (Archer 2 for 6, Brigand for 11, against 17 hp)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -928,7 +928,7 @@ b  archer-1         Archer L1 bowman           9,3    hp 17/17  Road  group mill
 d  archer-2         Archer L1 bowman           9,7    hp 17/17  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        8,4    hp 16/23  Plain  captain  done
 B  maud             Maud L1 chaplain           8,5    hp 9/17   Fort (heals 20 percent, 3 hp)  done
-> end
+> end !
 Lethal if all land: Maud (Archer 1 for 6, Archer 2 for 6, against 9 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -3924,7 +3924,7 @@ B  dunstan          Dunstan L1 bulwark         3,3    hp 19/23  Plain  done
 f  hexer-1          Hexer L1 adept             5,1    hp 16/16  Plain  group north, aggressive
 A  maud             Maud L2 chaplain           3,2    hp 18/18  Fort (heals 20 percent, 3 hp)  captain  done
 d  soldier-1        Soldier L1 pikeman         5,2    hp 20/20  Plain  group east, aggressive
-> end
+> end !
 Lethal if all land: Dunstan (Archer 1 for 3, Archer 2 for 3, Hexer for 11, Soldier for 6, against 19 hp)
 Lethal if all land: Maud (Archer 1 for 6, Archer 2 for 6, Hexer for 2, Soldier for 9, against 18 hp)
 -- Player phase ends, turn 4 --
@@ -4066,7 +4066,7 @@ B  dunstan          Dunstan L1 bulwark         3,1    hp 19/23  Plain  done
 f  hexer-1          Hexer L1 adept             5,1    hp 16/16  Plain  group north, aggressive
 A  maud             Maud L2 chaplain           3,2    hp 18/18  Fort (heals 20 percent, 3 hp)  captain  done
 d  soldier-1        Soldier L1 pikeman         5,2    hp 20/20  Plain  group east, aggressive
-> end
+> end !
 Lethal if all land: Dunstan (Archer 1 for 3, Archer 2 for 3, Hexer for 11, Soldier for 6, against 19 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -4430,7 +4430,7 @@ The Lazar House  turn 3 of 6  player phase  survive  recall 0
 B  dunstan          Dunstan L1 bulwark         8,4    hp 8/23   Road  done
 A  maud             Maud L2 chaplain           8,2    hp 18/18  Plain  captain  done
 d  soldier-1        Soldier L1 pikeman         9,4    hp 2/20   Road  group east, aggressive
-> end
+> end !
 Lethal if all land: Dunstan (Archer 2 for 3, Soldier for 6, against 8 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -4640,7 +4640,7 @@ The Lazar House  turn 5 of 6  player phase  survive  recall 0
 e  archer-2         Archer L1 bowman           8,4    hp 6/17   Road  group ford, aggressive
 B  dunstan          Dunstan L1 bulwark         9,4    hp 5/23   Road  done
 A  maud             Maud L2 chaplain           8,2    hp 7/18   Plain  captain  unarmed  done
-> end
+> end !
 Lethal if all land: Maud (Archer 2 for 8, against 7 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
@@ -12558,7 +12558,7 @@ D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
 b  veteran-1        Veteran L7 halberdier      7,5    hp 25/25  Plain  group field, guard, awake
 C  wren             Wren L2 cadet              1,5    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 2 for 4, Brawler for 12, Veteran for 12, against 24 hp)
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
@@ -16320,7 +16320,7 @@ C  ottilie          Ottilie L1 bowman          12,7   hp 17/17  Plain
 D  pell             Pell L6 adept              11,5   hp 17/17  Plain  done
 e  soldier-1        Soldier L8 pikeman         6,7    hp 23/23  Plain  group van, aggressive
 B  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
-> end
+> end !
 Lethal if all land: Keziah (Longbowman for 13, Soldier 1 for 12, against 23 hp)
 Lethal if all land: Teodor (Brigand 1 for 13, Longbowman for 11, against 21 hp)
 -- Player phase ends, turn 2 --
@@ -16647,7 +16647,7 @@ G  keziah           Keziah L2 reaver           10,7   hp 12/24  Plain  done
 c  longbowman-1     Longbowman L8 marksman     8,4    hp 19/19  Plain  group van, aggressive
 C  ottilie          Ottilie L1 bowman          11,7   hp 17/17  Plain  done
 D  pell             Pell L7 adept              11,5   hp 17/17  Plain  done
-> end
+> end !
 Lethal if all land: Keziah (Longbowman for 13, against 12 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -17228,7 +17228,7 @@ i  hexer-1          Hexer L8 adept             7,7    hp 18/18  Plain  group wav
 C  ottilie          Ottilie L1 bowman          12,7   hp 8/17   Plain  done
 D  pell             Pell L7 adept              13,7   hp 17/17  Plain  done
 h  soldier-2        Soldier L8 pikeman         8,3    hp 23/23  Plain  group wave, aggressive
-> end
+> end !
 Lethal if all land: Ansgar (Archer 1 for 9, Hexer 1 for 14, against 20 hp)
 Lethal if all land: Ottilie (Archer 1 for 9, against 8 hp)
 -- Player phase ends, turn 5 --

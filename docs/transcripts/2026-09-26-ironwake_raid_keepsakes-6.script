@@ -11,7 +11,7 @@ move teodor 8,7
 wait teodor
 move wren 8,4
 wait wren
-end
+end !
 #   event wave1 fired
 #   event wave2 fired
 # enemy: move archer-1 7,6
@@ -47,7 +47,7 @@ attack teodor brigand-1 !
 move wren 7,5
 attack wren archer-1
 #   wren vs archer-1: hit 10; wren 20 hp, archer-1 7 hp
-end
+end !
 #   event wave3 fired
 #   event wave4 fired
 # enemy: attack archer-1 teodor
@@ -76,7 +76,7 @@ move dunstan 8,7
 recover dunstan
 show dunstan
 wait ottilie
-end
+end !
 attack wren brigand-3 !
 move captain 7,5
 attack captain soldier-2

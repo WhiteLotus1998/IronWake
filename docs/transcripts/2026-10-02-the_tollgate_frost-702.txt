@@ -1644,7 +1644,7 @@ D  pell             Pell L1 adept              5,6    hp 16/16  Forest
 C  teodor           Teodor L2 pikeman          6,3    hp 9/22   Plain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 6/21   Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
-> end
+> end !
 Lethal if all land: Teodor (Archer 1 for 5, Bandit Leader for 11, Toll Warden for 7, against 9 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --

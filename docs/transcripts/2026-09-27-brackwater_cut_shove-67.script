@@ -40,7 +40,7 @@ exit rook
 threat captain
 wait captain
 wait dunstan
-end
+end !
 recall 56
 move wren 13,3
 item wren 2
@@ -59,7 +59,7 @@ wait wren
 wait captain
 wait rook
 attack dunstan rider-1
-end
+end !
 recall 82
 move pell 16,1
 wait pell

@@ -8,11 +8,11 @@ move maud 4,7
 attack maud brigand-1
 move keziah 5,7
 attack keziah brigand-1
-end
+end !
 recall 13
 move keziah 4,6
 wait keziah
-end
+end !
 move maud 3,7
 attack maud soldier-1
 move keziah 5,6
@@ -48,7 +48,7 @@ attack keziah sworn_captain-1 !
 recall 88
 move maud 12,5
 item maud 2 keziah
-end
+end !
 attack keziah sworn_captain-1 art cleave !
 item maud 2 keziah
-end
+end !

@@ -1264,7 +1264,7 @@ B  wren             Wren L1 cadet              10,1   hp 9/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 holding; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Teodor (Archer 2 for 5, Soldier 2 for 8, against 13 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1609,7 +1609,7 @@ B  wren             Wren L1 cadet              13,1   hp 9/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 holding; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Dunstan (Archer 2 for 3, Hexer for 11, against 7 hp)
 Lethal if all land: Teodor (Archer 2 for 5, against 5 hp)
 -- Player phase ends, turn 4 --
@@ -2055,7 +2055,7 @@ B  wren             Wren L1 cadet              13,1   hp 9/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 holding; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Teodor (Archer 2 for 5, against 5 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -2354,7 +2354,7 @@ B  wren             Wren L1 cadet              14,4   hp 9/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Pell (Archer 1 for 8, Archer 2 for 8, Soldier 3 for 11, against 9 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
@@ -2604,7 +2604,7 @@ B  wren             Wren L1 cadet              15,7   hp 3/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Alder Fenn (Brigand 3 for 10, Brigand 5 for 10, Soldier 3 for 8, against 14 hp)
 Lethal if all land: Dunstan (Archer 1 for 3, Brigand 5 for 8, Soldier 3 for 6, against 7 hp)
 Lethal if all land: Ottilie (Soldier 3 for 10, against 10 hp)
@@ -2917,7 +2917,7 @@ B  wren             Wren L1 cadet              15,7   hp 3/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 holding; south 10,10 holding
-> end
+> end !
 Lethal if all land: Alder Fenn (Brigand 3 for 10, Brigand 5 for 10, Soldier 3 for 8, against 14 hp)
 Lethal if all land: Dunstan (Archer 1 for 3, Brigand 5 for 8, Soldier 3 for 6, against 7 hp)
 Lethal if all land: Wren (Archer 1 for 6, against 3 hp)
@@ -3184,7 +3184,7 @@ B  wren             Wren L1 cadet              15,7   hp 3/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 1 for 5, Archer 3 for 5, Brigand 4 for 10, Brigand 6 for 10, Soldier 3 for 8, against 14 hp)
 Lethal if all land: Dunstan (Archer 1 for 2, Brigand 6 for 7, Soldier 3 for 5, Soldier 5 for 5, against 8 hp)
 Lethal if all land: Ottilie (Archer 1 for 7, Brigand 6 for 12, Soldier 3 for 10, against 10 hp)

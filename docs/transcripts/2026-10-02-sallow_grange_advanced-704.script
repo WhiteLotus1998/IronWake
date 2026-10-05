@@ -10,7 +10,7 @@ move ottilie 2,8
 wait ottilie
 move ansgar 4,9
 wait ansgar
-end
+end !
 recall list
 recall 0
 move teodor 2,5
@@ -36,7 +36,7 @@ move ottilie 2,7
 wait ottilie
 move ansgar 2,8
 wait ansgar
-end
+end !
 move teodor 1,6
 item teodor 2
 move pell 2,5
@@ -88,7 +88,7 @@ wait wren
 move captain 12,7
 wait captain
 wait pell
-end
+end !
 recall 102
 move captain 12,5
 wait captain
@@ -96,7 +96,7 @@ move wren 13,6
 wait wren
 wait ottilie
 wait pell
-end
+end !
 move ansgar 8,6
 wait ansgar
 move captain 16,5

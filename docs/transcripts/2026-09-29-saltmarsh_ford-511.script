@@ -30,7 +30,7 @@ attack captain soldier-2
 move wren 6,5
 attack wren soldier-2
 item teodor 2
-end
+end !
 attack captain soldier-2
 item wren 2
 wait teodor

@@ -11,7 +11,7 @@ move ottilie 1,7
 wait ottilie
 wait pell
 wait captain
-end
+end !
 move keziah 4,6
 attack keziah brawler-1
 move ottilie 5,7
@@ -24,7 +24,7 @@ move pell 2,4
 attack pell veteran-1
 move captain 1,8
 wait captain
-end
+end !
 recall 22
 move keziah 4,6
 attack keziah brawler-1
@@ -88,7 +88,7 @@ move teodor 11,6
 wait teodor
 move pell 8,5
 wait pell
-end
+end !
 recall 91
 move keziah 10,5
 wait keziah

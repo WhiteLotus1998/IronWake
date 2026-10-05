@@ -31,15 +31,15 @@ end
 attack maud brigand-1
 move captain 7,7
 wait captain
-end
+end !
 attack maud soldier-1
 move captain 8,4
 attack captain soldier-1
-end
+end !
 move captain 9,4
 attack captain archer-1
 attack maud archer-2
-end
+end !
 move captain 9,3
 attack captain archer-1
 move maud 9,5
@@ -348,7 +348,7 @@ move dunstan 14,4
 wait dunstan
 move rook 14,2
 wait rook
-end
+end !
 attack captain soldier-1 iron_bow
 canto captain 17,3
 move wren 18,3

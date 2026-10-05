@@ -441,7 +441,7 @@ e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group for
 A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
 d  soldier-1        Soldier L1 pikeman         5,2    hp 10/20  Plain  group east, aggressive
 B  wren             Wren L1 cadet              5,1    hp 10/20  Plain  done
-> end
+> end !
 Lethal if all land: Wren (Archer 1 for 6, Archer 2 for 6, Soldier for 9, against 10 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -639,7 +639,7 @@ g  brigand-3        Brigand L1 reaver          6,1    hp 22/22  Plain  group eas
 h  brigand-4        Brigand L1 reaver          5,4    hp 22/22  Road  group ford, aggressive
 A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
 B  wren             Wren L1 cadet              3,1    hp 9/20   Plain  done
-> end
+> end !
 Lethal if all land: Maud (Archer 1 for 6, Archer 2 for 6, Brigand 4 for 11, against 17 hp)
 Lethal if all land: Wren (Archer 1 for 6, Archer 2 for 6, Brigand 3 for 11, against 9 hp)
 -- Player phase ends, turn 6 --
@@ -1476,7 +1476,7 @@ e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group fla
 C  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
-> end
+> end !
 Lethal if all land: Pell (Rider for 10, against 9 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -1783,7 +1783,7 @@ A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Forest  captain 
 C  teodor           Teodor L1 pikeman          6,3    hp 7/21   Plain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 11/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest  done
-> end
+> end !
 Lethal if all land: Teodor (Archer 1 for 5, Bandit Leader for 11, Toll Warden for 7, against 7 hp)
 Rapport Alder Fenn and Teodor +4 (4)
 Rapport Alder Fenn and Wren +4 (8)
@@ -1900,7 +1900,7 @@ a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group kee
 A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Forest  captain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 5/21   Plain  group keep, hold
 B  wren             Wren L1 cadet              6,3    hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Wren (Archer 1 for 6, Bandit Leader for 12, Toll Warden for 8, against 20 hp)
 Rapport Alder Fenn and Wren +4 (12)
 -- Player phase ends, turn 7 --
@@ -2419,7 +2419,7 @@ D  pell             Pell L1 adept              6,4    hp 8/16   Forest  done
 C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Alder Fenn (Archer 1 for 5, Bandit Leader for 11, Toll Warden for 7, against 22 hp)
 Lethal if all land: Pell (Toll Warden for 9, against 8 hp)
 Rapport Alder Fenn and Pell +4 (4)
@@ -2663,7 +2663,7 @@ A  captain          Alder Fenn L1 cadet        5,1    hp 22/22  Plain  captain  
 D  pell             Pell L2 adept              6,3    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
 B  wren             Wren L1 cadet              6,2    hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Pell (Bandit Leader for 14, against 9 hp)
 Rapport Pell and Wren +4 (8)
 -- Player phase ends, turn 6 --

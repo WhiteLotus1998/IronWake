@@ -1292,7 +1292,7 @@ A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain  
 D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
 C  teodor           Teodor L1 pikeman          6,3    hp 14/21  Plain  done
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
-> end
+> end !
 Lethal if all land: Teodor (Archer 1 for 5, Bandit Leader for 11, against 14 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --

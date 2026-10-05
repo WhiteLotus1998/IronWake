@@ -3,7 +3,7 @@ wait keziah
 wait pell
 wait wren
 wait captain
-end
+end !
 move wren 7,9
 attack wren brigand-2
 move keziah 5,7
@@ -11,7 +11,7 @@ attack keziah brigand-1
 attack pell brigand-1 !
 move captain 5,8
 wait captain
-end
+end !
 recall 15
 move wren 5,7
 attack wren brigand-1

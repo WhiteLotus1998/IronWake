@@ -18,7 +18,7 @@ move ottilie 3,6
 attack ottilie brigand-2
 move wren 5,7
 wait wren
-end
+end !
 attack wren brigand-1
 move ottilie 4,6
 attack ottilie brigand-2
@@ -36,7 +36,7 @@ move wren 5,7
 attack wren lector-1
 move ottilie 5,5
 attack ottilie sworn_captain-1
-end
+end !
 recall 80
 move ottilie 4,7
 attack ottilie lector-1
@@ -45,5 +45,5 @@ wait wren
 end
 attack ottilie sworn_captain-1
 attack wren sworn_captain-1 art heavy_cut !
-end
+end !
 leave

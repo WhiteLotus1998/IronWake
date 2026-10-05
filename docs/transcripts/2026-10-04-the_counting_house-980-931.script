@@ -8,7 +8,7 @@ move ottilie 5,8
 attack ottilie brigand-1 art aimed_shot
 move teodor 5,7
 attack teodor soldier-1 art long_thrust
-end
+end !
 attack teodor brigand-2 art long_thrust
 move ottilie 4,6
 attack ottilie brigand-2 art aimed_shot
@@ -36,7 +36,7 @@ end
 move ottilie 5,6
 attack ottilie sworn_captain-1 art aimed_shot
 attack teodor sworn_captain-1
-end
+end !
 recall 86
 move teodor 4,8
 wait teodor
@@ -53,5 +53,5 @@ recall 100
 move ottilie 3,7
 attack ottilie archer-1 art aimed_shot
 item teodor 2
-end
+end !
 leave

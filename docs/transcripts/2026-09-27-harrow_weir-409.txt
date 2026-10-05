@@ -2317,7 +2317,7 @@ D  pell             Pell L1 adept              8,6    hp 16/16  Road  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
 B  teodor           Teodor L1 pikeman          6,4    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 10/28  Road  group weir, boss, awake
-> end
+> end !
 Lethal if all land: Keziah (Brigand 3 for 12, against 11 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
@@ -2712,7 +2712,7 @@ D  pell             Pell L1 adept              10,6   hp 6/16   Road  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 7/24   Road  group bridge, hold
 B  teodor           Teodor L1 pikeman          7,4    hp 11/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 10/28  Hill  group weir, boss, awake
-> end
+> end !
 Lethal if all land: Pell (Shieldbearer for 10, against 6 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --

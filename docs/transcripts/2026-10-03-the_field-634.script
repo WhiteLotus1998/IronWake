@@ -29,7 +29,7 @@ move ottilie 6,12
 wait ottilie
 move pell 6,11
 wait pell
-end
+end !
 recall 28
 move ansgar 6,12
 wait ansgar

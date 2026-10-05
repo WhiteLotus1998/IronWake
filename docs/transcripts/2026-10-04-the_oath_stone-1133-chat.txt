@@ -1216,7 +1216,7 @@ A  keziah           Keziah L7 reaver           13,3   hp 12/26  Plain  captain  
 B  maud             Maud L7 chaplain           12,5   hp 7/19   Plain  done
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 19/28  Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
-> end
+> end !
 Lethal if all land: Keziah (Sworn Captain for 14, against 12 hp)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --

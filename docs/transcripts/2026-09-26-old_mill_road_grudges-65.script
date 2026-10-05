@@ -33,13 +33,13 @@ end
 attack captain mill_bandit-1
 attack wren mill_bandit-1
 threat wren
-end
+end !
 recall 61
 move captain 7,1
 attack captain mill_bandit-1
 move wren 6,2
 wait wren
-end
+end !
 move captain 7,0
 attack captain archer-1
 move wren 6,1

@@ -618,7 +618,7 @@ a  wing_captain-1   Wing Captain L6 sky captain 5,1    hp 19/19  Mountain  group
 e  wingrider-1      Wingrider L6 skyrider      4,7    hp 19/19  Plain  group pursuit, aggressive
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> end
+> end !
 Lethal if all land: Dunstan (Soldier for 4, Wingrider 1 for 4, against 6 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1177,7 +1177,7 @@ d  sentry-1         Sentry L6 sentinel         12,6   hp 29/29  Plain  group pas
 a  wing_captain-1   Wing Captain L6 sky captain 3,5    hp 19/19  Road  group loft, guard, awake
 f  wingrider-2      Wingrider L6 skyrider      12,4   hp 5/19   Plain  group pursuit, aggressive
 exits (>): 14,4 14,5 14,6 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
-> end
+> end !
 Lethal if all land: Rook (Rider for 12, Wing Captain for 13, against 8 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --

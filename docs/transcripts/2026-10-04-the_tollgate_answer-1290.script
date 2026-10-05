@@ -61,7 +61,7 @@ threat pell
 threat wren from 6,4
 move wren 6,4
 wait wren
-end
+end !
 recall 76
 move captain 6,2
 attack captain archer-1
@@ -70,7 +70,7 @@ attack teodor archer-1 art long_thrust
 threat pell
 wait pell
 wait wren
-end
+end !
 move teodor 7,4
 wait teodor
 move pell 6,3

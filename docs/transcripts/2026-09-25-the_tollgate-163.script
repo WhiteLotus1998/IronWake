@@ -14,7 +14,7 @@ move pell 8,5
 attack pell toll_brigand-1
 move wren 4,7
 move teodor 7,6
-end
+end !
 attack pell toll_brigand-1
 move wren 5,6
 attack wren archer-2
@@ -28,7 +28,7 @@ attack wren archer-2
 attack captain archer-2
 move teodor 5,4
 attack teodor archer-2
-end
+end !
 recall 49
 move captain 9,6
 attack captain rider-1

@@ -24,7 +24,7 @@ end
 move wren 5,3
 attack wren rider-1
 attack teodor sworn_captain-1 art long_thrust
-end
+end !
 attack wren rider-2 !
 attack teodor sworn_captain-1 art long_thrust
 leave

@@ -122,7 +122,7 @@ move wren 12,2
 wait wren
 move dunstan 17,3
 wait dunstan
-end
+end !
 recall 99
 move pell 12,2
 attack pell brigand-2 cinder
@@ -133,4 +133,4 @@ move captain 13,3
 wait captain
 move dunstan 14,2
 wait dunstan
-end
+end !

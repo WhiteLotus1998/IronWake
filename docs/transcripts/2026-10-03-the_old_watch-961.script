@@ -51,5 +51,5 @@ move wren 7,1
 attack wren sworn_captain-1 art heavy_cut
 move teodor 8,1
 attack teodor sworn_captain-1 family_lance art long_thrust
-end
+end !
 leave

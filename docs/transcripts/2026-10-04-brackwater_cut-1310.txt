@@ -1289,7 +1289,7 @@ Threat on Rook at 19,3 (Plain):
   Soldier (once Shieldbearer lights you) from 19,4 with Iron Lance (slot 1): acc 63% dmg 12 crit 0%; counter: acc 79% dmg 7 crit 3%
   If all land: 23 against 17 hp
   In the dark, unpriced: ? at 10,3 (9)
-> end
+> end !
 Lethal if all land: Rook (Shieldbearer for 11, Soldier for 12, against 17 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --

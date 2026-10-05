@@ -2313,7 +2313,7 @@ D  pell             Pell L1 adept              10,6   hp 3/16   Road  done
 e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          9,6    hp 13/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 2/28   Plain  group weir, boss, awake
-> end
+> end !
 Lethal if all land: Keziah (Weir Foreman for 12, against 11 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --

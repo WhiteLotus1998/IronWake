@@ -1110,7 +1110,7 @@ e  soldier-2        Soldier L2 pikeman         1,9    hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          9,7    hp 10/21  Plain  braced  done
 B  wren             Wren L1 cadet              10,1   hp 3/20   Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
-> end
+> end !
 Lethal if all land: Wren (Bandit Leader for 12, against 3 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
