@@ -14,7 +14,7 @@
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
     { "map": "harrow_weir", "reward": 1200, "enemyLevel": 2,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
-    { "map": "ironwake_raid", "reward": 1000, "branch": ["keziah", "rook"], "enemyLevel": 6,
+    { "map": "ironwake_raid", "reward": 1000, "branch": ["keziah", "rook"], "seatLevel": 4, "seatRank": 30, "enemyLevel": 6,
       "pitch": { "keziah": "Everyone here is offering you a promise. Mine's hungry, and you'll hear it ask.", "rook": "She's the last one. Pick me and you're the second person alive who knows her name." },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "beacon", "field_dressing"] },
     { "map": "sallow_grange", "reward": 1400, "enemyLevel": 7, "swap": { "7,5": "veteran" },

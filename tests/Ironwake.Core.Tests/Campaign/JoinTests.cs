@@ -9,7 +9,7 @@ namespace Ironwake.Core.Tests.Campaign;
 /// Issue 763 (rounds 228 and 234): a recruit who joins below the living company's median joins at
 /// it. Rook joins at the raid's camp when picked (the branch, issue 633), placed on no tile of her
 /// own, raised to the median whether or not she deploys, never lowered. The rule is join-time: the
-/// bench is never raised.
+/// bench is never raised. As the pick she joins at no less than the seat (issue 1130, SeatTests).
 /// </summary>
 public class JoinTests
 {
@@ -59,7 +59,7 @@ public class JoinTests
     public void AJoinerBelowTheMedianIsRaisedToItOnTheAverageGrowthAndTheCampSaysSo()
     {
         var record = AtTheRaid(7, 5, 5, 4, 1);
-        var cast = CampaignRecord.Kitted(Content.Unit("rook"), Content);
+        var cast = CampaignRecord.Trained(CampaignRecord.Kitted(Content.Unit("rook"), Content), Content);
 
         var rook = record.Present(Content).Single(u => u.Id == "rook");
 
@@ -69,13 +69,13 @@ public class JoinTests
     }
 
     [Fact]
-    public void AJoinerIsNeverLoweredAndAtTheMedianNothingIsPrinted()
+    public void APickBelowAMedianAboveTheSeatJoinsAtTheMedianAndTheCampSaysSo()
     {
-        var record = AtTheRaid(1, 1, 1);
+        var record = AtTheRaid(9, 9, 9);
+        var cast = CampaignRecord.Trained(CampaignRecord.Kitted(Content.Unit("rook"), Content), Content);
 
-        Assert.Equal(CampaignRecord.Kitted(Content.Unit("rook"), Content), record.Present(Content).Single(u => u.Id == "rook"));
-        Assert.Empty(record.RaisedOnJoining(Content));
-        Assert.Empty(CampaignSession.JoinLines(record, Content));
+        Assert.Equal(cast.ScaledTo(9, Content.Class("skyrider")), record.Present(Content).Single(u => u.Id == "rook"));
+        Assert.Equal(new[] { "Rook joins at level 9 (the company's median)" }, CampaignSession.JoinLines(record, Content));
     }
 
     [Fact]

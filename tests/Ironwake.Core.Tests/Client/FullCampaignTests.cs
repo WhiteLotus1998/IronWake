@@ -18,7 +18,7 @@ public class FullCampaignTests
 {
     private const ulong Seed = 644;
     private const string Difficulty = "recruit";
-    private const int Variant = 66;
+    private const int Variant = 18;
 
     private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
 
@@ -83,7 +83,7 @@ public class FullCampaignTests
         var order = client.IndexOf("Alder Fenn calls fall back", StringComparison.Ordinal);
         var without = client[..order] + client[(client.IndexOf('\n', order) + 1)..];
 
-        Assert.StartsWith("event log differs at line 1195", Parity.FirstDifference(console, without));
+        Assert.StartsWith("event log differs at line 1297", Parity.FirstDifference(console, without));
     }
 
     [Fact]

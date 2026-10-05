@@ -110,6 +110,16 @@ public static class ContentSerializer
                     writer.WriteEndObject();
                 }
 
+                if (map.SeatLevel is { } seatLevel)
+                {
+                    writer.WriteNumber("seatLevel", seatLevel);
+                }
+
+                if (map.SeatRank > 0)
+                {
+                    writer.WriteNumber("seatRank", map.SeatRank);
+                }
+
                 if (map.Meets.Count > 0)
                 {
                     writer.WriteStartArray("meets");

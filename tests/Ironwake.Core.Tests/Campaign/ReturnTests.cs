@@ -65,12 +65,12 @@ public class ReturnTests
     }
 
     [Fact]
-    public void AFallenPickSendsThePassedClaimantBackAtTheCompanysMedian()
+    public void AFallenPickSendsThePassedClaimantBackAtTheSeat()
     {
         var record = AtTheField("keziah");
         record = record with { Roster = ValueList<Unit>.From(record.Roster.Where(u => u.Id != "keziah")), Fallen = record.Fallen.Add("keziah") };
 
-        Assert.Equal(Math.Max(Content.Unit("rook").Level, record.JoinLevel(Content)), record.ReturnLevel(Content));
+        Assert.Equal(Math.Max(Content.Unit("rook").Level, record.SeatLevel(Content)), record.ReturnLevel(Content));
         Assert.Equal(Side.Enemy, record.Begin(Field, Content).Find("rook")!.Side);
     }
 
