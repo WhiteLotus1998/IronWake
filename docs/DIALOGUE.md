@@ -17,7 +17,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Combat numbers** (0028), **masteries** (0047): in DESIGN.
 - **Wake rule:** proximity, radius 4, noise at 6, any death wakes the group, checked after every command (DESIGN 8). Guard bosses wake (0055); `wake_links` calls a second group (0080).
 - **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; options range over every weapon carried, the counter is what it last swung (#174); prefers a target that cannot counter. A `defeat_boss` boss plans under the exposure veto; a refused guard boss goes home (0077 to 0080); a throne-holder steps off only to strike (0063).
-- **The Sim's veto** covers every unit whose death loses the map, no-crit worst case, a certain kill removed (0024 to 0026). Recruits take no veto. Gate 4 is relative ablation, cast verdict (0019, 0020); on Escape it pairs units out (0068).
+- **The Sim's veto** covers every unit whose death loses the map, no-crit worst case, a certain kill removed (0024 to 0026). Recruits take no veto; one on a lethal approach tile takes the captain's key: gate 1 is a crude player, never a blind one (368, #1054). Gate 4 is relative ablation, cast verdict (0019, 0020); on Escape it pairs units out (0068).
 - **`threat`** prices the coming enemy phase with the planner's choices (DESIGN 8): one enemy per strike tile, announced spawns (0045), sleepers unnumbered, at dusk only what the player sees (#403), `from <tile>` names what a stop would wake (#458).
 - **Escape:** `exit` is an action; the captain's wins, the rest fall (0056, 0074).
 - **Recall** restores the rolls, buying knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75).
@@ -28,9 +28,9 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Maps
 
-- **The Tollgate: `tuned`** (0073). The rider spawns on the door step (0072), no tell, surprise not a trap. Opens the beta and the showcase.
+- **The Tollgate: `tuned`** (0073); the rider spawns on the door step (0072). Opens the beta.
 - **Brackwater Cut at dusk: `tuned`** (0078). Dusk hides what, never where.
-- **The showcase (#509, 0092):** done at 8/7; animation never hides state; each art loses to the plain attack somewhere (#611).
+- **The showcase (#509, 0092):** done; animation never hides state (#611).
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15).
 - **Saltmarsh Ford:** not tuned; north cut 7/7/6, 7/7/5 (0093); the spawn lever failed (0095).
 - **Sallow Grange:** the Reeve stays at 15,6; a quiet route is quiet on the enemy phase too (#275).
@@ -44,14 +44,12 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.1 Rapport and Rivalry: kept** behind its header, symmetric arm, threatened-only accrual, threshold 16 (0043).
 - **13.2 Commander's Word (#85, 0136; rounds 206 to 209):** arm B only, radius `2 + Cha / 4`, `order <press|rally|fall back>` once a map after the captain's move, with `preview`; Fall back replaces Hold. Kept on Harrow Weir `orders: on` if a third of orders bind and a journal names a move for it.
 - **13.4 Grudges (0065, 0066):** a veto, -20 crit avoid on the sworn unit; killed if Chat's seed 23 replay (#331) changes no decision.
-- **13.5 The keep: kept provisionally** (0059, 0060); Chat's camp play decides.
-- **13.6 Certification trials: kept provisionally** (0057); #73 closes on Chat's cold Outrider trial. A trial only where the payout is worth refusing.
+- **13.5 The keep, 13.6 trials: kept provisionally** (0059, 0060, 0057); Chat's camp play and cold Outrider trial (#73) decide.
 - **13.7 Dusk: kept** on Escape; Brackwater ships at `dusk: 5` (0062), Sallow stays in daylight. Sight and hearing `?`, never stacked; an enemy hears within 4, printed (#765).
-- **13.8 Carry the fallen (#295):** killed if neither play spends a move on a carrier.
 - **13.10 Retreat (0037, #215):** a refugee holds its refuge as Hold until 50 percent; the forecast prints it. Killed if Chat's cold `river_refuge_hold.map` changes no turn.
 - **Kept:** 13.11 (0061); samples 13.12, 13.13 (0069, 0082).
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
-- **13.15 Wildfire: kept on its samples** (0085, 0110); a map shipping it needs an enemy route through forest the party holds. Killed: 13.16, 13.17, 13.19 (0094, 0098, 0099).
+- **13.15 Wildfire: kept on its samples** (0085, 0110). Killed: 13.16, 13.17, 13.19 (0094, 0098, 0099).
 - **13.21 The tide (0111, round 176; provisional):** content only, map events flood and drain a ford on announced turns. Kept if a journal shows a ford tile taken, refused or crossed for the schedule; Chat's cold play decides.
 - **13.22 The break (0112, rounds 181 to 183; provisional; DESIGN 13.22):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for the break. The board is Saltmarsh Ford (#606).
 - **13.24 The messenger (0135):** a runner fires `messenger` at its edge. Kept if a strike or blocker is spent on it. Chat's cold #680 decides.
@@ -60,13 +58,13 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.27 The dash (#950, 0234; provisional):** Move +2 as the whole turn, winded (+15 against). Killed if no dash over a Move; more free than priced in both journals: the borrowed step. Code warm 8/7/6.
 - **13.28 The wind (#955, #957, 0235; provisional):** downwind wake radius +2, upwind -2; the board names who the coming turn wakes; never with `dusk:`. Killed if no play takes a stop, route or timing for it.
 - **13.29 The one answer (#960, 0236; provisional):** a unit that counters makes no other until the next phase. More free strikes than priced in both journals kills it. Swarm lever, unbuilt: a braced unit answers every strike.
-- **13.26 Rockfall (0182):** `drop` on a ledge strikes 10; killed if nobody drops or every drop is free.
+- **13.26 Rockfall (0182):** `drop` strikes 10; killed if nobody drops or every drop is free. **13.8 Carry (#295):** killed if no play moves a carrier.
 - **13.20 The keep as a home (0137, 0138, #687):** rooms cost repair budget; beds gate arrivals, a death frees none (0010). Killed if the raid purse buys every room and wall in both plays.
 
 ## The campaign's story (186 to 211; 0121; DESIGN 14)
 
 - **A levy company**, one arrival per map to the captain plus five (Maud, Pell, Teodor, Ottilie, the pick; 213); `cadet` shows as Levy. Captain male or female (#648). Map 1, Starting Alone, is Fun Gate exempt.
-- **The branch** (#633): Keziah against Rook; the passed one returns on map 9 (0010). **`talk` kept** (0193): cost a camp trade, a bait, a flier's turn (#844). #81's drift kept (0226). **The field is `tuned` on Keziah's pick** (0233). Rook's (0246, 364): Fun Gate met, gate 1 owed (49/200); #1044: why the Sim barely swings Rook, then one pick-keyed lever, Chat's read if it moves turns 1 to 7.
+- **The branch** (#633): Keziah against Rook; the passed one returns on map 9 (0010). **`talk` kept** (0193): cost a camp trade, a bait, a flier's turn (#844). #81's drift kept (0226). **The field is `tuned` on Keziah's pick** (0233). Rook's (0246, 364): Fun Gate met, gate 1 owed (49/200); #1044 (368): under #1054 her arm is 86 of 120; next a row with `seen_far` off (header's cost or her kit), then at most one pick-keyed lever, a gate-1 lever only if measured over 60; Chat reads it if it moves turns 1 to 7. The Sim's route split proves no route balance; 0233 stands on hand plays.
 - **The pool is the ten we have;** four side characters (213) met by choice, one a map at most.
 - **Quests (192; 260):** a main member's two are trial-shape side maps, quest 2 larger, paying the signature item; quest 1 after their second map, quest 2 two later, two an interlude; permadeath. Gate: a cold chair 7+ on tension and choice, and the Sim. The slot table follows STORY (Pell after 4 and 6, Wren none). Quest 1 pays a class door where one exists; quest-1 second signatures ship with the first, once 13.18 is kept.
 - **Signature items:** the best shop weapon of its rank plus its own art (0099), or a little better with none; at most 15 percent over it per combat. Bound. **Maud's Psalter (260, 261; built, 0196):** rank D, art **Unasked**: double heal on an ally unmoved and unacted, capped at max HP; ends as a Wait. Heal arm at most 1.15 of the best stocked heal at its rank or below.
@@ -121,4 +119,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Round index
 
-1-118 rules, carry, dusk, brace; 119-342 showcase, story; #994 343-359 writing, casting; #1033 360 on (366 Lotus's draft 6 notes).
+1-118 rules, carry, dusk, brace; 119-342 showcase, story; #994 343-359 writing, casting; #1033 360 on (366 Lotus's draft 6 notes; 368 careful recruits).
