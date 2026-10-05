@@ -5,9 +5,10 @@ using static Ironwake.Core.Tests.Battle.BattleFixture;
 namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
-/// The drake's carry (issue 805, experiment): on a <c>carry:</c> map a rider whose drake is Grown or more,
-/// unmoved and not acted, lifts an adjacent ally that has neither moved nor acted, flies to a tile its Move
-/// reaches, and sets the ally down beside it, as its whole turn. The ally lands as the header's setting says.
+/// The drake's carry (issue 805; shipped by issue 1094): on every campaign map and on a <c>carry:</c> sample a
+/// rider whose drake is Grown or more, unmoved and not acted, lifts an adjacent ally that has neither moved
+/// nor acted, flies to a tile its Move reaches, and sets the ally down beside it, as its whole turn. The ally
+/// lands free to move and act.
 /// </summary>
 public class DrakeCarryTests
 {
@@ -18,7 +19,7 @@ public class DrakeCarryTests
         turn_limit: 10
         recall: 3
         enemy_level: 1
-        carry: {0} rook
+        carry: rook
 
         ...~~...
         ...~~...
@@ -38,8 +39,16 @@ public class DrakeCarryTests
     private static readonly Coord Over = new(5, 2);
     private static readonly Coord Down = new(5, 3);
 
-    private static BattleState Start(string setting = "free", string? map = null) =>
-        BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Rook, Wren), map ?? River.Replace("{0}", setting));
+    private static BattleState Start(string? map = null) =>
+        BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Rook, Wren), map ?? River);
+
+    /// <summary>The River without its header, Rook's drake Grown as a campaign grows it.</summary>
+    private static BattleState Headerless()
+    {
+        var start = Start(River.Replace("carry: rook\n", ""));
+        var rook = start.Find("rook")!;
+        return start.WithUnit(rook with { Unit = rook.Unit with { Drake = new DrakeState(DrakeStage.Grown, 2) } });
+    }
 
     [Fact]
     public void TheHeadersRiderIsPlacedWithAGrownDrake()
@@ -55,7 +64,7 @@ public class DrakeCarryTests
         Assert.True(result.Accepted, result.Rejection?.Message);
         Assert.Equal(Over, result.Next.Find("rook")!.At);
         Assert.Equal(Down, result.Next.Find("wren")!.At);
-        Assert.Contains(new Carried("rook", "wren", new Coord(1, 2), Over, new Coord(1, 3), Down, CarrySetting.Free), result.Events);
+        Assert.Contains(new Carried("rook", "wren", new Coord(1, 2), Over, new Coord(1, 3), Down), result.Events);
     }
 
     [Fact]
@@ -69,18 +78,9 @@ public class DrakeCarryTests
     }
 
     [Fact]
-    public void OnWaitedTheAllyLandsDoneForThePhase()
+    public void TheAllyLandsUnmovedAndMayMoveAndAct()
     {
-        var wren = Start("waited").Do(new Carry("rook", "wren", Over, Down)).Find("wren")!;
-
-        Assert.True(wren.Moved);
-        Assert.True(wren.Acted);
-    }
-
-    [Fact]
-    public void OnFreeTheAllyLandsUnmovedAndMayMoveAndAct()
-    {
-        var state = Start("free").Do(new Carry("rook", "wren", Over, Down));
+        var state = Start().Do(new Carry("rook", "wren", Over, Down));
         var wren = state.Find("wren")!;
 
         Assert.False(wren.Moved);
@@ -90,43 +90,44 @@ public class DrakeCarryTests
     }
 
     [Fact]
-    public void OnBraceTheAllyLandsUnableToStrike()
+    public void TheLandedAllyMayStrike()
     {
-        var state = Start("brace").Do(new Carry("rook", "wren", new Coord(6, 1), new Coord(6, 0)));
-        Assert.True(state.Find("wren")!.Moved);
-        Assert.True(state.Find("wren")!.Landed);
+        var state = Start().Do(new Carry("rook", "wren", new Coord(6, 1), new Coord(6, 0)));
 
-        var refusal = state.Refused(new Attack("wren", "brigand-1"));
+        Assert.Contains(Resolver.Legal(state, Starter), c => c is Attack { UnitId: "wren" });
+    }
+
+    [Fact]
+    public void ACarryIsRefusedOutsideTheCampaignWithoutTheHeader()
+    {
+        var refusal = Headerless().Refused(new Carry("rook", "wren", Over, Down));
 
         Assert.Equal(RejectionReason.CannotCarry, refusal.Reason);
-        Assert.DoesNotContain(Resolver.Legal(state, Starter), c => c is Attack { UnitId: "wren" });
+        Assert.Contains("campaign maps", refusal.Message);
     }
 
     [Fact]
-    public void OnBraceTheLandedAllyBracesWhenItWaits()
+    public void TheCarryIsOpenOnEveryCampaignMainMapWithoutAHeader()
     {
-        var state = Start("brace").Do(new Carry("rook", "wren", Over, Down)).Do(new Wait("wren"));
+        var result = (Headerless() with { CampaignMap = 1 }).Try(new Carry("rook", "wren", Over, Down));
 
-        Assert.True(state.Find("wren")!.Braced);
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.Equal(Down, result.Next.Find("wren")!.At);
     }
 
     [Fact]
-    public void TheLandedMarkClearsWhenAPhaseBegins()
+    public void TheCarryIsOpenOnACampaignSideMapWithoutAHeader()
     {
-        var state = Start("brace").Do(new Carry("rook", "wren", Over, Down)).Do(new EndPhase());
+        var result = (Headerless() with { SideMap = true }).Try(new Carry("rook", "wren", Over, Down));
 
-        Assert.False(state.Find("wren")!.Landed);
+        Assert.True(result.Accepted, result.Rejection?.Message);
     }
 
     [Fact]
-    public void ACarryIsRefusedWithoutTheHeader()
+    public void TheBoardPrintsTheCarryLineOnACampaignMapAndNotOutside()
     {
-        var map = River.Replace("carry: {0} rook\n", "");
-        var start = Start(map: map);
-        var rook = start.Find("rook")!;
-        var grown = start.WithUnit(rook with { Unit = rook.Unit with { Drake = new DrakeState(DrakeStage.Grown, 2) } });
-
-        Assert.Equal(RejectionReason.CannotCarry, grown.Refused(new Carry("rook", "wren", Over, Down)).Reason);
+        Assert.Null(DrakeCarry.Line(Headerless()));
+        Assert.Contains("lands free to move and act", DrakeCarry.Line(Headerless() with { SideMap = true }));
     }
 
     [Fact]
@@ -208,25 +209,36 @@ public class DrakeCarryTests
     [Fact]
     public void TheCarryHeaderWritesBackCanonically()
     {
-        var text = River.Replace("{0}", "brace").Replace("\r\n", "\n");
-        var map = MapFixture.Parse(text);
+        var map = MapFixture.Parse(River.Replace("\r\n", "\n"));
 
-        Assert.Equal(new CarryRule(CarrySetting.Brace, "rook"), map.Carry);
-        Assert.Contains("carry: brace rook\n", MapFormat.Write(map, MapFixture.Content));
+        Assert.Equal("rook", map.CarryRider);
+        Assert.Contains("carry: rook\n", MapFormat.Write(map, MapFixture.Content));
+    }
+
+    [Theory]
+    [InlineData("waited")]
+    [InlineData("brace")]
+    [InlineData("free")]
+    public void ADroppedCarrySettingIsRefusedOnLoad(string setting)
+    {
+        var error = Assert.Throws<MapException>(() => MapFixture.Parse(River.Replace("carry: rook", $"carry: {setting} rook")));
+
+        Assert.Contains($"the setting '{setting}' was dropped", error.Message);
+        Assert.Contains("carry", error.Message);
     }
 
     [Fact]
-    public void AnUnknownCarrySettingIsRefusedOnLoad()
+    public void ACarryHeaderNamesOneRider()
     {
-        var error = Assert.Throws<MapException>(() => MapFixture.Parse(River.Replace("{0}", "sometimes")));
+        var error = Assert.Throws<MapException>(() => MapFixture.Parse(River.Replace("carry: rook", "carry: rook wren")));
 
-        Assert.Contains("carry needs", error.Message);
+        Assert.Contains("carry needs '<rider>'", error.Message);
     }
 
     [Fact]
     public void ACarryRiderMustBePlacedByName()
     {
-        var error = Assert.Throws<MapException>(() => MapFixture.Parse(River.Replace("{0}", "free").Replace("carry: free rook", "carry: free teodor")));
+        var error = Assert.Throws<MapException>(() => MapFixture.Parse(River.Replace("carry: rook", "carry: teodor")));
 
         Assert.Contains("no 'P recruit:teodor' line", error.Message);
     }

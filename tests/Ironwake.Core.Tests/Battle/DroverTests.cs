@@ -217,19 +217,32 @@ public class DroverTests
     [Fact]
     public void TheLongCarryLeavesTheDroverACantoOfWhatTheFlightLeft()
     {
-        var state = OnRiver("carry: free rook", "drover");
+        var state = OnRiver("carry: rook", "drover");
         var mov = state.ReachOf(state.Find("rook")!, Starter).Mov;
 
         var rook = state.Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!;
 
         Assert.Equal(mov - 4, rook.Canto);
-        Assert.Null(OnRiver("carry: free rook", "skycaptain").Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!.Canto);
+        Assert.Null(OnRiver("carry: rook", "skycaptain").Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!.Canto);
+    }
+
+    [Fact]
+    public void TheLongCarryReadsTheSameOnACampaignMapWithoutTheHeader()
+    {
+        var sample = OnRiver("carry: rook", "drover");
+        var campaign = sample with { Map = sample.Map with { CarryRider = null }, CampaignMap = 10 };
+
+        var fromSample = sample.Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!;
+        var fromCampaign = campaign.Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!;
+
+        Assert.NotNull(fromCampaign.Canto);
+        Assert.Equal(fromSample.Canto, fromCampaign.Canto);
     }
 
     [Fact]
     public void AfterTheLongCarryTheDroverMovesAgain()
     {
-        var state = OnRiver("carry: free rook", "drover").Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3)));
+        var state = OnRiver("carry: rook", "drover").Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3)));
 
         var result = state.Try(new Canto("rook", new Coord(6, 2)));
 
@@ -284,8 +297,8 @@ public class DroverTests
     public void TheCardNamesWhatIsLiveAtTheDrakesStage()
     {
         Assert.Equal("Drake: half-grown. Live: Drake Bite 3.", Drake.Card(Riding(DrakeStage.HalfGrown), Starter with { Campaign = Starter.Campaign with { Drake = null } }));
-        Assert.EndsWith("Live: Drake Bite 5, Long Carry, Deep Rime.", Drake.Card(Riding(DrakeStage.Unbroken), Starter));
-        Assert.Equal("Drake: grown.", Drake.Card(Riding(DrakeStage.Grown, "skycaptain"), Starter));
+        Assert.EndsWith("; carries an ally (carry), breathes rime once a map (breathe). Live: Drake Bite 5, Long Carry, Deep Rime.", Drake.Card(Riding(DrakeStage.Unbroken), Starter));
+        Assert.Equal("Drake: grown; carries an ally (carry).", Drake.Card(Riding(DrakeStage.Grown, "skycaptain"), Starter));
     }
 
     [Fact]

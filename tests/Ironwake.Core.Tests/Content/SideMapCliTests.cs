@@ -438,6 +438,37 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Code's journaled play of Rook's quest 2 with the drake shipped (issue 1094, side-map seed 1132): the
+    /// Rookery save with Rook's drake Grown, no <c>carry:</c> header. The carry line prints on the side map,
+    /// the turn-2 carry flies Wren over the ravine to 10,6 and she lands free to kill the archer; Wren escapes
+    /// on turn 7, Rook falls on 14,6 to the rider on turn 8, and the Recall to turn 8 replays the same roll.
+    /// </summary>
+    [Fact]
+    public void TheJournaledRookeryCarryPlayFliesWrenOverTheRavineWithNoHeader()
+    {
+        var script = Transcript("2026-10-05-the_rookery-1132-carry.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-rookery-carry-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-05-the_rookery-1132-carry.saves", "rookery.json")), Path.Combine(saves, "rookery.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "rookery", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.DoesNotContain("carry: ", output);
+            Assert.Contains("carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act\n", output);
+            Assert.Contains("Rook's drake carries Wren 4,5 -> 10,6; lands free to move and act\n", output);
+            Assert.Contains("Archer falls at 12,6\n", output);
+            Assert.Contains("Rook falls at 14,6; her drake leaves the field\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Code's journaled replay of Keziah's quest 2 on the board as slice 16 left it (side-map seed 1133),
     /// played with the rear rider on turn 3 (issue 940 moved it to 5),
     /// from the same save at the camp after map 9: Joab named and bound at the door, the envoy a

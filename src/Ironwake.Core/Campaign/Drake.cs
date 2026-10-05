@@ -56,8 +56,10 @@ public static class Drake
     };
 
     /// <summary>
-    /// The unit card's line for a rider (issue 805): the stage, and while Half-grown under the campaign's
-    /// <see cref="CampaignRules.Drake"/> what grows it and how many maps are flown. Null for a unit with no drake.
+    /// The unit card's line for a rider (issue 805): the stage and the verbs it opens (issue 1094: Grown
+    /// <c>carries an ally (carry)</c>, Unbroken also <c>breathes rime once a map (breathe)</c>), and while
+    /// Half-grown under the campaign's <see cref="CampaignRules.Drake"/> what grows it and how many maps are
+    /// flown. Null for a unit with no drake.
     /// </summary>
     public static string? Card(Unit unit, GameContent content)
     {
@@ -69,12 +71,20 @@ public static class Drake
         var live = Live(unit, content) is { Count: > 0 } verbs ? $" Live: {string.Join(", ", verbs)}." : "";
         if (drake.Stage != DrakeStage.HalfGrown || content.Campaign.Drake is not { } rules)
         {
-            return $"Drake: {Word(drake.Stage)}.{live}";
+            return $"Drake: {Word(drake.Stage)}{Verbs(drake.Stage)}.{live}";
         }
 
         var said = Referent.For(content, unit);
         return $"Drake: half-grown; grows once {unit.Name}'s first quest is won and {said.Subject} {(said.Plural ? "have" : "has")} flown {rules.GrownFlown} maps ({drake.Flown} so far).{live}";
     }
+
+    /// <summary>The verbs a drake at <paramref name="stage"/> gives its rider, as the card prints them after the stage.</summary>
+    public static string Verbs(DrakeStage stage) => stage switch
+    {
+        DrakeStage.HalfGrown => "",
+        DrakeStage.Grown => "; carries an ally (carry)",
+        _ => "; carries an ally (carry), breathes rime once a map (breathe)",
+    };
 
     /// <summary>
     /// The class's drake abilities live for <paramref name="unit"/> at its drake's stage (issue 872), as the

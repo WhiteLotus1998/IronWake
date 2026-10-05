@@ -136,13 +136,13 @@ public class DrakeTests
     }
 
     [Fact]
-    public void TheCardSaysWhatGrowsAHalfGrownDrakeAndOnlyTheStageAfter()
+    public void TheCardSaysWhatGrowsAHalfGrownDrakeAndTheVerbsEachStageOpens()
     {
         var rook = CampaignRecord.Kitted(Content.Unit("rook"), Content);
 
         Assert.Equal("Drake: half-grown; grows once Rook's first quest is won and she has flown 2 maps (0 so far).", Drake.Card(rook, Content));
-        Assert.Equal("Drake: grown.", Drake.Card(rook with { Drake = new DrakeState(DrakeStage.Grown, 2) }, Content));
-        Assert.Equal("Drake: unbroken.", Drake.Card(rook with { Drake = new DrakeState(DrakeStage.Unbroken, 2) }, Content));
+        Assert.Equal("Drake: grown; carries an ally (carry).", Drake.Card(rook with { Drake = new DrakeState(DrakeStage.Grown, 2) }, Content));
+        Assert.Equal("Drake: unbroken; carries an ally (carry), breathes rime once a map (breathe).", Drake.Card(rook with { Drake = new DrakeState(DrakeStage.Unbroken, 2) }, Content));
         Assert.Null(Drake.Card(Content.Unit("rook"), Content));
     }
 

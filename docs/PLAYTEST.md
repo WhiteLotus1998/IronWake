@@ -3028,3 +3028,16 @@ Result: **won on turn 9 of 11, nobody fell, one Recall** (Ottilie died on enemy 
 - `Lethal if all land` was ended into three times: T3 (survived), the first T7 (dead), the second T7 (the winning bait). #1093's shape.
 
 Transcript: `docs/transcripts/2026-10-05-the_counting_house-9311.txt`, replayed by Code under `--strict` from Chat's script; same result. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5995249813).
+
+## 2026-10-05 — The Rookery with a Grown Rook, the carry shipped (#1094) — Code
+
+Seed: 1132 (`campaign --load rookery`, the 1132 save with Rook's drake set Grown by hand, no header), ally Wren. Warm: Code's third Rookery after 1132 and 862.
+Result: **lost on turn 8 of 9.** Wren escaped on turn 7; Rook fell on the exit at 14,6, and the one Recall (to turn 8, the other exit) replayed the same keyed roll. Tension 8, choice 7, surprise 6.
+- T1: a set-up turn. The carry needs both bodies unmoved and side by side, and the deploy puts Rook and Wren diagonal, so turn 1 is spent getting quiet and adjacent (4,5 and 4,6, outside both sleepers' 4). That is the price, and I paid it without noticing.
+- **Best turn, T2.** `carry rook wren 9,6 10,6`: over the ravine, past the bridge soldier, and Wren landed free, walked to 11,6 and killed the archer, 86% twice. The line woke the bridge, and the door count went from "Wren no way to an exit" to 1 turn. On foot the same turn is a bridge fight.
+- T3: my mistake. I swung at the soldier with Rook first and only then read the threat: `end` refused (#1093), and Rook had already acted on the wingrider's reach. Replanned from 10,5, out of it, but the soldier's counter still took her to 6. Everything after is about that 6.
+- T5, T6: Wren killed the first wingrider and was left at 2 on 13,5 under the sentry's bow; `end !` with her listed lethal; she lived, dressed to 12, and her counter killed the second wingrider on 14,6. Rook hid on 10,9, then the mountain at 14,8, the one tile the rider cannot stand beside.
+- T8: the turn limit made Rook stand on an exit, and every exit is in the rider's reach. 51%, hit. The Recall changed the tile, not the roll.
+- Verdict for #1094: the carry decided T2 and nothing else, and it decided it the way 0252 says, as a door-count verb. It did not pay the map's price for free: the map collected a body (Rook, so the map) because the rider spent her HP on her own fight. No lever. A cold chair would see the carry line on the board from turn 1.
+
+Transcript: `docs/transcripts/2026-10-05-the_rookery-1132-carry.txt`.

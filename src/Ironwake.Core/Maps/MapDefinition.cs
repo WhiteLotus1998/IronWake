@@ -210,10 +210,11 @@ public sealed record MapDefinition(
     public int Deploy { get; init; } = DefaultDeploy;
 
     /// <summary>
-    /// The <c>carry:</c> header (issue 805, samples): the setting a carried ally lands under and the
-    /// rider placed with a grown drake (<see cref="DrakeCarry"/>); null for a map without the carry.
+    /// The <c>carry:</c> header (issue 805, samples; issue 1094): the rider placed with a grown drake, so a
+    /// sample plays the carry (<see cref="DrakeCarry"/>) without a campaign behind it; null for a map without it.
+    /// A campaign battle opens the carry with no header (<see cref="DrakeCarry.Open"/>).
     /// </summary>
-    public CarryRule? Carry { get; init; }
+    public string? CarryRider { get; init; }
 
     /// <summary>
     /// The <c>dash: on</c> header (DESIGN.md 13.27, experiment, samples): a player unit may move
@@ -229,8 +230,9 @@ public sealed record MapDefinition(
     public bool OneAnswerEnabled { get; init; }
 
     /// <summary>
-    /// The <c>breath:</c> header (issue 805, samples): the recruit placed with an Unbroken drake, whose
-    /// breath the map plays (<see cref="Rime"/>); null for a map without the breath.
+    /// The <c>breath:</c> header (issue 805, samples; issue 1094): the recruit placed with an Unbroken drake,
+    /// so a sample plays the breath (<see cref="Rime"/>) without a campaign behind it; null for a map without
+    /// it. A campaign battle opens the breath with no header (<see cref="Rime.Open"/>).
     /// </summary>
     public string? BreathRider { get; init; }
 
@@ -348,7 +350,7 @@ public sealed record MapDefinition(
     /// </summary>
     public Unit Armed(Unit unit, GameContent content)
     {
-        if (Carry is { } carry && carry.Rider == unit.Id && unit.Drake is not { Stage: >= DrakeStage.Grown })
+        if (CarryRider == unit.Id && unit.Drake is not { Stage: >= DrakeStage.Grown })
         {
             unit = unit with { Drake = new DrakeState(DrakeStage.Grown, unit.Drake?.Flown ?? 0) };
         }

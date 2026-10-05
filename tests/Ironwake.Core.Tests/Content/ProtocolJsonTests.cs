@@ -47,7 +47,7 @@ public class ProtocolJsonTests
         { new UnitFreed("brigand-1", A, 4), """{"type":"unitFreed","unit":"brigand-1","at":{"x":1,"y":2},"hp":4}""" },
         { new RouteDrifted("south", A, ValueList<string>.Of("rider-1")), """{"type":"routeDrifted","group":"south","to":{"x":1,"y":2},"units":["rider-1"]}""" },
         { new UnitTalked("rook", "keziah", A, 9, ReturnFate.Turned), """{"type":"unitTalked","unit":"rook","target":"keziah","at":{"x":1,"y":2},"hp":9,"fate":"turned"}""" },
-        { new Carried("rook", "wren", A, B, new Coord(1, 3), new Coord(3, 5), CarrySetting.Brace), """{"type":"carried","unit":"rook","ally":"wren","from":{"x":1,"y":2},"to":{"x":3,"y":4},"allyFrom":{"x":1,"y":3},"setDown":{"x":3,"y":5},"setting":"brace"}""" },
+        { new Carried("rook", "wren", A, B, new Coord(1, 3), new Coord(3, 5)), """{"type":"carried","unit":"rook","ally":"wren","from":{"x":1,"y":2},"to":{"x":3,"y":4},"allyFrom":{"x":1,"y":3},"setDown":{"x":3,"y":5}}""" },
         { new Breathed("rook", A, ValueList<Coord>.Of(B), ValueList<string>.Of("brigand-1"), ValueList<Coord>.Of(B)), """{"type":"breathed","unit":"rook","from":{"x":1,"y":2},"line":[{"x":3,"y":4}],"chilled":["brigand-1"],"frozen":[{"x":3,"y":4}]}""" },
         { new Shoved("dunstan", "rider-1", A, B), """{"type":"shoved","unit":"dunstan","target":"rider-1","from":{"x":1,"y":2},"to":{"x":3,"y":4}}""" },
         { new RapportGained("ottilie", "wren", 4, 8, 16), """{"type":"rapportGained","a":"ottilie","b":"wren","amount":4,"total":8,"outOf":16}""" },
@@ -316,6 +316,22 @@ public class ProtocolJsonTests
         var older = System.Text.Json.Nodes.JsonNode.Parse(ProtocolJson.State(state with { History = ValueList<BattleState>.Empty }, content))!.AsObject();
         older.Remove("escaped");
         Assert.Empty(ProtocolJson.ReadState(older.ToJsonString(), content).Escaped);
+    }
+
+    /// <summary>Issue 1094: a campaign side map travels with <c>sideMap</c>, written only when true, and a state without it reads as outside the campaign.</summary>
+    [Fact]
+    public void AStateReadsBackEqualOnASideMap()
+    {
+        var (content, state) = PlayedTollgate();
+        var plain = state with { History = ValueList<BattleState>.Empty };
+        var side = plain with { SideMap = true };
+
+        var json = ProtocolJson.State(side, content);
+        Assert.Contains("\"sideMap\":true", json);
+        Assert.True(ProtocolJson.ReadState(json, content).InCampaign);
+        Assert.Equal(side, ProtocolJson.ReadState(json, content));
+        Assert.DoesNotContain("\"sideMap\"", ProtocolJson.State(plain, content));
+        Assert.False(ProtocolJson.ReadState(ProtocolJson.State(plain, content), content).SideMap);
     }
 
     /// <summary>Issue 396: a unit shoved this phase travels with <c>shoved</c>, written only when true, and a state without it reads as not shoved.</summary>

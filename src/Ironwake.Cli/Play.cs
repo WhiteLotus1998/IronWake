@@ -50,8 +50,8 @@ public sealed class PlaySession
           talk <unit> <target>     Beside the claimant who came back as a foe: the pick's talk turns them, the captain's spares them
           dash <unit> <x,y>        On a dash map, a unit not yet moved or acted moves with Move +2 (terrain costs the extra), as its whole turn; struck at +15 Acc until its next phase
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
-          carry <unit> <ally> <x,y> <x,y>  On a carry map, a grown drake lifts an adjacent ally, flies to the first tile and sets it down on the second, as the rider's whole turn
-          breathe <unit> <x,y>     On a breath map, once a map, an unbroken drake breathes 3 tiles out through the adjacent tile, as the action: everyone on the line is chilled, Water freezes to Rime ice
+          carry <unit> <ally> <x,y> <x,y>  In the campaign, a grown drake lifts an adjacent ally, flies to the first tile and sets it down on the second, as the rider's whole turn
+          breathe <unit> <x,y>     In the campaign, once a map, an unbroken drake breathes 3 tiles out through the adjacent tile, as the action: everyone on the line is chilled, Water freezes to Rime ice
           order <press|rally|fall back>  Commander's Word, once a map, as the captain's action: allies within 2 + Cha / 4 of the captain; press +1 Mov to those not moved, rally heals 15 percent, fall back lets those who acted move 2
           order <kind> preview [from <x,y>]  Who the order would reach from where the captain stands, or from a tile
           fallback <unit> <x,y|stay>  After a fall back order, an ally who had acted moves up to 2, if it wakes no one
@@ -2783,12 +2783,7 @@ public sealed class PlaySession
             case Breathed b:
                 return $"{names[b.UnitId]}'s drake breathes rime from {b.From} over {string.Join(" ", b.Line)}" + (b.Frozen.Count > 0 ? $"; the water freezes at {string.Join(" ", b.Frozen)}" : "") + (b.Chilled.Count == 0 ? "; no one is caught" : "");
             case Carried c:
-                return $"{names[c.UnitId]}'s drake carries {names[c.AllyId]} {c.AllyFrom} -> {c.SetDown}; " + c.Setting switch
-                {
-                    CarrySetting.Waited => "lands done for the phase",
-                    CarrySetting.Free => "lands free to move and act",
-                    _ => "lands moved, cannot strike, braces if it waits",
-                };
+                return $"{names[c.UnitId]}'s drake carries {names[c.AllyId]} {c.AllyFrom} -> {c.SetDown}; lands free to move and act";
             case UnitRetreated r:
                 return $"{names[r.UnitId]} falls back to {r.To} and will not fight this phase";
             case UnitBroke b:

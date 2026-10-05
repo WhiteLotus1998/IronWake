@@ -15,8 +15,8 @@ public sealed record RimeTile(Coord At, Side Side, int Clock)
 }
 
 /// <summary>
-/// The drake's rime breath (issue 805, the Unbroken stage; STORY draft 6). On a <c>breath:</c> map a
-/// player rider whose drake is Unbroken breathes once a map, as its action, after a move or without
+/// The drake's rime breath (issue 805, the Unbroken stage; STORY draft 6). On every campaign map, main or
+/// side, and on a sample with the <c>breath:</c> header (issue 1094, <see cref="Open"/>), a player rider whose drake is Unbroken breathes once a map, as its action, after a move or without
 /// one: a line of <see cref="Reach"/> tiles straight out from it through the orthogonally adjacent
 /// tile it names. Every unit on the line, of either side, is chilled (<see cref="Frost"/>: Mov -1,
 /// never below 1, on the chill's clock). Every Water tile on the line turns to Rime ice
@@ -38,6 +38,12 @@ public static class Rime
 
     /// <summary>The terrain the breath freezes.</summary>
     public const string WaterId = "water";
+
+    /// <summary>
+    /// Whether the breath is open on this battle (issue 1094): on every campaign battle, main map or side
+    /// map (<see cref="BattleState.InCampaign"/>), and on a map with the <c>breath:</c> header.
+    /// </summary>
+    public static bool Open(BattleState state) => state.Map.BreathRider is not null || state.InCampaign;
 
     /// <summary>Whether <paramref name="unit"/> rides a drake old enough to breathe.</summary>
     public static bool CanBreathe(BattleUnit unit) => unit.Unit.Drake is { Stage: >= DrakeStage.Unbroken };
@@ -71,9 +77,9 @@ public static class Rime
     /// </summary>
     public static string? Refusal(BattleState state, BattleUnit rider, Coord toward)
     {
-        if (state.Map.BreathRider is null)
+        if (!Open(state))
         {
-            return "this map has no breath: header";
+            return "the breath is open on campaign maps and breath: samples, and this is neither";
         }
 
         if (rider.Side != Side.Player)
@@ -187,13 +193,13 @@ public static class Rime
     }
 
     /// <summary>
-    /// The board's line on a <c>breath:</c> map while a rider can still breathe:
+    /// The board's line where the breath is open while a rider can still breathe:
     /// <c>breath (an unbroken drake's action, once a map): breathe rook &lt;x,y beside her&gt;; ...</c>,
     /// and while ice holds, where and when it thaws.
     /// </summary>
     public static string? Line(BattleState state)
     {
-        if (state.Map.BreathRider is null)
+        if (!Open(state))
         {
             return null;
         }

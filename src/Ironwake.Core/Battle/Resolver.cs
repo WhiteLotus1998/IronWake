@@ -560,11 +560,6 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NotAnEnemy, $"{target.Id} is on {unit.Id}'s own side"));
         }
 
-        if (unit.Landed)
-        {
-            return (state, new Rejection(RejectionReason.CannotCarry, $"{unit.Id} was set down by a drake this phase and cannot strike; it may wait to brace"));
-        }
-
         var (armed, weapon, choice) = ChooseWeapon(unit, content, attack.Slot);
         if (choice is not null)
         {
@@ -1338,8 +1333,8 @@ public static class Resolver
     /// <summary>
     /// Issue 805's carry: a rider with a grown drake, unmoved and not acted, lifts an adjacent ally, flies
     /// to <see cref="Carry.To"/> on its own Move with the ally lifted, and sets the ally down beside it
-    /// (<see cref="DrakeCarry"/>). The rider's whole turn. The ally lands marked as shoved, and as the
-    /// map's setting says: done for the phase, free, or moved and unable to strike. A rider holding the
+    /// (<see cref="DrakeCarry"/>). The rider's whole turn. The ally lands marked as shoved, unmoved and
+    /// free to move and act (issue 1094, the setting <c>free</c>). A rider holding the
     /// long carry (issue 872, <see cref="AbilityRules.LongCarry"/>) keeps a Canto of the Move the flight left.
     /// </summary>
     private static (BattleState, Rejection?) ApplyCarry(BattleState state, GameContent content, Carry carry, List<GameEvent> events)
@@ -1356,22 +1351,13 @@ public static class Resolver
         }
 
         var ally = state.Find(carry.AllyId)!;
-        var setting = state.Map.Carry!.Setting;
         var lifted = state.WithoutUnit(ally.Id);
         var entry = lifted.ReachOf(rider, content).EntryAt(carry.To)!;
         events.Add(new UnitMoved(rider.Id, rider.At, carry.To, entry.Path));
-        events.Add(new Carried(rider.Id, ally.Id, rider.At, carry.To, ally.At, carry.SetDown, setting));
+        events.Add(new Carried(rider.Id, ally.Id, rider.At, carry.To, ally.At, carry.SetDown));
         int? canto = AbilityRules.LongCarry(content.AbilitiesOf(rider.Unit), rider.Unit) ? lifted.ReachOf(rider, content).Mov - entry.Cost : null;
         var next = state.WithUnit(rider with { At = carry.To, Moved = true, Acted = true, Canto = canto, Braced = false });
-        var landed = ally with
-        {
-            At = carry.SetDown,
-            Moved = setting != CarrySetting.Free,
-            Acted = setting == CarrySetting.Waited,
-            Shoved = true,
-            Braced = false,
-            Landed = setting == CarrySetting.Brace,
-        };
+        var landed = ally with { At = carry.SetDown, Shoved = true, Braced = false };
         return (next.WithUnit(landed), null);
     }
 
@@ -1745,7 +1731,7 @@ public static class Resolver
         events.Add(new PhaseEnded(ended, state.Turn));
         if (nextTurn > state.Map.TurnLimit)
         {
-            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Open = null, Landed = false });
+            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Open = null });
             return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared), LitGroups = ValueList<string>.Empty }, null);
         }
 
@@ -1778,7 +1764,7 @@ public static class Resolver
                 events.Add(new UnitRested(unit.Id));
             }
 
-            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null, Landed = false });
+            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
@@ -1907,7 +1893,7 @@ public static class Resolver
                 }
             }
 
-            foreach (var attack in unit.Landed ? Enumerable.Empty<Attack>() : LegalAttacks(state, content, unit))
+            foreach (var attack in LegalAttacks(state, content, unit))
             {
                 yield return attack;
             }

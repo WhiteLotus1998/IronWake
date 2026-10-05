@@ -210,7 +210,6 @@ public static class ProtocolJson
                 WriteCoord(w, "to", c.To);
                 WriteCoord(w, "allyFrom", c.AllyFrom);
                 WriteCoord(w, "setDown", c.SetDown);
-                w.WriteString("setting", Name(c.Setting));
                 break;
             case UnitRetreated r:
                 w.WriteString("unit", r.UnitId);
@@ -819,6 +818,11 @@ public static class ProtocolJson
             w.WriteNumber("campaignMap", campaignMap);
         }
 
+        if (state.SideMap)
+        {
+            w.WriteBoolean("sideMap", true);
+        }
+
         if (state.OrderCalled is { } order)
         {
             w.WriteString("order", OrderName(order));
@@ -1022,6 +1026,7 @@ public static class ProtocolJson
             e.TryGetProperty("litGroups", out _) ? ReadStrings(e, "litGroups") : ValueList<string>.Empty)
         {
             CampaignMap = OptionalInt(e, "campaignMap"),
+            SideMap = e.TryGetProperty("sideMap", out _) && RequiredBool(e, "sideMap"),
             OrderCalled = OptionalString(e, "order") is { } order ? ReadOrderKind(order) : null,
             Opened = e.TryGetProperty("chests", out var chests)
                 ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
@@ -1097,11 +1102,6 @@ public static class ProtocolJson
         if (unit.Braced)
         {
             w.WriteBoolean("braced", true);
-        }
-
-        if (unit.Landed)
-        {
-            w.WriteBoolean("landed", true);
         }
 
         if (unit.Breathed)
@@ -1350,7 +1350,6 @@ public static class ProtocolJson
             Chill = OptionalInt(e, "chill") ?? 0,
             LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
-            Landed = e.TryGetProperty("landed", out _) && RequiredBool(e, "landed"),
             Breathed = e.TryGetProperty("breathed", out _) && RequiredBool(e, "breathed"),
             Winded = e.TryGetProperty("winded", out _) && RequiredBool(e, "winded"),
             Answered = e.TryGetProperty("answered", out _) && RequiredBool(e, "answered"),

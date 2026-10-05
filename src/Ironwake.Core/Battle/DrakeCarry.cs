@@ -1,37 +1,15 @@
 namespace Ironwake.Core;
 
 /// <summary>
-/// What a carried ally may do once it is set down (issue 805, round 247): the three costs the spike
-/// plays as a map's switch, one of which the keep round names.
-/// </summary>
-public enum CarrySetting
-{
-    /// <summary>The ally lands moved and acted, as if it had waited.</summary>
-    Waited,
-
-    /// <summary>The ally lands unmoved and free to act, its own Move included.</summary>
-    Free,
-
-    /// <summary>The ally lands moved, may not strike, and a Wait on the landing tile braces (DESIGN.md 13.14).</summary>
-    Brace,
-}
-
-/// <summary>
-/// The <c>carry:</c> header (issue 805, samples): the <see cref="CarrySetting"/> the map plays, and
-/// the recruit, placed by name, whose drake begins the map at Grown at least, so a sample plays the
-/// carry without a campaign behind it.
-/// </summary>
-public sealed record CarryRule(CarrySetting Setting, string Rider);
-
-/// <summary>
 /// The drake's carry (issue 805, the Grown stage; STORY draft 6: "it carries an ally over a river or
-/// a wall"). On a <c>carry:</c> map a player rider whose drake is Grown or more, who has neither moved
+/// a wall"). On every campaign map, main or side, and on a sample with the <c>carry:</c> header
+/// (issue 1094, DECISIONS/0254), a player rider whose drake is Grown or more, who has neither moved
 /// nor acted and is not grounded, lifts an ally orthogonally beside it that has neither moved nor
 /// acted, flies to a tile its own Move reaches (read with the ally lifted off its tile), and sets the
 /// ally down on an empty tile orthogonally beside that one which the ally can stand on. It is the
-/// rider's whole turn, Move and action, and no Canto follows but the Drover's long carry (issue 872). The ally lands as the map's
-/// <see cref="CarrySetting"/> says, marked as shoved, so it does not exit on that tile this phase
-/// (issue 396). The carry is quiet: it makes no noise beyond where the two now stand. The enemy never
+/// rider's whole turn, Move and action, and no Canto follows but the Drover's long carry (issue 872). The ally lands unmoved and free to
+/// move and act (the setting <c>free</c>, the keep round's, 0252), marked as shoved, so it does not
+/// exit on that tile this phase (issue 396). The carry is quiet: it makes no noise beyond where the two now stand. The enemy never
 /// carries, and the planner, <see cref="Resolver.Legal"/> and the Sim do not read it.
 /// </summary>
 public static class DrakeCarry
@@ -39,22 +17,11 @@ public static class DrakeCarry
     /// <summary>Whether <paramref name="unit"/> rides a drake grown enough to carry.</summary>
     public static bool CanLift(BattleUnit unit) => unit.Unit.Drake is { Stage: >= DrakeStage.Grown };
 
-    /// <summary>The setting's word as the header and the screen print it.</summary>
-    public static string Word(CarrySetting setting) => setting switch
-    {
-        CarrySetting.Waited => "waited",
-        CarrySetting.Free => "free",
-        _ => "brace",
-    };
-
-    /// <summary>The setting a header word names, or null for none.</summary>
-    public static CarrySetting? Parse(string word) => word switch
-    {
-        "waited" => CarrySetting.Waited,
-        "free" => CarrySetting.Free,
-        "brace" => CarrySetting.Brace,
-        _ => null,
-    };
+    /// <summary>
+    /// Whether the carry is open on this battle (issue 1094): on every campaign battle, main map or side
+    /// map (<see cref="BattleState.InCampaign"/>), and on a map with the <c>carry:</c> header.
+    /// </summary>
+    public static bool Open(BattleState state) => state.Map.CarryRider is not null || state.InCampaign;
 
     /// <summary>
     /// Why <paramref name="rider"/> may not carry <paramref name="allyId"/> to <paramref name="to"/> and set
@@ -63,9 +30,9 @@ public static class DrakeCarry
     /// </summary>
     public static string? Refusal(BattleState state, GameContent content, BattleUnit rider, string allyId, Coord to, Coord setDown)
     {
-        if (state.Map.Carry is null)
+        if (!Open(state))
         {
-            return "this map has no carry: header";
+            return "the carry is open on campaign maps and carry: samples, and this is neither";
         }
 
         if (rider.Side != Side.Player)
@@ -139,11 +106,11 @@ public static class DrakeCarry
     }
 
     /// <summary>
-    /// The board's line on a <c>carry:</c> map: <c>carry (a grown drake's whole turn): carry rook &lt;ally&gt; &lt;to&gt; &lt;set down&gt;; the ally lands free to act</c>.
+    /// The board's line where the carry is open and a player rider can lift: <c>carry (a grown drake's whole turn, ...): carry rook &lt;ally&gt; &lt;x,y&gt; &lt;set down x,y&gt;; the ally lands free to move and act</c>.
     /// </summary>
     public static string? Line(BattleState state)
     {
-        if (state.Map.Carry is not { } rule)
+        if (!Open(state))
         {
             return null;
         }
@@ -154,12 +121,6 @@ public static class DrakeCarry
             return null;
         }
 
-        var lands = rule.Setting switch
-        {
-            CarrySetting.Waited => "lands done for the phase",
-            CarrySetting.Free => "lands free to move and act",
-            _ => "lands moved, cannot strike, and braces if it waits",
-        };
-        return $"carry (a grown drake's whole turn, from beside an ally that has not moved): carry {riders[0]} <ally> <x,y> <set down x,y>; the ally {lands}";
+        return $"carry (a grown drake's whole turn, from beside an ally that has not moved): carry {riders[0]} <ally> <x,y> <set down x,y>; the ally lands free to move and act";
     }
 }
