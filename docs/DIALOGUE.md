@@ -31,9 +31,9 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **The Tollgate: `tuned`** (0073); the rider spawns on the door step (0072). Opens the beta.
 - **Brackwater Cut at dusk: `tuned`** (0078). Dusk hides what, never where.
-- **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15). Baiting the Foreman off the hill with a saved art is skill (0251); two Harrow wins in a row by the bait reopen #1067, with a content lever on the Foreman.
-- **Saltmarsh Ford:** not tuned; north cut 7/7/6, 7/7/5 (0093); the spawn lever failed (0095).
-- **Sallow Grange:** the Reeve stays at 15,6; a quiet route is quiet on the enemy phase too (#275).
+- **Harrow Weir: `tuned` on the crest** (0088, 0100; 7/8/7 both chairs; limit 15). Two Harrow wins in a row by baiting the Foreman reopen #1067 (0251), a content lever.
+- **Saltmarsh Ford:** not tuned (0093); the spawn lever failed (0095).
+- **Sallow Grange:** the Reeve stays at 15,6 (#275).
 - **The Rookery (Rook 2, 0208):** not passed; the cage and #862's ring stay; no lever before a cold chair. The card's bow-crit line becomes a warning (#1003). Lean, unfiled: a loft reward for the early captain kill. A lost Escape keeps its living (#861).
 - **The Counting House (Ottilie 1; 311 to 314, 321):** opening kept, finish the defect. Lever 1 (#925, 0228): archer guards 11,2. Lever 2 (#931, 0231): limit 11; quest cards match their map's limit. Chat cold decides, fresh seed.
 - **The Long Count (Ottilie 2; 313 to 315):** the count on screen (#928, 0229); dusk keeps the exit dark; the archer at 11,4 (#930, 0230).
@@ -119,4 +119,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Round index
 
-1-118 rules; 119-342 showcase, story; 343-359 writing, casting; #1033 360-371 (366 Lotus's notes; 368 careful recruits; 371 Rook on hand plays); #1063 372 on.
+1-118 rules; 119-342 story; 343-359 writing; #1033 360-371 (366 Lotus's notes); #1063 372 on.
