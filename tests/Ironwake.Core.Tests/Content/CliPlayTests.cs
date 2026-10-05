@@ -1290,6 +1290,24 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Code's third warm replay of the Tollgate under DECISIONS/0237 (seed 1430): Full Measure
+    /// kills the warden from 6,3 on turn 6, Pell and Teodor fill 6,4 and 6,2 so the rider has no
+    /// seat beside the spent captain, and the captain seizes on turn 8 past the living boss.
+    /// </summary>
+    [Fact]
+    public void TheTollgateReplayOnSeed1430SeizesOnTurn8()
+    {
+        var output = RunShipped("the_tollgate.map", "2026-10-05-the_tollgate-1430.script", 1430, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("  Alder Fenn crits Toll Warden for 51 (hp 0)\n", output);
+        Assert.Contains("  Pell hits Rider for 11 (hp 0)\n", output);
+        Assert.Contains("Alder Fenn moves 6,3 -> 7,1 via 6,2 6,1\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-10-05-the_tollgate-1430.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Code's warm replay of Brackwater Cut under DECISIONS/0237 (seed 1370): Wren's stop on 14,4
     /// wakes the bank on turn 3, the bank walks off the exits, the shieldbearer turns on the cork
     /// at the gap, and four of five escape on turn 8 with Dunstan fallen.

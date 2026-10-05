@@ -2946,3 +2946,18 @@ Notes:
 - **Verdict:** the tuned verdict stands, and the play files nothing. Holding the door is a real third line, and it costs more than the other two: three bodies and a Recall, against 1370's one body and two Recalls. Dusk did its job, too. On turn 7 the soldier couldn't see the captain at 19,8, five tiles off and out of hearing, so it went for Rook instead, and missed. Brackwater has now given me three different lines, each with a different price, and that's what a tuned map should do.
 
 — Code
+
+## 2026-10-05 — The Tollgate, a tuned map replayed under 0237, warm — Code
+Seed: 1430 (`play the_tollgate --seed 1430 --strict --script docs/transcripts/2026-10-05-the_tollgate-1430.script`; transcript beside it; main at 4ece4cc)   Result: **won on turn 8 of 10.** Nobody fell, nobody lost a hit point, and no Recall was spent. The boss was left standing.
+Warm: my third Tollgate under 0237 (after 1320 and 1380), and I built the rider trigger. This time I staged all four just outside both woods turrets' reach on turn 3 (`threat` read clean on every tile) and struck on turn 4, instead of 1380's turn-3 opener.
+Tension: 5/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 6. The corridor only fits two attackers on the warden, 6,3 and 6,4. Feint from 6,3 read 99 for 7 and Gust from 6,4 100 for 11, 18 against his 21, so the cork needed Full Measure (100 for 17), and Full Measure freezes the captain on 6,3 for turn 7 with the rider just spawned. The answer was to fill both sides of him: Pell stopped on 6,4 and Teodor walked through to 6,2 and put the archer at 6,1 down to 5. With 6,4 and 6,2 taken, the rider had no seat next to the frozen captain, `threat` on Pell showed it would take her at 39 into Gust's 100 percent counter, and that's what it did. Full Measure crit for 51 anyway, but the shape held whichever way it rolled.
+Notes:
+- **Why tension is a 5: the dice.** The enemy swung six times all map (the archers at 34 and 67, the boss at 58, 39 and 39, the rider at 39) and missed all six. Roughly 2.8 hits were expected, and all six missing is about a 3 percent run. Add the captain's two crits (Feint for 24 on the brigand, Full Measure for 51 on the warden) and the map never pushed back. That's the seed, not the line. 1380 on a similar shape cost Pell 13 HP and the last turn.
+- **The woods pair are turrets, so staging is free.** Hold units never move, and their reach is countable from the board, so four units can stand three tiles off and pick the turn they strike. Every Tollgate entry says turns 1 and 2 are a walk. On this play turn 3 was one too.
+- **My mistake, unpunished:** on turn 5 Teodor waited on 7,4, inside the boss's Toll Axe reach over the wall (range 2). I didn't run `threat` on him, and the boss swung at 58 for 11 and missed. The screen would have told me.
+- **The rider is a priced kill for the third entry running** (1320, 1380, 1430). 1380 said that if a third entry said so too, it becomes a content note for the Table, not a bug. This is that third entry, but all three are warm and all mine, so the note waits for Chat's next Tollgate, as 1380 put it.
+- **The boss was never fought.** Once the archer at 6,1 fell, the gate was three steps from 6,3 through Teodor's tile. A Seize map lets you leave him, and that's right.
+- **Verdict:** the tuned verdict stands, and the play files nothing. The corridor's two-tile cork, and filling both sides of whoever corks it, is the map's real decision. The rest was a lucky seed.
+
+— Code
