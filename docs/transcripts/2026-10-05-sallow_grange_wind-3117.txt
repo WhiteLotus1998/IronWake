@@ -1,0 +1,3229 @@
+Sallow Grange, seed 3117, scheme TwoRollAverage
+Objective: Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 ...........#......
+ 4 ...........#......
+ 5 DC.....b..........
+ 6 EA.....cd......!T.
+ 7 G..........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        1,6    hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          0,7    hp 17/17  Plain
+E  pell             Pell L1 adept              0,6    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
+C  wren             Wren L1 cadet              1,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move captain 2,3
+Alder Fenn moves 1,6 -> 2,3 via 1,5 1,4 1,3
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 ..A........#......
+ 4 ...........#......
+ 5 DC.....b..........
+ 6 E......cd......!T.
+ 7 G..........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          0,7    hp 17/17  Plain
+E  pell             Pell L1 adept              0,6    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
+C  wren             Wren L1 cadet              1,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait captain
+Alder Fenn waits
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 ..A........#......
+ 4 ...........#......
+ 5 DC.....b..........
+ 6 E......cd......!T.
+ 7 G..........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          0,7    hp 17/17  Plain
+E  pell             Pell L1 adept              0,6    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
+C  wren             Wren L1 cadet              1,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move wren 3,4
+Wren moves 1,5 -> 3,4 via 1,4 2,4
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 ..A........#......
+ 4 ...C.......#......
+ 5 D......b..........
+ 6 E......cd......!T.
+ 7 G..........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          0,7    hp 17/17  Plain
+E  pell             Pell L1 adept              0,6    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait wren
+Wren waits
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 ..A........#......
+ 4 ...C.......#......
+ 5 D......b..........
+ 6 E......cd......!T.
+ 7 G..........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          0,7    hp 17/17  Plain
+E  pell             Pell L1 adept              0,6    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move teodor 1,3
+Teodor moves 0,5 -> 1,3 via 0,4 0,3
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .DA........#......
+ 4 ...C.......#......
+ 5 .......b..........
+ 6 E......cd......!T.
+ 7 G..........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          0,7    hp 17/17  Plain
+E  pell             Pell L1 adept              0,6    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait teodor
+Teodor waits
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .DA........#......
+ 4 ...C.......#......
+ 5 .......b..........
+ 6 E......cd......!T.
+ 7 G..........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          0,7    hp 17/17  Plain
+E  pell             Pell L1 adept              0,6    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move pell 2,4
+Pell moves 0,6 -> 2,4 via 0,5 0,4 1,4
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .DA........#......
+ 4 ..EC.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 G..........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          0,7    hp 17/17  Plain
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait pell
+Pell waits
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .DA........#......
+ 4 ..EC.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 G..........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          0,7    hp 17/17  Plain
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move ottilie 1,4
+Ottilie moves 0,7 -> 1,4 via 0,6 0,5 0,4
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .DA........#......
+ 4 .GEC.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait ottilie
+Ottilie waits
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .DA........#......
+ 4 .GEC.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 B.....^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         0,10   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain  done
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move ansgar 2,6
+Ansgar moves 0,10 -> 2,6 via 0,9 0,8 0,7 0,6 1,6
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .DA........#......
+ 4 .GEC.......#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain  done
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 0 movement: canto ansgar <x,y|stay>
+Sallow Grange  turn 1 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .DA........#......
+ 4 .GEC.......#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain  canto 0
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain  done
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait brawler-1
+Brawler waits
+enemy: wait grange_reeve-1
+Grange Reeve waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .DA........#......
+ 4 .GEC.......#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,3    hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move captain 6,3
+Alder Fenn moves 2,3 -> 6,3 via 3,3 4,3 5,3
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .D....A....#......
+ 4 .GEC.......#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait captain
+Alder Fenn waits
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a......#e#####
+ 3 .D....A....#......
+ 4 .GEC.......#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move wren 5,2
+Wren moves 3,4 -> 5,2 via 3,3 4,3 5,3
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aC.....#e#####
+ 3 .D....A....#......
+ 4 .GE........#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait wren
+Wren waits
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aC.....#e#####
+ 3 .D....A....#......
+ 4 .GE........#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+E  pell             Pell L1 adept              2,4    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move pell 4,3
+Pell moves 2,4 -> 4,3 via 2,3 3,3
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aC.....#e#####
+ 3 .D..E.A....#......
+ 4 .G.........#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait pell
+Pell waits
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aC.....#e#####
+ 3 .D..E.A....#......
+ 4 .G.........#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move ottilie 3,2
+Ottilie moves 1,4 -> 3,2 via 1,3 1,2 2,2
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...GaC.....#e#####
+ 3 .D..E.A....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait ottilie
+Ottilie waits
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...GaC.....#e#####
+ 3 .D..E.A....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain  done
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          1,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move teodor 2,3
+Teodor moves 1,3 -> 2,3
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...GaC.....#e#####
+ 3 ..D.E.A....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain  done
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait teodor
+Teodor waits
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...GaC.....#e#####
+ 3 ..D.E.A....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 ..B....cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         2,6    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain  done
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move ansgar 3,4
+Ansgar moves 2,6 -> 3,4 via 2,5 2,4
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...GaC.....#e#####
+ 3 ..D.E.A....#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain  done
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 3 movement: canto ansgar <x,y|stay>
+Sallow Grange  turn 2 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...GaC.....#e#####
+ 3 ..D.E.A....#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain  canto 3
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain  done
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait brawler-1
+Brawler waits
+enemy: wait grange_reeve-1
+Grange Reeve waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...GaC.....#e#####
+ 3 ..D.E.A....#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move captain 10,3
+Alder Fenn moves 6,3 -> 10,3 via 7,3 8,3 9,3
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...GaC.....#e#####
+ 3 ..D.E.....A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait captain
+Alder Fenn waits
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...GaC.....#e#####
+ 3 ..D.E.....A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move wren 9,2
+Wren moves 5,2 -> 9,2 via 6,2 7,2 8,2
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...Ga....C.#e#####
+ 3 ..D.E.....A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait wren
+Wren waits
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...Ga....C.#e#####
+ 3 ..D.E.....A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain
+E  pell             Pell L1 adept              4,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move pell 8,3
+Pell moves 4,3 -> 8,3 via 5,3 6,3 7,3
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...Ga....C.#e#####
+ 3 ..D.....E.A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait pell
+Pell waits
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ...Ga....C.#e#####
+ 3 ..D.....E.A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          3,2    hp 17/17  Plain
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move ottilie 6,3
+Ottilie moves 3,2 -> 6,3 via 3,3 4,3 5,3
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a....C.#e#####
+ 3 ..D...G.E.A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait ottilie
+Ottilie waits
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....a....C.#e#####
+ 3 ..D...G.E.A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain  done
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          2,3    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move teodor 5,2
+Teodor moves 2,3 -> 5,2 via 3,3 4,3 5,3
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aD...C.#e#####
+ 3 ......G.E.A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain  done
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait teodor
+Teodor waits
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aD...C.#e#####
+ 3 ......G.E.A#......
+ 4 ...B.......#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         3,4    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain  done
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> move ansgar 7,2
+Ansgar moves 3,4 -> 7,2 via 3,3 4,3 5,3 5,2 6,2
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aD.B.C.#e#####
+ 3 ......G.E.A#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain  done
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 0 movement: canto ansgar <x,y|stay>
+Sallow Grange  turn 3 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aD.B.C.#e#####
+ 3 ......G.E.A#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain  canto 0
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain  done
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait brawler-1
+Brawler waits
+enemy: wait grange_reeve-1
+Grange Reeve waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aD.B.C.#e#####
+ 3 ......G.E.A#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ansgar at 7,2, Ottilie at 6,3 and Pell at 8,3 wake the field group
+> move pell 10,2
+Pell moves 8,3 -> 10,2 via 8,2 9,2
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aD.B.CE#e#####
+ 3 ......G...A#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ansgar at 7,2 and Ottilie at 6,3 wake the field group
+> attack pell shieldbearer-1
+Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 13 crit 3%; counter: none
+Pell attacks Shieldbearer
+  Pell hits Shieldbearer for 13 (hp 12)
+  Pell hp 16, Shieldbearer hp 12
+Pell gains 14 exp (14)
+The field group wakes (noise)
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aD.B.CE#e#####
+ 3 ......G...A#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 12/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> move captain 12,1
+Alder Fenn moves 10,3 -> 12,1 via 10,2 10,1 11,1
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^...A.....
+ 2 ....aD.B.CE#e#####
+ 3 ......G....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 12/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> attack captain shieldbearer-1
+Forecast Alder Fenn -> Shieldbearer: acc 94% dmg 4 x2 crit 5%; counter: acc 58% dmg 7 crit 0%
+Alder Fenn attacks Shieldbearer
+  Alder Fenn hits Shieldbearer for 4 (hp 8)
+  Shieldbearer hits Alder Fenn for 7 (hp 15)
+  Alder Fenn hits Shieldbearer for 4 (hp 4)
+  Alder Fenn hp 15, Shieldbearer hp 4
+Alder Fenn gains 14 exp (14)
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^...A.....
+ 2 ....aD.B.CE#e#####
+ 3 ......G....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 15/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 4/25   Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> move wren 9,1
+Wren moves 9,2 -> 9,1
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^C..A.....
+ 2 ....aD.B..E#e#####
+ 3 ......G....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 15/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 4/25   Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> wait wren
+Wren waits
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^C..A.....
+ 2 ....aD.B..E#e#####
+ 3 ......G....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 15/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 4/25   Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> move ottilie 10,3
+Ottilie moves 6,3 -> 10,3 via 7,3 8,3 9,3
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^C..A.....
+ 2 ....aD.B..E#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 15/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 4/25   Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> wait ottilie
+Ottilie waits
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^C..A.....
+ 2 ....aD.B..E#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 15/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 4/25   Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> move ansgar 11,1
+Ansgar moves 7,2 -> 11,1 via 8,2 9,2 9,1 10,1
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^C.BA.....
+ 2 ....aD....E#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         11,1   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 15/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 4/25   Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 1 movement: canto ansgar <x,y|stay>
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^C.BA.....
+ 2 ....aD....E#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         11,1   hp 20/20  Plain  canto 1
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 15/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 4/25   Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> move teodor 9,2
+Teodor moves 5,2 -> 9,2 via 6,2 7,2 8,2
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^C.BA.....
+ 2 ....a....DE#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         11,1   hp 20/20  Plain  canto 1
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 15/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 4/25   Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> wait teodor
+Teodor waits
+Sallow Grange  turn 4 of 10  player phase  seize  recall 3
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^C.BA.....
+ 2 ....a....DE#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         11,1   hp 20/20  Plain  canto 1
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
+A  captain          Alder Fenn L1 cadet        12,1   hp 15/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 4/25   Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, awake
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              9,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> recall 63
+Recalled to state 63; 2 charges left
+Undone: gives back 28 exp, 21 enemy hp; returns 7 hp to Alder Fenn
+The rolls do not change: the same attack will roll the same
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.........
+ 2 ....aD.B.C.#e#####
+ 3 ......G.E.A#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ansgar at 7,2, Ottilie at 6,3 and Pell at 8,3 wake the field group
+> move wren 12,1
+Wren moves 9,2 -> 12,1 via 9,1 10,1 11,1
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^...C.....
+ 2 ....aD.B...#e#####
+ 3 ......G.E.A#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ansgar at 7,2, Ottilie at 6,3 and Pell at 8,3 wake the field group
+> attack wren shieldbearer-1
+Forecast Wren -> Shieldbearer: acc 93% dmg 3 x2 crit 4%; counter: acc 60% dmg 8 crit 0%
+Wren attacks Shieldbearer
+  Wren hits Shieldbearer for 3 (hp 22)
+  Shieldbearer hits Wren for 8 (hp 12)
+  Wren hits Shieldbearer for 3 (hp 19)
+  Wren hp 12, Shieldbearer hp 19
+Wren gains 14 exp (14)
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^...C.....
+ 2 ....aD.B...#e#####
+ 3 ......G.E.A#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ansgar at 7,2, Ottilie at 6,3 and Pell at 8,3 wake the field group
+> move captain 10,1
+Alder Fenn moves 10,3 -> 10,1 via 10,2
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.A.C.....
+ 2 ....aD.B...#e#####
+ 3 ......G.E..#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ansgar at 7,2, Ottilie at 6,3 and Pell at 8,3 wake the field group
+> wait captain
+Alder Fenn waits
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.A.C.....
+ 2 ....aD.B...#e#####
+ 3 ......G.E..#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              8,3    hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ansgar at 7,2, Ottilie at 6,3 and Pell at 8,3 wake the field group
+> move pell 10,2
+Pell moves 8,3 -> 10,2 via 8,2 9,2
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.A.C.....
+ 2 ....aD.B..E#e#####
+ 3 ......G....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ansgar at 7,2 and Ottilie at 6,3 wake the field group
+> wait pell
+Pell waits
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.A.C.....
+ 2 ....aD.B..E#e#####
+ 3 ......G....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         7,2    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ansgar at 7,2 and Ottilie at 6,3 wake the field group
+> move ansgar 9,1
+Ansgar moves 7,2 -> 9,1 via 8,2 9,2
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^BA.C.....
+ 2 ....aD....E#e#####
+ 3 ......G....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ottilie at 6,3 wakes the field group
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 3 movement: canto ansgar <x,y|stay>
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^BA.C.....
+ 2 ....aD....E#e#####
+ 3 ......G....#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  canto 3
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          6,3    hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: Ottilie at 6,3 wakes the field group
+> move ottilie 10,3
+Ottilie moves 6,3 -> 10,3 via 7,3 8,3 9,3
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^BA.C.....
+ 2 ....aD....E#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  canto 3
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> wait ottilie
+Ottilie waits
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^BA.C.....
+ 2 ....aD....E#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  canto 3
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> move teodor 9,2
+Teodor moves 5,2 -> 9,2 via 6,2 7,2 8,2
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^BA.C.....
+ 2 ....a....DE#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  canto 3
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> wait teodor
+Teodor waits
+Sallow Grange  turn 4 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^BA.C.....
+ 2 ....a....DE#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  canto 3
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 19/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing north; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4); turns east on turn 5
+the wind turns east at turn 5: it wakes nobody where your units stand
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait brawler-1
+Brawler waits
+enemy: wait grange_reeve-1
+Grange Reeve waits
+enemy: wait hexer-1
+Hexer waits
+enemy: attack shieldbearer-1 wren
+Forecast Shieldbearer -> Wren: acc 60% dmg 8 crit 0%; counter: acc 93% dmg 3 x2 crit 4%
+Shieldbearer attacks Wren
+  Shieldbearer misses Wren
+  Wren hits Shieldbearer for 3 (hp 16)
+  Wren hits Shieldbearer for 3 (hp 13)
+  Shieldbearer hp 13, Wren hp 12
+Wren gains 14 exp (28)
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^BA.C.....
+ 2 ....a....DE#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 13/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move pell 11,1
+Pell moves 10,2 -> 11,1 via 10,1
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^BAEC.....
+ 2 ....a....D.#e#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain
+e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 13/25  Plain  group gate, hold
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> attack pell shieldbearer-1
+Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 13 crit 3%; counter: none
+Pell attacks Shieldbearer
+  Pell hits Shieldbearer for 13 (hp 0)
+  Pell hp 16, Shieldbearer hp 0
+Pell gains 40 exp (40)
+Shieldbearer falls at 12,2
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^BAEC.....
+ 2 ....a....D.#.#####
+ 3 ..........G#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        10,1   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move captain 12,3
+Alder Fenn moves 10,1 -> 12,3 via 11,1 12,1 12,2
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^B.EC.....
+ 2 ....a....D.#.#####
+ 3 ..........G#A.....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait captain
+Alder Fenn waits
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^B.EC.....
+ 2 ....a....D.#.#####
+ 3 ..........G#A.....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              12,1   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move wren 13,3
+Wren moves 12,1 -> 13,3 via 12,2 12,3
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^B.E......
+ 2 ....a....D.#.#####
+ 3 ..........G#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait wren
+Wren waits
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^B.E......
+ 2 ....a....D.#.#####
+ 3 ..........G#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move ansgar 12,2
+Ansgar moves 9,1 -> 12,2 via 10,1 11,1 12,1
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^..E......
+ 2 ....a....D.#B#####
+ 3 ..........G#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^..E......
+ 2 ....a....D.#B#####
+ 3 ..........G#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain  canto 2
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          9,2    hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move teodor 12,1
+Teodor moves 9,2 -> 12,1 via 9,1 10,1 11,1
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^..ED.....
+ 2 ....a......#B#####
+ 3 ..........G#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain  canto 2
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          12,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait teodor
+Teodor waits
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^..ED.....
+ 2 ....a......#B#####
+ 3 ..........G#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain  canto 2
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,3   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          12,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move ottilie 10,1
+Ottilie moves 10,3 -> 10,1 via 10,2
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.GED.....
+ 2 ....a......#B#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain  canto 2
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,1   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          12,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait ottilie
+Ottilie waits
+Sallow Grange  turn 5 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.GED.....
+ 2 ....a......#B#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain  canto 2
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,1   hp 17/17  Plain  done
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          12,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait brawler-1
+Brawler waits
+enemy: wait grange_reeve-1
+Grange Reeve waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^.GED.....
+ 2 ....a......#B#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          10,1   hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          12,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move ottilie 9,1
+Ottilie moves 10,1 -> 9,1
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^G.ED.....
+ 2 ....a......#B#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          12,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait ottilie
+Ottilie waits
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^G.ED.....
+ 2 ....a......#B#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              11,1   hp 16/16  Plain
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          12,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move pell 10,1
+Pell moves 11,1 -> 10,1
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GE.D.....
+ 2 ....a......#B#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          12,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait pell
+Pell waits
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GE.D.....
+ 2 ....a......#B#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          12,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move teodor 11,1
+Teodor moves 12,1 -> 11,1
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GED......
+ 2 ....a......#B#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait teodor
+Teodor waits
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GED......
+ 2 ....a......#B#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,2   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move ansgar 12,1
+Ansgar moves 12,2 -> 12,1
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#.#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait ansgar
+Ansgar waits
+Ansgar may move again up to 5 movement: canto ansgar <x,y|stay>
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#.#####
+ 3 ...........#AC....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain  canto 5
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              13,3   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move wren 12,2
+Wren moves 13,3 -> 12,2 via 12,3
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#C#####
+ 3 ...........#A.....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain  canto 5
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              12,2   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait wren
+Wren waits
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#C#####
+ 3 ...........#A.....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain  canto 5
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              12,2   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move captain 13,3
+Alder Fenn moves 12,3 -> 13,3
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#C#####
+ 3 ...........#.A....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain  canto 5
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        13,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              12,2   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait captain
+Alder Fenn waits
+Sallow Grange  turn 6 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#C#####
+ 3 ...........#.A....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain  canto 5
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        13,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain  done
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain  done
+C  wren             Wren L1 cadet              12,2   hp 12/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait brawler-1
+Brawler waits
+enemy: wait grange_reeve-1
+Grange Reeve waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+Sallow Grange  turn 7 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#C#####
+ 3 ...........#.A....
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        13,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              12,2   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move captain 17,3
+Alder Fenn moves 13,3 -> 17,3 via 14,3 15,3 16,3
+Sallow Grange  turn 7 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#C#####
+ 3 ...........#.....A
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        17,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              12,2   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> wait captain
+Alder Fenn waits
+Sallow Grange  turn 7 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#C#####
+ 3 ...........#.....A
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        17,3   hp 22/22  Plain  captain  done
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              12,2   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait brawler-1
+Brawler waits
+enemy: wait grange_reeve-1
+Grange Reeve waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+Sallow Grange  turn 8 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#C#####
+ 3 ...........#.....A
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!T.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        17,3   hp 22/22  Plain  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              12,2   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+> move captain 16,6
+Alder Fenn moves 17,3 -> 16,6 via 16,3 16,4 16,5
+The hall group wakes (proximity)
+Sallow Grange  turn 8 of 10  player phase  seize  recall 2
+   012345678901234567
+ 0 ....^^^^^^^.......
+ 1 ......^^^GEDB.....
+ 2 ....a......#C#####
+ 3 ...........#......
+ 4 ...........#......
+ 5 .......b..........
+ 6 .......cd......!A.
+ 7 ...........#.f....
+ 8 ...........#......
+ 9 ...........#######
+10 ......^^^.........
+11 ....^^^^^^^.......
+
+B  ansgar           Ansgar L1 outrider         12,1   hp 20/20  Plain
+a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
+d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
+c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
+A  captain          Alder Fenn L1 cadet        16,6   hp 22/22  Gate (heals 20 percent, 4 hp)  captain
+!  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, awake
+f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
+G  ottilie          Ottilie L1 bowman          9,1    hp 17/17  Plain
+E  pell             Pell L1 adept              10,1   hp 16/16  Plain
+b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
+D  teodor           Teodor L1 pikeman          11,1   hp 21/21  Plain
+C  wren             Wren L1 cadet              12,2   hp 12/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+wind: blowing east; a sleeper downwind of a unit hears it within 6 (a fight within 8), upwind within 2 (a fight within 4)
+Battle won: seize; only recall is left
+Battle won: seize

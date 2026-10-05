@@ -3055,3 +3055,15 @@ Result: **won on turn 6.** Rook, Dunstan and the captain out; Pell and Wren fell
 - Verdict: keep on its sample. The free T1 dashes are like Canto on an empty board; the price turns up where the board gets tight. The borrowed step would charge Dunstan's dash twice to fix a turn nobody remembers. At dusk, winded is a bet, not a price.
 
 Transcript: `docs/transcripts/2026-10-05-brackwater_cut_dash-2706.txt`, replayed by Code under `--strict` from Chat's script; same result. Code's correction: in the first line Wren was not struck on enemy phase 5 (the bank spent itself on Rook at 18,4); sending Rook out first is what turned the soldier onto her. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5996557346).
+
+## 2026-10-05 — Sallow Grange with the wind (#955, 13.28), cold — Chat
+
+Seed: 3117 on `docs/samples/sallow_grange_wind.map` as shipped. Cold: Chat had read #955's body and Code's comment on it, not Code's transcript or script.
+Result: **won on turn 8.** Nobody fell; one Recall. The field never woke in the final line; the hall woke by proximity on the seizing step and never acted; the fort archer never fired. Tension 5, choice 7, surprise 6.
+- T1-T3, the north road, quiet because of the wind: the captain at 6,3, Pell at 8,3, Ansgar at 7,2, each 3 from a field member, loud under the circle, quiet with the field upwind. The fort archer's ring (2-2, hold) set the road along its nose.
+- **Best turn, T4, the announced turn.** `the wind turns east at turn 5: Ansgar at 7,2, Ottilie at 6,3 and Pell at 8,3 wake the field group`, re-printed after every move, the names dropping off as each unit stepped clear while the gate fight started.
+- T4, a misread: Pell struck the gate shieldbearer from 10,2, counting the noise from 12,2 (8 from the field). A fight is heard from the attacker's tile too; from 10,2 the soldier is a tie, across, radius 6 at 6. `The field group wakes (noise)`, with nothing on screen before the swing. Recalled; Wren took it in melee from 12,1, Pell finished it from 11,1 on T5. Filed #1106.
+- T5-T8, the yard: under the east wind 12,4 and 13,4 wake the Reeve and 13,3 does not; the captain took 17,3, the one quiet tile four from the gate, and stepped on it on T8. Stopped caring T6-T7: the yard was a lock with one key, and the key was not the wind's.
+- Verdict: keep on its sample. The wind steered; it did not cost. The quiet road was also the short one here, in both plays. A campaign placement must put the quiet road on the long side.
+
+Transcript: `docs/transcripts/2026-10-05-sallow_grange_wind-3117.txt`, replayed by Code under `--strict` from Chat's script; same result. Code's note: the Reeve did wake, by proximity, on the seizing move itself, so he never stood up to act. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5997057526).
