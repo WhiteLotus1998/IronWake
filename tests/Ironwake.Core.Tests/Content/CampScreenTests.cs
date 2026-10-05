@@ -146,6 +146,29 @@ public class CampScreenTests
     }
 
     [Fact]
+    public void ASideMapOpensSayingWhoFallsIsGoneForGoodWithPermadeathOn()
+    {
+        var record = Tollgate();
+        var quest = record.QuestsOffered(Content)[0];
+
+        var line = CampaignSession.QuestOpening(record, Content, Map(record), quest.Id, quest.MemberId)[1];
+
+        Assert.EndsWith("; who falls here is gone for good.", line, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void ASideMapOpensSayingWhoFallsComesBackWoundedWithPermadeathOff()
+    {
+        var record = Tollgate() with { Permadeath = false };
+        var quest = record.QuestsOffered(Content)[0];
+
+        var line = CampaignSession.QuestOpening(record, Content, Map(record), quest.Id, quest.MemberId)[1];
+
+        Assert.EndsWith("; who falls here comes back wounded.", line, StringComparison.Ordinal);
+        Assert.DoesNotContain("gone for good", line, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void AWonSideMapIsListedWithWhatItPaid()
     {
         var record = Tollgate();

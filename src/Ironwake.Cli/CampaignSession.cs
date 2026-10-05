@@ -36,7 +36,7 @@ public sealed class CampaignSession
           classes [unit]           What each class asks for promotion into it, and what the unit still lacks
           certify <unit> <class>   Promote into a class, paying a seal from the purse
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
-          quest <id> <ally>...     Fight a member's side map with the allies its board takes; who falls there is gone for good
+          quest <id> <ally>...     Fight a member's side map with the allies its board takes; who falls there is gone for good with permadeath on, back wounded with it off
           keep                     The keep's rooms and beds; once the raid is fought, each wall placement, its price and what it does
           build <room>             Buy a room for the keep from the purse; each adds beds, and no bed free means a recruit will not join
           hire [<id>]              List the barracks' hires, or hire one into the company from the purse (once the barracks is built)
@@ -1114,7 +1114,10 @@ public sealed class CampaignSession
     public static IReadOnlyList<string> QuestOpening(CampaignRecord record, GameContent content, MapDefinition map, string questId, string allyId) =>
         QuestOpening(record, content, map, questId, new[] { allyId });
 
-    /// <summary>The lines that open a side map with several allies (issue 691), named in the order given.</summary>
+    /// <summary>
+    /// The lines that open a side map with several allies (issue 691), named in the order given;
+    /// the price of a fall follows the record's permadeath (issue 1117).
+    /// </summary>
     public static IReadOnlyList<string> QuestOpening(CampaignRecord record, GameContent content, MapDefinition map, string questId, IReadOnlyList<string> allyIds)
     {
         var names = UnitNames.Of(record, content);
@@ -1124,7 +1127,7 @@ public sealed class CampaignSession
         return new[]
         {
             $"Side map: {map.Name}, seed {record.QuestSeed(questId, content)}",
-            $"{names[quest.MemberId]} goes with {with}. This map is lost if {names[quest.MemberId]} falls; who falls here is gone for good.",
+            $"{names[quest.MemberId]} goes with {with}. This map is lost if {names[quest.MemberId]} falls; who falls here {(record.Permadeath ? "is gone for good" : "comes back wounded")}.",
         };
     }
 
