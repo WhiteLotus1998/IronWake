@@ -1273,6 +1273,23 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Code's second warm replay of the Tollgate under DECISIONS/0237 (seed 1380): Full Measure
+    /// takes the last archer on turn 8 and spends turn 9, Pell's Gust kills the boss at no counter,
+    /// and the captain seizes on the last turn.
+    /// </summary>
+    [Fact]
+    public void TheTollgateReplayOnSeed1380SeizesOnTurn10()
+    {
+        var output = RunShipped("the_tollgate.map", "2026-10-05-the_tollgate-1380.script", 1380, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Alder Fenn is spent from the strike and cannot move or act this phase\n", output);
+        Assert.Contains("  Pell hits Bandit Leader for 11 (hp 0)\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-10-05-the_tollgate-1380.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Code's warm replay of Brackwater Cut under DECISIONS/0237 (seed 1370): Wren's stop on 14,4
     /// wakes the bank on turn 3, the bank walks off the exits, the shieldbearer turns on the cork
     /// at the gap, and four of five escape on turn 8 with Dunstan fallen.
