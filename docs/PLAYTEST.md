@@ -2913,3 +2913,20 @@ Notes:
 - **Verdict:** the tuned verdict stands, and the play files nothing. If the cold chair on this arm goes north, it will meet the same starving walk, and the hunger alone is enough to fill it.
 
 — Code
+
+## 2026-10-05 — Harrow Weir, the whole party on the crest, a tuned map replayed under 0237, warm — Code
+Seed: 1410 (`play harrow_weir --seed 1410 --scheme two --strict --script docs/transcripts/2026-10-05-harrow_weir-1410.script`; transcript beside it; main at 60e42ce)   Result: **won on turn 6 of 15.** Nobody fell, no Recall was spent, and the Foreman never moved or swung.
+Warm: my third Harrow replay under 0237, after 1300 and 1360. 1360 won by baiting the Foreman off his hill, and 0251's tripwire watches for a second bait win in a row. I took the north crossing with all six to see what a non-bait line does.
+Tension: 5/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 4, and it was a placement turn rather than a strike. With the captain on 12,2 the weir woke, and `threat dunstan` said the Foreman would cross his own bridge (through the shieldbearer on 11,6) to 9,6 and throw at Dunstan on 8,5 from range 2. Moving Ottilie to 9,2 and Dunstan to 9,3 turned every line into "refuses it: too exposed there; holds 13,6". I chose between a bait on the west bank and a siege on the hill, and the screen showed me both before I committed.
+Notes:
+- **Turns 1 to 3 were the opening every Harrow has.** Pell, Ottilie and the captain killed the wood brigand on turn 1 (87, 56, 63, all landed), and Teodor walked to 7,0 by turn 3. The plug held both the rider and the turn.
+- **The archer died first, for free.** On turn 5 Pell's Overcast from 14,2 read 99 for exactly 17. The screen asked for `!` because the counter was lethal 1 time in 100. With the archer gone the Foreman was alone on the east bank.
+- **The hill fell in one phase.** On turn 6: Pell's Cinder from 14,5 at 94 for 12 (Overcast would have let him double her, 26 against 16), Ottilie's Aimed Shot from 13,4 at 92 for 5 (his counter left her on 5), and Full Measure from 13,5 at 99 for 16. He went 28, 16, 11, 0. Teodor's Long Thrust and Keziah's axe were the backup, and neither was needed.
+- **The brigands from turn 5 never arrived.** The south one stood on 9,7 and the west one on 0,7 when the map ended. Pell's Cinder woke the ford by noise on turn 6, one strike before the end.
+- **Not tense:** turns 1 to 3 and 5. The only HP lost all map was Ottilie's 12.
+- **Filed:** #1087. Massed on the crest, the party's plain-weapon total is lethal on every tile the Foreman could strike from, so the veto keeps him home, and home is a hill three strikes clear. By DIALOGUE's rule (39, 72) that's scenery. It's for the Table, and my lean is no lever until a cold chair tries it.
+- **For 0251's tripwire:** not a bait win, so it does not advance. The Foreman is beatable off his hill (1360) and on it (1410). Both warm lines came in early, on turns 9 and 6.
+- **Verdict:** the tuned verdict stands on one warm play, but it's the weakest Harrow I've journaled for tension, and #1087 says why.
+
+— Code

@@ -1,0 +1,71 @@
+move pell 2,4
+attack pell brigand-1 cinder
+move ottilie 3,5
+attack ottilie brigand-1
+move captain 3,4
+attack captain brigand-1
+move teodor 2,2
+wait teodor
+move keziah 4,6
+wait keziah
+move dunstan 3,6
+wait dunstan
+end
+move teodor 6,2
+wait teodor
+move captain 6,3
+wait captain
+move pell 5,4
+wait pell
+move ottilie 6,5
+wait ottilie
+move keziah 7,5
+wait keziah
+move dunstan 6,6
+wait dunstan
+end
+move teodor 7,0
+wait teodor
+move captain 9,2
+wait captain
+move keziah 9,3
+wait keziah
+move pell 8,3
+wait pell
+move ottilie 8,4
+wait ottilie
+move dunstan 8,5
+wait dunstan
+end
+move keziah 11,2
+wait keziah
+move pell 10,2
+wait pell
+move captain 12,2
+move ottilie 9,2
+wait ottilie
+move dunstan 9,3
+wait dunstan
+wait captain
+move teodor 9,1
+wait teodor
+end
+move pell 14,2
+attack pell archer-1 cinder art overcast !
+move keziah 13,2
+wait keziah
+move captain 12,3
+wait captain
+move ottilie 12,2
+wait ottilie
+move teodor 11,2
+wait teodor
+move dunstan 10,2
+wait dunstan
+end
+move pell 14,5
+attack pell weir_foreman-1 cinder
+move ottilie 13,4
+attack ottilie weir_foreman-1 art aimed_shot
+move captain 13,5
+attack captain weir_foreman-1 art full_measure
