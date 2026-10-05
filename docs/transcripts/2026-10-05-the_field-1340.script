@@ -1,0 +1,144 @@
+march
+move rook 4,14
+wait rook
+move captain 2,12
+wait captain
+move teodor 2,11
+wait teodor
+move pell 1,11
+wait pell
+move ottilie 1,12
+wait ottilie
+move maud 1,13
+wait maud
+end
+move rook 3,12
+talk rook keziah
+move pell 4,12
+attack pell archer-2
+move captain 5,12
+attack captain archer-2
+move teodor 4,13
+wait teodor
+move ottilie 4,11
+wait ottilie
+move maud 3,11
+wait maud
+end
+attack pell soldier-3
+attack captain brigand-1
+item maud 2 ottilie
+move teodor 6,12
+wait teodor
+move rook 7,10
+wait rook
+end
+move rook 11,9
+wait rook
+move teodor 8,11
+wait teodor
+move captain 7,12
+wait captain
+move pell 6,12
+wait pell
+move ottilie 6,11
+wait ottilie
+move maud 5,12
+wait maud
+end
+move rook 9,6
+attack rook archer-1
+recall 98
+item maud 2 pell
+move rook 7,11
+wait rook
+end
+move captain 8,9
+attack captain archer-1
+move teodor 9,9
+wait teodor
+move rook 8,8
+wait rook
+move pell 7,10
+wait pell
+move ottilie 8,10
+wait ottilie
+move maud 6,11
+wait maud
+end
+move pell 7,8
+attack pell soldier-1
+move ottilie 10,11
+attack ottilie soldier-2
+attack teodor soldier-2
+move maud 7,9
+item maud 2 captain
+end
+move ottilie 7,12
+wait ottilie
+move teodor 11,10
+attack teodor rider-1
+move captain 10,11
+attack captain rider-1
+move maud 7,11
+item maud 2 ottilie
+move rook 11,11
+wait rook
+move pell 10,9
+wait pell
+end
+move rook 15,12
+wait rook
+move captain 12,13
+wait captain
+move teodor 12,12
+wait teodor
+move pell 11,12
+wait pell
+move ottilie 10,12
+wait ottilie
+move maud 9,12
+wait maud
+end
+move rook 15,11
+attack rook archer-3
+move teodor 15,13
+wait teodor
+move captain 14,13
+wait captain
+move pell 13,13
+wait pell
+move ottilie 12,14
+wait ottilie
+move maud 11,13
+wait maud
+end
+move teodor 17,11
+wait teodor
+move captain 16,11
+wait captain
+move pell 15,12
+wait pell
+move ottilie 15,13
+wait ottilie
+move maud 14,13
+item maud 2 ottilie
+move rook 16,12
+wait rook
+end
+move captain 18,9
+attack captain sworn_captain-1 art full_measure
+move teodor 16,8
+wait teodor
+move pell 17,10
+wait pell
+move rook 16,11
+wait rook
+move ottilie 16,10
+wait ottilie
+move maud 15,12
+wait maud
+end
+move pell 18,8
+attack pell sworn_captain-1
+leave
