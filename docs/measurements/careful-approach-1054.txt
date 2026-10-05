@@ -1,0 +1,21 @@
+# Issue 1054: --full --all --seeds 200 under the careful approach (0248). Release, two-roll average. Gate 1 and gate 4 rows.
+# Before (main 2f6ab8b): brackwater 129, harrow 143, old_mill_road 65, sallow 161, saltmarsh 50, starting_alone 1, the_field 122, the_mill 133, the_tollgate 158.
+
+gate 1 beatable: brackwater_cut, heuristic wins 129/200 (65 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 71 captain 0 protected, quiet tail -, refused kill -, survivors p50 1 of 4, captain alone 59, two-roll average: ok
+gate 4 no dead weight: brackwater_cut, 4 recruits x 200 seeds, units out, 0 to 4, median drop 0.282: ok
+gate 1 beatable: harrow_weir, heuristic wins 137/200 (69 %), winning turn median 8 p90 11 limit 15, losses 34 timeout 29 captain 0 protected, quiet tail 0.5, refused kill p50 0.9524 over 34, at the stall p50 0.0346 over 31, two-roll average: ok
+gate 4 no dead weight: harrow_weir, 5 recruits x 200 seeds, median drop 0.225: ok
+gate 1 beatable: old_mill_road, heuristic wins 57/200 (28 %), winning turn median 7 p90 10 limit 12, losses 36 timeout 107 captain 0 protected, quiet tail 5.5, refused kill p50 0.9892 over 36, at the stall p50 0.0390 over 36, two-roll average: FAILED
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.275: ok
+gate 1 beatable: sallow_grange, heuristic wins 161/200 (81 %), winning turn median 9 p90 10 limit 10, losses 35 timeout 4 captain 0 protected, quiet tail 0.3, refused kill p50 0.8775 over 35, at the stall p50 0.0868 over 25, two-roll average: ok
+gate 4 no dead weight: sallow_grange, 5 recruits x 200 seeds, median drop 0.330: ok
+gate 1 beatable: saltmarsh_ford, heuristic wins 50/200 (25 %), winning turn median 12 p90 16 limit 18, losses 133 timeout 17 captain 0 protected, quiet tail 1.8, refused kill p50 0.8674 over 133, at the stall p50 0.0077 over 131, two-roll average: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.075: FAILED
+gate 1 beatable: starting_alone, heuristic wins 1/200 (1 %), winning turn median 10 p90 10 limit 10, losses 0 timeout 199 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
+gate 4 no dead weight: starting_alone, 0 recruits x 200 seeds, median drop 0.000: ok
+gate 1 beatable: the_field, heuristic wins 134/200 (67 %), winning turn median 11 p90 15 limit 20, losses 43 timeout 23 captain 0 protected, quiet tail 1.7, refused kill p50 0.9824 over 43, at the stall p50 0.0224 over 41, route line 6 drifted 3 won 4 p50 13 lost 3.3; south 194 drifted 26 won 130 p50 11 lost 3.6; none 0 drifted 0 won 0, two-roll average: ok
+gate 4 no dead weight: the_field, 5 recruits x 200 seeds, median drop 0.315: ok
+gate 1 beatable: the_mill, heuristic wins 133/200 (67 %), winning turn median 7 p90 8 limit 12, losses 0 timeout 1 captain 66 protected, quiet tail -, refused kill -, two-roll average: ok
+gate 4 no dead weight: the_mill, 0 recruits x 200 seeds, median drop 0.000: ok
+gate 1 beatable: the_tollgate, heuristic wins 167/200 (83 %), winning turn median 9 p90 10 limit 10, losses 33 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 33, at the stall p50 0.8674 over 31, two-roll average: ok
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.220: ok
