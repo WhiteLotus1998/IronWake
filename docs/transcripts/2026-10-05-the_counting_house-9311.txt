@@ -426,7 +426,7 @@ A  ottilie          Ottilie L5 bowman          5,7    hp 18/18  Plain  captain  
 B  pell             Pell L5 adept              5,6    hp 10/17  Plain  done
 f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-> end
+> end !
 Lethal if all land: Pell (Brigand 2 for 14, against 10 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -899,7 +899,7 @@ e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group hou
 A  ottilie          Ottilie L5 bowman          7,1    hp 17/18  Plain  captain  done
 B  pell             Pell L5 adept              5,1    hp 10/17  Plain  done
 f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, awake
-> end
+> end !
 Lethal if all land: Ottilie (Archer for 7, Lector for 15, against 17 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
@@ -1519,7 +1519,7 @@ e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group hou
 A  ottilie          Ottilie L5 bowman          7,1    hp 15/18  Plain  captain  done
 B  pell             Pell L5 adept              7,3    hp 17/17  Plain  done
 f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, awake
-> end
+> end !
 Lethal if all land: Ottilie (Lector for 15, against 15 hp)
 Lethal if all land: Pell (Archer for 8, Lector for 11, against 17 hp)
 -- Player phase ends, turn 7 --
