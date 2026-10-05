@@ -49,6 +49,18 @@ public sealed record BattleState(
     public int? CampaignMap { get; init; }
 
     /// <summary>
+    /// Set on a campaign side map (issue 1094, <see cref="CampaignRecord.BeginQuest(MapDefinition, string, IReadOnlyList{string}, GameContent, RollScheme)"/>),
+    /// which is fought inside the campaign but is no main map, so it has no <see cref="CampaignMap"/>.
+    /// </summary>
+    public bool SideMap { get; init; }
+
+    /// <summary>
+    /// Whether this battle is fought inside the campaign (issue 1094): a main map (<see cref="CampaignMap"/>)
+    /// or a side map (<see cref="SideMap"/>). The drake's carry and breath are open on every such battle.
+    /// </summary>
+    public bool InCampaign => CampaignMap is not null || SideMap;
+
+    /// <summary>
     /// The tiles of the chests opened so far (issue 649), sorted row-major. A chest opens once and
     /// stays open; a Recall restores the list with the board.
     /// </summary>

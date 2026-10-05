@@ -1,0 +1,41 @@
+quest rook_2 wren
+move wren 4,5
+wait wren
+move rook 4,6
+wait rook
+end
+carry rook wren 9,6 10,6
+move wren 11,6
+attack wren archer-1
+end
+move wren 14,6
+wait wren
+move rook 10,5
+attack rook soldier-1
+end
+move rook 14,5
+wait rook
+move wren 13,5
+wait wren
+end
+attack wren wingrider-1
+move rook 14,9
+wait rook
+end !
+move wren 14,6
+item wren 2
+move rook 10,9
+wait rook
+end
+exit wren
+move rook 14,8
+wait rook
+end
+move rook 14,6
+wait rook
+end !
+recall 77
+move rook 14,5
+wait rook
+end !
+leave

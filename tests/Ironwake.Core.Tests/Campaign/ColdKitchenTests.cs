@@ -50,6 +50,16 @@ public class ColdKitchenTests
     }
 
     [Fact]
+    public void ASideMapIsFoughtInsideTheCampaign()
+    {
+        var opening = WithBet("ironwake_keep").BeginQuest(ColdKitchen(), "bet_kitchen", Allies, Content);
+
+        Assert.True(opening.SideMap);
+        Assert.Null(opening.CampaignMap);
+        Assert.True(opening.InCampaign);
+    }
+
+    [Fact]
     public void BetsRequestIsNotOfferedBeforeTheCampAfterMapEight()
     {
         Assert.DoesNotContain(WithBet("brackwater_cut").QuestsOffered(Content), q => q.Id == "bet_kitchen");

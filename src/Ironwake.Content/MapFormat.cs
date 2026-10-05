@@ -145,9 +145,9 @@ public static class MapFormat
             sb.Append("woken: ").Append(woken).Append('\n');
         }
 
-        if (map.Carry is { } carry)
+        if (map.CarryRider is { } carry)
         {
-            sb.Append("carry: ").Append(DrakeCarry.Word(carry.Setting)).Append(' ').Append(carry.Rider).Append('\n');
+            sb.Append("carry: ").Append(carry).Append('\n');
         }
 
         if (map.BreathRider is { } breath)
@@ -419,7 +419,7 @@ public static class MapFormat
             map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, WokenBearer = woken, Chests = chests, Messenger = ParseMessenger(header, width, height), OrdersEnabled = orders, EffectiveBows = effectiveBows, DashEnabled = dash, OneAnswerEnabled = oneAnswer };
             ValidateMessenger(map, header);
             Validate(map);
-            map = map with { Carry = ParseCarry(header, map), BreathRider = ParseBreath(header, map) };
+            map = map with { CarryRider = ParseCarry(header, map), BreathRider = ParseBreath(header, map) };
             map = map with { Deploy = ParseDeploy(header, map), Oathbound = ParseGroups(header, map, "oathbound"), PairRuleGroups = ParseGroups(header, map, "pair_rule") };
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
@@ -907,10 +907,11 @@ public static class MapFormat
         }
 
         /// <summary>
-        /// The <c>carry:</c> header (issue 805, samples): <c>carry: &lt;waited|free|brace&gt; &lt;rider&gt;</c>,
-        /// the rider placed by a <c>P recruit:</c> line.
+        /// The <c>carry:</c> header (issue 805, samples): <c>carry: &lt;rider&gt;</c>, the rider placed by a
+        /// <c>P recruit:</c> line. The settings <c>waited</c> and <c>brace</c> were dropped and <c>free</c>
+        /// is the only one (issue 1094), so a setting word is refused.
         /// </summary>
-        private CarryRule? ParseCarry(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        private string? ParseCarry(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
         {
             if (!header.TryGetValue("carry", out var entry))
             {
@@ -918,17 +919,22 @@ public static class MapFormat
             }
 
             var words = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            if (words.Length != 2 || DrakeCarry.Parse(words[0]) is not { } setting)
+            if (words.Length == 2 && words[0] is "waited" or "free" or "brace")
             {
-                throw ErrorAt(entry.Line, $"carry needs '<waited|free|brace> <rider>', got '{entry.Value}'");
+                throw ErrorAt(entry.Line, $"carry takes only '<rider>' now; the setting '{words[0]}' was dropped and every carry lands free (issue 1094), got '{entry.Value}'");
             }
 
-            if (!map.Placements.Any(p => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit } n && n.RecruitId == words[1]))
+            if (words.Length != 1)
             {
-                throw ErrorAt(entry.Line, $"carry names '{words[1]}' but no 'P recruit:{words[1]}' line places them");
+                throw ErrorAt(entry.Line, $"carry needs '<rider>', got '{entry.Value}'");
             }
 
-            return new CarryRule(setting, words[1]);
+            if (!map.Placements.Any(p => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit } n && n.RecruitId == words[0]))
+            {
+                throw ErrorAt(entry.Line, $"carry names '{words[0]}' but no 'P recruit:{words[0]}' line places them");
+            }
+
+            return words[0];
         }
 
         /// <summary>

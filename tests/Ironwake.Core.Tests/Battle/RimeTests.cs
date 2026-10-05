@@ -125,6 +125,23 @@ public class RimeTests
         Assert.Equal(RejectionReason.CannotBreathe, unbroken.Refused(new Breathe("rook", East)).Reason);
     }
 
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void TheBreathIsOpenOnEveryCampaignMapWithoutAHeader(bool sideMap)
+    {
+        var start = Start(River.Replace("breath: rook\n", ""));
+        var rook = start.Find("rook")!;
+        var unbroken = start.WithUnit(rook with { Unit = rook.Unit with { Drake = new DrakeState(DrakeStage.Unbroken, 2) } });
+        var campaign = sideMap ? unbroken with { SideMap = true } : unbroken with { CampaignMap = 4 };
+
+        var result = campaign.Try(new Breathe("rook", East));
+
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.NotNull(Rime.Line(campaign));
+        Assert.Null(Rime.Line(unbroken));
+    }
+
     [Fact]
     public void AGrownDrakeCannotBreathe()
     {

@@ -1443,7 +1443,7 @@ public sealed record CampaignRecord(
             throw new ArgumentException($"{quest.MemberId} and {string.Join(", ", allyIds)} must all be on the roster");
         }
 
-        return BattleState.From(played, content, ValueList<Unit>.From(party!), QuestSeed(questId, content), scheme) with { Rapport = Rapport };
+        return BattleState.From(played, content, ValueList<Unit>.From(party!), QuestSeed(questId, content), scheme) with { Rapport = Rapport, SideMap = true };
     }
 
     /// <summary>

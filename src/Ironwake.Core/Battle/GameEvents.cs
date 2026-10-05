@@ -80,10 +80,10 @@ public sealed record Breathed(string UnitId, Coord From, ValueList<Coord> Line, 
 /// <summary>
 /// A rider's drake carried an ally (issue 805, experiment): the rider flew from <paramref name="From"/> to
 /// <paramref name="To"/> and set <paramref name="AllyId"/> down from <paramref name="AllyFrom"/> on
-/// <paramref name="SetDown"/>, which lands as <paramref name="Setting"/> says. The rider's own path is its
+/// <paramref name="SetDown"/>, where it lands free to move and act (issue 1094). The rider's own path is its
 /// <see cref="UnitMoved"/>, emitted just before.
 /// </summary>
-public sealed record Carried(string UnitId, string AllyId, Coord From, Coord To, Coord AllyFrom, Coord SetDown, CarrySetting Setting) : GameEvent;
+public sealed record Carried(string UnitId, string AllyId, Coord From, Coord To, Coord AllyFrom, Coord SetDown) : GameEvent;
 
 /// <summary>
 /// A unit dashed (DESIGN.md 13.27, experiment) and is winded until its side's next phase: strikes
