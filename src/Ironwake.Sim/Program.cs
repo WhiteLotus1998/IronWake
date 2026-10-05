@@ -264,7 +264,9 @@ public static class Program
             var difficulty = Array.IndexOf(args, "--difficulty") is var d and >= 0 && d + 1 < args.Length ? args[d + 1] : CampaignRecord.NormalDifficulty;
             var permadeath = !(Array.IndexOf(args, "--permadeath") is var pd and >= 0 && pd + 1 < args.Length && args[pd + 1] == "off");
             var variant = Array.IndexOf(args, "--variant") is var v and >= 0 && v + 1 < args.Length && int.TryParse(args[v + 1], out var parsedVariant) ? parsedVariant : 0;
-            return CampaignScriptRun(scriptSeed, last, write, difficulty, permadeath, variant);
+            var quest = Array.IndexOf(args, "--quest") is var q and >= 0 && q + 1 < args.Length ? args[q + 1] : null;
+            (string, string)? until = Array.IndexOf(args, "--until-certify") is var u and >= 0 && u + 2 < args.Length ? (args[u + 1], args[u + 2]) : null;
+            return CampaignScriptRun(scriptSeed, last, write, difficulty, permadeath, variant, quest, until);
         }
 
         if (args.Length > 2 && args[0] == "--trace" && ulong.TryParse(args[2], out var traceSeed))
@@ -288,7 +290,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -731,7 +733,7 @@ public static class Program
     /// to <paramref name="last"/> naming the map it was lost on or the win and the kinds it never
     /// took, and with <paramref name="write"/> the first seed's script written there.
     /// </summary>
-    public static int CampaignScriptRun(ulong first, ulong last, string? write, string difficulty, bool permadeath, int variant)
+    public static int CampaignScriptRun(ulong first, ulong last, string? write, string difficulty, bool permadeath, int variant, string? quest = null, (string Unit, string Class)? until = null)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -743,9 +745,25 @@ public static class Program
         var content = ContentLoader.Load(contentDir);
         for (var seed = first; seed <= last; seed++)
         {
-            var result = CampaignScript.Write(content, contentDir, seed, HandPlays(contentDir), difficulty, permadeath, variant);
+            var result = CampaignScript.Write(content, contentDir, seed, HandPlays(contentDir), difficulty, permadeath, variant, quest, until);
+            if (until is { } door && result.LostOn is null && result.Text.Contains("# stopped at", StringComparison.Ordinal))
+            {
+                Console.WriteLine($"seed {seed}: stopped after {result.Maps} maps, certify {door.Unit} {door.Class} accepted");
+                if (write is not null && seed == first)
+                {
+                    File.WriteAllText(write, result.Text);
+                }
+
+                continue;
+            }
+
             var missed = CampaignScript.Kinds.Where(k => !result.Touched.Contains(k)).ToList();
             Console.WriteLine($"seed {seed}: {(result.LostOn is { } lost ? $"lost on map {lost}" : "won")}, {result.Maps} maps, missed {(missed.Count == 0 ? "none" : string.Join(", ", missed))}");
+            if (until is not null && result.Text.TrimEnd('\n').Split('\n')[^1] is { } never && never.StartsWith("# never reached", StringComparison.Ordinal))
+            {
+                Console.WriteLine("  " + never[2..]);
+            }
+
             if (write is not null && seed == first)
             {
                 File.WriteAllText(write, result.Text);

@@ -36,8 +36,12 @@ public static class CampaignScript
     /// when <c>variant / 3</c> is odd no side map is taken, and when <c>variant / 6</c> is odd the camp
     /// before the last map benches the wounded, repairs every weapon and buys each member the dearest
     /// stocked one it can wield (issue 81: with the field before it, no other camp wins the keep).
+    /// <paramref name="quest"/>, when given, is taken at every camp that offers it, before and beside the
+    /// first quest the camps take anyway. <paramref name="until"/>, when given, ends the script at the
+    /// first camp where that unit's certify into that class would be accepted, before any action there
+    /// (issue 1100: a save at the camp where Rook first reaches the Drover's door, the door unpicked).
     /// </summary>
-    public static Result Write(GameContent content, string contentDir, ulong seed, IReadOnlyDictionary<string, string>? handPlays = null, string difficulty = CampaignRecord.NormalDifficulty, bool permadeath = true, int variant = 0)
+    public static Result Write(GameContent content, string contentDir, ulong seed, IReadOnlyDictionary<string, string>? handPlays = null, string difficulty = CampaignRecord.NormalDifficulty, bool permadeath = true, int variant = 0, string? quest = null, (string Unit, string Class)? until = null)
     {
         var client = new CampaignClient(content, contentDir, CampaignRecord.Start(content, seed, difficulty, permadeath));
         var lines = new List<string>
@@ -52,9 +56,15 @@ public static class CampaignScript
         {
             var mapId = client.Record.NextMap(content).MapId;
             var hand = handPlays is not null && handPlays.TryGetValue(mapId, out var played) ? played : null;
+            if (until is { } door && client.Record.Certify(door.Unit, door.Class, content).Accepted)
+            {
+                lines.Add($"# stopped at the camp before {mapId}: certify {door.Unit} {door.Class} would be accepted");
+                return new Result(string.Concat(lines.Select(l => l + "\n")), touched, null, maps);
+            }
+
             if (hand is null)
             {
-                Camp(client, content, contentDir, lines, touched, variant);
+                Camp(client, content, contentDir, lines, touched, variant, quest);
             }
 
             if (client.Record.Pick is null && client.Record.NextMap(content).Branch.Count > 0)
@@ -85,6 +95,11 @@ public static class CampaignScript
                 // Issue 795: a company thinned below a map's slots throws at march; the run ends there.
                 lines.Add("march");
                 lines.Add("# march threw: " + e.Message);
+                if (until is { } thrown)
+                {
+                    lines.Add($"# never reached: certify {thrown.Unit} {thrown.Class}: {client.Record.Certify(thrown.Unit, thrown.Class, content).Text.Replace('\n', ' ').Trim()}");
+                }
+
                 return new Result(string.Concat(lines.Select(l => l + "\n")), touched, maps + 1, maps + 1);
             }
 
@@ -100,10 +115,16 @@ public static class CampaignScript
         }
 
         int? lostOn = client.Record.IsFinished(content) ? null : maps;
+        if (until is { } never)
+        {
+            var refusal = client.Record.Certify(never.Unit, never.Class, content).Text.Replace('\n', ' ').Trim();
+            lines.Add($"# never reached: certify {never.Unit} {never.Class}: {refusal}");
+        }
+
         return new Result(string.Concat(lines.Select(l => l + "\n")), touched, lostOn, maps);
     }
 
-    private static void Camp(CampaignClient client, GameContent content, string contentDir, List<string> lines, HashSet<string> touched, int variant)
+    private static void Camp(CampaignClient client, GameContent content, string contentDir, List<string> lines, HashSet<string> touched, int variant, string? preferred = null)
     {
         bool Take(string kind, string line, Func<bool> act)
         {
@@ -245,11 +266,11 @@ public static class CampaignScript
             }
         }
 
-        foreach (var quest in client.Record.QuestsOffered(content))
+        foreach (var quest in client.Record.QuestsOffered(content).OrderBy(q => q.Id == preferred ? 0 : 1).ToList())
         {
-            if (touched.Contains("quest") || (variant / 3) % 2 == 1)
+            if (quest.Id != preferred && (touched.Contains("quest") || (variant / 3) % 2 == 1))
             {
-                break;
+                continue;
             }
 
             var map = QuestMap(client, contentDir, quest);
@@ -292,12 +313,19 @@ public static class CampaignScript
                 continue;
             }
 
+            // Issue 1093: a hand play's bare `end` or swing into a lethal is written with the `!` the console asks for.
+            var written = line.Trim();
+            if (Program.Script(battle.State, battle.Content, played).EndsWith(" !", StringComparison.Ordinal) && !written.EndsWith('!'))
+            {
+                written += " !";
+            }
+
             if (!battle.Submit(played))
             {
                 break;
             }
 
-            lines.Add(line.Trim());
+            lines.Add(written);
             battle.Continue();
         }
 
