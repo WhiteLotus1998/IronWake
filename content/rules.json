@@ -33,7 +33,8 @@
       "enemyLevelOffset": 1,
       "recallOffset": -1,
       "unlockedBy": "normal",
-      "tier": 1
+      "tier": 1,
+      "lethalConfirm": false
     }
   }
 }

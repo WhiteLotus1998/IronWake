@@ -25,7 +25,7 @@ public sealed record RecallRow(int? State, string Text);
 /// </summary>
 public sealed class PlaySession
 {
-    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--candidate id] [--level N] [--log file]";
+    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--confirm-lethal on|off] [--candidate id] [--level N] [--log file]";
 
     /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
     public const int StrictStop = 3;
@@ -57,7 +57,7 @@ public sealed class PlaySession
           fallback <unit> <x,y|stay>  After a fall back order, an ally who had acted moves up to 2, if it wakes no one
           cover <unit> <ally>      On a cover map, take the first strike aimed at the ally beside it, as the action
           watch <unit>             On an overwatch map, strike the first foe to end a move in the unit's ring, as the action
-          end [!]                  End the player phase; the enemy phase plays out, each enemy attack printing its forecast first. Refused while a unit is lethal if all land; end ! ends anyway
+          end [!]                  End the player phase; the enemy phase plays out, each enemy attack printing its forecast first. With --confirm-lethal on (the default; never on Tactician), refused while a unit is lethal if all land; end ! ends anyway
           recall <n>               Rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              Every state recall can return to, the command that made it, and what a rewind there gives back
           recall                   List the state each player turn started at, and the charges left
@@ -176,6 +176,13 @@ public sealed class PlaySession
 
     private readonly bool _campaign;
 
+    /// <summary>
+    /// Whether <c>end</c> is refused while a unit is lethal if all land (issue 1120, DECISIONS/0260):
+    /// the player's setting under the difficulty in play (<see cref="Difficulty.AsksOnLethal"/>).
+    /// When false, <c>end</c> prints the lethal lines and ends the phase.
+    /// </summary>
+    internal bool ConfirmLethal { get; init; } = true;
+
     /// <summary>The board as it stands.</summary>
     internal BattleState State => _state;
 
@@ -205,6 +212,7 @@ public sealed class PlaySession
         var strict = false;
         var protocol = false;
         var omniscient = false;
+        var confirmLethal = true;
         var contentDir = "content";
         var scheme = RollScheme.TwoRollAverage;
         string? candidate = null;
@@ -230,6 +238,10 @@ public sealed class PlaySession
                     break;
                 case "--omniscient":
                     omniscient = true;
+                    break;
+                case "--confirm-lethal" when OnOff(value) is { } lethalSetting:
+                    confirmLethal = lethalSetting;
+                    i++;
                     break;
                 case "--content" when value is not null:
                     contentDir = value;
@@ -348,10 +360,10 @@ public sealed class PlaySession
 
         if (protocol)
         {
-            return new ProtocolSession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, omniscient).Run(input);
+            return new ProtocolSession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, omniscient) { ConfirmLethal = confirmLethal }.Run(input);
         }
 
-        var session = new PlaySession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, scripted: script is not null);
+        var session = new PlaySession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, scripted: script is not null) { ConfirmLethal = confirmLethal };
         var code = session.Play(input, strict, seed);
         if (log is not null)
         {
@@ -745,7 +757,7 @@ public sealed class PlaySession
                     : new List<ExposureEntry>();
                 var endNames = UnitNames.Of(_state, _content);
                 var lethalNow = Queries.Lethal(_state, _content);
-                if (lethalNow.Count > 0 && !swingAnyway && _state.Phase == Side.Player && !_state.Outcome.IsOver)
+                if (lethalNow.Count > 0 && ConfirmLethal && !swingAnyway && _state.Phase == Side.Player && !_state.Outcome.IsOver)
                 {
                     foreach (var lethal in lethalNow)
                     {
@@ -1672,6 +1684,14 @@ public sealed class PlaySession
     /// </summary>
     public static string LethalLine(LethalThreat lethal, UnitNames names) =>
         $"Lethal if all land: {names[lethal.Unit.Id]} ({string.Join(", ", lethal.Strikers.Select(s => $"{names[s.Enemy.Id]} for {s.Damage}"))}, against {lethal.Unit.Hp} hp)";
+
+    /// <summary>The value of an <c>on|off</c> flag (issue 1120), or null when it is neither.</summary>
+    internal static bool? OnOff(string? value) => value switch
+    {
+        "on" => true,
+        "off" => false,
+        _ => null,
+    };
 
     /// <summary>
     /// The refusal of an <c>end</c> while a unit is lethal if all land (issue 1093): the warned death is

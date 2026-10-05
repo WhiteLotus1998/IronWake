@@ -130,6 +130,8 @@ public static class Screens
             "Enemy phase speed: " + options.Speed,
             "Battle scenes: " + options.Scenes switch { "all" => "all", "map" => "map only", _ => "key moments" },
             "Confirm end turn while units are unmoved: " + OnOff(options.ConfirmEndTurn),
+            "Confirm end turn while a unit is lethal: " + OnOff(options.ConfirmLethal)
+                + (record is not null && content.Difficulties.TryGetValue(record.Difficulty, out var played) && !played.LethalConfirm ? $" (never asks on {played.DisplayName})" : ""),
             "Show enemy reach on hover: " + OnOff(options.ReachOnHover),
             $"UI scale: {options.UiScale}",
             $"Sound: {OnOff(options.Sound)}, volume {options.Volume}",

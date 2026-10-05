@@ -13,3 +13,11 @@ Lotus questioned two changes from 2026-10-05. On the wind (13.28, 0256), he said
 3. **Open, not ruled:** whether the setting defaults on or off. The lean, until Lotus says otherwise, is on, which is today's behavior. Also open is whether the attack confirm (`attack ... !`, #975, 0241) follows the same option. The ruling did not name it, so it stands as is. #1114's slot guard is not affected: it catches a weapon the player didn't name, not a misjudgment.
 
 Supersedes 0253's "It asks" for Tactician, and makes it optional on Recruit and Captain.
+
+## Built (#1120)
+
+- A difficulty carries `lethalConfirm` in `rules.json` (default true, false on Tactician); `Difficulty.AsksOnLethal(setting)` is the one rule, so nothing asks for Tactician by id.
+- The setting is the profile line `confirm-lethal: on|off` (on by default, the lean), an Options row beside `confirm-end-turn`, which is unchanged. The Options screen says "never asks on Tactician" on a Tactician campaign.
+- The console: `play` and `campaign` take `--confirm-lethal on|off`; `campaign` otherwise reads the profile. `end !` parses everywhere. The protocol answers `lethalUnconfirmed` only when the confirm asks.
+- The client's end-turn confirm now also asks on a lethal alone when the confirm asks, so the row does what it says on the screen.
+

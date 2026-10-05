@@ -7,7 +7,8 @@ namespace Ironwake.Content;
 /// as one <c>key: value</c> line each, and read by any renderer: the enemy phase's speed
 /// (<c>1x</c>, <c>2x</c>, <c>5x</c>, the top bar's three, or <c>instant</c>, which still logs every
 /// act), the battle scenes (<c>key</c> moments, <c>all</c>, <c>map</c> only), whether ending a turn
-/// with units unmoved asks first, whether hovering an enemy shows its reach, the UI scale (100, 125
+/// with units unmoved asks first, whether ending it while a unit is lethal if all land asks first
+/// (issue 1120; the difficulty may forbid the ask, <see cref="Ironwake.Core.Difficulty.LethalConfirm"/>), whether hovering an enemy shows its reach, the UI scale (100, 125
 /// or 150), and the sound with its volume (0 to 100). None of them changes a rule, so none is on
 /// a campaign record.
 /// </summary>
@@ -23,6 +24,8 @@ public sealed record Options
 
     public bool ConfirmEndTurn { get; init; } = true;
 
+    public bool ConfirmLethal { get; init; } = true;
+
     public bool ReachOnHover { get; init; } = true;
 
     public int UiScale { get; init; } = 100;
@@ -37,6 +40,7 @@ public sealed record Options
         "speed: " + Speed,
         "scenes: " + Scenes,
         "confirm-end-turn: " + OnOff(ConfirmEndTurn),
+        "confirm-lethal: " + OnOff(ConfirmLethal),
         "reach-on-hover: " + OnOff(ReachOnHover),
         "ui-scale: " + UiScale.ToString(CultureInfo.InvariantCulture),
         "sound: " + OnOff(Sound),
@@ -94,6 +98,8 @@ public sealed record Options
                 return SceneValues.Contains(value) ? (options with { Scenes = value }, null) : (options, "must be one of " + string.Join(", ", SceneValues));
             case "confirm-end-turn":
                 return ParseOnOff(value) is { } confirm ? (options with { ConfirmEndTurn = confirm }, null) : (options, "must be on or off");
+            case "confirm-lethal":
+                return ParseOnOff(value) is { } lethal ? (options with { ConfirmLethal = lethal }, null) : (options, "must be on or off");
             case "reach-on-hover":
                 return ParseOnOff(value) is { } reach ? (options with { ReachOnHover = reach }, null) : (options, "must be on or off");
             case "ui-scale":
@@ -107,7 +113,7 @@ public sealed record Options
                     ? (options with { Volume = volume }, null)
                     : (options, "must be 0 to 100");
             default:
-                return (options, "is not an option; expected speed, scenes, confirm-end-turn, reach-on-hover, ui-scale, sound or volume");
+                return (options, "is not an option; expected speed, scenes, confirm-end-turn, confirm-lethal, reach-on-hover, ui-scale, sound or volume");
         }
     }
 

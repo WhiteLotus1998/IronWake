@@ -8,7 +8,9 @@ namespace Ironwake.Core.Tests.Content;
 /// lethal lines and ends nothing, in the attack guard's shape (issue 975); <c>end !</c> prints the
 /// same lines and ends the phase, so bait stays legal. Only the lethal refuses: the escape count and
 /// the wind line still print and the phase still ends. The protocol's <c>end</c> asks the same, and
-/// <c>"anyway": true</c> answers it.
+/// <c>"anyway": true</c> answers it. Issue 1120 (DECISIONS/0260): the ask is the player's
+/// <c>confirm-lethal</c> setting on Recruit and Captain, and never on Tactician; when it does not
+/// ask, <c>end</c> prints the lethal lines and ends the phase.
 /// </summary>
 [Collection("console")]
 public sealed class EndAsksTests
@@ -190,6 +192,112 @@ public sealed class EndAsksTests
             Assert.Contains("lethal if all land: Alder Fenn, Wren; send ", refused);
             Assert.StartsWith("{\"ok\":true,", ended);
             Assert.Contains("\"lethal\":[{\"unit\":\"captain\",", ended);
+        }
+        finally
+        {
+            File.Delete(map);
+        }
+    }
+
+    [Fact]
+    public void TheLethalConfirmAsksWhenTheSettingIsOn()
+    {
+        var output = Play(Ringed, "end\n", "--confirm-lethal", "on");
+
+        Assert.Contains("ERROR: Lethal if all land: Alder Fenn, Wren; add ! to end anyway: end !\n", output);
+        Assert.DoesNotContain("-- Player phase ends", output);
+    }
+
+    [Fact]
+    public void WithTheLethalConfirmOffEndPrintsTheLethalLinesAndEndsThePhase()
+    {
+        var output = Play(Ringed, "end\nend !\n", "--confirm-lethal", "off");
+
+        Assert.Contains("> end\nLethal if all land: Alder Fenn (", output);
+        Assert.Contains("\nLethal if all land: Wren (", output);
+        Assert.Contains("\n-- Player phase ends, turn 1 --\n", output);
+        Assert.DoesNotContain("ERROR: Lethal", output);
+    }
+
+    [Fact]
+    public void AConfirmLethalValueOtherThanOnOrOffIsAUsageError()
+    {
+        var output = Play(Ringed, "end\n", "--confirm-lethal", "maybe");
+
+        Assert.Contains("ERROR: unexpected argument '--confirm-lethal'", output);
+    }
+
+    [Fact]
+    public void TacticianNeverAsksOnALethalWhateverTheSetting()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+
+        Assert.False(content.Difficulty("tactician").AsksOnLethal(true));
+        Assert.False(content.Difficulty("tactician").AsksOnLethal(false));
+        Assert.True(content.Difficulty(Difficulty.NormalId).AsksOnLethal(true));
+        Assert.False(content.Difficulty(Difficulty.NormalId).AsksOnLethal(false));
+        Assert.True(content.Difficulty("recruit").AsksOnLethal(true));
+        Assert.False(content.Difficulty("recruit").AsksOnLethal(false));
+    }
+
+    [Fact]
+    public void ACampaignOnTacticianEndsOnALethalWithTheSettingOn()
+    {
+        var on = CampaignAsks("normal", setting: true);
+        var tactician = CampaignAsks("tactician", setting: true);
+        var off = CampaignAsks("normal", setting: false);
+
+        Assert.True(on);
+        Assert.False(tactician);
+        Assert.False(off);
+    }
+
+    /// <summary>Whether a campaign battle begun on <paramref name="difficulty"/> with the setting asks, read from the session's battle.</summary>
+    private static bool CampaignAsks(string difficulty, bool setting)
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        return CampaignSession.LethalConfirmFor(content, CampaignRecord.Start(content, 3, difficulty), setting);
+    }
+
+    [Fact]
+    public void TheProtocolsEndWithTheLethalConfirmOffEndsAndCarriesTheLethal()
+    {
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-endasks-" + Guid.NewGuid().ToString("N") + ".map");
+        File.WriteAllText(map, Ringed);
+        try
+        {
+            var content = ContentLoader.Load(Fixture.RealContentDirectory());
+            var state = BattleState.From(MapFiles.Load(map, content), content, content.Cast, 1);
+            var session = new ProtocolSession(content, state, new StringWriter()) { ConfirmLethal = false };
+
+            var ended = session.Answer("""{"type":"end"}""");
+
+            Assert.StartsWith("{\"ok\":true,", ended);
+            Assert.Contains("\"lethal\":[{\"unit\":\"captain\",", ended);
+        }
+        finally
+        {
+            File.Delete(map);
+        }
+    }
+
+    [Fact]
+    public void TheClientsConfirmAsksOnALethalAloneOnlyWhenTheLethalConfirmAsks()
+    {
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-endasks-" + Guid.NewGuid().ToString("N") + ".map");
+        File.WriteAllText(map, Ringed);
+        try
+        {
+            var content = ContentLoader.Load(Fixture.RealContentDirectory());
+            var state = BattleState.From(MapFiles.Load(map, content), content, content.Cast, 1);
+
+            var asks = Ironwake.Client.EndTurnConfirm.Lines(state, content, confirmOn: false, lethalOn: true);
+            var quiet = Ironwake.Client.EndTurnConfirm.Lines(state, content, confirmOn: false, lethalOn: false);
+
+            Assert.NotNull(asks);
+            Assert.StartsWith("Lethal if all land: Alder Fenn (", asks![0]);
+            Assert.Equal(Ironwake.Client.EndTurnConfirm.Answer, asks[^1]);
+            Assert.Null(quiet);
         }
         finally
         {

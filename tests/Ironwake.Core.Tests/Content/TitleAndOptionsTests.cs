@@ -23,6 +23,7 @@ public class TitleAndOptionsTests
     [InlineData("scenes", "all")]
     [InlineData("scenes", "map")]
     [InlineData("confirm-end-turn", "off")]
+    [InlineData("confirm-lethal", "off")]
     [InlineData("reach-on-hover", "off")]
     [InlineData("ui-scale", "150")]
     [InlineData("sound", "off")]
@@ -246,13 +247,23 @@ public class TitleAndOptionsTests
                 "Enemy phase speed: 1x",
                 "Battle scenes: map only",
                 "Confirm end turn while units are unmoved: on",
+                "Confirm end turn while a unit is lethal: on",
                 "Show enemy reach on hover: on",
                 "UI scale: 125",
                 "Sound: on, volume 80",
                 "This campaign: difficulty Captain, permadeath on (lowered only at a camp)",
             },
             lines);
-        Assert.Equal(6, Screens.OptionsLines(new Options(), null, Content).Count);
+        Assert.Equal(7, Screens.OptionsLines(new Options(), null, Content).Count);
+    }
+
+    /// <summary>Issue 1120: on Tactician the lethal row says the confirm never asks there, whatever the setting.</summary>
+    [Fact]
+    public void TheOptionsScreenSaysTheLethalConfirmNeverAsksOnTactician()
+    {
+        var lines = Screens.OptionsLines(new Options(), CampaignRecord.Start(Content, 3, "tactician"), Content);
+
+        Assert.Contains("Confirm end turn while a unit is lethal: on (never asks on Tactician)", lines);
     }
 
     private static string Run(string script, params string[] extra)

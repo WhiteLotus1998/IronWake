@@ -713,6 +713,11 @@ public static class ContentSerializer
                         writer.WriteNumber("tier", difficulty.Tier);
                     }
 
+                    if (!difficulty.LethalConfirm)
+                    {
+                        writer.WriteBoolean("lethalConfirm", false);
+                    }
+
                     writer.WriteEndObject();
                 }
 
