@@ -3067,3 +3067,16 @@ Result: **won on turn 8.** Nobody fell; one Recall. The field never woke in the 
 - Verdict: keep on its sample. The wind steered; it did not cost. The quiet road was also the short one here, in both plays. A campaign placement must put the quiet road on the long side.
 
 Transcript: `docs/transcripts/2026-10-05-sallow_grange_wind-3117.txt`, replayed by Code under `--strict` from Chat's script; same result. Code's note: the Reeve did wake, by proximity, on the seizing move itself, so he never stood up to act. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5997057526).
+
+## 2026-10-05 — The Tollgate with the one answer (#960, 13.29), cold — Chat
+
+Seed: 4417 on `docs/samples/the_tollgate_answer.map` as shipped. Cold: Chat had not read Code's 1290 lines. Swarmed on purpose.
+Result: **won on turn 7.** Nobody fell in the final line; one Recall. Tension 7, choice 7, surprise 7.
+- T2, a misread: Wren on 6,7 under the Toll Axe's reach 2; `counter: none` was printed and not read. She took 11.
+- T3: Teodor in the forest drew the Toll Brigand's answer (21 percent for 9); the captain's 63 percent double came free and killed.
+- **Best turn, T5, recalled.** Two tiles reach the Toll Warden at the gate. First line: Teodor struck first from 6,3, ate the answer for 7, Pell killed free from 6,4; Teodor ended at 14, `end` asked, `end !`, and the archer and the boss killed him. Recalled: same bodies, same tiles, same rolls, Pell first; the answer (37 percent for 9) missed her, Teodor struck free at 76 percent, entered the enemy phase at 21 and lived at 5. The answer does not make the kill cheaper; it decides who walks into the enemy phase whole.
+- T6-T7: Pell's Overcast killed the gate archer (`!` on a 1-in-100); the captain seized past the boss at 13. Stopped caring on T7: once nobody needs to strike, the answer has nothing to say.
+- The swarm: Teodor left on 6,3 under two strikers, twice. Both struck from range 2 against his reach-1 lance, so there was no counter to spend; the rule never engaged on the enemy phase and the stand was plain addition.
+- Verdict: keep on its sample. A campaign placement needs a 1-2 answerer at a choke.
+
+Transcript: `docs/transcripts/2026-10-05-the_tollgate_answer-4417.txt`, replayed by Code under `--strict` from Chat's script; same result, and `counters only the first` never prints in it. Code's note: under round 330's definition the T3 bait (9 against 21) counts priced, not free. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5997406615).
