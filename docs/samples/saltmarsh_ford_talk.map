@@ -1,0 +1,34 @@
+name: Saltmarsh Ford
+size: 18x10
+win: rout
+turn_limit: 18
+recall: 3
+enemy_level: 2
+brace: on
+signatures: on
+effective_bows: on
+
+........^^....F...
+......^....nn.....
+..........n.......
+~~~~~~~=~~~~~~=~~~
+.......^^.........
+........^^........
+......^^..........
+..................
+..................
+..................
+
+units:
+P captain 10,8
+P recruit 9,8
+P recruit 11,8
+P recruit 10,9
+E brigand 7,2 group:ford behavior:aggressive
+E soldier 6,1 group:ford behavior:aggressive
+E archer 14,1 group:fort behavior:guard
+E soldier 13,0 group:fort behavior:guard
+E wingrider 16,2 group:fort behavior:guard
+B bandit_leader 14,0 group:fort behavior:boss
+E rider 0,6 group:marsh behavior:guard
+E rider 1,6 group:marsh behavior:guard
