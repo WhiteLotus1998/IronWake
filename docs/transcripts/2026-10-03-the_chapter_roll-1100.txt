@@ -1259,7 +1259,7 @@ that, the drake's number, and Rook's name on the line below. "Your keep
 bought a seat with us." She folds the receipt into her glove and leaves
 the roll open.
 
-(The Drover is open to Rook at her second promotion: the other door
-above the Skyrider.)
+(The Drake Warden is open to Rook at her second promotion: the other
+door above the Skyrider.)
 
 Campaign stopped before Brackwater Cut: the script ended on the screen

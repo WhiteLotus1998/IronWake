@@ -39,7 +39,7 @@ public static class CampaignScript
     /// <paramref name="quest"/>, when given, is taken at every camp that offers it, before and beside the
     /// first quest the camps take anyway. <paramref name="until"/>, when given, ends the script at the
     /// first camp where that unit's certify into that class would be accepted, before any action there
-    /// (issue 1100: a save at the camp where Rook first reaches the Drover's door, the door unpicked).
+    /// (issue 1100: a save at the camp where Rook first reaches the Drake Warden's door, the door unpicked).
     /// </summary>
     public static Result Write(GameContent content, string contentDir, ulong seed, IReadOnlyDictionary<string, string>? handPlays = null, string difficulty = CampaignRecord.NormalDifficulty, bool permadeath = true, int variant = 0, string? quest = null, (string Unit, string Class)? until = null)
     {

@@ -5,7 +5,7 @@ namespace Ironwake.Core;
 /// made it, and its thaw clock, counted as the chill's is (<see cref="Frost.AtPhaseChange"/>):
 /// <c>1</c> from the breath until that side's next phase begins, <c>2</c> through that phase, and
 /// <c>3</c> once it is due but a unit stands on it. <see cref="Extra"/> is the full rounds it still holds
-/// past that (issue 872, the Drover's <see cref="DeepRimeEffect"/>): a due tile with one left goes back to
+/// past that (issue 872, the Drake Warden's <see cref="DeepRimeEffect"/>): a due tile with one left goes back to
 /// <c>1</c> instead of thawing.
 /// </summary>
 public sealed record RimeTile(Coord At, Side Side, int Clock)

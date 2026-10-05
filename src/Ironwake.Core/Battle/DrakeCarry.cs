@@ -7,7 +7,7 @@ namespace Ironwake.Core;
 /// nor acted and is not grounded, lifts an ally orthogonally beside it that has neither moved nor
 /// acted, flies to a tile its own Move reaches (read with the ally lifted off its tile), and sets the
 /// ally down on an empty tile orthogonally beside that one which the ally can stand on. It is the
-/// rider's whole turn, Move and action, and no Canto follows but the Drover's long carry (issue 872). The ally lands unmoved and free to
+/// rider's whole turn, Move and action, and no Canto follows but the Drake Warden's long carry (issue 872). The ally lands unmoved and free to
 /// move and act (the setting <c>free</c>, the keep round's, 0252), marked as shoved, so it does not
 /// exit on that tile this phase (issue 396). The carry is quiet: it makes no noise beyond where the two now stand. The enemy never
 /// carries, and the planner, <see cref="Resolver.Legal"/> and the Sim do not read it.

@@ -154,7 +154,7 @@ public class UniqueClassTests
     {
         var drover = Shipped.Class("drover");
 
-        Assert.Equal("Drover", drover.Name);
+        Assert.Equal("Drake Warden", drover.Name);
         Assert.Equal("skyrider", drover.Advances?.Id);
         Assert.Equal("rook", drover.Unique);
         Assert.Equal("rook_1", drover.UnlockedBy);
