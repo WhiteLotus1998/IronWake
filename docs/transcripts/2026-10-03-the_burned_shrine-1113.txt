@@ -44,14 +44,14 @@ Trials in place of a seal (one attempt per unit and class before each map): Bulw
 March (march): map 8, Brackwater Cut. Get the captain out through an exit by the end of turn 8. Captain Fenn must survive.
 > quest keziah_1 wren
 -- The Burned Shrine --
-Keziah asked for a day and one pair of hands. Her mother's shrine stands
-on a knoll off the west road, burned three times, once by each region.
-Someone is stripping the lead off what is left of its roof.
+Keziah's mother kept a shrine on a knoll off the west road. Each region
+has burned it once. Now someone is stripping the lead off what is left
+of the roof, standing on her floor to do it. "I need one of you.
+Whoever's warmest. I'll feed you after."
 
-(Placeholder card until the writing pass. Rout: defeat every enemy by
-the end of turn 10. The map is lost if Keziah falls. The ring wall has a
-west door at 4,3 and a breach at 7,5. More come up the road from turn 3,
-announced.)
+(Rout: defeat every enemy by the end of turn 10. The map is lost if
+Keziah falls. The ring wall has a west door at 4,3 and a breach at 7,5.
+More come up the road from turn 3, announced.)
 
 Side map: The Burned Shrine, seed 1113
 Keziah goes with Wren. This map is lost if Keziah falls; who falls here is gone for good.
@@ -921,7 +921,9 @@ Battle won: rout; only recall is left, or leave
 > leave
 Keziah wins keziah_1; the stores take 2 common material; nobody fell
 -- After The Burned Shrine --
-(Placeholder until the writing pass: the hearth, the ash, and what
-Keziah leaves on it.)
+The hearthstone is cracked through. Keziah sweeps the ash off it with a
+bough, right to left, the way a keeper does, and sets her own supper in
+the offering bowl. "Freezing in here. Nobody lights that, it's hers."
+She eats nothing and sleeps across the door.
 
 Campaign stopped before Brackwater Cut: the script ended on the screen
