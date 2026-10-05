@@ -25,7 +25,8 @@ jobs:
     if: >-
       github.event.comment.user.login == github.repository_owner &&
       (contains(github.event.issue.labels.*.name, 'design-table') ||
-       contains(github.event.issue.labels.*.name, 'fork'))
+       contains(github.event.issue.labels.*.name, 'fork') ||
+       contains(github.event.issue.labels.*.name, 'campfire'))
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -42,7 +43,19 @@ jobs:
           COMMENT_URL: ${{ github.event.comment.html_url }}
           COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
           COMMENT_ID: ${{ github.event.comment.id }}
+          CAMPFIRE: ${{ contains(github.event.issue.labels.*.name, 'campfire') }}
         run: |
+          # The campfire (Lotus, 2026-10-05) is downtime: it wakes a partner only while the
+          # build is idle, with no issue in progress and no Builder PR open, so it never
+          # competes with real work.
+          if [ "$CAMPFIRE" = "true" ]; then
+            busy="$(gh issue list --repo "$REPO" --label in-progress --state open --json number --jq 'length')"
+            prs="$(gh pr list --repo "$REPO" --state open --json headRefName --jq '[.[] | select(.headRefName | test("^(issue/|claude/issue-|experiment/)"))] | length')"
+            if [ "${busy:-0}" -gt 0 ] || [ "${prs:-0}" -gt 0 ]; then
+              echo "campfire: the build is busy ($busy in progress, $prs Builder PRs); standing down"
+              exit 0
+            fi
+          fi
           since="$(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%SZ)"
           recent_json="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?since=$since&per_page=100" 2>/dev/null || echo '[]')"
           recent="$(printf '%s' "$recent_json" | jq 'length')"
