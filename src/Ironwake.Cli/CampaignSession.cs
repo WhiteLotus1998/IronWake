@@ -683,13 +683,27 @@ public sealed class CampaignSession
         $"Promotion trial: {UnitNames.Of(record, content)[unitId]} plays as {content.Class(classId).Name} with {string.Join(", ", trial.Certification!.Loadout)}",
     };
 
-    /// <summary>The line after a won battle: the reason, the reward, the purse, and who fell on it, by name.</summary>
+    /// <summary>
+    /// The line after a won battle: the reason, the reward, the purse, and who fell on it, by name:
+    /// fallen for good, or with <see cref="CampaignRecord.Permadeath"/> off fell and came back wounded
+    /// (issue 1124, the side map's three cases), or nobody. A unit came back wounded if it began the
+    /// battle on the board, is not standing at its end, and is not among the record's fallen.
+    /// </summary>
     public static string WonLine(CampaignRecord before, CampaignRecord after, BattleState end, GameContent content)
     {
         var names = UnitNames.Of(after, content);
         var fallen = after.Fallen.Skip(before.Fallen.Count).Select(id => names[id]).ToList();
+        var opening = end.History.Count > 0 ? end.History[0] : end;
+        var deployed = opening.UnitsOf(Side.Player).Select(u => u.Id).ToHashSet(StringComparer.Ordinal);
+        var standing = end.Survivors().Select(u => u.Id).ToHashSet(StringComparer.Ordinal);
+        var wounded = after.Roster
+            .Where(u => deployed.Contains(u.Id) && !standing.Contains(u.Id) && !after.Fallen.Contains(u.Id))
+            .Select(u => names[u.Id])
+            .ToList();
         return $"{end.Map.Name} won: {end.Outcome.Reason}; reward {after.Purse - before.Purse}, the purse holds {after.Purse}"
-            + (fallen.Count > 0 ? $"; fallen: {string.Join(", ", fallen)}" : "; nobody fell");
+            + (fallen.Count > 0 ? $"; fallen: {string.Join(", ", fallen)}"
+                : wounded.Count > 0 ? $"; fell and came back wounded: {string.Join(", ", wounded)}"
+                : "; nobody fell");
     }
 
     /// <summary>The line a lost battle ends the campaign on, its reason naming units as the battle does.</summary>

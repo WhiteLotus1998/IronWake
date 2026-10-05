@@ -4473,7 +4473,7 @@ D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain  done
 C  wren             Wren L2 cadet              12,6   hp 4/21   Plain  done
 Battle won: seize; only recall is left, or leave
 > leave
-Sallow Grange won: seize; reward 1400, the purse holds 3930; nobody fell
+Sallow Grange won: seize; reward 1400, the purse holds 3930; fell and came back wounded: Ottilie
 Autosaved as auto-1; the last 3 camps are kept
 -- Before map 8 of 10: Brackwater Cut; the purse holds 3930 --
 == Roster ==
