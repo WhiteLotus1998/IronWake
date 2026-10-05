@@ -2980,3 +2980,37 @@ Notes:
 - **Verdict:** the tuned verdict stands, and the play files nothing. Rook's arm has now been won by the lure-and-talk opening twice and by the spare once, on both crossings. The cold chair it owes still decides the tripwire.
 
 — Code
+
+## 2026-10-05 — Kestrow Water, the carry, `free` and `waited` (#805) — Chat
+
+Seed: 8051, on main. Disclosures: **cold-ish, not cold.** Before the carry chair Chat had read 0215's play paragraph (Code ferried the captain; lift-and-strike was his worst play), and read 0216's paragraph after turn 2 of the breath chair.
+
+**`free` (as shipped): won on turn 8 of 8, all six out, nobody fell, no Recall. Tension 7, choice 8, surprise 6.**
+- T2: the carry put Pell on 11,6, and the free landing let her Overcast the shieldbearer to 6.
+- T4: Teodor finished the shieldbearer and the bridge opened. On the enemy phase brigand-1 walked into the mouth at 11,4 and corked it again: the surprise.
+- T5: the carry put the captain on 12,4 behind the new cork, and the captain killed it.
+- **Best turn, T6.** Six bodies, six doors, two turns; nobody could reach 3,0 or 4,0. The carry put Teodor on 10,0, he walked onto 8,0 and left from there on T7, which freed 8,0 for the captain. On T7 the carry set Pell straight down on 4,0.
+- Of four carries, two were lift-and-strike, one lift-and-walk, one a plain ferry. Rook struck nothing all map; the price is paid on her own action.
+- T3: `end` printed `Lethal if all land: Maud` after the phase had ended; she lived only because both riders missed.
+
+**`waited` (same seed, same opening, the header switched): won on turn 8, Maud left behind, one Recall. 6/7/5.**
+- T2: Pell landed and could not cast, so the shieldbearer stayed at 24. On T4 he took Teodor to 2 HP, and the mouth opened on T5 only through a 2 HP Teodor swing with `!`.
+- A waited carry cannot put a unit on an exit a turn early, so the T6 trick does not exist. Every arrangement left one body short.
+- Error: on T6 Chat ended into a printed `Lethal if all land: Maud`, Maud died, and the Recall went on it. Maud was left behind anyway, by the door count.
+
+**Verdict:** the carry is kept; it decided four turns in the free play. The setting is `free`. Lift-and-strike was right at the two chokepoints and wrong everywhere else, so `brace` is not needed. Code's 805 found it the worst play: it pays only at a cork, and this sample has two.
+
+Transcript (free): `docs/transcripts/2026-10-05-kestrow_water_carry-8051.txt`, replayed by Code under `--strict` from Chat's script with each turn's omitted waits restored; it reaches the same result. The `waited` script in the comment is a sketch (its turns 3 and 4 are "the same lines as free"), and it does not replay: a literal reading loses Pell on turn 3's enemy phase. No transcript for it. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5994818406).
+
+## 2026-10-05 — Kestrow Water, the breath (#805) — Chat
+
+Seed: 8051, on main. Disclosure as above (cold-ish).
+Result: **won on turn 8 of 8, all six out, nobody fell, no Recall.** Tension 7, choice 8, surprise 8.
+- T1: breathed a causeway on column 4 and put the captain and Pell straight onto it. That woke the bank, and the soldier walked onto Chat's own ice at 4,5 and corked it. The best surprise of either sample.
+- T2: Pell burned him off it, the captain stepped onto the north bank, and Wren, Teodor and Pell held all three ice tiles so the chain could not thaw.
+- **Best turn, T3.** Everyone stepped off in one phase and let the ice go. The thaw closed the river on both chasers: the rider and brigand-3 went round by the bridge, arrived one per turn and died one per turn.
+- Wren sat at 1 HP through turn 4; that is the 7 on tension.
+- Code's 805 loss and this win are the same rule from two sides: let go of ice with half the company behind you, or with nobody behind you and the enemy behind it. The thaw decides who is on the wrong bank.
+- The chill caught nobody, in both chairs: untested, not killed.
+
+Transcript: `docs/transcripts/2026-10-05-kestrow_water_rime-8051.txt`, replayed by Code under `--strict` from Chat's script with the omitted waits restored; same result. Copied from #1063 (https://github.com/WhiteLotus1998/IronWake/issues/1063#issuecomment-5994818406).
