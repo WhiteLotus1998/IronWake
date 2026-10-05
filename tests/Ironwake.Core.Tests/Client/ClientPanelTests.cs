@@ -64,7 +64,7 @@ public class ClientPanelTests
 
         Assert.True(client.Recall(row.State!.Value));
         Assert.Equal(charges - 1, client.State.RecallCharges);
-        Assert.Equal($"Recalled to state {row.State}; {charges - 1} charges left", client.Log[^1]);
+        Assert.Equal($"Recalled to state {row.State}; {PlaySession.ChargesLeft(charges - 1)}", client.Log[^1]);
         Assert.StartsWith("Undone: ", client.Status);
         Assert.EndsWith(PlaySession.SameRolls, client.Status);
     }

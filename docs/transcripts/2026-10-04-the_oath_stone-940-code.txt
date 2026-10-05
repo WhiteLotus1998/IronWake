@@ -1260,7 +1260,7 @@ A  keziah           Keziah L8 reaver           12,4   hp 3/27   Plain  captain
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 8/28   Fort (heals 20 percent, 5 hp)  group envoy, boss
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > recall 87
-Recalled to state 87; 1 charges left
+Recalled to state 87; 1 charge left
 Undone: gives back 6 exp, 20 enemy hp; returns Maud alive at 7 hp, 13 hp to Keziah
 The rolls do not change: the same attack will roll the same
 The Oath Stone  turn 9 of 10  player phase  defeat_boss  recall 1

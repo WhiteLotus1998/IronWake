@@ -2398,7 +2398,7 @@ public class CliPlayTests
         Assert.EndsWith("Battle won: escape\nEscaped: Alder Fenn; left behind: none; fell: Dunstan, Pell, Rook, Wren\n", output);
         Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("Recalled to state 54; 2 charges left", output);
-        Assert.Contains("Recalled to state 96; 1 charges left", output);
+        Assert.Contains("Recalled to state 96; 1 charge left", output);
         Assert.Contains("Archer 2 falls at 11,1", output);
         Assert.Contains("Brackwater Cut  turn 8 of 8", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);

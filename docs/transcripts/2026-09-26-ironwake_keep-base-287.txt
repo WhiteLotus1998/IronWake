@@ -2290,7 +2290,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,7   hp 18/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 12/20  Plain  done
 > recall 111
-Recalled to state 111; 1 charges left
+Recalled to state 111; 1 charge left
 Undone: gives back 3 kills (Archer 1, Archer 2, Soldier 3), 117 exp, 1 level, 31 enemy hp; returns 7 hp to Ottilie
 The rolls do not change: the same attack will roll the same
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 1

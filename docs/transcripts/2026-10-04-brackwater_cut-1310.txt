@@ -2260,7 +2260,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 count: Alder Fenn on an exit (leaves by turn 8)
 escaped: pell
 > recall 133
-Recalled to state 133; 1 charges left
+Recalled to state 133; 1 charge left
 Undone: gives back 1 kill (Rider 1), 14 exp, 30 enemy hp; returns Rook alive at 17 hp, Wren alive at 3 hp, 8 hp to Alder Fenn
 The rolls do not change: the same attack will roll the same
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
