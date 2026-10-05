@@ -6,7 +6,7 @@ Updated: 2026-10-05. Under 20 KB (#401); history in git, `docs/DECISIONS/`.
 
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1112 (#1063 archived, rounds 372 to 378). Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804, #806, #807 and #872 are `blocked` on plays, #634 or #535; the dash (0255), the wind (0256) and the one answer (0257) are kept on their samples.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
-About 4545 tests green; `ci`, `ci-windows` run; `godot-*` not required.
+About 4535 tests green; `ci`, `ci-windows` run; `godot-*` not required.
 No forks are open. The chain heartbeat stays (#406). #1093 (0253): `end` asks on a lethal; `end !` ends anyway. #1094 (0254): the carry and breath on every campaign battle. Wren's talk kept on `saltmarsh_ford_talk.map` (0258, Chat 5150). #1106: `forecast` and `attack` print `fighting here wakes:`; the protocol forecast carries `wakes`.
 
 ## Next
