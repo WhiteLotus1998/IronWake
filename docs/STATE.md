@@ -4,7 +4,7 @@ Updated: 2026-10-05. Rewritten, not appended; under 20 KB (#401); history in git
 
 ## Where we are
 
-Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1033. Casting (`docs/look/CASTING.md`) waits on Lotus. #991: the lethal-counter line names its condition. #1001: scene scripts (0244); #77 slice 8 (0245): support conversations. #1002: Kinsbane's barks, cold read pending. #1003: Rook's, Maud's, Pell's, Teodor's and Ottilie's cards closed (reads 348 to 363); Keziah's pair in, read owed; Bet's waits on #1042. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
+Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243); the Table is #1033. Casting (`docs/look/CASTING.md`) waits on Lotus. #991: the lethal-counter line names its condition. #1001: scene scripts (0244); #77 slice 8 (0245): support conversations. #1002: Kinsbane's barks, cold read pending. #1003: Rook's, Maud's, Pell's, Teodor's and Ottilie's cards closed (reads 348 to 363); Keziah's in, read owed; Bet after #1042. #804 to #807 and #872 are `blocked` on plays, #634 or #535; 13.27 the dash (#950, #952), 13.28 the wind (#955, #957) and 13.29 the one answer (#960) are spiked.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field on Keziah's pick (0233); on Rook's pick the Fun Gate is met and gate 1 is owed (0246, #1044). Maps 1 and 2 and the rest wait on plays (Maps).
 About 4462 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus, #406).
