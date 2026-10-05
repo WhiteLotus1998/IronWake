@@ -1,0 +1,194 @@
+build barracks
+build barracks_wing
+hire corin
+build wall 10,3
+quest maud_1 rook
+move rook 4,4
+wait rook
+wait maud
+end
+attack rook brigand-1
+wait maud
+end
+move rook 3,3
+wait rook
+item maud salve rook
+end !
+recall 19
+move rook 3,1
+wait rook
+item maud salve rook
+end !
+recall 9
+move maud 3,4
+attack maud brigand-1
+move rook 3,2
+wait rook
+end
+move rook 3,1
+wait rook
+move maud 3,2
+wait maud
+end !
+attack maud brigand-2
+end !
+end !
+leave
+quest pell_1 rook
+move pell 7,4
+attack pell shieldbearer-1 cinder
+move rook 8,4
+attack rook shieldbearer-1
+end
+move rook 11,3
+attack rook archer-1
+move pell 9,2
+attack pell archer-1 cinder
+end
+move pell 9,3
+attack pell brigand-2 cinder
+move rook 9,4
+attack rook brigand-2
+end !
+attack rook brigand-2 !
+move pell 8,4
+attack pell hexer-1 cinder art overcast
+end
+move rook 12,5
+wait rook
+move pell 12,4
+wait pell
+end
+exit rook
+exit pell
+leave
+show rook
+bench dunstan
+bench maud
+march
+move captain 3,6
+wait captain
+move rook 1,8
+wait rook
+wait wren
+wait pell
+wait ottilie
+end
+move captain 5,5
+attack captain archer-2
+canto captain stay
+move ottilie 2,6
+attack ottilie veteran-1
+move teodor 4,5
+attack teodor veteran-1
+move wren 3,6
+attack wren veteran-1
+move rook 4,7
+attack rook veteran-1 !
+recall 28
+move rook 5,6
+attack rook veteran-1 !
+recall 19
+move captain 5,5
+attack captain archer-2
+canto captain stay
+move ottilie 2,6
+attack ottilie veteran-1
+move teodor 3,5
+attack teodor veteran-1 art long_thrust
+move wren 3,6
+attack wren veteran-1 art heavy_cut
+move rook 4,7
+attack rook veteran-1 !
+recall 28
+move pell 3,7
+attack pell veteran-1
+move rook 3,4
+wait rook
+end
+move pell 4,4
+attack pell archer-1
+move rook 4,3
+attack rook archer-1
+move captain 8,5
+item captain 2
+canto captain stay
+move wren 6,6
+item wren 2
+move teodor 6,5
+wait teodor
+move ottilie 5,6
+wait ottilie
+end
+move pell 7,4
+wait pell
+move teodor 7,5
+wait teodor
+move rook 9,4
+wait rook
+move captain 10,5
+wait captain
+move wren 9,6
+wait wren
+move ottilie 8,6
+wait ottilie
+end
+move captain 11,6
+wait captain
+end
+move captain 13,5
+attack captain grange_reeve-1
+canto captain stay
+move ottilie 12,6
+attack ottilie hexer-1
+move rook 12,7
+attack rook hexer-1
+move pell 8,4
+wait pell
+move teodor 11,5
+wait teodor
+move wren 11,6
+wait wren
+end !
+move teodor 12,5
+attack teodor grange_reeve-1 art long_thrust
+move wren 12,6
+attack wren grange_reeve-1
+move rook 13,7
+attack rook grange_reeve-1 !
+move captain 16,6
+leave
+quest maud_1 rook
+move rook 6,2
+wait rook
+wait maud
+end
+move maud 5,2
+item maud salve rook
+attack rook brigand-1 !
+recall 9
+attack rook brigand-1 !
+wait maud
+end !
+recall 0
+move rook 3,1
+wait rook
+wait maud
+end
+move rook 5,1
+attack rook brigand-1
+wait maud
+end !
+recall 9
+move rook 3,3
+wait rook
+wait maud
+end !
+move rook 5,4
+attack rook archer-1
+wait maud
+end !
+attack maud brigand-1
+end !
+leave
+show rook
