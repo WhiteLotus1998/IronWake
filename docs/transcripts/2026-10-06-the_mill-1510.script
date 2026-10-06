@@ -1,0 +1,49 @@
+move captain 5,8
+wait captain
+move maud 6,7
+wait maud
+end
+attack maud brigand-1
+threat captain from 7,8
+move captain 7,8
+attack captain archer-2
+threat maud
+recall list
+recall 13
+move captain 7,7
+attack captain brigand-1
+threat maud
+threat captain
+end
+forecast maud archer-2
+forecast captain archer-2 from 7,8
+move captain 7,8
+attack captain archer-2
+forecast maud archer-2
+attack maud archer-2
+end
+attack maud archer-2
+move captain 7,4
+wait captain
+end
+threat captain from 10,3
+move captain 10,3
+wait captain
+move maud 8,5
+wait maud
+end
+attack captain soldier-1
+recall
+recall 47
+forecast captain soldier-1 art full_measure
+attack captain soldier-1 art full_measure
+forecast maud archer-1 from 9,4
+move maud 9,4
+attack maud archer-1
+end
+forecast maud archer-1
+forecast maud archer-1 from 9,3
+attack maud archer-1
+end
+move captain 8,4
+attack captain archer-1 art feint

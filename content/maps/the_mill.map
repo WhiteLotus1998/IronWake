@@ -1,7 +1,7 @@
 name: The Mill
 size: 12x10
 win: rout
-turn_limit: 12
+turn_limit: 9
 recall: 3
 enemy_level: 1
 protect: maud
