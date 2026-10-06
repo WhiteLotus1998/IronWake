@@ -1,0 +1,258 @@
+move wren 11,2
+wait wren
+move pell 12,1
+wait pell
+move corin 12,2
+wait corin
+move captain 11,5
+wait captain
+move bet 11,6
+wait bet
+move ottilie 12,5
+wait ottilie
+move mattias 12,6
+wait mattias
+move ines 12,4
+wait ines
+move tamsin 13,5
+wait tamsin
+move dunstan 11,9
+wait dunstan
+move teodor 11,10
+wait teodor
+move wat 12,9
+wait wat
+canto wat stay
+end
+move captain 10,6
+attack captain brigand-1
+move mattias 11,5
+attack mattias soldier-1
+move bet 10,5
+attack bet soldier-1
+move pell 14,1
+wait pell
+move corin 12,3
+wait corin
+move wren 12,2
+wait wren
+wait ottilie
+wait ines
+wait tamsin
+wait dunstan
+wait teodor
+wait wat
+canto wat stay
+end
+move corin 14,3
+wait corin
+move tamsin 14,4
+item tamsin salve corin
+move wren 11,2
+attack wren brigand-2
+move ottilie 12,2
+attack ottilie brigand-2
+move pell 13,1
+attack pell brigand-5 cinder
+move captain 9,5
+attack captain archer-1
+attack mattias finale_hunter-1
+move ines 13,3
+attack ines finale_hunter-1
+wait bet
+attack dunstan soldier-2
+move teodor 10,10
+attack teodor soldier-2
+wait wat
+canto wat stay
+end
+move wren 11,1
+attack wren brigand-5
+attack mattias brigand-6
+move teodor 11,7
+attack teodor brigand-6
+move pell 12,1
+wait pell
+move ottilie 14,2
+wait ottilie
+move tamsin 13,2
+item tamsin salve ottilie
+move captain 12,5
+wait captain
+move wat 12,6
+wait wat
+canto wat stay
+wait bet
+move dunstan 11,8
+wait dunstan
+wait ines
+wait corin
+end
+attack wren brigand-3
+attack mattias finale_hunter-1
+move wat 13,6
+move ines 12,6
+attack ines finale_hunter-1
+move bet 12,4
+move tamsin 12,3
+item tamsin salve bet
+move pell 13,4
+recall 139
+move bet 12,3
+wait bet
+move tamsin 12,2
+item tamsin salve bet
+move captain 14,5
+wait captain
+move mattias 15,5
+wait mattias
+move wat 14,7
+wait wat
+canto wat stay
+move teodor 12,8
+wait teodor
+wait dunstan
+wait ines
+wait pell
+wait ottilie
+wait corin
+end
+move tamsin 14,1
+attack pell finale_hunter-1 cinder art overcast
+move ottilie 13,2
+attack ottilie finale_hunter-1
+attack wren finale_hunter-1
+move bet 12,2
+attack bet finale_hunter-1
+move ines 12,3
+attack ines finale_hunter-1
+move captain 12,5
+attack captain hexer-1
+move mattias 13,4
+attack mattias soldier-3
+move wat 12,4
+attack wat soldier-3
+canto wat stay
+move corin 11,4
+attack corin hexer-1
+move teodor 12,7
+attack teodor archer-2
+attack dunstan archer-2
+wait tamsin
+end
+attack captain archer-2
+move teodor 11,5
+item teodor field_dressing
+move corin 12,6
+wait corin
+item wren field_dressing
+move bet 13,1
+item tamsin salve bet
+item ottilie field_dressing
+move mattias 13,5
+wait mattias
+wait pell
+wait ines
+wait wat
+canto wat stay
+wait dunstan
+end
+move dunstan 11,7
+attack dunstan brigand-4
+attack teodor soldier-4
+move wren 10,1
+attack wren archer-3
+move ottilie 11,1
+attack ottilie archer-3
+move corin 14,4
+wait corin
+move ines 13,6
+attack ines brigand-4
+move captain 12,6
+attack captain brigand-4
+move tamsin 13,4
+item tamsin salve wat
+move wat 7,5
+wait wat
+canto wat stay
+move pell 9,2
+wait pell
+move mattias 9,5
+wait mattias
+move bet 9,1
+wait bet
+end
+move wat 4,6
+wait wat
+canto wat stay
+move mattias 5,5
+wait mattias
+move teodor 7,5
+wait teodor
+move captain 8,6
+item captain field_dressing
+move pell 5,2
+wait pell
+move wren 7,2
+wait wren
+move bet 6,2
+wait bet
+move dunstan 9,7
+wait dunstan
+move ottilie 8,2
+wait ottilie
+move ines 10,6
+wait ines
+move tamsin 10,5
+wait tamsin
+move corin 11,4
+wait corin
+end
+move mattias 2,6
+attack mattias hask-1
+move wat 3,6
+wait wat
+canto wat stay
+move captain 4,6
+wait captain
+move teodor 3,5
+wait teodor
+move pell 2,3
+wait pell
+move wren 4,3
+wait wren
+move bet 3,3
+wait bet
+move dunstan 5,7
+wait dunstan
+move ottilie 5,2
+wait ottilie
+move ines 6,6
+wait ines
+move tamsin 7,5
+wait tamsin
+move corin 8,5
+wait corin
+end
+move pell 1,5
+attack pell hask-1 cinder art overcast
+attack mattias hask-1
+move captain 1,6
+attack captain hask-1 art full_measure
+move teodor 0,5
+attack teodor hask-1
+move wat 0,7
+attack wat hask-1
+recall 319
+wait teodor
+wait wat
+canto wat stay
+wait wren
+wait bet
+wait dunstan
+wait ottilie
+wait ines
+wait tamsin
+wait corin
+end
+attack pell hask-1 cinder

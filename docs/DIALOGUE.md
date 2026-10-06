@@ -4,7 +4,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## How we work (standing agreements)
 
-- **Lotus's roadmap (`docs/ROADMAP.md`), standing:** all but art first, fun with no art; no new scenes, supports or cards on the old text while he rewrites the story from #1144 (hooks fine); then his story in, his no-art beta, art, others' beta.
+- **Lotus's roadmap (`docs/ROADMAP.md`):** all but art first; no new scenes, supports or cards on the old text while he rewrites the story (#1144; hooks fine); then his story, his no-art beta, art, others' beta.
 - **Fun Gate entries.** Written blind, Code's first; a disclosed warm chair counts (0073); tricks unnamed until both are in. On a save each chair takes its own seed; a pinned seed, or a roll retried after a Recall, is one read (0238, #963; 334). A board a branch pick changes is gated per arm, gate 1 too; the file's number is the arm it seats (334, 364).
 - **A map is retuned only after both entries on it are in**, one lever at a time, Sim-measured before a partner plays it. Levers are content first.
 - **Queue order (61, 184, 188):** bugs, Lotus's notes, campaign issues, experiment plays, retunes with both entries in, Phase 3. Cold chairs owed (the Critic's): the Oath Stone; the Rookery, fresh seed, a countering ally (341); Rook's field as shipped (0250).
@@ -18,7 +18,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **Forecast** prints the resolved probability; one hit function for forecast, resolver and planners (DESIGN 5); 100 only if certain, 0 only if impossible, else 1 to 99 (#452).
 - **Wake rule:** proximity, radius 4, noise at 6, any death wakes the group, checked after every command (DESIGN 8). Guard bosses wake (0055); `wake_links` calls a second group (0080).
-- **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; options range over every weapon carried, counters with its last swing (#174); prefers a target that cannot counter. A `defeat_boss` boss plans under the exposure veto, plain weapons only, arts unpriced (372, 0251); a refused guard boss goes home, and on its post with no strike on offer holds (0077 to 0080; #1138, 0264; watch (398, 399): dead to unanswered range-2 strikes in #1087 and the field 1460; a third play goes to the Table); a throne-holder steps off only to strike (0063). A `holds:` member stays where it struck; its line says so (410, #1216).
+- **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; options range over every weapon carried, counters with its last swing (#174); prefers a target that cannot counter. A `defeat_boss` boss plans under the exposure veto, plain weapons only, arts unpriced (372, 0251); a refused guard boss goes home, and on its post with no strike on offer holds (0077 to 0080; #1138, 0264; watch (398, 399): dead to unanswered range-2 strikes in #1087, the field 1460 and the 2410 sample (413, on the Table)); a throne-holder steps off only to strike (0063). A `holds:` member stays where it struck; its line says so (410, #1216).
 - **The Sim's veto** covers every unit whose death loses the map, no-crit worst case, a certain kill removed (0024 to 0026). Recruits take no veto; one on a lethal approach tile takes the captain's key (368, #1054). Gate 4 is relative ablation (0019, 0020); on Escape it pairs units out (0068).
 - **`threat`** prices the coming enemy phase with the planner's choices (DESIGN 8): one enemy per strike tile, announced spawns (0045), sleepers unnumbered, at dusk only what the player sees (#403), `from <tile>` names what a stop would wake (#458). **A freed tile** (404, #1191): strikers sharing the one tile a counter can free are priced one wave deep, no chains; `end` asks on that lethal at any counter chance, the chance printed. A spell's counter prints its uses left; `threat` warns of the last (406, 0282; provisional).
 - **Escape:** `exit` is an action (0056).
@@ -30,7 +30,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Maps
 
-- **The Tollgate: `tuned`** (0073), opens beta. **Brackwater Cut at dusk: `tuned`** (0078).
+- **The Tollgate** (0073), **Brackwater Cut at dusk** (0078): `tuned`.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). A crest mass freezing the Foreman is a solve (#1087); lever: the archer out of Pell's turn-5 reach.
 - **Saltmarsh Ford:** not tuned (0093, 0095).
 - **The Rookery (0208):** not passed; no lever before a cold chair.
@@ -38,7 +38,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
 - **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409; cold 5/6/4, t5): woken, the pair feeds the fort from its edge. Lever #1210: the fort and Maud's start south; a held rectangle out of reach is a post.
 - **The First Shrine (406 to 408, 0283):** starts south, alone (brace, second guard declined). Both in from the south (7/7/5), no rework; after #1206's Sim the limit moves only if sprints dominate. #1208: `seize_name: altar` (a hook, not text).
-- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204, one at a time: an empty front sends the hunter for those nearest it, priced in `threat` (0284; no route named, 0287); inside spawns inside each front (0285; all blocked when fresh: decoration). Hask's reach is a sample (0286; Chat 2300 warm 7/8/7: bait at distance 5); soft Def, turn 13 declined (410). A depleted pair decides (411, #1217 in; Chat): one seed, sample then keep. A fall to Hask is a cost. Sample lost, keep won, via Hask: backout, range plus 2 here. Both lost: the roster (#692) first, reach undecided (412); roster change replays the pair. Else it ships.
+- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204, one at a time: an empty front sends the hunter for those nearest it, priced in `threat` (0284; no route named, 0287); inside spawns inside each front (0285; all blocked when fresh: decoration). Hask's reach is a sample (0286; Chat 2300 warm 7/8/7: bait at distance 5); soft Def, turn 13 declined (410). The depleted pair (411, 412) won both on 2410 (413): the reach ships (#1227); range plus 2 parked. Against that company it is a gift: bait at distance 5 saves a walk, and once hurt the veto sends him home. The fresh keep chair (shipped keep) says if the bait is a choice. The roster's short number is Cinder (Overcast 3 of Pell's 8), not HP.
 
 ## Experiments (state and kill criterion)
 
@@ -112,4 +112,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Round index
 
-1-118 rules; 119-342 story; 343-359 writing; 360-388; 389-399 (#1151); 400-410 (#1187); 411 on (#1218).
+1-118 rules; 119-342 story; 343-359 writing; 360-410; 411 on (#1218).
