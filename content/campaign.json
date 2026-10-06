@@ -2,7 +2,7 @@
   "startingPurse": 500,
   "certificationPrice": 500,
   "advancedCertificationPrice": 1000,
-  "levyFloor": 2,
+  "levyFloor": 3,
   "maps": [
     { "map": "starting_alone", "reward": 300, "enemyLevel": 1,
       "stock": ["iron_sword", "field_dressing"] },

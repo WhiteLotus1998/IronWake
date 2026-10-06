@@ -46,7 +46,7 @@ public static class CampaignScript
         var client = new CampaignClient(content, contentDir, CampaignRecord.Start(content, seed, difficulty, permadeath));
         var lines = new List<string>
         {
-            $"# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")} --variant {variant}`.",
+            $"# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")} --variant {variant}{(quest is null ? "" : $" --quest {quest}")}`.",
             $"# Played by `campaign --seed {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")}`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 632);",
             "# the heuristic player fights the rest; each camp takes the actions not yet taken that the record accepts.",
         };

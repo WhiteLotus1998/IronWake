@@ -18,7 +18,10 @@ public class FullCampaignTests
 {
     private const ulong Seed = 644;
     private const string Difficulty = "recruit";
-    private const int Variant = 18;
+    private const int Variant = 21;
+
+    /// <summary>The side map the script takes (issue 1166): at levy floor three only a quest-off variant wins seed 644, so it names one.</summary>
+    private const string Quest = "pell_1";
 
     private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
 
@@ -83,7 +86,7 @@ public class FullCampaignTests
         var order = client.IndexOf("Alder Fenn calls fall back", StringComparison.Ordinal);
         var without = client[..order] + client[(client.IndexOf('\n', order) + 1)..];
 
-        Assert.StartsWith("event log differs at line 1316", Parity.FirstDifference(console, without));
+        Assert.StartsWith("event log differs at line 1359", Parity.FirstDifference(console, without));
     }
 
     [Fact]
@@ -106,7 +109,7 @@ public class FullCampaignTests
     [Fact]
     public void CommittedScriptIsWhatTheSimWrites()
     {
-        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant);
+        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, Quest);
 
         Assert.Null(written.LostOn);
         Assert.Equal(File.ReadAllText(ScriptPath()), written.Text);

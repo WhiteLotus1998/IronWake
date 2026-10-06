@@ -31,3 +31,11 @@ The floor fixed the level half and the bench: every levy member stands at L7 aft
 ## Kill criterion
 
 Revisited if the chip-then-finish chair passes the bar with the floor at three, or if a hand campaign journal says the drill made the bench free (a levy member never deployed still fights at the floor without cost).
+
+## Amended (issue 1166, round 392)
+
+- **The offset is three.** "Under the bar, never at it" is read where the bar is read: the record after map 8's win, already drilled for map 9. At two that record stood at L7 for every levy member, the level half issued. At three it is L6, one level fed. The bench pays a level (L5 at map 8) and stays deployable.
+- **The ceiling reads both halves.** The even chair must stand at p50 0 on L7 alone as well as on L7+C after map 8; if either moves, the offset steps before anything else.
+- **The read** (`docs/measurements/levels-floor3-1166.txt`, 200 runs): even 275 handed, after map 8 p50 0 at L7+C and p50 0 at L7 alone (was 6); the ceiling holds on both halves. Paying 19 handed, refused no tile 461, kill chance 453, exposure 23, forecast death 103; p50 0 at L7+C, the bar fails. Price: captain p50 L7, Teodor p50 L6 (rank points p50 11), 0 given up, p50 73 HP lost, 251 falls.
+- **Next** (round 392): the strike-then-finish chair (#1167) in place of chip-then-finish: Teodor strikes every planned target the paying guard allows, kill or not, and prints strikes per map; its read decides whether rank takes its own lever.
+- **The parity script moves.** At offset three seed 644 wins the campaign only on a variant that takes no side maps by itself, so `full-campaign-644.script` is written by `--variant 21 --quest pell_1` (the header names the flag) and still takes every camp action and order the test lists.

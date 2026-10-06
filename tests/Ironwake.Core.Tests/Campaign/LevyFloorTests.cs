@@ -21,11 +21,11 @@ public class LevyFloorTests
     private static CampaignRecord AtMapEight() => CampaignRecord.StartAt(Content, 1164, "brackwater_cut", pick: "rook");
 
     [Fact]
-    public void TheShippedFloorIsMapNumberLessTwo()
+    public void TheShippedFloorIsMapNumberLessThree()
     {
-        Assert.Equal(2, Content.Campaign.LevyFloor);
+        Assert.Equal(3, Content.Campaign.LevyFloor);
         Assert.Equal(8, Content.Campaign.MapIndexOf("brackwater_cut") + 1);
-        Assert.Equal(6, AtMapEight().LevyFloorLevel(Content));
+        Assert.Equal(5, AtMapEight().LevyFloorLevel(Content));
     }
 
     [Fact]
@@ -46,12 +46,12 @@ public class LevyFloorTests
         var drilled = record.Drill(Content);
 
         Assert.Equal(Levy.Order(), drills.Select(d => d.Id).Order());
-        Assert.All(drills, d => Assert.Equal((1, 6), (d.From, d.To)));
+        Assert.All(drills, d => Assert.Equal((1, 5), (d.From, d.To)));
         foreach (var id in Levy)
         {
             var unit = drilled.Find(id)!;
-            Assert.Equal(record.Find(id)!.AtLevel(6, Content.Class(unit.ClassId)).Stats, unit.Stats);
-            Assert.Equal((6, 0), (unit.Level, unit.Exp));
+            Assert.Equal(record.Find(id)!.AtLevel(5, Content.Class(unit.ClassId)).Stats, unit.Stats);
+            Assert.Equal((5, 0), (unit.Level, unit.Exp));
         }
     }
 
@@ -119,7 +119,7 @@ public class LevyFloorTests
         var lines = CampaignSession.DrillLines(AtMapEight(), Content);
 
         Assert.Equal(Levy.Length, lines.Count);
-        Assert.Contains("Teodor drilled with the levy: L1 -> L6.", lines);
+        Assert.Contains("Teodor drilled with the levy: L1 -> L5.", lines);
     }
 
     [Fact]
@@ -127,7 +127,7 @@ public class LevyFloorTests
     {
         var content = ContentLoader.Parse(ContentSerializer.Write(Content));
 
-        Assert.Equal(2, content.Campaign.LevyFloor);
+        Assert.Equal(3, content.Campaign.LevyFloor);
     }
 
     [Fact]
