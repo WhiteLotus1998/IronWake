@@ -102,6 +102,13 @@ public sealed record CampaignRecord(
     public ValueList<KeepWork> Keep { get; init; } = ValueList<KeepWork>.Empty;
 
     /// <summary>
+    /// The line <see cref="SettleKeep"/> left when it dropped keep work off the menu (issue 1154,
+    /// DECISIONS/0266), or null when it dropped none. Only the loaded record carries it; the
+    /// protocol never writes it, so a save written after the load holds no trace of it.
+    /// </summary>
+    public string? KeepSettled { get; init; }
+
+    /// <summary>
     /// The rooms bought for the keep (issue 687, DESIGN section 13.20), by room id in the order
     /// they were bought. Between maps, so a Recall never touches it.
     /// </summary>
@@ -1775,6 +1782,45 @@ public sealed record CampaignRecord(
     public MapDefinition KeepMap(MapDefinition bare, GameContent content) =>
         Keep.Aggregate(bare, (map, work) => Core.Keep.Apply(map, content.Campaign.Keep.Edit(work.EditId)
             ?? throw new InvalidOperationException($"the keep's menu has no edit '{work.EditId}'"), work.At));
+
+    /// <summary>
+    /// This record with every keep work whose tile is off its edit's placement set dropped and the
+    /// edit's price refunded into the purse (issue 1154, DECISIONS/0266): a save written before the
+    /// menu moved still loads, and the player gets back what the moved work cost at today's price,
+    /// since the record never stored the price paid. <see cref="KeepSettled"/> says what was dropped;
+    /// a record with nothing off the menu is returned unchanged.
+    /// </summary>
+    public CampaignRecord SettleKeep(GameContent content)
+    {
+        var menu = content.Campaign.Keep;
+        var kept = new List<KeepWork>();
+        var dropped = new List<string>();
+        var refund = 0;
+        foreach (var work in Keep)
+        {
+            if (menu.Edit(work.EditId) is { } edit && !edit.At.Contains(work.At))
+            {
+                refund += edit.Price;
+                dropped.Add($"{work} ({edit.Name} goes only on {string.Join(" ", edit.At)})");
+            }
+            else
+            {
+                kept.Add(work);
+            }
+        }
+
+        if (dropped.Count == 0)
+        {
+            return this;
+        }
+
+        return this with
+        {
+            Keep = ValueList<KeepWork>.From(kept),
+            Purse = Purse + refund,
+            KeepSettled = $"The keep's menu moved since this save: dropped {string.Join("; ", dropped)}; {refund} refunded, the purse holds {Purse + refund}",
+        };
+    }
 
     /// <summary>
     /// Buys <paramref name="editId"/> at <paramref name="at"/> for the keep (issue 288): refused

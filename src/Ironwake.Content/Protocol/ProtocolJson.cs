@@ -1923,6 +1923,7 @@ public static class ProtocolJson
             throw new ProtocolException("fields 'purse' and 'mapIndex' must be at least 0");
         }
 
+        // A save whose keep work a later menu moved loads with that work refunded (issue 1154).
         return new CampaignRecord(
             ValueList<Unit>.From(roster),
             ReadStrings(e, "fallen"),
@@ -1954,7 +1955,7 @@ public static class ProtocolJson
             Returned = ReadReturned(e),
             Met = ReadMet(e, content),
             SupportsSeen = ReadSupportsSeen(e, content),
-        };
+        }.SettleKeep(content);
     }
 
     /// <summary>A returned claimant's fate's protocol name (issue 633).</summary>

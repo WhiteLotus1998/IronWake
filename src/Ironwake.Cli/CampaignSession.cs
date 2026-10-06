@@ -502,6 +502,12 @@ public sealed class CampaignSession
         {
             WriteEvent(ReseededLine(pinned, _record.Seed));
         }
+
+        if (_record.KeepSettled is { } settled)
+        {
+            WriteEvent(settled);
+            _record = _record with { KeepSettled = null };
+        }
         if (CaptainLine(_record, _content) is { } captainLine)
         {
             _out.WriteLine(captainLine);
@@ -1617,7 +1623,12 @@ public sealed class CampaignSession
                     if (loaded is not null)
                     {
                         WriteEvent($"Loaded {name}: {SaveLine(loaded, _content)}");
-                        return loaded;
+                        if (loaded.KeepSettled is { } settled)
+                        {
+                            WriteEvent(settled);
+                        }
+
+                        return loaded with { KeepSettled = null };
                     }
 
                     Error(text, refusal!);
