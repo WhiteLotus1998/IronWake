@@ -6,7 +6,8 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// The focused chair (issue 1157, round 389): a kill the heuristic plans for another unit goes to the fed
 /// unit, Teodor, under one of two guards. Guarded keeps the even chair's rule; paying lets him take it at
-/// up to 15 points less kill chance and one more enemy in reach, never onto a forecast death.
+/// up to 15 points less kill chance and one more enemy in reach, never onto a forecast death. Striking
+/// (issue 1167, round 392) adds a strike on any target another unit is planned to attack, kill or not.
 /// </summary>
 public class FocusedPlayerTests
 {
@@ -174,5 +175,91 @@ public class FocusedPlayerTests
         Assert.Equal("hale", Striker(plan));
 
         Assert.Same(plan, FocusedPlayer.Hand(state, Starter, plan, FocusedPlayer.Guard.Paying));
+    }
+
+    private static BattleState Whole(BattleState state) => state.WithUnit(Brigand(state) with { Hp = Brigand(state).Unit.Stats.Hp });
+
+    [Fact]
+    public void TheStrikingLineStrikesAPlannedTargetItCannotKill()
+    {
+        var state = Whole(Board(Hale, Twin));
+        var plan = HalesPlan(state);
+        Assert.Equal("hale", Striker(plan));
+        Assert.False(HeuristicPlayer.KillsOnHit(state, Starter, state.Find(FocusedPlayer.Fed)!, new Coord(2, 1), Brigand(state)));
+
+        var strike = FocusedPlayer.Strike(state, Starter, plan);
+
+        Assert.NotNull(strike);
+        Assert.Equal(FocusedPlayer.Fed, Striker(strike));
+        Assert.Equal(Brigand(state).Id, ((Attack)strike[^1]).TargetId);
+        Assert.True(Resolver.Apply(state, Starter, strike[0]).Accepted);
+    }
+
+    [Fact]
+    public void TheStrikingPlayerCountsTheStrikeAndTheCombat()
+    {
+        var state = Whole(Board(Hale, Twin));
+        var player = new FocusedPlayer(FocusedPlayer.Guard.Striking);
+
+        var commands = player.Next(state, Starter);
+
+        Assert.Equal(FocusedPlayer.Fed, Striker(commands));
+        Assert.Equal(1, player.Combats);
+        Assert.Equal(HalesPlan(state)[^1] is Attack { UnitId: "hale" } ? 1 : 0, player.Strikes);
+    }
+
+    [Fact]
+    public void ThePayingPlayerNeverHandsAStrike()
+    {
+        var state = Whole(Board(Hale, Twin));
+        var player = new FocusedPlayer(FocusedPlayer.Guard.Paying);
+
+        player.Next(state, Starter);
+
+        Assert.Equal(0, player.Strikes);
+    }
+
+    [Fact]
+    public void AStrikeOntoAForecastDeathIsRefused()
+    {
+        var state = Whole(Board(Hale, Twin, Two));
+        state = state.WithUnit(state.Find(FocusedPlayer.Fed)! with { Hp = 1 });
+        var teodor = state.Find(FocusedPlayer.Fed)!;
+
+        Assert.Null(FocusedPlayer.StrikeFrom(state, Starter, teodor, Brigand(state), Open, EnemyReach(state)));
+    }
+
+    [Fact]
+    public void AStrikeTakesOneMoreEnemyInReachAndRefusesTwo()
+    {
+        var state = Whole(Board(Hale, Twin));
+        var teodor = state.Find(FocusedPlayer.Fed)!;
+        var reach = EnemyReach(state);
+
+        // Every tile beside the brigand is in its own reach: one enemy.
+        Assert.NotNull(FocusedPlayer.StrikeFrom(state, Starter, teodor, Brigand(state), 1, reach));
+        Assert.Null(FocusedPlayer.StrikeFrom(state, Starter, teodor, Brigand(state), 0, reach));
+    }
+
+    [Fact]
+    public void AStrikeThatCannotLandIsRefused()
+    {
+        var state = Whole(Board(Hale, Twin));
+        var brigand = Brigand(state);
+        state = state.WithUnit(brigand with { Unit = brigand.Unit with { Stats = brigand.Unit.Stats with { Lck = 250 } } });
+        var teodor = state.Find(FocusedPlayer.Fed)!;
+
+        // The refusal is the landing clause: the tile beside the brigand forecasts no death for him.
+        Assert.True(Exposure.Of(state, Starter, teodor, new Coord(2, 1), Brigand(state), teodor.EquippedSlot(Starter)).NoCrit < teodor.Hp);
+        Assert.Null(FocusedPlayer.StrikeFrom(state, Starter, teodor, Brigand(state), Open, EnemyReach(state)));
+    }
+
+    [Fact]
+    public void TheFedUnitsOwnPlanIsNeverStruck()
+    {
+        var state = Whole(Board(Hale, Twin));
+        var plan = HeuristicPlayer.PlanUnit(state, Starter, state.Find(FocusedPlayer.Fed)!);
+
+        Assert.Null(FocusedPlayer.Strike(state, Starter, plan));
     }
 }
