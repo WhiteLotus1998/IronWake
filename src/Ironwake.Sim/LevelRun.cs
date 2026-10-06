@@ -52,6 +52,40 @@ public static class LevelRun
         /// the HP he lost in enemy phases and his falls in them; empty for any other player.
         /// </summary>
         public IReadOnlyList<Price> Prices { get; init; } = [];
+
+        /// <summary>
+        /// <see cref="FocusedPlayer.Fed"/>'s EXP per won map (issue 1181, round 396), one entry per <see cref="Maps"/>
+        /// entry in the same order, on every player.
+        /// </summary>
+        public IReadOnlyList<FedExp> Exp { get; init; } = [];
+    }
+
+    /// <summary>
+    /// The fed unit's EXP on one won map (issue 1181, round 396): whether he was deployed in the won battle, the EXP
+    /// the record kept from it (counted from level 1, so a level gained counts whole; a fall keeps none), and the
+    /// EXP the camp's drill zeroed after it (<see cref="CampaignRecord.Drill"/>: his EXP after the battle when the
+    /// levy floor raised him, else 0).
+    /// </summary>
+    public sealed record FedExp(bool Deployed, int Earned, int Zeroed)
+    {
+        /// <summary>A map he was not in the company for.</summary>
+        public static FedExp Absent { get; } = new(false, 0, 0);
+
+        /// <summary>
+        /// The reading from the record before the battle, the record after it (<see cref="CampaignRecord.Fought"/>, before
+        /// the drill) and the units deployed into it.
+        /// </summary>
+        public static FedExp Of(CampaignRecord before, CampaignRecord fought, IEnumerable<string> deployed, GameContent content)
+        {
+            if (before.Roster.FirstOrDefault(u => u.Id == FocusedPlayer.Fed) is not { } prior
+                || fought.Roster.FirstOrDefault(u => u.Id == FocusedPlayer.Fed) is not { } after)
+            {
+                return Absent;
+            }
+
+            var zeroed = fought.Drills(content).Any(d => d.Id == FocusedPlayer.Fed) ? after.Exp : 0;
+            return new(deployed.Contains(FocusedPlayer.Fed), TotalExp(after) - TotalExp(prior), zeroed);
+        }
     }
 
     /// <summary>The focused chair's price on one won map (issue 1157): see <see cref="Run.Prices"/>.</summary>
@@ -230,6 +264,7 @@ public static class LevelRun
             var companies = new List<IReadOnlyList<Member>>();
             var handed = 0;
             var prices = new List<Price>();
+            var exp = new List<FedExp>();
             int? lost = null;
             int? lastPoints = null;
             while (!record.IsFinished(content))
@@ -243,6 +278,7 @@ public static class LevelRun
                 Camp? camp = null;
                 Dictionary<string, WeaponMix>? struck = null;
                 Price? price = null;
+                IReadOnlyList<string> deployed = [];
                 for (var attempt = 0; attempt < HeirloomRun.Attempts && won is null; attempt++)
                 {
                     var tried = record with { Seed = unchecked(record.Seed + (ulong)attempt * 7919UL) };
@@ -266,6 +302,7 @@ public static class LevelRun
                         won = end;
                         struck = tally;
                         camp = Read(start, end, content);
+                        deployed = start.UnitsOf(Side.Player).Select(u => u.Id).ToList();
                     }
                 }
 
@@ -280,7 +317,9 @@ public static class LevelRun
                     weapons[classId] = weapons.GetValueOrDefault(classId, WeaponMix.Zero).Plus(mix);
                 }
 
-                record = record.AfterBattle(won, content);
+                var fought = record.Fought(won, content);
+                exp.Add(FedExp.Of(record, fought, deployed, content));
+                record = fought.Drill(content);
                 var company = record.Present(content);
                 var afterPoints = FedPoints(company, content);
                 if (price is not null)
@@ -307,7 +346,7 @@ public static class LevelRun
                 }
             }
 
-            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport, Companies = companies, Handed = handed, Prices = prices });
+            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport, Companies = companies, Handed = handed, Prices = prices, Exp = exp });
         }
 
         return runs;
@@ -720,6 +759,61 @@ public static class LevelRun
             after.GetValueOrDefault(FocusedPlayer.Refusal.Chance),
             before.GetValueOrDefault(FocusedPlayer.Refusal.NoTile),
             after.GetValueOrDefault(FocusedPlayer.Refusal.NoTile));
+    }
+
+    /// <summary>The EXP margin the chipping chair's zeroed total must beat the even chair's by at p50 for the drill to be the lever (round 396).</summary>
+    public const int DrillMargin = 50;
+
+    /// <summary>
+    /// The drill's print (issue 1181, round 396): per chair, over the runs that won map <see cref="VerdictMap"/>
+    /// with the fed unit in the company after it, his EXP the camp's drill zeroed through it (summed per run, p50
+    /// p75, and the total) and the EXP he kept per deployed map through it (p50 p75), then the zeroed EXP per map
+    /// over those runs; last, the read the Table agreed before the numbers (<see cref="DrillVerdict"/>).
+    /// </summary>
+    public static IEnumerable<string> DrillLines(IReadOnlyList<Run> even, IReadOnlyList<Run> chipping)
+    {
+        static string Pair(IEnumerable<int> values)
+        {
+            var list = values.ToList();
+            return $"p50 {Percentile(list, 0.5)} p75 {Percentile(list, 0.75)}";
+        }
+
+        static List<List<FedExp>> Through(IReadOnlyList<Run> runs) =>
+            runs.Select(r => (Run: r, At: r.Maps.ToList().FindIndex(m => m.Map == VerdictMap)))
+                .Where(x => x.At >= 0 && x.At < x.Run.Exp.Count && x.At < x.Run.Companies.Count && x.Run.Companies[x.At].Any(m => m.Id == FocusedPlayer.Fed))
+                .Select(x => x.Run.Exp.Take(x.At + 1).ToList())
+                .ToList();
+
+        yield return $"levels --drill: {chipping.Count} runs, the chipping chair (issue 1178) and the even chair over the same seeds (issue 1181, round 396); {FocusedPlayer.Fed}'s EXP the levy floor's drill zeroed, and the EXP he kept per deployed map, through map {VerdictMap}";
+        var zeroedP50 = new Dictionary<string, int>(StringComparer.Ordinal);
+        foreach (var (label, runs) in new[] { ("chipping", chipping), ("even", even) })
+        {
+            var through = Through(runs);
+            var zeroed = through.Select(t => t.Sum(e => e.Zeroed)).ToList();
+            var earned = through.SelectMany(t => t.Where(e => e.Deployed).Select(e => e.Earned)).ToList();
+            var drilled = through.Sum(t => t.Count(e => e.Zeroed > 0));
+            zeroedP50[label] = zeroed.Count == 0 ? 0 : Percentile(zeroed, 0.5);
+            yield return $"  {label} ({through.Count} runs with {FocusedPlayer.Fed} after map {VerdictMap}): EXP zeroed by the drill per run {Pair(zeroed)} (total {zeroed.Sum()}, {drilled} camps zeroed some); EXP kept per deployed map {Pair(earned)} ({earned.Count} maps)";
+            var perMap = Enumerable.Range(0, VerdictMap).Select(i => through.Where(t => i < t.Count).Sum(t => t[i].Zeroed));
+            yield return $"  {label}, EXP zeroed by map 1..{VerdictMap} (summed over those runs): {string.Join(" ", perMap)}";
+        }
+
+        yield return DrillVerdict(zeroedP50["chipping"], zeroedP50["even"]);
+    }
+
+    /// <summary>
+    /// Round 396's read of the drill, agreed before the numbers: when the chipping chair's EXP zeroed through map
+    /// <see cref="VerdictMap"/> is at least <see cref="DrillMargin"/> more than the even chair's at p50, feeding happens
+    /// and the drill deletes it, so the lever is the drill carrying EXP over, read under the even ceiling's tripwire
+    /// (its own issue); otherwise the drill is not the cause and the cold hand play feeding him decides the bar.
+    /// </summary>
+    public static string DrillVerdict(int chippingZeroedP50, int evenZeroedP50)
+    {
+        var head = $"  verdict (round 396, through map {VerdictMap}): ";
+        var gap = chippingZeroedP50 - evenZeroedP50;
+        return gap >= DrillMargin
+            ? head + $"the drill deletes the feeding (zeroed p50 chipping {chippingZeroedP50}, even {evenZeroedP50}, {gap} apart, at least {DrillMargin}); the lever is the drill carrying EXP over, read under the tripwire (even p50 0 on L{Threshold} alone)"
+            : head + $"the drill is not the cause (zeroed p50 chipping {chippingZeroedP50}, even {evenZeroedP50}, {gap} apart, under {DrillMargin}); the cold hand play feeding {FocusedPlayer.Fed} through map {VerdictMap} decides the bar";
     }
 
     /// <summary>The fed unit's record entry after map <see cref="VerdictMap"/> on each run that won it, null where he was not in the company.</summary>
