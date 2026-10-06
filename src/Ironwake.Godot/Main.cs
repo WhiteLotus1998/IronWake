@@ -113,11 +113,11 @@ public partial class Main : Node2D
     /// <summary>The console's monospaced face for every console line (the log, the forecast and unit text), so numbers align as they do in the console.</summary>
     private readonly Font _mono = LoadFont("JetBrainsMono-Regular.ttf", tabular: false, "DejaVu Sans Mono", "Consolas", "Menlo", "monospace");
 
-    /// <summary>The UI face (LOOK.md: Inter, OFL) with tabular numerals, for everything that is not a console line.</summary>
-    private readonly Font _ui = LoadFont("Inter-Regular.ttf", tabular: true, "DejaVu Sans", "Segoe UI", "Helvetica", "sans-serif");
+    /// <summary>The UI face (LOOK.md: TeX Gyre Heros, the GUST Font License) with tabular numerals, for everything that is not a console line.</summary>
+    private readonly Font _ui = LoadFont("texgyreheros-regular.otf", tabular: true, "DejaVu Sans", "Segoe UI", "Helvetica", "sans-serif");
 
     /// <summary>The UI face at 700, for names, numerals and chips.</summary>
-    private readonly Font _bold = LoadFont("Inter-Bold.ttf", tabular: true, "DejaVu Sans", "Segoe UI", "Helvetica", "sans-serif");
+    private readonly Font _bold = LoadFont("texgyreheros-bold.otf", tabular: true, "DejaVu Sans", "Segoe UI", "Helvetica", "sans-serif");
 
     /// <summary>The panel titles' spaced capitals: the UI face at 700 with its letters set apart.</summary>
     private readonly FontVariation _caps;

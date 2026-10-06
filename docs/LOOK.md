@@ -62,7 +62,7 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 
 ## Type
 
-- **UI:** Inter (OFL), tabular numerals (`font-variant-numeric: tabular-nums`), 700 for names and numerals, 400 for the rest, labels in spaced capitals.
+- **UI:** TeX Gyre Heros (a free Helvetica-style face; GUST Font License, LPPL 1.3c), Lotus's pick on 2026-10-06 for the basic font, with tabular numerals, bold for names and numerals, regular for the rest, labels in spaced capitals. Key moments and phrases may get their own face later. Inter (OFL) stays vendored, unused for now.
 - **Log:** JetBrains Mono (OFL), the console's text as it is.
 - Both are vendored in `src/Ironwake.Godot/fonts/` from their own GitHub releases (Inter 4.1, JetBrains Mono 2.304; the sandbox's proxy refuses Google Fonts), each with its OFL beside it and listed in `LICENSES`. The client reads them from the source tree, or as imported resources in an export, and falls back to a system face. The console's own lines (the forecast and unit text until slice 2 draws them, the log) stay in the monospace; everything else is Inter. The mocked frames in `docs/look/` still rasterise with DejaVu.
 
