@@ -83,7 +83,7 @@ public class FullCampaignTests
         var order = client.IndexOf("Alder Fenn calls fall back", StringComparison.Ordinal);
         var without = client[..order] + client[(client.IndexOf('\n', order) + 1)..];
 
-        Assert.StartsWith("event log differs at line 1297", Parity.FirstDifference(console, without));
+        Assert.StartsWith("event log differs at line 1316", Parity.FirstDifference(console, without));
     }
 
     [Fact]

@@ -629,6 +629,55 @@ public sealed record CampaignRecord(
     }
 
     /// <summary>
+    /// The levy floor for the next map (issue 1164, round 391): its number, from 1, less
+    /// <see cref="CampaignRules.LevyFloor"/>; <see cref="Unit.MinLevel"/> when the campaign keeps no
+    /// floor or is finished.
+    /// </summary>
+    public int LevyFloorLevel(GameContent content) =>
+        content.Campaign.LevyFloor <= 0 || IsFinished(content)
+            ? Unit.MinLevel
+            : Math.Clamp(MapIndex + 1 - content.Campaign.LevyFloor, Unit.MinLevel, Unit.MaxLevel);
+
+    /// <summary>
+    /// Whether <paramref name="unitId"/> is of the levy (issue 1164): a cast member on the roster from
+    /// the first map who is not the captain, so no map brings them in by arriving, joining, a branch
+    /// or a meeting.
+    /// </summary>
+    public static bool IsLevy(string unitId, GameContent content) =>
+        content.Cast.Count > 0 && unitId != content.Cast[0].Id && content.Cast.Any(u => u.Id == unitId) && content.Campaign.ArrivalIndex(unitId) < 0;
+
+    /// <summary>
+    /// The levy members the camp's floor raises before the next map (issue 1164, round 391), each with
+    /// the level they stand at and the floor, in roster order: every living levy member below
+    /// <see cref="LevyFloorLevel"/>, benched and wounded included. A unit at or above it is never
+    /// listed, so a fed unit keeps its distance above the floor.
+    /// </summary>
+    public IReadOnlyList<(string Id, int From, int To)> Drills(GameContent content)
+    {
+        var floor = LevyFloorLevel(content);
+        return Roster.Where(u => u.Level < floor && IsLevy(u.Id, content)).Select(u => (u.Id, u.Level, floor)).ToList();
+    }
+
+    /// <summary>
+    /// The record with the levy drilled to the floor (issue 1164, round 391): each unit
+    /// <see cref="Drills"/> names is raised on the average growth (<see cref="Unit.AtLevel"/>), its
+    /// EXP zeroed; weapon ranks are untouched, so rank stays the part that measures use. The record
+    /// itself when nobody is below the floor.
+    /// </summary>
+    public CampaignRecord Drill(GameContent content)
+    {
+        var drills = Drills(content);
+        if (drills.Count == 0)
+        {
+            return this;
+        }
+
+        var floor = LevyFloorLevel(content);
+        var raised = Roster.Select(u => drills.Any(d => d.Id == u.Id) ? u.AtLevel(floor, content.Class(u.ClassId)) with { Exp = 0 } : u);
+        return this with { Roster = ValueList<Unit>.From(raised) };
+    }
+
+    /// <summary>
     /// The level the picked claimant joins at, at least (issue 1130, rounds 380 and 381): the branch
     /// map's authored <see cref="CampaignMap.SeatLevel"/>, or <see cref="JoinLevel"/> when that is
     /// higher. Nothing here reads the company's top level, so feeding one unit never raises the pick
@@ -867,9 +916,16 @@ public sealed record CampaignRecord(
     /// <see cref="Permadeath"/> off a unit that fell comes back as it began the battle, wounded
     /// (<see cref="Wound.Inflict"/>); every other wound on the roster counts this main map down
     /// (<see cref="Wound.Tick"/>), deployed or not. A bound enemy killed on the map is recorded
-    /// (<see cref="FreedUnitFell"/>, issue 750).
+    /// (<see cref="FreedUnitFell"/>, issue 750). The camp then drills the levy
+    /// (<see cref="Drill"/>, issue 1164); <see cref="Fought"/> is the record before it.
     /// </summary>
-    public CampaignRecord AfterBattle(BattleState end, GameContent content)
+    public CampaignRecord AfterBattle(BattleState end, GameContent content) => Fought(end, content).Drill(content);
+
+    /// <summary>
+    /// <see cref="AfterBattle"/> before the camp's drill (issue 1164): the console reads
+    /// <see cref="Drills"/> on it to print who the floor raises.
+    /// </summary>
+    public CampaignRecord Fought(BattleState end, GameContent content)
     {
         if (end.Outcome.Result != BattleResult.Won)
         {

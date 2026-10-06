@@ -32,9 +32,9 @@ public class FocusedReadTests
     }
 
     [Fact]
-    public void ABarShortOfOneSendsTheFirstLever()
+    public void ABarShortOfOneSendsAChipThenFinishChair()
     {
-        Assert.Contains("the bar fails (paying p50 0 at L7+C); the first lever is the joins' levels and ranks", LevelRun.FocusedVerdict(Unfed, Unfed));
+        Assert.Contains("the bar fails (paying p50 0 at L7+C) on the levy floor; next a chip-then-finish chair, before lever 2 (round 391)", LevelRun.FocusedVerdict(Unfed, Unfed));
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class FocusedReadTests
     {
         var even = Companies([M(7, 160, captain: true), M(7, 80)]);
 
-        Assert.EndsWith("the ceiling is broken (even p50 1)", LevelRun.FocusedVerdict(even, Unfed));
+        Assert.EndsWith("the ceiling is broken (even p50 1); step the levy floor to less three (round 391)", LevelRun.FocusedVerdict(even, Unfed));
     }
 
     [Fact]

@@ -51,6 +51,11 @@ public static class ContentSerializer
             writer.WriteNumber("startingPurse", campaign.StartingPurse);
             writer.WriteNumber("certificationPrice", campaign.CertificationPrice);
             writer.WriteNumber("advancedCertificationPrice", campaign.AdvancedCertificationPrice);
+            if (campaign.LevyFloor > 0)
+            {
+                writer.WriteNumber("levyFloor", campaign.LevyFloor);
+            }
+
             writer.WriteStartArray("maps");
             foreach (var map in campaign.Maps)
             {

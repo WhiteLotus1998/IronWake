@@ -279,6 +279,12 @@ public static class ContentLoader
             throw root.Error("advancedCertificationPrice", "must be at least 0");
         }
 
+        var levyFloor = root.IntOr("levyFloor", 0);
+        if (levyFloor < 0)
+        {
+            throw root.Error("levyFloor", "must be at least 0");
+        }
+
         var maps = new List<CampaignMap>();
         var index = 0;
         foreach (var element in root.Array("maps"))
@@ -784,6 +790,7 @@ public static class ContentLoader
         return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps))
         {
             AdvancedCertificationPrice = advancedSeal,
+            LevyFloor = levyFloor,
             Trials = ValueList<CampaignTrial>.From(trials.OrderBy(t => t.ClassId, StringComparer.Ordinal)),
             Quests = ValueList<CampaignQuest>.From(quests),
             Keep = keep,

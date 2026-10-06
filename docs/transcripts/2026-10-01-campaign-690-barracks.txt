@@ -1302,17 +1302,23 @@ B  wren             Wren L2 cadet              7,7    hp 4/20   Plain
 Battle won: rout; only recall is left, or leave
 > leave
 Raid on Ironwake won: rout; reward 1000, the purse holds 1500; fallen: Teodor, Dunstan
+Wren drilled with the levy: L2 -> L5.
+Ottilie drilled with the levy: L1 -> L5.
+Pell drilled with the levy: L1 -> L5.
+Ansgar drilled with the levy: L1 -> L5.
+Keziah drilled with the levy: L1 -> L5.
+Brannock drilled with the levy: L1 -> L5.
 -- Before map 7 of 9: Sallow Grange; the purse holds 1500 --
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L2, EXP 35; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
-  Ottilie: Bowman L1, EXP 59; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
-  Pell: Adept L1, EXP 71; 1: Cinder 8/8, 2: Gust 6/6
+  Wren: Cadet L5, EXP 0; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
+  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
   Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
-  Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Ansgar: Outrider L5, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
-  Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
-  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Keziah: Reaver L5, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
   Fallen: Teodor (fell on Raid on Ironwake), Dunstan (fell on Raid on Ironwake)
 Deploys to Sallow Grange: Alder Fenn, Ansgar, Wren, Pell, Ottilie (deploy 5 of 9; 1 slot stands empty)
 This map is not ideal for Keziah; march asks first if Keziah deploys (bench keziah to leave her).
@@ -1378,14 +1384,14 @@ ERROR: A hire costs 300 and the purse holds 0
 > roster
 Roster: company 11/12
   Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L2, EXP 35; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
-  Ottilie: Bowman L1, EXP 59; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
-  Pell: Adept L1, EXP 71; 1: Cinder 8/8, 2: Gust 6/6
+  Wren: Cadet L5, EXP 0; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
+  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
   Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
-  Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Ansgar: Outrider L5, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
-  Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
-  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Keziah: Reaver L5, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
   Bet Lowry (bet): Pikeman L1, EXP 0; 1: Iron Lance 40/40
   Ines Tarrow (ines): Bowman L1, EXP 0; 1: Iron Bow 40/40
   Fallen: Teodor (fell on Raid on Ironwake), Dunstan (fell on Raid on Ironwake)
@@ -1398,14 +1404,14 @@ Roster: company 11/12
 -- Before map 7 of 9: Sallow Grange; the purse holds 0 --
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L2, EXP 35; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
-  Ottilie: Bowman L1, EXP 59; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
-  Pell: Adept L1, EXP 71; 1: Cinder 8/8, 2: Gust 6/6
+  Wren: Cadet L5, EXP 0; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
+  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
   Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
-  Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Ansgar: Outrider L5, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
-  Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
-  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Keziah: Reaver L5, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
   Bet Lowry (bet): Pikeman L1, EXP 0; 1: Iron Lance 40/40
   Ines Tarrow (ines): Bowman L1, EXP 0; 1: Iron Bow 40/40
   Fallen: Teodor (fell on Raid on Ironwake), Dunstan (fell on Raid on Ironwake)

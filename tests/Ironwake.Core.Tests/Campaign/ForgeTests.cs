@@ -293,7 +293,7 @@ public class ForgeTranscriptTests
 
         Assert.Contains("Maud wins maud_1; the stores take 2 common material; fell and came back wounded: Wren\n", output);
         Assert.Contains("Refine Iron Lance: Iron Lance +1, Acc 70, Power 7, for 1 common material and 100; the purse holds 800\n", output);
-        Assert.Contains("  Teodor: Pikeman L1, EXP 54; 1: Iron Lance +1 38/40", output);
+        Assert.Contains("  Teodor: Pikeman L3, EXP 0; 1: Iron Lance +1 38/40", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 }
