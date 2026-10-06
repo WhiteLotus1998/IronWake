@@ -25,7 +25,7 @@ public sealed record RecallRow(int? State, string Text);
 /// </summary>
 public sealed class PlaySession
 {
-    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--confirm-lethal on|off] [--candidate id] [--level N] [--log file]";
+    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--confirm-lethal on|off] [--candidate id] [--level N [--company full|depleted|floor]] [--log file]";
 
     /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
     public const int StrictStop = 3;
@@ -183,6 +183,9 @@ public sealed class PlaySession
     /// </summary>
     internal bool ConfirmLethal { get; init; } = true;
 
+    /// <summary>The fielded finale company's header line under <c>--company</c> (issue 1217), printed after the map line; null otherwise.</summary>
+    internal string? CompanyLine { get; init; }
+
     /// <summary>The board as it stands.</summary>
     internal BattleState State => _state;
 
@@ -217,6 +220,7 @@ public sealed class PlaySession
         var scheme = RollScheme.TwoRollAverage;
         string? candidate = null;
         int? level = null;
+        FinaleCompany? company = null;
         string? log = null;
         for (var i = 1; i < args.Length; i++)
         {
@@ -255,6 +259,10 @@ public sealed class PlaySession
                     level = parsedLevel;
                     i++;
                     break;
+                case "--company" when value is not null && FinaleCompanies.Parse(value) is { } parsedCompany:
+                    company = parsedCompany;
+                    i++;
+                    break;
                 case "--log" when value is not null:
                     log = value;
                     i++;
@@ -287,6 +295,20 @@ public sealed class PlaySession
         if (log is not null && protocol)
         {
             Console.WriteLine("ERROR: --log applies to a text run; a protocol run carries each event's text in its answer");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if (company is not null && level is null)
+        {
+            Console.WriteLine("ERROR: --company fields a finale company at a level; give --level");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if (company is not null && candidate is not null)
+        {
+            Console.WriteLine("ERROR: --company fields a whole company and --candidate a single trial candidate; give one");
             Console.WriteLine(Usage);
             return 2;
         }
@@ -353,7 +375,29 @@ public sealed class PlaySession
 
         // --level raises each member below N to N on the average growth enemies scale by (issue 692),
         // so a board written for a late-campaign company can be played without the campaign before it.
-        if (level is { } floor)
+        // --company fields the Sim's finale roster for that company instead (issue 1217), built by the
+        // same function the Sim calls, so a hand chair and the measurement cannot drift apart.
+        string? companyLine = null;
+        if (company is { } fielded && level is { } companyLevel)
+        {
+            if (!map.DeploysAll)
+            {
+                Console.WriteLine($"ERROR: --company needs a 'deploy: all' map to seat the whole company, and '{map.Name}' deploys {map.Deploy}");
+                return 2;
+            }
+
+            roster = FinaleCompanies.Roster(content, fielded, companyLevel);
+            var members = roster.Select(u => u.Id).ToHashSet(StringComparer.Ordinal);
+            var missing = map.Placements.OfType<PlayerPlacement>().Where(p => p.Slot == PlayerSlot.NamedRecruit && p.RecruitId is { } id && !members.Contains(id)).Select(p => content.Cast.FirstOrDefault(u => u.Id == p.RecruitId)?.Name ?? p.RecruitId).ToList();
+            if (missing.Count > 0)
+            {
+                Console.WriteLine($"ERROR: '{map.Name}' places {string.Join(", ", missing)} by name, and the {FinaleCompanies.Name(fielded)} company has no {string.Join(" or ", missing)}");
+                return 2;
+            }
+
+            companyLine = FinaleCompanies.Line(fielded, roster, content);
+        }
+        else if (level is { } floor)
         {
             roster = ValueList<Unit>.From(roster.Select(u => u.ScaledTo(floor, content.Class(u.ClassId))));
         }
@@ -363,7 +407,7 @@ public sealed class PlaySession
             return new ProtocolSession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, omniscient) { ConfirmLethal = confirmLethal }.Run(input);
         }
 
-        var session = new PlaySession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, scripted: script is not null) { ConfirmLethal = confirmLethal };
+        var session = new PlaySession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, scripted: script is not null) { ConfirmLethal = confirmLethal, CompanyLine = companyLine };
         var code = session.Play(input, strict, seed);
         if (log is not null)
         {
@@ -515,6 +559,11 @@ public sealed class PlaySession
     private int Play(TextReader input, bool strict, ulong seed)
     {
         _out.WriteLine($"{_state.Map.Name}, seed {seed}, scheme {_state.Scheme}");
+        if (CompanyLine is not null)
+        {
+            _out.WriteLine(CompanyLine);
+        }
+
         if (_state.Map.Certification is { } trialHeader)
         {
             var candidate = _state.UnitsOf(Side.Player).Single();

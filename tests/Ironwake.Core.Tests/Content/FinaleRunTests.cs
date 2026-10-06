@@ -23,7 +23,7 @@ public class FinaleRunTests
     [Fact]
     public void TheFullCompanyIsTheWholeCastThenHiresToTheCap()
     {
-        var roster = FinaleRun.Roster(Content, FinaleRun.Company.Full, FinaleRun.DefaultLevel);
+        var roster = FinaleRun.Roster(Content, FinaleCompany.Full, FinaleRun.DefaultLevel);
 
         Assert.Equal(CampaignRecord.CompanyCap, roster.Count);
         Assert.Equal(Content.Cast.Select(u => u.Id), roster.Take(Content.Cast.Count).Select(u => u.Id));
@@ -33,7 +33,7 @@ public class FinaleRunTests
     [Fact]
     public void TheDepletedCompanyIsTheCaptainFiveStoryMembersAndHiresToTheCap()
     {
-        var roster = FinaleRun.Roster(Content, FinaleRun.Company.Depleted, FinaleRun.DefaultLevel);
+        var roster = FinaleRun.Roster(Content, FinaleCompany.Depleted, FinaleRun.DefaultLevel);
 
         Assert.Equal(CampaignRecord.CompanyCap, roster.Count);
         Assert.Equal(Content.Cast.Take(1 + FinaleRun.DepletedStory).Select(u => u.Id), roster.Take(1 + FinaleRun.DepletedStory).Select(u => u.Id));
@@ -43,7 +43,7 @@ public class FinaleRunTests
     [Fact]
     public void TheFloorCompanyIsTheCaptainThreeStoryMembersAndEveryHire()
     {
-        var roster = FinaleRun.Roster(Content, FinaleRun.Company.Floor, FinaleRun.DefaultLevel);
+        var roster = FinaleRun.Roster(Content, FinaleCompany.Floor, FinaleRun.DefaultLevel);
 
         Assert.Equal(1 + FinaleRun.FloorStory + Content.Campaign.Keep.Hires.Count, roster.Count);
         Assert.Equal(Content.Campaign.Keep.Hires.Select(h => h.Id), roster.Skip(1 + FinaleRun.FloorStory).Select(u => u.Id));
@@ -52,7 +52,7 @@ public class FinaleRunTests
     [Fact]
     public void StoryMembersStandAtTheLevelAndHiresJoinTheBarracksLevelsBelowIt()
     {
-        var roster = FinaleRun.Roster(Content, FinaleRun.Company.Floor, FinaleRun.DefaultLevel);
+        var roster = FinaleRun.Roster(Content, FinaleCompany.Floor, FinaleRun.DefaultLevel);
 
         Assert.All(roster.Take(1 + FinaleRun.FloorStory), u => Assert.True(u.Level >= FinaleRun.DefaultLevel, u.Id));
         Assert.All(roster.Skip(1 + FinaleRun.FloorStory), u => Assert.Equal(FinaleRun.DefaultLevel - Barracks.LevelsBelow, u.Level));
@@ -77,13 +77,13 @@ public class FinaleRunTests
     [Fact]
     public void FullAndDepletedAreHeldToGateOneAndTheFloorIsData()
     {
-        foreach (var company in new[] { FinaleRun.Company.Full, FinaleRun.Company.Depleted })
+        foreach (var company in new[] { FinaleCompany.Full, FinaleCompany.Depleted })
         {
             Assert.False(new FinaleRun.Reading(company, 12, Games(1, 9, 10), 10, 11).Passed);
             Assert.True(new FinaleRun.Reading(company, 12, Games(6, 4, 10), 10, 11).Passed);
         }
 
-        var floor = new FinaleRun.Reading(FinaleRun.Company.Floor, 10, Games(0, 10, 10), 10, 11);
+        var floor = new FinaleRun.Reading(FinaleCompany.Floor, 10, Games(0, 10, 10), 10, 11);
         Assert.True(floor.Passed);
         Assert.Contains("data, a cold chair's play decides (never won)", floor.Lines(8).First());
     }
@@ -91,7 +91,7 @@ public class FinaleRunTests
     [Fact]
     public void AFinaleLongerThanSixteenTurnsAtTheMedianFailsOnLengthAndNamesTheLever()
     {
-        var reading = new FinaleRun.Reading(FinaleRun.Company.Floor, 10, Games(5, 5, FinaleRun.LengthLimit + 1), 10, 20);
+        var reading = new FinaleRun.Reading(FinaleCompany.Floor, 10, Games(5, 5, FinaleRun.LengthLimit + 1), 10, 20);
 
         Assert.False(reading.Passed);
         Assert.Contains($"  length: median {FinaleRun.LengthLimit + 1} turns over every game, limit 20: over {FinaleRun.LengthLimit}, the lever is one fewer wave", reading.Lines(8));
@@ -113,16 +113,16 @@ public class FinaleRunTests
                 _ => Array.Empty<MapEventFired>(),
             },
         }).ToList();
-        var reading = new FinaleRun.Reading(FinaleRun.Company.Full, 12, games, 10, 11) { Falls = new[] { "gate_in1" } };
+        var reading = new FinaleRun.Reading(FinaleCompany.Full, 12, games, 10, 11) { Falls = new[] { "gate_in1" } };
 
         Assert.Contains("  falls: gate_in1 arrived 1, blocked 1, unfired 1 of 3 (data; all blocked is decoration)", reading.Lines(8));
-        Assert.DoesNotContain(new FinaleRun.Reading(FinaleRun.Company.Full, 12, games, 10, 11).Lines(8), l => l.StartsWith("  falls:", StringComparison.Ordinal));
+        Assert.DoesNotContain(new FinaleRun.Reading(FinaleCompany.Full, 12, games, 10, 11).Lines(8), l => l.StartsWith("  falls:", StringComparison.Ordinal));
     }
 
     [Fact]
     public void AFinaleWhoseSlowestAiGameReachesOneSecondFailsOnTime()
     {
-        var reading = new FinaleRun.Reading(FinaleRun.Company.Full, 12, Games(10, 0, 10), FinaleRun.SpeedLimitMs, 11);
+        var reading = new FinaleRun.Reading(FinaleCompany.Full, 12, Games(10, 0, 10), FinaleRun.SpeedLimitMs, 11);
 
         Assert.False(reading.Passed);
         Assert.Contains($"  time: {FinaleRun.SpeedSeeds} AI-vs-AI games, slowest {FinaleRun.SpeedLimitMs} ms: FAILED", reading.Lines(8));
@@ -136,16 +136,16 @@ public class FinaleRunTests
         var map = MapFiles.Load(path, Content);
 
         Assert.Equal(text, Ironwake.Content.MapFormat.Write(Ironwake.Content.MapFormat.Parse("ironwake_keep_finale.map", text, Content), Content));
-        Assert.Equal(12, FinaleRun.Measure(Content, map, FinaleRun.Company.Full, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
-        Assert.Equal(12, FinaleRun.Measure(Content, map, FinaleRun.Company.Depleted, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
-        Assert.Equal(1 + FinaleRun.FloorStory + Content.Campaign.Keep.Hires.Count, FinaleRun.Measure(Content, map, FinaleRun.Company.Floor, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
+        Assert.Equal(12, FinaleRun.Measure(Content, map, FinaleCompany.Full, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
+        Assert.Equal(12, FinaleRun.Measure(Content, map, FinaleCompany.Depleted, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
+        Assert.Equal(1 + FinaleRun.FloorStory + Content.Campaign.Keep.Hires.Count, FinaleRun.Measure(Content, map, FinaleCompany.Floor, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
     }
 
     /// <summary>Issue 1149: the fielded content's cast is the company, so a gate that fields the cast fields it at the level.</summary>
     [Fact]
     public void TheFieldedContentsCastIsTheCompany()
     {
-        Assert.Equal(FinaleRun.Roster(Content, FinaleRun.Company.Depleted, 8), FinaleRun.Fielded(Content, FinaleRun.Company.Depleted, 8).Cast);
+        Assert.Equal(FinaleRun.Roster(Content, FinaleCompany.Depleted, 8), FinaleRun.Fielded(Content, FinaleCompany.Depleted, 8).Cast);
     }
 }
 

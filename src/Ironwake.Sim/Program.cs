@@ -342,7 +342,7 @@ public static class Program
 
         Console.WriteLine($"finale: {mapId}, {seeds} seeds, {Gates.Name(scheme)}, story members at level {level}, hires at {Math.Max(Unit.MinLevel, level - Barracks.LevelsBelow)}");
         var failed = false;
-        foreach (var company in new[] { FinaleRun.Company.Full, FinaleRun.Company.Depleted, FinaleRun.Company.Floor })
+        foreach (var company in new[] { FinaleCompany.Full, FinaleCompany.Depleted, FinaleCompany.Floor })
         {
             var reading = FinaleRun.Measure(content, map, company, level, seeds, scheme);
             foreach (var line in reading.Lines(level))
@@ -351,7 +351,7 @@ public static class Program
             }
 
             failed |= !reading.Passed;
-            if (gates && company == FinaleRun.Company.Full)
+            if (gates && company == FinaleCompany.Full)
             {
                 var fielded = FinaleRun.Fielded(content, company, level);
                 foreach (var gate in new[] { Gates.Gate2(fielded, map, mapId, seeds, scheme), Gates.Gate4(fielded, map, mapId, reading.Games, scheme) })
