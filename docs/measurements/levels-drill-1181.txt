@@ -1,0 +1,7 @@
+# issue 1181: --levels --drill (Release, 200 runs, each chair's seeds split over four threads) on branch issue/1181-drill-print over main after #1180: the chipping chair and the even chair over the same seeds. Elapsed 12m 33s.
+levels --drill: 200 runs, the chipping chair (issue 1178) and the even chair over the same seeds (issue 1181, round 396); teodor's EXP the levy floor's drill zeroed, and the EXP he kept per deployed map, through map 8
+  chipping (82 runs with teodor after map 8): EXP zeroed by the drill per run p50 74 p75 92 (total 5383, 101 camps zeroed some); EXP kept per deployed map p50 0 p75 32 (410 maps)
+  chipping, EXP zeroed by map 1..8 (summed over those runs): 0 0 0 2202 1737 629 791 24
+  even (81 runs with teodor after map 8): EXP zeroed by the drill per run p50 36 p75 61 (total 3506, 96 camps zeroed some); EXP kept per deployed map p50 0 p75 10 (405 maps)
+  even, EXP zeroed by map 1..8 (summed over those runs): 0 0 0 1360 1066 613 417 50
+  verdict (round 396, through map 8): the drill is not the cause (zeroed p50 chipping 74, even 36, 38 apart, under 50); the cold hand play feeding teodor through map 8 decides the bar
