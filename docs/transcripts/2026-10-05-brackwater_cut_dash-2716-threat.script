@@ -1,0 +1,24 @@
+dash dunstan 14,3
+dash rook 14,2
+dash captain 13,3
+dash wren 12,3
+dash pell 12,4
+end
+move dunstan 18,3
+wait dunstan
+wait rook
+wait captain
+wait wren
+wait pell
+end
+move pell 15,3
+attack pell soldier-1 cinder
+move captain 16,3
+wait captain
+move dunstan 14,3
+wait dunstan
+dash wren 15,1
+move rook 14,0
+wait rook
+threat dunstan
+end
