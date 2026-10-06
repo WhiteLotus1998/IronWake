@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-06 (#1227, 0293; Table #1218, round 414). Under 20 KB (#401); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-06 (Long Count 1540, 0278; Table #1218, 414). Under 20 KB (#401); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
@@ -41,7 +41,7 @@ No forks are open. The chain heartbeat stays (#406). 0260, #1120: `confirm-letha
 | the_undercroft | Side map, Pell's quest 2 (0200, #635), two maps after Pell 1; pays Pell's Commonplace and 3 frozen iron. Seize, limit 7, Recall 2; three routes past two sleeping groups, a lector corking the north door, sworn down the stair from turn 2. Sim gate 1 1/200 (0292). Code 960 warm 7/7/6 at L5, won t6. A cold chair owed. |
 | the_old_watch | Side map, Teodor's quest 1 (0201, #635), after map 5; wakes the Family Lance. Defeat Boss, limit 9, Recall 2; a sallying boss on a fort, a one-tile bridgehead. Sim gate 1 8/200. Code 961 warm 8/7/7, lost t9, boss at 2, Wren fell. A cold chair owed. |
 | the_counting_house | Side map, Ottilie 1 (0202, #635); 2 common. Rout, limit 11 (#931, 0231), Recall 2; a canal, bridges 6,1 and 6,7; the archer a house guard at 11,2 (#925, 0228). Sim 0/200. Code 980 8/7/7, Chat cold 7/7/6, Code 925 7/6/6, Code 931 warm 8/7/6; Chat 9311 cold-ish 8/8/7, 11 stays. Code's fresh-seed read owed (0238). |
-| the_long_count | Side map, Ottilie 2 (0203, #635); Ottilie's Tally, 3 frozen iron. Escape, limit 8, `dusk: 4`; a road bridge or a footbridge, pursuers from turn 2; the count on screen (0229); the archer on the road at 11,4 (#930, 0230). Sim 74/200. Code 91 7/7/6, Chat cold 7/8/6, Code 928 7/8/5; Code 930 warm 7/6/5, won turn 8. A cold chair on the road archer owed. |
+| the_long_count | Side map, Ottilie 2 (0203, #635); Ottilie's Tally, 3 frozen iron. Escape, limit 8, `dusk: 4`; a road bridge or a footbridge, pursuers from turn 2; the count on screen (0229); the archer on the road at 11,4 (#930, 0230). Sim 74/200. Code 91 7/7/6, Chat cold 7/8/6, Code 928 7/8/5; Code 930 warm 7/6/5, won turn 8; Code 1540 warm 8/6/6 (Pell), lost. A cold chair on the road archer owed. |
 | the_chapter_roll | Side map, Rook 1 (0204, #635); opens the Drover. Seize, limit 8; a gorge, a corked cell. Sim 0/200. Code 1100 warm 8/7/6, won t8; the sentry never acted. A cold chair owed. |
 | the_wardens_gate | Side map, Teodor 2 (0205, #635); names the lance, 3 frozen iron. Defeat Boss, limit 10; the boss before the gate, a gap and a breach, a rider yard in his noise. Sim 0/200. Code 1110 warm 8/7/7, won t7; archer-2 never acted. A cold chair owed. |
 | the_burned_shrine | Side map, Keziah 1 (0206, #635); 2 common. Rout, limit 10; a ring wall, the hearth fort beside a held shieldbearer, a fight from it wakes the grove. Sim 0/200. Code 1113 warm 7/7/5, won t8; the turn-5 brigand is a walk. A cold chair owed. |
