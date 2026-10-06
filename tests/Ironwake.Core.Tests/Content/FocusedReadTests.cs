@@ -4,7 +4,7 @@ namespace Ironwake.Core.Tests.Content;
 
 /// <summary>
 /// The focused chair's read (issue 1157, round 389): the bar is p50 1 non-captain at L7 and rank C after
-/// map 8 on the paying line, the even chair the ceiling at p50 0, and a pass that leaves the captain below
+/// map 8 on the paying line, the even chair the ceiling at p50 0 on L7+C and on L7 alone (round 392), and a pass that leaves the captain below
 /// L7 reopens the curve; the paying line prints its price.
 /// </summary>
 public class FocusedReadTests
@@ -20,7 +20,7 @@ public class FocusedReadTests
     {
         var paying = Companies([M(7, 160, captain: true), M(7, 80)]);
 
-        Assert.EndsWith("the bar passes (paying p50 1 at L7+C, captain p50 L7); a door has to be fed; the ceiling holds (even p50 0)", LevelRun.FocusedVerdict(Unfed, paying));
+        Assert.EndsWith("the bar passes (paying p50 1 at L7+C, captain p50 L7); a door has to be fed; the ceiling holds (even p50 0 at L7+C, p50 0 at L7 alone)", LevelRun.FocusedVerdict(Unfed, paying));
     }
 
     [Fact]
@@ -32,9 +32,9 @@ public class FocusedReadTests
     }
 
     [Fact]
-    public void ABarShortOfOneSendsAChipThenFinishChair()
+    public void ABarShortOfOneSendsTheStrikeThenFinishChair()
     {
-        Assert.Contains("the bar fails (paying p50 0 at L7+C) on the levy floor; next a chip-then-finish chair, before lever 2 (round 391)", LevelRun.FocusedVerdict(Unfed, Unfed));
+        Assert.Contains("the bar fails (paying p50 0 at L7+C) on the levy floor; next the strike-then-finish chair, before lever 2 (round 392)", LevelRun.FocusedVerdict(Unfed, Unfed));
     }
 
     [Fact]
@@ -42,7 +42,15 @@ public class FocusedReadTests
     {
         var even = Companies([M(7, 160, captain: true), M(7, 80)]);
 
-        Assert.EndsWith("the ceiling is broken (even p50 1); step the levy floor to less three (round 391)", LevelRun.FocusedVerdict(even, Unfed));
+        Assert.EndsWith("the ceiling is broken (even p50 1 at L7+C, p50 1 at L7 alone); step the levy floor's offset first (round 392)", LevelRun.FocusedVerdict(even, Unfed));
+    }
+
+    [Fact]
+    public void AnEvenChairAtLevelSevenWithoutRankCBreaksTheCeiling()
+    {
+        var even = Companies([M(7, 160, captain: true), M(7, 11)]);
+
+        Assert.EndsWith("the ceiling is broken (even p50 0 at L7+C, p50 1 at L7 alone); step the levy floor's offset first (round 392)", LevelRun.FocusedVerdict(even, Unfed));
     }
 
     [Fact]

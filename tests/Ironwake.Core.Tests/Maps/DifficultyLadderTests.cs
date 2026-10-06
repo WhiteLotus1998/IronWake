@@ -151,7 +151,7 @@ public class DifficultyLadderTests
         Assert.Contains("Maud wins maud_1; fell and came back wounded: Wren\n", output);
         Assert.Contains("    Wounded (2): Str -2, Spd -2 for 2 more main maps\n", output);
         Assert.Contains("The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell\n", output);
-        Assert.Contains("  Wren: Cadet L3, EXP 0, Wounded (1); ", output);
+        Assert.Contains("  Wren: Cadet L2, EXP 0, Wounded (1); ", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 

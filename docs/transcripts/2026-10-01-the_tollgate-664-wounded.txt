@@ -2717,26 +2717,25 @@ B  wren             Wren L1 cadet              6,2    hp 20/20  Plain
 Battle won: seize; only recall is left, or leave
 > leave
 The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell
-Wren drilled with the levy: L1 -> L3.
-Teodor drilled with the levy: L1 -> L3.
-Ottilie drilled with the levy: L1 -> L3.
-Pell drilled with the levy: L2 -> L3.
-Dunstan drilled with the levy: L1 -> L3.
-Ansgar drilled with the levy: L1 -> L3.
-Keziah drilled with the levy: L1 -> L3.
-Brannock drilled with the levy: L1 -> L3.
+Wren drilled with the levy: L1 -> L2.
+Teodor drilled with the levy: L1 -> L2.
+Ottilie drilled with the levy: L1 -> L2.
+Dunstan drilled with the levy: L1 -> L2.
+Ansgar drilled with the levy: L1 -> L2.
+Keziah drilled with the levy: L1 -> L2.
+Brannock drilled with the levy: L1 -> L2.
 -- Before map 5 of 9: Harrow Weir; the purse holds 1500 --
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L3, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
-  Teodor: Pikeman L3, EXP 0; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
-  Ottilie: Bowman L3, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
-  Pell: Adept L3, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L3, EXP 0; 1: Iron Lance 40/40
+  Wren: Cadet L2, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
+  Teodor: Pikeman L2, EXP 0; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L2, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L2, EXP 55; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L2, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L1, EXP 82; 1: Radiance 5/5, 2: Salve 8/8
-  Ansgar: Outrider L3, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  Keziah: Reaver L3, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
-  Brannock: Cadet L3, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Ansgar: Outrider L2, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Keziah: Reaver L2, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L2, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Keziah (deploy 6 of 10)
 == Keep ==
 Purse: 1500
@@ -2751,19 +2750,19 @@ March (march): map 5, Harrow Weir. Defeat the boss by the end of turn 15. Captai
 > roster
 Roster: company 10/12
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L3, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
-  Teodor: Pikeman L3, EXP 0; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
-  Ottilie: Bowman L3, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
-  Pell: Adept L3, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L3, EXP 0; 1: Iron Lance 40/40
+  Wren: Cadet L2, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
+  Teodor: Pikeman L2, EXP 0; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L2, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L2, EXP 55; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L2, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L1, EXP 82; 1: Radiance 5/5, 2: Salve 8/8
-  Ansgar: Outrider L3, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  Keziah: Reaver L3, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
-  Brannock: Cadet L3, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Ansgar: Outrider L2, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Keziah: Reaver L2, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L2, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 > show wren
-  Wren: Cadet L3, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
+  Wren: Cadet L2, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
     Wounded (1): Str -2, Spd -2 for the next main map
-    HP 21  Str 5 Mag 0 Dex 6 Spd 7 Lck 5 Def 4 Res 2 Cha 3
+    HP 20  Str 5 Mag 0 Dex 6 Spd 6 Lck 5 Def 4 Res 2 Cha 3
     Ranks: sword E (11), lance E (0), axe E (0)
     Mastery: Fundamentals (3 of 12 combats)
 Campaign stopped before Harrow Weir: the script ended on the screen
