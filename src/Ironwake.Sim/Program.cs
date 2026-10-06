@@ -147,7 +147,7 @@ public static class Program
                 }
             }
 
-            return LevelTable(seeds);
+            return LevelTable(seeds, args.Contains("--even"));
         }
 
         if (args.Length > 0 && args[0] == "--supports")
@@ -290,7 +290,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -445,7 +445,8 @@ public static class Program
     /// The second tier's timing (issue 704): the company's levels after each campaign map under the
     /// heuristic player, <see cref="LevelRun"/>. A measurement only; nothing here changes what ships.
     /// </summary>
-    public static int LevelTable(int seeds)
+    /// <remarks>With <paramref name="even"/> set it plays the even-company chair and prints its read instead (issue 1150, <see cref="LevelRun.EvenLines"/>).</remarks>
+    public static int LevelTable(int seeds, bool even = false)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -455,7 +456,8 @@ public static class Program
         }
 
         var content = ContentLoader.Load(contentDir);
-        foreach (var line in LevelRun.Lines(content, LevelRun.Measure(contentDir, content, seeds)))
+        var runs = LevelRun.Measure(contentDir, content, seeds, even: even);
+        foreach (var line in even ? LevelRun.EvenLines(content, runs) : LevelRun.Lines(content, runs))
         {
             Console.WriteLine(line);
         }
