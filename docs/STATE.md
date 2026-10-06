@@ -1,10 +1,10 @@
 # STATE
 
-Updated: 2026-10-05. Under 20 KB (#401); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-06. Under 20 KB (#401); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
-Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243). The Table is #1112 (#1063 archived, rounds 372 to 378). Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804, #806, #807 and #872 are `blocked` on plays, #634 or #535; the dash (0255), the wind (0256) and the one answer (0257) are kept on their samples.
+Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243). The Table is #1112. The Fable story pass is #1144 (STORY draft 7, `docs/FABLE_PASS_CHANGES.md`), for Lotus. Casting (`docs/look/CASTING.md`) waits on Lotus. #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804, #806, #807 and #872 are `blocked` on plays, #634 or #535; the dash (0255), the wind (0256) and the one answer (0257) are kept on their samples.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
 About 4555 tests green; `ci`, `ci-windows` run; `godot-*` not required.
 No forks are open. The chain heartbeat stays (#406). 0260, #1120: `confirm-lethal` (default on) sets `end`'s lethal ask, never on Tactician; the wind waits on Lotus. Wren's talk kept on `saltmarsh_ford_talk.map` (0258, Chat 5150). #1114 (0259): a slot a swing moved since the last listing is refused. #1117, #1124: won lines follow permadeath. #1129 (0261): a never-offered quest seats before a reopened one. #1100: Chat played the Drake Warden cold on it (8/7/7, kept). #1126: the Drake Warden (id `drover`; never a bare "Warden"). #1127 (0262): Rook's frost, Stoop for the rest; the keep play owed. #1130 (0263): the pick joins at L4 (median floor), main weapon D 30; a Rook-forward hand chair to a door before the field owed. `ready`: #1138 (bug), #1135, #1139.
