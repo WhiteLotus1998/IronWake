@@ -147,7 +147,7 @@ public static class Program
                 }
             }
 
-            return args.Contains("--chip") ? ChipTable(seeds) : args.Contains("--gate") ? GateTable(seeds) : args.Contains("--rank-trace") ? RankTraceTable(seeds) : args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
+            return args.Contains("--drill") ? DrillTable(seeds) : args.Contains("--chip") ? ChipTable(seeds) : args.Contains("--gate") ? GateTable(seeds) : args.Contains("--rank-trace") ? RankTraceTable(seeds) : args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
         }
 
         if (args.Length > 0 && args[0] == "--supports")
@@ -290,7 +290,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip|--drill] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -535,6 +535,30 @@ public static class Program
         var chipping = Split(seeds, (count, first) => LevelRun.Measure(contentDir, content, count, focused: FocusedPlayer.Guard.Chipping, firstSeed: first));
         var even = Split(seeds, (count, first) => LevelRun.Measure(contentDir, content, count, even: true, firstSeed: first));
         foreach (var line in LevelRun.ChipLines(even.Result, striking.Result, chipping.Result))
+        {
+            Console.WriteLine(line);
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// The drill's print (issue 1181, round 396, <see cref="LevelRun.DrillLines"/>): the chipping chair and the even
+    /// chair over the same seeds, each chair's seeds split across four threads in order. A measurement only.
+    /// </summary>
+    public static int DrillTable(int seeds)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("levels: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var chipping = Split(seeds, (count, first) => LevelRun.Measure(contentDir, content, count, focused: FocusedPlayer.Guard.Chipping, firstSeed: first));
+        var even = Split(seeds, (count, first) => LevelRun.Measure(contentDir, content, count, even: true, firstSeed: first));
+        foreach (var line in LevelRun.DrillLines(even.Result, chipping.Result))
         {
             Console.WriteLine(line);
         }
