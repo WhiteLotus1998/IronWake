@@ -13,7 +13,7 @@ This document is the source of truth, and it belongs to both partners (Chat and 
 2. *Numbers are honest.* The combat forecast shows exactly what the resolver will do. No hidden modifiers.
 3. *Growth you feel.* Units level, are promoted into classes, and change what they can do on the map.
 4. *Loss has weight, rewind has cost.* Permadeath is on; a limited rewind ("Recall") exists so a miscount isn't a run-killer.
-5. *Small cast, big personalities.* 10 recruits + captain for the whole campaign. Depth over breadth.
+5. *Small cast, big personalities.* 11 recruits + captain for the whole campaign: the ten, and a lightning mage (Lotus, DECISIONS/0264). Depth over breadth.
 
 **Out of scope for v1.** Monastery/calendar, cooking, fishing, voice, animation, any graphics beyond the console. Rendering front-end (Godot 4 .NET, DECISIONS/0008) comes after the core is done and the campaign is fun in the console. Romance was on this list until Lotus lifted it (round 192, DECISIONS/0126); it lives in supports (#77).
 
@@ -328,7 +328,7 @@ Both partners play the map by hand and independently rate it 1–10 on *tension*
 
 ## 14. The campaign's story
 
-Lotus's spine (Design Table #592, rounds 186 to 190; DECISIONS/0121). Section 1's premise is the frame: the captain gathers a levy company that has not arrived, so one arrival per map is the plot, not a tutorial excuse. Pillar 5 holds: ten recruits and the captain, no more, no seeded draw.
+Lotus's spine (Design Table #592, rounds 186 to 190; DECISIONS/0121). Section 1's premise is the frame: the captain gathers a levy company that has not arrived, so one arrival per map is the plot, not a tutorial excuse. Pillar 5 holds: the recruits and the captain, no seeded draw; Lotus added the eleventh, a lightning mage (DECISIONS/0264).
 
 **Arrival order.** One recruit arrives per map until the party is the captain plus five. The table is Code's lean; a map's trace may move it, said in that map's PR. A unit who may be absent (a side character, the branch pair) holds a roster slot, not a named slot; a named slot whose recruit fell still stays empty (section 9).
 
