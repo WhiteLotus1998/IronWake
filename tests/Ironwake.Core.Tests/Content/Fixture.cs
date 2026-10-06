@@ -143,6 +143,29 @@ internal static class Fixture
         return target;
     }
 
+    private static readonly Lazy<string> ShrineNorthStart = new(() => WithShrineNorthStart(CopyFiles("ironwake-shrine-north-")));
+
+    /// <summary>
+    /// A copy of the real content directory whose First Shrine starts Maud and her ally north of
+    /// the water, at 6,5 and 8,5, and nothing else changed, for a play journaled before the start
+    /// moved south (issue 1198). Made once per test run.
+    /// </summary>
+    public static string ShrineNorthStartContentDirectory() => ShrineNorthStart.Value;
+
+    private static string WithShrineNorthStart(string target)
+    {
+        var path = Path.Combine(target, MapFiles.QuestsDirectory, "the_first_shrine.map");
+        var text = File.ReadAllText(path);
+        const string now = "P captain 4,8\nP recruit 10,8\n";
+        if (!text.Contains(now, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{path}: no south start to put back north of the water");
+        }
+
+        File.WriteAllText(path, text.Replace(now, "P captain 6,5\nP recruit 8,5\n", StringComparison.Ordinal));
+        return target;
+    }
+
     private static readonly Lazy<string> FieldUnseen = new(() => WithFieldUnseen(CopyFiles("ironwake-field-unseen-")));
 
     /// <summary>

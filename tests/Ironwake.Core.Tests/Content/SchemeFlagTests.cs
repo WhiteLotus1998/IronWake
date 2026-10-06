@@ -75,7 +75,7 @@ public class SchemeFlagTests
     [Fact]
     public void TheTraceUsageNamesTheSchemeFlagAndNotTheFormula()
     {
-        Assert.Contains("--trace <map> <seed> [--scheme one|two] |", Program.Usage);
+        Assert.Contains("--trace <map> <seed> [--scheme one|two] [--lead <id>]... |", Program.Usage);
         Assert.DoesNotContain("--formula", Program.Usage);
     }
 

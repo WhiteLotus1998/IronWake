@@ -71,6 +71,7 @@ public class SideMapCliTests
     /// Code's journaled play of Maud's quest 2 (seed 875), from a save before the raid with her
     /// quest 1 won: Wren kills the hexer, Maud both brigands, the braced door soldier falls on
     /// Wren's counter, and Maud takes the altar on turn 4 with the Psalter paid into her pack.
+    /// Played north of the water, before issue 1198 moved the start south.
     /// </summary>
     [Fact]
     public void TheJournaledShrinePlayWinsAndPaysThePsalter()
@@ -81,7 +82,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--script", script, "--strict", "--content", Fixture.ShrineNorthStartContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Battle won: seize", output);
@@ -99,7 +100,8 @@ public class SideMapCliTests
     /// Chat's cold chair on Maud's quest 2 (round 406), reseeded to 2130 from the 875 save with
     /// Ottilie as the ally: Maud's forest counters crit brigand 2 for 36 and spend four of
     /// Radiance's five uses, the forecasts counting them down (issue 1200), and the door soldier
-    /// still stands; the play recalls to turn 2 and stops undecided.
+    /// still stands; the play recalls to turn 2 and stops undecided. Played north of the water,
+    /// before issue 1198 moved the start south.
     /// </summary>
     [Fact]
     public void ChatsColdShrinePlaySpendsRadianceOnCountersAndStopsUndecided()
@@ -110,13 +112,45 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "2130", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "2130", "--script", script, "--strict", "--content", Fixture.ShrineNorthStartContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("  Maud crits Brigand 2 for 36 (hp 0)\n", output);
             Assert.Contains("counter: acc 81% dmg 11 crit 3% (Radiance 1 of 5 left)\n", output);
             Assert.Contains("Maud's Radiance is spent for this battle\n", output);
             Assert.EndsWith("Campaign stopped in The First Shrine at turn 2, undecided\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
+    /// Code's warm play of Maud's quest 2 after issue 1198 moved the start south of the water,
+    /// reseeded to 1530 from the 875 save with Wren as the ally: the soldier braces before anyone
+    /// reaches the door, Wren holds the turn-2 spawn tile, Radiance runs dry on turn 4, both Recalls
+    /// go, and Wren's sword opens the door on turn 9 for Maud to take the altar on turn 10 of 10.
+    /// </summary>
+    [Fact]
+    public void TheShrineFromTheSouthStartIsWonOnTheLastTurn()
+    {
+        var script = Transcript("2026-10-06-the_first_shrine-1530.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1530", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Soldier 1 waits and braces\nenemy: end\n-- Enemy phase ends, turn 1 --\n", output);
+            Assert.Contains("Reinforcements are blocked: a unit holds 7,8\n", output);
+            Assert.Contains("Maud's Radiance is spent for this battle\n", output);
+            Assert.Contains("The First Shrine  turn 10 of 10  player phase", output);
+            Assert.Contains("Battle won: seize", output);
+            Assert.Contains("Maud wins maud_2; Maud receives Maud's Psalter; nobody fell\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
         finally
