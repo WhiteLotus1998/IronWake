@@ -3272,3 +3272,16 @@ Notes:
 - **Verdict:** the tuned verdict stands, and the play files nothing. This is a fourth line (a lure from the south), with a fourth price (one body and every Recall). The seed pushed back on turn 1 and again on turn 6, and the `count` line was the instrument I should have read earlier. Like 1460, the play is clean but files no finding. 0237 says to revisit if warm replays file nothing for two days of chain runs. The last finding was #1087 (Harrow 1410), on 2026-10-05, so that clock is running, not run out.
 
 — Code
+
+## 2026-10-06 — The Mill, woken on turn 2, the weakest untuned map under 0278, warm — Code
+Seed: 1480 (`play the_mill --seed 1480 --strict --script docs/transcripts/2026-10-06-the_mill-1480.script`; transcript beside it; main at 3b632c6)   Result: **won, rout, on turn 4 of 12**, nobody lost, no Recall.
+Warm: my third Mill (632 the journal, 635 the Psalter's art). The first play under 0278, which points empty-queue runs at the lowest-rated untuned map. 632 rated it 6/5/3 because I never woke the mill. This time I set out to wake it.
+Tension: 7/10   Choice: 6/10   Surprise: 6/10
+Best turn: turn 2. The brigand stopped at 10,5, two tiles from the fort, and `forecast maud brigand-1` read `98, no counter` with a second line, `Fighting here wakes: the mill group`. The captain opened the road archer to 6 from 7,8, and Maud took the swing. `end` refused: `Lethal if all land: Maud (Archer 2 for 6, Brigand for 11, against 17 hp)`, about 29 percent. I ended with `!`. The archer chose the captain, the brigand missed at 45, and Maud's counter killed it.
+Notes:
+- **Surprise: the guards came down.** I expected a woken guard group to hold the hill. Instead the soldier and archer-1 walked to the bridge at 8,3 and 9,3, two tiles from Maud, and turned turn 3 into the fight the 632 play never had. `threat maud` read 21 against 17 with three strikers. Killing the road archer brought that down to 15.
+- **Radiance ran dry on counters.** Maud hit the soldier for 10 from the fort (no counter), then countered the archer and the soldier in the enemy phase. Her fifth use killed the soldier, and the line `Maud's Radiance is spent for this battle` came on turn 3 with Maud on 2 HP. She started turn 4 on 5 after the fort's heal, unarmed, with archer-1 at 7 HP in the forest at 9,6, threatening 6 against 5. The captain's Feint (91 for 8) finished it. Full Measure read 95 for 18 at the price of his next phase, and on the last enemy there is no next phase to pay. That is the same cost-that-never-bites the Tollgate 636 journal named.
+- **Not tense:** turn 1, a walk. The moment I stopped caring: none, the map ended first.
+- **Verdict:** better than 632 on surprise, because the wake is a real choice with a printed price. It is also the strong line, and it ends the map on turn 4 of 12. Filed as #1189: the limit never binds; the woken mill marches into Maud's counters; Radiance spends on counters she did not choose. Levers wait on Chat's entry (DIALOGUE: a map is retuned only after both are in).
+
+— Code

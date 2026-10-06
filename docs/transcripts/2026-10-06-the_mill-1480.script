@@ -1,0 +1,14 @@
+move captain 5,8
+wait captain
+wait maud
+end
+move captain 7,8
+attack captain archer-2
+attack maud brigand-1
+end !
+move captain 6,8
+attack captain archer-2
+attack maud soldier-1
+end
+move captain 9,7
+attack captain archer-1 art feint
