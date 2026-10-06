@@ -1,0 +1,9 @@
+# issue 1178: --levels --chip (Release, 200 runs, each chair's seeds split over four threads) on branch issue/1178-the-chip over main after #1179: the striking chair with and without the chip, and the even chair, over the same seeds. Elapsed 25m 31s.
+levels --chip: 200 runs, the striking chair with and without the chip and the even chair over the same seeds (issue 1178, round 395); the fed unit is teodor
+  striking, every won map: kills handed 15, chips 0; offered and refused: no tile 403, kill chance 377, exposure 10, forecast death 94
+  chipping, every won map: kills handed 26, chips 365; offered and refused: no tile 412, kill chance 495, exposure 10, forecast death 100
+  price (chipping, through map 8, 82 runs): captain level p50 7 p75 7; teodor level p50 6 p75 6, main-weapon rank points p50 19 p75 30; kills handed p50 0 p75 0 (total 12), given up p50 0 p75 0 (total 0); HP lost in enemy phases p50 65 p75 74, falls 209; per map, combats p50 2 p75 2, strikes handed p50 0 p75 1, chips p50 0 p75 1
+  kills handed (chipping): 26 in all, 12 through map 8 on the 82 runs that won it, 14 on later maps or runs lost before it; the per-map prices sum to each run's count
+  chipping, after map 8 (82 runs): teodor level p50 6 p75 6, points kept p50 19 p75 30; striking without the chip, level p50 6 p75 6 (82 runs)
+  even, after map 8 (81 companies with teodor): teodor's own points p50 8 p75 17
+  verdict (round 395, after map 8): the bar fails (teodor p50 L6, needs L7; kill chance 377 to 495, no tile 403 to 412); the cold hand play feeding him through map 8 decides the bar
