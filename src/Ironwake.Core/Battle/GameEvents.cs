@@ -154,6 +154,9 @@ public sealed record UnitBurned(string UnitId, int Amount, int HpAfter) : GameEv
 /// <summary>A drop's rock struck the unit standing under it (DESIGN.md 13.26, experiment). Amount is what was actually lost; the rock never takes a unit below 1.</summary>
 public sealed record RockfallStruck(string UnitId, Coord At, int Amount, int HpAfter) : GameEvent;
 
+/// <summary>A player unit rang the bell on <paramref name="At"/> (DESIGN.md 13.30); <paramref name="Answering"/> are the enemies that answer it, in unit order.</summary>
+public sealed record BellRang(string UnitId, Coord At, ValueList<string> Answering) : GameEvent;
+
 /// <summary>At the start of its side's phase a unit pays an art that cost it this phase (issue 636): it begins moved and acted and can neither move nor act until its side's next phase.</summary>
 public sealed record UnitRested(string UnitId) : GameEvent;
 

@@ -289,6 +289,17 @@ public static class ProtocolJson
                 w.WriteNumber("amount", r.Amount);
                 w.WriteNumber("hpAfter", r.HpAfter);
                 break;
+            case BellRang b:
+                w.WriteString("unit", b.UnitId);
+                WriteCoord(w, "at", b.At);
+                w.WriteStartArray("answering");
+                foreach (var id in b.Answering)
+                {
+                    w.WriteStringValue(id);
+                }
+
+                w.WriteEndArray();
+                break;
             case UnitRested r:
                 w.WriteString("unit", r.UnitId);
                 break;
@@ -625,6 +636,10 @@ public static class ProtocolJson
                 w.WriteString("type", "drop");
                 w.WriteString("unit", drop.UnitId);
                 break;
+            case Ring ring:
+                w.WriteString("type", "ring");
+                w.WriteString("unit", ring.UnitId);
+                break;
             case Talk talk:
                 w.WriteString("type", "talk");
                 w.WriteString("unit", talk.UnitId);
@@ -708,6 +723,7 @@ public static class ProtocolJson
             "recover" => new Recover(RequiredString(e, "unit")),
             "open" => new Open(RequiredString(e, "unit"), ReadCoord(e, "at")),
             "drop" => new Drop(RequiredString(e, "unit")),
+            "ring" => new Ring(RequiredString(e, "unit")),
             "talk" => new Talk(RequiredString(e, "unit"), RequiredString(e, "target")),
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
             "carry" => new Carry(RequiredString(e, "unit"), RequiredString(e, "ally"), ReadCoord(e, "to"), ReadCoord(e, "setDown")),
@@ -839,6 +855,11 @@ public static class ProtocolJson
         if (state.SideMap)
         {
             w.WriteBoolean("sideMap", true);
+        }
+
+        if (state.BellRung)
+        {
+            w.WriteBoolean("bellRung", true);
         }
 
         if (state.OrderCalled is { } order)
@@ -1045,6 +1066,7 @@ public static class ProtocolJson
         {
             CampaignMap = OptionalInt(e, "campaignMap"),
             SideMap = e.TryGetProperty("sideMap", out _) && RequiredBool(e, "sideMap"),
+            BellRung = e.TryGetProperty("bellRung", out _) && RequiredBool(e, "bellRung"),
             OrderCalled = OptionalString(e, "order") is { } order ? ReadOrderKind(order) : null,
             Opened = e.TryGetProperty("chests", out var chests)
                 ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
@@ -1135,6 +1157,11 @@ public static class ProtocolJson
         if (unit.Answered)
         {
             w.WriteBoolean("answered", true);
+        }
+
+        if (unit.Rung > 0)
+        {
+            w.WriteNumber("rung", unit.Rung);
         }
 
         if (unit.Pressed)
@@ -1389,6 +1416,7 @@ public static class ProtocolJson
             Breathed = e.TryGetProperty("breathed", out _) && RequiredBool(e, "breathed"),
             Winded = e.TryGetProperty("winded", out _) && RequiredBool(e, "winded"),
             Answered = e.TryGetProperty("answered", out _) && RequiredBool(e, "answered"),
+            Rung = OptionalInt(e, "rung") ?? 0,
             Open = e.TryGetProperty("open", out var open) ? new OpenMark(RequiredString(open, "by"), RequiredInt(open, "def"), RequiredInt(open, "res")) : null,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,

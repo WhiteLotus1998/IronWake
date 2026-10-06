@@ -47,6 +47,7 @@ public sealed class PlaySession
           recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
           open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
           drop <unit>              On a ledge, bring the rock down as the action: each tile below takes 10 to anyone on it, and closes unless someone stands there
+          ring <unit>              On the bell, ring it as the action, once: every enemy but a boss in its radius marches to it next enemy phase, striking no one
           talk <unit> <target>     Beside the claimant who came back as a foe: the pick's talk turns them, the captain's spares them
           dash <unit> <x,y>        On a dash map, a unit not yet moved or acted moves with Move +2 (terrain costs the extra), as its whole turn; struck at +15 Acc until its next phase
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
@@ -704,6 +705,12 @@ public sealed class PlaySession
                 break;
             case "drop":
                 Error("usage: drop <unit>");
+                break;
+            case "ring" when words.Length == 2:
+                Apply(new Ring(words[1]));
+                break;
+            case "ring":
+                Error("usage: ring <unit>");
                 break;
             case "talk" when words.Length == 3:
                 Apply(new Talk(words[1], words[2]));
@@ -2808,6 +2815,7 @@ public sealed class PlaySession
         Recover r => $"recover {r.UnitId}",
         Open o => $"open {o.UnitId} {o.At}",
         Drop d => $"drop {d.UnitId}",
+        Ring r => $"ring {r.UnitId}",
         Talk t => $"talk {t.UnitId} {t.TargetId}",
         Order o => $"order {Orders.Word(o.Kind)}",
         FallBack f => $"fallback {f.UnitId} {f.To}",
@@ -2927,6 +2935,8 @@ public sealed class PlaySession
                 return $"{names[b.UnitId]} burns {b.Amount} (hp {b.HpAfter})";
             case RockfallStruck r:
                 return $"  the rock strikes {names[r.UnitId]} at {r.At} for {r.Amount} (hp {r.HpAfter})";
+            case BellRang b:
+                return $"{names[b.UnitId]} rings the bell at {b.At}" + (b.Answering.Count == 0 ? "; nobody is near enough to answer" : $"; answering, they march to it and strike no one: {string.Join(", ", b.Answering.Select(id => names[id]))}");
             case UnitRested r:
                 return $"{names[r.UnitId]} is spent from the strike and cannot move or act this phase";
             case HungerDrained h:

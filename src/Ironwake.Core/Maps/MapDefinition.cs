@@ -230,6 +230,12 @@ public sealed record MapDefinition(
     public bool OneAnswerEnabled { get; init; }
 
     /// <summary>
+    /// The <c>bell:</c> header (DESIGN.md 13.30, experiment, samples): the bell's tile and radius
+    /// (<see cref="Core.Bell"/>); null for a map without one.
+    /// </summary>
+    public AlarmBell? Bell { get; init; }
+
+    /// <summary>
     /// The <c>breath:</c> header (issue 805, samples; issue 1094): the recruit placed with an Unbroken drake,
     /// so a sample plays the breath (<see cref="Rime"/>) without a campaign behind it; null for a map without
     /// it. A campaign battle opens the breath with no header (<see cref="Rime.Open"/>).
@@ -553,3 +559,6 @@ public sealed record MapDefinition(
         return new string(chars);
     }
 }
+
+/// <summary>The <c>bell:</c> header (DESIGN.md 13.30): the bell stands on <paramref name="At"/> and is heard within <paramref name="Radius"/> by Manhattan distance.</summary>
+public sealed record AlarmBell(Coord At, int Radius);

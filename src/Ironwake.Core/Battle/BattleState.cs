@@ -54,6 +54,9 @@ public sealed record BattleState(
     /// </summary>
     public bool SideMap { get; init; }
 
+    /// <summary>Whether the map's bell has been rung this battle (DESIGN.md 13.30, <see cref="Bell"/>); a Recall restores it with the board.</summary>
+    public bool BellRung { get; init; }
+
     /// <summary>
     /// Whether this battle is fought inside the campaign (issue 1094): a main map (<see cref="CampaignMap"/>)
     /// or a side map (<see cref="SideMap"/>). The drake's carry and breath are open on every such battle.
@@ -233,6 +236,7 @@ public sealed record BattleState(
         {
             null => null,
             _ when RetreatRule.Holds(unit, content) => Core.Behavior.Hold,
+            _ when unit.Rung != 0 && !unit.IsBoss => Core.Behavior.Aggressive,
             Core.Behavior.Guard => unit.Group is { } group && IsAwake(group) ? Core.Behavior.Aggressive : Core.Behavior.Hold,
             var other => other,
         };

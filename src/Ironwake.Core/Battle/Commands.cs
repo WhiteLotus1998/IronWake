@@ -85,6 +85,13 @@ public sealed record Open(string UnitId, Coord At) : Command;
 public sealed record Drop(string UnitId) : Command;
 
 /// <summary>
+/// Ring the bell (DESIGN.md 13.30, experiment): a player unit standing on the map's bell rings it
+/// as its action, in place of Attack, Item or Wait, after its Move or without one, once a battle
+/// (<see cref="Bell"/>). No Canto follows. The enemy never rings.
+/// </summary>
+public sealed record Ring(string UnitId) : Command;
+
+/// <summary>
 /// Shove an orthogonally adjacent ally (DESIGN.md 13.12, experiment): on a <c>shove: on</c> map,
 /// a player unit pushes an ally one tile directly away from itself, as its action in place of
 /// Attack, Item or Wait, after its Move or without one. The tile beyond must be on the map,

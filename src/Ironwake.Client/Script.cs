@@ -53,6 +53,7 @@ public static class Script
             ("exit", 2) => new Exit(words[1]),
             ("recover", 2) => new Recover(words[1]),
             ("drop", 2) => new Drop(words[1]),
+            ("ring", 2) => new Ring(words[1]),
             ("talk", 3) => new Talk(words[1], words[2]),
             ("shove", 3) => new Shove(words[1], words[2]),
             ("dash", 3) when TryCoord(words[2], out var dashTo) => new Dash(words[1], dashTo),

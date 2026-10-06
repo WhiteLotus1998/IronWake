@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "bell" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -93,6 +93,11 @@ public static class MapFormat
         if (map.OneAnswerEnabled)
         {
             sb.Append("one_answer: on\n");
+        }
+
+        if (map.Bell is { } bell)
+        {
+            sb.Append("bell: ").Append(bell.At).Append(' ').Append(bell.Radius).Append('\n');
         }
 
         if (map.PincerEnabled)
@@ -416,8 +421,12 @@ public static class MapFormat
             }
 
             var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce, keepsakes, dusk, grudges, shove, exitAfterMove);
-            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, WokenBearer = woken, Chests = chests, Messenger = ParseMessenger(header, width, height), OrdersEnabled = orders, EffectiveBows = effectiveBows, DashEnabled = dash, OneAnswerEnabled = oneAnswer };
+            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, WokenBearer = woken, Chests = chests, Messenger = ParseMessenger(header, width, height), OrdersEnabled = orders, EffectiveBows = effectiveBows, DashEnabled = dash, OneAnswerEnabled = oneAnswer, Bell = ParseBell(header, width, height) };
             ValidateMessenger(map, header);
+            if (map.Bell is { } bellAt && !map.TerrainAt(bellAt.At, _content).IsPassable(MovementType.Infantry))
+            {
+                throw ErrorAt(header["bell"].Line, $"bell at {bellAt.At} stands on {map.TerrainIdAt(bellAt.At)}, which infantry cannot enter");
+            }
             Validate(map);
             map = map with { CarryRider = ParseCarry(header, map), BreathRider = ParseBreath(header, map) };
             map = map with { Deploy = ParseDeploy(header, map), Oathbound = ParseGroups(header, map, "oathbound"), PairRuleGroups = ParseGroups(header, map, "pair_rule") };
@@ -609,6 +618,37 @@ public static class MapFormat
             }
 
             return count;
+        }
+
+        /// <summary>
+        /// The <c>bell:</c> header (DESIGN.md 13.30): the bell's tile, on the grid (and, checked once
+        /// the map is built, on ground infantry can enter), then its radius, 1 to <see cref="MapDefinition.MaxSide"/> times 2.
+        /// </summary>
+        private AlarmBell? ParseBell(Dictionary<string, (string Value, int Line)> header, int width, int height)
+        {
+            if (!header.TryGetValue("bell", out var entry))
+            {
+                return null;
+            }
+
+            var tokens = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var parts = tokens.Length == 2 ? tokens[0].Split(',') : System.Array.Empty<string>();
+            if (parts.Length != 2 || !int.TryParse(parts[0], out var x) || !int.TryParse(parts[1], out var y) || !int.TryParse(tokens[1], out var radius))
+            {
+                throw ErrorAt(entry.Line, $"bell needs a tile and a radius: 'bell: 12,7 8', got '{entry.Value}'");
+            }
+
+            if (x < 0 || y < 0 || x >= width || y >= height)
+            {
+                throw ErrorAt(entry.Line, $"bell position {x},{y} is outside the {width}x{height} grid");
+            }
+
+            if (radius < 1 || radius > MapDefinition.MaxSide * 2)
+            {
+                throw ErrorAt(entry.Line, $"bell radius must be 1 to {MapDefinition.MaxSide * 2}, got {radius}");
+            }
+
+            return new AlarmBell(new Coord(x, y), radius);
         }
 
         /// <summary>The <c>messenger:</c> header (DESIGN.md 13.24): two tiles, the messenger's placement and its road on the grid's edge.</summary>

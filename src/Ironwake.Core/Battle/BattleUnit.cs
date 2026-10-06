@@ -147,6 +147,14 @@ public sealed record BattleUnit(
     /// </summary>
     public bool Answered { get; init; }
 
+    /// <summary>
+    /// The bell's mark on an enemy (DESIGN.md 13.30, <see cref="Bell"/>): 0 none; <see cref="Bell.Answering"/>
+    /// rung within reach of it, so on the coming enemy phase it marches to the bell and strikes no one;
+    /// <see cref="Bell.Roused"/> once that phase has ended, an aggressive unit for the rest of the battle.
+    /// Board state, so Recall restores it.
+    /// </summary>
+    public int Rung { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 

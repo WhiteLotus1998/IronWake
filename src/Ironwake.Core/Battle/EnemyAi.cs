@@ -142,7 +142,7 @@ public static class EnemyAi
         if (!state.Map.PincerEnabled || unit.Side != Side.Enemy || unit.Acted || unit.Moved || unit.IsBoss
             || unit.Group is null || claimed.Contains(unit.Id) || HoldsTheThrone(state, unit)
             || state.EffectiveBehavior(unit, content) != Behavior.Aggressive || unit.EquippedWeapon(content) is null
-            || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit))
+            || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit) || unit.Rung == Bell.Answering)
         {
             return null;
         }
@@ -158,7 +158,7 @@ public static class EnemyAi
             .Where(f => f.Id != unit.Id && f.Group == unit.Group && !f.Acted && !f.Moved && !f.IsBoss && !claimed.Contains(f.Id)
                 && state.EffectiveBehavior(f, content) == Behavior.Aggressive
                 && f.EquippedWeapon(content) is { } weapon && weapon.InRange(1)
-                && RetreatRule.Choose(state, content, f) is null && !Messenger.Is(state, f))
+                && RetreatRule.Choose(state, content, f) is null && !Messenger.Is(state, f) && f.Rung != Bell.Answering)
             .ToList();
         if (followers.Count == 0)
         {
@@ -278,6 +278,14 @@ public static class EnemyAi
         {
             var run = Messenger.Runs(state, content, unit) ? Run(state, content, unit, reach, playerReach) : null;
             return run is { } to && to != unit.At
+                ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
+                : new Command[] { new Wait(unit.Id) };
+        }
+
+        if (unit.Rung == Bell.Answering && state.Map.Bell is { } bell)
+        {
+            var answer = MarchTo(state, content, unit, new[] { bell.At }, reach, playerReach);
+            return answer is { } to && to != unit.At
                 ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
                 : new Command[] { new Wait(unit.Id) };
         }
@@ -444,7 +452,7 @@ public static class EnemyAi
     /// weapon slot among its options against that one unit, by <see cref="PlanUnit"/>'s
     /// own score and order, so when the planner's best option is this target the strike
     /// named here is the strike that comes. Null when the unit would retreat, has no
-    /// weapon, or has no option against the target; a unit that holds strikes only from
+    /// weapon, answers the bell (DESIGN.md 13.30), or has no option against the target; a unit that holds strikes only from
     /// its own tile, and one that has moved only from where it stands. On a dusk map a target
     /// the unit does not know of (<see cref="Dusk.Knows"/>) is no option; given
     /// <paramref name="inDaylight"/>, the dark is ignored, both that and the sight a strike
@@ -454,7 +462,7 @@ public static class EnemyAi
     {
         var behavior = state.EffectiveBehavior(unit, content)
             ?? throw new ArgumentException($"{unit.Id} is a player unit and has no behavior", nameof(unit));
-        if (unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit))
+        if (unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit) || unit.Rung == Bell.Answering)
         {
             return null;
         }

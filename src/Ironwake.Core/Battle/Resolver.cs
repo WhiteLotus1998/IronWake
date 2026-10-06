@@ -67,6 +67,9 @@ public static class Resolver
             case Drop drop:
                 (next, rejection) = ApplyDrop(state, content, drop, events);
                 break;
+            case Ring ring:
+                (next, rejection) = ApplyRing(state, ring, events);
+                break;
             case Talk talk:
                 (next, rejection) = ApplyTalk(state, talk, events);
                 break;
@@ -1560,6 +1563,27 @@ public static class Resolver
     }
 
     /// <summary>
+    /// DESIGN.md 13.30's bell: a player unit that has not acted, standing on the map's bell before it
+    /// has been rung, rings it as its action, in place of Attack, Item or Wait, after its Move or
+    /// without one (<see cref="Bell.Ring"/>). No Canto follows.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyRing(BattleState state, Ring ring, List<GameEvent> events)
+    {
+        var unit = Acting(state, ring.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (Bell.Refusal(state, unit) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotRing, refusal));
+        }
+
+        return (Bell.Ring(state, unit, events), null);
+    }
+
+    /// <summary>
     /// Issue 633's talk: the pick or the captain, not yet acted, beside the returned claimant, talks
     /// them round as its action, in place of Attack, Item or Wait, after its Move or without one
     /// (<see cref="Returned"/>). They leave the board, which is not a kill. No Canto follows.
@@ -1731,6 +1755,7 @@ public static class Resolver
             state = Rivalry.Accrue(state, content, events);
         }
 
+        state = Bell.AtPhaseEnd(state, ended);
         events.Add(new PhaseEnded(ended, state.Turn));
         if (nextTurn > state.Map.TurnLimit)
         {
@@ -1936,6 +1961,11 @@ public static class Resolver
             if (Rockfall.Refusal(state, unit) is null)
             {
                 yield return new Drop(unit.Id);
+            }
+
+            if (Bell.Refusal(state, unit) is null)
+            {
+                yield return new Ring(unit.Id);
             }
 
             if (Returned.On(state) is { } returned && Returned.Refusal(state, unit, returned.Id) is null)

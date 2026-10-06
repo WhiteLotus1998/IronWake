@@ -430,6 +430,15 @@ public static class MapRenderer
                     role += state.IsAwake(unit.Group!) ? ", awake" : ", asleep";
                 }
 
+                if (unit.Rung == Bell.Answering)
+                {
+                    role += ", answering the bell";
+                }
+                else if (unit.Rung == Bell.Roused)
+                {
+                    role += ", roused";
+                }
+
                 if (RetreatRule.Holds(unit, content))
                 {
                     role += ", holds its refuge until half hp";
@@ -602,6 +611,11 @@ public static class MapRenderer
         if (Rockfall.Line(state, content) is { } ledges)
         {
             sb.Append(ledges).Append('\n');
+        }
+
+        if (Bell.Line(state) is { } bell)
+        {
+            sb.Append(bell).Append('\n');
         }
 
         if (DrakeCarry.Line(state) is { } carry)

@@ -29,6 +29,7 @@ public enum RejectionReason
     NoKeepsake,
     CannotOpen,
     CannotDrop,
+    CannotRing,
     Unseen,
     CannotShove,
     CannotCarry,
