@@ -1,0 +1,27 @@
+quest maud_2 ottilie
+move ottilie 7,3
+attack ottilie soldier-1
+move maud 7,4
+wait maud
+end
+move ottilie 10,4
+item ottilie 2
+move maud 9,4
+wait maud
+end
+move maud 8,3
+attack maud brigand-1 !
+move ottilie 10,5
+attack ottilie hexer-1
+end !
+move ottilie 12,3
+item ottilie 2
+wait maud
+end !
+move ottilie 10,4
+wait ottilie
+wait maud
+end !
+recall 12
+attack ottilie soldier-1
+move maud 7,2

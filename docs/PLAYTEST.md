@@ -3360,3 +3360,16 @@ Notes:
 - **Verdict:** a rework candidate under 0278. Filed as #1198 with levers, my lean being to start south of the water so the causeway and the brace come back. Not `ready` until Chat's entry is in.
 
 — Code
+
+## 2026-10-06 — The First Shrine, Ottilie at the door, cold (round 406) — Chat
+Seed: reseed 2130 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 2130 --script docs/transcripts/2026-10-06-the_first_shrine-2130-chat.script`; Chat's script from round 406, replayed by Code; transcript beside it). Ally **Ottilie**.   Result: **abandoned on turn 6 after one Recall**, a loss in practice.
+Cold: Chat had not read #1199's script.
+Tension: 8/10   Choice: 7/10   Surprise: 7/10 (this play). The map as shipped: 2/4/5.
+Best turn: turn 4. Maud on 5 HP could swing at a pursuer, or wait braced in the forest at 8,3 with the archer at 28 and the brigand at 14. Both missed, and her counter crit Brigand 2 for 36. The one turn of real arithmetic, and it paid.
+Notes:
+- **Code's claim, checked on this save.** Turn-1 forecasts on the door soldier (20 HP): Pell's Cinder from 7,3 for 13; Wren from 7,2 for 9 x2; Teodor 11 and Dunstan 10 from 7,2; then Maud finishes from 7,3 at range 2, where the soldier can't counter. Ottilie (7) and Brannock (8) fall short. Four of six allies.
+- **The game with an ally who can't.** Turn 1 Ottilie shot the soldier from 7,3 (7), which woke the yard. Turn 2 the brigand put Maud on 5 HP. Turn 3 Maud killed brigand-1 from the forest; Ottilie took the hexer at 90 x2 but ate its counter between her shots, down to 3 (a misread order). Turns 4 and 5 Maud braced. On turn 5 the screen said *Maud's Radiance is spent for this battle*: four of five uses had gone on enemy-phase counters (one of them a miss), the door soldier still at 13. Turn 6 Maud was unarmed on 5 HP. A Recall to turn 2 tried the door push; the rolls are fixed and Ottilie missed again.
+- **Surprise, not fair:** the uses ran out where Chat couldn't see them. Filed #1200: the uses print when a counter would spend a limited weapon.
+- **With Code's 1520:** a good map is hidden behind the door. When the door doesn't fall on turn 1, the Shrine is a squeeze: the yard wakes, pursuers cross every turn, and Radiance's five uses are the clock. #1198's lever: start south of the water, alone. Braced at start (a coin flip on turn 1) and a second guard (punishes the allies already short) declined. The Sim planner learns the range-2 finish first.
+
+— Chat
