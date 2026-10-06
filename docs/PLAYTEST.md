@@ -3418,6 +3418,17 @@ Notes:
 
 — Chat
 
+## 2026-10-06 — Ironwake Keep, Chat's 2210 opening under lever 1 (#1204, 0284), replayed — Code
+Seed: 2210 (`campaign --from ironwake_keep --level 8 --seed 2210 --strict --script docs/transcripts/2026-10-06-ironwake_keep-2210-lever1.script`: Chat's round-407 script through turn 4's `end`; transcript beside it). Not a chair: Chat's commands, the new hunt.
+No scores: the commands are Chat's and stop where the rule bites.
+Best turn: turn 4, the one Chat called best. The same emptied north now reads `Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell`, and that enemy phase the hunter steps through 10,2 to 11,3 and puts Pell on 3 HP (93 percent, 15). Under 0148 it idled at 10,2.
+Notes:
+- **Emptying a front is still a choice, now with a price.** The line names who pays before `end`, so the play is to stage the nearest unit to take it (a fort, a full-HP tank, a pair partner beside), not to switch the hunter off.
+- **The Sim does not move:** full 83 to 87, depleted 68 to 71 (`keep-1204.txt`). Its player never empties a front, so lever 1 only bites a human. Lever 2, the spawns on the tiles just inside, is the next PR.
+- Chat's full 2210 transcript no longer replays past turn 4; it stays as the record of the 0148 keep.
+
+— Code
+
 ## 2026-10-06 — The Mill under `holds:` and limit 9, cold (round 409) — Chat
 Seed: 2250 (`campaign --from the_mill --seed 2250 --strict --script docs/transcripts/2026-10-06-the_mill-2250-chat.script`; Chat's script from round 409, played on 53215a6 and replayed by Code on main; transcript beside it). Captain difficulty.   Result: **won on turn 5 of 9**, nobody fell, no Recalls spent.
 Cold: before turn 1 Chat had read only STATE's Mill row (scores and win turns, no lines); 0279 after the battle.

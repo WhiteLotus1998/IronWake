@@ -2473,23 +2473,28 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Chat's cold chair on the campaign keep as the finale (round 407, seed 2210, level 8): with
-    /// the north emptied the hunter reads it as the weakest front and idles, the gate falls with
-    /// both inside spawn tiles held, one Recall, and Keziah kills Hask on turn 11 with nobody
-    /// fallen. The evidence for issue 1204's levers.
+    /// Chat's cold chair on the campaign keep as the finale (round 407, seed 2210, level 8) was won
+    /// with nobody fallen under the hunt before issue 1204: with the north emptied on turn 4 the
+    /// hunter read it as the weakest front and idled at 10,2. Its transcript is the record of that
+    /// play and no longer replays (DECISIONS/0284). Its first four turns, kept as the lever1 script,
+    /// are lever 1's evidence: the same emptied north now names Pell, the unit nearest it, and the
+    /// hunter comes through 10,2 and puts her on 3 HP.
     /// </summary>
     [Fact]
-    public void ChatsColdKeepPlayWinsTheFinaleWithNobodyFallen()
+    public void ChatsEmptiedNorthLetsTheHunterThroughForTheUnitNearestIt()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-10-06-ironwake_keep-2210-chat.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-10-06-ironwake_keep-2210-lever1.script");
+        var chats = File.ReadAllLines(Path.Combine(repo, "docs", "transcripts", "2026-10-06-ironwake_keep-2210-chat.script"));
+        var turnFour = chats.Select((line, i) => (line, i)).Where(l => l.line.Trim() == "end").ElementAt(3).i;
 
-        var output = Run(out var exit, "campaign", "--from", "ironwake_keep", "--level", "8", "--seed", "2210", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "campaign", "--from", "ironwake_keep", "--level", "8", "--seed", "2210", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
-        Assert.Equal(0, exit);
-        Assert.Contains("Sworn Hunter hunts the north next: no defenders (weakest)", output);
-        Assert.Contains("Reinforcements are blocked: a unit holds 11,4\n", output);
-        Assert.Contains("Ironwake Keep won: defeat_boss; reward 2000, the purse holds 2500; nobody fell\n", output);
+        Assert.Equal(chats.Take(turnFour + 1), File.ReadAllLines(script));
+        Assert.DoesNotContain("Rejected ", output);
+        Assert.Contains("Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell\n", output);
+        Assert.Contains("enemy: move finale_hunter-1 11,3\nSworn Hunter moves 9,2 -> 11,3 via 10,2 11,2\n", output);
+        Assert.Contains("Sworn Hunter hits Pell for 15 (hp 3)\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 

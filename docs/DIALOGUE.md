@@ -38,7 +38,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
 - **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409; cold 5/6/4, t5): woken, the pair feeds the fort from its edge. #1212: held ground out of the fort's reach, by `threat`; tile count says only a post fits, so Maud's start is next.
 - **The First Shrine (406 to 408, 0283):** starts south, alone (brace, second guard declined). Both in from the south (7/7/5), no rework; after #1206's Sim the limit moves only if sprints dominate. #1208: `seize_name: altar` (a hook, not text).
-- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204, one at a time: an empty front lets the hunter in (`threat` and `end` move with it); inside spawns inside each front (all blocked: decoration); Hask gets 0279's reach. Depleted gate 1 under 60 softens.
+- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204, one at a time: an empty front lets the hunter through, priced in `threat` (0284); inside spawns inside each front (all blocked: decoration); Hask gets 0279's reach. Depleted gate 1 under 60 softens.
 
 ## Experiments (state and kill criterion)
 

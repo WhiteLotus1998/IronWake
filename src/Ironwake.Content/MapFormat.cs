@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -203,6 +203,11 @@ public static class MapFormat
         if (map.Hunter is { } hunter)
         {
             sb.Append("hunter: ").Append(hunter).Append('\n');
+        }
+
+        if (map.HuntWaits)
+        {
+            sb.Append("hunt_waits: on\n");
         }
 
         if (map.Bond is { } bond)
@@ -428,6 +433,7 @@ public static class MapFormat
             map = map with { Deploy = ParseDeploy(header, map), Oathbound = ParseGroups(header, map, "oathbound"), PairRuleGroups = ParseGroups(header, map, "pair_rule") };
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
+            map = map with { HuntWaits = ParseHuntWaits(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
             map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
@@ -536,6 +542,21 @@ public static class MapFormat
             }
 
             return new RouteDrift(routes[0].Group, routes[0].Crossing, routes[1].Group, routes[1].Crossing, when);
+        }
+
+        /// <summary>
+        /// The <c>hunt_waits: on</c> header (issue 1204): the hunt before DECISIONS/0284, kept for the
+        /// samples whose journaled plays were made under it. It needs a <c>hunter:</c> header.
+        /// </summary>
+        private bool ParseHuntWaits(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            var on = ParseOn(header, "hunt_waits");
+            if (on && map.Hunter is null)
+            {
+                throw ErrorAt(header["hunt_waits"].Line, "hunt_waits: needs a hunter: header; it keeps the old hunt");
+            }
+
+            return on;
         }
 
         /// <summary>
