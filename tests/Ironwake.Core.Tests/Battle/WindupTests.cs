@@ -423,7 +423,7 @@ public class WindupTests
         var fresh = new Ironwake.Cli.ProtocolSession(Starter, Start(true), TextWriter.Null).Answer("""{"query":"threat","unit":"hale"}""");
 
         Assert.Contains($"\"blow\":{{\"wielder\":\"toll_mauler-1\",\"damage\":{landing}}},\"ifAllLand\":{landing},", raised);
-        Assert.Contains("\"ifAllLand\":0,\"raises\":true,", raised);
+        Assert.Contains("\"ifAllLand\":0,\"countedFrom\":null,\"raises\":true,", raised);
         Assert.Contains("],\"ifAllLand\":0,", fresh);
         Assert.DoesNotContain("\"blow\"", fresh);
     }

@@ -514,7 +514,8 @@ public sealed class ProtocolSession
             w.WriteNumber("y", tile.Y);
             w.WriteEndObject();
             w.WriteStartArray("threats");
-            foreach (var line in lines)
+            var counted = Queries.CountedFrom(lines);
+            foreach (var (line, index) in lines.Select((l, i) => (l, i)))
             {
                 w.WriteStartObject();
                 w.WriteString("enemy", line.Enemy.Id);
@@ -533,6 +534,18 @@ public sealed class ProtocolSession
                 w.WriteNumber("slot", line.Slot);
                 w.WriteString("weapon", line.Weapon.Id);
                 w.WriteNumber("ifAllLand", line.IfAllLand);
+                if (counted[index] is { } seat)
+                {
+                    w.WriteStartObject("countedFrom");
+                    w.WriteNumber("x", seat.X);
+                    w.WriteNumber("y", seat.Y);
+                    w.WriteEndObject();
+                }
+                else
+                {
+                    w.WriteNull("countedFrom");
+                }
+
                 if (line.Raises)
                 {
                     w.WriteBoolean("raises", true);

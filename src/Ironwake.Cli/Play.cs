@@ -1908,6 +1908,18 @@ public sealed class PlaySession
     }
 
     /// <summary>
+    /// The note after a <c>threat</c> line's tile that says where the total counts it (issue
+    /// 1237, round 415): <c> (counted from 9,4)</c> when the seating puts it on another tile than
+    /// the one printed, <c> (not counted: 8,3 taken)</c> when the seating drops it. Empty for a
+    /// line counted where it reads, a raise or a line that deals nothing; the covered case,
+    /// whose total is not the seated sum, does not ask.
+    /// </summary>
+    private static string CountedNote(ThreatLine line, Coord? counted) =>
+        line.Raises || line.IfAllLand <= 0 ? ""
+        : counted is { } seat ? (seat == line.From ? "" : $" (counted from {seat})")
+        : $" (not counted: {line.From} taken)";
+
+    /// <summary>
     /// On a <c>brace: on</c> map (DESIGN.md 13.14), for a unit asked about on its own tile that
     /// would brace if it waited there and something can strike it: the same threat priced braced,
     /// under a line saying so, so the choice between striking and bracing reads as two numbers.
@@ -1976,6 +1988,10 @@ public sealed class PlaySession
     /// On a map with fronts (issue 692) one row names the front the tile defends (<see cref="Hunt.DefendedFrom"/>),
     /// and on a map with a hunter one more names the front it hunts (<see cref="Hunt.Line"/>), read
     /// with the unit moved to the tile.
+    /// A line the total seats on another tile than the one it prints says so after the tile,
+    /// <c>from 8,3 (counted from 9,4)</c>, and a priced line the seating drops says
+    /// <c>(not counted: 8,3 taken)</c> (<see cref="Queries.CountedFrom"/>, issue 1237); the
+    /// printed tile stays the enemy's own, and the covered case prints no seat.
     /// </summary>
     public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null, IReadOnlyList<GroupWoke>? wakes = null, IReadOnlyList<RefusalLine>? refusals = null)
     {
@@ -2004,7 +2020,8 @@ public sealed class PlaySession
                 rows.Add($"  {names[blow.Wielder.Id]}'s raised blow lands here at the enemy phase start: {blow.Damage}, sure, unless a hit from within its reach breaks it");
             }
 
-            foreach (var line in lines)
+            var counted = lines.Any(l => l.CoveredBy is not null) ? null : Queries.CountedFrom(lines);
+            foreach (var (line, index) in lines.Select((l, i) => (l, i)))
             {
                 var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
                 if (line.LitBy is { } lighter)
@@ -2014,7 +2031,7 @@ public sealed class PlaySession
 
                 var covered = line.CoveredBy is { } by ? $"covered by {names[by.Id]}, strikes {names[by.Id]} on {tile}, " : "";
                 var answers = line.CoveredBy ?? unit;
-                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
+                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From}{(counted is null ? "" : CountedNote(line, counted[index]))} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
                 var falls = !line.Raises && line.Forecast.CounterIsLethal(line.Enemy.Hp, answers.Hp) ? Returned.Falls(state, line.Enemy, names) : null;
                 if (!line.Raises && line.Forecast.Defender.Strikes && Kinsbane.CounterFeedLine(answers, line.Enemy, line.Forecast, content, names[answers.Id], falls) is { } feed)
                 {

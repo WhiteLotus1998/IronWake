@@ -413,6 +413,58 @@ public static class Queries
         Exposure.SeatedSum(lines.Where(l => !l.Raises).Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
 
     /// <summary>
+    /// Where <see cref="IfAllLand(IReadOnlyList{ThreatLine})"/> seats each of the
+    /// <paramref name="lines"/>, by index (issue 1237, round 415): the strike tile the total
+    /// counts that enemy from, or null for a line the total leaves out, a raise or one the
+    /// seating drops for want of a free tile. The lines and weights are the total's, so the
+    /// seated lines sum to it. Each line tries its own <see cref="ThreatLine.From"/> first, and a
+    /// line seated elsewhere goes back to it when that tile is free or when its holder, itself
+    /// off its own tile, can take the line's seat, so a line reads moved only when the total needs the move. It is the worst
+    /// case's assignment, not the planner's move, and an equal-weight seating is not unique, so it
+    /// explains the number and never predicts where an enemy goes. Read-only.
+    /// </summary>
+    public static IReadOnlyList<Coord?> CountedFrom(IReadOnlyList<ThreatLine> lines)
+    {
+        var priced = Enumerable.Range(0, lines.Count).Where(i => !lines[i].Raises).ToList();
+        var tiles = priced.Select(i => (IReadOnlyList<Coord>)new[] { lines[i].From }.Concat((lines[i].Tiles ?? ValueList<Coord>.Of(lines[i].From)).Where(t => t != lines[i].From)).ToList()).ToList();
+        var seats = new Dictionary<int, Coord>(Exposure.SeatedOn(priced.Select((i, k) => (lines[i].IfAllLand, tiles[k])).ToList()));
+        var settled = false;
+        while (!settled)
+        {
+            settled = true;
+            foreach (var (k, seat) in seats.ToList())
+            {
+                var own = lines[priced[k]].From;
+                if (seat == own)
+                {
+                    continue;
+                }
+
+                var holders = seats.Where(pair => pair.Value == own).Select(pair => pair.Key).ToList();
+                if (holders.Count == 0)
+                {
+                    seats[k] = own;
+                    settled = false;
+                }
+                else if (lines[priced[holders[0]]].From != own && tiles[holders[0]].Contains(seat))
+                {
+                    seats[k] = own;
+                    seats[holders[0]] = seat;
+                    settled = false;
+                }
+            }
+        }
+
+        var counted = new Coord?[lines.Count];
+        foreach (var (k, tile) in seats)
+        {
+            counted[priced[k]] = tile;
+        }
+
+        return counted;
+    }
+
+    /// <summary>
     /// Every player unit that the coming enemy phase kills if every strike <c>threat</c> prices
     /// on it lands (issue 558, rounds 158 and 159): the unit's <see cref="Threats"/> from where it
     /// stands, summed as <see cref="IfAllLand(IReadOnlyList{ThreatLine}, RaisedBlow?)"/> sums them,

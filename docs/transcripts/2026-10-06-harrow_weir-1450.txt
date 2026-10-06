@@ -1198,7 +1198,7 @@ B  teodor           Teodor L1 pikeman          7,9    hp 21/21  Plain  done
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > threat dunstan
 Threat on Dunstan at 8,10 (Plain):
-  Brawler from 9,10 with Iron Gauntlets (slot 1): acc 95% dmg 3 x2 crit 0%; counter: acc 74% dmg 11 crit 1%
+  Brawler from 9,10 (counted from 8,9) with Iron Gauntlets (slot 1): acc 95% dmg 3 x2 crit 0%; counter: acc 74% dmg 11 crit 1%
   Soldier from 9,10 with Iron Lance (slot 1): acc 82% dmg 6 crit 1%; counter: acc 73% dmg 9 crit 0%
   If all land: 12 against 23 hp
 > threat teodor
