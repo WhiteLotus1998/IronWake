@@ -1,0 +1,14 @@
+quest maud_2 pell
+threat maud from 7,3
+threat pell from 7,3
+forecast pell soldier-1 from 7,3
+move pell 7,3
+attack pell soldier-1
+move maud 7,2
+attack maud soldier-1
+threat maud
+end
+threat maud from 7,0
+move maud 7,0
+leave
+camp

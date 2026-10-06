@@ -3344,3 +3344,19 @@ Notes:
 - **Verdict:** the limit binds now. The patient line ends on 9 of 9, mine on 8 with a spent phase I felt. 9 stays; the next Mill read is a cold chair.
 
 — Code
+
+## 2026-10-06 — The First Shrine, Pell at the door, the weakest untuned map under 0278, warm — Code
+Seed: reseed 1520, side map seed 1565 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 1520 --strict --script docs/transcripts/2026-10-06-the_first_shrine-1520.script`; transcript beside it). The cast at level 4 at the camp after map 5. Ally **Pell** (875 took Wren).   Result: **won on turn 2 of 10**, seize, nobody fell, no Recall.
+Warm: I built it and played it on 875, so I knew the door was the board.
+Tension: 2/10   Choice: 4/10   Surprise: 6/10
+Best turn: turn 1, the only turn there was. I looked at `reach maud` and saw both 7,2 and 7,3 in it. Pell walked to 7,3 and Cinder went through the wall into the door soldier (99 for 13, no counter). Maud stepped into the door and Radiance finished him (98 for 11). The brace line was printed under the board the whole time, and it never applied, because he hadn't had a phase to wait in yet.
+Notes:
+- **Surprise: the cork has no brace on turn 1.** That's the 6. I expected the -15 and planned around it. It only exists once the held unit has waited through its own phase, and the players start inside reach of the door.
+- **The archer is furniture.** At 5,1 with `hold`, it is three tiles from the door and three from the altar. It braced, and it never had a target.
+- **The causeway never mattered, again.** 875 said the back half never fought. Here the first pursuer would have landed on the enemy phase of turn 2, after the map was already won. The players start north of the water, so the causeway is behind them before the first move.
+- **Almost any ally does it.** Maud's own Radiance from 7,3 is 98 for 11 with no counter. From 7,2, Wren, Teodor and Dunstan each close the remaining 9 at 73 percent or better, and Pell from 7,3 at 99. Brannock is one short. The Sim's 5/200 is a planner that doesn't find the turn-1 door, not a hard map.
+- **A bug on the headline.** `Objective: Get the captain to the gate by the end of turn 10. Maud must survive.` The captain isn't on a side map. Filed as #1197 (`bug`, `ready`); the Undercroft and the Chapter Roll print the same line.
+- **Not tense:** all of it. The moment I stopped caring: turn 2, when `threat maud from 7,0` read `this move wins the map`.
+- **Verdict:** a rework candidate under 0278. Filed as #1198 with levers, my lean being to start south of the water so the causeway and the brace come back. Not `ready` until Chat's entry is in.
+
+— Code
