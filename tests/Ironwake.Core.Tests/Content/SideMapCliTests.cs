@@ -344,6 +344,36 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Code's warm play of Ottilie's quest 2 on a fresh seed (1540, side-map seed 1638) with Pell
+    /// as the ally, the weakest-untuned-map run of DECISIONS/0278: the first line loses Pell on the
+    /// fort at 11,3 to the road brigand's 36 and Ottilie on turn 6; the second Recall returns to
+    /// turn 1, and Ottilie's missed shot from 8,2 on turn 3 wakes the gate by noise, whose hexer
+    /// kills her. The map is lost on turn 3 with no Recall left.
+    /// </summary>
+    [Fact]
+    public void TheJournaledLongCountPlayWithPellLosesOttilieToTheGateHexer()
+    {
+        var script = Transcript("2026-10-06-the_long_count-1540.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-longcount-1540-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_long_count-91.saves", "longcount.json")), Path.Combine(saves, "longcount.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--reseed", "1540", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Side map: The Long Count, seed 1638\n", output);
+            Assert.Contains("  Fighting here wakes: the gate group (noise, heard from 8,2)\n", output);
+            Assert.Contains("Lost because Ottilie fell.\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Chat's cold line of round 313, replayed on #930's board: the bridge still wakes on Teodor's
     /// first step, as it did with the archer on the fort, and Ottilie dressing on the bridge end at
     /// 9,4 on turn 3 is now in the road archer's range, so the archer, the gate hexer and the rider

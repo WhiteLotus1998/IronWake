@@ -1,0 +1,51 @@
+quest ottilie_2 pell
+move pell 6,4
+wait pell
+move ottilie 4,4
+wait ottilie
+end
+move pell 6,3
+attack pell soldier-1
+move ottilie 6,4
+wait ottilie
+end
+move ottilie 5,5
+attack ottilie rider-1 art aimed_shot
+move pell 6,6
+attack pell rider-1
+end
+move pell 8,4
+wait pell
+move ottilie 7,3
+wait ottilie
+end
+recall 33
+move pell 8,4
+wait pell
+move ottilie 8,5
+wait ottilie
+end
+move pell 11,3
+attack pell archer-1 art overcast
+move ottilie 10,3
+wait ottilie
+end !
+move ottilie 13,4
+item ottilie field_dressing
+end !
+recall 0
+move ottilie 5,4
+wait ottilie
+move pell 4,4
+wait pell
+end
+move ottilie 7,4
+wait ottilie
+move pell 5,4
+wait pell
+end
+move pell 7,3
+attack pell soldier-1
+move ottilie 8,2
+attack ottilie soldier-1
+end !
