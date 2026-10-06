@@ -13,24 +13,37 @@ public static class Objective
     /// The objective line in the player's words (issue 609, Lotus's own line for the Tollgate):
     /// what to do and by when, then who must survive, as two short sentences. Where the seize
     /// tile is and the rule clauses that hang off the objective are <see cref="Rules"/>, printed
-    /// by <c>help</c>, never in the headline.
+    /// by <c>help</c>, never in the headline. On a map a cast member leads (issue 1197), the
+    /// Seize and Escape clauses name the member, who must arrive alive, so the survivor clause
+    /// does not name the member a second time: <c>Get Maud to the gate alive by the end of turn
+    /// 10.</c>
     /// </summary>
     public static string Line(BattleState state, GameContent content)
     {
         var map = state.Map;
         var by = $"by the end of turn {map.TurnLimit}";
+        var captain = Rank(state, content);
+        var member = CaptainUnit(state) is { } leader && Leads(leader, content) && map.Win is WinCondition.Seize or WinCondition.Escape;
+        var who = member ? captain : "the captain";
+        var alive = member ? " alive" : "";
         var win = map.Win switch
         {
-            WinCondition.Seize => $"Get the captain to the {SeizeName(content)} {by}.",
+            WinCondition.Seize => $"Get {who} to the {SeizeName(content)}{alive} {by}.",
             WinCondition.Rout => $"Defeat every enemy {by}.",
             WinCondition.DefeatBoss => Arrival(map) is { } arrival ? $"Hold until the boss arrives on turn {arrival.Turn}, then defeat the boss {by}." : $"Defeat the boss {by}.",
             WinCondition.Survive => $"Hold out until the end of turn {map.TurnLimit}.",
-            WinCondition.Escape => $"Get the captain out through an exit {by}.",
+            WinCondition.Escape => $"Get {who} out through an exit{alive} {by}.",
             _ => throw new ArgumentOutOfRangeException(nameof(state), map.Win, "unknown win condition"),
         };
-        var captain = Rank(state, content);
-        var survivors = map.ProtectId is { } protect ? $"{captain} and {UnitNames.Of(state, content)[protect]} must survive." : $"{captain} must survive.";
-        return $"{win} {survivors}";
+        var guarded = map.ProtectId is { } protect ? UnitNames.Of(state, content)[protect] : null;
+        var survivors = (member, guarded) switch
+        {
+            (true, null) => null,
+            (true, { } other) => $"{UnitNames.Sentence(other)} must survive.",
+            (false, null) => $"{captain} must survive.",
+            (false, { } other) => $"{captain} and {other} must survive.",
+        };
+        return survivors is null ? win : $"{win} {survivors}";
     }
 
     /// <summary>
