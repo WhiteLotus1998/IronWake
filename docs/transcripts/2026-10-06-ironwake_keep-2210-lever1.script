@@ -1,0 +1,75 @@
+march
+move wren 10,2
+wait wren
+move pell 11,2
+wait pell
+move captain 11,5
+wait captain
+move keziah 11,6
+wait keziah
+move dunstan 10,9
+wait dunstan
+move teodor 10,10
+wait teodor
+move ottilie 12,5
+wait ottilie
+move ansgar 12,6
+wait ansgar
+move maud 12,4
+wait maud
+move rook 13,3
+wait rook
+move brannock 13,6
+wait brannock
+end
+move ansgar 8,6
+attack ansgar longbowman-1
+canto ansgar 10,6
+move ottilie 10,5
+attack ottilie longbowman-1
+attack pell finale_hunter-1
+move rook 10,1
+wait rook
+item wren 2
+move maud 11,4
+item maud salve captain
+move brannock 11,7
+wait brannock
+wait keziah
+wait dunstan
+wait teodor
+end
+move pell 11,1
+attack pell brigand-1
+attack ottilie marauder-1
+attack ansgar marauder-1
+canto ansgar stay
+move rook 14,0
+wait rook
+move maud 12,6
+item maud salve keziah
+wait brannock
+wait captain
+wait wren
+wait dunstan
+wait teodor
+end
+move ottilie 12,5
+item maud salve ottilie
+move captain 13,4
+wait captain
+move ansgar 11,5
+wait ansgar
+wait keziah
+move pell 11,4
+wait pell
+move teodor 9,10
+attack teodor soldier-1
+move wren 14,2
+item wren 2
+move dunstan 14,9
+wait dunstan
+wait brannock
+wait ottilie
+wait rook
+end

@@ -38,7 +38,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
 - **The Mill:** `holds:` (0279): woken guards go home, off the bank only to strike; limit 9 (0280). Next a cold chair.
 - **The First Shrine (406 to 408, 0283):** starts south, alone (brace, second guard declined). Both in from the south (7/7/5), no rework; after #1206's Sim the limit moves only if sprints dominate.
-- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204, one at a time: an empty front lets the hunter in (`threat` and `end` move with it); inside spawns inside each front (all blocked: decoration); Hask gets 0279's reach. Depleted gate 1 under 60 softens.
+- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204, one at a time: an empty front lets the hunter through, priced in `threat` (0284); inside spawns inside each front (all blocked: decoration); Hask gets 0279's reach. Depleted gate 1 under 60 softens.
 
 ## Experiments (state and kill criterion)
 
