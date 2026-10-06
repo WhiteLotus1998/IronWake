@@ -98,13 +98,15 @@ public sealed class EvenPlayer : IPlayer
     /// (only its own tile once it has moved), a weapon in range, the target seen, the ledger not refusing,
     /// the veto passed where the unit's death loses the map, the target killed on a hit, a kill chance of
     /// at least <paramref name="floor"/>, and at most <paramref name="exposure"/> enemies able to reach the tile.
+    /// With <paramref name="refuseDeath"/> set the veto's no-crit forecast death is refused for any unit,
+    /// not only one whose death loses the map (the focused chair's paying line, issue 1157).
     /// </summary>
-    public static IReadOnlyList<Command>? KillFrom(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, double floor, int exposure, IReadOnlyList<Reach> enemyReach)
+    public static IReadOnlyList<Command>? KillFrom(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, double floor, int exposure, IReadOnlyList<Reach> enemyReach, bool refuseDeath = false)
     {
         var tiles = unit.Moved
             ? new List<Coord> { unit.At }
             : state.ReachOf(unit, content).Destinations.Where(t => HeuristicPlayer.MayEndOn(state, content, unit, t)).ToList();
-        var vetoed = HeuristicPlayer.LosesTheMap(state, unit);
+        var vetoed = refuseDeath || HeuristicPlayer.LosesTheMap(state, unit);
         var equipped = unit.EquippedSlot(content);
         (Coord Tile, int Slot, double Score)? best = null;
         foreach (var tile in tiles)

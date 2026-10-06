@@ -36,6 +36,20 @@ public static class LevelRun
 
         /// <summary>The kills <see cref="EvenPlayer"/> handed to another unit over the run's won battles (issue 1150); 0 for any other player.</summary>
         public int Handed { get; init; }
+
+        /// <summary>
+        /// The focused chair's price per won map (issue 1157), one entry per <see cref="Maps"/> entry in the same
+        /// order: kills handed to <see cref="FocusedPlayer.Fed"/>, kills given up (<see cref="FocusedPlayer.GivenUp"/>),
+        /// the HP he lost in enemy phases and his falls in them; empty for any other player.
+        /// </summary>
+        public IReadOnlyList<Price> Prices { get; init; } = [];
+    }
+
+    /// <summary>The focused chair's price on one won map (issue 1157): see <see cref="Run.Prices"/>.</summary>
+    public sealed record Price(int Handed, int GivenUp, int HpLost, int Falls)
+    {
+        /// <summary>The kills offered to the fed unit and refused on the map, by the first clause that refused each (<see cref="FocusedPlayer.Refused"/>).</summary>
+        public IReadOnlyDictionary<FocusedPlayer.Refusal, int> Refused { get; init; } = new Dictionary<FocusedPlayer.Refusal, int>();
     }
 
     /// <summary>
@@ -54,6 +68,9 @@ public static class LevelRun
         /// </summary>
         public IReadOnlyList<string> Refused { get; init; } = [];
 
+        /// <summary>The unit's id (issue 1157, so the focused chair can read its fed unit).</summary>
+        public string Id { get; init; } = "";
+
         /// <summary>The bar's level half alone, read at <paramref name="level"/> or above.</summary>
         public bool AtLevel(int level) => Level >= level;
 
@@ -67,6 +84,7 @@ public static class LevelRun
             return new(unit.Level, unit.Skill.Points(MainType(unit, content)), ready, CampaignRecord.IsCaptain(unit, content))
             {
                 Refused = ready ? [] : Closest(unit, content),
+                Id = unit.Id,
             };
         }
     }
@@ -137,8 +155,8 @@ public static class LevelRun
     /// <see cref="PairingPlayer"/> for that support pair, each map's bench set by
     /// <see cref="PairingPlayer.Deploy"/> so both members fight it (issue 77, slice 5).
     /// </summary>
-    /// <remarks>With <paramref name="even"/> set the player is <see cref="EvenPlayer"/>, the even-company chair (issue 1150).</remarks>
-    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, (string A, string B)? pair = null, bool even = false)
+    /// <remarks>With <paramref name="even"/> set the player is <see cref="EvenPlayer"/>, the even-company chair (issue 1150); with <paramref name="focused"/> set it is <see cref="FocusedPlayer"/> under that guard (issue 1157).</remarks>
+    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, (string A, string B)? pair = null, bool even = false, FocusedPlayer.Guard? focused = null)
     {
         var runs = new List<Run>();
         for (var seed = 1; seed <= seeds; seed++)
@@ -149,6 +167,7 @@ public static class LevelRun
             var rapport = new List<IReadOnlyList<Rapport>>();
             var companies = new List<IReadOnlyList<Member>>();
             var handed = 0;
+            var prices = new List<Price>();
             int? lost = null;
             while (!record.IsFinished(content))
             {
@@ -158,6 +177,7 @@ public static class LevelRun
                 BattleState? won = null;
                 Camp? camp = null;
                 Dictionary<string, WeaponMix>? struck = null;
+                Price? price = null;
                 for (var attempt = 0; attempt < HeirloomRun.Attempts && won is null; attempt++)
                 {
                     var tried = record with { Seed = unchecked(record.Seed + (ulong)attempt * 7919UL) };
@@ -168,11 +188,12 @@ public static class LevelRun
 
                     var start = tried.Begin(map, content);
                     var tally = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
-                    IPlayer player = pair is { } q ? new PairingPlayer(q.A, q.B) : even ? new EvenPlayer() : new HeuristicPlayer();
-                    var end = Fight(start, content, seed, number, tally, player);
+                    IPlayer player = pair is { } q ? new PairingPlayer(q.A, q.B) : focused is { } guard ? new FocusedPlayer(guard) : even ? new EvenPlayer() : new HeuristicPlayer();
+                    var (end, hpLost, falls) = Fight(start, content, seed, number, tally, player);
                     if (end.Outcome.Result == BattleResult.Won)
                     {
-                        handed += player is EvenPlayer chair ? chair.Handed : 0;
+                        handed += player switch { EvenPlayer chair => chair.Handed, FocusedPlayer chair => chair.Handed, _ => 0 };
+                        price = player is FocusedPlayer fed ? new Price(fed.Handed, fed.GivenUp, hpLost, falls) { Refused = fed.Refused.ToDictionary() } : null;
                         won = end;
                         struck = tally;
                         camp = Read(start, end, content);
@@ -196,9 +217,13 @@ public static class LevelRun
                 maps.Add((number, company.Select(u => u.Level).ToList(), members.Count(m => m.Ready), camp!));
                 rapport.Add(record.Rapport.ToList());
                 companies.Add(members);
+                if (price is not null)
+                {
+                    prices.Add(price);
+                }
             }
 
-            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport, Companies = companies, Handed = handed });
+            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport, Companies = companies, Handed = handed, Prices = prices });
         }
 
         return runs;
@@ -224,8 +249,11 @@ public static class LevelRun
             .OrderBy(r => r.Count)
             .FirstOrDefault() ?? [];
 
-    private static BattleState Fight(BattleState state, GameContent content, int seed, int number, Dictionary<string, WeaponMix> weapons, IPlayer player)
+    /// <summary>One battle to its end, and the HP <see cref="FocusedPlayer.Fed"/> lost in enemy phases and how often he fell in them (issue 1157).</summary>
+    private static (BattleState End, int HpLost, int Falls) Fight(BattleState state, GameContent content, int seed, int number, Dictionary<string, WeaponMix> weapons, IPlayer player)
     {
+        var hpLost = 0;
+        var falls = 0;
         while (!state.Outcome.IsOver)
         {
             var commands = state.Phase == Side.Player ? player.Next(state, content) : EnemyAi.Plan(state, content);
@@ -242,6 +270,13 @@ public static class LevelRun
                     weapons[classId] = weapons.GetValueOrDefault(classId, WeaponMix.Zero).With(type, counter);
                 }
 
+                if (state.Phase == Side.Enemy && state.Find(FocusedPlayer.Fed) is { Side: Side.Player } before)
+                {
+                    var after = result.Next.Find(FocusedPlayer.Fed) is { Hp: > 0 } standing ? standing.Hp : 0;
+                    hpLost += Math.Max(0, before.Hp - after);
+                    falls += after == 0 ? 1 : 0;
+                }
+
                 state = result.Next;
                 if (state.Outcome.IsOver)
                 {
@@ -250,7 +285,7 @@ public static class LevelRun
             }
         }
 
-        return state;
+        return (state, hpLost, falls);
     }
 
     /// <summary>
@@ -315,6 +350,101 @@ public static class LevelRun
     public static IEnumerable<string> EvenLines(GameContent content, IReadOnlyList<Run> runs)
     {
         yield return $"levels --even: {runs.Count} runs, the even-company chair (issue 1150): a kill the heuristic plans goes to the lowest level, then the fewest main-weapon rank points, that takes it from a tile the heuristic accepts at no lower kill chance and no more exposure; kills handed {runs.Sum(r => r.Handed)}";
+        foreach (var line in ChairLines(content, runs))
+        {
+            yield return line;
+        }
+
+        yield return Verdict(Companies(runs, VerdictMap));
+    }
+
+    /// <summary>
+    /// The focused chair's read (issue 1157, round 389): three chairs over the same seeds, the even chair
+    /// (the ceiling), the focused chair's guarded line and its paying line, each with its kills handed and
+    /// <see cref="ChairLines"/>; the paying line also prints its price through map 8 (<see cref="PriceLine"/>);
+    /// last, the bar's read (<see cref="FocusedVerdict"/>).
+    /// </summary>
+    public static IEnumerable<string> FocusedLines(GameContent content, IReadOnlyList<Run> even, IReadOnlyList<Run> guarded, IReadOnlyList<Run> paying)
+    {
+        yield return $"levels --focused: {paying.Count} runs, three chairs over the same seeds, retries and campaign; the fed unit is {FocusedPlayer.Fed}";
+        foreach (var (label, runs) in new[]
+        {
+            ("even (the ceiling): the lowest level that takes a kill at no lower kill chance and no more exposure", even),
+            ("guarded: every kill " + FocusedPlayer.Fed + " can take at no lower kill chance and no more exposure", guarded),
+            ($"paying: every kill {FocusedPlayer.Fed} can take that still kills on a hit, at most {(int)Math.Round(FocusedPlayer.PayingGap * 100)} points of kill chance below the planned attacker's, at most {FocusedPlayer.PayingReach} more enemy in reach, no forecast death", paying),
+        })
+        {
+            var refused = runs.SelectMany(r => r.Prices).SelectMany(p => p.Refused).GroupBy(kv => kv.Key).ToDictionary(g => g.Key, g => g.Sum(kv => kv.Value));
+            var why = runs.Any(r => r.Prices.Count > 0)
+                ? $", offered and refused: no tile {refused.GetValueOrDefault(FocusedPlayer.Refusal.NoTile)}, kill chance {refused.GetValueOrDefault(FocusedPlayer.Refusal.Chance)}, exposure {refused.GetValueOrDefault(FocusedPlayer.Refusal.Exposure)}, forecast death {refused.GetValueOrDefault(FocusedPlayer.Refusal.ForecastDeath)}"
+                : "";
+            yield return $"  {label}; kills handed {runs.Sum(r => r.Handed)}{why}";
+            foreach (var line in ChairLines(content, runs))
+            {
+                yield return "  " + line;
+            }
+        }
+
+        yield return PriceLine(paying);
+        yield return FocusedVerdict(Companies(even, VerdictMap), Companies(paying, VerdictMap));
+    }
+
+    /// <summary>
+    /// The paying line's price through map <see cref="VerdictMap"/> (issue 1157), over the runs that won it:
+    /// the captain's level after it, the fed unit's level and main-weapon rank points after it, the kills
+    /// handed and given up, the HP the fed unit lost in enemy phases (each p50 p75 per run), and his falls in all.
+    /// </summary>
+    public static string PriceLine(IReadOnlyList<Run> runs)
+    {
+        var reached = runs.Select(r => (Run: r, At: r.Maps.ToList().FindIndex(m => m.Map == VerdictMap))).Where(x => x.At >= 0 && x.At < x.Run.Companies.Count && x.At < x.Run.Prices.Count).ToList();
+        if (reached.Count == 0)
+        {
+            return $"  price (paying, through map {VerdictMap}): no run won it";
+        }
+
+        string Pair(IEnumerable<int> values)
+        {
+            var list = values.ToList();
+            return $"p50 {Percentile(list, 0.5)} p75 {Percentile(list, 0.75)}";
+        }
+
+        var through = reached.Select(x => x.Run.Prices.Take(x.At + 1).ToList()).ToList();
+        var after = reached.Select(x => x.Run.Companies[x.At]).ToList();
+        var captain = after.Select(c => c.FirstOrDefault(m => m.Captain)?.Level ?? 0);
+        var fed = after.Select(c => c.FirstOrDefault(m => m.Id == FocusedPlayer.Fed)).ToList();
+        return $"  price (paying, through map {VerdictMap}, {reached.Count} runs): captain level {Pair(captain)}; {FocusedPlayer.Fed} level {Pair(fed.Select(m => m?.Level ?? 0))}, main-weapon rank points {Pair(fed.Select(m => m?.MainRank ?? 0))}; kills handed {Pair(through.Select(p => p.Sum(x => x.Handed)))}, given up {Pair(through.Select(p => p.Sum(x => x.GivenUp)))} (total {through.Sum(p => p.Sum(x => x.GivenUp))}); HP lost in enemy phases {Pair(through.Select(p => p.Sum(x => x.HpLost)))}, falls {through.Sum(p => p.Sum(x => x.Falls))}";
+    }
+
+    /// <summary>
+    /// Round 389's read after map <see cref="VerdictMap"/>: the bar is p50 1 non-captain at L7 and rank C on the
+    /// paying line, the ceiling p50 0 on the even chair, and a pass that leaves the captain's p50 below
+    /// <see cref="Threshold"/> reopens the curve.
+    /// </summary>
+    public static string FocusedVerdict(IReadOnlyList<IReadOnlyList<Member>> even, IReadOnlyList<IReadOnlyList<Member>> paying)
+    {
+        int P50(IReadOnlyList<IReadOnlyList<Member>> companies) => Percentile(companies.Select(c => c.Count(m => !m.Captain && m.AtBar)), 0.5);
+        var head = $"  verdict (round 389, after map {VerdictMap}): ";
+        if (paying.Count == 0)
+        {
+            return head + "no paying company reached it";
+        }
+
+        var captain = Percentile(paying.Select(c => c.FirstOrDefault(m => m.Captain)?.Level ?? 0), 0.5);
+        var bar = P50(paying) >= 1
+            ? captain >= Threshold ? $"the bar passes (paying p50 {P50(paying)} at L7+C, captain p50 L{captain}); a door has to be fed" : $"the bar passes at p50 {P50(paying)} but the captain is at p50 L{captain}; the curve reopens"
+            : "the bar fails (paying p50 0 at L7+C); the first lever is the joins' levels and ranks";
+        var ceiling = P50(even) == 0 ? "the ceiling holds (even p50 0)" : $"the ceiling is broken (even p50 {P50(even)})";
+        return head + bar + "; " + ceiling;
+    }
+
+    /// <summary>
+    /// One chair's per-map read (issue 1150): per map from <see cref="EvenFrom"/>, over the companies standing
+    /// after it, the non-captains at L7, L6 and L5 with rank C in the main weapon, the level half and the rank
+    /// half alone, and those meeting a form, each as p50 p75; then, over the non-captains at L7 and rank C who
+    /// meet no form, what the closest form refuses.
+    /// </summary>
+    public static IEnumerable<string> ChairLines(GameContent content, IReadOnlyList<Run> runs)
+    {
         foreach (var number in runs.SelectMany(r => r.Maps.Select(m => m.Map)).Distinct().Where(n => n >= EvenFrom).Order())
         {
             var companies = Companies(runs, number).Select(c => c.Where(m => !m.Captain).ToList()).ToList();
@@ -331,8 +461,6 @@ public static class LevelRun
                 .Select(g => $"{g.Key} {g.Count()}").ToList();
             yield return $"    at L7+C meeting no form: {refused.Count}{(keys.Count == 0 ? "" : $", the closest form refuses {string.Join(", ", keys)}")}";
         }
-
-        yield return Verdict(Companies(runs, VerdictMap));
     }
 
     /// <summary>
