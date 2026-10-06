@@ -1,0 +1,122 @@
+march
+move captain 4,13
+wait captain
+move keziah 3,12
+wait keziah
+move teodor 4,11
+wait teodor
+move pell 2,12
+wait pell
+move ottilie 3,11
+wait ottilie
+move maud 2,13
+wait maud
+end
+move captain 7,12
+talk captain rook
+move keziah 6,12
+wait keziah
+move teodor 6,11
+wait teodor
+move pell 5,12
+wait pell
+move ottilie 5,11
+wait ottilie
+move maud 4,12
+wait maud
+end
+move pell 6,14
+attack pell brigand-1
+move maud 5,12
+item maud salve keziah
+attack keziah soldier-3 !
+move ottilie 7,11
+attack ottilie archer-2
+move teodor 8,11
+attack teodor archer-2
+move captain 9,12
+wait captain
+end
+move captain 10,10
+item captain 2
+move teodor 10,11
+wait teodor
+move ottilie 10,12
+wait ottilie
+move keziah 9,12
+wait keziah
+move maud 8,12
+wait maud
+move pell 9,13
+wait pell
+end
+move captain 11,7
+wait captain
+move teodor 11,8
+wait teodor
+move keziah 10,9
+wait keziah
+move pell 10,10
+wait pell
+move ottilie 12,10
+wait ottilie
+move maud 10,11
+wait maud
+end
+move captain 9,5
+attack captain soldier-1
+move keziah 10,7
+attack keziah archer-1
+canto keziah 11,7
+move teodor 10,6
+attack teodor soldier-1
+move maud 11,8
+item maud salve keziah
+move pell 10,7
+attack pell soldier-1
+move ottilie 11,10
+wait ottilie
+end
+move teodor 12,7
+attack teodor soldier-2
+move keziah 12,9
+attack keziah rider-1
+move ottilie 11,11
+item ottilie 2
+move captain 10,8
+item captain 2
+move maud 10,10
+wait maud
+move pell 11,9
+wait pell
+end
+move ottilie 11,8
+attack ottilie archer-3
+move teodor 12,8
+attack teodor archer-3
+move keziah 13,7
+attack keziah archer-3
+move pell 14,8
+attack pell sentry-1
+move maud 12,9
+item maud salve teodor
+move captain 12,7
+wait captain
+end
+move teodor 15,7
+attack teodor brigand-2
+move pell 16,6
+attack pell sworn_captain-1 art overcast
+move keziah 16,7
+wait keziah
+move captain 14,7
+wait captain
+move ottilie 15,8
+wait ottilie
+move maud 14,8
+wait maud
+end
+attack pell sworn_captain-1 gust
+move teodor 17,6
+attack teodor sworn_captain-1
+leave
