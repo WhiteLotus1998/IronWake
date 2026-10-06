@@ -1343,6 +1343,26 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Code's warm play of Saltmarsh Ford under DECISIONS/0278 (seed 1560): Teodor wakes the fort
+    /// from 10,5 and his counter sets up Ottilie's kill on the wingrider, the archer and soldier die
+    /// single file on the ford, Teodor's range-2 bait on 10,2 takes the Toll Axe and strips the
+    /// leader's brace, and Full Measure finishes him on turn 6; the pair die at the ford on turns 9
+    /// and 10.
+    /// </summary>
+    [Fact]
+    public void SaltmarshFordReplayOnSeed1560RoutsOnTurn10()
+    {
+        var output = RunShipped("saltmarsh_ford.map", "2026-10-06-saltmarsh_ford-1560.script", 1560, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Forecast Bandit Leader -> Teodor: acc 58% dmg 11 crit 1%; counter: none\n", output);
+        Assert.Contains("  Alder Fenn hits Bandit Leader for 15 (hp 0)\n", output);
+        Assert.Contains("Soldier 2 moves 8,4 -> 5,4 via 7,4 6,4\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-10-06-saltmarsh_ford-1560.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Code's warm replay of Brackwater Cut under DECISIONS/0237 (seed 1470): the fort archer
     /// survives the opener, a Recall and a 3 percent crit on turn 2 open the gap, two Recalls price
     /// the bank, and Dunstan, left as a lure in the south, buys four escapes on turn 8.
