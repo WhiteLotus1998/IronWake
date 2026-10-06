@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-06 (Saltmarsh 1560, 0278; Table #1218, 414). Under 20 KB (#401); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-06 (the raid 1570, 0278; Table #1218, 414). Under 20 KB (#401); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
@@ -42,8 +42,8 @@ No forks are open. The chain heartbeat stays (#406). 0260, #1120: `confirm-letha
 | the_old_watch | Side map, Teodor's quest 1 (0201, #635), after map 5; wakes the Family Lance. Defeat Boss, limit 9, Recall 2; a sallying boss on a fort, a one-tile bridgehead. Sim gate 1 8/200. Code 961 warm 8/7/7, lost t9, boss at 2, Wren fell. A cold chair owed. |
 | the_counting_house | Side map, Ottilie 1 (0202, #635); 2 common. Rout, limit 11 (#931, 0231), Recall 2; a canal, bridges 6,1 and 6,7; the archer a house guard at 11,2 (#925, 0228). Sim 0/200. Code 980 8/7/7, Chat cold 7/7/6, Code 925 7/6/6, Code 931 warm 8/7/6; Chat 9311 cold-ish 8/8/7, 11 stays. Code's fresh-seed read owed (0238). |
 | the_long_count | Side map, Ottilie 2 (0203, #635); Ottilie's Tally, 3 frozen iron. Escape, limit 8, `dusk: 4`; a road bridge or a footbridge, pursuers from turn 2; the count on screen (0229); the archer on the road at 11,4 (#930, 0230). Sim 74/200. Code 91 7/7/6, Chat cold 7/8/6, Code 928 7/8/5; Code 930 warm 7/6/5, won turn 8; Code 1540 warm 8/6/6 (Pell), lost. A cold chair owed. |
-| the_chapter_roll | Side map, Rook 1 (0204, #635); opens the Drover. Seize, limit 8; a gorge, a corked cell. Sim 0/200. Code 1100 warm 8/7/6, won t8; the sentry never acted. A cold chair owed. |
-| the_wardens_gate | Side map, Teodor 2 (0205, #635); names the lance, 3 frozen iron. Defeat Boss, limit 10; the boss before the gate, a gap and a breach, a rider yard in his noise. Sim 0/200. Code 1110 warm 8/7/7, won t7; archer-2 never acted. A cold chair owed. |
+| the_chapter_roll | Side map, Rook 1 (0204, #635); opens the Drover. Seize, limit 8; a gorge, a corked cell. Sim 0/200. Code 1100 warm 8/7/6, won t8. A cold chair owed. |
+| the_wardens_gate | Side map, Teodor 2 (0205, #635); names the lance, 3 frozen iron. Defeat Boss, limit 10; the boss before the gate, a gap and a breach, a rider yard in his noise. Sim 0/200. Code 1110 warm 8/7/7, won t7. A cold chair owed. |
 | the_burned_shrine | Side map, Keziah 1 (0206, #635); 2 common. Rout, limit 10; a ring wall, the hearth fort beside a held shieldbearer, a fight from it wakes the grove. Sim 0/200. Code 1113 warm 7/7/5, 1550 6/7/5 (Teodor), both won t8; the turn-5 brigand walks (#1234). A cold chair owed. |
 | the_oath_stone | Side map, Keziah 2 (0224, 0225, #635); 2 common. Defeat Boss, limit 10 (#939, 0232); Joab corks the door, `freed` by the envoy's fall; the envoy keeps his fort. Chat 4410 warm 7/6/7 (lost t10; ~55% from t8). #940 (0239): rider on turn 5; Code 940 warm 8/7/6, won t10. Chat's read owed. |
 | the_rookery | Side map, Rook 2 (0208, #635); 2 common, #805's key for Unbroken. Escape, limit 9; a ravine bridge, a woken loft, Rook leaves last. #862 (0208 addendum): sentry 13,3, archer 12,6, 14,5 free. Sim 36/200 (was 72), all captain alone. Code 862 warm 7/7/5. Code 1132-carry warm 8/7/6 (Grown, #1094), lost t8; its Wing Captain stoops. A cold chair owed. |
@@ -56,7 +56,7 @@ No forks are open. The chain heartbeat stays (#406). 0260, #1120: `confirm-letha
 | old_mill_road | A fixture, out of the campaign (0124); gate 1 57/200 (0248). |
 | saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 50/200, gate 4 fails at 0.075 (#971). On the cut: Code 547 7/7/6, Chat cold 571 7/7/5; Code 1560 warm 6/6/5, the pair late. The spawn lever #524 failed (0095). |
 | sallow_grange | Not tuned. Seize, the Reeve a guard boss at 15,6 (0055), hexer at 13,7 (#275). `keziah_warning: on` (0214). Gate 1 81 percent (161/200), gate 4 ok at 0.330 (#971). Last: Chat 7/7/6 (44), Code 6/6/5 (61), Code 871 7/7/5. |
-| ironwake_raid | Not tuned (round 158). Campaign map 5 (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat cold 301 7/7/5; never tuned for surprise. |
+| ironwake_raid | Not tuned (round 158). Campaign map 6 (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat cold 301 7/7/5, 633 9/7/6 (L1), 1570 warm 6/6/4 (L4, t5); #1237. Never tuned for surprise. |
 | ironwake_keep | Not tuned. The finale (0265, #1149): defeat boss, limit 12, fronts north/gate/south, the raid's wall broken. `--finale` L8 floor 0 (data). Code 1149 warm 9/7/7, abandoned t6; Chat 2210 cold 7/8/6, won t11. Levers 1 to 3 (0284 to 0287): 87/71, 87/70, 84/58. Chat's depleted pair 2410: sample 6/7/6 t11, keep 7/6/5 t12; the reach shipped (0293; Sim 84/58). Next: a fresh keep chair (is the bait a choice?). |
 
 ## Open experiments and the play that decides each
