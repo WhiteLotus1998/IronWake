@@ -1,0 +1,8 @@
+# issue 1177: --levels --gate (Release, 200 runs, each chair's seeds split over four threads) on branch issue/1177-handed-total over main after #1176: the price line prints a total for kills handed, and the handed split reconciles the header's count. Every other line matches levels-gate-1174.txt. Elapsed 12m 23s.
+levels --gate: 200 runs, the striking chair and the even chair over the same seeds (issue 1174, round 394); the door asks L7 and 50 main-weapon rank points (D is 30, C is 80); the pick is rook
+  price (striking, through map 8, 82 runs): captain level p50 7 p75 7; teodor level p50 6 p75 6, main-weapon rank points p50 12 p75 26; kills handed p50 0 p75 0 (total 9), given up p50 0 p75 0 (total 0); HP lost in enemy phases p50 69 p75 77, falls 218; per map, combats p50 2 p75 2, strikes handed p50 0 p75 1
+  kills handed (striking): 15 in all, 9 through map 8 on the 82 runs that won it, 6 on later maps or runs lost before it; the per-map prices sum to each run's count
+  striking, after map 8 (82 runs): teodor level p50 6 p75 6; points kept p50 12 p75 26, the Recalling player's bound p50 55 p75 63; at L7 and the gate (kept) 0 of 82
+  even, after map 8 (81 companies): non-captains at L7 and the gate p50 0 p75 0, at L7 alone p50 0 p75 0; the best non-captain's points p50 52 p75 73
+  the pick on the even chair, after map 8 (81 companies with rook): level p50 4 p75 4, points p50 30 p75 30; at L7 and the gate 0
+  verdict (round 394, after map 8): the bar fails (bound p50 55, needs 55; teodor p50 L6, needs L7; kept p50 12, not deciding); the ceiling holds (even p50 0 at L7 and the gate, p50 0 at L7 alone); the pick stays short of the door on the even chair (p50 L4, 30)
