@@ -80,6 +80,9 @@ public static class FinaleRun
     /// <summary>One company's reading: the heuristic's games and the slowest AI-vs-AI game.</summary>
     public sealed record Reading(Company Company, int Size, IReadOnlyList<GameResult> Games, long SlowestMs, int TurnLimit, bool Bonded = false)
     {
+        /// <summary>The names of the map's events a front's fall fires, in file order (issue 1204); empty on a map without fronts.</summary>
+        public IReadOnlyList<string> Falls { get; init; } = Array.Empty<string>();
+
         public int Wins => Games.Count(g => g.Won);
 
         /// <summary>The median turns played over every game, won or lost, a timeout counted at the limit: the finale's length line.</summary>
@@ -104,6 +107,11 @@ public static class FinaleRun
             if (Bonded)
             {
                 yield return "  " + BondLine(Games);
+            }
+
+            if (Falls.Count > 0)
+            {
+                yield return "  " + FallsLine(Falls, Games);
             }
         }
     }
@@ -136,7 +144,10 @@ public static class FinaleRun
         }
 
         var size = BattleState.From(map, fielded, roster, 1, scheme).UnitsOf(Side.Player).Count();
-        return new Reading(company, size, games, slowest, map.TurnLimit, map.Bond is not null);
+        return new Reading(company, size, games, slowest, map.TurnLimit, map.Bond is not null)
+        {
+            Falls = map.Events.Where(e => e.Trigger is FallsTrigger).Select(e => e.Name).ToList(),
+        };
     }
 
     /// <summary>
@@ -145,6 +156,18 @@ public static class FinaleRun
     /// </summary>
     public static string BondLine(IReadOnlyList<GameResult> games) =>
         $"bond: hunter killed {games.Count(g => g.Bond == BondFate.Fell)}, freed {games.Count(g => g.Bond == BondFate.Freed)}, standing {games.Count(g => g.Bond is null)} of {games.Count} (data; the Sim does not price an ending)";
+
+    /// <summary>
+    /// How each of a fallen front's events went over the games (issue 1204): arrived, blocked by a
+    /// unit or terrain on its tile, or never fired because the front stood. Data only; a fall whose
+    /// spawn is always blocked is decoration (Design Table round 407).
+    /// </summary>
+    public static string FallsLine(IReadOnlyList<string> falls, IReadOnlyList<GameResult> games) =>
+        "falls: " + string.Join(", ", falls.Select(name =>
+        {
+            var fired = games.Select(g => g.Fired.FirstOrDefault(f => f.Name == name)).ToList();
+            return $"{name} arrived {fired.Count(f => f is { Blocked: false })}, blocked {fired.Count(f => f is { Blocked: true })}, unfired {fired.Count(f => f is null)}";
+        })) + $" of {games.Count} (data; all blocked is decoration)";
 
     private static int Median(IEnumerable<int> values)
     {

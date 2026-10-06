@@ -46,6 +46,9 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// <summary>The player units other than the captain deployed at the start of the game (issue 263).</summary>
     public int Recruits { get; init; }
 
+    /// <summary>Every map event that fired in the game, blocked or not, in order (issue 1204: whether a fallen front's spawn arrived).</summary>
+    public IReadOnlyList<MapEventFired> Fired { get; init; } = Array.Empty<MapEventFired>();
+
     /// <summary>How the enemy a <c>freed:</c> header binds left the board (issue 750): null while she stood at the end or on a map without one.</summary>
     public BondFate? Bond { get; init; }
 
@@ -203,6 +206,7 @@ public static class Runner
         var enemyWatch = WatchCounts.Zero;
         var pins = PinCounts.Zero;
         var covers = CoverCounts.Zero;
+        var fired = new List<MapEventFired>();
         while (!state.Outcome.IsOver)
         {
             if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
@@ -262,6 +266,7 @@ public static class Runner
                     covers = covers.After(e);
                 }
 
+                fired.AddRange(result.Events.OfType<MapEventFired>());
                 drifted |= result.Events.OfType<RouteDrifted>().Any();
                 if (result.Events.OfType<CombatFought>().Any())
                 {
@@ -292,6 +297,7 @@ public static class Runner
             Skills = LastOf(state, unit => unit.Skill),
             Masteries = LastOf(state, unit => unit.Mastery),
             Recruits = recruits,
+            Fired = fired,
             Bond = state.Bond,
             Weapons = weapons,
             Items = items,

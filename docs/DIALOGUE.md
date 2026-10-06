@@ -36,9 +36,9 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Rookery (0208):** not passed; no lever before a cold chair.
 - **The Counting House (311 to 321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh-seed read gates.
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
-- **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409; cold 5/6/4, t5): woken, the pair feeds the fort from its edge. #1212: held ground out of the fort's reach, by `threat`; tile count says only a post fits, so Maud's start is next.
+- **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409; cold 5/6/4, t5): woken, the pair feeds the fort from its edge. Lever #1210 (#1212 a duplicate): the fort and Maud's start south; a held rectangle out of reach is a post.
 - **The First Shrine (406 to 408, 0283):** starts south, alone (brace, second guard declined). Both in from the south (7/7/5), no rework; after #1206's Sim the limit moves only if sprints dominate. #1208: `seize_name: altar` (a hook, not text).
-- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204, one at a time: an empty front lets the hunter through, priced in `threat` (0284); inside spawns inside each front (all blocked: decoration); Hask gets 0279's reach. Depleted gate 1 under 60 softens.
+- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204, one at a time: an empty front lets the hunter through, priced in `threat` (0284; no path rule, a content test, 409); inside spawns inside each front (0285; all blocked in the fresh chair: decoration); Hask gets 0279's reach. Depleted gate 1 under 60 softens.
 
 ## Experiments (state and kill criterion)
 
@@ -79,12 +79,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake; three voices, three lines a map (0221); choice screen (0222). Barks (#1002): never "cold" (a Kin tell on frost); the hate points at the feeder, not the keep; no puns on teeth or fed.
 - **The waking (250, 251; 0212):** once a map a woken scythe kill gives full Move again, no second strike. Levers stopped (286); reach gate reverted (0214).
 - **The company** (213, 214): cap 12 living, cast 10; a map deploys 6, the keep all (#689, #1139). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling. **The campaign keep seats #692 whole (387, #1149):** fronts, waves, van, hunt, hold-then-boss; walls on the fronts, the purse short of three. Before a chair: gate 1, random under 25%, gate 4 drop above 0.
-- **Saves** camp only (#663). Refine +2/+3 (#647). Chests guarded or a puzzle; opening is an action (#649). **Supports** (#77; 0183 to 0189): 3 to 4 partners plus the captain, a kind per pair (#809); marriage S (#634). Best partner, not sum. C 16, B 28, A 48.
+- **Saves** camp only (#663). Refine +2/+3 (#647). Chests guarded or a puzzle, opened as an action (#649). **Supports** (#77; 0183 to 0189): 3 to 4 partners plus the captain, a kind per pair (#809); marriage S (#634). Best partner, not sum. C 16, B 28, A 48.
 
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723); frozen iron chills (#702).
 - **Second tier (#704; provisional):** L7 and the gate; campaign-only curve (0161). The pick joins at L4, weapon D (381, 0263). **A door is fed** (387 to 396; 0268 to 0275): bar the striking chair (Teodor) after map 8; ceiling the even chair, p50 0 on L7+gate and L7 alone. **Levy floor:** before map N the levy is raised to N less 3, level only. **Points gate (394, 395):** level-7 doors ask 50 main-weapon points, never raised for the even best. **The bar passes cold, closed** (399, 0277); Sim chairs are lower bounds. Tripwire: a floor, curve or kill EXP change re-reads the even L7 chair. **The drill keeps EXP** (398, 0276), `N EXP kept` on the row. Issued weapons follow the door (Wren's: Lotus).
-- **The captain's ladder at tier 1 (229; 0165; provisional):** the lance moved to the Champion; Hunter's Ground killed. Numbers before verbs. The Sim picks a weapon per attack (0171).
-- **The ladder bar (232; provisional):** per map no class 10 under the unpromoted captain; class means within 10 at 200 seeds, 5 at 400 before tuned.
+- **The captain's ladder at tier 1 (229, 232; 0165; provisional):** the lance to the Champion; Hunter's Ground killed; the Sim picks a weapon per attack (0171). Bar: per map no class 10 under the unpromoted captain; means within 10 at 200 seeds, 5 at 400.
 - **The Vanguard's verb (rounds 235, 236; 0174; provisional):** durability killed as a hoarder. Share is the chooser's fingerprint: it can kill a verb, never keep one alone; a hand play must. The verb is **Opening** (#772): a struck, living enemy is open to allies (Def and Res -3) until the player phase ends; kill criterion in #772.
 
 ## How we write (Lotus, #780)

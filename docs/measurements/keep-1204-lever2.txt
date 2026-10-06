@@ -1,0 +1,66 @@
+# Issue 1204, lever 2: a fallen front's spawn stands just inside it (DECISIONS/0285).
+# ironwake-sim --finale ironwake_keep --seeds 200 --gates, before (main at cb164c1, with the falls line) and after.
+## before
+finale: ironwake_keep, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 174/200 (87 %), losses 23 timeout 3 captain 0 protected: ok
+  length: median 9 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 86 ms: ok
+  bond: hunter killed 198, freed 0, standing 2 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 23, blocked 0, unfired 177, gate_in1 arrived 10, blocked 0, unfired 190, gate_in2 arrived 10, blocked 0, unfired 190, south_in arrived 2, blocked 0, unfired 198 of 200 (data; all blocked is decoration)
+  gate 2 decisions matter: ironwake_keep, random wins 0/200 (0 %): ok
+  gate 4 no dead weight: ironwake_keep, 11 recruits x 200 seeds, median drop 0.070: ok
+    ansgar: drop 0.135 se 0.041 own [atk 404 dmg 4346 heal 0 abs 477] rest baseline [atk 7788 dmg 80009 heal 351 abs 2605] rest benched [atk 7352 dmg 87075 heal 259 abs 3489] benched losses 46 timeout 7 captain 0 protected, refused kill p50 0.9849 over 46, at the stall p50 0.0000 over 42
+    brannock: drop 0.035 se 0.034 own [atk 743 dmg 6665 heal 0 abs 145] rest baseline [atk 7449 dmg 77690 heal 351 abs 2937] rest benched [atk 7908 dmg 84339 heal 312 abs 3050] benched losses 30 timeout 3 captain 0 protected, refused kill p50 0.9849 over 30, at the stall p50 0.0000 over 29
+    corin: drop 0.000 se 0.030 own [atk 632 dmg 4366 heal 0 abs 213] rest baseline [atk 7560 dmg 79989 heal 351 abs 2869] rest benched [atk 7657 dmg 84418 heal 322 abs 3024] benched losses 21 timeout 5 captain 0 protected, refused kill p50 0.9910 over 21, at the stall p50 0.0000 over 19
+    dunstan: drop 0.000 se 0.029 own [atk 745 dmg 5758 heal 0 abs 247] rest baseline [atk 7447 dmg 78597 heal 351 abs 2835] rest benched [atk 7567 dmg 84322 heal 202 abs 3006] benched losses 23 timeout 3 captain 0 protected, refused kill p50 0.9593 over 23, at the stall p50 0.0000 over 19
+    keziah: drop 0.025 se 0.025 own [atk 517 dmg 6696 heal 0 abs 250] rest baseline [atk 7675 dmg 77659 heal 351 abs 2832] rest benched [atk 8076 dmg 83742 heal 318 abs 3218] benched losses 23 timeout 8 captain 0 protected, refused kill p50 0.9910 over 23, at the stall p50 0.0000 over 22
+    maud: drop 0.070 se 0.026 own [atk 753 dmg 7419 heal 351 abs 114] rest baseline [atk 7439 dmg 76936 heal 0 abs 2968] rest benched [atk 7809 dmg 83501 heal 0 abs 3273] benched losses 35 timeout 5 captain 0 protected, refused kill p50 0.9910 over 35, at the stall p50 0.0000 over 32
+    ottilie: drop 0.045 se 0.030 own [atk 1148 dmg 4614 heal 0 abs 396] rest baseline [atk 7044 dmg 79741 heal 351 abs 2686] rest benched [atk 7031 dmg 85072 heal 307 abs 3182] benched losses 28 timeout 7 captain 0 protected, refused kill p50 0.9910 over 28, at the stall p50 0.0000 over 25
+    pell: drop 0.760 se 0.062 own [atk 1024 dmg 16162 heal 0 abs 139] rest baseline [atk 7168 dmg 68193 heal 351 abs 2943] rest benched [atk 7396 dmg 82996 heal 283 abs 4080] benched losses 163 timeout 15 captain 0 protected, refused kill p50 0.9849 over 163, at the stall p50 0.0000 over 147
+    rook: drop 0.070 se 0.032 own [atk 756 dmg 10833 heal 0 abs 362] rest baseline [atk 7436 dmg 73522 heal 351 abs 2720] rest benched [atk 7923 dmg 85090 heal 331 abs 3433] benched losses 33 timeout 7 captain 0 protected, refused kill p50 0.9910 over 33, at the stall p50 0.0000 over 28
+    teodor: drop 0.145 se 0.040 own [atk 657 dmg 5463 heal 0 abs 227] rest baseline [atk 7535 dmg 78892 heal 351 abs 2855] rest benched [atk 7559 dmg 87167 heal 198 abs 3228] benched losses 52 timeout 3 captain 0 protected, refused kill p50 0.9910 over 52, at the stall p50 0.0000 over 46
+    wren: drop 0.380 se 0.050 own [atk 394 dmg 5471 heal 0 abs 373] rest baseline [atk 7798 dmg 78884 heal 351 abs 2709] rest benched [atk 7587 dmg 84229 heal 312 abs 3578] benched losses 90 timeout 12 captain 0 protected, refused kill p50 0.9910 over 90, at the stall p50 0.0000 over 80
+    captain captain: baseline [atk 419 dmg 6562 heal 0 abs 139] never benched, not judged
+finale depleted: 12 units at level 8, heuristic wins 143/200 (71 %), losses 46 timeout 11 captain 0 protected: ok
+  length: median 10 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 73 ms: ok
+  bond: hunter killed 195, freed 0, standing 5 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 20, blocked 0, unfired 180, gate_in1 arrived 21, blocked 4, unfired 175, gate_in2 arrived 24, blocked 1, unfired 175, south_in arrived 6, blocked 0, unfired 194 of 200 (data; all blocked is decoration)
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 133 timeout 67 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 63 ms: ok
+  bond: hunter killed 140, freed 0, standing 60 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 129, blocked 2, unfired 69, gate_in1 arrived 98, blocked 16, unfired 86, gate_in2 arrived 112, blocked 2, unfired 86, south_in arrived 41, blocked 0, unfired 159 of 200 (data; all blocked is decoration)
+finale: ok
+## after
+finale: ironwake_keep, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 174/200 (87 %), losses 22 timeout 4 captain 0 protected: ok
+  length: median 9 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 93 ms: ok
+  bond: hunter killed 198, freed 0, standing 2 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 23, blocked 1, unfired 176, gate_in1 arrived 9, blocked 1, unfired 190, gate_in2 arrived 10, blocked 0, unfired 190, south_in arrived 1, blocked 0, unfired 199 of 200 (data; all blocked is decoration)
+  gate 2 decisions matter: ironwake_keep, random wins 0/200 (0 %): ok
+  gate 4 no dead weight: ironwake_keep, 11 recruits x 200 seeds, median drop 0.070: ok
+    ansgar: drop 0.140 se 0.042 own [atk 405 dmg 4358 heal 0 abs 477] rest baseline [atk 7792 dmg 79872 heal 342 abs 2587] rest benched [atk 7306 dmg 86989 heal 253 abs 3476] benched losses 49 timeout 5 captain 0 protected, refused kill p50 0.9849 over 49, at the stall p50 0.0000 over 43
+    brannock: drop 0.015 se 0.034 own [atk 746 dmg 6721 heal 0 abs 153] rest baseline [atk 7451 dmg 77509 heal 342 abs 2911] rest benched [atk 7918 dmg 84539 heal 317 abs 3062] benched losses 26 timeout 3 captain 0 protected, refused kill p50 0.9849 over 26, at the stall p50 0.0000 over 24
+    corin: drop 0.005 se 0.031 own [atk 635 dmg 4388 heal 0 abs 213] rest baseline [atk 7562 dmg 79842 heal 342 abs 2851] rest benched [atk 7663 dmg 84345 heal 322 abs 3021] benched losses 22 timeout 5 captain 0 protected, refused kill p50 0.9910 over 22, at the stall p50 0.0000 over 21
+    dunstan: drop 0.000 se 0.029 own [atk 740 dmg 5759 heal 0 abs 252] rest baseline [atk 7457 dmg 78471 heal 342 abs 2812] rest benched [atk 7579 dmg 84367 heal 199 abs 3002] benched losses 23 timeout 3 captain 0 protected, refused kill p50 0.9593 over 23, at the stall p50 0.0000 over 20
+    keziah: drop 0.060 se 0.027 own [atk 522 dmg 6768 heal 0 abs 246] rest baseline [atk 7675 dmg 77462 heal 342 abs 2818] rest benched [atk 8039 dmg 83428 heal 317 abs 3242] benched losses 29 timeout 9 captain 0 protected, refused kill p50 0.9910 over 29, at the stall p50 0.0000 over 28
+    maud: drop 0.100 se 0.030 own [atk 744 dmg 7322 heal 342 abs 114] rest baseline [atk 7453 dmg 76908 heal 0 abs 2950] rest benched [atk 7799 dmg 83313 heal 0 abs 3273] benched losses 41 timeout 5 captain 0 protected, refused kill p50 0.9910 over 41, at the stall p50 0.0000 over 38
+    ottilie: drop 0.060 se 0.032 own [atk 1149 dmg 4571 heal 0 abs 385] rest baseline [atk 7048 dmg 79659 heal 342 abs 2679] rest benched [atk 7005 dmg 84714 heal 322 abs 3191] benched losses 30 timeout 8 captain 0 protected, refused kill p50 0.9880 over 30, at the stall p50 0.0000 over 26
+    pell: drop 0.765 se 0.062 own [atk 1016 dmg 15945 heal 0 abs 135] rest baseline [atk 7181 dmg 68285 heal 342 abs 2929] rest benched [atk 7444 dmg 83215 heal 269 abs 4067] benched losses 162 timeout 17 captain 0 protected, refused kill p50 0.9910 over 162, at the stall p50 0.0000 over 149
+    rook: drop 0.070 se 0.032 own [atk 763 dmg 10774 heal 0 abs 354] rest baseline [atk 7434 dmg 73456 heal 342 abs 2710] rest benched [atk 7931 dmg 84882 heal 326 abs 3436] benched losses 35 timeout 5 captain 0 protected, refused kill p50 0.9849 over 35, at the stall p50 0.0000 over 31
+    teodor: drop 0.130 se 0.039 own [atk 661 dmg 5547 heal 0 abs 230] rest baseline [atk 7536 dmg 78683 heal 342 abs 2834] rest benched [atk 7573 dmg 87176 heal 208 abs 3182] benched losses 47 timeout 5 captain 0 protected, refused kill p50 0.9910 over 47, at the stall p50 0.0000 over 38
+    wren: drop 0.360 se 0.049 own [atk 396 dmg 5468 heal 0 abs 373] rest baseline [atk 7801 dmg 78762 heal 342 abs 2691] rest benched [atk 7630 dmg 84217 heal 310 abs 3560] benched losses 88 timeout 10 captain 0 protected, refused kill p50 0.9849 over 88, at the stall p50 0.0000 over 82
+    captain captain: baseline [atk 420 dmg 6609 heal 0 abs 132] never benched, not judged
+finale depleted: 12 units at level 8, heuristic wins 140/200 (70 %), losses 48 timeout 12 captain 0 protected: ok
+  length: median 10 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 125 ms: ok
+  bond: hunter killed 193, freed 0, standing 7 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 20, blocked 2, unfired 178, gate_in1 arrived 21, blocked 5, unfired 174, gate_in2 arrived 23, blocked 3, unfired 174, south_in arrived 6, blocked 0, unfired 194 of 200 (data; all blocked is decoration)
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 131 timeout 69 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 60 ms: ok
+  bond: hunter killed 140, freed 0, standing 60 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 120, blocked 7, unfired 73, gate_in1 arrived 86, blocked 28, unfired 86, gate_in2 arrived 107, blocked 7, unfired 86, south_in arrived 33, blocked 2, unfired 165 of 200 (data; all blocked is decoration)
+finale: ok
