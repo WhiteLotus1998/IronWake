@@ -1,0 +1,18 @@
+# issue 1170: --levels --rank-trace (Release, 200 runs, seeds split over four threads) on branch issue/1170-rank-trace over main after #1169: the striking chair (issue 1167) alone, with the fed unit's main-weapon rank points traced per map (round 393). The price line matches levels-strike-1167.txt, so the trace changes no play. Elapsed 6m 4s.
+  price (striking, through map 8, 82 runs): captain level p50 7 p75 7; teodor level p50 6 p75 6, main-weapon rank points p50 12 p75 26; kills handed p50 0 p75 0, given up p50 0 p75 0 (total 0); HP lost in enemy phases p50 69 p75 77, falls 218; per map, combats p50 2 p75 2, strikes handed p50 0 p75 1
+levels --rank-trace: 200 runs, the striking chair (issue 1167); teodor's main-weapon rank points, where they go (issue 1170, round 393); C is 80, 3 a combat struck, 5 a kill
+  through map 8, 82 runs; per map, means over the runs that deployed him:
+    map 1 starting_alone: deployed 0 of 82; combats player - (struck -), enemy - (struck -); points earned -, kept -, lost to a fall - (fell 0), in lost tries -
+    map 2 the_mill: deployed 0 of 82; combats player - (struck -), enemy - (struck -); points earned -, kept -, lost to a fall - (fell 0), in lost tries -
+    map 3 saltmarsh_ford: deployed 82 of 82; combats player 2.1 (struck 2.1), enemy 4.3 (struck 1.2); points earned 11.5, kept 0.9, lost to a fall 10.6 (fell 78), in lost tries 14.2
+    map 4 the_tollgate: deployed 82 of 82; combats player 2.5 (struck 2.5), enemy 2.0 (struck 0.6); points earned 10.4, kept 7.0, lost to a fall 3.4 (fell 27), in lost tries 1.4
+    map 5 harrow_weir: deployed 82 of 82; combats player 3.1 (struck 3.1), enemy 1.7 (struck 1.0); points earned 12.2, kept 4.6, lost to a fall 7.6 (fell 55), in lost tries 5.5
+    map 6 ironwake_raid: deployed 82 of 82; combats player 2.1 (struck 2.1), enemy 2.1 (struck 1.3); points earned 11.3, kept 3.2, lost to a fall 8.1 (fell 63), in lost tries 9.4
+    map 7 sallow_grange: deployed 82 of 82; combats player 2.5 (struck 2.5), enemy 2.5 (struck 0.9); points earned 10.5, kept 2.1, lost to a fall 8.4 (fell 70), in lost tries 38.5
+    map 8 brackwater_cut: deployed 0 of 82; combats player - (struck -), enemy - (struck -); points earned -, kept -, lost to a fall - (fell 0), in lost tries -
+  per run: maps deployed p50 5 p75 5, benched p50 3 p75 3; combats p50 24 p75 29, struck p50 17 p75 19, strikeless p50 8 p75 10
+  per run: points earned p50 55 p75 63, kept p50 12 p75 26, lost to a fall p50 39 p75 47, in lost tries p50 45 p75 103, at camps p50 0 p75 0
+  after map 8: the record reads p50 12 p75 26; the Recalling player's bound (plus the points lost to a fall) p50 55 p75 63
+  reconciles: in-battle points against the record on 656 of 656 maps (unexplained 0 points), camps that moved his points 0
+  sinks, mean points a run: lost to a fall 38.1, strikeless combats at 3 23.7, maps benched at his mean earned on a deployed map 33.6
+  verdict (round 393, after map 8): the Recalling player's bound is short of C (p50 55); a rank lever is right, a door-only shape preferred (round 393); the largest sink is lost to a fall

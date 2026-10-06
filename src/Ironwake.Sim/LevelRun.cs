@@ -56,6 +56,43 @@ public static class LevelRun
 
         /// <summary>Every attack the fed unit made on the map, whoever planned it (<see cref="FocusedPlayer.Combats"/>, issue 1167).</summary>
         public int Combats { get; init; }
+
+        /// <summary>Where the fed unit's main-weapon rank points went on the map (issue 1170, <see cref="RankTrace"/>).</summary>
+        public RankTrace Rank { get; init; } = RankTrace.Benched;
+    }
+
+    /// <summary>
+    /// The fed unit's main-weapon rank points on one won map (issue 1170, round 393): whether he was deployed,
+    /// the combats he was in on each phase and those in which he struck (rank pays only a unit that struck,
+    /// DESIGN 126), the points he earned in the won battle, those the record kept after it (a unit that fell
+    /// comes back as he began the battle, so a fall loses the map's points), whether he fell, the points he
+    /// earned in the map's lost tries, and the change at the camp before the battle (none is expected).
+    /// </summary>
+    public sealed record RankTrace(bool Deployed, int PlayerCombats, int PlayerStruck, int EnemyCombats, int EnemyStruck, int Earned, bool Fell)
+    {
+        /// <summary>A map the fed unit sat out.</summary>
+        public static RankTrace Benched { get; } = new(false, 0, 0, 0, 0, 0, false);
+
+        /// <summary>The points the record kept from the battle: his main-weapon points after it less those before it.</summary>
+        public int Kept { get; init; }
+
+        /// <summary>The points he earned in the map's lost tries, which no record keeps.</summary>
+        public int LostTries { get; init; }
+
+        /// <summary>His main-weapon points before the battle less those after the previous map (0 before map 1).</summary>
+        public int Camp { get; init; }
+
+        /// <summary>The won battle's points the record did not keep because he fell in it.</summary>
+        public int LostToFall => Fell ? Earned - Kept : 0;
+
+        /// <summary>Points neither kept nor lost to a fall: 0 when the in-battle count reconciles with the record.</summary>
+        public int Unexplained => Earned - Kept - LostToFall;
+
+        /// <summary>The combats he was in on either phase.</summary>
+        public int Combats => PlayerCombats + EnemyCombats;
+
+        /// <summary>The combats he was in and struck no blow in, on either phase.</summary>
+        public int Strikeless => Combats - PlayerStruck - EnemyStruck;
     }
 
     /// <summary>
@@ -162,10 +199,11 @@ public static class LevelRun
     /// <see cref="PairingPlayer.Deploy"/> so both members fight it (issue 77, slice 5).
     /// </summary>
     /// <remarks>With <paramref name="even"/> set the player is <see cref="EvenPlayer"/>, the even-company chair (issue 1150); with <paramref name="focused"/> set it is <see cref="FocusedPlayer"/> under that guard (issue 1157).</remarks>
-    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, (string A, string B)? pair = null, bool even = false, FocusedPlayer.Guard? focused = null)
+    /// <remarks>With <paramref name="firstSeed"/> set the seeds are <paramref name="firstSeed"/> onward, <paramref name="seeds"/> of them, so a read can be split across threads (issue 1170).</remarks>
+    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, (string A, string B)? pair = null, bool even = false, FocusedPlayer.Guard? focused = null, int firstSeed = 1)
     {
         var runs = new List<Run>();
-        for (var seed = 1; seed <= seeds; seed++)
+        for (var seed = firstSeed; seed < firstSeed + seeds; seed++)
         {
             var record = CampaignRecord.Start(content, (ulong)seed, permadeath: false);
             var maps = new List<(int, IReadOnlyList<int>, int, Camp)>();
@@ -175,9 +213,12 @@ public static class LevelRun
             var handed = 0;
             var prices = new List<Price>();
             int? lost = null;
+            int? lastPoints = null;
             while (!record.IsFinished(content))
             {
                 record = SimPick.Made(record, content);
+                var priorPoints = FedPoints(record.Present(content), content);
+                var lostTries = 0;
                 var number = record.MapIndex + 1;
                 var map = MapFiles.Load(MapFiles.CampaignPath(contentRoot, content, record.NextMap(content).MapId), content);
                 BattleState? won = null;
@@ -195,11 +236,15 @@ public static class LevelRun
                     var start = tried.Begin(map, content);
                     var tally = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
                     IPlayer player = pair is { } q ? new PairingPlayer(q.A, q.B) : focused is { } guard ? new FocusedPlayer(guard) : even ? new EvenPlayer() : new HeuristicPlayer();
-                    var (end, hpLost, falls) = Fight(start, content, seed, number, tally, player);
-                    if (end.Outcome.Result == BattleResult.Won)
+                    var (end, hpLost, falls, trace) = Fight(start, content, seed, number, tally, player);
+                    if (end.Outcome.Result != BattleResult.Won)
+                    {
+                        lostTries += trace.Earned;
+                    }
+                    else
                     {
                         handed += player switch { EvenPlayer chair => chair.Handed, FocusedPlayer chair => chair.Handed, _ => 0 };
-                        price = player is FocusedPlayer fed ? new Price(fed.Handed, fed.GivenUp, hpLost, falls) { Refused = fed.Refused.ToDictionary(), Strikes = fed.Strikes, Combats = fed.Combats } : null;
+                        price = player is FocusedPlayer fed ? new Price(fed.Handed, fed.GivenUp, hpLost, falls) { Refused = fed.Refused.ToDictionary(), Strikes = fed.Strikes, Combats = fed.Combats, Rank = trace } : null;
                         won = end;
                         struck = tally;
                         camp = Read(start, end, content);
@@ -219,6 +264,21 @@ public static class LevelRun
 
                 record = record.AfterBattle(won, content);
                 var company = record.Present(content);
+                var afterPoints = FedPoints(company, content);
+                if (price is not null)
+                {
+                    price = price with
+                    {
+                        Rank = price.Rank with
+                        {
+                            Kept = (afterPoints ?? 0) - (priorPoints ?? 0),
+                            LostTries = lostTries,
+                            Camp = lastPoints is { } last && priorPoints is { } prior ? prior - last : 0,
+                        },
+                    };
+                }
+
+                lastPoints = afterPoints;
                 var members = company.Select(u => Member.Of(u, content)).ToList();
                 maps.Add((number, company.Select(u => u.Level).ToList(), members.Count(m => m.Ready), camp!));
                 rapport.Add(record.Rapport.ToList());
@@ -255,11 +315,25 @@ public static class LevelRun
             .OrderBy(r => r.Count)
             .FirstOrDefault() ?? [];
 
-    /// <summary>One battle to its end, and the HP <see cref="FocusedPlayer.Fed"/> lost in enemy phases and how often he fell in them (issue 1157).</summary>
-    private static (BattleState End, int HpLost, int Falls) Fight(BattleState state, GameContent content, int seed, int number, Dictionary<string, WeaponMix> weapons, IPlayer player)
+    /// <summary>The fed unit's main-weapon rank points in <paramref name="company"/>, or null when he is not in it (issue 1170).</summary>
+    private static int? FedPoints(IEnumerable<Unit> company, GameContent content) =>
+        company.FirstOrDefault(u => u.Id == FocusedPlayer.Fed) is { } fed ? fed.Skill.Points(MainType(fed, content)) : null;
+
+    /// <summary>
+    /// One battle to its end, and the HP <see cref="FocusedPlayer.Fed"/> lost in enemy phases and how often he fell in them (issue 1157),
+    /// and his rank trace for the battle (issue 1170, <see cref="RankTrace"/>; its record-side fields are left for the caller).
+    /// </summary>
+    private static (BattleState End, int HpLost, int Falls, RankTrace Trace) Fight(BattleState state, GameContent content, int seed, int number, Dictionary<string, WeaponMix> weapons, IPlayer player)
     {
         var hpLost = 0;
         var falls = 0;
+        var trace = RankTrace.Benched;
+        var main = state.Find(FocusedPlayer.Fed) is { Side: Side.Player } deployed ? MainType(deployed.Unit, content) : (WeaponType?)null;
+        if (main is not null)
+        {
+            trace = trace with { Deployed = true };
+        }
+
         while (!state.Outcome.IsOver)
         {
             var commands = state.Phase == Side.Player ? player.Next(state, content) : EnemyAi.Plan(state, content);
@@ -283,6 +357,11 @@ public static class LevelRun
                     falls += after == 0 ? 1 : 0;
                 }
 
+                if (main is { } mainType)
+                {
+                    trace = Traced(trace, state, result, mainType);
+                }
+
                 state = result.Next;
                 if (state.Outcome.IsOver)
                 {
@@ -291,7 +370,34 @@ public static class LevelRun
             }
         }
 
-        return (state, hpLost, falls);
+        return (state, hpLost, falls, trace);
+    }
+
+    /// <summary>
+    /// <paramref name="trace"/> after one accepted command (issue 1170): each combat the fed unit was in, by phase,
+    /// and whether he struck in it, the main-weapon points he gained, and whether he fell.
+    /// </summary>
+    private static RankTrace Traced(RankTrace trace, BattleState before, ApplyResult result, WeaponType main)
+    {
+        if (before.Find(FocusedPlayer.Fed) is not { Side: Side.Player, Hp: > 0 } fed)
+        {
+            return trace;
+        }
+
+        foreach (var fought in result.Events.OfType<CombatFought>().Where(f => f.AttackerId == FocusedPlayer.Fed || f.TargetId == FocusedPlayer.Fed))
+        {
+            var struck = fought.Strikes.Any(s => s.AttackerId == FocusedPlayer.Fed) ? 1 : 0;
+            trace = fought.Phase == Side.Player
+                ? trace with { PlayerCombats = trace.PlayerCombats + 1, PlayerStruck = trace.PlayerStruck + struck }
+                : trace with { EnemyCombats = trace.EnemyCombats + 1, EnemyStruck = trace.EnemyStruck + struck };
+        }
+
+        if (result.Next.Find(FocusedPlayer.Fed) is { Hp: > 0 } standing)
+        {
+            return trace with { Earned = trace.Earned + Math.Max(0, standing.Unit.Skill.Points(main) - fed.Unit.Skill.Points(main)) };
+        }
+
+        return result.Events.OfType<UnitDied>().Any(d => d.UnitId == FocusedPlayer.Fed) ? trace with { Fell = true } : trace;
     }
 
     /// <summary>
@@ -427,6 +533,88 @@ public static class LevelRun
             ? $"; per map, combats {Pair(through.SelectMany(p => p.Select(x => x.Combats)))}, strikes handed {Pair(through.SelectMany(p => p.Select(x => x.Strikes)))}"
             : "";
         return $"  price ({line}, through map {VerdictMap}, {reached.Count} runs): captain level {Pair(captain)}; {FocusedPlayer.Fed} level {Pair(fed.Select(m => m?.Level ?? 0))}, main-weapon rank points {Pair(fed.Select(m => m?.MainRank ?? 0))}; kills handed {Pair(through.Select(p => p.Sum(x => x.Handed)))}, given up {Pair(through.Select(p => p.Sum(x => x.GivenUp)))} (total {through.Sum(p => p.Sum(x => x.GivenUp))}); HP lost in enemy phases {Pair(through.Select(p => p.Sum(x => x.HpLost)))}, falls {through.Sum(p => p.Sum(x => x.Falls))}{perMap}";
+    }
+
+    /// <summary>
+    /// The rank trace (issue 1170, round 393): over the runs that won map <see cref="VerdictMap"/>, per map
+    /// through it, the runs that deployed the fed unit and, as means over those, his combats and those he struck
+    /// in on each phase and the main-weapon points he earned, kept, lost to a fall and earned in lost tries;
+    /// then per run (p50 p75) the same totals, his strikeless combats and maps benched, the points the record
+    /// reads after map <see cref="VerdictMap"/> and the Recalling player's bound (those plus the points lost to
+    /// a fall); then whether the in-battle count reconciles with the record, the sinks in points, and the read
+    /// the Table agreed before the numbers (<see cref="TraceVerdict"/>).
+    /// </summary>
+    public static IEnumerable<string> RankTraceLines(GameContent content, IReadOnlyList<Run> runs)
+    {
+        var reached = runs.Select(r => (Run: r, At: r.Maps.ToList().FindIndex(m => m.Map == VerdictMap))).Where(x => x.At >= 0 && x.At < x.Run.Companies.Count && x.At < x.Run.Prices.Count).ToList();
+        yield return $"levels --rank-trace: {runs.Count} runs, the striking chair (issue 1167); {FocusedPlayer.Fed}'s main-weapon rank points, where they go (issue 1170, round 393); C is {WeaponRanks.Threshold(WeaponRank.C)}, {WeaponRanks.PerCombat} a combat struck, {WeaponRanks.PerKill} a kill";
+        if (reached.Count == 0)
+        {
+            yield return $"  no run won map {VerdictMap}";
+            yield break;
+        }
+
+        static string Mean(IEnumerable<int> values)
+        {
+            var list = values.ToList();
+            return list.Count == 0 ? "-" : (list.Sum() / (double)list.Count).ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        static string Pair(IEnumerable<int> values)
+        {
+            var list = values.ToList();
+            return $"p50 {Percentile(list, 0.5)} p75 {Percentile(list, 0.75)}";
+        }
+
+        var through = reached.Select(x => x.Run.Prices.Take(x.At + 1).Select(p => p.Rank).ToList()).ToList();
+        yield return $"  through map {VerdictMap}, {reached.Count} runs; per map, means over the runs that deployed him:";
+        for (var i = 0; i <= reached.Min(x => x.At); i++)
+        {
+            var number = reached[0].Run.Maps[i].Map;
+            var id = content.Campaign.Maps[number - 1].MapId;
+            var maps = through.Select(t => t[i]).ToList();
+            var deployed = maps.Where(m => m.Deployed).ToList();
+            yield return $"    map {number} {id}: deployed {deployed.Count} of {maps.Count}; combats player {Mean(deployed.Select(m => m.PlayerCombats))} (struck {Mean(deployed.Select(m => m.PlayerStruck))}), enemy {Mean(deployed.Select(m => m.EnemyCombats))} (struck {Mean(deployed.Select(m => m.EnemyStruck))}); points earned {Mean(deployed.Select(m => m.Earned))}, kept {Mean(deployed.Select(m => m.Kept))}, lost to a fall {Mean(deployed.Select(m => m.LostToFall))} (fell {deployed.Count(m => m.Fell)}), in lost tries {Mean(deployed.Select(m => m.LostTries))}";
+        }
+
+        var final = reached.Select(x => x.Run.Companies[x.At].FirstOrDefault(m => m.Id == FocusedPlayer.Fed)?.MainRank ?? 0).ToList();
+        var fall = through.Select(t => t.Sum(m => m.LostToFall)).ToList();
+        var bound = final.Zip(fall, (f, l) => f + l).ToList();
+        yield return $"  per run: maps deployed {Pair(through.Select(t => t.Count(m => m.Deployed)))}, benched {Pair(through.Select(t => t.Count(m => !m.Deployed)))}; combats {Pair(through.Select(t => t.Sum(m => m.Combats)))}, struck {Pair(through.Select(t => t.Sum(m => m.PlayerStruck + m.EnemyStruck)))}, strikeless {Pair(through.Select(t => t.Sum(m => m.Strikeless)))}";
+        yield return $"  per run: points earned {Pair(through.Select(t => t.Sum(m => m.Earned)))}, kept {Pair(through.Select(t => t.Sum(m => m.Kept)))}, lost to a fall {Pair(fall)}, in lost tries {Pair(through.Select(t => t.Sum(m => m.LostTries)))}, at camps {Pair(through.Select(t => t.Sum(m => m.Camp)))}";
+        yield return $"  after map {VerdictMap}: the record reads {Pair(final)}; the Recalling player's bound (plus the points lost to a fall) {Pair(bound)}";
+        var maps8 = through.SelectMany(t => t).ToList();
+        var unexplained = maps8.Count(m => m.Unexplained != 0);
+        var camps = maps8.Count(m => m.Camp != 0);
+        yield return $"  reconciles: in-battle points against the record on {maps8.Count - unexplained} of {maps8.Count} maps (unexplained {maps8.Sum(m => m.Unexplained)} points), camps that moved his points {camps}";
+        var deployedMaps = maps8.Where(m => m.Deployed).ToList();
+        var perDeployed = deployedMaps.Count == 0 ? 0.0 : deployedMaps.Sum(m => m.Earned) / (double)deployedMaps.Count;
+        var sinks = new (string Name, double Points)[]
+        {
+            ("lost to a fall", fall.Average()),
+            ($"strikeless combats at {WeaponRanks.PerCombat}", through.Average(t => t.Sum(m => m.Strikeless)) * WeaponRanks.PerCombat),
+            ("maps benched at his mean earned on a deployed map", through.Average(t => t.Count(m => !m.Deployed)) * perDeployed),
+        };
+        yield return "  sinks, mean points a run: " + string.Join(", ", sinks.Select(k => $"{k.Name} {k.Points.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)}"));
+        yield return TraceVerdict(Percentile(bound, 0.5), unexplained, sinks.MaxBy(k => k.Points).Name);
+    }
+
+    /// <summary>
+    /// Round 393's read of the rank trace, agreed before the numbers: a count that does not reconcile is a bug
+    /// and goes first; a Recalling player's bound at C or above pulls no rank lever; otherwise a rank lever is
+    /// right, a door-only shape preferred over raising the points a strike pays, named with the largest sink.
+    /// </summary>
+    public static string TraceVerdict(int boundP50, int unexplainedMaps, string largestSink)
+    {
+        var head = $"  verdict (round 393, after map {VerdictMap}): ";
+        if (unexplainedMaps > 0)
+        {
+            return head + $"the count does not reconcile on {unexplainedMaps} maps; a bug, and it goes first";
+        }
+
+        return boundP50 >= WeaponRanks.Threshold(WeaponRank.C)
+            ? head + $"the Recalling player's bound reaches C (p50 {boundP50}); no rank lever"
+            : head + $"the Recalling player's bound is short of C (p50 {boundP50}); a rank lever is right, a door-only shape preferred (round 393); the largest sink is {largestSink}";
     }
 
     /// <summary>
