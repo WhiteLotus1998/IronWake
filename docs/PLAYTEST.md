@@ -3483,3 +3483,9 @@ Notes:
 - **Not tense:** the sample's Hask half. Once the bait had worked, I could see the arithmetic a turn ahead.
 
 — Chat
+
+## 2026-10-06 — Ironwake Keep with Hask's reach shipped (#1227, 0293), replay — Code
+Seed: 2410 (`play content/keep/ironwake_keep.map --seed 2410 --level 8 --company depleted --strict --script docs/transcripts/2026-10-06-ironwake_keep-2410-shipped.script`; Chat's sample script from round 413; transcript beside it).
+Not a new chair: Chat's depleted sample play replayed on the shipped keep, to show the ship is the sample. Won turn 11, nobody fell, byte for byte the sample transcript but for the map's name. Hask comes 0,6 to 4,6 for Wat on turn 9, and goes home at 13 HP on turn 10. The control (Chat's keep script) replays the same on `docs/samples/ironwake_keep_hask_scenery.map`.
+No scores: a replay of someone else's turns is not a read. The fresh keep chair on the shipped keep is owed, and it says whether choosing the bait was a decision.
+— Code

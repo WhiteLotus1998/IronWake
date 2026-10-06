@@ -14,7 +14,7 @@ public class PlayCompanyTests
 {
     private static string Repo => Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
 
-    private static string HaskHolds => Path.Combine(Repo, "docs", "samples", "ironwake_keep_hask_holds.map");
+    private static string HaskScenery => Path.Combine(Repo, "docs", "samples", "ironwake_keep_hask_scenery.map");
 
     private static string CampaignKeep => Path.Combine(Fixture.RealContentDirectory(), "keep", "ironwake_keep.map");
 
@@ -45,7 +45,7 @@ public class PlayCompanyTests
         var roster = FinaleRun.Roster(content, FinaleCompany.Depleted, FinaleRun.DefaultLevel);
         var absent = content.Cast.Where(u => roster.All(r => r.Id != u.Id)).ToList();
 
-        foreach (var map in new[] { HaskHolds, CampaignKeep })
+        foreach (var map in new[] { HaskScenery, CampaignKeep })
         {
             var output = Play(out var exit, map, "--seed", "3", "--level", "8", "--company", "depleted");
 
@@ -123,7 +123,7 @@ public class PlayCompanyTests
     public void PlayCompanyOnAMapThatNamesAnAbsentMemberIsRefusedByName()
     {
         // One bare slot of the sample becomes Maud's named slot, and the depleted company has no Maud.
-        var text = File.ReadAllText(HaskHolds).ReplaceLineEndings("\n").Replace("P recruit 15,6\n", "P recruit:maud 15,6\n", StringComparison.Ordinal);
+        var text = File.ReadAllText(HaskScenery).ReplaceLineEndings("\n").Replace("P recruit 15,6\n", "P recruit:maud 15,6\n", StringComparison.Ordinal);
         var map = Path.Combine(Path.GetTempPath(), "ironwake-company-" + Guid.NewGuid().ToString("N") + ".map");
         File.WriteAllText(map, text);
         try
@@ -131,7 +131,7 @@ public class PlayCompanyTests
             var output = Play(out var exit, map, "--level", "8", "--company", "depleted");
 
             Assert.Equal(2, exit);
-            Assert.Contains("ERROR: 'Ironwake Keep (Hask holds)' places Maud by name, and the depleted company has no Maud", output);
+            Assert.Contains("ERROR: 'Ironwake Keep (Hask scenery)' places Maud by name, and the depleted company has no Maud", output);
         }
         finally
         {

@@ -1,4 +1,4 @@
-name: Ironwake Keep (Hask holds)
+name: Ironwake Keep (Hask scenery)
 size: 16x12
 win: defeat_boss
 turn_limit: 12
@@ -11,7 +11,6 @@ pair_rule: hunt, lord
 fronts: north 10,1 10,2; gate 10,5 10,6; south 10,9 10,10
 hunter: 7,6
 freed: 7,6 by lord
-holds: lord 0,6 0,6
 deploy: all
 
 ....^^....#.....
@@ -58,5 +57,5 @@ assault3 turn 5 enemy spawn archer 0,4 group:assault behavior:aggressive
 north_in falls north spawn brigand 11,1 group:inside behavior:aggressive
 gate_in1 falls gate spawn soldier 11,5 group:inside behavior:aggressive
 gate_in2 falls gate spawn brigand 11,6 group:inside behavior:aggressive
-lord turn 6 enemy spawn boss hask 0,6 group:lord behavior:aggressive
+lord turn 6 enemy spawn boss hask 0,6 group:lord behavior:boss
 south_in falls south spawn brigand 11,10 group:inside behavior:aggressive
