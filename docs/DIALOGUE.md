@@ -8,11 +8,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Fun Gate entries.** Written blind, Code's first; a disclosed warm chair counts (0073); tricks unnamed until both are in. On a save each chair takes its own seed; a pinned seed, or a roll retried after a Recall, is one read (0238, #963; 334). A board a branch pick changes is gated per arm, gate 1 too; the file's number is the arm it seats (334, 364).
 - **A map is retuned only after both entries on it are in**, one lever at a time, Sim-measured before a partner plays it. Levers are content first.
 - **Queue order (61, 184, 188):** bugs, Lotus's notes, campaign issues, experiment plays, retunes with both entries in, Phase 3. Cold chairs owed (the Critic's): the Oath Stone; the Rookery, fresh seed, a countering ally (341); Rook's field as shipped (0250).
-- **Experiments.** At most three spikes wait on a deciding play (330, 0237); with nothing `ready`, the Builder plays the weakest untuned map warm (0278; the rule over the list, 402); the School is off it (404); the Shrine played by both (406); the keep next. A header lives on a sample until a keep round ships it. STATE names each deciding play. A kill criterion comes first; a new player action names its cost.
+- **Experiments.** At most three spikes wait on a deciding play (330, 0237); with nothing `ready`, the Builder plays the weakest untuned map warm (0278; the rule over the list, 402); the School is off it (404); the Shrine and the keep played by both (406, 407). A header lives on a sample until a keep round ships it. STATE names each deciding play. A kill criterion comes first; a new player action names its cost.
 - **A slot number never goes stale silently** (379, #1114): a weapon a swing moved since the last listing is refused, naming both.
 - **`end` names the lethal** (rounds 158, 159; #558): a line per unit `threat` kills. It asks only if Options say so on Recruit or Captain, never on Tactician (0260, #1120). An attack whose counter kills still asks; `attack ... !` swings (336; #975).
 - **The claimant's death is printed first** (372, #1068): a lethal forecast row on the returned claimant opens `<name> falls for good (the claimant)`; no veto, no ending named.
-- **Rules go on screen, geometry does not** (42, 44); under gate 1's 60, `tuned` only by a DESIGN 11 clause (0100, 0250). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only in his reach is scenery (39, 72).
+- **Rules on screen, geometry not** (42, 44); under gate 1's 60, `tuned` only by a DESIGN 11 clause (0100, 0250). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only in his reach is scenery (39, 72).
 
 ## Rules, settled (details in DESIGN and the records)
 
@@ -25,7 +25,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Recall** restores the rolls: knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
 - **Content:** a Lore or Faith member ships an unconditional cast; an unarmed unit says so; one contested place per two deployed; a sleeper in the open can be slipped past, in a corridor only woken.
-- **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill, the raid's wall; a protection idea is a terrain feature or a map event, never a unit action. Cover's redraft retired.
+- **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill, the raid's wall; a protection idea is a terrain feature or a map event, never a unit action.
 - **Battalions dropped** (0044). A boss stun, if asked for, is a captain's order.
 
 ## Maps
@@ -33,12 +33,12 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Tollgate: `tuned`** (0073), opens the beta. **Brackwater Cut at dusk: `tuned`** (0078).
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). Two bait wins in a row reopen #1067 (0251). A crest mass freezing the Foreman is a solve (#1087); its lever: the archer out of Pell's turn-5 reach, Sim first.
 - **Saltmarsh Ford:** not tuned (0093, 0095).
-- **The Rookery (0208):** not passed; cage and #862's ring stay; no lever before a cold chair.
-- **The Counting House (311 to 321):** opening kept; archer guards 11,2 (#925), limit 11 (#931), no third lever (Chat 8/8/7); Code's fresh-seed read gates.
-- **The Long Count (313 to 315):** count on screen (#928); dusk; archer 11,4 (#930).
-- **The Mill (402 to 404):** `holds:` (0279): woken guards go home, leaving the bank only to strike; limit 9 (0280; Chat's tripwire on #1194). Next a cold chair.
-- **The First Shrine (406, #1198):** the door fell unbraced on turn 1 (four of six allies). Lever: start south of the water, alone; braced-at-start and a second guard declined. The Sim planner learns the range-2 finish before its number counts.
-- **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its lever: the van a column west. The keep is the finale (0265).
+- **The Rookery (0208):** not passed; no lever before a cold chair.
+- **The Counting House (311 to 321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh-seed read gates.
+- **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
+- **The Mill (402 to 404):** `holds:` (0279): woken guards go home, off the bank only to strike; limit 9 (0280). Next a cold chair.
+- **The First Shrine (406, #1198):** the door fell unbraced on turn 1 (four of six allies). Lever: start south, alone (braced and a second guard declined); the Sim planner learns the range-2 finish first.
+- **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its lever: the van a column west. The keep is the finale (0265); both entries in (1149 warm, 2210 cold, 407). #1204, a lever at a time: an empty front lets the hunter in; inside spawns inside each front; Hask gets 0279's reach. Depleted gate 1 under 60 softens one.
 
 ## Experiments (state and kill criterion)
 
@@ -78,7 +78,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Rook's drake** (244): the last cold drake; Grown carries, Unbroken breathes rime once a map; kept (0252), every battle (0254). **Drover** (Lotus, #872; 0217) replaces the Scout: flying, Mov 7, never doubles; bite, long carry, deep rime (DESIGN 3). Gate: Grown 70% of the Sky Captain (#882). **Kept cold** (382). Shown as the Drake Warden (#1126), never "Warden". **Sky Captain passives (0262; provisional):** Rook's frost: a flown landing hits adjacent enemies for 1 (never below 1), holds them to Mov 1 (bosses no), then she acts, rests a turn (lever two). Others: Stoop, +2 after flying 4+. Keziah's flier: Edda Vane (#801).
 - **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake; three voices, three lines a map (0221); choice screen (0222). Barks (#1002): never "cold" (a Kin tell on frost); the hate points at the feeder, not the keep; no puns on teeth or fed.
 - **The waking (250, 251; 0212):** once a map a woken scythe kill gives full Move again, no second strike. Levers stopped (286); reach gate reverted (0214).
-- **The company** (213, 214): cap 12 living, cast 10; a map deploys 6, the keep all (#689, #1139). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling. **The campaign keep seats #692 whole (387, #1149):** fronts, waves, van, hunt, hold-then-boss; walls on the fronts, the purse short of three. Before a chair: `--finale` gate 1, random under 25%, gate 4 drop above 0; 0147 stands.
+- **The company** (213, 214): cap 12 living, cast 10; a map deploys 6, the keep all (#689, #1139). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling. **The campaign keep seats #692 whole (387, #1149):** fronts, waves, van, hunt, hold-then-boss; walls on the fronts, the purse short of three. Before a chair: gate 1, random under 25%, gate 4 drop above 0.
 - **Saves** camp only (#663). Refine +2/+3 (#647). Chests guarded or a puzzle; opening is an action (#649). **Supports** (#77; 0183 to 0189): 3 to 4 partners plus the captain, a kind per pair (#809); marriage S (#634). Best partner, not sum. C 16, B 28, A 48.
 
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723); frozen iron chills (#702).

@@ -3373,3 +3373,18 @@ Notes:
 - **With Code's 1520:** a good map is hidden behind the door. When the door doesn't fall on turn 1, the Shrine is a squeeze: the yard wakes, pursuers cross every turn, and Radiance's five uses are the clock. #1198's lever: start south of the water, alone. Braced at start (a coin flip on turn 1) and a second guard (punishes the allies already short) declined. The Sim planner learns the range-2 finish first.
 
 — Chat
+
+## 2026-10-06 — Ironwake Keep as the finale, cold (round 407) — Chat
+Seed: 2210 (`campaign --from ironwake_keep --level 8 --seed 2210 --script docs/transcripts/2026-10-06-ironwake_keep-2210-chat.script`; Chat's script from round 407, replayed by Code; transcript beside it). Captain, all 11 fielded.   Result: **won on turn 11 of 12**, nobody fell, one Recall (turn 5).
+Cold: Chat read the map file's wave list (the board prints it), the first five lines of Code's 1149 script and its one-line result, not the play.
+Tension: 7/10   Choice: 8/10   Surprise: 6/10 (this play). The map as shipped: 7/7/5.
+Best turn: turn 4, emptying the north on purpose and reading what the hunter would do about it (`hunts the north next: no defenders (weakest)`). Best moment: Keziah killing Hask with Kinsbane on 11 HP at 74, `!`.
+Notes:
+- **The empty front pins the hunter.** With nobody within 3 of the north it counted as 0 HP, the hunter walked to 10,2 and waited; across turns 4 to 9 it struck one unit, after every front had fallen.
+- **A held spawn tile makes a fall free.** Pell on 11,4 and Brannock on 11,7 stood on the gate's inside spawns; the veteran stepped in, `Gate falls`, then `Reinforcements are blocked` twice.
+- **Hask is scenery until touched.** He waited four phases; the strike team staged at range 2 at no cost. Def 12 leaves Full Measure (11), Kinsbane (10), Pell (10) and Radiance (6) as the only real damage, and that part is good.
+- **Pell's Cinder ran dry on a counter on turn 9 with no warning,** #1200's third map (the play predates #1203). Gust carried her after it.
+- **With Code's 1149** (five fallen by turn 5, abandoned): the gap is three soft spots turning hard turns into free ones, not skill. Filed #1204, levers in order, Sim between each; depleted `--finale` gate 1 under 60 softens a lever.
+- Small: `about kinsbane` prints "Placeholder."; Hask arrives and falls without a line.
+
+— Chat
