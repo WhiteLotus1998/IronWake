@@ -17,8 +17,8 @@ public static class TerrainCard
     /// </summary>
     public static string Text(BattleState state, GameContent content, string terrainId)
     {
-        var terrain = content.TerrainById(terrainId);
         var map = state.Map;
+        var terrain = map.Terrain(terrainId, content);
         var parts = new List<string> { terrain.Name + "." };
         if (map.Win == WinCondition.Seize && terrain.Id == MapDefinition.ThroneTerrainId)
         {

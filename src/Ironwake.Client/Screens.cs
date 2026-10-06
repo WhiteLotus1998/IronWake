@@ -359,7 +359,7 @@ public sealed record EndCard(bool Won, string Headline, string Line, string Turn
         var turn = $"turn {Math.Min(state.Turn, state.Map.TurnLimit)} of {state.Map.TurnLimit}";
         if (!won && state.Map.Win == WinCondition.Seize && state.Outcome.Cause == LossCause.Timeout)
         {
-            return new EndCard(false, "Lost", $"Turn {state.Map.TurnLimit} ran out with the captain short of the {Objective.SeizeName(content)}.", turn);
+            return new EndCard(false, "Lost", $"Turn {state.Map.TurnLimit} ran out with the captain short of the {Objective.SeizeName(state.Map, content)}.", turn);
         }
 
         if (!won)

@@ -317,6 +317,14 @@ public sealed record MapDefinition(
     /// </summary>
     public MapRegion Region { get; init; } = MapRegion.Seam;
 
+    /// <summary>
+    /// The <c>seize_name:</c> header (issue 1208): what this Seize map calls its throne tile, in
+    /// lowercase words (the First Shrine's altar). Null for the content's name, the throne
+    /// terrain's (<see cref="Objective.SeizeName(GameContent)"/>). Only the printed name changes;
+    /// no rule reads it.
+    /// </summary>
+    public string? SeizeName { get; init; }
+
     /// <summary>Whether <paramref name="unit"/> is oath-bound here (issue 691): an enemy whose group <see cref="Oathbound"/> names.</summary>
     public bool IsOathbound(BattleUnit unit) => unit.Side == Side.Enemy && unit.Group is { } group && Oathbound.Contains(group);
 
@@ -416,7 +424,20 @@ public sealed record MapDefinition(
             ? TerrainIds[at.Y * Width + at.X]
             : throw new ArgumentOutOfRangeException(nameof(at), at, $"outside a {Width}x{Height} map");
 
-    public Terrain TerrainAt(Coord at, GameContent content) => content.TerrainById(TerrainIdAt(at));
+    public Terrain TerrainAt(Coord at, GameContent content) => Terrain(TerrainIdAt(at), content);
+
+    /// <summary>
+    /// The terrain <paramref name="terrainId"/> as this map prints it: the content's, except the
+    /// throne on a map with <see cref="SeizeName"/>, which carries that name with its first letter
+    /// capitalized, as terrain names are (issue 1208).
+    /// </summary>
+    public Terrain Terrain(string terrainId, GameContent content)
+    {
+        var terrain = content.TerrainById(terrainId);
+        return terrainId == ThroneTerrainId && SeizeName is { } name
+            ? terrain with { Name = char.ToUpperInvariant(name[0]) + name[1..] }
+            : terrain;
+    }
 
     /// <summary>The placement standing on a tile at the start of the map, or null.</summary>
     public Placement? PlacementAt(Coord at)

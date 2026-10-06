@@ -822,8 +822,8 @@ public static class ProtocolJson
 
         if (state.Map.Win == WinCondition.Seize)
         {
-            // Derived (issue 569): the seize tile by the name the objective prints, never read back.
-            w.WriteString("seizeName", Objective.SeizeName(content));
+            // Derived (issues 569, 1208): the seize tile by the name the objective prints, never read back.
+            w.WriteString("seizeName", Objective.SeizeName(state.Map, content));
         }
 
         w.WriteNumber("turn", state.Turn);

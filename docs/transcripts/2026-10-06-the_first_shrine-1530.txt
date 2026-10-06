@@ -52,7 +52,7 @@ Maud goes with Wren. This map is lost if Maud falls; who falls here is gone for 
   turn 3, enemy phase: an archer arrives at 6,8 (aggressive). A unit standing on 6,8 stops it.
   turn 4, enemy phase: a soldier arrives at 7,8 (aggressive). A unit standing on 7,8 stops it.
   turn 5, enemy phase: a brigand arrives at 13,8 (aggressive). A unit standing on 13,8 stops it.
-Objective: Get Maud to the gate alive by the end of turn 10.
+Objective: Get Maud to the altar alive by the end of turn 10.
 The First Shrine  turn 1 of 10  player phase  seize  recall 2
    01234567890123
  0 ^^M###.T.###M^
@@ -1478,7 +1478,7 @@ The First Shrine  turn 10 of 10  player phase  seize  recall 0
  8 ^^.....=.....^
 
 b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group sanctum, hold, braced
-A  maud             Maud L4 chaplain           7,0    hp 18/18  Gate (heals 20 percent, 3 hp)  captain  unarmed
+A  maud             Maud L4 chaplain           7,0    hp 18/18  Altar (heals 20 percent, 3 hp)  captain  unarmed
 B  wren             Wren L5 cadet              8,1    hp 17/22  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 Battle won: seize; no recall is left, so leave
