@@ -51,7 +51,7 @@ One combatant per sheet, facing **right**. The client mirrors the sheet for the 
 | `hit_react` | 4 | 1 | taking the blow |
 | `fall` | 10 | none | down and still; the last frame holds |
 
-Classes and the weapon kinds each needs, from `content/classes.json`: adept (reason), bowman (bow), bulwark (lance, axe), cadet (sword, lance, axe), chaplain (faith), outrider (lance, sword), pikeman (lance), reaver (axe, gauntlet), sergeant (lance, sword; issue 691, a hidden class earned on the Postern, the pike crossed with a short sword), skyrider (lance). Named bosses from the shipped maps, one set per weapon each carries: the Bandit Leader (the Tollgate; steel axe and the Toll Axe, a two-weapon boss whose chosen axe must read at a glance), the Grange Reeve (Sallow Grange; steel lance and the Toll Spear), and the Weir Foreman (Harrow Weir; the Toll Axe). Hask, the finale's lord (issue 806), joins this list when a shipped map places him: his set shows a shard of frozen iron set in his lance's pommel, drawn as the woken heirloom's frozen iron is drawn, and no clip makes it act; it is on him, not a weapon effect.
+Classes and the weapon kinds each needs, from `content/classes.json`: adept (reason), bowman (bow), bulwark (lance, axe), cadet (sword, lance, axe), chaplain (faith), outrider (lance, sword), pikeman (lance), reaver (axe, gauntlet), sergeant (lance, sword; issue 691, a hidden class earned on the Postern, the pike crossed with a short sword), skyrider (lance). Named bosses from the shipped maps, one set per weapon each carries: the Bandit Leader (the Tollgate; steel axe and the Toll Axe, a two-weapon boss whose chosen axe must read at a glance), the Grange Reeve (Sallow Grange; steel lance and the Toll Spear), and the Weir Foreman (Harrow Weir; the Toll Axe). Hask, the finale's lord (issue 806), on the keep since issue 1149 (the Warden's Lance): his set shows a shard of frozen iron set in his lance's pommel, drawn as the woken heirloom's frozen iron is drawn, and no clip makes it act; it is on him, not a weapon effect.
 
 ## Effects
 
@@ -573,6 +573,14 @@ boss_grange_reeve_toll_spear_miss_recover
 boss_grange_reeve_toll_spear_dodge
 boss_grange_reeve_toll_spear_hit_react
 boss_grange_reeve_toll_spear_fall
+boss_hask_wardens_lance_idle
+boss_hask_wardens_lance_advance
+boss_hask_wardens_lance_strike
+boss_hask_wardens_lance_strike_crit
+boss_hask_wardens_lance_miss_recover
+boss_hask_wardens_lance_dodge
+boss_hask_wardens_lance_hit_react
+boss_hask_wardens_lance_fall
 boss_sworn_captain_steel_lance_idle
 boss_sworn_captain_steel_lance_advance
 boss_sworn_captain_steel_lance_strike

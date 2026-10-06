@@ -108,11 +108,18 @@ public static class FinaleRun
         }
     }
 
+    /// <summary>
+    /// <paramref name="content"/> with <paramref name="company"/> at <paramref name="level"/> as its
+    /// cast, so any gate that fields the cast fields the company (issue 1149).
+    /// </summary>
+    public static GameContent Fielded(GameContent content, Company company, int level) =>
+        content with { Cast = Roster(content, company, level) };
+
     /// <summary>Plays <paramref name="company"/> on <paramref name="map"/>: <paramref name="seeds"/> heuristic games and <see cref="SpeedSeeds"/> timed AI-vs-AI games.</summary>
     public static Reading Measure(GameContent content, MapDefinition map, Company company, int level, int seeds, RollScheme scheme)
     {
-        var roster = Roster(content, company, level);
-        var fielded = content with { Cast = roster };
+        var fielded = Fielded(content, company, level);
+        var roster = fielded.Cast;
         var games = new List<GameResult>();
         for (var seed = 1; seed <= seeds; seed++)
         {

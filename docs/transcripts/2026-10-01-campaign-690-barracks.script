@@ -46,7 +46,7 @@ build barracks
 hire
 hire bet
 hire tamsin
-build wall 10,3
+build wall 10,2
 hire ines
 hire corin
 roster

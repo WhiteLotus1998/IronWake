@@ -22,11 +22,11 @@ Rooms: beds: 9/12; a fallen member keeps their bed
   Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Keep: Ironwake Keep; built: nothing; the purse holds 500
   wall: Rebuild a wall, 400
-    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
-    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+    Wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
+    Wall 10,9: Wall; no unit can stand on it; the gap 10,9 to 10,10 narrows from 2 tiles to 1 (10,10)
   ditch: Dig a ditch, 300
-    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
-    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,4: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,7: Water; infantry, cavalry and armored units cannot stand on it; flying can
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
   rook_2: Rook's quest 2, The Rookery (quest rook_2 <ally>); permadeath applies
@@ -43,7 +43,7 @@ Side maps won:
 == Shop ==
 Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
-March (march): map 10, Ironwake Keep. Hold out until the end of turn 8. Captain Fenn must survive.
+March (march): map 10, Ironwake Keep. Hold until the boss arrives on turn 6, then defeat the boss by the end of turn 12. Captain Fenn must survive.
 > quest rook_2 wren
 -- The Rookery --
 Rook asks for one more day. The ledger in the rookery's loft, on the

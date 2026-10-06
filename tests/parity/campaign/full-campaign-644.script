@@ -1,4 +1,4 @@
-# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script 644 --difficulty recruit --permadeath off --variant 24`.
+# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script 644 --difficulty recruit --permadeath off --variant 18`.
 # Played by `campaign --seed 644 --difficulty recruit --permadeath off`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 632);
 # the heuristic player fights the rest; each camp takes the actions not yet taken that the record accepts.
 march
@@ -300,7 +300,7 @@ leave
 build barracks
 build barracks_wing
 hire corin
-build wall 10,3
+build wall 10,2
 march
 move captain 3,4
 wait captain
@@ -524,123 +524,131 @@ wait ottilie
 move pell 16,6
 attack pell sworn_captain-1
 leave
+repair captain 1
+buy steel_sword captain
+repair wren 1
+buy iron_axe wren
+repair teodor 1
+buy iron_lance teodor
+repair ottilie 1
+buy steel_bow ottilie
+buy bolt pell
+repair dunstan 1
+buy iron_axe dunstan
+buy salve maud
+buy iron_lance ansgar
+repair rook 1
+buy steel_lance rook
+buy iron_axe keziah
+buy iron_axe brannock
 march
-wait ansgar
-canto ansgar 13,8
+move ansgar 8,6
+attack ansgar finale_hunter-1
+canto ansgar 8,6
+move brannock 12,5
 wait brannock
+move captain 9,5
 wait captain
+move corin 11,6
 wait corin
+move dunstan 11,9
 wait dunstan
+move keziah 13,5
+wait keziah
+move maud 12,6
+wait maud
+move ottilie 9,6
+attack ottilie finale_hunter-1 steel_bow
+move pell 11,3
+wait pell
+move rook 10,5
+wait rook
+move teodor 10,9
+wait teodor
+move wren 11,5
+wait wren
+end !
+move brannock 8,5
+attack brannock marauder-1 !
+move captain 11,4
+wait captain
+move corin 9,6
+attack corin marauder-1 !
+move dunstan 7,9
+attack dunstan soldier-1
+move keziah 9,5
+attack keziah veteran-1
+move maud 10,6
+attack maud marauder-1
+move pell 9,1
+attack pell brigand-1 bolt
+move rook 5,5
+attack rook longbowman-1
+move teodor 8,7
+attack teodor marauder-1
+move wren 9,3
+wait wren
+end !
+move captain 8,5
+wait captain
+move corin 8,6
+attack corin finale_hunter-1
+move keziah 7,5
+attack keziah finale_hunter-1 iron_gauntlets
+move maud 9,6
+attack maud finale_hunter-1
+move pell 6,1
+attack pell brigand-2
+move rook 5,1
+attack rook brigand-2
+move teodor 6,8
+attack teodor soldier-1
+move wren 6,4
+wait wren
+end !
+move captain 5,5
+attack captain soldier-2 steel_sword
+move corin 5,6
+attack corin hexer-1 !
+move keziah 7,9
+attack keziah soldier-1 kinsbane !
+move maud 6,6
+attack maud hexer-1
+move pell 5,0
+attack pell finale_hunter-1
+move rook 4,5
+attack rook hexer-1 steel_lance
+move wren 5,1
+attack wren finale_hunter-1
+end !
+move captain 3,7
+attack captain archer-1
+move keziah 7,8
+attack keziah hexer-1 !
+move maud 7,7
+item maud 2 keziah
+wait pell
+wait wren
+end
+move captain 3,6
+attack captain archer-2
 wait keziah
 wait maud
-wait ottilie
 wait pell
-wait rook
-wait teodor
 wait wren
 end
-move ansgar 11,7
-attack ansgar marauder-1 !
-canto ansgar 13,7
-wait brannock
-move captain 11,4
-attack captain veteran-1
-wait corin
-move dunstan 11,7
-attack dunstan marauder-1 !
-move keziah 11,7
-attack keziah marauder-1 !
-move maud 11,3
-attack maud veteran-1
-move ottilie 11,5
-attack ottilie veteran-1
+move captain 1,6
+attack captain hask-1
+move keziah 3,8
+wait keziah
+move maud 4,6
+wait maud
+move pell 2,1
 wait pell
-wait rook
-wait teodor
+move wren 1,1
 wait wren
 end
-move ansgar 10,8
-attack ansgar soldier-1
-canto ansgar 12,8
-wait brannock
-move captain 9,3
-attack captain longbowman-1
-wait corin
-attack keziah soldier-1
-move maud 8,4
-attack maud longbowman-1
-attack ottilie brigand-1
-move pell 10,4
-attack pell brigand-1
-move rook 9,4
-attack rook brigand-1
-move teodor 10,8
-attack teodor soldier-1
-wait wren
-end !
-move ansgar 9,5
-attack ansgar soldier-1 !
-canto ansgar 9,5
-wait brannock
-move captain 6,3
-attack captain brigand-2
-wait corin
-wait keziah
-move ottilie 8,4
-attack ottilie brigand-2
-move pell 7,5
-attack pell archer-1
-move rook 5,4
-attack rook archer-1
-wait teodor
-wait wren
-end !
-move ansgar 3,5
-attack ansgar brigand-3 !
-wait brannock
-move captain 4,3
-attack captain soldier-2
-wait corin
-move keziah 8,7
-attack keziah hexer-1 iron_gauntlets !
-move ottilie 5,3
-attack ottilie soldier-2
-move pell 4,5
-attack pell brigand-3
-attack rook soldier-2 !
-wait wren
-end
-wait brannock
-move captain 3,2
-attack captain soldier-3
-wait corin
-wait keziah
-move ottilie 4,4
-attack ottilie soldier-3
-move pell 5,3
-attack pell soldier-3
-move rook 1,4
-attack rook archer-2
-wait wren
-end !
-wait brannock
-wait captain
-wait corin
-wait keziah
-move ottilie 2,5
-attack ottilie archer-2
-move pell 6,3
-attack pell brigand-4
-wait wren
-end !
-wait brannock
-move captain 7,2
-item captain field_dressing
-wait corin
-move keziah 7,4
-attack keziah soldier-4 kinsbane !
-move pell 4,4
-attack pell brigand-4
-wait wren
-end !
+attack captain hask-1
+move keziah 0,7
+attack keziah hask-1 !
 leave
