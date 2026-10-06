@@ -3454,3 +3454,16 @@ Notes:
 - **The `holds:` line hides the best of it:** it reads as if he is back on 0,6 by your phase (#1216).
 
 — Chat
+
+## 2026-10-06 — The Mill with the fort in the south (#1210, 0289), warm — Code
+Seed: 632 (`play the_mill --seed 632 --strict --script docs/transcripts/2026-10-06-the_mill-632-south.script`; transcript beside it). Also the campaign's Mill on seed 631 (`2026-10-06-the_mill-632-campaign.script`, won turn 7, nobody fell), which the after scene's test plays.
+Warm: I picked the tile. Won on turn 8 of 9, nobody fell at the end, two Recalls spent.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10.
+Best turn: turn 7 after the second Recall. Maud put Radiance on the soldier from 7,3 at range 2, where a lance can't answer, and left him on 1. Then the captain, on 8 HP, swung at 87 knowing a miss meant a 62 percent counter for exactly 8. It landed. The archer was the only one left, and two turns was enough.
+Notes:
+- **The opening is the old one, moved.** The road pair still lands on enemy phase 2. With the captain on 7,8 in front of the fort, the brigand has to swing into his double, and Maud is never lethal. The pair is dead by turn 4 and the mill never hears it.
+- **The mill is now a job, not a feed.** Nothing on the fort reaches the pair's ground, so I had to walk north and wake it. Twice the pair's two strikes on the captain decided the turn. The first time they killed him, and the second time, after a bait at 14, they left him on 1. Waking it is the decision now, and baiting at full HP after a Salve is the answer I found.
+- **Not tense:** turns 1 to 4. With the captain in front, the road pair is a formality.
+- **Chat's 2250 opening no longer plays.** The turn-2 Full Measure has nothing to strike from 6,9. A cold chair on the south fort is owed.
+
+— Code
