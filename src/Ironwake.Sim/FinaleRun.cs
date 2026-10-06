@@ -19,11 +19,11 @@ public static class FinaleRun
     /// <summary>The level the company is expected to stand at on the keep (provisional; FinaleStrengthTests holds the bosses to it).</summary>
     public const int DefaultLevel = 8;
 
-    /// <summary>Story members beside the captain in the depleted company (issue 692).</summary>
-    public const int DepletedStory = 5;
+    /// <summary>Story members beside the captain in the depleted company (issue 692; <see cref="FinaleCompanies.DepletedStory"/>).</summary>
+    public const int DepletedStory = FinaleCompanies.DepletedStory;
 
-    /// <summary>Story members beside the captain in the floor company (issue 692).</summary>
-    public const int FloorStory = 3;
+    /// <summary>Story members beside the captain in the floor company (issue 692; <see cref="FinaleCompanies.FloorStory"/>).</summary>
+    public const int FloorStory = FinaleCompanies.FloorStory;
 
     /// <summary>The median turn count over which the finale is too long; the lever is one fewer wave (issue 692).</summary>
     public const int LengthLimit = 16;
@@ -34,41 +34,11 @@ public static class FinaleRun
     /// <summary>The slowest AI-vs-AI game allowed, in milliseconds, as gate 7.</summary>
     public const int SpeedLimitMs = 1000;
 
-    /// <summary>The three companies the finale is measured with.</summary>
-    public enum Company
-    {
-        Full,
-        Depleted,
-        Floor,
-    }
-
     /// <summary>A company's name as printed.</summary>
-    public static string Name(Company company) => company switch
-    {
-        Company.Full => "full",
-        Company.Depleted => "depleted",
-        _ => "floor",
-    };
+    public static string Name(FinaleCompany company) => FinaleCompanies.Name(company);
 
-    /// <summary>
-    /// The roster of <paramref name="company"/> in deploy order, captain first: story members in
-    /// cast order raised to <paramref name="level"/>, then hires in the keep's hire order at
-    /// <paramref name="level"/> less <see cref="Barracks.LevelsBelow"/>.
-    /// </summary>
-    public static ValueList<Unit> Roster(GameContent content, Company company, int level)
-    {
-        var story = company switch
-        {
-            Company.Full => content.Cast.Count - 1,
-            Company.Depleted => DepletedStory,
-            _ => FloorStory,
-        };
-        var hiresLevel = Math.Max(Unit.MinLevel, level - Barracks.LevelsBelow);
-        var members = content.Cast.Take(1 + Math.Min(story, content.Cast.Count - 1)).Select(u => u.ScaledTo(level, content.Class(u.ClassId))).ToList();
-        var hires = content.Campaign.Keep.Hires.Select(h => Barracks.Recruit(h, hiresLevel, content));
-        members.AddRange(company == Company.Floor ? hires : hires.Take(Math.Max(0, CampaignRecord.CompanyCap - members.Count)));
-        return ValueList<Unit>.From(members);
-    }
+    /// <summary>The roster of <paramref name="company"/> in deploy order (<see cref="FinaleCompanies.Roster"/>; issue 1217 moved it to Core so <c>play --company</c> fields the same units).</summary>
+    public static ValueList<Unit> Roster(GameContent content, FinaleCompany company, int level) => FinaleCompanies.Roster(content, company, level);
 
     /// <summary>
     /// Why <paramref name="map"/> cannot be measured as the finale, or null: it must field the whole
@@ -78,7 +48,7 @@ public static class FinaleRun
         map.DeploysAll ? null : $"finale: {id} is not 'deploy: all'; the finale fields the whole company";
 
     /// <summary>One company's reading: the heuristic's games and the slowest AI-vs-AI game.</summary>
-    public sealed record Reading(Company Company, int Size, IReadOnlyList<GameResult> Games, long SlowestMs, int TurnLimit, bool Bonded = false)
+    public sealed record Reading(FinaleCompany Company, int Size, IReadOnlyList<GameResult> Games, long SlowestMs, int TurnLimit, bool Bonded = false)
     {
         /// <summary>The names of the map's events a front's fall fires, in file order (issue 1204); empty on a map without fronts.</summary>
         public IReadOnlyList<string> Falls { get; init; } = Array.Empty<string>();
@@ -89,7 +59,7 @@ public static class FinaleRun
         public int MedianTurns => Median(Games.Select(g => Math.Min(g.Turns, TurnLimit)));
 
         /// <summary>Gate 1 on full and depleted; the floor is data.</summary>
-        public bool Beatable => Company == Company.Floor || (double)Wins / Games.Count >= Gates.BeatableRate;
+        public bool Beatable => Company == FinaleCompany.Floor || (double)Wins / Games.Count >= Gates.BeatableRate;
 
         public bool Fast => SlowestMs < SpeedLimitMs;
 
@@ -100,7 +70,7 @@ public static class FinaleRun
         public IEnumerable<string> Lines(int level)
         {
             var rate = (double)Wins / Games.Count;
-            var verdict = Company == Company.Floor ? $"data, a cold chair's play decides ({(Wins > 0 ? "won at least once" : "never won")})" : Gates.Verdict(Beatable);
+            var verdict = Company == FinaleCompany.Floor ? $"data, a cold chair's play decides ({(Wins > 0 ? "won at least once" : "never won")})" : Gates.Verdict(Beatable);
             yield return $"finale {Name(Company)}: {Size} units at level {level}, heuristic wins {Wins}/{Games.Count} ({rate:P0}), losses {Gates.LossCounts(Games)}: {verdict}";
             yield return $"  length: median {MedianTurns} turns over every game, limit {TurnLimit}: {(Short ? "ok" : $"over {LengthLimit}, the lever is one fewer wave")}";
             yield return $"  time: {SpeedSeeds} AI-vs-AI games, slowest {SlowestMs} ms: {Gates.Verdict(Fast)}";
@@ -120,11 +90,11 @@ public static class FinaleRun
     /// <paramref name="content"/> with <paramref name="company"/> at <paramref name="level"/> as its
     /// cast, so any gate that fields the cast fields the company (issue 1149).
     /// </summary>
-    public static GameContent Fielded(GameContent content, Company company, int level) =>
+    public static GameContent Fielded(GameContent content, FinaleCompany company, int level) =>
         content with { Cast = Roster(content, company, level) };
 
     /// <summary>Plays <paramref name="company"/> on <paramref name="map"/>: <paramref name="seeds"/> heuristic games and <see cref="SpeedSeeds"/> timed AI-vs-AI games.</summary>
-    public static Reading Measure(GameContent content, MapDefinition map, Company company, int level, int seeds, RollScheme scheme)
+    public static Reading Measure(GameContent content, MapDefinition map, FinaleCompany company, int level, int seeds, RollScheme scheme)
     {
         var fielded = Fielded(content, company, level);
         var roster = fielded.Cast;
