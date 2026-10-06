@@ -1,0 +1,71 @@
+pick keziah
+march
+move dunstan 11,7
+wait dunstan
+move teodor 11,4
+wait teodor
+move wren 12,3
+wait wren
+move pell 13,4
+wait pell
+move ottilie 12,6
+wait ottilie
+move captain 12,5
+wait captain
+end
+move pell 12,7
+attack pell brigand-1
+move ottilie 12,4
+attack ottilie soldier-1
+attack teodor soldier-1
+move wren 10,3
+attack wren soldier-1
+move captain 9,4
+wait captain
+wait dunstan
+end
+move captain 9,3
+attack captain archer-1
+move wren 8,2
+attack wren archer-1
+move dunstan 8,7
+move pell 9,7
+attack pell hexer-1
+attack dunstan hexer-1
+recall 46
+move captain 8,2
+attack captain archer-1
+move wren 9,3
+attack wren archer-1
+move dunstan 8,7
+move pell 9,7
+attack pell hexer-1
+attack dunstan hexer-1
+move ottilie 9,4
+wait ottilie
+item teodor field_dressing
+end
+move pell 8,6
+attack pell brigand-2 art overcast
+move dunstan 8,5
+attack dunstan brigand-2
+move ottilie 10,3
+attack ottilie soldier-2
+attack wren soldier-2
+recall 65
+move ottilie 10,3
+attack ottilie soldier-2
+attack wren soldier-2
+move pell 10,4
+attack pell brigand-2 art overcast
+move dunstan 8,5
+attack dunstan brigand-2
+move captain 7,4
+wait captain
+move teodor 9,5
+wait teodor
+end
+move ottilie 7,3
+attack ottilie brigand-3
+attack captain brigand-3
+leave
