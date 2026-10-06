@@ -11,8 +11,20 @@ public sealed record CertificationRequirements(int Level, ValueList<(WeaponType 
     public static CertificationRequirements None { get; } = new(Unit.MinLevel, ValueList<(WeaponType, WeaponRank)>.Empty, Stats.Zero);
 
     /// <summary>
+    /// A door's points gate (issue 1174, round 394): a minimum in rank points in each named weapon type,
+    /// strictly between D's threshold and C's, so a gate never reads as a letter. Empty asks nothing.
+    /// </summary>
+    public ValueList<(WeaponType Type, int Points)> Points { get; init; } = ValueList<(WeaponType, int)>.Empty;
+
+    /// <summary>Whether <paramref name="points"/> may stand as a points gate: strictly between D's threshold and C's.</summary>
+    public static bool IsGate(int points) => points > WeaponRanks.Threshold(WeaponRank.D) && points < WeaponRanks.Threshold(WeaponRank.C);
+
+    /// <summary>A points gate as the screen names it, <c>lance 50 (between D and C)</c>.</summary>
+    public static string DescribeGate(WeaponType type, int points) => $"{type.Label()} {points} (between D and C)";
+
+    /// <summary>
     /// The requirements as the between-map screen prints them: the level, then each rank in
-    /// content order, then each stat minimum in draw order, as <c>level 4, sword D, spd 8</c>;
+    /// content order, then each points gate (issue 1174), then each stat minimum in draw order, as <c>level 4, sword D, spd 8</c>;
     /// <c>nothing</c> when they ask nothing a new recruit lacks.
     /// </summary>
     public string Describe()
@@ -24,6 +36,7 @@ public sealed record CertificationRequirements(int Level, ValueList<(WeaponType 
         }
 
         parts.AddRange(Ranks.Select(r => $"{r.Type.Label()} {r.Rank}"));
+        parts.AddRange(Points.Select(g => DescribeGate(g.Type, g.Points)));
         parts.AddRange(Stats.All.Where(s => Stats.Get(s) > 0).Select(s => $"{s.ToString().ToLowerInvariant()} {Stats.Get(s)}"));
         return parts.Count == 0 ? "nothing" : string.Join(", ", parts);
     }
@@ -43,7 +56,7 @@ public static class Certifications
 {
     /// <summary>
     /// Every requirement of <paramref name="target"/> that <paramref name="unit"/> fails, in
-    /// order: the class itself, a hidden class (issue 691), an advanced form's base (issue 704), level, ranks in content order, stats in draw order. Empty
+    /// order: the class itself, a hidden class (issue 691), an advanced form's base (issue 704), level, ranks in content order, points gates in content order (issue 1174), stats in draw order. Empty
     /// when the unit may certify. A stat minimum reads the unit's own stats, so the class it
     /// would leave counts for nothing toward the class it enters.
     /// </summary>
@@ -133,6 +146,15 @@ public static class Certifications
             if (has < rank)
             {
                 refusals.Add(new("ranks." + type.ToString().ToLowerInvariant(), $"needs {type.Label()} {rank}, has {has}"));
+            }
+        }
+
+        foreach (var (type, points) in requirements.Points)
+        {
+            var has = unit.Skill.Points(type);
+            if (has < points)
+            {
+                refusals.Add(new("points." + type.ToString().ToLowerInvariant(), $"needs {type.Label()} {points}, has {has}"));
             }
         }
 

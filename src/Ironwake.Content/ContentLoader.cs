@@ -2423,7 +2423,8 @@ public static class ContentLoader
 
     /// <summary>
     /// A class's optional <c>certification</c> (issue 72): <c>level</c>, <c>ranks</c> (weapon
-    /// type to rank letter) and <c>stats</c> (minimums, 0 asking nothing), each optional; absent, the class asks nothing.
+    /// type to rank letter), <c>points</c> (weapon type to a rank-point gate strictly between D and C, never a
+    /// type <c>ranks</c> also names; issue 1174) and <c>stats</c> (minimums, 0 asking nothing), each optional; absent, the class asks nothing.
     /// </summary>
     private static CertificationRequirements ParseCertification(EntryNode node)
     {
@@ -2432,7 +2433,7 @@ public static class ContentLoader
             return CertificationRequirements.None;
         }
 
-        RequireOnly(node, certification, "certification", "level", "ranks", "stats");
+        RequireOnly(node, certification, "certification", "level", "ranks", "points", "stats");
         var level = Unit.MinLevel;
         if (certification.Has("level"))
         {
@@ -2459,6 +2460,27 @@ public static class ContentLoader
             }
         }
 
+        var points = new List<(WeaponType, int)>();
+        if (certification.OptionalObject("points") is { } pointNode)
+        {
+            foreach (var property in pointNode.Element.EnumerateObject())
+            {
+                var field = "certification.points." + property.Name;
+                var type = node.ParseEnum<WeaponType>(field, property.Name);
+                if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt32(out var gate) || !CertificationRequirements.IsGate(gate))
+                {
+                    throw node.Error(field, $"must be an integer strictly between D's {WeaponRanks.Threshold(WeaponRank.D)} and C's {WeaponRanks.Threshold(WeaponRank.C)} rank points");
+                }
+
+                if (ranks.Any(r => r.Item1 == type))
+                {
+                    throw node.Error(field, $"names {property.Name}, which certification.ranks also names; a door asks a letter or a gate, not both");
+                }
+
+                points.Add((type, gate));
+            }
+        }
+
         var stats = Stats.Zero;
         if (certification.OptionalObject("stats") is { } statNode)
         {
@@ -2478,7 +2500,7 @@ public static class ContentLoader
             }
         }
 
-        return new CertificationRequirements(level, ValueList<(WeaponType, WeaponRank)>.From(ranks), stats);
+        return new CertificationRequirements(level, ValueList<(WeaponType, WeaponRank)>.From(ranks), stats) { Points = ValueList<(WeaponType, int)>.From(points) };
     }
 
     private static ImmutableSortedDictionary<string, Weapon> ParseWeapons(ContentFile file)

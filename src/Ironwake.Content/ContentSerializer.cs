@@ -904,6 +904,17 @@ public static class ContentSerializer
             }
 
             writer.WriteEndObject();
+            if (certification.Points.Count > 0)
+            {
+                writer.WriteStartObject("points");
+                foreach (var (type, points) in certification.Points)
+                {
+                    writer.WriteNumber(type.ToString().ToLowerInvariant(), points);
+                }
+
+                writer.WriteEndObject();
+            }
+
             WriteStats(writer, "stats", certification.Stats);
             writer.WriteEndObject();
         }

@@ -27,14 +27,14 @@ public class AdvancedClassTests
     [InlineData("lancer", "outrider", "lance")]
     [InlineData("skycaptain", "skyrider", "lance")]
     [InlineData("sentinel", "bulwark", "lance")]
-    public void EachFirstTierClassHasOneAdvancedFormAtLevelSevenAndRankC(string formId, string baseId, string weapon)
+    public void EachFirstTierClassHasOneAdvancedFormAtLevelSevenAndThePointsGate(string formId, string baseId, string weapon)
     {
         var form = Content.Class(formId);
 
         Assert.Equal(baseId, form.Advances?.Id);
         Assert.Equal(baseId, form.BaseId);
         Assert.Equal(7, form.Certification.Level);
-        Assert.Equal($"level 7, {weapon} C", form.Certification.Describe());
+        Assert.Equal($"level 7, {weapon} 50 (between D and C)", form.Certification.Describe());
         Assert.Single(Content.Classes.Values, c => c.Advances?.Id == baseId && c.Unique is null);
     }
 
@@ -95,19 +95,19 @@ public class AdvancedClassTests
     }
 
     [Fact]
-    public void APikemanShortOfTheLevelAndTheRankIsRefusedNamingBoth()
+    public void APikemanShortOfTheLevelAndTheGateIsRefusedNamingBoth()
     {
         var pikeman = Recruit("teodor") with { ClassId = "pikeman", Level = 6, Skill = WeaponSkill.Zero.With(WeaponType.Lance, WeaponRanks.Threshold(WeaponRank.D)) };
 
-        Assert.Equal(new[] { "needs level 7, has 6", "needs lance C, has D" }, Certifications.Check(pikeman, Content.Class("halberdier")).Select(r => r.Text));
+        Assert.Equal(new[] { "needs level 7, has 6", "needs lance 50, has 30" }, Certifications.Check(pikeman, Content.Class("halberdier")).Select(r => r.Text));
     }
 
     [Fact]
-    public void ARankRefusalNamesTheWeaponTypeByItsScreenLabel()
+    public void AGateRefusalNamesTheWeaponTypeByItsScreenLabel()
     {
         var adept = Recruit("pell") with { Level = 10 };
 
-        Assert.Equal(new[] { "needs lore C, has E" }, Certifications.Check(adept, Content.Class("scholar")).Select(r => r.Text));
+        Assert.Equal(new[] { "needs lore 50, has 0" }, Certifications.Check(adept, Content.Class("scholar")).Select(r => r.Text));
     }
 
     [Fact]

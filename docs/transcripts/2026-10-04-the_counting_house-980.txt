@@ -4,12 +4,12 @@ Autosaved as auto-1; the last 3 camps are kept
 == Roster ==
   Alder Fenn (captain): Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  Teodor: Pikeman L5, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
-  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
-  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L5, EXP 0; 1: Iron Lance 40/40
-  Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
-  Rook: Skyrider L5, EXP 0; 1: Iron Lance 40/40
+  Teodor: Pikeman L5, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40; door: lance 0/50
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3; door: bow 0/50
+  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6; door: lore 0/50
+  Dunstan: Bulwark L5, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
+  Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8; door: faith 30/50
+  Rook: Skyrider L5, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
   Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 Deploys to Sallow Grange: Alder Fenn, Dunstan, Wren, Teodor, Pell, Ottilie (deploy 6 of 9)
 == Keep ==

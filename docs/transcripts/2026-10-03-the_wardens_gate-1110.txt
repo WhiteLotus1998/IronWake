@@ -4,12 +4,12 @@ Autosaved as auto-1; the last 3 camps are kept
 == Roster ==
   Alder Fenn (captain): Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  Teodor: Pikeman L7, EXP 0; 1: Family Lance 40/40, 2: Iron Lance 40/40, 3: Field Dressing 3/3
-  Ottilie: Bowman L7, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
-  Pell: Adept L7, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L7, EXP 0; 1: Iron Lance 40/40
-  Maud: Chaplain L7, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
-  Rook: Skyrider L7, EXP 0; 1: Iron Lance 40/40
+  Teodor: Pikeman L7, EXP 0; 1: Family Lance 40/40, 2: Iron Lance 40/40, 3: Field Dressing 3/3; door: lance 0/50
+  Ottilie: Bowman L7, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3; door: bow 0/50
+  Pell: Adept L7, EXP 0; 1: Cinder 8/8, 2: Gust 6/6; door: lore 0/50
+  Dunstan: Bulwark L7, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
+  Maud: Chaplain L7, EXP 0; 1: Radiance 5/5, 2: Salve 8/8; door: faith 30/50
+  Rook: Skyrider L7, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
   Brannock: Cadet L7, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 Deploys to Brackwater Cut: Alder Fenn, Dunstan, Rook, Wren, Pell (deploy 5 of 9)
 == Keep ==
