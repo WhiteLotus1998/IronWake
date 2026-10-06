@@ -2,7 +2,7 @@
 
 **Rule 1: stands.** Rook may name a feeling once, as a scene's turn, and the beat sheet names it in advance (below). She is the speaker most likely to name one to the drake and least likely to a person, and the booked one goes to the drake.
 
-**Who.** Kestrow; raised by the church in the rookery that keeps its one secret animal, early twenties, a skyrider and the drake's escort. The church's ledger lists the drake as a holding and Rook on the line below it. Dry, watchful, kinder to her mount than to people. Wants the drake safe and off the ledger, and herself with it. Won't say that she named it in secret (Corrie, placeholder), or that she assumes everyone is lying because the only people who raised her did (her flaw).
+**Who.** Kestrow; raised by the church in the rookery that keeps its one secret animal, early twenties, a skyrider and the drake's escort. The church's ledger lists the drake as a holding and Rook on the line below it. Dry, watchful, kinder to her mount than to people. Wants the drake safe and off the ledger, and herself with it. Won't say that she named it in secret (Corrie, placeholder), or that she assumes everyone is lying because the only people who raised her did (her flaw). Sold to the chapter by her mother for a winter's grain at six; told the day she arrived that if she ever spoke of the drake it would be killed, and believed it for nine years; fifteen when she understood the drake was the chapter's whole treasury and the lie had been told to keep a child quiet (STORY draft 7). The rookery names its wards from the birds, so her new name, when Lotus gives it, is a bird's. Corrie is for the high hollows where the snow never melts, where it sleeps best.
 
 **Image source** (rule 5). The rookery and the weather. **The rookery:** the loft, the roost, feed buckets, the ledger line, a bad wing, the night watch on a sick animal. **The weather:** wind direction, the front coming over the fell, a thermal, cloud base, ice on a wing, how far you can see from up there. Of Kestrow's three voices she has the sky (Dunstan has stone, Maud the sickbed). Never: the hunt or the herd (Keziah's and Kinsbane's; the drake is fed, never hunted with). Never stone, footing or walls (Dunstan's). Never a page or a ledger as a thing she reads (Pell's and Ottilie's); the church's ledger is the one exception, and it is an enemy.
 
@@ -31,6 +31,7 @@
 5. `support`, to the captain, a test: "Who paid for the extra seat? You know. Say it."
 6. `scene`, the Rookery, to the drake, the ledger struck: "There. Nobody owns you now. You'll have to put up with me anyway. It's a long way down."
 7. `scene`, the field, returned in Hask's ranks, to Keziah (pinned in part): "He was good to it. That was the worst part. Ask me something he lied about. You can't."
-8. `card`, her epilogue if she lived, Rook's pick: "Rook keeps the drake on the keep roof each winter. Children come up to look. She makes them ask its name, and tells the ones who ask nicely."
+8. `bark`, the Sky Captain's frost as she lands (#1127), to the drake: "Down. Let it off your wings."
+9. `card`, her epilogue if she lived, Rook's pick: "Rook keeps the drake on the keep roof each winter. Children come up to look. She makes them ask its name, and tells the ones who ask nicely."
 
 **Average test.** Stock: "My dragon and I fly as one. None can stand against us!" Ours: "Front's coming over the fell by noon. She'll want to land before it. So will you."

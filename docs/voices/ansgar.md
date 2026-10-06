@@ -2,7 +2,7 @@
 
 **Rule 1: stands.** Ansgar may name a feeling once, as a scene's turn, and the beat sheet names it in advance (below).
 
-**Who.** Sallow, fen-born; a courier sold as a boy to Hask's companies, eighteen, an outrider, met on the field (map 9), last of anyone. He ran the night before his swearing, on the horse they gave him for it. Wants to stay free, and to stop running. Won't say how far the warmth had got.
+**Who.** Sallow, fen-born; a courier indentured at twelve by Sallow's courier guild to Hask's companies, eighteen, an outrider, met on the field (map 9), last of anyone. Six years carrying the Warden's post without breaking a seal, so he knows every road in the seam and most of what was in the letters, because couriers listen. He ran the night before his swearing, on the horse they gave him for it, third from the end of the line, when the warmth had reached his elbows (STORY draft 7). Wants to stay free, and to stop running. Won't say how far the warmth had got. **Proposed plant:** at the Tollgate, after Hask rides in, an unnamed courier boy rides through with the post and flinches at the toll brazier; his map 9 card says the captain has seen the horse before.
 
 **Image source** (rule 5). The fen behind Sallow's counting houses: reed beds, a punt pole, mud that keeps a boot, mist. The courier's road: the satchel, a seal he never broke, the next post. Never ledgers, tolls or tides (Ottilie's; her Sallow is the canal's front, his the fen behind it). Never fire, as an image or a comfort: he won't reach for it.
 

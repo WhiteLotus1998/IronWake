@@ -2,7 +2,7 @@
 
 **Rule 1: stands.** Teodor may name a feeling once, as a scene's turn, and the beat sheet names it in advance (below).
 
-**Who.** Aldmere; the eldest of nine, a levy pikeman, carrying his grandfather's rusted lance. Wants the pay, because it feeds eight, and says so. Won't say that he's glad to be away from the farm, or that he obeys anyone who sounds like his grandfather (his flaw).
+**Who.** Aldmere; the eldest of nine, a levy pikeman, carrying his grandfather's rusted lance. Wants the pay, because it feeds eight, and says so. Won't say that he's glad to be away from the farm, or that he obeys anyone who sounds like his grandfather (his flaw). Can't read, and has never said so outside the farm; it shows as how often he looks at the socket, where there are letters under the rust (STORY draft 7). His grandfather was Hask's first sergeant, carried the Warden off Saltmarsh Ford with a pike through him, and got the garrison's oldest lance for it. Wren teaches him the letters, one at a time, and neither of them mentions it.
 
 **Image source** (rule 5). Aldmere outdoors: the farm year (lambing, the hay, the harvest, a frost too early), weather as work (rain on cut hay, mud to the hock), the levy roll that takes the eldest son. Pay is what it buys, a winter of bread, never a number. Never: pages, ink or damp on a shelf (Pell's; she takes Aldmere's rain indoors). Never sums, rates or scrip (Ottilie's).
 
@@ -18,6 +18,7 @@
 - "honour", "glory", "make him proud"
 - a number with a unit (pay, distance, odds)
 - a speech; more than two sentences at once
+- that he can't read; he never says it, and the one line that shows it is Wren's or the stage's
 - **Most at risk:** the folksy proverb. "Grandad always said" is one line in the campaign, not a habit; after it, the grandfather comes up as an object (the lance, the oil, the roll).
 - **Second risk:** the quiet button. Teodor's lines are short and kind, so every scene wants to end on one; his scenes end on an act (he picks up the lance, he oils it).
 

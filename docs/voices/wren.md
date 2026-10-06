@@ -2,7 +2,7 @@
 
 **Rule 1: stands.** Wren may name a feeling once, as a scene's turn, and the beat sheet names it in advance (below).
 
-**Who.** Aldmere; a surveyor's daughter, nineteen, a cadet, met at the Grange (map 7). Her father was hanged for moving border stones he didn't move. Wants his surveys, the originals, which are at the Grange. Won't say that she held the chain for him the season he set those stones, so if one was moved, she should have seen it.
+**Who.** Aldmere; a surveyor's daughter, nineteen, a cadet, met at the Grange (map 7). Her father was hanged for moving border stones he didn't move. Wants his surveys, the originals, which are at the Grange. Won't say that she held the chain for him the season he set those stones, so if one was moved, she should have seen it. The originals are at the Grange because the armistice lodges each border's survey with the other side's archive (STORY draft 7). Her father's stones were the Stone, Aldmere's third of the rite, and his hanging was Hask's doing; she learns the second at the Grange and the first at the reseal. She teaches Teodor his letters and never says so.
 
 **Image source** (rule 5). The survey: the chain and its links, a stone and its mark, a bearing, paces, the boundary line, the field book with its thumbed corner. The land measured, never worked. She counts things: stones, steps, arrows, the men on a wall. Never: the harvest or weather as work (Teodor's; his Aldmere is worked, hers is measured). Never a price or a rate (Ottilie's; Ottilie counts in prices, Wren in things). Never a page as precious (Pell's; the field book is a tool she writes in with a wet thumb).
 

@@ -601,7 +601,7 @@ Teodor, Pikeman L4, at 7,4 on Road
   Ranks: lance E (22)
   Techniques: Long Thrust (long_thrust) (lance E, cost 2): +1 range, -3 Power. Reaches past a sword's answer.
   Mastery: Horsebane (6 of 12 combats)
-  Family Lance, sound: Placeholder. Balanced now, or he has learned it. He will not say which. Placeholder. The rust holds; it waits on Teodor.
+  Family Lance, sound: Balanced now, or he has learned it. He will not say which. The rust holds. What is under it is waiting for a hand it knows.
   Targets from here: Sworn Captain (sworn_captain-1)
 > move teodor 8,7
 Teodor moves 7,4 -> 8,7 via 7,5 7,6 8,6

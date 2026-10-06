@@ -2,7 +2,7 @@
 
 **Rule 1: narrowed.** Alder never names a feeling, not even once: the captain's feeling is the player's, so the one break the rule allows every other speaker is not Alder's to spend.
 
-**Who.** The seam; a garrison ward and foundling, academy-trained, early twenties (#648: male or female, so this sheet says "they"). Wants the ten names home. Won't say that they were sent away first, or that Hask was their father in everything but the word. The origin pick (#648) is the card, not the voice: wherever the foundling came from, Alder grew up at the keep, and the images below stay the garrison's.
+**Who.** The seam; a garrison ward and foundling, academy-trained, early twenties (#648: male or female, so this sheet says "they"). Wants the ten names home. Won't say that they were sent away first, or that Hask was their father in everything but the word. The origin pick (#648) is the card, not the voice: wherever the foundling came from, Alder grew up at the keep, and the images below stay the garrison's. Named Alder for the one tree in the keep yard, the alder against the bakehouse wall the foundling was found under, and Fenn for the duty clerk whose turn it was when the roll needed a second name (STORY draft 7). Alder knows the tree. The hands are the Cold Kitchen's, and Alder never mentions either.
 
 **Image source** (rule 5). Garrison and seam: the keep's walls and the rime on them, horses and tack (the girth, the bit, a lame foot), the roll and the list (ink, a name, a line through it). The cold is home and Alder says so, plainly, as a fact about where to sleep. Never: ledgers, scrip or tides (Ottilie's); pages or books (Pell's). Never the sickbed or the rite (Maud's) either, though Alder will say the rite badly if nobody else is left.
 

@@ -118,7 +118,7 @@ public class SideMapCliTests
             var output = Run(out var exit, "campaign", "--load", "watch", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
             Assert.Equal(1, exit);
-            Assert.Contains("The rust holds; it waits on Teodor.", output);
+            Assert.Contains("The rust holds. What is under it is waiting for a hand it knows.", output);
             Assert.Contains("Lost because turn 9 ended and the boss still stands.\n", output);
             Assert.Contains("> leave\nSide map teodor_1 is lost: turn 9 passed; it opens again after the next map; fallen for good: Wren\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
