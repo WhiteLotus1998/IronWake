@@ -1,0 +1,49 @@
+# Issue 1204, lever 3: Hask on a held post (DECISIONS/0286).
+# Before: docs/measurements/keep-1204-lever2.txt, after (main at ac11c84).
+# After: ironwake-sim --finale docs/samples/ironwake_keep_hask_holds.map --seeds 200 --gates (the campaign keep with only Hask's line and holds: changed).
+## after (behavior:aggressive, holds: lord 0,6 0,6)
+finale: docs/samples/ironwake_keep_hask_holds.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 169/200 (84 %), losses 23 timeout 8 captain 0 protected: ok
+  length: median 9 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 74 ms: ok
+  bond: hunter killed 198, freed 0, standing 2 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 23, blocked 1, unfired 176, gate_in1 arrived 9, blocked 1, unfired 190, gate_in2 arrived 10, blocked 0, unfired 190, south_in arrived 1, blocked 0, unfired 199 of 200 (data; all blocked is decoration)
+  gate 2 decisions matter: docs/samples/ironwake_keep_hask_holds.map, random wins 0/200 (0 %): ok
+  gate 4 no dead weight: docs/samples/ironwake_keep_hask_holds.map, 11 recruits x 200 seeds, median drop 0.150: ok
+    ansgar: drop 0.205 se 0.047 own [atk 396 dmg 4331 heal 0 abs 486] rest baseline [atk 7636 dmg 79612 heal 316 abs 2691] rest benched [atk 7147 dmg 86554 heal 222 abs 3694] benched losses 63 timeout 9 captain 0 protected, refused kill p50 0.9849 over 63, at the stall p50 0.0000 over 49
+    brannock: drop 0.075 se 0.038 own [atk 738 dmg 6698 heal 0 abs 151] rest baseline [atk 7294 dmg 77245 heal 316 abs 3026] rest benched [atk 7720 dmg 83939 heal 303 abs 3219] benched losses 41 timeout 5 captain 0 protected, refused kill p50 0.9849 over 41, at the stall p50 0.0000 over 34
+    corin: drop 0.040 se 0.037 own [atk 621 dmg 4371 heal 0 abs 222] rest baseline [atk 7411 dmg 79572 heal 316 abs 2955] rest benched [atk 7508 dmg 83860 heal 306 abs 3151] benched losses 30 timeout 9 captain 0 protected, refused kill p50 0.9849 over 30, at the stall p50 0.0000 over 24
+    dunstan: drop 0.060 se 0.036 own [atk 743 dmg 5704 heal 0 abs 229] rest baseline [atk 7289 dmg 78239 heal 316 abs 2948] rest benched [atk 7448 dmg 83911 heal 195 abs 3184] benched losses 38 timeout 5 captain 0 protected, refused kill p50 0.9849 over 38, at the stall p50 0.0000 over 36
+    keziah: drop 0.165 se 0.034 own [atk 532 dmg 6915 heal 0 abs 248] rest baseline [atk 7500 dmg 77028 heal 316 abs 2929] rest benched [atk 7806 dmg 82622 heal 298 abs 3478] benched losses 49 timeout 15 captain 0 protected, refused kill p50 0.9849 over 49, at the stall p50 0.0000 over 47
+    maud: drop 0.150 se 0.035 own [atk 719 dmg 7285 heal 316 abs 181] rest baseline [atk 7313 dmg 76658 heal 0 abs 2996] rest benched [atk 7597 dmg 82801 heal 0 abs 3468] benched losses 47 timeout 14 captain 0 protected, refused kill p50 0.9849 over 47, at the stall p50 0.0000 over 41
+    ottilie: drop 0.085 se 0.035 own [atk 1074 dmg 4619 heal 0 abs 477] rest baseline [atk 6958 dmg 79324 heal 316 abs 2700] rest benched [atk 6903 dmg 84459 heal 289 abs 3313] benched losses 36 timeout 12 captain 0 protected, refused kill p50 0.9849 over 36, at the stall p50 0.0000 over 32
+    pell: drop 0.760 se 0.062 own [atk 1013 dmg 16160 heal 0 abs 163] rest baseline [atk 7019 dmg 67783 heal 316 abs 3014] rest benched [atk 7146 dmg 82846 heal 238 abs 4457] benched losses 158 timeout 25 captain 0 protected, refused kill p50 0.9910 over 158, at the stall p50 0.0000 over 129
+    rook: drop 0.130 se 0.038 own [atk 737 dmg 10778 heal 0 abs 364] rest baseline [atk 7295 dmg 73165 heal 316 abs 2813] rest benched [atk 7787 dmg 84425 heal 307 abs 3619] benched losses 52 timeout 5 captain 0 protected, refused kill p50 0.9910 over 52, at the stall p50 0.0000 over 41
+    teodor: drop 0.150 se 0.041 own [atk 647 dmg 5559 heal 0 abs 203] rest baseline [atk 7385 dmg 78384 heal 316 abs 2974] rest benched [atk 7417 dmg 86680 heal 206 abs 3381] benched losses 54 timeout 7 captain 0 protected, refused kill p50 0.9910 over 54, at the stall p50 0.0000 over 43
+    wren: drop 0.435 se 0.053 own [atk 406 dmg 5457 heal 0 abs 356] rest baseline [atk 7626 dmg 78486 heal 316 abs 2821] rest benched [atk 7367 dmg 83741 heal 309 abs 3889] benched losses 103 timeout 15 captain 0 protected, refused kill p50 0.9849 over 103, at the stall p50 0.0000 over 94
+    captain captain: baseline [atk 406 dmg 6066 heal 0 abs 97] never benched, not judged
+finale depleted: 12 units at level 8, heuristic wins 117/200 (58 %), losses 58 timeout 25 captain 0 protected: FAILED
+  length: median 10 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 55 ms: ok
+  bond: hunter killed 190, freed 0, standing 10 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 20, blocked 3, unfired 177, gate_in1 arrived 22, blocked 6, unfired 172, gate_in2 arrived 25, blocked 3, unfired 172, south_in arrived 6, blocked 0, unfired 194 of 200 (data; all blocked is decoration)
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 119 timeout 81 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 56 ms: ok
+  bond: hunter killed 135, freed 0, standing 65 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 120, blocked 9, unfired 71, gate_in1 arrived 89, blocked 28, unfired 83, gate_in2 arrived 108, blocked 9, unfired 83, south_in arrived 35, blocked 2, unfired 163 of 200 (data; all blocked is decoration)
+finale: FAILED
+## variant: behavior:guard on the same post (asleep until woken), the campaign keep edited in place
+finale: ironwake_keep, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 170/200 (85 %), losses 23 timeout 7 captain 0 protected: ok
+  gate 4 no dead weight: ironwake_keep, 11 recruits x 200 seeds, median drop 0.155: ok
+finale depleted: 12 units at level 8, heuristic wins 117/200 (58 %), losses 58 timeout 25 captain 0 protected: FAILED
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 121 timeout 79 captain 0 protected: data, a cold chair's play decides (never won)
+finale: FAILED
+## variant: guard, and turn_limit 13
+finale: ironwake_keep, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 170/200 (85 %), losses 23 timeout 7 captain 0 protected: ok
+  gate 4 no dead weight: ironwake_keep, 11 recruits x 200 seeds, median drop 0.140: ok
+finale depleted: 12 units at level 8, heuristic wins 120/200 (60 %), losses 52 timeout 28 captain 0 protected: ok
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 109 timeout 91 captain 0 protected: data, a cold chair's play decides (never won)
+finale: ok

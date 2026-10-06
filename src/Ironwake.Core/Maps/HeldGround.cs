@@ -28,8 +28,11 @@ public sealed record HeldGround(string Group, Coord From, Coord To)
 
     /// <summary>
     /// The rule line under the unit rows:
-    /// <c>holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back</c>.
+    /// <c>holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back</c>, and for a
+    /// one-tile post <c>holds: the lord group leaves 0,6 only to strike, then goes back</c>.
     /// </summary>
     public string Line() =>
-        $"holds: the {Group} group leaves {From.X},{From.Y} to {To.X},{To.Y} only to strike, then goes back";
+        From == To
+            ? $"holds: the {Group} group leaves {From.X},{From.Y} only to strike, then goes back"
+            : $"holds: the {Group} group leaves {From.X},{From.Y} to {To.X},{To.Y} only to strike, then goes back";
 }

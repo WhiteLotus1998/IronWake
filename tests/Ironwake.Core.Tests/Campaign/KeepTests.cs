@@ -117,6 +117,7 @@ public class KeepTests
         Assert.Equal(sample.Oathbound, Base.Oathbound);
         Assert.Equal(sample.PairRuleGroups, Base.PairRuleGroups);
         Assert.Equal(sample.Hunter, Base.Hunter);
+        Assert.Equal(sample.Holds, Base.Holds);
         Assert.Equal(sample.Fronts.Select(f => f.Name), Base.Fronts.Select(f => f.Name));
         Assert.All(sample.Fronts.Zip(Base.Fronts), p => Assert.Subset(p.Second.Tiles.ToHashSet(), p.First.Tiles.ToHashSet()));
         Assert.Equal(12, Base.Placements.OfType<PlayerPlacement>().Count());
@@ -142,6 +143,28 @@ public class KeepTests
             Assert.True(front.Tiles.Any(t => !walls.Contains(t) && t.DistanceTo(at) == 1 && at.X > t.X), $"{e.Name} at {at}");
         });
         Assert.Equal(new[] { new Coord(11, 1), new Coord(11, 5), new Coord(11, 6), new Coord(11, 10) }, falls.Select(e => ((SpawnEnemy)e.Action).Placement.At));
+    }
+
+    /// <summary>
+    /// Issue 1204, lever 3 (DECISIONS/0286): on <c>docs/samples/ironwake_keep_hask_holds.map</c> Hask
+    /// arrives Aggressive on a one-tile post at his spawn tile, so he strikes anything in his Move plus
+    /// his range and walks back (0279's <c>holds:</c>). The sample is the campaign keep with only that
+    /// changed; the campaign keep keeps him a Boss, since the lever took the depleted roster under 60.
+    /// </summary>
+    [Fact]
+    public void TheHaskHoldsSampleIsTheKeepWithHaskOnAHeldPost()
+    {
+        var sample = MapFiles.Load(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples", "ironwake_keep_hask_holds.map"), Content);
+        static EnemyPlacement Lord(MapDefinition map) => map.Events.Select(e => e.Action).OfType<SpawnEnemy>().Single(s => s.Placement.TemplateId == "hask").Placement;
+
+        Assert.Equal((Behavior.Boss, true), (Lord(Base).Behavior, Lord(Base).IsBoss));
+        Assert.Null(Base.Holds);
+        Assert.Equal((Behavior.Aggressive, true), (Lord(sample).Behavior, Lord(sample).IsBoss));
+        Assert.Equal(new HeldGround("lord", Lord(sample).At, Lord(sample).At), sample.Holds);
+        Assert.Equal(
+            Base with { Name = sample.Name, Events = Base.Events },
+            sample with { Holds = null, Events = Base.Events });
+        Assert.Equal(Base.Events.Where(e => e.Name != "lord"), sample.Events.Where(e => e.Name != "lord"));
     }
 
     [Fact]

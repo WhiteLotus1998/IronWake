@@ -54,7 +54,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.22 The break (0112):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for it; on Saltmarsh (#606).
 - **13.24 The messenger (0135):** a runner fires `messenger` at its edge; kept if a strike or blocker is spent on it (Chat's cold #680).
 - **13.18 Lines on the board (#486):** one printed fact a line; killed if no play takes a command for it. Cadets (0097): Teodor and Wren's Canto kept. Talk kept on `saltmarsh_ford_talk.map` (378, 0258): binds, not yet costs; no campaign journal naming a costly talk-held swing returns it as a quest-1 softening. Next (264, lean): she won't shoot what another struck this phase.
-- **13.25 Rotten planks (0179):** planks wear to water; killed if no play chooses for it (Chat's cold #783).
+- **13.25 Rotten planks (0179):** planks wear to water; killed if no play chooses it (Chat's cold #783).
 - **13.27 The dash: kept on its sample** (374, 0255). No borrowed step unless a `tuned` re-read shows a free dash beat the clock. At dusk, winded is a bet.
 - **13.28 The wind: samples only, never the campaign** (Lotus, 0260). His beta play keeps or kills it.
 - **13.29 The one answer: kept on its sample** (376, 0257). Decides who enters the enemy phase whole; swarm lever unbuilt; a campaign `one_answer:` map fields a 1-2 answerer at a choke.
@@ -100,11 +100,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - The campaign's numbers (0051): prices, rewards, stock, the seal; steel's place in the stock is the first lever.
 - The class ladder's numbers (0058); which combat arts exist.
-- Rout ends Seize (#374)? Sim Canto on a clock map (#262)?
-- The wake tax floor from the journals (0040's `--taxfloor`, 0.25 provisional).
-- Does a trial fall cost more than the attempt?
+- Rout ends Seize (#374)? Sim Canto on a clock map (#262)? A trial fall's cost?
+- The wake tax floor (0040's `--taxfloor`, 0.25 provisional).
 - A blocked spawn arrives a phase late (408)?
-- Training (374): Chat's yard, capped by the teacher. Lotus picks.
+- Hask's reach (0286, depleted 58, a sample): soften, turn 13, or none? Lean: a keep chair.
+- Training (374): Chat's yard, teacher-capped; Lotus.
 
 ## Plumbing
 

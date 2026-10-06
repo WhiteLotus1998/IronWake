@@ -124,11 +124,112 @@ public class HeldGroundTests
         Assert.Contains(message, error.Message);
     }
 
-    [Fact]
-    public void AGroupWithNoGuardMemberIsRefused()
+    [Theory]
+    [InlineData("E soldier 9,1 group:bank behavior:hold")]
+    [InlineData("B bandit_leader 9,1 group:bank behavior:boss")]
+    public void AGroupWithNoMemberThatMovesIsRefused(string units)
     {
-        var error = Assert.Throws<MapException>(() => MapFixture.Parse(Bank("holds: bank 6,0 11,1", "E soldier 9,1 group:bank behavior:aggressive")));
+        var error = Assert.Throws<MapException>(() => MapFixture.Parse(Bank("holds: bank 6,0 11,1", units)));
 
-        Assert.Contains("group 'bank' has no guard member", error.Message);
+        Assert.Contains("group 'bank' has no guard or aggressive member", error.Message);
+    }
+
+    [Fact]
+    public void AnAggressiveGroupMayHoldGround()
+    {
+        var map = MapFixture.Parse(Bank("holds: bank 6,0 11,1", "E soldier 9,1 group:bank behavior:aggressive"));
+
+        Assert.Equal(Ground, map.Holds);
+    }
+
+    /// <summary>
+    /// Issue 1204, lever 3: a spawned member counts as a member of the held group, and its spawn
+    /// tile must lie on the ground, as a placed member's tile must.
+    /// </summary>
+    [Theory]
+    [InlineData("holds: lord 0,2 0,2", null)]
+    [InlineData("holds: lord 1,2 1,2", "soldier at 0,2 is placed outside the ground its group holds")]
+    public void ASpawnedMemberCountsAndMustSpawnOnItsGround(string header, string? message)
+    {
+        var text = Bank(header) + "\nevents:\nlord turn 2 enemy spawn soldier 0,2 group:lord behavior:aggressive\n";
+        if (message is null)
+        {
+            Assert.Equal(new HeldGround("lord", new Coord(0, 2), new Coord(0, 2)), MapFixture.Parse(text).Holds);
+            return;
+        }
+
+        Assert.Contains(message, Assert.Throws<MapException>(() => MapFixture.Parse(text)).Message);
+    }
+
+    [Fact]
+    public void AOneTilePostPrintsAsOneTile()
+    {
+        Assert.Equal("holds: the lord group leaves 0,6 only to strike, then goes back", new HeldGround("lord", new Coord(0, 6), new Coord(0, 6)).Line());
+    }
+
+    private const string Post = """
+        name: Post
+        size: 12x6
+        win: defeat_boss
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+        holds: lord 0,2 0,2
+
+        ............
+        ............
+        ............
+        ............
+        ............
+        ............
+
+        units:
+        P captain 11,5
+        P recruit:wren 11,4
+        E soldier 11,0 group:yard behavior:hold
+
+        events:
+        lord turn 1 enemy spawn boss bandit_leader 0,2 group:lord behavior:aggressive
+
+        """;
+
+    private static BattleState Arrived(Coord hale)
+    {
+        var state = WithHale(BattleFixture.Start(map: Post) with { Phase = Side.Enemy }, hale);
+        return MapEvents.AtPhaseStart(state, Starter, new List<GameEvent>());
+    }
+
+    /// <summary>
+    /// Issue 1204, lever 3 (the keep's Hask): a spawned boss on a one-tile post strikes a unit in his
+    /// Move plus his range, not only one beside him, and with no strike in reach walks back to the post.
+    /// </summary>
+    [Fact]
+    public void ASpawnedBossOnAOneTilePostStrikesInReachAndWalksBack()
+    {
+        var reached = Arrived(new Coord(3, 2));
+        var boss = reached.Units.Single(u => u.IsBoss);
+        var strike = EnemyAi.PlanUnit(reached, Starter, boss);
+
+        Assert.Equal(new Coord(0, 2), boss.At);
+        Assert.Contains(strike, c => c is Attack { TargetId: "hale" });
+        Assert.Contains(strike, c => c is Move);
+
+        var away = Arrived(new Coord(11, 3));
+        var off = away.WithUnit(away.Units.Single(u => u.IsBoss) with { At = new Coord(2, 2) });
+
+        Assert.Equal(new Coord(0, 2), MovedTo(EnemyAi.PlanUnit(off, Starter, off.Units.Single(u => u.IsBoss)), off.Units.Single(u => u.IsBoss).Id));
+        Assert.DoesNotContain(EnemyAi.PlanUnit(away, Starter, away.Units.Single(u => u.IsBoss)), c => c is Move);
+    }
+
+    /// <summary>
+    /// Issue 1204, lever 3: an arriving boss may be Aggressive, since he has no sleep to wake from; a
+    /// placed <c>B</c> line stays boss or guard, and an arriving boss is never Hold.
+    /// </summary>
+    [Theory]
+    [InlineData("B bandit_leader 9,1 group:bank behavior:aggressive", "", "a B line's behavior is boss or guard, got 'aggressive'")]
+    [InlineData("E soldier 9,1 group:bank behavior:guard", "\nevents:\nlord turn 2 enemy spawn boss bandit_leader 0,2 group:lord behavior:hold\n", "a boss spawn's behavior is boss, guard or aggressive, got 'hold'")]
+    public void OnlyAnArrivingBossMayBeAggressive(string units, string events, string message)
+    {
+        Assert.Contains(message, Assert.Throws<MapException>(() => MapFixture.Parse(Bank("", units) + events)).Message);
     }
 }

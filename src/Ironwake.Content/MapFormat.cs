@@ -1157,8 +1157,8 @@ public static class MapFormat
 
         /// <summary>
         /// The <c>holds:</c> header (issue 1189): <c>group x,y x,y</c>, an enemy group on the map with a
-        /// Guard member and the corners of a rectangle inside the grid in which every member of the
-        /// group is placed.
+        /// Guard or Aggressive member and the corners of a rectangle inside the grid in which every member
+        /// of the group is placed or spawned (a spawned boss on a one-tile post, issue 1204 lever 3).
         /// </summary>
         private HeldGround? ParseHolds(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
         {
@@ -1191,15 +1191,17 @@ public static class MapFormat
             }
 
             var held = new HeldGround(parts[0], corners[0], corners[1]);
-            var members = map.Placements.OfType<EnemyPlacement>().Where(p => p.Group == held.Group).ToList();
+            var members = map.Placements.OfType<EnemyPlacement>()
+                .Concat(map.Events.Select(e => e.Action).OfType<SpawnEnemy>().Select(s => s.Placement))
+                .Where(p => p.Group == held.Group).ToList();
             if (members.Count == 0)
             {
                 throw ErrorAt(entry.Line, $"holds: no enemy is in group '{held.Group}'");
             }
 
-            if (members.All(m => m.Behavior != Behavior.Guard))
+            if (members.All(m => m.Behavior is not (Behavior.Guard or Behavior.Aggressive)))
             {
-                throw ErrorAt(entry.Line, $"holds: group '{held.Group}' has no guard member, so nothing in it wakes to hold its ground");
+                throw ErrorAt(entry.Line, $"holds: group '{held.Group}' has no guard or aggressive member, so nothing in it moves to hold its ground");
             }
 
             if (members.FirstOrDefault(m => !held.Contains(m.At)) is { } outside)
@@ -1399,7 +1401,7 @@ public static class MapFormat
             return ValueList<Placement>.From(placements);
         }
 
-        private Placement ParseUnitLine(string line, int width, int height, ValueList<string> terrain)
+        private Placement ParseUnitLine(string line, int width, int height, ValueList<string> terrain, bool arriving = false)
         {
             var tokens = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (tokens[0] is not ("P" or "E" or "B"))
@@ -1456,7 +1458,10 @@ public static class MapFormat
                     {
                         "boss" => Behavior.Boss,
                         "guard" => Behavior.Guard,
-                        _ => throw Error($"a B line's behavior is boss or guard, got '{given}'"),
+                        "aggressive" when arriving => Behavior.Aggressive,
+                        _ => throw Error(arriving
+                            ? $"a boss spawn's behavior is boss, guard or aggressive, got '{given}'"
+                            : $"a B line's behavior is boss or guard, got '{given}'"),
                     }
                     : Behavior.Boss;
             }
@@ -1691,7 +1696,7 @@ public static class MapFormat
                         throw Error("a boss spawn needs a template and an edge tile: 'spawn boss bandit_leader 0,5 group:assault'");
                     }
 
-                    var placement = ParseUnitLine((boss ? "B " : "E ") + string.Join(' ', tokens[(boss ? 2 : 1)..]), width, height, terrain);
+                    var placement = ParseUnitLine((boss ? "B " : "E ") + string.Join(' ', tokens[(boss ? 2 : 1)..]), width, height, terrain, arriving: boss);
                     if (placement is not EnemyPlacement enemy)
                     {
                         throw Error("spawn action places an enemy");
