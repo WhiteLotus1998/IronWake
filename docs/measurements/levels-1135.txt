@@ -1,0 +1,37 @@
+# issue 1135: --levels (Release, 200 runs) on main after #1143, with the median-unit line under each camp line and the first non-captain to meet a form (round 381). Same seeds, heuristic and permadeath-off campaign as levels-704-curve.txt (0161). Elapsed 6m 5s.
+levels: 200 runs, the heuristic player through the campaign, never promoting; at 7+ is the second tier's level; each map's camp line is its won battle as it began
+  map 1 starting_alone: won 82, at 7+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 2 p50 2 p75 2, third p25 1 p50 1 p75 1, levels gained by the company p25 1 p50 1 p75 1
+    camp starting_alone: enemy 1, deployed top p50 1, median p50 1, lowest p50 1, captain share p50 100%
+    median starting_alone: unit level p25 1 p50 1 p75 1, main-weapon rank points p25 0 p50 0 p75 0, at L7 and rank C p50 0 p75 0
+  map 2 the_mill: won 82, at 7+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 2 p50 2 p75 2, third p25 1 p50 1 p75 1, levels gained by the company p25 1 p50 1 p75 1
+    camp the_mill: enemy 1, deployed top p50 2, median p50 1, lowest p50 1, captain share p50 55%
+    median the_mill: unit level p25 1 p50 1 p75 1, main-weapon rank points p25 0 p50 0 p75 0, at L7 and rank C p50 0 p75 0
+  map 3 saltmarsh_ford: won 82, at 7+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 3 p50 3 p75 4, third p25 1 p50 1 p75 1, levels gained by the company p25 3 p50 3 p75 3
+    camp saltmarsh_ford: enemy 2, deployed top p50 2, median p50 1, lowest p50 1, captain share p50 100%
+    median saltmarsh_ford: unit level p25 1 p50 1 p75 1, main-weapon rank points p25 0 p50 0 p75 0, at L7 and rank C p50 0 p75 0
+  map 4 the_tollgate: won 82, at 7+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 4 p50 4 p75 4, third p25 1 p50 1 p75 1, levels gained by the company p25 3 p50 4 p75 4
+    camp the_tollgate: enemy 3, deployed top p50 3, median p50 1, lowest p50 1, captain share p50 80%
+    median the_tollgate: unit level p25 1 p50 1 p75 1, main-weapon rank points p25 0 p50 0 p75 0, at L7 and rank C p50 0 p75 0
+  map 5 harrow_weir: won 82, at 7+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 4 p50 5 p75 5, third p25 1 p50 1 p75 2, levels gained by the company p25 4 p50 5 p75 6
+    camp harrow_weir: enemy 2, deployed top p50 4, median p50 1, lowest p50 1, captain share p50 27%
+    median harrow_weir: unit level p25 1 p50 1 p75 1, main-weapon rank points p25 0 p50 6 p75 13, at L7 and rank C p50 0 p75 0
+  map 6 ironwake_raid: won 82, at 7+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 5 p50 6 p75 6, third p25 2 p50 3 p75 4, levels gained by the company p25 10 p50 11 p75 12
+    camp ironwake_raid: enemy 6, deployed top p50 5, median p50 1, lowest p50 1, captain share p50 23%
+    median ironwake_raid: unit level p25 1 p50 1 p75 2, main-weapon rank points p25 14 p50 18 p75 27, at L7 and rank C p50 0 p75 0
+  map 7 sallow_grange: won 81, at 7+ p25 0 p50 0 p75 1, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 6 p50 6 p75 7, third p25 3 p50 3 p75 4, levels gained by the company p25 11 p50 12 p75 14
+    camp sallow_grange: enemy 7, deployed top p50 6, median p50 1, lowest p50 1, captain share p50 100%
+    median sallow_grange: unit level p25 1 p50 1 p75 2, main-weapon rank points p25 14 p50 19 p75 28, at L7 and rank C p50 0 p75 1
+  map 8 brackwater_cut: won 81, at 7+ p25 1 p50 1 p75 1, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 7 p50 7 p75 7, third p25 3 p50 3 p75 4, levels gained by the company p25 11 p50 13 p75 14
+    camp brackwater_cut: enemy 6, deployed top p50 6, median p50 3, lowest p50 1, captain share p50 100%
+    median brackwater_cut: unit level p25 1 p50 1 p75 2, main-weapon rank points p25 14 p50 19 p75 28, at L7 and rank C p50 1 p75 1
+  map 9 the_field: won 81, at 7+ p25 1 p50 1 p75 1, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 7 p50 7 p75 8, third p25 4 p50 4 p75 4, levels gained by the company p25 14 p50 16 p75 18
+    camp the_field: enemy 4, deployed top p50 7, median p50 2, lowest p50 1, captain share p50 15%
+    median the_field: unit level p25 1 p50 1 p75 2, main-weapon rank points p25 8 p50 13 p75 20, at L7 and rank C p50 1 p75 1
+  map 10 ironwake_keep: won 21, at 7+ p25 1 p50 1 p75 1, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 7 p50 8 p75 9, third p25 4 p50 4 p75 4, levels gained by the company p25 16 p50 17 p75 19
+    camp ironwake_keep: enemy 8, deployed top p50 7, median p50 2, lowest p50 1, captain share p50 100%
+    median ironwake_keep: unit level p25 1 p50 1 p75 2, main-weapon rank points p25 10 p50 16 p75 30, at L7 and rank C p50 1 p75 1
+  first non-captain to meet a form: after map p50 9 p75 9 over 9 runs; none in 191 of 200
+  weapons by class over won battles, attacks/counters: adept [reason 1927/525], bowman [bow 1225/101], bulwark [lance 442/205], cadet [sword 2855/1797], chaplain [faith 458/165], pikeman [lance 1098/461], skyrider [lance 294/137]
+  no try won map 1: 118
+  no try won map 7: 1
+  no try won map 10: 60
