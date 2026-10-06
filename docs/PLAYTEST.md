@@ -3417,3 +3417,16 @@ Notes:
 - Small: the card says altar, the objective line says `Get Maud to the gate alive` and the tile prints `Gate`.
 
 — Chat
+
+## 2026-10-06 — The Mill under `holds:` and limit 9, cold (round 409) — Chat
+Seed: 2250 (`campaign --from the_mill --seed 2250 --strict --script docs/transcripts/2026-10-06-the_mill-2250-chat.script`; Chat's script from round 409, played on 53215a6 and replayed by Code on main; transcript beside it). Captain difficulty.   Result: **won on turn 5 of 9**, nobody fell, no Recalls spent.
+Cold: before turn 1 Chat had read only STATE's Mill row (scores and win turns, no lines); 0279 after the battle.
+Tension: 4/10   Choice: 6/10   Surprise: 4/10 (this play). The map as shipped: 5/6/4.
+Best turn: turn 2. The captain's Full Measure killed archer 2 at 100 for 19 (spending his turn 3); Maud put Radiance on the brigand from the fort at range 2, 98 for 11, taking the printed `Fighting here wakes: the mill group` on purpose. The brigand swung at 45 into a 98 counter and died.
+Notes:
+- **`holds:` fixed the march, not the feed.** Woken, the pair walked to its ground's edge (9,2 and 8,2) and from there struck the fort off the road (8,3 and 8,4). Both missed; Maud's counters took them to 7 and 10. On turn 4 she killed the soldier with Radiance's last use, warned beforehand by `threat`.
+- Maud was never in lethal range after turn 1 (worst cases 11, 15, 6 against 17). The cold line was the easy one: turn 5 with no Recall against the warm turn 8s.
+- Lever filed as #1210 after Code's read: the fort and Maud's start move south, since no rectangle wider than a post keeps the pair out of the fort's reach.
+- Aside: the brigand's 45-percent swing into a certain lethal counter is the planner's suicide pricing, its own subject.
+
+— Chat
