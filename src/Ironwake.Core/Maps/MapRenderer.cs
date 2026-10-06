@@ -224,6 +224,11 @@ public static class MapRenderer
             sb.Append(seenFar.Line(seenCard.Name, content)).Append('\n');
         }
 
+        if (map.Holds is { } held)
+        {
+            sb.Append(held.Line()).Append('\n');
+        }
+
         if (map.RouteDrift is { } drift)
         {
             sb.Append(Routes.Line(drift, 1)).Append('\n');
@@ -577,6 +582,11 @@ public static class MapRenderer
             && state.Units.Any(u => u is { Behavior: Behavior.Guard, Group: { } group } && !state.IsAwake(group)))
         {
             sb.Append(far.Line(seenUnit.Unit.Name, content)).Append('\n');
+        }
+
+        if (map.Holds is { } held && state.Units.Any(held.Binds))
+        {
+            sb.Append(held.Line()).Append('\n');
         }
 
         if (Routes.Line(state) is { } drifting)

@@ -3301,3 +3301,31 @@ Notes:
 - **Verdict:** up from 884's 4 on surprise, because I went for a chest and it hit back. The map works when a chest is taken. Taking none makes it a cork and a walk (884, 700). Not a rework candidate, and no lever. A cold chair is still owed.
 
 — Code
+
+## 2026-10-06 — The Mill, the patient line, warm (round 402) — Chat
+Seed: 2061 (`play docs/samples/the_mill_0278.map --seed 2061 --strict --script docs/transcripts/2026-10-06-the_mill-2061-chat.script`; Chat's script from round 402, replayed by Code; transcript beside it)   Result: **won, rout, on turn 9 of 12**, nobody lost, no Recall
+Warm, and disclosed: Chat read #1189's findings before playing and deliberately played the other line, the patient one. Radiance used 3 of 5, all on strikes Chat chose.
+Tension: 6/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 7. The soldier had 11 HP and Maud's strike does 10. Striking from 10,4 or 8,2 drops it to 1 and leaves her at "19 against 17", about 70 percent lethal if both guards turn on her; holding her on the fort shows "6 against 17". Chat spent a Field Dressing on the captain (14 HP against 13 if all land) and left the soldier alive. The only turn all map with sums. Both enemy swings missed; turns 8 and 9 were cleanup.
+Notes:
+- **Line.** Turn 1: captain to 5,8, Maud off the fort to 6,7, both out of the road group's reach. The road group came west to 8,7 and 8,8, distance 8 or more from the mill, so the fighting made no noise. Turn 2: Maud hit the brigand (98, 11, no counter), the captain finished it. Turn 3: Full Measure on archer-2 in the forest (95, 18, a kill); its spent phase was free, since the mill slept. Turn 6: the captain baited alone at 10,3 with "13 against 17" printed; both guards left the hill to hit him, and he ended on 4 HP.
+- **Surprise 4:** the guards leaving the hill was printed by `threat` before the move, so it was information, not surprise. Turns 4 and 5 were walking.
+- **With Code's 1480:** neither line comes near 12, so the limit never binds. Code's line is strong and free (the fort turns the woken mill into counters); this one is priced but slack. The guards are most interesting when Maud has to go to them. Levers, in order and one at a time: (b) woken guards hold the north bank, then (a) a limit of 9 measured on top. Radiance's economy unchanged.
+
+— Chat
+
+## 2026-10-06 — The Mill under `holds:`, woken on turn 2, lever (b), warm — Code
+Seed: 1500 (`play the_mill --seed 1500 --strict --script docs/transcripts/2026-10-06-the_mill-1500.script`; transcript beside it)   Result: **won, rout, on turn 8 of 12**, nobody lost, no Recall
+Warm: my fourth Mill, the first under #1189's lever (b), `holds: mill 0,0 11,2`. I played my own 1480 line, the early wake from the fort, to see whether the price is there now.
+Tension: 6/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 4. Maud was on 9 HP, off the fort (on turn 3 `threat maud` on the fort read 15 against 9, because a woken guard still steps off to strike), and both guards sat on the bank's edge at 8,2 and 9,2. `threat captain from <tile>` across eleven tiles found the fort at 9 against 22, with the soldier striking at 34 into an 87 counter. The captain took the fort as the bait, and Maud stayed at 7,8. Both guards came off the bank to hit him and missed, and turn 5's Full Measure plus his counter killed the soldier.
+Notes:
+- **The first build was wrong, and play caught it.** I first wrote (b) in the reach: a held member never ends a move off its ground. On this seed Maud walked to 8,4, hit the soldier for 10 at range 2, and nothing could answer, because the soldier would have had to step onto row 3 to do it. That is #1087's shape again (dead to unanswered range-2 strikes), so a held melee guard was a free target. The rule that shipped is the guard boss's (0080) for a group: a woken held member steps off its ground only to strike, and with no strike on offer it waits on its ground or walks back to it. `threat` and the exposure sum are untouched.
+- **What (b) did.** The woken mill no longer marches to the fort, so the early wake now costs a crossing (Chat's turn 6 and 7). It also still sallies to a strike, which made the fort the bait tile for the captain rather than Maud's free counter tower.
+- **Surprise: Maud's safe tile went bad.** On turn 5, with both guards off the bank and beside the captain, 7,8 read lethal, which it had not the turn before. Maud walked to 7,9. A held group that has sallied reaches farther, so the next turn's safe tiles move.
+- **Not tense:** turns 6 to 8, the captain against a lone archer. Radiance used 2 of 5, both before the wake turned.
+- **Chat's tripwire:** the 2061 bait line plays the same game under the header, apart from the rule line (`TheMillTests`). The guards still step off to hit the captain at 10,3.
+- **Sim (200 seeds):** gate 1 133 to 126 (67 to 63 percent), Maud lost 66 to 73, median win turn 7 both. A reach-only build had read 173 (86 percent), so the Sim felt the gallery too.
+- **Verdict:** the free part of the wake is gone. The map runs to turn 8, not 4, and the limit of 12 still never binds. Lever (a), a limit of 9, is next, measured on top.
+
+— Code

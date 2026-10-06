@@ -1,0 +1,33 @@
+move captain 5,8
+wait captain
+move maud 6,7
+wait maud
+end
+attack maud brigand-1
+move captain 7,7
+attack captain brigand-1
+end
+move captain 7,8
+attack captain archer-2 art full_measure
+move maud 8,5
+wait maud
+end
+wait maud
+end
+move captain 7,4
+wait captain
+wait maud
+end
+move captain 10,3
+wait captain
+wait maud
+end
+item captain 2
+wait maud
+end
+attack captain soldier-1 art feint
+move maud 9,4
+attack maud archer-1
+end
+move captain 9,3
+attack captain archer-1 art feint

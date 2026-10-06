@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -225,6 +225,11 @@ public static class MapFormat
             sb.Append("seen_far: ").Append(seenFar).Append('\n');
         }
 
+        if (map.Holds is { } holds)
+        {
+            sb.Append("holds: ").Append(holds).Append('\n');
+        }
+
         if (map.Region != MapRegion.Seam)
         {
             sb.Append("region: ").Append(MapRegions.Word(map.Region)).Append('\n');
@@ -424,7 +429,7 @@ public static class MapFormat
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
-            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header) };
+            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
@@ -1127,6 +1132,61 @@ public static class MapFormat
             }
 
             return new SeenFar(parts[0], extra);
+        }
+
+        /// <summary>
+        /// The <c>holds:</c> header (issue 1189): <c>group x,y x,y</c>, an enemy group on the map with a
+        /// Guard member and the corners of a rectangle inside the grid in which every member of the
+        /// group is placed.
+        /// </summary>
+        private HeldGround? ParseHolds(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("holds", out var entry))
+            {
+                return null;
+            }
+
+            var parts = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 3)
+            {
+                throw ErrorAt(entry.Line, $"holds: needs a group and two corners, 'holds: mill 0,0 11,2', got '{entry.Value}'");
+            }
+
+            var corners = new Coord[2];
+            for (var i = 0; i < 2; i++)
+            {
+                var xy = parts[i + 1].Split(',');
+                if (xy.Length != 2 || !int.TryParse(xy[0], out var x) || !int.TryParse(xy[1], out var y))
+                {
+                    throw ErrorAt(entry.Line, $"holds: corner must be x,y, got '{parts[i + 1]}'");
+                }
+
+                if (x < 0 || y < 0 || x >= map.Width || y >= map.Height)
+                {
+                    throw ErrorAt(entry.Line, $"holds: corner {x},{y} is outside the {map.Width}x{map.Height} grid");
+                }
+
+                corners[i] = new Coord(x, y);
+            }
+
+            var held = new HeldGround(parts[0], corners[0], corners[1]);
+            var members = map.Placements.OfType<EnemyPlacement>().Where(p => p.Group == held.Group).ToList();
+            if (members.Count == 0)
+            {
+                throw ErrorAt(entry.Line, $"holds: no enemy is in group '{held.Group}'");
+            }
+
+            if (members.All(m => m.Behavior != Behavior.Guard))
+            {
+                throw ErrorAt(entry.Line, $"holds: group '{held.Group}' has no guard member, so nothing in it wakes to hold its ground");
+            }
+
+            if (members.FirstOrDefault(m => !held.Contains(m.At)) is { } outside)
+            {
+                throw ErrorAt(entry.Line, $"holds: {outside.TemplateId} at {outside.At.X},{outside.At.Y} is placed outside the ground its group holds");
+            }
+
+            return held;
         }
 
         /// <summary>The <c>region:</c> header (issue 916): one of the region words; absent means the seam.</summary>

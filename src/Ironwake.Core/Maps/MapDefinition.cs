@@ -288,6 +288,12 @@ public sealed record MapDefinition(
     public SeenFar? SeenFar { get; init; }
 
     /// <summary>
+    /// The <c>holds:</c> header (issue 1189): an enemy group and the rectangle it never ends a move
+    /// outside (<see cref="HeldGround"/>). Null for none.
+    /// </summary>
+    public HeldGround? Holds { get; init; }
+
+    /// <summary>
     /// The <c>keziah_warning: on</c> header (issue 871, Lotus's ruling): a map where the hungering
     /// weapon's walking drains run high, so a campaign asks once before marching with its bearer
     /// deployed (<see cref="CampaignRecord.MarchWarning"/>). Refused on a map that places the bearer

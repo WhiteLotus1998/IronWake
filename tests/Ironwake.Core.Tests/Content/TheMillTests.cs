@@ -39,18 +39,64 @@ public class TheMillTests
     /// <summary>
     /// Code's journaled play (seed 632): Maud leaves the fort on turn 2 to finish the road archer
     /// the captain opened, so only the brigand reaches her; the road pair is dead by turn 3 with no
-    /// combat near the mill, and the mill pair falls on turns 5 and 6 with no Recall spent.
+    /// combat near the mill, and the mill pair falls on turns 5 and 6 with no Recall spent. It
+    /// replays on the Mill it was played on, before the <c>holds:</c> header (issue 1189).
     /// </summary>
     [Fact]
     public void TheJournaledPlayWinsOnTurnSixWithNoRecall()
     {
         var script = Transcript("2026-10-01-the_mill-632.script");
 
-        var output = Run(out var exit, "play", "the_mill", "--seed", "632", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Path.Combine(Repo, "docs", "samples", "the_mill_0278.map"), "--seed", "632", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.Contains("Brigand hits Maud for 13 (hp 4)\n", output);
         Assert.Contains("Archer 1 falls at 9,1\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Chat's warm play of the Mill (round 402, seed 2061), the patient line: the road group is
+    /// lured west out of the mill's hearing and the captain baits the guards off the hill on turn 6.
+    /// It replays on the Mill it was played on, and the same commands play the same game under the
+    /// <c>holds:</c> header (issue 1189), since the guards step off their ground only to strike.
+    /// </summary>
+    [Fact]
+    public void ChatsPatientLineWinsOnTurnNineAndTheHoldLeavesItAlone()
+    {
+        var script = Transcript("2026-10-06-the_mill-2061-chat.script");
+
+        var played = Run(out var exit, "play", Path.Combine(Repo, "docs", "samples", "the_mill_0278.map"), "--seed", "2061", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var held = Run(out var heldExit, "play", "the_mill", "--seed", "2061", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Soldier hits Alder Fenn for 8 (hp 4)\n", played);
+        Assert.Contains("The Mill  turn 9 of 12  player phase", played);
+        Assert.EndsWith("Battle won: rout\n", played);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), played);
+        Assert.Equal(0, heldExit);
+        Assert.Equal(played, string.Concat(held.Split('\n').Where(l => !l.StartsWith("holds:", StringComparison.Ordinal)).Select(l => l + "\n"))[..^1]);
+    }
+
+    /// <summary>
+    /// Code's warm play under the <c>holds:</c> header (issue 1189, seed 1500): the fort strike wakes
+    /// the mill on turn 2, the guards wait on the north bank instead of marching to the fort, Maud
+    /// leaves the fort at 9 HP for a tile they cannot strike, and on turn 5 the guards that stepped
+    /// off to strike the captain on the fort put her tile in reach, so she steps back; won on turn 8, no Recall.
+    /// </summary>
+    [Fact]
+    public void UnderTheHoldTheWokenMillWaitsOnTheBankAndTheMapRunsToTurnEight()
+    {
+        var script = Transcript("2026-10-06-the_mill-1500.script");
+
+        var output = Run(out var exit, "play", "the_mill", "--seed", "1500", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("The mill group wakes (noise)\n", output);
+        Assert.Contains("enemy: move soldier-1 8,2\n", output);
+        Assert.Contains("Maud moves 7,8 -> 7,9\n", output);
+        Assert.Contains("The Mill  turn 8 of 12  player phase", output);
         Assert.EndsWith("Battle won: rout\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
