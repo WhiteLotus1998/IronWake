@@ -51,7 +51,7 @@ public class CampaignClientTests
         var client = ClientLog();
 
         Assert.StartsWith("Alder Fenn buys Iron Sword for 400; the purse holds 100\nMap 4 of 10: The Tollgate, seed 113\n", console);
-        Assert.Contains("The Tollgate won: seize; reward 1000, the purse holds 1100; fallen: Teodor\nWren drilled with the levy: L1 -> L2.\nOttilie drilled with the levy: L1 -> L2.\nDunstan drilled with the levy: L1 -> L2.\nBrannock drilled with the levy: L1 -> L2.\nMap 5 of 10: Harrow Weir, seed 114\n", console);
+        Assert.Contains("The Tollgate won: seize; reward 1000, the purse holds 1100; fallen: Teodor\nWren drilled with the levy: L1 -> L2, 68 EXP kept.\nOttilie drilled with the levy: L1 -> L2.\nDunstan drilled with the levy: L1 -> L2.\nBrannock drilled with the levy: L1 -> L2.\nMap 5 of 10: Harrow Weir, seed 114\n", console);
         Assert.Contains("-- Enemy phase, turn 1 --", console[console.IndexOf("Harrow Weir", StringComparison.Ordinal)..]);
         Assert.Null(Parity.FirstDifference(console, client));
     }

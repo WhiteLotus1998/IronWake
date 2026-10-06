@@ -56,6 +56,32 @@ public class LevyFloorTests
     }
 
     [Fact]
+    public void TheDrillKeepsEveryLevyMembersExp()
+    {
+        var record = AtMapEight();
+        var earned = record.Find("teodor")!.AtLevel(3, Content.Class("pikeman")) with { Exp = 99 };
+        record = record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u.Id == "teodor" ? earned : u)) };
+
+        var drilled = record.Drill(Content).Find("teodor")!;
+
+        Assert.Equal((5, 99), (drilled.Level, drilled.Exp));
+        Assert.Contains(record.Drills(Content), d => d == ("teodor", 3, 5, 99));
+    }
+
+    [Fact]
+    public void TheDrillLineNamesTheExpKeptAndOnlyWhenThereIsSome()
+    {
+        var record = AtMapEight();
+        var earned = record.Find("teodor")!.AtLevel(3, Content.Class("pikeman")) with { Exp = 36 };
+        record = record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u.Id == "teodor" ? earned : u)) };
+
+        var lines = CampaignSession.DrillLines(record, Content);
+
+        Assert.Contains("Teodor drilled with the levy: L3 -> L5, 36 EXP kept.", lines);
+        Assert.Contains("Wren drilled with the levy: L1 -> L5.", lines);
+    }
+
+    [Fact]
     public void TheDrillLeavesWeaponRanksAlone()
     {
         var record = AtMapEight();

@@ -2723,8 +2723,8 @@ B  wren             Wren L1 cadet              6,2    hp 20/20  Plain
 Battle won: seize; only recall is left, or leave
 > leave
 The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell
-Wren drilled with the levy: L1 -> L2.
-Teodor drilled with the levy: L1 -> L2.
+Wren drilled with the levy: L1 -> L2, 40 EXP kept.
+Teodor drilled with the levy: L1 -> L2, 54 EXP kept.
 Ottilie drilled with the levy: L1 -> L2.
 Dunstan drilled with the levy: L1 -> L2.
 Ansgar drilled with the levy: L1 -> L2.
@@ -2733,8 +2733,8 @@ Brannock drilled with the levy: L1 -> L2.
 -- Before map 5 of 9: Harrow Weir; the purse holds 1500 --
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L2, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
-  Teodor: Pikeman L2, EXP 0; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Wren: Cadet L2, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
+  Teodor: Pikeman L2, EXP 54; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
   Ottilie: Bowman L2, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
   Pell: Adept L2, EXP 55; 1: Cinder 8/8, 2: Gust 6/6
   Dunstan: Bulwark L2, EXP 0; 1: Iron Lance 40/40
@@ -2778,8 +2778,8 @@ Bunk room built for 400, the purse holds 300; beds: 10/14
 > roster
 Roster: company 10/12
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword +1 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L2, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
-  Teodor: Pikeman L2, EXP 0; 1: Iron Lance +1 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Wren: Cadet L2, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
+  Teodor: Pikeman L2, EXP 54; 1: Iron Lance +1 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
   Ottilie: Bowman L2, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
   Pell: Adept L2, EXP 55; 1: Cinder 8/8, 2: Gust 6/6
   Dunstan: Bulwark L2, EXP 0; 1: Iron Lance 40/40

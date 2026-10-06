@@ -63,8 +63,8 @@ public static class LevelRun
     /// <summary>
     /// The fed unit's EXP on one won map (issue 1181, round 396): whether he was deployed in the won battle, the EXP
     /// the record kept from it (counted from level 1, so a level gained counts whole; a fall keeps none), and the
-    /// EXP the camp's drill zeroed after it (<see cref="CampaignRecord.Drill"/>: his EXP after the battle when the
-    /// levy floor raised him, else 0).
+    /// EXP the camp's drill zeroed after it (<see cref="CampaignRecord.Drill"/>: his EXP after the battle less what
+    /// the drill left him; 0 since issue 1184, which keeps EXP through the drill).
     /// </summary>
     public sealed record FedExp(bool Deployed, int Earned, int Zeroed)
     {
@@ -83,7 +83,7 @@ public static class LevelRun
                 return Absent;
             }
 
-            var zeroed = fought.Drills(content).Any(d => d.Id == FocusedPlayer.Fed) ? after.Exp : 0;
+            var zeroed = after.Exp - (fought.Drill(content).Find(FocusedPlayer.Fed)?.Exp ?? after.Exp);
             return new(deployed.Contains(FocusedPlayer.Fed), TotalExp(after) - TotalExp(prior), zeroed);
         }
     }

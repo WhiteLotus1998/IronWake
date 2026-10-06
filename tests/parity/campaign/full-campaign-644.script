@@ -621,7 +621,7 @@ attack rook archer-1
 move teodor 9,5
 wait teodor
 attack wren brigand-1
-end !
+end
 move brannock 9,1
 attack brannock brigand-2 !
 move captain 5,5

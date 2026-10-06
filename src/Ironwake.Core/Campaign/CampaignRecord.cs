@@ -650,19 +650,21 @@ public sealed record CampaignRecord(
     /// The levy members the camp's floor raises before the next map (issue 1164, round 391), each with
     /// the level they stand at and the floor, in roster order: every living levy member below
     /// <see cref="LevyFloorLevel"/>, benched and wounded included. A unit at or above it is never
-    /// listed, so a fed unit keeps its distance above the floor.
+    /// listed, so a fed unit keeps its distance above the floor. <c>Exp</c> is the EXP each carries
+    /// through the drill (issue 1184, round 398).
     /// </summary>
-    public IReadOnlyList<(string Id, int From, int To)> Drills(GameContent content)
+    public IReadOnlyList<(string Id, int From, int To, int Exp)> Drills(GameContent content)
     {
         var floor = LevyFloorLevel(content);
-        return Roster.Where(u => u.Level < floor && IsLevy(u.Id, content)).Select(u => (u.Id, u.Level, floor)).ToList();
+        return Roster.Where(u => u.Level < floor && IsLevy(u.Id, content)).Select(u => (u.Id, u.Level, floor, u.Exp)).ToList();
     }
 
     /// <summary>
     /// The record with the levy drilled to the floor (issue 1164, round 391): each unit
-    /// <see cref="Drills"/> names is raised on the average growth (<see cref="Unit.AtLevel"/>), its
-    /// EXP zeroed; weapon ranks are untouched, so rank stays the part that measures use. The record
-    /// itself when nobody is below the floor.
+    /// <see cref="Drills"/> names is raised on the average growth (<see cref="Unit.AtLevel"/>) and
+    /// keeps its EXP (issue 1184, round 398: what a unit earned is never erased silently; EXP is
+    /// under 100, so nothing overflows); weapon ranks are untouched, so rank stays the part that
+    /// measures use. The record itself when nobody is below the floor.
     /// </summary>
     public CampaignRecord Drill(GameContent content)
     {
@@ -673,7 +675,7 @@ public sealed record CampaignRecord(
         }
 
         var floor = LevyFloorLevel(content);
-        var raised = Roster.Select(u => drills.Any(d => d.Id == u.Id) ? u.AtLevel(floor, content.Class(u.ClassId)) with { Exp = 0 } : u);
+        var raised = Roster.Select(u => drills.Any(d => d.Id == u.Id) ? u.AtLevel(floor, content.Class(u.ClassId)) : u);
         return this with { Roster = ValueList<Unit>.From(raised) };
     }
 
