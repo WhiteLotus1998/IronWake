@@ -1,0 +1,43 @@
+move captain 5,8
+wait captain
+wait maud
+end
+move captain 6,9
+forecast captain archer-2
+attack captain archer-2
+forecast maud brigand-1
+attack maud brigand-1
+threat maud
+end !
+move captain 8,8
+attack captain archer-2
+threat maud
+threat maud from 7,8
+move maud 7,8
+wait maud
+end
+threat captain from 8,5
+move captain 8,5
+wait captain
+wait maud
+end
+threat maud from 7,5
+forecast captain soldier-1 art full_measure
+attack captain soldier-1 art full_measure
+threat captain
+threat maud from 7,9
+move maud 7,9
+wait maud
+end
+threat maud from 8,6
+threat maud
+wait maud
+end
+move captain 8,4
+forecast captain archer-1
+attack captain archer-1
+wait maud
+end
+move captain 8,3
+forecast captain archer-1
+attack captain archer-1

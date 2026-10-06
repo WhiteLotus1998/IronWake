@@ -1363,12 +1363,14 @@ public class CliPlayTests
     /// <summary>
     /// Code's warm play of the Mill under DECISIONS/0278 (seed 1480): Maud's fort strike on the
     /// brigand wakes the mill on turn 2, the guards march to the bridge, her counters spend
-    /// Radiance on turn 3, and the captain's Feint ends the rout on turn 4 of 12 (issue 1189).
+    /// Radiance on turn 3, and the captain's Feint ends the rout on turn 4 of 12 (issue 1189). It
+    /// replays on the Mill it was played on, before the <c>holds:</c> header, kept as
+    /// <c>docs/samples/the_mill_0278.map</c>.
     /// </summary>
     [Fact]
     public void TheMillReplayOnSeed1480WakesTheMillAndWinsOnTurn4()
     {
-        var output = RunShipped("the_mill.map", "2026-10-06-the_mill-1480.script", 1480, out var exit);
+        var output = RunSample("the_mill_0278.map", "2026-10-06-the_mill-1480.script", 1480, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("The mill group wakes (noise)\n", output);

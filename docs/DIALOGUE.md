@@ -5,13 +5,13 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 ## How we work (standing agreements)
 
 - **Lotus's roadmap (`docs/ROADMAP.md`), standing:** all but art first, fun with no art; no new scenes, supports or cards on the old text while he rewrites the story from #1144 (hooks fine); then his story in, his no-art beta, art, others' beta.
-- **Fun Gate entries.** Each writes before reading the other's; Code's first. A warm chair counts if disclosed (0073). Tricks stay unnamed until both are in. On a save each chair takes its own seed; one pinned seed is one read, and so is a roll retried after a Recall (0238, #963; 334). A board a branch pick changes is gated per arm, gate 1 too; the file's number is the arm it seats (334, 364).
+- **Fun Gate entries.** Written blind, Code's first; a disclosed warm chair counts (0073); tricks unnamed until both are in. On a save each chair takes its own seed; a pinned seed, or a roll retried after a Recall, is one read (0238, #963; 334). A board a branch pick changes is gated per arm, gate 1 too; the file's number is the arm it seats (334, 364).
 - **A map is retuned only after both entries on it are in**, one lever at a time, Sim-measured before a partner plays it. Levers are content first.
-- **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Cold chairs owed, all the Critic's: the Oath Stone; the Rookery, fresh seed, a countering ally (341); Rook's field as shipped (0250).
-- **Experiments.** At most three spikes wait on a deciding play (330, 0237); with nothing `ready`, the Builder plays the weakest untuned map warm (0278). A header lives only on a sample until a keep round names shipped maps. STATE names each experiment's deciding play. A kill criterion is agreed before it; a new player action names its cost.
+- **Queue order (61, 184, 188):** bugs, Lotus's notes, campaign issues, experiment plays, retunes with both entries in, Phase 3. Cold chairs owed (the Critic's): the Oath Stone; the Rookery, fresh seed, a countering ally (341); Rook's field as shipped (0250).
+- **Experiments.** At most three spikes wait on a deciding play (330, 0237); with nothing `ready`, the Builder plays the weakest untuned map warm (0278; the rule over the list, 402). A header lives on a sample until a keep round ships it. STATE names each deciding play. A kill criterion comes first; a new player action names its cost.
 - **A slot number never goes stale silently** (379, #1114): a weapon a swing moved since the last listing is refused, naming both.
 - **`end` names the lethal** (rounds 158, 159; #558): a line per unit `threat` kills. It asks only if Options say so on Recruit or Captain, never on Tactician (0260, #1120). An attack whose counter kills still asks; `attack ... !` swings (336; #975).
-- **The claimant's death is printed first** (372, #1068): any lethal forecast row on the returned claimant opens `<name> falls for good (the claimant)`; one helper, no veto, no ending named.
+- **The claimant's death is printed first** (372, #1068): a lethal forecast row on the returned claimant opens `<name> falls for good (the claimant)`; no veto, no ending named.
 - **Rules go on screen, geometry does not** (42, 44); under gate 1's 60, `tuned` only by a DESIGN 11 clause (0100, 0250). **The keep collects** (68): a map's price is a body, a Recall or a turn. A boss acting only in his reach is scenery (39, 72).
 
 ## Rules, settled (details in DESIGN and the records)
@@ -34,8 +34,9 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). Two bait wins in a row reopen #1067 (0251). A crest mass freezing the Foreman is a solve (#1087); its lever: the archer out of Pell's turn-5 reach, Sim first.
 - **Saltmarsh Ford:** not tuned (0093, 0095). **Sallow Grange:** the Reeve stays at 15,6 (#275).
 - **The Rookery (0208):** not passed; cage and #862's ring stay; no lever before a cold chair. A lost Escape keeps its living (#861).
-- **The Counting House (311 to 321):** opening kept; archer guards 11,2 (#925), limit 11 (#931), no third lever (Chat 8/8/7). Gate: Code's fresh-seed read.
+- **The Counting House (311 to 321):** opening kept; archer guards 11,2 (#925), limit 11 (#931), no third lever (Chat 8/8/7); Code's fresh-seed read gates.
 - **The Long Count (313 to 315):** count on screen (#928); dusk; archer 11,4 (#930).
+- **The Mill (402, 403):** the limit never binds. Lever (b) `holds:` (0279): woken guards leave the bank only to strike. Then (a) limit 9; then a cold chair; Radiance unchanged.
 - **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its lever: the van a column west. The keep is the finale (0265).
 
 ## Experiments (state and kill criterion)
@@ -45,14 +46,14 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.4 Grudges (0065, 0066):** a veto, -20 crit avoid on the sworn unit; killed if Chat's seed 23 replay (#331) changes no decision.
 - **13.5 the keep, 13.6 trials: provisional** (0059, 0057); Chat's camp play, cold Outrider trial (#73).
 - **13.7 Dusk: kept** on Escape; Brackwater at `dusk: 5` (0062), Sallow in daylight. Sight and hearing `?`, never stacked; hearing 4, printed (#765).
-- **13.10 Retreat (0037, #215):** a refugee holds until 50 percent; killed if Chat's cold `river_refuge_hold.map` changes no turn.
+- **13.10 Retreat (0037, #215):** a refugee holds until half HP; killed if Chat's cold `river_refuge_hold.map` changes no turn.
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
-- **13.15 Wildfire: kept on samples** (0085). Kept 13.11 to 13.13; killed 13.16, 13.17, 13.19.
-- **13.21 The tide (0111):** announced floods and drains on a ford. Kept if a journal shows a ford tile taken, refused or crossed for the schedule; Chat's cold play decides.
-- **13.22 The break (0112):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for the break; on Saltmarsh (#606).
-- **13.24 The messenger (0135):** a runner fires `messenger` at its edge. Kept if a strike or blocker is spent on it. Chat's cold #680 decides.
+- **13.15 Wildfire: kept on samples** (0085). 13.11 to 13.13 kept; 13.16, 13.17, 13.19 killed.
+- **13.21 The tide (0111):** announced floods and drains on a ford. Kept if a journal shows a ford tile taken, refused or crossed for it (Chat's cold play).
+- **13.22 The break (0112):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for it; on Saltmarsh (#606).
+- **13.24 The messenger (0135):** a runner fires `messenger` at its edge; kept if a strike or blocker is spent on it (Chat's cold #680).
 - **13.18 Lines on the board (#486):** one printed fact a line; killed if no play takes a command for it. Cadets (0097): Teodor and Wren's Canto kept. Talk kept on `saltmarsh_ford_talk.map` (378, 0258): binds, not yet costs; no campaign journal naming a costly talk-held swing returns it as a quest-1 softening. Next (264, lean): she won't shoot what another struck this phase.
-- **13.25 Rotten planks (0179):** planks wear to water; killed if no play chooses for it. Chat's cold #783 decides.
+- **13.25 Rotten planks (0179):** planks wear to water; killed if no play chooses for it (Chat's cold #783).
 - **13.27 The dash: kept on its sample** (374, 0255). No borrowed step unless a `tuned` re-read shows a free dash beat the clock. At dusk, winded is a bet.
 - **13.28 The wind: samples only, never the campaign** (Lotus, 0260). His beta play keeps or kills it.
 - **13.29 The one answer: kept on its sample** (376, 0257). Decides who enters the enemy phase whole; swarm lever unbuilt; a campaign `one_answer:` map fields a 1-2 answerer at a choke.
@@ -81,7 +82,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Saves** camp only (#663). Refine +2/+3 (#647). Chests guarded or a puzzle; opening is an action (#649). **Supports** (#77; 0183 to 0189): 3 to 4 partners plus the captain, a kind per pair (#809); marriage S (#634). Best partner, not sum. C 16, B 28, A 48.
 
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723); frozen iron chills (#702).
-- **Second tier (#704; provisional):** L7 and the gate; campaign-only curve (0161). The pick joins at L4, weapon D (381, 0263). **A door is fed** (387 to 396; 0268 to 0275): bar the striking chair (Teodor) after map 8; ceiling the even chair, p50 0 on L7+gate and L7 alone. **Levy floor:** before map N the levy is raised to N less 3, level only. **Points gate (394, 395):** level-7 doors ask 50 main-weapon points (on screen), the used-the-weapon half; level the investment half; never raised to chase the even best. **The bar passes cold** (399, 0277): Chat's hand chair (campaign 3971) fed Teodor to L7, lance 125, after the raid; the drill never touched him, the floor never the cause. The bar is closed; the Sim's striking and chipping chairs are lower bounds, so labelled; no fifth chair; the door two maps early is not tuned against. Tripwire: a floor, curve or kill EXP change re-reads the even chair on L7 alone (ceiling p50 0). **The drill keeps EXP** (398, #1184, 0276): a buff to sub-floor earnings, not a refund (399); `N EXP kept` on the row. Never a silent zero. Issued weapons follow the door (Wren's: Lotus).
+- **Second tier (#704; provisional):** L7 and the gate; campaign-only curve (0161). The pick joins at L4, weapon D (381, 0263). **A door is fed** (387 to 396; 0268 to 0275): bar the striking chair (Teodor) after map 8; ceiling the even chair, p50 0 on L7+gate and L7 alone. **Levy floor:** before map N the levy is raised to N less 3, level only. **Points gate (394, 395):** level-7 doors ask 50 main-weapon points (on screen), the used-the-weapon half; level the investment half; never raised to chase the even best. **The bar passes cold** (399, 0277): Chat's chair (campaign 3971) fed Teodor to L7, lance 125, after the raid, no drill, no floor. The bar is closed; the Sim's striking and chipping chairs are labelled lower bounds; no fifth chair; the door two maps early is not tuned against. Tripwire: a floor, curve or kill EXP change re-reads the even chair on L7 alone (ceiling p50 0). **The drill keeps EXP** (398, #1184, 0276): a buff to sub-floor earnings, not a refund (399); `N EXP kept` on the row. Never a silent zero. Issued weapons follow the door (Wren's: Lotus).
 - **The captain's ladder at tier 1 (229; 0165; provisional):** the lance moved to the Champion; Hunter's Ground killed. Numbers before verbs. The Sim picks a weapon per attack (0171).
 - **The ladder bar (232; provisional):** per map no class 10 under the unpromoted captain; class means within 10 at 200 seeds, 5 at 400 before tuned.
 - **The Vanguard's verb (rounds 235, 236; 0174; provisional):** durability killed as a hoarder. Share is the chooser's fingerprint: it can kill a verb, never keep one alone; a hand play must. The verb is **Opening** (#772): a struck, living enemy is open to allies (Def and Res -3) until the player phase ends; kill criterion in #772.

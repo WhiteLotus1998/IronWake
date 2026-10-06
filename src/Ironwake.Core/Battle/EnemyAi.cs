@@ -321,7 +321,8 @@ public static class EnemyAi
 
     /// <summary>
     /// Where a mover with no strike this phase ends: its post when <see cref="GoesHome"/> says
-    /// so (issue 393), else <see cref="Destination"/>, else where it stands. <see cref="PlanUnit"/>
+    /// so (issue 393), else <see cref="Destination"/>, else where it stands; a member of a
+    /// <c>holds:</c> group ends on its ground (<see cref="HeldEnd"/>, issue 1189). <see cref="PlanUnit"/>
     /// and <c>threat</c>'s swing read this one function, so they agree on the tile.
     /// </summary>
     private static Coord End(
@@ -329,7 +330,40 @@ public static class EnemyAi
         IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool veto, bool inDaylight = false) =>
         veto && GoesHome(state, content, unit, tiles, reach, known, playerReach, sworn, inDaylight) is { } home
             ? home
-            : Destination(state, content, unit, weapon, reach, known, playerReach, sworn, veto) ?? unit.At;
+            : state.Map.Holds is { } held && held.Binds(unit)
+                ? HeldEnd(state, content, unit, weapon, reach, known, playerReach, sworn, veto, held)
+                : Destination(state, content, unit, weapon, reach, known, playerReach, sworn, veto) ?? unit.At;
+
+    /// <summary>
+    /// A held group holds its ground (issue 1189, round 402; DESIGN.md section 8): a member of the
+    /// <c>holds:</c> group with no strike this phase approaches only over tiles of its ground, so
+    /// a woken group waits on the edge of its ground instead of marching out; standing off it, after
+    /// a strike took it there, it walks back, ending on the reachable tile of its ground nearest the
+    /// unit it would approach, or, with none in reach, on the reachable tile nearest its ground (then
+    /// the lower movement cost, then the reach's order). A strike is still taken from any tile it can
+    /// reach, so the rule decides where it waits, never what it answers.
+    /// </summary>
+    private static Coord HeldEnd(
+        BattleState state, GameContent content, BattleUnit unit, Weapon weapon, Reach reach,
+        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool veto, HeldGround held)
+    {
+        if (Destination(state, content, unit, weapon, reach, known, playerReach, sworn, veto, held) is { } inside && held.Contains(inside))
+        {
+            return inside;
+        }
+
+        if (held.Contains(unit.At))
+        {
+            return unit.At;
+        }
+
+        return reach.Destinations
+            .Select((tile, order) => (tile, order))
+            .OrderBy(t => held.DistanceTo(t.tile))
+            .ThenBy(t => reach.CostTo(t.tile) ?? int.MaxValue)
+            .ThenBy(t => t.order)
+            .First().tile;
+    }
 
     /// <summary>
     /// A guard boss goes home (issue 393, DESIGN.md section 8): when the boss veto refused a strike
@@ -381,13 +415,18 @@ public static class EnemyAi
     /// Where a mover with no strike this phase ends: the objective drift on a dusk map when it
     /// knows of nobody, else the approach toward the unit it is sworn against, else toward the
     /// nearest it knows of; null means it stays. Under the boss veto (<paramref name="veto"/>)
-    /// a refused tile is no destination.
+    /// a refused tile is no destination, and so is a tile off the <paramref name="held"/> ground.
     /// </summary>
     private static Coord? Destination(
         BattleState state, GameContent content, BattleUnit unit, Weapon weapon, Reach reach,
-        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool veto)
+        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool veto, HeldGround? held = null)
     {
         Func<Coord, bool>? refused = veto ? tile => BossVetoRefuses(state, content, unit, tile) : null;
+        if (held is not null)
+        {
+            var vetoed = refused;
+            refused = tile => !held.Contains(tile) || (vetoed?.Invoke(tile) ?? false);
+        }
         if (Routes.CrossingFor(state, unit) is { } crossing
             && MarchTo(state, content, unit, new[] { crossing }, reach, playerReach, refused) is { } drifting)
         {
