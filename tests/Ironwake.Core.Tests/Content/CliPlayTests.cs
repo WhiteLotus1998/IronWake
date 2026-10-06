@@ -1256,6 +1256,23 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 1104's acceptance on the board that found it (the dash sample, seed 2716): on turn 3
+    /// the brawler walks to 16,4 to strike the captain and stands within sight of Dunstan, lighting
+    /// him for the shieldbearer, which kills him; <c>threat dunstan</c> now prices the shieldbearer
+    /// lit by the brawler instead of printing it <c>cannot see you (dark)</c>.
+    /// </summary>
+    [Fact]
+    public void OnTheBoardThatFoundItThreatPricesTheShieldbearerAWalkerLights()
+    {
+        var output = RunLoose("2026-10-05-brackwater_cut_dash-2716-threat.script", 2716, "brackwater_cut_dash.map");
+
+        Assert.Contains("  Shieldbearer (once Brawler lights you) from 14,2 with Iron Lance (slot 1): acc 80% dmg 5 crit 0%;", output);
+        Assert.DoesNotContain("Shieldbearer: cannot see you (dark)", output);
+        Assert.Contains("Shieldbearer moves 18,2 -> 14,2 via 17,2 16,2 15,2\n", output);
+        Assert.Contains("Dunstan falls at 14,3\n", output);
+    }
+
+    /// <summary>
     /// Code's warm replay of the Tollgate under DECISIONS/0237 (seed 1320): the boss's Toll Axe
     /// reaches 7,4 over the corridor wall at range 2, and the captain seizes on turn 8 with the
     /// archer dead and the boss at 8.

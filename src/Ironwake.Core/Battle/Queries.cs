@@ -286,7 +286,8 @@ public static class Queries
     /// one of its strike tiles within sight of the unit (an empty tile, or its own), the lighter
     /// marked moved so the tile stays its own; the first lighter and tile in line order that lets
     /// the enemy strike decide its line. A lighter is any enemy with a line in
-    /// <paramref name="lines"/> or found here, so a lit enemy lights the next. It must come before
+    /// <paramref name="lines"/> or found here, so a lit enemy lights the next, or one whose own plan
+    /// walks it within sight of the unit without striking it (<see cref="Walkers"/>, issue 1104). It must come before
     /// the enemy in the phase's order (<see cref="EnemyAi.Plan"/> acts in unit order), except on a
     /// <c>pincer: on</c> map, whose anvils reorder the phase. Like every line of
     /// <see cref="Threats"/> it prices what the enemy would do were it to choose the unit. Empty in
@@ -307,6 +308,12 @@ public static class Queries
                 && EnemyAi.StrikeOn(board, content, e, moved) is null
                 && EnemyAi.StrikeOn(board, content, e, moved, inDaylight: true) is not null)
             .ToList();
+        if (pending.Count == 0)
+        {
+            return found;
+        }
+
+        lighters.AddRange(Walkers(board, content, moved, lines, sight));
         var progress = true;
         while (progress)
         {
@@ -326,6 +333,31 @@ public static class Queries
         }
 
         return found;
+    }
+
+    /// <summary>
+    /// The enemies with no line on <paramref name="moved"/> whose own plan on the phase-start
+    /// <paramref name="board"/> (<see cref="EnemyAi.PlanUnit"/>) ends its move within sight of it
+    /// (issue 1104): a side-mate walking toward someone else still lights the unit for the enemies
+    /// that act after it. Each comes with the one tile its plan ends on; an enemy whose plan does
+    /// not move it is left out, since where it stands already counts for its side's sight.
+    /// </summary>
+    private static IEnumerable<(BattleUnit Unit, ValueList<Coord> Tiles)> Walkers(BattleState board, GameContent content, BattleUnit moved, IReadOnlyList<ThreatLine> lines, int sight)
+    {
+        var striking = lines.Select(l => l.Enemy.Id).ToHashSet(StringComparer.Ordinal);
+        foreach (var enemy in board.UnitsOf(Side.Enemy))
+        {
+            if (striking.Contains(enemy.Id) || board.EffectiveBehavior(enemy, content) is null)
+            {
+                continue;
+            }
+
+            if (EnemyAi.PlanUnit(board, content, enemy).OfType<Move>().LastOrDefault() is { } walk
+                && walk.To != enemy.At && walk.To.DistanceTo(moved.At) <= sight)
+            {
+                yield return (enemy, ValueList<Coord>.Of(walk.To));
+            }
+        }
     }
 
     private static (BattleUnit Lighter, BattleState Lit, EnemyStrike Strike)? LitBy(BattleState board, GameContent content, BattleUnit moved, BattleUnit enemy,

@@ -438,6 +438,54 @@ public class DuskTests
         Assert.Contains(plan, c => c is Attack { UnitId: "soldier-1", TargetId: "hale" });
     }
 
+    /// <summary>
+    /// Issue 1104's board, at sight 3: hale at 0,1, Ottilie at 1,2; the <paramref name="walker"/> at
+    /// 5,2 hears Ottilie, not hale, and walks to strike her; the <paramref name="lit"/> enemy at 4,0
+    /// is past hearing of hale and nobody of its side sees him at the phase start.
+    /// </summary>
+    private static BattleState Walked(string walker, string lit) =>
+        BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(3, $"E {lit} 4,0 group:b behavior:aggressive\nE {walker} 5,2 group:a behavior:aggressive")
+            .Replace("P recruit:ottilie 0,2", "P recruit:ottilie 1,2"));
+
+    /// <summary>
+    /// Issue 1104: a side-mate that walks within sight of the unit to strike someone else, never
+    /// striking the unit itself, still lights it for an enemy acting after it, so <c>threat</c>
+    /// prices that enemy and marks the walker as the one who lights the unit.
+    /// </summary>
+    [Fact]
+    public void ASideMateWalkingPastTheUnitLightsItForAnEnemyAfterIt()
+    {
+        var state = Walked("brigand", "soldier");
+        var hale = state.Find("hale")!;
+        var board = state.Do(new EndPhase());
+        var walk = EnemyAi.PlanUnit(board, Starter, board.Find("brigand-1")!).OfType<Move>().Single();
+
+        var lines = Queries.Threats(state, Starter, hale, hale.At)!;
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, lines, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
+
+        Assert.True(walk.To.DistanceTo(hale.At) <= Dusk.Sight(board));
+        Assert.DoesNotContain(EnemyAi.PlanUnit(board, Starter, board.Find("brigand-1")!), c => c is Attack { TargetId: "hale" });
+        Assert.Equal("brigand-1", Assert.Single(lines, l => l.Enemy.Id == "soldier-1").LitBy?.Id);
+        Assert.DoesNotContain(Queries.Unseeing(state, Starter, hale, hale.At)!, u => u.Id == "soldier-1");
+        Assert.DoesNotContain("Soldier: cannot see you (dark)", text);
+    }
+
+    /// <summary>
+    /// Issue 1104's guard: a walker that acts after the enemy in the phase's order lights nobody
+    /// for it, so the enemy stays <c>cannot see you (dark)</c>.
+    /// </summary>
+    [Fact]
+    public void ASideMateWalkingPastAfterTheEnemyLightsNothingForIt()
+    {
+        var state = Walked("soldier", "brigand");
+        var hale = state.Find("hale")!;
+
+        var lines = Queries.Threats(state, Starter, hale, hale.At)!;
+
+        Assert.DoesNotContain(lines, l => l.Enemy.Id == "brigand-1");
+        Assert.Contains(Queries.Unseeing(state, Starter, hale, hale.At)!, u => u.Id == "brigand-1");
+    }
+
     [Fact]
     public void InDaylightNoEnemyIsUnseeing()
     {
