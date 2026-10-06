@@ -1361,6 +1361,24 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Code's warm play of the Mill under DECISIONS/0278 (seed 1480): Maud's fort strike on the
+    /// brigand wakes the mill on turn 2, the guards march to the bridge, her counters spend
+    /// Radiance on turn 3, and the captain's Feint ends the rout on turn 4 of 12 (issue 1189).
+    /// </summary>
+    [Fact]
+    public void TheMillReplayOnSeed1480WakesTheMillAndWinsOnTurn4()
+    {
+        var output = RunShipped("the_mill.map", "2026-10-06-the_mill-1480.script", 1480, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("The mill group wakes (noise)\n", output);
+        Assert.Contains("Maud's Radiance is spent for this battle\n", output);
+        Assert.Contains("The Mill  turn 4 of 12  player phase", output);
+        Assert.EndsWith("Battle won: rout\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-10-06-the_mill-1480.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 403's acceptance on the Critic's cold board (issue 399, seed 509): Dunstan on 16,6 at
     /// sight 1 is told the soldier's <c>?</c> at 15,4 is three tiles off, nearest first, unnamed.
     /// </summary>
