@@ -98,12 +98,12 @@ public class HuntTests
     }
 
     [Fact]
-    public void TheHunterComesThroughAFrontNobodyDefendsForTheUnitNearestIt()
+    public void TheHunterComesForTheUnitNearestAFrontNobodyDefends()
     {
         var state = Board();
         state = state.WithUnit(state.Find("wren")! with { At = new Coord(0, 6) }).Do(new EndPhase());
         Assert.Equal("south", Hunt.Hunted(state)!.Name);
-        Assert.True(Hunt.ComesThrough(state));
+        Assert.True(Hunt.ComesForTheNearest(state));
         Assert.Equal(new[] { "hale" }, Hunt.Prey(state)!.Select(p => p.Id));
 
         var plan = EnemyAi.PlanUnit(state, Starter, state.Find("rider-1")!);
@@ -141,12 +141,12 @@ public class HuntTests
     {
         var state = Board(hale: 22, wren: 20);
 
-        Assert.False(Hunt.ComesThrough(state));
+        Assert.False(Hunt.ComesForTheNearest(state));
         Assert.Equal(new[] { "wren" }, Hunt.Prey(state)!.Select(p => p.Id));
     }
 
     [Fact]
-    public void ThreatPricesTheHuntersStrikeThroughAnEmptyFront()
+    public void ThreatPricesTheHuntersStrikeForAnEmptyFront()
     {
         var state = Board();
         state = state.WithUnit(state.Find("wren")! with { At = new Coord(0, 6) });
@@ -156,7 +156,7 @@ public class HuntTests
 
         Assert.Contains(threats, l => l.Enemy.Id == "rider-1");
         var text = PlaySession.ThreatText(state, Starter, hale, hale.At, threats, Queries.SleepingThreats(state, Starter, hale, hale.At)!);
-        Assert.Contains("  Rider hunts the south next: no defenders (weakest); comes through it for the nearest: hale", text);
+        Assert.Contains("  Rider hunts the south next: no defenders (weakest); comes for the nearest: hale", text);
     }
 
     [Fact]
@@ -176,7 +176,7 @@ public class HuntTests
     {
         var state = Start(map: Field(Header + "hunt_waits: on\n"));
         state = state.WithUnit(state.Find("wren")! with { At = new Coord(0, 6) }).Do(new EndPhase());
-        Assert.False(Hunt.ComesThrough(state));
+        Assert.False(Hunt.ComesForTheNearest(state));
         Assert.Empty(Hunt.Prey(state)!);
 
         var plan = EnemyAi.PlanUnit(state, Starter, state.Find("rider-1")!);

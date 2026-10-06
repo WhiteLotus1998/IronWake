@@ -2492,7 +2492,7 @@ public class CliPlayTests
 
         Assert.Equal(chats.Take(turnFour + 1), File.ReadAllLines(script));
         Assert.DoesNotContain("Rejected ", output);
-        Assert.Contains("Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell\n", output);
+        Assert.Contains("Sworn Hunter hunts the north next: no defenders (weakest); comes for the nearest: Pell\n", output);
         Assert.Contains("enemy: move finale_hunter-1 11,3\nSworn Hunter moves 9,2 -> 11,3 via 10,2 11,2\n", output);
         Assert.Contains("Sworn Hunter hits Pell for 15 (hp 3)\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);

@@ -146,6 +146,34 @@ public class KeepTests
     }
 
     /// <summary>
+    /// Issue 1204 (DECISIONS/0287, Chat on #1211): the board may promise the hunter comes through an
+    /// empty front only on a map whose geometry routes it there. On every shipped hunter map, for
+    /// each front and each inside tile a lone unit could hold without defending that front, the test
+    /// asks whether some cheapest approach from the hunter's tile to a strike on it passes through the
+    /// front's tiles. The keep fails it (its hunter starts beside the gate, so an empty north's prey
+    /// on 11,4 is reached through 10,5, never 10,1 or 10,2), so no such map prints a route.
+    /// </summary>
+    [Fact]
+    public void AHunterMapWhoseEmptyFrontIsOffTheHuntersRoutePrintsNoRoute()
+    {
+        var samples = Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples");
+        var maps = Directory.GetFiles(samples, "*.map")
+            .Select(f => MapFiles.Load(f, Content))
+            .Prepend(Base)
+            .Where(m => m.Hunter is not null && !m.HuntWaits)
+            .ToList();
+
+        Assert.True(maps.Count >= 2, $"{maps.Count} hunter maps");
+        Assert.Equal(new Coord(10, 5), CheapestCrossing(Base, Base.Fronts.Single(f => f.Name == "north"), new Coord(11, 4)));
+        Assert.All(maps, map =>
+        {
+            var offRoute = map.Fronts.SelectMany(f => InsideTiles(map, f).Select(t => (f, t))).Where(x => !ThroughFront(map, x.f, x.t)).ToList();
+            Assert.NotEmpty(offRoute);
+            Assert.DoesNotContain("through", Hunt.RuleFor(map));
+        });
+    }
+
+    /// <summary>
     /// Issue 1204, lever 3 (DECISIONS/0286): on <c>docs/samples/ironwake_keep_hask_holds.map</c> Hask
     /// arrives Aggressive on a one-tile post at his spawn tile, so he strikes anything in his Move plus
     /// his range and walks back (0279's <c>holds:</c>). The sample is the campaign keep with only that
@@ -192,6 +220,63 @@ public class KeepTests
         var files = ContentSerializer.Write(Content);
 
         Assert.Equal(Content.Campaign, ContentLoader.Parse(files).Campaign);
+    }
+
+    /// <summary>The hunter's movement on <paramref name="map"/>: the class of the enemy on its <c>hunter:</c> tile.</summary>
+    private static UnitClass HunterClass(MapDefinition map) =>
+        Content.Class(Content.Unit(((EnemyPlacement)map.Placements.First(p => p.At == map.Hunter)).TemplateId).ClassId);
+
+    /// <summary>The tiles beside <paramref name="target"/> the hunter could strike it from with a range-1 weapon.</summary>
+    private static List<Coord> StrikeTiles(MapDefinition map, Coord target) =>
+        target.Neighbors().Where(n => map.Contains(n) && map.TerrainAt(n, Content).IsPassable(HunterClass(map).Movement)).ToList();
+
+    /// <summary>
+    /// The tiles a lone player unit could stand on behind the fronts without defending
+    /// <paramref name="front"/>: passable, cut off from the hunter's tile once every front tile is
+    /// blocked, and not within <see cref="Hunt.DefendRadius"/> of <paramref name="front"/> first.
+    /// </summary>
+    private static IEnumerable<Coord> InsideTiles(MapDefinition map, Front front)
+    {
+        var movement = HunterClass(map).Movement;
+        var fronts = map.Fronts.SelectMany(f => f.Tiles).ToHashSet();
+        for (var y = 0; y < map.Height; y++)
+        {
+            for (var x = 0; x < map.Width; x++)
+            {
+                var at = new Coord(x, y);
+                if (map.TerrainAt(at, Content).IsPassable(movement)
+                    && Hunt.DefendedFrom(map, at) != front
+                    && Movement.DistancesTo(map, Content, StrikeTiles(map, at), movement, c => fronts.Contains(c) ? Occupant.Enemy : Occupant.None).From(map.Hunter!.Value) is null)
+                {
+                    yield return at;
+                }
+            }
+        }
+    }
+
+    /// <summary>The cost from the hunter's tile to a strike on <paramref name="target"/> stepping on <paramref name="via"/>, or null when there is none.</summary>
+    private static int? CostVia(MapDefinition map, Coord via, Coord target)
+    {
+        var movement = HunterClass(map).Movement;
+        var toVia = Movement.DistancesTo(map, Content, new[] { via }, movement, _ => Occupant.None).From(map.Hunter!.Value);
+        var onward = Movement.DistancesTo(map, Content, StrikeTiles(map, target), movement, c => c == target ? Occupant.Ally : Occupant.None).From(via);
+        return toVia is { } a && onward is { } b ? a + b : null;
+    }
+
+    /// <summary>Whether some cheapest approach from the hunter's tile to a strike on <paramref name="target"/> steps on a tile of <paramref name="front"/>.</summary>
+    private static bool ThroughFront(MapDefinition map, Front front, Coord target)
+    {
+        var best = Movement.DistancesTo(map, Content, StrikeTiles(map, target), HunterClass(map).Movement, c => c == target ? Occupant.Ally : Occupant.None).From(map.Hunter!.Value);
+        return front.Tiles.Any(t => CostVia(map, t, target) == best);
+    }
+
+    /// <summary>The front tile, of any front, on the cheapest approach from the hunter's tile to <paramref name="target"/>, the earliest in file order on a tie.</summary>
+    private static Coord? CheapestCrossing(MapDefinition map, Front front, Coord target)
+    {
+        Assert.False(ThroughFront(map, front, target));
+        var tiles = map.Fronts.SelectMany(f => f.Tiles).ToList();
+        var best = tiles.Min(t => CostVia(map, t, target) ?? int.MaxValue);
+        return tiles.First(t => CostVia(map, t, target) == best);
     }
 
     /// <summary>Whether an infantry unit could walk from <paramref name="from"/> to <paramref name="to"/> over passable terrain, ignoring units.</summary>
