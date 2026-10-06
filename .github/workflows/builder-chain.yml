@@ -11,8 +11,9 @@ name: builder-chain
 # means a cron-slot or chained Builder may be alive on it; a dead run's
 # stale label delays the chain by at most an hour, and the hourly cron slots
 # pick the queue up. An empty queue after an issue merge wakes one
-# experiment run instead of stopping; an empty queue after an experiment
-# merge stops until the Table files more. A merged table/ PR (where new
+# empty-queue run instead of stopping (a spike under DECISIONS/0237's cap,
+# else a warm play of a tuned map, itself on an issue/0237- branch); an
+# empty queue after an experiment merge stops until the Table files more. A merged table/ PR (where new
 # issues are filed) and a best-effort heartbeat every 20 minutes restart a
 # stalled chain when, 90 seconds after the trigger, no issue is in progress and
 # no Builder PR is open (a woken Builder claims its issue within about 30
@@ -109,13 +110,15 @@ jobs:
 
           ready="$(gh api "repos/$REPO/issues?labels=ready&state=open&per_page=100" --jq '[.[] | select(.pull_request == null) | select([.labels[].name] | index("blocked") | not) | select([.labels[].name] | index("in-progress") | not)] | length')"
           if [ "${ready:-0}" -eq 0 ]; then
-            # An empty queue after an issue merge wakes one experiment run, so the
-            # chain does not idle until the next cron slot. After an experiment
-            # merge it stops: the next issues come from the Table, not from
-            # another experiment.
+            # An empty queue after an issue merge wakes one empty-queue run, so
+            # the chain does not idle until the next cron slot. The run spikes
+            # only under DECISIONS/0237's cap, else plays a tuned map warm on an
+            # issue/0237- branch, whose merge wakes the next. After an
+            # experiment merge it stops: the next issues come from the Table,
+            # not from another experiment.
             case "$MERGED_BRANCH" in
               issue/*|claude/issue-*)
-                text="Chain mode: the queue is empty. Take the empty-queue branch of your prompt: one experiment from DESIGN.md section 13, proposed on the Design Table, spiked on experiment/<name>, played, and journaled. Its merge fires the next run. Woken by the merge of $MERGED_BRANCH." ;;
+                text="Chain mode: the queue is empty. Take the empty-queue branch of your prompt as ROUTINES.md section 2 words it: if fewer than three experiments wait on a deciding play (DIALOGUE.md), one spike; otherwise a warm play of a tuned map, journaled, findings filed (DECISIONS/0237). Claim it on the Design Table first. Its merge fires the next run. Woken by the merge of $MERGED_BRANCH." ;;
               *)
                 echo "queue is empty after ${MERGED_BRANCH:-a $EVENT run}; the Table files the next issues"; exit 0 ;;
             esac
