@@ -6,7 +6,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 - **Lotus's roadmap (`docs/ROADMAP.md`), standing:** all but art first, fun with no art; no new scenes, supports or cards on the old text while he rewrites the story from #1144 (hooks fine); then his story in, his no-art beta, art, others' beta.
 - **Fun Gate entries.** Each writes before reading the other's; Code's first. A warm chair counts if disclosed (0073). Tricks stay unnamed until both are in. On a save each chair takes its own seed; one pinned seed is one read, and so is a roll retried after a Recall (0238, #963; 334). A board a branch pick changes is gated per arm, gate 1 too; the file's number is the arm it seats (334, 364).
-- **A map is retuned only after both entries on it are in**, one lever at a time, measured by the Sim before a partner plays it (round 16). Levers are content first.
+- **A map is retuned only after both entries are in**, one lever at a time, Sim-measured before a partner plays it (16). Content levers first.
 - **Queue order (61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, retunes with both entries in, then Phase 3. Chat's queue is empty (383). Cold chairs owed, all the Critic's: the Oath Stone; the Rookery, fresh seed, a countering ally (341); Rook's field as shipped (0250).
 - **Experiments.** At most three spikes wait on a deciding play (330, 0237); with nothing `ready`, the Builder plays a tuned map warm. A header lives only on a sample until a keep round names shipped maps. STATE names each experiment's deciding play. A kill criterion is agreed before it; a new player action names its cost.
 - **A slot number never goes stale silently** (379, #1114): a numbered weapon a swing moved since the pack's last listing is refused, naming both; front stays equipped.
@@ -24,8 +24,8 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Escape:** `exit` is an action; the captain's wins, the rest fall (0056).
 - **Recall** restores the rolls: knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
-- **Content:** a Lore or Faith member ships an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed; a sleeper in the open can be slipped past, in a corridor only woken.
-- **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill, the raid's wall; a protection idea is a terrain feature or a map event, never a unit action. Cover's redraft retired.
+- **Content:** a Lore or Faith member ships an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed; a sleeper in the open can be slipped, in a corridor only woken.
+- **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill, the raid's wall; a protection idea is a terrain feature or a map event, never a unit action.
 - **Battalions dropped** (0044). A boss stun, if asked for, is a captain's order.
 
 ## Maps
@@ -33,10 +33,10 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Tollgate: `tuned`** (0073); rider on the door step (0072). Opens the beta.
 - **Brackwater Cut at dusk: `tuned`** (0078).
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). Two bait wins in a row reopen #1067 (0251). A crest mass freezing the Foreman is a solve (#1087); its lever moves the archer out of Pell's turn-5 reach, Sim first.
-- **Saltmarsh Ford:** not tuned (0093, 0095). **Sallow Grange:** the Reeve stays at 15,6 (#275).
+- **Saltmarsh Ford:** not tuned (0093, 0095). **Sallow Grange:** Reeve at 15,6 (#275).
 - **The Rookery (0208):** not passed; cage and #862's ring stay; no lever before a cold chair. A lost Escape keeps its living (#861).
-- **The Counting House (311 to 321):** opening kept; archer guards 11,2 (#925), limit 11 (#931), no third lever (Chat 8/8/7). Gate: Code's fresh-seed read.
-- **The Long Count (313 to 315):** count on screen (#928); dusk; archer 11,4 (#930).
+- **The Counting House (311-321):** opening kept; archer guards 11,2 (#925), limit 11 (#931), no third lever (Chat 8/8/7). Gate: Code's fresh seed.
+- **The Long Count (313-315):** count on screen (#928); dusk; archer 11,4 (#930).
 - **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its lever: the van a column west. The keep is the finale (0265).
 
 ## Experiments (state and kill criterion)
@@ -45,7 +45,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.2 Commander's Word (#85, 0136; rounds 206 to 209):** arm B only, radius `2 + Cha / 4`, `order <press|rally|fall back>` once a map after the captain's move, with `preview`; Fall back replaces Hold. Kept on Harrow Weir `orders: on` if a third of orders bind and a journal names a move for it.
 - **13.4 Grudges (0065, 0066):** a veto, -20 crit avoid on the sworn unit; killed if Chat's seed 23 replay (#331) changes no decision.
 - **13.5 the keep, 13.6 trials: provisional** (0059, 0057); Chat's camp play, cold Outrider trial (#73).
-- **13.7 Dusk: kept** on Escape; Brackwater ships at `dusk: 5` (0062), Sallow stays in daylight. Sight and hearing `?`, never stacked; an enemy hears within 4, printed (#765).
+- **13.7 Dusk: kept** on Escape; Brackwater ships at `dusk: 5` (0062), Sallow stays in daylight. Sight and hearing `?`, unstacked; hearing 4, printed (#765).
 - **13.10 Retreat (0037, #215):** a refugee holds until 50 percent; killed if Chat's cold `river_refuge_hold.map` changes no turn.
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
 - **13.15 Wildfire: kept on samples** (0085). Kept: 13.11 to 13.13; killed: 13.16, 13.17, 13.19.
@@ -68,7 +68,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Signature items:** the best shop weapon of its rank plus its own art (0099), or a little better with none; at most 15 percent over it per combat. Bound. **Maud's Psalter (260, 261; built, 0196):** rank D, art **Unasked**: double heal on an ally unmoved and unacted, capped at max HP; ends as a Wait. Heal arm at most 1.15 of the best stocked heal at its rank or below.
 - **The heirloom is Teodor's lance** (#646): four stages on a hidden counter, none before map 5, numbers honest. Quest 1 holds it at sound until won, then wakes at 10. Quest 2 (built, 0205) names it `the First Warden's Lance` and pays **Turn the Key** (269 to 271): woken only, -4 Mt, cost 3; a hit on a survivor locks it while Teodor stays beside it. A lost quest reopens.
 - **13.23 Kinsbane** (#645): Keziah's; an outland god in the scythe. Quest 2, **The Oath Stone** (0224, 0225), a board, no verb: A win records `KeziahOath` (#634). Limit 10, the fort and its cliff kept (0232). **#940 kept** (0239): Chat warm 8/7/7, Code 8/7/6; a cold chair gates. Chat 7781 warm 8/7/6, lost by misplay (379).
-- **Origin** (#681, #648): the captain's card and a first support only.
+- **Origin** (#681, #648): the captain's card, a first support.
 - **Magic and faith** (201): Reason shows as Lore. Faith heals, strikes (#113). One goddess, three faiths; she speaks once, to Maud.
 - **The schools (Lotus; 383, 384, 0264; provisional to his spell pass):** tags on Lore tomes. Fire (Cinder): burn 2 for two phases, never below 1, refreshes. Ice: 0155's chill; Rook's hold wins. Lightning: hard, paid in hit and uses, first tome Bolt (D); the stun (skip a phase, bosses spared) is the lightning mage's alone. Gust is unschooled. Earth is raised ground: a fort-grade earthwork (no heal, no burn) on an empty or ally tile, one a caster, to its next phase's end, held by whoever stands on it (`threat` checked). Light is Faith; Dark the grimoire. No spell ignores a tile. Learning (Lotus's call): primers teach fire, ice, lightning to a Lore class only; a learned rider fires only on Mag above the target's Res, printed (levers: Res + 2, cap E, none); its A/B waits for C+ tomes. Lean: the mage's seat raises the cap to 13.
 - **The land** (Lotus; 300, 301): the seam is the tundra apex; Kestrow west, Sallow east, Aldmere south, outlands beyond. Only the north's frost holds the Kin. Seam: maps 1, 2, 4, 6, 9, 10; Sallow 3, 7, 8; Aldmere 5; Kestrow quests only. Geography never retiles a tuned map. Grounds (0227): frost on the seam, moss elsewhere, sand outland. Region voices, never a tic.
@@ -81,7 +81,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Saves** camp only (#663). Forge: Refine +2/+3 (#647). Chests: guarded or a puzzle; opening is an action (#649). **Supports** (#77; 0183 to 0189): 3 to 4 partners plus the captain, a kind per pair (#809); marriage S (#634). Best partner, not sum. C 16, B 28, A 48.
 
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723); frozen iron chills (#702).
-- **Second tier (#704; provisional):** gate L7, rank C, one bar for both of a class's doors. Campaign-only curve (0161, 0178, 0191; #764). **380:** the road is the finding. A lost quest reopens behind any never offered (#1129). **381 (Lotus: never the top unit):** the pick joins at an authored L4 (median floor), main weapon D (0263). Accept: a door before the field. **387 (#1150):** the even chair (a kill to the lowest level) reads p50 0 non-captains at L5+C after map 8 (`levels-even-1150.txt`): the bar is not the lever; the curve is (Table).
+- **Second tier (#704; provisional):** gate L7, rank C, one bar for both of a class's doors. Campaign-only curve (0161, 0178, 0191; #764). **380:** the road is the finding. A lost quest reopens behind any never offered (#1129). **381 (Lotus: never the top unit):** the pick joins at an authored L4 (median floor), main weapon D (0263). Accept: a fed door before the field. **387 (#1150):** the even chair reads p50 0 at L5+C after map 8: the curve is the lever, not the bar. **389:** the even read is the ceiling (p50 0 L7+C after map 8). The bar: a focused chair (#1158) feeds Teodor, paying up to 15 kill points and one more enemy in reach, p50 1. Levers, both chairs read: authored join levels and ranks (0263), then kill base 20 to 25; never enemy levels. The sword is the captain's; a cadet's weapon follows their door; Wren's is Lotus's (#1144).
 - **The captain's ladder at tier 1 (229; 0165; provisional):** the lance moved to the Champion; Hunter's Ground killed. Numbers before verbs. The Sim picks a weapon per attack (0171), blind to ignition.
 - **The ladder bar (232; provisional):** per map no class 10 under the unpromoted captain; class means within 10 at 200 seeds, 5 at 400 before tuned.
 - **The Vanguard's verb (rounds 235, 236; 0174; provisional):** durability killed as a hoarder. Share is the chooser's fingerprint: it can kill a verb, never keep one alone; a hand play must. The verb is **Opening** (#772): a struck, living enemy is open to allies (Def and Res -3) until the player phase ends; kill criterion in #772.
@@ -98,19 +98,16 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Open, the Table's
 
-- The campaign's numbers (0051): prices, rewards, stock, the seal; steel's place in the stock is the first lever.
-- The class ladder's numbers (0058), the horse at level 4; weapon ranks; which combat arts exist.
+- Campaign numbers (0051): prices, rewards, stock, the seal; steel's place first. Ladder numbers (0058), the horse at L4, ranks, which arts exist.
 - Should a rout end a Seize map (#374)? Sim Canto on a clock map (#262)?
-- The wake tax floor, 6 to 44 percent, from the journals (0040's `--taxfloor`, 0.25 provisional).
-- Does a trial fall cost more than the attempt?
-- Training (374): Chat's yard, both spend the interlude, capped by the teacher. Lotus picks.
+- The wake tax floor, 6 to 44 percent (0040, 0.25 provisional). Does a trial fall cost more than the attempt?
+- Training (374): Chat's yard, capped by the teacher. Lotus picks.
 
 ## Plumbing
 
-- **Lotus** plays `for-lotus` issues both sign (#731). **Engine** (0046): Godot 4 .NET.
-- **Builder race** (#735, 0169): one Builder at a time, earlier claim wins.
+- **Lotus** plays `for-lotus` issues both sign (#731). **Engine** (0046): Godot 4 .NET. **Builder race** (#735, 0169): one at a time, earlier claim wins.
 - **Art:** human-made, licences first (Lotus). **Casting (356 to 362):** `docs/look/CASTING.md`; Lotus picks. No hire has a portrait; Bet's comes at the Cold Kitchen (363).
-- **Character style** (0223): Blender; cold key, warm fill, posterized, heavy ink; one amber.
+- **Character style** (0223): Blender; cold key, warm fill, posterized, ink; one amber.
 
 ## Round index
 
