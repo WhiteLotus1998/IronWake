@@ -97,6 +97,28 @@ public class FinaleRunTests
         Assert.Contains($"  length: median {FinaleRun.LengthLimit + 1} turns over every game, limit 20: over {FinaleRun.LengthLimit}, the lever is one fewer wave", reading.Lines(8));
     }
 
+    /// <summary>
+    /// Issue 1204: on a map with fronts each reading counts, per fall event, the games its spawn
+    /// arrived in, was blocked in, or never fired in, as data beside the gates.
+    /// </summary>
+    [Fact]
+    public void AFinaleReadingCountsEachFallsSpawnArrivedBlockedOrUnfired()
+    {
+        var games = Games(3, 0, 10).Select((g, i) => g with
+        {
+            Fired = i switch
+            {
+                0 => new[] { new MapEventFired("gate_in1", false) },
+                1 => new[] { new MapEventFired("gate_in1", true), new MapEventFired("wave1", false) },
+                _ => Array.Empty<MapEventFired>(),
+            },
+        }).ToList();
+        var reading = new FinaleRun.Reading(FinaleRun.Company.Full, 12, games, 10, 11) { Falls = new[] { "gate_in1" } };
+
+        Assert.Contains("  falls: gate_in1 arrived 1, blocked 1, unfired 1 of 3 (data; all blocked is decoration)", reading.Lines(8));
+        Assert.DoesNotContain(new FinaleRun.Reading(FinaleRun.Company.Full, 12, games, 10, 11).Lines(8), l => l.StartsWith("  falls:", StringComparison.Ordinal));
+    }
+
     [Fact]
     public void AFinaleWhoseSlowestAiGameReachesOneSecondFailsOnTime()
     {

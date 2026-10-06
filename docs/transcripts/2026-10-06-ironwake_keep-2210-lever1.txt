@@ -3356,7 +3356,7 @@ enemy: move brigand-2 11,2
 Brigand 2 moves 8,1 -> 11,2 via 9,1 10,1 11,1
 North falls: the wave is inside
 Reinforcements arrive
-  Brigand 4 arrives at 11,0 with the inside group, aggressive
+  Brigand 4 arrives at 11,1 with the inside group, aggressive
 enemy: wait brigand-2
 Brigand 2 waits
 enemy: move finale_hunter-1 11,3
@@ -3380,8 +3380,8 @@ Soldier 2 waits
 enemy: move veteran-1 10,5
 Veteran moves 9,5 -> 10,5
 Gate falls: the wave is inside
-Reinforcements are blocked: a unit holds 11,4
-Reinforcements are blocked: a unit holds 11,7
+Reinforcements are blocked: a unit holds 11,5
+Reinforcements are blocked: a unit holds 11,6
 enemy: attack veteran-1 ansgar
 Forecast Veteran -> Ansgar with Steel Lance: acc 74% dmg 15 crit 0%; counter with Iron Lance: acc 81% dmg 9 crit 2%
 Veteran attacks Ansgar
@@ -3394,8 +3394,8 @@ enemy: end
 Kinsbane drains Keziah 5 (hp 15)
 Ironwake Keep  turn 5 of 12  player phase  defeat_boss  recall 3
    0123456789012345
- 0 ....^^....#o..J.
- 1 ................
+ 0 ....^^....#...J.
+ 1 ...........o....
  2 ...^.......g..B.
  3 ..........#f....
  4 ....n.....#E.A..
@@ -3411,7 +3411,7 @@ I  ansgar           Ansgar L8 outrider         11,5   hp 8/23   Plain
 h  archer-1         Archer L8 bowman           9,7    hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          11,2   hp 25/25  Plain  group wave, aggressive
-o  brigand-4        Brigand L8 reaver          11,0   hp 25/25  Plain  group inside, aggressive
+o  brigand-4        Brigand L8 reaver          11,1   hp 25/25  Plain  group inside, aggressive
 A  captain          Alder Fenn L8 cadet        13,4   hp 24/25  Plain  captain
 G  dunstan          Dunstan L8 bulwark         14,9   hp 7/27   Plain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,3   hp 13/39  Plain  group hunt, aggressive

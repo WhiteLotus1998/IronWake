@@ -122,6 +122,28 @@ public class KeepTests
         Assert.Equal(12, Base.Placements.OfType<PlayerPlacement>().Count());
     }
 
+    /// <summary>
+    /// Issue 1204, lever 2: each spawn a front's fall fires stands on the tile just inside that
+    /// front, next to one of its tiles the menu's wall never covers, so a unit that blocks the wave
+    /// stands where the breachers strike. Before the lever the inside spawns were a tile off the
+    /// breach, and a unit parked on one blocked the wave for free.
+    /// </summary>
+    [Fact]
+    public void AFallenFrontsSpawnStandsJustInsideThatFront()
+    {
+        var walls = Menu.Edits.SelectMany(e => e.At).ToHashSet();
+        var falls = Base.Events.Where(e => e.Trigger is FallsTrigger).ToList();
+
+        Assert.Equal(new[] { "north", "gate", "gate", "south" }, falls.Select(e => ((FallsTrigger)e.Trigger).Front));
+        Assert.All(falls, e =>
+        {
+            var at = ((SpawnEnemy)e.Action).Placement.At;
+            var front = Base.Fronts.Single(f => f.Name == ((FallsTrigger)e.Trigger).Front);
+            Assert.True(front.Tiles.Any(t => !walls.Contains(t) && t.DistanceTo(at) == 1 && at.X > t.X), $"{e.Name} at {at}");
+        });
+        Assert.Equal(new[] { new Coord(11, 1), new Coord(11, 5), new Coord(11, 6), new Coord(11, 10) }, falls.Select(e => ((SpawnEnemy)e.Action).Placement.At));
+    }
+
     [Fact]
     public void TheKeepMenuIsRefusedOnAnUnknownTerrainANonPositivePriceOrABadTile()
     {

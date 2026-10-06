@@ -54,8 +54,8 @@ wave4 turn 3 enemy spawn hexer 0,6 group:wave behavior:aggressive
 assault1 turn 5 enemy spawn soldier 0,5 group:assault behavior:aggressive
 assault2 turn 5 enemy spawn brigand 0,6 group:assault behavior:aggressive
 assault3 turn 5 enemy spawn archer 0,4 group:assault behavior:aggressive
-north_in falls north spawn brigand 11,0 group:inside behavior:aggressive
-gate_in1 falls gate spawn soldier 11,4 group:inside behavior:aggressive
-gate_in2 falls gate spawn brigand 11,7 group:inside behavior:aggressive
+north_in falls north spawn brigand 11,1 group:inside behavior:aggressive
+gate_in1 falls gate spawn soldier 11,5 group:inside behavior:aggressive
+gate_in2 falls gate spawn brigand 11,6 group:inside behavior:aggressive
 lord turn 6 enemy spawn boss hask 0,6 group:lord behavior:boss
-south_in falls south spawn brigand 11,11 group:inside behavior:aggressive
+south_in falls south spawn brigand 11,10 group:inside behavior:aggressive
