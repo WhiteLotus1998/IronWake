@@ -3504,3 +3504,18 @@ Notes:
 - **Verdict:** the first loss from Code's chair, and the ally pick is now a real decision on this board. Nothing filed: no defect, and no lever I'd pull before the owed cold chair. Not a rework candidate. Lowest axis now choice 6.
 
 — Code
+
+## 2026-10-06 — The Burned Shrine, Teodor as the ally, a fresh seed, the weakest untuned map under 0278, warm — Code
+Seed: reseed 1550, side map seed 1677 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_burned_shrine-1113.saves> --reseed 1550 --strict --script docs/transcripts/2026-10-06-the_burned_shrine-1550.script`; transcript beside it; main at e95fdbf). The cast at level 7 at the camp after map 7; ally **Teodor** (1113 took Wren).   Result: **won on turn 8**, rout, no Recall, nobody fell.
+Warm: my second Burned Shrine, and I built it. Picked under 0278: the lowest last rating among the untuned maps was 5, a tie on sum 19 with Saltmarsh, Sallow and the raid; this one first because 1113 had already named a soft spot.
+Tension: 6/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 6. The grove's hexer and archer sat in the forest at 10,6 and 11,6, where Teodor's lance read 52 percent on the hexer and its counter 13 at 99. I stepped Teodor back off the breach to 7,4 instead. `threat` priced exactly one answer, the hexer from 7,6 for 13, and it came: out of the forest onto the plain at the breach's mouth, with the archer beside it on 8,6. Teodor paid 13 of 24. Next turn Keziah's gauntlets took the hexer at 96 before its counter, and the archer a turn later. A step back bought two 52s as two 96s.
+Notes:
+- **Teodor is the right ally here, the mirror of Pell on the Long Count.** His lance counters 14 at 80 against the brawler's gauntlets, so standing him on 3,4 as the waker cost 10 HP and killed the brawler on the counter's follow-up. He then corked the breach against the turn-3 rider (it missed, he countered 12, and finished it next turn).
+- **1113's note was wrong: the shieldbearer's fight wakes the grove from any side.** The noise is heard from the defender's tile (`heard from 7,2`, five tiles from the archer on 12,1), so 6,2 does not keep the grove asleep, as 1113 guessed. The forecast prints it. Not a defect.
+- **Turn 4 was the tension.** Keziah traded with the shieldbearer and ended on 8 of 26 with the grove awake and the rider at 9,6. The fort and the breach cork were the only safe pair; `threat` read both clear and they held.
+- **Surprise is low again, for the reason 1113 gave plus one more.** The turn-5 brigand walked again (corner on 5, door on 6, one 34 percent swing at Teodor on the fort on 7, dead on 8). And the grove, woken on turn 3, walked north toward the west door, then back south once the breach was held: two phases of walking, so the rider met the breach alone. The burners never press from two doors at once. Filed as #1234, `blocked` on the owed cold chair.
+- **Not tense:** turns 7 and 8. The moment I stopped caring: the brigand's turn-7 swing at 34.
+- **Verdict:** 6/7/5, the lowest axis still surprise 5. A rework candidate on the arrivals, not on the ground; #1234 holds the levers.
+
+— Code

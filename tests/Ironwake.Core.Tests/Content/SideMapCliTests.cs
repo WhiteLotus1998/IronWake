@@ -500,6 +500,37 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Code's warm play of Keziah's quest 1 on a fresh seed (1550, side-map seed 1677) with Teodor
+    /// as the ally, the weakest-untuned-map run of DECISIONS/0278: Teodor wakes the nave from 3,4
+    /// and his counter takes the brawler, the shieldbearer's fight wakes the grove from its own tile,
+    /// Teodor corks the breach against the turn-3 rider, then baits the hexer onto the plain at 7,6
+    /// from 7,4, and the last two fall on turn 8.
+    /// </summary>
+    [Fact]
+    public void TheJournaledBurnedShrinePlayWithTeodorRoutsOnTurnEight()
+    {
+        var script = Transcript("2026-10-06-the_burned_shrine-1550.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-1550-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_burned_shrine-1113.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1550", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Side map: The Burned Shrine, seed 1677\n", output);
+            Assert.Contains("  Fighting here wakes: the grove group (noise, heard from 7,2)\n", output);
+            Assert.Contains("Hexer moves 10,6 -> 7,6 via 9,6 8,6\n", output);
+            Assert.Contains("> leave\nKeziah wins keziah_1; the stores take 2 common material; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Code's journaled play of Rook's quest 2 (side-map seed 1132), from a save at the camp
     /// after map 9 with Rook picked, the Chapter Roll won and the cast at level 7: the bridge
     /// fight wakes the loft, Wren kills the Wing Captain and both pursuing wingriders. On issue 862's
