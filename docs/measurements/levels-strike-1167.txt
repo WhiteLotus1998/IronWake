@@ -1,0 +1,41 @@
+# issue 1167: --levels --focused (Release, 200 runs) on branch issue/1167-strike-then-finish over main after #1168 (levy floor offset 3): the even, guarded and paying chairs as in levels-floor3-1166.txt, plus the striking line (round 392): the paying line, and a strike by teodor on any target another unit is planned to attack, kill or not, at most one more enemy in reach, no forecast death. The bar is read on the striking line. Elapsed 17m 43s.
+levels --focused: 200 runs, four chairs over the same seeds, retries and campaign; the fed unit is teodor
+  even (the ceiling): the lowest level that takes a kill at no lower kill chance and no more exposure; kills handed 275
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 81, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 8 brackwater_cut: companies 81, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 9 the_field: companies 81, non-captains at L7+C p50 1 p75 1, L6+C p50 1 p75 1, L5+C p50 1 p75 1; L7 alone p50 6 p75 6, rank C alone p50 1 p75 1; meets a form p50 1 p75 1
+      at L7+C meeting no form: 1, the closest form refuses ranks.axe 1
+  guarded: every kill teodor can take at no lower kill chance and no more exposure; kills handed 18, offered and refused: no tile 451, kill chance 586, exposure 2, forecast death 0
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 8 brackwater_cut: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 1, the closest form refuses ranks.axe 1
+    map 9 the_field: companies 82, non-captains at L7+C p50 0 p75 1, L6+C p50 0 p75 1, L5+C p50 0 p75 1; L7 alone p50 6 p75 6, rank C alone p50 0 p75 1; meets a form p50 0 p75 1
+      at L7+C meeting no form: 2, the closest form refuses ranks.axe 2
+  paying: every kill teodor can take that still kills on a hit, at most 15 points of kill chance below the planned attacker's, at most 1 more enemy in reach, no forecast death; kills handed 19, offered and refused: no tile 461, kill chance 453, exposure 23, forecast death 103
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 8 brackwater_cut: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 9 the_field: companies 82, non-captains at L7+C p50 0 p75 1, L6+C p50 0 p75 1, L5+C p50 0 p75 1; L7 alone p50 6 p75 6, rank C alone p50 0 p75 1; meets a form p50 0 p75 1
+      at L7+C meeting no form: 2, the closest form refuses ranks.axe 2
+  striking: the paying line, and a strike by teodor on any target another unit is planned to attack, kill or not, at most 1 more enemy in reach, no forecast death; kills handed 15, offered and refused: no tile 403, kill chance 377, exposure 10, forecast death 94
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 8 brackwater_cut: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 9 the_field: companies 82, non-captains at L7+C p50 0 p75 1, L6+C p50 0 p75 1, L5+C p50 0 p75 1; L7 alone p50 6 p75 6, rank C alone p50 0 p75 1; meets a form p50 0 p75 1
+      at L7+C meeting no form: 2, the closest form refuses ranks.axe 2
+  price (paying, through map 8, 82 runs): captain level p50 7 p75 7; teodor level p50 6 p75 6, main-weapon rank points p50 11 p75 19; kills handed p50 0 p75 0, given up p50 0 p75 0 (total 0); HP lost in enemy phases p50 73 p75 80, falls 251
+  price (striking, through map 8, 82 runs): captain level p50 7 p75 7; teodor level p50 6 p75 6, main-weapon rank points p50 12 p75 26; kills handed p50 0 p75 0, given up p50 0 p75 0 (total 0); HP lost in enemy phases p50 69 p75 77, falls 218; per map, combats p50 2 p75 2, strikes handed p50 0 p75 1
+  verdict (round 389, after map 8): the bar fails (striking p50 0 at L7+C; teodor p50 L6, rank points p50 12); his rank is short of C with him striking every safe turn; rank takes its own lever (round 392); the ceiling holds (even p50 0 at L7+C, p50 0 at L7 alone)
