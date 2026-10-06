@@ -74,7 +74,7 @@ B  wren             Wren L8 cadet              12,2   hp 23/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (1 defending, 23 hp, hunted); gate 10,5 10,6 holding (4 defending, 86 hp); south 10,9 10,10 holding (1 defending, 24 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 1 defender, 23 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -116,7 +116,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (1 defending, 23 hp, hunted); gate 10,5 10,6 holding (4 defending, 86 hp); south 10,9 10,10 holding (1 defending, 24 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 1 defender, 23 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -158,7 +158,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (1 defending, 23 hp, hunted); gate 10,5 10,6 holding (4 defending, 86 hp); south 10,9 10,10 holding (1 defending, 24 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 1 defender, 23 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -200,7 +200,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp); gate 10,5 10,6 holding (4 defending, 86 hp); south 10,9 10,10 holding (1 defending, 24 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 1 defender, 24 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -242,7 +242,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp); gate 10,5 10,6 holding (4 defending, 86 hp); south 10,9 10,10 holding (1 defending, 24 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 1 defender, 24 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -284,7 +284,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp); gate 10,5 10,6 holding (4 defending, 86 hp); south 10,9 10,10 holding (1 defending, 24 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 1 defender, 24 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -326,7 +326,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp); gate 10,5 10,6 holding (4 defending, 86 hp); south 10,9 10,10 holding (1 defending, 24 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 1 defender, 24 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -368,7 +368,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (1 defending, 24 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 1 defender, 24 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -410,7 +410,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (1 defending, 24 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 1 defender, 24 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -452,7 +452,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -494,7 +494,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -536,7 +536,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -578,7 +578,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -620,7 +620,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -662,7 +662,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -704,7 +704,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -747,7 +747,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -789,7 +789,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -831,7 +831,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -873,7 +873,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -915,7 +915,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (5 defending, 113 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -957,7 +957,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (6 defending, 135 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -999,7 +999,7 @@ B  wren             Wren L8 cadet              10,2   hp 23/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 41 hp, hunted); gate 10,5 10,6 holding (6 defending, 135 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1085,7 +1085,7 @@ B  wren             Wren L8 cadet              10,2   hp 11/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 29 hp, hunted); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 29 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1127,7 +1127,7 @@ B  wren             Wren L8 cadet              10,2   hp 11/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 29 hp, hunted); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 29 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1174,7 +1174,7 @@ B  wren             Wren L8 cadet              10,2   hp 11/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 29 hp, hunted); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 29 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1216,7 +1216,7 @@ B  wren             Wren L8 cadet              10,2   hp 11/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 29 hp, hunted); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 29 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1258,7 +1258,7 @@ B  wren             Wren L8 cadet              10,2   hp 11/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 29 hp, hunted); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 29 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1304,7 +1304,7 @@ B  wren             Wren L8 cadet              10,2   hp 11/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 29 hp, hunted); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 29 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1350,7 +1350,7 @@ B  wren             Wren L8 cadet              10,2   hp 11/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 29 hp, hunted); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 29 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1391,7 +1391,7 @@ B  wren             Wren L8 cadet              10,2   hp 11/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 48 hp, hunted); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 3 defenders, 48 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1432,7 +1432,7 @@ B  wren             Wren L8 cadet              10,2   hp 11/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 48 hp, hunted); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 3 defenders, 48 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1474,7 +1474,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 58 hp); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 51 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1515,7 +1515,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 58 hp); gate 10,5 10,6 holding (6 defending, 121 hp); south 10,9 10,10 holding (2 defending, 51 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 51 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1558,7 +1558,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 58 hp); gate 10,5 10,6 holding (6 defending, 129 hp); south 10,9 10,10 holding (2 defending, 51 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 51 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1599,7 +1599,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 58 hp); gate 10,5 10,6 holding (6 defending, 129 hp); south 10,9 10,10 holding (2 defending, 51 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 51 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1640,7 +1640,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 58 hp); gate 10,5 10,6 holding (6 defending, 129 hp); south 10,9 10,10 holding (2 defending, 51 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 51 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1681,7 +1681,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 58 hp); gate 10,5 10,6 holding (6 defending, 129 hp); south 10,9 10,10 holding (2 defending, 51 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 51 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1722,7 +1722,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 58 hp); gate 10,5 10,6 holding (6 defending, 129 hp); south 10,9 10,10 holding (2 defending, 51 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 51 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1763,7 +1763,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 58 hp); gate 10,5 10,6 holding (6 defending, 129 hp); south 10,9 10,10 holding (2 defending, 51 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 51 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1866,7 +1866,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 41 hp, hunted); gate 10,5 10,6 holding (6 defending, 124 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 3 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1909,7 +1909,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 41 hp, hunted); gate 10,5 10,6 holding (6 defending, 124 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 3 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -1956,7 +1956,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 41 hp, hunted); gate 10,5 10,6 holding (6 defending, 124 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 3 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2002,7 +2002,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 41 hp, hunted); gate 10,5 10,6 holding (6 defending, 124 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 3 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2049,7 +2049,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 41 hp, hunted); gate 10,5 10,6 holding (6 defending, 124 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 3 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2090,7 +2090,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (3 defending, 41 hp, hunted); gate 10,5 10,6 holding (6 defending, 124 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 3 defenders, 41 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2131,7 +2131,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 39 hp, hunted); gate 10,5 10,6 holding (6 defending, 124 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 39 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2172,7 +2172,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 39 hp, hunted); gate 10,5 10,6 holding (6 defending, 124 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 39 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2213,7 +2213,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 39 hp, hunted); gate 10,5 10,6 holding (6 defending, 124 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 39 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2256,7 +2256,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 39 hp, hunted); gate 10,5 10,6 holding (6 defending, 132 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 39 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2297,7 +2297,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 39 hp, hunted); gate 10,5 10,6 holding (6 defending, 132 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 39 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2338,7 +2338,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 39 hp, hunted); gate 10,5 10,6 holding (6 defending, 132 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 39 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2379,7 +2379,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 39 hp, hunted); gate 10,5 10,6 holding (6 defending, 132 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 39 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2420,7 +2420,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 39 hp, hunted); gate 10,5 10,6 holding (6 defending, 132 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 39 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2461,7 +2461,7 @@ B  wren             Wren L8 cadet              10,2   hp 21/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 39 hp, hunted); gate 10,5 10,6 holding (6 defending, 132 hp); south 10,9 10,10 holding (2 defending, 41 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 2 defenders, 39 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2558,7 +2558,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 27 hp); gate 10,5 10,6 holding (6 defending, 112 hp); south 10,9 10,10 holding (2 defending, 26 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 26 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2601,7 +2601,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 27 hp); gate 10,5 10,6 holding (6 defending, 112 hp); south 10,9 10,10 holding (2 defending, 26 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 26 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2646,7 +2646,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 27 hp); gate 10,5 10,6 holding (6 defending, 120 hp); south 10,9 10,10 holding (2 defending, 26 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 26 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2689,7 +2689,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 27 hp); gate 10,5 10,6 holding (5 defending, 96 hp); south 10,9 10,10 holding (2 defending, 26 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 26 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2732,7 +2732,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 27 hp); gate 10,5 10,6 holding (5 defending, 96 hp); south 10,9 10,10 holding (2 defending, 26 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 26 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2775,7 +2775,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 27 hp); gate 10,5 10,6 holding (5 defending, 96 hp); south 10,9 10,10 holding (2 defending, 26 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 26 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2819,7 +2819,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 27 hp); gate 10,5 10,6 holding (5 defending, 96 hp); south 10,9 10,10 holding (2 defending, 26 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 26 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2862,7 +2862,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (2 defending, 27 hp); gate 10,5 10,6 holding (5 defending, 96 hp); south 10,9 10,10 holding (2 defending, 26 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 2 defenders, 26 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2905,7 +2905,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (1 defending, 9 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (2 defending, 26 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 1 defender, 9 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2948,7 +2948,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (1 defending, 9 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (2 defending, 26 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 1 defender, 9 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -2991,7 +2991,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (1 defending, 9 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (2 defending, 26 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 1 defender, 9 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -3038,7 +3038,7 @@ B  wren             Wren L8 cadet              10,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (1 defending, 9 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (2 defending, 26 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the north next: 1 defender, 9 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
@@ -3080,8 +3080,8 @@ B  wren             Wren L8 cadet              14,2   hp 9/23   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (0 defending, 0 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (2 defending, 26 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
-Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
+Sworn Hunter hunts the north next: no defenders (weakest); comes for the nearest: Pell
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
@@ -3123,8 +3123,8 @@ B  wren             Wren L8 cadet              14,2   hp 19/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (0 defending, 0 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (2 defending, 26 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
-Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
+Sworn Hunter hunts the north next: no defenders (weakest); comes for the nearest: Pell
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
@@ -3165,8 +3165,8 @@ B  wren             Wren L8 cadet              14,2   hp 19/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (0 defending, 0 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (1 defending, 19 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
-Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
+Sworn Hunter hunts the north next: no defenders (weakest); comes for the nearest: Pell
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
@@ -3207,8 +3207,8 @@ B  wren             Wren L8 cadet              14,2   hp 19/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (0 defending, 0 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (1 defending, 19 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
-Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
+Sworn Hunter hunts the north next: no defenders (weakest); comes for the nearest: Pell
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
@@ -3249,8 +3249,8 @@ B  wren             Wren L8 cadet              14,2   hp 19/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (0 defending, 0 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (1 defending, 19 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
-Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
+Sworn Hunter hunts the north next: no defenders (weakest); comes for the nearest: Pell
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
@@ -3291,8 +3291,8 @@ B  wren             Wren L8 cadet              14,2   hp 19/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (0 defending, 0 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (1 defending, 19 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
-Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
+Sworn Hunter hunts the north next: no defenders (weakest); comes for the nearest: Pell
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
@@ -3333,8 +3333,8 @@ B  wren             Wren L8 cadet              14,2   hp 19/23  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 holding (0 defending, 0 hp, hunted); gate 10,5 10,6 holding (6 defending, 114 hp); south 10,9 10,10 holding (1 defending, 19 hp)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
-Sworn Hunter hunts the north next: no defenders (weakest); comes through it for the nearest: Pell
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
+Sworn Hunter hunts the north next: no defenders (weakest); comes for the nearest: Pell
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
@@ -3428,7 +3428,7 @@ B  wren             Wren L8 cadet              14,2   hp 19/23  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 A front falls when an enemy stands on or moves through one of its tiles. A fallen front lets its wave in; it does not lose the map.
 fronts: north 10,1 10,2 fallen; gate 10,5 10,6 fallen; south 10,9 10,10 holding (1 defending, 19 hp, hunted)
-A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders lets it through: it strikes the units nearest that front.
+A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins. A front with no defenders turns it on the units nearest that front.
 Sworn Hunter hunts the south next: 1 defender, 19 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
