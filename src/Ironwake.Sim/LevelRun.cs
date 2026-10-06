@@ -33,6 +33,9 @@ public static class LevelRun
 
         /// <summary>The company standing after each won map, one entry per <see cref="Maps"/> entry in the same order (issue 1135).</summary>
         public IReadOnlyList<IReadOnlyList<Member>> Companies { get; init; } = [];
+
+        /// <summary>The kills <see cref="EvenPlayer"/> handed to another unit over the run's won battles (issue 1150); 0 for any other player.</summary>
+        public int Handed { get; init; }
     }
 
     /// <summary>
@@ -42,11 +45,30 @@ public static class LevelRun
     public sealed record Member(int Level, int MainRank, bool Ready, bool Captain)
     {
         /// <summary>The tier-2 bar of rounds 224 to 226 read on the main weapon alone: <see cref="Threshold"/> and rank C.</summary>
-        public bool AtBar => Level >= Threshold && MainRank >= WeaponRanks.Threshold(WeaponRank.C);
+        public bool AtBar => AtLevel(Threshold) && AtRank;
+
+        /// <summary>
+        /// What the closest advanced form still refuses a unit that meets none (issue 1150): the requirement
+        /// keys of <see cref="Certifications.Check(Unit, UnitClass, UnitClass, bool)"/> as <see cref="Ready"/>
+        /// reads it, for the form with the fewest, content order breaking ties; empty when the unit meets one.
+        /// </summary>
+        public IReadOnlyList<string> Refused { get; init; } = [];
+
+        /// <summary>The bar's level half alone, read at <paramref name="level"/> or above.</summary>
+        public bool AtLevel(int level) => Level >= level;
+
+        /// <summary>The tier-2 bar's rank half alone: rank C or above in the main weapon.</summary>
+        public bool AtRank => MainRank >= WeaponRanks.Threshold(WeaponRank.C);
 
         /// <summary>The <see cref="Member"/> reading of <paramref name="unit"/>.</summary>
-        public static Member Of(Unit unit, GameContent content) =>
-            new(unit.Level, unit.Skill.Points(MainType(unit, content)), LevelRun.Ready(unit, content), CampaignRecord.IsCaptain(unit, content));
+        public static Member Of(Unit unit, GameContent content)
+        {
+            var ready = LevelRun.Ready(unit, content);
+            return new(unit.Level, unit.Skill.Points(MainType(unit, content)), ready, CampaignRecord.IsCaptain(unit, content))
+            {
+                Refused = ready ? [] : Closest(unit, content),
+            };
+        }
     }
 
     /// <summary>
@@ -115,7 +137,8 @@ public static class LevelRun
     /// <see cref="PairingPlayer"/> for that support pair, each map's bench set by
     /// <see cref="PairingPlayer.Deploy"/> so both members fight it (issue 77, slice 5).
     /// </summary>
-    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, (string A, string B)? pair = null)
+    /// <remarks>With <paramref name="even"/> set the player is <see cref="EvenPlayer"/>, the even-company chair (issue 1150).</remarks>
+    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, (string A, string B)? pair = null, bool even = false)
     {
         var runs = new List<Run>();
         for (var seed = 1; seed <= seeds; seed++)
@@ -125,6 +148,7 @@ public static class LevelRun
             var weapons = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
             var rapport = new List<IReadOnlyList<Rapport>>();
             var companies = new List<IReadOnlyList<Member>>();
+            var handed = 0;
             int? lost = null;
             while (!record.IsFinished(content))
             {
@@ -144,10 +168,11 @@ public static class LevelRun
 
                     var start = tried.Begin(map, content);
                     var tally = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
-                    IPlayer player = pair is { } q ? new PairingPlayer(q.A, q.B) : new HeuristicPlayer();
+                    IPlayer player = pair is { } q ? new PairingPlayer(q.A, q.B) : even ? new EvenPlayer() : new HeuristicPlayer();
                     var end = Fight(start, content, seed, number, tally, player);
                     if (end.Outcome.Result == BattleResult.Won)
                     {
+                        handed += player is EvenPlayer chair ? chair.Handed : 0;
                         won = end;
                         struck = tally;
                         camp = Read(start, end, content);
@@ -173,7 +198,7 @@ public static class LevelRun
                 companies.Add(members);
             }
 
-            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport, Companies = companies });
+            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport, Companies = companies, Handed = handed });
         }
 
         return runs;
@@ -186,6 +211,18 @@ public static class LevelRun
     /// </summary>
     public static bool Ready(Unit unit, GameContent content) =>
         content.Classes.Values.Any(f => f.Advances is { } basis && Certifications.Check(unit with { ClassId = basis.Id }, f, null, CampaignRecord.IsCaptain(unit, content)).Count == 0);
+
+    /// <summary>
+    /// The requirement keys the closest advanced form refuses <paramref name="unit"/> (issue 1150), read as
+    /// <see cref="Ready"/> reads a form: in that form's base. The form with the fewest refusals wins, content
+    /// order breaking ties; empty when the content holds no advanced form.
+    /// </summary>
+    public static IReadOnlyList<string> Closest(Unit unit, GameContent content) =>
+        content.Classes.Values
+            .Where(f => f.Advances is not null)
+            .Select(f => Certifications.Check(unit with { ClassId = f.Advances!.Id }, f, null, CampaignRecord.IsCaptain(unit, content)).Select(r => r.Requirement).ToList())
+            .OrderBy(r => r.Count)
+            .FirstOrDefault() ?? [];
 
     private static BattleState Fight(BattleState state, GameContent content, int seed, int number, Dictionary<string, WeaponMix> weapons, IPlayer player)
     {
@@ -261,6 +298,56 @@ public static class LevelRun
         {
             yield return $"  no try won map {lostOn.Key}: {lostOn.Count()}";
         }
+    }
+
+    /// <summary>The first map the even read covers (issue 1150): every map after map 5.</summary>
+    public const int EvenFrom = 6;
+
+    /// <summary>The map whose company the verdict reads (round 387): the company standing after map 8.</summary>
+    public const int VerdictMap = 8;
+
+    /// <summary>
+    /// The even chair's read (issue 1150): per map from <see cref="EvenFrom"/>, over the companies standing
+    /// after it, the non-captains at L7, L6 and L5 with rank C in the main weapon, the level half and the rank
+    /// half alone, and those meeting a form, each as p50 p75; then, over the non-captains at L7 and rank C who
+    /// meet no form, what the closest form refuses; last, round 387's verdict from the map-8 p50 (<see cref="Verdict"/>).
+    /// </summary>
+    public static IEnumerable<string> EvenLines(GameContent content, IReadOnlyList<Run> runs)
+    {
+        yield return $"levels --even: {runs.Count} runs, the even-company chair (issue 1150): a kill the heuristic plans goes to the lowest level, then the fewest main-weapon rank points, that takes it from a tile the heuristic accepts at no lower kill chance and no more exposure; kills handed {runs.Sum(r => r.Handed)}";
+        foreach (var number in runs.SelectMany(r => r.Maps.Select(m => m.Map)).Distinct().Where(n => n >= EvenFrom).Order())
+        {
+            var companies = Companies(runs, number).Select(c => c.Where(m => !m.Captain).ToList()).ToList();
+            var id = content.Campaign.Maps[number - 1].MapId;
+            string Pair(Func<Member, bool> p)
+            {
+                var counts = companies.Select(c => c.Count(p)).ToList();
+                return $"p50 {Percentile(counts, 0.5)} p75 {Percentile(counts, 0.75)}";
+            }
+
+            yield return $"  map {number} {id}: companies {companies.Count}, non-captains at L7+C {Pair(m => m.AtLevel(7) && m.AtRank)}, L6+C {Pair(m => m.AtLevel(6) && m.AtRank)}, L5+C {Pair(m => m.AtLevel(5) && m.AtRank)}; L7 alone {Pair(m => m.AtLevel(Threshold))}, rank C alone {Pair(m => m.AtRank)}; meets a form {Pair(m => m.Ready)}";
+            var refused = companies.SelectMany(c => c).Where(m => m.AtBar && !m.Ready).ToList();
+            var keys = refused.SelectMany(m => m.Refused).GroupBy(k => k, StringComparer.Ordinal).OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
+                .Select(g => $"{g.Key} {g.Count()}").ToList();
+            yield return $"    at L7+C meeting no form: {refused.Count}{(keys.Count == 0 ? "" : $", the closest form refuses {string.Join(", ", keys)}")}";
+        }
+
+        yield return Verdict(Companies(runs, VerdictMap));
+    }
+
+    /// <summary>
+    /// Round 387's verdict ladder read on the companies standing after map 8: the p50 count of non-captains
+    /// at L7 with rank C keeps the bar; failing that L6, then L5; none at L5 sends the curve back to the Table.
+    /// </summary>
+    public static string Verdict(IReadOnlyList<IReadOnlyList<Member>> companies)
+    {
+        int P50(int level) => Percentile(companies.Select(c => c.Count(m => !m.Captain && m.AtLevel(level) && m.AtRank)), 0.5);
+        var head = $"  verdict (round 387, after map {VerdictMap}, {companies.Count} companies): ";
+        return companies.Count == 0 ? head + "no company reached it"
+            : P50(7) >= 1 ? head + $"p50 {P50(7)} non-captains at L7+C; the bar stands"
+            : P50(6) >= 1 ? head + $"p50 0 at L7+C, {P50(6)} at L6+C; the level half drops to L6, rank C kept"
+            : P50(5) >= 1 ? head + $"p50 0 at L6+C, {P50(5)} at L5+C; the level half drops to L5, rank C kept"
+            : head + "p50 0 at L5+C; the bar is not the lever, the curve is (back to the Table)";
     }
 
     /// <summary>The company standing after map <paramref name="number"/> in every run that won it and recorded one (issue 1135).</summary>
