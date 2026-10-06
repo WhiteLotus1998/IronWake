@@ -1343,6 +1343,24 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Code's warm replay of Brackwater Cut under DECISIONS/0237 (seed 1470): the fort archer
+    /// survives the opener, a Recall and a 3 percent crit on turn 2 open the gap, two Recalls price
+    /// the bank, and Dunstan, left as a lure in the south, buys four escapes on turn 8.
+    /// </summary>
+    [Fact]
+    public void BrackwaterCutReplayOnSeed1470EscapesFourOnTurn8()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-10-06-brackwater_cut-1470.script", 1470, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("  Rook crits Archer 2 for 21 (hp 0)\n", output);
+        Assert.Contains("Recalled to state 96; 0 charges left\n", output);
+        Assert.Contains("  Brawler hits Dunstan for 3 (hp 0)\n", output);
+        Assert.EndsWith("Escaped: Rook, Wren, Pell, Alder Fenn; left behind: none; fell: Dunstan\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-10-06-brackwater_cut-1470.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 403's acceptance on the Critic's cold board (issue 399, seed 509): Dunstan on 16,6 at
     /// sight 1 is told the soldier's <c>?</c> at 15,4 is three tiles off, nearest first, unnamed.
     /// </summary>
