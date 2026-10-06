@@ -37,7 +37,7 @@ public sealed class RandomLegalPlayer : IPlayer
 /// 8's rule for Rout and Defeat Boss, toward the throne for Seize, toward the nearest exit
 /// for Escape, hold for Survive. On Escape a unit that can reach an exit leaves through it
 /// ahead of all of that, and the captain plans last and leaves last (<see cref="ExitTile"/>, issue 269),
-/// the rest farthest from an exit first (<see cref="PlanOrder"/>, issue 332). The veto is arithmetic (Design Table, seventh round)
+/// the rest farthest from an exit first (<see cref="PlanOrder(BattleState, GameContent)"/>, issue 332); on a corked Seize map the captain plans last and the recruits leave it its no-counter tiles (<see cref="CaptainsTiles"/>, issue 1206). The veto is arithmetic (Design Table, seventh round)
 /// and covers every unit whose death loses the map (fourteenth round, issue 141): the
 /// captain, and the recruit a <c>protect:</c> header names, by section 7's loss order.
 /// A plan is refused when <see cref="Exposure"/>'s no-crit sum over the whole cycle
@@ -89,7 +89,7 @@ public sealed class HeuristicPlayer : IPlayer
             return new Command[] { PlanCanto(state, content, owed) };
         }
 
-        var unit = PlanOrder(state).FirstOrDefault(u => !u.Acted);
+        var unit = PlanOrder(state, content).FirstOrDefault(u => !u.Acted);
         if (unit is null)
         {
             return new Command[] { new EndPhase() };
@@ -122,6 +122,79 @@ public sealed class HeuristicPlayer : IPlayer
             : state.UnitsOf(Side.Player)
                 .OrderBy(u => u.IsCaptain)
                 .ThenByDescending(u => state.Map.Exits.Min(x => x.DistanceTo(u.At)));
+
+    /// <summary>
+    /// <see cref="PlanOrder(BattleState)"/>, and on a Seize map whose throne the captain has no
+    /// open path to (<see cref="Corked"/>, issue 1206), on a turn it can strike some enemy without
+    /// a counter, the captain plans last, so the cork's other attackers strike first and the
+    /// captain finishes from the safe tile.
+    /// </summary>
+    public static IEnumerable<BattleUnit> PlanOrder(BattleState state, GameContent content) =>
+        Corked(state, content) is { } captain && !captain.Acted && SafeStrikeTiles(state, content, captain).Count > 0
+            ? state.UnitsOf(Side.Player).OrderBy(u => u.IsCaptain)
+            : PlanOrder(state);
+
+    /// <summary>
+    /// The living captain on a Seize map when no throne tile has an open path from where it
+    /// stands (an enemy holds the corridor, the case <c>Approach</c> turns into a Rout approach),
+    /// else null (issue 1206).
+    /// </summary>
+    public static BattleUnit? Corked(BattleState state, GameContent content)
+    {
+        if (state.Map.Win != WinCondition.Seize
+            || state.UnitsOf(Side.Player).FirstOrDefault(u => u.IsCaptain) is not { } captain)
+        {
+            return null;
+        }
+
+        var movement = Grounding.MovementOf(captain, content);
+        Occupant OccupantAt(Coord at) => at == captain.At ? Occupant.None : state.OccupantAt(at, captain.Side);
+        var toward = Movement.DistancesTo(state.Map, content, state.Map.TilesOf(MapDefinition.ThroneTerrainId), movement, OccupantAt, content.AbilitiesOf(captain.Unit));
+        return toward.From(captain.At) is null ? captain : null;
+    }
+
+    /// <summary>
+    /// The tiles a recruit leaves free for a corked captain who has not acted (issue 1206): the
+    /// captain's <see cref="SafeStrikeTiles"/>. A recruit never strikes from one, so on a cork one
+    /// tile reaches without a counter the recruit takes the counter from another tile or does not
+    /// strike, and the captain finishes from the safe tile. Empty for the captain, or when not corked.
+    /// </summary>
+    public static IReadOnlySet<Coord> CaptainsTiles(BattleState state, GameContent content, BattleUnit unit) =>
+        unit.IsCaptain || Corked(state, content) is not { } captain || captain.Acted
+            ? new HashSet<Coord>()
+            : SafeStrikeTiles(state, content, captain);
+
+    /// <summary>
+    /// Each tile <paramref name="captain"/> can end on this turn from which one of its arms strikes
+    /// an enemy that cannot answer at that distance (issue 1206).
+    /// </summary>
+    public static IReadOnlySet<Coord> SafeStrikeTiles(BattleState state, GameContent content, BattleUnit captain)
+    {
+        var tiles = new HashSet<Coord>();
+        var arms = Arms(content, captain);
+        var enemies = state.UnitsOf(Side.Enemy).ToList();
+        foreach (var tile in state.ReachOf(captain, content).Destinations)
+        {
+            foreach (var (_, weapon, armed) in arms)
+            {
+                if (enemies.Any(e => weapon.InRange(tile.DistanceTo(e.At)) && !Answers(state, content, armed, tile, e)))
+                {
+                    tiles.Add(tile);
+                    break;
+                }
+            }
+        }
+
+        return tiles;
+    }
+
+    /// <summary>Whether <paramref name="target"/> strikes back at <paramref name="armed"/> attacking from <paramref name="tile"/>.</summary>
+    private static bool Answers(BattleState state, GameContent content, BattleUnit armed, Coord tile, BattleUnit target)
+    {
+        var me = (armed with { At = tile }).ToCombatant(state, content, against: target);
+        var them = target.Answering(state, content, tile, armed);
+        return Combat.Forecast(me, them, tile.DistanceTo(target.At), state.Scheme).Defender.Strikes;
+    }
 
     /// <summary>
     /// The weapons <paramref name="unit"/> may strike with, by slot in inventory order, each with
@@ -205,6 +278,7 @@ public sealed class HeuristicPlayer : IPlayer
         if (arms.Count > 0)
         {
             var equipped = unit.EquippedSlot(content);
+            var captains = CaptainsTiles(state, content, unit);
             Option? best = null;
             foreach (var tile in tiles)
             {
@@ -215,7 +289,7 @@ public sealed class HeuristicPlayer : IPlayer
                 {
                     foreach (var target in enemies)
                     {
-                        if (!armWeapon.InRange(tile.DistanceTo(target.At)) || !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile) || LedgerRefuses(state, content, armed, tile, target))
+                        if (captains.Contains(tile) || !armWeapon.InRange(tile.DistanceTo(target.At)) || !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile) || LedgerRefuses(state, content, armed, tile, target))
                         {
                             continue;
                         }
@@ -270,7 +344,7 @@ public sealed class HeuristicPlayer : IPlayer
             return new Command[] { Idle(state, content, unit) };
         }
 
-        var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, Grounding.MovementOf(unit, content));
+        var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, Grounding.MovementOf(unit, content), CaptainsTiles(state, content, unit));
         return WithMove(unit, destination ?? unit.At, Idle(state, content, unit, destination));
     }
 
@@ -588,11 +662,13 @@ public sealed class HeuristicPlayer : IPlayer
     /// tiles whose no-crit exposure reaches its HP when any tile passes, and prefers a tile
     /// a crit cannot kill on; every other recruit takes <see cref="EnemyAi.Approach"/>, unless
     /// that tile's no-crit exposure reaches its HP, when it takes the veto's key with lethal
-    /// tiles last and crit-lethal ones after the rest (issue 1044).
+    /// tiles last and crit-lethal ones after the rest (issue 1044). It never ends on one of
+    /// <paramref name="captains"/>, the tiles left free for a corked captain (issue 1206), and when
+    /// section 8's tile is one of them it takes the veto's key as for a lethal one.
     /// </summary>
     private static Coord? Approach(
         BattleState state, GameContent content, BattleUnit unit, Weapon? weapon, Reach reach,
-        List<BattleUnit> enemies, List<Reach> enemyReach, MovementType movement)
+        List<BattleUnit> enemies, List<Reach> enemyReach, MovementType movement, IReadOnlySet<Coord> captains)
     {
         Occupant OccupantAt(Coord at) => at == unit.At ? Occupant.None : state.OccupantAt(at, unit.Side);
         var footing = content.AbilitiesOf(unit.Unit);
@@ -618,7 +694,7 @@ public sealed class HeuristicPlayer : IPlayer
         (Coord? At, bool Lethal) Blind(Weapon armed)
         {
             var at = EnemyAi.Approach(state, content, unit, armed, reach, enemies, enemyReach);
-            careful = at is { } end && Exposure.Of(state, content, unit, end).NoCrit >= unit.Hp;
+            careful = at is { } end && (captains.Contains(end) || Exposure.Of(state, content, unit, end).NoCrit >= unit.Hp);
             return (at, careful);
         }
 
@@ -672,7 +748,7 @@ public sealed class HeuristicPlayer : IPlayer
         (bool Lethal, int Remaining, bool CritLethal, int Avoid, int Exposed, int Cost) bestKey = default;
         foreach (var tile in reach.Destinations)
         {
-            if (toward.From(tile) is not { } remaining || !MayEndOn(state, content, unit, tile))
+            if (toward.From(tile) is not { } remaining || !MayEndOn(state, content, unit, tile) || captains.Contains(tile))
             {
                 continue;
             }
