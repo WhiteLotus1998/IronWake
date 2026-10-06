@@ -18,8 +18,8 @@ brace: on
 ^^.....=.....^
 
 units:
-P captain 6,5
-P recruit 8,5
+P captain 4,8
+P recruit 10,8
 E soldier 7,1 group:sanctum behavior:hold
 E archer 5,1 group:sanctum behavior:hold
 E brigand 2,3 group:yard behavior:guard

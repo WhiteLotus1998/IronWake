@@ -536,6 +536,55 @@ public class SideMapTests
         Assert.Equal(text, MapFormat.Write(MapFormat.Parse(path, text, Content), Content));
     }
 
+    /// <summary>
+    /// The First Shrine starts south of the water (issue 1198): from either player slot, no class
+    /// in the content, on any cast member's footing, can reach a tile within the longest weapon's
+    /// range of the sanctum soldier on its Move alone, so the door is never struck before the
+    /// enemy phase of turn 1 and the soldier has braced by the time anyone arrives. Side maps
+    /// carry no Commander's Word, so no press adds a step.
+    /// </summary>
+    [Fact]
+    public void TheFirstShrinesDoorCannotBeStruckOnTurnOne()
+    {
+        var map = Side("the_first_shrine");
+        var state = BattleState.From(map, Content, Content.Cast, 1198);
+        var door = map.Placements.OfType<EnemyPlacement>().Single(p => p.Group == "sanctum" && p.TemplateId == "soldier").At;
+        var longest = Content.Weapons.Values.Max(w => w.MaxRange);
+        var strikeTiles = Enumerable.Range(0, map.Width).SelectMany(x => Enumerable.Range(0, map.Height).Select(y => new Coord(x, y)))
+            .Where(t => t != door && t.DistanceTo(door) <= longest)
+            .ToList();
+        var starts = map.Placements.OfType<PlayerPlacement>().Select(p => p.At).ToList();
+        Assert.Equal(2, starts.Count);
+
+        foreach (var unitClass in Content.Classes.Values)
+        {
+            foreach (var member in Content.Cast)
+            {
+                var footing = Content.AbilitiesOf(member with { ClassId = unitClass.Id });
+                var distances = Movement.DistancesTo(map, Content, strikeTiles, unitClass.Movement, at => state.OccupantAt(at, Ironwake.Core.Side.Player), footing);
+                foreach (var start in starts)
+                {
+                    var cost = distances.From(start);
+                    Assert.True(cost is null || cost > unitClass.Mov, $"{member.Id} as {unitClass.Id} from {start} strikes the door on turn 1 (cost {cost}, Mov {unitClass.Mov})");
+                }
+            }
+        }
+    }
+
+    /// <summary>The guard above falsified: from the start north of the water the door is in reach on turn 1.</summary>
+    [Fact]
+    public void FromTheOldNorthStartTheFirstShrinesDoorIsInReachOnTurnOne()
+    {
+        var map = Side("the_first_shrine");
+        var door = map.Placements.OfType<EnemyPlacement>().Single(p => p.Group == "sanctum" && p.TemplateId == "soldier").At;
+        var state = BattleState.From(map, Content, Content.Cast, 1198);
+        var cadet = Content.Class("cadet");
+        var distances = Movement.DistancesTo(map, Content, new[] { door with { Y = door.Y + 2 } }, cadet.Movement, at => state.OccupantAt(at, Ironwake.Core.Side.Player));
+
+        Assert.True(distances.From(new Coord(6, 5)) <= cadet.Mov);
+        Assert.True(distances.From(new Coord(4, 8)) > cadet.Mov);
+    }
+
     [Fact]
     public void TheOldWatchIsCanonical()
     {

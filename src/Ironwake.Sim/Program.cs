@@ -272,17 +272,22 @@ public static class Program
         if (args.Length > 2 && args[0] == "--trace" && ulong.TryParse(args[2], out var traceSeed))
         {
             RollScheme? scheme = RollScheme.TwoRollAverage;
+            var traceLead = new List<string>();
             for (var i = 3; i + 1 < args.Length; i++)
             {
                 if (args[i] == "--scheme")
                 {
                     scheme = ParseScheme(args[i + 1]);
                 }
+                else if (args[i] == "--lead")
+                {
+                    traceLead.Add(args[i + 1]);
+                }
             }
 
             if (scheme is { } trace)
             {
-                return Trace(args[1], traceSeed, trace);
+                return traceLead.Count == 0 ? Trace(args[1], traceSeed, trace) : Trace(args[1], traceSeed, trace, c => Led(c, traceLead));
             }
         }
 
@@ -290,7 +295,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip|--drill] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] [--lead <id>]... | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip|--drill] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -942,6 +947,14 @@ public static class Program
     public static int Trace(string mapId, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage) => Trace(mapId, seed, scheme, null);
 
     /// <summary>
+    /// The content with the cast reordered so <paramref name="lead"/> comes first, in order: a side
+    /// map (issue 635) is measured and traced with its member in the captain slot and its ally first
+    /// in the bare slots (issue 1198). Every id must be in the cast.
+    /// </summary>
+    public static GameContent Led(GameContent content, IReadOnlyList<string> lead) =>
+        content with { Cast = ValueList<Unit>.From(lead.Select(id => content.Cast.First(u => u.Id == id)).Concat(content.Cast.Where(u => !lead.Contains(u.Id)))) };
+
+    /// <summary>
     /// <see cref="Trace(string, ulong, RollScheme)"/> with the loaded content passed through
     /// <paramref name="adjust"/> first, so a test can trace a sample with a roster changed (issue 746:
     /// Pell with Cinder alone, since the heuristic otherwise casts Gust and never lights a fire).
@@ -1254,8 +1267,7 @@ public static class Program
                 return 2;
             }
 
-            // A side map (issue 635) is measured with its member in the captain slot and its ally first in the bare slots.
-            content = content with { Cast = ValueList<Unit>.From(lead.Select(id => content.Cast.First(u => u.Id == id)).Concat(content.Cast.Where(u => !lead.Contains(u.Id)))) };
+            content = Led(content, lead);
         }
 
         var all = MapFiles.LoadAll(contentDir, content);

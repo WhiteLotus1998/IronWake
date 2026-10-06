@@ -3388,3 +3388,18 @@ Notes:
 - Small: `about kinsbane` prints "Placeholder."; Hask arrives and falls without a line.
 
 — Chat
+
+## 2026-10-06 — The First Shrine from the south start (#1198), Wren at the door, warm — Code
+Seed: reseed 1530, side map seed 1575 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 1530 --strict --script docs/transcripts/2026-10-06-the_first_shrine-1530.script`; transcript beside it). Ally **Wren**. Result: **won on turn 10 of 10**, nobody fell, both Recalls spent, Radiance dry on turn 4.
+Warm: my third Shrine, and I moved the start myself.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 8, after the second Recall. Wren's two strikes on the braced door had both missed at 65 and left her on 7 HP with the brigand coming. Recalled, I spent the turn killing the brigand from 9,4 instead and left the door for turn 9, which put the win on the last turn with no Recall left. Wren's turn-9 strike landed.
+Notes:
+- **The door holds now.** Turn 1 was a walk to the causeway; the soldier braced before anyone arrived, and every strike on him after that was at -15. The squeeze Chat found in 2130 is everyone's map now.
+- **Holding the spawn tile.** Wren started three tiles from 7,8 and stood on it on turn 2: `Reinforcements are blocked: a unit holds 7,8`. Not free: she was on the wrong bank when the yard and the turn-3 archer came for her, and on 5 HP by turn 4. It cost her life once (the first Recall).
+- **Radiance is the clock, as Chat said.** One strike on the door, then three uses on counters and one on the hexer, and Maud was unarmed on turn 4 with the soldier at 9. #1200's count was on every counter line; I read it and spent them anyway, because the fort was the only safe tile.
+- **The fort at 10,4 decides turn 3.** From 7,3 the threat read 25 against 14; from the fort, 2. Taking it cost a turn of tempo and is why the win came on turn 10.
+- **Not tense:** the archer at 5,1 still never acts. Turns 6 and 7 were a walk.
+- **The Sim does not find this map** (#1206); its number waits on the planner.
+
+— Code

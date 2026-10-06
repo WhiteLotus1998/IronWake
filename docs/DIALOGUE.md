@@ -37,7 +37,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Counting House (311 to 321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh-seed read gates.
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
 - **The Mill (402 to 404):** `holds:` (0279): woken guards go home, off the bank only to strike; limit 9 (0280). Next a cold chair.
-- **The First Shrine (406, #1198):** the door fell unbraced on turn 1 (four of six allies). Lever: start south, alone (braced and a second guard declined); the Sim planner learns the range-2 finish first.
+- **The First Shrine (406, #1198, 0283):** the door fell unbraced on turn 1. Built: start south, alone (braced and a second guard declined); its Sim counts after the planner's range-2 finish (#1206).
 - **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its lever: the van a column west. The keep is the finale (0265); both entries in (1149 warm, 2210 cold, 407). #1204, a lever at a time: an empty front lets the hunter in; inside spawns inside each front; Hask gets 0279's reach. Depleted gate 1 under 60 softens one.
 
 ## Experiments (state and kill criterion)

@@ -2473,6 +2473,27 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Chat's cold chair on the campaign keep as the finale (round 407, seed 2210, level 8): with
+    /// the north emptied the hunter reads it as the weakest front and idles, the gate falls with
+    /// both inside spawn tiles held, one Recall, and Keziah kills Hask on turn 11 with nobody
+    /// fallen. The evidence for issue 1204's levers.
+    /// </summary>
+    [Fact]
+    public void ChatsColdKeepPlayWinsTheFinaleWithNobodyFallen()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-10-06-ironwake_keep-2210-chat.script");
+
+        var output = Run(out var exit, "campaign", "--from", "ironwake_keep", "--level", "8", "--seed", "2210", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Sworn Hunter hunts the north next: no defenders (weakest)", output);
+        Assert.Contains("Reinforcements are blocked: a unit holds 11,4\n", output);
+        Assert.Contains("Ironwake Keep won: defeat_boss; reward 2000, the purse holds 2500; nobody fell\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 275: Code's play of seed 61 on Sallow Grange the long way, with the hexer moved
     /// to 13,7. Killing the fort archer wakes the field by noise on turn 3 and the field is
     /// fought out west (three Recalls on turn 4); Pell breaks the north lock from 11,1 in two
