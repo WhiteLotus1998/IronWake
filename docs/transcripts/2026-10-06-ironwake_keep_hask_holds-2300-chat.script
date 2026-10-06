@@ -1,0 +1,189 @@
+move wren 11,2
+wait wren
+move pell 12,1
+wait pell
+move captain 11,5
+wait captain
+move keziah 11,6
+wait keziah
+move dunstan 11,9
+wait dunstan
+move teodor 11,10
+wait teodor
+move ottilie 12,5
+wait ottilie
+move ansgar 12,6
+wait ansgar
+move maud 12,4
+wait maud
+move rook 13,3
+wait rook
+move brannock 13,6
+wait brannock
+end
+move captain 10,5
+attack captain soldier-1
+move ottilie 11,5
+attack ottilie soldier-1
+move keziah 10,6
+attack keziah brigand-1
+move maud 11,6
+attack maud brigand-1
+move rook 11,1
+wait rook
+wait wren
+wait pell
+wait ansgar
+wait brannock
+wait dunstan
+wait teodor
+end
+move captain 8,5
+attack captain archer-1
+attack dunstan soldier-2
+move teodor 10,10
+attack teodor soldier-2
+item maud salve keziah
+wait ottilie
+wait ansgar
+wait brannock
+wait wren
+wait pell
+wait rook
+end
+move pell 10,1
+attack pell brigand-3
+move wren 9,1
+attack wren brigand-3
+move teodor 9,10
+attack teodor archer-2
+move keziah 12,7
+wait keziah
+move maud 11,8
+item maud salve dunstan
+move captain 10,5
+wait captain
+move brannock 10,6
+wait brannock
+wait ottilie
+wait ansgar
+wait rook
+wait dunstan
+end
+move teodor 9,8
+attack teodor archer-2
+move pell 9,4
+attack pell finale_hunter-1
+move maud 11,6
+attack maud finale_hunter-1
+attack brannock finale_hunter-1
+move captain 9,5
+attack captain finale_hunter-1
+recall 124
+move captain 11,4
+move ottilie 10,5
+attack ottilie finale_hunter-1
+move wren 8,4
+attack wren soldier-3
+move rook 9,5
+attack rook soldier-3
+move ansgar 7,6
+attack ansgar hexer-1
+canto ansgar stay
+wait captain
+wait keziah
+wait dunstan
+end
+move ansgar 11,7
+wait ansgar
+item maud salve ansgar
+move rook 12,4
+wait rook
+wait pell
+wait wren
+move ottilie 12,5
+wait ottilie
+move captain 10,5
+wait captain
+move teodor 11,8
+wait teodor
+wait brannock
+wait keziah
+wait dunstan
+end
+move captain 8,5
+attack captain brigand-4
+move pell 7,4
+attack pell soldier-4
+move wren 7,5
+attack wren soldier-4
+move brannock 9,6
+attack brannock brigand-4
+move ottilie 10,6
+attack ottilie brigand-4
+move maud 9,5
+attack maud brigand-4
+move ansgar 7,6
+attack ansgar archer-3
+canto ansgar 8,6
+move keziah 10,5
+wait keziah
+move teodor 10,9
+wait teodor
+move dunstan 11,8
+wait dunstan
+move rook 9,4
+wait rook
+end
+move wren 6,5
+attack wren archer-3
+item maud salve keziah
+move keziah 7,5
+wait keziah
+move pell 6,4
+wait pell
+item captain 2
+move ottilie 7,6
+wait ottilie
+move teodor 7,8
+wait teodor
+move dunstan 9,9
+wait dunstan
+move ansgar 7,7
+wait ansgar
+move rook 8,4
+wait rook
+wait brannock
+end
+move keziah 4,5
+wait keziah
+move pell 5,5
+wait pell
+move captain 5,6
+wait captain
+move maud 6,6
+wait maud
+move ottilie 5,7
+wait ottilie
+move teodor 3,8
+wait teodor
+move ansgar 4,8
+wait ansgar
+move dunstan 6,8
+wait dunstan
+move rook 6,4
+wait rook
+wait wren
+wait brannock
+end
+move keziah 8,5
+wait keziah
+attack pell hask-1 art overcast
+move captain 3,6
+attack captain hask-1 art full_measure
+move maud 4,6
+attack maud hask-1
+move teodor 2,5
+attack teodor hask-1
+move ansgar 4,5
+attack ansgar hask-1
