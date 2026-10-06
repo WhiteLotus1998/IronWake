@@ -147,7 +147,7 @@ public static class Program
                 }
             }
 
-            return LevelTable(seeds, args.Contains("--even"));
+            return args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
         }
 
         if (args.Length > 0 && args[0] == "--supports")
@@ -290,7 +290,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -458,6 +458,32 @@ public static class Program
         var content = ContentLoader.Load(contentDir);
         var runs = LevelRun.Measure(contentDir, content, seeds, even: even);
         foreach (var line in even ? LevelRun.EvenLines(content, runs) : LevelRun.Lines(content, runs))
+        {
+            Console.WriteLine(line);
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// The focused chair's read (issue 1157, round 389, <see cref="LevelRun.FocusedLines"/>): the even chair,
+    /// the guarded and the paying focused chairs over the same seeds, one thread each, since every run owns
+    /// its player and the content is read-only. A measurement only.
+    /// </summary>
+    public static int FocusedTable(int seeds)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("levels: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var even = Task.Run(() => LevelRun.Measure(contentDir, content, seeds, even: true));
+        var guarded = Task.Run(() => LevelRun.Measure(contentDir, content, seeds, focused: FocusedPlayer.Guard.Guarded));
+        var paying = Task.Run(() => LevelRun.Measure(contentDir, content, seeds, focused: FocusedPlayer.Guard.Paying));
+        foreach (var line in LevelRun.FocusedLines(content, even.Result, guarded.Result, paying.Result))
         {
             Console.WriteLine(line);
         }
