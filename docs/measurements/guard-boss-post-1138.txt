@@ -1,0 +1,50 @@
+# Issue 1138: gate 1 and gate 4 on every defeat_boss map with a guard boss, before (41f0f30) and after the post rule. Release, 200 seeds, two-roll average.
+# Rook's arm is the_field.map with the 1,13 slot recruit:rook (as field-rook-arm-1044.txt).
+
+## the_field
+base:
+  gate 1 beatable: the_field, heuristic wins 134/200 (67 %), winning turn median 11 p90 15 limit 20, losses 43 timeout 23 captain 0 protected, quiet tail 1.7, refused kill p50 0.9824 over 43, at the stall p50 0.0224 over 41, route line 6 drifted 3 won 4 p50 13 lost 3.3; south 194 drifted 26 won 130 p50 11 lost 3.6; none 0 drifted 0 won 0, two-roll average: ok
+  gate 4 no dead weight: the_field, 5 recruits x 200 seeds, median drop 0.315: ok
+fix:
+  gate 1 beatable: the_field, heuristic wins 138/200 (69 %), winning turn median 13 p90 16 limit 20, losses 39 timeout 23 captain 0 protected, quiet tail 2.0, refused kill p50 0.9775 over 39, at the stall p50 0.0202 over 29, route line 6 drifted 3 won 4 p50 10 lost 2.5; south 194 drifted 26 won 134 p50 13 lost 3.7; none 0 drifted 0 won 0, two-roll average: ok
+  gate 4 no dead weight: the_field, 5 recruits x 200 seeds, median drop 0.295: ok
+
+## field_rook
+base:
+  gate 1 beatable: /tmp/claude-0/-home-user-IronWake/882dca9e-9807-51d2-8192-bebe002d8bab/scratchpad/field_rook.map, heuristic wins 86/200 (43 %), winning turn median 13 p90 17 limit 20, losses 60 timeout 54 captain 0 protected, quiet tail 1.8, refused kill p50 0.9711 over 60, at the stall p50 0.0314 over 52, route line 4 drifted 1 won 0; south 196 drifted 11 won 86 p50 13 lost 3.7; none 0 drifted 0 won 0, two-roll average: FAILED
+  gate 4 no dead weight: /tmp/claude-0/-home-user-IronWake/882dca9e-9807-51d2-8192-bebe002d8bab/scratchpad/field_rook.map, 5 recruits x 200 seeds, median drop 0.225: FAILED
+fix:
+  gate 1 beatable: /tmp/claude-0/-home-user-IronWake/882dca9e-9807-51d2-8192-bebe002d8bab/scratchpad/field_rook.map, heuristic wins 92/200 (46 %), winning turn median 14 p90 17 limit 20, losses 56 timeout 52 captain 0 protected, quiet tail 1.9, refused kill p50 0.9775 over 56, at the stall p50 0.0316 over 42, route line 4 drifted 1 won 0; south 196 drifted 11 won 92 p50 14 lost 3.5; none 0 drifted 0 won 0, two-roll average: FAILED
+  gate 4 no dead weight: /tmp/claude-0/-home-user-IronWake/882dca9e-9807-51d2-8192-bebe002d8bab/scratchpad/field_rook.map, 5 recruits x 200 seeds, median drop 0.180: FAILED
+
+## harrow_weir
+base:
+  gate 1 beatable: harrow_weir, heuristic wins 137/200 (69 %), winning turn median 8 p90 11 limit 15, losses 34 timeout 29 captain 0 protected, quiet tail 0.5, refused kill p50 0.9524 over 34, at the stall p50 0.0346 over 31, two-roll average: ok
+  gate 4 no dead weight: harrow_weir, 5 recruits x 200 seeds, median drop 0.225: ok
+fix:
+  gate 1 beatable: harrow_weir, heuristic wins 136/200 (68 %), winning turn median 8 p90 11 limit 15, losses 37 timeout 27 captain 0 protected, quiet tail 0.5, refused kill p50 0.9892 over 37, at the stall p50 0.0260 over 33, two-roll average: ok
+  gate 4 no dead weight: harrow_weir, 5 recruits x 200 seeds, median drop 0.215: ok
+
+## the_old_watch
+base:
+  gate 1 beatable: content/quests/the_old_watch.map, heuristic wins 8/200 (4 %), winning turn median 2 p90 9 limit 9, losses 164 timeout 28 captain 0 protected, quiet tail 0.6, refused kill p50 0.9824 over 164, at the stall p50 0.0530 over 114, two-roll average: FAILED
+  gate 4 no dead weight: content/quests/the_old_watch.map, 1 recruits x 200 seeds, median drop 0.030: FAILED
+fix:
+  gate 1 beatable: content/quests/the_old_watch.map, heuristic wins 6/200 (3 %), winning turn median 2 p90 2 limit 9, losses 177 timeout 17 captain 0 protected, quiet tail 0.7, refused kill p50 0.9849 over 177, at the stall p50 0.0692 over 110, two-roll average: FAILED
+  gate 4 no dead weight: content/quests/the_old_watch.map, 1 recruits x 200 seeds, median drop 0.030: ok
+
+## the_wardens_gate
+base:
+  gate 1 beatable: content/quests/the_wardens_gate.map, heuristic wins 6/200 (3 %), winning turn median 5 p90 10 limit 10, losses 46 timeout 148 captain 0 protected, quiet tail 0.7, refused kill p50 0.8601 over 46, at the stall p50 0.0530 over 33, two-roll average: FAILED
+  gate 4 no dead weight: content/quests/the_wardens_gate.map, 1 recruits x 200 seeds, median drop 0.015: FAILED
+fix:
+  gate 1 beatable: content/quests/the_wardens_gate.map, heuristic wins 1/200 (1 %), winning turn median 9 p90 9 limit 10, losses 129 timeout 70 captain 0 protected, quiet tail 0.4, refused kill p50 0.8460 over 129, at the stall p50 0.2466 over 73, two-roll average: FAILED
+  gate 4 no dead weight: content/quests/the_wardens_gate.map, 1 recruits x 200 seeds, median drop 0.005: FAILED
+
+## the_oath_stone
+base:
+  gate 1 beatable: content/quests/the_oath_stone.map, heuristic wins 0/200 (0 %), no wins, losses 105 timeout 95 captain 0 protected, quiet tail 0.8, refused kill p50 0.8775 over 105, at the stall p50 0.4428 over 71, two-roll average: FAILED
+  gate 4 no dead weight: content/quests/the_oath_stone.map, 1 recruits x 200 seeds, median drop 0.000: FAILED
+fix:
+  gate 1 beatable: content/quests/the_oath_stone.map, heuristic wins 0/200 (0 %), no wins, losses 105 timeout 95 captain 0 protected, quiet tail 0.8, refused kill p50 0.8775 over 105, at the stall p50 0.4428 over 71, two-roll average: FAILED
+  gate 4 no dead weight: content/quests/the_oath_stone.map, 1 recruits x 200 seeds, median drop 0.000: FAILED
