@@ -472,10 +472,12 @@ public class SideMapCliTests
     /// Chat's cold Drake Warden chair (issue 1100, Table comment 6005059467): issue 1133's synthetic
     /// Brackwater camp, Rook certified to the Drake Warden, Brackwater Cut won on turn 6 with Pell
     /// fallen and one Recall, then the Field won on turn 11 with Keziah turned on turn 1 and the
-    /// Sworn Captain killed on his fort. The boss's off-fort shuttle on turns 5 to 10 is issue 1138.
+    /// Sworn Captain killed on his fort. The boss's off-fort shuttle on turns 5 to 10 was issue 1138:
+    /// replayed loose under it, he holds 18,6 from turn 5 to turn 9 and comes off it on turn 10 only
+    /// to strike Teodor, so the journaled line no longer replays strictly past turn 5.
     /// </summary>
     [Fact]
-    public void TheJournaledColdDrakeWardenChairWinsBrackwaterAndTheField()
+    public void TheJournaledColdDrakeWardenChairNowFindsTheBossHoldingHisFort()
     {
         var script = Transcript("2026-10-05-drake_warden-644-chat.script");
         var saves = Path.Combine(Path.GetTempPath(), "ironwake-drake-warden-" + Guid.NewGuid().ToString("N"));
@@ -483,14 +485,20 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-05-drake_warden-644-synthetic.saves", "brackwater.json")), Path.Combine(saves, "brackwater.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "brackwater", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out _, "campaign", "--load", "brackwater", "--saves", saves, "--script", script, "--content", Fixture.RealContentDirectory());
 
-            Assert.Equal(1, exit);
+            var field = output[output.IndexOf("Battle won: escape", StringComparison.Ordinal)..];
             Assert.Contains("Pell falls at 13,4\n", output);
-            Assert.Contains("Sworn Captain moves 18,6 -> 16,7 via 17,6 16,6\n", output);
-            Assert.Contains("Sworn Captain falls at 18,6\n", output);
-            Assert.Contains("  Rook: Drake Warden L8, EXP 20;", output);
-            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+            Assert.Contains("Battle won: escape", output);
+            for (var turn = 5; turn <= 9; turn++)
+            {
+                var start = field.IndexOf($"-- Enemy phase, turn {turn} --", StringComparison.Ordinal);
+                var phase = field[start..field.IndexOf($"-- Enemy phase ends, turn {turn} --", start, StringComparison.Ordinal)];
+                Assert.DoesNotContain("Sworn Captain moves", phase);
+                Assert.Contains("Sworn Captain waits\n", phase);
+            }
+
+            Assert.Contains("Sworn Captain moves 18,6 -> 16,6 via 17,6\nenemy: attack sworn_captain-1 teodor\n", field);
         }
         finally
         {

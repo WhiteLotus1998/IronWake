@@ -156,6 +156,48 @@ public class BossVetoTests
     }
 
     /// <summary>
+    /// Issue 1138: on his post at 13,1 with the party at the west end, out of every strike, the
+    /// Reeve holds instead of taking the vetoed approach west, which the next phase's refusal
+    /// would undo.
+    /// </summary>
+    [Fact]
+    public void AGuardBossOnItsPostWithNoStrikeInReachHoldsThere()
+    {
+        var state = OffPost(Party, Home);
+        var reeve = state.Find("grange_reeve-1")!;
+
+        Assert.Equal(Home, EnemyAi.GoesHome(state, Starter, reeve, state.ReachOf(reeve, Starter).Destinations.ToList(), state.ReachOf(reeve, Starter),
+            state.UnitsOf(Side.Player).ToList(), state.UnitsOf(Side.Player).Select(p => state.ReachOf(p, Starter)).ToList(), null));
+        var plan = EnemyAi.PlanUnit(state, Starter, reeve);
+        Assert.Equal(Home, EndOf(plan, reeve));
+        Assert.DoesNotContain(plan, c => c is Attack);
+    }
+
+    /// <summary>Off the veto (a Rout map) the post rule does not apply: the woken guard boss on its post still approaches.</summary>
+    [Fact]
+    public void AGuardBossOnItsPostOffADefeatBossMapStillApproaches()
+    {
+        var map = Field("rout", Party.Count)
+            .Replace("size: 9x3", "size: 15x3")
+            .Replace(".........", "...............")
+            .Replace("B grange_reeve 6,1", "B grange_reeve 13,1");
+        var state = Start(roster: Party, map: map).Wake("hall").Do(new EndPhase());
+        var reeve = state.Find("grange_reeve-1")!;
+
+        Assert.True(EndOf(EnemyAi.PlanUnit(state, Starter, reeve), reeve).X < 13);
+    }
+
+    /// <summary><c>threat</c> agrees with the holding boss: on his post out of reach, he names no strike on anyone.</summary>
+    [Fact]
+    public void ThreatAgreesWithTheGuardBossHoldingItsPost()
+    {
+        var state = OffPost(Party, Home);
+        var reeve = state.Find("grange_reeve-1")!;
+
+        Assert.All(state.UnitsOf(Side.Player), player => Assert.Null(EnemyAi.StrikeOn(state, Starter, reeve, player)));
+    }
+
+    /// <summary>
     /// <c>threat</c> reads the same end tile as the plan: sent toward his post at 13,1, out of reach
     /// of a party at the west end, the Reeve swings at nobody, and <see cref="EnemyAi.StrikeOn"/> names no strike.
     /// </summary>

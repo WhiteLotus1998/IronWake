@@ -842,22 +842,21 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// 13.14's first play: Code's seed 307 on <c>docs/samples/harrow_weir_brace.map</c>. Ottilie
-    /// waits braced as bait for the west brigand at 31 percent and it misses; the Foreman waits
-    /// braced on his hill until Teodor's strike draws his answer, and Pell kills him unbraced
-    /// on turn 11.
+    /// 13.14's first play: Code's seed 307 on <c>docs/samples/harrow_weir_brace.map</c>, history since
+    /// issue 1138. Played, the Foreman stepped off his hill to 10,6 with no strike on turn 6 and was
+    /// walked home on turn 7. Now the woken Foreman on his post with no strike holds it, braced, and
+    /// comes off it only to strike: the journaled line no longer replays past turn 6.
     /// </summary>
     [Fact]
-    public void TheJournaledBracePlayReplaysWithItsBraces()
+    public void TheJournaledBracePlayNowFindsTheForemanBracedOnHisHill()
     {
-        var output = RunSample("harrow_weir_brace.map", "2026-09-27-harrow_weir_brace-307.script", 307, out var exit);
+        var output = RunLoose("2026-09-27-harrow_weir_brace-307.script", 307, "harrow_weir_brace.map");
 
-        Assert.Equal(0, exit);
-        Assert.EndsWith("Battle won: defeat_boss\n", output);
         Assert.Contains("Forecast Brigand 2 -> Ottilie: acc 31% dmg 12 crit 0%; counter: none\n  Brace: Ottilie braced: Brigand 2 acc -15\n", output);
-        Assert.Contains("  Brace: Weir Foreman braced: Teodor acc -15\n", output);
-        Assert.Contains("Forecast Pell -> Weir Foreman with Cinder: acc 94% dmg 12 crit 1%", output);
-        Assert.Contains("Weir Foreman falls at 13,6\n", output);
+        Assert.Contains("The weir group wakes (noise)\n", output);
+        Assert.Contains("Weir Foreman waits and braces\n", EnemyPhase(output, 6));
+        Assert.Contains("Weir Foreman waits and braces\n", EnemyPhase(output, 7));
+        Assert.DoesNotContain("Weir Foreman moves 13,6 -> 10,6", output);
     }
 
     /// <summary>
@@ -994,20 +993,20 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// 13.14's deciding play: Chat's seed 439 on <c>docs/samples/harrow_weir_brace.map</c>. Dunstan
-    /// waits braced on 10,10 and the Foreman, let out by the veto, takes the one strike at 43; on
-    /// turn 13 the Foreman sits braced on his hill and Dunstan kills him at 29.
+    /// 13.14's deciding play: Chat's seed 439 on <c>docs/samples/harrow_weir_brace.map</c>, history since
+    /// issue 1138. Played, the called Foreman left his hill for 12,9 with no strike on turn 8. Now he
+    /// holds it braced until a strike is on offer, then sallies to take it (Teodor, from 12,9, on
+    /// turn 10): the journaled line no longer replays past turn 8.
     /// </summary>
     [Fact]
-    public void ChatsColdBracePlayReplaysWithItsBraces()
+    public void ChatsColdBracePlayNowFindsTheForemanBracedOnHisHillUntilAStrike()
     {
-        var output = RunSample("harrow_weir_brace.map", "2026-09-27-harrow_weir_brace-439.script", 439, out var exit);
+        var output = RunLoose("2026-09-27-harrow_weir_brace-439.script", 439, "harrow_weir_brace.map");
 
-        Assert.Equal(0, exit);
-        Assert.EndsWith("Battle won: defeat_boss\n", output);
-        Assert.Contains("Forecast Weir Foreman -> Dunstan: acc 43% dmg 8 crit 2%; counter: none\n  Brace: Dunstan braced: Weir Foreman acc -15\n", output);
-        Assert.Contains("Forecast Dunstan -> Weir Foreman: acc 29% dmg 8 crit 0%; counter: acc 70% dmg 8 crit 2%\n  Brace: Weir Foreman braced: Dunstan acc -15\n", output);
-        Assert.Contains("Weir Foreman falls at 13,6\n", output);
+        Assert.Contains("The weir group wakes (called by the ford group)\n", output);
+        Assert.Contains("Weir Foreman waits and braces\n", EnemyPhase(output, 8));
+        Assert.DoesNotContain("Weir Foreman moves", EnemyPhase(output, 8));
+        Assert.Contains("Weir Foreman moves 13,6 -> 12,9 via 12,6 12,7 12,8\nenemy: attack weir_foreman-1 teodor\n", EnemyPhase(output, 10));
     }
 
     /// <summary>
@@ -1454,35 +1453,43 @@ public class CliPlayTests
 
     /// <summary>
     /// Issue 393 (2), the ford wakes the weir: Chat's seed 401 script on the shipped map. Dunstan
-    /// wakes the ford on turn 3, the ford calls the weir, and on enemy phase 3 the Foreman crosses
-    /// to 9,6 while the party is split; on enemy phase 4, with every strike refused, he goes back
-    /// toward his post. The journaled 401 transcript is history and no longer replays past turn 3.
+    /// wakes the ford on turn 3 and the ford calls the weir. Under 393 the Foreman crossed to 9,6
+    /// with no strike while the party was split and was refused home the next phase; under issue
+    /// 1138 a guard boss on his post with no strike holds it, so he waits on his hill until a strike
+    /// is on offer (Keziah, on turn 9). The journaled 401 transcript is history.
     /// </summary>
     [Fact]
-    public void TheFordCallsTheForemanIntoTheSplitPartyOnSeed401()
+    public void TheFordCallsTheForemanAndHeHoldsHisHillOnSeed401()
     {
         var output = RunLoose("2026-09-27-harrow_weir-401.script", 401);
 
         Assert.Contains("The ford group wakes (proximity)\nThe weir group wakes (called by the ford group)\n", output);
-        var third = output[output.IndexOf("-- Enemy phase, turn 3 --", StringComparison.Ordinal)..output.IndexOf("-- Enemy phase ends, turn 3 --", StringComparison.Ordinal)];
-        Assert.Contains("Weir Foreman moves 13,6 -> 9,6 via 12,6 11,6 10,6\n", third);
-        Assert.Contains("Weir Foreman moves 9,6 -> 12,6 via 10,6 11,6\n", output);
+        for (var turn = 3; turn <= 8; turn++)
+        {
+            Assert.DoesNotContain("Weir Foreman moves", EnemyPhase(output, turn));
+            Assert.Contains("Weir Foreman waits\n", EnemyPhase(output, turn));
+        }
+
+        Assert.Contains("enemy: attack weir_foreman-1 keziah\n", EnemyPhase(output, 9));
         Assert.DoesNotContain("-> 14,8", output);
     }
 
     /// <summary>
-    /// Issue 393 on Code's seed 397 script: the ford calls the weir on turn 3, and the Foreman
-    /// crosses onto 10,6, the old pocket, where the veto passes the tile while the party is split
-    /// at the ford; with every strike refused on enemy phase 4 he walks home to 13,6.
+    /// Issue 1138 on Code's seed 397 script: the ford calls the weir on turn 3. Under 393 the Foreman
+    /// crossed onto 10,6, the old pocket, with no strike, and walked home the next phase; now he holds
+    /// his hill until a strike passes the veto, takes it from 12,7 on turn 6, goes home on turn 7, and
+    /// falls on his hill on turn 8.
     /// </summary>
     [Fact]
-    public void TheCalledForemanStandsOnTheBridgeThenGoesHomeOnSeed397()
+    public void TheCalledForemanHoldsHisHillUntilAStrikeOnSeed397()
     {
         var output = RunLoose("2026-09-27-harrow_weir-397.script", 397);
 
         Assert.Contains("The weir group wakes (called by the ford group)\n", output);
-        Assert.Contains("Weir Foreman moves 13,6 -> 10,6 via 12,6 11,6\nenemy: wait weir_foreman-1\n", output);
-        Assert.Contains("Weir Foreman moves 10,6 -> 13,6 via 11,6 12,6\nenemy: wait weir_foreman-1\n", output);
+        Assert.DoesNotContain("Weir Foreman moves 13,6 -> 10,6", output);
+        Assert.Contains("Weir Foreman waits\n", EnemyPhase(output, 3));
+        Assert.Contains("Weir Foreman moves 13,6 -> 12,7 via 12,6\nenemy: attack weir_foreman-1 keziah\n", EnemyPhase(output, 6));
+        Assert.Contains("Weir Foreman falls at 13,6\n", output);
     }
 
     /// <summary>
@@ -1516,22 +1523,24 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 393: Code's hand play of seed 409 replays to its journaled transcript. The ford calls
-    /// the Foreman across to 9,6 on turn 3, he hunts Teodor to 9,3 on enemy phase 4, walks home onto
-    /// 10,6 when the gathered party refuses him on enemy phase 5, is broken to 10 there, reaches his
-    /// hill on enemy phase 6, and falls to Pell on turn 9, with one Recall and nobody dead.
+    /// Issue 393: Code's hand play of seed 409, history since issue 1138. Played, the ford called the
+    /// Foreman across to 9,6 with no strike on turn 3. Now the called Foreman holds his hill until a
+    /// strike is on offer, and comes off it on turn 7 to strike Ottilie from 10,6: the journaled line
+    /// no longer replays past turn 3.
     /// </summary>
     [Fact]
-    public void TheJournaledSeed409PlayReplaysWithTheCalledForeman()
+    public void TheCalledForemanOnSeed409HoldsHisHillUntilAStrike()
     {
-        var output = RunSample("harrow_weir_0081.map", "2026-09-27-harrow_weir-409.script", 409, out var exit);
+        var output = RunLoose("2026-09-27-harrow_weir-409.script", 409);
 
-        Assert.Equal(0, exit);
         Assert.Contains("The weir group wakes (called by the ford group)\n", output);
-        Assert.Contains("Weir Foreman moves 9,6 -> 9,3 via 9,5 9,4\nenemy: attack weir_foreman-1 teodor\n", output);
-        Assert.Contains("Weir Foreman moves 9,3 -> 10,6 via 9,4 9,5 9,6\n", output);
-        Assert.Contains("Weir Foreman falls at 13,6\n", output);
-        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-409.txt")).ReplaceLineEndings("\n"), output);
+        for (var turn = 3; turn <= 6; turn++)
+        {
+            Assert.Contains("Weir Foreman waits\n", EnemyPhase(output, turn));
+        }
+
+        Assert.Contains("Weir Foreman moves 13,6 -> 10,6 via 12,6 11,6\nenemy: attack weir_foreman-1 ottilie\n", EnemyPhase(output, 7));
+        Assert.DoesNotContain("Weir Foreman moves 13,6 -> 9,6", output);
     }
 
     /// <summary>
@@ -1555,25 +1564,21 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Eightieth round: Chat's hand play of seed 421 replays to its journaled transcript. The ford wakes
-    /// on turn 3 and calls the weir, the Foreman crosses to 9,6, goes home to 12,6 and 13,6 when refused,
-    /// comes back out to 10,6 as a guard, takes the lone Teodor from 8,4 at full HP, and after one Recall
-    /// is boxed at 9,2 and falls on Teodor's counter on enemy phase 9.
+    /// Eightieth round: Chat's hand play of seed 421, history since issue 1138. Played, the called
+    /// Foreman patrolled: across to 9,6, home, out to 10,6, then onto the lone Teodor. Now he holds
+    /// his hill through the whole line, with no strike on offer from any tile the veto passes: the
+    /// journaled line no longer replays past turn 3.
     /// </summary>
     [Fact]
-    public void TheJournaledSeed421PlayReplaysWithThePatrolAndTheBox()
+    public void TheCalledForemanOnSeed421HoldsHisHillThroughThePatrol()
     {
-        var output = RunSample("harrow_weir_0081.map", "2026-09-27-harrow_weir-421.script", 421, out var exit);
+        var output = RunLoose("2026-09-27-harrow_weir-421.script", 421);
 
-        Assert.Equal(0, exit);
         Assert.Contains("The ford group wakes (proximity)\nThe weir group wakes (called by the ford group)\n", output);
-        Assert.Contains("Weir Foreman moves 13,6 -> 9,6 via 12,6 11,6 10,6\n", output);
-        Assert.Contains("Weir Foreman moves 9,6 -> 12,6 via 10,6 11,6\n", output);
-        Assert.Contains("Weir Foreman moves 13,6 -> 10,6 via 12,6 11,6\n", output);
-        Assert.Contains("Weir Foreman moves 10,6 -> 8,4 via 9,6 8,6 8,5\nenemy: attack weir_foreman-1 teodor\n", output);
-        Assert.Contains("Recalled to state 133; 2 charges left\n", output);
-        Assert.Contains("Weir Foreman falls at 9,2\n", output);
-        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-421.txt")).ReplaceLineEndings("\n"), output);
+        for (var turn = 3; turn <= 9; turn++)
+        {
+            Assert.DoesNotContain("Weir Foreman moves", EnemyPhase(output, turn));
+        }
     }
 
     /// <summary>
@@ -1743,13 +1748,20 @@ public class CliPlayTests
 
     /// <summary>
     /// A transcript script played without <c>--strict</c>, so a line the rules have moved past still
-    /// plays on, on Harrow Weir as issue 456 found it: <c>docs/samples/harrow_weir_0081.map</c>, the
-    /// file every Harrow Weir play before the retune was made on.
+    /// plays on, by default on Harrow Weir as issue 456 found it: <c>docs/samples/harrow_weir_0081.map</c>,
+    /// the file every Harrow Weir play before the retune was made on.
     /// </summary>
-    private static string RunLoose(string script, int seed)
+    private static string RunLoose(string script, int seed, string map = "harrow_weir_0081.map")
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        return Run(out _, "play", Path.Combine(repo, "docs", "samples", "harrow_weir_0081.map"), "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", Path.Combine(repo, "docs", "transcripts", script), "--content", Fixture.RealContentDirectory());
+        return Run(out _, "play", Path.Combine(repo, "docs", "samples", map), "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", Path.Combine(repo, "docs", "transcripts", script), "--content", Fixture.RealContentDirectory());
+    }
+
+    /// <summary>The enemy phase of <paramref name="turn"/> as the console printed it.</summary>
+    private static string EnemyPhase(string output, int turn)
+    {
+        var start = output.IndexOf($"-- Enemy phase, turn {turn} --", StringComparison.Ordinal);
+        return output[start..output.IndexOf($"-- Enemy phase ends, turn {turn} --", start, StringComparison.Ordinal)];
     }
 
     private static string RunShipped(string map, string script, int seed, out int exit, string? content = null)
