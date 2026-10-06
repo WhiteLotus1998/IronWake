@@ -1,0 +1,30 @@
+quest maud_2 teodor
+move maud 7,7
+wait maud
+move teodor 7,8
+wait teodor
+end
+move maud 7,3
+attack maud soldier-1
+wait teodor
+end
+move teodor 7,4
+attack teodor hexer-1 art long_thrust
+recall 21
+move maud 7,2
+attack maud soldier-1
+move teodor 7,4
+wait teodor
+end !
+recall 10
+move maud 7,3
+attack maud soldier-1
+move teodor 7,4
+wait teodor
+end !
+move maud 7,2
+attack maud soldier-1
+item teodor 2
+end !
+move maud 7,0
+leave
