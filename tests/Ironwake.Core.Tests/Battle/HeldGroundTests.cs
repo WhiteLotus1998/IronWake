@@ -93,7 +93,7 @@ public class HeldGroundTests
     public void TheBoardPrintsTheRuleWhileAHeldMemberStands()
     {
         var state = Woken("holds: bank 6,0 11,1");
-        const string line = "holds: the bank group leaves 6,0 to 11,1 only to strike, then goes back";
+        const string line = "holds: the bank group strikes out from 6,0 to 11,1, stays where it struck, and goes back when nothing is in reach";
 
         Assert.Contains(line, MapRenderer.Render(state, Starter));
         Assert.DoesNotContain("holds:", MapRenderer.Render(Woken(""), Starter));
@@ -164,7 +164,44 @@ public class HeldGroundTests
     [Fact]
     public void AOneTilePostPrintsAsOneTile()
     {
-        Assert.Equal("holds: the lord group leaves 0,6 only to strike, then goes back", new HeldGround("lord", new Coord(0, 6), new Coord(0, 6)).Line());
+        Assert.Equal("holds: the lord group strikes out from 0,6, stays where it struck, and goes back when nothing is in reach", new HeldGround("lord", new Coord(0, 6), new Coord(0, 6)).Line());
+    }
+
+    /// <summary>
+    /// Issue 1216, the line's middle claim: a held member that struck from off its ground in the
+    /// enemy phase is still on its strike tile when the next player phase starts, so the line's
+    /// "stays where it struck" is the rule, not a paraphrase of it.
+    /// </summary>
+    [Fact]
+    public void AHeldMemberStaysWhereItStruckIntoThePlayerPhase()
+    {
+        var state = WithHale(BattleFixture.Start(map: Bank("holds: bank 6,0 11,1")).Wake("bank"), new Coord(9, 3));
+        var next = state.Do(new EndPhase());
+        foreach (var command in EnemyAi.Plan(next, Starter))
+        {
+            next = next.Do(command);
+        }
+
+        if (next.Phase == Side.Enemy)
+        {
+            next = next.Do(new EndPhase());
+        }
+
+        var soldier = next.Find("soldier-1")!;
+
+        Assert.Equal(Side.Player, next.Phase);
+        Assert.True(next.Find("hale")!.Hp < state.Find("hale")!.Hp, "the soldier never struck");
+        Assert.Equal(new Coord(9, 2), soldier.At);
+        Assert.False(Ground.Contains(soldier.At));
+    }
+
+    [Fact]
+    public void HelpPrintsTheHeldGroundsRule()
+    {
+        var rules = Objective.Rules(Woken("holds: bank 6,0 11,1"), Starter);
+
+        Assert.Contains("The bank group holds 6,0 to 11,1. A member strikes out from it, stays where it struck, and goes back when nothing is in reach.", rules);
+        Assert.DoesNotContain(Objective.Rules(Woken(""), Starter), r => r.Contains("holds", StringComparison.Ordinal));
     }
 
     private const string Post = """

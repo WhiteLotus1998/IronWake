@@ -49,7 +49,7 @@ public static class Objective
     /// <summary>
     /// The clauses the objective line leaves out (issue 609), in sentence case, one per line:
     /// where the seize tile is and that only the captain seizes, how an exit works, the boss's
-    /// mark. The console's <c>help</c> prints them under the commands; empty when the map's
+    /// mark, the fronts, a held ground (issue 1216) and the pair rule. The console's <c>help</c> prints them under the commands; empty when the map's
     /// objective needs nothing more than its line.
     /// </summary>
     public static IReadOnlyList<string> Rules(BattleState state, GameContent content)
@@ -71,6 +71,11 @@ public static class Objective
         if (map.Fronts.Count > 0)
         {
             rules = rules.Append(Fronts.Rule).ToArray();
+        }
+
+        if (map.Holds is { } held)
+        {
+            rules = rules.Append(held.Rule()).ToArray();
         }
 
         return PairRule.Rule(map) is { } pairRule ? rules.Append(pairRule).ToArray() : rules;

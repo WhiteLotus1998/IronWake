@@ -3,8 +3,8 @@ namespace Ironwake.Core;
 /// <summary>
 /// The <c>holds:</c> header (issue 1189, round 402): an enemy group and the rectangle of ground it
 /// holds, corners <paramref name="From"/> and <paramref name="To"/> inclusive. A woken member steps
-/// off it only to strike: with no strike on offer it approaches over its ground alone and walks back
-/// to it (<see cref="EnemyAi"/>), so a woken Guard group waits on its ground instead of marching out,
+/// off it only to strike and stays on the tile it struck from: with no strike on offer it approaches
+/// over its ground alone and walks back to it (<see cref="EnemyAi"/>), so a woken Guard group waits on its ground instead of marching out,
 /// and a unit that strikes it from off the ground is answered as anywhere else. Strikes, and so
 /// <c>threat</c> and the exposure sum, are untouched.
 /// </summary>
@@ -27,12 +27,20 @@ public sealed record HeldGround(string Group, Coord From, Coord To)
     public override string ToString() => $"{Group} {From.X},{From.Y} {To.X},{To.Y}";
 
     /// <summary>
-    /// The rule line under the unit rows:
-    /// <c>holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back</c>, and for a
-    /// one-tile post <c>holds: the lord group leaves 0,6 only to strike, then goes back</c>.
+    /// The rule line under the unit rows, naming the three facts of the rule (issue 1216, round 410):
+    /// a member strikes out from its ground, stays on the tile it struck from, and walks back only in
+    /// a phase with no strike in reach:
+    /// <c>holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach</c>,
+    /// and for a one-tile post
+    /// <c>holds: the lord group strikes out from 0,6, stays where it struck, and goes back when nothing is in reach</c>.
     /// </summary>
-    public string Line() =>
-        From == To
-            ? $"holds: the {Group} group leaves {From.X},{From.Y} only to strike, then goes back"
-            : $"holds: the {Group} group leaves {From.X},{From.Y} to {To.X},{To.Y} only to strike, then goes back";
+    public string Line() => $"holds: the {Group} group strikes out from {Where}, stays where it struck, and goes back when nothing is in reach";
+
+    /// <summary>
+    /// The same rule in sentence case for <c>help</c> (issue 1216):
+    /// <c>The mill group holds 0,0 to 11,2. A member strikes out from it, stays where it struck, and goes back when nothing is in reach.</c>
+    /// </summary>
+    public string Rule() => $"The {Group} group holds {Where}. A member strikes out from it, stays where it struck, and goes back when nothing is in reach.";
+
+    private string Where => From == To ? $"{From.X},{From.Y}" : $"{From.X},{From.Y} to {To.X},{To.Y}";
 }
