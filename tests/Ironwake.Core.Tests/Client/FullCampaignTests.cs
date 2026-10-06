@@ -18,8 +18,8 @@ public class FullCampaignTests
 {
     private const ulong Seed = 644;
     private const string Difficulty = "recruit";
-    /// <summary>The camp variant: 20 lost the field once the Mill's fort went south (issue 1210); 30 keeps its side map and its spent purse.</summary>
-    private const int Variant = 30;
+    /// <summary>The camp variant: 20 lost the field once the Mill's fort went south (issue 1210), 30 map 6 once the planner left a corked captain its no-counter tile (issue 1206); 44 keeps its side map and its spent purse.</summary>
+    private const int Variant = 44;
 
     /// <summary>The side map the script takes (issue 1166): at levy floor three only a quest-off variant wins seed 644, so it names one.</summary>
     private const string Quest = "pell_1";
@@ -87,7 +87,7 @@ public class FullCampaignTests
         var order = client.IndexOf("Alder Fenn calls fall back", StringComparison.Ordinal);
         var without = client[..order] + client[(client.IndexOf('\n', order) + 1)..];
 
-        Assert.StartsWith("event log differs at line 1435", Parity.FirstDifference(console, without));
+        Assert.StartsWith("event log differs at line 1340", Parity.FirstDifference(console, without));
     }
 
     [Fact]
