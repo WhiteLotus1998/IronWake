@@ -3519,3 +3519,18 @@ Notes:
 - **Verdict:** 6/7/5, the lowest axis still surprise 5. A rework candidate on the arrivals, not on the ground; #1234 holds the levers.
 
 — Code
+
+## 2026-10-06 — Saltmarsh Ford, a fresh seed, the weakest untuned map under 0278, warm — Code
+Seed: 1560 (`play content/maps/saltmarsh_ford.map --seed 1560 --strict --script docs/transcripts/2026-10-06-saltmarsh_ford-1560.script`; transcript beside it; main at dfbdd9e). The shipped file: the north cut (0093), `brace: on` (0091), the pair at 0,9 and 1,9 (0090).   Result: **won on turn 10 of 18**, rout, no Recall, nobody fell.
+Warm: I built the cut and played 523 and 547 here, and I read 571 before this play. Picked under 0278: after the Burned Shrine, a tie at 7/7/5 with Sallow and the raid; this one first, its last play the oldest and its gate 4 the only failing one.
+Tension: 6/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 5, the bait. Wren stood on 10,1 beside the braced leader and Teodor on 10,2 at range 2, both on tiles they had not started on. `threat` priced the Steel Axe on Wren (17 at 63) and the Toll Axe on Teodor (11 at 58, no counter); he took the throw at Teodor and missed. That one swing stripped his brace, and turn 6 was the assault: Wren 6, Teodor 8 from 11,0, Ottilie 4 from 10,2, then the captain's Full Measure from 9,0 at 98 for 15 on a leader at 8.
+Notes:
+- **Turns 2 to 4 were the fort, single file.** Teodor's stop on 10,5 woke it; the wingrider came over and ate his counter (13), Ottilie crit it at 77 from 10,6. Then the archer stood on the ford with the soldier behind it, and `threat` read "no enemy can strike him" on 10,4: the one-tile crossing corks the fort group from inside as well as out. The captain took the archer (crit), Ottilie and the captain the soldier.
+- **Full Measure lifts 571's range-bait ceiling.** Chat's 571 found range bait capped the assault at 25 against his 26. That play predates 0125. With Full Measure the same four reached 33, so the bait and the kill were turns 5 and 6, and the call (Wren's step to 10,1) came the turn before the kill. The pair arrived on 0,9 and 1,9 with the leader one phase from dead.
+- **My error, turn 6:** Ottilie on 10,2 drew the Toll Axe's counter for 13, and she went to 4. The forecast printed it; I ordered her strike before I read it. Not the map's fault.
+- **The pair are 571's chore again, after the puzzle instead of before it.** Three enemy phases to the ford mouth (2,7 and 3,7, then 5,6 and 6,6, then 7,4 and 8,4). Teodor held 10,2 braced, so only 10,3 could reach anyone; the brigand took it, missed at 36, and died to his counter and his next strike. With 10,3 taken, the soldier walked west to 5,4 for the other ford, then back to 9,4 once it was free. That is two phases of walking, the same shape as the grove on the Shrine (#1234). Across the whole map the pair dealt 8 damage, all of it to Teodor.
+- **Not tense:** turns 7 to 10. The moment I stopped caring: enemy phase 8, the soldier turning west.
+- **Verdict:** 6/6/5. Nothing filed. The boss half is still the map's best puzzle, and it closes in two turns once the captain carries Full Measure. The pair still come late, which 571 named; its lever (the spawn one step closer, #524) failed gate 1's floor (0095). Rework candidate for the Table, no lever proposed: the open question is whether the pair should arrive before the kill cycle closes, and gate 1 is the cost of that.
+
+— Code

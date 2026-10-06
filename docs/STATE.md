@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-06 (Burned Shrine 1550, 0278, #1234; Table #1218, 414). Under 20 KB (#401); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-06 (Saltmarsh 1560, 0278; Table #1218, 414). Under 20 KB (#401); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
@@ -54,7 +54,7 @@ No forks are open. The chain heartbeat stays (#406). 0260, #1120: `confirm-letha
 | harrow_weir | **tuned** (0088, 0100). The crest file (#471 over #456), `turn_limit: 15` (0100). Guard Foreman with the Toll Axe under the boss veto, goes home when refused (0080), `wake_links: ford>weir`. Gate 1 68 percent (136/200, 0264), gate 4 ok at 0.215. Fun Gate: Code 481 7/8/7 (warm), Chat 487 7/8/7; the Critic 617 7/6/6. Code 1360 warm 7/7/8; Code 1410 warm 5/7/6, 1450 6/7/5 (the ford): the Foreman frozen from either bank (#1087). |
 | the_field | **tuned on Keziah's pick** (0233); **Rook's pick tuned on hand plays, gate 1 short** (0246, 0250; tripwire: the owed cold chair). Map 9 (0190, 0191), level 4. Defeat Boss, limit 20; `route_drift` turn 5 (0226). Gate 1 69 percent (138/200, 0264), gate 4 ok; route claims come from hand plays (0248). Keziah: Chat cold 4071 7/7/7, Code warm 936 7/7/7, 1350 8/7/7, 1400 8/7/6, 1460 7/8/6. Rook (`seen_far: rook 2`, 0240; Sim 92/200 under 0264; the turn-3 south wake 89, not shipped, 0249): Chat 5150 7/7/7, Code warm 1340 8/7/7, 1390 7/7/6, 1440 7/7/6. |
 | old_mill_road | A fixture, out of the campaign (0124); gate 1 57/200 (0248). |
-| saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 25 percent (50/200), gate 4 fails at 0.075 (#971). On the cut: Code 547 7/7/6, Chat cold 571 7/7/5. The spawn lever (#524) failed gate 1's floor (0095). |
+| saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 50/200, gate 4 fails at 0.075 (#971). On the cut: Code 547 7/7/6, Chat cold 571 7/7/5; Code 1560 warm 6/6/5, the pair late. The spawn lever #524 failed (0095). |
 | sallow_grange | Not tuned. Seize, the Reeve a guard boss at 15,6 (0055), hexer at 13,7 (#275). `keziah_warning: on` (0214). Gate 1 81 percent (161/200), gate 4 ok at 0.330 (#971). Last: Chat 7/7/6 (44), Code 6/6/5 (61), Code 871 7/7/5. |
 | ironwake_raid | Not tuned (round 158). Campaign map 5 (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat cold 301 7/7/5; never tuned for surprise. |
 | ironwake_keep | Not tuned. The finale (0265, #1149): defeat boss, limit 12, fronts north/gate/south, the raid's wall broken. `--finale` L8 floor 0 (data). Code 1149 warm 9/7/7, abandoned t6; Chat 2210 cold 7/8/6, won t11. Levers 1 to 3 (0284 to 0287): 87/71, 87/70, 84/58. Chat's depleted pair 2410: sample 6/7/6 t11, keep 7/6/5 t12; the reach shipped (0293; Sim 84/58). Next: a fresh keep chair (is the bait a choice?). |
