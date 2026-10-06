@@ -52,7 +52,7 @@ Maud goes with Ottilie. This map is lost if Maud falls; who falls here is gone f
   turn 3, enemy phase: an archer arrives at 6,8 (aggressive). A unit standing on 6,8 stops it.
   turn 4, enemy phase: a soldier arrives at 7,8 (aggressive). A unit standing on 7,8 stops it.
   turn 5, enemy phase: a brigand arrives at 13,8 (aggressive). A unit standing on 13,8 stops it.
-Objective: Get Maud to the gate alive by the end of turn 10.
+Objective: Get Maud to the altar alive by the end of turn 10.
 The First Shrine  turn 1 of 10  player phase  seize  recall 2
    01234567890123
  0 ^^M###.T.###M^

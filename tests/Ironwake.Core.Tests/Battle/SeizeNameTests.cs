@@ -3,6 +3,7 @@ using Ironwake.Client;
 using Ironwake.Content;
 using Ironwake.Content.Protocol;
 using Ironwake.Core.Tests.Content;
+using Ironwake.Core.Tests.Maps;
 using static Ironwake.Core.Tests.Battle.BattleFixture;
 
 namespace Ironwake.Core.Tests.Battle;
@@ -14,10 +15,10 @@ namespace Ironwake.Core.Tests.Battle;
 /// </summary>
 public class SeizeNameTests
 {
-    private static string Hall(string win) => $"""
+    private static string Hall(string win, string? header = null) => $"""
         name: Hall
         size: 16x3
-        win: {win}
+        win: {win}{(header is null ? "" : "\n" + header)}
         turn_limit: 10
         recall: 3
         enemy_level: 1
@@ -107,5 +108,75 @@ public class SeizeNameTests
         {
             Assert.DoesNotContain("throne", line, StringComparison.Ordinal);
         }
+    }
+
+    /// <summary>
+    /// Issue 1208: a map's <c>seize_name:</c> names its throne tile in every line the content's
+    /// name would print, the tile's own terrain name included; the map file writes it back.
+    /// </summary>
+    [Fact]
+    public void ASeizeMapWithASeizeNameHeaderPrintsItsNameInTheObjectiveTheLossAndTheTile()
+    {
+        var client = new ClientSession(Starter, Start(map: Hall("seize", "seize_name: altar")));
+        var map = client.State.Map;
+        var throne = new Coord(12, 1);
+
+        Assert.Equal("altar", map.SeizeName);
+        Assert.Equal("altar", Objective.SeizeName(map, Starter));
+        Assert.Equal("Get the captain to the altar by the end of turn 10. Captain hale must survive.", client.Objective);
+        Assert.Contains("on the altar at 12,1", Assert.Single(Objective.Rules(client.State, Starter)), StringComparison.Ordinal);
+        Assert.Equal("Altar", map.TerrainAt(throne, Starter).Name);
+        Assert.StartsWith("Altar.", TerrainCard.Text(client.State, Starter, MapDefinition.ThroneTerrainId), StringComparison.Ordinal);
+        Assert.Equal("Gate", Starter.TerrainById(MapDefinition.ThroneTerrainId).Name);
+        using (var json = JsonDocument.Parse(ProtocolJson.State(client.State, Starter)))
+        {
+            Assert.Equal("altar", json.RootElement.GetProperty("seizeName").GetString());
+        }
+
+        Assert.Contains("seize_name: altar\n", MapFormat.Write(map, Starter), StringComparison.Ordinal);
+
+        for (var turn = 0; turn < 12 && !client.State.Outcome.IsOver; turn++)
+        {
+            client.Submit(new EndPhase());
+            client.Continue();
+        }
+
+        Assert.Contains("on the altar at 12,1", client.Verdict!, StringComparison.Ordinal);
+        Assert.EndsWith("short of the altar.", client.Ending!.Line, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void ASeizeMapWithoutTheHeaderStillCallsTheTileAGate()
+    {
+        var state = Start(map: Hall("seize"));
+
+        Assert.Null(state.Map.SeizeName);
+        Assert.Equal("gate", Objective.SeizeName(state.Map, Starter));
+        Assert.Equal("Gate", state.Map.TerrainAt(new Coord(12, 1), Starter).Name);
+        Assert.DoesNotContain("seize_name", MapFormat.Write(state.Map, Starter), StringComparison.Ordinal);
+    }
+
+    [Theory]
+    [InlineData("seize", "seize_name: Altar", "must be lowercase words")]
+    [InlineData("seize", "seize_name: old  altar", "must be lowercase words")]
+    [InlineData("seize", "seize_name: altar2", "must be lowercase words")]
+    [InlineData("rout", "seize_name: altar", "seize_name: needs win: seize")]
+    public void ABadSeizeNameHeaderIsRefusedNamingTheFileAndLine(string win, string header, string problem)
+    {
+        var ex = Assert.Throws<MapException>(() => MapFixture.Parse(Hall(win, header), "hall.map"));
+
+        Assert.StartsWith("hall.map, line 4: ", ex.Message, StringComparison.Ordinal);
+        Assert.Contains(problem, ex.Message, StringComparison.Ordinal);
+    }
+
+    /// <summary>The First Shrine is the one map that names its tile (issue 1208): Maud goes to the altar.</summary>
+    [Fact]
+    public void TheFirstShrinesSeizeTileIsTheAltar()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var map = MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), "quests", "the_first_shrine.map"), content);
+
+        Assert.Equal("altar", map.SeizeName);
+        Assert.Equal("altar", Objective.SeizeName(map, content));
     }
 }

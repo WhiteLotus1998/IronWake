@@ -676,7 +676,7 @@ public class SideMapTests
     }
 
     [Theory]
-    [InlineData("the_first_shrine", "Get Maud to the gate alive by the end of turn 10.")]
+    [InlineData("the_first_shrine", "Get Maud to the altar alive by the end of turn 10.")]
     [InlineData("the_burned_school", "Get Maud out through an exit alive by the end of turn 7.")]
     public void OnAMemberLedSeizeOrEscapeMapTheObjectiveNamesTheMemberNotTheCaptain(string map, string line)
     {
@@ -691,7 +691,7 @@ public class SideMapTests
         var shrine = Side("the_first_shrine") with { ProtectId = "teodor" };
         var battle = At("the_tollgate").BeginQuest(shrine, "maud_1", "teodor", Content);
 
-        Assert.Equal("Get Maud to the gate alive by the end of turn 10. Teodor must survive.", Objective.Line(battle, Content));
+        Assert.Equal("Get Maud to the altar alive by the end of turn 10. Teodor must survive.", Objective.Line(battle, Content));
     }
 
     [Fact]

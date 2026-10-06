@@ -15,7 +15,7 @@ public static class Objective
     /// tile is and the rule clauses that hang off the objective are <see cref="Rules"/>, printed
     /// by <c>help</c>, never in the headline. On a map a cast member leads (issue 1197), the
     /// Seize and Escape clauses name the member, who must arrive alive, so the survivor clause
-    /// does not name the member a second time: <c>Get Maud to the gate alive by the end of turn
+    /// does not name the member a second time: <c>Get Maud to the altar alive by the end of turn
     /// 10.</c>
     /// </summary>
     public static string Line(BattleState state, GameContent content)
@@ -28,7 +28,7 @@ public static class Objective
         var alive = member ? " alive" : "";
         var win = map.Win switch
         {
-            WinCondition.Seize => $"Get {who} to the {SeizeName(content)}{alive} {by}.",
+            WinCondition.Seize => $"Get {who} to the {SeizeName(map, content)}{alive} {by}.",
             WinCondition.Rout => $"Defeat every enemy {by}.",
             WinCondition.DefeatBoss => Arrival(map) is { } arrival ? $"Hold until the boss arrives on turn {arrival.Turn}, then defeat the boss {by}." : $"Defeat the boss {by}.",
             WinCondition.Survive => $"Hold out until the end of turn {map.TurnLimit}.",
@@ -58,7 +58,7 @@ public static class Objective
         var captain = Captain(state, content);
         var rules = map.Win switch
         {
-            WinCondition.Seize => new[] { $"The captain, {captain}, must stand on the {SeizeName(content)} at {Thrones(map)}. Only the captain seizes." },
+            WinCondition.Seize => new[] { $"The captain, {captain}, must stand on the {SeizeName(map, content)} at {Thrones(map)}. Only the captain seizes." },
             WinCondition.Escape => new[] { $"The captain, {captain}, must exit from an exit tile ({MapRenderer.ExitGlyph}).{(map.ExitAfterMove ? "" : " A unit that starts its turn on an exit may leave.")} Anyone still on the board is left behind." },
             WinCondition.DefeatBoss when map.BossSpawns().Any() => new[]
             {
@@ -118,8 +118,8 @@ public static class Objective
         var missed = map.Win switch
         {
             WinCondition.Seize => state.Units.FirstOrDefault(u => u.IsCaptain) is { } captain
-                ? $"the captain ended at {captain.At}, not on the {SeizeName(content)} at {Thrones(map)}"
-                : $"the captain never stood on the {SeizeName(content)} at {Thrones(map)}",
+                ? $"the captain ended at {captain.At}, not on the {SeizeName(map, content)} at {Thrones(map)}"
+                : $"the captain never stood on the {SeizeName(map, content)} at {Thrones(map)}",
             WinCondition.Rout => state.UnitsOf(Side.Enemy).Count() is var left && left == 1 ? "1 enemy still stands" : $"{left} enemies still stand",
             WinCondition.DefeatBoss => map.BossSpawns().Any() ? "the boss got away" : "the boss still stands",
             WinCondition.Escape => "the captain never exited",
@@ -150,12 +150,12 @@ public static class Objective
         };
         if (mover is not null && after.Find(mover) is { Side: Side.Player, IsCaptain: false } unit && map.IsThrone(unit.At))
         {
-            lines.Add(UnitNames.Sentence($"{UnitNames.Of(after, content)[unit.Id]} stands on the {SeizeName(content)}, but only the captain, {Captain(after, content, letters: false)}, seizes."));
+            lines.Add(UnitNames.Sentence($"{UnitNames.Of(after, content)[unit.Id]} stands on the {SeizeName(map, content)}, but only the captain, {Captain(after, content, letters: false)}, seizes."));
         }
 
         if (before.UnitsOf(Side.Enemy).Any() && !after.UnitsOf(Side.Enemy).Any())
         {
-            lines.Add($"No enemy is left, but the map is not won: the captain, {Captain(after, content, letters: false)}, must still stand on the {SeizeName(content)} at {Thrones(map)} by the end of turn {map.TurnLimit} (now turn {after.Turn}).");
+            lines.Add($"No enemy is left, but the map is not won: the captain, {Captain(after, content, letters: false)}, must still stand on the {SeizeName(map, content)} at {Thrones(map)} by the end of turn {map.TurnLimit} (now turn {after.Turn}).");
         }
 
         return lines;
@@ -171,6 +171,12 @@ public static class Objective
         content.Terrain.TryGetValue(MapDefinition.ThroneTerrainId, out var throne)
             ? throne.Name.ToLowerInvariant()
             : MapDefinition.ThroneTerrainId;
+
+    /// <summary>
+    /// The seize tile as this map names it (issue 1208): the map's <c>seize_name:</c> when it has
+    /// one, otherwise the content's name (<see cref="SeizeName(GameContent)"/>).
+    /// </summary>
+    public static string SeizeName(MapDefinition map, GameContent content) => map.SeizeName ?? SeizeName(content);
 
     /// <summary>The turn trigger of the map's first boss spawn (issue 692), or null on a map whose boss is placed.</summary>
     private static TurnTrigger? Arrival(MapDefinition map) => map.BossSpawns().Select(e => e.Trigger).OfType<TurnTrigger>().FirstOrDefault();

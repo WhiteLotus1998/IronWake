@@ -1152,7 +1152,7 @@ public partial class Main : Node2D
         _legendTerrain.Clear();
         foreach (var id in TerrainCard.OnBoard(map))
         {
-            var name = _client!.Content.TerrainById(id).Name;
+            var name = map.Terrain(id, _client!.Content).Name;
             if (x + 22 + UiWidth(name, 12) > right)
             {
                 x = Board.X;
