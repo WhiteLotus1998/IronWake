@@ -71,7 +71,7 @@ public class FinaleRunTests
     [Fact]
     public void TheSimsUsageNamesTheFinale()
     {
-        Assert.Contains("--finale <map|file> [--seeds N] [--level N] [--scheme one|two] |", Program.Usage);
+        Assert.Contains("--finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] |", Program.Usage);
     }
 
     [Fact]
@@ -117,5 +117,37 @@ public class FinaleRunTests
         Assert.Equal(12, FinaleRun.Measure(Content, map, FinaleRun.Company.Full, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
         Assert.Equal(12, FinaleRun.Measure(Content, map, FinaleRun.Company.Depleted, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
         Assert.Equal(1 + FinaleRun.FloorStory + Content.Campaign.Keep.Hires.Count, FinaleRun.Measure(Content, map, FinaleRun.Company.Floor, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
+    }
+
+    /// <summary>Issue 1149: the fielded content's cast is the company, so a gate that fields the cast fields it at the level.</summary>
+    [Fact]
+    public void TheFieldedContentsCastIsTheCompany()
+    {
+        Assert.Equal(FinaleRun.Roster(Content, FinaleRun.Company.Depleted, 8), FinaleRun.Fielded(Content, FinaleRun.Company.Depleted, 8).Cast);
+    }
+}
+
+/// <summary>The finale's console lines (issue 1149), read through the console, so in its collection.</summary>
+[Collection("console")]
+public class FinaleRunConsoleTests
+{
+    /// <summary>
+    /// Issue 1149: <c>--gates</c> adds gate 2 and gate 4 under the full company, and only there;
+    /// without it neither line prints.
+    /// </summary>
+    [Fact]
+    public void TheGatesFlagAddsGatesTwoAndFourToTheFullCompany()
+    {
+        var with = ConsoleCapture.Run(() => Ironwake.Sim.Program.Main(new[] { "--finale", "ironwake_keep", "--seeds", "1", "--gates" }));
+        var without = ConsoleCapture.Run(() => Ironwake.Sim.Program.Main(new[] { "--finale", "ironwake_keep", "--seeds", "1" }));
+
+        var full = with.IndexOf("finale full:", StringComparison.Ordinal);
+        var depleted = with.IndexOf("finale depleted:", StringComparison.Ordinal);
+        var two = with.IndexOf("  gate 2 decisions matter: ironwake_keep, random wins ", StringComparison.Ordinal);
+        var four = with.IndexOf("  gate 4 no dead weight: ironwake_keep, 11 recruits x 1 seeds", StringComparison.Ordinal);
+        Assert.True(full < two && two < four && four < depleted, with);
+        Assert.Equal(1, with.Split("gate 2 ").Length - 1);
+        Assert.DoesNotContain("gate 2 ", without);
+        Assert.DoesNotContain("gate 4 ", without);
     }
 }

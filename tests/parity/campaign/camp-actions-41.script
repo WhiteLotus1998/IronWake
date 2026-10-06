@@ -10,7 +10,7 @@ repair wren 1
 take wren 2
 drop wren 3
 certify captain vanguard
-build wall 10,3
+build wall 10,2
 quest maud_1 wren
 end
 end

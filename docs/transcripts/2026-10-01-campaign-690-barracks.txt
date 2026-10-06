@@ -1326,11 +1326,11 @@ Rooms: beds: 11/12; a fallen member keeps their bed
   Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Keep: Ironwake Keep; built: nothing; the purse holds 1500
   wall: Rebuild a wall, 400
-    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
-    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+    Wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
+    Wall 10,9: Wall; no unit can stand on it; the gap 10,9 to 10,10 narrows from 2 tiles to 1 (10,10)
   ditch: Dig a ditch, 300
-    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
-    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,4: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,7: Water; infantry, cavalry and armored units cannot stand on it; flying can
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
   ottilie_1: Ottilie's quest 1, The Counting House (quest ottilie_1 <ally>); permadeath applies
@@ -1348,11 +1348,11 @@ Rooms: beds: 11/12; a fallen member keeps their bed
   Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Keep: Ironwake Keep; built: nothing; the purse holds 1500
   wall: Rebuild a wall, 400
-    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
-    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+    Wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
+    Wall 10,9: Wall; no unit can stand on it; the gap 10,9 to 10,10 narrows from 2 tiles to 1 (10,10)
   ditch: Dig a ditch, 300
-    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
-    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,4: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,7: Water; infantry, cavalry and armored units cannot stand on it; flying can
 > build barracks
 Barracks built for 500, the purse holds 1000; beds: 11/14; hire <id> takes Corin Ashby, Bet Lowry, Ines Tarrow, Mattias Grue for 300 each
 > hire
@@ -1369,8 +1369,8 @@ Hires: 300 each, joining at L1, the company's average less 2; hire <id>
 Bet Lowry joins as a Pikeman at L1 for 300, the purse holds 700; beds: 12/14
 > hire tamsin
 ERROR: Tamsin Hale is hired once the Barracks wing is built
-> build wall 10,3
-Built for 400, the purse holds 300: wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+> build wall 10,2
+Built for 400, the purse holds 300: wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
 > hire ines
 Ines Tarrow joins as a Bowman at L1 for 300, the purse holds 0; beds: 13/14
 > hire corin
@@ -1424,13 +1424,13 @@ Hires: 300 each, joining at L1, the company's average less 2; hire <id>
     Took the bounty because the harvest failed. Says so.
   mattias: Mattias Grue (he), Adept L1, Cinder; hp 16 str 1 mag 8 dex 5 spd 5 lck 3 def 2 res 5 cha 3; growths hp 25 str 5 mag 50 dex 25 spd 25 lck 15 def 5 res 25 cha 15
     Failed out of a shrine school. Kept the books.
-Keep: Ironwake Keep; built: wall 10,3; the purse holds 0
+Keep: Ironwake Keep; built: wall 10,2; the purse holds 0
   wall: Rebuild a wall, 400
-    wall 10,3: built
-    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+    wall 10,2: built
+    Wall 10,9: Wall; no unit can stand on it; the gap 10,9 to 10,10 narrows from 2 tiles to 1 (10,10)
   ditch: Dig a ditch, 300
-    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
-    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,4: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,7: Water; infantry, cavalry and armored units cannot stand on it; flying can
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
   ottilie_1: Ottilie's quest 1, The Counting House (quest ottilie_1 <ally>); permadeath applies

@@ -22,11 +22,11 @@ Rooms: beds: 9/12; a fallen member keeps their bed
   Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Keep: Ironwake Keep; built: nothing; the purse holds 500
   wall: Rebuild a wall, 400
-    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
-    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+    Wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
+    Wall 10,9: Wall; no unit can stand on it; the gap 10,9 to 10,10 narrows from 2 tiles to 1 (10,10)
   ditch: Dig a ditch, 300
-    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
-    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,4: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,7: Water; infantry, cavalry and armored units cannot stand on it; flying can
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
   rook_1: Rook's quest 1, The Chapter Roll (quest rook_1 <ally>); permadeath applies

@@ -104,7 +104,7 @@ public static class Program
 
             if (scheme is { } finale)
             {
-                return Finale(args[1], seeds, level, finale);
+                return Finale(args[1], seeds, level, finale, args.Skip(2).Contains("--gates"));
             }
         }
 
@@ -290,17 +290,19 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
     /// <summary>
     /// The keep finale's measurement (issue 692, <see cref="FinaleRun"/>): a <c>deploy: all</c> map,
     /// a campaign map, the keep, or a file, played with the full, depleted and floor companies at
-    /// <paramref name="level"/>, each with its gate 1, length and time lines. Exits non-zero when
-    /// full or depleted fails gate 1, or any company is slow or long.
+    /// <paramref name="level"/>, each with its gate 1, length and time lines. With
+    /// <paramref name="gates"/> (issue 1149), the full company also takes gate 2 (random) and gate 4
+    /// (dead weight) at that level, against its own heuristic games. Exits non-zero when full or
+    /// depleted fails gate 1, any company is slow or long, or a gate asked for fails.
     /// </summary>
-    public static int Finale(string mapId, int seeds, int level, RollScheme scheme)
+    public static int Finale(string mapId, int seeds, int level, RollScheme scheme, bool gates = false)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -344,6 +346,15 @@ public static class Program
             }
 
             failed |= !reading.Passed;
+            if (gates && company == FinaleRun.Company.Full)
+            {
+                var fielded = FinaleRun.Fielded(content, company, level);
+                foreach (var gate in new[] { Gates.Gate2(fielded, map, mapId, seeds, scheme), Gates.Gate4(fielded, map, mapId, reading.Games, scheme) })
+                {
+                    Console.WriteLine("  " + gate.Line.Replace("\n", "\n  "));
+                    failed |= !gate.Passed;
+                }
+            }
         }
 
         Console.WriteLine(failed ? "finale: FAILED" : "finale: ok");

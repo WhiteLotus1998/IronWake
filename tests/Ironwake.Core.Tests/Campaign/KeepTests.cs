@@ -7,7 +7,8 @@ namespace Ironwake.Core.Tests.Campaign;
 /// <summary>
 /// Issue 82's experiment, the keep you build (DESIGN section 13.5): a fixed menu of terrain edits,
 /// each with a price and a placement set in <c>campaign.json</c>, applied to the keep's map under
-/// <c>content/keep</c>. An edited keep is an ordinary map, and no edit on the menu can close a breach.
+/// <c>content/keep</c>. An edited keep is an ordinary map, and no edit on the menu can close a front (issue 1149: the
+/// keep is the finale, so its breaches are the map's <c>fronts:</c>).
 /// </summary>
 public class KeepTests
 {
@@ -32,9 +33,9 @@ public class KeepTests
     [Fact]
     public void AnEditChangesOneTilesTerrainAndNothingElse()
     {
-        var edited = Keep.Apply(Base, Edit("wall"), new Coord(10, 3));
+        var edited = Keep.Apply(Base, Edit("wall"), new Coord(10, 2));
 
-        Assert.Equal("wall", edited.TerrainIdAt(new Coord(10, 3)));
+        Assert.Equal("wall", edited.TerrainIdAt(new Coord(10, 2)));
         Assert.Equal(Base with { TerrainIds = edited.TerrainIds }, edited);
         Assert.Equal(1, Base.TerrainIds.Zip(edited.TerrainIds).Count(p => p.First != p.Second));
     }
@@ -42,15 +43,15 @@ public class KeepTests
     [Fact]
     public void AnEditOffItsPlacementSetOnItsOwnTerrainOrOnAUnitIsRefused()
     {
-        var walled = Keep.Apply(Base, Edit("wall"), new Coord(10, 3));
+        var walled = Keep.Apply(Base, Edit("wall"), new Coord(10, 2));
         var onUnit = Edit("ditch") with { At = ValueList<Coord>.Of(new Coord(13, 5)) };
 
-        Assert.Equal("Rebuild a wall goes only on 10,3 10,8, not 10,4", Keep.Refusal(Base, Edit("wall"), new Coord(10, 4)));
-        Assert.Equal("10,3 is already wall", Keep.Refusal(walled, Edit("wall"), new Coord(10, 3)));
+        Assert.Equal("Rebuild a wall goes only on 10,2 10,9, not 10,1", Keep.Refusal(Base, Edit("wall"), new Coord(10, 1)));
+        Assert.Equal("10,2 is already wall", Keep.Refusal(walled, Edit("wall"), new Coord(10, 2)));
         Assert.Equal("13,5 holds a unit at the start", Keep.Refusal(Base, onUnit, new Coord(13, 5)));
-        Assert.Null(Keep.Refusal(Base, Edit("wall"), new Coord(10, 8)));
-        var e = Assert.Throws<InvalidOperationException>(() => Keep.Apply(Base, Edit("wall"), new Coord(10, 4)));
-        Assert.StartsWith("wall at 10,4: ", e.Message);
+        Assert.Null(Keep.Refusal(Base, Edit("wall"), new Coord(10, 9)));
+        var e = Assert.Throws<InvalidOperationException>(() => Keep.Apply(Base, Edit("wall"), new Coord(10, 1)));
+        Assert.StartsWith("wall at 10,1: ", e.Message);
     }
 
     [Fact]
@@ -65,58 +66,60 @@ public class KeepTests
         Assert.Equal(text, MapFormat.Write(parsed, Content));
     }
 
+    /// <summary>
+    /// Issue 1149: with every edit on the menu made at once, each of the finale's three fronts still
+    /// has a tile a foot unit can walk to from the west edge and on into the keep, so the purse
+    /// narrows a front and never shuts one.
+    /// </summary>
     [Fact]
-    public void EveryEditOnTheMenuAtOnceLeavesBothBreachesOpenToFoot()
+    public void EveryEditOnTheMenuAtOnceLeavesEveryFrontOpenToFoot()
     {
         var edited = Menu.Edits.SelectMany(e => e.At.Select(at => (e, at))).Aggregate(Base, (map, x) => Keep.Apply(map, x.e, x.at));
 
-        foreach (var breach in new[] { new[] { new Coord(10, 3), new Coord(10, 4) }, new[] { new Coord(10, 7), new Coord(10, 8) } })
+        Assert.Equal(new[] { "north", "gate", "south" }, Base.Fronts.Select(f => f.Name));
+        foreach (var front in edited.Fronts)
         {
-            var open = breach.Where(at => edited.TerrainAt(at, Content).IsPassable(MovementType.Infantry)).ToList();
+            var open = front.Tiles.Where(at => edited.TerrainAt(at, Content).IsPassable(MovementType.Infantry)).ToList();
             Assert.NotEmpty(open);
             Assert.Contains(open, at => FootReaches(edited, new Coord(0, at.Y), at) && FootReaches(edited, at, new Coord(13, 5)));
         }
     }
 
     /// <summary>
-    /// Issue 287: the waves run to the clock. Every wave arrives on an enemy phase, there are
-    /// waves on enemy phases 5 and 6, and the last is the heaviest, so the keep peaks on its
-    /// final enemy phases instead of ending with a free turn.
+    /// Issue 1149: every edit on the menu stands on a front's tile or within two tiles outside one,
+    /// so what the purse buys hardens a front and nothing else.
     /// </summary>
     [Fact]
-    public void TheWavesRunThroughEnemyPhasesFiveAndSixWithTheHeaviestLast()
+    public void EveryEditOnTheMenuSitsOnAFront()
     {
-        var turns = Base.Events.Select(e => Assert.IsType<TurnTrigger>(e.Trigger)).ToList();
-        Assert.All(turns, t => Assert.Equal(Side.Enemy, t.Phase));
-        Assert.All(Base.Events, e => Assert.IsType<SpawnEnemy>(e.Action));
+        var fronts = Base.Fronts.SelectMany(f => f.Tiles).ToList();
 
-        var sizes = turns.GroupBy(t => t.Turn).ToDictionary(g => g.Key, g => g.Count());
-        Assert.Contains(5, sizes.Keys);
-        Assert.Equal(6, sizes.Keys.Max());
-        Assert.All(sizes.Where(kv => kv.Key != 6), kv => Assert.True(kv.Value < sizes[6], $"the wave on enemy phase {kv.Key} is as heavy as the last"));
-        Assert.True(sizes[6] > Base.Placements.OfType<EnemyPlacement>().Count() / 2, "the last wave is lighter than half the van");
+        Assert.All(Menu.Edits.SelectMany(e => e.At), at => Assert.Contains(fronts, f => at.X <= f.X && f.DistanceTo(at) <= 2));
     }
 
     /// <summary>
-    /// Issue 287: the first wave reaches the breaches on the first enemy phase, so the opening is
-    /// not a free turn. Each breach has a van member whose foot path to one of its tiles fits in
-    /// that member's movement, over the bare keep and with every edit on the menu made.
+    /// Issue 1149: the campaign keep seats the finale whole. Its objective, clock, enemies, events,
+    /// sworn groups, pair rule, hunter and bond are the measured finale sample's
+    /// (<c>docs/samples/ironwake_keep_finale.map</c>), and its fronts are the sample's by name with
+    /// every sample front tile kept; only the north and south breaches are a tile wider, so a
+    /// rebuilt wall narrows them instead of shutting them, and the clock runs one turn longer
+    /// (the lever 0151 named, which carries the depleted company over gate 1).
     /// </summary>
     [Fact]
-    public void TheVanReachesBothBreachesOnTheFirstEnemyPhase()
+    public void TheCampaignKeepSeatsTheFinaleWhole()
     {
-        var edited = Menu.Edits.SelectMany(e => e.At.Select(at => (e, at))).Aggregate(Base, (map, x) => Keep.Apply(map, x.e, x.at));
-        var van = Base.Placements.OfType<EnemyPlacement>().Where(e => e.Group == "van").ToList();
-        Assert.NotEmpty(van);
+        var sample = MapFiles.Load(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples", "ironwake_keep_finale.map"), Content);
 
-        foreach (var map in new[] { Base, edited })
-        {
-            foreach (var breach in new[] { new[] { new Coord(10, 3), new Coord(10, 4) }, new[] { new Coord(10, 7), new Coord(10, 8) } })
-            {
-                var open = breach.Where(at => map.TerrainAt(at, Content).IsPassable(MovementType.Infantry)).ToList();
-                Assert.Contains(van, e => open.Any(at => FootSteps(map, e.At, at) <= Mov(e)));
-            }
-        }
+        Assert.Equal(WinCondition.DefeatBoss, Base.Win);
+        Assert.Equal((sample.Win, sample.TurnLimit + 1), (Base.Win, Base.TurnLimit));
+        Assert.Equal(sample.Events, Base.Events);
+        Assert.Equal(sample.Placements.OfType<EnemyPlacement>(), Base.Placements.OfType<EnemyPlacement>());
+        Assert.Equal(sample.Oathbound, Base.Oathbound);
+        Assert.Equal(sample.PairRuleGroups, Base.PairRuleGroups);
+        Assert.Equal(sample.Hunter, Base.Hunter);
+        Assert.Equal(sample.Fronts.Select(f => f.Name), Base.Fronts.Select(f => f.Name));
+        Assert.All(sample.Fronts.Zip(Base.Fronts), p => Assert.Subset(p.Second.Tiles.ToHashSet(), p.First.Tiles.ToHashSet()));
+        Assert.Equal(12, Base.Placements.OfType<PlayerPlacement>().Count());
     }
 
     [Fact]
@@ -144,32 +147,6 @@ public class KeepTests
         var files = ContentSerializer.Write(Content);
 
         Assert.Equal(Content.Campaign, ContentLoader.Parse(files).Campaign);
-    }
-
-    /// <summary>An enemy template's class movement.</summary>
-    private static int Mov(EnemyPlacement e) => Content.Class(Content.Unit(e.TemplateId).ClassId).Mov;
-
-    /// <summary>The fewest steps an infantry unit takes from <paramref name="from"/> to <paramref name="to"/> over passable terrain, ignoring units and move costs above one; int.MaxValue when it cannot.</summary>
-    private static int FootSteps(MapDefinition map, Coord from, Coord to)
-    {
-        var steps = new Dictionary<Coord, int> { [from] = 0 };
-        var queue = new Queue<Coord>(new[] { from });
-        while (queue.Count > 0)
-        {
-            var at = queue.Dequeue();
-            if (at == to)
-            {
-                return steps[at];
-            }
-
-            foreach (var next in at.Neighbors().Where(n => map.Contains(n) && map.TerrainAt(n, Content).IsPassable(MovementType.Infantry) && !steps.ContainsKey(n)))
-            {
-                steps[next] = steps[at] + 1;
-                queue.Enqueue(next);
-            }
-        }
-
-        return int.MaxValue;
     }
 
     /// <summary>Whether an infantry unit could walk from <paramref name="from"/> to <paramref name="to"/> over passable terrain, ignoring units.</summary>

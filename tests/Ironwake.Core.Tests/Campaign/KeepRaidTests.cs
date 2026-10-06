@@ -57,10 +57,12 @@ public class KeepRaidTests
     }
 
     /// <summary>
-    /// The raid shows the finale's leak only if it is the finale's keep: the same grid tile for
-    /// tile, the keep's player slots as far as the raid's six go (the keep fields the whole company,
-    /// issue 1139), and every enemy it brings arriving on a tile the finale's waves
-    /// spawn on, with a smaller force than the finale's.
+    /// The raid shows the finale's leak only if it is the finale's keep: the same ground tile for
+    /// tile off the wall's column, where the raid's two breaches stand before the finale's three
+    /// (issue 1149: the finale is fought on the wall the raid broke), every raid slot one of the
+    /// keep's (the keep fields the whole company, issue 1139), every enemy it
+    /// brings arriving on the west edge the finale's waves spawn from or on a van tile of the
+    /// finale's, with a smaller force than the finale's.
     /// </summary>
     [Fact]
     public void TheRaidIsTheBareKeepWithASmallerForceFromTheFinalesOwnSpawnTiles()
@@ -70,11 +72,13 @@ public class KeepRaidTests
         static IEnumerable<Coord> Spawns(MapDefinition map) => map.Events.Select(e => e.Action).OfType<SpawnEnemy>().Select(s => s.Placement.At);
 
         Assert.Equal((keep.Width, keep.Height), (raid.Width, raid.Height));
-        Assert.Equal(keep.TerrainIds, raid.TerrainIds);
+        var wall = keep.Fronts.First().Tiles.First().X;
+        var offWall = (MapDefinition m) => m.TerrainIds.Where((_, i) => i % m.Width != wall).ToList();
+        Assert.Equal(offWall(keep), offWall(raid));
         var raidSlots = raid.Placements.OfType<PlayerPlacement>().ToList();
-        Assert.Equal(keep.Placements.OfType<PlayerPlacement>().Take(raidSlots.Count), raidSlots);
+        Assert.Subset(keep.Placements.OfType<PlayerPlacement>().Select(p => p.At).ToHashSet(), raidSlots.Select(p => p.At).ToHashSet());
         Assert.NotEmpty(Spawns(raid));
-        Assert.All(Spawns(raid), at => Assert.Contains(at, Spawns(keep)));
+        Assert.All(Spawns(raid), at => Assert.Contains(Spawns(keep), k => k.X == at.X));
         Assert.All(raid.Placements.OfType<EnemyPlacement>(), e => Assert.Contains(keep.Placements.OfType<EnemyPlacement>(), k => k.At == e.At));
         var force = (MapDefinition m) => m.Placements.OfType<EnemyPlacement>().Count() + Spawns(m).Count();
         Assert.True(force(raid) < force(keep), $"the raid brings {force(raid)} and the finale {force(keep)}");
@@ -107,7 +111,7 @@ public class KeepRaidTests
 
         Assert.Equal(closed, start.KeepMenuRefusal(Content));
         Assert.Equal(closed, atRaid.KeepMenuRefusal(Content));
-        var refused = atRaid.Build("wall", new Coord(10, 3), Bare, Content);
+        var refused = atRaid.Build("wall", new Coord(10, 2), Bare, Content);
         Assert.False(refused.Accepted);
         Assert.Equal(closed, refused.Text);
         Assert.Same(atRaid, refused.Record);
@@ -127,26 +131,26 @@ public class KeepRaidTests
     [Fact]
     public void BuildingPaysTheEditsPriceRecordsItAndTheKeepMapMakesIt()
     {
-        var result = AfterRaid(1000).Build("wall", new Coord(10, 3), Bare, Content);
+        var result = AfterRaid(1000).Build("wall", new Coord(10, 2), Bare, Content);
 
         Assert.True(result.Accepted, result.Text);
         Assert.Equal(600, result.Record.Purse);
-        Assert.Equal(ValueList<KeepWork>.Of(new KeepWork("wall", new Coord(10, 3))), result.Record.Keep);
-        Assert.Equal("built for 400, the purse holds 600: wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)", result.Text);
-        Assert.Equal(Keep.Apply(Bare, Menu.Edit("wall")!, new Coord(10, 3)), result.Record.KeepMap(Bare, Content));
+        Assert.Equal(ValueList<KeepWork>.Of(new KeepWork("wall", new Coord(10, 2))), result.Record.Keep);
+        Assert.Equal("built for 400, the purse holds 600: wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)", result.Text);
+        Assert.Equal(Keep.Apply(Bare, Menu.Edit("wall")!, new Coord(10, 2)), result.Record.KeepMap(Bare, Content));
         Assert.Equal(Bare, AfterRaid().KeepMap(Bare, Content));
     }
 
     [Fact]
     public void BuildingIsRefusedOffTheMenuOffItsPlacementsTwiceOrOnAShortPurse()
     {
-        var walled = AfterRaid(1000).Build("wall", new Coord(10, 3), Bare, Content).Record;
+        var walled = AfterRaid(1000).Build("wall", new Coord(10, 2), Bare, Content).Record;
 
         Assert.Equal("the keep's menu has no 'fort'; it sells wall, ditch", AfterRaid().Build("fort", new Coord(11, 4), Bare, Content).Text);
-        Assert.Equal("Rebuild a wall goes only on 10,3 10,8, not 10,4", AfterRaid().Build("wall", new Coord(10, 4), Bare, Content).Text);
-        Assert.Equal("10,3 is already wall", walled.Build("wall", new Coord(10, 3), Bare, Content).Text);
-        Assert.Equal("Dig a ditch costs 300 and the purse holds 200", AfterRaid(200).Build("ditch", new Coord(9, 5), Bare, Content).Text);
-        Assert.False(AfterRaid(200).Build("ditch", new Coord(9, 5), Bare, Content).Accepted);
+        Assert.Equal("Rebuild a wall goes only on 10,2 10,9, not 10,1", AfterRaid().Build("wall", new Coord(10, 1), Bare, Content).Text);
+        Assert.Equal("10,2 is already wall", walled.Build("wall", new Coord(10, 2), Bare, Content).Text);
+        Assert.Equal("Dig a ditch costs 300 and the purse holds 200", AfterRaid(200).Build("ditch", new Coord(9, 4), Bare, Content).Text);
+        Assert.False(AfterRaid(200).Build("ditch", new Coord(9, 4), Bare, Content).Accepted);
     }
 
     /// <summary>The line comes from the terrain and the placement: the shipped menu's four lines, read on the bare keep.</summary>
@@ -158,10 +162,10 @@ public class KeepRaidTests
         Assert.Equal(
             new[]
             {
-                "wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)",
-                "wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)",
-                "ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can",
-                "ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can",
+                "wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)",
+                "wall 10,9: Wall; no unit can stand on it; the gap 10,9 to 10,10 narrows from 2 tiles to 1 (10,10)",
+                "ditch 9,4: Water; infantry, cavalry and armored units cannot stand on it; flying can",
+                "ditch 9,7: Water; infantry, cavalry and armored units cannot stand on it; flying can",
             },
             lines);
     }
@@ -182,34 +186,34 @@ public class KeepRaidTests
         };
 
         Assert.Equal(
-            "ditch 9,5: Shallows; cavalry and armored units cannot stand on it; infantry and flying can; a unit on it gets evade 10",
-            Keep.Describe(Bare, Menu.Edit("ditch")!, new Coord(9, 5), shallow));
+            "ditch 9,4: Shallows; cavalry and armored units cannot stand on it; infantry and flying can; a unit on it gets evade 10",
+            Keep.Describe(Bare, Menu.Edit("ditch")!, new Coord(9, 4), shallow));
     }
 
     /// <summary>The finale is fought on the keep the record holds: its map is the content's keep with the record's edits made, written canonically.</summary>
     [Fact]
     public void TheRecordsKeepIsWrittenCanonicallyAndTheFinaleBeginsOnIt()
     {
-        var record = AfterRaid(1000).Build("wall", new Coord(10, 8), Bare, Content).Record.Build("ditch", new Coord(9, 5), Bare, Content).Record;
+        var record = AfterRaid(1000).Build("wall", new Coord(10, 9), Bare, Content).Record.Build("ditch", new Coord(9, 4), Bare, Content).Record;
         var keep = record.KeepMap(Bare, Content);
 
         var text = MapFormat.Write(keep, Content);
         Assert.Equal(keep, MapFormat.Parse("ironwake_keep.map", text, Content));
-        Assert.Equal("wall", keep.TerrainIdAt(new Coord(10, 8)));
-        Assert.Equal("water", keep.TerrainIdAt(new Coord(9, 5)));
+        Assert.Equal("wall", keep.TerrainIdAt(new Coord(10, 9)));
+        Assert.Equal("water", keep.TerrainIdAt(new Coord(9, 4)));
         var battle = (record with { MapIndex = IndexOf(Menu.MapId) }).Begin(keep, Content);
-        Assert.Equal("wall", battle.Map.TerrainIdAt(new Coord(10, 8)));
+        Assert.Equal("wall", battle.Map.TerrainIdAt(new Coord(10, 9)));
     }
 
     [Fact]
     public void ARecordWithAnEditedKeepRoundTripsThroughTheProtocol()
     {
-        var record = AfterRaid(1000).Build("wall", new Coord(10, 3), Bare, Content).Record.Build("ditch", new Coord(9, 6), Bare, Content).Record;
+        var record = AfterRaid(1000).Build("wall", new Coord(10, 2), Bare, Content).Record.Build("ditch", new Coord(9, 7), Bare, Content).Record;
 
         var json = ProtocolJson.Campaign(record);
         var back = ProtocolJson.ReadCampaign(json, Content);
 
-        Assert.Contains("\"keep\":[{\"edit\":\"wall\",\"at\":{\"x\":10,\"y\":3}},{\"edit\":\"ditch\",\"at\":{\"x\":9,\"y\":6}}]", json);
+        Assert.Contains("\"keep\":[{\"edit\":\"wall\",\"at\":{\"x\":10,\"y\":2}},{\"edit\":\"ditch\",\"at\":{\"x\":9,\"y\":7}}]", json);
         Assert.Equal(record, back);
         Assert.Equal(json, ProtocolJson.Campaign(back));
     }

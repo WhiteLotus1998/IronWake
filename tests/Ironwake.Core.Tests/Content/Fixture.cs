@@ -207,9 +207,30 @@ internal static class Fixture
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
         campaign.AsObject().Remove("quests");
         campaign.AsObject().Remove("issues");
+        WithKeep1139(target, campaign);
         File.WriteAllText(campaignPath, campaign.ToJsonString());
         WithoutScenesOffTheCampaign(target);
         return target;
+    }
+
+    /// <summary>
+    /// The keep as it stood before issue 1149 seated the finale on it, kept as
+    /// <c>docs/samples/ironwake_keep_1139.map</c> (survive, two breaches at column 10), with the menu
+    /// placed for that wall (walls at 10,3 and 10,8, ditches at 9,5 and 9,6), so a campaign journaled
+    /// on the old keep replays on it.
+    /// </summary>
+    private static void WithKeep1139(string target, System.Text.Json.Nodes.JsonNode campaign)
+    {
+        var repo = Directory.GetParent(RealContentDirectory())!.FullName;
+        File.Copy(
+            Path.Combine(repo, "docs", "samples", "ironwake_keep_1139.map"),
+            Path.Combine(target, "keep", (string)campaign["keep"]!["map"]! + ".map"),
+            overwrite: true);
+        foreach (var (edit, tiles) in new[] { ("wall", new[] { "10,3", "10,8" }), ("ditch", new[] { "9,5", "9,6" }) })
+        {
+            var entry = campaign["keep"]!["edits"]!.AsArray().First(e => (string)e!["id"]! == edit)!;
+            entry["at"] = new System.Text.Json.Nodes.JsonArray(tiles.Select(t => (System.Text.Json.Nodes.JsonNode?)t).ToArray());
+        }
     }
 
     private static readonly Lazy<string> Saltmarsh0030 = new(() => WithSaltmarsh0030(WithoutStartingAlone(CopyRealContent("ironwake-saltmarsh-0030-"))));

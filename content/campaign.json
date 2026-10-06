@@ -201,8 +201,8 @@
       { "id": "edda", "name": "Edda Vane", "pronoun": "she", "class": "skyrider", "items": ["iron_lance"], "line": "Flew dispatches for a war that ended. Nobody wrote to tell her." }
     ],
     "edits": [
-      { "id": "wall", "name": "Rebuild a wall", "terrain": "wall", "price": 400, "at": ["10,3", "10,8"] },
-      { "id": "ditch", "name": "Dig a ditch", "terrain": "water", "price": 300, "at": ["9,5", "9,6"] }
+      { "id": "wall", "name": "Rebuild a wall", "terrain": "wall", "price": 400, "at": ["10,2", "10,9"] },
+      { "id": "ditch", "name": "Dig a ditch", "terrain": "water", "price": 300, "at": ["9,4", "9,7"] }
     ]
   }
 }

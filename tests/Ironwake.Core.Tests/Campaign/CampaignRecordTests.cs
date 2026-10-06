@@ -30,7 +30,8 @@ public class CampaignRecordTests
     /// <summary>
     /// The battle <paramref name="record"/> begins, won by removing every enemy and, on a Seize map,
     /// standing the captain on the throne, or on an Escape map, every player unit on its own exit,
-    /// or on a Survive map, the turn past the limit,
+    /// or on a Survive map, the turn past the limit, or on a Defeat Boss map whose boss arrives
+    /// by an event (the keep, issue 1149), that event fired,
     /// with the opening kept as history.
     /// </summary>
     private static BattleState Won(CampaignRecord record, Func<BattleUnit, BattleUnit?>? player = null, MapDefinition? on = null)
@@ -43,7 +44,7 @@ public class CampaignRecordTests
             .Select(u => player is null ? u : player(u)).OfType<BattleUnit>();
         return map.Win == WinCondition.Escape
             ? opening with { Units = ValueList<BattleUnit>.Empty, Escaped = ValueList<BattleUnit>.From(units.OrderBy(u => u.IsCaptain)), Turn = 4, History = ValueList<BattleState>.Of(opening) }
-            : opening with { Units = ValueList<BattleUnit>.From(units), Turn = map.Win == WinCondition.Survive ? map.TurnLimit + 1 : 4, History = ValueList<BattleState>.Of(opening) };
+            : opening with { Units = ValueList<BattleUnit>.From(units), Turn = map.Win == WinCondition.Survive ? map.TurnLimit + 1 : 4, Fired = ValueList<string>.From(opening.Fired.Concat(map.BossSpawns().Select(e => e.Name))), History = ValueList<BattleState>.Of(opening) };
     }
 
     [Fact]

@@ -137,7 +137,7 @@ public class CampActionsTests
         Assert.Contains("certify captain vanguard", commands);
         Assert.DoesNotContain("certify captain adept", commands);
         Assert.Contains("build forge", commands);
-        Assert.Contains("build wall 10,3", commands);
+        Assert.Contains("build wall 10,2", commands);
         Assert.Contains("quest maud_1 captain", commands);
         Assert.DoesNotContain(commands, c => c.StartsWith("refine", StringComparison.Ordinal));
         Assert.DoesNotContain(commands, c => c.StartsWith("hire", StringComparison.Ordinal));
