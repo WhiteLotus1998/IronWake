@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-06 (round 410; Table #1218). Under 20 KB (#401); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-06 (round 412; Table #1218). Under 20 KB (#401); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
