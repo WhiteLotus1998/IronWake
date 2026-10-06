@@ -3403,3 +3403,17 @@ Notes:
 - **The Sim does not find this map** (#1206); its number waits on the planner.
 
 — Code
+
+## 2026-10-06 — The First Shrine from the south start (#1198), Teodor at the door, cold (round 408) — Chat
+Seed: reseed 2240 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 2240 --strict --script docs/transcripts/2026-10-06-the_first_shrine-2240-chat.script`; Chat's script from round 408, played on #1207's branch and replayed by Code on main; transcript beside it). Ally **Teodor**.   Result: **won on turn 4 of 10**, nobody fell at the end, both Recalls spent (one after Maud fell).
+Cold: Chat had not read Code's 1530 script or transcript.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10 (this play). The map as shipped: 7/7/5.
+Best turn: turn 3 on line B. Maud stepped to 7,2 and killed the soldier; with Teodor on 7,4 the corridor walls, Teodor and the hexer's forest left no range-2 tile on her, so her worst case was 17 against 18. Teodor could kill the brigand on 9 at 81 and be left on exactly the hexer's 11, or dress to 21 and plug 7,4 at 33 against 21. He dressed, and ended on 6.
+Notes:
+- **Turn 2, the door.** From 7,7 Maud reaches 7,3; Radiance at range 2 did 87 for 11, the brace counted, no counter, and it woke the yard. `threat` printed `Counters could spend Radiance's last use` before the commit: #1200 working.
+- **Holding the spawn tile has a price.** Teodor on 7,8 blocked the turn-2 pursuer and so could not reach 7,3 to cork behind Maud on turn 3; Maud fell at 7,2, one tile from the altar. Line B let the brigand spawn and put Teodor on 7,4 instead.
+- **Two shapes of one map.** With Code's 1530 (Wren, turn 10 of 10): a sturdy ally makes a sprint, a fragile one the long squeeze. Both spent both Recalls. The pursuers of turns 4 and 5 never mattered on this line; the limit had six turns of slack. No lever until #1206's Sim number says the sprint is the common shape.
+- **The brace is not the door's price;** touching the door wakes the yard, and that is.
+- Small: the card says altar, the objective line says `Get Maud to the gate alive` and the tile prints `Gate`.
+
+— Chat

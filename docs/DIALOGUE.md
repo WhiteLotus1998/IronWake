@@ -30,15 +30,15 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Maps
 
-- **The Tollgate: `tuned`** (0073), opens the beta. **Brackwater Cut at dusk: `tuned`** (0078).
-- **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). Two bait wins in a row reopen #1067 (0251). A crest mass freezing the Foreman is a solve (#1087); its lever: the archer out of Pell's turn-5 reach, Sim first.
+- **The Tollgate: `tuned`** (0073), opens beta. **Brackwater Cut at dusk: `tuned`** (0078).
+- **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). Two bait wins reopen #1067 (0251). A crest mass freezing the Foreman is a solve (#1087); lever: the archer out of Pell's turn-5 reach, Sim first.
 - **Saltmarsh Ford:** not tuned (0093, 0095).
 - **The Rookery (0208):** not passed; no lever before a cold chair.
 - **The Counting House (311 to 321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh-seed read gates.
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
-- **The Mill (402 to 404):** `holds:` (0279): woken guards go home, off the bank only to strike; limit 9 (0280). Next a cold chair.
-- **The First Shrine (406, #1198, 0283):** the door fell unbraced on turn 1. Built: start south, alone (braced and a second guard declined); its Sim counts after the planner's range-2 finish (#1206).
-- **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its lever: the van a column west. The keep is the finale (0265); both entries in (1149 warm, 2210 cold, 407). #1204, a lever at a time: an empty front lets the hunter in; inside spawns inside each front; Hask gets 0279's reach. Depleted gate 1 under 60 softens one.
+- **The Mill:** `holds:` (0279): woken guards go home, off the bank only to strike; limit 9 (0280). Next a cold chair.
+- **The First Shrine (406 to 408, 0283):** starts south, alone (brace, second guard declined). Both in from the south (7/7/5), no rework; after #1206's Sim the limit moves only if sprints dominate.
+- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204, one at a time: an empty front lets the hunter in (`threat` and `end` move with it); inside spawns inside each front (all blocked: decoration); Hask gets 0279's reach. Depleted gate 1 under 60 softens.
 
 ## Experiments (state and kill criterion)
 
@@ -104,6 +104,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - Rout ends Seize (#374)? Sim Canto on a clock map (#262)?
 - The wake tax floor from the journals (0040's `--taxfloor`, 0.25 provisional).
 - Does a trial fall cost more than the attempt?
+- A blocked spawn arrives a phase late (408)?
 - Training (374): Chat's yard, capped by the teacher. Lotus picks.
 
 ## Plumbing
