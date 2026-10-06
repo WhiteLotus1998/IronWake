@@ -160,17 +160,17 @@ public class CampaignCliTests
             Assert.Contains("  Cadet: nothing -- Alder Fenn's class\n", output);
             Assert.Contains("  Outrider: level 4, sword D; or its trial in place of the seal -- Outrider is not on the captain's ladder; needs level 4, has 1; needs sword D, has E\n", output);
             Assert.Contains("  Bowman: level 3, dex 8 -- Bowman is not on the captain's ladder; needs level 3, has 1; needs dex 8, has 7\n", output);
-            Assert.Contains("  Halberdier (from Pikeman; adds axe): level 7, lance C -- Halberdier is not on the captain's ladder; needs to be a Pikeman first; needs level 7, has 1; needs lance C, has E\n", output);
-            Assert.Contains("  Marksman (from Bowman; adds Long Draw): level 7, bow C", output);
-            Assert.Contains("  Scholar (from Adept; adds faith (strike spells only)): level 7, lore C", output);
-            Assert.Contains("  Warden (from Chaplain; adds sword, Far Mending): level 7, faith C", output);
-            Assert.Contains("  Berserker (from Reaver; adds Blood Price): level 7, axe C", output);
-            Assert.Contains("  Sky Captain (from Skyrider; adds +1 Mov, Drake Frost, Stoop): level 7, lance C", output);
+            Assert.Contains("  Halberdier (from Pikeman; adds axe): level 7, lance 50 (between D and C) -- Halberdier is not on the captain's ladder; needs to be a Pikeman first; needs level 7, has 1; needs lance 50, has 0\n", output);
+            Assert.Contains("  Marksman (from Bowman; adds Long Draw): level 7, bow 50 (between D and C)", output);
+            Assert.Contains("  Scholar (from Adept; adds faith (strike spells only)): level 7, lore 50 (between D and C)", output);
+            Assert.Contains("  Warden (from Chaplain; adds sword, Far Mending): level 7, faith 50 (between D and C)", output);
+            Assert.Contains("  Berserker (from Reaver; adds Blood Price): level 7, axe 50 (between D and C)", output);
+            Assert.Contains("  Sky Captain (from Skyrider; adds +1 Mov, Drake Frost, Stoop): level 7, lance 50 (between D and C)", output);
             Assert.Contains("  Vanguard: level 3 -- needs level 3, has 1\n", output);
             Assert.Contains("  Commander (from Marshal; adds cavalry, lance, +2 Mov): level 10, sword C -- needs to be a Marshal first;", output);
             Assert.Contains("  Champion (from Vanguard; adds lance, axe): level 10, sword C -- needs to be a Vanguard first; needs level 10, has 1; needs sword C, has E\n", output);
             Assert.Contains("ERROR: No unit 'nobody' on the roster\n", output);
-            Assert.Contains("  Field Surgeon (from Chaplain; adds Steady Hands, Ward Rounds) [Maud's other door; loses reach]: level 7, faith C\n", output);
+            Assert.Contains("  Field Surgeon (from Chaplain; adds Steady Hands, Ward Rounds) [Maud's other door; loses reach]: level 7, faith 50 (between D and C)\n", output);
             Assert.Single(output.Split('\n'), l => l.Contains("Field Surgeon"));
         }
         finally

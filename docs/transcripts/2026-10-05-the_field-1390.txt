@@ -17,12 +17,12 @@ group sleeps until a fight comes within its hearing.)
 == Roster ==
   Alder Fenn (captain): Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  Teodor: Pikeman L5, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
-  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
-  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L5, EXP 0; 1: Iron Lance 40/40
-  Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
-  Rook: Skyrider L5, EXP 0; 1: Iron Lance 40/40
+  Teodor: Pikeman L5, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40; door: lance 0/50
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3; door: bow 0/50
+  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6; door: lore 0/50
+  Dunstan: Bulwark L5, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
+  Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8; door: faith 30/50
+  Rook: Skyrider L5, EXP 0; 1: Iron Lance 40/40; door: lance 30/50
   Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 Deploys to The Field Before the Keep: Alder Fenn, Teodor, Ottilie, Pell, Maud, Rook (deploy 6 of 9)
 Keziah (Reaver, level 5) rides with the enemy on this map.
@@ -6665,13 +6665,13 @@ Brannock drilled with the levy: L5 -> L7.
 == Roster ==
   Alder Fenn (captain): Cadet L6, EXP 80; 1: Iron Sword 29/40 (repair 110), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  Teodor: Pikeman L7, EXP 0; 1: Iron Lance 33/40 (repair 70), 2: Field Dressing 2/3, 3: Family Lance 40/40
-  Ottilie: Bowman L7, EXP 0; 1: Iron Bow 35/40 (repair 50), 2: Field Dressing 3/3
-  Pell: Adept L7, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L7, EXP 0; 1: Iron Lance 40/40
-  Maud: Chaplain L5, EXP 67; 1: Radiance 5/5, 2: Salve 8/8
-  Rook: Skyrider L5, EXP 25; 1: Iron Lance 37/40 (repair 30)
-  Keziah: Reaver L5, EXP 0; 1: Kinsbane 20/20, 2: Iron Axe 40/40, 3: Iron Gauntlets 40/40
+  Teodor: Pikeman L7, EXP 0; 1: Iron Lance 33/40 (repair 70), 2: Field Dressing 2/3, 3: Family Lance 40/40; door: lance 23/50
+  Ottilie: Bowman L7, EXP 0; 1: Iron Bow 35/40 (repair 50), 2: Field Dressing 3/3; door: bow 12/50
+  Pell: Adept L7, EXP 0; 1: Cinder 8/8, 2: Gust 6/6; door: lore 17/50
+  Dunstan: Bulwark L7, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
+  Maud: Chaplain L5, EXP 67; 1: Radiance 5/5, 2: Salve 8/8; door: faith 48/50
+  Rook: Skyrider L5, EXP 25; 1: Iron Lance 37/40 (repair 30); door: lance 38/50
+  Keziah: Reaver L5, EXP 0; 1: Kinsbane 20/20, 2: Iron Axe 40/40, 3: Iron Gauntlets 40/40; door: axe 30/50
   Brannock: Cadet L7, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 Deploys to Ironwake Keep: the whole company fights: 10; Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan, Maud, Rook, Keziah, Brannock
 Keziah came back with the enemy: turned by Rook, and with the company.

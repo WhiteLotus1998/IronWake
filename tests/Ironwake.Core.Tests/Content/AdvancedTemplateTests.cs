@@ -67,13 +67,13 @@ public class AdvancedTemplateTests
     }
 
     [Fact]
-    public void TheLevelTableCountsAUnitReadyOnlyAtTheFormsLevelAndRank()
+    public void TheLevelTableCountsAUnitReadyOnlyAtTheFormsLevelAndGate()
     {
         var levy = Shipped.Cast[1];
-        var trained = levy with { Level = 7, Skill = WeaponSkill.Zero.With(WeaponType.Lance, 80) };
+        var trained = levy with { Level = 7, Skill = WeaponSkill.Zero.With(WeaponType.Lance, 50) };
 
         Assert.True(LevelRun.Ready(trained, Shipped));
         Assert.False(LevelRun.Ready(trained with { Level = 6 }, Shipped));
-        Assert.False(LevelRun.Ready(trained with { Skill = WeaponSkill.Zero.With(WeaponType.Lance, 79) }, Shipped));
+        Assert.False(LevelRun.Ready(trained with { Skill = WeaponSkill.Zero.With(WeaponType.Lance, 49) }, Shipped));
     }
 }

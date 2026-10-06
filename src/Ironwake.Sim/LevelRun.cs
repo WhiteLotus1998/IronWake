@@ -22,6 +22,15 @@ public static class LevelRun
     /// <summary>The level the second tier asks for (classes.json, every advanced form; 7 since rounds 224 to 226).</summary>
     public const int Threshold = 7;
 
+    /// <summary>
+    /// The door's points gate in the main weapon (classes.json, every level-7 door's <c>certification.points</c>;
+    /// 50 since round 394, issue 1174), between D's 30 and C's 80.
+    /// </summary>
+    public const int Gate = 50;
+
+    /// <summary>The margin the Recalling player's bound must clear the gate by at p50 (round 394).</summary>
+    public const int GateMargin = 5;
+
     /// <summary>One run: per map won, the levels of the company standing after it, how many of it meet some advanced form's level and ranks (<see cref="Ready"/>) and the map's <see cref="Camp"/> reading, and the map no try won, or null.</summary>
     public sealed record Run(IReadOnlyList<(int Map, IReadOnlyList<int> Levels, int Ready, Camp Camp)> Maps, int? LostOn)
     {
@@ -119,6 +128,12 @@ public static class LevelRun
 
         /// <summary>The tier-2 bar's rank half alone: rank C or above in the main weapon.</summary>
         public bool AtRank => MainRank >= WeaponRanks.Threshold(WeaponRank.C);
+
+        /// <summary>The door's points gate alone (issue 1174, round 394): <see cref="Gate"/> or more in the main weapon.</summary>
+        public bool AtGate => MainRank >= Gate;
+
+        /// <summary>The door as round 394 reads it: <see cref="Threshold"/> and the points gate in the main weapon.</summary>
+        public bool AtDoor => AtLevel(Threshold) && AtGate;
 
         /// <summary>The <see cref="Member"/> reading of <paramref name="unit"/>.</summary>
         public static Member Of(Unit unit, GameContent content)
@@ -597,6 +612,74 @@ public static class LevelRun
         };
         yield return "  sinks, mean points a run: " + string.Join(", ", sinks.Select(k => $"{k.Name} {k.Points.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)}"));
         yield return TraceVerdict(Percentile(bound, 0.5), unexplained, sinks.MaxBy(k => k.Points).Name);
+    }
+
+    /// <summary>
+    /// The door's points gate read (issue 1174, round 394): the striking chair and the even chair over the same
+    /// seeds, read after map <see cref="VerdictMap"/>. The striking line prints the fed unit's level, the points the
+    /// record keeps and the Recalling player's bound (kept plus the points lost to a fall); the even chair prints
+    /// the non-captains at L7 and the gate and at L7 alone, its best non-captain's points, and the pick's level and
+    /// points; last, the read the Table agreed before the numbers (<see cref="GateVerdict"/>).
+    /// </summary>
+    public static IEnumerable<string> GateLines(GameContent content, IReadOnlyList<Run> even, IReadOnlyList<Run> striking)
+    {
+        static string Pair(IEnumerable<int> values)
+        {
+            var list = values.ToList();
+            return $"p50 {Percentile(list, 0.5)} p75 {Percentile(list, 0.75)}";
+        }
+
+        var pick = PickId(content);
+        yield return $"levels --gate: {striking.Count} runs, the striking chair and the even chair over the same seeds (issue 1174, round 394); the door asks L{Threshold} and {Gate} main-weapon rank points (D is {WeaponRanks.Threshold(WeaponRank.D)}, C is {WeaponRanks.Threshold(WeaponRank.C)}); the pick is {pick}";
+        yield return PriceLine(striking, "striking");
+        var reached = striking.Select(r => (Run: r, At: r.Maps.ToList().FindIndex(m => m.Map == VerdictMap))).Where(x => x.At >= 0 && x.At < x.Run.Companies.Count && x.At < x.Run.Prices.Count).ToList();
+        var fed = reached.Select(x => x.Run.Companies[x.At].FirstOrDefault(m => m.Id == FocusedPlayer.Fed)).ToList();
+        var kept = fed.Select(m => m?.MainRank ?? 0).ToList();
+        var bound = kept.Zip(reached.Select(x => x.Run.Prices.Take(x.At + 1).Sum(p => p.Rank.LostToFall)), (k, l) => k + l).ToList();
+        var level = fed.Select(m => m?.Level ?? 0).ToList();
+        yield return $"  striking, after map {VerdictMap} ({reached.Count} runs): {FocusedPlayer.Fed} level {Pair(level)}; points kept {Pair(kept)}, the Recalling player's bound {Pair(bound)}; at L{Threshold} and the gate (kept) {fed.Count(m => m is { AtDoor: true })} of {fed.Count}";
+        var evens = Companies(even, VerdictMap).Select(c => c.Where(m => !m.Captain).ToList()).ToList();
+        var door = evens.Select(c => c.Count(m => m.AtDoor)).ToList();
+        var alone = evens.Select(c => c.Count(m => m.AtLevel(Threshold))).ToList();
+        var best = evens.Select(c => c.Select(m => m.MainRank).DefaultIfEmpty(0).Max()).ToList();
+        var picks = evens.Select(c => c.FirstOrDefault(m => m.Id == pick)).Where(m => m is not null).Select(m => m!).ToList();
+        yield return $"  even, after map {VerdictMap} ({evens.Count} companies): non-captains at L{Threshold} and the gate {Pair(door)}, at L{Threshold} alone {Pair(alone)}; the best non-captain's points {Pair(best)}";
+        yield return $"  the pick on the even chair, after map {VerdictMap} ({picks.Count} companies with {pick}): level {Pair(picks.Select(m => m.Level))}, points {Pair(picks.Select(m => m.MainRank))}; at L{Threshold} and the gate {picks.Count(m => m.AtDoor)}";
+        yield return GateVerdict(
+            Percentile(bound, 0.5),
+            Percentile(level, 0.5),
+            Percentile(kept, 0.5),
+            Percentile(door, 0.5),
+            Percentile(alone, 0.5),
+            picks.Count == 0 ? 0 : Percentile(picks.Select(m => m.Level), 0.5),
+            picks.Count == 0 ? 0 : Percentile(picks.Select(m => m.MainRank), 0.5));
+    }
+
+    /// <summary>The claimant the Sim's campaigns pick at the branch (<see cref="SimPick.Claimant"/>), or the empty id when no map offers one.</summary>
+    public static string PickId(GameContent content) =>
+        content.Campaign.Maps.FirstOrDefault(m => m.Branch.Count > 0) is { } branch ? SimPick.Claimant(branch) : "";
+
+    /// <summary>
+    /// Round 394's read of the points gate, agreed before the numbers: the bar passes when the Recalling player's
+    /// bound at p50 clears <see cref="Gate"/> by <see cref="GateMargin"/> and the fed unit is at p50
+    /// <see cref="Threshold"/>; the points kept are printed and do not decide. The ceiling holds while the even
+    /// chair reads p50 0 at L7 and the gate and p50 0 at L7 alone, and a broken one steps the levy floor's offset
+    /// first. A pick at p50 L7 and the gate on the even chair raises the gate before anything else moves.
+    /// </summary>
+    public static string GateVerdict(int boundP50, int fedLevelP50, int keptP50, int evenDoorP50, int evenAloneP50, int pickLevelP50, int pickPointsP50)
+    {
+        var head = $"  verdict (round 394, after map {VerdictMap}): ";
+        var needs = Gate + GateMargin;
+        var bar = boundP50 >= needs && fedLevelP50 >= Threshold
+            ? $"the bar passes (bound p50 {boundP50}, at least {needs}; {FocusedPlayer.Fed} p50 L{fedLevelP50}; kept p50 {keptP50}, not deciding)"
+            : $"the bar fails (bound p50 {boundP50}, needs {needs}; {FocusedPlayer.Fed} p50 L{fedLevelP50}, needs L{Threshold}; kept p50 {keptP50}, not deciding)";
+        var ceiling = evenDoorP50 == 0 && evenAloneP50 == 0
+            ? $"the ceiling holds (even p50 0 at L{Threshold} and the gate, p50 0 at L{Threshold} alone)"
+            : $"the ceiling is broken (even p50 {evenDoorP50} at L{Threshold} and the gate, p50 {evenAloneP50} at L{Threshold} alone); step the levy floor's offset first (round 392)";
+        var pick = pickLevelP50 >= Threshold && pickPointsP50 >= Gate
+            ? $"the pick reaches L{Threshold} and the gate on the even chair (p50 L{pickLevelP50}, {pickPointsP50}); the gate rises first (round 394)"
+            : $"the pick stays short of the door on the even chair (p50 L{pickLevelP50}, {pickPointsP50})";
+        return head + bar + "; " + ceiling + "; " + pick;
     }
 
     /// <summary>

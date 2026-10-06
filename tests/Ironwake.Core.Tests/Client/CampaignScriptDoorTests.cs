@@ -83,7 +83,7 @@ public class CampaignScriptDoorTests
     {
         var text = Write(until: ("rook", "drover")).Text;
 
-        Assert.Matches("# never reached: certify rook drover: .*needs level 7, has \\d+; needs lance C, has [A-E]\n$", text);
+        Assert.Matches("# never reached: certify rook drover: .*needs level 7, has \\d+; needs lance 50, has \\d+\n$", text);
     }
 
     [Fact]

@@ -147,7 +147,7 @@ public static class Program
                 }
             }
 
-            return args.Contains("--rank-trace") ? RankTraceTable(seeds) : args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
+            return args.Contains("--gate") ? GateTable(seeds) : args.Contains("--rank-trace") ? RankTraceTable(seeds) : args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
         }
 
         if (args.Length > 0 && args[0] == "--supports")
@@ -290,7 +290,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -490,6 +490,43 @@ public static class Program
         }
 
         return 0;
+    }
+
+    /// <summary>
+    /// The door's points gate read (issue 1174, round 394, <see cref="LevelRun.GateLines"/>): the striking chair
+    /// and the even chair over the same seeds, each chair's seeds split across four threads in order. A measurement only.
+    /// </summary>
+    public static int GateTable(int seeds)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("levels: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var striking = Split(seeds, (count, first) => LevelRun.Measure(contentDir, content, count, focused: FocusedPlayer.Guard.Striking, firstSeed: first));
+        var even = Split(seeds, (count, first) => LevelRun.Measure(contentDir, content, count, even: true, firstSeed: first));
+        foreach (var line in LevelRun.GateLines(content, even.Result, striking.Result))
+        {
+            Console.WriteLine(line);
+        }
+
+        return 0;
+    }
+
+    /// <summary>Seeds 1..<paramref name="seeds"/> split across four threads in order, each part measured by <paramref name="measure"/> (count, first seed), the runs joined in seed order.</summary>
+    private static Task<List<LevelRun.Run>> Split(int seeds, Func<int, int, IReadOnlyList<LevelRun.Run>> measure)
+    {
+        const int Threads = 4;
+        var chunk = (seeds + Threads - 1) / Threads;
+        var parts = Enumerable.Range(0, Threads)
+            .Select(k => (First: 1 + k * chunk, Count: Math.Min(chunk, seeds - k * chunk)))
+            .Where(p => p.Count > 0)
+            .Select(p => Task.Run(() => measure(p.Count, p.First)))
+            .ToList();
+        return Task.WhenAll(parts).ContinueWith(t => t.Result.SelectMany(r => r).ToList(), TaskScheduler.Default);
     }
 
     /// <summary>

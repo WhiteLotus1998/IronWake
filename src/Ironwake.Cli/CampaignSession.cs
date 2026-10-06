@@ -2033,7 +2033,8 @@ public sealed class CampaignSession
         var unitClass = content.Class(unit.ClassId);
         var slots = unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {ItemText(content, item)}");
         var bench = (unit.Wound is { } wound ? ", " + wound.Label : "") + (record.Benched.Contains(unit.Id) ? ", benched" : "");
-        var ladder = CampaignRecord.IsCaptain(unit, content) && LadderText(content, unitClass) is { } text ? "; " + text : "";
+        var ladder = CampaignRecord.IsCaptain(unit, content) && LadderText(content, unitClass) is { } text ? "; " + text
+            : DoorText(content, unit) is { } door ? "; " + door : "";
         var lines = new List<string> { $"  {name}: {unitClass.Name} L{unit.Level}, EXP {unit.Exp}{bench}; {(unit.Inventory.Count == 0 ? "no items" : string.Join(", ", slots))}{ladder}" };
         if (!detail)
         {
@@ -2080,6 +2081,31 @@ public sealed class CampaignSession
         var basis = held.Advances ?? held;
         var form = content.Classes.Values.FirstOrDefault(c => c.Advances?.Id == basis.Id && c.Unique is null);
         return form is null ? $"ladder: {basis.Name}" : $"ladder: {basis.Name}, then {form.Name} at {form.Certification.Level}";
+    }
+
+    /// <summary>The level at which the camp row starts showing a unit's points toward its door (issue 1174, round 394).</summary>
+    public const int DoorShownFrom = 5;
+
+    /// <summary>
+    /// A unit's points toward the points gate of the doors above its class (issue 1174, round 394), as the camp
+    /// row ends it, <c>door: lance 41/50</c>, once the unit is at <see cref="DoorShownFrom"/> or above; one entry
+    /// per weapon type and gate the doors open to it share. Null below that level, for a class with no door
+    /// above it, and for a door that asks no gate.
+    /// </summary>
+    public static string? DoorText(GameContent content, Unit unit)
+    {
+        if (unit.Level < DoorShownFrom)
+        {
+            return null;
+        }
+
+        var gates = content.Classes.Values
+            .Where(c => c.Advances?.Id == unit.ClassId && (c.Unique is null || c.Unique == unit.Id))
+            .SelectMany(c => c.Certification.Points)
+            .Distinct()
+            .Select(g => $"{g.Type.Label()} {unit.Skill.Points(g.Type)}/{g.Points}")
+            .ToList();
+        return gates.Count == 0 ? null : "door: " + string.Join(", ", gates);
     }
 
     /// <summary>An inventory entry with its uses out of its full uses, and what repairing it costs where it can be repaired and is short.</summary>

@@ -117,7 +117,7 @@
       "weapons": ["lance", "axe"],
       "mastery": "set_haft",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "lance": "C" } },
+      "certification": { "level": 7, "points": { "lance": 50 } },
       "modifiers": { "hp": 3, "str": 2, "def": 2 }
     },
     {
@@ -130,7 +130,7 @@
       "weapons": ["axe", "gauntlet"],
       "mastery": "hard_to_kill",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "axe": "C" } },
+      "certification": { "level": 7, "points": { "axe": 50 } },
       "modifiers": { "hp": 4, "str": 4 }
     },
     {
@@ -143,7 +143,7 @@
       "weapons": ["bow"],
       "mastery": "still_breath",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "bow": "C" } },
+      "certification": { "level": 7, "points": { "bow": 50 } },
       "modifiers": { "dex": 4, "str": 1 }
     },
     {
@@ -157,7 +157,7 @@
       "grants": { "faith": "D" },
       "mastery": "old_texts",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "reason": "C" } },
+      "certification": { "level": 7, "points": { "reason": 50 } },
       "modifiers": { "mag": 4, "res": 2 }
     },
     {
@@ -170,7 +170,7 @@
       "weapons": ["faith", "sword"],
       "mastery": "steadfast",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "faith": "C" } },
+      "certification": { "level": 7, "points": { "faith": 50 } },
       "modifiers": { "mag": 2, "res": 3, "def": 1 }
     },
     {
@@ -187,7 +187,7 @@
       "healOnly": ["faith"],
       "mastery": "triage",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "faith": "C" } },
+      "certification": { "level": 7, "points": { "faith": 50 } },
       "modifiers": { "mag": 2, "res": 2, "spd": 1 }
     },
     {
@@ -200,7 +200,7 @@
       "weapons": ["lance", "sword", "axe"],
       "mastery": "couched_lance",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "lance": "C" } },
+      "certification": { "level": 7, "points": { "lance": 50 } },
       "modifiers": { "hp": 2, "str": 2, "def": 1 }
     },
     {
@@ -213,7 +213,7 @@
       "weapons": ["lance"],
       "mastery": "wind_rider",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "lance": "C" } },
+      "certification": { "level": 7, "points": { "lance": 50 } },
       "modifiers": { "spd": 3, "res": 2, "str": 1 }
     },
     {
@@ -230,7 +230,7 @@
       "weapons": ["lance"],
       "mastery": "lookout",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "lance": "C" } },
+      "certification": { "level": 7, "points": { "lance": 50 } },
       "modifiers": { "spd": 3, "res": 2, "str": 1 }
     },
     {
@@ -242,7 +242,7 @@
       "weapons": ["lance", "axe", "bow"],
       "mastery": "iron_footing",
       "masteryPoints": 12,
-      "certification": { "level": 7, "ranks": { "lance": "C" } },
+      "certification": { "level": 7, "points": { "lance": 50 } },
       "modifiers": { "hp": 5, "def": 5, "spd": -2 }
     },
     {
