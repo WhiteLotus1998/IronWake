@@ -626,6 +626,25 @@ public class SideMapTests
         Assert.Equal("Hold out until the end of turn 6. Maud must survive.", Objective.Line(battle, Content));
     }
 
+    [Theory]
+    [InlineData("the_first_shrine", "Get Maud to the gate alive by the end of turn 10.")]
+    [InlineData("the_burned_school", "Get Maud out through an exit alive by the end of turn 7.")]
+    public void OnAMemberLedSeizeOrEscapeMapTheObjectiveNamesTheMemberNotTheCaptain(string map, string line)
+    {
+        var battle = At("the_tollgate").BeginQuest(Side(map), "maud_1", "teodor", Content);
+
+        Assert.Equal(line, Objective.Line(battle, Content));
+    }
+
+    [Fact]
+    public void OnAMemberLedSeizeMapAProtectedUnitStillHasItsOwnSurvivorClause()
+    {
+        var shrine = Side("the_first_shrine") with { ProtectId = "teodor" };
+        var battle = At("the_tollgate").BeginQuest(shrine, "maud_1", "teodor", Content);
+
+        Assert.Equal("Get Maud to the gate alive by the end of turn 10. Teodor must survive.", Objective.Line(battle, Content));
+    }
+
     [Fact]
     public void AWonSideMapIsRecordedAndItsSurvivorsComeBackAsTheBattleLeftThem()
     {

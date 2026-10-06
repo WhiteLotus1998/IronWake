@@ -48,7 +48,7 @@ Pell goes with Wren. This map is lost if Pell falls; who falls here is gone for 
   turn 2, enemy phase: a hexer arrives at 0,3 (aggressive). A unit standing on 0,3 stops it.
   turn 3, enemy phase: a brigand arrives at 0,6 (aggressive). A unit standing on 0,6 stops it.
   turn 4, enemy phase: a soldier arrives at 2,8 (aggressive). A unit standing on 2,8 stops it.
-Objective: Get the captain out through an exit by the end of turn 7. Pell must survive.
+Objective: Get Pell out through an exit alive by the end of turn 7.
 The Burned School  turn 1 of 7  player phase  escape  recall 2
    0123456789012
  0 ^^n.......^^M

@@ -81,7 +81,7 @@ Ottilie goes with Wren. This map is lost if Ottilie falls; who falls here is gon
   turn 2, enemy phase: a rider arrives at 0,8 (aggressive). A unit standing on 0,8 stops it.
   turn 3, enemy phase: a brigand arrives at 4,0 (aggressive). A unit standing on 4,0 stops it.
   turn 4, enemy phase: a hexer arrives at 0,8 (aggressive). A unit standing on 0,8 stops it.
-Objective: Get the captain out through an exit by the end of turn 8. Ottilie must survive.
+Objective: Get Ottilie out through an exit alive by the end of turn 8.
 The Long Count  turn 1 of 8  player phase  escape  recall 2
    012345678901234
  0 ####.^^..~^^...

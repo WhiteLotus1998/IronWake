@@ -64,7 +64,7 @@ Rook goes with Wren. This map is lost if Rook falls; who falls here is gone for 
   turn 2, enemy phase: a wingrider arrives at 0,9 (aggressive). A unit standing on 0,9 stops it.
   turn 3, enemy phase: a wingrider arrives at 4,9 (aggressive). A unit standing on 4,9 stops it.
   turn 4, enemy phase: a rider arrives at 0,9 (aggressive). A unit standing on 0,9 stops it.
-Objective: Get the captain out through an exit by the end of turn 9. Rook must survive.
+Objective: Get Rook out through an exit alive by the end of turn 9.
 The Rookery  turn 1 of 9  player phase  escape  recall 2
    012345678901234
  0 ####MMM~~MMMMMM

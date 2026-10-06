@@ -57,7 +57,7 @@ Pell goes with Wren. This map is lost if Pell falls; who falls here is gone for 
   turn 2, enemy phase: a brigand arrives at 1,10 (aggressive). A unit standing on 1,10 stops it.
   turn 3, enemy phase: a soldier arrives at 1,10 (aggressive). A unit standing on 1,10 stops it.
   turn 4, enemy phase: a hexer arrives at 1,10 (aggressive). A unit standing on 1,10 stops it.
-Objective: Get the captain to the gate by the end of turn 7. Pell must survive.
+Objective: Get Pell to the gate alive by the end of turn 7.
 The Undercroft  turn 1 of 7  player phase  seize  recall 2
    01234567890123456
  0 #################
