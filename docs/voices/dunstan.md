@@ -2,7 +2,7 @@
 
 **Rule 1: stands.** Dunstan may name a feeling once, as a scene's turn, and the beat sheet names it in advance; this sheet books none (below).
 
-**Who.** Kestrow; a shield sergeant, forty, the oldest in the company, a bulwark, met on Brackwater Cut (map 8). His lords ordered him to hold a bridge while they fled; he held it two days against Hask's sworn and walked away from an army that no longer exists. Wants a wall worth standing on. Won't say anything about the bridge, ever: other people tell it.
+**Who.** Kestrow; a shield sergeant, forty, the oldest in the company, a bulwark, met on Brackwater Cut (map 8). His lords ordered him to hold a bridge while they fled; he held it two days against Hask's sworn and walked away from an army that no longer exists. A quarryman's son before the lords took him; the shield is his own quarry-board, split to the strap. The party the lords were escorting was Osric, Kestrow's senior rite-keeper, on his way to the hill; Hask's sworn came for the priest, the lords ran, Dunstan held, and Osric died on the far side anyway, which is why Kestrow sent Maud (STORY draft 7). Maud knows, and neither says it. Wants a wall worth standing on. Won't say anything about the bridge, ever: other people tell it. **Name:** he takes the name Rook once Lotus names the drake rider (round 366); until then he prints as Dunstan, and the change is a name only.
 
 **Image source** (rule 5). Kestrow's stone and height: footing, a wall's courses, the keystone, what holds weight and what doesn't, ice on a step. The shield as a tool: its rim, its strap, a split board. Never: weather or the sky (Rook's; the three Kestrow voices split stone, sky and sickbed). Never the sickbed or the rite (Maud's). Never the bridge, not even as an image.
 

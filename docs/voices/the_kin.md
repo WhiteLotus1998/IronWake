@@ -2,7 +2,7 @@
 
 **Rule 1: widened, and turned outward.** The Kin names feelings constantly, but only the listener's, in "you" and "we"; it never says "I" and has no feeling of its own to name (round 296).
 
-**Who.** The outlands, carried north; the god chained under Ironwake in frozen iron for three hundred years. It reaches the world above the iron only through the sworn, and through Hask, who is its door (STORY). Wants more who swear; that is all it wants. Won't say that, because it never says what it wants. It says what *you* want, one step further than you'd have taken it.
+**Who.** The outlands, carried north; the god chained under Ironwake in frozen iron for three hundred years. It reaches the world above the iron only through the sworn, and through Hask, who is its door (STORY). Wants more who swear; that is all it wants. Won't say that, because it never says what it wants. It says what *you* want, one step further than you'd have taken it. **Proposed (STORY draft 7):** the Tithe, the dark grimoire, is its warmth taken by hand, and a carrier who darkens drifts into its grammar, names dropped and "we" where "I" belongs, never sworn. The Kin itself says nothing new for it.
 
 **Where it speaks.** Three registers, and only these.
 - **Through the shard**, to Hask. Never printed as its own speaker before the keep; it leaks into his lines (Hask's sheet says how to tell).

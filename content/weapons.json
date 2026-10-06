@@ -18,7 +18,7 @@
     { "id": "obsidian_axe", "name": "Obsidian Axe", "type": "axe", "mt": 13, "hit": 70, "crit": 25, "wt": 8, "minRange": 1, "maxRange": 1, "durability": 8, "rank": "B", "price": 1800, "glass": true, "description": "A wedge of black glass on a haft. Splits mail, and in time itself." },
     { "id": "toll_axe", "name": "Toll Axe", "type": "axe", "mt": 6, "hit": 60, "crit": 0, "wt": 8, "minRange": 1, "maxRange": 2, "durability": 20, "rank": "E", "description": "Bearded axe with a long haft. Reaches two paces for whoever can lift it." },
     { "id": "post_maul", "name": "Post Maul", "type": "axe", "mt": 9, "hit": 60, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 20, "rank": "E", "windup": true, "description": "A fence-driver's maul. The swing takes a while; the landing does not." },
-    { "id": "kinsbane", "name": "Kinsbane", "type": "axe", "mt": 9, "hit": 70, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 20, "rank": "E", "hungers": true, "boundTo": "keziah", "description": "Placeholder. Drains 5 HP unfed. Kills heal 10.",
+    { "id": "kinsbane", "name": "Kinsbane", "type": "axe", "mt": 9, "hit": 70, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 20, "rank": "E", "hungers": true, "boundTo": "keziah", "description": "Outland reaping blade, never used on grain. Something in it is hungry.",
       "voice": {
         "starved": [ { "id": "kb_starved_eat", "text": "Eat." }, { "id": "kb_starved_cold", "text": "Marrow." }, { "id": "kb_starved_now", "text": "The slowest." } ],
         "tooth": [
@@ -28,18 +28,18 @@
           { "id": "kb_tooth_4", "text": "Penned meat, that one. Never had to run. Find whoever fattened it." } ],
         "woken": [ { "id": "kb_woken", "text": "{name}. I remember what I'm for." } ] } },
     { "id": "family_lance", "name": "Family Lance", "type": "lance", "mt": 5, "hit": 60, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E", "boundTo": "teodor", "description": "Older than the house that kept it. Heavier than it should be.",
-      "heirloom": { "fromMap": 5, "first": "rusted", "held": "Placeholder. The rust holds; it waits on Teodor.", "named": "the First Warden's Lance", "stages": [
-        { "id": "pitted", "at": 3, "mt": 7, "hit": 70, "crit": 0, "wt": 10, "description": "Placeholder. The rust comes off in flakes. What is under it is not iron." },
-        { "id": "sound", "at": 6, "mt": 9, "hit": 75, "crit": 0, "wt": 10, "description": "Placeholder. Balanced now, or he has learned it. He will not say which." },
-        { "id": "woken", "at": 10, "mt": 10, "hit": 80, "crit": 0, "wt": 10, "description": "Placeholder. It sits in his hands as if it had waited for them." } ] } },
+      "heirloom": { "fromMap": 5, "first": "rusted", "held": "The rust holds. What is under it is waiting for a hand it knows.", "named": "the First Warden's Lance", "stages": [
+        { "id": "pitted", "at": 3, "mt": 7, "hit": 70, "crit": 0, "wt": 10, "description": "The rust comes off in flakes. What is under it is not iron." },
+        { "id": "sound", "at": 6, "mt": 9, "hit": 75, "crit": 0, "wt": 10, "description": "Balanced now, or he has learned it. He will not say which." },
+        { "id": "woken", "at": 10, "mt": 10, "hit": 80, "crit": 0, "wt": 10, "description": "It sits in his hands as if it had waited for them." } ] } },
 
     { "id": "iron_bow", "name": "Iron Bow", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "rank": "E", "price": 400, "critAgainst": ["flying"], "critBonus": 20, "description": "Yew and gut, nothing fancy. Brings down birds and the people on them." },
-    { "id": "ottilie_tally", "name": "Ottilie's Tally", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "rank": "E", "boundTo": "ottilie", "critAgainst": ["flying"], "critBonus": 20, "description": "Placeholder. Iron limbs notched with a tally; she knows every mark." },
+    { "id": "ottilie_tally", "name": "Ottilie's Tally", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "rank": "E", "boundTo": "ottilie", "critAgainst": ["flying"], "critBonus": 20, "description": "Iron limbs notched like a ledger's margin. She knows every mark." },
     { "id": "steel_bow", "name": "Steel Bow", "type": "bow", "mt": 8, "hit": 75, "crit": 5, "wt": 9, "minRange": 2, "maxRange": 2, "durability": 30, "rank": "D", "price": 900, "critAgainst": ["flying"], "critBonus": 20, "description": "Steel-backed and stiff to draw. Rewards the archer who keeps at it." },
     { "id": "obsidian_bow", "name": "Obsidian Bow", "type": "bow", "mt": 10, "hit": 75, "crit": 25, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 8, "rank": "B", "price": 1800, "critAgainst": ["flying"], "critBonus": 20, "glass": true, "description": "Glass-tipped shafts and a short quiver. Count them before you loose." },
 
     { "id": "cinder", "name": "Cinder", "type": "reason", "mt": 5, "hit": 90, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 8, "rank": "E", "price": 500, "ignites": true, "description": "A spark coaxed out of the air. Catches dry wood if you are careless." },
-    { "id": "pell_commonplace", "name": "Pell's Commonplace", "type": "reason", "mt": 5, "hit": 90, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 8, "rank": "E", "boundTo": "pell", "description": "Placeholder. Copied out by hand, margins full. None of it will burn." },
+    { "id": "pell_commonplace", "name": "Pell's Commonplace", "type": "reason", "mt": 5, "hit": 90, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 8, "rank": "E", "boundTo": "pell", "description": "Copied out by hand, margins full. None of it will burn." },
     { "id": "gust", "name": "Gust", "type": "reason", "mt": 4, "hit": 100, "crit": 5, "wt": 1, "minRange": 1, "maxRange": 2, "durability": 6, "rank": "E", "price": 600, "effective": ["flying"], "description": "Air shoved hard in one direction. Riders on wings hate it most." },
     { "id": "bolt", "name": "Bolt", "type": "reason", "mt": 7, "hit": 75, "crit": 10, "wt": 5, "minRange": 1, "maxRange": 2, "durability": 5, "rank": "D", "price": 900, "description": "Lightning on a short leash. Bites hard and burns through its uses." },
 
@@ -48,7 +48,7 @@
 
     { "id": "salve", "name": "Salve", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 2, "minRange": 1, "maxRange": 1, "durability": 8, "rank": "E", "price": 500, "heals": true, "healBase": 0, "description": "A prayer for a cut that will not close. Mends whoever stands beside you." },
     { "id": "beacon", "name": "Beacon", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 4, "rank": "C", "price": 800, "heals": true, "healBase": 0, "description": "The same prayer, said louder. Reaches a friend two tiles off." },
-    { "id": "maud_psalter", "name": "Maud's Psalter", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 4, "rank": "D", "heals": true, "healBase": 0, "boundTo": "maud", "description": "Placeholder. Her order's prayers in her own hand, and some of hers." },
+    { "id": "maud_psalter", "name": "Maud's Psalter", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 4, "rank": "D", "heals": true, "healBase": 0, "boundTo": "maud", "description": "Her order's prayers in her own hand, with one word changed." },
     { "id": "radiance", "name": "Radiance", "type": "faith", "mt": 6, "hit": 85, "crit": 0, "wt": 4, "minRange": 1, "maxRange": 2, "durability": 5, "rank": "D", "price": 700, "description": "Faith turned outward. Light that stings anyone the healer must face." }
   ]
 }

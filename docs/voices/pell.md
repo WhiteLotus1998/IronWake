@@ -2,7 +2,7 @@
 
 **Rule 1: stands.** Pell may name a feeling once, as a scene's turn, and the beat sheet names it in advance (below).
 
-**Who.** Aldmere; a shrine-school novice whose school was burned around her, twenty-two, an adept. Wants the undercroft, the one archive nobody has entered, and says so on the first day. Won't say that she was the only one who got out, or that she trusts a page because the people didn't come.
+**Who.** Aldmere; a shrine-school novice whose school was burned around her, twenty-two, an adept. She was fourteen, in the cellar copying lines as a punishment for talking back to the lector, and the cellar is why she lived; she came up through the smoke with the one page she had been copying (STORY draft 7). It was the first of Hask's burnings, in the dismissal winter, and she learns whose hand it was at the Grange. Wants the undercroft, the one archive nobody has entered, and says so on the first day. Won't say that she was the only one who got out, or that she trusts a page because the people didn't come.
 
 **Image source** (rule 5). Pages: the binding, the spine, ink, the margin and what's written in it, a copy and its errors, the shrine script, a burned edge. From Aldmere she takes rain only indoors: damp in a shelf, ink that runs, a roof that leaks over the wrong case. Never: harvest, seasons, a field or the sky as weather (Teodor's; his Aldmere is outdoors, hers is a shelf). Never prices or sums (Ottilie's). When she counts, it is an inventory (the undercroft's rings), not a price.
 

@@ -2,7 +2,7 @@
 
 **Rule 1: stands.** Bet may name a feeling once, at her Cold Kitchen event (0146, 0247), and the beat sheet names it in advance (below). Before the Cold Kitchen she names none, the way the other hires name none.
 
-**Who.** The seam's own, which nobody knows; fifties, a pikeman from the barracks. In fact the old garrison's cook for twenty years, sworn to the Kin with the rest in Hask's first winter, and it didn't take. She is also the one who found the foundling against the outside of the bake-oven wall and handed them to Hask. She took the barracks' coin to see the keep again. Wants to see it. Won't say any of it, to anyone, until the Cold Kitchen, and never hints (0146's rule).
+**Who.** The seam's own, which nobody knows; fifties, a pikeman from the barracks. In fact the old garrison's cook for twenty years, sworn to the Kin with the rest in Hask's first winter, and it didn't take. She is also the one who found the foundling against the outside of the bake-oven wall, under the alder that is the keep yard's one tree, and handed them to Hask. She took the barracks' coin to see the keep again. Wants to see it. Won't say any of it, to anyone, until the Cold Kitchen, and never hints (0146's rule).
 
 **Why it didn't take** (partners only, never in game text; round 366). The Kin's oath feels like warmth. She lit the garrison's fire at four every morning for twenty years and knows exactly what warmth costs. A god offering it for nothing had nothing to sell her.
 

@@ -2,7 +2,7 @@
 
 **Rule 1: stands.** Keziah may name a feeling once, as a scene's turn, and the beat sheet names it in advance (below). Hunger is never her feeling; it is Kinsbane's, and she talks about it the way you talk about a dog in the room.
 
-**Who.** The outlands; a shrine-keeper's daughter, early twenties, a reaver carrying the scythe Kinsbane. Her shrine was burned by all three regions in one generation. Angry, generous, superstitious, and right more often than anyone credits. Wants the outlands' seat to mean something, and wants to know what to do with a god in a blade. Won't say that the hunger is the only thing that has ever wanted her, and that she isn't sure she minds (her flaw).
+**Who.** The outlands; a shrine-keeper's daughter, early twenties, a reaver carrying the scythe Kinsbane. Her shrine was burned by all three regions in one generation. Angry, generous, superstitious, and right more often than anyone credits. Wants the outlands' seat to mean something, and wants to know what to do with a god in a blade. Won't say that the hunger is the only thing that has ever wanted her, and that she isn't sure she minds (her flaw). Her mother died in the third burning, Kestrow's, when Keziah was twelve; she went back into the nave for the one thing under the altar, the reaping blade the keepers had carried three hundred years and never used, and Joab, who kept the lamps, got her out of the smoke (STORY draft 7). She did not see him again until the Oath Stone, sworn.
 
 **Image source** (rule 5). Two sources, and they argue. **The hunt:** spoor, the waterhole, the dry months, the kill shared out by rank, the night when things move. **The shrine:** the keeper's broom, the offering bowl, smoke, the ash of the burned beams, the small rules a keeper's child keeps (don't count the dead aloud, step over a threshold left foot first). Her country is heat, dust and night, so she complains about the cold, often, as a fact about her body, never as a metaphor. Never: the cold as home (Alder's and Bet's). Never the pen or the herd as contempt (Kinsbane's; she hunts for food, it hunts for hate). Never height, sky or weather-reading (Rook's; the claimants part on images first).
 
@@ -14,7 +14,7 @@
 
 **Wit:** yes, the most of anyone after Ottilie (rule 7). About the cold, the north's food and the north's gods. Never about her shrine, and never about the scythe's hunger to its face.
 
-**Names** (rule 8). She says names readily to people she's fed, and calls everyone else by what they're wearing or carrying ("you with the book"). Kinsbane is "it", "the old one", or nothing. Hask is "the old man", which is meant kindly and becomes worse.
+**Names** (rule 8). She says names readily to people she's fed, and calls everyone else by what they're wearing or carrying ("you with the book"). Kinsbane is "it", "the old one", or nothing. **Proposed (Lotus's Bane, STORY draft 7):** if the two-halves reading is confirmed, "the Bane" is what her mother called the god, and Keziah says it once, on Under the Hill, and never before. Hask is "the old man", which is meant kindly and becomes worse.
 
 **The one named feeling:** proposed for the Oath Stone, on whichever side of the hunger she lands, to the captain. Wanted: that the hunger is the first thing that ever wanted her. The beat sheet confirms it.
 

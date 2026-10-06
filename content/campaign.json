@@ -24,10 +24,10 @@
     { "map": "the_field", "reward": 1800, "enemyLevel": 4, "meets": ["ansgar"], "return": { "at": "8,12", "group": "pickets", "behavior": "guard" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "beacon", "field_dressing"],
       "before": [
-        "Hollin is a sworn village, a day short of the keep. Nobody in it is hungry. Nobody is fighting. Every hearth is lit, which is more than Ironwake can say. Nobody will meet my eye.",
-        "I asked a girl at the well her name. She said, \"We're well, thank you,\" and went back to the bucket.",
-        "Past Hollin the keep is in sight across a field and a river. The rime on its walls has started to run.",
-        "(Placeholder card until the writing pass. Defeat the Sworn Captain. Each group sleeps until a fight comes within its hearing.)"
+        "Hollin is a sworn village, a day short of the keep. Nobody in it is hungry or fighting, every hearth is lit, and nobody meets the captain's eye.",
+        "A girl at the well, asked her name, says, \"We're well, thank you,\" and goes back to the bucket.",
+        "Past Hollin, the keep. The rime on its walls has started to run.",
+        "(Defeat the Sworn Captain. Each group sleeps until a fight comes within its hearing.)"
       ] },
     { "map": "ironwake_keep", "reward": 2000, "enemyLevel": 8, "swap": { "6,4": "veteran", "6,7": "marauder", "4,5": "longbowman" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "beacon", "field_dressing"] }

@@ -292,6 +292,7 @@
     {
       "id": "sworn_captain",
       "name": "Sworn Captain",
+      "description": "A boy of the oath's first winter. Twenty-four now, and never once cold.",
       "class": "pikeman",
       "level": 3,
       "stats": { "hp": 26, "str": 7, "mag": 0, "dex": 6, "spd": 5, "lck": 4, "def": 6, "res": 2, "cha": 5 },

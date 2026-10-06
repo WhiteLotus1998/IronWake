@@ -1,17 +1,16 @@
 Campaign, seed 1392, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
 -- The Field Before the Keep --
 Hollin is a sworn village, a day short of the keep. Nobody in it is
-hungry. Nobody is fighting. Every hearth is lit, which is more than
-Ironwake can say. Nobody will meet my eye.
+hungry or fighting, every hearth is lit, and nobody meets the captain's
+eye.
 
-I asked a girl at the well her name. She said, "We're well, thank you,"
-and went back to the bucket.
+A girl at the well, asked her name, says, "We're well, thank you," and
+goes back to the bucket.
 
-Past Hollin the keep is in sight across a field and a river. The rime on
-its walls has started to run.
+Past Hollin, the keep. The rime on its walls has started to run.
 
-(Placeholder card until the writing pass. Defeat the Sworn Captain. Each
-group sleeps until a fight comes within its hearing.)
+(Defeat the Sworn Captain. Each group sleeps until a fight comes within
+its hearing.)
 
 -- Before map 9 of 10: The Field Before the Keep; the purse holds 500 --
 == Roster ==

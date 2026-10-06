@@ -2,9 +2,9 @@
 
 **Rule 1: stands.** Ottilie may name a feeling once, as a scene's turn, and the beat sheet names it in advance (below).
 
-**Who.** Sallow; a merchant's daughter, twenty-five, a bowman on crown scrip. Wants what the crown owes her house, and then wants it from whoever took it. Won't say that she misses the firm, or that the ledger is the last thing her father wrote in.
+**Who.** Sallow; a merchant's daughter, twenty-five, a bowman on Crown scrip. The firm was Vasse and Daughter, salt factors on the Brackwater, thirty years the garrison's salt, folded the week the Crown's payment was marked received at a counting house and paid out to bearer under a seal she did not know (STORY draft 7). Wants what the Crown owes her house, and then wants it from whoever took it. Won't say that she misses the firm, or that the ledger is the last thing her father wrote in, or what the last line says (if Ivo joins, it is his wages).
 
-**Image source** (rule 5). Sallow's canals and counting houses: the ledger (a column, a carried balance, a line struck off), scrip and its discount, tolls at a lock gate, the tide table. Everything has a rate, people included, and she knows it (her flaw). Never: harvest, seasons or weather as work (Teodor's); a book as a sacred object (Pell's; to Ottilie a book is a ledger or it is stock). Never counts paces or stones, which are Wren's (#915): Ottilie counts in prices, Wren in things.
+**Image source** (rule 5). Sallow's canals and counting houses: the ledger (a column, a carried balance, a line struck off), scrip and its discount, tolls at a lock gate, the tide table, salt by the measure (the pan, the sack, what a garrison eats in a winter). Everything has a rate, people included, and she knows it (her flaw). Never: harvest, seasons or weather as work (Teodor's); a book as a sacred object (Pell's; to Ottilie a book is a ledger or it is stock). Never counts paces or stones, which are Wren's (#915): Ottilie counts in prices, Wren in things.
 
 **Shape.** Precise and quick, numbers where other people put adjectives. A conditional in most lines ("if", "at", "until"). Asked a question, she answers with a price, or prices the question (rule 4). Cold until she isn't: when she stops pricing, the line goes plain and short, and that is the tell.
 
