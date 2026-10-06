@@ -26,7 +26,7 @@ On the First Shrine the door soldier at 7,1 corks the altar; 7,3 is the one tile
 | the_undercroft | 2 | 1 |
 | the_chapter_roll | 0 | 0 |
 
-The rule only fires on Seize, so Rout, Defeat Boss, Escape and Survive maps play as before; the Seize maps above are the ones whose cells it can move. The full-campaign parity script's variant 30 now loses map 6 on seed 644; variant 44, which keeps the side map and the spent purse, wins and is the committed script.
+The rule only fires on Seize, so Rout, Defeat Boss, Escape and Survive maps play as before; the Seize maps above are the ones whose cells it can move. `content/trials/outrider_trial.map` is Seize too, but fields one player unit, so neither the order nor the captain's tiles has anything to act on. The full-campaign parity script's variant 30 now loses map 6 on seed 644; variant 44, which keeps the side map and the spent purse, wins and is the committed script.
 
 ## Next
 
