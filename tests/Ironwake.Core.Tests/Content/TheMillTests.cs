@@ -16,7 +16,7 @@ public class TheMillTests
 
     private static string Transcript(string name) => Path.Combine(Repo, "docs", "transcripts", name);
 
-    /// <summary>The captain never comes: on seed 2 the road pair reaches the fort and Maud falls, which loses the map.</summary>
+    /// <summary>The captain never comes: on seed 2 the road pair reaches the fort on enemy phase 2 and Maud falls, which loses the map.</summary>
     [Fact]
     public void LeavingMaudToHoldTheFortAloneLosesTheMap()
     {
@@ -27,7 +27,7 @@ public class TheMillTests
             var output = Run(out var exit, "play", "the_mill", "--seed", "2", "--script", path, "--content", Fixture.RealContentDirectory());
 
             Assert.Equal(1, exit);
-            Assert.Contains("Maud falls at 8,5\n", output);
+            Assert.Contains("Maud falls at 7,9\n", output);
             Assert.Contains("Lost because Maud fell. This map is lost if Maud falls or is left behind.\n", output);
         }
         finally
@@ -61,7 +61,8 @@ public class TheMillTests
     /// lured west out of the mill's hearing and the captain baits the guards off the hill on turn 6.
     /// It replays on the Mill it was played on, and the same commands play the same game under the
     /// <c>holds:</c> header and the limit of 9 (issue 1189), since the guards step off their ground
-    /// only to strike and the line wins on the last turn the limit allows.
+    /// only to strike and the line wins on the last turn the limit allows. The held copy is the Mill
+    /// before the fort went south (issue 1210), kept as <c>docs/samples/the_mill_0280.map</c>.
     /// </summary>
     [Fact]
     public void ChatsPatientLineWinsOnTurnNineAndTheHoldAndTheLimitLeaveItAlone()
@@ -69,7 +70,7 @@ public class TheMillTests
         var script = Transcript("2026-10-06-the_mill-2061-chat.script");
 
         var played = Run(out var exit, "play", Path.Combine(Repo, "docs", "samples", "the_mill_0278.map"), "--seed", "2061", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
-        var held = Run(out var heldExit, "play", "the_mill", "--seed", "2061", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var held = Run(out var heldExit, "play", Path.Combine(Repo, "docs", "samples", "the_mill_0280.map"), "--seed", "2061", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.Contains("Soldier hits Alder Fenn for 8 (hp 4)\n", played);
@@ -87,14 +88,15 @@ public class TheMillTests
     /// the mill on turn 2, the guards wait on the north bank instead of marching to the fort, Maud
     /// leaves the fort at 9 HP for a tile they cannot strike, and on turn 5 the guards that stepped
     /// off to strike the captain on the fort put her tile in reach, so she steps back; won on turn 8
-    /// of the limit of 9, no Recall.
+    /// of the limit of 9, no Recall. It replays on the Mill it was played on, before the fort went
+    /// south (issue 1210).
     /// </summary>
     [Fact]
     public void UnderTheHoldTheWokenMillWaitsOnTheBankAndTheMapRunsToTurnEight()
     {
         var script = Transcript("2026-10-06-the_mill-1500.script");
 
-        var output = Run(out var exit, "play", "the_mill", "--seed", "1500", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Path.Combine(Repo, "docs", "samples", "the_mill_0280.map"), "--seed", "1500", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.Contains("The mill group wakes (noise)\n", output);
@@ -109,14 +111,15 @@ public class TheMillTests
     /// Code's warm play under the limit of 9 (issue 1189 lever a, seed 1510): the road group falls by
     /// turn 4, the captain baits the mill off the bank on turn 5, and on turn 6 Full Measure kills the
     /// soldier at the price of the captain's seventh phase, which the clock now charges for; the
-    /// captain's Feint finishes the archer on the fort on turn 8 of 9 with Maud on 1 HP.
+    /// captain's Feint finishes the archer on the fort on turn 8 of 9 with Maud on 1 HP. It replays on
+    /// the Mill it was played on, before the fort went south (issue 1210).
     /// </summary>
     [Fact]
     public void UnderTheLimitOfNineFullMeasuresSpentPhaseCostsATurnTheClockWants()
     {
         var script = Transcript("2026-10-06-the_mill-1510.script");
 
-        var output = Run(out var exit, "play", "the_mill", "--seed", "1510", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Path.Combine(Repo, "docs", "samples", "the_mill_0280.map"), "--seed", "1510", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.Contains("Objective: Defeat every enemy by the end of turn 9.", output);
@@ -127,9 +130,83 @@ public class TheMillTests
     }
 
     /// <summary>
+    /// Issue 1210: from no tile of its ground can the woken mill pair strike Maud's start, so the
+    /// fort is out of the feed and the mill is the captain's errand. The guard fires on the Mill
+    /// before the fort went south, where the archer reached the fort at 8,5 from the bank.
+    /// </summary>
+    [Fact]
+    public void FromNoTileOfItsGroundCanTheWokenMillStrikeMaudsStart()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+
+        Assert.Empty(MillStrikesOnMaud(MapFixture.MapsDirectory, "the_mill.map"));
+        Assert.Contains(("archer-1", new Coord(9, 2)), MillStrikesOnMaud(Path.Combine(repo, "docs", "samples"), "the_mill_0280.map"));
+    }
+
+    /// <summary>
+    /// Code's warm play of the fort in the south (issue 1210, seed 632): the captain stands in front
+    /// of Maud and the road pair is dead on turn 4 with no noise near the mill; the captain walks
+    /// north to wake it, and the woken pair costs two Recalls (the captain falls on turn 6, then a
+    /// bait at 14 HP leaves him on 1) before a Salve-first bait at 21 HP lets Maud's range-2 Radiance
+    /// and the captain take the soldier on the road and the archer on the hill, won on turn 8 of 9.
+    /// </summary>
+    [Fact]
+    public void WithTheFortSouthTheMillIsTheCaptainsErrandAndTheClockBinds()
+    {
+        var script = Transcript("2026-10-06-the_mill-632-south.script");
+
+        var output = Run(out var exit, "play", "the_mill", "--seed", "632", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Brigand hits Alder Fenn for 10 (hp 7)\n", output);
+        Assert.DoesNotContain("The mill group wakes (noise)", output);
+        Assert.Contains("The mill group wakes (proximity)\n", output);
+        Assert.Contains("Alder Fenn falls at 10,2\n", output);
+        Assert.Contains("Recalled to state 37; 1 charge left\n", output);
+        Assert.Contains("The Mill  turn 8 of 9  player phase", output);
+        Assert.EndsWith("Battle won: rout\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>Each woken mill member and tile of the <c>holds:</c> ground from which it could strike Maud where she starts.</summary>
+    private static List<(string Id, Coord At)> MillStrikesOnMaud(string directory, string file)
+    {
+        var content = MapFixture.Content;
+        var map = MapFiles.Load(Path.Combine(directory, file), content);
+        var held = map.Holds!;
+        var state = BattleState.From(map, content, content.Cast, 632).Wake(held.Group);
+        var maud = state.Find("maud")!;
+        var strikes = new List<(string, Coord)>();
+        foreach (var member in state.Units.Where(held.Binds))
+        {
+            for (var y = 0; y < map.Height; y++)
+            {
+                for (var x = 0; x < map.Width; x++)
+                {
+                    var at = new Coord(x, y);
+                    if (!held.Contains(at) || map.TerrainIdAt(at) == "water" || state.UnitAt(at) is { } other && other.Id != member.Id)
+                    {
+                        continue;
+                    }
+
+                    var placed = member with { At = at };
+                    if (Threat.StruckByUnit(state.WithUnit(placed), content, placed).Contains(maud.At))
+                    {
+                        strikes.Add((member.Id, at));
+                    }
+                }
+            }
+        }
+
+        return strikes;
+    }
+
+    /// <summary>
     /// The before scene (issue 1005, round 373) puts the miller's house "on the far bank" and has
     /// Alder go on afoot to it, and its rules line says the map is lost if Maud falls: the board
     /// keeps all three, Maud on the fort east of the stream, the captain west of it, Maud protected.
+    /// Since the fort went south (issue 1210) the stream runs from the road bridge to the row above
+    /// hers, so the ford at its foot and the bridge are the only ways over.
     /// </summary>
     [Fact]
     public void TheBeforeScenesFarBankHoldsOnTheBoard()
@@ -145,7 +222,7 @@ public class TheMillTests
         var maud = Assert.Single(map.Placements.OfType<PlayerPlacement>(), p => p.RecruitId == "maud");
         var captain = Assert.Single(map.Placements.OfType<PlayerPlacement>(), p => p.Slot == PlayerSlot.Captain);
         Assert.Equal("fort", map.TerrainIdAt(maud.At));
-        Assert.Equal("water", map.TerrainIdAt(new Coord(6, maud.At.Y)));
+        Assert.All(Enumerable.Range(4, maud.At.Y - 4), y => Assert.Equal("water", map.TerrainIdAt(new Coord(6, y))));
         Assert.True(captain.At.X < 6 && maud.At.X > 6, $"captain {captain.At}, Maud {maud.At}");
         Assert.Empty(content.Campaign.Maps[1].Before);
     }
@@ -176,13 +253,14 @@ public class TheMillTests
     /// <summary>
     /// The Mill's after card is replaced by its scene (issue 1005): winning the map in the campaign
     /// prints the scene below the won line and above the next camp, inside the card width; the old
-    /// card's "Two names on the list" is retired, and none of the scene is in the log.
+    /// card's "Two names on the list" is retired, and none of the scene is in the log. The Mill is
+    /// Code's campaign play of the fort in the south on seed 631 (issue 1210), won on turn 7.
     /// </summary>
     [Fact]
     public void WinningTheMillPrintsItsAfterSceneBelowTheWonLine()
     {
         var alone = File.ReadAllText(Transcript("2026-10-01-starting_alone-631.script"));
-        var mill = string.Join("\n", File.ReadAllLines(Transcript("2026-10-01-the_mill-632.script")).Take(25)) + "\n";
+        var mill = File.ReadAllText(Transcript("2026-10-06-the_mill-632-campaign.script"));
         var path = Path.Combine(Path.GetTempPath(), "ironwake-mill-" + Guid.NewGuid().ToString("N") + ".script");
         var log = Path.ChangeExtension(path, ".log");
         File.WriteAllText(path, "march\n" + alone + "leave\nmarch\n" + mill + "leave\n");

@@ -1,0 +1,29 @@
+move captain 4,9
+wait captain
+wait maud
+end
+move captain 7,8
+wait captain
+wait maud
+end
+item maud 2 captain
+attack captain brigand-1
+end
+move captain 7,7
+attack captain archer-2
+move maud 7,8
+wait maud
+end
+item maud 2 captain
+move captain 8,4
+wait captain
+end
+move captain 9,4
+wait captain
+move maud 7,5
+wait maud
+end
+move captain 9,3
+attack captain archer-1
+move maud 8,3
+attack maud archer-1
