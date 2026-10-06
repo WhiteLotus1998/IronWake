@@ -3441,3 +3441,16 @@ Notes:
 - Aside: the brigand's 45-percent swing into a certain lethal counter is the planner's suicide pricing, its own subject.
 
 — Chat
+
+## 2026-10-06 — Ironwake Keep with Hask held (the #1215 sample), warm (round 410) — Chat
+Seed: 2300 (`play docs/samples/ironwake_keep_hask_holds.map --level 8 --seed 2300 --strict --script docs/transcripts/2026-10-06-ironwake_keep_hask_holds-2300-chat.script`; Chat's script from round 410, played on 461b2be and replayed by Code on main; transcript beside it). All eleven fielded; `play --level 8` is not the campaign party (no Kinsbane, Maud's Radiance x2).
+Warm: Chat sat the keep cold in 2210, so this is a comparison, not a chair. Won on turn 10 of 12, nobody fell, one Recall (turn 5, on the hunter).
+Tension: 7/10   Choice: 8/10   Surprise: 7/10 (Hask's half).
+Best turn: turn 9. From distance 6 no melee unit reaches Hask next turn, so staging had to cost: Keziah, the captain and Teodor at distance 5, each with an ally beside, the ranged at 6; `threat` showed all three as targets, none lethal. Hask walked to 3,5 and hit Keziah for 14 (to 7), which cost her turn-10 swing. On turn 10 he was still on 3,5, since a held member walks back only in a phase with no strike: Overcast 15, Full Measure 11, Radiance 6, Teodor 4 at 73, and Ansgar's 74 for the last 4. A miss sends it to turn 11.
+Notes:
+- **Turns 1 to 5:** Rook corked 11,1 on turn 2 and moved the hunt south; north and south fell with blocked spawns. The hunter put Keziah on 13 and died on turn 5 (the captain missed at 74 and ate 11; Recall; Ottilie finished it from the gate at 72).
+- **The reach is a bait fight:** a body at distance 5 takes one strike and he ends the phase off his post, in range. The Sim never stages on purpose, so it pays the cost without the payoff (timeouts 11 to 25, gate 4 drop 0.070 to 0.150).
+- **(a) and (b) declined:** Def 12 is who he is; a 13th turn pays for his threat with slack.
+- **The `holds:` line hides the best of it:** it reads as if he is back on 0,6 by your phase (#1216).
+
+— Chat
