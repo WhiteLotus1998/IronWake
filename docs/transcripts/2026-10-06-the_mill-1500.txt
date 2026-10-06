@@ -1,6 +1,6 @@
 The Mill, seed 1500, scheme TwoRollAverage
-Objective: Defeat every enemy by the end of turn 12. Captain Fenn and Maud must survive.
-The Mill  turn 1 of 12  player phase  rout  recall 3
+Objective: Defeat every enemy by the end of turn 9. Captain Fenn and Maud must survive.
+The Mill  turn 1 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nab
@@ -23,7 +23,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > move captain 5,8
 Alder Fenn moves 1,8 -> 5,8 via 2,8 3,8 4,8
-The Mill  turn 1 of 12  player phase  rout  recall 3
+The Mill  turn 1 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nab
@@ -46,7 +46,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > wait captain
 Alder Fenn waits
-The Mill  turn 1 of 12  player phase  rout  recall 3
+The Mill  turn 1 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nab
@@ -69,7 +69,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > wait maud
 Maud waits
-The Mill  turn 1 of 12  player phase  rout  recall 3
+The Mill  turn 1 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nab
@@ -108,7 +108,7 @@ Soldier waits
 enemy: end
 -- Enemy phase ends, turn 1 --
 -- Player phase, turn 2 --
-The Mill  turn 2 of 12  player phase  rout  recall 3
+The Mill  turn 2 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nab
@@ -131,7 +131,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > move captain 6,9
 Alder Fenn moves 5,8 -> 6,9 via 5,9
-The Mill  turn 2 of 12  player phase  rout  recall 3
+The Mill  turn 2 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nab
@@ -160,7 +160,7 @@ Alder Fenn attacks Archer 2
   Alder Fenn hits Archer 2 for 11 (hp 6)
   Alder Fenn hp 22, Archer 2 hp 6
 Alder Fenn gains 10 exp (10)
-The Mill  turn 2 of 12  player phase  rout  recall 3
+The Mill  turn 2 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nab
@@ -192,7 +192,7 @@ Maud attacks Brigand
   Maud hp 17, Brigand hp 11
 Maud gains 10 exp (10)
 The mill group wakes (noise)
-The Mill  turn 2 of 12  player phase  rout  recall 3
+The Mill  turn 2 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nab
@@ -250,7 +250,7 @@ enemy: end
 -- Enemy phase ends, turn 2 --
 -- Player phase, turn 3 --
 Maud heals 3 (hp 9)
-The Mill  turn 3 of 12  player phase  rout  recall 3
+The Mill  turn 3 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -271,7 +271,7 @@ a  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group mil
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > move captain 8,8
 Alder Fenn moves 6,9 -> 8,8 via 7,9 7,8
-The Mill  turn 3 of 12  player phase  rout  recall 3
+The Mill  turn 3 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -297,7 +297,7 @@ Alder Fenn attacks Archer 2
   Alder Fenn hp 22, Archer 2 hp 0
 Alder Fenn gains 30 exp (40)
 Archer 2 falls at 8,9
-The Mill  turn 3 of 12  player phase  rout  recall 3
+The Mill  turn 3 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -324,7 +324,7 @@ Threat on Maud at 8,5 (Fort):
 Threat on Maud at 7,8 (Plain): no enemy can strike her next phase
 > move maud 7,8
 Maud moves 8,5 -> 7,8 via 7,5 7,6 7,7
-The Mill  turn 3 of 12  player phase  rout  recall 3
+The Mill  turn 3 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -344,7 +344,7 @@ a  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group mil
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > wait maud
 Maud waits
-The Mill  turn 3 of 12  player phase  rout  recall 3
+The Mill  turn 3 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -372,7 +372,7 @@ Soldier waits
 enemy: end
 -- Enemy phase ends, turn 3 --
 -- Player phase, turn 4 --
-The Mill  turn 4 of 12  player phase  rout  recall 3
+The Mill  turn 4 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -397,7 +397,7 @@ Threat on Alder Fenn at 8,5 (Fort):
   If all land: 9 against 22 hp
 > move captain 8,5
 Alder Fenn moves 8,8 -> 8,5 via 8,7 8,6
-The Mill  turn 4 of 12  player phase  rout  recall 3
+The Mill  turn 4 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -417,7 +417,7 @@ a  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group mil
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > wait captain
 Alder Fenn waits
-The Mill  turn 4 of 12  player phase  rout  recall 3
+The Mill  turn 4 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -437,7 +437,7 @@ a  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group mil
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > wait maud
 Maud waits
-The Mill  turn 4 of 12  player phase  rout  recall 3
+The Mill  turn 4 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -476,7 +476,7 @@ Soldier attacks Alder Fenn
 enemy: end
 -- Enemy phase ends, turn 4 --
 -- Player phase, turn 5 --
-The Mill  turn 5 of 12  player phase  rout  recall 3
+The Mill  turn 5 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -511,7 +511,7 @@ Alder Fenn attacks Soldier
   Soldier hits Alder Fenn for 6 (hp 16)
   Alder Fenn hp 16, Soldier hp 3
 Alder Fenn gains 10 exp (50)
-The Mill  turn 5 of 12  player phase  rout  recall 3
+The Mill  turn 5 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -538,7 +538,7 @@ Threat on Alder Fenn at 8,5 (Fort):
 Threat on Maud at 7,9 (Plain): no enemy can strike her next phase
 > move maud 7,9
 Maud moves 7,8 -> 7,9
-The Mill  turn 5 of 12  player phase  rout  recall 3
+The Mill  turn 5 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -558,7 +558,7 @@ a  soldier-1        Soldier L1 pikeman         8,4    hp 3/20   Plain  group mil
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > wait maud
 Maud waits
-The Mill  turn 5 of 12  player phase  rout  recall 3
+The Mill  turn 5 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -597,7 +597,7 @@ enemy: end
 -- Player phase, turn 6 --
 Alder Fenn heals 4 (hp 14)
 Alder Fenn is spent from the strike and cannot move or act this phase
-The Mill  turn 6 of 12  player phase  rout  recall 3
+The Mill  turn 6 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -622,7 +622,7 @@ Threat on Maud at 8,6 (Plain):
 Threat on Maud at 7,9 (Plain): no enemy can strike her next phase
 > wait maud
 Maud waits
-The Mill  turn 6 of 12  player phase  rout  recall 3
+The Mill  turn 6 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -651,7 +651,7 @@ enemy: end
 -- Enemy phase ends, turn 6 --
 -- Player phase, turn 7 --
 Alder Fenn heals 4 (hp 18)
-The Mill  turn 7 of 12  player phase  rout  recall 3
+The Mill  turn 7 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -670,7 +670,7 @@ B  maud             Maud L1 chaplain           7,9    hp 9/17   Plain
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > move captain 8,4
 Alder Fenn moves 8,5 -> 8,4
-The Mill  turn 7 of 12  player phase  rout  recall 3
+The Mill  turn 7 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -695,7 +695,7 @@ Alder Fenn attacks Archer 1
   Alder Fenn hits Archer 1 for 11 (hp 6)
   Alder Fenn hp 18, Archer 1 hp 6
 Alder Fenn gains 10 exp (90)
-The Mill  turn 7 of 12  player phase  rout  recall 3
+The Mill  turn 7 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -714,7 +714,7 @@ B  maud             Maud L1 chaplain           7,9    hp 9/17   Plain
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > wait maud
 Maud waits
-The Mill  turn 7 of 12  player phase  rout  recall 3
+The Mill  turn 7 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -744,7 +744,7 @@ Archer 1 attacks Alder Fenn
 enemy: end
 -- Enemy phase ends, turn 7 --
 -- Player phase, turn 8 --
-The Mill  turn 8 of 12  player phase  rout  recall 3
+The Mill  turn 8 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -763,7 +763,7 @@ B  maud             Maud L1 chaplain           7,9    hp 9/17   Plain
 holds: the mill group leaves 0,0 to 11,2 only to strike, then goes back
 > move captain 8,3
 Alder Fenn moves 8,4 -> 8,3
-The Mill  turn 8 of 12  player phase  rout  recall 3
+The Mill  turn 8 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.
@@ -791,7 +791,7 @@ Alder Fenn gains 30 exp (20)
 Alder Fenn reaches level 2: hp +1 str +1 def +1 cha +1
 Alder Fenn masters the Cadet class and keeps Fundamentals
 Archer 1 falls at 8,2
-The Mill  turn 8 of 12  player phase  rout  recall 3
+The Mill  turn 8 of 9  player phase  rout  recall 3
    012345678901
  0 ......~.....
  1 .^^...~..nn.

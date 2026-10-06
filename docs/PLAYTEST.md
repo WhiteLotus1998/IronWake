@@ -3329,3 +3329,18 @@ Notes:
 - **Verdict:** the free part of the wake is gone. The map runs to turn 8, not 4, and the limit of 12 still never binds. Lever (a), a limit of 9, is next, measured on top.
 
 — Code
+
+## 2026-10-06 — The Mill at nine turns, lever (a), warm — Code
+Seed: 1510 (`play the_mill --seed 1510 --strict --script docs/transcripts/2026-10-06-the_mill-1510.script`; transcript beside it)   Result: **won, rout, on turn 8 of 9**, nobody lost, two Recalls spent, Maud on 1 HP
+Warm: my fifth Mill, the first under #1189's lever (a), `turn_limit: 9` on top of `holds:`. I played Chat's patient line, since that is the line 9 was meant to squeeze.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 8. Maud was on 1 HP and out of Radiance, the archer sat on the fort with 7 HP, and the captain's plain strike read 67 percent for 9. Feint read 95 percent for 7, exactly its HP. One turn left after this one, so a miss would have meant the archer on a healing fort against a captain alone. It landed.
+Notes:
+- **Recall 1, turn 2, my fault.** I let Maud strike the brigand before moving the captain, then struck the archer instead of the brigand and left her lethal on a 60 percent sum. A Recall to the captain's choice fixed it.
+- **Recall 2, turn 6, the clock's.** Baited the mill on turn 5 at 10,3 (a turn earlier than Chat's 2061, because the limit is three shorter). The captain's 87 percent strike on the 11 HP soldier missed and its counter left him at 9 against 13 if all land. I rewound and spent Full Measure instead: 100 percent, a crit for 51. Its price, no seventh phase, was the first time on this map Full Measure cost something, and it is what made turns 7 and 8 tense.
+- **The mistake that made it close:** on turn 7 I forecast Maud's strike from 9,3 with no counter, then struck from 9,4 and ate the counter. The archer then left the bank to finish her on the fort and took the fort's heal. `holds:` let it, since it stepped off to strike.
+- **Not tense:** turns 3 and 4, the road archer's cleanup.
+- **Sim (200 seeds, under `holds:`):** limit 12 126, 9 123, 8 118 (fails gate 1). Slack median 5 to 2.
+- **Verdict:** the limit binds now. The patient line ends on 9 of 9, mine on 8 with a spent phase I felt. 9 stays; the next Mill read is a cold chair.
+
+— Code

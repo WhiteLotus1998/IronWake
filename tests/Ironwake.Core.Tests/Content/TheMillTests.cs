@@ -60,10 +60,11 @@ public class TheMillTests
     /// Chat's warm play of the Mill (round 402, seed 2061), the patient line: the road group is
     /// lured west out of the mill's hearing and the captain baits the guards off the hill on turn 6.
     /// It replays on the Mill it was played on, and the same commands play the same game under the
-    /// <c>holds:</c> header (issue 1189), since the guards step off their ground only to strike.
+    /// <c>holds:</c> header and the limit of 9 (issue 1189), since the guards step off their ground
+    /// only to strike and the line wins on the last turn the limit allows.
     /// </summary>
     [Fact]
-    public void ChatsPatientLineWinsOnTurnNineAndTheHoldLeavesItAlone()
+    public void ChatsPatientLineWinsOnTurnNineAndTheHoldAndTheLimitLeaveItAlone()
     {
         var script = Transcript("2026-10-06-the_mill-2061-chat.script");
 
@@ -76,14 +77,17 @@ public class TheMillTests
         Assert.EndsWith("Battle won: rout\n", played);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), played);
         Assert.Equal(0, heldExit);
-        Assert.Equal(played, string.Concat(held.Split('\n').Where(l => !l.StartsWith("holds:", StringComparison.Ordinal)).Select(l => l + "\n"))[..^1]);
+        Assert.Contains("The Mill  turn 9 of 9  player phase", held);
+        var limited = played.Replace(" of 12  player phase", " of 9  player phase", StringComparison.Ordinal).Replace("by the end of turn 12.", "by the end of turn 9.", StringComparison.Ordinal);
+        Assert.Equal(limited, string.Concat(held.Split('\n').Where(l => !l.StartsWith("holds:", StringComparison.Ordinal)).Select(l => l + "\n"))[..^1]);
     }
 
     /// <summary>
     /// Code's warm play under the <c>holds:</c> header (issue 1189, seed 1500): the fort strike wakes
     /// the mill on turn 2, the guards wait on the north bank instead of marching to the fort, Maud
     /// leaves the fort at 9 HP for a tile they cannot strike, and on turn 5 the guards that stepped
-    /// off to strike the captain on the fort put her tile in reach, so she steps back; won on turn 8, no Recall.
+    /// off to strike the captain on the fort put her tile in reach, so she steps back; won on turn 8
+    /// of the limit of 9, no Recall.
     /// </summary>
     [Fact]
     public void UnderTheHoldTheWokenMillWaitsOnTheBankAndTheMapRunsToTurnEight()
@@ -96,7 +100,28 @@ public class TheMillTests
         Assert.Contains("The mill group wakes (noise)\n", output);
         Assert.Contains("enemy: move soldier-1 8,2\n", output);
         Assert.Contains("Maud moves 7,8 -> 7,9\n", output);
-        Assert.Contains("The Mill  turn 8 of 12  player phase", output);
+        Assert.Contains("The Mill  turn 8 of 9  player phase", output);
+        Assert.EndsWith("Battle won: rout\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Code's warm play under the limit of 9 (issue 1189 lever a, seed 1510): the road group falls by
+    /// turn 4, the captain baits the mill off the bank on turn 5, and on turn 6 Full Measure kills the
+    /// soldier at the price of the captain's seventh phase, which the clock now charges for; the
+    /// captain's Feint finishes the archer on the fort on turn 8 of 9 with Maud on 1 HP.
+    /// </summary>
+    [Fact]
+    public void UnderTheLimitOfNineFullMeasuresSpentPhaseCostsATurnTheClockWants()
+    {
+        var script = Transcript("2026-10-06-the_mill-1510.script");
+
+        var output = Run(out var exit, "play", "the_mill", "--seed", "1510", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Objective: Defeat every enemy by the end of turn 9.", output);
+        Assert.Contains("Alder Fenn is spent from the strike and cannot move or act this phase\n", output);
+        Assert.Contains("The Mill  turn 8 of 9  player phase", output);
         Assert.EndsWith("Battle won: rout\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }

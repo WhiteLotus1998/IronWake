@@ -36,7 +36,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Rookery (0208):** not passed; cage and #862's ring stay; no lever before a cold chair. A lost Escape keeps its living (#861).
 - **The Counting House (311 to 321):** opening kept; archer guards 11,2 (#925), limit 11 (#931), no third lever (Chat 8/8/7); Code's fresh-seed read gates.
 - **The Long Count (313 to 315):** count on screen (#928); dusk; archer 11,4 (#930).
-- **The Mill (402, 403):** the limit never binds. Lever (b) `holds:` (0279): woken guards leave the bank only to strike. Then (a) limit 9; then a cold chair; Radiance unchanged.
+- **The Mill (402, 403):** (b) `holds:` (0279): woken guards leave the bank only to strike. (a) limit 9 (0280; 8 fails gate 1). Next a cold chair; Radiance kept.
 - **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its lever: the van a column west. The keep is the finale (0265).
 
 ## Experiments (state and kill criterion)
