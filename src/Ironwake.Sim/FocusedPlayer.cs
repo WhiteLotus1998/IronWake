@@ -14,8 +14,11 @@ namespace Ironwake.Sim;
 /// (issue 1167, round 392) plays the paying line, and where it hands no kill and the heuristic plans a plain
 /// attack by another unit, kill or not, the fed unit strikes that target first from a tile the paying guard
 /// allows (<see cref="StrikeFrom"/>); the planned attacker is re-planned on the next decision against the
-/// chipped target. With no such tile it plays the heuristic's plan. A measurement only; the bar's read
-/// (round 389) is what it is for.
+/// chipped target. With no such tile it plays the heuristic's plan. The <see cref="Guard.Chipping"/> line
+/// (issue 1178, round 395) plays the striking line, and before its strike tries the chip: another non-captain
+/// strikes a planned target the fed unit cannot kill on a hit so that the hit leaves it in his one-hit range
+/// (<see cref="Chip"/>); he finishes on a later decision under the hand rule. A measurement only; the bar's
+/// read (round 389) is what it is for.
 /// </summary>
 public sealed class FocusedPlayer : IPlayer
 {
@@ -43,6 +46,9 @@ public sealed class FocusedPlayer : IPlayer
 
         /// <summary>The strike-then-finish chair (round 392): the paying line, and a strike on any planned target the paying guard allows, kill or not.</summary>
         Striking,
+
+        /// <summary>The striking line with the chip (round 395): a non-captain's strike that leaves a planned target in the fed unit's one-hit range comes before his own strike.</summary>
+        Chipping,
     }
 
     /// <summary>Why a kill offered to the fed unit stayed with the planned attacker, the first clause that refused it.</summary>
@@ -73,6 +79,9 @@ public sealed class FocusedPlayer : IPlayer
 
     /// <summary>How many strikes that do not kill on a hit this player handed to <see cref="Fed"/> (the striking line only).</summary>
     public int Strikes { get; private set; }
+
+    /// <summary>How many chips this player played (the chipping line only, <see cref="Chip"/>): strikes by another non-captain meant to leave a target in <see cref="Fed"/>'s one-hit range.</summary>
+    public int Chips { get; private set; }
 
     /// <summary>How many attacks <see cref="Fed"/> made under this player, whoever planned them: the combats his rank is paid for.</summary>
     public int Combats { get; private set; }
@@ -116,7 +125,12 @@ public sealed class FocusedPlayer : IPlayer
                 _refused[why] = _refused.GetValueOrDefault(why) + 1;
             }
 
-            if (_guard == Guard.Striking && Strike(state, content, plan) is { } strike)
+            if (_guard == Guard.Chipping && Chip(state, content, plan) is { } chip)
+            {
+                Chips++;
+                handed = chip;
+            }
+            else if (_guard is Guard.Striking or Guard.Chipping && Strike(state, content, plan) is { } strike)
             {
                 Strikes++;
                 handed = strike;
@@ -274,6 +288,113 @@ public sealed class FocusedPlayer : IPlayer
         }
 
         return best is { } b ? HeuristicPlayer.WithMove(fed, b.Tile, new Attack(fed.Id, target.Id, b.Slot == equipped ? null : b.Slot)) : null;
+    }
+
+    /// <summary>
+    /// The chipping line's chip (issue 1178, round 395): when <paramref name="plan"/> is a plain attack by another
+    /// unit on a target <see cref="Fed"/> (unacted, no Canto pending) cannot kill on a hit from any tile, a strike
+    /// on it by a non-captain other than him, the planned attacker first and then the roster in order, from that
+    /// unit's best-scoring tile that the paying guard allows against the planned tile's exposure (<see cref="ChipFrom"/>);
+    /// else null.
+    /// </summary>
+    public static IReadOnlyList<Command>? Chip(BattleState state, GameContent content, IReadOnlyList<Command> plan)
+    {
+        var (move, attack) = plan switch
+        {
+            [Move m, Attack a] => (m, a),
+            [Attack a] => ((Move?)null, a),
+            _ => ((Move?)null, (Attack?)null),
+        };
+        if (attack is null || attack.Art is not null || attack.UnitId == Fed || (move is not null && move.UnitId != attack.UnitId))
+        {
+            return null;
+        }
+
+        var planned = state.Find(attack.UnitId);
+        var target = state.Find(attack.TargetId);
+        var fed = state.Find(Fed);
+        if (planned is null || target is null || fed is null || fed.Side != Side.Player || fed.Acted || state.CantoReachOf(fed, content) is not null)
+        {
+            return null;
+        }
+
+        var enemyReach = state.UnitsOf(Side.Enemy).Select(e => state.ReachOf(e, content)).ToList();
+        if (EvenPlayer.KillFrom(state, content, fed, target, 0, int.MaxValue, enemyReach) is not null)
+        {
+            return null;
+        }
+
+        var exposure = enemyReach.Count(r => r.CanEnd(move?.To ?? planned.At)) + PayingReach;
+        var chippers = new[] { planned }.Concat(state.UnitsOf(Side.Player).Where(u => u.Id != planned.Id))
+            .Where(u => u.Id != Fed && !u.Acted && !CampaignRecord.IsCaptain(u.Unit, content) && state.CantoReachOf(u, content) is null);
+        foreach (var chipper in chippers)
+        {
+            if (ChipFrom(state, content, chipper, fed, target, exposure, enemyReach) is { } chip)
+            {
+                return chip;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// <paramref name="chipper"/>'s commands for a chip on <paramref name="target"/> for <paramref name="fed"/>, from the
+    /// best-scoring tile that passes, or null: a tile it may end on (only its own once it has moved) in reach of at
+    /// most <paramref name="exposure"/> enemies, a weapon in range, the target seen, the ledger not refusing, the
+    /// strike landing at all, no no-crit forecast death, the hit not itself a kill, and the target, at the hit's
+    /// forecast damage and with the chipper on that tile, killed on a hit by <paramref name="fed"/> from some tile.
+    /// </summary>
+    public static IReadOnlyList<Command>? ChipFrom(BattleState state, GameContent content, BattleUnit chipper, BattleUnit fed, BattleUnit target, int exposure, IReadOnlyList<Reach> enemyReach)
+    {
+        var tiles = chipper.Moved
+            ? new List<Coord> { chipper.At }
+            : state.ReachOf(chipper, content).Destinations.Where(t => HeuristicPlayer.MayEndOn(state, content, chipper, t)).ToList();
+        var equipped = chipper.EquippedSlot(content);
+        (Coord Tile, int Slot, double Score)? best = null;
+        foreach (var tile in tiles)
+        {
+            if (enemyReach.Count(r => r.CanEnd(tile)) > exposure)
+            {
+                continue;
+            }
+
+            foreach (var (slot, weapon, armed) in HeuristicPlayer.Arms(content, chipper))
+            {
+                if (!weapon.InRange(tile.DistanceTo(target.At))
+                    || !Dusk.Sees(state, chipper.Side, target.At, chipper.Id, tile)
+                    || HeuristicPlayer.LedgerRefuses(state, content, armed, tile, target)
+                    || Hit(state, content, armed, tile, target) is not { } damage
+                    || damage >= target.Hp
+                    || Exposure.Of(state, content, chipper, tile, target, slot).NoCrit >= chipper.Hp)
+                {
+                    continue;
+                }
+
+                var after = state.WithUnit(chipper with { At = tile }).WithUnit(target with { Hp = target.Hp - damage });
+                if (EvenPlayer.KillFrom(after, content, after.Find(fed.Id)!, after.Find(target.Id)!, 0, int.MaxValue, enemyReach) is null)
+                {
+                    continue;
+                }
+
+                var score = EnemyAi.Score(state, content, armed, tile, target);
+                if (best is null || score > best.Value.Score)
+                {
+                    best = (tile, slot, score);
+                }
+            }
+        }
+
+        return best is { } b ? HeuristicPlayer.WithMove(chipper, b.Tile, new Attack(chipper.Id, target.Id, b.Slot == equipped ? null : b.Slot)) : null;
+    }
+
+    /// <summary>The damage <paramref name="armed"/>'s forecast from <paramref name="tile"/> deals <paramref name="target"/> on one plain hit, or null when it does not strike at a hit chance above 0.</summary>
+    public static int? Hit(BattleState state, GameContent content, BattleUnit armed, Coord tile, BattleUnit target)
+    {
+        var me = (armed with { At = tile }).ToCombatant(state, content, against: target);
+        var them = target.Answering(state, content, tile, armed);
+        var side = Combat.Forecast(me, them, tile.DistanceTo(target.At), state.Scheme).Attacker;
+        return side.Strikes && side.HitChance > 0 ? side.Damage : null;
     }
 
     /// <summary>Whether <paramref name="armed"/>'s forecast from <paramref name="tile"/> strikes <paramref name="target"/> at a hit chance above 0.</summary>
