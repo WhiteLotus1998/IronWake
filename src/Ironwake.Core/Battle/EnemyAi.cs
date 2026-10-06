@@ -336,9 +336,12 @@ public static class EnemyAi
     /// it could otherwise make this phase, a boss whose map behavior is Guard and that has a post
     /// (<see cref="Post"/>) ends on the reachable tile nearest its post, by Manhattan distance,
     /// then its own tile, then the lower movement cost, then the reach's order; that tile is not
-    /// vetoed, and the swing of issue 389 follows from it. Null when the rule does not apply:
-    /// not a guard boss, no post, or no strike in reach at all, in which case it approaches as
-    /// any woken guard does. So a boss the gathered party outweighs holds the ground it guards
+    /// vetoed, and the swing of issue 389 follows from it. With no strike in reach at all, a guard
+    /// boss standing on its post holds there (issue 1138): the vetoed approach looks one phase
+    /// ahead and the refusal another, so stepping off on a tile safe now sent him home the next
+    /// phase, a shuttle with a heal on every return. Null when the rule does not apply: not a
+    /// guard boss, no post, or no strike in reach while off the post, in which case it approaches
+    /// as any woken guard does. So a boss the gathered party outweighs holds the ground it guards
     /// instead of running from it.
     /// </summary>
     public static Coord? GoesHome(
@@ -352,7 +355,7 @@ public static class EnemyAi
 
         if (Choose(state, content, unit, tiles, reach, known, playerReach, sworn, inDaylight, unvetoed: true).Best is null)
         {
-            return null;
+            return unit.At == post ? post : null;
         }
 
         return reach.Destinations

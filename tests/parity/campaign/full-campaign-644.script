@@ -516,13 +516,12 @@ attack pell sentry-1
 move teodor 17,7
 attack teodor archer-3
 end !
-move captain 15,8
-attack captain brigand-2
-move maud 16,6
-attack maud archer-3
+move captain 17,10
+attack captain archer-3
+attack maud brigand-2
 move ottilie 6,2
 wait ottilie
-move pell 15,6
+move pell 16,6
 attack pell sworn_captain-1
 leave
 bench teodor
