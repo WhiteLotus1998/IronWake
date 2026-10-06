@@ -1,0 +1,72 @@
+# Issue 1139: the campaign's keep (content/keep/ironwake_keep.map) at deploy 6 (main before the PR) and deploy: all (12 slots).
+# Standalone --full, 200 seeds, stand-in units at the map's enemy_level 2 header; not the campaign's carried company.
+
+## before: six player slots, deploy 6
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: ironwake_keep.map (main), heuristic wins 147/200 (73 %), winning turn median 9 p90 9 limit 8, losses 0 timeout 53 captain 0 protected, quiet tail -, refused kill -, two-roll average: ok
+gate 2 decisions matter: ironwake_keep.map (main), random wins 12/200 (6 %): FAILED
+gate 3 no cheap shots: ironwake_keep.map (main), 0 player units killed from deployment: ok
+gate 4 no dead weight: ironwake_keep.map (main), 5 recruits x 200 seeds, median drop 0.360: ok
+  dunstan: drop 0.310 se 0.048 own [atk 726 dmg 8467 heal 0 abs 486] rest baseline [atk 2992 dmg 42826 heal 0 abs 2794] rest benched [atk 2870 dmg 43210 heal 0 abs 3069] benched losses 0 timeout 115 captain 0 protected, refused kill -
+  ottilie: drop 0.290 se 0.048 own [atk 807 dmg 6795 heal 0 abs 466] rest baseline [atk 2911 dmg 44498 heal 0 abs 2814] rest benched [atk 2881 dmg 46910 heal 0 abs 3209] benched losses 0 timeout 111 captain 0 protected, refused kill -
+  pell: drop 0.455 se 0.055 own [atk 909 dmg 15666 heal 0 abs 502] rest baseline [atk 2809 dmg 35627 heal 0 abs 2778] rest benched [atk 2628 dmg 37569 heal 0 abs 3517] benched losses 0 timeout 144 captain 0 protected, refused kill -
+  teodor: drop 0.435 se 0.055 own [atk 563 dmg 7300 heal 0 abs 691] rest baseline [atk 3155 dmg 43993 heal 0 abs 2589] rest benched [atk 2755 dmg 42539 heal 0 abs 3366] benched losses 0 timeout 140 captain 0 protected, refused kill -
+  wren: drop 0.360 se 0.049 own [atk 563 dmg 9061 heal 0 abs 688] rest baseline [atk 3155 dmg 42232 heal 0 abs 2592] rest benched [atk 3000 dmg 43608 heal 0 abs 3157] benched losses 0 timeout 125 captain 0 protected, refused kill -
+  captain captain: baseline [atk 150 dmg 4004 heal 0 abs 447] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 3851 ms: ok
+gate 5 forecast honesty: 10052 combats (4055 with gauntlets), 20221 strikes, hits 13585 expected 13573.4, crits 985 expected 988.2, damage mismatches 0, bow strikes on fliers 50 (grounded 4, killed 23): ok
+gate 7 speed: ironwake_keep.map (main), 5 AI-vs-AI games, 29 turns, slowest 89 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 71388 ms: ok
+free prefix: ironwake_keep.map (main), 0 of 2, 4, 6 tried, slack median -1 p90 -1 (printed, not gated)
+  prefix 2: wins 87/200, drop 0.300 se 0.051, not free
+  prefix 4: wins 57/200, drop 0.450 se 0.056, not free
+  prefix 6: wins 29/200, drop 0.590 se 0.060, not free
+  prefix 2 refunded: wins 27/200, drop 0.600 se 0.058, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 0.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 1 quiet 0 live 199, wake tax 0.00
+  turn 6: dead 7 quiet 0 live 191, wake tax 0.00
+  turn 7: dead 18 quiet 0 live 175, wake tax 0.00
+  turn 8: dead 14 quiet 0 live 159, wake tax 0.00
+full: FAILED
+
+## after: twelve player slots, deploy: all
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: content/keep/ironwake_keep.map, heuristic wins 198/200 (99 %), winning turn median 9 p90 9 limit 8, losses 0 timeout 2 captain 0 protected, quiet tail -, refused kill -, two-roll average: ok
+gate 2 decisions matter: content/keep/ironwake_keep.map, random wins 106/200 (53 %): FAILED
+gate 3 no cheap shots: content/keep/ironwake_keep.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: content/keep/ironwake_keep.map, 10 recruits x 200 seeds, median drop 0.000: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.000, se 0.010); rows are data, no recruit is judged
+  ansgar: drop -0.005 se 0.009 own [atk 639 dmg 6135 heal 0 abs 137] rest baseline [atk 4529 dmg 57965 heal 59 abs 3110] rest benched [atk 5019 dmg 68322 heal 52 abs 3119] benched losses 0 timeout 1 captain 0 protected, refused kill -
+  brannock: drop 0.000 se 0.000 own [atk 5 dmg 80 heal 0 abs 5] rest baseline [atk 5163 dmg 64020 heal 59 abs 3242] rest benched [atk 5166 dmg 64098 heal 59 abs 3247] benched losses 0 timeout 2 captain 0 protected, refused kill -
+  dunstan: drop 0.005 se 0.011 own [atk 745 dmg 7118 heal 0 abs 415] rest baseline [atk 4423 dmg 56982 heal 59 abs 2832] rest benched [atk 4585 dmg 63624 heal 50 abs 3040] benched losses 0 timeout 3 captain 0 protected, refused kill -
+  keziah: drop 0.000 se 0.007 own [atk 242 dmg 4363 heal 0 abs 144] rest baseline [atk 4926 dmg 59737 heal 59 abs 3103] rest benched [atk 4991 dmg 60972 heal 47 abs 3267] benched losses 0 timeout 2 captain 0 protected, refused kill -
+  maud: drop 0.000 se 0.010 own [atk 668 dmg 9488 heal 59 abs 579] rest baseline [atk 4500 dmg 54612 heal 0 abs 2668] rest benched [atk 4759 dmg 61477 heal 0 abs 3140] benched losses 0 timeout 2 captain 0 protected, refused kill -
+  ottilie: drop 0.000 se 0.010 own [atk 742 dmg 5461 heal 0 abs 364] rest baseline [atk 4426 dmg 58639 heal 59 abs 2883] rest benched [atk 4607 dmg 62570 heal 43 abs 3125] benched losses 0 timeout 2 captain 0 protected, refused kill -
+  pell: drop 0.010 se 0.012 own [atk 805 dmg 13824 heal 0 abs 420] rest baseline [atk 4363 dmg 50276 heal 59 abs 2827] rest benched [atk 4849 dmg 58609 heal 29 abs 3138] benched losses 0 timeout 4 captain 0 protected, refused kill -
+  rook: drop -0.010 se 0.007 own [atk 362 dmg 5207 heal 0 abs 390] rest baseline [atk 4806 dmg 58893 heal 59 abs 2857] rest benched [atk 5211 dmg 65592 heal 104 abs 2872] benched losses 0 timeout 0 captain 0 protected, refused kill -
+  teodor: drop 0.000 se 0.010 own [atk 322 dmg 3330 heal 0 abs 218] rest baseline [atk 4846 dmg 60770 heal 59 abs 3029] rest benched [atk 4635 dmg 65864 heal 40 abs 2941] benched losses 0 timeout 2 captain 0 protected, refused kill -
+  wren: drop 0.005 se 0.009 own [atk 625 dmg 8912 heal 0 abs 561] rest baseline [atk 4543 dmg 55188 heal 59 abs 2686] rest benched [atk 4785 dmg 62545 heal 59 abs 3093] benched losses 0 timeout 3 captain 0 protected, refused kill -
+  captain captain: baseline [atk 13 dmg 182 heal 0 abs 14] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 5463 ms: ok
+gate 5 forecast honesty: 10051 combats (4055 with gauntlets), 20233 strikes, hits 13593 expected 13581.6, crits 983 expected 987.6, damage mismatches 0, bow strikes on fliers 50 (grounded 4, killed 23): ok
+gate 7 speed: content/keep/ironwake_keep.map, 5 AI-vs-AI games, 44 turns, slowest 196 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 128737 ms: ok
+free prefix: content/keep/ironwake_keep.map, 0 of 2, 4, 6 tried, slack median -1 p90 -1 (printed, not gated)
+  prefix 2: wins 169/200, drop 0.145 se 0.028, not free
+  prefix 4: wins 168/200, drop 0.150 se 0.029, not free
+  prefix 6: wins 127/200, drop 0.355 se 0.043, not free
+  prefix 2 refunded: wins 130/200, drop 0.340 se 0.042, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 0.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 2 quiet 0 live 198, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 6: dead 9 quiet 0 live 191, wake tax 0.00
+  turn 7: dead 4 quiet 0 live 196, wake tax 0.00
+  turn 8: dead 14 quiet 0 live 186, wake tax 0.00
+full: FAILED

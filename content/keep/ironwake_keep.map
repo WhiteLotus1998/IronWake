@@ -4,6 +4,7 @@ win: survive
 turn_limit: 8
 recall: 3
 enemy_level: 2
+deploy: all
 
 ....^^....#.....
 ..........#.....
@@ -25,6 +26,12 @@ P recruit 12,7
 P recruit 13,6
 P recruit 14,4
 P recruit 14,7
+P recruit 13,3
+P recruit 13,8
+P recruit 12,2
+P recruit 12,9
+P recruit 15,5
+P recruit 15,6
 E soldier 6,4 group:van behavior:aggressive
 E brigand 6,7 group:van behavior:aggressive
 E archer 4,5 group:van behavior:aggressive

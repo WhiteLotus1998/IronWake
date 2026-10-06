@@ -13,7 +13,7 @@ Autosaved as auto-1; the last 3 camps are kept
   Ansgar: Outrider L7, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
   Keziah: Reaver L7, EXP 0; 1: Kinsbane 20/20, 2: Iron Axe 40/40, 3: Iron Gauntlets 40/40
   Brannock: Cadet L7, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to Ironwake Keep: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 10)
+Deploys to Ironwake Keep: the whole company fights: 10; Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan, Maud, Ansgar, Keziah, Brannock
 == Keep ==
 Purse: 500
 Rooms: beds: 10/12; a fallen member keeps their bed
