@@ -515,14 +515,33 @@ public static class LevelRun
         }
 
         yield return PriceLine(paying);
+        yield return HandedSplit(paying, "paying");
         yield return PriceLine(striking, "striking");
+        yield return HandedSplit(striking, "striking");
         yield return FocusedVerdict(Companies(even, VerdictMap), Companies(striking, VerdictMap));
+    }
+
+    /// <summary>
+    /// The handed count's split (issue 1177, round 395): the kills a focused line handed the fed unit over every
+    /// won map of every run (the count its header prints), split into those through map <see cref="VerdictMap"/>
+    /// on the runs that won it (the price line's total) and the rest (maps after it, or runs lost before it);
+    /// it reconciles when the per-map prices sum to the run's count on every run.
+    /// </summary>
+    public static string HandedSplit(IReadOnlyList<Run> runs, string line)
+    {
+        var all = runs.Sum(r => r.Handed);
+        var reached = runs.Select(r => (Run: r, At: r.Maps.ToList().FindIndex(m => m.Map == VerdictMap))).Where(x => x.At >= 0 && x.At < x.Run.Companies.Count && x.At < x.Run.Prices.Count).ToList();
+        var through = reached.Sum(x => x.Run.Prices.Take(x.At + 1).Sum(p => p.Handed));
+        var reconciles = runs.All(r => r.Prices.Sum(p => p.Handed) == r.Handed);
+        return $"  kills handed ({line}): {all} in all, {through} through map {VerdictMap} on the {reached.Count} runs that won it, {all - through} on later maps or runs lost before it; "
+            + (reconciles ? "the per-map prices sum to each run's count" : "the per-map prices do not sum to each run's count (a bug)");
     }
 
     /// <summary>
     /// A focused line's price through map <see cref="VerdictMap"/> (issue 1157), over the runs that won it:
     /// the captain's level after it, the fed unit's level and main-weapon rank points after it, the kills
-    /// handed and given up, the HP the fed unit lost in enemy phases (each p50 p75 per run), and his falls in all.
+    /// handed and given up (each p50 p75 per run, then its total over those runs; issue 1177), the HP the fed unit
+    /// lost in enemy phases (p50 p75 per run), and his falls in all.
     /// The striking line (issue 1167) adds the fed unit's combats per map and the strikes the chair handed him
     /// per map, each p50 p75 over every won map through it.
     /// </summary>
@@ -547,7 +566,7 @@ public static class LevelRun
         var perMap = line == "striking"
             ? $"; per map, combats {Pair(through.SelectMany(p => p.Select(x => x.Combats)))}, strikes handed {Pair(through.SelectMany(p => p.Select(x => x.Strikes)))}"
             : "";
-        return $"  price ({line}, through map {VerdictMap}, {reached.Count} runs): captain level {Pair(captain)}; {FocusedPlayer.Fed} level {Pair(fed.Select(m => m?.Level ?? 0))}, main-weapon rank points {Pair(fed.Select(m => m?.MainRank ?? 0))}; kills handed {Pair(through.Select(p => p.Sum(x => x.Handed)))}, given up {Pair(through.Select(p => p.Sum(x => x.GivenUp)))} (total {through.Sum(p => p.Sum(x => x.GivenUp))}); HP lost in enemy phases {Pair(through.Select(p => p.Sum(x => x.HpLost)))}, falls {through.Sum(p => p.Sum(x => x.Falls))}{perMap}";
+        return $"  price ({line}, through map {VerdictMap}, {reached.Count} runs): captain level {Pair(captain)}; {FocusedPlayer.Fed} level {Pair(fed.Select(m => m?.Level ?? 0))}, main-weapon rank points {Pair(fed.Select(m => m?.MainRank ?? 0))}; kills handed {Pair(through.Select(p => p.Sum(x => x.Handed)))} (total {through.Sum(p => p.Sum(x => x.Handed))}), given up {Pair(through.Select(p => p.Sum(x => x.GivenUp)))} (total {through.Sum(p => p.Sum(x => x.GivenUp))}); HP lost in enemy phases {Pair(through.Select(p => p.Sum(x => x.HpLost)))}, falls {through.Sum(p => p.Sum(x => x.Falls))}{perMap}";
     }
 
     /// <summary>
@@ -632,6 +651,7 @@ public static class LevelRun
         var pick = PickId(content);
         yield return $"levels --gate: {striking.Count} runs, the striking chair and the even chair over the same seeds (issue 1174, round 394); the door asks L{Threshold} and {Gate} main-weapon rank points (D is {WeaponRanks.Threshold(WeaponRank.D)}, C is {WeaponRanks.Threshold(WeaponRank.C)}); the pick is {pick}";
         yield return PriceLine(striking, "striking");
+        yield return HandedSplit(striking, "striking");
         var reached = striking.Select(r => (Run: r, At: r.Maps.ToList().FindIndex(m => m.Map == VerdictMap))).Where(x => x.At >= 0 && x.At < x.Run.Companies.Count && x.At < x.Run.Prices.Count).ToList();
         var fed = reached.Select(x => x.Run.Companies[x.At].FirstOrDefault(m => m.Id == FocusedPlayer.Fed)).ToList();
         var kept = fed.Select(m => m?.MainRank ?? 0).ToList();
