@@ -147,7 +147,7 @@ public static class Program
                 }
             }
 
-            return args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
+            return args.Contains("--rank-trace") ? RankTraceTable(seeds) : args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
         }
 
         if (args.Length > 0 && args[0] == "--supports")
@@ -290,7 +290,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>] [--until-certify <unit> <class>] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -485,6 +485,37 @@ public static class Program
         var paying = Task.Run(() => LevelRun.Measure(contentDir, content, seeds, focused: FocusedPlayer.Guard.Paying));
         var striking = Task.Run(() => LevelRun.Measure(contentDir, content, seeds, focused: FocusedPlayer.Guard.Striking));
         foreach (var line in LevelRun.FocusedLines(content, even.Result, guarded.Result, paying.Result, striking.Result))
+        {
+            Console.WriteLine(line);
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// The rank trace (issue 1170, round 393, <see cref="LevelRun.RankTraceLines"/>): the striking chair alone,
+    /// its seeds split across four threads in order, since every run depends on its seed alone. A measurement only.
+    /// </summary>
+    public static int RankTraceTable(int seeds)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("levels: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        const int Threads = 4;
+        var chunk = (seeds + Threads - 1) / Threads;
+        var parts = Enumerable.Range(0, Threads)
+            .Select(k => (First: 1 + k * chunk, Count: Math.Min(chunk, seeds - k * chunk)))
+            .Where(p => p.Count > 0)
+            .Select(p => Task.Run(() => LevelRun.Measure(contentDir, content, p.Count, focused: FocusedPlayer.Guard.Striking, firstSeed: p.First)))
+            .ToList();
+        var runs = parts.SelectMany(t => t.Result).ToList();
+        Console.WriteLine(LevelRun.PriceLine(runs, "striking"));
+        foreach (var line in LevelRun.RankTraceLines(content, runs))
         {
             Console.WriteLine(line);
         }
