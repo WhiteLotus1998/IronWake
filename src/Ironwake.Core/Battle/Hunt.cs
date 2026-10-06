@@ -8,15 +8,23 @@ namespace Ironwake.Core;
 /// none. The hunted front is the standing front whose defenders' summed HP is lowest, the earlier
 /// in file order on a tie, chosen once as each enemy phase begins (<see cref="BattleState.Hunting"/>)
 /// and read fresh on the player phase, so <c>threat</c> names the front that comes. The hunter
-/// strikes only defenders of the hunted front; with none it can strike it approaches them, and with
-/// none at all it marches on the front's tiles, the party left out of the field as in
-/// <see cref="EnemyAi.Drift"/>. It still counters anyone. With every front fallen it hunts nothing
-/// and acts as any enemy of its behavior.
+/// strikes only its prey (<see cref="Prey"/>): the hunted front's defenders, or, when the front has
+/// none, the player units nearest the front, which it comes for through the empty front (issue
+/// 1204, DECISIONS/0284). With no prey it can strike it approaches them, and with none it knows of
+/// it marches on the front's tiles, the party left out of the field as in <see cref="EnemyAi.Drift"/>.
+/// It still counters anyone. With every front fallen it hunts nothing and acts as any enemy of its
+/// behavior.
 /// </summary>
 public static class Hunt
 {
     /// <summary>The rule the board prints on a map with a hunter on it.</summary>
-    public const string Rule = "A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.";
+    public const string Rule = WaitingRule + " A front with no defenders lets it through: it strikes the units nearest that front.";
+
+    /// <summary>The rule before issue 1204, printed on a <c>hunt_waits: on</c> sample (<see cref="MapDefinition.HuntWaits"/>).</summary>
+    public const string WaitingRule = "A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.";
+
+    /// <summary>The rule <paramref name="map"/> is fought under: <see cref="WaitingRule"/> on a <c>hunt_waits: on</c> sample, else <see cref="Rule"/>.</summary>
+    public static string RuleFor(MapDefinition map) => map.HuntWaits ? WaitingRule : Rule;
 
     /// <summary>How far from a front's nearest tile a player unit still defends it.</summary>
     public const int DefendRadius = 3;
@@ -112,21 +120,52 @@ public static class Hunt
             : state with { Hunting = phase == Side.Enemy ? Choose(state)?.Name : null };
 
     /// <summary>
+    /// The player units the hunter hunts on <paramref name="state"/>: the hunted front's defenders,
+    /// or, when nobody defends it, the units nearest the front's nearest tile, every one tied (issue
+    /// 1204, DECISIONS/0284), so an emptied front decides where the hunter comes in and never stands
+    /// it down. Null on a map without a hunter, or with no front standing.
+    /// </summary>
+    public static IReadOnlyList<BattleUnit>? Prey(BattleState state)
+    {
+        if (Hunted(state) is not { } front)
+        {
+            return null;
+        }
+
+        var players = state.UnitsOf(Side.Player).ToList();
+        var defenders = players.Where(p => DefendedFrom(state.Map, p.At) == front).ToList();
+        if (defenders.Count > 0 || players.Count == 0 || state.Map.HuntWaits)
+        {
+            return defenders;
+        }
+
+        var nearest = players.Min(p => Distance(front, p.At));
+        return players.Where(p => Distance(front, p.At) == nearest).ToList();
+    }
+
+    /// <summary>Whether the hunted front on <paramref name="state"/> has no defenders, so the hunter comes through it for the nearest units.</summary>
+    public static bool ComesThrough(BattleState state) =>
+        !state.Map.HuntWaits && Hunted(state) is { } front && !state.UnitsOf(Side.Player).Any(p => DefendedFrom(state.Map, p.At) == front);
+
+    private static int Distance(Front front, Coord at) => front.Tiles.Min(t => t.DistanceTo(at));
+
+    /// <summary>
     /// The player units <paramref name="unit"/> may strike or approach among <paramref name="known"/>:
-    /// all of them unless it is the hunter with a front to hunt, then only that front's defenders.
+    /// all of them unless it is the hunter with a front to hunt, then only its <see cref="Prey"/>.
     /// </summary>
     public static IReadOnlyList<BattleUnit> Narrow(BattleState state, BattleUnit unit, IReadOnlyList<BattleUnit> known) =>
-        Is(state, unit) && Hunted(state) is { } front
-            ? known.Where(p => DefendedFrom(state.Map, p.At) == front).ToList()
+        Is(state, unit) && Prey(state) is { } prey
+            ? known.Where(p => prey.Any(q => q.Id == p.Id)).ToList()
             : known;
 
-    /// <summary>Whether the hunt keeps <paramref name="unit"/> off <paramref name="target"/>: it is the hunter, a front is hunted, and the target does not defend it.</summary>
+    /// <summary>Whether the hunt keeps <paramref name="unit"/> off <paramref name="target"/>: it is the hunter, a front is hunted, and the target is not its <see cref="Prey"/>.</summary>
     public static bool Spares(BattleState state, BattleUnit unit, BattleUnit target) =>
-        Is(state, unit) && Hunted(state) is { } front && DefendedFrom(state.Map, target.At) != front;
+        Is(state, unit) && Prey(state) is { } prey && !prey.Any(q => q.Id == target.Id);
 
     /// <summary>
     /// The line <c>threat</c> and the board print for the hunt, units by the names a reader sees:
-    /// <c>Marrit hunts the north next: 2 defenders, 41 hp (weakest)</c>, or that the hunt is over.
+    /// <c>Marrit hunts the north next: 2 defenders, 41 hp (weakest)</c>, on a front nobody defends
+    /// <c>... no defenders (weakest); comes through it for the nearest: Wren</c>, or that the hunt is over.
     /// Null on a map without a hunter or once it has fallen.
     /// </summary>
     public static string? Line(BattleState state, UnitNames names)
@@ -142,8 +181,16 @@ public static class Hunt
         }
 
         var hold = Holds(state).FirstOrDefault(h => h.Front == front);
+        var next = state.Phase == Side.Player ? " next" : "";
+        if (hold is not null && hold.Defenders.Count == 0 && !state.Map.HuntWaits)
+        {
+            var prey = Prey(state) ?? Array.Empty<BattleUnit>();
+            var whom = prey.Count == 0 ? "" : $" for the nearest: {string.Join(", ", prey.Select(p => names[p.Id]))}";
+            return $"{names[hunter.Id]} hunts the {front.Words}{next}: no defenders (weakest); comes through it{whom}";
+        }
+
         var defenders = hold is null ? "fallen this phase" : hold.Defenders.Count == 0 ? "no defenders" : $"{hold.Defenders.Count} defender{(hold.Defenders.Count == 1 ? "" : "s")}, {hold.Hp} hp";
-        return $"{names[hunter.Id]} hunts the {front.Words}{(state.Phase == Side.Player ? " next" : "")}: {defenders} (weakest); strikes only its defenders";
+        return $"{names[hunter.Id]} hunts the {front.Words}{next}: {defenders} (weakest); strikes only its defenders";
     }
 }
 

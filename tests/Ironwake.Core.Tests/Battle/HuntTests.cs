@@ -98,16 +98,110 @@ public class HuntTests
     }
 
     [Fact]
-    public void TheHunterMarchesOnAFrontNobodyDefends()
+    public void TheHunterComesThroughAFrontNobodyDefendsForTheUnitNearestIt()
     {
         var state = Board();
+        state = state.WithUnit(state.Find("wren")! with { At = new Coord(0, 6) }).Do(new EndPhase());
+        Assert.Equal("south", Hunt.Hunted(state)!.Name);
+        Assert.True(Hunt.ComesThrough(state));
+        Assert.Equal(new[] { "hale" }, Hunt.Prey(state)!.Select(p => p.Id));
+
+        var plan = EnemyAi.PlanUnit(state, Starter, state.Find("rider-1")!);
+
+        Assert.Equal("hale", plan.OfType<Attack>().Single().TargetId);
+    }
+
+    [Fact]
+    public void TheNearestToAnEmptyFrontIsTheHuntersPreyNotTheWeakest()
+    {
+        var state = Start(map: Field(extra: "P recruit 0,6\n"), roster: Three);
+        state = state.WithUnit(state.Find("ivo")! with { At = new Coord(0, 6), Hp = 1 });
+        state = state.WithUnit(state.Find("wren")! with { At = new Coord(0, 3) });
+        Assert.Equal("south", Hunt.Hunted(state)!.Name);
+
+        Assert.Equal(new[] { "hale" }, Hunt.Prey(state)!.Select(p => p.Id));
+        var rider = state.Find("rider-1")!;
+        Assert.Null(EnemyAi.StrikeOn(state, Starter, rider, state.Find("ivo")!));
+        Assert.NotNull(EnemyAi.StrikeOn(state, Starter, rider, state.Find("hale")!));
+    }
+
+    [Fact]
+    public void UnitsTiedNearestAnEmptyFrontAreAllPrey()
+    {
+        var state = Start(map: Field(extra: "P recruit 9,5\n"), roster: Three);
+        state = state.WithUnit(state.Find("wren")! with { At = new Coord(0, 6) });
+        state = state.WithUnit(state.Find("ivo")! with { At = new Coord(9, 5) });
+        state = state.WithUnit(state.Find("hale")! with { At = new Coord(1, 5) });
+
+        Assert.Equal(new[] { "hale", "ivo" }, Hunt.Prey(state)!.Select(p => p.Id).OrderBy(id => id));
+    }
+
+    [Fact]
+    public void ADefendedFrontKeepsTheHuntOnItsDefenders()
+    {
+        var state = Board(hale: 22, wren: 20);
+
+        Assert.False(Hunt.ComesThrough(state));
+        Assert.Equal(new[] { "wren" }, Hunt.Prey(state)!.Select(p => p.Id));
+    }
+
+    [Fact]
+    public void ThreatPricesTheHuntersStrikeThroughAnEmptyFront()
+    {
+        var state = Board();
+        state = state.WithUnit(state.Find("wren")! with { At = new Coord(0, 6) });
+        var hale = state.Find("hale")!;
+
+        var threats = Queries.Threats(state, Starter, hale, hale.At)!;
+
+        Assert.Contains(threats, l => l.Enemy.Id == "rider-1");
+        var text = PlaySession.ThreatText(state, Starter, hale, hale.At, threats, Queries.SleepingThreats(state, Starter, hale, hale.At)!);
+        Assert.Contains("  Rider hunts the south next: no defenders (weakest); comes through it for the nearest: hale", text);
+    }
+
+    [Fact]
+    public void TheHunterMarchesOnAFrontNobodyDefendsWhenItSeesNoPrey()
+    {
+        var state = Start(map: Field(Header + "dusk: 1\n"));
         state = state.WithUnit(state.Find("wren")! with { At = new Coord(0, 6) }).Do(new EndPhase());
         Assert.Equal("south", Hunt.Hunted(state)!.Name);
 
         var plan = EnemyAi.PlanUnit(state, Starter, state.Find("rider-1")!);
 
         Assert.Equal(new Command[] { new Move("rider-1", new Coord(5, 5)), new Wait("rider-1") }, plan);
-        Assert.Contains(state.Try(plan[0]).Events, e => e is FrontFell { Front: "south" });
+    }
+
+    [Fact]
+    public void AHuntWaitsSampleKeepsTheOldHuntAndMarchesOnTheEmptyFront()
+    {
+        var state = Start(map: Field(Header + "hunt_waits: on\n"));
+        state = state.WithUnit(state.Find("wren")! with { At = new Coord(0, 6) }).Do(new EndPhase());
+        Assert.False(Hunt.ComesThrough(state));
+        Assert.Empty(Hunt.Prey(state)!);
+
+        var plan = EnemyAi.PlanUnit(state, Starter, state.Find("rider-1")!);
+
+        Assert.Equal(new Command[] { new Move("rider-1", new Coord(5, 5)), new Wait("rider-1") }, plan);
+        Assert.Equal("Rider hunts the south: no defenders (weakest); strikes only its defenders", Hunt.Line(state, UnitNames.Of(state, Starter)));
+        Assert.Contains(Hunt.WaitingRule + "\n", MapRenderer.Render(state, Starter));
+        Assert.DoesNotContain(Hunt.Rule, MapRenderer.Render(state, Starter));
+    }
+
+    [Fact]
+    public void TheHuntWaitsHeaderRoundTrips()
+    {
+        var map = MapFixture.Parse(Field(Header + "hunt_waits: on\n"));
+
+        Assert.True(map.HuntWaits);
+        Assert.Equal(map, MapFixture.Parse(MapFormat.Write(map, Starter)));
+    }
+
+    [Fact]
+    public void AHuntWaitsHeaderWithoutAHunterIsRefused()
+    {
+        var error = Assert.Throws<MapException>(() => MapFixture.Parse(Field("fronts: north 5,1; south 5,5\nhunt_waits: on\n")));
+
+        Assert.Contains("hunt_waits: needs a hunter: header", error.Message);
     }
 
     [Fact]

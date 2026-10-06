@@ -10,6 +10,7 @@ oathbound: van, hunt, lord
 pair_rule: hunt, lord
 fronts: north 10,1; gate 10,5 10,6; south 10,10
 hunter: 7,6
+hunt_waits: on
 
 ....^^....#.....
 ................

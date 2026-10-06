@@ -264,6 +264,14 @@ public sealed record MapDefinition(
     public Coord? Hunter { get; init; }
 
     /// <summary>
+    /// The <c>hunt_waits: on</c> header: the hunt before issue 1204 (DECISIONS/0284), under which
+    /// the hunter strikes only the hunted front's defenders and marches on a front nobody defends
+    /// instead of coming through it for the units nearest it (<see cref="Hunt.Prey"/>). It is kept
+    /// only on the sample maps that replay journaled plays made under that rule. Off by default.
+    /// </summary>
+    public bool HuntWaits { get; init; }
+
+    /// <summary>
     /// The <c>freed:</c> header (issue 750): the enemy placement bound to a boss's group, freed
     /// when a boss of that group falls (<see cref="Freed"/>). Null for none.
     /// </summary>

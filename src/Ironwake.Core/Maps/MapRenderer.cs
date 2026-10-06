@@ -667,7 +667,7 @@ public static class MapRenderer
 
         if (Hunt.Line(state, UnitNames.Of(state, content)) is { } huntLine)
         {
-            sb.Append(Hunt.Rule).Append('\n');
+            sb.Append(Hunt.RuleFor(state.Map)).Append('\n');
             sb.Append(huntLine).Append('\n');
         }
 
