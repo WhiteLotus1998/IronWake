@@ -158,7 +158,14 @@ public static class Exposure
     /// order: the strikers its total sums (issue 558). One walk serves both, so a list of the
     /// strikers cannot disagree with the total.
     /// </summary>
-    public static IReadOnlyList<int> Seated(IReadOnlyList<(int Weight, IReadOnlyList<Coord> Tiles)> lines)
+    public static IReadOnlyList<int> Seated(IReadOnlyList<(int Weight, IReadOnlyList<Coord> Tiles)> lines) =>
+        SeatedOn(lines).Keys.OrderBy(i => i).ToList();
+
+    /// <summary>
+    /// The seating <see cref="Seated"/> reads: each seated line's index and the tile it holds
+    /// (issue 1191), so the tile a counter-kill would free is the one the total seated it on.
+    /// </summary>
+    public static IReadOnlyDictionary<int, Coord> SeatedOn(IReadOnlyList<(int Weight, IReadOnlyList<Coord> Tiles)> lines)
     {
         var seated = new Dictionary<Coord, int>();
         foreach (var index in Enumerable.Range(0, lines.Count).OrderByDescending(i => lines[i].Weight).ThenBy(i => i))
@@ -166,7 +173,7 @@ public static class Exposure
             Seat(index, new HashSet<Coord>());
         }
 
-        return seated.Values.OrderBy(i => i).ToList();
+        return seated.ToDictionary(pair => pair.Value, pair => pair.Key);
 
         bool Seat(int index, HashSet<Coord> visited)
         {

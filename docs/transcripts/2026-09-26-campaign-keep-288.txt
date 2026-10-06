@@ -4708,7 +4708,8 @@ J  rook             Rook L1 skyrider           12,2   hp 17/17  Plain
 o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          11,3   hp 21/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
-> end
+> end !
+Lethal if all land: Wren (Archer 3 for 5, Brigand 5 for 10, Soldier 5 for 8 on 10,4 if Wren's counter kills Brigand 5 (88 hit, all counters landing), against 20 hp)
 Rapport Teodor and Wren +4 (12)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --

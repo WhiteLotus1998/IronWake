@@ -62,7 +62,7 @@ public sealed class PlaySession
           recall list              Every state recall can return to, the command that made it, and what a rewind there gives back
           recall                   List the state each player turn started at, and the charges left
           forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  Show the forecast without attacking, from any tile the unit can reach
-          threat <unit> [from <x,y>]  What each enemy would strike it with next enemy phase, from where it stands or a tile it can reach, on the board as it stands now (a foe freed by a kill mid-phase is not counted)
+          threat <unit> [from <x,y>]  What each enemy would strike it with next enemy phase, from where it stands or a tile it can reach, on the board as it stands now (a foe freed by a kill mid-phase is not counted, except a tile the unit's own counter-kill frees, one wave deep)
           reach <unit>             Show the board with the unit's reachable tiles marked
           show <unit>              Show a unit's numbers
           terrain [glyph|name]     What the ground does for a unit on it; with no name, every terrain on the board
@@ -1686,9 +1686,19 @@ public sealed class PlaySession
     /// if every strike <c>threat</c> prices lands (issue 558, <see cref="Queries.Lethal"/>):
     /// <c>Lethal if all land: Wren (Soldier 2 for 9, Archer for 6, against 15 hp)</c>, each unit by
     /// the name a reader sees (issue 615), the <c>for</c> keeping a numbered name off its damage.
+    /// A strike a tile freed by the unit's own counter-kill lets in (<see cref="LethalThreat.Freed"/>, issue 1191)
+    /// follows the others with its tile and the counter's chance:
+    /// <c>Lethal if all land: Teodor (Brigand 1 for 9, Brigand 2 for 9 on 4,0 if Teodor's counter kills Brigand 1 (81 hit), against 13 hp)</c>.
     /// </summary>
     public static string LethalLine(LethalThreat lethal, UnitNames names) =>
-        $"Lethal if all land: {names[lethal.Unit.Id]} ({string.Join(", ", lethal.Strikers.Select(s => $"{names[s.Enemy.Id]} for {s.Damage}"))}, against {lethal.Unit.Hp} hp)";
+        $"Lethal if all land: {names[lethal.Unit.Id]} ({string.Join(", ", lethal.Strikers.Select(s => $"{names[s.Enemy.Id]} for {s.Damage}").Concat(lethal.Freed.Select(f => $"{names[f.Follower.Id]} for {f.Damage} on {f.Tile} if {names[lethal.Unit.Id]}'s counter kills {names[f.Freer.Id]} {FreedChance(f)}")))}, against {lethal.Unit.Hp} hp)";
+
+    /// <summary>
+    /// The chance a freeing counter (issue 1191) is read at: its displayed hit, <c>(81 hit)</c> when one
+    /// counter strike kills, else <c>(81 hit, all counters landing)</c>, the split <see cref="Kinsbane.CounterKillLabel"/> draws.
+    /// </summary>
+    public static string FreedChance(FreedStrike freed) =>
+        freed.Counter.Defender.Damage >= freed.Freer.Hp ? $"({freed.Counter.Defender.DisplayedHit} hit)" : $"({freed.Counter.Defender.DisplayedHit} hit, all counters landing)";
 
     /// <summary>The value of an <c>on|off</c> flag (issue 1120), or null when it is neither.</summary>
     internal static bool? OnOff(string? value) => value switch
@@ -1981,6 +1991,12 @@ public sealed class PlaySession
             else
             {
                 rows.Add($"  if all land: {Queries.IfAllLand(lines, blow)} against {unit.Hp} hp");
+                var freed = Queries.FreedStrikes(lines, unit);
+                if (freed.Count > 0)
+                {
+                    var clauses = freed.Select((f, i) => $"{(i == 0 ? $"{name}'s counter kills" : "and if it kills")} {names[f.Freer.Id]} {FreedChance(f)}, {names[f.Follower.Id]} takes {f.Tile}");
+                    rows.Add($"  if {string.Join(", ", clauses)}: {Queries.IfAllLand(lines, blow) + freed.Sum(f => f.Damage)} against {unit.Hp} hp");
+                }
             }
 
             if (state.Map.OneAnswerEnabled && lines.Count(l => !l.Raises && l.Forecast.Defender.Strikes) > 1)

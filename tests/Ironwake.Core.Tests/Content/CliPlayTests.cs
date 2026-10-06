@@ -268,7 +268,7 @@ public class CliPlayTests
     [Fact]
     public void ThreatHelpSaysItPricesTheBoardAsItStandsNow()
     {
-        Assert.Contains("on the board as it stands now (a foe freed by a kill mid-phase is not counted)\n", Play(out _, "help\n"));
+        Assert.Contains("on the board as it stands now (a foe freed by a kill mid-phase is not counted, except a tile the unit's own counter-kill frees, one wave deep)\n", Play(out _, "help\n"));
     }
 
     /// <summary>

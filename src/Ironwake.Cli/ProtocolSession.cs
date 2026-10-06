@@ -240,6 +240,24 @@ public sealed class ProtocolSession
             }
 
             w.WriteEndArray();
+            if (threat.Freed.Count > 0)
+            {
+                w.WriteStartArray("freed");
+                foreach (var freed in threat.Freed)
+                {
+                    w.WriteStartObject();
+                    w.WriteString("enemy", freed.Follower.Id);
+                    w.WriteNumber("damage", freed.Damage);
+                    w.WriteString("tile", freed.Tile.ToString());
+                    w.WriteString("ifCounterKills", freed.Freer.Id);
+                    w.WriteNumber("counterHit", freed.Counter.Defender.DisplayedHit);
+                    w.WriteBoolean("counterKillsOnHit", freed.Counter.Defender.Damage >= freed.Freer.Hp);
+                    w.WriteEndObject();
+                }
+
+                w.WriteEndArray();
+            }
+
             w.WriteEndObject();
         }
 

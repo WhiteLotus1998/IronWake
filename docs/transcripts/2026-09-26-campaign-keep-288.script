@@ -139,5 +139,5 @@ move ottilie 15,6
 wait ottilie
 move dunstan 15,8
 wait dunstan
-end
+end !
 leave
