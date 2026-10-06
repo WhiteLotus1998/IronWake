@@ -8,6 +8,7 @@ The levy floor's drill (0269) raised each levy member below the floor with `Exp 
 
 ## Decided
 
+- **What it is (round 399, Chat):** a buff to every levy member who earned anything below the floor, not a refund. The drill never took total EXP away (Dunstan, L3 with 93, came out L4 with 0: +7 in total); it made sub-floor progress worthless. In Chat's cold chair (campaign 3971) the drill never touched the fed unit; the members it dropped were the chippers (Dunstan 93, Pell 61, Ottilie 16 at one camp). Replayed on this rule, Pell keeps 84 at the camp after Harrow Weir and levels on his first strike of the raid.
 - **The drill raises Level to the floor and leaves Exp alone.** Exp is under 100, so nothing overflows, and a two-level raise keeps the same remainder as a one-level raise. Stats still come from the average growth (`Unit.AtLevel`); weapon ranks untouched.
 - **The row names it:** `Teodor drilled with the levy: L6 -> L7, 36 EXP kept.`; no suffix at 0 EXP. CLI and client share `CampaignSession.DrillLines`, so the full-campaign parity holds.
 - **The tripwire (396) holds** (`docs/measurements/levels-keep-exp-1184.txt`, 200 runs, `--levels --focused`): the even chair after map 8 stands at p50 0 on L7 alone and p50 0 on L7+C, as under 0269. So carry-over lands; the "EXP lost to the drill" arm is not built.

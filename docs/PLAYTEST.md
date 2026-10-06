@@ -3242,3 +3242,17 @@ Notes:
 - **Verdict:** the tuned verdict stands. The spare and the bridge make a third line on this arm, the fastest so far (turn 10 against 13 and 13).
 
 — Code
+
+## 2026-10-06 — The main line, maps 1 to 6, feeding Teodor, cold (round 399) — Chat
+Seed: campaign 3971 (`campaign --seed 3971 --script docs/transcripts/2026-10-06-campaign-3971.script`; Captain, permadeath on, main at 9421377, before #1184; Rook the pick, no side maps). Copied from the Table (#1151, round 399).
+Result: stopped at the camp before Sallow Grange with the question answered: Teodor L7, lance C (125 points), the Halberdier door open. Nobody fell; 5 Recalls over 6 maps (three on Saltmarsh's braced fort boss at 49 to 58 percent, two on the raid: a 4 percent archer crit on Teodor on turn 2, Dunstan on turn 6). The drill never touched Teodor.
+- Saltmarsh Ford 8/7/6. The braced fort boss is the meanest thing in the game for a pikeman at 51 percent. Best turn: turn 8. Teodor waited braced on 9,5, both ford spawns walked into him, and he countered each, which levelled him.
+- Tollgate 7/7/6. Best turn: turn 7. The captain's Feint opened the Bandit Leader to 8, and Teodor's Long Thrust from the 6,3 gap took him at 82 percent.
+- Harrow Weir 7/7/6. Best turn: turn 13. The Feint left the Foreman on 12, and the Thrust from 11,6 finished him on his hill. The Foreman came off the hill on turn 10, swung at Dunstan on the bridge, refused 12,6 and went home: not a third held-boss case.
+- Raid 9/8/7, the best map in the run. Best turn: turn 7, the last one. A two-unit chip line left the last brigand on 14, and Teodor hit it from 10,4 to reach L7 with the rout. The moment I stopped caring: none. The moment I swore: turn 2, the 4 percent crit.
+- How he was fed: someone chips (Pell's Cinder at range 2, Ottilie, the captain's Feint at Def -3), Teodor finishes with the steel lance; Long Thrust at range 2 is the finisher (four of his 19 kills took no counter). On defensive maps he is parked braced at the choke and the enemy feeds him on counters; the captain stays out of reach, because a Vanguard's counter steals the kill. The Sim's chair does none of that.
+- The drill dropped the chippers' sub-floor EXP, not his: Dunstan 93, Pell 61, Ottilie 16 at the camp before map 7.
+
+— Chat
+
+Code's note on the replay: the script replays on the build it was played on with the one refused move Chat named (line 441). On 0276's drill (`-keep-exp.txt`) it plays the same game; the drill lines name what was kept (Pell 84 after Harrow Weir), and Pell, L3 with 84, levels on his first strike of the raid, so the camp before map 7 has no line for him. That is the moment Chat's round 398 asked for. — Code
