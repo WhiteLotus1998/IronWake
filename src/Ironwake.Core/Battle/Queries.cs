@@ -418,7 +418,10 @@ public static class Queries
     /// stands, summed as <see cref="IfAllLand(IReadOnlyList{ThreatLine}, RaisedBlow?)"/> sums them,
     /// at least its HP. When <paramref name="playerView"/> is set an enemy the player cannot see
     /// at dusk is left out unless an announced event spawns it, as <c>threat</c> leaves it out; a
-    /// sleeping group counts for nothing. A strike a cover would swap onto the coverer (DESIGN.md
+    /// sleeping group counts for nothing. A unit the board's seating does not kill is still named
+    /// when the strikes its own counter-kills would seat (<see cref="FreedStrikes"/>, issue 1191,
+    /// round 404) bring the total to its HP, at any chance of that counter, with those strikes
+    /// as <see cref="LethalThreat.Freed"/>. A strike a cover would swap onto the coverer (DESIGN.md
     /// 13.19) is not in the unit's own total. In deployment order; empty off the player phase or
     /// when the map is over. Read-only.
     /// </summary>
@@ -450,10 +453,54 @@ public static class Queries
             if (strikers.Count > 0 && total >= unit.Hp)
             {
                 found.Add(new LethalThreat(unit, total, ValueList<LethalStriker>.From(strikers)));
+                continue;
+            }
+
+            var freed = FreedStrikes(lines, unit);
+            if (strikers.Count > 0 && freed.Count > 0 && total + freed.Sum(f => f.Damage) >= unit.Hp)
+            {
+                found.Add(new LethalThreat(unit, total + freed.Sum(f => f.Damage), ValueList<LethalStriker>.From(strikers)) { Freed = ValueList<FreedStrike>.From(freed) });
             }
         }
 
         return found;
+    }
+
+    /// <summary>
+    /// The strikes a tile freed by the unit's own counter would let in, one wave deep (issue 1191,
+    /// round 404): the lines are seated as <see cref="IfAllLand(IReadOnlyList{ThreatLine})"/> seats
+    /// them, a seated line whose counter is lethal if every counter strike lands
+    /// (<see cref="CombatForecast.CounterIsLethal"/>) frees its tile, and the lines the seating
+    /// dropped are seated a second time onto the freed tiles alone, heaviest first. A strike a
+    /// cover would swap frees nothing, a line that only raises a blow is left out, and a strike
+    /// seated on a freed tile frees nothing further. In line order of the dropped strikes; empty
+    /// when no counter frees a tile a dropped line could take. Read-only.
+    /// </summary>
+    public static IReadOnlyList<FreedStrike> FreedStrikes(IReadOnlyList<ThreatLine> lines, BattleUnit unit)
+    {
+        var priced = lines.Where(l => !l.Raises).ToList();
+        var seats = Exposure.SeatedOn(priced.Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
+        var freedBy = new Dictionary<Coord, ThreatLine>();
+        foreach (var (index, tile) in seats.OrderBy(pair => pair.Key))
+        {
+            var line = priced[index];
+            if (line.CoveredBy is null && line.Forecast.CounterIsLethal(line.Enemy.Hp, unit.Hp))
+            {
+                freedBy[tile] = line;
+            }
+        }
+
+        if (freedBy.Count == 0)
+        {
+            return Array.Empty<FreedStrike>();
+        }
+
+        var dropped = Enumerable.Range(0, priced.Count).Where(i => !seats.ContainsKey(i)).Select(i => priced[i]).ToList();
+        var second = Exposure.SeatedOn(dropped.Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)).Where(freedBy.ContainsKey).ToList())).ToList());
+        return second.OrderBy(pair => pair.Key)
+            .Where(pair => dropped[pair.Key].IfAllLand > 0)
+            .Select(pair => new FreedStrike(freedBy[pair.Value].Enemy, freedBy[pair.Value].Forecast, dropped[pair.Key].Enemy, pair.Value, dropped[pair.Key].IfAllLand))
+            .ToList();
     }
 
     /// <summary>
@@ -806,7 +853,22 @@ public sealed record RaisedBlow(BattleUnit Wielder, Coord Over, int Damage);
 /// coming enemy phase's damage on it if every strike lands, at least its HP, and
 /// <paramref name="Strikers"/> the enemies that total sums, in <c>threat</c>'s order.
 /// </summary>
-public sealed record LethalThreat(BattleUnit Unit, int Total, ValueList<LethalStriker> Strikers);
+public sealed record LethalThreat(BattleUnit Unit, int Total, ValueList<LethalStriker> Strikers)
+{
+    /// <summary>
+    /// The strikes a tile freed by the unit's own counter-kill lets in (<see cref="Queries.FreedStrikes"/>,
+    /// issue 1191), set only when <see cref="Strikers"/> alone fall short of the unit's HP; <see cref="Total"/> then counts them.
+    /// </summary>
+    public ValueList<FreedStrike> Freed { get; init; } = ValueList<FreedStrike>.Empty;
+}
+
+/// <summary>
+/// One strike <see cref="Queries.FreedStrikes"/> seats (issue 1191): <paramref name="Follower"/> takes
+/// <paramref name="Tile"/> if the unit's counter kills <paramref name="Freer"/>, whose strike
+/// <paramref name="Counter"/> forecasts (its <see cref="CombatForecast.Defender"/> is the unit's
+/// counter), and deals <paramref name="Damage"/> if every strike lands.
+/// </summary>
+public sealed record FreedStrike(BattleUnit Freer, CombatForecast Counter, BattleUnit Follower, Coord Tile, int Damage);
 
 /// <summary>One enemy in a <see cref="LethalThreat"/>'s total, and the damage it deals if every strike lands.</summary>
 public sealed record LethalStriker(BattleUnit Enemy, int Damage);

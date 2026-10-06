@@ -55,7 +55,7 @@ wait captain
 wait teodor
 move rook 10,1
 wait rook
-end
+end !
 attack captain rider-3
 attack dunstan rider-2
 move teodor 6,1 preview
