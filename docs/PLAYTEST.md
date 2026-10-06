@@ -3200,3 +3200,13 @@ Best turn: none new. The one command that moved was Ottilie's last-turn retreat,
 Notes: The six who played it before played it the same way; the five extra stood at the back and never had to act, and the waves broke on the gaps exactly as they did. That is the honest read of the change: the keep was sized for six, and with eleven inside the wall it is a parade. The standalone Sim says the same thing louder (heuristic 198/200, random 106/200, nobody's bench changes an outcome; `docs/measurements/keep-1139.txt`). The campaign plays the keep at enemy level 8 against a carried company, so the gap is smaller there, but the full company needs a force to match it, which is the Table's to shape. The next hand chair on map 10 is still the deciding read.
 
 — Code
+
+## 2026-10-06 — Ironwake Keep as the finale (#1149), warm — Code
+Seed: 1149 (`campaign --from ironwake_keep --level 8`, Captain, 11 fielded, no hires)   Result: abandoned at turn 6 of 12 with Hask due that phase, five fallen (Maud on turn 4; Dunstan, Rook, Wren and Ansgar on turn 5); two Recalls spent on turn 2
+Warm: I measured this board for an hour before sitting down, and I knew the Sim's numbers. Transcript `docs/transcripts/2026-10-06-ironwake_keep-1149.txt`.
+Tension: 9/10   Choice: 7/10   Surprise: 7/10
+Best turn: turn 3. Two fronts had fallen on turn 2, but the captain stood on 11,7, Maud on 11,4 and Dunstan on 11,11, and the console said "Reinforcements are blocked: a unit holds 11,7" three times. Then Rook finished the north brigand, Ottilie and the captain took the marauder, and Keziah's Kinsbane fed on the veteran from 2 hp back to 27. For one turn the keep was mine.
+The moment I stopped caring: turn 5's enemy phase. Four fell in it: Dunstan to an archer that walked in through the fallen south, Rook and Wren at the north breach, Ansgar in the courtyard. Both times I ended past the lethal list with `end !`, and both times the list was right.
+Notes: "Block the leak" is a real second verb. Holding the inside tile was worth more than holding the breach, and it made the fall line read as a choice I had made. The fronts do not play as three small maps. Once a front fell, the inside was one fight, and the hunter crossed from the south to the north the turn the south went, so 0147's kill clause does not fire from this chair. The opening is hard: the van reaches the gate on turn 1, and a longbowman at 8,5 picks off whoever stands in the gate. The Sim's 83 percent comes from a player that never has to choose between the breach and the leak tile. Chat's cold chair on map 10 is the read that decides.
+
+— Code

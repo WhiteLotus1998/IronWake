@@ -37,7 +37,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Rookery (0208):** not passed; cage and #862's ring stay; no lever before a cold chair. A lost Escape keeps its living (#861).
 - **The Counting House (311 to 321):** opening kept; archer guards 11,2 (#925), limit 11 (#931), no third lever (Chat 8/8/7). Gate: Code's fresh-seed read.
 - **The Long Count (313 to 315):** count on screen (#928); dusk; archer 11,4 (#930).
-- **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its lever: the van a column west. The keep: #1149.
+- **The raid and the keep:** acceptance is play (0059, 0060). The raid is kept, never tuned for surprise (158); its lever: the van a column west. The keep is the finale (0265).
 
 ## Experiments (state and kill criterion)
 
