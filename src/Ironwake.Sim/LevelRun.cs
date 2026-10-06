@@ -50,6 +50,12 @@ public static class LevelRun
     {
         /// <summary>The kills offered to the fed unit and refused on the map, by the first clause that refused each (<see cref="FocusedPlayer.Refused"/>).</summary>
         public IReadOnlyDictionary<FocusedPlayer.Refusal, int> Refused { get; init; } = new Dictionary<FocusedPlayer.Refusal, int>();
+
+        /// <summary>The strikes that do not kill on a hit the chair handed the fed unit on the map (<see cref="FocusedPlayer.Strikes"/>, issue 1167).</summary>
+        public int Strikes { get; init; }
+
+        /// <summary>Every attack the fed unit made on the map, whoever planned it (<see cref="FocusedPlayer.Combats"/>, issue 1167).</summary>
+        public int Combats { get; init; }
     }
 
     /// <summary>
@@ -193,7 +199,7 @@ public static class LevelRun
                     if (end.Outcome.Result == BattleResult.Won)
                     {
                         handed += player switch { EvenPlayer chair => chair.Handed, FocusedPlayer chair => chair.Handed, _ => 0 };
-                        price = player is FocusedPlayer fed ? new Price(fed.Handed, fed.GivenUp, hpLost, falls) { Refused = fed.Refused.ToDictionary() } : null;
+                        price = player is FocusedPlayer fed ? new Price(fed.Handed, fed.GivenUp, hpLost, falls) { Refused = fed.Refused.ToDictionary(), Strikes = fed.Strikes, Combats = fed.Combats } : null;
                         won = end;
                         struck = tally;
                         camp = Read(start, end, content);
@@ -359,19 +365,21 @@ public static class LevelRun
     }
 
     /// <summary>
-    /// The focused chair's read (issue 1157, round 389): three chairs over the same seeds, the even chair
-    /// (the ceiling), the focused chair's guarded line and its paying line, each with its kills handed and
-    /// <see cref="ChairLines"/>; the paying line also prints its price through map 8 (<see cref="PriceLine"/>);
-    /// last, the bar's read (<see cref="FocusedVerdict"/>).
+    /// The focused chair's read (issue 1157, round 389): four chairs over the same seeds, the even chair
+    /// (the ceiling), the focused chair's guarded line, its paying line and its striking line (issue 1167,
+    /// round 392), each with its kills handed and <see cref="ChairLines"/>; the paying and striking lines
+    /// also print their price through map 8 (<see cref="PriceLine"/>); last, the bar's read on the striking
+    /// line (<see cref="FocusedVerdict"/>).
     /// </summary>
-    public static IEnumerable<string> FocusedLines(GameContent content, IReadOnlyList<Run> even, IReadOnlyList<Run> guarded, IReadOnlyList<Run> paying)
+    public static IEnumerable<string> FocusedLines(GameContent content, IReadOnlyList<Run> even, IReadOnlyList<Run> guarded, IReadOnlyList<Run> paying, IReadOnlyList<Run> striking)
     {
-        yield return $"levels --focused: {paying.Count} runs, three chairs over the same seeds, retries and campaign; the fed unit is {FocusedPlayer.Fed}";
+        yield return $"levels --focused: {striking.Count} runs, four chairs over the same seeds, retries and campaign; the fed unit is {FocusedPlayer.Fed}";
         foreach (var (label, runs) in new[]
         {
             ("even (the ceiling): the lowest level that takes a kill at no lower kill chance and no more exposure", even),
             ("guarded: every kill " + FocusedPlayer.Fed + " can take at no lower kill chance and no more exposure", guarded),
             ($"paying: every kill {FocusedPlayer.Fed} can take that still kills on a hit, at most {(int)Math.Round(FocusedPlayer.PayingGap * 100)} points of kill chance below the planned attacker's, at most {FocusedPlayer.PayingReach} more enemy in reach, no forecast death", paying),
+            ($"striking: the paying line, and a strike by {FocusedPlayer.Fed} on any target another unit is planned to attack, kill or not, at most {FocusedPlayer.PayingReach} more enemy in reach, no forecast death", striking),
         })
         {
             var refused = runs.SelectMany(r => r.Prices).SelectMany(p => p.Refused).GroupBy(kv => kv.Key).ToDictionary(g => g.Key, g => g.Sum(kv => kv.Value));
@@ -386,20 +394,23 @@ public static class LevelRun
         }
 
         yield return PriceLine(paying);
-        yield return FocusedVerdict(Companies(even, VerdictMap), Companies(paying, VerdictMap));
+        yield return PriceLine(striking, "striking");
+        yield return FocusedVerdict(Companies(even, VerdictMap), Companies(striking, VerdictMap));
     }
 
     /// <summary>
-    /// The paying line's price through map <see cref="VerdictMap"/> (issue 1157), over the runs that won it:
+    /// A focused line's price through map <see cref="VerdictMap"/> (issue 1157), over the runs that won it:
     /// the captain's level after it, the fed unit's level and main-weapon rank points after it, the kills
     /// handed and given up, the HP the fed unit lost in enemy phases (each p50 p75 per run), and his falls in all.
+    /// The striking line (issue 1167) adds the fed unit's combats per map and the strikes the chair handed him
+    /// per map, each p50 p75 over every won map through it.
     /// </summary>
-    public static string PriceLine(IReadOnlyList<Run> runs)
+    public static string PriceLine(IReadOnlyList<Run> runs, string line = "paying")
     {
         var reached = runs.Select(r => (Run: r, At: r.Maps.ToList().FindIndex(m => m.Map == VerdictMap))).Where(x => x.At >= 0 && x.At < x.Run.Companies.Count && x.At < x.Run.Prices.Count).ToList();
         if (reached.Count == 0)
         {
-            return $"  price (paying, through map {VerdictMap}): no run won it";
+            return $"  price ({line}, through map {VerdictMap}): no run won it";
         }
 
         string Pair(IEnumerable<int> values)
@@ -412,29 +423,40 @@ public static class LevelRun
         var after = reached.Select(x => x.Run.Companies[x.At]).ToList();
         var captain = after.Select(c => c.FirstOrDefault(m => m.Captain)?.Level ?? 0);
         var fed = after.Select(c => c.FirstOrDefault(m => m.Id == FocusedPlayer.Fed)).ToList();
-        return $"  price (paying, through map {VerdictMap}, {reached.Count} runs): captain level {Pair(captain)}; {FocusedPlayer.Fed} level {Pair(fed.Select(m => m?.Level ?? 0))}, main-weapon rank points {Pair(fed.Select(m => m?.MainRank ?? 0))}; kills handed {Pair(through.Select(p => p.Sum(x => x.Handed)))}, given up {Pair(through.Select(p => p.Sum(x => x.GivenUp)))} (total {through.Sum(p => p.Sum(x => x.GivenUp))}); HP lost in enemy phases {Pair(through.Select(p => p.Sum(x => x.HpLost)))}, falls {through.Sum(p => p.Sum(x => x.Falls))}";
+        var perMap = line == "striking"
+            ? $"; per map, combats {Pair(through.SelectMany(p => p.Select(x => x.Combats)))}, strikes handed {Pair(through.SelectMany(p => p.Select(x => x.Strikes)))}"
+            : "";
+        return $"  price ({line}, through map {VerdictMap}, {reached.Count} runs): captain level {Pair(captain)}; {FocusedPlayer.Fed} level {Pair(fed.Select(m => m?.Level ?? 0))}, main-weapon rank points {Pair(fed.Select(m => m?.MainRank ?? 0))}; kills handed {Pair(through.Select(p => p.Sum(x => x.Handed)))}, given up {Pair(through.Select(p => p.Sum(x => x.GivenUp)))} (total {through.Sum(p => p.Sum(x => x.GivenUp))}); HP lost in enemy phases {Pair(through.Select(p => p.Sum(x => x.HpLost)))}, falls {through.Sum(p => p.Sum(x => x.Falls))}{perMap}";
     }
 
     /// <summary>
-    /// Round 389's read after map <see cref="VerdictMap"/>: the bar is p50 1 non-captain at L7 and rank C on the
-    /// paying line, the ceiling p50 0 on the even chair, and a pass that leaves the captain's p50 below
+    /// Round 389's read after map <see cref="VerdictMap"/>: the bar is p50 1 non-captain at L7 and rank C,
+    /// the ceiling p50 0 on the even chair, and a pass that leaves the captain's p50 below
     /// <see cref="Threshold"/> reopens the curve. Round 392 (issue 1166) reads the ceiling on the level half
-    /// alone as well (p50 0 at L7 on the even chair), names a bar that still fails for the strike-then-finish
-    /// chair (issue 1167) before lever 2, and steps the floor's offset first on a broken ceiling.
+    /// alone as well (p50 0 at L7 on the even chair) and steps the floor's offset first on a broken ceiling.
+    /// From issue 1167 the bar is read on the striking line (<paramref name="fed"/>): a fail names the fed
+    /// unit's p50 level and main-weapon rank points, and sends rank to its own lever when his rank is short
+    /// of C with him striking every safe turn (round 392), else the level half back to the Table.
     /// </summary>
-    public static string FocusedVerdict(IReadOnlyList<IReadOnlyList<Member>> even, IReadOnlyList<IReadOnlyList<Member>> paying)
+    public static string FocusedVerdict(IReadOnlyList<IReadOnlyList<Member>> even, IReadOnlyList<IReadOnlyList<Member>> fed)
     {
         int P50(IReadOnlyList<IReadOnlyList<Member>> companies) => Percentile(companies.Select(c => c.Count(m => !m.Captain && m.AtBar)), 0.5);
         var head = $"  verdict (round 389, after map {VerdictMap}): ";
-        if (paying.Count == 0)
+        if (fed.Count == 0)
         {
-            return head + "no paying company reached it";
+            return head + "no striking company reached it";
         }
 
-        var captain = Percentile(paying.Select(c => c.FirstOrDefault(m => m.Captain)?.Level ?? 0), 0.5);
-        var bar = P50(paying) >= 1
-            ? captain >= Threshold ? $"the bar passes (paying p50 {P50(paying)} at L7+C, captain p50 L{captain}); a door has to be fed" : $"the bar passes at p50 {P50(paying)} but the captain is at p50 L{captain}; the curve reopens"
-            : "the bar fails (paying p50 0 at L7+C) on the levy floor; next the strike-then-finish chair, before lever 2 (round 392)";
+        var captain = Percentile(fed.Select(c => c.FirstOrDefault(m => m.Captain)?.Level ?? 0), 0.5);
+        var unit = fed.Select(c => c.FirstOrDefault(m => m.Id == FocusedPlayer.Fed)).ToList();
+        var unitLevel = Percentile(unit.Select(m => m?.Level ?? 0), 0.5);
+        var unitRank = Percentile(unit.Select(m => m?.MainRank ?? 0), 0.5);
+        var next = unitRank < WeaponRanks.Threshold(WeaponRank.C)
+            ? "his rank is short of C with him striking every safe turn; rank takes its own lever (round 392)"
+            : "his rank reaches C and the level half is short; the level half goes back to the Table";
+        var bar = P50(fed) >= 1
+            ? captain >= Threshold ? $"the bar passes (striking p50 {P50(fed)} at L7+C, captain p50 L{captain}); a door has to be fed" : $"the bar passes at p50 {P50(fed)} but the captain is at p50 L{captain}; the curve reopens"
+            : $"the bar fails (striking p50 0 at L7+C; {FocusedPlayer.Fed} p50 L{unitLevel}, rank points p50 {unitRank}); {next}";
         var level = Percentile(even.Select(c => c.Count(m => !m.Captain && m.AtLevel(Threshold))), 0.5);
         var ceiling = P50(even) == 0 && level == 0
             ? "the ceiling holds (even p50 0 at L7+C, p50 0 at L7 alone)"

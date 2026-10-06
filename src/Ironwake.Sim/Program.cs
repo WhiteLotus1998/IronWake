@@ -467,7 +467,7 @@ public static class Program
 
     /// <summary>
     /// The focused chair's read (issue 1157, round 389, <see cref="LevelRun.FocusedLines"/>): the even chair,
-    /// the guarded and the paying focused chairs over the same seeds, one thread each, since every run owns
+    /// the guarded, the paying and the striking (issue 1167) focused chairs over the same seeds, one thread each, since every run owns
     /// its player and the content is read-only. A measurement only.
     /// </summary>
     public static int FocusedTable(int seeds)
@@ -483,7 +483,8 @@ public static class Program
         var even = Task.Run(() => LevelRun.Measure(contentDir, content, seeds, even: true));
         var guarded = Task.Run(() => LevelRun.Measure(contentDir, content, seeds, focused: FocusedPlayer.Guard.Guarded));
         var paying = Task.Run(() => LevelRun.Measure(contentDir, content, seeds, focused: FocusedPlayer.Guard.Paying));
-        foreach (var line in LevelRun.FocusedLines(content, even.Result, guarded.Result, paying.Result))
+        var striking = Task.Run(() => LevelRun.Measure(contentDir, content, seeds, focused: FocusedPlayer.Guard.Striking));
+        foreach (var line in LevelRun.FocusedLines(content, even.Result, guarded.Result, paying.Result, striking.Result))
         {
             Console.WriteLine(line);
         }
