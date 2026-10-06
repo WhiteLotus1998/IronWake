@@ -1,0 +1,140 @@
+move pell 2,4
+attack pell brigand-1 cinder
+move ottilie 3,5
+attack ottilie brigand-1
+move captain 3,4
+attack captain brigand-1
+move teodor 3,7
+wait teodor
+move keziah 3,6
+wait keziah
+move dunstan 3,8
+wait dunstan
+end
+move dunstan 6,9
+wait dunstan
+move teodor 6,8
+wait teodor
+move keziah 6,7
+wait keziah
+move captain 5,6
+wait captain
+move ottilie 4,8
+wait ottilie
+move pell 4,6
+wait pell
+end
+move dunstan 8,10
+wait dunstan
+move teodor 7,9
+wait teodor
+move keziah 7,8
+wait keziah
+move captain 6,8
+wait captain
+move ottilie 6,10
+wait ottilie
+move pell 5,9
+wait pell
+threat dunstan
+threat teodor
+threat ottilie
+threat pell
+threat keziah
+threat captain
+end
+show pell
+forecast teodor brawler-1
+forecast keziah brawler-1 from 8,8
+forecast keziah rider-1 from 7,7
+forecast captain rider-1 from 6,6
+forecast captain rider-1 from 7,7
+forecast pell rider-1 from 6,6
+forecast pell brawler-1 from 6,9
+forecast ottilie soldier-1 from 7,10
+forecast dunstan soldier-1
+forecast pell rider-1 from 6,7
+move pell 6,7
+attack pell rider-1
+move captain 6,6
+attack captain rider-1
+attack teodor brawler-1
+move ottilie 7,10
+attack ottilie soldier-1
+forecast keziah soldier-1 from 9,9
+threat keziah from 9,9
+move keziah 9,9
+attack keziah soldier-1
+move dunstan 9,11
+wait dunstan
+threat keziah
+threat dunstan
+threat captain
+threat pell
+end
+show weir_foreman-1
+show archer-1
+move captain 8,8
+wait captain
+move pell 8,9
+wait pell
+move ottilie 11,10
+wait ottilie
+move teodor 10,10
+wait teodor
+move keziah 12,10
+wait keziah
+threat keziah
+threat ottilie
+threat teodor
+end
+forecast pell brigand-2 from 6,11
+forecast pell brigand-2 from 5,10
+forecast dunstan brigand-2 from 5,11
+move pell 6,11
+attack pell brigand-2
+move dunstan 5,11
+attack dunstan brigand-2
+move captain 9,10
+wait captain
+move keziah 13,10
+wait keziah
+move ottilie 12,11
+wait ottilie
+move teodor 11,10
+wait teodor
+threat keziah
+threat ottilie
+threat teodor
+threat captain
+end
+move captain 12,9
+wait captain
+move pell 10,11
+wait pell
+move dunstan 9,11
+wait dunstan
+move keziah 14,9
+wait keziah
+move ottilie 13,10
+wait ottilie
+move teodor 12,10
+wait teodor
+threat keziah
+threat ottilie
+threat teodor
+threat captain
+end
+show captain
+forecast captain weir_foreman-1 from 13,7
+forecast captain weir_foreman-1 art full_measure from 13,7
+forecast keziah weir_foreman-1 from 13,7
+forecast ottilie weir_foreman-1 from 13,8
+forecast ottilie weir_foreman-1 from 12,7
+forecast teodor weir_foreman-1 from 12,6
+forecast teodor weir_foreman-1 from 13,7
+threat teodor from 13,7
+move captain 12,6
+attack captain weir_foreman-1 art full_measure
+move ottilie 13,8
+attack ottilie weir_foreman-1

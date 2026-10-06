@@ -14,6 +14,10 @@ namespace Ironwake.Core.Tests.Content;
 /// 12,2 wakes the weir, the Foreman refuses every strike tile and holds his hill, and he falls
 /// there on turn 6 to Pell's Cinder, Ottilie's Aimed Shot and Full Measure, having never swung
 /// on his own phase.
+/// The third replay (seed 1450) crosses by the south ford: the ford's fight wakes the weir by
+/// its link, the party masses on the east bank's south plain, the Foreman refuses every strike
+/// tile from that side too and holds his hill, and he falls there on turn 8 to Full Measure and
+/// Ottilie's critical shot, having never moved or swung.
 /// </summary>
 [Collection("console")]
 public class HarrowWeirReplayTests
@@ -48,6 +52,24 @@ public class HarrowWeirReplayTests
         Assert.Contains("Weir Foreman falls at 13,6\n", output);
         Assert.Contains("Battle won: defeat_boss\n", output);
         Assert.Equal(File.ReadAllText(Path.Combine(root, "docs", "transcripts", "2026-10-05-harrow_weir-1410.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    [Fact]
+    public void HarrowWeirReplayOnSeed1450FromTheFordIsWonOnTheHillOnTurn8()
+    {
+        var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(root, "docs", "transcripts", "2026-10-06-harrow_weir-1450.script");
+        var args = new[] { "play", "harrow_weir", "--seed", "1450", "--scheme", "two", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
+
+        var output = ConsoleCapture.Run(() => Program.Main(args));
+
+        Assert.Contains("The weir group wakes (called by the ford group)\n", output);
+        Assert.Contains("Reinforcements are blocked: a unit holds 9,11\n", output);
+        Assert.DoesNotContain("enemy: move weir_foreman-1", output);
+        Assert.DoesNotContain("enemy: attack weir_foreman-1", output);
+        Assert.Contains("Weir Foreman falls at 13,6\n", output);
+        Assert.Contains("Battle won: defeat_boss\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(root, "docs", "transcripts", "2026-10-06-harrow_weir-1450.txt")).ReplaceLineEndings("\n"), output);
     }
 
     private static string EnemyPhase(string output, int turn)
