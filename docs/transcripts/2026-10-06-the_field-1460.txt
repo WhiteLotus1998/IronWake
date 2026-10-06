@@ -4677,18 +4677,18 @@ Battle won: defeat_boss; only recall is left, or leave
 > leave
 The Field Before the Keep won: defeat_boss; reward 1800, the purse holds 2300; nobody fell
 Wren drilled with the levy: L5 -> L7.
-Teodor drilled with the levy: L6 -> L7.
-Ottilie drilled with the levy: L5 -> L7.
-Pell drilled with the levy: L5 -> L7.
+Teodor drilled with the levy: L6 -> L7, 36 EXP kept.
+Ottilie drilled with the levy: L5 -> L7, 8 EXP kept.
+Pell drilled with the levy: L5 -> L7, 99 EXP kept.
 Dunstan drilled with the levy: L5 -> L7.
 Brannock drilled with the levy: L5 -> L7.
 -- Before map 10 of 10: Ironwake Keep; the purse holds 2300 --
 == Roster ==
   Alder Fenn (captain): Cadet L5, EXP 16; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 1/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  Teodor: Pikeman L7, EXP 0; 1: Iron Lance 34/40 (repair 60), 2: Field Dressing 3/3, 3: Family Lance 40/40; door: lance 26/50
-  Ottilie: Bowman L7, EXP 0; 1: Iron Bow 38/40 (repair 20), 2: Field Dressing 2/3; door: bow 6/50
-  Pell: Adept L7, EXP 0; 1: Gust 6/6, 2: Cinder 8/8; door: lore 24/50
+  Teodor: Pikeman L7, EXP 36; 1: Iron Lance 34/40 (repair 60), 2: Field Dressing 3/3, 3: Family Lance 40/40; door: lance 26/50
+  Ottilie: Bowman L7, EXP 8; 1: Iron Bow 38/40 (repair 20), 2: Field Dressing 2/3; door: bow 6/50
+  Pell: Adept L7, EXP 99; 1: Gust 6/6, 2: Cinder 8/8; door: lore 24/50
   Dunstan: Bulwark L7, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
   Maud: Chaplain L5, EXP 46; 1: Radiance 5/5, 2: Salve 8/8; door: faith 42/50
   Keziah: Reaver L6, EXP 8; 1: Kinsbane 20/20, 2: Iron Axe 40/40, 3: Iron Gauntlets 40/40; door: axe 53/50

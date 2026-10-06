@@ -22,15 +22,15 @@ public class DrillPrintTests
     }
 
     [Fact]
-    public void TheDrillPrintCountsTheExpTheDrillZeroesOnAFedUnitBelowTheFloor()
+    public void TheDrillPrintCountsNothingZeroedOnAFedUnitBelowTheFloorSinceTheDrillKeepsExp()
     {
         var before = WithTeodor(AtMapEight(), 3, 50);
         var fought = WithTeodor(before, 4, 80);
 
         var exp = LevelRun.FedExp.Of(before, fought, [FocusedPlayer.Fed], Content);
 
-        Assert.Equal(new LevelRun.FedExp(true, Experience.LevelUpAt + 30, 80), exp);
-        Assert.Equal(0, fought.Drill(Content).Find(FocusedPlayer.Fed)!.Exp);
+        Assert.Equal(new LevelRun.FedExp(true, Experience.LevelUpAt + 30, 0), exp);
+        Assert.Equal(80, fought.Drill(Content).Find(FocusedPlayer.Fed)!.Exp);
     }
 
     [Fact]

@@ -1302,18 +1302,18 @@ B  wren             Wren L2 cadet              7,7    hp 4/20   Plain
 Battle won: rout; only recall is left, or leave
 > leave
 Raid on Ironwake won: rout; reward 1000, the purse holds 1500; fallen: Teodor, Dunstan
-Wren drilled with the levy: L2 -> L4.
-Ottilie drilled with the levy: L1 -> L4.
-Pell drilled with the levy: L1 -> L4.
+Wren drilled with the levy: L2 -> L4, 35 EXP kept.
+Ottilie drilled with the levy: L1 -> L4, 59 EXP kept.
+Pell drilled with the levy: L1 -> L4, 71 EXP kept.
 Ansgar drilled with the levy: L1 -> L4.
 Keziah drilled with the levy: L1 -> L4.
 Brannock drilled with the levy: L1 -> L4.
 -- Before map 7 of 9: Sallow Grange; the purse holds 1500 --
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L4, EXP 0; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
-  Ottilie: Bowman L4, EXP 0; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
-  Pell: Adept L4, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Wren: Cadet L4, EXP 35; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
+  Ottilie: Bowman L4, EXP 59; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
+  Pell: Adept L4, EXP 71; 1: Cinder 8/8, 2: Gust 6/6
   Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
   Ansgar: Outrider L4, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
@@ -1384,9 +1384,9 @@ ERROR: A hire costs 300 and the purse holds 0
 > roster
 Roster: company 11/12
   Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L4, EXP 0; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
-  Ottilie: Bowman L4, EXP 0; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
-  Pell: Adept L4, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Wren: Cadet L4, EXP 35; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
+  Ottilie: Bowman L4, EXP 59; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
+  Pell: Adept L4, EXP 71; 1: Cinder 8/8, 2: Gust 6/6
   Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
   Ansgar: Outrider L4, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
@@ -1404,9 +1404,9 @@ Roster: company 11/12
 -- Before map 7 of 9: Sallow Grange; the purse holds 0 --
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L4, EXP 0; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
-  Ottilie: Bowman L4, EXP 0; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
-  Pell: Adept L4, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Wren: Cadet L4, EXP 35; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
+  Ottilie: Bowman L4, EXP 59; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
+  Pell: Adept L4, EXP 71; 1: Cinder 8/8, 2: Gust 6/6
   Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
   Ansgar: Outrider L4, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40

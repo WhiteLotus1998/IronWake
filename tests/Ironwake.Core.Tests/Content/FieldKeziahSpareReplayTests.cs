@@ -24,7 +24,7 @@ public class FieldKeziahSpareReplayTests
         Assert.Contains("Alder Fenn talks Rook round: spared, off the field (18 hp)\n", output);
         Assert.Contains("Teodor hits Sworn Captain for 6 (hp 0)\n", output);
         Assert.Contains("The Field Before the Keep won: defeat_boss; reward 1800, the purse holds 2300; nobody fell\n", output);
-        Assert.Contains("Teodor drilled with the levy: L6 -> L7.\n", output);
+        Assert.Contains("Teodor drilled with the levy: L6 -> L7, 36 EXP kept.\n", output);
         Assert.Contains("Brannock drilled with the levy: L5 -> L7.\n", output);
         Assert.DoesNotContain("Recalled to state", output);
         Assert.DoesNotContain("Sworn Captain attacks", output);

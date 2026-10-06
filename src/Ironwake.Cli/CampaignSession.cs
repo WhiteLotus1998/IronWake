@@ -1891,13 +1891,14 @@ public sealed class CampaignSession
 
     /// <summary>
     /// One rules line per levy member the camp's floor raises (issue 1164, round 391), printed after a
-    /// won battle: <c>&lt;name&gt; drilled with the levy: L2 -&gt; L6.</c> <paramref name="record"/> is
-    /// the record before the drill (<see cref="CampaignRecord.Fought"/>).
+    /// won battle: <c>&lt;name&gt; drilled with the levy: L2 -&gt; L6.</c>, with <c>, 36 EXP kept</c>
+    /// before the stop when the unit carries EXP through it (issue 1184, round 398). <paramref name="record"/>
+    /// is the record before the drill (<see cref="CampaignRecord.Fought"/>).
     /// </summary>
     public static IReadOnlyList<string> DrillLines(CampaignRecord record, GameContent content)
     {
         var names = UnitNames.Of(record, content);
-        return record.Drills(content).Select(d => $"{names[d.Id]} drilled with the levy: L{d.From} -> L{d.To}.").ToList();
+        return record.Drills(content).Select(d => $"{names[d.Id]} drilled with the levy: L{d.From} -> L{d.To}{(d.Exp > 0 ? $", {d.Exp} EXP kept" : "")}.").ToList();
     }
 
     /// <summary>
