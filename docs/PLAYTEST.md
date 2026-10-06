@@ -3549,3 +3549,17 @@ Notes:
 - **Not tense:** turn 5, a brigand at 24 against Ottilie's arrow and the captain's double at 89.
 
 — Code
+
+## 2026-10-06 — Sallow Grange, a fresh seed, the weakest untuned map under 0278, warm — Code
+Seed: 1580 (`campaign --seed 1580 --from sallow_grange --level 5 --strict --script docs/transcripts/2026-10-06-sallow_grange-1580.script`; transcript beside it; main at 8d82586). The camp before map 7 of 10, the default six (captain, Wren, Teodor, Ottilie, Pell, Dunstan) at L5 against the grange's L7; no pick, so Keziah's question never comes up.   Result: **won on turn 8 of 10**, seize, two Recalls, nobody fell.
+Warm: I played Sallow at 61 and 871 and read 44. Picked under 0278: the last of the 7/7/5 tie after Saltmarsh and the raid.
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 6, the fall back. Teodor's lance had taken the hexer to 4, and its Cinder counter took him to 4 with the Reeve just woken. Ottilie's crit killed the hexer, Wren went to 13,6, Pell to 12,5, and the captain stepped to 10,6 and called fall back. Teodor walked two tiles back into the gap at 11,6, and Dunstan took the tile he left. Every tile the Reeve could strike 11,6 from was filled, and `threat teodor` read clear. The Reeve threw his spear at Wren for 9 from his post and died the next turn. It was the first time I have used the Commander's Word to save someone rather than to push.
+Notes:
+- **Turn 3 was the map, twice.** The field group (veteran, brawler, archer) sleeps in a knot at 7,5 to 8,6, and nothing can reach it without waking all three. My first pass: Pell's Overcast killed the archer from 7,7 at 99, Ottilie and the captain's Full Measure killed the brawler, and Teodor missed the veteran while Wren landed one of two. Then he walked to 7,6 and put 17 into Pell's 17 at 83. I ended with `threat pell` already reading 17 against 17, because everyone had acted. I recalled to the turn start. Since the same attack rolls the same, Teodor missed again. This time Pell went to 5,5 and used the same Overcast on the veteran: 19 into his 19, after Wren's 6. The archer was left alone, and it chipped Teodor for 5.
+- **The second Recall was mine too.** On turn 5 I sent Dunstan and Ottilie at the hexer from inside the yard. Dunstan missed, the counter took 13 off Ottilie, and the Reeve woke with her at 5 and `threat` lethal at 77. I recalled, staged everyone at distance 5 from the Reeve, and went in a turn later with the whole company.
+- **Two of seven enemies were scenery.** The fort archer at 4,2 and the shieldbearer at 12,2 never acted. Both hold, and both sit off a route that runs straight through rows 5 to 7. 871 only fought the fort archer because Keziah went looking for a feed. This is a rework candidate under 0278, and I am filing no lever: the map is short and the Reeve is the clock, but the north edge asks nothing of you.
+- **The Reeve on his post is a fair boss.** He threw the Toll Spear from 15,6 and never left the tile, and every strike on him was answered: the spear countered Pell at range 2 for 12, and Ottilie for 11. That is not the held-boss watch line (none of the strikes went unanswered).
+- **Not tense:** turns 1, 2 and 4, the approach and the mop-up. Turn 8 was a walk.
+
+— Code

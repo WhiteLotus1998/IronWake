@@ -1,0 +1,115 @@
+march
+move dunstan 2,8
+wait dunstan
+move teodor 2,5
+wait teodor
+move wren 2,6
+wait wren
+move ottilie 1,7
+wait ottilie
+move captain 1,6
+wait captain
+move pell 1,5
+wait pell
+end
+move wren 3,4
+wait wren
+move captain 2,6
+wait captain
+move pell 3,7
+wait pell
+move ottilie 4,8
+wait ottilie
+move dunstan 3,8
+wait dunstan
+wait teodor
+end
+move pell 7,7
+attack pell archer-2 art overcast !
+move ottilie 6,7
+attack ottilie brawler-1
+move captain 6,6
+attack captain brawler-1 art full_measure
+move teodor 6,5
+attack teodor veteran-1
+move wren 7,4
+attack wren veteran-1
+move dunstan 7,8
+wait dunstan
+threat pell
+end !
+recall list
+recall 41
+move ottilie 6,7
+attack ottilie brawler-1
+move captain 6,6
+attack captain brawler-1 art full_measure
+move teodor 6,5
+attack teodor veteran-1
+move wren 7,4
+attack wren veteran-1
+threat ottilie
+threat pell from 5,5
+move pell 5,5
+attack pell veteran-1 art overcast
+move dunstan 7,8
+wait dunstan
+end
+move teodor 7,5
+attack teodor archer-2
+move wren 8,4
+attack wren archer-2
+move dunstan 10,7
+wait dunstan
+move ottilie 9,6
+wait ottilie
+move pell 9,5
+wait pell
+end
+move dunstan 12,7
+attack dunstan hexer-1
+move ottilie 12,6
+attack ottilie hexer-1
+threat ottilie
+recall 77
+move wren 10,5
+wait wren
+move teodor 10,6
+wait teodor
+move pell 10,4
+wait pell
+move ottilie 9,7
+wait ottilie
+move captain 9,6
+wait captain
+wait dunstan
+end
+move teodor 12,7
+attack teodor hexer-1
+move ottilie 12,6
+attack ottilie hexer-1
+move wren 13,6
+wait wren
+move pell 12,5
+wait pell
+move captain 10,6
+order fall back
+fallback teodor 11,6
+move dunstan 12,7
+wait dunstan
+threat pell
+end
+move wren 14,6
+attack wren grange_reeve-1
+move pell 14,5
+attack pell grange_reeve-1
+move ottilie 14,7
+attack ottilie grange_reeve-1
+move dunstan 15,7
+attack dunstan grange_reeve-1
+move captain 13,6
+wait captain
+wait teodor
+end
+move captain 16,6
+leave
