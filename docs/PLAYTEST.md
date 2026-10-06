@@ -3226,3 +3226,19 @@ Notes:
 - **Verdict:** the tuned verdict stands, and nothing new is filed. The freeze is #1087's, and its datapoint is added there. For 0251's tripwire this is not a bait win, so the count does not advance. The bait existed, but the screen made it cost the follow-up.
 
 — Code
+
+## 2026-10-06 — The field on Keziah's pick, Rook spared, over the bridge, a tuned map replayed under 0237, warm — Code
+Seed: 1460 (`campaign --seed 1460 --from the_field --pick keziah --fed 10 --level 5 --strict --script docs/transcripts/2026-10-06-the_field-1460.script`; transcript beside it; main at 9b3aea6)   Result: **won on turn 10 of 20.** Nobody fell, no Recall was spent. Rook was spared by the captain on turn 2 and left the field.
+Warm: my fourth play of this arm, after 936, 1350 (south) and 1400 (north). This time the captain spared Rook instead of Keziah turning her, and I crossed by the bridge.
+Tension: 7/10   Choice: 8/10   Surprise: 6/10
+Best turn: turn 6. Kinsbane woke on the line's archer and the hunt gave Keziah four more tiles, and `end` refused me twice before I found where to put them. With Pell on 10,7 to finish soldier-1, Pell was lethal (rider and soldier 24 against 17); Ottilie blocking 11,7 was 22 against 18. The answer was Keziah's free Move onto 11,7 at 25 HP and Maud on 11,8 to heal her, which left Pell's tile with no reachable neighbour. The rider and the soldier spent the phase on Ottilie and Maud and killed nobody.
+Notes:
+- **The spare is cheap on this seed.** The captain walked to 7,12 and talked Rook off the field. `threat` priced the woken pickets at 22 against his 24, and they hit him for 10. On 1350 and 1400 Keziah's talk cost Teodor 19 HP and, on 1400, two Recalls. The price is Rook herself: "spared, and gone" at the next camp, no drake, no rider. I'd take her, but the screen let me choose, and that's the choice the arm is for.
+- **Turn 3 was the tense one.** The soldier left Keziah on 2, Kinsbane's drain took her to 1, and it starved to half power. She needed the 2-HP soldier at 76 with a lethal counter on a miss (`!`). Maud's Salve first only took her to 9, under the counter's 11. It hit.
+- **Teodor took four kills, the boss among them.** The chip-and-finish worked four times: Ottilie or the captain first, Teodor last (archer-2, soldier-2, brigand-2 at 81), and on turn 10 Pell's Gust left the boss on 6 and Teodor's 6 at 58 finished him.
+- **The boss never swung.** He held his fort all map, refused the open tiles ("too exposed there; holds 18,6"), and fell to two range-2 strikes he could not answer (Pell's Overcast 16, Gust 10) and Teodor's lance. That is the field's version of #1087 under 0264's hold. 1400's replay now shows the same. Not filed: Pell's Cinder spent its last uses on it, and the Recall-free win came from the west-bank fight, not from him.
+- **Not tense:** turns 4, 5 and 9 were walks. The drift was one rider again, as on 1400.
+- **For round 397 (filed on the Table, not as an issue).** After the win the camp drilled the levy to L7. Teodor, fed four kills and the boss (L5 to L6 plus 36 EXP), came out at **L7, EXP 0**, the same as Wren, Dunstan and Brannock, who never deployed. Pell, at L5 with 99 EXP, also came out at L7 with EXP 0. On this one map, feeding him bought nothing that a bench didn't. It's one warm map at a synthetic L5 start, not the cold chair through map 8, so it doesn't decide the bar.
+- **Verdict:** the tuned verdict stands. The spare and the bridge make a third line on this arm, the fastest so far (turn 10 against 13 and 13).
+
+— Code
