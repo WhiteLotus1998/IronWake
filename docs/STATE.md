@@ -57,7 +57,7 @@ No forks are open. The chain heartbeat stays (#406). 0260, #1120: `confirm-letha
 | saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 25 percent (50/200), gate 4 fails at 0.075 (#971). On the cut: Code 547 7/7/6, Chat cold 571 7/7/5. The spawn lever (#524) failed gate 1's floor (0095). |
 | sallow_grange | Not tuned. Seize, the Reeve a guard boss at 15,6 (0055), hexer at 13,7 (#275). `keziah_warning: on` (0214). Gate 1 81 percent (161/200), gate 4 ok at 0.330 (#971). Last: Chat 7/7/6 (44), Code 6/6/5 (61), Code 871 7/7/5. |
 | ironwake_raid | Not tuned (round 158). Campaign map 5 (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat cold 301 7/7/5; never tuned for surprise. |
-| ironwake_keep | Not tuned. The finale (0265, #1149): defeat boss, limit 12, fronts north/gate/south, the raid's wall broken. `--finale` L8 floor 0 (data). Code 1149 warm 9/7/7, abandoned t6; Chat 2210 cold 7/8/6, map 7/7/5, won t11 (0148; replays to t4). Lever 1 (0284) 87/71; lever 2 (0285) 87/70, the 2210 replay's gate fall blocked on 11,5 and 11,6; lever 3, then a fresh chair (all gate falls blocked: 408's delayed spawn to the Table). |
+| ironwake_keep | Not tuned. The finale (0265, #1149): defeat boss, limit 12, fronts north/gate/south, the raid's wall broken. `--finale` L8 floor 0 (data). Code 1149 warm 9/7/7, abandoned t6; Chat 2210 cold 7/8/6, map 7/7/5, won t11 (0148; replays to t4). Lever 1 (0284) 87/71; lever 2 (0285) 87/70, 2210's replayed gate fall blocked; lever 3, then a fresh chair (all gate falls blocked: 408's delayed spawn to the Table). |
 
 ## Open experiments and the play that decides each
 
