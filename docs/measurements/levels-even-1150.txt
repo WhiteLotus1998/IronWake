@@ -1,0 +1,11 @@
+# issue 1150: --levels --even (Release, 200 runs) on main after #1155: the even-company chair (EvenPlayer, round 387) through the campaign, same seeds, retries and permadeath-off campaign as levels-1135.txt. 118 of 200 runs still never win map 1 (Starting Alone), so the reads after it are over the 79 to 82 that did. Elapsed 9m 45s.
+levels --even: 200 runs, the even-company chair (issue 1150): a kill the heuristic plans goes to the lowest level, then the fewest main-weapon rank points, that takes it from a tile the heuristic accepts at no lower kill chance and no more exposure; kills handed 281
+  map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+    at L7+C meeting no form: 0
+  map 7 sallow_grange: companies 79, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+    at L7+C meeting no form: 1, the closest form refuses ranks.axe 1
+  map 8 brackwater_cut: companies 79, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+    at L7+C meeting no form: 2, the closest form refuses ranks.axe 2
+  map 9 the_field: companies 79, non-captains at L7+C p50 0 p75 0, L6+C p50 1 p75 1, L5+C p50 1 p75 1; L7 alone p50 0 p75 0, rank C alone p50 1 p75 1; meets a form p50 0 p75 0
+    at L7+C meeting no form: 2, the closest form refuses ranks.axe 2
+  verdict (round 387, after map 8, 79 companies): p50 0 at L5+C; the bar is not the lever, the curve is (back to the Table)
