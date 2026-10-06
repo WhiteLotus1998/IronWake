@@ -1,0 +1,57 @@
+quest pell_1 teodor
+move pell 7,4
+attack pell shieldbearer-1 art overcast
+move teodor 3,2
+wait teodor
+end
+threat pell from 4,4
+move pell 4,4
+attack pell brigand-2
+attack teodor brigand-1
+threat teodor
+threat pell
+end
+recall 12
+threat pell from 7,4
+move teodor 5,0
+wait teodor
+attack pell shieldbearer-1
+threat pell
+threat teodor
+recall 12
+about field_dressing
+move teodor 5,0
+item teodor field_dressing
+attack pell shieldbearer-1
+threat teodor
+threat pell
+end
+threat pell from 6,5
+about gust
+move pell 10,5
+wait pell
+move teodor 9,0
+wait teodor
+end
+threat pell
+threat pell from 12,5
+threat pell from 12,4
+move teodor 9,4
+attack teodor hexer-1 art long_thrust !
+move pell 8,4
+attack pell hexer-1 !
+threat pell
+threat teodor
+end
+threat teodor from 12,5
+threat pell from 12,4
+move teodor 12,5
+item teodor field_dressing
+move pell 12,4
+wait pell
+threat pell
+threat teodor
+end
+exit teodor
+exit pell
+leave
