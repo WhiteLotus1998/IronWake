@@ -30,6 +30,38 @@ public static class LevelRun
 
         /// <summary>The record's rapport after each won map, one entry per <see cref="Maps"/> entry in the same order (issue 77).</summary>
         public IReadOnlyList<IReadOnlyList<Rapport>> Rapport { get; init; } = [];
+
+        /// <summary>The company standing after each won map, one entry per <see cref="Maps"/> entry in the same order (issue 1135).</summary>
+        public IReadOnlyList<IReadOnlyList<Member>> Companies { get; init; } = [];
+    }
+
+    /// <summary>
+    /// One living unit after a won map (issue 1135): its level, the rank points in its main weapon
+    /// (<see cref="MainType"/>), whether it meets some advanced form (<see cref="Ready"/>), and whether it is the captain.
+    /// </summary>
+    public sealed record Member(int Level, int MainRank, bool Ready, bool Captain)
+    {
+        /// <summary>The tier-2 bar of rounds 224 to 226 read on the main weapon alone: <see cref="Threshold"/> and rank C.</summary>
+        public bool AtBar => Level >= Threshold && MainRank >= WeaponRanks.Threshold(WeaponRank.C);
+
+        /// <summary>The <see cref="Member"/> reading of <paramref name="unit"/>.</summary>
+        public static Member Of(Unit unit, GameContent content) =>
+            new(unit.Level, unit.Skill.Points(MainType(unit, content)), LevelRun.Ready(unit, content), CampaignRecord.IsCaptain(unit, content));
+    }
+
+    /// <summary>
+    /// A unit's main weapon type: the first weapon on its cast card, as the seat trains it (issue 1130),
+    /// or, for a unit whose card carries none, the type it holds the most rank points in.
+    /// </summary>
+    public static WeaponType MainType(Unit unit, GameContent content)
+    {
+        var card = content.Units.TryGetValue(unit.Id, out var cast) ? cast : unit;
+        if (card.Inventory.Items.Select(s => content.Weapons.GetValueOrDefault(s.ItemId)).FirstOrDefault(w => w is not null) is { } main)
+        {
+            return main.Type;
+        }
+
+        return Enum.GetValues<WeaponType>().OrderByDescending(unit.Skill.Points).First();
     }
 
     /// <summary>
@@ -92,6 +124,7 @@ public static class LevelRun
             var maps = new List<(int, IReadOnlyList<int>, int, Camp)>();
             var weapons = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
             var rapport = new List<IReadOnlyList<Rapport>>();
+            var companies = new List<IReadOnlyList<Member>>();
             int? lost = null;
             while (!record.IsFinished(content))
             {
@@ -134,11 +167,13 @@ public static class LevelRun
 
                 record = record.AfterBattle(won, content);
                 var company = record.Present(content);
-                maps.Add((number, company.Select(u => u.Level).ToList(), company.Count(u => Ready(u, content)), camp!));
+                var members = company.Select(u => Member.Of(u, content)).ToList();
+                maps.Add((number, company.Select(u => u.Level).ToList(), members.Count(m => m.Ready), camp!));
                 rapport.Add(record.Rapport.ToList());
+                companies.Add(members);
             }
 
-            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport });
+            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport, Companies = companies });
         }
 
         return runs;
@@ -207,6 +242,15 @@ public static class LevelRun
             var shares = camps.Select(CaptainShare).OfType<int>().ToList();
             var share = shares.Count == 0 ? "none earned" : $"{Percentile(shares, 0.5)}%";
             yield return $"    camp {id}: enemy {Percentile(enemy, 0.5)}, deployed top p50 {Percentile(topAtCamp, 0.5)}, median p50 {Percentile(median, 0.5)}, lowest p50 {Percentile(lowest, 0.5)}, captain share p50 {share}";
+            if (MedianLine(id, Companies(runs, number)) is { } line)
+            {
+                yield return line;
+            }
+        }
+
+        if (FirstCertified(runs) is { } first)
+        {
+            yield return first;
         }
 
         var byClass = runs.SelectMany(r => r.Weapons).GroupBy(kv => kv.Key, StringComparer.Ordinal).OrderBy(g => g.Key, StringComparer.Ordinal)
@@ -217,6 +261,61 @@ public static class LevelRun
         {
             yield return $"  no try won map {lostOn.Key}: {lostOn.Count()}";
         }
+    }
+
+    /// <summary>The company standing after map <paramref name="number"/> in every run that won it and recorded one (issue 1135).</summary>
+    public static IReadOnlyList<IReadOnlyList<Member>> Companies(IReadOnlyList<Run> runs, int number) =>
+        runs.SelectMany(r => r.Maps.Select((m, i) => (m.Map, Company: i < r.Companies.Count ? r.Companies[i] : null)))
+            .Where(x => x.Map == number && x.Company is not null).Select(x => x.Company!).ToList();
+
+    /// <summary>
+    /// The median unit's line for one map (issue 1135, round 381), or null when no run recorded a company:
+    /// over the companies standing after it, the median unit's level and main-weapon rank points, each as
+    /// p25 p50 p75, and how many living units are at the tier-2 bar (<see cref="Member.AtBar"/>), at p50 and p75.
+    /// </summary>
+    public static string? MedianLine(string id, IReadOnlyList<IReadOnlyList<Member>> companies)
+    {
+        if (companies.Count == 0)
+        {
+            return null;
+        }
+
+        var level = companies.Select(c => Median(c.Select(m => m.Level).ToList())).ToList();
+        var rank = companies.Select(c => Median(c.Select(m => m.MainRank).ToList())).ToList();
+        var bar = companies.Select(c => c.Count(m => m.AtBar)).ToList();
+        return $"    median {id}: unit level {Band(level)}, main-weapon rank points {Band(rank)}, at L{Threshold} and rank C p50 {Percentile(bar, 0.5)} p75 {Percentile(bar, 0.75)}";
+    }
+
+    /// <summary>The first map after which a unit other than the captain meets some advanced form (<see cref="Member.Ready"/>), or null if none ever does (issue 1135).</summary>
+    public static int? FirstCertifiedMap(Run run)
+    {
+        for (var i = 0; i < run.Maps.Count && i < run.Companies.Count; i++)
+        {
+            if (run.Companies[i].Any(u => u.Ready && !u.Captain))
+            {
+                return run.Maps[i].Map;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// The camp at which the first unit other than the captain meets some advanced form, over the runs
+    /// (issue 1135): its p50 and p75 over the runs where one did, and how many runs saw none. Null with no runs.
+    /// </summary>
+    public static string? FirstCertified(IReadOnlyList<Run> runs)
+    {
+        if (runs.Count == 0)
+        {
+            return null;
+        }
+
+        var maps = runs.Select(FirstCertifiedMap).OfType<int>().ToList();
+        var none = runs.Count - maps.Count;
+        return maps.Count == 0
+            ? $"  first non-captain to meet a form: none in {runs.Count} runs"
+            : $"  first non-captain to meet a form: after map p50 {Percentile(maps, 0.5)} p75 {Percentile(maps, 0.75)} over {maps.Count} runs; none in {none} of {runs.Count}";
     }
 
     /// <summary>
