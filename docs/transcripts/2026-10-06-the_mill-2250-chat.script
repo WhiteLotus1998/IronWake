@@ -1,0 +1,18 @@
+march
+move captain 5,8
+wait captain
+wait maud
+end
+move captain 6,9
+attack captain archer-2 art full_measure
+attack maud brigand-1
+end
+wait maud
+end
+attack maud soldier-1
+move captain 7,6
+wait captain
+end
+move captain 8,4
+attack captain archer-1
+leave
