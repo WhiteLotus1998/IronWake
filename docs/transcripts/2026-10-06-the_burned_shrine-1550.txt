@@ -1,0 +1,934 @@
+Campaign, seed 1550, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+reseeded from 986 to 1550: not the save's battle
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 8 of 10: Brackwater Cut; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L7, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40; door: lance 0/50
+  Ottilie: Bowman L7, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3; door: bow 0/50
+  Pell: Adept L7, EXP 0; 1: Cinder 8/8, 2: Gust 6/6; door: lore 0/50
+  Dunstan: Bulwark L7, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
+  Maud: Chaplain L7, EXP 0; 1: Radiance 5/5, 2: Salve 8/8; door: faith 30/50
+  Keziah: Reaver L7, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40; door: axe 0/50
+  Brannock: Cadet L7, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Brackwater Cut: Alder Fenn, Dunstan, Teodor, Wren, Pell (deploy 5 of 9)
+== Keep ==
+Purse: 500
+Rooms: beds: 9/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Keep: Ironwake Keep; built: nothing; the purse holds 500
+  wall: Rebuild a wall, 400
+    Wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
+    Wall 10,9: Wall; no unit can stand on it; the gap 10,9 to 10,10 narrows from 2 tiles to 1 (10,10)
+  ditch: Dig a ditch, 300
+    Ditch 9,4: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,7: Water; infantry, cavalry and armored units cannot stand on it; flying can
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  teodor_2: Teodor's quest 2, The Warden's Gate (quest teodor_2 <ally>); permadeath applies
+  keziah_1: Keziah's quest 1, The Burned Shrine (quest keziah_1 <ally>); permadeath applies
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+  pell_1: Pell's quest 1, The Burned School; paid 2 common material
+  maud_2: Maud's quest 2, The First Shrine; paid Maud's Psalter
+  teodor_1: Teodor's quest 1, The Old Watch; paid nothing
+  pell_2: Pell's quest 2, The Undercroft; paid Pell's Commonplace and 3 frozen iron
+  ottilie_1: Ottilie's quest 1, The Counting House; paid 2 common material
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 8, Brackwater Cut. Get the captain out through an exit by the end of turn 8. Captain Fenn must survive.
+> quest keziah_1 teodor
+-- The Burned Shrine --
+Keziah's mother kept a shrine on a knoll off the west road. Each region
+has burned it once. Now someone is stripping the lead off what is left
+of the roof, standing on her floor to do it. "I need one of you. Whoever
+packed a second blanket. I'll feed you after."
+
+(Rout: defeat every enemy by the end of turn 10. The map is lost if
+Keziah falls. The ring wall has a west door at 4,3 and a breach at 7,5.
+More come up the road from turn 3, announced.)
+
+Side map: The Burned Shrine, seed 1677
+Keziah goes with Teodor. This map is lost if Keziah falls; who falls here is gone for good.
+  turn 3, enemy phase: a rider arrives at 14,7 (aggressive). A unit standing on 14,7 stops it.
+  turn 5, enemy phase: a brigand arrives at 0,0 (aggressive). A unit standing on 0,0 stops it.
+Objective: Defeat every enemy by the end of turn 10. Keziah must survive.
+The Burned Shrine  turn 1 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..bc.#....
+ 3 .......F..#..e.
+ 4 ....#.a...#....
+ 5 ^...###.###..^.
+ 6 .AB.......^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+c  acolyte-1        Acolyte L5 chaplain        8,2    hp 17/17  Plain  group nave, guard, asleep
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+a  brawler-1        Brawler L5 reaver          6,4    hp 24/24  Plain  group nave, guard, asleep
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           1,6    hp 26/26  Plain  captain
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          2,6    hp 24/24  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 3,4
+Teodor moves 2,6 -> 3,4 via 2,5 2,4
+The nave group wakes (proximity)
+The Burned Shrine  turn 1 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..bc.#....
+ 3 .......F..#..e.
+ 4 ...B#.a...#....
+ 5 ^...###.###..^.
+ 6 .A........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+c  acolyte-1        Acolyte L5 chaplain        8,2    hp 17/17  Plain  group nave, guard, awake
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+a  brawler-1        Brawler L5 reaver          6,4    hp 24/24  Plain  group nave, guard, awake
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           1,6    hp 26/26  Plain  captain
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 24/24  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Burned Shrine  turn 1 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..bc.#....
+ 3 .......F..#..e.
+ 4 ...B#.a...#....
+ 5 ^...###.###..^.
+ 6 .A........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+c  acolyte-1        Acolyte L5 chaplain        8,2    hp 17/17  Plain  group nave, guard, awake
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+a  brawler-1        Brawler L5 reaver          6,4    hp 24/24  Plain  group nave, guard, awake
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           1,6    hp 26/26  Plain  captain
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 24/24  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 2,5
+Keziah moves 1,6 -> 2,5 via 1,5
+The Burned Shrine  turn 1 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..bc.#....
+ 3 .......F..#..e.
+ 4 ...B#.a...#....
+ 5 ^.A.###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+c  acolyte-1        Acolyte L5 chaplain        8,2    hp 17/17  Plain  group nave, guard, awake
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+a  brawler-1        Brawler L5 reaver          6,4    hp 24/24  Plain  group nave, guard, awake
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           2,5    hp 26/26  Plain  captain
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 24/24  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait keziah
+Keziah waits
+The Burned Shrine  turn 1 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..bc.#....
+ 3 .......F..#..e.
+ 4 ...B#.a...#....
+ 5 ^.A.###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+c  acolyte-1        Acolyte L5 chaplain        8,2    hp 17/17  Plain  group nave, guard, awake
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+a  brawler-1        Brawler L5 reaver          6,4    hp 24/24  Plain  group nave, guard, awake
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           2,5    hp 26/26  Plain  captain  done
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 24/24  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move acolyte-1 5,3
+Acolyte moves 8,2 -> 5,3 via 7,2 6,2 5,2
+enemy: wait acolyte-1
+Acolyte waits
+enemy: wait archer-1
+Archer waits
+enemy: move brawler-1 3,3
+Brawler moves 6,4 -> 3,3 via 6,3 5,3 4,3
+enemy: attack brawler-1 teodor
+Forecast Brawler -> Teodor: acc 90% dmg 5 x2 crit 0%; counter with Iron Lance: acc 80% dmg 14 crit 4%
+Brawler attacks Teodor
+  Brawler hits Teodor for 5 (hp 19)
+  Brawler hits Teodor for 5 (hp 14)
+  Teodor hits Brawler for 14 (hp 10)
+  Brawler hp 10, Teodor hp 14
+Teodor gains 6 exp (6)
+enemy: wait hexer-1
+Hexer waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Burned Shrine  turn 2 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..b..#....
+ 3 ...a.c.F..#..e.
+ 4 ...B#.....#....
+ 5 ^.A.###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+c  acolyte-1        Acolyte L5 chaplain        5,3    hp 17/17  Plain  group nave, guard, awake
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+a  brawler-1        Brawler L5 reaver          3,3    hp 10/24  Plain  group nave, guard, awake
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           2,5    hp 26/26  Plain  captain
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 14/24  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack teodor brawler-1
+Forecast Teodor -> Brawler with Iron Lance: acc 80% dmg 14 crit 4%; counter: acc 90% dmg 5 x2 crit 0%
+Teodor attacks Brawler
+  Teodor hits Brawler for 14 (hp 0)
+  Teodor hp 14, Brawler hp 0
+Teodor gains 20 exp (26)
+Brawler falls at 3,3
+The Burned Shrine  turn 2 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..b..#....
+ 3 .....c.F..#..e.
+ 4 ...B#.....#....
+ 5 ^.A.###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+c  acolyte-1        Acolyte L5 chaplain        5,3    hp 17/17  Plain  group nave, guard, awake
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           2,5    hp 26/26  Plain  captain
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 14/24  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 4,3
+Keziah moves 2,5 -> 4,3 via 2,4 2,3 3,3
+The Burned Shrine  turn 2 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..b..#....
+ 3 ....Ac.F..#..e.
+ 4 ...B#.....#....
+ 5 ^...###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+c  acolyte-1        Acolyte L5 chaplain        5,3    hp 17/17  Plain  group nave, guard, awake
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           4,3    hp 26/26  Plain  captain
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 14/24  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack keziah acolyte-1 iron_gauntlets
+Forecast Keziah -> Acolyte with Iron Gauntlets: acc 96% dmg 13 x4 crit 0%; counter: acc 97% dmg 12 crit 0% (Radiance 5 of 5 left)
+Keziah equips Iron Gauntlets
+Keziah attacks Acolyte
+  Keziah hits Acolyte for 13 (hp 4)
+  Keziah hits Acolyte for 13 (hp 0)
+  Keziah hp 26, Acolyte hp 0
+Keziah gains 20 exp (20)
+Acolyte falls at 5,3
+The Burned Shrine  turn 2 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..b..#....
+ 3 ....A..F..#..e.
+ 4 ...B#.....#....
+ 5 ^...###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           4,3    hp 26/26  Plain  captain  done
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 14/24  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Burned Shrine  turn 3 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#..b..#....
+ 3 ....A..F..#..e.
+ 4 ...B#.....#....
+ 5 ^...###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           4,3    hp 26/26  Plain  captain
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 14/24  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 6,2
+Keziah moves 4,3 -> 6,2 via 5,3 5,2
+The Burned Shrine  turn 3 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#.Ab..#....
+ 3 .......F..#..e.
+ 4 ...B#.....#....
+ 5 ^...###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, asleep
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, asleep
+A  keziah           Keziah L7 reaver           6,2    hp 26/26  Plain  captain
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 26/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 14/24  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack keziah shieldbearer-1 iron_axe
+Forecast Keziah -> Shieldbearer with Iron Axe: acc 82% dmg 9 x2 crit 3%; counter: acc 67% dmg 9 crit 0%
+  Fighting here wakes: the grove group (noise, heard from 7,2)
+Keziah equips Iron Axe
+Keziah attacks Shieldbearer
+  Keziah misses Shieldbearer
+  Shieldbearer hits Keziah for 9 (hp 17)
+  Keziah hits Shieldbearer for 9 (hp 17)
+  Keziah hp 17, Shieldbearer hp 17
+Keziah gains 6 exp (26)
+The grove group wakes (noise)
+The Burned Shrine  turn 3 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#.Ab..#....
+ 3 .......F..#..e.
+ 4 ...B#.....#....
+ 5 ^...###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, awake
+A  keziah           Keziah L7 reaver           6,2    hp 17/26  Plain  captain  done
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 17/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          3,4    hp 14/24  Plain
+> move teodor 6,3
+Teodor moves 3,4 -> 6,3 via 3,3 4,3 5,3
+The Burned Shrine  turn 3 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#.Ab..#....
+ 3 ......BF..#..e.
+ 4 ....#.....#....
+ 5 ^...###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, awake
+A  keziah           Keziah L7 reaver           6,2    hp 17/26  Plain  captain  done
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 17/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          6,3    hp 14/24  Plain
+> item teodor field_dressing
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 24)
+The Burned Shrine  turn 3 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.d^^
+ 2 ....#.Ab..#....
+ 3 ......BF..#..e.
+ 4 ....#.....#....
+ 5 ^...###.###..^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           12,1   hp 18/18  Forest  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             13,3   hp 17/17  Hill  group grove, guard, awake
+A  keziah           Keziah L7 reaver           6,2    hp 17/26  Plain  captain  done
+b  shieldbearer-1   Shieldbearer L5 bulwark    7,2    hp 17/26  Plain  group nave, hold
+B  teodor           Teodor L7 pikeman          6,3    hp 24/24  Plain  done
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Rider arrives at 14,7 with the burners group, aggressive
+enemy: move archer-1 11,0
+Archer moves 12,1 -> 11,0 via 11,1
+enemy: wait archer-1
+Archer waits
+enemy: move hexer-1 11,1
+Hexer moves 13,3 -> 11,1 via 13,2 12,2 11,2
+enemy: wait hexer-1
+Hexer waits
+enemy: move rider-1 9,6
+Rider moves 14,7 -> 9,6 via 13,7 12,7 11,7 10,7 9,7
+enemy: wait rider-1
+Rider waits
+enemy: attack shieldbearer-1 keziah
+Forecast Shieldbearer -> Keziah: acc 67% dmg 9 crit 0%; counter with Iron Axe: acc 82% dmg 9 x2 crit 3%
+Shieldbearer attacks Keziah
+  Shieldbearer hits Keziah for 9 (hp 8)
+  Keziah hits Shieldbearer for 9 (hp 8)
+  Keziah hits Shieldbearer for 9 (hp 0)
+  Shieldbearer hp 0, Keziah hp 8
+Keziah gains 20 exp (46)
+Shieldbearer falls at 7,2
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Burned Shrine  turn 4 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^d^^^
+ 1 ^...#######e^^^
+ 2 ....#.A...#....
+ 3 ......BF..#..n.
+ 4 ....#.....#....
+ 5 ^...###.###..^.
+ 6 .........f^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,0   hp 18/18  Forest  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             11,1   hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           6,2    hp 8/26   Plain  captain
+f  rider-1          Rider L5 outrider          9,6    hp 22/22  Plain  group burners, aggressive
+B  teodor           Teodor L7 pikeman          6,3    hp 24/24  Plain
+> move teodor 7,5
+Teodor moves 6,3 -> 7,5 via 7,3 7,4
+The Burned Shrine  turn 4 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^d^^^
+ 1 ^...#######e^^^
+ 2 ....#.A...#....
+ 3 .......F..#..n.
+ 4 ....#.....#....
+ 5 ^...###B###..^.
+ 6 .........f^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,0   hp 18/18  Forest  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             11,1   hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           6,2    hp 8/26   Plain  captain
+f  rider-1          Rider L5 outrider          9,6    hp 22/22  Plain  group burners, aggressive
+B  teodor           Teodor L7 pikeman          7,5    hp 24/24  Plain
+> wait teodor
+Teodor waits
+The Burned Shrine  turn 4 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^d^^^
+ 1 ^...#######e^^^
+ 2 ....#.A...#....
+ 3 .......F..#..n.
+ 4 ....#.....#....
+ 5 ^...###B###..^.
+ 6 .........f^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,0   hp 18/18  Forest  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             11,1   hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           6,2    hp 8/26   Plain  captain
+f  rider-1          Rider L5 outrider          9,6    hp 22/22  Plain  group burners, aggressive
+B  teodor           Teodor L7 pikeman          7,5    hp 24/24  Plain  done
+> move keziah 7,3
+Keziah moves 6,2 -> 7,3 via 7,2
+The Burned Shrine  turn 4 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^d^^^
+ 1 ^...#######e^^^
+ 2 ....#.....#....
+ 3 .......A..#..n.
+ 4 ....#.....#....
+ 5 ^...###B###..^.
+ 6 .........f^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,0   hp 18/18  Forest  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             11,1   hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 8/26   Fort (heals 20 percent, 5 hp)  captain
+f  rider-1          Rider L5 outrider          9,6    hp 22/22  Plain  group burners, aggressive
+B  teodor           Teodor L7 pikeman          7,5    hp 24/24  Plain  done
+> wait keziah
+Keziah waits
+The Burned Shrine  turn 4 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^d^^^
+ 1 ^...#######e^^^
+ 2 ....#.....#....
+ 3 .......A..#..n.
+ 4 ....#.....#....
+ 5 ^...###B###..^.
+ 6 .........f^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,0   hp 18/18  Forest  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             11,1   hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 8/26   Fort (heals 20 percent, 5 hp)  captain  done
+f  rider-1          Rider L5 outrider          9,6    hp 22/22  Plain  group burners, aggressive
+B  teodor           Teodor L7 pikeman          7,5    hp 24/24  Plain  done
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: move archer-1 11,4
+Archer moves 11,0 -> 11,4 via 11,1 11,2 11,3
+enemy: wait archer-1
+Archer waits
+enemy: move hexer-1 11,5
+Hexer moves 11,1 -> 11,5 via 11,2 11,3 11,4
+enemy: wait hexer-1
+Hexer waits
+enemy: move rider-1 7,6
+Rider moves 9,6 -> 7,6 via 8,6
+enemy: attack rider-1 teodor
+Forecast Rider -> Teodor: acc 73% dmg 7 crit 0%; counter with Iron Lance: acc 76% dmg 12 crit 3%
+Rider attacks Teodor
+  Rider misses Teodor
+  Teodor hits Rider for 12 (hp 10)
+  Rider hp 10, Teodor hp 24
+Teodor gains 6 exp (32)
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Keziah heals 5 (hp 13)
+The Burned Shrine  turn 5 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......A..#..n.
+ 4 ....#.....#d...
+ 5 ^...###B###e.^.
+ 6 .......f..^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,4   hp 18/18  Plain  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             11,5   hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 13/26  Fort (heals 20 percent, 5 hp)  captain
+f  rider-1          Rider L5 outrider          7,6    hp 10/22  Plain  group burners, aggressive
+B  teodor           Teodor L7 pikeman          7,5    hp 24/24  Plain
+> attack teodor rider-1 iron_lance
+Forecast Teodor -> Rider with Iron Lance: acc 76% dmg 12 crit 3%; counter: acc 73% dmg 7 crit 0%
+Teodor attacks Rider
+  Teodor hits Rider for 12 (hp 0)
+  Teodor hp 24, Rider hp 0
+Teodor gains 20 exp (52)
+Rider falls at 7,6
+The Burned Shrine  turn 5 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......A..#..n.
+ 4 ....#.....#d...
+ 5 ^...###B###e.^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,4   hp 18/18  Plain  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             11,5   hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 13/26  Fort (heals 20 percent, 5 hp)  captain
+B  teodor           Teodor L7 pikeman          7,5    hp 24/24  Plain  done
+> wait keziah
+Keziah waits
+The Burned Shrine  turn 5 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......A..#..n.
+ 4 ....#.....#d...
+ 5 ^...###B###e.^.
+ 6 ..........^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,4   hp 18/18  Plain  group grove, guard, awake
+e  hexer-1          Hexer L5 adept             11,5   hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 13/26  Fort (heals 20 percent, 5 hp)  captain  done
+B  teodor           Teodor L7 pikeman          7,5    hp 24/24  Plain  done
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Reinforcements arrive
+  Brigand arrives at 0,0 with the burners group, aggressive
+enemy: move archer-1 11,6
+Archer moves 11,4 -> 11,6 via 11,5
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 3,0
+Brigand moves 0,0 -> 3,0 via 1,0 2,0
+enemy: wait brigand-1
+Brigand waits
+enemy: move hexer-1 10,6
+Hexer moves 11,5 -> 10,6 via 11,6
+enemy: wait hexer-1
+Hexer waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Keziah heals 5 (hp 18)
+The Burned Shrine  turn 6 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.g.nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......A..#..n.
+ 4 ....#.....#....
+ 5 ^...###B###..^.
+ 6 ..........ed...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,6   hp 18/18  Forest  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          3,0    hp 24/24  Plain  group burners, aggressive
+e  hexer-1          Hexer L5 adept             10,6   hp 17/17  Forest  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 18/26  Fort (heals 20 percent, 5 hp)  captain
+B  teodor           Teodor L7 pikeman          7,5    hp 24/24  Plain
+> move teodor 7,4
+Teodor moves 7,5 -> 7,4
+The Burned Shrine  turn 6 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.g.nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......A..#..n.
+ 4 ....#..B..#....
+ 5 ^...###.###..^.
+ 6 ..........ed...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,6   hp 18/18  Forest  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          3,0    hp 24/24  Plain  group burners, aggressive
+e  hexer-1          Hexer L5 adept             10,6   hp 17/17  Forest  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 18/26  Fort (heals 20 percent, 5 hp)  captain
+B  teodor           Teodor L7 pikeman          7,4    hp 24/24  Plain
+> wait teodor
+Teodor waits
+The Burned Shrine  turn 6 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.g.nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......A..#..n.
+ 4 ....#..B..#....
+ 5 ^...###.###..^.
+ 6 ..........ed...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,6   hp 18/18  Forest  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          3,0    hp 24/24  Plain  group burners, aggressive
+e  hexer-1          Hexer L5 adept             10,6   hp 17/17  Forest  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 18/26  Fort (heals 20 percent, 5 hp)  captain
+B  teodor           Teodor L7 pikeman          7,4    hp 24/24  Plain  done
+> wait keziah
+Keziah waits
+The Burned Shrine  turn 6 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.g.nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......A..#..n.
+ 4 ....#..B..#....
+ 5 ^...###.###..^.
+ 6 ..........ed...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           11,6   hp 18/18  Forest  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          3,0    hp 24/24  Plain  group burners, aggressive
+e  hexer-1          Hexer L5 adept             10,6   hp 17/17  Forest  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 18/26  Fort (heals 20 percent, 5 hp)  captain  done
+B  teodor           Teodor L7 pikeman          7,4    hp 24/24  Plain  done
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: move archer-1 8,6
+Archer moves 11,6 -> 8,6 via 10,6 9,6
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 4,3
+Brigand moves 3,0 -> 4,3 via 3,1 3,2 3,3
+enemy: wait brigand-1
+Brigand waits
+enemy: move hexer-1 7,6
+Hexer moves 10,6 -> 7,6 via 9,6 8,6
+enemy: attack hexer-1 teodor
+Forecast Hexer -> Teodor: acc 99% dmg 13 crit 1%; counter: none
+Hexer attacks Teodor
+  Hexer hits Teodor for 13 (hp 11)
+  Hexer hp 17, Teodor hp 11
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+Keziah heals 5 (hp 23)
+The Burned Shrine  turn 7 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 ....g..A..#..n.
+ 4 ....#..B..#....
+ 5 ^...###.###..^.
+ 6 .......ed.^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           8,6    hp 18/18  Plain  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          4,3    hp 24/24  Plain  group burners, aggressive
+e  hexer-1          Hexer L5 adept             7,6    hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,3    hp 23/26  Fort (heals 20 percent, 5 hp)  captain
+B  teodor           Teodor L7 pikeman          7,4    hp 11/24  Plain
+> move keziah 7,5
+Keziah moves 7,3 -> 7,5 via 7,4
+The Burned Shrine  turn 7 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 ....g..F..#..n.
+ 4 ....#..B..#....
+ 5 ^...###A###..^.
+ 6 .......ed.^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           8,6    hp 18/18  Plain  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          4,3    hp 24/24  Plain  group burners, aggressive
+e  hexer-1          Hexer L5 adept             7,6    hp 17/17  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,5    hp 23/26  Plain  captain
+B  teodor           Teodor L7 pikeman          7,4    hp 11/24  Plain
+> attack keziah hexer-1 iron_gauntlets
+Forecast Keziah -> Hexer with Iron Gauntlets: acc 96% dmg 13 x2 crit 2%; counter: acc 99% dmg 14 crit 0% (Cinder 7 of 8 left)
+Keziah equips Iron Gauntlets
+Keziah attacks Hexer
+  Keziah hits Hexer for 13 (hp 4)
+  Keziah hits Hexer for 13 (hp 0)
+  Keziah hp 23, Hexer hp 0
+Keziah gains 20 exp (66)
+Hexer falls at 7,6
+The Burned Shrine  turn 7 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 ....g..F..#..n.
+ 4 ....#..B..#....
+ 5 ^...###A###..^.
+ 6 ........d.^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           8,6    hp 18/18  Plain  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          4,3    hp 24/24  Plain  group burners, aggressive
+A  keziah           Keziah L7 reaver           7,5    hp 23/26  Plain  captain  done
+B  teodor           Teodor L7 pikeman          7,4    hp 11/24  Plain
+> move teodor 7,3
+Teodor moves 7,4 -> 7,3
+The Burned Shrine  turn 7 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 ....g..B..#..n.
+ 4 ....#.....#....
+ 5 ^...###A###..^.
+ 6 ........d.^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           8,6    hp 18/18  Plain  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          4,3    hp 24/24  Plain  group burners, aggressive
+A  keziah           Keziah L7 reaver           7,5    hp 23/26  Plain  captain  done
+B  teodor           Teodor L7 pikeman          7,3    hp 11/24  Fort (heals 20 percent, 4 hp)
+> item teodor field_dressing
+Teodor uses Field Dressing (1 left)
+Teodor heals 10 (hp 21)
+The Burned Shrine  turn 7 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 ....g..B..#..n.
+ 4 ....#.....#....
+ 5 ^...###A###..^.
+ 6 ........d.^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           8,6    hp 18/18  Plain  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          4,3    hp 24/24  Plain  group burners, aggressive
+A  keziah           Keziah L7 reaver           7,5    hp 23/26  Plain  captain  done
+B  teodor           Teodor L7 pikeman          7,3    hp 21/24  Fort (heals 20 percent, 4 hp)  done
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: attack archer-1 keziah
+Forecast Archer -> Keziah: acc 79% dmg 7 crit 2%; counter: none
+Archer attacks Keziah
+  Archer hits Keziah for 7 (hp 16)
+  Archer hp 18, Keziah hp 16
+enemy: move brigand-1 6,3
+Brigand moves 4,3 -> 6,3 via 5,3
+enemy: attack brigand-1 teodor
+Forecast Brigand -> Teodor: acc 34% dmg 8 crit 0%; counter with Iron Lance: acc 82% dmg 14 crit 4%
+Brigand attacks Teodor
+  Brigand hits Teodor for 8 (hp 13)
+  Teodor hits Brigand for 14 (hp 10)
+  Brigand hp 10, Teodor hp 13
+Teodor gains 6 exp (58)
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+Teodor heals 4 (hp 17)
+The Burned Shrine  turn 8 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 ......gB..#..n.
+ 4 ....#.....#....
+ 5 ^...###A###..^.
+ 6 ........d.^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           8,6    hp 18/18  Plain  group grove, guard, awake
+g  brigand-1        Brigand L5 reaver          6,3    hp 10/24  Plain  group burners, aggressive
+A  keziah           Keziah L7 reaver           7,5    hp 16/26  Plain  captain
+B  teodor           Teodor L7 pikeman          7,3    hp 17/24  Fort (heals 20 percent, 4 hp)
+> attack teodor brigand-1 iron_lance
+Forecast Teodor -> Brigand with Iron Lance: acc 82% dmg 14 crit 4%; counter: acc 34% dmg 8 crit 0%
+Teodor attacks Brigand
+  Teodor hits Brigand for 14 (hp 0)
+  Teodor hp 17, Brigand hp 0
+Teodor gains 20 exp (78)
+Brigand falls at 6,3
+The Burned Shrine  turn 8 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......B..#..n.
+ 4 ....#.....#....
+ 5 ^...###A###..^.
+ 6 ........d.^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           8,6    hp 18/18  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,5    hp 16/26  Plain  captain
+B  teodor           Teodor L7 pikeman          7,3    hp 17/24  Fort (heals 20 percent, 4 hp)  done
+> move keziah 7,6
+Keziah moves 7,5 -> 7,6
+The Burned Shrine  turn 8 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......B..#..n.
+ 4 ....#.....#....
+ 5 ^...###.###..^.
+ 6 .......Ad.^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+d  archer-1         Archer L5 bowman           8,6    hp 18/18  Plain  group grove, guard, awake
+A  keziah           Keziah L7 reaver           7,6    hp 16/26  Plain  captain
+B  teodor           Teodor L7 pikeman          7,3    hp 17/24  Fort (heals 20 percent, 4 hp)  done
+> attack keziah archer-1 iron_gauntlets
+Forecast Keziah -> Archer with Iron Gauntlets: acc 91% dmg 12 x2 crit 2%; counter: none
+Keziah attacks Archer
+  Keziah hits Archer for 12 (hp 6)
+  Keziah hits Archer for 12 (hp 0)
+  Keziah hp 16, Archer hp 0
+Keziah gains 20 exp (86)
+Archer falls at 8,6
+The Burned Shrine  turn 8 of 10  player phase  rout  recall 2
+   012345678901234
+ 0 ^^...nn...^^^^^
+ 1 ^...#######.^^^
+ 2 ....#.....#....
+ 3 .......B..#..n.
+ 4 ....#.....#....
+ 5 ^...###.###..^.
+ 6 .......A..^^...
+ 7 ===============
+ 8 ^^......^^....^
+
+A  keziah           Keziah L7 reaver           7,6    hp 16/26  Plain  captain  done
+B  teodor           Teodor L7 pikeman          7,3    hp 17/24  Fort (heals 20 percent, 4 hp)  done
+Battle won: rout; only recall is left, or leave
+> leave
+Keziah wins keziah_1; the stores take 2 common material; nobody fell
+-- After The Burned Shrine --
+The hearthstone is cracked through. Keziah sweeps the ash off it with a
+bough and sets her own supper in the offering bowl. "Freezing in here.
+Nobody lights that, it's hers." She eats nothing and sleeps across the
+door.
+
+Campaign stopped before Brackwater Cut: the script ended on the screen
