@@ -6667,7 +6667,7 @@ The Field Before the Keep won: defeat_boss; reward 1800, the purse holds 2300; n
   Rook: Skyrider L5, EXP 25; 1: Iron Lance 37/40 (repair 30)
   Keziah: Reaver L5, EXP 0; 1: Kinsbane 20/20, 2: Iron Axe 40/40, 3: Iron Gauntlets 40/40
   Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to Ironwake Keep: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 10)
+Deploys to Ironwake Keep: the whole company fights: 10; Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan, Maud, Rook, Keziah, Brannock
 Keziah came back with the enemy: turned by Rook, and with the company.
 == Keep ==
 Purse: 2300

@@ -40,8 +40,26 @@ public class KeepRaidTests
     }
 
     /// <summary>
+    /// Issue 1139 (#689, rounds 213 and 214): a map deploys six, the keep all. The campaign's keep
+    /// carries <c>deploy: all</c> and a slot for every member of a full company, each inside the
+    /// keep's wall, so nobody is benched on the last map.
+    /// </summary>
+    [Fact]
+    public void TheCampaignsKeepFieldsEveryLivingUnit()
+    {
+        var keep = Bare;
+        var slots = keep.Placements.OfType<PlayerPlacement>().ToList();
+
+        Assert.Equal(MapDefinition.DeployAll, keep.Deploy);
+        Assert.True(slots.Count >= CampaignRecord.CompanyCap, $"the keep has {slots.Count} player slots");
+        Assert.All(slots, p => Assert.True(p.At.X > 10, $"slot {p.At} is outside the wall"));
+        Assert.Equal(slots.Count, slots.Select(p => p.At).Distinct().Count());
+    }
+
+    /// <summary>
     /// The raid shows the finale's leak only if it is the finale's keep: the same grid tile for
-    /// tile, the same player slots, and every enemy it brings arriving on a tile the finale's waves
+    /// tile, the keep's player slots as far as the raid's six go (the keep fields the whole company,
+    /// issue 1139), and every enemy it brings arriving on a tile the finale's waves
     /// spawn on, with a smaller force than the finale's.
     /// </summary>
     [Fact]
@@ -53,7 +71,8 @@ public class KeepRaidTests
 
         Assert.Equal((keep.Width, keep.Height), (raid.Width, raid.Height));
         Assert.Equal(keep.TerrainIds, raid.TerrainIds);
-        Assert.Equal(keep.Placements.OfType<PlayerPlacement>(), raid.Placements.OfType<PlayerPlacement>());
+        var raidSlots = raid.Placements.OfType<PlayerPlacement>().ToList();
+        Assert.Equal(keep.Placements.OfType<PlayerPlacement>().Take(raidSlots.Count), raidSlots);
         Assert.NotEmpty(Spawns(raid));
         Assert.All(Spawns(raid), at => Assert.Contains(at, Spawns(keep)));
         Assert.All(raid.Placements.OfType<EnemyPlacement>(), e => Assert.Contains(keep.Placements.OfType<EnemyPlacement>(), k => k.At == e.At));

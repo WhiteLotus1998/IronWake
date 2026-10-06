@@ -11,7 +11,7 @@ Autosaved as auto-1; the last 3 camps are kept
   Maud: Chaplain L7, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
   Rook: Skyrider L7, EXP 0; 1: Iron Lance 40/40
   Brannock: Cadet L7, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to Ironwake Keep: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 9)
+Deploys to Ironwake Keep: the whole company fights: 9; Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan, Maud, Rook, Brannock
 == Keep ==
 Purse: 500
 Rooms: beds: 9/12; a fallen member keeps their bed

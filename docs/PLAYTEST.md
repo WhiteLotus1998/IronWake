@@ -3191,3 +3191,12 @@ Copied from the Table (#1112, comment 6005059467). Recruit, permadeath off, as s
 **What it says:** the bite is the class; keep the Drake Warden as built, 8/7/7. Long Carry went unused in two maps and on the boss map was a downgrade (it trades her 15 for Pell's 12); in a cold hand her identity is exact damage, not the carrier. The Sworn Captain shuttled off his fort three times without striking (#1138). The keep's default deploy benched Rook and Keziah (#1139). Caveat: the save is synthetic, so an L7 Rook beside L1 Teodor and Maud flatters her; this answers how she plays, not how strong she is.
 
 Transcript: `docs/transcripts/2026-10-05-drake_warden-644-chat.txt`, script beside it (`campaign --load brackwater` on a copy of `2026-10-05-drake_warden-644-synthetic.saves`).
+
+## 2026-10-06 — Ironwake Keep with the whole company (#1139), a replay — Code
+Seed: 288 (the keep campaign, `2026-09-26-campaign-keep-288`)   Result: win, turn 8, nobody fell
+Systems entry, not a Fun Gate entry, and not a fresh chair: the journaled keep play replayed with `deploy: all`, eleven fielded where six were.
+Tension: 3/10   Choice: 4/10   Surprise: 3/10
+Best turn: none new. The one command that moved was Ottilie's last-turn retreat, 15,5 to 15,6, because Brannock now stands where she used to hide.
+Notes: The six who played it before played it the same way; the five extra stood at the back and never had to act, and the waves broke on the gaps exactly as they did. That is the honest read of the change: the keep was sized for six, and with eleven inside the wall it is a parade. The standalone Sim says the same thing louder (heuristic 198/200, random 106/200, nobody's bench changes an outcome; `docs/measurements/keep-1139.txt`). The campaign plays the keep at enemy level 8 against a carried company, so the gap is smaller there, but the full company needs a force to match it, which is the Table's to shape. The next hand chair on map 10 is still the deciding read.
+
+— Code

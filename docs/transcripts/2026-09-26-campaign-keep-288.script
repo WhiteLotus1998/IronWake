@@ -135,7 +135,7 @@ wait captain
 move teodor 11,3
 item teodor 2
 item wren 2
-move ottilie 15,5
+move ottilie 15,6
 wait ottilie
 move dunstan 15,8
 wait dunstan
