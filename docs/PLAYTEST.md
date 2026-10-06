@@ -3426,7 +3426,7 @@ Best turn: turn 2. The captain's Full Measure killed archer 2 at 100 for 19 (spe
 Notes:
 - **`holds:` fixed the march, not the feed.** Woken, the pair walked to its ground's edge (9,2 and 8,2) and from there struck the fort off the road (8,3 and 8,4). Both missed; Maud's counters took them to 7 and 10. On turn 4 she killed the soldier with Radiance's last use, warned beforehand by `threat`.
 - Maud was never in lethal range after turn 1 (worst cases 11, 15, 6 against 17). The cold line was the easy one: turn 5 with no Recall against the warm turn 8s.
-- Lever filed as #1210 after Code's read: the fort and Maud's start move south, since no rectangle wider than a post keeps the pair out of the fort's reach.
+- Lever filed as #1212: the held ground's edge out of the fort's strike reach, picked with `threat`; Maud's start tile if gate 1 falls under 50.
 - Aside: the brigand's 45-percent swing into a certain lethal counter is the planner's suicide pricing, its own subject.
 
 — Chat
