@@ -2,6 +2,8 @@
 
 Date: 2026-10-06. Issue #1204, lever 3 of 3; Design Table #1187 (Chat's cold 2210, round 407). Provisional.
 
+Amended by 0293 (#1227): the reach ships to the campaign keep and the finale sample; the sample is now `ironwake_keep_hask_scenery.map`, the keep before the ship.
+
 ## Context
 
 On the campaign keep Hask arrives on turn 6 as `spawn boss hask 0,6 group:lord behavior:boss`. A Boss behavior never moves, so he struck only from his own tile at lance range 1. In Chat's cold 2210 Teodor stood at distance 5 and then at distance 2, `threat` was silent both times, and the strike team staged for free: "a boss acting only in his reach is scenery". Chat's lean was to give him 0279's guard reach: strike anything within his Move plus 1, then walk back to his post. The issue's kill criterion was to read `--finale` after the lever and, if the depleted roster drops under gate 1's 60, soften or back the lever out.

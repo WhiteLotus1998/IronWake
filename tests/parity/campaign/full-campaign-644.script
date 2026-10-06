@@ -666,7 +666,7 @@ move brannock 0,1
 wait brannock
 move captain 1,6
 attack captain hask-1
-move keziah 2,5
+move keziah 4,4
 wait keziah
 move pell 2,6
 attack pell hask-1 bolt

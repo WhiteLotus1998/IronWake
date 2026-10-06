@@ -174,24 +174,26 @@ public class KeepTests
     }
 
     /// <summary>
-    /// Issue 1204, lever 3 (DECISIONS/0286): on <c>docs/samples/ironwake_keep_hask_holds.map</c> Hask
-    /// arrives Aggressive on a one-tile post at his spawn tile, so he strikes anything in his Move plus
-    /// his range and walks back (0279's <c>holds:</c>). The sample is the campaign keep with only that
-    /// changed; the campaign keep keeps him a Boss, since the lever took the depleted roster under 60.
+    /// Issue 1227 (DECISIONS/0293, amending 0286): the campaign keep's Hask arrives Aggressive on a
+    /// one-tile post at his spawn tile, so he strikes anything in his Move plus his range and walks
+    /// back (0279's <c>holds:</c>). <c>docs/samples/ironwake_keep_hask_scenery.map</c> keeps the keep
+    /// as it stood before the ship, Hask a Boss with no post, and differs from it by only that and
+    /// its name, so the depleted pair's control (Chat 2410) still replays.
     /// </summary>
     [Fact]
-    public void TheHaskHoldsSampleIsTheKeepWithHaskOnAHeldPost()
+    public void TheCampaignKeepsHaskHoldsHisPostAndTheScenerySampleKeepsHimABoss()
     {
-        var sample = MapFiles.Load(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples", "ironwake_keep_hask_holds.map"), Content);
+        var sample = MapFiles.Load(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples", "ironwake_keep_hask_scenery.map"), Content);
         static EnemyPlacement Lord(MapDefinition map) => map.Events.Select(e => e.Action).OfType<SpawnEnemy>().Single(s => s.Placement.TemplateId == "hask").Placement;
 
-        Assert.Equal((Behavior.Boss, true), (Lord(Base).Behavior, Lord(Base).IsBoss));
-        Assert.Null(Base.Holds);
-        Assert.Equal((Behavior.Aggressive, true), (Lord(sample).Behavior, Lord(sample).IsBoss));
-        Assert.Equal(new HeldGround("lord", Lord(sample).At, Lord(sample).At), sample.Holds);
+        Assert.Equal((Behavior.Aggressive, true), (Lord(Base).Behavior, Lord(Base).IsBoss));
+        Assert.Equal(new HeldGround("lord", Lord(Base).At, Lord(Base).At), Base.Holds);
+        Assert.Equal((Behavior.Boss, true), (Lord(sample).Behavior, Lord(sample).IsBoss));
+        Assert.Null(sample.Holds);
+        Assert.NotEqual(Base.Name, sample.Name);
         Assert.Equal(
-            Base with { Name = sample.Name, Events = Base.Events },
-            sample with { Holds = null, Events = Base.Events });
+            Base with { Name = sample.Name, Holds = null, Events = sample.Events },
+            sample with { Events = sample.Events });
         Assert.Equal(Base.Events.Where(e => e.Name != "lord"), sample.Events.Where(e => e.Name != "lord"));
     }
 
