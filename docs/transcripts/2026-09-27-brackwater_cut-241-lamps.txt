@@ -1324,15 +1324,15 @@ Threat on Alder Fenn at 19,3 (Plain):
   And whatever is in the dark (?), unpriced
 > threat rook from 19,6
 Threat on Rook at 19,6 (Plain):
-  Brawler from 18,6 with Iron Gauntlets (slot 1): acc 83% dmg 10 x2 crit 0%; counter: acc 80% dmg 9 crit 4%
+  Brawler from 18,6 (counted from 19,7) with Iron Gauntlets (slot 1): acc 83% dmg 10 x2 crit 0%; counter: acc 80% dmg 9 crit 4%
   Shieldbearer from 18,6 with Iron Lance (slot 1): acc 60% dmg 11 crit 0%; counter: acc 89% dmg 2 x2 crit 4%
-  Soldier from 18,6 with Iron Lance (slot 1): acc 63% dmg 12 crit 0%; counter: acc 79% dmg 7 crit 3%
+  Soldier from 18,6 (counted from 19,5) with Iron Lance (slot 1): acc 63% dmg 12 crit 0%; counter: acc 79% dmg 7 crit 3%
   If all land: 43 against 17 hp
   And whatever is in the dark (?), unpriced
 > threat wren from 19,4
 Threat on Wren at 19,4 (Plain):
   Shieldbearer from 18,4 with Iron Lance (slot 1): acc 60% dmg 8 crit 0%; counter: acc 93% dmg 3 x2 crit 4%
-  Soldier from 18,4 with Iron Lance (slot 1): acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
+  Soldier from 18,4 (counted from 19,5) with Iron Lance (slot 1): acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
   If all land: 17 against 20 hp
   Brawler: cannot see you (dark)
   And whatever is in the dark (?), unpriced

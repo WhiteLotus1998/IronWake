@@ -1223,7 +1223,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.Contains("The bank group wakes (proximity); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)\n", output);
-        Assert.Contains("  Brawler from 18,6 with Iron Gauntlets (slot 1): acc 83% dmg 10 x2 crit 0%;", output);
+        Assert.Contains("  Brawler from 18,6 (counted from 19,7) with Iron Gauntlets (slot 1): acc 83% dmg 10 x2 crit 0%;", output);
         Assert.Contains("Brawler moves 17,7 -> 19,8 via 18,7 19,7\n", output);
         Assert.Contains("Rook falls at 19,4\n", output);
         Assert.EndsWith("Escaped: Wren, Alder Fenn; left behind: Pell; fell: Dunstan, Rook\n", output);

@@ -772,7 +772,7 @@ d  soldier-1        Soldier L6 pikeman         6,6    hp 22/22  Plain  group cam
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > threat keziah
 Threat on Keziah at 4,5 (Plain):
-  Rider from 4,6 with Iron Lance (slot 1): acc 72% dmg 11 crit 0%; counter with Kinsbane: acc 39% dmg 20 crit 2%
+  Rider from 4,6 (counted from 4,4) with Iron Lance (slot 1): acc 72% dmg 11 crit 0%; counter with Kinsbane: acc 39% dmg 20 crit 2%
     Counter kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 11)
   Soldier from 4,6 with Iron Lance (slot 1): acc 72% dmg 10 crit 0%; counter with Kinsbane: acc 39% dmg 19 crit 2%
   If all land: 21 against 10 hp
