@@ -96,6 +96,36 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Chat's cold chair on Maud's quest 2 (round 406), reseeded to 2130 from the 875 save with
+    /// Ottilie as the ally: Maud's forest counters crit brigand 2 for 36 and spend four of
+    /// Radiance's five uses, the forecasts counting them down (issue 1200), and the door soldier
+    /// still stands; the play recalls to turn 2 and stops undecided.
+    /// </summary>
+    [Fact]
+    public void ChatsColdShrinePlaySpendsRadianceOnCountersAndStopsUndecided()
+    {
+        var script = Transcript("2026-10-06-the_first_shrine-2130-chat.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "2130", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("  Maud crits Brigand 2 for 36 (hp 0)\n", output);
+            Assert.Contains("counter: acc 81% dmg 11 crit 3% (Radiance 1 of 5 left)\n", output);
+            Assert.Contains("Maud's Radiance is spent for this battle\n", output);
+            Assert.EndsWith("Campaign stopped in The First Shrine at turn 2, undecided\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Code's journaled play of Pell's quest 1 (seed 884), from a save at the camp after map 4:
     /// Wren's counter breaks the shieldbearer at the east gate, Pell turns back for the north
     /// chest and is boxed in its door, Wren leaves first, and Pell gets out on turn 6 at 5 hp

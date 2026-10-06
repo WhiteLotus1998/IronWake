@@ -1054,7 +1054,7 @@ E  pell             Pell L1 adept              7,4    hp 16/16  Plain  done
 f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wave, aggressive
 B  wren             Wren L1 cadet              7,7    hp 14/20  Plain
 > attack wren hexer-1
-Forecast Wren -> Hexer: acc 91% dmg 11 x2 crit 3%; counter: acc 98% dmg 10 crit 0%
+Forecast Wren -> Hexer: acc 91% dmg 11 x2 crit 3%; counter: acc 98% dmg 10 crit 0% (Cinder 7 of 8 left)
 Wren attacks Hexer
   Wren hits Hexer for 11 (hp 5)
   Hexer hits Wren for 10 (hp 4)
@@ -1122,7 +1122,7 @@ Brigand 3 falls at 6,7
 enemy: move soldier-2 7,3
 Soldier 2 moves 4,3 -> 7,3 via 5,3 6,3
 enemy: attack soldier-2 pell
-Forecast Soldier 2 -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
+Forecast Soldier 2 -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2% (Cinder 6 of 8 left)
 Soldier 2 attacks Pell
   Soldier 2 hits Pell for 11 (hp 5)
   Pell hits Soldier 2 for 12 (hp 8)

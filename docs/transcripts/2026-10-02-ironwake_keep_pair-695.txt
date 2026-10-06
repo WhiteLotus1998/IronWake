@@ -2251,7 +2251,7 @@ Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside
 pair rule binds: Sworn Hunter
 > threat pell from 11,5
 Threat on Pell at 11,5 (Plain):
-  Archer 1 from 9,5 with Iron Bow (slot 1): acc 81% dmg 9 crit 2%; counter with Cinder: acc 99% dmg 16 crit 3%
+  Archer 1 from 9,5 with Iron Bow (slot 1): acc 81% dmg 9 crit 2%; counter with Cinder: acc 99% dmg 16 crit 3% (Cinder 7 of 8 left)
   If all land: 9 against 18 hp
   Front: defends the gate
   Sworn Hunter hunts the north next: no defenders (weakest); strikes only its defenders
@@ -2968,7 +2968,7 @@ Lethal if all land: Pell (Archer 1 for 9, against 9 hp)
 Reinforcements arrive
   Hask arrives at 0,6 with the lord group, boss
 enemy: attack archer-1 pell
-Forecast Archer 1 -> Pell: acc 81% dmg 9 crit 2%; counter with Cinder: acc 99% dmg 16 crit 3%
+Forecast Archer 1 -> Pell: acc 81% dmg 9 crit 2%; counter with Cinder: acc 99% dmg 16 crit 3% (Cinder 6 of 8 left)
 Archer 1 attacks Pell
   Archer 1 hits Pell for 9 (hp 0)
   Archer 1 hp 3, Pell hp 0

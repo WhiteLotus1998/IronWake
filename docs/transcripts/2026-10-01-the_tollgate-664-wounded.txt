@@ -660,7 +660,7 @@ Wren falls at 3,1
 enemy: move brigand-4 3,3
 Brigand 4 moves 5,4 -> 3,3 via 4,4 3,4
 enemy: attack brigand-4 maud
-Forecast Brigand 4 -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3%
+Forecast Brigand 4 -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3% (Radiance 3 of 5 left)
 Brigand 4 attacks Maud
   Brigand 4 misses Maud
   Maud hits Brigand 4 for 11 (hp 11)
@@ -1481,7 +1481,7 @@ Bandit Leader waits
 enemy: move rider-1 7,4
 Rider moves 13,4 -> 7,4 via 12,4 11,4 10,4 9,4 8,4
 enemy: attack rider-1 pell
-Forecast Rider -> Pell: acc 47% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
+Forecast Rider -> Pell: acc 47% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2% (Cinder 6 of 8 left)
 Rider attacks Pell
   Rider hits Pell for 10 (hp 0)
   Rider hp 21, Pell hp 0
@@ -2432,7 +2432,7 @@ Bandit Leader attacks Alder Fenn
   Bandit Leader misses Alder Fenn
   Bandit Leader hp 26, Alder Fenn hp 22
 enemy: attack toll_warden-1 pell
-Forecast Toll Warden -> Pell: acc 37% dmg 9 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
+Forecast Toll Warden -> Pell: acc 37% dmg 9 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2% (Cinder 5 of 8 left)
 Toll Warden attacks Pell
   Toll Warden misses Pell
   Pell hits Toll Warden for 12 (hp 0)
@@ -2663,7 +2663,7 @@ Rapport Pell and Wren +4 (8)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: attack bandit_leader-1 pell
-Forecast Bandit Leader -> Pell: acc 62% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 13 crit 1%
+Forecast Bandit Leader -> Pell: acc 62% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 13 crit 1% (Cinder 3 of 8 left)
 Bandit Leader attacks Pell
   Bandit Leader misses Pell
   Pell hits Bandit Leader for 13 (hp 13)

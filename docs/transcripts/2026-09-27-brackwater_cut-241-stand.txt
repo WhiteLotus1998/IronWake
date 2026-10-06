@@ -1557,7 +1557,7 @@ Wren gains 14 exp (14)
 enemy: move soldier-1 18,5
 Soldier moves 17,6 -> 18,5 via 17,5
 enemy: attack soldier-1 pell
-Forecast Soldier -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
+Forecast Soldier -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2% (Cinder 7 of 8 left)
 Soldier attacks Pell
   Soldier misses Pell
   Pell hits Soldier for 12 (hp 9)

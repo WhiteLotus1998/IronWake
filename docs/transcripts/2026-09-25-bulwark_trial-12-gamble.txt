@@ -19,7 +19,7 @@ A  captain          Alder Fenn L1 bulwark      1,3    hp 25/25  Plain  captain
 e  hexer-1          Hexer L3 adept             4,1    hp 16/16  Plain  group north, hold
 f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
 > forecast captain hexer-1 from 3,1
-Forecast Alder Fenn -> Hexer 1 from 3,1 (Plain): acc 88% dmg 13 x2 crit 4%; counter: acc 98% dmg 11 crit 0%
+Forecast Alder Fenn -> Hexer 1 from 3,1 (Plain): acc 88% dmg 13 x2 crit 4%; counter: acc 98% dmg 11 crit 0% (Cinder 8 of 8 left)
 > threat captain from 3,1
 Threat on Alder Fenn at 3,1 (Plain):
   Brigand 1 from 2,1 with Iron Axe (slot 1): acc 56% dmg 8 crit 0%; counter: acc 85% dmg 12 crit 5%
@@ -47,7 +47,7 @@ A  captain          Alder Fenn L1 bulwark      3,1    hp 25/25  Plain  captain
 e  hexer-1          Hexer L3 adept             4,1    hp 16/16  Plain  group north, hold
 f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
 > attack captain hexer-1
-Forecast Alder Fenn -> Hexer 1: acc 88% dmg 13 x2 crit 4%; counter: acc 98% dmg 11 crit 0%
+Forecast Alder Fenn -> Hexer 1: acc 88% dmg 13 x2 crit 4%; counter: acc 98% dmg 11 crit 0% (Cinder 8 of 8 left)
 Alder Fenn attacks Hexer 1
   Alder Fenn hits Hexer 1 for 13 (hp 3)
   Hexer 1 hits Alder Fenn for 11 (hp 14)

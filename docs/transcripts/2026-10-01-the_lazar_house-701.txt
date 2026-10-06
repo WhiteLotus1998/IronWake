@@ -660,7 +660,7 @@ Wren falls at 3,1
 enemy: move brigand-4 3,3
 Brigand 4 moves 5,4 -> 3,3 via 4,4 3,4
 enemy: attack brigand-4 maud
-Forecast Brigand 4 -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3%
+Forecast Brigand 4 -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3% (Radiance 3 of 5 left)
 Brigand 4 attacks Maud
   Brigand 4 misses Maud
   Maud hits Brigand 4 for 11 (hp 11)

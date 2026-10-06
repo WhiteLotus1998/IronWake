@@ -638,7 +638,7 @@ c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yar
 b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
 B  wren             Wren L7 cadet              8,5    hp 16/23  Plain
 > attack rook deacon-1
-Forecast Rook -> Deacon: acc 87% dmg 11 x2 crit 2%; counter with Radiance: acc 95% dmg 8 crit 0%
+Forecast Rook -> Deacon: acc 87% dmg 11 x2 crit 2%; counter with Radiance: acc 95% dmg 8 crit 0% (Radiance 4 of 5 left)
 Rook attacks Deacon
   Rook hits Deacon for 11 (hp 6)
   Deacon hits Rook for 8 (hp 3)
@@ -765,7 +765,7 @@ c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yar
 b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
 B  wren             Wren L7 cadet              8,5    hp 16/23  Plain
 > forecast wren deacon-1 from 10,6
-Forecast Wren -> Deacon from 10,6 (Forest): acc 92% dmg 12 x2 crit 3%; counter with Radiance: acc 74% dmg 11 crit 0%
+Forecast Wren -> Deacon from 10,6 (Forest): acc 92% dmg 12 x2 crit 3%; counter with Radiance: acc 74% dmg 11 crit 0% (Radiance 4 of 5 left)
 > move wren 10,6
 Wren moves 8,5 -> 10,6 via 8,6 9,6
 The Chapter Roll  turn 5 of 8  player phase  seize  recall 1
@@ -789,7 +789,7 @@ c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yar
 b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
 B  wren             Wren L7 cadet              10,6   hp 16/23  Forest
 > attack wren deacon-1
-Forecast Wren -> Deacon: acc 92% dmg 12 x2 crit 3%; counter with Radiance: acc 74% dmg 11 crit 0%
+Forecast Wren -> Deacon: acc 92% dmg 12 x2 crit 3%; counter with Radiance: acc 74% dmg 11 crit 0% (Radiance 4 of 5 left)
 Wren attacks Deacon
   Wren hits Deacon for 12 (hp 5)
   Deacon hits Wren for 11 (hp 5)

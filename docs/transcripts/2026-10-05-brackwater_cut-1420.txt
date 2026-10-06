@@ -1150,7 +1150,7 @@ Archer 1 attacks Alder Fenn
 enemy: move brawler-1 14,3
 Brawler moves 17,4 -> 14,3 via 17,3 16,3 15,3
 enemy: attack brawler-1 pell
-Forecast Brawler -> Pell: acc 94% dmg 9 x2 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
+Forecast Brawler -> Pell: acc 94% dmg 9 x2 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3% (Cinder 4 of 8 left)
 Brawler attacks Pell
   Brawler hits Pell for 9 (hp 7)
   Brawler hits Pell for 9 (hp 0)
@@ -1799,7 +1799,7 @@ enemy: something in the dark acts (x2)
 enemy: move soldier-1 15,4
 Soldier moves 16,4 -> 15,4
 enemy: attack soldier-1 pell
-Forecast Soldier -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 86% dmg 12 crit 2%
+Forecast Soldier -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 86% dmg 12 crit 2% (Cinder 1 of 8 left)
 Soldier attacks Pell
   Soldier hits Pell for 11 (hp 5)
   Pell misses Soldier

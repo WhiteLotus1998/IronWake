@@ -26,7 +26,7 @@ Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
 A  captain          Alder Fenn L1 outrider     2,2    hp 23/23  Plain  captain
 a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
 > attack captain hexer-1 2
-Forecast Alder Fenn -> Hexer with Iron Sword: acc 92% dmg 13 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
+Forecast Alder Fenn -> Hexer with Iron Sword: acc 92% dmg 13 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 8 of 8 left)
 Alder Fenn equips Iron Sword
 Alder Fenn attacks Hexer
   Alder Fenn misses Hexer

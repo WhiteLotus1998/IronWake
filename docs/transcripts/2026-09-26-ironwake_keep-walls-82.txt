@@ -1692,7 +1692,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain
 > attack pell hexer-1
-Forecast Pell -> Hexer with Cinder: acc 99% dmg 8 crit 2%; counter: acc 99% dmg 7 crit 0%
+Forecast Pell -> Hexer with Cinder: acc 99% dmg 8 crit 2%; counter: acc 99% dmg 7 crit 0% (Cinder 6 of 8 left)
 Pell attacks Hexer
   Pell hits Hexer for 8 (hp 0)
   Pell hp 16, Hexer hp 0

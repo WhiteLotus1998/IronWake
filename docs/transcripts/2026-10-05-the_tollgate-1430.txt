@@ -1479,7 +1479,7 @@ C  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
 > threat pell
 Threat on Pell at 6,4 (Forest):
-  Rider from 7,4 with Iron Lance (slot 1): acc 39% dmg 10 crit 0%; counter with Gust: acc 100% dmg 11 crit 7%
+  Rider from 7,4 with Iron Lance (slot 1): acc 39% dmg 10 crit 0%; counter with Gust: acc 100% dmg 11 crit 7% (Gust 5 of 6 left)
   If all land: 10 against 16 hp
 > end
 -- Player phase ends, turn 6 --
@@ -1497,7 +1497,7 @@ Bandit Leader attacks Alder Fenn
 enemy: move rider-1 7,4
 Rider moves 13,4 -> 7,4 via 12,4 11,4 10,4 9,4 8,4
 enemy: attack rider-1 pell
-Forecast Rider -> Pell: acc 39% dmg 10 crit 0%; counter with Gust: acc 100% dmg 11 crit 7%
+Forecast Rider -> Pell: acc 39% dmg 10 crit 0%; counter with Gust: acc 100% dmg 11 crit 7% (Gust 5 of 6 left)
 Rider attacks Pell
   Rider misses Pell
   Pell hits Rider for 11 (hp 10)

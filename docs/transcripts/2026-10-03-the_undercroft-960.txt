@@ -507,7 +507,7 @@ B  wren             Wren L5 cadet              9,1    hp 22/22  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > threat pell from 14,1
 Threat on Pell at 14,1 (Plain):
-  Lector from 14,3 with Radiance (slot 2): acc 96% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 9 crit 3%
+  Lector from 14,3 with Radiance (slot 2): acc 96% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 9 crit 3% (Cinder 8 of 8 left)
   If all land: 10 against 17 hp
 > move pell 14,1
 Pell moves 13,1 -> 14,1
@@ -633,7 +633,7 @@ Hexer 2 moves 1,10 -> 2,8 via 1,9 2,9
 enemy: wait hexer-2
 Hexer 2 waits
 enemy: attack lector-1 pell 2
-Forecast Lector -> Pell with Radiance: acc 96% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 9 crit 3%
+Forecast Lector -> Pell with Radiance: acc 96% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 9 crit 3% (Cinder 8 of 8 left)
 Lector equips Radiance
 Lector attacks Pell
   Lector hits Pell for 10 (hp 7)
@@ -703,7 +703,7 @@ g  soldier-2        Soldier L4 pikeman         2,3    hp 21/21  Plain  group swo
 B  wren             Wren L5 cadet              13,1   hp 22/22  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell lector-1 !
-Forecast Pell -> Lector with Cinder: acc 99% dmg 9 crit 3%; counter with Radiance: acc 96% dmg 10 crit 0%
+Forecast Pell -> Lector with Cinder: acc 99% dmg 9 crit 3%; counter with Radiance: acc 96% dmg 10 crit 0% (Radiance 4 of 5 left)
   Kills if the first strike lands (99)
   Counter: lethal to Pell only if the first round misses (1 in 100) (10 against 7 hp)
 Pell attacks Lector

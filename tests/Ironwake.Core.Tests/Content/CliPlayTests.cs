@@ -926,7 +926,7 @@ public class CliPlayTests
         Assert.Contains("  Wildfire: Hexer 1 ignites 6,4 on a hit\n", output);
         Assert.Contains("Dunstan burns 4 (hp 7)\n", output);
         Assert.Contains("Alder Fenn moves 7,5 -> 5,4 via 7,4 6,4\n", output);
-        Assert.Contains("Forecast Alder Fenn -> Hexer 1: acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 11 crit 0%\n", output);
+        Assert.Contains("Forecast Alder Fenn -> Hexer 1: acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 11 crit 0% (Cinder 6 of 8 left)\n", output);
         Assert.DoesNotContain("Alder Fenn burns", output);
         Assert.DoesNotContain("Pell burns", output);
     }
