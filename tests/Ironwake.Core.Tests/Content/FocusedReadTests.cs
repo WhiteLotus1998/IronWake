@@ -75,7 +75,32 @@ public class FocusedReadTests
 
         var line = LevelRun.PriceLine([run]);
 
-        Assert.Equal($"  price (paying, through map 8, 1 runs): captain level p50 7 p75 7; {FocusedPlayer.Fed} level p50 4 p75 4, main-weapon rank points p50 40 p75 40; kills handed p50 16 p75 16, given up p50 8 p75 8 (total 8); HP lost in enemy phases p50 80 p75 80, falls 0", line);
+        Assert.Equal($"  price (paying, through map 8, 1 runs): captain level p50 7 p75 7; {FocusedPlayer.Fed} level p50 4 p75 4, main-weapon rank points p50 40 p75 40; kills handed p50 16 p75 16 (total 16), given up p50 8 p75 8 (total 8); HP lost in enemy phases p50 80 p75 80, falls 0", line);
+    }
+
+    [Fact]
+    public void ThePriceLinesHandedTotalIsTheSumOverTheRunsThatReachedTheVerdictMapThroughIt()
+    {
+        var camp = new LevelRun.Camp(1, [], 0, 0);
+        LevelRun.Member[] company = [M(7, 160, captain: true, id: "captain"), M(6, 50, id: FocusedPlayer.Fed)];
+        var nine = Enumerable.Range(1, 9).Select(n => (n, (IReadOnlyList<int>)company.Select(m => m.Level).ToList(), 0, camp)).ToList();
+        var reached = new LevelRun.Run(nine, null) { Companies = nine.Select(_ => (IReadOnlyList<LevelRun.Member>)company).ToList(), Prices = nine.Select(_ => new LevelRun.Price(1, 0, 0, 0)).ToList(), Handed = 9 };
+        var five = nine.Take(5).ToList();
+        var short5 = new LevelRun.Run(five, 6) { Companies = five.Select(_ => (IReadOnlyList<LevelRun.Member>)company).ToList(), Prices = five.Select(_ => new LevelRun.Price(2, 0, 0, 0)).ToList(), Handed = 10 };
+
+        Assert.Contains("kills handed p50 8 p75 8 (total 8),", LevelRun.PriceLine([reached, short5], "striking"));
+        Assert.Equal("  kills handed (striking): 19 in all, 8 through map 8 on the 1 runs that won it, 11 on later maps or runs lost before it; the per-map prices sum to each run's count", LevelRun.HandedSplit([reached, short5], "striking"));
+    }
+
+    [Fact]
+    public void AHandedCountThePricesDoNotSumToIsNamedABug()
+    {
+        var camp = new LevelRun.Camp(1, [], 0, 0);
+        LevelRun.Member[] company = [M(7, 160, captain: true, id: "captain"), M(6, 50, id: FocusedPlayer.Fed)];
+        var nine = Enumerable.Range(1, 9).Select(n => (n, (IReadOnlyList<int>)company.Select(m => m.Level).ToList(), 0, camp)).ToList();
+        var run = new LevelRun.Run(nine, null) { Companies = nine.Select(_ => (IReadOnlyList<LevelRun.Member>)company).ToList(), Prices = nine.Select(_ => new LevelRun.Price(1, 0, 0, 0)).ToList(), Handed = 10 };
+
+        Assert.EndsWith("the per-map prices do not sum to each run's count (a bug)", LevelRun.HandedSplit([run], "striking"));
     }
 
     [Fact]
