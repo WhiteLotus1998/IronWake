@@ -217,7 +217,7 @@ Archer 2 attacks Alder Fenn
 enemy: move brigand-1 9,5
 Brigand moves 10,5 -> 9,5
 enemy: attack brigand-1 maud
-Forecast Brigand -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3%
+Forecast Brigand -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3% (Radiance 4 of 5 left)
 Brigand attacks Maud
   Brigand misses Maud
   Maud hits Brigand for 11 (hp 0)
@@ -322,7 +322,7 @@ a  soldier-1        Soldier L1 pikeman         8,3    hp 10/20  Road  group mill
 enemy: move archer-1 9,6
 Archer 1 moves 9,3 -> 9,6 via 9,4 9,5
 enemy: attack archer-1 maud
-Forecast Archer 1 -> Maud: acc 65% dmg 6 crit 0%; counter: acc 80% dmg 10 crit 2%
+Forecast Archer 1 -> Maud: acc 65% dmg 6 crit 0%; counter: acc 80% dmg 10 crit 2% (Radiance 2 of 5 left)
 Archer 1 attacks Maud
   Archer 1 hits Maud for 6 (hp 11)
   Maud hits Archer 1 for 10 (hp 7)
@@ -331,7 +331,7 @@ Maud gains 10 exp (60)
 enemy: move soldier-1 8,4
 Soldier moves 8,3 -> 8,4
 enemy: attack soldier-1 maud
-Forecast Soldier -> Maud: acc 58% dmg 9 crit 0%; counter: acc 97% dmg 10 crit 2%
+Forecast Soldier -> Maud: acc 58% dmg 9 crit 0%; counter: acc 97% dmg 10 crit 2% (Radiance 1 of 5 left)
 Soldier attacks Maud
   Soldier hits Maud for 9 (hp 2)
   Maud hits Soldier for 10 (hp 0)

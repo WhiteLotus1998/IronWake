@@ -1857,7 +1857,7 @@ Bandit Leader waits
 enemy: move soldier-2 10,5
 Soldier 2 moves 10,2 -> 10,5 via 10,3 10,4
 enemy: attack soldier-2 pell
-Forecast Soldier 2 -> Pell: acc 74% dmg 11 crit 0%; counter with Gust: acc 100% dmg 11 crit 7%
+Forecast Soldier 2 -> Pell: acc 74% dmg 11 crit 0%; counter with Gust: acc 100% dmg 11 crit 7% (Gust 5 of 6 left)
 Soldier 2 attacks Pell
   Soldier 2 misses Pell
   Pell hits Soldier 2 for 11 (hp 9)
@@ -2587,7 +2587,7 @@ Rapport Pell and Wren +4 (4)
 -- Enemy phase, turn 8 --
 Bandit Leader heals 5 (hp 21)
 enemy: attack bandit_leader-1 pell 2
-Forecast Bandit Leader -> Pell: acc 58% dmg 14 crit 0%; counter with Gust: acc 97% dmg 10 crit 6%
+Forecast Bandit Leader -> Pell: acc 58% dmg 14 crit 0%; counter with Gust: acc 97% dmg 10 crit 6% (Gust 2 of 6 left)
 Bandit Leader equips Toll Axe
 Bandit Leader attacks Pell
   Bandit Leader misses Pell

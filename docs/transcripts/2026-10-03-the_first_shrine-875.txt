@@ -95,7 +95,7 @@ a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group san
 B  wren             Wren L4 cadet              10,3   hp 21/21  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack wren hexer-1
-Forecast Wren -> Hexer: acc 91% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
+Forecast Wren -> Hexer: acc 91% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 8 of 8 left)
 Wren attacks Hexer
   Wren hits Hexer for 12 (hp 4)
   Hexer hits Wren for 10 (hp 11)
@@ -195,7 +195,7 @@ B  wren             Wren L4 cadet              10,3   hp 11/21  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > threat maud from 6,3
 Threat on Maud at 6,3 (Forest):
-  Brigand 1 from 5,3 with Iron Axe (slot 1): acc 34% dmg 12 crit 0%; counter: acc 98% dmg 12 crit 4%
+  Brigand 1 from 5,3 with Iron Axe (slot 1): acc 34% dmg 12 crit 0%; counter: acc 98% dmg 12 crit 4% (Radiance 5 of 5 left)
   If all land: 12 against 18 hp
 > move maud 6,3
 Maud moves 7,4 -> 6,3 via 7,3
@@ -293,7 +293,7 @@ Archer 1 waits and braces
 enemy: move brigand-1 5,3
 Brigand 1 moves 5,4 -> 5,3
 enemy: attack brigand-1 maud
-Forecast Brigand 1 -> Maud: acc 34% dmg 12 crit 0%; counter: acc 98% dmg 12 crit 4%
+Forecast Brigand 1 -> Maud: acc 34% dmg 12 crit 0%; counter: acc 98% dmg 12 crit 4% (Radiance 4 of 5 left)
 Brigand 1 attacks Maud
   Brigand 1 misses Maud
   Maud hits Brigand 1 for 12 (hp 0)

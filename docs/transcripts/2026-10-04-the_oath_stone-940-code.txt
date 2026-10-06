@@ -334,7 +334,7 @@ Joab waits
 enemy: move soldier-1 4,8
 Soldier moves 6,9 -> 4,8 via 5,9 5,8
 enemy: attack soldier-1 maud
-Forecast Soldier -> Maud: acc 79% dmg 12 crit 0%; counter: acc 98% dmg 12 crit 4%
+Forecast Soldier -> Maud: acc 79% dmg 12 crit 0%; counter: acc 98% dmg 12 crit 4% (Radiance 4 of 5 left)
 Soldier attacks Maud
   Soldier hits Maud for 12 (hp 7)
   Maud hits Soldier for 12 (hp 10)
@@ -797,7 +797,7 @@ e  rider-1          Rider L6 outrider          5,1    hp 22/22  Plain  group rea
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > threat maud from 11,7
 Threat on Maud at 11,7 (Plain):
-  Archer from 11,5 with Iron Bow (slot 1): acc 85% dmg 9 crit 0%; counter: acc 98% dmg 12 crit 4%
+  Archer from 11,5 with Iron Bow (slot 1): acc 85% dmg 9 crit 0%; counter: acc 98% dmg 12 crit 4% (Radiance 3 of 5 left)
   If all land: 9 against 7 hp
   Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > move maud 11,7
@@ -851,7 +851,7 @@ Lethal if all land: Maud (Archer for 9, against 7 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: attack archer-1 maud
-Forecast Archer -> Maud: acc 85% dmg 9 crit 0%; counter: acc 98% dmg 12 crit 4%
+Forecast Archer -> Maud: acc 85% dmg 9 crit 0%; counter: acc 98% dmg 12 crit 4% (Radiance 3 of 5 left)
 Archer attacks Maud
   Archer misses Maud
   Maud hits Archer for 12 (hp 7)
@@ -1223,7 +1223,7 @@ Sworn Captain heals 5 (hp 8)
 enemy: move brigand-2 11,5
 Brigand 2 moves 8,4 -> 11,5 via 9,4 10,4 11,4
 enemy: attack brigand-2 maud
-Forecast Brigand 2 -> Maud: acc 68% dmg 15 crit 0%; counter: acc 98% dmg 13 crit 5%
+Forecast Brigand 2 -> Maud: acc 68% dmg 15 crit 0%; counter: acc 98% dmg 13 crit 5% (Radiance 1 of 5 left)
 Brigand 2 attacks Maud
   Brigand 2 hits Maud for 15 (hp 0)
   Brigand 2 hp 24, Maud hp 0

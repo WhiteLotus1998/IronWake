@@ -1729,7 +1729,7 @@ enemy: something in the dark acts (x4)
 enemy: move rider-1 17,2
 Rider 1 moves 15,3 -> 17,2 via 15,2 16,2
 enemy: attack rider-1 pell
-Forecast Rider 1 -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
+Forecast Rider 1 -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2% (Cinder 6 of 8 left)
 Rider 1 attacks Pell
   Rider 1 misses Pell
   Pell hits Rider 1 for 12 (hp 9)
@@ -1739,7 +1739,7 @@ enemy: something in the dark acts (x2)
 enemy: move shieldbearer-1 18,3
 Shieldbearer moves 18,4 -> 18,3
 enemy: attack shieldbearer-1 pell
-Forecast Shieldbearer -> Pell: acc 77% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
+Forecast Shieldbearer -> Pell: acc 77% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3% (Cinder 5 of 8 left)
 Shieldbearer attacks Pell
   Shieldbearer hits Pell for 10 (hp 6)
   Pell hits Shieldbearer for 13 (hp 0)

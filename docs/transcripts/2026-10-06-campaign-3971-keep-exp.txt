@@ -298,7 +298,7 @@ b  archer-1         Archer L1 bowman           6,3    hp 17/17  Plain  group hil
 A  captain          Alder Fenn L1 cadet        5,3    hp 21/22  Plain  captain
 c  hexer-1          Hexer L1 adept             5,2    hp 16/16  Plain  group hill, guard, awake
 > attack captain hexer-1
-Forecast Alder Fenn -> Hexer: acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
+Forecast Alder Fenn -> Hexer: acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 6 of 8 left)
 Alder Fenn attacks Hexer
   Alder Fenn hits Hexer for 12 (hp 4)
   Hexer hits Alder Fenn for 10 (hp 11)
@@ -710,7 +710,7 @@ Alder Fenn masters the Cadet class and keeps Fundamentals
 enemy: move brigand-1 9,5
 Brigand moves 10,5 -> 9,5
 enemy: attack brigand-1 maud
-Forecast Brigand -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3%
+Forecast Brigand -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3% (Radiance 5 of 5 left)
 Brigand attacks Maud
   Brigand hits Maud for 11 (hp 6)
   Maud hits Brigand for 11 (hp 11)
@@ -826,7 +826,7 @@ Archer 1 waits
 enemy: move soldier-1 8,4
 Soldier moves 8,3 -> 8,4
 enemy: attack soldier-1 maud
-Forecast Soldier -> Maud: acc 58% dmg 9 crit 0%; counter: acc 97% dmg 10 crit 2%
+Forecast Soldier -> Maud: acc 58% dmg 9 crit 0%; counter: acc 97% dmg 10 crit 2% (Radiance 3 of 5 left)
 Soldier attacks Maud
   Soldier misses Maud
   Maud hits Soldier for 10 (hp 10)
@@ -11761,7 +11761,7 @@ D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > attack ottilie hexer-1
-Forecast Ottilie -> Hexer: acc 87% dmg 9 crit 4%; counter: acc 99% dmg 12 crit 0%
+Forecast Ottilie -> Hexer: acc 87% dmg 9 crit 4%; counter: acc 99% dmg 12 crit 0% (Cinder 6 of 8 left)
 Ottilie attacks Hexer
   Ottilie hits Hexer for 9 (hp 8)
   Hexer hits Ottilie for 12 (hp 5)
@@ -11792,7 +11792,7 @@ D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > attack teodor hexer-1 1 art long_thrust
-Forecast Teodor -> Hexer: acc 89% dmg 15 crit 2%; counter: acc 99% dmg 12 crit 2%
+Forecast Teodor -> Hexer: acc 89% dmg 15 crit 2%; counter: acc 99% dmg 12 crit 2% (Cinder 5 of 8 left)
   Technique Long Thrust: Steel Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 3 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Steel Lance, spending 2 extra uses
 Teodor attacks Hexer

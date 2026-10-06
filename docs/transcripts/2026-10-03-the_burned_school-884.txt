@@ -219,7 +219,7 @@ count: Pell 2 turns to an exit (last start: turn 5), Wren 1 turn to an exit (las
 chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
 > threat pell from 6,3
 Threat on Pell at 6,3 (Plain):
-  Brigand 2 from 6,4 with Iron Axe (slot 1): acc 67% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 14 crit 3%
+  Brigand 2 from 6,4 with Iron Axe (slot 1): acc 67% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 14 crit 3% (Cinder 7 of 8 left)
   If all land: 13 against 17 hp
 > move pell 6,3
 Pell moves 7,4 -> 6,3 via 6,4
@@ -325,7 +325,7 @@ Brigand 1 waits
 enemy: move brigand-2 6,4
 Brigand 2 moves 4,4 -> 6,4 via 5,4
 enemy: attack brigand-2 pell
-Forecast Brigand 2 -> Pell: acc 67% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 14 crit 3%
+Forecast Brigand 2 -> Pell: acc 67% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 14 crit 3% (Cinder 7 of 8 left)
 Brigand 2 attacks Pell
   Brigand 2 misses Pell
   Pell hits Brigand 2 for 14 (hp 8)
@@ -430,7 +430,7 @@ Brigand 3 waits
 enemy: move hexer-1 5,4
 Hexer moves 3,4 -> 5,4 via 4,4
 enemy: attack hexer-1 pell
-Forecast Hexer -> Pell: acc 99% dmg 6 crit 0%; counter with Cinder: acc 99% dmg 9 crit 2%
+Forecast Hexer -> Pell: acc 99% dmg 6 crit 0%; counter with Cinder: acc 99% dmg 9 crit 2% (Cinder 5 of 8 left)
 Hexer attacks Pell
   Hexer hits Pell for 6 (hp 11)
   Pell hits Hexer for 9 (hp 7)
@@ -524,7 +524,7 @@ Brigand 3 waits
 enemy: move hexer-1 7,4
 Hexer moves 5,4 -> 7,4 via 6,4
 enemy: attack hexer-1 pell
-Forecast Hexer -> Pell: acc 99% dmg 6 crit 0%; counter with Cinder: acc 99% dmg 9 crit 2%
+Forecast Hexer -> Pell: acc 99% dmg 6 crit 0%; counter with Cinder: acc 99% dmg 9 crit 2% (Cinder 4 of 8 left)
 Hexer attacks Pell
   Hexer hits Pell for 6 (hp 5)
   Pell hits Hexer for 9 (hp 0)

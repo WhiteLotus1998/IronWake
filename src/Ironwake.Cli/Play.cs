@@ -1129,7 +1129,7 @@ public sealed class PlaySession
 
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
                 var (chills, counterChills) = Chills(_content, attacker!, target!, attack.Slot);
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, chills, counterChills));
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, chills, counterChills, CounterUses(_content, target!, forecast.Defender)));
                 PrintRivalry(target!, countering: true);
                 if (SwornLine(attacker!, target!, names) is { } sworn)
                 {
@@ -1566,7 +1566,7 @@ public sealed class PlaySession
         var raises = RaisesWith(state, content, unit, slot);
         var names = UnitNames.Of(state, content);
         var (chills, counterChills) = Chills(content, unit, target, slot);
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills) };
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills, CounterUses(content, target, forecast.Defender)) };
         var hunger = HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state, forecast).ToList();
         if (ClaimantLine(state, unit, target, forecast, raises, names, hunger) is { } claimant)
         {
@@ -1965,7 +1965,7 @@ public sealed class PlaySession
 
                 var covered = line.CoveredBy is { } by ? $"covered by {names[by.Id]}, strikes {names[by.Id]} on {tile}, " : "";
                 var answers = line.CoveredBy ?? unit;
-                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
+                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
                 var falls = !line.Raises && line.Forecast.CounterIsLethal(line.Enemy.Hp, answers.Hp) ? Returned.Falls(state, line.Enemy, names) : null;
                 if (!line.Raises && line.Forecast.Defender.Strikes && Kinsbane.CounterFeedLine(answers, line.Enemy, line.Forecast, content, names[answers.Id], falls) is { } feed)
                 {
@@ -1996,6 +1996,11 @@ public sealed class PlaySession
                 {
                     var clauses = freed.Select((f, i) => $"{(i == 0 ? $"{name}'s counter kills" : "and if it kills")} {names[f.Freer.Id]} {FreedChance(f)}, {names[f.Follower.Id]} takes {f.Tile}");
                     rows.Add($"  if {string.Join(", ", clauses)}: {Queries.IfAllLand(lines, blow) + freed.Sum(f => f.Damage)} against {unit.Hp} hp");
+                }
+
+                if (LastUseRow(state, unit, lines, content) is { } lastUse)
+                {
+                    rows.Add(lastUse);
                 }
             }
 
@@ -2093,7 +2098,7 @@ public sealed class PlaySession
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
     /// unit has not moved to (issue 151), empty for a forecast on the standing board.
     /// </summary>
-    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, bool chills = false, bool counterChills = false)
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, bool chills = false, bool counterChills = false, string counterUses = "")
     {
         names ??= UnitNames.None;
         if (raises)
@@ -2101,7 +2106,7 @@ public sealed class PlaySession
             return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {RaiseText(forecast.Attacker)}; counter: none";
         }
 
-        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + (counterChills ? " chills" : "") : ": none" + (forecast.CounterAnswered ? " (answered this phase)" : ""))}";
+        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + (counterChills ? " chills" : "") + counterUses : ": none" + (forecast.CounterAnswered ? " (answered this phase)" : ""))}";
     }
 
     /// <summary>
@@ -2136,6 +2141,44 @@ public sealed class PlaySession
     /// </summary>
     public static string CounterWith(GameContent content, BattleUnit defender, int distance) =>
         defender.WeaponChoicesAt(content, distance) > 1 ? WeaponWith(defender, content, defender.EquippedSlot(content)) : "";
+
+    /// <summary>
+    /// The uses a counter would spend from, after its strike columns (issue 1200): <c> (Radiance 2 of 5 left)</c>
+    /// when <paramref name="defender"/> counters with a spell, whose uses are a battle's (<see cref="BattleState"/>
+    /// refills them at the start); empty for a physical weapon or no counter. Information only: no ask follows from it.
+    /// </summary>
+    public static string CounterUses(GameContent content, BattleUnit defender, SideForecast counter) =>
+        counter.Strikes && SpellInFront(content, defender) is { } spell ? $" ({spell.Weapon.Name} {spell.Uses} of {spell.Weapon.Durability} left)" : "";
+
+    /// <summary>
+    /// The row <c>threat</c> adds when the counters it lists could spend <paramref name="unit"/>'s last use of the
+    /// spell it holds in front (issue 1200): each answered strike spends one, a double two, and on a
+    /// <c>one_answer: on</c> map only the first line is answered. <c>threat</c> asks it only when no line is
+    /// covered, since a coverer's counters are not the unit's.
+    /// </summary>
+    public static string? LastUseRow(BattleState state, BattleUnit unit, IReadOnlyList<ThreatLine> lines, GameContent content)
+    {
+        if (SpellInFront(content, unit) is not { } spell)
+        {
+            return null;
+        }
+
+        var counters = lines.Where(l => !l.Raises && l.Forecast.Defender.Strikes).Select(l => l.Forecast.Defender.StrikeCount).ToList();
+        var spends = state.Map.OneAnswerEnabled ? counters.Take(1).Sum() : counters.Sum();
+        return counters.Count > 0 && spends >= spell.Uses ? $"  counters could spend {spell.Weapon.Name}'s last use" : null;
+    }
+
+    private static (Weapon Weapon, int Uses)? SpellInFront(GameContent content, BattleUnit unit)
+    {
+        var slot = unit.EquippedSlot(content);
+        if (slot < 0 || slot >= unit.Unit.Inventory.Count)
+        {
+            return null;
+        }
+
+        var stack = unit.Unit.Inventory.Items[slot];
+        return content.Weapons.TryGetValue(stack.ItemId, out var weapon) && weapon.IsMagic ? (weapon, stack.Uses) : null;
+    }
 
     private static string WeaponWith(BattleUnit unit, GameContent content, int slot)
     {

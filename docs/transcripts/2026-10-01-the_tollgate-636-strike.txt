@@ -789,8 +789,8 @@ B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 Threat on Alder Fenn at 5,5 (Forest): no enemy can strike him next phase
 > threat pell
 Threat on Pell at 7,4 (Plain):
-  Bandit Leader from 7,2 with Toll Axe (slot 2): acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 12 crit 1%
-  Rider from 8,4 with Iron Lance (slot 1): acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
+  Bandit Leader from 7,2 with Toll Axe (slot 2): acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 12 crit 1% (Cinder 8 of 8 left)
+  Rider from 8,4 with Iron Lance (slot 1): acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2% (Cinder 8 of 8 left)
   If all land: 25 against 16 hp
 > end !
 Lethal if all land: Pell (Bandit Leader for 14, Rider for 11, against 16 hp)
@@ -799,7 +799,7 @@ Lethal if all land: Pell (Bandit Leader for 14, Rider for 11, against 16 hp)
 enemy: wait archer-1
 Archer 1 waits
 enemy: attack bandit_leader-1 pell 2
-Forecast Bandit Leader -> Pell: acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 12 crit 1%
+Forecast Bandit Leader -> Pell: acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 12 crit 1% (Cinder 8 of 8 left)
 Bandit Leader equips Toll Axe
 Bandit Leader attacks Pell
   Bandit Leader misses Pell
@@ -809,7 +809,7 @@ Pell gains 14 exp (14)
 enemy: move rider-1 8,4
 Rider moves 13,4 -> 8,4 via 12,4 11,4 10,4 9,4
 enemy: attack rider-1 pell
-Forecast Rider -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
+Forecast Rider -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2% (Cinder 7 of 8 left)
 Rider attacks Pell
   Rider hits Pell for 11 (hp 5)
   Pell hits Rider for 12 (hp 9)

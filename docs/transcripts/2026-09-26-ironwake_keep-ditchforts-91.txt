@@ -1584,7 +1584,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 21/21  Fort (heals 20 percent, 4 hp)
 B  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
 > attack ottilie hexer-1
-Forecast Ottilie -> Hexer: acc 89% dmg 9 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
+Forecast Ottilie -> Hexer: acc 89% dmg 9 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 8 of 8 left)
 Ottilie attacks Hexer
   Ottilie hits Hexer for 9 (hp 7)
   Hexer hits Ottilie for 10 (hp 7)
@@ -1743,7 +1743,7 @@ Brigand 4 waits
 enemy: move soldier-3 9,4
 Soldier 3 moves 8,3 -> 9,4 via 9,3
 enemy: attack soldier-3 pell
-Forecast Soldier 3 -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
+Forecast Soldier 3 -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2% (Cinder 5 of 8 left)
 Soldier 3 attacks Pell
   Soldier 3 hits Pell for 11 (hp 5)
   Pell hits Soldier 3 for 12 (hp 8)

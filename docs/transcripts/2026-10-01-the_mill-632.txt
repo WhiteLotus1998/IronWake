@@ -228,7 +228,7 @@ Archer 1 waits
 enemy: move brigand-1 7,6
 Brigand moves 10,5 -> 7,6 via 9,5 8,5 7,5
 enemy: attack brigand-1 maud
-Forecast Brigand -> Maud: acc 72% dmg 13 crit 0%; counter: acc 98% dmg 11 crit 3%
+Forecast Brigand -> Maud: acc 72% dmg 13 crit 0%; counter: acc 98% dmg 11 crit 3% (Radiance 4 of 5 left)
 Brigand attacks Maud
   Brigand hits Maud for 13 (hp 4)
   Maud hits Brigand for 11 (hp 11)

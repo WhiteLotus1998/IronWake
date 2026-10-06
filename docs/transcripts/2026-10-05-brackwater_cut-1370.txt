@@ -2295,7 +2295,7 @@ enemy: something in the dark acts (x2)
 enemy: move brawler-1 18,3
 Brawler moves 16,3 -> 18,3 via 17,3
 enemy: attack brawler-1 pell
-Forecast Brawler -> Pell: acc 94% dmg 9 x2 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
+Forecast Brawler -> Pell: acc 94% dmg 9 x2 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3% (Cinder 1 of 8 left)
 Brawler attacks Pell
   Brawler hits Pell for 9 (hp 7)
   Brawler hits Pell for 9 (hp 0)

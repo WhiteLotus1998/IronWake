@@ -177,9 +177,9 @@ Threat on Alder Fenn at 5,4 (Fort):
   Hexer from 5,2 with Cinder (slot 1): acc 87% dmg 8 crit 0%; counter: none
   If all land: 8 against 18 hp
 > forecast captain hexer-1 from 5,3
-Forecast Alder Fenn -> Hexer from 5,3 (Plain): acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
+Forecast Alder Fenn -> Hexer from 5,3 (Plain): acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 7 of 8 left)
 > forecast captain hexer-1 1 art feint from 5,3
-Forecast Alder Fenn -> Hexer from 5,3 (Plain): acc 100% dmg 10 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
+Forecast Alder Fenn -> Hexer from 5,3 (Plain): acc 100% dmg 10 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 7 of 8 left)
   Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 3 of 38 uses, 1 of them hit or miss
 > threat captain from 5,3
 Threat on Alder Fenn at 5,3 (Plain):
@@ -203,7 +203,7 @@ b  archer-1         Archer L1 bowman           9,1    hp 17/17  Hill  group hill
 A  captain          Alder Fenn L1 cadet        5,3    hp 18/22  Plain  captain
 c  hexer-1          Hexer L1 adept             5,2    hp 16/16  Plain  group hill, guard, awake
 > attack captain hexer-1 1
-Forecast Alder Fenn -> Hexer: acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
+Forecast Alder Fenn -> Hexer: acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 7 of 8 left)
 Alder Fenn attacks Hexer
   Alder Fenn hits Hexer for 12 (hp 4)
   Hexer hits Alder Fenn for 10 (hp 8)

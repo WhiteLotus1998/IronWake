@@ -424,7 +424,7 @@ Joab waits
 enemy: move soldier-1 3,6
 Soldier moves 3,8 -> 3,6 via 3,7
 enemy: attack soldier-1 maud
-Forecast Soldier -> Maud: acc 79% dmg 12 crit 0%; counter: acc 98% dmg 12 crit 4%
+Forecast Soldier -> Maud: acc 79% dmg 12 crit 0%; counter: acc 98% dmg 12 crit 4% (Radiance 4 of 5 left)
 Soldier attacks Maud
   Soldier hits Maud for 12 (hp 7)
   Maud hits Soldier for 12 (hp 10)
@@ -1435,7 +1435,7 @@ Sworn Captain heals 5 (hp 24)
 enemy: move brigand-2 11,5
 Brigand 2 moves 11,7 -> 11,5 via 11,6
 enemy: attack brigand-2 maud
-Forecast Brigand 2 -> Maud: acc 68% dmg 15 crit 0%; counter: acc 98% dmg 13 crit 5%
+Forecast Brigand 2 -> Maud: acc 68% dmg 15 crit 0%; counter: acc 98% dmg 13 crit 5% (Radiance 1 of 5 left)
 Brigand 2 attacks Maud
   Brigand 2 misses Maud
   Maud hits Brigand 2 for 13 (hp 11)

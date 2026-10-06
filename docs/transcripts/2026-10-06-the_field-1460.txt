@@ -3284,7 +3284,7 @@ Sentry waits
 enemy: move soldier-2 12,8
 Soldier 2 moves 12,6 -> 12,8 via 12,7
 enemy: attack soldier-2 maud
-Forecast Soldier 2 -> Maud: acc 77% dmg 12 crit 0%; counter: acc 98% dmg 11 crit 3%
+Forecast Soldier 2 -> Maud: acc 77% dmg 12 crit 0%; counter: acc 98% dmg 11 crit 3% (Radiance 5 of 5 left)
 Soldier 2 attacks Maud
   Soldier 2 hits Maud for 12 (hp 6)
   Maud hits Soldier 2 for 11 (hp 10)
@@ -4157,7 +4157,7 @@ Rapport Alder Fenn and Keziah +4 (8)
 enemy: move brigand-2 14,7
 Brigand 2 moves 15,6 -> 14,7 via 15,7
 enemy: attack brigand-2 pell
-Forecast Brigand 2 -> Pell: acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 15 crit 4%
+Forecast Brigand 2 -> Pell: acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 15 crit 4% (Cinder 4 of 8 left)
 Brigand 2 attacks Pell
   Brigand 2 misses Pell
   Pell hits Brigand 2 for 15 (hp 8)

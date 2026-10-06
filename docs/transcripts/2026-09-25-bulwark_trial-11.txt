@@ -38,7 +38,7 @@ Threat on Alder Fenn at 5,3 (Plain):
   Brigand 2 from 4,3 with Iron Axe (slot 1): acc 56% dmg 8 crit 0%; counter: acc 85% dmg 12 crit 5%
   If all land: 8 against 25 hp
 > forecast captain hexer-1 from 3,1
-Forecast Alder Fenn -> Hexer 1 from 3,1 (Plain): acc 88% dmg 13 x2 crit 4%; counter: acc 98% dmg 11 crit 0%
+Forecast Alder Fenn -> Hexer 1 from 3,1 (Plain): acc 88% dmg 13 x2 crit 4%; counter: acc 98% dmg 11 crit 0% (Cinder 8 of 8 left)
 > move captain 5,3
 Alder Fenn moves 1,3 -> 5,3 via 2,3 3,3 4,3
 Trial of the Bulwark  turn 1 of 1  player phase  survive  recall 0

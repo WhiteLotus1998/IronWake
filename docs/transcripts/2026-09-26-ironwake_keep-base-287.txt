@@ -1886,7 +1886,7 @@ Hexer 1 attacks Alder Fenn
 enemy: move soldier-3 11,4
 Soldier 3 moves 8,3 -> 11,4 via 9,3 9,4 10,4
 enemy: attack soldier-3 pell
-Forecast Soldier 3 -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
+Forecast Soldier 3 -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2% (Cinder 5 of 8 left)
 Soldier 3 attacks Pell
   Soldier 3 hits Pell for 11 (hp 5)
   Pell hits Soldier 3 for 12 (hp 8)
@@ -2696,7 +2696,7 @@ Reinforcements arrive
 enemy: move archer-2 11,4
 Archer 2 moves 9,4 -> 11,4 via 10,4
 enemy: attack archer-2 pell
-Forecast Archer 2 -> Pell: acc 83% dmg 8 crit 1%; counter with Cinder: acc 99% dmg 13 crit 2%
+Forecast Archer 2 -> Pell: acc 83% dmg 8 crit 1%; counter with Cinder: acc 99% dmg 13 crit 2% (Cinder 3 of 8 left)
 Archer 2 attacks Pell
   Archer 2 hits Pell for 8 (hp 0)
   Archer 2 hp 6, Pell hp 0
