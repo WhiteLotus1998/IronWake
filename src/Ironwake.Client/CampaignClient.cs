@@ -320,8 +320,10 @@ public sealed class CampaignClient
         }
 
         var before = Record;
-        Record = Record.AfterBattle(battle.State, Content);
+        var fought = Record.Fought(battle.State, Content);
+        Record = fought.Drill(Content);
         _log.Add(CampaignSession.WonLine(before, Record, battle.State, Content));
+        _log.AddRange(CampaignSession.DrillLines(fought, Content));
         QueueCard(CampaignSession.AfterCard(before, Content, battle.State.Map));
         QueueCard(CampaignSession.SceneLines(Record, Content, ScenePoint.After, before.NextMap(Content).MapId, battle.State.Map.Name));
         if (Record.IsFinished(Content))

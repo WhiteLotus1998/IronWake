@@ -137,7 +137,7 @@ public class DifficultyLadderTests
 
     /// <summary>
     /// Code's journaled play (issue 664): the Lazar House with permadeath off brings Wren back
-    /// Wounded (2), she fights the Tollgate wounded, and its win counts her down to Wounded (1).
+    /// Wounded (2), she fights the Tollgate wounded, and its win counts her down to Wounded (1), and the camp drills her to the levy floor (issue 1164).
     /// </summary>
     [Fact]
     public void TheJournaledWoundedTollgateReplaysToItsTranscript()
@@ -151,7 +151,7 @@ public class DifficultyLadderTests
         Assert.Contains("Maud wins maud_1; fell and came back wounded: Wren\n", output);
         Assert.Contains("    Wounded (2): Str -2, Spd -2 for 2 more main maps\n", output);
         Assert.Contains("The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell\n", output);
-        Assert.Contains("  Wren: Cadet L1, EXP 40, Wounded (1); ", output);
+        Assert.Contains("  Wren: Cadet L3, EXP 0, Wounded (1); ", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 

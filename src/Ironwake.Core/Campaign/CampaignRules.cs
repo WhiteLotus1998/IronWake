@@ -208,6 +208,13 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     /// <summary>The seal a promotion into <paramref name="target"/> costs: the advanced price for an advanced form, else the plain one.</summary>
     public int SealFor(UnitClass target) => target.Advances is null ? CertificationPrice : AdvancedCertificationPrice;
 
+    /// <summary>
+    /// The levy floor's offset (issue 1164, round 391), <c>levyFloor</c>: before map number N (from 1)
+    /// every living levy member below level N less this is raised to it; 0 when the file names none,
+    /// and then no floor is kept.
+    /// </summary>
+    public int LevyFloor { get; init; }
+
     /// <summary>The certification trials, one per class at most, in class id order (issue 252); a class without one certifies only with a seal.</summary>
     public ValueList<CampaignTrial> Trials { get; init; } = ValueList<CampaignTrial>.Empty;
 

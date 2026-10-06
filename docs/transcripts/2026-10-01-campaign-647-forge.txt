@@ -2723,18 +2723,26 @@ B  wren             Wren L1 cadet              6,2    hp 20/20  Plain
 Battle won: seize; only recall is left, or leave
 > leave
 The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell
+Wren drilled with the levy: L1 -> L3.
+Teodor drilled with the levy: L1 -> L3.
+Ottilie drilled with the levy: L1 -> L3.
+Pell drilled with the levy: L2 -> L3.
+Dunstan drilled with the levy: L1 -> L3.
+Ansgar drilled with the levy: L1 -> L3.
+Keziah drilled with the levy: L1 -> L3.
+Brannock drilled with the levy: L1 -> L3.
 -- Before map 5 of 9: Harrow Weir; the purse holds 1500 --
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L1, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
-  Teodor: Pikeman L1, EXP 54; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
-  Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
-  Pell: Adept L2, EXP 55; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
+  Wren: Cadet L3, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
+  Teodor: Pikeman L3, EXP 0; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L3, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L3, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L3, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L1, EXP 82; 1: Radiance 5/5, 2: Salve 8/8
-  Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
-  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Ansgar: Outrider L3, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Keziah: Reaver L3, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L3, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Keziah (deploy 6 of 10)
 == Keep ==
 Purse: 1500
@@ -2771,15 +2779,15 @@ Bunk room built for 400, the purse holds 300; beds: 10/14
 > roster
 Roster: company 10/12
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword +1 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
-  Wren: Cadet L1, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
-  Teodor: Pikeman L1, EXP 54; 1: Iron Lance +1 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
-  Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
-  Pell: Adept L2, EXP 55; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
+  Wren: Cadet L3, EXP 0, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
+  Teodor: Pikeman L3, EXP 0; 1: Iron Lance +1 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L3, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L3, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L3, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L1, EXP 82; 1: Radiance 5/5, 2: Salve 8/8
-  Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
-  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Ansgar: Outrider L3, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Keziah: Reaver L3, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L3, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 > keep
 Rooms: beds: 10/14; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 1 of 2
@@ -2810,12 +2818,12 @@ c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group wei
 d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
 a  brigand-1        Brigand L2 reaver          3,3    hp 22/22  Forest  group wood, guard, asleep
 A  captain          Alder Fenn L1 cadet        1,6    hp 22/22  Plain  captain
-E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
-G  keziah           Keziah L1 reaver           0,6    hp 23/23  Plain
-C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
-D  pell             Pell L2 adept              0,5    hp 17/17  Plain
+E  dunstan          Dunstan L3 bulwark         0,7    hp 24/24  Plain
+G  keziah           Keziah L3 reaver           0,6    hp 24/24  Plain
+C  ottilie          Ottilie L3 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L3 adept              0,5    hp 17/17  Plain
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
-B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
+B  teodor           Teodor L3 pikeman          1,5    hp 22/22  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies

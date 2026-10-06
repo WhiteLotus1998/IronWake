@@ -474,7 +474,9 @@ public class SideMapCliTests
     /// fallen and one Recall, then the Field won on turn 11 with Keziah turned on turn 1 and the
     /// Sworn Captain killed on his fort. The boss's off-fort shuttle on turns 5 to 10 was issue 1138:
     /// replayed loose under it, he holds 18,6 from turn 5 to turn 9 and comes off it on turn 10 only
-    /// to strike Teodor, so the journaled line no longer replays strictly past turn 5.
+    /// to strike Teodor, so the journaled line no longer replays strictly past turn 5. Under the levy
+    /// floor (issue 1164) the camp after Brackwater drills the levy to L7, the replay drifts further,
+    /// and he never comes off at all; what stays pinned is that he leaves his fort only to strike.
     /// </summary>
     [Fact]
     public void TheJournaledColdDrakeWardenChairNowFindsTheBossHoldingHisFort()
@@ -498,7 +500,10 @@ public class SideMapCliTests
                 Assert.Contains("Sworn Captain waits\n", phase);
             }
 
-            Assert.Contains("Sworn Captain moves 18,6 -> 16,6 via 17,6\nenemy: attack sworn_captain-1 teodor\n", field);
+            foreach (var move in field.Split('\n').Select((line, at) => (line, at)).Where(l => l.line.StartsWith("Sworn Captain moves", StringComparison.Ordinal)))
+            {
+                Assert.StartsWith("enemy: attack sworn_captain-1 ", field.Split('\n')[move.at + 1]);
+            }
         }
         finally
         {

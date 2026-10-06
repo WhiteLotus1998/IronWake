@@ -594,8 +594,14 @@ public sealed class CampaignSession
             }
 
             var before = _record;
-            _record = _record.AfterBattle(battle.State, _content);
+            var fought = _record.Fought(battle.State, _content);
+            _record = fought.Drill(_content);
             WriteEvent(WonLine(before, _record, battle.State, _content));
+            foreach (var drilled in DrillLines(fought, _content))
+            {
+                WriteEvent(drilled);
+            }
+
             foreach (var grown in DrakesGrown(before, _record))
             {
                 WriteEvent(grown);
@@ -1881,6 +1887,17 @@ public sealed class CampaignSession
         var names = UnitNames.Of(record, content);
         var why = record.CompanyFull(content) ? $"company full ({CampaignRecord.CompanyCap})" : "no bed free";
         return record.TurnedAway(content).Select(id => $"{why}: {names[id]} will not join").ToList();
+    }
+
+    /// <summary>
+    /// One rules line per levy member the camp's floor raises (issue 1164, round 391), printed after a
+    /// won battle: <c>&lt;name&gt; drilled with the levy: L2 -&gt; L6.</c> <paramref name="record"/> is
+    /// the record before the drill (<see cref="CampaignRecord.Fought"/>).
+    /// </summary>
+    public static IReadOnlyList<string> DrillLines(CampaignRecord record, GameContent content)
+    {
+        var names = UnitNames.Of(record, content);
+        return record.Drills(content).Select(d => $"{names[d.Id]} drilled with the levy: L{d.From} -> L{d.To}.").ToList();
     }
 
     /// <summary>

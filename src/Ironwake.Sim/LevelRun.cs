@@ -418,7 +418,9 @@ public static class LevelRun
     /// <summary>
     /// Round 389's read after map <see cref="VerdictMap"/>: the bar is p50 1 non-captain at L7 and rank C on the
     /// paying line, the ceiling p50 0 on the even chair, and a pass that leaves the captain's p50 below
-    /// <see cref="Threshold"/> reopens the curve.
+    /// <see cref="Threshold"/> reopens the curve. Round 391 (issue 1164) names the next moves: a bar
+    /// that still fails with the levy floor in sends a chip-then-finish chair before lever 2, and a
+    /// broken ceiling steps the floor's offset to three.
     /// </summary>
     public static string FocusedVerdict(IReadOnlyList<IReadOnlyList<Member>> even, IReadOnlyList<IReadOnlyList<Member>> paying)
     {
@@ -432,8 +434,8 @@ public static class LevelRun
         var captain = Percentile(paying.Select(c => c.FirstOrDefault(m => m.Captain)?.Level ?? 0), 0.5);
         var bar = P50(paying) >= 1
             ? captain >= Threshold ? $"the bar passes (paying p50 {P50(paying)} at L7+C, captain p50 L{captain}); a door has to be fed" : $"the bar passes at p50 {P50(paying)} but the captain is at p50 L{captain}; the curve reopens"
-            : "the bar fails (paying p50 0 at L7+C); the first lever is the joins' levels and ranks";
-        var ceiling = P50(even) == 0 ? "the ceiling holds (even p50 0)" : $"the ceiling is broken (even p50 {P50(even)})";
+            : "the bar fails (paying p50 0 at L7+C) on the levy floor; next a chip-then-finish chair, before lever 2 (round 391)";
+        var ceiling = P50(even) == 0 ? "the ceiling holds (even p50 0)" : $"the ceiling is broken (even p50 {P50(even)}); step the levy floor to less three (round 391)";
         return head + bar + "; " + ceiling;
     }
 

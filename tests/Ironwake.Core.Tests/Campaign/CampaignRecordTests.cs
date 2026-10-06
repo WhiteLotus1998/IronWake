@@ -244,8 +244,9 @@ public class CampaignRecordTests
             ? u with { Unit = u.Unit with { Exp = 40, Inventory = new Inventory(ValueList<ItemStack>.Of(new ItemStack("iron_sword", 31), new ItemStack("field_dressing", 1))) } }
             : u);
 
-        var after = record.AfterBattle(end, Content);
+        var after = record.Fought(end, Content);
 
+        Assert.Equal(after.Drill(Content), record.AfterBattle(end, Content));
         Assert.Equal(3, after.MapIndex);
         Assert.Equal(record.Purse + 800, after.Purse);
         Assert.Equal(40, after.Find("wren")!.Exp);

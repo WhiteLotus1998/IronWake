@@ -1,0 +1,31 @@
+# issue 1164: --levels --focused (Release, 200 runs) with the levy floor (levyFloor 2) on branch issue/1164-levy-floor over main after #1163: the same three chairs, seeds, retries and permadeath-off campaign as levels-focused-1157.txt. "After map 8" is the record after map 8's win, so it includes map 9's camp drill (floor L7). Elapsed 18m 36s.
+levels --focused: 200 runs, three chairs over the same seeds, retries and campaign; the fed unit is teodor
+  even (the ceiling): the lowest level that takes a kill at no lower kill chance and no more exposure; kills handed 262
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 8 brackwater_cut: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 6 p75 6, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 2, the closest form refuses ranks.axe 2
+    map 9 the_field: companies 82, non-captains at L7+C p50 1 p75 1, L6+C p50 1 p75 1, L5+C p50 1 p75 1; L7 alone p50 7 p75 7, rank C alone p50 1 p75 1; meets a form p50 1 p75 1
+      at L7+C meeting no form: 2, the closest form refuses ranks.axe 2
+  guarded: every kill teodor can take at no lower kill chance and no more exposure; kills handed 19, offered and refused: no tile 448, kill chance 577, exposure 4, forecast death 0
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 8 brackwater_cut: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 6 p75 6, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 9 the_field: companies 82, non-captains at L7+C p50 0 p75 1, L6+C p50 0 p75 1, L5+C p50 0 p75 1; L7 alone p50 7 p75 7, rank C alone p50 0 p75 1; meets a form p50 0 p75 1
+      at L7+C meeting no form: 0
+  paying: every kill teodor can take that still kills on a hit, at most 15 points of kill chance below the planned attacker's, at most 1 more enemy in reach, no forecast death; kills handed 25, offered and refused: no tile 451, kill chance 452, exposure 24, forecast death 105
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 8 brackwater_cut: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 6 p75 6, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 1, the closest form refuses ranks.axe 1
+    map 9 the_field: companies 82, non-captains at L7+C p50 0 p75 1, L6+C p50 0 p75 1, L5+C p50 0 p75 1; L7 alone p50 7 p75 7, rank C alone p50 0 p75 1; meets a form p50 0 p75 1
+      at L7+C meeting no form: 1, the closest form refuses ranks.axe 1
+  price (paying, through map 8, 82 runs): captain level p50 7 p75 7; teodor level p50 7 p75 7, main-weapon rank points p50 11 p75 19; kills handed p50 0 p75 0, given up p50 0 p75 0 (total 0); HP lost in enemy phases p50 73 p75 79, falls 243
+  verdict (round 389, after map 8): the bar fails (paying p50 0 at L7+C) on the levy floor; next a chip-then-finish chair, before lever 2 (round 391); the ceiling holds (even p50 0)
