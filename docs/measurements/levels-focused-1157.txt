@@ -1,0 +1,31 @@
+# issue 1157: --levels --focused (Release, 200 runs) on main after #1162: three chairs over the same seeds, retries and permadeath-off campaign as levels-even-1150.txt, one thread each; the even line matches levels-even-1150.txt number for number. The fed unit's refusals count offers on won battles only, by the first clause that refused each (no tile: none in range, seen and killing on a hit at any chance). Elapsed 17m 31s.
+levels --focused: 200 runs, three chairs over the same seeds, retries and campaign; the fed unit is teodor
+  even (the ceiling): the lowest level that takes a kill at no lower kill chance and no more exposure; kills handed 281
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 79, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 1, the closest form refuses ranks.axe 1
+    map 8 brackwater_cut: companies 79, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 2, the closest form refuses ranks.axe 2
+    map 9 the_field: companies 79, non-captains at L7+C p50 0 p75 0, L6+C p50 1 p75 1, L5+C p50 1 p75 1; L7 alone p50 0 p75 0, rank C alone p50 1 p75 1; meets a form p50 0 p75 0
+      at L7+C meeting no form: 2, the closest form refuses ranks.axe 2
+  guarded: every kill teodor can take at no lower kill chance and no more exposure; kills handed 21, offered and refused: no tile 449, kill chance 560, exposure 2, forecast death 0
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 81, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 8 brackwater_cut: companies 81, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 1, the closest form refuses ranks.axe 1
+    map 9 the_field: companies 81, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 1, L5+C p50 0 p75 1; L7 alone p50 0 p75 0, rank C alone p50 0 p75 1; meets a form p50 0 p75 0
+      at L7+C meeting no form: 1, the closest form refuses ranks.axe 1
+  paying: every kill teodor can take that still kills on a hit, at most 15 points of kill chance below the planned attacker's, at most 1 more enemy in reach, no forecast death; kills handed 28, offered and refused: no tile 464, kill chance 443, exposure 22, forecast death 100
+    map 6 ironwake_raid: companies 82, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 7 sallow_grange: companies 81, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 8 brackwater_cut: companies 81, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 0; L7 alone p50 0 p75 0, rank C alone p50 0 p75 0; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+    map 9 the_field: companies 81, non-captains at L7+C p50 0 p75 0, L6+C p50 0 p75 0, L5+C p50 0 p75 1; L7 alone p50 0 p75 0, rank C alone p50 0 p75 1; meets a form p50 0 p75 0
+      at L7+C meeting no form: 0
+  price (paying, through map 8, 81 runs): captain level p50 7 p75 7; teodor level p50 1 p75 2, main-weapon rank points p50 11 p75 19; kills handed p50 0 p75 0, given up p50 0 p75 0 (total 0); HP lost in enemy phases p50 72 p75 79, falls 251
+  verdict (round 389, after map 8): the bar fails (paying p50 0 at L7+C); the first lever is the joins' levels and ranks; the ceiling holds (even p50 0)
