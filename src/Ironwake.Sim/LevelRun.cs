@@ -66,6 +66,9 @@ public static class LevelRun
         /// <summary>Every attack the fed unit made on the map, whoever planned it (<see cref="FocusedPlayer.Combats"/>, issue 1167).</summary>
         public int Combats { get; init; }
 
+        /// <summary>The chips the chair played on the map (<see cref="FocusedPlayer.Chips"/>, issue 1178).</summary>
+        public int Chips { get; init; }
+
         /// <summary>Where the fed unit's main-weapon rank points went on the map (issue 1170, <see cref="RankTrace"/>).</summary>
         public RankTrace Rank { get; init; } = RankTrace.Benched;
     }
@@ -259,7 +262,7 @@ public static class LevelRun
                     else
                     {
                         handed += player switch { EvenPlayer chair => chair.Handed, FocusedPlayer chair => chair.Handed, _ => 0 };
-                        price = player is FocusedPlayer fed ? new Price(fed.Handed, fed.GivenUp, hpLost, falls) { Refused = fed.Refused.ToDictionary(), Strikes = fed.Strikes, Combats = fed.Combats, Rank = trace } : null;
+                        price = player is FocusedPlayer fed ? new Price(fed.Handed, fed.GivenUp, hpLost, falls) { Refused = fed.Refused.ToDictionary(), Strikes = fed.Strikes, Combats = fed.Combats, Chips = fed.Chips, Rank = trace } : null;
                         won = end;
                         struck = tally;
                         camp = Read(start, end, content);
@@ -543,7 +546,7 @@ public static class LevelRun
     /// handed and given up (each p50 p75 per run, then its total over those runs; issue 1177), the HP the fed unit
     /// lost in enemy phases (p50 p75 per run), and his falls in all.
     /// The striking line (issue 1167) adds the fed unit's combats per map and the strikes the chair handed him
-    /// per map, each p50 p75 over every won map through it.
+    /// per map, each p50 p75 over every won map through it; the chipping line (issue 1178) adds its chips per map.
     /// </summary>
     public static string PriceLine(IReadOnlyList<Run> runs, string line = "paying")
     {
@@ -563,8 +566,9 @@ public static class LevelRun
         var after = reached.Select(x => x.Run.Companies[x.At]).ToList();
         var captain = after.Select(c => c.FirstOrDefault(m => m.Captain)?.Level ?? 0);
         var fed = after.Select(c => c.FirstOrDefault(m => m.Id == FocusedPlayer.Fed)).ToList();
-        var perMap = line == "striking"
+        var perMap = line is "striking" or "chipping"
             ? $"; per map, combats {Pair(through.SelectMany(p => p.Select(x => x.Combats)))}, strikes handed {Pair(through.SelectMany(p => p.Select(x => x.Strikes)))}"
+                + (line == "chipping" ? $", chips {Pair(through.SelectMany(p => p.Select(x => x.Chips)))}" : "")
             : "";
         return $"  price ({line}, through map {VerdictMap}, {reached.Count} runs): captain level {Pair(captain)}; {FocusedPlayer.Fed} level {Pair(fed.Select(m => m?.Level ?? 0))}, main-weapon rank points {Pair(fed.Select(m => m?.MainRank ?? 0))}; kills handed {Pair(through.Select(p => p.Sum(x => x.Handed)))} (total {through.Sum(p => p.Sum(x => x.Handed))}), given up {Pair(through.Select(p => p.Sum(x => x.GivenUp)))} (total {through.Sum(p => p.Sum(x => x.GivenUp))}); HP lost in enemy phases {Pair(through.Select(p => p.Sum(x => x.HpLost)))}, falls {through.Sum(p => p.Sum(x => x.Falls))}{perMap}";
     }
@@ -673,6 +677,78 @@ public static class LevelRun
             Percentile(alone, 0.5),
             picks.Count == 0 ? 0 : Percentile(picks.Select(m => m.Level), 0.5),
             picks.Count == 0 ? 0 : Percentile(picks.Select(m => m.MainRank), 0.5));
+    }
+
+    /// <summary>
+    /// The chip's read (issue 1178, round 395): the striking line and the chipping line over the same seeds, each
+    /// with its kills handed, chips and the kills offered and refused by reason over every won map; the chipping
+    /// line's price through map <see cref="VerdictMap"/> and its handed split; the fed unit's level and points after
+    /// it on the chipping line; his own points on the even chair; last, the read the Table agreed before the
+    /// numbers (<see cref="ChipVerdict"/>).
+    /// </summary>
+    public static IEnumerable<string> ChipLines(IReadOnlyList<Run> even, IReadOnlyList<Run> striking, IReadOnlyList<Run> chipping)
+    {
+        static string Pair(IEnumerable<int> values)
+        {
+            var list = values.ToList();
+            return $"p50 {Percentile(list, 0.5)} p75 {Percentile(list, 0.75)}";
+        }
+
+        static Dictionary<FocusedPlayer.Refusal, int> Refusals(IReadOnlyList<Run> runs) =>
+            runs.SelectMany(r => r.Prices).SelectMany(p => p.Refused).GroupBy(kv => kv.Key).ToDictionary(g => g.Key, g => g.Sum(kv => kv.Value));
+
+        yield return $"levels --chip: {chipping.Count} runs, the striking chair with and without the chip and the even chair over the same seeds (issue 1178, round 395); the fed unit is {FocusedPlayer.Fed}";
+        foreach (var (label, runs) in new[] { ("striking", striking), ("chipping", chipping) })
+        {
+            var refused = Refusals(runs);
+            yield return $"  {label}, every won map: kills handed {runs.Sum(r => r.Handed)}, chips {runs.Sum(r => r.Prices.Sum(p => p.Chips))}; offered and refused: no tile {refused.GetValueOrDefault(FocusedPlayer.Refusal.NoTile)}, kill chance {refused.GetValueOrDefault(FocusedPlayer.Refusal.Chance)}, exposure {refused.GetValueOrDefault(FocusedPlayer.Refusal.Exposure)}, forecast death {refused.GetValueOrDefault(FocusedPlayer.Refusal.ForecastDeath)}";
+        }
+
+        yield return PriceLine(chipping, "chipping");
+        yield return HandedSplit(chipping, "chipping");
+        var level = AfterVerdict(chipping).Select(m => m?.Level ?? 0).ToList();
+        var points = AfterVerdict(chipping).Select(m => m?.MainRank ?? 0).ToList();
+        var baseline = AfterVerdict(striking).Select(m => m?.Level ?? 0).ToList();
+        yield return $"  chipping, after map {VerdictMap} ({level.Count} runs): {FocusedPlayer.Fed} level {Pair(level)}, points kept {Pair(points)}; striking without the chip, level {Pair(baseline)} ({baseline.Count} runs)";
+        var evenFed = AfterVerdict(even).Where(m => m is not null).Select(m => m!.MainRank).ToList();
+        yield return $"  even, after map {VerdictMap} ({evenFed.Count} companies with {FocusedPlayer.Fed}): {FocusedPlayer.Fed}'s own points {Pair(evenFed)}";
+        var before = Refusals(striking);
+        var after = Refusals(chipping);
+        yield return ChipVerdict(
+            level.Count == 0 ? 0 : Percentile(level, 0.5),
+            before.GetValueOrDefault(FocusedPlayer.Refusal.Chance),
+            after.GetValueOrDefault(FocusedPlayer.Refusal.Chance),
+            before.GetValueOrDefault(FocusedPlayer.Refusal.NoTile),
+            after.GetValueOrDefault(FocusedPlayer.Refusal.NoTile));
+    }
+
+    /// <summary>The fed unit's record entry after map <see cref="VerdictMap"/> on each run that won it, null where he was not in the company.</summary>
+    private static List<Member?> AfterVerdict(IReadOnlyList<Run> runs) =>
+        runs.Select(r => (Run: r, At: r.Maps.ToList().FindIndex(m => m.Map == VerdictMap)))
+            .Where(x => x.At >= 0 && x.At < x.Run.Companies.Count)
+            .Select(x => x.Run.Companies[x.At].FirstOrDefault(m => m.Id == FocusedPlayer.Fed))
+            .ToList();
+
+    /// <summary>
+    /// Round 395's read of the chip, agreed before the numbers: the bar passes when the fed unit is at p50
+    /// <see cref="Threshold"/> after map <see cref="VerdictMap"/> on the chipping line. Failing it, kill-chance
+    /// refusals that collapse (issue 1178: to half the striking line's or fewer) while no-tile refusals do not
+    /// read as positioning, which a hand play answers, not a fifth chair; otherwise the cold hand play feeding him
+    /// through map 8 decides the bar. Nothing is tuned to make a chair pass.
+    /// </summary>
+    public static string ChipVerdict(int fedLevelP50, int chanceBefore, int chanceAfter, int noTileBefore, int noTileAfter)
+    {
+        var head = $"  verdict (round 395, after map {VerdictMap}): ";
+        if (fedLevelP50 >= Threshold)
+        {
+            return head + $"the bar passes on the chip ({FocusedPlayer.Fed} p50 L{fedLevelP50}); the cold hand play feeding him through map {VerdictMap} confirms it";
+        }
+
+        static bool Collapsed(int before, int after) => after * 2 <= before;
+        var refusals = $"kill chance {chanceBefore} to {chanceAfter}, no tile {noTileBefore} to {noTileAfter}";
+        return Collapsed(chanceBefore, chanceAfter) && !Collapsed(noTileBefore, noTileAfter)
+            ? head + $"the bar fails ({FocusedPlayer.Fed} p50 L{fedLevelP50}, needs L{Threshold}); kill-chance refusals collapse and no-tile refusals do not ({refusals}): positioning, the cold hand play decides the bar"
+            : head + $"the bar fails ({FocusedPlayer.Fed} p50 L{fedLevelP50}, needs L{Threshold}; {refusals}); the cold hand play feeding him through map {VerdictMap} decides the bar";
     }
 
     /// <summary>The claimant the Sim's campaigns pick at the branch (<see cref="SimPick.Claimant"/>), or the empty id when no map offers one.</summary>
