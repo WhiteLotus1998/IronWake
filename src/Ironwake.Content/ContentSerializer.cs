@@ -1012,6 +1012,11 @@ public static class ContentSerializer
             writer.WriteString("school", school.Label());
         }
 
+        if (weapon.Rider is { } rider)
+        {
+            writer.WriteString("rider", SchoolRider.Label(rider));
+        }
+
         if (weapon.CritAgainst.Count > 0)
         {
             writer.WriteStartArray("critAgainst");

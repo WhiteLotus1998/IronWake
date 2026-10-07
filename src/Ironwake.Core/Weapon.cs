@@ -104,6 +104,13 @@ public sealed record Weapon(
     /// </summary>
     public MagicSchool? School { get; init; }
 
+    /// <summary>
+    /// The rider this tome opts into (issue 1250, DECISIONS/0298), or null for a plain tome. The kind
+    /// is named here; its amount and phases are the school's (<see cref="GameContent.RiderOf"/>), so a
+    /// school's first tome stays plain while a found grimoire of the same school carries the rider.
+    /// </summary>
+    public RiderKind? Rider { get; init; }
+
     public bool IsMagic => Type.IsMagic();
 
     public bool InRange(int distance) => distance >= MinRange && distance <= MaxRange;

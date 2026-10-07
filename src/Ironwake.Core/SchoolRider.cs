@@ -11,8 +11,8 @@ public enum RiderKind
 }
 
 /// <summary>
-/// A school's rider, from <c>rules.json</c>'s <c>schools</c> block (issue 1243): every tome of the
-/// school carries it (<see cref="GameContent.RiderOf"/>). <paramref name="Amount"/> is how hard it
+/// A school's rider, from <c>rules.json</c>'s <c>schools</c> block (issue 1243): the shape a tome
+/// of the school takes when it names the kind (issue 1250, <see cref="GameContent.RiderOf"/>). <paramref name="Amount"/> is how hard it
 /// bites and <paramref name="Phases"/> for how many of the struck side's phases.
 /// </summary>
 public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)

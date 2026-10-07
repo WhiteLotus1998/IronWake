@@ -63,6 +63,7 @@ public static class ContentLoader
         var (units, cast, signatures, pronouns) = ParseUnits(files.Units, classes, weapons, items, abilities);
         ValidateSignatureItems(files, weapons, abilities, cast);
         var (wakeRadius, rivalry, difficulties, riders) = ParseRules(files.Rules);
+        ValidateTomeRiders(files, weapons, riders);
         var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast) : CampaignRules.None;
         ValidateUniqueClasses(files, classes, cast, campaign);
         ValidateSameSexRomance(files, campaign, pronouns);
@@ -165,6 +166,31 @@ public static class ContentLoader
     /// weapon carries no <c>price</c>, since a bound item is never sold or repaired; an art's
     /// <c>item</c> names a weapon of the art's own type.
     /// </summary>
+    /// <summary>
+    /// A tome that names a rider (issue 1250) names the kind its school's rider has in rules.json; the
+    /// school supplies the amount and phases, so a tome can opt in but never invent its own numbers.
+    /// </summary>
+    private static void ValidateTomeRiders(ContentFiles files, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<MagicSchool, SchoolRider> riders)
+    {
+        foreach (var weapon in weapons.Values)
+        {
+            if (weapon is not { School: { } school, Rider: { } kind })
+            {
+                continue;
+            }
+
+            if (!riders.TryGetValue(school, out var rider))
+            {
+                throw new ContentException(files.Weapons.Name, weapon.Id, "rider", $"'{SchoolRider.Label(kind)}' but the {school.Label()} school has no rider in {ContentFiles.RulesName}");
+            }
+
+            if (rider.Kind != kind)
+            {
+                throw new ContentException(files.Weapons.Name, weapon.Id, "rider", $"'{SchoolRider.Label(kind)}' but the {school.Label()} school's rider is '{SchoolRider.Label(rider.Kind)}'");
+            }
+        }
+    }
+
     private static void ValidateSignatureItems(
         ContentFiles files, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Ability> abilities, IReadOnlyList<Unit> cast)
     {
@@ -1802,8 +1828,8 @@ public static class ContentLoader
     /// <summary>
     /// The schools block of rules.json (issue 1243): an object of school (<c>fire</c>, <c>ice</c>,
     /// <c>lightning</c>, <c>earth</c>) to an object with an optional <c>rider</c>: a <c>kind</c> Core
-    /// knows (<c>burn</c>), an <c>amount</c> and a count of <c>phases</c>, each at least 1. Every tome
-    /// of the school carries its rider (<see cref="GameContent.RiderOf"/>).
+    /// knows (<c>burn</c>), an <c>amount</c> and a count of <c>phases</c>, each at least 1. A tome of
+    /// the school carries the rider only when it names its kind (issue 1250, <see cref="GameContent.RiderOf"/>).
     /// </summary>
     private static ImmutableSortedDictionary<MagicSchool, SchoolRider> ParseSchoolRiders(EntryNode node)
     {
@@ -2715,6 +2741,18 @@ public static class ContentLoader
                 throw node.Error("school", "only a Lore (reason) tome belongs to a school");
             }
 
+            RiderKind? rider = null;
+            if (node.OptionalString("rider") is { } riderName)
+            {
+                if (school is null)
+                {
+                    throw node.Error("rider", "only a tome with a school names a rider");
+                }
+
+                rider = System.Enum.GetValues<RiderKind>().Cast<RiderKind?>().FirstOrDefault(k => SchoolRider.Label(k!.Value) == riderName)
+                    ?? throw node.Error("rider", $"unknown rider kind '{riderName}'; expected " + string.Join(", ", System.Enum.GetValues<RiderKind>().Select(SchoolRider.Label)));
+            }
+
             var heirloom = node.Has("heirloom") ? ReadHeirloom(node, heals || type.IsMagic()) : null;
             var voice = node.Has("voice") ? ReadVoice(node) : null;
 
@@ -2747,6 +2785,7 @@ public static class ContentLoader
                 CritAgainst = ValueList<MovementType>.From(critAgainst),
                 CritBonus = critBonus,
                 School = school,
+                Rider = rider,
             });
         }
 
