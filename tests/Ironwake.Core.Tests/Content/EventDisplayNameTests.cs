@@ -44,6 +44,16 @@ public class EventDisplayNameTests
     }
 
     [Fact]
+    public void AChestLineSaysWhichTomeTheOpenerCannotWieldInThePackAndTheWagon()
+    {
+        var shorts = ValueList<WieldShort>.Of(new WieldShort("cinder", "fire school"), new WieldShort("bolt", "Mag 8"));
+
+        Assert.Equal(
+            "Wren opens the chest at 2,1: Cinder (cannot wield: fire school), Steel Sword\n  To the wagon, kept if the map is won: Bolt (cannot wield: Mag 8)",
+            Line(new ChestOpened("wren", new Coord(2, 1), ValueList<string>.Of("cinder", "steel_sword"), ValueList<string>.Of("bolt"), shorts)));
+    }
+
+    [Fact]
     public void AKeepsakeOfSomeoneOutsideTheCastFallsBackToTheId()
     {
         Assert.Equal("Iron Sword (stranger's) lies at 1,1", Line(new KeepsakeLeft("stranger", "iron_sword", new Coord(1, 1))));

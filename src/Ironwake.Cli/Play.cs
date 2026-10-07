@@ -3277,13 +3277,18 @@ public sealed class PlaySession
 
     /// <summary>
     /// The console's lines for an opened chest (issue 679): what went to the pack, then, when
-    /// anything did not fit, what went to the wagon, collected only if the map is won.
+    /// anything did not fit, what went to the wagon, collected only if the map is won. A tome or
+    /// grimoire the opener cannot wield is still taken and says why (issue 1285), so a chest is
+    /// never a dead click: <c>Cinder (cannot wield: fire school)</c>.
     /// </summary>
     internal static string ChestLine(ChestOpened c, UnitNames names, GameContent content)
     {
-        var pack = c.ItemIds.Count == 0 ? "nothing fits in the pack" : string.Join(", ", c.ItemIds.Select(content.ItemName));
+        string Name(string id) =>
+            c.CannotWield.FirstOrDefault(s => s.ItemId == id) is { } shortOf ? $"{content.ItemName(id)} (cannot wield: {shortOf.Why})" : content.ItemName(id);
+
+        var pack = c.ItemIds.Count == 0 ? "nothing fits in the pack" : string.Join(", ", c.ItemIds.Select(Name));
         var line = $"{names[c.UnitId]} opens the chest at {c.At}: {pack}";
-        return c.Wagon.Count == 0 ? line : line + $"\n  To the wagon, kept if the map is won: {string.Join(", ", c.Wagon.Select(content.ItemName))}";
+        return c.Wagon.Count == 0 ? line : line + $"\n  To the wagon, kept if the map is won: {string.Join(", ", c.Wagon.Select(Name))}";
     }
 
     private static string AbilityName(string id, GameContent content) =>

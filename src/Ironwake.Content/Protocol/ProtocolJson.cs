@@ -154,6 +154,20 @@ public static class ProtocolJson
                     WriteStrings(w, "wagon", c.Wagon);
                 }
 
+                if (c.CannotWield.Count > 0)
+                {
+                    w.WriteStartArray("cannotWield");
+                    foreach (var shortOf in c.CannotWield)
+                    {
+                        w.WriteStartObject();
+                        w.WriteString("item", shortOf.ItemId);
+                        w.WriteString("why", shortOf.Why);
+                        w.WriteEndObject();
+                    }
+
+                    w.WriteEndArray();
+                }
+
                 break;
             case KeepsakeTaken k:
                 w.WriteString("unit", k.UnitId);

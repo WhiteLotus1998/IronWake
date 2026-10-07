@@ -1767,7 +1767,11 @@ public static class Resolver
             }
         }
 
-        events.Add(new ChestOpened(unit.Id, chest.At, ValueList<string>.From(packed), ValueList<string>.From(wagon)));
+        var unitClass = content.Class(unit.Unit.ClassId);
+        var cannotWield = chest.Items.Distinct()
+            .Select(id => content.Weapons.TryGetValue(id, out var weapon) && MagicSchoolExtensions.TomeShort(unit.Unit, unitClass, weapon) is { } why ? new WieldShort(id, why) : null)
+            .OfType<WieldShort>();
+        events.Add(new ChestOpened(unit.Id, chest.At, ValueList<string>.From(packed), ValueList<string>.From(wagon), ValueList<WieldShort>.From(cannotWield)));
         var opener = unit with
         {
             Unit = unit.Unit with { Inventory = inventory },
