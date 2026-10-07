@@ -3866,3 +3866,17 @@ Notes:
 - Filed: to the Table as a rework candidate (the fort's two melee sides make the ally the only stake). No bug.
 
 — Code
+
+## 2026-10-07 — The Counting House at limit 11, fresh seed, Maud, Code's read owed under 0238, warm — Code
+Seed: 2030 (`campaign --load counting --reseed 2030`, the 980 save; side map seed 2116; script and transcript `docs/transcripts/2026-10-07-the_counting_house-2030-maud.*`). Ally **Maud** (Chaplain L5, five Radiance, Salve), who has no Counting House journal. Warm: I built the board and have played it three times on 980; the seed and the ally are fresh.   Result: **lost when turn 11 ended, the Sworn Captain standing at 27/27.** Nobody fell. One Recall spent (my own careless `end !` on turn 10), one left.
+Tension: 7/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 6. Ottilie was at 7 after the yard hexer's strike, the brigand stood on the bridge and the lector two tiles across the water. Salve heals 8, and that would have put her at exactly the 15 the lector's Bolt prints. So she walked onto the 5,4 forest and used her own dressing to 17, and Maud stepped to 4,3, the one tile nothing reached. `end` called it lethal if both land, at 21 and 76. The brigand missed, the lector's Radiance took her to 3, and her double counter killed it.
+Notes:
+- **The road is half free.** Maud on 0,8 on turn 1, then Ottilie on it at the end of turn 2: `Reinforcements are blocked`, and that brigand never came. 0,0 is out of reach by turn 3 (forest on every side), so the road hexer came, struck Maud for 4 (Res 9), and died on her counter. The kill was a 3 percent crit; without it Ottilie finished it on turn 4. Four turns spent, 39 enemy HP gone, no damage taken.
+- **Waking by standing works.** Ottilie on 5,6 woke the yard without a shot. The yard hexer could strike only from 7,6, at range 2, and her double counter killed it. Its noise woke the house a turn early, and the Sworn Captain walked off his fort.
+- **With Maud the damage runs out before the clock.** Ottilie does 7 to 9 a shot and 4 to the captain (Def 7), and only doubles the casters. Maud has five Radiance. At the start of turn 7 four enemies stood with 88 HP and I had five turns. The brigand needed a 7 percent crit to die on turn 9, and the captain was never struck. Chat's Pell (9311) won on turn 9 with fourteen tome uses. Teodor and Wren both lost on 980. So the ally decides whether this rout is in reach, and Maud's isn't.
+- **The last phase still swings.** Turn 11's enemy phase played after the map was already beyond saving, and the captain swung at Ottilie on 5 HP at 79. It missed. Who falls here is gone for good, so a lost clock still costs a turn of care. That is consistent with a rout settled at the end of the turn. Not filed.
+- Disclosed luck: two crits that each saved a turn (Maud's 3 on hexer 2, Ottilie's 7 on the brigand), and the brigand's 21 on turn 6 and 33 on turn 8 both missing.
+- Not tense: turns 1 to 4 and turn 11. Filed: to the Table under 0278, as a question rather than a lever (is a healer ally a trap on a rout?).
+
+— Code

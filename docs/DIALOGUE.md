@@ -33,13 +33,13 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). A crest mass freezing the Foreman is a solve (#1087); lever: the archer out of Pell's turn-5 reach.
 - **Saltmarsh Ford:** not tuned (0093, 0095).
 - **The Rookery (0208):** not passed; no lever before a cold chair.
-- **The Counting House (311 to 321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh-seed read gates.
+- **The Counting House (311 to 321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh read in (2030, Maud, lost; 441).
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
-- **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409): woken, the pair feeds the fort from its edge. #1210: fort and Maud south. 1710 (431): Maud safe west of the river from t2; if a cold chair agrees, the pair's lane reaches row 9.
-- **The First Shrine (406 to 433; 0283, 0304, 0306):** south start, limit 10; the loft archer wakes on the door's death (kept). **The altar is held** (`seize_hold: 1`). The archer takes it the phase the door falls (Critic 7070, 8/7/7). **Kept, no lever** (433): chairs journal that turn and the opener's tile; on phase 9 with a shot, the cheap lever (the objective names who holds the tile). 0306's criterion: the next chair to sprint for its own reasons; brigand-1 to 4,4 waits. Code 1950 7/7/7 (door t7 from 7,2); Chat (Ottilie) owed.
+- **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409): the pair feeds the fort from its edge. #1210: fort, Maud south. 1710 (431): Maud safe west of the river from t2; if a cold chair agrees, the pair's lane reaches row 9.
+- **The First Shrine (406 to 439; 0283, 0304, 0306):** south start, limit 10; the loft archer wakes on the door's death. **The altar is held** (`seize_hold: 1`); the archer takes it the phase the door falls. **Kept, no lever** (433): chairs journal that turn and the opener's tile; on phase 9 with a shot, the objective names who holds the tile. 0306's criterion: the next chair to sprint for its own reasons. Code 1950 the third clean read; Chat (Ottilie) owed.
 - **The Undercroft (431):** the middle wins (4,4 corks the stair); the lector is scenery off the north route. Held for a cold chair: his reach over the desk, or 13,4.
-- **The Lazar House (420 to 425):** the hexer is the price of not barring. **Held bars, waiting queue kept** (#1259, 0303): a bar holds while stood on, what it blocks waits, `east3` keeps both bars in reach turns 5, 6; 9,1 retired. `turn_limit: 5` (0305); bar advice is #1144's. Sim never bars.
-- **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158). The keep is the finale (0265); both in (407). Levers 0284 to 0287, 0293 shipped; range plus 2 parked. Fresh keep chair: is the bait a choice? Short on Cinder, not HP.
+- **The Lazar House (420 to 440):** held bars and the queue kept (#1259, 0303), limit 5 (0305); bar advice is #1144's. No lever before the Critic's cold chair (Pell or Wren on the north lane; journals whether that ally lives, and turns 3, 4). Ally dies on every line: the turn-5 hexer later or east; saved, surprise 4 or under: a turn-3, 4 change; 2,3 or 4,3 only if Maud's HP never mattered.
+- **The raid and the keep:** acceptance is play. The raid is never tuned for surprise (158). The keep is the finale (0265); both in (407). Levers 0284 to 0287, 0293 shipped; range plus 2 parked. Fresh keep chair: is the bait a choice?
 
 ## Experiments (state and kill criterion)
 

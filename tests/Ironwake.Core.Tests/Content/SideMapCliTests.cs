@@ -469,6 +469,37 @@ public class SideMapCliTests
         }
     }
 
+    /// <summary>
+    /// Code's fresh-seed read of Ottilie's quest 1 at limit 11 (reseeded to 2030 from the 980 save),
+    /// with Maud: a body on 0,8 at the end of turn 2 stops the road brigand for good, Maud's counter
+    /// kills the road hexer, and Ottilie's double counters kill the yard hexer and the lector. With
+    /// five Radiance the damage runs out first: turn 11 ends with the Sworn Captain unhit at 27,
+    /// the map lost and nobody fallen.
+    /// </summary>
+    [Fact]
+    public void TheJournaledMaudCountingHousePlayRunsOutOfDamageBeforeTheClock()
+    {
+        var script = Transcript("2026-10-07-the_counting_house-2030-maud.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-counting-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--reseed", "2030", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Reinforcements are blocked: a unit holds 0,8\n", output);
+            Assert.Contains("Lector falls at 7,4\n", output);
+            Assert.Contains("Lost because turn 11 ended and 1 enemy still stands.\n", output);
+            Assert.Contains("Side map ottilie_1 is lost: turn 11 passed; it opens again after the next map; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     [Fact]
     public void TheJournaledBurnedSchoolPlayEscapesWithTheGust()
     {
