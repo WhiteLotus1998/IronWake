@@ -113,6 +113,8 @@ Only `CritChance` is clamped. `CritAvoid` is not: a modifier (rivalry in 13.1 is
 
 **Items.** A unit's five slots hold weapons, spells, and consumables; the equipped weapon is the first slot holding a usable weapon that is not a healing spell, and an Attack may name another usable slot, which moves to the front so the counter uses it too; choosing costs nothing extra (issue 99). Consumables live in `items.json` (`id`, `name`, `heals`, `uses`); the first is the Field Dressing (heals 10, 3 uses), an original name, since the content standards forbid franchise names. Section 7's Item action uses one slot: a consumable heals its user and needs no target; a healing spell heals one ally within its range. Either spends a use and ends the action; a consumable at 0 leaves the inventory. Healing a unit already at full HP is refused, so no script burns a use on nothing, and the legal-command list offers an item use only where something would heal.
 
+**Schools (issue 1242, DECISIONS/0296; 0264, Lotus's schools ruling).** A Lore tome may carry a `school`: fire, ice, lightning or earth. Cinder is fire and Bolt lightning; Gust and the Commonplace are unschooled. A class names the schools it reaches in `schools`, an advanced form keeping its base's: the Adept reaches fire, ice and lightning, the Scholar those and earth, the Marshal and Commander fire and lightning. A schooled tome is wielded only in a class that reaches its school, on top of type and rank; the card names the school and a refusal names what the class reaches. Riders, primers and the Mag gate on grimoires follow (#1243 to #1246); new spells wait on Lotus (#1247).
+
 **Healing.** Faith heal = Mag / 2 + 5 + spell base. Healer gains 11 EXP per heal, +5 if the target was below 50%.
 
 ## 6. EXP

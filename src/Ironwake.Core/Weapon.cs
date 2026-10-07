@@ -97,6 +97,13 @@ public sealed record Weapon(
     /// <summary>The one line the item card prints for this weapon (issue 650); empty only in a weapon built outside the content files.</summary>
     public string Description { get; init; } = "";
 
+    /// <summary>
+    /// The school of Lore magic this tome belongs to (DECISIONS/0296), or null for an unschooled
+    /// tome and for every weapon that is not <see cref="WeaponType.Reason"/>. Only a unit whose
+    /// class reaches the school may wield it (<see cref="Unit.CanWield"/>).
+    /// </summary>
+    public MagicSchool? School { get; init; }
+
     public bool IsMagic => Type.IsMagic();
 
     public bool InRange(int distance) => distance >= MinRange && distance <= MaxRange;

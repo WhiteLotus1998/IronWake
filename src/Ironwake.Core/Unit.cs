@@ -85,11 +85,13 @@ public sealed record Unit(
     /// <summary>
     /// Whether this unit may equip <paramref name="weapon"/>: its class uses the type, its rank in the type
     /// reaches the weapon's, a healing spell is not of a type the class strikes with only (issue 704), and
-    /// anything else is not of a type the class heals with only (issue 706).
+    /// anything else is not of a type the class heals with only (issue 706), and a schooled tome's school is
+    /// one the class reaches (DECISIONS/0296).
     /// </summary>
     public bool CanWield(Weapon weapon, UnitClass unitClass) =>
         unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank
-        && (weapon.Heals ? unitClass.CanHealWith(weapon.Type) : unitClass.CanStrikeWith(weapon.Type));
+        && (weapon.Heals ? unitClass.CanHealWith(weapon.Type) : unitClass.CanStrikeWith(weapon.Type))
+        && (weapon.School is not { } school || unitClass.Reaches(school));
 
     private readonly int _level = Guard(Level, MinLevel, MaxLevel, nameof(Level));
     private readonly int _exp = Guard(Exp, 0, MaxExp, nameof(Exp));

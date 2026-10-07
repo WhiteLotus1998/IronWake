@@ -45,7 +45,7 @@ public class RenamePassTests
     public void TheWeaponLineAndTheCardPrintAccFirstThenPower()
     {
         Assert.StartsWith("Iron Bow, bow E. Acc 70, Power 5, Crit 0, ", ItemCard.Text(Content, "iron_bow"), StringComparison.Ordinal);
-        Assert.StartsWith("Cinder, lore E. Acc ", ItemCard.Text(Content, "cinder"), StringComparison.Ordinal);
+        Assert.StartsWith("Cinder, lore E, fire school. Acc ", ItemCard.Text(Content, "cinder"), StringComparison.Ordinal);
     }
 
     private const string Yard = """

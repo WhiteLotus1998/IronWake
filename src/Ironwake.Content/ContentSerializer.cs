@@ -881,6 +881,17 @@ public static class ContentSerializer
             writer.WriteBoolean("singleStrike", true);
         }
 
+        if (unitClass.Schools.Count > 0)
+        {
+            writer.WriteStartArray("schools");
+            foreach (var school in unitClass.Schools)
+            {
+                writer.WriteStringValue(school.Label());
+            }
+
+            writer.WriteEndArray();
+        }
+
         if (unitClass.Grants.Count > 0)
         {
             writer.WriteStartObject("grants");
@@ -977,6 +988,11 @@ public static class ContentSerializer
         if (weapon.FrozenIron)
         {
             writer.WriteBoolean("frozenIron", true);
+        }
+
+        if (weapon.School is { } school)
+        {
+            writer.WriteString("school", school.Label());
         }
 
         if (weapon.CritAgainst.Count > 0)
