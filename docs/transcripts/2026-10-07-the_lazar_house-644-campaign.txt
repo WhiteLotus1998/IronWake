@@ -1,0 +1,658 @@
+# Code, warm, The Lazar House inside the 644 full campaign (recruit, permadeath off), side map seed 667; Maud with Wren. Replays as: `ironwake-sim --campaign-script 644 --difficulty recruit --permadeath off --variant 44 --quest pell_1,maud_1,maud_2` up to its maud_1 quest line, then this play.
+> quest maud_1 wren
+-- The Lazar House --
+The keeper at Sorrel Bend has stopped writing. Maud's order kept the
+lazar house there until the armistice, then called its sisters home and
+left the sick with him. Maud packs the basin. "The carts come at dusk.
+Nobody strips this door till then. You won't be thanked."
+
+(Hold out five turns. The lanes in are announced. A unit that ends its
+move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane
+while it stays there; what the bar blocks waits behind it and comes
+through, one a turn, once the bar is left. The ford south cannot be
+barred.)
+
+Side map: The Lazar House, seed 667
+Maud goes with Wren. This map is lost if Maud falls; who falls here comes back wounded.
+  when one of yours stops on 8,1: 8,0 becomes wall while one of yours stays on 8,1; it gives way when 8,1 is left.
+  when one of yours stops on 10,4: 11,4 becomes wall while one of yours stays on 10,4; it gives way when 10,4 is left.
+  turn 2, enemy phase: a brigand arrives at 8,0 (aggressive). A unit or a wall on 8,0 holds it back, and it lands at the first enemy phase that starts with 8,0 open.
+  turn 2, enemy phase: a soldier arrives at 11,4 (aggressive). A unit or a wall on 11,4 holds it back, and it lands at the first enemy phase that starts with 11,4 open.
+  turn 3, enemy phase: an archer arrives at 6,7 (aggressive). A unit or a wall on 6,7 holds it back, and it lands at the first enemy phase that starts with 6,7 open.
+  turn 3, enemy phase: a hexer arrives at 8,0 (aggressive). A unit or a wall on 8,0 holds it back, and it lands at the first enemy phase that starts with 8,0 open.
+  turn 4, enemy phase: a brigand arrives at 11,4 (aggressive). A unit or a wall on 11,4 holds it back, and it lands at the first enemy phase that starts with 11,4 open.
+  turn 5, enemy phase: a brigand arrives at 6,7 (aggressive). A unit or a wall on 6,7 holds it back, and it lands at the first enemy phase that starts with 6,7 open.
+  turn 5, enemy phase: an archer arrives at 11,2 (aggressive). A unit or a wall on 11,2 holds it back, and it lands at the first enemy phase that starts with 11,2 open.
+Objective: Hold out until the end of turn 5. Maud must survive.
+The Lazar House  turn 1 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 ...B.=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 16/16  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 20/20  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  wren             Wren L1 cadet              3,4    hp 20/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move wren 3,3
+Wren moves 3,4 -> 3,3
+The Lazar House  turn 1 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#B#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 16/16  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 20/20  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  wren             Wren L1 cadet              3,3    hp 20/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait wren
+Wren waits
+The Lazar House  turn 1 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#B#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 16/16  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 20/20  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  wren             Wren L1 cadet              3,3    hp 20/20  Plain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait maud
+Maud waits
+The Lazar House  turn 1 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#B#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 16/16  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 20/20  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+B  wren             Wren L1 cadet              3,3    hp 20/20  Plain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 7,4
+Archer 1 moves 9,6 -> 7,4 via 9,5 9,4 8,4
+enemy: wait archer-1
+Archer 1 waits
+enemy: move brigand-1 5,4
+Brigand 1 moves 8,3 -> 5,4 via 7,3 6,3 5,3
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Lazar House  turn 2 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#B#....^..
+ 4 .....a=b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          5,4    hp 20/20  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  wren             Wren L1 cadet              3,3    hp 20/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move maud 3,4
+Maud moves 3,2 -> 3,4 via 3,3
+The Lazar House  turn 2 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#F#.......
+ 3 ..#B#....^..
+ 4 ...A.a=b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          5,4    hp 20/20  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain
+B  wren             Wren L1 cadet              3,3    hp 20/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> attack maud brigand-1
+Forecast Maud -> Brigand 1: acc 98% dmg 11 crit 3%; counter: none
+Maud attacks Brigand 1
+  Maud hits Brigand 1 for 11 (hp 9)
+  Maud hp 17, Brigand 1 hp 9
+Maud gains 10 exp (70)
+The Lazar House  turn 2 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#F#.......
+ 3 ..#B#....^..
+ 4 ...A.a=b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          5,4    hp 9/20   Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain  done
+B  wren             Wren L1 cadet              3,3    hp 20/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move wren 4,4
+Wren moves 3,3 -> 4,4 via 3,4
+The Lazar House  turn 2 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 ...ABa=b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          5,4    hp 9/20   Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain  done
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> attack wren brigand-1
+Forecast Wren -> Brigand 1: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
+Wren attacks Brigand 1
+  Wren misses Brigand 1
+  Brigand 1 hits Wren for 11 (hp 9)
+  Wren hits Brigand 1 for 10 (hp 0)
+  Wren hp 9, Brigand 1 hp 0
+Wren gains 30 exp (91)
+Brigand 1 falls at 5,4
+The Lazar House  turn 2 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 ...AB==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 16/16  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain  done
+B  wren             Wren L1 cadet              4,4    hp 9/20   Plain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Brigand 2 arrives at 8,0 with the north group, aggressive
+Reinforcements arrive
+  Soldier arrives at 11,4 with the east group, aggressive
+enemy: move archer-1 6,4
+Archer 1 moves 7,4 -> 6,4
+enemy: attack archer-1 wren
+Forecast Archer 1 -> Wren: acc 70% dmg 6 crit 0%; counter: none
+Archer 1 attacks Wren
+  Archer 1 misses Wren
+  Archer 1 hp 16, Wren hp 9
+enemy: move brigand-2 8,4
+Brigand 2 moves 8,0 -> 8,4 via 8,1 8,2 8,3
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move soldier-1 7,4
+Soldier moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Lazar House  turn 3 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 ...AB=bdc===
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          8,4    hp 20/20  Road  group north, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+B  wren             Wren L1 cadet              4,4    hp 9/20   Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move wren 3,3
+Wren moves 4,4 -> 3,3 via 3,4
+The Lazar House  turn 3 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#F#.......
+ 3 ..#B#....^..
+ 4 ...A.=bdc===
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          8,4    hp 20/20  Road  group north, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+B  wren             Wren L1 cadet              3,3    hp 9/20   Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> item wren 2
+Wren uses Field Dressing (1 left)
+Wren heals 10 (hp 19)
+The Lazar House  turn 3 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#F#.......
+ 3 ..#B#....^..
+ 4 ...A.=bdc===
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          8,4    hp 20/20  Road  group north, aggressive
+A  maud             Maud L1 chaplain           3,4    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+B  wren             Wren L1 cadet              3,3    hp 19/20  Plain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move maud 3,2
+Maud moves 3,4 -> 3,2 via 3,3
+The Lazar House  turn 3 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#B#....^..
+ 4 .....=bdc===
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          8,4    hp 20/20  Road  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+B  wren             Wren L1 cadet              3,3    hp 19/20  Plain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> item maud 2 wren
+Maud uses Salve on wren (7 left)
+Wren heals 1 (hp 20)
+Maud gains 11 exp (81)
+The Lazar House  turn 3 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#B#....^..
+ 4 .....=bdc===
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,4    hp 16/16  Road  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          8,4    hp 20/20  Road  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         7,4    hp 18/18  Road  group east, aggressive
+B  wren             Wren L1 cadet              3,3    hp 20/20  Plain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Archer 2 arrives at 6,7 with the ford group, aggressive
+Reinforcements arrive
+  Hexer arrives at 8,0 with the north group, aggressive
+enemy: move archer-1 5,3
+Archer 1 moves 6,4 -> 5,3 via 6,3
+enemy: attack archer-1 wren
+Forecast Archer 1 -> Wren: acc 70% dmg 6 crit 0%; counter: none
+Archer 1 attacks Wren
+  Archer 1 hits Wren for 6 (hp 14)
+  Archer 1 hp 16, Wren hp 14
+enemy: move archer-2 5,4
+Archer 2 moves 6,7 -> 5,4 via 6,6 6,5 6,4
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-2 4,4
+Brigand 2 moves 8,4 -> 4,4 via 7,4 6,4 5,4
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move hexer-1 6,2
+Hexer moves 8,0 -> 6,2 via 8,1 7,1 6,1
+enemy: wait hexer-1
+Hexer waits
+enemy: move soldier-1 3,4
+Soldier moves 7,4 -> 3,4 via 6,4 5,4 4,4
+enemy: attack soldier-1 wren
+Forecast Soldier -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
+Soldier attacks Wren
+  Soldier misses Wren
+  Wren hits Soldier for 8 (hp 10)
+  Soldier hp 10, Wren hp 14
+Wren gains 10 exp (1)
+Wren reaches level 2: str +1 dex +1 lck +1
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Lazar House  turn 4 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.f.....
+ 3 ..#B#b...^..
+ 4 ...dce======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,3    hp 16/16  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,4    hp 16/16  Road  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          4,4    hp 20/20  Plain  group north, aggressive
+f  hexer-1          Hexer L1 adept             6,2    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         3,4    hp 10/18  Plain  group east, aggressive
+B  wren             Wren L2 cadet              3,3    hp 14/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> attack maud soldier-1
+Forecast Maud -> Soldier: acc 97% dmg 10 crit 2%; counter: none
+Maud attacks Soldier
+  Maud hits Soldier for 10 (hp 0)
+  Maud hp 17, Soldier hp 0
+Maud gains 30 exp (11)
+Maud reaches level 2: hp +1 mag +1
+Soldier falls at 3,4
+The Lazar House  turn 4 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.f.....
+ 3 ..#B#b...^..
+ 4 ....ce======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,3    hp 16/16  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,4    hp 16/16  Road  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          4,4    hp 20/20  Plain  group north, aggressive
+f  hexer-1          Hexer L1 adept             6,2    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           3,2    hp 18/18  Fort (heals 20 percent, 3 hp)  captain  done
+B  wren             Wren L2 cadet              3,3    hp 14/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> item wren 2
+Wren uses Field Dressing (0 left)
+Wren heals 6 (hp 20)
+The Lazar House  turn 4 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.f.....
+ 3 ..#B#b...^..
+ 4 ....ce======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,3    hp 16/16  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,4    hp 16/16  Road  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          4,4    hp 20/20  Plain  group north, aggressive
+f  hexer-1          Hexer L1 adept             6,2    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           3,2    hp 18/18  Fort (heals 20 percent, 3 hp)  captain  done
+B  wren             Wren L2 cadet              3,3    hp 20/20  Plain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end !
+Lethal if all land: Wren (Archer 1 for 6, Archer 2 for 6, Brigand 2 for 11, Hexer for 10, against 20 hp)
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Reinforcements arrive
+  Brigand 3 arrives at 11,4 with the east group, aggressive
+enemy: attack archer-1 wren
+Forecast Archer 1 -> Wren: acc 68% dmg 6 crit 0%; counter: none
+Archer 1 attacks Wren
+  Archer 1 hits Wren for 6 (hp 14)
+  Archer 1 hp 16, Wren hp 14
+Wren masters the Cadet class and keeps Fundamentals
+enemy: move archer-2 2,4
+Archer 2 moves 5,4 -> 2,4 via 4,4 3,4
+enemy: attack archer-2 wren
+Forecast Archer 2 -> Wren: acc 65% dmg 5 crit 0%; counter: none
+Archer 2 attacks Wren
+  Archer 2 misses Wren
+  Archer 2 hp 16, Wren hp 14
+enemy: move brigand-2 3,4
+Brigand 2 moves 4,4 -> 3,4
+enemy: attack brigand-2 wren
+Forecast Brigand 2 -> Wren: acc 45% dmg 10 crit 0%; counter: acc 90% dmg 12 x2 crit 5%
+Brigand 2 attacks Wren
+  Brigand 2 misses Wren
+  Wren hits Brigand 2 for 12 (hp 8)
+  Wren hits Brigand 2 for 12 (hp 0)
+  Brigand 2 hp 0, Wren hp 14
+Wren gains 25 exp (26)
+Wren reaches rank D in sword
+Brigand 2 falls at 3,4
+enemy: move brigand-3 7,4
+Brigand 3 moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move hexer-1 3,1
+Hexer moves 6,2 -> 3,1 via 6,1 5,1 4,1
+enemy: attack hexer-1 wren
+Forecast Hexer -> Wren: acc 98% dmg 10 crit 0%; counter: none
+Hexer attacks Wren
+  Hexer hits Wren for 10 (hp 4)
+  Hexer hp 15, Wren hp 4
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Lazar House  turn 5 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..f.....n.M
+ 2 ..#A#.......
+ 3 ..#B#b...^..
+ 4 ..e..==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,3    hp 16/16  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           2,4    hp 16/16  Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 20/20  Road  group east, aggressive
+f  hexer-1          Hexer L1 adept             3,1    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           3,2    hp 18/18  Fort (heals 20 percent, 3 hp)  captain
+B  wren             Wren L2 cadet              3,3    hp 4/20   Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> item maud 2 wren
+Maud uses Salve on wren (6 left)
+Wren heals 8 (hp 12)
+Maud gains 16 exp (27)
+The Lazar House  turn 5 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..f.....n.M
+ 2 ..#A#.......
+ 3 ..#B#b...^..
+ 4 ..e..==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,3    hp 16/16  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           2,4    hp 16/16  Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 20/20  Road  group east, aggressive
+f  hexer-1          Hexer L1 adept             3,1    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           3,2    hp 18/18  Fort (heals 20 percent, 3 hp)  captain  done
+B  wren             Wren L2 cadet              3,3    hp 12/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move wren 3,4
+Wren moves 3,3 -> 3,4
+The Lazar House  turn 5 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..f.....n.M
+ 2 ..#A#.......
+ 3 ..#.#b...^..
+ 4 ..eB.==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,3    hp 16/16  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           2,4    hp 16/16  Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 20/20  Road  group east, aggressive
+f  hexer-1          Hexer L1 adept             3,1    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           3,2    hp 18/18  Fort (heals 20 percent, 3 hp)  captain  done
+B  wren             Wren L2 cadet              3,4    hp 12/20  Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> attack wren archer-2
+Forecast Wren -> Archer 2: acc 87% dmg 12 x2 crit 4%; counter: none
+Wren attacks Archer 2
+  Wren hits Archer 2 for 12 (hp 4)
+  Wren hits Archer 2 for 12 (hp 0)
+  Wren hp 12, Archer 2 hp 0
+Wren gains 25 exp (51)
+Archer 2 falls at 2,4
+The Lazar House  turn 5 of 5  player phase  survive  recall 3
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..f.....n.M
+ 2 ..#A#.......
+ 3 ..#.#b...^..
+ 4 ...B.==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,3    hp 16/16  Plain  group yard, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 20/20  Road  group east, aggressive
+f  hexer-1          Hexer L1 adept             3,1    hp 15/15  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           3,2    hp 18/18  Fort (heals 20 percent, 3 hp)  captain  done
+B  wren             Wren L2 cadet              3,4    hp 12/20  Plain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end !
+Lethal if all land: Wren (Archer 1 for 5, Brigand 3 for 10, against 12 hp)
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Reinforcements arrive
+  Brigand 4 arrives at 6,7 with the ford group, aggressive
+Reinforcements arrive
+  Archer 3 arrives at 11,2 with the east group, aggressive
+enemy: move archer-1 5,4
+Archer 1 moves 5,3 -> 5,4
+enemy: attack archer-1 wren
+Forecast Archer 1 -> Wren: acc 65% dmg 5 crit 0%; counter: none
+Archer 1 attacks Wren
+  Archer 1 hits Wren for 5 (hp 7)
+  Archer 1 hp 16, Wren hp 7
+enemy: move archer-3 7,2
+Archer 3 moves 11,2 -> 7,2 via 10,2 9,2 8,2
+enemy: wait archer-3
+Archer 3 waits
+enemy: move brigand-3 4,4
+Brigand 3 moves 7,4 -> 4,4 via 6,4 5,4
+enemy: attack brigand-3 wren
+Forecast Brigand 3 -> Wren: acc 45% dmg 10 crit 0%; counter: acc 90% dmg 12 x2 crit 5%
+Brigand 3 attacks Wren
+  Brigand 3 misses Wren
+  Wren crits Brigand 3 for 36 (hp 0)
+  Brigand 3 hp 0, Wren hp 7
+Wren gains 25 exp (76)
+Brigand 3 falls at 4,4
+enemy: move brigand-4 4,5
+Brigand 4 moves 6,7 -> 4,5 via 6,6 6,5 5,5
+enemy: wait brigand-4
+Brigand 4 waits
+enemy: move hexer-1 3,0
+Hexer moves 3,1 -> 3,0
+enemy: attack hexer-1 maud
+Forecast Hexer -> Maud: acc 90% dmg 3 crit 0%; counter: acc 80% dmg 7 crit 2% (Radiance 3 of 5 left)
+Hexer attacks Maud
+  Hexer hits Maud for 3 (hp 15)
+  Maud hits Hexer for 7 (hp 8)
+  Hexer hp 8, Maud hp 15
+Maud gains 8 exp (35)
+enemy: end
+-- Enemy phase ends, turn 5 --
+The Lazar House  over after turn 5 of 5  survive  recall 3
+   012345678901
+ 0 ^^^f^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#..i....
+ 3 ..#.#....^..
+ 4 ...B.b======
+ 5 .^..h.....^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,4    hp 16/16  Road  group yard, aggressive
+i  archer-3         Archer L1 bowman           7,2    hp 16/16  Plain  group east, aggressive
+h  brigand-4        Brigand L1 reaver          4,5    hp 20/20  Plain  group ford, aggressive
+f  hexer-1          Hexer L1 adept             3,0    hp 8/15   Forest  group north, aggressive
+A  maud             Maud L2 chaplain           3,2    hp 15/18  Fort (heals 20 percent, 3 hp)  captain
+B  wren             Wren L2 cadet              3,4    hp 7/20   Plain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+Battle won: survive; only recall is left, or leave
+> leave
+Maud wins maud_1; the stores take 2 common material; nobody fell
+-- After The Lazar House --
+The carts come at dusk. They find the keeper, and the meal bins full,
+bought by someone who never signed the book. Maud counts the beds:
+forty, twelve in use. "I'm angry at the order. It won't break tonight.
+Who here hasn't eaten?" She says the prayer over every bed, then over
+the keeper, with his name in it.
+

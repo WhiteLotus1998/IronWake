@@ -127,4 +127,26 @@ public class FullCampaignTests
         Assert.True(quest >= 0);
         Assert.Equal("move rook 12,1", lines[Array.IndexOf(lines, "leave", quest) - 1]);
     }
+
+    [Fact]
+    public void TheLazarHouseAndShrineHandPlaysPayThePsalterInsideTheCampaign()
+    {
+        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, Quest + ",maud_1,maud_2");
+        var lines = written.Text.Split('\n');
+        var client = new CampaignClient(Content, Fixture.RealContentDirectory(), Start());
+        Script.PlayCampaign(client, written.Text);
+
+        Assert.Equal(1, lines.Count(l => l == "quest maud_1 wren"));
+        Assert.Equal(1, lines.Count(l => l == "quest maud_2 wren"));
+        Assert.Contains(client.Record.Find("maud")!.Inventory.Items, stack => stack.ItemId == "maud_psalter");
+    }
+
+    [Fact]
+    public void ASideMapsHandPlayIsFoughtOnlyWhenTheQuestIsNamed()
+    {
+        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, Quest);
+
+        Assert.Contains("quest maud_1 brannock", written.Text.Split('\n'));
+        Assert.DoesNotContain("quest maud_1 wren", written.Text.Split('\n'));
+    }
 }
