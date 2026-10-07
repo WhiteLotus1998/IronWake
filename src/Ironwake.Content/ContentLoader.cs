@@ -185,7 +185,7 @@ public static class ContentLoader
                 throw new ContentException(files.Weapons.Name, weapon.Id, "rider", $"'{SchoolRider.Label(kind)}' but the {school.Label()} school has no rider in {ContentFiles.RulesName}");
             }
 
-            if (rider.Kind != kind && !(kind == RiderKind.Ember && rider.Kind == RiderKind.Burn))
+            if (rider.Kind != kind && !SchoolRider.Borrows(kind, rider.Kind))
             {
                 throw new ContentException(files.Weapons.Name, weapon.Id, "rider", $"'{SchoolRider.Label(kind)}' but the {school.Label()} school's rider is '{SchoolRider.Label(rider.Kind)}'");
             }
@@ -1919,6 +1919,11 @@ public static class ContentLoader
             if (kind == RiderKind.Ember)
             {
                 throw entry.Error("rider.kind", "an ember is named by a tome on a school whose rider is burn, never a school's own rider");
+            }
+
+            if (kind == RiderKind.Sunder)
+            {
+                throw entry.Error("rider.kind", "a sunder is named by a tome on a school whose rider is raise, never a school's own rider");
             }
 
             string[] fields = kind switch

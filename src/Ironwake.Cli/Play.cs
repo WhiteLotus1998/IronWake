@@ -2265,7 +2265,7 @@ public sealed class PlaySession
         }
 
         var gate = LearnedGate.Suffix(LearnedGate.Read(content, striker, weapon, struck));
-        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + gate + Stun.ForecastText(content, striker, weapon, struck);
+        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck);
     }
 
     /// <summary>
@@ -3169,6 +3169,8 @@ public sealed class PlaySession
                 return $"{names[c.ByUnitId]} cashes the burn on {names[c.UnitId]}: {c.Amount} at once (hp {c.HpAfter}), and it burns no more";
             case GroundRaised g:
                 return $"{names[g.UnitId]} raises {(content.Terrain.TryGetValue(g.TerrainId, out var raised) ? raised.Name.ToLowerInvariant() : g.TerrainId)} under {names[g.TargetId]} at {g.At}: held by whoever stands on it until the caster's next phase ends";
+            case GroundSundered gs:
+                return $"{names[gs.UnitId]} sunders the {(content.Terrain.TryGetValue(gs.TerrainId, out var sundered) ? sundered.Name.ToLowerInvariant() : gs.TerrainId)} {names[gs.OwnerId]} raised at {gs.At}: the ground falls back";
             case RodCaught rc:
                 return $"{names[rc.UnitId]}'s rod catches {names[rc.ByUnitId]}'s spell aimed at {names[rc.AimedId]}: it strikes {names[rc.UnitId]}";
             case UnitStunned st:

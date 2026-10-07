@@ -356,6 +356,12 @@ public sealed record RodCaught(string UnitId, string AimedId, string ByUnitId) :
 /// </summary>
 public sealed record GroundRaised(string UnitId, string TargetId, Coord At, string TerrainId) : GameEvent;
 
+/// <summary>
+/// A tome naming sunder dropped the <paramref name="TerrainId"/> overlay <paramref name="OwnerId"/> raised at
+/// <paramref name="At"/> (issue 1281, <see cref="Sunder"/>); the <see cref="TerrainChanged"/> giving the ground back follows.
+/// </summary>
+public sealed record GroundSundered(string UnitId, Coord At, string TerrainId, string OwnerId) : GameEvent;
+
 /// <summary>A stunned unit's side's phase began, and it skips it: it neither moves nor acts until the phase ends (issue 1244, <see cref="Stun"/>).</summary>
 public sealed record StunSkipped(string UnitId) : GameEvent;
 
