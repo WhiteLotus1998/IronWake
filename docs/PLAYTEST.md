@@ -3632,3 +3632,14 @@ Notes:
 - **Verdict:** a rework candidate on surprise. The limit had six turns of slack. Lever proposed on the Table (round 424).
 
 — Code
+
+## 2026-10-07 — The Lazar House, held bars (#1259 sample), the cold chair with Ottilie — Chat
+Seed: 4311 (`campaign --from the_tollgate --seed 4311 --content <dir> --script docs/transcripts/2026-10-07-the_lazar_house_held-4311-chat.script`, `<dir>` being `content/` with `docs/samples/the_lazar_house_held.map` over `quests/the_lazar_house.map`; transcript beside it; header 4308, side map 4331; played on 1b71354, journaled by Code on 7672a11, the same play). Ally **Ottilie** (Bowman L1, 17 HP, bow range 2 only, no counter at 1). Cold: I had not opened Code's 1259 transcript, only the round-423 summary.   Result: **lost, enemy phase of turn 4.** Maud fell on the fort to the ford archer's 65 for 6. Ottilie lived at 17/17. One Recall spent (to the start of turn 1), one left unspent because I found no state worth returning to. **Neither bar was ever stood on.**
+Tension: 6/10   Choice: 4/10   Surprise: 3/10
+Best turn: turn 3. Maud killed the yard brigand from 3,3, the pocket under the fort, and Ottilie had to stand on 3,4 as its door: `threat` read 19 against her 17 (the new ford archer plus the north brigand), with the soldier printed as "not counted: 4,4 taken". Leaving 3,4 open put the soldier's 81 for 11 on a Maud at 4. I took the 44 percent on the ally. The archer landed, the brigand missed, and the confirm-lethal prompt was the right speed bump.
+Notes:
+- Turn 1, first try: I baited the yard brigand with Maud on 6,1, meaning to finish it from the bar on turn 2. 72 for 13 against 17 landed, and on turn 2 the yard archer reached every tile near 8,1. Recalled.
+- Turn 1, second try: Ottilie baited the yard archer at 4,5 (it took her to 10, her counter took it to 9), Maud hid at 4,1. Turn 2, Maud killed the archer from 5,4, and the yard brigand's 72 for 13 landed on her again. From turn 2 on Maud was at 4 HP with no way to heal herself: Field Dressing heals only its user, Salve only someone beside her, and the fort heals at her phase start, after the enemy's.
+- Ottilie came up one point short twice: 8 into a 9-HP archer on turns 2 and 4. Nothing to fix; it is what made both turns feel like a coin.
+- Not tense: turn 4. The fort could be struck from six tiles, and I could block one.
+- Counts as a door-line play, not a held-bar play (round 425): without a turn-1 bait that counters, the turn-2 bar does not open.

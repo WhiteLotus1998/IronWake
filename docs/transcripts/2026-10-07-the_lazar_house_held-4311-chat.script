@@ -1,0 +1,26 @@
+quest maud_1 ottilie
+move maud 6,1
+wait maud
+move ottilie 3,3
+wait ottilie
+end
+recall 0
+move maud 4,1
+wait maud
+move ottilie 4,5
+wait ottilie
+end
+move maud 5,4
+attack maud archer-1
+item ottilie 2
+end
+move maud 3,3
+attack maud brigand-1
+move ottilie 3,4
+wait ottilie
+end !
+move maud 3,2
+wait maud
+move ottilie 3,3
+item ottilie 2
+end !

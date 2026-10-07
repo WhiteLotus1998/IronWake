@@ -37,7 +37,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
 - **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409; cold 5/6/4, t5): woken, the pair feeds the fort from its edge. Lever #1210: the fort and Maud's start south; a held rectangle out of reach is a post.
 - **The First Shrine (406 to 408, 0283):** starts south, alone (brace, second guard declined). Both in from the south (7/7/5), no rework; after #1206's Sim the limit moves only if sprints dominate. #1208: `seize_name: altar` (a hook, not text).
-- **The Lazar House (420 to 422):** both in (Code warm 8/6/6; Chat cold 5/7/5, barred turn 2). The hexer is the price of not barring; a permanent bar ends the map. #1259 (a lever, not a spike; 0303): a bar holds only while stood on, what it blocks waits, each bar tile in reach of an enemy alive turns 5, 6 (`east3`). Code warm 1259 lost t6; Chat cold decides. Fallback: the north bar at 9,1. Sim 4/200: the door.
+- **The Lazar House (420 to 425):** the hexer is the price of not barring. **Held bars, waiting queue kept** (#1259, 0303): a bar holds while stood on, what it blocks waits, `east3` keeps both bars in reach turns 5, 6; 9,1 retired. Chat's Ottilie 4311 (lost t4, no bar) is a door-line play. Ships at `turn_limit: 5` (#1266; 1259 replays won t5); the bar's advice line is #1144's. Sim 4/200: the door.
 - **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204's three levers shipped one at a time (0284 to 0287, 0293: the hunter, inside spawns, Hask's reach); range plus 2 parked. Fresh keep chair (shipped keep): is the bait a choice? Short on Cinder, not HP.
 
 ## Experiments (state and kill criterion)
@@ -102,7 +102,6 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - The class ladder's numbers (0058); which combat arts exist.
 - Rout ends Seize (#374)? Sim Canto on a clock map (#262)? A trial fall's cost?
 - The wake tax floor (0040, 0.25 provisional).
-- A blocked spawn waits (408)? #1259's sample only.
 - Training (374): Lotus.
 
 ## Plumbing
