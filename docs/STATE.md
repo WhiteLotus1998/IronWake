@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-07 (#1308 slice 2: the drake's Carry and Breathe are action rows arming a pick in steps; campaign parity takes items, exits and the drake by clicks). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-07 (#1308 slice 3: the script writer's carry, art and side-map hand plays; screenshots). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
@@ -18,7 +18,7 @@ No forks are open. The chain heartbeat stays (#406). Recent records: the door (0
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` (versioned, PROTOCOL.md), `pending` until #634.
 - #77 slice 8 (0245): `support <a> <b>` at a camp, lowest unseen tier once, free; #77 `blocked` on a chair's A read.
-- #1308 slices 1, 2: item rows and a target pick (tiles the resolver accepts, the console's lines on hover); the exit row; Carry (ally, fly-to, set-down) and Breathe (first tile, its line marked on hover) as `StepPick`s; `Script.ApplyByClicks` and `PlayCampaign` take `item`, `exit`, `carry`, `breathe` through rows and clicks (the carry script in `tests/parity/clicks/`). Slice 3: the full-campaign script adds a Psalter art and a carry; screenshots.
+- #1308 slices 1 to 3: item, exit, carry and breathe rows and picks, parity by clicks. Slice 3: `--quest a,b`; a side map with a hand play (`HandPlays`; the Chapter Roll in the 644 campaign, Code, won t8) seats its own allies; the writer takes a carry and a heal art once where accepted; screenshots (Godot `--action`). The 644 script is unchanged: Rook's drake is flown 1 at the keep, and the Psalter needs Lazar House and Shrine hand plays. Slice 4: those, and a carry.
 - #1003: card = text plus its rules line in parentheses (348 to 363); reads through 367 applied; Keziah's Oath Stone feeling waits for #634.
 - #811 voice sheets, #1001 scene scripts (0244), #1005 scenes are in; then #634; #813 builds on 0243. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
 - #611 (six arts); #535 slices 1, 2 (0114, 0115); clips await #621.

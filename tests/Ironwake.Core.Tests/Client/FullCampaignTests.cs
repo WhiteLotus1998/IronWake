@@ -115,4 +115,16 @@ public class FullCampaignTests
         Assert.Null(written.LostOn);
         Assert.Equal(File.ReadAllText(ScriptPath()), written.Text);
     }
+
+    [Fact]
+    public void ASideMapWithAHandPlayIsFoughtWithItsAlliesAndWonInTheCampaign()
+    {
+        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, Quest + ",rook_1");
+        var lines = written.Text.Split('\n');
+        var quest = Array.IndexOf(lines, "quest rook_1 wren");
+
+        Assert.Null(written.LostOn);
+        Assert.True(quest >= 0);
+        Assert.Equal("move rook 12,1", lines[Array.IndexOf(lines, "leave", quest) - 1]);
+    }
 }

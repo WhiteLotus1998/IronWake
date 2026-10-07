@@ -1,0 +1,33 @@
+quest rook_1 wren
+move rook 4,2
+wait rook
+move wren 4,7
+wait wren
+end
+move rook 6,6
+wait rook
+move wren 8,7
+wait wren
+end
+move rook 9,6
+wait rook
+move wren 10,7
+wait wren
+end
+move wren 8,5
+attack wren wingrider-2
+wait rook
+end !
+move wren 10,6
+attack wren deacon-1
+move rook 12,6
+wait rook
+end !
+attack wren wingrider-1 !
+move rook 11,2
+attack rook soldier-1 !
+end !
+attack rook soldier-1 !
+end
+move rook 12,1
+leave

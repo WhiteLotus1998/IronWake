@@ -1,0 +1,10 @@
+move captain 5,8
+wait captain
+wait maud
+end !
+move captain 5,6
+wait captain
+move maud 5,9
+wait maud
+end !
+move maud 5,7

@@ -3795,3 +3795,15 @@ Notes:
 - **Not tense:** turns 1, 2 and 8.
 
 — Code
+
+## 2026-10-07 — The Chapter Roll inside the 644 campaign (side map seed 751), issue 1308 slice 3, warm — Code
+
+Warm: I had played this map on seed 1100 and opened with that play's first four turns, which held here. Rook L4 with Wren L5, recruit, permadeath off. Transcript `docs/transcripts/2026-10-07-the_chapter_roll-644-campaign.txt`; the script is the hand play the campaign-script writer now fights `rook_1` with.
+
+**Result: won on turn 8 of 8**, Rook on the roll room at 9/18. Wren fell on enemy phase 6 to a 20 percent brigand swing (she comes back wounded).
+
+**Tension 8, Choice 6, Surprise 6.**
+
+**Best turn: turn 6.** Rook at 9 HP and the door soldier at 20 with two turns left. Rook took 11,2, the one tile beside the door the archer's bow (13,4, range 2) cannot reach, and swung into a 58 percent lethal counter with `!`. The counter missed; the soldier went to 6. That swing was the map: anything later and Rook cannot both kill the door and stand on the roll room by turn 8.
+
+Not tense: turns 1 to 3, the walk along the bridge. Wren's turn-5 kill of the deacon (91, double) was the only safe good choice of the play. The brigand finishing Wren at 20 percent was the surprise, and it cost nothing the map counts.

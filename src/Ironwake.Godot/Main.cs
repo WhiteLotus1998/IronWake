@@ -299,6 +299,13 @@ public partial class Main : Node2D
                 _client.Select(select);
             }
 
+            // Issue 1308: `--action <label>` takes the selected unit's first action row whose label starts
+            // with it, so a screenshot can show an armed item pick or the exit row's line.
+            if (Arg(args, "--action") is { } action && _client.Actions().ToList().FindIndex(row => row.Label.StartsWith(action, StringComparison.Ordinal)) is var row and >= 0)
+            {
+                _client.TakeAction(row);
+            }
+
             _hover = CoordArg(args, "--hover");
             _client.RecallOpen = Array.IndexOf(args, "--recall") >= 0;
             _paused = Array.IndexOf(args, "--paused") >= 0;
