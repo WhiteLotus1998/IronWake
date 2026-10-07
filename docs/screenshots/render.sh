@@ -132,3 +132,6 @@ for scale in 125 150; do
   shot the_tollgate-113-paused-scale$scale --map the_tollgate --seed 113 --paused --ui-scale $scale
   shot options-scale$scale --campaign --screen options --ui-scale $scale
 done
+# Issue 1308: Maud's Salve row armed as a target pick with the captain hovered, and the captain's exit row naming who is left behind.
+shot the_mill-635-item-pick --map the_mill --seed 635 --script "$PWD/$out/the_mill-635-item.script" --select 5,7 --action Item --hover 5,6
+shot brackwater_cut-53-exit-captain --map brackwater_cut --seed 53 --script "$PWD/$out/brackwater_cut-53-exit.script" --select 19,3

@@ -21,7 +21,7 @@ public static class CampaignScript
     public static readonly IReadOnlyList<string> Kinds = new[]
     {
         "buy", "drop", "bench", "unbench", "repair", "room", "hire", "edit", "certify", "advance", "refine", "trial", "quest",
-        "press", "rally", "fall back", "fallback", "talk",
+        "press", "rally", "fall back", "fallback", "talk", "carry", "art",
     };
 
     /// <summary>The script, the kinds it took, and the map number the campaign was lost on, or null when it was won.</summary>
@@ -36,8 +36,8 @@ public static class CampaignScript
     /// when <c>variant / 3</c> is odd no side map is taken, and when <c>variant / 6</c> is odd the camp
     /// before the last map benches the wounded, repairs every weapon and buys each member the dearest
     /// stocked one it can wield (issue 81: with the field before it, no other camp wins the keep).
-    /// <paramref name="quest"/>, when given, is taken at every camp that offers it, before and beside the
-    /// first quest the camps take anyway. <paramref name="until"/>, when given, ends the script at the
+    /// <paramref name="quest"/>, when given, is a comma-separated list of quests each taken at every camp that
+    /// offers it, before and beside the first quest the camps take anyway. <paramref name="until"/>, when given, ends the script at the
     /// first camp where that unit's certify into that class would be accepted, before any action there
     /// (issue 1100: a save at the camp where Rook first reaches the Drake Warden's door, the door unpicked).
     /// </summary>
@@ -64,7 +64,7 @@ public static class CampaignScript
 
             if (hand is null)
             {
-                Camp(client, content, contentDir, lines, touched, variant, quest);
+                Camp(client, content, contentDir, lines, touched, variant, quest?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>(), handPlays);
             }
 
             if (client.Record.Pick is null && client.Record.NextMap(content).Branch.Count > 0)
@@ -124,7 +124,7 @@ public static class CampaignScript
         return new Result(string.Concat(lines.Select(l => l + "\n")), touched, lostOn, maps);
     }
 
-    private static void Camp(CampaignClient client, GameContent content, string contentDir, List<string> lines, HashSet<string> touched, int variant, string? preferred = null)
+    private static void Camp(CampaignClient client, GameContent content, string contentDir, List<string> lines, HashSet<string> touched, int variant, IReadOnlyCollection<string> preferred, IReadOnlyDictionary<string, string>? handPlays)
     {
         bool Take(string kind, string line, Func<bool> act)
         {
@@ -266,28 +266,34 @@ public static class CampaignScript
             }
         }
 
-        foreach (var quest in client.Record.QuestsOffered(content).OrderBy(q => q.Id == preferred ? 0 : 1).ToList())
+        foreach (var quest in client.Record.QuestsOffered(content).OrderBy(q => preferred.Contains(q.Id) ? 0 : 1).ToList())
         {
-            if (quest.Id != preferred && (touched.Contains("quest") || (variant / 3) % 2 == 1))
+            if (!preferred.Contains(quest.Id) && (touched.Contains("quest") || (variant / 3) % 2 == 1))
             {
                 continue;
             }
 
             var map = QuestMap(client, contentDir, quest);
             var needed = CampaignRecord.QuestAllies(map);
+            var hand = handPlays is not null && handPlays.TryGetValue(quest.MapId, out var played) ? played : null;
             var allies = client.Record.Present(content)
                 .Where(u => u.Id != quest.MemberId && !CampaignRecord.IsCaptain(u, content))
-                .OrderByDescending(u => u.Level).ThenBy(u => u.Id, StringComparer.Ordinal)
+                .OrderByDescending(u => HandAllies(hand, quest.Id).Contains(u.Id)).ThenByDescending(u => u.Level).ThenBy(u => u.Id, StringComparer.Ordinal)
                 .Take(needed).Select(u => u.Id).ToList();
             if (allies.Count == needed && client.Quest(quest.Id, allies))
             {
                 lines.Add($"quest {quest.Id} {string.Join(' ', allies)}");
                 touched.Add("quest");
-                Fight(client, content, lines, touched);
+                Fight(client, content, lines, touched, hand);
                 Leave(client, lines);
             }
         }
     }
+
+    /// <summary>The allies a hand play's own <c>quest</c> line seats for <paramref name="questId"/>, so the side map is fought with the company it was played with; none without one.</summary>
+    private static IReadOnlyList<string> HandAllies(string? hand, string questId) =>
+        (hand ?? "").Split('\n').Select(l => l.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries))
+            .FirstOrDefault(w => w.Length > 2 && w[0] == "quest" && w[1] == questId)?.Skip(2).ToList() ?? new List<string>();
 
     /// <summary>The side map a quest is fought on, read to count the allies it takes.</summary>
     private static MapDefinition QuestMap(CampaignClient client, string contentDir, CampaignQuest quest) =>
@@ -344,9 +350,19 @@ public static class CampaignScript
                 throw new InvalidOperationException("the player had nothing to do in its own phase");
             }
 
+            if (TryCarry(battle, lines, touched, commands))
+            {
+                continue;
+            }
+
             for (var i = 0; i < commands.Count; i++)
             {
                 var command = commands[i];
+                if (command is Wait or UseItem && TryArt(battle, lines, touched, command))
+                {
+                    break;
+                }
+
                 if (command is Wait wait && TryOrder(battle, content, lines, touched, wait.UnitId))
                 {
                     break;
@@ -395,6 +411,77 @@ public static class CampaignScript
             }
 
             return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// A drake rider's plan of a Move and a Wait (or a Wait alone) replaced by a carry once a campaign
+    /// (issue 1308): the rider flies to the tile it would have moved to with the first ally beside it,
+    /// in the order the board lists them, that the core lets it set down on the first tile it accepts,
+    /// so the rider ends where the player meant it to and the click path's carry is in the script.
+    /// </summary>
+    private static bool TryCarry(ClientSession battle, List<string> lines, HashSet<string> touched, IReadOnlyList<Command> commands)
+    {
+        var state = battle.State;
+        var (riderId, to) = commands switch
+        {
+            [Move m, Wait w] when m.UnitId == w.UnitId => (m.UnitId, (Coord?)m.To),
+            [Wait w] => (w.UnitId, state.Find(w.UnitId)?.At),
+            _ => ("", null),
+        };
+        if (touched.Contains("carry") || to is not { } flyTo || state.Find(riderId) is not { } rider || !DrakeCarry.Open(state) || !DrakeCarry.CanLift(rider))
+        {
+            return false;
+        }
+
+        foreach (var ally in state.UnitsOf(rider.Side).Where(u => u.Id != rider.Id && u.At.Neighbors().Contains(rider.At)))
+        {
+            foreach (var setDown in flyTo.Neighbors())
+            {
+                var carry = new Carry(rider.Id, ally.Id, flyTo, setDown);
+                if (Resolver.Apply(state, battle.Content, carry).Accepted)
+                {
+                    Submit(battle, lines, carry);
+                    touched.Add("carry");
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// A unit's Wait or heal replaced by a heal art (the Psalter's Unasked) once a campaign (issue 1308):
+    /// the first slot, art and ally in the board's order that the core accepts, so the click path's
+    /// art row is in the script.
+    /// </summary>
+    private static bool TryArt(ClientSession battle, List<string> lines, HashSet<string> touched, Command command)
+    {
+        var state = battle.State;
+        var unitId = command is Wait w ? w.UnitId : ((UseItem)command).UnitId;
+        if (touched.Contains("art") || state.Find(unitId) is not { } unit)
+        {
+            return false;
+        }
+
+        foreach (var (ability, _) in battle.Content.ArtsOf(unit.Unit))
+        {
+            for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
+            {
+                foreach (var ally in state.UnitsOf(unit.Side).Where(u => u.Id != unit.Id))
+                {
+                    var use = new UseItem(unit.Id, slot, ally.Id, ability.Id);
+                    if (Resolver.Apply(state, battle.Content, use).Accepted)
+                    {
+                        Submit(battle, lines, use);
+                        touched.Add("art");
+                        return true;
+                    }
+                }
+            }
         }
 
         return false;

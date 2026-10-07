@@ -880,7 +880,7 @@ public static class Program
     {
         var transcripts = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(contentDir).TrimEnd(Path.DirectorySeparatorChar))!, "docs", "transcripts");
         var plays = new Dictionary<string, string>(StringComparer.Ordinal);
-        foreach (var (map, file) in new[] { ("starting_alone", "2026-10-01-starting_alone-631.script"), ("the_mill", "2026-10-06-the_mill-632-south.script") })
+        foreach (var (map, file) in new[] { ("starting_alone", "2026-10-01-starting_alone-631.script"), ("the_mill", "2026-10-06-the_mill-632-south.script"), ("the_chapter_roll", "2026-10-07-the_chapter_roll-644-campaign.script") })
         {
             var path = Path.Combine(transcripts, file);
             if (File.Exists(path))
@@ -1163,7 +1163,7 @@ public static class Program
         (command switch
         {
             Attack { Slot: { } slot } a when UniqueItemAt(state, a.UnitId, slot) is { } id => $"attack {a.UnitId} {a.TargetId} {id}",
-            UseItem u when UniqueItemAt(state, u.UnitId, u.Slot) is { } id => u.TargetId is { } t ? $"item {u.UnitId} {id} {t}" : $"item {u.UnitId} {id}",
+            UseItem u when UniqueItemAt(state, u.UnitId, u.Slot) is { } id => (u.TargetId is { } t ? $"item {u.UnitId} {id} {t}" : $"item {u.UnitId} {id}") + (u.Art is { } art ? $" art {art}" : ""),
             _ => Script(command),
         }) + (command switch
         {
@@ -1206,7 +1206,7 @@ public static class Program
     {
         Move m => m.Via is { } via ? $"move {m.UnitId} {m.To} via {via}" : $"move {m.UnitId} {m.To}",
         Attack a => a.Slot is { } slot ? $"attack {a.UnitId} {a.TargetId} {slot + 1}" : $"attack {a.UnitId} {a.TargetId}",
-        UseItem u => u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}",
+        UseItem u => (u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}") + (u.Art is { } art ? $" art {art}" : ""),
         Wait w => $"wait {w.UnitId}",
         Watch w => $"watch {w.UnitId}",
         Cover c => $"cover {c.UnitId} {c.AllyId}",
@@ -1220,6 +1220,8 @@ public static class Program
         Shove s => $"shove {s.UnitId} {s.TargetId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         Canto c => $"canto {c.UnitId} {c.To}",
+        Carry c => $"carry {c.UnitId} {c.AllyId} {c.To} {c.SetDown}",
+        Breathe b => $"breathe {b.UnitId} {b.Toward}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
         _ => command.ToString() ?? "",
