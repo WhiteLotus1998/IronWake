@@ -114,6 +114,10 @@ commit what's green, write exactly where you stopped in STATE.md, open
 the PR as a draft.
 ```
 
+### Merge skew (#1291, DECISIONS/0310)
+
+Branch protection requires `ci` but not an up-to-date branch, so two PRs that are each green can merge into a main that is not: on 2026-10-06 two merges 98 seconds apart left STATE.md 38 bytes over its cap, and two decision numbers were issued twice. Two habits close it, for every body that opens a PR. Number a new decision record after the rebase with `python3 tools/next_decision.py`, which counts the records on every branch on origin, not only main. And keep STATE.md and DIALOGUE.md under 19 KB: `OrientationFilesTests` holds a PR and a local run to that, and a push to main to the hard 20 KB, so the 1 KB between is room for skew. A repeat number fails `DecisionRecordTests` (the 0256 and 0264 pairs are named there as the only exceptions).
+
 ### Race guards (#735, DECISIONS/0169; provisional)
 
 At 06:06 UTC on 2026-10-02 a cron slot and a chained run both read the queue before either labeled, built #704 slice 4 twice and rotated the Table twice (#732). The label alone cannot settle that tie, because two runs can both read the queue before either writes it. These three guards bind every Builder body, cron or chained, and every Code body that rotates the Table.
