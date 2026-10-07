@@ -80,6 +80,15 @@ public sealed record BattleUnit(
     public int Chill { get; init; }
 
     /// <summary>
+    /// A rider's burn (issue 1243, <see cref="Burning"/>): the HP it takes at each start of the
+    /// unit's side's phase, never below 1; 0 when not burning.
+    /// </summary>
+    public int Burn { get; init; }
+
+    /// <summary>The phase starts of its own side the burn still has to tick (issue 1243); 0 when not burning.</summary>
+    public int BurnPhases { get; init; }
+
+    /// <summary>
     /// The frost hold's clock (issue 1127, <see cref="DrakeFrost"/>), counted as the chill's is
     /// (<see cref="Frost.AtPhaseChange"/>): 0 not held; 1 struck by a drake's frost, its side's next phase
     /// not yet begun; 2 that phase under way, cleared when it ends. While it is not 0 the unit's Mov is at

@@ -60,6 +60,17 @@ public sealed record GameContent(
     public ImmutableSortedDictionary<string, Pronoun> Pronouns { get; init; } =
         ImmutableSortedDictionary<string, Pronoun>.Empty.WithComparers(StringComparer.Ordinal);
 
+    /// <summary>
+    /// Each school's rider by school (issue 1243), from <c>rules.json</c>'s <c>schools</c> block; a
+    /// school without one is absent. Empty when the content declares none.
+    /// </summary>
+    public ImmutableSortedDictionary<MagicSchool, SchoolRider> Riders { get; init; } =
+        ImmutableSortedDictionary<MagicSchool, SchoolRider>.Empty;
+
+    /// <summary>The rider <paramref name="weapon"/> carries from its school (issue 1243), or null when it is unschooled, null, or its school has none.</summary>
+    public SchoolRider? RiderOf(Weapon? weapon) =>
+        weapon?.School is { } school && Riders.TryGetValue(school, out var rider) ? rider : null;
+
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
     public int NoiseRadius => WakeRadius + 2;
 

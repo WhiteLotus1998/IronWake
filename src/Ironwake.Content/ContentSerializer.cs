@@ -646,10 +646,10 @@ public static class ContentSerializer
         writer.WriteEndObject();
     }
 
-    /// <summary>rules.json: the wake radius, and the rivalry (issue 16) and difficulties (issue 76) blocks when the content has them.</summary>
+    /// <summary>rules.json: the wake radius, and the rivalry (issue 16), difficulties (issue 76) and schools (issue 1243) blocks when the content has them.</summary>
     private static string WriteRules(GameContent content)
     {
-        if (content.Rivalry == RivalryRules.None && content.Difficulties.Count == 0)
+        if (content.Rivalry == RivalryRules.None && content.Difficulties.Count == 0 && content.Riders.Count == 0)
         {
             return "{\n  \"wakeRadius\": " + content.WakeRadius + "\n}\n";
         }
@@ -743,6 +743,23 @@ public static class ContentSerializer
                         writer.WriteBoolean("lethalConfirm", false);
                     }
 
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndObject();
+            }
+
+            if (content.Riders.Count > 0)
+            {
+                writer.WriteStartObject("schools");
+                foreach (var (school, rider) in content.Riders)
+                {
+                    writer.WriteStartObject(school.Label());
+                    writer.WriteStartObject("rider");
+                    writer.WriteString("kind", SchoolRider.Label(rider.Kind));
+                    writer.WriteNumber("amount", rider.Amount);
+                    writer.WriteNumber("phases", rider.Phases);
+                    writer.WriteEndObject();
                     writer.WriteEndObject();
                 }
 

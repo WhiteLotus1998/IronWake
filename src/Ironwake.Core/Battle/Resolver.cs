@@ -700,6 +700,7 @@ public static class Resolver
         next = Wildfire.AfterCombat(next, unit.Id, weapon, target.At, result.Strikes, events);
         next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
         next = Frost.AfterCombat(next, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
+        next = Burning.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Lock.AfterAttack(next, art, unit.Id, target.Id, result.Strikes, events);
         next = Grounding.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Opening.AfterAttack(next, content, unit, target.Id, result.Strikes, events);
@@ -809,6 +810,7 @@ public static class Resolver
             }
 
             state = Frost.AfterCombat(state, shooter.Id, weapon, struck.Id, null, strikes, events);
+            state = Burning.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Grounding.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Windup.AfterCombat(state, content, shooter, struck, strikes, events);
             state = EndStruckWatches(state, strikes, events);
@@ -1715,6 +1717,7 @@ public static class Resolver
     /// max, reported as the amount actually gained; a unit at full HP is not reported.
     /// A hungering weapon's drain follows heal and burn (DESIGN.md 13.23, <see cref="Kinsbane.AtPhaseStart"/>).
     /// A chill's clock turns (issue 702, <see cref="Frost.AtPhaseChange"/>), and a grounding's with it (issue 703).
+    /// A rider's burn takes the larger of it and the tile's burn, one <see cref="UnitBurned"/>, and its count turns (issue 1243, <see cref="Burning"/>).
     /// Every open mark clears (issue 772, <see cref="Opening"/>).
     /// Then the map events whose turn trigger names the phase that has begun fire, in
     /// file order (issue 32). The enemy phase of the last turn ends the battle (DESIGN.md
@@ -1752,7 +1755,7 @@ public static class Resolver
                     events.Add(new UnitHealed(unit.Id, hp - unit.Hp, hp));
                 }
 
-                var burnt = Math.Max(Math.Min(1, hp), hp - state.Map.TerrainAt(unit.At, content).BurnFor(max));
+                var burnt = Math.Max(Math.Min(1, hp), hp - Math.Max(state.Map.TerrainAt(unit.At, content).BurnFor(max), Burning.Due(unit)));
                 if (burnt < hp)
                 {
                     events.Add(new UnitBurned(unit.Id, hp - burnt, burnt));
@@ -1767,7 +1770,8 @@ public static class Resolver
                 events.Add(new UnitRested(unit.Id));
             }
 
-            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
+            var ticked = unit.Side == nextPhase && unit.BurnPhases > 0 ? Burning.Ticked(unit) : unit;
+            units.Add(ticked with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };

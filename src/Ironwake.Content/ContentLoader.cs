@@ -62,11 +62,11 @@ public static class ContentLoader
         var items = ParseItems(files.Items, weapons);
         var (units, cast, signatures, pronouns) = ParseUnits(files.Units, classes, weapons, items, abilities);
         ValidateSignatureItems(files, weapons, abilities, cast);
-        var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
+        var (wakeRadius, rivalry, difficulties, riders) = ParseRules(files.Rules);
         var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast) : CampaignRules.None;
         ValidateUniqueClasses(files, classes, cast, campaign);
         ValidateSameSexRomance(files, campaign, pronouns);
-        var content = new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
+        var content = new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Riders = riders, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
         if (files.Campaign is { } campaignText && Forge.RareRefusal(content) is { } rare)
         {
             throw new ContentException(campaignText.Name, "quests", "rare", rare);
@@ -1765,7 +1765,7 @@ public static class ContentLoader
     /// The global rule constants of DESIGN.md: today only the Guard wake radius (section 8),
     /// which lives in content so it is identical on every map and never in a map file.
     /// </summary>
-    private static (int WakeRadius, RivalryRules Rivalry, ImmutableSortedDictionary<string, Difficulty> Difficulties) ParseRules(ContentFile file)
+    private static (int WakeRadius, RivalryRules Rivalry, ImmutableSortedDictionary<string, Difficulty> Difficulties, ImmutableSortedDictionary<MagicSchool, SchoolRider> Riders) ParseRules(ContentFile file)
     {
         JsonDocument document;
         try
@@ -1793,7 +1793,73 @@ public static class ContentLoader
         var difficulties = root.OptionalObject("difficulties") is { } block
             ? ParseDifficulties(block)
             : ImmutableSortedDictionary<string, Difficulty>.Empty.WithComparers(StringComparer.Ordinal);
-        return (wakeRadius, rivalryRules, difficulties);
+        var riders = root.OptionalObject("schools") is { } schools
+            ? ParseSchoolRiders(schools)
+            : ImmutableSortedDictionary<MagicSchool, SchoolRider>.Empty;
+        return (wakeRadius, rivalryRules, difficulties, riders);
+    }
+
+    /// <summary>
+    /// The schools block of rules.json (issue 1243): an object of school (<c>fire</c>, <c>ice</c>,
+    /// <c>lightning</c>, <c>earth</c>) to an object with an optional <c>rider</c>: a <c>kind</c> Core
+    /// knows (<c>burn</c>), an <c>amount</c> and a count of <c>phases</c>, each at least 1. Every tome
+    /// of the school carries its rider (<see cref="GameContent.RiderOf"/>).
+    /// </summary>
+    private static ImmutableSortedDictionary<MagicSchool, SchoolRider> ParseSchoolRiders(EntryNode node)
+    {
+        var builder = ImmutableSortedDictionary.CreateBuilder<MagicSchool, SchoolRider>();
+        foreach (var property in node.Element.EnumerateObject())
+        {
+            var school = new EntryNode(node.File, "schools", node.Element).ParseEnum<MagicSchool>(property.Name, property.Name);
+            if (property.Value.ValueKind != JsonValueKind.Object)
+            {
+                throw new ContentException(node.File, "schools", property.Name, "must be an object");
+            }
+
+            var entry = new EntryNode(node.File, "schools." + property.Name, property.Value);
+            foreach (var field in entry.Element.EnumerateObject())
+            {
+                if (field.Name != "rider")
+                {
+                    throw entry.Error(field.Name, "is not a school field; expected rider");
+                }
+            }
+
+            if (entry.OptionalObject("rider") is not { } rider)
+            {
+                continue;
+            }
+
+            foreach (var field in rider.Element.EnumerateObject())
+            {
+                if (field.Name is not ("kind" or "amount" or "phases"))
+                {
+                    throw entry.Error("rider." + field.Name, "is not a rider field; expected kind, amount or phases");
+                }
+            }
+
+            var kindName = rider.String("kind");
+            if (!System.Enum.GetValues<RiderKind>().Any(k => SchoolRider.Label(k) == kindName))
+            {
+                throw entry.Error("rider.kind", $"unknown rider kind '{kindName}'; expected " + string.Join(", ", System.Enum.GetValues<RiderKind>().Select(SchoolRider.Label)));
+            }
+
+            var amount = rider.Int("amount");
+            if (amount < 1)
+            {
+                throw entry.Error("rider.amount", "must be at least 1");
+            }
+
+            var phases = rider.Int("phases");
+            if (phases < 1)
+            {
+                throw entry.Error("rider.phases", "must be at least 1");
+            }
+
+            builder[school] = new SchoolRider(System.Enum.GetValues<RiderKind>().First(k => SchoolRider.Label(k) == kindName), amount, phases);
+        }
+
+        return builder.ToImmutable();
     }
 
     /// <summary>

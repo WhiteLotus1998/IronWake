@@ -305,6 +305,13 @@ public sealed record HungerEased(string UnitId, string ItemId, int Healed, int H
 public sealed record HeirloomTurned(string UnitId, string ItemId, int Stage, string StageId) : GameEvent;
 
 /// <summary>
+/// A hit from a tome whose school carries a burn rider set a unit that survived it burning (issue 1243,
+/// <see cref="Burning"/>): <paramref name="Amount"/> HP at each of its side's next <paramref name="Phases"/>
+/// phase starts, never below 1. A burn already running is refreshed, never stacked.
+/// </summary>
+public sealed record UnitIgnited(string UnitId, string ByUnitId, int Amount, int Phases) : GameEvent;
+
+/// <summary>
 /// A hit from a frozen-iron weapon chilled a unit that survived it (issue 702 slice 2, <see cref="Frost"/>):
 /// Mov -1 until the end of <paramref name="Side"/>'s next phase, the struck unit's side. <paramref name="Next"/>
 /// is true when it was struck on its own side's phase, so the chill outlasts the phase under way.

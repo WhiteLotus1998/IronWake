@@ -1177,8 +1177,8 @@ public sealed class PlaySession
                 }
 
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
-                var (chills, counterChills) = Chills(_content, attacker!, target!, attack.Slot);
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, chills, counterChills, CounterUses(_content, target!, forecast.Defender)));
+                var (riders, counterRiders) = Riders(_content, attacker!, target!, attack.Slot);
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, riders, counterRiders, CounterUses(_content, target!, forecast.Defender)));
                 PrintRivalry(target!, countering: true);
                 if (SwornLine(attacker!, target!, names) is { } sworn)
                 {
@@ -1614,8 +1614,8 @@ public sealed class PlaySession
         var (with, counterWith) = Arms(content, unit, target, slot, tile);
         var raises = RaisesWith(state, content, unit, slot);
         var names = UnitNames.Of(state, content);
-        var (chills, counterChills) = Chills(content, unit, target, slot);
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills, CounterUses(content, target, forecast.Defender)) };
+        var (riders, counterRiders) = Riders(content, unit, target, slot);
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, riders, counterRiders, CounterUses(content, target, forecast.Defender)) };
         var hunger = HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state, forecast).ToList();
         if (ClaimantLine(state, unit, target, forecast, raises, names, hunger) is { } claimant)
         {
@@ -2164,7 +2164,7 @@ public sealed class PlaySession
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
     /// unit has not moved to (issue 151), empty for a forecast on the standing board.
     /// </summary>
-    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, bool chills = false, bool counterChills = false, string counterUses = "")
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, string riders = "", string counterRiders = "", string counterUses = "")
     {
         names ??= UnitNames.None;
         if (raises)
@@ -2172,16 +2172,20 @@ public sealed class PlaySession
             return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {RaiseText(forecast.Attacker)}; counter: none";
         }
 
-        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + (counterChills ? " chills" : "") + counterUses : ": none" + (forecast.CounterAnswered ? " (answered this phase)" : ""))}";
+        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{riders}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + counterRiders + counterUses : ": none" + (forecast.CounterAnswered ? " (answered this phase)" : ""))}";
     }
 
     /// <summary>
-    /// Whether each side of a forecast strikes with frozen iron (issue 702, <see cref="Frost"/>): the
+    /// What each side of a forecast leaves on a hit, printed after that side's strike columns: the
     /// attacker with <paramref name="slot"/> (else its equipped weapon), the target with the weapon it
-    /// holds in front. The forecast line prints <c>chills</c> after that side's strike columns.
+    /// holds in front. <c> chills</c> for frozen iron (issue 702, <see cref="Frost"/>), then
+    /// <c> burns 2 for two phases</c> for a school's burn (issue 1243, <see cref="Burning"/>).
     /// </summary>
-    public static (bool Chills, bool CounterChills) Chills(GameContent content, BattleUnit unit, BattleUnit target, int? slot) =>
-        (Resolver.ChooseWeapon(unit, content, slot).Weapon is { FrozenIron: true }, target.EquippedWeapon(content) is { FrozenIron: true });
+    public static (string Riders, string CounterRiders) Riders(GameContent content, BattleUnit unit, BattleUnit target, int? slot) =>
+        (RiderText(content, Resolver.ChooseWeapon(unit, content, slot).Weapon), RiderText(content, target.EquippedWeapon(content)));
+
+    private static string RiderText(GameContent content, Weapon? weapon) =>
+        (weapon is { FrozenIron: true } ? " chills" : "") + Burning.ForecastText(content, weapon);
 
     /// <summary>
     /// The weapon suffixes of a forecast line (DESIGN.md 13.11, issue 313): <c> with Toll Axe</c>
@@ -2512,6 +2516,11 @@ public sealed class PlaySession
         else if (Frost.CardLine(state, unit) is { } chilled)
         {
             lines.Add("  " + chilled);
+        }
+
+        if (Burning.CardLine(unit) is { } burning)
+        {
+            lines.Add("  " + burning);
         }
 
         if (DrakeFrost.HeldLine(state, unit) is { } frosted)
@@ -3066,6 +3075,8 @@ public sealed class PlaySession
                 return $"{content.ItemName(h.ItemId)} is eased by the hit" + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "");
             case UnitOpened o:
                 return $"{names[o.UnitId]} is open: allies of {names[o.ByUnitId]} strike it at Def -{o.Def}, Res -{o.Res} until the phase ends";
+            case UnitIgnited i:
+                return $"{names[i.UnitId]} catches fire: {i.Amount} hp at the start of each of its side's next {SchoolRider.PhasesText(i.Phases)}";
             case UnitChilled c:
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
             case UnitFrosted f:
