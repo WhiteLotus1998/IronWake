@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "seize_name", "drops", "arrivals", "wake_on_death" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "seize_name", "seize_hold", "drops", "arrivals", "wake_on_death" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -35,6 +35,11 @@ public static class MapFormat
         if (map.SeizeName is { } seizeName)
         {
             sb.Append("seize_name: ").Append(seizeName).Append('\n');
+        }
+
+        if (map.SeizeHold)
+        {
+            sb.Append("seize_hold: 1\n");
         }
 
         if (map.Drops.Count > 0)
@@ -455,7 +460,7 @@ public static class MapFormat
             map = map with { Hunter = ParseHunter(header, map) };
             map = map with { HuntWaits = ParseHuntWaits(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
-            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map), SeizeName = ParseSeizeName(header, win) };
+            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map), SeizeName = ParseSeizeName(header, win), SeizeHold = ParseSeizeHold(header, win) };
             map = map with { Drops = ParseDrops(header, map), ArrivalsWait = ParseArrivals(header, map), DeathWakes = ParseDeathWakes(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
@@ -1379,6 +1384,30 @@ public static class MapFormat
             }
 
             return entry.Value;
+        }
+
+        /// <summary>
+        /// The <c>seize_hold:</c> header (issue 1274): <c>1</c>, the one enemy phase the captain must
+        /// hold the seize tile through; only on <c>win: seize</c>. Absent means the seize is won on the step.
+        /// </summary>
+        private bool ParseSeizeHold(Dictionary<string, (string Value, int Line)> header, WinCondition win)
+        {
+            if (!header.TryGetValue("seize_hold", out var entry))
+            {
+                return false;
+            }
+
+            if (win != WinCondition.Seize)
+            {
+                throw ErrorAt(entry.Line, "seize_hold: needs win: seize");
+            }
+
+            if (entry.Value != "1")
+            {
+                throw ErrorAt(entry.Line, $"seize_hold: '{entry.Value}' must be 1, the one enemy phase the seize tile is held through");
+            }
+
+            return true;
         }
 
         /// <summary>The <c>region:</c> header (issue 916): one of the region words; absent means the seam.</summary>

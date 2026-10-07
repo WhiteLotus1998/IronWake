@@ -28,6 +28,7 @@ public static class Objective
         var alive = member ? " alive" : "";
         var win = map.Win switch
         {
+            WinCondition.Seize when map.SeizeHold => $"Get {who} to the {SeizeName(map, content)}{alive} and hold it through an enemy phase {by}.",
             WinCondition.Seize => $"Get {who} to the {SeizeName(map, content)}{alive} {by}.",
             WinCondition.Rout => $"Defeat every enemy {by}.",
             WinCondition.DefeatBoss => Arrival(map) is { } arrival ? $"Hold until the boss arrives on turn {arrival.Turn}, then defeat the boss {by}." : $"Defeat the boss {by}.",
@@ -58,6 +59,7 @@ public static class Objective
         var captain = Captain(state, content);
         var rules = map.Win switch
         {
+            WinCondition.Seize when map.SeizeHold => new[] { $"The captain, {captain}, must still stand on the {SeizeName(map, content)} at {Thrones(map)} when a player phase begins: step on, then hold it through the enemy phase. A step on turn {map.TurnLimit} held through its enemy phase wins. Only the captain seizes." },
             WinCondition.Seize => new[] { $"The captain, {captain}, must stand on the {SeizeName(map, content)} at {Thrones(map)}. Only the captain seizes." },
             WinCondition.Escape => new[] { $"The captain, {captain}, must exit from an exit tile ({MapRenderer.ExitGlyph}).{(map.ExitAfterMove ? "" : " A unit that starts its turn on an exit may leave.")} Anyone still on the board is left behind." },
             WinCondition.DefeatBoss when map.BossSpawns().Any() => new[]
@@ -136,7 +138,8 @@ public static class Objective
     /// <summary>
     /// The lines a command's result earns on a Seize map, printed after its events: that the last
     /// enemy is gone and the throne is still the objective, and that a unit other than the captain
-    /// ending a move on the throne seizes nothing. Empty on every other map and once the battle is over.
+    /// ending a move on the throne seizes nothing, and on a <c>seize_hold: 1</c> map (issue 1274) that the
+    /// captain's step onto it wins only if held through the enemy phase. Empty on every other map and once the battle is over.
     /// </summary>
     public static IReadOnlyList<string> Notices(BattleState before, BattleState after, GameContent content, Command command)
     {
@@ -158,9 +161,16 @@ public static class Objective
             lines.Add(UnitNames.Sentence($"{UnitNames.Of(after, content)[unit.Id]} stands on the {SeizeName(map, content)}, but only the captain, {Captain(after, content, letters: false)}, seizes."));
         }
 
+        if (map.SeizeHold && mover is not null && after.Find(mover) is { Side: Side.Player, IsCaptain: true } captain && map.IsThrone(captain.At) && before.Find(mover)?.At != captain.At)
+        {
+            lines.Add($"{Captain(after, content, letters: false)} stands on the {SeizeName(map, content)}. The map is won if {Captain(after, content, letters: false)} still stands there when turn {after.Turn}'s enemy phase ends.");
+        }
+
         if (before.UnitsOf(Side.Enemy).Any() && !after.UnitsOf(Side.Enemy).Any())
         {
-            lines.Add($"No enemy is left, but the map is not won: the captain, {Captain(after, content, letters: false)}, must still stand on the {SeizeName(map, content)} at {Thrones(map)} by the end of turn {map.TurnLimit} (now turn {after.Turn}).");
+            lines.Add(map.SeizeHold
+                ? $"No enemy is left, but the map is not won: the captain, {Captain(after, content, letters: false)}, must still hold the {SeizeName(map, content)} at {Thrones(map)} through an enemy phase by the end of turn {map.TurnLimit} (now turn {after.Turn})."
+                : $"No enemy is left, but the map is not won: the captain, {Captain(after, content, letters: false)}, must still stand on the {SeizeName(map, content)} at {Thrones(map)} by the end of turn {map.TurnLimit} (now turn {after.Turn}).");
         }
 
         return lines;

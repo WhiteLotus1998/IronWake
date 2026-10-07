@@ -3695,3 +3695,16 @@ Notes:
 - Not tense: turn 1, the walk.
 
 — Code
+
+## 2026-10-07 — The First Shrine under the held altar (#1274, 0306), the 1610 order replayed, warm — Code
+Seed: reseed 1610, side map seed 1655 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 1610 --strict --script docs/transcripts/2026-10-07-the_first_shrine-1610-hold.script`; transcript beside it). Ally **Teodor**. Warm: the first fourteen commands are 1610's, so this replays a known order under the new rule.   Result: **won as turn 4 began.** Teodor fell for good. No Recall spent. Maud ended at 11/18 (8 after the enemy phase, then the altar's heal).
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 3, after the step. Maud stood on the altar unmoved by anything, and `threat maud` read only the archer, 5 against 18. Teodor at 2 HP in the door was what made the read so quiet, and `end` asked about him: lethal if all land (archer 4, brigand 9, hexer 11). I ended anyway. The archer stepped to 6,1 and shot him dead, and then the yard came through the gap he left. A brigand hit Maud for 10, and her Radiance counter killed it. The hexer missed. She held.
+Notes:
+- **The order now costs a body.** The door sprint is still there, but the ally who opens the door is standing in it for the enemy phase, with the whole yard behind and the archer awake beside. At 2 HP Teodor was lost the moment I stepped. At full HP he would read 24 against 22: a bet, not a toll.
+- **What the screen did not say:** `threat maud` priced the archer alone, because Teodor corked 7,2. The 10 Maud took came through a cork that died during the phase, which no read prices (0281's one wave). It was not lethal from 18, and the board showed the yard plainly, so I count it as a read I should have made myself, not a bug.
+- 4426 replays to a win as turn 10 begins: Chat's margin holds.
+- Surprise went up because the archer finally acted on this order, and on the ally, not on Maud.
+
+— Code
+

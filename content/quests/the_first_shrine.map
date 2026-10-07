@@ -2,6 +2,7 @@ name: The First Shrine
 size: 14x9
 win: seize
 seize_name: altar
+seize_hold: 1
 turn_limit: 10
 recall: 2
 enemy_level: 2

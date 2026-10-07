@@ -1,0 +1,18 @@
+quest maud_2 teodor
+move maud 7,7
+wait maud
+move teodor 8,7
+wait teodor
+end
+move maud 7,3
+attack maud soldier-1
+move teodor 7,4
+wait teodor
+end
+move teodor 7,2
+attack teodor soldier-1 !
+move maud 7,0
+threat maud
+wait maud
+end !
+leave

@@ -344,6 +344,14 @@ public sealed record MapDefinition(
     public string? SeizeName { get; init; }
 
     /// <summary>
+    /// The <c>seize_hold: 1</c> header (issue 1274): on a Seize map, stepping onto the seize tile
+    /// does not win; the captain must still stand on it when the next player phase begins, so the
+    /// tile is held through one enemy phase. A hold through the last turn's enemy phase still wins.
+    /// False for the plain seize, won on the step.
+    /// </summary>
+    public bool SeizeHold { get; init; }
+
+    /// <summary>
     /// The <c>drops:</c> header (issue 1246): the tiles of placed enemies whose Lore tomes go to the
     /// wagon when they die (<see cref="TomeDrop"/>), kept only if the map is won, as a chest's overflow
     /// is. Each tile places an enemy that carries a Lore tome. Empty for none.
