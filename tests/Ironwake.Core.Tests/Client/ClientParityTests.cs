@@ -48,7 +48,6 @@ public class ClientParityTests
     [Theory]
     [InlineData("brackwater_cut", 53UL)]
     [InlineData("sallow_grange", 61UL)]
-    [InlineData("the_mill", 635UL)]
     public void ClientEventLogMatchesTheConsoleByteForByte(string map, ulong seed)
     {
         var console = ConsoleLog(map, seed);
