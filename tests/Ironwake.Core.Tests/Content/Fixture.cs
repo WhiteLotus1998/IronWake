@@ -143,12 +143,36 @@ internal static class Fixture
         return target;
     }
 
-    private static readonly Lazy<string> ShrineNorthStart = new(() => WithShrineNorthStart(CopyFiles("ironwake-shrine-north-")));
+    private static readonly Lazy<string> ShrineNorthStart = new(() => WithShrineNorthStart(WithShrineArcherHeld(CopyFiles("ironwake-shrine-north-"))));
+
+    private static readonly Lazy<string> ShrineArcherHeld = new(() => WithShrineArcherHeld(CopyFiles("ironwake-shrine-held-")));
+
+    /// <summary>
+    /// A copy of the real content directory whose First Shrine keeps the sanctum archer on Hold in
+    /// the sanctum group, with no <c>wake_on_death:</c> header, and nothing else changed, for a play
+    /// journaled before the archer woke on the door soldier's death (issue 1264). Made once per test run.
+    /// </summary>
+    public static string ShrineArcherHeldContentDirectory() => ShrineArcherHeld.Value;
+
+    private static string WithShrineArcherHeld(string target)
+    {
+        var path = Path.Combine(target, MapFiles.QuestsDirectory, "the_first_shrine.map");
+        var text = File.ReadAllText(path);
+        const string header = "wake_on_death: loft by sanctum\n";
+        const string now = "E archer 5,1 group:loft behavior:guard\n";
+        if (!text.Contains(header, StringComparison.Ordinal) || !text.Contains(now, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{path}: no woken sanctum archer to put back on Hold");
+        }
+
+        File.WriteAllText(path, text.Replace(header, "", StringComparison.Ordinal).Replace(now, "E archer 5,1 group:sanctum behavior:hold\n", StringComparison.Ordinal));
+        return target;
+    }
 
     /// <summary>
     /// A copy of the real content directory whose First Shrine starts Maud and her ally north of
-    /// the water, at 6,5 and 8,5, and nothing else changed, for a play journaled before the start
-    /// moved south (issue 1198). Made once per test run.
+    /// the water, at 6,5 and 8,5, with the sanctum archer on Hold (<see cref="ShrineArcherHeldContentDirectory"/>),
+    /// and nothing else changed, for a play journaled before the start moved south (issue 1198). Made once per test run.
     /// </summary>
     public static string ShrineNorthStartContentDirectory() => ShrineNorthStart.Value;
 

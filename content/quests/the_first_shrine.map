@@ -6,6 +6,7 @@ turn_limit: 10
 recall: 2
 enemy_level: 2
 announce: on
+wake_on_death: loft by sanctum
 brace: on
 
 ^^M###.T.###M^
@@ -22,7 +23,7 @@ units:
 P captain 4,8
 P recruit 10,8
 E soldier 7,1 group:sanctum behavior:hold
-E archer 5,1 group:sanctum behavior:hold
+E archer 5,1 group:loft behavior:guard
 E brigand 2,3 group:yard behavior:guard
 E hexer 11,3 group:yard behavior:guard
 

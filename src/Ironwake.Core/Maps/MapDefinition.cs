@@ -232,6 +232,16 @@ public sealed record MapDefinition(
     public bool ArrivalsWait { get; init; }
 
     /// <summary>
+    /// The <c>wake_on_death:</c> header (issue 1264): Guard groups that sleep through proximity and noise
+    /// and wake only on a death in their own group or the named one (<see cref="WakeCheck"/>). Empty by
+    /// default.
+    /// </summary>
+    public ValueList<DeathWake> DeathWakes { get; init; }
+
+    /// <summary>Whether the <c>wake_on_death:</c> header names <paramref name="group"/>, which then sleeps through proximity and noise (issue 1264).</summary>
+    public bool IsDeaf(string? group) => group is not null && DeathWakes.Any(d => d.Group == group);
+
+    /// <summary>
     /// The <c>one_answer: on</c> header (DESIGN.md 13.29, experiment, samples): a unit that counters
     /// makes no further counter until the next phase begins, on either side (<see cref="Answer"/>). Off by default.
     /// </summary>

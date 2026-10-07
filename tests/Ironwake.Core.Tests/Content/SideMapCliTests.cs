@@ -132,6 +132,7 @@ public class SideMapCliTests
     /// reseeded to 1530 from the 875 save with Wren as the ally: the soldier braces before anyone
     /// reaches the door, Wren holds the turn-2 spawn tile, Radiance runs dry on turn 4, both Recalls
     /// go, and Wren's sword opens the door on turn 9 for Maud to take the altar on turn 10 of 10.
+    /// Played before issue 1264 woke the sanctum archer on the door's fall.
     /// </summary>
     [Fact]
     public void TheShrineFromTheSouthStartIsWonOnTheLastTurn()
@@ -142,7 +143,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1530", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1530", "--script", script, "--strict", "--content", Fixture.ShrineArcherHeldContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Soldier 1 waits and braces\nenemy: end\n-- Enemy phase ends, turn 1 --\n", output);
@@ -163,7 +164,7 @@ public class SideMapCliTests
     /// Code's warm play of Maud's quest 2 from the south start under 0278, reseeded to 1600 from
     /// the 875 save with Ottilie as the ally: Maud breaks the braced door alone with two Radiance
     /// strikes, Ottilie's Aimed Shot kills the hexer and she corks 7,4 at 6 hp, and Maud takes the
-    /// altar on turn 4 of 10.
+    /// altar on turn 4 of 10. Played before issue 1264 woke the sanctum archer on the door's fall.
     /// </summary>
     [Fact]
     public void TheShrineFromTheSouthStartFallsToMaudAloneOnTurnFour()
@@ -174,7 +175,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1600", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1600", "--script", script, "--strict", "--content", Fixture.ShrineArcherHeldContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Reinforcements are blocked: a unit holds 7,8\n", output);
@@ -182,6 +183,38 @@ public class SideMapCliTests
             Assert.Contains("The First Shrine  turn 4 of 10  player phase", output);
             Assert.Contains("Battle won: seize", output);
             Assert.Contains("Maud wins maud_2; Maud receives Maud's Psalter; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
+    /// Code's warm replay of 1600 after issue 1264 woke the sanctum archer on the door's fall: the
+    /// door soldier dies on turn 3, the loft group wakes on the death, the archer takes the altar
+    /// and shoots Maud, and the brigand finishes her. One Recall back to after the hexer's death,
+    /// Maud steps off the door; Ottilie falls on turn 4, Radiance runs dry on turn 5, and Maud
+    /// braces on the fort to the end of turn 10, off the altar.
+    /// </summary>
+    [Fact]
+    public void TheWokenShrineArcherTakesTheAltarWhenTheDoorFalls()
+    {
+        var script = Transcript("2026-10-07-the_first_shrine-1600-woken.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1600", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("The loft group wakes (a death in the sanctum group)\n", output);
+            Assert.Contains("Archer 1 moves 5,1 -> 7,0 via 6,1 6,0\n", output);
+            Assert.Contains("Maud falls at 7,2\n", output);
+            Assert.Contains("Ottilie falls at 9,5\n", output);
+            Assert.Contains("Lost because turn 10 ended and the captain ended at 10,4, not on the altar at 7,0.\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
         finally

@@ -55,6 +55,32 @@ public sealed class HeldBarSampleTests
 
     private static string Read(string output, string header) => output[output.IndexOf(header, StringComparison.Ordinal)..];
 
+    /// <summary>
+    /// Chat's cold chair on the sample with Ottilie (seed 4311, round 424's answer): one Recall to the start,
+    /// neither bar ever stood on, and Maud falls on the fort in turn 4's enemy phase.
+    /// </summary>
+    [Fact]
+    public void ChatsColdChairWithOttilieLosesOnTurnFourWithoutStandingOnABar()
+    {
+        var root = Path.Combine(Path.GetTempPath(), "ironwake-4311-" + Guid.NewGuid().ToString("N"));
+        var content = Path.Combine(root, "content");
+        Copy(Fixture.RealContentDirectory(), content);
+        File.Copy(SamplePath(), Path.Combine(content, "quests", "the_lazar_house.map"), overwrite: true);
+        var script = Path.Combine(Fixture.RealContentDirectory(), "..", "docs", "transcripts", "2026-10-07-the_lazar_house_held-4311-chat.script");
+        try
+        {
+            var output = ConsoleCapture.Run(() => Program.Main(new[] { "campaign", "--from", "the_tollgate", "--seed", "4311", "--script", script, "--strict", "--content", content }));
+
+            Assert.Contains("Maud falls at 3,2\n", output);
+            Assert.DoesNotContain("barred while", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(root, recursive: true);
+        }
+    }
+
     [Fact]
     public void TheBoardNamesTheHolderAndWhatWaitsBehindTheBar()
     {

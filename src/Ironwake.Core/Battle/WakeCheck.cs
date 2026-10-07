@@ -25,7 +25,9 @@ public static class WakeCheck
     /// cause in the order death, noise, proximity. <paramref name="noisy"/> holds the
     /// tiles of every combat the command fought, each with its radius (the content's, or Wren's
     /// <see cref="Signatures.TalkRadius"/>, DESIGN.md 13.18), <paramref name="diedGroups"/> the group
-    /// of every unit it killed. A Guard group a map event spawned during the command
+    /// of every unit it killed. A group the map's <c>wake_on_death:</c> header names (issue 1264) hears
+    /// no noise and sees no one: it wakes on a death in its own group, or on one in the group it names,
+    /// with that group as its caller. A Guard group a map event spawned during the command
     /// (issue 32) is asleep on <paramref name="before"/> and is checked with the rest.
     /// After the three causes, each group that woke calls every sleeping group the map's
     /// <c>wake_links:</c> header links it to (issue 393), transitively, and each called group
@@ -47,9 +49,18 @@ public static class WakeCheck
         {
             var members = after.Units.Where(u => u.Group == group).Select(u => u.At).ToList();
             WakeCause? cause = null;
+            string? by = null;
             if (diedGroups.Contains(group))
             {
                 cause = WakeCause.Death;
+            }
+            else if (before.Map.DeathWakes.FirstOrDefault(d => d.Group == group) is { } deathWake)
+            {
+                if (diedGroups.Contains(deathWake.By))
+                {
+                    cause = WakeCause.Death;
+                    by = deathWake.By;
+                }
             }
             else if (noisy.Any(noise => members.Any(m => m.DistanceTo(noise.At) <= Wind.Radius(after, noise.Radius, noise.At, m))))
             {
@@ -62,7 +73,7 @@ public static class WakeCheck
 
             if (cause is { } why)
             {
-                woke.Add(new GroupWoke(group, why));
+                woke.Add(new GroupWoke(group, why, CalledBy: by));
             }
         }
 
@@ -95,10 +106,16 @@ public static class WakeCheck
     /// The player units on <paramref name="after"/> within the wake radius of a living member of
     /// <paramref name="group"/>, the radius bent by the wind on <paramref name="after"/>'s turn and grown around a
     /// <c>seen_far:</c> unit (issue 973): the
-    /// proximity cause of <see cref="Run"/>, and the units the wind's warning names (issue 957).
+    /// proximity cause of <see cref="Run"/>, and the units the wind's warning names (issue 957). None for a
+    /// <c>wake_on_death:</c> group, which sees no one (issue 1264).
     /// </summary>
     public static IReadOnlyList<BattleUnit> Wakers(BattleState after, GameContent content, string group)
     {
+        if (after.Map.DeathWakes.Any(d => d.Group == group))
+        {
+            return Array.Empty<BattleUnit>();
+        }
+
         var members = after.Units.Where(u => u.Group == group).Select(u => u.At).ToList();
         return after.UnitsOf(Side.Player)
             .Where(p => members.Any(m => m.DistanceTo(p.At) <= Wind.Radius(after, content.WakeRadius, p.At, m) + (after.Map.SeenFar?.For(p) ?? 0)))

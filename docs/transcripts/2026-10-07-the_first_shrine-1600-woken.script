@@ -1,0 +1,38 @@
+quest maud_2 ottilie
+move maud 7,7
+wait maud
+move ottilie 7,8
+wait ottilie
+end
+move maud 7,3
+attack maud soldier-1
+wait ottilie
+end
+move ottilie 7,4
+attack ottilie hexer-1 art aimed_shot
+move maud 7,2
+attack maud soldier-1
+end !
+recall list
+recall 23
+move maud 8,4
+wait maud
+end !
+move ottilie 9,5
+attack ottilie archer-2 art aimed_shot !
+move maud 10,4
+wait maud
+end !
+threat maud
+wait maud
+end !
+wait maud
+end !
+wait maud
+end !
+wait maud
+end !
+wait maud
+end !
+wait maud
+end !
