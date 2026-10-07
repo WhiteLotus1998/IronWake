@@ -2302,11 +2302,11 @@ public sealed class PlaySession
     {
         if (LearnedGate.Read(content, striker, weapon, struck) is { Passes: false } held)
         {
-            return LearnedGate.Refused(Frost.Chills(content, weapon) ? "chill" : Burning.Embers(content, weapon) ? "ember" : Drain.Drains(content, weapon) ? "drain" : "burn", held);
+            return LearnedGate.Refused(Frost.Chills(content, weapon) ? "chill" : Burning.Embers(content, weapon) ? "ember" : Drain.Drains(content, weapon) ? "drain" : Curse.Curses(content, weapon) ? "curse" : "burn", held);
         }
 
         var gate = LearnedGate.Suffix(LearnedGate.Read(content, striker, weapon, struck));
-        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck);
+        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + Curse.ForecastText(content, weapon) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck);
     }
 
     /// <summary>
@@ -2643,6 +2643,11 @@ public sealed class PlaySession
         if (Burning.CardLine(content, unit) is { } burning)
         {
             lines.Add("  " + burning);
+        }
+
+        if (Curse.CardLine(content, unit, UnitNames.Of(state, content)) is { } cursed)
+        {
+            lines.Add("  " + cursed);
         }
 
         if (Armor.CardLine(content, unit) is { } armored)
@@ -3218,6 +3223,10 @@ public sealed class PlaySession
                 return $"{names[i.UnitId]} " + (i.Stacks > 1 ? "burns hotter" : "catches fire") + $": {i.Amount} hp at the start of each of its side's next {SchoolRider.PhasesText(i.Phases)} ({i.Stacks} {(i.Stacks == 1 ? "stack" : "stacks")}" + (i.Laid > 1 ? $", {i.Laid} laid by the hit)" : ")");
             case UnitDrained dr:
                 return $"{names[dr.UnitId]} drains {dr.Amount} from {names[dr.FromUnitId]} (hp {dr.HpAfter})";
+            case UnitCursed cu:
+                return $"{names[cu.UnitId]} is cursed by {names[cu.ByUnitId]}: Hit -{cu.Blind}, and {cu.Amount} hp to {names[cu.ByUnitId]} at the start of each of its side's next {SchoolRider.PhasesText(cu.Phases)}";
+            case CurseTicked ct:
+                return $"the curse takes {ct.Amount} from {names[ct.UnitId]} (hp {ct.HpAfter})" + (ct.CasterId is { } caster ? $"; {names[caster]} heals {ct.Healed} (hp {ct.CasterHpAfter})" : "; its caster is gone, and it heals no one");
             case BurnCashed c:
                 return $"{names[c.ByUnitId]} cashes the burn on {names[c.UnitId]}: {c.Amount} at once (hp {c.HpAfter}), and it burns no more";
             case GroundRaised g:
@@ -3239,7 +3248,7 @@ public sealed class PlaySession
             case StunSkipped sk:
                 return $"{names[sk.UnitId]} is stunned and skips this phase";
             case UnitCleansed uc:
-                return $"{names[uc.UnitId]} is cleansed by {names[uc.ByUnitId]}: " + string.Join(", ", new[] { uc.Burn ? "the burn" : null, uc.Chill ? "the chill" : null, uc.Stun ? "the stun" : null }.Where(p => p is not null)) + " cleared" + (uc.Freed ? "; it may move and act this phase" : "");
+                return $"{names[uc.UnitId]} is cleansed by {names[uc.ByUnitId]}: " + string.Join(", ", new[] { uc.Burn ? "the burn" : null, uc.Chill ? "the chill" : null, uc.Stun ? "the stun" : null, uc.Curse ? "the curse" : null }.Where(p => p is not null)) + " cleared" + (uc.Freed ? "; it may move and act this phase" : "");
             case UnitChilled c:
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
             case UnitFrosted f:

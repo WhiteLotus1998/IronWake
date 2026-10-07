@@ -48,12 +48,18 @@ public enum RiderKind
     /// whose gate it reads; a school's own rider is never a hollow.
     /// </summary>
     Hollow,
+
+    /// <summary>
+    /// A hit curses the target (issue 1328, DECISIONS/0322, <see cref="Core.Curse"/>): it strikes at
+    /// <see cref="SchoolRider.Blind"/> less Hit, and at each of its side's next phase starts loses a tick that heals the caster.
+    /// </summary>
+    Curse,
 }
 
 /// <summary>
 /// A school's rider, from <c>rules.json</c>'s <c>schools</c> block (issue 1243): the shape a tome
 /// of the school takes when it names the kind (issue 1250, <see cref="GameContent.RiderOf"/>). <paramref name="Amount"/> is how hard it
-/// bites and <paramref name="Phases"/> for how many of the struck side's phases; a burn's alone, 0 for
+/// bites and <paramref name="Phases"/> for how many of the struck side's phases; a burn's or a curse's alone, 0 for
 /// a chill, a stun or a raise, whose clocks are fixed (issues 1244, 1245).
 /// </summary>
 public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
@@ -80,15 +86,23 @@ public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
 
     /// <summary>
     /// Whether a tome may name <paramref name="tomeKind"/> on a school whose rider is <paramref name="schoolKind"/>
-    /// though the two differ: an ember on a burn (issue 1279), a sunder (issue 1281) or armor (issue 1282) on a raise, a hollow on a drain (issue 1284).
+    /// though the two differ: an ember on a burn (issue 1279), a sunder (issue 1281) or armor (issue 1282) on a raise, a hollow on a drain (issue 1284),
+    /// and a drain or a hollow on a curse (issue 1328: dark is Curse, Drain Life and Hollow once its rider is the curse).
     /// </summary>
     public static bool Borrows(RiderKind tomeKind, RiderKind schoolKind) =>
-        (tomeKind, schoolKind) is (RiderKind.Ember, RiderKind.Burn) or (RiderKind.Sunder, RiderKind.Raise) or (RiderKind.Armor, RiderKind.Raise) or (RiderKind.Hollow, RiderKind.Drain);
+        (tomeKind, schoolKind) is (RiderKind.Ember, RiderKind.Burn) or (RiderKind.Sunder, RiderKind.Raise) or (RiderKind.Armor, RiderKind.Raise) or (RiderKind.Hollow, RiderKind.Drain)
+            or (RiderKind.Drain, RiderKind.Curse) or (RiderKind.Hollow, RiderKind.Curse);
+
+    /// <summary>
+    /// The Hit a cursed unit loses on every strike and counter while its curse runs (issue 1328, DECISIONS/0322: 30).
+    /// Read only on a <see cref="RiderKind.Curse"/> rider; rules.json <c>blind</c>, required there.
+    /// </summary>
+    public int Blind { get; init; }
 
     /// <summary>A burn rider's <see cref="Cap"/> when rules.json names none.</summary>
     public const int DefaultCap = 4;
 
-    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>, <c>armor</c>, <c>drain</c>, <c>hollow</c>.</summary>
+    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>, <c>armor</c>, <c>drain</c>, <c>hollow</c>, <c>curse</c>.</summary>
     public static string Label(RiderKind kind) => kind.ToString().ToLowerInvariant();
 
     /// <summary>A count of phases as a line says it: <c>one phase</c>, <c>two phases</c>; past nine, in digits.</summary>

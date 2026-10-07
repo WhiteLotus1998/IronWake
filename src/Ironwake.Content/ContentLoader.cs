@@ -1889,7 +1889,8 @@ public static class ContentLoader
     /// knows and its fields: <c>burn</c> with an <c>amount</c> and a count of <c>phases</c>, each at least 1;
     /// <c>chill</c> alone (frozen iron's, issue 1244); <c>stun</c> with the <c>classes</c> whose casters fire
     /// it, at least one, each a class in classes.json; <c>raise</c> with the <c>terrain</c> it lays, a terrain in
-    /// terrain.json every movement type may enter that neither wears nor thaws (issue 1245); <c>drain</c> alone (dark's, issue 1283). A tome of the school carries the rider only when it
+    /// terrain.json every movement type may enter that neither wears nor thaws (issue 1245); <c>drain</c> alone (dark's, issue 1283);
+    /// <c>curse</c>, dark's alone, with an <c>amount</c> and <c>phases</c>, each at least 1, and the <c>blind</c> it takes off Hit, at least 0 (issue 1328). A tome of the school carries the rider only when it
     /// names its kind (issue 1250, <see cref="GameContent.RiderOf"/>).
     /// </summary>
     private static ImmutableSortedDictionary<MagicSchool, SchoolRider> ParseSchoolRiders(EntryNode node, IReadOnlySet<string> knownClasses, ImmutableSortedDictionary<string, Terrain> terrain)
@@ -1941,12 +1942,13 @@ public static class ContentLoader
 
             if (kind == RiderKind.Hollow)
             {
-                throw entry.Error("rider.kind", "a hollow is named by a tome on a school whose rider is drain, never a school's own rider");
+                throw entry.Error("rider.kind", "a hollow is named by a tome on a school whose rider is drain or curse, never a school's own rider");
             }
 
             string[] fields = kind switch
             {
                 RiderKind.Burn => ["kind", "amount", "phases", "cap", "gate"],
+                RiderKind.Curse => ["kind", "amount", "phases", "blind", "gate"],
                 RiderKind.Stun => ["kind", "classes", "gate"],
                 RiderKind.Raise => ["kind", "terrain", "gate"],
                 _ => ["kind", "gate"],
@@ -1959,7 +1961,34 @@ public static class ContentLoader
                 }
             }
 
-            if (kind == RiderKind.Burn)
+            if (kind == RiderKind.Curse && school != MagicSchool.Dark)
+            {
+                throw entry.Error("rider.kind", "a curse is dark's rider alone (DECISIONS/0322)");
+            }
+
+            if (kind == RiderKind.Curse)
+            {
+                var amount = rider.Int("amount");
+                if (amount < 1)
+                {
+                    throw entry.Error("rider.amount", "must be at least 1");
+                }
+
+                var phases = rider.Int("phases");
+                if (phases < 1)
+                {
+                    throw entry.Error("rider.phases", "must be at least 1");
+                }
+
+                var blind = rider.Int("blind");
+                if (blind < 0)
+                {
+                    throw entry.Error("rider.blind", "must be at least 0");
+                }
+
+                builder[school] = new SchoolRider(kind, amount, phases) { Blind = blind };
+            }
+            else if (kind == RiderKind.Burn)
             {
                 var amount = rider.Int("amount");
                 if (amount < 1)

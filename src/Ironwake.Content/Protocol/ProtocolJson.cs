@@ -412,6 +412,25 @@ public static class ProtocolJson
                 w.WriteNumber("amount", dr.Amount);
                 w.WriteNumber("hpAfter", dr.HpAfter);
                 break;
+            case UnitCursed cu:
+                w.WriteString("unit", cu.UnitId);
+                w.WriteString("by", cu.ByUnitId);
+                w.WriteNumber("amount", cu.Amount);
+                w.WriteNumber("phases", cu.Phases);
+                w.WriteNumber("blind", cu.Blind);
+                break;
+            case CurseTicked ct:
+                w.WriteString("unit", ct.UnitId);
+                w.WriteNumber("amount", ct.Amount);
+                w.WriteNumber("hpAfter", ct.HpAfter);
+                if (ct.CasterId is { } caster)
+                {
+                    w.WriteString("caster", caster);
+                    w.WriteNumber("healed", ct.Healed);
+                    w.WriteNumber("casterHpAfter", ct.CasterHpAfter);
+                }
+
+                break;
             case UnitStunned st:
                 w.WriteString("unit", st.UnitId);
                 w.WriteString("by", st.ByUnitId);
@@ -431,6 +450,11 @@ public static class ProtocolJson
                 w.WriteBoolean("burn", uc.Burn);
                 w.WriteBoolean("chill", uc.Chill);
                 w.WriteBoolean("stun", uc.Stun);
+                if (uc.Curse)
+                {
+                    w.WriteBoolean("curse", true);
+                }
+
                 if (uc.Freed)
                 {
                     w.WriteBoolean("freed", true);
@@ -1341,6 +1365,14 @@ public static class ProtocolJson
             w.WriteNumber("burnPhases", unit.BurnPhases);
         }
 
+        if (unit is { CursePhases: > 0, CursedBy: { } cursedBy })
+        {
+            w.WriteNumber("curse", unit.Curse);
+            w.WriteNumber("curseBlind", unit.CurseBlind);
+            w.WriteNumber("cursePhases", unit.CursePhases);
+            w.WriteString("cursedBy", cursedBy);
+        }
+
         if (unit.Stun > 0)
         {
             w.WriteNumber("stun", unit.Stun);
@@ -1617,6 +1649,10 @@ public static class ProtocolJson
             Burn = OptionalInt(e, "burn") ?? 0,
             BurnStacks = OptionalInt(e, "burnStacks") ?? (OptionalInt(e, "burnPhases") > 0 ? 1 : 0),
             BurnPhases = OptionalInt(e, "burnPhases") ?? 0,
+            Curse = OptionalInt(e, "curse") ?? 0,
+            CurseBlind = OptionalInt(e, "curseBlind") ?? 0,
+            CursePhases = OptionalInt(e, "cursePhases") ?? 0,
+            CursedBy = OptionalString(e, "cursedBy"),
             Stun = OptionalInt(e, "stun") ?? 0,
             StunSpent = e.TryGetProperty("stunSpent", out _) && RequiredBool(e, "stunSpent"),
             RaiseSpent = e.TryGetProperty("raiseSpent", out _) && RequiredBool(e, "raiseSpent"),
