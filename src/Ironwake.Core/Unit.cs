@@ -69,6 +69,17 @@ public sealed record Unit(
     public DrakeState? Drake { get; init; }
 
     /// <summary>
+    /// The schools this unit learned from a primer at camp (issue 1246, <see cref="CampaignRecord.Read"/>),
+    /// in the order learned; empty for every enemy template and for a unit that never read one. A
+    /// learned school is reached as a class's is (<see cref="Reaches"/>), but its rider is gated
+    /// (<see cref="LearnedGate"/>).
+    /// </summary>
+    public ValueList<MagicSchool> Learned { get; init; } = ValueList<MagicSchool>.Empty;
+
+    /// <summary>Whether this unit reaches <paramref name="school"/>: its class names it, or it learned it (issue 1246).</summary>
+    public bool Reaches(MagicSchool school, UnitClass unitClass) => unitClass.Reaches(school) || Learned.Contains(school);
+
+    /// <summary>
     /// The one line a unit's card prints under its name (issue 806): who this is, in the content's
     /// words, or null for none. The validator holds it to an item description's rule, one line of
     /// at most 72 characters. It is a template's text and the save does not carry it.
@@ -86,12 +97,14 @@ public sealed record Unit(
     /// Whether this unit may equip <paramref name="weapon"/>: its class uses the type, its rank in the type
     /// reaches the weapon's, a healing spell is not of a type the class strikes with only (issue 704), and
     /// anything else is not of a type the class heals with only (issue 706), and a schooled tome's school is
-    /// one the class reaches (DECISIONS/0296).
+    /// one the unit reaches (DECISIONS/0296; learned, issue 1246), and its Mag (unit and class) is at
+    /// least a grimoire's <see cref="Weapon.MinMag"/> (issue 1246).
     /// </summary>
     public bool CanWield(Weapon weapon, UnitClass unitClass) =>
         unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank
         && (weapon.Heals ? unitClass.CanHealWith(weapon.Type) : unitClass.CanStrikeWith(weapon.Type))
-        && (weapon.School is not { } school || unitClass.Reaches(school));
+        && (weapon.School is not { } school || Reaches(school, unitClass))
+        && (weapon.MinMag is not { } minMag || EffectiveStats(unitClass).Mag >= minMag);
 
     private readonly int _level = Guard(Level, MinLevel, MaxLevel, nameof(Level));
     private readonly int _exp = Guard(Exp, 0, MaxExp, nameof(Exp));

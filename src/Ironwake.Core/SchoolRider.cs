@@ -33,6 +33,14 @@ public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
     /// <summary>The terrain a raise rider lays as its overlay (issue 1245, <see cref="Earthwork"/>); null for any other kind.</summary>
     public string? Terrain { get; init; }
 
+    /// <summary>
+    /// How far a learner's Mag must clear the target's Res for this rider to fire (issue 1246,
+    /// <see cref="LearnedGate"/>): it fires when Mag is above Res plus this. 0 by default. It binds
+    /// only a caster who reaches the school by a primer, never one whose class reaches it. Null is
+    /// no gate at all: a learner's rider fires as a class's does (rules.json <c>"gate": null</c>).
+    /// </summary>
+    public int? Gate { get; init; } = 0;
+
     /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>.</summary>
     public static string Label(RiderKind kind) => kind.ToString().ToLowerInvariant();
 

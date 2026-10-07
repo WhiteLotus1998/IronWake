@@ -1093,7 +1093,7 @@ public sealed record CampaignRecord(
             return ScreenResult.Refused(this, $"{unit.Id} cannot wield {name} ({weapon.Type.Label()}); ranks: {RanksText(unit, unitClass)}");
         }
 
-        if (weapon is not null && MagicSchoolExtensions.SchoolShort(unitClass, weapon) is { } school)
+        if (weapon is not null && MagicSchoolExtensions.SchoolShort(unit, unitClass, weapon) is { } school)
         {
             return ScreenResult.Refused(this, $"{unit.Id} cannot wield {name}: it {school}");
         }
@@ -1208,6 +1208,46 @@ public sealed record CampaignRecord(
 
         var dropped = unit with { Inventory = unit.Inventory.RemoveAt(slot) };
         return new ScreenResult(Replace(dropped), $"{unit.Id} drops {content.ItemName(stack.ItemId)}", true);
+    }
+
+    /// <summary>
+    /// Reads the primer in <paramref name="slot"/> (0-based) of <paramref name="unitId"/> at the camp
+    /// (issue 1246): the unit learns the school it teaches (<see cref="Unit.Learned"/>) for the rest of
+    /// the campaign, and the primer is spent. Refused for a unit not on the roster, an empty slot, an
+    /// item that is not a primer, a class that does not wield Lore, and a school the unit already
+    /// reaches, each with its reason. Earth is never taught; the loader refuses such a primer.
+    /// </summary>
+    public ScreenResult Read(string unitId, int slot, GameContent content)
+    {
+        if (Find(unitId) is not { } unit)
+        {
+            return ScreenResult.Refused(this, $"no unit '{unitId}' on the roster");
+        }
+
+        if (slot < 0 || slot >= unit.Inventory.Count)
+        {
+            return ScreenResult.Refused(this, $"{unit.Id} has no item in slot {slot + 1}");
+        }
+
+        var stack = unit.Inventory.Items[slot];
+        if (!content.Items.TryGetValue(stack.ItemId, out var item) || item.Teaches is not { } school)
+        {
+            return ScreenResult.Refused(this, $"{content.ItemName(stack.ItemId)} is not a primer; only a primer is read");
+        }
+
+        var unitClass = content.Class(unit.ClassId);
+        if (!unitClass.CanUse(WeaponType.Reason))
+        {
+            return ScreenResult.Refused(this, $"{unit.Id} cannot learn from {item.Name}: a {unitClass.Name} does not wield Lore");
+        }
+
+        if (unit.Reaches(school, unitClass))
+        {
+            return ScreenResult.Refused(this, $"{unit.Id} already reaches the {school.Label()} school");
+        }
+
+        var learned = unit with { Inventory = unit.Inventory.RemoveAt(slot), Learned = unit.Learned.Add(school) };
+        return new ScreenResult(Replace(learned), $"{unit.Id} reads {item.Name} and learns the {school.Label()} school; its rider fires only on Mag over the target's Res", true);
     }
 
     /// <summary>

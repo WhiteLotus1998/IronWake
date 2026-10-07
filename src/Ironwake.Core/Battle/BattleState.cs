@@ -80,7 +80,8 @@ public sealed record BattleState(
 
     /// <summary>
     /// What opened chests sent to the wagon (issue 679): the item ids that did not fit in the
-    /// opener's pack, in the order they were taken, each at full uses. The campaign collects them
+    /// opener's pack, and the tomes a <c>drops:</c> enemy carried (issue 1246, <see cref="TomeDrop"/>),
+    /// in the order they were taken, each at full uses. The campaign collects them
     /// only if the map is won (<see cref="CampaignRecord.AfterBattle"/>); a Recall restores the list
     /// with the board.
     /// </summary>

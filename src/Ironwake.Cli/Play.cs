@@ -2187,13 +2187,23 @@ public sealed class PlaySession
     /// holds in front. <c> chills</c> for frozen iron (issue 702, <see cref="Frost"/>), then
     /// <c> burns 2 for two phases</c> for a school's burn (issue 1243, <see cref="Burning"/>). <c> chills</c>
     /// also for an ice tome's chill rider, and <c> stuns</c> (or <c> stun: bosses spared</c>, <c> stun spent</c>)
-    /// for a stun rider in a gated caster's hands (issue 1244, <see cref="Stun"/>).
+    /// for a stun rider in a gated caster's hands (issue 1244, <see cref="Stun"/>). A learned school's
+    /// rider prints its gate (issue 1246, <see cref="LearnedGate"/>): <c> burns 2 for two phases: Mag 6
+    /// over Res 4</c> when it fires, <c> no burn: Mag 4, Res 4</c> when it does not.
     /// </summary>
     public static (string Riders, string CounterRiders) Riders(GameContent content, BattleUnit unit, BattleUnit target, int? slot) =>
         (RiderText(content, unit, Resolver.ChooseWeapon(unit, content, slot).Weapon, target), RiderText(content, target, target.EquippedWeapon(content), unit));
 
-    private static string RiderText(GameContent content, BattleUnit striker, Weapon? weapon, BattleUnit struck) =>
-        (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon) + Stun.ForecastText(content, striker, weapon, struck);
+    private static string RiderText(GameContent content, BattleUnit striker, Weapon? weapon, BattleUnit struck)
+    {
+        if (LearnedGate.Read(content, striker, weapon, struck) is { Passes: false } held)
+        {
+            return LearnedGate.Refused(Frost.Chills(content, weapon) ? "chill" : "burn", held);
+        }
+
+        var gate = LearnedGate.Suffix(LearnedGate.Read(content, striker, weapon, struck));
+        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon) + gate + Stun.ForecastText(content, striker, weapon, struck);
+    }
 
     /// <summary>
     /// The weapon suffixes of a forecast line (DESIGN.md 13.11, issue 313): <c> with Toll Axe</c>
@@ -3022,6 +3032,8 @@ public sealed class PlaySession
                 return $"{names[b.UnitId]} is left behind at {b.At}";
             case KeepsakeLeft k:
                 return $"{Keepsake.Name(k.ItemId, k.FallenId, content)} lies at {k.At}";
+            case TomeDropped t:
+                return $"{names[t.UnitId]} drops {string.Join(", ", t.ItemIds.Select(content.ItemName))}: to the wagon, kept only if the map is won";
             case KeepsakeRecovered k:
                 return $"{names[k.UnitId]} recovers {Keepsake.Name(k.ItemId, k.FallenId, content)}";
             case ChestOpened c:

@@ -38,6 +38,9 @@ public sealed record UnitWaited(string UnitId, bool Braced = false) : GameEvent;
 /// <summary>A fallen player unit's weapon stays on its tile on a <c>keepsakes: on</c> map (DESIGN.md 13.8).</summary>
 public sealed record KeepsakeLeft(string FallenId, string ItemId, Coord At) : GameEvent;
 
+/// <summary>An enemy on a <c>drops:</c> tile died and its Lore tomes went to the wagon, kept only if the map is won (issue 1246, <see cref="TomeDrop"/>).</summary>
+public sealed record TomeDropped(string UnitId, ValueList<string> ItemIds) : GameEvent;
+
 /// <summary>A player unit recovered a fallen ally's weapon; it carries the fallen's name from now on (DESIGN.md 13.8).</summary>
 public sealed record KeepsakeRecovered(string UnitId, string FallenId, string ItemId) : GameEvent;
 

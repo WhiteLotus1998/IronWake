@@ -705,8 +705,8 @@ public static class Resolver
 
         next = Wildfire.AfterCombat(next, unit.Id, weapon, target.At, result.Strikes, events);
         next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
-        next = Frost.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
-        next = Burning.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
+        next = Frost.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
+        next = Burning.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Stun.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Lock.AfterAttack(next, art, unit.Id, target.Id, result.Strikes, events);
         next = Grounding.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
@@ -816,8 +816,8 @@ public static class Resolver
                 break;
             }
 
-            state = Frost.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
-            state = Burning.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
+            state = Frost.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
+            state = Burning.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
             state = Stun.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Grounding.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Windup.AfterCombat(state, content, shooter, struck, strikes, events);
@@ -899,7 +899,9 @@ public static class Resolver
                 : content.Weapon(itemId).Heals ? "a healing spell; use it with item"
                 : content.Weapon(itemId).IsMagic && unit.Unit.Inventory.Items[slot.Value].Uses == 0 ? "spent for this battle"
                 : !content.Class(unit.Unit.ClassId).CanUse(content.Weapon(itemId).Type) ? $"not a weapon a {unit.Unit.ClassId} can use"
-                : MagicSchoolExtensions.SchoolShort(content.Class(unit.Unit.ClassId), content.Weapon(itemId)) ?? RankShort(unit.Unit, content.Weapon(itemId));
+                : MagicSchoolExtensions.SchoolShort(unit.Unit, content.Class(unit.Unit.ClassId), content.Weapon(itemId))
+                    ?? MagicSchoolExtensions.MagShort(unit.Unit, content.Class(unit.Unit.ClassId), content.Weapon(itemId))
+                    ?? RankShort(unit.Unit, content.Weapon(itemId));
             return (unit, null, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot attack with {itemId}: {why}"));
         }
 
@@ -1007,6 +1009,11 @@ public static class Resolver
                 return (state, new Rejection(RejectionReason.ArtRefused, $"{item.Name} is not a healing spell; no art is declared with it"));
             }
 
+            if (item.Teaches is { } school)
+            {
+                return (state, new Rejection(RejectionReason.NotUsable, $"{item.Name} teaches the {school.Label()} school; it is read at camp, not in battle"));
+            }
+
             if (use.TargetId is not null && use.TargetId != unit.Id)
             {
                 return (state, new Rejection(RejectionReason.NotUsable, $"{item.Name} heals its user; it cannot be used on {use.TargetId}"));
@@ -1044,7 +1051,7 @@ public static class Resolver
 
         if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
         {
-            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {stack.ItemId}: {RankShort(unit.Unit, spell)}"));
+            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {stack.ItemId}: {MagicSchoolExtensions.MagShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? RankShort(unit.Unit, spell)}"));
         }
 
         if (stack.Uses == 0)
@@ -1132,7 +1139,7 @@ public static class Resolver
 
         if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
         {
-            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {spell.Id}: " + (MagicSchoolExtensions.SchoolShort(content.Class(unit.Unit.ClassId), spell) ?? RankShort(unit.Unit, spell))));
+            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {spell.Id}: " + (MagicSchoolExtensions.SchoolShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? MagicSchoolExtensions.MagShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? RankShort(unit.Unit, spell))));
         }
 
         var stack = unit.Unit.Inventory.Items[use.Slot];
@@ -1350,10 +1357,12 @@ public static class Resolver
     /// that dies leaves what <see cref="Keepsake.Dropped"/> names on its tile, one
     /// <see cref="KeepsakeLeft"/> each: a player unit its weapon and any keepsake it carried,
     /// an enemy every keepsake it carried (issue 295). Nothing is left on a map without the
-    /// header.
+    /// header. Every death passes here, so a <c>drops:</c> enemy's tomes go to the wagon here
+    /// first, on any map (issue 1246, <see cref="TomeDrop"/>).
     /// </summary>
     private static BattleState LeaveKeepsake(BattleState state, BattleUnit fallen, GameContent content, List<GameEvent> events)
     {
+        state = TomeDrop.After(state, fallen, content, events);
         if (!state.Map.KeepsakesEnabled)
         {
             return state;
@@ -2114,9 +2123,9 @@ public static class Resolver
         for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
         {
             var stack = unit.Unit.Inventory.Items[slot];
-            if (content.Items.ContainsKey(stack.ItemId))
+            if (content.Items.TryGetValue(stack.ItemId, out var item))
             {
-                if (unit.Hp < unit.MaxHp(content))
+                if (item.Teaches is null && unit.Hp < unit.MaxHp(content))
                 {
                     yield return new UseItem(unit.Id, slot);
                 }

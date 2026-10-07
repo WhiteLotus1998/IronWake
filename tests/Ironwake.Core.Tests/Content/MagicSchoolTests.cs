@@ -55,7 +55,7 @@ public class MagicSchoolTests
         {
             foreach (var item in items.Where(Content.Weapons.ContainsKey))
             {
-                Assert.True(MagicSchoolExtensions.SchoolShort(Content.Class(classId), Content.Weapon(item)) is null, $"{id} carries {item}");
+                Assert.True(MagicSchoolExtensions.SchoolShort(Content.Cast[0], Content.Class(classId), Content.Weapon(item)) is null, $"{id} carries {item}");
             }
         }
     }
@@ -104,10 +104,11 @@ public class MagicSchoolTests
     public void TheRefusalNamesTheSchoolAndWhatTheClassReaches()
     {
         var content = Schooled();
+        var mage = content.Units["recruit"] with { ClassId = "pyre" };
 
-        Assert.Equal("needs the lightning school; a Pyre reaches fire", MagicSchoolExtensions.SchoolShort(content.Class("pyre"), content.Weapon("zap")));
-        Assert.Null(MagicSchoolExtensions.SchoolShort(content.Class("pyre"), content.Weapon("spark")));
-        Assert.Null(MagicSchoolExtensions.SchoolShort(content.Class("pyre"), content.Weapon("shove")));
+        Assert.Equal("needs the lightning school; a Pyre reaches fire", MagicSchoolExtensions.SchoolShort(mage, content.Class("pyre"), content.Weapon("zap")));
+        Assert.Null(MagicSchoolExtensions.SchoolShort(mage, content.Class("pyre"), content.Weapon("spark")));
+        Assert.Null(MagicSchoolExtensions.SchoolShort(mage, content.Class("pyre"), content.Weapon("shove")));
     }
 
     [Fact]

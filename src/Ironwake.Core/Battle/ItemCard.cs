@@ -24,13 +24,15 @@ public static class ItemCard
     /// <summary>
     /// The card for <paramref name="id"/>: the name; for a weapon its type and rank (and a tome's school, DECISIONS/0296), Acc, Power (or the
     /// heal for a healing spell), Crit, weight, range, uses and the units it is effective
-    /// against; for a consumable its heal and uses; then the description.
+    /// against; for a consumable its heal and uses, or the school a primer teaches (issue 1246); a grimoire's Mag gate beside its rank; then the description.
     /// </summary>
     public static string Text(GameContent content, string id)
     {
         if (content.Items.TryGetValue(id, out var item))
         {
-            return $"{item.Name}. Heals {item.Heals} HP, {item.Uses} uses. {item.Description}";
+            return item.Teaches is { } teaches
+                ? $"{item.Name}. Teaches the {teaches.Label()} school to a Lore class, read at camp. {item.Description}"
+                : $"{item.Name}. Heals {item.Heals} HP, {item.Uses} uses. {item.Description}";
         }
 
         var weapon = content.Weapon(id);
@@ -38,7 +40,7 @@ public static class ItemCard
         var power = weapon.Heals ? "heals" : $"Power {weapon.Mt}";
         var range = weapon.MinRange == weapon.MaxRange ? $"range {weapon.MinRange}" : $"range {weapon.MinRange}-{weapon.MaxRange}";
         var uses = weapon.IsMagic ? $"{weapon.Durability} uses a battle" : $"{weapon.Durability} uses";
-        var school = weapon.School is { } s ? $", {s.Label()} school" : "";
+        var school = (weapon.School is { } s ? $", {s.Label()} school" : "") + (weapon.MinMag is { } minMag ? $", needs Mag {minMag}" : "");
         var parts = new List<string> { $"{weapon.Name}, {type} {weapon.Rank}{school}. Acc {weapon.Hit}, {power}, Crit {weapon.Crit}, Wt {weapon.Wt}, {range}, {uses}." };
         if (weapon.EffectiveAgainst.Count > 0)
         {

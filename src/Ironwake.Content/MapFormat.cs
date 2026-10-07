@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "seize_name" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "seize_name", "drops" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -35,6 +35,11 @@ public static class MapFormat
         if (map.SeizeName is { } seizeName)
         {
             sb.Append("seize_name: ").Append(seizeName).Append('\n');
+        }
+
+        if (map.Drops.Count > 0)
+        {
+            sb.Append("drops: ").Append(string.Join(' ', map.Drops)).Append('\n');
         }
 
         sb.Append("turn_limit: ").Append(map.TurnLimit).Append('\n');
@@ -441,6 +446,7 @@ public static class MapFormat
             map = map with { HuntWaits = ParseHuntWaits(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
             map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map), SeizeName = ParseSeizeName(header, win) };
+            map = map with { Drops = ParseDrops(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
@@ -490,6 +496,53 @@ public static class MapFormat
             }
 
             return new FreedBond(at, group);
+        }
+
+        /// <summary>
+        /// The <c>drops:</c> header (issue 1246): one or more <c>x,y</c> tiles, each placing an enemy
+        /// that carries a Lore tome, none named twice. Empty when absent.
+        /// </summary>
+        private ValueList<Coord> ParseDrops(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("drops", out var entry))
+            {
+                return ValueList<Coord>.Empty;
+            }
+
+            var tiles = new List<Coord>();
+            foreach (var part in entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+            {
+                var xy = part.Split(',');
+                if (xy.Length != 2 || !int.TryParse(xy[0], out var x) || !int.TryParse(xy[1], out var y))
+                {
+                    throw ErrorAt(entry.Line, $"drops: needs the tiles of enemies that drop their tomes, 'drops: 7,6 9,4', got '{part}'");
+                }
+
+                var at = new Coord(x, y);
+                if (map.Placements.FirstOrDefault(p => p.At == at) is not EnemyPlacement enemy)
+                {
+                    throw ErrorAt(entry.Line, $"drops names {at} but no E line places an enemy there");
+                }
+
+                if (!_content.Units[enemy.TemplateId].Inventory.Items.Any(i => _content.Weapons.TryGetValue(i.ItemId, out var w) && w.Type == WeaponType.Reason))
+                {
+                    throw ErrorAt(entry.Line, $"drops: the enemy at {at} ({enemy.TemplateId}) carries no Lore tome");
+                }
+
+                if (tiles.Contains(at))
+                {
+                    throw ErrorAt(entry.Line, $"drops names {at} twice");
+                }
+
+                tiles.Add(at);
+            }
+
+            if (tiles.Count == 0)
+            {
+                throw ErrorAt(entry.Line, "drops: needs at least one tile");
+            }
+
+            return ValueList<Coord>.From(tiles);
         }
 
         /// <summary>

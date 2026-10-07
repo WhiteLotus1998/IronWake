@@ -818,7 +818,8 @@ public static class EnemyAi
     /// swap out (DESIGN.md 13.19) is scored against the coverer on the ally's tile
     /// (<see cref="CoverRule.Swapped"/>), so the planner prices the swap. A burn rider on either
     /// side's weapon adds its expected ticks to that side's line (issue 1243, <see cref="Burning.Expected"/>),
-    /// weighted by the chance some strike lands; a priced kill leaves no one to burn.
+    /// weighted by the chance some strike lands; a priced kill leaves no one to burn, and a learned
+    /// school's burn its gate holds back adds nothing (issue 1246, <see cref="LearnedGate"/>).
     /// </summary>
     public static double Score(BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target)
     {
@@ -842,7 +843,7 @@ public static class EnemyAi
         var score = (canKill ? KillBonus : 0) + dealt * hit;
         if (!canKill)
         {
-            score += Burning.Expected(content, weapon, target, target.Hp - dealt * hit, Landed(hit, strikes));
+            score += LearnedGate.Fires(content, attacker, weapon, target) ? Burning.Expected(content, weapon, target, target.Hp - dealt * hit, Landed(hit, strikes)) : 0;
         }
 
         if (forecast.Defender.Strikes)
@@ -850,7 +851,7 @@ public static class EnemyAi
             var counterStrikes = forecast.Defender.StrikeCount;
             var taken = Math.Min(attacker.Hp, Expected(forecast.Defender, counterStrikes));
             var counterHit = Combat.HitProbability(forecast.Defender.HitChance, state.Scheme);
-            var burnt = Burning.Expected(content, target.EquippedWeapon(content), attacker, attacker.Hp - taken * counterHit, Landed(counterHit, counterStrikes));
+            var burnt = LearnedGate.Fires(content, target, target.EquippedWeapon(content), attacker) ? Burning.Expected(content, target.EquippedWeapon(content), attacker, attacker.Hp - taken * counterHit, Landed(counterHit, counterStrikes)) : 0;
             score -= (taken * counterHit + burnt) * CounterWeight;
         }
         else
