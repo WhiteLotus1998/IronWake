@@ -1,0 +1,29 @@
+# 0316: The enemy lays Rampart where a ward is struck, and dons armor only with no strike
+
+Date: 2026-10-07. Issue #1286, slice 2 (the planner's earth casts). Source: Lotus's enemy-caster ruling (#1251, 6033129482; DECISIONS/0307), 0312, 0315. Provisional: a Table lean, argued on the PR.
+
+## Context
+
+#1286's step 2 asks the enemy planner to cast "when a chill, a Rampart, a raise is worth more than a strike". Slice 1 (0315) built the raise. The chill already rides a frost tome's strike, because the planner strikes with any tome it carries, so there is no separate cast to choose. The two Item-action casts the enemy never made were Rampart (`Earthwork`, on an ally) and armor (`Armor`, on the caster).
+
+## Decision
+
+- **Rampart (`EnemyAi.Rampart`).** A unit holding a tome naming earth's raise rider, which it can wield with a use left, lays the ground under an ally of its side in place of any strike that is not a kill, ranked after a raise. The ally must meet three conditions:
+  - it stays where it stands this phase, either because it has moved or acted, or because its behavior keeps it on its tile;
+  - it stands on open ground, or on the caster's own earthwork, which a recast refreshes; another caster's earthwork is never taken;
+  - a player unit can strike it next phase, priced as the boss veto prices the player phase (`Exposure.OfBoss` above 0).
+- **Which ally and which tile.** The ally with the most exposure, then the least HP. The caster casts from the tile fewest player units can reach, then the cheapest, as the raise does.
+- **Armor (`EnemyAi.Don`).** A unit wearing no armor, holding an armor tome it can wield with a use left, dons it only in a phase with no strike. It dons on the tile it ends on (its approach tile, or where it stands) if a player unit can strike it there. It never replaces a strike, so 0312's kill criterion reads the cast cleanly.
+- **Why these lines.** A Rampart lasts through the player phase that follows, so it is worth most under an ally the player is about to hit. Placing it under an ally that will still move wastes it. Armor costs Mov for phases. On a unit that could strike, it would trade a sure exchange for a Def bonus the player can simply walk around.
+- **No content.** No shipped class or tome casts either spell. The fixture is the woods archer of `the_tollgate_frost.map`, made an Adept given earth. No gate moves.
+
+## Not built here
+
+- `threat` reads neither cast, as it reads no raise (0315). A caster's line shows its strike or nothing.
+- `Score` does not price the chill.
+- The enemy classes, the placement proposal, and `drops:` wait on Lotus's signature on #1247.
+
+## Kill criterion
+
+- **Rampart.** If a journal shows an earth-shaper that never strikes because some ally is always struck, the Rampart goes behind a strike worth more than the ward's exposure saved: 5 Def times the strikes priced on it.
+- **Armor.** If armor never forces a choice, 0312's levers apply.
