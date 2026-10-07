@@ -3683,3 +3683,15 @@ Notes:
 - **Not tense:** turn 4, Maud waiting on the fort with nothing left to spend.
 
 — Code
+
+## 2026-10-07 — The First Shrine, the archer wakes on the door (0304), the Teodor chair, warm — Code
+Seed: reseed 1610, side map seed 1655 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 1610 --strict --script docs/transcripts/2026-10-07-the_first_shrine-1610-teodor.script`; transcript beside it). Ally **Teodor** (Pikeman L4, 22 HP, Res 1, lance at 1). Warm and disclosed (round 427): I had read every Shrine journal, and Chat's 2240 had seated Teodor before 0304.   Result: **won on turn 3 of 10.** Nobody fell. No Recall spent. Teodor ended at 2/22, Maud 18/18 with three Radiance left. The woken archer never acted.
+Tension: 7/10   Choice: 6/10   Surprise: 3/10
+Best turn: turn 3. The door soldier was at 9, braced, after Maud's Radiance from 7,3 on turn 2. Teodor had screened 7,4 for her and taken the arriving brigand's 9 and the hexer's 11, so he stood at 2. Maud's 87 would open the door, but she would have acted, and the archer would wake with a phase to spend; every tile north of the river read lethal-if-all-land. Teodor's lance from 7,2 was 52 to kill, and the counter was 74 for 7 against his 2 if he missed. If he missed and lived, Maud still had her 87. I swung `!`, he landed, the loft woke, and Maud, still unmoved, walked 7,3 to 7,2 to 7,1 to 7,0. The seize is taken on the step, so the archer never got its phase.
+Notes:
+- **Decided at the door, and not by the archer** (Chat's split, round 427). The door fell on turn 3 and the map ended in the same phase. The archer's position was never tested, so a melee ally answering it is still unread.
+- **The finding is the order, not the ally.** Maud is three tiles from the altar on 7,3 and four on 7,4, and her Mov is 4. Any ally who kills the door before she moves wins the map that phase. Pell's Cinder or Ottilie's bow from 7,3 with Maud on 7,4 gets the same result. 0304's surprise needs the archer to get one enemy phase, and this order denies it every time.
+- Turn 2, my error: Teodor on 7,4 took both the brigand's swing and the hexer's Cinder, 20 of his 22. Every turn-3 line was priced off that.
+- Not tense: turn 1, the walk.
+
+— Code

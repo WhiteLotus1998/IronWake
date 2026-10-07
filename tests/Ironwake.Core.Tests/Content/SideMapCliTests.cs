@@ -256,6 +256,36 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Code's warm Teodor chair on Maud's quest 2 after issue 1266, reseeded to 1610 from the 875
+    /// save: Maud's Radiance takes the braced door to 9 on turn 2, Teodor screens 7,4 and drops to
+    /// 2, then on turn 3 he kills the door from 7,2 at 52 percent before Maud has moved, and she
+    /// walks 7,3 to the altar in the same phase, so the woken loft archer never acts.
+    /// </summary>
+    [Fact]
+    public void AnAllyKillingTheShrineDoorBeforeMaudMovesSeizesBeforeTheWokenArcherActs()
+    {
+        var script = Transcript("2026-10-07-the_first_shrine-1610-teodor.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1610", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Soldier 1 falls at 7,1\nThe loft group wakes (a death in the sanctum group)\n", output);
+            Assert.Contains("Maud moves 7,3 -> 7,0 via 7,2 7,1\n", output);
+            Assert.DoesNotContain("enemy: move archer-1", output);
+            Assert.Contains("Maud wins maud_2; Maud receives Maud's Psalter; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Code's journaled play of Pell's quest 1 (seed 884), from a save at the camp after map 4:
     /// Wren's counter breaks the shieldbearer at the east gate, Pell turns back for the north
     /// chest and is boxed in its door, Wren leaves first, and Pell gets out on turn 6 at 5 hp
