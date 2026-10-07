@@ -1789,9 +1789,9 @@ public static class ContentLoader
                 }
 
                 teaches = node.ParseEnum<MagicSchool>("teaches", node.String("teaches"));
-                if (teaches == MagicSchool.Earth)
+                if (teaches is MagicSchool.Earth or MagicSchool.Dark)
                 {
-                    throw node.Error("teaches", "earth is never taught; only fire, ice and lightning are");
+                    throw node.Error("teaches", $"{teaches.Value.Label()} is never taught; only fire, ice and lightning are");
                 }
             }
             else
@@ -1877,11 +1877,11 @@ public static class ContentLoader
 
     /// <summary>
     /// The schools block of rules.json (issue 1243): an object of school (<c>fire</c>, <c>ice</c>,
-    /// <c>lightning</c>, <c>earth</c>) to an object with an optional <c>rider</c>: a <c>kind</c> Core
+    /// <c>lightning</c>, <c>earth</c>, <c>dark</c>) to an object with an optional <c>rider</c>: a <c>kind</c> Core
     /// knows and its fields: <c>burn</c> with an <c>amount</c> and a count of <c>phases</c>, each at least 1;
     /// <c>chill</c> alone (frozen iron's, issue 1244); <c>stun</c> with the <c>classes</c> whose casters fire
     /// it, at least one, each a class in classes.json; <c>raise</c> with the <c>terrain</c> it lays, a terrain in
-    /// terrain.json every movement type may enter that neither wears nor thaws (issue 1245). A tome of the school carries the rider only when it
+    /// terrain.json every movement type may enter that neither wears nor thaws (issue 1245); <c>drain</c> alone (dark's, issue 1283). A tome of the school carries the rider only when it
     /// names its kind (issue 1250, <see cref="GameContent.RiderOf"/>).
     /// </summary>
     private static ImmutableSortedDictionary<MagicSchool, SchoolRider> ParseSchoolRiders(EntryNode node, IReadOnlySet<string> knownClasses, ImmutableSortedDictionary<string, Terrain> terrain)

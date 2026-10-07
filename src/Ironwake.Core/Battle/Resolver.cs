@@ -715,6 +715,7 @@ public static class Resolver
         next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
         next = Frost.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Burning.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
+        next = Drain.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Stun.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Lock.AfterAttack(next, art, unit.Id, target.Id, result.Strikes, events);
         next = Grounding.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
@@ -817,6 +818,7 @@ public static class Resolver
             shooter = AwardRank(shooter, weapon, strikes, died, events);
             shooter = AwardMastery(shooter, content, events);
             state = state.WithUnit(shooter).WithUnit(struck);
+            state = Drain.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, watcher, target);
             if (died)
             {
                 events.Add(new UnitDied(target.Id, target.Side, target.At));

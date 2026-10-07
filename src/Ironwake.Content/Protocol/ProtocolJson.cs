@@ -375,6 +375,12 @@ public static class ProtocolJson
                 w.WriteString("aimed", rc.AimedId);
                 w.WriteString("by", rc.ByUnitId);
                 break;
+            case UnitDrained dr:
+                w.WriteString("unit", dr.UnitId);
+                w.WriteString("from", dr.FromUnitId);
+                w.WriteNumber("amount", dr.Amount);
+                w.WriteNumber("hpAfter", dr.HpAfter);
+                break;
             case UnitStunned st:
                 w.WriteString("unit", st.UnitId);
                 w.WriteString("by", st.ByUnitId);

@@ -338,6 +338,13 @@ public sealed record UnitIgnited(string UnitId, string ByUnitId, int Amount, int
 public sealed record BurnCashed(string UnitId, string ByUnitId, int Amount, int HpAfter) : GameEvent;
 
 /// <summary>
+/// A tome naming its school's drain rider healed <paramref name="UnitId"/> by <paramref name="Amount"/>, the
+/// HP its hits took off <paramref name="FromUnitId"/> in one combat, up to its max HP; <paramref name="HpAfter"/>
+/// is its HP after (issue 1283, <see cref="Drain"/>).
+/// </summary>
+public sealed record UnitDrained(string UnitId, string FromUnitId, int Amount, int HpAfter) : GameEvent;
+
+/// <summary>
 /// A hit from a stunning caster stunned a unit that survived it (issue 1244, <see cref="Stun"/>): it
 /// skips <paramref name="Side"/>'s next phase, the struck unit's side, and still counters. <paramref name="Next"/>
 /// is true when it was struck on its own side's phase, so the skip falls on that side's phase after this one.
