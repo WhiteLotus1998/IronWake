@@ -306,7 +306,27 @@ public static class Queries
             lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, StrikeForecast(lit, content, carrier, moved, strike), arrives, StrikeTiles(lit, content, enemy, moved), Windup.Raises(lit, weapon)) { LitBy = lighter });
         }
 
-        return lines.Select(l => StrikeWakes(board, content, moved, l) is { Count: > 0 } wakes ? l with { Wakes = ValueList<FightWake>.From(wakes) } : l).ToList();
+        return lines
+            .Select(l => StrikeWakes(board, content, moved, l) is { Count: > 0 } wakes ? l with { Wakes = ValueList<FightWake>.From(wakes) } : l)
+            .Select(l => l with { Casts = CastsInstead(content, moved, l) })
+            .ToList();
+    }
+
+    /// <summary>
+    /// The cast a line's enemy may make in place of its strike (issue 1286, DECISIONS/0316 amended):
+    /// <see cref="EnemyAi.CastsInstead"/> when the strike would not kill the unit it lands on if every hit lands
+    /// (the planner's own kill flag), since the planner never casts over a kill. Null for a kill, a windup raise or a
+    /// held line. The line stays priced and counted: the total is the worst case.
+    /// </summary>
+    private static CastKind? CastsInstead(GameContent content, BattleUnit moved, ThreatLine line)
+    {
+        if (line.Raises || line.HeldBy is not null)
+        {
+            return null;
+        }
+
+        var struck = line.CoveredBy ?? moved;
+        return line.Forecast.AttackerDamageLivedFor(line.Enemy.Hp) >= struck.Hp ? null : EnemyAi.CastsInstead(content, line.Enemy);
     }
 
     /// <summary>
@@ -1074,6 +1094,23 @@ public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon W
     /// total (DECISIONS/0281). Empty when the strike wakes nothing.
     /// </summary>
     public ValueList<FightWake> Wakes { get; init; } = ValueList<FightWake>.Empty;
+
+    /// <summary>
+    /// The cast the enemy may make in place of this strike (issue 1286, DECISIONS/0316 amended): a raiser or an
+    /// earth-shaper casts in place of any strike that is not a kill. The line stays counted, since whether the cast is
+    /// taken depends on the bodies and allies the phase leaves. Null when the strike kills or the enemy casts nothing.
+    /// </summary>
+    public CastKind? Casts { get; init; }
+}
+
+/// <summary>A cast an enemy makes on the board in place of a strike that is not a kill (issue 1286): a raise dead, or a Rampart under an ally.</summary>
+public enum CastKind
+{
+    /// <summary>Raises a fallen unit of its side as a Hollow (<see cref="EnemyAi.Raise"/>).</summary>
+    Raise,
+
+    /// <summary>Lays the earth rider's ground under an ally (<see cref="EnemyAi.Rampart"/>).</summary>
+    Rampart,
 }
 
 /// <summary>

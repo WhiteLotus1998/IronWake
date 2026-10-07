@@ -100,6 +100,18 @@ public static class EnemyAi
         Tome(content, unit, w => Hollow.Raises(content, w) || Earthwork.Rider(content, w) is not null) is not null;
 
     /// <summary>
+    /// The cast <paramref name="unit"/> may make in place of a strike that is not a kill (<see cref="PlanUnit"/>), as
+    /// <c>threat</c> names it (issue 1286, DECISIONS/0316 amended): a raise while it holds a hollow tome it can wield
+    /// with a use left, has not raised this map and has no Hollow standing (<see cref="Raise"/>), else a Rampart while
+    /// it holds an earth raise-rider tome (<see cref="Rampart"/>). Null when it holds neither. Whether the cast is
+    /// taken depends on the bodies and allies the phase leaves, so this names the possibility, never the choice.
+    /// </summary>
+    public static CastKind? CastsInstead(GameContent content, BattleUnit unit) =>
+        !unit.RaiseSpent && unit.Hollow is null && Tome(content, unit, w => Hollow.Raises(content, w)) is not null ? CastKind.Raise
+        : Tome(content, unit, w => Earthwork.Rider(content, w) is not null) is not null ? CastKind.Rampart
+        : null;
+
+    /// <summary>
     /// The enemy that acts next among <paramref name="order"/>, the ids not yet planned in
     /// ascending order: the first of them, unless the map has the <c>pincer: on</c> header and
     /// one of them is an anvil (<see cref="Anvil"/>, issue 419), in which case the first anvil
