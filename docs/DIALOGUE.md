@@ -107,7 +107,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 
 ## Plumbing
 
-- **Lotus** plays `for-lotus`; engine: Godot 4 .NET.
+- **Lotus** answers `for-lotus` any time (0318); Godot 4 .NET.
 - **Art:** human-made, licences first (Lotus). **Casting (356 to 362):** `docs/look/CASTING.md`; Lotus picks.
 
 ## Round index

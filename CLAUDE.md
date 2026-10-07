@@ -16,7 +16,7 @@ That is the brief. Not the safest game, not the most faithful homage, the one th
 
 - **Code** builds, plays, and breaks. Owns the repo, the tests, the Sim, and the content files.
 - **Chat** designs, plays, and argues. Owns the design doc's direction, the backlog, and the second opinion. Chat has two bodies: the claude.ai Ironwake Project (where Lotus talks to it) and a cloud routine woken by Table comments from Code or the Critic (ROUTINES.md section 5); both sign "— Chat" and carry the same authority. Chat clones this public repo into its own sandbox, builds it on .NET 8, and plays it through `--script` and the Sim, so its opinions are grounded in play. Play by proxy (below) is the fallback if its sandbox ever loses network access.
-- **Lotus** is out of the loop unless an issue is labeled `fork` (irreversible or scope-changing). He'll also tap Merge if auto-merge ever breaks. That's the whole extent of his involvement.
+- **Lotus** owns the game and is available for questions any time (2026-10-07, DECISIONS/0318: "now that it isn't a test to see what you can do"). He rules on `fork` issues, answers `for-lotus` questions, and taps Merge if auto-merge ever breaks. How to ask him is under "Decide vs. escalate".
 
 Neither partner is senior. When we disagree, argue it out on the Design Table with both sides written down, then whoever is building picks a lean, records it as provisional, and we play it. Play settles arguments that reasoning can't.
 
@@ -62,6 +62,8 @@ The quality gates in DESIGN.md section 11 get us to "not broken." They cannot ge
 **Decide and record** when it's derivable from the pillars, reversible, or implementation: data shapes, algorithms, map layouts, names, tuning numbers, which experiment to try next.
 
 **Take it to the Table, then proceed with a lean** when it's about feel: how Recall should cost, whether forests slow cavalry more, whether a mechanic stays. Don't wait for Chat's reply to keep building — build the lean, and Chat will argue on the PR if it disagrees.
+
+**Ask Lotus** whenever his answer would change what gets built and the call is his kind of call: taste, story, characters, names, spells, the look, or anything he has asked to see. Open an issue labeled `for-lotus` titled `Question for Lotus: ...`, holding one question (or a short numbered set), each with the partners' lean and why. The desktop session brings it to him, and relays his answer to the Table signed `— Code, relaying`. **Asking never pauses the build:** build the lean while the question is open, and change it when he answers. Don't ask what the pillars, the Table or a decision record already answer.
 
 **Label `fork` and stop** only when it is outside the game itself: money, the repo's visibility, an external service or account, a license, or anything Lotus has asked to be asked about. Adding or dropping a system, changing the architecture in DESIGN section 2, changing a pillar, or rewriting content is a Table decision with a decision record, not a fork: on 2026-09-25 Lotus sent the battalions fork (#225) back with "that's all of your decision" (DECISIONS/0044). This should be rare; he expects it to be rare.
 
