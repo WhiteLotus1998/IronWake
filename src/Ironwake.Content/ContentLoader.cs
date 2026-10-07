@@ -169,6 +169,7 @@ public static class ContentLoader
     /// <summary>
     /// A tome that names a rider (issue 1250) names the kind its school's rider has in rules.json; the
     /// school supplies the amount and phases, so a tome can opt in but never invent its own numbers.
+    /// A tome may name <c>ember</c> where its school's rider is <c>burn</c> (issue 1279).
     /// </summary>
     private static void ValidateTomeRiders(ContentFiles files, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<MagicSchool, SchoolRider> riders)
     {
@@ -184,7 +185,7 @@ public static class ContentLoader
                 throw new ContentException(files.Weapons.Name, weapon.Id, "rider", $"'{SchoolRider.Label(kind)}' but the {school.Label()} school has no rider in {ContentFiles.RulesName}");
             }
 
-            if (rider.Kind != kind)
+            if (rider.Kind != kind && !(kind == RiderKind.Ember && rider.Kind == RiderKind.Burn))
             {
                 throw new ContentException(files.Weapons.Name, weapon.Id, "rider", $"'{SchoolRider.Label(kind)}' but the {school.Label()} school's rider is '{SchoolRider.Label(rider.Kind)}'");
             }
@@ -1906,9 +1907,14 @@ public static class ContentLoader
             }
 
             var kind = System.Enum.GetValues<RiderKind>().First(k => SchoolRider.Label(k) == kindName);
+            if (kind == RiderKind.Ember)
+            {
+                throw entry.Error("rider.kind", "an ember is named by a tome on a school whose rider is burn, never a school's own rider");
+            }
+
             string[] fields = kind switch
             {
-                RiderKind.Burn => ["kind", "amount", "phases", "gate"],
+                RiderKind.Burn => ["kind", "amount", "phases", "cap", "gate"],
                 RiderKind.Stun => ["kind", "classes", "gate"],
                 RiderKind.Raise => ["kind", "terrain", "gate"],
                 _ => ["kind", "gate"],
@@ -1935,7 +1941,13 @@ public static class ContentLoader
                     throw entry.Error("rider.phases", "must be at least 1");
                 }
 
-                builder[school] = new SchoolRider(kind, amount, phases);
+                var cap = rider.Has("cap") ? rider.Int("cap") : SchoolRider.DefaultCap;
+                if (cap < 1)
+                {
+                    throw entry.Error("rider.cap", "must be at least 1");
+                }
+
+                builder[school] = new SchoolRider(kind, amount, phases) { Cap = cap };
             }
             else if (kind == RiderKind.Stun)
             {

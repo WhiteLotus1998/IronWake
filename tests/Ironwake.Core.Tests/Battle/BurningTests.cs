@@ -9,9 +9,11 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// A school's rider and fire's burn (issue 1243, DECISIONS/0297, 0298): the rider's shape is data on
 /// the school in <c>rules.json</c>, a tome carries it only by naming its kind (issue 1250), and a hit (not a miss, not a kill) from a burn
-/// rider's tome leaves the target losing its amount at each of its side's next phase starts, never
-/// below 1, refreshed and never stacked, and never stacked with tile fire. Shipped fire carries burn 2
-/// for two phases, but shipped Cinder is plain fire (round 418), so these tests have Cinder name it.
+/// rider's tome lays a stack of burn on the target, which loses <c>max(1, stacks * amount - Res / 2)</c>
+/// at each of its side's next phase starts, never below 1 HP; each stack refreshes the one count, up to
+/// the cap (issue 1279), never stacked with tile fire, and an ember tome's hit cashes it out. Shipped
+/// fire carries burn 2 for two phases, cap 4, but shipped Cinder is plain fire (round 418), so these
+/// tests have Cinder name it, or name ember.
 /// Played on the sample <c>the_tollgate_frost.map</c>, Pell with Cinder against the woods brigand.
 /// </summary>
 public class BurningTests
@@ -19,6 +21,11 @@ public class BurningTests
     private static readonly GameContent Shipped = ContentLoader.Load(Fixture.RealContentDirectory());
 
     private static readonly SchoolRider FireBurn = new(RiderKind.Burn, 2, 2);
+
+    private static readonly GameContent Embers = Shipped with
+    {
+        Weapons = Shipped.Weapons.SetItem("cinder", Shipped.Weapon("cinder") with { Rider = RiderKind.Ember }),
+    };
 
     private static readonly GameContent Burns = Shipped with
     {
@@ -160,8 +167,8 @@ public class BurningTests
             }
 
             var landed = result.Events.OfType<CombatFought>().Single().Strikes.Any(s => s.AttackerId == "pell" && s.Hit);
-            Assert.Equal(landed ? (2, 2) : (0, 0), (after.Burn, after.BurnPhases));
-            Assert.Equal(landed, result.Events.Contains(new UnitIgnited(brigand.Id, "pell", 2, 2)));
+            Assert.Equal(landed ? (2, 1, 2) : (0, 0, 0), (after.Burn, after.BurnStacks, after.BurnPhases));
+            Assert.Equal(landed, result.Events.Contains(new UnitIgnited(brigand.Id, "pell", 2, 2, 1)));
             hit |= landed;
             miss |= !landed;
         }
@@ -199,7 +206,7 @@ public class BurningTests
 
         var second = Resolver.Apply(player.Next, Burns, new EndPhase());
         Assert.Contains(new UnitBurned(id, 2, hp - 4), second.Events);
-        Assert.Equal((0, 0), (second.Next.Find(id)!.Burn, second.Next.Find(id)!.BurnPhases));
+        Assert.Equal((0, 0, 0), (second.Next.Find(id)!.Burn, second.Next.Find(id)!.BurnStacks, second.Next.Find(id)!.BurnPhases));
 
         var third = Resolver.Apply(Resolver.Apply(second.Next, Burns, new EndPhase()).Next, Burns, new EndPhase());
         Assert.DoesNotContain(third.Events, e => e is UnitBurned);
@@ -211,7 +218,7 @@ public class BurningTests
     public void ABurnNeverTakesAUnitBelowOneHp(int hp, int after)
     {
         var state = Facing();
-        var brigand = Brigand(state) with { Hp = hp, Burn = 2, BurnPhases = 2 };
+        var brigand = Brigand(state) with { Hp = hp, Burn = 2, BurnStacks = 1, BurnPhases = 2 };
         var result = Resolver.Apply(state.WithUnit(brigand), Burns, new EndPhase());
 
         Assert.Equal(after, result.Next.Find(brigand.Id)!.Hp);
@@ -219,16 +226,17 @@ public class BurningTests
     }
 
     [Fact]
-    public void ASecondBurnRefreshesTheCountAndNeverStacks()
+    public void ASecondBurnAddsAStackAndRefreshesTheCount()
     {
         for (ulong seed = 1; seed < 400; seed++)
         {
             var state = Facing(seed);
-            var brigand = Brigand(state) with { Burn = 2, BurnPhases = 1 };
+            var brigand = Brigand(state) with { Burn = 2, BurnStacks = 1, BurnPhases = 1 };
             var result = Resolver.Apply(state.WithUnit(brigand), Burns, new Attack("pell", brigand.Id));
             if (result.Next.Find(brigand.Id) is { } after && result.Events.Any(e => e is UnitIgnited))
             {
-                Assert.Equal((2, 2), (after.Burn, after.BurnPhases));
+                Assert.Equal((2, 2, 2), (after.Burn, after.BurnStacks, after.BurnPhases));
+                Assert.Contains(new UnitIgnited(brigand.Id, "pell", 4, 2, 2), result.Events);
                 return;
             }
         }
@@ -240,7 +248,7 @@ public class BurningTests
     public void ABurningUnitOnAFireTileLosesTheLargerOfTheTwoOnce()
     {
         var state = Facing();
-        var brigand = Brigand(state) with { Burn = 2, BurnPhases = 2 };
+        var brigand = Brigand(state) with { Burn = 2, BurnStacks = 1, BurnPhases = 2 };
         state = state.WithUnit(brigand) with { Map = state.Map.WithTerrain(brigand.At, Wildfire.FireTerrainId) };
         var max = brigand.MaxHp(Burns);
         var tile = state.Map.TerrainAt(brigand.At, Burns).BurnFor(max);
@@ -258,20 +266,21 @@ public class BurningTests
         var state = Facing();
         var (pell, target) = (state.Find("pell")!, Brigand(state));
         var (riders, counterRiders) = PlaySession.Riders(Burns, pell, target, null);
-        Assert.Equal((" burns 2 for two phases", ""), (riders, counterRiders));
+        Assert.Equal((" burn 2 (1 stack, 2 phases)", ""), (riders, counterRiders));
         var forecast = Core.Combat.Forecast(
             Burns.CombatantOf(pell.Unit, pell.EquippedWeapon(Burns), state.Map.TerrainAt(pell.At, Burns), pell.Hp),
             Burns.CombatantOf(target.Unit, target.EquippedWeapon(Burns), state.Map.TerrainAt(target.At, Burns), target.Hp),
             2,
             state.Scheme);
-        Assert.Contains("burns 2 for two phases; counter", PlaySession.ForecastLine(pell, target, forecast, riders: riders));
+        Assert.Contains("burn 2 (1 stack, 2 phases); counter", PlaySession.ForecastLine(pell, target, forecast, riders: riders));
         Assert.Equal(("", ""), PlaySession.Riders(Shipped, pell, target, null));
 
         var (_, result) = Struck();
         var brigand = Brigand(result.Next);
-        Assert.Equal("burning: 2 for two more phases", Burning.CardLine(brigand));
-        Assert.Equal("burning: 2 for one more phase", Burning.CardLine(brigand with { BurnPhases = 1 }));
-        Assert.Null(Burning.CardLine(brigand with { Burn = 0, BurnPhases = 0 }));
+        Assert.Equal("burn 2 (1 stack, 2 phases)", Burning.CardLine(Burns, brigand));
+        Assert.Equal("burn 4 (2 stacks, 1 phase)", Burning.CardLine(Burns, brigand with { BurnStacks = 2, BurnPhases = 1 }));
+        Assert.Null(Burning.CardLine(Burns, brigand with { Burn = 0, BurnStacks = 0, BurnPhases = 0 }));
+        Assert.Equal((" burn 4 (2 stacks, 2 phases)", ""), PlaySession.Riders(Burns, pell, target with { Burn = 2, BurnStacks = 1, BurnPhases = 1 }, null));
     }
 
     [Fact]
@@ -283,10 +292,12 @@ public class BurningTests
 
         var with = EnemyAi.Score(state, Burns, pell, pell.At, brigand);
         var without = EnemyAi.Score(state, Shipped, pell, pell.At, brigand);
-        var already = EnemyAi.Score(state.WithUnit(brigand with { Burn = 2, BurnPhases = 2 }), Burns, pell, pell.At, brigand with { Burn = 2, BurnPhases = 2 });
+        var capped = brigand with { Burn = 2, BurnStacks = SchoolRider.DefaultCap, BurnPhases = 2 };
+        var atCap = EnemyAi.Score(state.WithUnit(capped), Burns, pell, pell.At, capped);
+        var plain = EnemyAi.Score(state.WithUnit(capped), Shipped, pell, pell.At, capped);
 
         Assert.True(with > without, $"{with} against {without}");
-        Assert.Equal(without, already, 6);
+        Assert.Equal(plain, atCap, 6);
     }
 
     [Fact]
@@ -296,6 +307,160 @@ public class BurningTests
         var again = ProtocolJson.ReadState(ProtocolJson.State(result.Next, Burns), Burns);
         var id = Brigand(result.Next).Id;
 
-        Assert.Equal((2, 2), (again.Find(id)!.Burn, again.Find(id)!.BurnPhases));
+        Assert.Equal((2, 1, 2), (again.Find(id)!.Burn, again.Find(id)!.BurnStacks, again.Find(id)!.BurnPhases));
+    }
+
+    [Theory]
+    [InlineData(1, 2, 0, 2)]
+    [InlineData(2, 2, 0, 4)]
+    [InlineData(4, 2, 0, 8)]
+    [InlineData(2, 2, 4, 2)]
+    [InlineData(3, 2, 5, 4)]
+    [InlineData(1, 2, 4, 1)]
+    [InlineData(1, 2, 9, 1)]
+    public void TheTickIsStacksTimesAmountLessHalfTheTargetsResNeverBelowOne(int stacks, int amount, int res, int tick)
+    {
+        var brigand = Brigand(Facing());
+        brigand = brigand with { Unit = brigand.Unit with { Stats = brigand.Unit.Stats with { Res = res } }, Burn = amount, BurnStacks = stacks, BurnPhases = 2 };
+        Assert.Equal(res, Burns.StatsOf(brigand.Unit).Res);
+
+        Assert.Equal(tick, Burning.Tick(Burns, brigand));
+        Assert.Equal(tick * 2, Burning.Owed(Burns, brigand));
+    }
+
+    [Fact]
+    public void StacksBuildOneAHitUpToTheCapAndEachRefreshesTheCount()
+    {
+        var rider = FireBurn with { Cap = 3 };
+        var unit = Brigand(Facing());
+        var stacks = new List<int>();
+        for (var i = 0; i < 5; i++)
+        {
+            unit = Burning.Laid(unit with { BurnPhases = unit.BurnPhases > 0 ? 1 : 0 }, rider);
+            stacks.Add(unit.BurnStacks);
+            Assert.Equal(2, unit.BurnPhases);
+        }
+
+        Assert.Equal([1, 2, 3, 3, 3], stacks);
+        Assert.Equal(1, Burning.Laid(Burning.Ticked(Burning.Ticked(unit)), rider).BurnStacks);
+    }
+
+    [Fact]
+    public void TheCapLoadsFromRulesFourWhenOmittedAndRoundTrips()
+    {
+        var omitted = ContentLoader.Parse(Fixture.Files(rules: RiderRules));
+        var named = ContentLoader.Parse(Fixture.Files(rules: RiderRules.Replace("\"phases\": 2", "\"phases\": 2, \"cap\": 6")));
+
+        Assert.Equal(4, omitted.Riders[MagicSchool.Fire].Cap);
+        Assert.Equal(6, named.Riders[MagicSchool.Fire].Cap);
+        Assert.Equal(6, ContentLoader.Parse(ContentSerializer.Write(named)).Riders[MagicSchool.Fire].Cap);
+        Assert.Equal(4, Shipped.Riders[MagicSchool.Fire].Cap);
+    }
+
+    [Theory]
+    [InlineData("\"phases\": 2", "\"phases\": 2, \"cap\": 0", "rider.cap", "at least 1")]
+    [InlineData("\"kind\": \"burn\", \"amount\": 2, \"phases\": 2", "\"kind\": \"ember\"", "rider.kind", "never a school's own rider")]
+    public void ABadCapOrAnEmberSchoolIsRefusedAtLoad(string from, string to, string field, string why)
+    {
+        var error = Assert.Throws<ContentException>(() => ContentLoader.Parse(Fixture.Files(rules: RiderRules.Replace(from, to))));
+
+        Assert.Contains("schools.fire", error.Message);
+        Assert.Contains(field, error.Message);
+        Assert.Contains(why, error.Message);
+    }
+
+    [Fact]
+    public void AFireTomeNamingEmberLoadsAndReadsTheBurnRidersGate()
+    {
+        var content = ContentLoader.Parse(ShippedWithWeapons(w => w.Replace("\"school\": \"fire\"", "\"school\": \"fire\", \"rider\": \"ember\"")));
+
+        Assert.Equal(RiderKind.Ember, content.Weapon("cinder").Rider);
+        Assert.Equal(FireBurn with { Kind = RiderKind.Ember }, content.RiderOf(content.Weapon("cinder")));
+        Assert.True(Burning.Embers(content, content.Weapon("cinder")));
+        Assert.Null(Burning.Rider(content, content.Weapon("cinder")));
+        Assert.Equal(RiderKind.Ember, ContentLoader.Parse(ContentSerializer.Write(content)).Weapon("cinder").Rider);
+    }
+
+    [Fact]
+    public void AnEmberHitOnABurningUnitCashesWhatItOwesNowAndClearsIt()
+    {
+        for (ulong seed = 1; seed < 400; seed++)
+        {
+            var state = Facing(seed);
+            var brigand = Brigand(state) with { Burn = 2, BurnStacks = 2, BurnPhases = 2 };
+            var owed = Burning.Owed(Embers, brigand);
+            var result = Resolver.Apply(state.WithUnit(brigand), Embers, new Attack("pell", brigand.Id));
+            Assert.True(result.Accepted, result.Rejection?.Message);
+            var landed = result.Events.OfType<CombatFought>().Single().Strikes.Any(s => s.AttackerId == "pell" && s.Hit);
+            if (result.Next.Find(brigand.Id) is not { } after || !landed)
+            {
+                Assert.DoesNotContain(result.Events, e => e is BurnCashed);
+                continue;
+            }
+
+            var cashed = Assert.Single(result.Events.OfType<BurnCashed>());
+            var hpBefore = cashed.HpAfter + cashed.Amount;
+            Assert.Equal(Math.Min(owed, hpBefore - 1), cashed.Amount);
+            Assert.Equal((cashed.HpAfter, 0, 0, 0), (after.Hp, after.Burn, after.BurnStacks, after.BurnPhases));
+            Assert.DoesNotContain(result.Events, e => e is UnitIgnited);
+            return;
+        }
+
+        Assert.Fail("no seed under 400 gave a surviving hit");
+    }
+
+    [Fact]
+    public void AnEmberHitOnAUnitNotBurningCashesNothing()
+    {
+        for (ulong seed = 1; seed < 40; seed++)
+        {
+            var state = Facing(seed);
+            var result = Resolver.Apply(state, Embers, new Attack("pell", Brigand(state).Id));
+
+            Assert.DoesNotContain(result.Events, e => e is BurnCashed or UnitIgnited);
+        }
+    }
+
+    [Fact]
+    public void TheForecastNamesWhatAnEmberCashesAndThePlannerPricesIt()
+    {
+        var state = Facing();
+        var (pell, brigand) = (state.Find("pell")!, Brigand(state));
+        var burning = brigand with { Burn = 2, BurnStacks = 2, BurnPhases = 2 };
+
+        Assert.Equal(" cashes no burn", PlaySession.Riders(Embers, pell, brigand, null).Riders);
+        Assert.Equal($" cashes burn {Burning.Owed(Embers, burning)}", PlaySession.Riders(Embers, pell, burning, null).Riders);
+
+        var cashing = EnemyAi.Score(state.WithUnit(burning), Embers, pell, pell.At, burning);
+        var plain = EnemyAi.Score(state.WithUnit(burning), Shipped, pell, pell.At, burning);
+        Assert.True(cashing > plain, $"{cashing} against {plain}");
+        Assert.Equal(
+            EnemyAi.Score(state, Shipped, pell, pell.At, brigand),
+            EnemyAi.Score(state, Embers, pell, pell.At, brigand),
+            6);
+    }
+
+    [Fact]
+    public void ARecallRestoresTheStacksAHitLaid()
+    {
+        for (ulong seed = 1; seed < 400; seed++)
+        {
+            var state = Facing(seed);
+            var brigand = Brigand(state) with { Burn = 2, BurnStacks = 1, BurnPhases = 1 };
+            state = state.WithUnit(brigand);
+            var result = Resolver.Apply(state, Burns, new Attack("pell", brigand.Id));
+            if (result.Next.Find(brigand.Id) is not { BurnStacks: 2 })
+            {
+                continue;
+            }
+
+            var back = Resolver.Apply(result.Next, Burns, new Recall(0));
+            Assert.True(back.Accepted, back.Rejection?.Message);
+            var restored = back.Next.Find(brigand.Id)!;
+            Assert.Equal((2, 1, 1), (restored.Burn, restored.BurnStacks, restored.BurnPhases));
+            return;
+        }
+
+        Assert.Fail("no seed under 400 gave a surviving hit");
     }
 }

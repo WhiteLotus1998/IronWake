@@ -324,10 +324,18 @@ public sealed record HeirloomTurned(string UnitId, string ItemId, int Stage, str
 
 /// <summary>
 /// A hit from a tome whose school carries a burn rider set a unit that survived it burning (issue 1243,
-/// <see cref="Burning"/>): <paramref name="Amount"/> HP at each of its side's next <paramref name="Phases"/>
-/// phase starts, never below 1. A burn already running is refreshed, never stacked.
+/// <see cref="Burning"/>), or laid another stack on a burn already running (issue 1279): it now has
+/// <paramref name="Stacks"/> stacks and takes <paramref name="Amount"/> HP, its Res read, at each of
+/// its side's next <paramref name="Phases"/> phase starts, never below 1.
 /// </summary>
-public sealed record UnitIgnited(string UnitId, string ByUnitId, int Amount, int Phases) : GameEvent;
+public sealed record UnitIgnited(string UnitId, string ByUnitId, int Amount, int Phases, int Stacks) : GameEvent;
+
+/// <summary>
+/// A hit from a tome that names its school's ember rider cashed out a burning unit that survived it
+/// (issue 1279, <see cref="Burning"/>): it lost <paramref name="Amount"/>, the ticks its burn still
+/// owed, at once and never below 1 HP, and burns no more.
+/// </summary>
+public sealed record BurnCashed(string UnitId, string ByUnitId, int Amount, int HpAfter) : GameEvent;
 
 /// <summary>
 /// A hit from a stunning caster stunned a unit that survived it (issue 1244, <see cref="Stun"/>): it

@@ -17,6 +17,13 @@ public enum RiderKind
 
     /// <summary>Cast on an ally's tile as a support action, it lays a timed terrain overlay there (issue 1245, <see cref="Earthwork"/>).</summary>
     Raise,
+
+    /// <summary>
+    /// A hit on a burning target deals the burn it still owes now and clears it (issue 1279, Last
+    /// Ember's, <see cref="Burning"/>). Only a tome names it, and only where its school's rider is
+    /// <see cref="Burn"/>, whose gate it reads; a school's own rider is never an ember.
+    /// </summary>
+    Ember,
 }
 
 /// <summary>
@@ -41,7 +48,16 @@ public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
     /// </summary>
     public int? Gate { get; init; } = 0;
 
-    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>.</summary>
+    /// <summary>
+    /// The most stacks a burn builds to (issue 1279, DECISIONS/0308): a burning hit adds one, never
+    /// past this. Read only on a <see cref="RiderKind.Burn"/> rider; rules.json <c>cap</c>, 4 when omitted.
+    /// </summary>
+    public int Cap { get; init; } = DefaultCap;
+
+    /// <summary>A burn rider's <see cref="Cap"/> when rules.json names none.</summary>
+    public const int DefaultCap = 4;
+
+    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>.</summary>
     public static string Label(RiderKind kind) => kind.ToString().ToLowerInvariant();
 
     /// <summary>A count of phases as a line says it: <c>one phase</c>, <c>two phases</c>; past nine, in digits.</summary>

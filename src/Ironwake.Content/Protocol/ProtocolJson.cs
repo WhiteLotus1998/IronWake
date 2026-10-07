@@ -339,6 +339,13 @@ public static class ProtocolJson
                 w.WriteString("by", i.ByUnitId);
                 w.WriteNumber("amount", i.Amount);
                 w.WriteNumber("phases", i.Phases);
+                w.WriteNumber("stacks", i.Stacks);
+                break;
+            case BurnCashed c:
+                w.WriteString("unit", c.UnitId);
+                w.WriteString("by", c.ByUnitId);
+                w.WriteNumber("amount", c.Amount);
+                w.WriteNumber("hpAfter", c.HpAfter);
                 break;
             case GroundRaised g:
                 w.WriteString("unit", g.UnitId);
@@ -1245,6 +1252,7 @@ public static class ProtocolJson
         if (unit.BurnPhases > 0)
         {
             w.WriteNumber("burn", unit.Burn);
+            w.WriteNumber("burnStacks", unit.BurnStacks);
             w.WriteNumber("burnPhases", unit.BurnPhases);
         }
 
@@ -1498,6 +1506,7 @@ public static class ProtocolJson
             Pressed = e.TryGetProperty("pressed", out _) && RequiredBool(e, "pressed"),
             Chill = OptionalInt(e, "chill") ?? 0,
             Burn = OptionalInt(e, "burn") ?? 0,
+            BurnStacks = OptionalInt(e, "burnStacks") ?? (OptionalInt(e, "burnPhases") > 0 ? 1 : 0),
             BurnPhases = OptionalInt(e, "burnPhases") ?? 0,
             Stun = OptionalInt(e, "stun") ?? 0,
             StunSpent = e.TryGetProperty("stunSpent", out _) && RequiredBool(e, "stunSpent"),

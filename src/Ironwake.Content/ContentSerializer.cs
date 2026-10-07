@@ -781,6 +781,7 @@ public static class ContentSerializer
                     {
                         writer.WriteNumber("amount", rider.Amount);
                         writer.WriteNumber("phases", rider.Phases);
+                        writer.WriteNumber("cap", rider.Cap);
                     }
 
                     if (rider.Kind == RiderKind.Stun)
