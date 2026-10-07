@@ -816,7 +816,9 @@ public static class EnemyAi
     /// strikes with its equipped weapon; <see cref="PlanUnit"/> scores another slot by
     /// passing the unit with that slot moved to the front. A strike on an ally a cover would
     /// swap out (DESIGN.md 13.19) is scored against the coverer on the ally's tile
-    /// (<see cref="CoverRule.Swapped"/>), so the planner prices the swap.
+    /// (<see cref="CoverRule.Swapped"/>), so the planner prices the swap. A burn rider on either
+    /// side's weapon adds its expected ticks to that side's line (issue 1243, <see cref="Burning.Expected"/>),
+    /// weighted by the chance some strike lands; a priced kill leaves no one to burn.
     /// </summary>
     public static double Score(BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target)
     {
@@ -836,13 +838,20 @@ public static class EnemyAi
         var strikes = forecast.Attacker.StrikeCount;
         var canKill = forecast.AttackerDamageLivedFor(attacker.Hp) >= target.Hp;
         var dealt = Math.Min(target.Hp, Expected(forecast.Attacker, strikes));
-        var score = (canKill ? KillBonus : 0) + dealt * Combat.HitProbability(forecast.Attacker.HitChance, state.Scheme);
+        var hit = Combat.HitProbability(forecast.Attacker.HitChance, state.Scheme);
+        var score = (canKill ? KillBonus : 0) + dealt * hit;
+        if (!canKill)
+        {
+            score += Burning.Expected(content, weapon, target, target.Hp - dealt * hit, Landed(hit, strikes));
+        }
 
         if (forecast.Defender.Strikes)
         {
             var counterStrikes = forecast.Defender.StrikeCount;
             var taken = Math.Min(attacker.Hp, Expected(forecast.Defender, counterStrikes));
-            score -= taken * Combat.HitProbability(forecast.Defender.HitChance, state.Scheme) * CounterWeight;
+            var counterHit = Combat.HitProbability(forecast.Defender.HitChance, state.Scheme);
+            var burnt = Burning.Expected(content, target.EquippedWeapon(content), attacker, attacker.Hp - taken * counterHit, Landed(counterHit, counterStrikes));
+            score -= (taken * counterHit + burnt) * CounterWeight;
         }
         else
         {
@@ -871,6 +880,9 @@ public static class EnemyAi
 
         return false;
     }
+
+    /// <summary>The chance at least one of <paramref name="strikes"/> strikes lands, each at <paramref name="hit"/> (the one hit function's probability).</summary>
+    private static double Landed(double hit, int strikes) => 1 - Math.Pow(1 - hit, strikes);
 
     private static double Expected(SideForecast side, int strikes) => side.CritGrounds ? side.Damage * strikes : side.Damage * (1 + 2 * side.CritChance / 100.0) * strikes;
 

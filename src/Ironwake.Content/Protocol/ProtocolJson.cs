@@ -330,6 +330,12 @@ public static class ProtocolJson
                 w.WriteNumber("def", o.Def);
                 w.WriteNumber("res", o.Res);
                 break;
+            case UnitIgnited i:
+                w.WriteString("unit", i.UnitId);
+                w.WriteString("by", i.ByUnitId);
+                w.WriteNumber("amount", i.Amount);
+                w.WriteNumber("phases", i.Phases);
+                break;
             case UnitChilled c:
                 w.WriteString("unit", c.UnitId);
                 w.WriteString("by", c.ByUnitId);
@@ -1147,6 +1153,12 @@ public static class ProtocolJson
             w.WriteNumber("chill", unit.Chill);
         }
 
+        if (unit.BurnPhases > 0)
+        {
+            w.WriteNumber("burn", unit.Burn);
+            w.WriteNumber("burnPhases", unit.BurnPhases);
+        }
+
         if (unit.LockedBy is { } lockedBy)
         {
             w.WriteString("lockedBy", lockedBy);
@@ -1381,6 +1393,8 @@ public static class ProtocolJson
             VoiceSpoken = OptionalInt(e, "voiceSpoken") ?? 0,
             Pressed = e.TryGetProperty("pressed", out _) && RequiredBool(e, "pressed"),
             Chill = OptionalInt(e, "chill") ?? 0,
+            Burn = OptionalInt(e, "burn") ?? 0,
+            BurnPhases = OptionalInt(e, "burnPhases") ?? 0,
             LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
             Frosted = OptionalInt(e, "frosted") ?? 0,
