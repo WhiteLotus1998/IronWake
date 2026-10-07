@@ -889,7 +889,7 @@ public static class Resolver
                 : content.Weapon(itemId).Heals ? "a healing spell; use it with item"
                 : content.Weapon(itemId).IsMagic && unit.Unit.Inventory.Items[slot.Value].Uses == 0 ? "spent for this battle"
                 : !content.Class(unit.Unit.ClassId).CanUse(content.Weapon(itemId).Type) ? $"not a weapon a {unit.Unit.ClassId} can use"
-                : RankShort(unit.Unit, content.Weapon(itemId));
+                : MagicSchoolExtensions.SchoolShort(content.Class(unit.Unit.ClassId), content.Weapon(itemId)) ?? RankShort(unit.Unit, content.Weapon(itemId));
             return (unit, null, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot attack with {itemId}: {why}"));
         }
 

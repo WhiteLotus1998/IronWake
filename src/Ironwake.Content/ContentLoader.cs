@@ -2276,6 +2276,7 @@ public static class ContentLoader
                 UnlockedBy = node.OptionalString("unlockedBy"),
                 Loses = node.Has("loses") ? node.Enum<SidegradeMeasure>("loses") : null,
                 SingleStrike = node.BoolOr("singleStrike", false),
+                Schools = ParseSchools(node, weapons),
             });
         }
 
@@ -2316,6 +2317,11 @@ public static class ContentLoader
             foreach (var weapon in basis.Weapons.Where(w => !form.CanUse(w)))
             {
                 throw node.Error("weapons", $"must keep every weapon type of '{basisId}'; missing {weapon.ToString().ToLowerInvariant()}");
+            }
+
+            foreach (var school in basis.Schools.Where(s => !form.Reaches(s)))
+            {
+                throw node.Error("schools", $"must keep every school of '{basisId}'; missing {school.Label()}");
             }
 
             var growth = node.Has("growthModifiers") ? basis.GrowthModifiers + form.GrowthModifiers : basis.GrowthModifiers;
@@ -2503,6 +2509,23 @@ public static class ContentLoader
         return new CertificationRequirements(level, ValueList<(WeaponType, WeaponRank)>.From(ranks), stats) { Points = ValueList<(WeaponType, int)>.From(points) };
     }
 
+    /// <summary>A class's optional <c>schools</c> (DECISIONS/0296): the Lore schools it reaches, none repeated, named only by a class that wields Lore.</summary>
+    private static ValueList<MagicSchool> ParseSchools(EntryNode node, List<WeaponType> weapons)
+    {
+        var schools = node.StringArrayOrEmpty("schools").Select(s => node.ParseEnum<MagicSchool>("schools", s)).ToList();
+        if (schools.Distinct().Count() != schools.Count)
+        {
+            throw node.Error("schools", "must not repeat a school");
+        }
+
+        if (schools.Count > 0 && !weapons.Contains(WeaponType.Reason))
+        {
+            throw node.Error("schools", "only a class that wields Lore (reason) reaches a school");
+        }
+
+        return ValueList<MagicSchool>.From(schools);
+    }
+
     private static ImmutableSortedDictionary<string, Weapon> ParseWeapons(ContentFile file)
     {
         var entries = Entries(file, "weapons");
@@ -2620,6 +2643,12 @@ public static class ContentLoader
                 throw node.Error("critBonus", "is only valid when critAgainst names a movement type");
             }
 
+            MagicSchool? school = node.OptionalString("school") is { } schoolName ? node.ParseEnum<MagicSchool>("school", schoolName) : null;
+            if (school is not null && type != WeaponType.Reason)
+            {
+                throw node.Error("school", "only a Lore (reason) tome belongs to a school");
+            }
+
             var heirloom = node.Has("heirloom") ? ReadHeirloom(node, heals || type.IsMagic()) : null;
             var voice = node.Has("voice") ? ReadVoice(node) : null;
 
@@ -2651,6 +2680,7 @@ public static class ContentLoader
                 FrozenIron = node.BoolOr("frozenIron", false),
                 CritAgainst = ValueList<MovementType>.From(critAgainst),
                 CritBonus = critBonus,
+                School = school,
             });
         }
 
@@ -2768,7 +2798,12 @@ public static class ContentLoader
         var unitClass = classes[unit.ClassId];
         for (var i = 0; i < unit.Inventory.Count; i++)
         {
-            if (weapons.TryGetValue(unit.Inventory.Items[i].ItemId, out var weapon) && unitClass.CanUse(weapon.Type) && !unit.CanWield(weapon, unitClass))
+            if (weapons.TryGetValue(unit.Inventory.Items[i].ItemId, out var weapon) && MagicSchoolExtensions.SchoolShort(unitClass, weapon) is { } why)
+            {
+                throw node.Error("inventory[" + i + "].item", $"{unit.Id} carries {weapon.Id}, which {why}");
+            }
+
+            if (weapons.TryGetValue(unit.Inventory.Items[i].ItemId, out weapon) && unitClass.CanUse(weapon.Type) && !unit.CanWield(weapon, unitClass))
             {
                 throw node.Error(
                     "inventory[" + i + "].item",

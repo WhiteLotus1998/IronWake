@@ -1093,6 +1093,11 @@ public sealed record CampaignRecord(
             return ScreenResult.Refused(this, $"{unit.Id} cannot wield {name} ({weapon.Type.Label()}); ranks: {RanksText(unit, unitClass)}");
         }
 
+        if (weapon is not null && MagicSchoolExtensions.SchoolShort(unitClass, weapon) is { } school)
+        {
+            return ScreenResult.Refused(this, $"{unit.Id} cannot wield {name}: it {school}");
+        }
+
         if (unit.Inventory.IsFull)
         {
             return ScreenResult.Refused(this, $"{unit.Id} carries {Inventory.Capacity} items already");

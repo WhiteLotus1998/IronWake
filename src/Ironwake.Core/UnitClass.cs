@@ -91,7 +91,17 @@ public sealed record UnitClass(
     /// </summary>
     public bool SingleStrike { get; init; }
 
+    /// <summary>
+    /// The schools of Lore magic the class reaches (DECISIONS/0296): a schooled tome is wielded only
+    /// in a class that names its school here. Empty for a class that wields no Lore; an advanced form
+    /// keeps every school of its base.
+    /// </summary>
+    public ValueList<MagicSchool> Schools { get; init; } = ValueList<MagicSchool>.Empty;
+
     public bool CanUse(WeaponType type) => Weapons.Contains(type);
+
+    /// <summary>Whether the class reaches <paramref name="school"/> (<see cref="Schools"/>).</summary>
+    public bool Reaches(MagicSchool school) => Schools.Contains(school);
 
     /// <summary>Whether the class may cast a healing spell of <paramref name="type"/>: it uses the type and does not strike only with it.</summary>
     public bool CanHealWith(WeaponType type) => CanUse(type) && !StrikeOnly.Contains(type);

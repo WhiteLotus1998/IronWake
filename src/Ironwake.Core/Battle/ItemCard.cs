@@ -22,7 +22,7 @@ public static class ItemCard
     }
 
     /// <summary>
-    /// The card for <paramref name="id"/>: the name; for a weapon its type and rank, Acc, Power (or the
+    /// The card for <paramref name="id"/>: the name; for a weapon its type and rank (and a tome's school, DECISIONS/0296), Acc, Power (or the
     /// heal for a healing spell), Crit, weight, range, uses and the units it is effective
     /// against; for a consumable its heal and uses; then the description.
     /// </summary>
@@ -38,7 +38,8 @@ public static class ItemCard
         var power = weapon.Heals ? "heals" : $"Power {weapon.Mt}";
         var range = weapon.MinRange == weapon.MaxRange ? $"range {weapon.MinRange}" : $"range {weapon.MinRange}-{weapon.MaxRange}";
         var uses = weapon.IsMagic ? $"{weapon.Durability} uses a battle" : $"{weapon.Durability} uses";
-        var parts = new List<string> { $"{weapon.Name}, {type} {weapon.Rank}. Acc {weapon.Hit}, {power}, Crit {weapon.Crit}, Wt {weapon.Wt}, {range}, {uses}." };
+        var school = weapon.School is { } s ? $", {s.Label()} school" : "";
+        var parts = new List<string> { $"{weapon.Name}, {type} {weapon.Rank}{school}. Acc {weapon.Hit}, {power}, Crit {weapon.Crit}, Wt {weapon.Wt}, {range}, {uses}." };
         if (weapon.EffectiveAgainst.Count > 0)
         {
             parts.Add($"Effective against {string.Join(" and ", weapon.EffectiveAgainst.Select(m => m.ToString().ToLowerInvariant()))}.");
