@@ -73,6 +73,12 @@ public sealed record BattleState(
     public ValueList<RimeTile> Rime { get; init; }
 
     /// <summary>
+    /// The timed terrain overlays on the board (issue 1245, <see cref="Earthwork"/>), each on its clock,
+    /// sorted row-major. A Recall restores the list with the board.
+    /// </summary>
+    public ValueList<TileOverlay> Overlays { get; init; }
+
+    /// <summary>
     /// What opened chests sent to the wagon (issue 679): the item ids that did not fit in the
     /// opener's pack, in the order they were taken, each at full uses. The campaign collects them
     /// only if the map is won (<see cref="CampaignRecord.AfterBattle"/>); a Recall restores the list
@@ -818,6 +824,17 @@ public sealed record BattleState(
             foreach (var tile in Rime)
             {
                 sb.Append(' ').Append(tile.At).Append('/').Append(tile.Side).Append('/').Append(tile.Clock);
+            }
+
+            sb.Append('\n');
+        }
+
+        if (Overlays.Count > 0)
+        {
+            sb.Append("overlays");
+            foreach (var overlay in Overlays)
+            {
+                sb.Append(' ').Append(overlay.At).Append('/').Append(overlay.TerrainId).Append('/').Append(overlay.UnderId).Append('/').Append(overlay.OwnerId).Append('/').Append(overlay.Side).Append('/').Append(overlay.Clock);
             }
 
             sb.Append('\n');

@@ -54,6 +54,7 @@ token_warden_player.png
 token_warden_enemy.png
 token_pikeman_enemy_hooked.png
 token_reaver_enemy_double.png
+tile_earthwork.png
 tile_fire.png
 tile_forest.png
 tile_fort.png

@@ -53,6 +53,7 @@ TERRAIN = {
     "mountain": "77767C", "water": "41667F", "fort": "9FB0C4", "wall": "23272E",
     "throne": "E4E7EA", "fire": "943C0C",
     "planks": "585030", "split_planks": "383010", "rime": "6090C0",
+    "earthwork": "383868",
 }
 PLAYER = hex_rgb("E8A33D")
 PLAYER_DEEP = hex_rgb("9A6420")
@@ -304,6 +305,10 @@ def tile(terrain):
         c.stroke([P(6, 14), P(18, 22), P(30, 16), P(42, 26)], s, crack)
         c.stroke([P(18, 22), P(22, 38)], s, crack)
         c.stroke([P(30, 16), P(34, 6)], s, crack)
+    elif terrain == "earthwork":
+        bank = [P(6, 36), P(14, 16), P(34, 16), P(42, 36)]
+        c.polygon(bank, over(REACH, 0.25))
+        c.stroke([P(14, 16), P(34, 16)], 1.5 * s, over(REACH, 0.5))
     elif terrain in ("planks", "split_planks"):
         seam = over(INK, 0.3)
         for y in (12, 24, 36):

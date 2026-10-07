@@ -41,6 +41,7 @@ public static class LookPalette
         ["planks"] = Hex("585030"),
         ["split_planks"] = Hex("383010"),
         ["rime"] = Hex("6090C0"),
+        ["earthwork"] = Hex("383868"),
     };
 
     /// <summary>
