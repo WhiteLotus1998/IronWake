@@ -17,7 +17,7 @@ Date: 2026-10-07. Issue #1243. Source: Lotus's schools ruling (#1218, 6027545091
 
 ## Measured
 
-`docs/measurements/schools-burn-1243.txt`: `--full --all`, 200 seeds a map, with the rider off (what ships) and on. The full suite, `--smoke` and every transcript pass unchanged with it off.
+`docs/measurements/schools-burn-1243.txt`: `--full --all`, 200 seeds a map, with the rider off (what ships) and on. No gate line is crossed. The tuned Tollgate falls from 169 to 159 wins (losses 31 to 41, gate 4 drop 0.300 to 0.180), the tuned field rises from 138 to 150, and Harrow Weir from 136 to 143; the rest move by 5 or less. With the rider off, the full suite, `--smoke` and every transcript pass unchanged.
 
 ## Open for the Table
 
