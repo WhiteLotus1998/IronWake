@@ -91,12 +91,14 @@ public static class Script
 
     /// <summary>
     /// Plays a script through a fresh client and returns its event log: each command is
-    /// submitted as the player would click it, and each enemy phase is stepped to its end.
+    /// submitted as the player would click it, <c>item</c> and <c>exit</c> through the action
+    /// list and its target pick (<see cref="ApplyByClicks"/>, issue 1308), and each enemy phase
+    /// is stepped to its end.
     /// </summary>
     public static string Play(GameContent content, BattleState state, string script)
     {
         var client = new ClientSession(content, state);
-        Apply(client, script);
+        ApplyByClicks(client, script);
         return client.LogText;
     }
 
