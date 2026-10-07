@@ -19,7 +19,7 @@ public sealed record TileOverlay(Coord At, string TerrainId, string UnderId, str
 /// the caster's next phase. One per caster: a second cast takes the first one up. Whoever stands on it holds
 /// it, either side. It rises only on open ground (<see cref="OpenGround"/>), never on a fort or gate, water,
 /// a wall, a mountain, fire, planks or ice, so geography never retiles a tuned map. It spends one use and
-/// the caster's action and earns no EXP. The enemy never casts it, and <see cref="Resolver.Legal"/> and the
+/// the caster's action and earns no EXP. The enemy lays it in place of a strike that is not a kill (<see cref="EnemyAi.Rampart"/>, issue 1286); <see cref="Resolver.Legal"/> and the
 /// Sim's player do not offer it; both read a raised tile as terrain.
 /// </summary>
 public static class Earthwork

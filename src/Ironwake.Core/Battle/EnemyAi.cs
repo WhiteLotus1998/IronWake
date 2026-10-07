@@ -290,10 +290,10 @@ public static class EnemyAi
         var equipped = unit.EquippedSlot(content);
         var sworn = Sworn(state, unit, known);
         var best = Choose(state, content, unit, tiles, reach, known, playerReach, sworn).Best;
-        if (Raise(state, content, unit, tiles, reach, playerReach) is { } raise
+        if ((Raise(state, content, unit, tiles, reach, playerReach) ?? Rampart(state, content, unit, tiles, reach, playerReach)) is { } cast
             && (best is null || !Kills(state, content, Armed(content, state.Carrying(unit, best.Tile), best.Slot), best.Tile, state.Find(best.TargetId)!)))
         {
-            return raise;
+            return cast;
         }
 
         if (best is not null)
@@ -306,13 +306,13 @@ public static class EnemyAi
 
         if (!mayMove || HoldsTheThrone(state, unit))
         {
-            return new Command[] { Idle(state, content, unit) };
+            return new Command[] { Don(state, content, unit, unit.At) ?? Idle(state, content, unit) };
         }
 
         var veto = BossVetoApplies(state, content, unit);
         var end = End(state, content, unit, weapon, tiles, reach, known, playerReach, sworn, veto);
         var swing = veto ? Choose(state, content, unit, new[] { end }, reach, known, playerReach, sworn, unvetoed: true).Best : null;
-        var last = swing is null ? Idle(state, content, unit) : new Attack(unit.Id, swing.TargetId, swing.Slot == equipped ? null : swing.Slot);
+        var last = swing is null ? Don(state, content, unit, end) ?? Idle(state, content, unit) : new Attack(unit.Id, swing.TargetId, swing.Slot == equipped ? null : swing.Slot);
         return end != unit.At
             ? new Command[] { new Move(unit.Id, end), last }
             : new Command[] { last };
@@ -335,21 +335,7 @@ public static class EnemyAi
             return null;
         }
 
-        var unitClass = content.Class(unit.Unit.ClassId);
-        var slot = -1;
-        Weapon? tome = null;
-        for (var i = 0; i < unit.Unit.Inventory.Count; i++)
-        {
-            var stack = unit.Unit.Inventory.Items[i];
-            if (stack.Uses > 0 && content.Weapons.TryGetValue(stack.ItemId, out var weapon) && Hollow.Raises(content, weapon) && unit.Unit.CanWield(weapon, unitClass))
-            {
-                slot = i;
-                tome = weapon;
-                break;
-            }
-        }
-
-        if (tome is null)
+        if (Tome(content, unit, w => Hollow.Raises(content, w)) is not ({ } tome, var slot))
         {
             return null;
         }
@@ -385,6 +371,99 @@ public static class EnemyAi
 
         var use = new UseItem(unit.Id, slot, chosen.Body.Id);
         return chosen.Tile == unit.At ? new Command[] { use } : new Command[] { new Move(unit.Id, chosen.Tile), use };
+    }
+
+    /// <summary>
+    /// An enemy earth-shaper's Rampart (issue 1286, <see cref="Earthwork"/>, DECISIONS/0316): a unit holding a tome
+    /// naming its school's raise rider that it can wield with a use left lays the rider's ground under an ally of its
+    /// side that will stay where it stands this phase (it has moved or acted, or its behavior keeps it on its tile),
+    /// on open ground or on the unit's own earthwork, which a recast refreshes, and that a player unit can strike next
+    /// phase (<see cref="Exposure.OfBoss"/> above 0, the player phase priced as it can play). It casts in place of any strike that is not a kill, after a raise
+    /// (<see cref="PlanUnit"/>). The ally is the one with the most no-crit exposure, then the least HP; the tile is
+    /// the one fewest player units can reach, then the cheapest, then the first in reach order, as the raise's is
+    /// (<see cref="Raise"/>). The commands are a Move when the tile is not its own, then the Item action naming the
+    /// ally; null when it has no Rampart to lay.
+    /// </summary>
+    public static IReadOnlyList<Command>? Rampart(
+        BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach, IReadOnlyList<Reach> playerReach)
+    {
+        if (Tome(content, unit, w => Earthwork.Rider(content, w) is not null) is not ({ } tome, var slot))
+        {
+            return null;
+        }
+
+        var wards = state.UnitsOf(unit.Side)
+            .Where(ally => ally.Id != unit.Id && (ally.Moved || ally.Acted || state.EffectiveBehavior(ally, content) != Behavior.Aggressive))
+            .Where(ally => Earthwork.At(state, ally.At) is { } overlay
+                ? overlay.OwnerId == unit.Id
+                : Earthwork.OpenGround(state.Map.TerrainAt(ally.At, content)))
+            .Select(ally => (Ally: ally, Exposure: Exposure.OfBoss(state, content, ally, ally.At)))
+            .Where(w => w.Exposure > 0)
+            .OrderByDescending(w => w.Exposure)
+            .ThenBy(w => w.Ally.Hp)
+            .Select(w => w.Ally)
+            .ToList();
+        if (wards.Count == 0)
+        {
+            return null;
+        }
+
+        (Coord Tile, int Exposure, int Cost, BattleUnit Ward)? pick = null;
+        foreach (var tile in tiles)
+        {
+            var ward = wards.FirstOrDefault(w => w.At != tile && tome.InRange(tile.DistanceTo(w.At)));
+            if (ward is null)
+            {
+                continue;
+            }
+
+            var exposure = playerReach.Count(r => r.CanEnd(tile));
+            var cost = reach.CostTo(tile)!.Value;
+            if (pick is null || exposure < pick.Value.Exposure || (exposure == pick.Value.Exposure && cost < pick.Value.Cost))
+            {
+                pick = (tile, exposure, cost, ward);
+            }
+        }
+
+        if (pick is not { } chosen)
+        {
+            return null;
+        }
+
+        var use = new UseItem(unit.Id, slot, chosen.Ward.Id);
+        return chosen.Tile == unit.At ? new Command[] { use } : new Command[] { new Move(unit.Id, chosen.Tile), use };
+    }
+
+    /// <summary>
+    /// An enemy's armor (issue 1286, <see cref="Armor"/>, DECISIONS/0316): a unit with no strike this phase, wearing
+    /// none, holding an armor tome it can wield with a use left, dons it on <paramref name="end"/>, the tile it ends
+    /// on, when a player unit can strike it there (<see cref="Exposure.OfBoss"/> above 0). It never takes the place of a
+    /// strike. The Item action naming no target, or null.
+    /// </summary>
+    public static Command? Don(BattleState state, GameContent content, BattleUnit unit, Coord end)
+    {
+        if (unit.Armor is not null || Tome(content, unit, w => Armor.Armors(content, w)) is not (_, var slot))
+        {
+            return null;
+        }
+
+        return Exposure.OfBoss(state, content, unit, end) > 0 ? new UseItem(unit.Id, slot, null) : null;
+    }
+
+    /// <summary>The first tome in <paramref name="unit"/>'s inventory that <paramref name="kind"/> names, that it can wield with a use left, and its slot; null when none.</summary>
+    private static (Weapon Tome, int Slot)? Tome(GameContent content, BattleUnit unit, Func<Weapon, bool> kind)
+    {
+        var unitClass = content.Class(unit.Unit.ClassId);
+        for (var i = 0; i < unit.Unit.Inventory.Count; i++)
+        {
+            var stack = unit.Unit.Inventory.Items[i];
+            if (stack.Uses > 0 && content.Weapons.TryGetValue(stack.ItemId, out var weapon) && kind(weapon) && unit.Unit.CanWield(weapon, unitClass))
+            {
+                return (weapon, i);
+            }
+        }
+
+        return null;
     }
 
     /// <summary>

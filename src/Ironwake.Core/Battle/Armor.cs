@@ -22,7 +22,7 @@ public sealed record ArmorMark(string SpellId, int Def, int Mov, int Phases);
 /// <see cref="ArmorSpell.Def"/> more Def in every combat (<see cref="Bonus"/>) and <see cref="ArmorSpell.Mov"/> less
 /// Mov, never below 1 (<see cref="Mov"/>), through the caster's next <see cref="ArmorSpell.Phases"/> own phases and
 /// every enemy phase between; it falls as the last of them ends. A recast replaces it. Sunder does not strip it. It is
-/// board state, so Recall restores it. The enemy never casts it, and <see cref="Resolver.Legal"/> and the Sim's
+/// board state, so Recall restores it. The enemy dons it only when it has no strike (<see cref="EnemyAi.Don"/>, issue 1286); <see cref="Resolver.Legal"/> and the Sim's
 /// player do not offer it.
 /// </summary>
 public static class Armor
