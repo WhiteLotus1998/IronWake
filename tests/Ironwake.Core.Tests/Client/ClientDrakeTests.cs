@@ -10,7 +10,7 @@ namespace Ironwake.Core.Tests.Client;
 /// action list that arms a pick taken in steps (the ally, where to fly, where to set it down; the
 /// breath's first tile), and the parity gate drives both through the rows and clicks. The carry's
 /// parity script is the journaled one with turn 2's <c>end</c> confirmed as <c>end !</c>, the
-/// console's lethal ask (issue 1093) having come after it; it sits under <c>tests/parity/samples</c>,
+/// console's lethal ask (issue 1093) having come after it; it sits under <c>tests/parity/clicks</c>,
 /// outside godot-parity's glob, as <c>play</c> resolves map names and not samples.
 /// </summary>
 [Collection("console")]
@@ -48,7 +48,7 @@ public class ClientDrakeTests
     }
 
     [Theory]
-    [InlineData("kestrow_water_carry", "tests/parity/samples/kestrow_water_carry-8051.script", "'s drake carries ")]
+    [InlineData("kestrow_water_carry", "tests/parity/clicks/kestrow_water_carry-8051.script", "'s drake carries ")]
     [InlineData("kestrow_water_rime", "docs/transcripts/2026-10-05-kestrow_water_rime-8051.script", " breathes ")]
     public void ClientEventLogMatchesTheConsoleWithCarryAndBreathTakenByClicks(string sample, string script, string mark)
     {
