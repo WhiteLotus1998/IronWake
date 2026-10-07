@@ -159,7 +159,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `coverFired` | `unit` (the coverer), `ally`, `attacker`, `at` (the tile the coverer now stands on, the ally's), `allyTo` (the ally's new tile), `wouldHaveKilled` (the strike, every hit landing and no crit, would have killed the ally), `counters` (the coverer can answer from there) (DESIGN 13.19, experiment) |
 | `recalled` | `toIndex`, `chargesLeft` |
 | `moveUndone` | `unit`, `from` (where the move had ended), `to` (the start tile it is back on; issue 676) |
-| `itemUsed` | `unit`, `item`, `target`, `usesLeft` |
+| `itemUsed` | `unit`, `item`, `target`, `usesLeft` (`target` is the user for a consumable, armor or an area heal; an area heal's `unitHealed` lines follow, one per unit it reached; issue 1321) |
 | `weaponEquipped` | `unit`, `item` |
 | `artDeclared` | `unit`, `art`, `item` (the weapon it strikes with, or the spell it heals with), `cost` (extra uses, spent hit or miss; issue 68; 0 for a heal art); precedes the `combatFought`, or for a heal art (issue 635) the `itemUsed`, after which the held ally's `unitWaited` follows |
 | `weaponBroke` | `unit`, `item` |

@@ -1092,6 +1092,11 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} has no uses left this battle"));
         }
 
+        if (spell.AreaHeal > 0)
+        {
+            return ApplyAreaHeal(state, content, use, unit, spell, events);
+        }
+
         if (use.TargetId is null)
         {
             return (state, new Rejection(RejectionReason.NoTarget, $"{spell.Name} needs a target: item {unit.Id} {use.Slot} <ally>"));
@@ -1193,6 +1198,52 @@ public static class Resolver
         healer = GainRank(healer, spell.Type, WeaponRanks.PerCombat, events);
         healer = AwardMastery(healer, content, events);
         return (state.WithUnit(healer).WithUnit(cleansed), null);
+    }
+
+    /// <summary>
+    /// The Item action with an area heal (issue 1321 slice 3, <see cref="AreaHeal"/>), checked as a heal is up to the
+    /// target: no art, no target named, and someone wounded within the radius; then every one of them healed, one use and
+    /// the action spent, one heal's EXP earned.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyAreaHeal(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, List<GameEvent> events)
+    {
+        if (use.Art is not null)
+        {
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} heals around its caster; no art is declared with it"));
+        }
+
+        if (use.TargetId is not null)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} heals everyone within {spell.AreaHeal} of {unit.Id}; it names no target: item {unit.Id} {use.Slot}"));
+        }
+
+        var healed = AreaHeal.Healed(state, content, unit, spell);
+        if (healed.Count == 0)
+        {
+            return (state, new Rejection(RejectionReason.NothingToHeal, $"no unit within {spell.AreaHeal} of {unit.Id} is wounded"));
+        }
+
+        var stack = unit.Unit.Inventory.Items[use.Slot];
+        var usesLeft = stack.Uses - 1;
+        events.Add(new ItemUsed(unit.Id, spell.Id, unit.Id, usesLeft));
+        var next = state;
+        foreach (var (ally, hpAfter) in healed)
+        {
+            events.Add(new UnitHealed(ally.Id, hpAfter - ally.Hp, hpAfter));
+            next = next.WithUnit(ally with { Hp = hpAfter });
+        }
+
+        if (usesLeft == 0)
+        {
+            events.Add(new SpellSpent(unit.Id, spell.Id));
+        }
+
+        var caster = next.Find(unit.Id)!;
+        var healer = caster with { Moved = true, Acted = true, Unit = caster.Unit with { Inventory = caster.Unit.Inventory.Replace(use.Slot, stack with { Uses = usesLeft }) } };
+        healer = AwardHealExp(healer, healed.Any(h => h.Unit.Hp * 2 < h.Unit.MaxHp(content)), content, state.Seed, events);
+        healer = GainRank(healer, spell.Type, WeaponRanks.PerCombat, events);
+        healer = AwardMastery(healer, content, events);
+        return (next.WithUnit(healer), null);
     }
 
     /// <summary>
@@ -2351,6 +2402,16 @@ public static class Resolver
             var spell = content.WeaponOf(unit.Unit, content.Weapon(stack.ItemId));
             if (!spell.Heals || !unit.Unit.CanWield(spell, unitClass) || stack.Uses == 0)
             {
+                continue;
+            }
+
+            if (spell.AreaHeal > 0)
+            {
+                if (AreaHeal.Healed(state, content, unit, spell).Count > 0)
+                {
+                    yield return new UseItem(unit.Id, slot);
+                }
+
                 continue;
             }
 

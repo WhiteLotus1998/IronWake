@@ -2887,6 +2887,12 @@ public static class ContentLoader
                 throw node.Error("cleanses", "a cleanse is a healing spell that heals nothing: heals true, no healBase");
             }
 
+            var areaHeal = node.IntOr("areaHeal", 0);
+            if (node.Has("areaHeal") && (areaHeal < 1 || !heals || cleanses))
+            {
+                throw node.Error("areaHeal", "an area heal is a healing spell, never a cleanse, with a radius of at least 1");
+            }
+
             var effectiveNames = node.StringArrayOrEmpty("effective").ToList();
             var effectiveHollows = effectiveNames.Contains(HollowEntry);
             if (effectiveNames.Count(e => e == HollowEntry) > 1)
@@ -3016,6 +3022,7 @@ public static class ContentLoader
                 Armor = armor,
                 BurnStacks = burnStacks,
                 Cleanses = cleanses,
+                AreaHeal = areaHeal,
                 EffectiveAgainstHollows = effectiveHollows,
             });
         }
