@@ -1,0 +1,823 @@
+Campaign, seed 2007, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+-- Before map 4 of 10: The Tollgate; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 8)
+== Keep ==
+Purse: 500
+Rooms: beds: 8/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath applies
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, iron_bow 400, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 4, The Tollgate. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+> quest maud_1 dunstan
+-- The Lazar House --
+The keeper at Sorrel Bend has stopped writing. Maud's order kept the
+lazar house there until the armistice, then called its sisters home and
+left the sick with him. Maud packs the basin. "The carts come at dusk.
+Nobody strips this door till then. You won't be thanked."
+
+(Hold out five turns. The lanes in are announced. A unit that ends its
+move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane
+while it stays there; what the bar blocks waits behind it and comes
+through, one a turn, once the bar is left. The ford south cannot be
+barred.)
+
+Side map: The Lazar House, seed 2030
+Maud goes with Dunstan. This map is lost if Maud falls; who falls here is gone for good.
+  when one of yours stops on 8,1: 8,0 becomes wall while one of yours stays on 8,1; it gives way when 8,1 is left.
+  when one of yours stops on 10,4: 11,4 becomes wall while one of yours stays on 10,4; it gives way when 10,4 is left.
+  turn 2, enemy phase: a brigand arrives at 8,0 (aggressive). A unit or a wall on 8,0 holds it back, and it lands at the first enemy phase that starts with 8,0 open.
+  turn 2, enemy phase: a soldier arrives at 11,4 (aggressive). A unit or a wall on 11,4 holds it back, and it lands at the first enemy phase that starts with 11,4 open.
+  turn 3, enemy phase: an archer arrives at 6,7 (aggressive). A unit or a wall on 6,7 holds it back, and it lands at the first enemy phase that starts with 6,7 open.
+  turn 3, enemy phase: a hexer arrives at 8,0 (aggressive). A unit or a wall on 8,0 holds it back, and it lands at the first enemy phase that starts with 8,0 open.
+  turn 4, enemy phase: a brigand arrives at 11,4 (aggressive). A unit or a wall on 11,4 holds it back, and it lands at the first enemy phase that starts with 11,4 open.
+  turn 5, enemy phase: a brigand arrives at 6,7 (aggressive). A unit or a wall on 6,7 holds it back, and it lands at the first enemy phase that starts with 6,7 open.
+  turn 5, enemy phase: an archer arrives at 11,2 (aggressive). A unit or a wall on 11,2 holds it back, and it lands at the first enemy phase that starts with 11,2 open.
+Objective: Hold out until the end of turn 5. Maud must survive.
+The Lazar House  turn 1 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 ...B.=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         3,4    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move dunstan 5,2
+Dunstan moves 3,4 -> 5,2 via 4,4 5,4 5,3
+The Lazar House  turn 1 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#B......
+ 3 ..#.#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,2    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait dunstan
+Dunstan waits
+The Lazar House  turn 1 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#B......
+ 3 ..#.#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,2    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait maud
+Maud waits
+The Lazar House  turn 1 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#B......
+ 3 ..#.#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,2    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 7,4
+Archer 1 moves 9,6 -> 7,4 via 9,5 9,4 8,4
+enemy: wait archer-1
+Archer 1 waits
+enemy: move brigand-1 6,2
+Brigand 1 moves 8,3 -> 6,2 via 8,2 7,2
+enemy: attack brigand-1 dunstan
+Forecast Brigand 1 -> Dunstan: acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
+Brigand 1 attacks Dunstan
+  Brigand 1 misses Dunstan
+  Dunstan hits Brigand 1 for 11 (hp 11)
+  Brigand 1 hp 11, Dunstan hp 23
+Dunstan gains 10 exp (10)
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Lazar House  turn 2 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#Ba.....
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,2    hp 11/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,2    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move maud 5,1
+Maud moves 3,2 -> 5,1 via 3,1 4,1
+The Lazar House  turn 2 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....A...n.M
+ 2 ..#F#Ba.....
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,2    hp 11/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,2    hp 23/23  Plain
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> attack maud brigand-1
+Forecast Maud -> Brigand 1: acc 98% dmg 11 crit 3%; counter: none
+Maud attacks Brigand 1
+  Maud hits Brigand 1 for 11 (hp 0)
+  Maud hp 17, Brigand 1 hp 0
+Maud gains 30 exp (30)
+Brigand 1 falls at 6,2
+The Lazar House  turn 2 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....A...n.M
+ 2 ..#F#B......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,2    hp 23/23  Plain
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain  done
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move dunstan 8,1
+Dunstan moves 5,2 -> 8,1 via 5,1 6,1 7,1
+The ground changes
+  8,0 becomes Wall
+The Lazar House  turn 2 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^....A..Bn.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain  done
+north bar (8,0): barred while dunstan holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait dunstan
+Dunstan waits
+The Lazar House  turn 2 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^....A..Bn.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain  done
+north bar (8,0): barred while dunstan holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Brigand waits at 8,0 (wall); it lands at the first enemy phase that starts with 8,0 open
+Reinforcements arrive
+  Soldier arrives at 11,4 with the east group, aggressive
+enemy: move archer-1 8,3
+Archer 1 moves 7,4 -> 8,3 via 7,3
+enemy: attack archer-1 dunstan
+Forecast Archer 1 -> Dunstan: acc 87% dmg 3 crit 3%; counter: none
+Archer 1 attacks Dunstan
+  Archer 1 misses Dunstan
+  Archer 1 hp 17, Dunstan hp 23
+enemy: move soldier-1 9,2
+Soldier moves 11,4 -> 9,2 via 11,3 11,2 10,2
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Lazar House  turn 3 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^....A..Bn.M
+ 2 ..#F#....d..
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group east, aggressive
+north bar (8,0): barred while dunstan holds 8,1; waiting: brigand
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move maud 3,2
+Maud moves 5,1 -> 3,2 via 4,1 3,1
+The Lazar House  turn 3 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......Bn.M
+ 2 ..#A#....d..
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group east, aggressive
+north bar (8,0): barred while dunstan holds 8,1; waiting: brigand
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait maud
+Maud waits
+The Lazar House  turn 3 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......Bn.M
+ 2 ..#A#....d..
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group east, aggressive
+north bar (8,0): barred while dunstan holds 8,1; waiting: brigand
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait dunstan
+Dunstan waits
+The Lazar House  turn 3 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......Bn.M
+ 2 ..#A#....d..
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group east, aggressive
+north bar (8,0): barred while dunstan holds 8,1; waiting: brigand
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Archer 2 arrives at 6,7 with the ford group, aggressive
+Hexer waits at 8,0 (wall); it lands at the first enemy phase that starts with 8,0 open
+enemy: attack archer-1 dunstan
+Forecast Archer 1 -> Dunstan: acc 87% dmg 3 crit 3%; counter: none
+Archer 1 attacks Dunstan
+  Archer 1 hits Dunstan for 3 (hp 20)
+  Archer 1 hp 17, Dunstan hp 20
+enemy: move archer-2 6,3
+Archer 2 moves 6,7 -> 6,3 via 6,6 6,5 6,4
+enemy: wait archer-2
+Archer 2 waits
+enemy: move soldier-1 9,1
+Soldier moves 9,2 -> 9,1
+enemy: attack soldier-1 dunstan
+Forecast Soldier -> Dunstan: acc 82% dmg 6 crit 1%; counter: acc 56% dmg 8 crit 0%
+Soldier attacks Dunstan
+  Soldier hits Dunstan for 6 (hp 14)
+  Dunstan misses Soldier
+  Soldier hp 20, Dunstan hp 14
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Lazar House  turn 4 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......Bd.M
+ 2 ..#A#.......
+ 3 ..#.#.e.b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 14/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Hill  group east, aggressive
+north bar (8,0): barred while dunstan holds 8,1; waiting: brigand, hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait maud
+Maud waits
+The Lazar House  turn 4 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......Bd.M
+ 2 ..#A#.......
+ 3 ..#.#.e.b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 14/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Hill  group east, aggressive
+north bar (8,0): barred while dunstan holds 8,1; waiting: brigand, hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait dunstan
+Dunstan waits
+The Lazar House  turn 4 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......Bd.M
+ 2 ..#A#.......
+ 3 ..#.#.e.b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 14/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Hill  group east, aggressive
+north bar (8,0): barred while dunstan holds 8,1; waiting: brigand, hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Reinforcements arrive
+  Brigand 3 arrives at 11,4 with the east group, aggressive
+enemy: attack archer-1 dunstan
+Forecast Archer 1 -> Dunstan: acc 87% dmg 3 crit 3%; counter: none
+Archer 1 attacks Dunstan
+  Archer 1 hits Dunstan for 3 (hp 11)
+  Archer 1 hp 17, Dunstan hp 11
+enemy: move archer-2 7,2
+Archer 2 moves 6,3 -> 7,2 via 6,2
+enemy: attack archer-2 dunstan
+Forecast Archer 2 -> Dunstan: acc 87% dmg 3 crit 3%; counter: none
+Archer 2 attacks Dunstan
+  Archer 2 hits Dunstan for 3 (hp 8)
+  Archer 2 hp 17, Dunstan hp 8
+enemy: move brigand-3 9,2
+Brigand 3 moves 11,4 -> 9,2 via 11,3 11,2 10,2
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: attack soldier-1 dunstan
+Forecast Soldier -> Dunstan: acc 82% dmg 6 crit 1%; counter: acc 56% dmg 8 crit 0%
+Soldier attacks Dunstan
+  Soldier hits Dunstan for 6 (hp 2)
+  Dunstan hits Soldier for 8 (hp 12)
+  Soldier hp 12, Dunstan hp 2
+Dunstan gains 10 exp (20)
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Lazar House  turn 5 of 5  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......Bd.M
+ 2 ..#A#..e.g..
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           7,2    hp 17/17  Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          9,2    hp 22/22  Plain  group east, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 2/23   Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         9,1    hp 12/20  Hill  group east, aggressive
+north bar (8,0): barred while dunstan holds 8,1; waiting: brigand, hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> recall 29
+Recalled to state 29; 1 charge left
+Undone: gives back 10 exp, 8 enemy hp; returns 12 hp to Dunstan, Brigand 3 not yet arrived
+The rolls do not change: the same attack will roll the same
+The Lazar House  turn 4 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......Bd.M
+ 2 ..#A#.......
+ 3 ..#.#.e.b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         8,1    hp 14/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Hill  group east, aggressive
+north bar (8,0): barred while dunstan holds 8,1; waiting: brigand, hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move dunstan 4,1
+Dunstan moves 8,1 -> 4,1 via 7,1 6,1 5,1
+North bar gives way: nobody holds 8,1
+  8,0 becomes Plain
+The Lazar House  turn 4 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...B....d.M
+ 2 ..#A#.......
+ 3 ..#.#.e.b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 14/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Hill  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1; waiting: brigand, hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move maud 3,1
+Maud moves 3,2 -> 3,1
+The Lazar House  turn 4 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..AB....d.M
+ 2 ..#F#.......
+ 3 ..#.#.e.b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 14/23  Plain
+A  maud             Maud L1 chaplain           3,1    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Hill  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1; waiting: brigand, hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> item maud 2 dunstan
+Maud uses Salve on dunstan (7 left)
+Dunstan heals 7 (hp 21)
+Maud gains 11 exp (41)
+The Lazar House  turn 4 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..AB....d.M
+ 2 ..#F#.......
+ 3 ..#.#.e.b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 21/23  Plain
+A  maud             Maud L1 chaplain           3,1    hp 17/17  Plain  captain  done
+d  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Hill  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1; waiting: brigand, hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait dunstan
+Dunstan waits
+The Lazar House  turn 4 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..AB....d.M
+ 2 ..#F#.......
+ 3 ..#.#.e.b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 21/23  Plain  done
+A  maud             Maud L1 chaplain           3,1    hp 17/17  Plain  captain  done
+d  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Hill  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1; waiting: brigand, hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Reinforcements arrive
+  Brigand 2 arrives at 8,0 with the north group, aggressive
+Reinforcements arrive
+  Brigand 3 arrives at 11,4 with the east group, aggressive
+enemy: move archer-1 6,1
+Archer 1 moves 8,3 -> 6,1 via 8,2 8,1 7,1
+enemy: attack archer-1 dunstan
+Forecast Archer 1 -> Dunstan: acc 87% dmg 3 crit 3%; counter: none
+Archer 1 attacks Dunstan
+  Archer 1 hits Dunstan for 3 (hp 18)
+  Archer 1 hp 17, Dunstan hp 18
+enemy: move archer-2 5,2
+Archer 2 moves 6,3 -> 5,2 via 6,2
+enemy: attack archer-2 dunstan
+Forecast Archer 2 -> Dunstan: acc 87% dmg 3 crit 3%; counter: none
+Archer 2 attacks Dunstan
+  Archer 2 hits Dunstan for 3 (hp 15)
+  Archer 2 hp 17, Dunstan hp 15
+enemy: move brigand-2 5,1
+Brigand 2 moves 8,0 -> 5,1 via 8,1 7,1 6,1
+enemy: attack brigand-2 dunstan
+Forecast Brigand 2 -> Dunstan: acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
+Brigand 2 attacks Dunstan
+  Brigand 2 hits Dunstan for 8 (hp 7)
+  Dunstan hits Brigand 2 for 11 (hp 11)
+  Brigand 2 hp 11, Dunstan hp 7
+Dunstan gains 10 exp (20)
+enemy: move brigand-3 7,4
+Brigand 3 moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move soldier-1 7,0
+Soldier moves 9,1 -> 7,0 via 8,1 8,0
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Lazar House  turn 5 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^d.^^M
+ 1 ^..ABcb..n.M
+ 2 ..#F#e......
+ 3 ..#.#....^..
+ 4 .....==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,2    hp 17/17  Plain  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 11/22  Plain  group north, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 22/22  Road  group east, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 7/23   Plain
+A  maud             Maud L1 chaplain           3,1    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         7,0    hp 20/20  Forest  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1; waiting: hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move maud 3,2
+Maud moves 3,1 -> 3,2
+The Lazar House  turn 5 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^d.^^M
+ 1 ^...Bcb..n.M
+ 2 ..#A#e......
+ 3 ..#.#....^..
+ 4 .....==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,2    hp 17/17  Plain  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 11/22  Plain  group north, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 22/22  Road  group east, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 7/23   Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         7,0    hp 20/20  Forest  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1; waiting: hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> wait maud
+Maud waits
+The Lazar House  turn 5 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^d.^^M
+ 1 ^...Bcb..n.M
+ 2 ..#A#e......
+ 3 ..#.#....^..
+ 4 .....==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,2    hp 17/17  Plain  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 11/22  Plain  group north, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 22/22  Road  group east, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 7/23   Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         7,0    hp 20/20  Forest  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1; waiting: hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> move dunstan 3,1
+Dunstan moves 4,1 -> 3,1
+The Lazar House  turn 5 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^d.^^M
+ 1 ^..B.cb..n.M
+ 2 ..#A#e......
+ 3 ..#.#....^..
+ 4 .....==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,2    hp 17/17  Plain  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 11/22  Plain  group north, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 22/22  Road  group east, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 7/23   Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         7,0    hp 20/20  Forest  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1; waiting: hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> threat maud
+Threat on Maud at 3,2 (Fort):
+  Archer 1 from 4,1 with Iron Bow (slot 1): acc 65% dmg 6 crit 0%; counter: acc 97% dmg 10 crit 2% (Radiance 4 of 5 left)
+  Archer 2 from 5,2 with Iron Bow (slot 1): acc 65% dmg 6 crit 0%; counter: acc 97% dmg 10 crit 2% (Radiance 4 of 5 left)
+  If all land: 12 against 17 hp
+> wait dunstan
+Dunstan waits
+The Lazar House  turn 5 of 5  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^d.^^M
+ 1 ^..B.cb..n.M
+ 2 ..#A#e......
+ 3 ..#.#....^..
+ 4 .....==g====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Plain  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,2    hp 17/17  Plain  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 11/22  Plain  group north, aggressive
+g  brigand-3        Brigand L1 reaver          7,4    hp 22/22  Road  group east, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 7/23   Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         7,0    hp 20/20  Forest  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1; waiting: hexer
+east bar (11,4): open, barred only while one of yours holds 10,4
+> end !
+Lethal if all land: Dunstan (Archer 1 for 3, Brigand 2 for 8, Hexer for 11, against 7 hp)
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Reinforcements arrive
+  Hexer arrives at 8,0 with the north group, aggressive
+Reinforcements arrive
+  Brigand 4 arrives at 6,7 with the ford group, aggressive
+Reinforcements arrive
+  Archer 3 arrives at 11,2 with the east group, aggressive
+enemy: move archer-1 4,0
+Archer 1 moves 6,1 -> 4,0 via 5,1 4,1
+enemy: attack archer-1 dunstan
+Forecast Archer 1 -> Dunstan: acc 87% dmg 3 crit 3%; counter: none
+Archer 1 attacks Dunstan
+  Archer 1 hits Dunstan for 3 (hp 4)
+  Archer 1 hp 17, Dunstan hp 4
+enemy: attack archer-2 maud
+Forecast Archer 2 -> Maud: acc 65% dmg 6 crit 0%; counter: acc 97% dmg 10 crit 2% (Radiance 4 of 5 left)
+Archer 2 attacks Maud
+  Archer 2 hits Maud for 6 (hp 11)
+  Maud hits Archer 2 for 10 (hp 7)
+  Archer 2 hp 7, Maud hp 11
+Maud gains 10 exp (51)
+enemy: move archer-3 8,1
+Archer 3 moves 11,2 -> 8,1 via 10,2 9,2 8,2
+enemy: wait archer-3
+Archer 3 waits
+enemy: move brigand-2 4,1
+Brigand 2 moves 5,1 -> 4,1
+enemy: attack brigand-2 dunstan
+Forecast Brigand 2 -> Dunstan: acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
+Brigand 2 attacks Dunstan
+  Brigand 2 misses Dunstan
+  Dunstan hits Brigand 2 for 11 (hp 0)
+  Brigand 2 hp 0, Dunstan hp 4
+Dunstan gains 30 exp (50)
+Brigand 2 falls at 4,1
+enemy: move brigand-3 3,4
+Brigand 3 moves 7,4 -> 3,4 via 6,4 5,4 4,4
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move brigand-4 5,4
+Brigand 4 moves 6,7 -> 5,4 via 6,6 6,5 6,4
+enemy: wait brigand-4
+Brigand 4 waits
+enemy: move hexer-1 5,1
+Hexer moves 8,0 -> 5,1 via 8,1 7,1 6,1
+enemy: attack hexer-1 dunstan
+Forecast Hexer -> Dunstan: acc 99% dmg 11 crit 1%; counter: none
+Hexer attacks Dunstan
+  Hexer hits Dunstan for 11 (hp 0)
+  Hexer hp 16, Dunstan hp 0
+Dunstan falls at 3,1
+enemy: move soldier-1 4,1
+Soldier moves 7,0 -> 4,1 via 7,1 6,1 5,1
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+The Lazar House  over after turn 5 of 5  survive  recall 1
+   012345678901
+ 0 ^^^^b^^^.^^M
+ 1 ^...df..in.M
+ 2 ..#A#e......
+ 3 ..#.#....^..
+ 4 ...g.h======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           4,0    hp 17/17  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           5,2    hp 7/17   Plain  group ford, aggressive
+i  archer-3         Archer L1 bowman           8,1    hp 17/17  Plain  group east, aggressive
+g  brigand-3        Brigand L1 reaver          3,4    hp 22/22  Plain  group east, aggressive
+h  brigand-4        Brigand L1 reaver          5,4    hp 22/22  Road  group ford, aggressive
+f  hexer-1          Hexer L1 adept             5,1    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 11/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         4,1    hp 20/20  Plain  group east, aggressive
+north bar (8,0): open, barred only while one of yours holds 8,1
+east bar (11,4): open, barred only while one of yours holds 10,4
+Battle won: survive; only recall is left, or leave
+> leave
+Maud wins maud_1; the stores take 2 common material; fallen for good: Dunstan
+-- After The Lazar House --
+The carts come at dusk. They find the keeper, and the meal bins full,
+bought by someone who never signed the book. Maud counts the beds:
+forty, twelve in use. "I'm angry at the order. It won't break tonight.
+Who here hasn't eaten?" She says the prayer over every bed, then over
+the keeper, with his name in it.
+
+Campaign stopped before The Tollgate: the script ended on the screen

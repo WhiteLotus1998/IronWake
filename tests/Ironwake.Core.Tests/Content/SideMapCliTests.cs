@@ -68,6 +68,28 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Code's warm Dunstan chair on the shipped held bars (seed 2010): Dunstan holds the north
+    /// bar from turn 2 with the brigand and the hexer waiting behind it, Maud is struck once all
+    /// map from the fort, and after a Recall to turn 4 Dunstan leaves the bar for Maud's Salve;
+    /// the queue lets the brigand through on turn 4 and the hexer on turn 5, and the hexer kills
+    /// him on the last enemy phase, corking 3,1 for the fort.
+    /// </summary>
+    [Fact]
+    public void TheHeldNorthBarQueuesTheHexerAndItKillsTheBarHolderOnTheLastPhase()
+    {
+        var script = Transcript("2026-10-07-the_lazar_house-2010-dunstan.script");
+
+        var output = Run(out var exit, "campaign", "--from", "the_tollgate", "--seed", "2010", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(1, exit);
+        Assert.Contains("north bar (8,0): barred while dunstan holds 8,1; waiting: brigand, hexer\n", output);
+        Assert.Contains("Hexer arrives at 8,0 with the north group, aggressive\n", output);
+        Assert.Contains("Hexer hits Dunstan for 11 (hp 0)\n", output);
+        Assert.Contains("> leave\nMaud wins maud_1; the stores take 2 common material; fallen for good: Dunstan\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Code's journaled play of Maud's quest 2 (seed 875), from a save before the raid with her
     /// quest 1 won: Wren kills the hexer, Maud both brigands, the braced door soldier falls on
     /// Wren's counter, and Maud takes the altar on turn 4 with the Psalter paid into her pack.
