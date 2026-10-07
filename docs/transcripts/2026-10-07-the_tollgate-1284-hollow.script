@@ -1,0 +1,95 @@
+move teodor 9,10
+wait teodor
+move pell 9,9
+wait pell
+move captain 8,10
+wait captain
+move wren 4,9
+wait wren
+end
+move teodor 10,7
+wait teodor
+move pell 8,7
+wait pell
+move captain 9,8
+wait captain
+move wren 3,7
+wait wren
+end
+move pell 7,5
+forecast pell toll_brigand-1
+attack pell toll_brigand-1
+move teodor 8,5
+wait teodor
+move captain 9,6
+wait captain
+move wren 4,6
+wait wren
+end !
+about test_grave
+item pell 3 toll_brigand-1
+show hollow-toll_brigand-1
+forecast wren archer-2 from 5,6
+move wren 5,6
+attack wren archer-2
+move teodor 8,4
+wait teodor
+move captain 9,5
+wait captain
+threat pell
+end
+forecast hollow-toll_brigand-1 archer-2
+attack hollow-toll_brigand-1 archer-2
+move pell 8,6
+wait pell
+wait wren
+move teodor 7,4
+wait teodor
+move captain 8,5
+wait captain
+threat teodor
+end
+attack wren archer-2
+forecast hollow-toll_brigand-1 toll_warden-1 from 6,3
+move hollow-toll_brigand-1 6,3
+attack hollow-toll_brigand-1 toll_warden-1
+move teodor 7,4
+wait teodor
+threat pell from 7,6
+move pell 7,6
+wait pell
+forecast captain archer-2 from 6,5
+move captain 6,5
+attack captain archer-2
+threat hollow-toll_brigand-1
+threat teodor
+threat captain
+end !
+move pell 8,6
+attack pell rider-1
+attack wren archer-2
+attack captain archer-2
+wait teodor
+end
+move teodor 9,5
+wait teodor
+attack wren archer-2
+move pell 7,5
+wait pell
+move captain 6,4
+wait captain
+threat captain
+end
+move captain 6,3
+attack captain toll_warden-1
+move pell 6,4
+attack pell toll_warden-1
+move wren 6,5
+wait wren
+wait teodor
+end !
+reach captain
+move captain 4,2
+wait captain
+wait pell
+end

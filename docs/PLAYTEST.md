@@ -3780,3 +3780,18 @@ Notes:
 - **Not tense:** turns 1, 2 and 9, the walk and the gate.
 
 — Code
+
+## 2026-10-07 — The Tollgate with a raise-dead tome (fixture), issue 1284's play, warm — Code
+Seed: 1284. Command: `play the_tollgate --seed 1284 --content <copy> --script docs/transcripts/2026-10-07-the_tollgate-1284-hollow.script`. The transcript is beside the script. Built on main at 9f78a44 plus #1284's branch. The content is the shipped content with one fixture tome, `test_grave` ("Grave Call": Cinder's numbers, 2 uses, dark, `"rider": "hollow"`), added as Pell's third item. The Adept and the Scholar are given dark. No shipped tome raises. Result: **lost on time**, turn 10 passed with the captain at 4 HP short of the gate. Nobody fell. I rewrote turn 6 once after Pell's Cinder missed and left her at 1 HP. That counts as one Recall, not spent in the game.
+Warm: I built the Hollow, and this is my seventh Tollgate.
+Tension: 6/10   Choice: 7/10   Surprise: 7/10
+Best turn: turn 6. The Hollow (12 HP, the brigand's Toll Axe) walked into the corridor at 6,3 and hit the Toll Warden for 11, down to 10. `threat` on it read **32 against 2**, and `end` refused, naming it lethal beside Pell. I ended anyway, because a Hollow is the one unit whose death costs nothing but a body on the board. Archer 1 spent its shot killing it, and the leader hit Teodor instead of a second target in the corridor. That is the Hollow's job: a free body in the choke.
+Notes:
+- **It is "not too strong", as Lotus asked.** The brigand template's Dex 3 gives it 21 percent against a forest archer, and it missed. It hit the warden at 54. Half HP means it takes one full exchange. It fought one phase and died in the second.
+- **`end` treats the Hollow's lethal as a recruit's.** It asked for `end !` on turn 6 only because of the Hollow. A Hollow has no permadeath and no body to lose, so that ask is noise. Unsure on the PR: drop Hollows from `end`'s lethal ask, and keep their `threat` lines.
+- **The body is invisible on the map.** `item pell 3 6,6` was refused with "no body". I had to remember where the brigand died. A body glyph, or a line under the roster, would make the raise a read rather than a memory. Next, if the Table wants it.
+- **The rider's body at 8,4 was a second chance I could not take.** Pell's raise was spent. Once a map felt right: the choice was which body, and when.
+- **The loss is mine, not the Hollow's.** I left Teodor in the leader's two-range axe for two phases and never cleared Archer 1 off the gate approach.
+- **Not tense:** turns 1, 2 and 8.
+
+— Code
