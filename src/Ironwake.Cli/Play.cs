@@ -441,7 +441,7 @@ public sealed class PlaySession
     /// </summary>
     internal void WritePendingEvents()
     {
-        foreach (var line in PendingEventLines(_state.Map.Events.Where(mapEvent => !_state.HasFired(mapEvent.Name)), _content))
+        foreach (var line in PendingEventLines(_state.Map.Events.Where(mapEvent => !_state.HasFired(mapEvent.Name)), _content, _state.Map.ArrivalsWait))
         {
             _out.WriteLine("  " + line);
         }
@@ -453,7 +453,7 @@ public sealed class PlaySession
     /// phase are one decision and print as one line at the first one's place, the tiles in map
     /// order and the held-tile rule once (issue 600, the tide sample). Presentation only.
     /// </summary>
-    internal static IReadOnlyList<string> PendingEventLines(IEnumerable<MapEvent> events, GameContent content)
+    internal static IReadOnlyList<string> PendingEventLines(IEnumerable<MapEvent> events, GameContent content, bool arrivalsWait = false)
     {
         var lines = new List<string>();
         var groups = new Dictionary<(int Turn, Side Phase, string TerrainId), int>();
@@ -477,7 +477,7 @@ public sealed class PlaySession
                 continue;
             }
 
-            lines.Add(DescribeEvent(mapEvent, content));
+            lines.Add(DescribeEvent(mapEvent, content, arrivalsWait));
             tiles.Add(new List<Coord>());
             heads.Add(null);
         }
@@ -496,9 +496,11 @@ public sealed class PlaySession
     /// <summary>
     /// A map event in player words, for example <c>turn 3, enemy phase: a rider arrives at
     /// 7,0 (aggressive). A unit standing on 7,0 stops it.</c> The held-tile rule is the one
-    /// <see cref="MapEvents"/> applies: a spawn tile with any unit on it blocks the spawn.
+    /// <see cref="MapEvents"/> applies: a spawn tile with any unit on it blocks the spawn, or, under
+    /// <c>arrivals: wait</c> (<paramref name="arrivalsWait"/>, issue 1259), holds it back until the tile is
+    /// open. A held bar says it lasts only while its tile is held.
     /// </summary>
-    public static string DescribeEvent(MapEvent mapEvent, GameContent content)
+    public static string DescribeEvent(MapEvent mapEvent, GameContent content, bool arrivalsWait = false)
     {
         var when = mapEvent.Trigger switch
         {
@@ -511,8 +513,9 @@ public sealed class PlaySession
         };
         var what = mapEvent.Action switch
         {
-            SpawnEnemy spawn => SpawnWords(spawn.Placement, content),
+            SpawnEnemy spawn => SpawnWords(spawn.Placement, content, arrivalsWait),
             ChangeTerrain change when mapEvent.Trigger is DropTrigger => $"{change.At} becomes {content.TerrainById(change.TerrainId).Name.ToLowerInvariant()}, unless anyone stands on it; the rock strikes them for {Rockfall.Damage}, never below 1.",
+            ChangeTerrain { Held: true } change when mapEvent.Trigger is EnterTrigger { Tiles: [var holder] } => $"{change.At} becomes {content.TerrainById(change.TerrainId).Name.ToLowerInvariant()} while one of yours stays on {holder}; it gives way when {holder} is left.",
             ChangeTerrain change => TerrainWords(new[] { change.At }, change.TerrainId, content),
             SetFlag flag => $"{flag.Flag} is set.",
             _ => throw new InvalidOperationException("unknown action " + mapEvent.Action.GetType().Name),
@@ -541,7 +544,7 @@ public sealed class PlaySession
             : $"{change}.";
     }
 
-    private static string SpawnWords(EnemyPlacement placement, GameContent content)
+    private static string SpawnWords(EnemyPlacement placement, GameContent content, bool arrivalsWait)
     {
         var template = content.Unit(placement.TemplateId);
         var kind = template.Name.ToLowerInvariant();
@@ -553,7 +556,9 @@ public sealed class PlaySession
         }
 
         var it = template.Named ? template.Name : "it";
-        return $"{who} arrives at {placement.At} ({behavior}). A unit standing on {placement.At} stops {it}.";
+        return arrivalsWait
+            ? $"{who} arrives at {placement.At} ({behavior}). A unit or a wall on {placement.At} holds {it} back, and {it} lands at the first enemy phase that starts with {placement.At} open."
+            : $"{who} arrives at {placement.At} ({behavior}). A unit standing on {placement.At} stops {it}.";
     }
 
     private int Play(TextReader input, bool strict, ulong seed)
@@ -3166,6 +3171,10 @@ public sealed class PlaySession
                 return $"  {names[u.UnitId]} arrives at {u.At} with {UnitNames.Group(u.Group)}, {u.Behavior.ToString().ToLowerInvariant()}";
             case FlagSet f:
                 return $"  flag {f.Flag} is set";
+            case BarReleased b:
+                return $"{b.Event.Replace('_', ' ')} gives way: nobody holds {b.Holder}";
+            case ArrivalWaits a:
+                return $"{content.Unit(a.Template).Name.ToLowerInvariant()} waits at {a.At} ({(a.Terrain is null ? "a unit holds it" : (content.Terrain.TryGetValue(a.Terrain, out var walled) ? walled.Name : a.Terrain).ToLowerInvariant())}); it lands at the first enemy phase that starts with {a.At} open";
             case RapportGained g:
                 return $"rapport {names[g.A]} and {names[g.B]} +{g.Amount} ({g.Total}{(g.OutOf is { } outOf ? $" of {outOf}" : "")})";
             case RivalryEnded r:

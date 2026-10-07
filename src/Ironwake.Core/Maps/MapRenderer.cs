@@ -629,6 +629,11 @@ public static class MapRenderer
             sb.Append(raised).Append('\n');
         }
 
+        if (HeldBars.Line(state, content) is { } bars)
+        {
+            sb.Append(bars).Append('\n');
+        }
+
         if (ChestLegend(state.ClosedChests, content) is { } chests)
         {
             sb.Append(chests).Append('\n');

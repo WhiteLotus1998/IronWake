@@ -173,6 +173,7 @@ public static class Resolver
             next = OpenCanto(next, content, acted, healed: command is UseItem && events.OfType<UnitHealed>().Any(h => h.UnitId != acted));
         }
 
+        next = HeldBars.After(next, events);
         next = Lock.After(next, events);
         next = Freed.After(state, next, events);
         next = Break.After(state, next, content, events);

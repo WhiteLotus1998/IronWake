@@ -37,7 +37,7 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
 - **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409; cold 5/6/4, t5): woken, the pair feeds the fort from its edge. Lever #1210: the fort and Maud's start south; a held rectangle out of reach is a post.
 - **The First Shrine (406 to 408, 0283):** starts south, alone (brace, second guard declined). Both in from the south (7/7/5), no rework; after #1206's Sim the limit moves only if sprints dominate. #1208: `seize_name: altar` (a hook, not text).
-- **The Lazar House (420 to 422):** both in (Code warm 8/6/6; Chat cold 5/7/5, barred turn 2). The hexer is the price of not barring. A permanent bar ends the map: #1259 (a lever, no spike) holds it only while stood on, and what it blocks waits; fallback the north bar at 9,1; each bar tile in reach of an enemy alive turns 5, 6 (422). Sim 4/200: the door.
+- **The Lazar House (420 to 422):** both in (Code warm 8/6/6; Chat cold 5/7/5, barred turn 2). The hexer is the price of not barring; a permanent bar ends the map. #1259 (a lever, not a spike; 0303): a bar holds only while stood on, what it blocks waits, each bar tile in reach of an enemy alive turns 5, 6 (`east3`). Code warm 1259 lost t6; Chat cold decides. Fallback: the north bar at 9,1. Sim 4/200: the door.
 - **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204's three levers shipped one at a time (0284 to 0287, 0293: the hunter, inside spawns, Hask's reach); range plus 2 parked. Fresh keep chair (shipped keep): is the bait a choice? Short on Cinder, not HP.
 
 ## Experiments (state and kill criterion)
@@ -50,11 +50,11 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **13.10 Retreat (0037, #215):** a refugee holds until half HP; killed if Chat's cold `river_refuge_hold.map` changes no turn.
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
 - **13.15 Wildfire: kept on samples** (0085). 13.11 to 13.13 kept; 13.16, 13.17, 13.19 killed.
-- **13.21 The tide (0111):** announced floods and drains on a ford. Kept if a journal shows a ford tile taken, refused or crossed for it (Chat's cold play).
+- **13.21 The tide (0111):** kept if a journal shows a ford tile taken, refused or crossed for it (Chat's cold play).
 - **13.22 The break (0112):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for it; on Saltmarsh (#606).
-- **13.24 The messenger (0135):** a runner fires `messenger` at its edge; kept if a strike or blocker is spent on it (Chat's cold #680).
+- **13.24 The messenger (0135):** kept if a strike or blocker is spent on the runner (Chat's cold #680).
 - **13.18 Lines on the board (#486):** one printed fact a line; killed if no play takes a command for it. Cadets (0097): Teodor and Wren's Canto kept. Talk kept on `saltmarsh_ford_talk.map` (378, 0258): binds, not yet costs; no campaign journal naming a costly talk-held swing returns it as a quest-1 softening. Next (264, lean): she won't shoot what another struck this phase.
-- **13.25 Rotten planks (0179):** planks wear to water; killed if no play chooses it (Chat's cold #783).
+- **13.25 Rotten planks (0179):** killed if no play chooses the wear (Chat's cold #783).
 - **13.27 The dash: kept on its sample** (374, 0255). No borrowed step unless a `tuned` re-read shows a free dash beat the clock. At dusk, winded is a bet.
 - **13.28 The wind: samples only, never the campaign** (Lotus, 0260). His beta play keeps or kills it.
 - **13.29 The one answer: kept on its sample** (376, 0257). Decides who enters the enemy phase whole; swarm lever unbuilt; a campaign `one_answer:` map fields a 1-2 answerer at a choke.

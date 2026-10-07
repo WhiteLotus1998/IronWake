@@ -270,6 +270,21 @@ public sealed record UnitSpawned(string UnitId, Coord At, string Group, Behavior
 public sealed record FlagSet(string Flag) : GameEvent;
 
 /// <summary>
+/// A held bar gave its tile back (issue 1259, <see cref="HeldBars"/>): nobody of the player's stood on
+/// <paramref name="Holder"/> after a command, so <paramref name="At"/> is <paramref name="TerrainId"/>
+/// again and the event <paramref name="Event"/> may fire on the next stop there.
+/// </summary>
+public sealed record BarReleased(string Event, Coord Holder, Coord At, string TerrainId) : GameEvent;
+
+/// <summary>
+/// A spawn could not land and waits at its tile under <c>arrivals: wait</c> (issue 1259):
+/// <paramref name="Template"/> waits at <paramref name="At"/>, held by a unit, or barred by the
+/// terrain <paramref name="Terrain"/> when no unit holds it. It lands at the first enemy phase that
+/// starts with the tile open (<see cref="MapEvents"/>).
+/// </summary>
+public sealed record ArrivalWaits(string Event, string Template, Coord At, string? Terrain) : GameEvent;
+
+/// <summary>
 /// At the start of its carrier's phase a hungering weapon that fed on nothing since the last one
 /// drains its carrier (DESIGN.md 13.23, experiment). Amount is what was actually lost; the drain
 /// never takes a unit below 1, and <paramref name="Starved"/> is set when it would have taken the

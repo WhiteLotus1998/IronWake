@@ -54,8 +54,20 @@ public sealed record MessengerFate(Coord At, bool Escaped);
 /// <summary>What a map event does.</summary>
 public abstract record MapEventAction;
 
-/// <summary>The tile becomes another terrain: a gate opens, a bridge falls, a fort is raised.</summary>
-public sealed record ChangeTerrain(Coord At, string TerrainId) : MapEventAction;
+/// <summary>
+/// The tile becomes another terrain: a gate opens, a bridge falls, a fort is raised. A
+/// <paramref name="Held"/> change (issue 1259, the held bar, experiment) rides a one-tile enter
+/// trigger and lasts only while a player unit stands on that tile: when the tile is left the
+/// terrain gives back and the event may fire again (<see cref="HeldBars"/>).
+/// </summary>
+public sealed record ChangeTerrain(Coord At, string TerrainId, bool Held = false) : MapEventAction;
+
+/// <summary>
+/// A held terrain change in force (issue 1259): the event <paramref name="Event"/> turned
+/// <paramref name="At"/> into <paramref name="TerrainId"/> from <paramref name="UnderId"/>, and holds
+/// while a player unit stands on <paramref name="Holder"/>.
+/// </summary>
+public sealed record HeldBar(string Event, Coord Holder, Coord At, string TerrainId, string UnderId);
 
 /// <summary>An enemy arrives on an edge tile from a template, with a group and a behavior, never a boss.</summary>
 public sealed record SpawnEnemy(EnemyPlacement Placement) : MapEventAction;

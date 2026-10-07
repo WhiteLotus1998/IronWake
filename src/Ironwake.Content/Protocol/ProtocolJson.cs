@@ -570,6 +570,22 @@ public static class ProtocolJson
             case FlagSet f:
                 w.WriteString("flag", f.Flag);
                 break;
+            case BarReleased b:
+                w.WriteString("event", b.Event);
+                WriteCoord(w, "holder", b.Holder);
+                WriteCoord(w, "at", b.At);
+                w.WriteString("terrain", b.TerrainId);
+                break;
+            case ArrivalWaits a:
+                w.WriteString("event", a.Event);
+                w.WriteString("template", a.Template);
+                WriteCoord(w, "at", a.At);
+                if (a.Terrain is { } walled)
+                {
+                    w.WriteString("terrain", walled);
+                }
+
+                break;
             default:
                 throw new ArgumentException($"the protocol has no shape for event {e.GetType().Name}; add one to ProtocolJson and docs/PROTOCOL.md", nameof(e));
         }
@@ -956,6 +972,28 @@ public static class ProtocolJson
             w.WriteEndArray();
         }
 
+        if (state.Bars.Count > 0)
+        {
+            w.WriteStartArray("bars");
+            foreach (var bar in state.Bars)
+            {
+                w.WriteStartObject();
+                w.WriteString("event", bar.Event);
+                WriteCoord(w, "holder", bar.Holder);
+                WriteCoord(w, "at", bar.At);
+                w.WriteString("terrain", bar.TerrainId);
+                w.WriteString("under", bar.UnderId);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
+        if (state.Waiting.Count > 0)
+        {
+            WriteStrings(w, "waiting", state.Waiting);
+        }
+
         if (state.Map.KeepsakesEnabled)
         {
             w.WriteStartArray("keepsakes");
@@ -1105,6 +1143,11 @@ public static class ProtocolJson
                     ReadCoord(o, "at"), RequiredString(o, "terrain"), RequiredString(o, "under"), RequiredString(o, "owner"),
                     ParseEnum<Side>(RequiredString(o, "side"), "side"), Math.Clamp(RequiredInt(o, "clock"), 1, 2))))
                 : ValueList<TileOverlay>.Empty,
+            Bars = e.TryGetProperty("bars", out var bars)
+                ? ValueList<HeldBar>.From(Array(bars, "bars").Select(b => new HeldBar(
+                    RequiredString(b, "event"), ReadCoord(b, "holder"), ReadCoord(b, "at"), RequiredString(b, "terrain"), RequiredString(b, "under"))))
+                : ValueList<HeldBar>.Empty,
+            Waiting = e.TryGetProperty("waiting", out _) ? ReadStrings(e, "waiting") : ValueList<string>.Empty,
         };
     }
 
