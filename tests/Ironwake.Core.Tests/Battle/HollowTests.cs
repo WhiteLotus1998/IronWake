@@ -181,7 +181,7 @@ public class HollowTests
         var result = Raise(state, "teodor");
 
         Assert.False(result.Accepted);
-        Assert.Contains("never a fallen ally", result.Rejection!.Message);
+        Assert.Contains("its dead stay dead", result.Rejection!.Message);
     }
 
     [Fact]

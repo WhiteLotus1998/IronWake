@@ -11,7 +11,7 @@ public sealed record HollowMark(string RaiserId, string FallenId, int Phases);
 /// Dark's raise dead (issue 1284, Lotus's #1247 rulings, DECISIONS/0307: "a fallen enemy rises on your side as a
 /// Hollow, cooler than a zombie, not too strong"). A tome naming <see cref="RiderKind.Hollow"/> on a school whose
 /// rider is <see cref="RiderKind.Drain"/> is cast through the Item action on a body
-/// (<see cref="BattleState.Bodies"/>): a unit of the caster's foe that died this map, its tile empty, in the tome's
+/// (<see cref="BattleState.Bodies"/>): an enemy unit that died this map, whichever side casts (issue 1286), its tile empty, in the tome's
 /// range, named by the tile or by the fallen unit's id. It spends one use and the caster's action, earns no EXP, and
 /// is once a map per caster (<see cref="BattleUnit.RaiseSpent"/>). The body leaves the list and a Hollow stands on
 /// its tile, on the caster's side:
@@ -24,8 +24,8 @@ public sealed record HollowMark(string RaiserId, string FallenId, int Phases);
 /// leaves no keepsake and no body, has no group, and wakes no one by dying.</item>
 /// <item>It is never the captain nor a protected unit, so it never holds a map; the campaign reads only its roster.</item>
 /// </list>
-/// Never a fallen ally: permadeath means gone. Everything is board state, so Recall restores it. The enemy never
-/// casts it yet (#1286), and <see cref="Resolver.Legal"/> and the Sim's player do not offer it.
+/// Never the company's dead: permadeath means gone. Everything is board state, so Recall restores it. An enemy raiser
+/// casts it through <see cref="EnemyAi.Raise"/> (issue 1286); <see cref="Resolver.Legal"/> and the Sim's player do not offer it.
 /// </summary>
 public static class Hollow
 {
