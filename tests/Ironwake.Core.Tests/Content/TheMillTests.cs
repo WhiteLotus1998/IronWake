@@ -168,6 +168,31 @@ public class TheMillTests
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Code's warm play on a fresh seed (1710): Maud leaves the fort west along row 9 on turn 2 and
+    /// no line reaches her again; the captain baits the road pair across the river at 5,4, the road
+    /// archer's shot wakes the mill by noise, Full Measure kills that archer on turn 3 and spends
+    /// turn 4, and the woken pair dies at the road crossing, won on turn 6 of 9 with no Recall.
+    /// </summary>
+    [Fact]
+    public void LeavingTheFortWestTurnsBothFightsIntoOneAtTheRoad()
+    {
+        var script = Transcript("2026-10-07-the_mill-1710.script");
+
+        var output = Run(out var exit, "play", "the_mill", "--seed", "1710", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Maud moves 7,9 -> 5,9", output);
+        Assert.Contains("The mill group wakes (noise)\n", output);
+        Assert.Contains("Brigand falls at 5,3\n", output);
+        Assert.Contains("Alder Fenn is spent from the strike and cannot move or act this phase\n", output);
+        Assert.DoesNotContain("attacks Maud", output);
+        Assert.DoesNotContain("Recalled", output);
+        Assert.Contains("The Mill  turn 6 of 9  player phase", output);
+        Assert.EndsWith("Battle won: rout\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
     /// <summary>Each woken mill member and tile of the <c>holds:</c> ground from which it could strike Maud where she starts.</summary>
     private static List<(string Id, Coord At)> MillStrikesOnMaud(string directory, string file)
     {
