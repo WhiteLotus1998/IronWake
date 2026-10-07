@@ -467,6 +467,36 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Code's warm play of Pell's quest 2 under 0278, reseeded to 1620 from the 960 save with Teodor:
+    /// the loud south route woken through the cells and recalled twice, then the middle through the
+    /// stacks, Teodor corking 4,4 against the stair while Pell walks past the lector's reach from 12,4
+    /// to the desk on turn 6.
+    /// </summary>
+    [Fact]
+    public void TheJournaledUndercroftTeodorPlayCorksTheWestDoorAndSeizesOnTurnSix()
+    {
+        var script = Transcript("2026-10-07-the_undercroft-1620-teodor.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-undercroft-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_undercroft-960.saves", "undercroft.json")), Path.Combine(saves, "undercroft.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "undercroft", "--saves", saves, "--reseed", "1620", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Side map: The Undercroft, seed 1686\n", output);
+            Assert.Contains("Recalled to state 11; 0 charges left\n", output);
+            Assert.Contains("Teodor hits Brigand 2 for 13 (hp 0)\n", output);
+            Assert.Contains("> leave\nPell wins pell_2; Pell receives Pell's Commonplace; the stores take 3 frozen iron; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Code's journaled play of Ottilie's quest 2 (side-map seed 91) on #930's board, from a save
     /// at the camp after map 8 with the cast at level 7 and Wren: the archer holds the road at
     /// 11,4, shoots Wren on the bridge end on turn 2 with `end` naming the lethal, and holds the
