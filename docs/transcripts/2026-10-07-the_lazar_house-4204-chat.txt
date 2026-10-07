@@ -1,0 +1,671 @@
+Campaign, seed 4204, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+-- Before map 4 of 10: The Tollgate; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 8)
+== Keep ==
+Purse: 500
+Rooms: beds: 8/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath applies
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, iron_bow 400, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 4, The Tollgate. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+> quest maud_1 teodor
+-- The Lazar House --
+The keeper at Sorrel Bend has stopped writing. Maud's order kept the
+lazar house there until the armistice, then called its sisters home and
+left the sick with him. Maud packs the basin. "The carts come at dusk.
+Nobody strips this door till then. You won't be thanked."
+
+(Hold out six turns. The lanes in are announced. A unit that ends its
+move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane
+for the rest of the map. The ford south cannot be barred.)
+
+Side map: The Lazar House, seed 4227
+Maud goes with Teodor. This map is lost if Maud falls; who falls here is gone for good.
+  when one of yours stops on 8,1: 8,0 becomes wall, unless one who cannot enter wall stands on it.
+  when one of yours stops on 10,4: 11,4 becomes wall, unless one who cannot enter wall stands on it.
+  turn 2, enemy phase: a brigand arrives at 8,0 (aggressive). A unit standing on 8,0 stops it.
+  turn 2, enemy phase: a soldier arrives at 11,4 (aggressive). A unit standing on 11,4 stops it.
+  turn 3, enemy phase: an archer arrives at 6,7 (aggressive). A unit standing on 6,7 stops it.
+  turn 3, enemy phase: a hexer arrives at 8,0 (aggressive). A unit standing on 8,0 stops it.
+  turn 4, enemy phase: a brigand arrives at 11,4 (aggressive). A unit standing on 11,4 stops it.
+  turn 5, enemy phase: a brigand arrives at 6,7 (aggressive). A unit standing on 6,7 stops it.
+Objective: Hold out until the end of turn 6. Maud must survive.
+The Lazar House  turn 1 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 ...B.=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
+> move teodor 5,2
+Teodor moves 3,4 -> 5,2 via 4,4 5,4 5,3
+The Lazar House  turn 1 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#B......
+ 3 ..#.#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+> wait teodor
+Teodor waits
+The Lazar House  turn 1 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#B......
+ 3 ..#.#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain  done
+> wait maud
+Maud waits
+The Lazar House  turn 1 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#B......
+ 3 ..#.#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+B  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain  done
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 7,4
+Archer 1 moves 9,6 -> 7,4 via 9,5 9,4 8,4
+enemy: wait archer-1
+Archer 1 waits
+enemy: move brigand-1 6,2
+Brigand 1 moves 8,3 -> 6,2 via 8,2 7,2
+enemy: attack brigand-1 teodor
+Forecast Brigand 1 -> Teodor: acc 63% dmg 10 crit 0%; counter with Iron Lance: acc 80% dmg 12 crit 2%
+Brigand 1 attacks Teodor
+  Brigand 1 misses Teodor
+  Teodor hits Brigand 1 for 12 (hp 10)
+  Brigand 1 hp 10, Teodor hp 21
+Teodor gains 10 exp (10)
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#Ba.....
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,2    hp 10/22  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+B  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+> move maud 5,1
+Maud moves 3,2 -> 5,1 via 3,1 4,1
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....A...n.M
+ 2 ..#F#Ba.....
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,2    hp 10/22  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+> attack maud brigand-1
+Forecast Maud -> Brigand 1: acc 98% dmg 11 crit 3%; counter: none
+Maud attacks Brigand 1
+  Maud hits Brigand 1 for 11 (hp 0)
+  Maud hp 17, Brigand 1 hp 0
+Maud gains 30 exp (30)
+Brigand 1 falls at 6,2
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....A...n.M
+ 2 ..#F#B......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain  done
+B  teodor           Teodor L1 pikeman          5,2    hp 21/21  Plain
+> move teodor 8,1
+Teodor moves 5,2 -> 8,1 via 5,1 6,1 7,1
+The ground changes
+  8,0 becomes Wall
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^....A..Bn.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain  done
+B  teodor           Teodor L1 pikeman          8,1    hp 21/21  Plain
+> wait teodor
+Teodor waits
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^....A..Bn.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain  done
+B  teodor           Teodor L1 pikeman          8,1    hp 21/21  Plain  done
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements are blocked: 8,0 is wall
+Reinforcements arrive
+  Soldier arrives at 11,4 with the east group, aggressive
+enemy: move archer-1 8,3
+Archer 1 moves 7,4 -> 8,3 via 7,3
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 16)
+  Archer 1 hp 17, Teodor hp 16
+enemy: move soldier-1 9,2
+Soldier moves 11,4 -> 9,2 via 11,3 11,2 10,2
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^....A..Bn.M
+ 2 ..#F#....d..
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group east, aggressive
+B  teodor           Teodor L1 pikeman          8,1    hp 16/21  Plain
+> move teodor 8,2
+Teodor moves 8,1 -> 8,2
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^....A...n.M
+ 2 ..#F#...Bd..
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group east, aggressive
+B  teodor           Teodor L1 pikeman          8,2    hp 16/21  Plain
+> attack teodor soldier-1
+Forecast Teodor -> Soldier with Iron Lance: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
+Teodor attacks Soldier
+  Teodor hits Soldier for 10 (hp 10)
+  Soldier misses Teodor
+  Teodor hp 16, Soldier hp 10
+Teodor gains 10 exp (20)
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^....A...n.M
+ 2 ..#F#...Bd..
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           5,1    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         9,2    hp 10/20  Plain  group east, aggressive
+B  teodor           Teodor L1 pikeman          8,2    hp 16/21  Plain  done
+> move maud 8,1
+Maud moves 5,1 -> 8,1 via 6,1 7,1
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......An.M
+ 2 ..#F#...Bd..
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           8,1    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         9,2    hp 10/20  Plain  group east, aggressive
+B  teodor           Teodor L1 pikeman          8,2    hp 16/21  Plain  done
+> attack maud soldier-1
+Forecast Maud -> Soldier: acc 97% dmg 10 crit 2%; counter: none
+Maud attacks Soldier
+  Maud hits Soldier for 10 (hp 0)
+  Maud hp 17, Soldier hp 0
+Maud gains 30 exp (60)
+Soldier falls at 9,2
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......An.M
+ 2 ..#F#...B...
+ 3 ..#.#...b^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           8,3    hp 17/17  Plain  group yard, aggressive
+A  maud             Maud L1 chaplain           8,1    hp 17/17  Plain  captain  done
+B  teodor           Teodor L1 pikeman          8,2    hp 16/21  Plain  done
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Archer 2 arrives at 6,7 with the ford group, aggressive
+Reinforcements are blocked: 8,0 is wall
+enemy: move archer-1 9,3
+Archer 1 moves 8,3 -> 9,3
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 11)
+  Archer 1 hp 17, Teodor hp 11
+enemy: move archer-2 6,3
+Archer 2 moves 6,7 -> 6,3 via 6,6 6,5 6,4
+enemy: wait archer-2
+Archer 2 waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Lazar House  turn 4 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......An.M
+ 2 ..#F#...B...
+ 3 ..#.#.e..b..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+A  maud             Maud L1 chaplain           8,1    hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          8,2    hp 11/21  Plain
+> item maud 2 teodor
+Maud uses Salve on teodor (7 left)
+Teodor heals 7 (hp 18)
+Maud gains 11 exp (71)
+The Lazar House  turn 4 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......An.M
+ 2 ..#F#...B...
+ 3 ..#.#.e..b..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+A  maud             Maud L1 chaplain           8,1    hp 17/17  Plain  captain  done
+B  teodor           Teodor L1 pikeman          8,2    hp 18/21  Plain
+> move teodor 10,4
+Teodor moves 8,2 -> 10,4 via 9,2 10,2 10,3
+The ground changes
+  11,4 becomes Wall
+The Lazar House  turn 4 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......An.M
+ 2 ..#F#.......
+ 3 ..#.#.e..b..
+ 4 .....=====B#
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+A  maud             Maud L1 chaplain           8,1    hp 17/17  Plain  captain  done
+B  teodor           Teodor L1 pikeman          10,4   hp 18/21  Road
+> wait teodor
+Teodor waits
+The Lazar House  turn 4 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......An.M
+ 2 ..#F#.......
+ 3 ..#.#.e..b..
+ 4 .....=====B#
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+A  maud             Maud L1 chaplain           8,1    hp 17/17  Plain  captain  done
+B  teodor           Teodor L1 pikeman          10,4   hp 18/21  Road  done
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Reinforcements are blocked: 11,4 is wall
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 13)
+  Archer 1 hp 17, Teodor hp 13
+enemy: move archer-2 8,4
+Archer 2 moves 6,3 -> 8,4 via 7,3 8,3
+enemy: attack archer-2 teodor
+Forecast Archer 2 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 2 attacks Teodor
+  Archer 2 hits Teodor for 5 (hp 8)
+  Archer 2 hp 17, Teodor hp 8
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Lazar House  turn 5 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......An.M
+ 2 ..#F#.......
+ 3 ..#.#....b..
+ 4 .....===e=B#
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           8,4    hp 17/17  Road  group ford, aggressive
+A  maud             Maud L1 chaplain           8,1    hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          10,4   hp 8/21   Road
+> move teodor 9,4
+Teodor moves 10,4 -> 9,4
+The Lazar House  turn 5 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......An.M
+ 2 ..#F#.......
+ 3 ..#.#....b..
+ 4 .....===eB=#
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           8,4    hp 17/17  Road  group ford, aggressive
+A  maud             Maud L1 chaplain           8,1    hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          9,4    hp 8/21   Road
+> attack teodor archer-2
+Forecast Teodor -> Archer 2 with Iron Lance: acc 76% dmg 12 crit 1%; counter: none
+Teodor attacks Archer 2
+  Teodor hits Archer 2 for 12 (hp 5)
+  Teodor hp 8, Archer 2 hp 5
+Teodor gains 10 exp (30)
+The Lazar House  turn 5 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^.......An.M
+ 2 ..#F#.......
+ 3 ..#.#....b..
+ 4 .....===eB=#
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           8,4    hp 5/17   Road  group ford, aggressive
+A  maud             Maud L1 chaplain           8,1    hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          9,4    hp 8/21   Road  done
+> move maud 8,2
+Maud moves 8,1 -> 8,2
+The Lazar House  turn 5 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^........n.M
+ 2 ..#F#...A...
+ 3 ..#.#....b..
+ 4 .....===eB=#
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Forest  group yard, aggressive
+e  archer-2         Archer L1 bowman           8,4    hp 5/17   Road  group ford, aggressive
+A  maud             Maud L1 chaplain           8,2    hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          9,4    hp 8/21   Road  done
+> attack maud archer-2
+Forecast Maud -> Archer 2: acc 97% dmg 10 crit 2%; counter: acc 86% dmg 8 crit 0%
+Maud attacks Archer 2
+  Maud hits Archer 2 for 10 (hp 0)
+  Maud hp 17, Archer 2 hp 0
+Maud gains 30 exp (1)
+Maud reaches level 2: dex +1 lck +1
+Archer 2 falls at 8,4
+The Lazar House  turn 5 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^........n.M
+ 2 ..#F#...A...
+ 3 ..#.#....b..
+ 4 .....====B=#
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Forest  group yard, aggressive
+A  maud             Maud L2 chaplain           8,2    hp 17/17  Plain  captain  done
+B  teodor           Teodor L1 pikeman          9,4    hp 8/21   Road  done
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Reinforcements arrive
+  Brigand 4 arrives at 6,7 with the ford group, aggressive
+enemy: move archer-1 10,5
+Archer 1 moves 9,3 -> 10,5 via 10,3 10,4
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 3)
+  Archer 1 hp 17, Teodor hp 3
+enemy: move brigand-4 7,4
+Brigand 4 moves 6,7 -> 7,4 via 6,6 6,5 6,4
+enemy: wait brigand-4
+Brigand 4 waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The Lazar House  turn 6 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^........n.M
+ 2 ..#F#...A...
+ 3 ..#.#....^..
+ 4 .....==h=B=#
+ 5 .^........b.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           10,5   hp 17/17  Forest  group yard, aggressive
+h  brigand-4        Brigand L1 reaver          7,4    hp 22/22  Road  group ford, aggressive
+A  maud             Maud L2 chaplain           8,2    hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          9,4    hp 3/21   Road
+> move teodor 10,1
+Teodor moves 9,4 -> 10,1 via 10,4 10,3 10,2
+The Lazar House  turn 6 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^........nBM
+ 2 ..#F#...A...
+ 3 ..#.#....^..
+ 4 .....==h===#
+ 5 .^........b.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           10,5   hp 17/17  Forest  group yard, aggressive
+h  brigand-4        Brigand L1 reaver          7,4    hp 22/22  Road  group ford, aggressive
+A  maud             Maud L2 chaplain           8,2    hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          10,1   hp 3/21   Plain
+> item teodor 2
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 13)
+The Lazar House  turn 6 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^........nBM
+ 2 ..#F#...A...
+ 3 ..#.#....^..
+ 4 .....==h===#
+ 5 .^........b.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           10,5   hp 17/17  Forest  group yard, aggressive
+h  brigand-4        Brigand L1 reaver          7,4    hp 22/22  Road  group ford, aggressive
+A  maud             Maud L2 chaplain           8,2    hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          10,1   hp 13/21  Plain  done
+> move maud 11,2
+Maud moves 8,2 -> 11,2 via 9,2 10,2
+The Lazar House  turn 6 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^........nBM
+ 2 ..#F#......A
+ 3 ..#.#....^..
+ 4 .....==h===#
+ 5 .^........b.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           10,5   hp 17/17  Forest  group yard, aggressive
+h  brigand-4        Brigand L1 reaver          7,4    hp 22/22  Road  group ford, aggressive
+A  maud             Maud L2 chaplain           11,2   hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          10,1   hp 13/21  Plain  done
+> wait maud
+Maud waits
+The Lazar House  turn 6 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^........nBM
+ 2 ..#F#......A
+ 3 ..#.#....^..
+ 4 .....==h===#
+ 5 .^........b.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           10,5   hp 17/17  Forest  group yard, aggressive
+h  brigand-4        Brigand L1 reaver          7,4    hp 22/22  Road  group ford, aggressive
+A  maud             Maud L2 chaplain           11,2   hp 17/17  Plain  captain  done
+B  teodor           Teodor L1 pikeman          10,1   hp 13/21  Plain  done
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: move archer-1 10,3
+Archer 1 moves 10,5 -> 10,3 via 10,4
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 8)
+  Archer 1 hp 17, Teodor hp 8
+enemy: move brigand-4 9,2
+Brigand 4 moves 7,4 -> 9,2 via 7,3 7,2 8,2
+enemy: wait brigand-4
+Brigand 4 waits
+enemy: end
+-- Enemy phase ends, turn 6 --
+The Lazar House  over after turn 6 of 6  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^#^^M
+ 1 ^........nBM
+ 2 ..#F#....h.A
+ 3 ..#.#....^b.
+ 4 .....======#
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           10,3   hp 17/17  Plain  group yard, aggressive
+h  brigand-4        Brigand L1 reaver          9,2    hp 22/22  Plain  group ford, aggressive
+A  maud             Maud L2 chaplain           11,2   hp 17/17  Plain  captain
+B  teodor           Teodor L1 pikeman          10,1   hp 8/21   Plain
+Battle won: survive; only recall is left, or leave
+Campaign stopped in The Lazar House at turn 7, decided and not left
