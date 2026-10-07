@@ -48,7 +48,7 @@ public class ClientItemExitTests
 
     [Theory]
     [InlineData("sample", "harrow_weir_orders", 85UL, "docs/transcripts/2026-10-01-harrow_weir_orders-85.script", " uses ")]
-    [InlineData("map", "the_mill", 635UL, "tests/parity/the_mill-635.script", " uses Salve on captain")]
+    [InlineData("map", "the_mill", 635UL, "tests/parity/clicks/the_mill-635.script", " uses Salve on captain")]
     [InlineData("map", "brackwater_cut", 53UL, "tests/parity/brackwater_cut-53.script", " leaves through the exit")]
     public void ClientEventLogMatchesTheConsoleWithItemsAndExitsTakenByClicks(string kind, string name, ulong seed, string script, string mark)
     {
