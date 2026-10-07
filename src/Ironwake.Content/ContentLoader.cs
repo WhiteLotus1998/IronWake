@@ -12,6 +12,9 @@ namespace Ironwake.Content;
 /// </summary>
 public static class ContentLoader
 {
+    /// <summary>The <c>effective</c> list entry that makes a light strike effective against Hollows (issue 1321, <see cref="Weapon.EffectiveAgainstHollows"/>).</summary>
+    private const string HollowEntry = "hollow";
+
     private static readonly string[] StatKeys = { "hp", "str", "mag", "dex", "spd", "lck", "def", "res", "cha" };
 
     private static readonly string[] MovementKeys = { "infantry", "cavalry", "flying", "armored" };
@@ -2884,7 +2887,19 @@ public static class ContentLoader
                 throw node.Error("cleanses", "a cleanse is a healing spell that heals nothing: heals true, no healBase");
             }
 
-            var effective = node.StringArrayOrEmpty("effective")
+            var effectiveNames = node.StringArrayOrEmpty("effective").ToList();
+            var effectiveHollows = effectiveNames.Contains(HollowEntry);
+            if (effectiveNames.Count(e => e == HollowEntry) > 1)
+            {
+                throw node.Error("effective", "must not repeat hollow");
+            }
+
+            if (effectiveHollows && (type != WeaponType.Faith || heals))
+            {
+                throw node.Error("effective", "hollow is light's: only a faith strike, never a heal, is effective against Hollows");
+            }
+
+            var effective = effectiveNames.Where(e => e != HollowEntry)
                 .Select(e => node.ParseEnum<MovementType>("effective", e)).ToList();
             if (effective.Distinct().Count() != effective.Count)
             {
@@ -3001,6 +3016,7 @@ public static class ContentLoader
                 Armor = armor,
                 BurnStacks = burnStacks,
                 Cleanses = cleanses,
+                EffectiveAgainstHollows = effectiveHollows,
             });
         }
 

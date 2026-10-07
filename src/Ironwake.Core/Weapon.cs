@@ -139,6 +139,13 @@ public sealed record Weapon(
     /// </summary>
     public bool Cleanses { get; init; }
 
+    /// <summary>
+    /// Whether this light strike is effective against Hollows (issue 1321 slice 2, DECISIONS/0317, light's ladder): its Mt
+    /// is tripled against a raised unit as against a movement type it names (<see cref="Combat.IsEffective"/>). Content
+    /// writes it as a <c>hollow</c> entry in the <c>effective</c> list, and only a Faith strike may carry it.
+    /// </summary>
+    public bool EffectiveAgainstHollows { get; init; }
+
     public bool IsMagic => Type.IsMagic();
 
     public bool InRange(int distance) => distance >= MinRange && distance <= MaxRange;

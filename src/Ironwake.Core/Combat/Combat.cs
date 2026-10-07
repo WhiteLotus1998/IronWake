@@ -42,11 +42,22 @@ public static class Combat
         return attacker.Broken ? Math.Max(0, weapon.Mt - BrokenMtPenalty) : weapon.Mt;
     }
 
-    /// <summary>Str or Mag plus Mt, with Mt tripled first when the weapon is effective against the target.</summary>
+    /// <summary>
+    /// Whether the attacker's weapon is effective against the target: it names the target's movement type, or it is
+    /// effective against Hollows and the target is one (issue 1321). Either way the multiplier is the one
+    /// <see cref="EffectiveMultiplier"/>, never stacked.
+    /// </summary>
+    public static bool IsEffective(Combatant attacker, Combatant target)
+    {
+        var weapon = Armed(attacker);
+        return weapon.IsEffectiveAgainst(target.Movement) || (weapon.EffectiveAgainstHollows && target.Hollow);
+    }
+
+    /// <summary>Str or Mag plus Mt, with Mt tripled first when the weapon is effective against the target (<see cref="IsEffective"/>).</summary>
     public static int Atk(Combatant attacker, Combatant target)
     {
         var weapon = Armed(attacker);
-        var mt = weapon.IsEffectiveAgainst(target.Movement) ? Mt(attacker) * EffectiveMultiplier : Mt(attacker);
+        var mt = IsEffective(attacker, target) ? Mt(attacker) * EffectiveMultiplier : Mt(attacker);
         return (weapon.IsMagic ? attacker.Stats.Mag : attacker.Stats.Str) + mt;
     }
 
