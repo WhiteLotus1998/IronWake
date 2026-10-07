@@ -91,6 +91,12 @@ public sealed class UnitNames
             names[unit.Id] = unit.Unit.Name;
         }
 
+        // A Hollow (issue 1284) reads as the body it rose from, on the board or crumbled: "Hollow Brigand 1".
+        foreach (var (id, fallen) in names.Where(n => !n.Key.StartsWith(Hollow.IdPrefix, StringComparison.Ordinal)).ToList())
+        {
+            names[Hollow.IdPrefix + id] = "Hollow " + fallen;
+        }
+
         // The returned claimant (issue 633) is placed by the campaign, not the map, and keeps their name and pronoun after leaving the board.
         if (state.Return is { } bond
             && (state.History.Count > 0 ? state.History[0].Units : state.Units).Concat(state.Units).FirstOrDefault(u => u.Id == bond.UnitId) is { } returned)

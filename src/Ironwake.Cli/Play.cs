@@ -39,7 +39,7 @@ public sealed class PlaySession
           move <unit> <x,y> via <x,y>  Move by way of a tile: the cheapest route to it, then on, within the unit's Mov
           move <unit> <x,y> [via <x,y>] preview  The route the move would walk and the planks it would wear, without moving
           attack <unit> <target> [slot|weapon] [art <id>] [!]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first); a swing whose counter is lethal to the attacker is refused unless the line ends in !
-          item <unit> <slot|item> [ally] Use the item in a slot or named by id; a healing spell names the ally, and so does a tome that raises ground (earthwork under the ally until the caster's next phase ends)
+          item <unit> <slot|item> [ally] Use the item in a slot or named by id; a healing spell names the ally, and so does a tome that raises ground (earthwork under the ally until the caster's next phase ends); a tome that raises the dead names a fallen foe or its tile
           wait <unit>              End the unit's action
           undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
           canto <unit> <x,y|stay>  After acting, a unit with Move Again moves on what its move left, or stays
@@ -2614,6 +2614,11 @@ public sealed class PlaySession
             lines.Add("  " + stunned);
         }
 
+        if (Hollow.CardLine(unit, UnitNames.Of(state, content)) is { } hollow)
+        {
+            lines.Add("  " + hollow);
+        }
+
         if (DrakeFrost.HeldLine(state, unit) is { } frosted)
         {
             lines.Add("  " + frosted);
@@ -3180,6 +3185,10 @@ public sealed class PlaySession
                 return $"{names[ad.UnitId]} wears {(content.Weapons.TryGetValue(ad.SpellId, out var worn) ? worn.Name : ad.SpellId)}: Def +{ad.Def}, Mov -{ad.Mov} through its side's next {SchoolRider.PhasesText(ad.Phases)}";
             case ArmorFell af:
                 return $"{names[af.UnitId]}'s {(content.Weapons.TryGetValue(af.SpellId, out var shed) ? shed.Name : af.SpellId)} falls away";
+            case HollowRaised hr:
+                return $"{names[hr.UnitId]} raises {names[hr.FallenId]} at {hr.At}: {names[hr.HollowId]} stands on {names[hr.UnitId]}'s side (hp {hr.Hp}), acts from its side's next phase, and crumbles after {SchoolRider.PhasesText(hr.Phases)} or when {names[hr.UnitId]} falls";
+            case HollowCrumbled hc:
+                return hc.RaiserFell ? $"{names[hc.UnitId]} crumbles: its raiser is gone" : $"{names[hc.UnitId]} crumbles: its last phase is over";
             case GroundSundered gs:
                 return $"{names[gs.UnitId]} sunders the {(content.Terrain.TryGetValue(gs.TerrainId, out var sundered) ? sundered.Name.ToLowerInvariant() : gs.TerrainId)} {names[gs.OwnerId]} raised at {gs.At}: the ground falls back";
             case RodCaught rc:

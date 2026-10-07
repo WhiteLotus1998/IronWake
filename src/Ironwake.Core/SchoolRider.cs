@@ -41,6 +41,13 @@ public enum RiderKind
 
     /// <summary>A hit heals its caster by the HP it took off the target, up to max HP (issue 1283, <see cref="Drain"/>).</summary>
     Drain,
+
+    /// <summary>
+    /// Cast through the Item action on a fallen foe's body, it raises a Hollow on the caster's side (issue 1284,
+    /// <see cref="Core.Hollow"/>). Only a tome names it, and only where its school's rider is <see cref="Drain"/>,
+    /// whose gate it reads; a school's own rider is never a hollow.
+    /// </summary>
+    Hollow,
 }
 
 /// <summary>
@@ -73,15 +80,15 @@ public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
 
     /// <summary>
     /// Whether a tome may name <paramref name="tomeKind"/> on a school whose rider is <paramref name="schoolKind"/>
-    /// though the two differ: an ember on a burn (issue 1279), a sunder (issue 1281) or armor (issue 1282) on a raise.
+    /// though the two differ: an ember on a burn (issue 1279), a sunder (issue 1281) or armor (issue 1282) on a raise, a hollow on a drain (issue 1284).
     /// </summary>
     public static bool Borrows(RiderKind tomeKind, RiderKind schoolKind) =>
-        (tomeKind, schoolKind) is (RiderKind.Ember, RiderKind.Burn) or (RiderKind.Sunder, RiderKind.Raise) or (RiderKind.Armor, RiderKind.Raise);
+        (tomeKind, schoolKind) is (RiderKind.Ember, RiderKind.Burn) or (RiderKind.Sunder, RiderKind.Raise) or (RiderKind.Armor, RiderKind.Raise) or (RiderKind.Hollow, RiderKind.Drain);
 
     /// <summary>A burn rider's <see cref="Cap"/> when rules.json names none.</summary>
     public const int DefaultCap = 4;
 
-    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>, <c>armor</c>, <c>drain</c>.</summary>
+    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>, <c>armor</c>, <c>drain</c>, <c>hollow</c>.</summary>
     public static string Label(RiderKind kind) => kind.ToString().ToLowerInvariant();
 
     /// <summary>A count of phases as a line says it: <c>one phase</c>, <c>two phases</c>; past nine, in digits.</summary>

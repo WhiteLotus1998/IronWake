@@ -364,6 +364,18 @@ public static class ProtocolJson
                 w.WriteString("unit", af.UnitId);
                 w.WriteString("item", af.SpellId);
                 break;
+            case HollowRaised hr:
+                w.WriteString("unit", hr.UnitId);
+                w.WriteString("hollow", hr.HollowId);
+                w.WriteString("fallen", hr.FallenId);
+                WriteCoord(w, "at", hr.At);
+                w.WriteNumber("hp", hr.Hp);
+                w.WriteNumber("phases", hr.Phases);
+                break;
+            case HollowCrumbled hc:
+                w.WriteString("unit", hc.UnitId);
+                w.WriteBoolean("raiserFell", hc.RaiserFell);
+                break;
             case GroundSundered gs:
                 w.WriteString("unit", gs.UnitId);
                 WriteCoord(w, "at", gs.At);
@@ -950,6 +962,17 @@ public static class ProtocolJson
         }
 
         w.WriteEndArray();
+        if (state.Bodies.Count > 0)
+        {
+            w.WriteStartArray("bodies");
+            foreach (var body in state.Bodies)
+            {
+                WriteUnit(w, body, content);
+            }
+
+            w.WriteEndArray();
+        }
+
         if (state.Map.Chests.Count > 0)
         {
             w.WriteStartArray("chests");
@@ -1173,6 +1196,9 @@ public static class ProtocolJson
             Rime = e.TryGetProperty("rime", out var rime)
                 ? ValueList<RimeTile>.From(Array(rime, "rime").Select(r => new RimeTile(ReadCoord(r, "at"), ParseEnum<Side>(RequiredString(r, "side"), "side"), Math.Clamp(RequiredInt(r, "clock"), 1, 3)) { Extra = Math.Max(0, OptionalInt(r, "extra") ?? 0) }))
                 : ValueList<RimeTile>.Empty,
+            Bodies = e.TryGetProperty("bodies", out var bodies)
+                ? ValueList<BattleUnit>.From(Array(bodies, "bodies").Select(u => ReadUnit(u, content)))
+                : ValueList<BattleUnit>.Empty,
             Overlays = e.TryGetProperty("overlays", out var overlays)
                 ? ValueList<TileOverlay>.From(Array(overlays, "overlays").Select(o => new TileOverlay(
                     ReadCoord(o, "at"), RequiredString(o, "terrain"), RequiredString(o, "under"), RequiredString(o, "owner"),
@@ -1292,6 +1318,20 @@ public static class ProtocolJson
         if (unit.StunSpent)
         {
             w.WriteBoolean("stunSpent", true);
+        }
+
+        if (unit.RaiseSpent)
+        {
+            w.WriteBoolean("raiseSpent", true);
+        }
+
+        if (unit.Hollow is { } hollow)
+        {
+            w.WriteStartObject("hollow");
+            w.WriteString("by", hollow.RaiserId);
+            w.WriteString("fallen", hollow.FallenId);
+            w.WriteNumber("phases", hollow.Phases);
+            w.WriteEndObject();
         }
 
         if (unit.LockedBy is { } lockedBy)
@@ -1548,6 +1588,8 @@ public static class ProtocolJson
             BurnPhases = OptionalInt(e, "burnPhases") ?? 0,
             Stun = OptionalInt(e, "stun") ?? 0,
             StunSpent = e.TryGetProperty("stunSpent", out _) && RequiredBool(e, "stunSpent"),
+            RaiseSpent = e.TryGetProperty("raiseSpent", out _) && RequiredBool(e, "raiseSpent"),
+            Hollow = e.TryGetProperty("hollow", out var hollow) ? new HollowMark(RequiredString(hollow, "by"), RequiredString(hollow, "fallen"), RequiredInt(hollow, "phases")) : null,
             LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
             Frosted = OptionalInt(e, "frosted") ?? 0,

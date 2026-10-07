@@ -79,6 +79,13 @@ public sealed record BattleState(
     public ValueList<TileOverlay> Overlays { get; init; }
 
     /// <summary>
+    /// Every unit that has died on this map, as it fell, where it fell, oldest first (issue 1284, <see cref="Hollow"/>):
+    /// the bodies dark's raise reads. A raised body leaves the list, and a Hollow's death adds none. A Recall restores
+    /// the list with the board.
+    /// </summary>
+    public ValueList<BattleUnit> Bodies { get; init; }
+
+    /// <summary>
     /// The held bars in force (issue 1259, <see cref="HeldBars"/>), in the order they fired. A Recall
     /// restores the list with the board.
     /// </summary>
@@ -704,6 +711,10 @@ public sealed record BattleState(
         return ReachOn(unit, content, budget);
     }
 
+    /// <summary>This state with a Hollow risen on the board (issue 1284, <see cref="Hollow.Raise"/>), the units kept in id order. Its id must be free.</summary>
+    public BattleState WithRisen(BattleUnit risen) =>
+        this with { Units = ValueList<BattleUnit>.From(Units.Append(risen).OrderBy(u => u.Id, StringComparer.Ordinal)) };
+
     /// <summary>This state with one unit replaced by id. The unit must exist.</summary>
     public BattleState WithUnit(BattleUnit unit)
     {
@@ -862,6 +873,17 @@ public sealed record BattleState(
             sb.Append('\n');
         }
 
+        if (Bodies.Count > 0)
+        {
+            sb.Append("bodies");
+            foreach (var body in Bodies)
+            {
+                sb.Append(' ').Append(body.Id).Append('@').Append(body.At);
+            }
+
+            sb.Append('\n');
+        }
+
         if (Bars.Count > 0)
         {
             sb.Append("bars");
@@ -976,6 +998,16 @@ public sealed record BattleState(
             if (unit.FallingBack)
             {
                 sb.Append(" fallingback");
+            }
+
+            if (unit.Hollow is { } hollow)
+            {
+                sb.Append(" hollow ").Append(hollow.RaiserId).Append('/').Append(hollow.FallenId).Append('/').Append(hollow.Phases);
+            }
+
+            if (unit.RaiseSpent)
+            {
+                sb.Append(" raisespent");
             }
 
             if (unit.Side == Side.Enemy)
