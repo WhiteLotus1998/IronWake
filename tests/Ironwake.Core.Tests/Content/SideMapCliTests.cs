@@ -160,6 +160,37 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Code's warm play of Maud's quest 2 from the south start under 0278, reseeded to 1600 from
+    /// the 875 save with Ottilie as the ally: Maud breaks the braced door alone with two Radiance
+    /// strikes, Ottilie's Aimed Shot kills the hexer and she corks 7,4 at 6 hp, and Maud takes the
+    /// altar on turn 4 of 10.
+    /// </summary>
+    [Fact]
+    public void TheShrineFromTheSouthStartFallsToMaudAloneOnTurnFour()
+    {
+        var script = Transcript("2026-10-07-the_first_shrine-1600.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1600", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Reinforcements are blocked: a unit holds 7,8\n", output);
+            Assert.Contains("Soldier 1 falls at 7,1\n", output);
+            Assert.Contains("The First Shrine  turn 4 of 10  player phase", output);
+            Assert.Contains("Battle won: seize", output);
+            Assert.Contains("Maud wins maud_2; Maud receives Maud's Psalter; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Code's journaled play of Pell's quest 1 (seed 884), from a save at the camp after map 4:
     /// Wren's counter breaks the shieldbearer at the east gate, Pell turns back for the north
     /// chest and is boxed in its door, Wren leaves first, and Pell gets out on turn 6 at 5 hp

@@ -3617,3 +3617,18 @@ Notes:
 - **Not tense:** turn 1 (the known bait), and turn 6, which was a single wait on the fort.
 
 — Code
+
+## 2026-10-07 — The First Shrine from the south start, Ottilie at the door, the weakest untuned map under 0278, warm — Code
+Seed: reseed 1600, side map seed 1645 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 1600 --strict --script docs/transcripts/2026-10-07-the_first_shrine-1600.script`; transcript beside it). Ally **Ottilie**, the ally who could not open the door in Chat's 2130.   Result: **won on turn 4 of 10**, nobody fell, no Recall spent, Ottilie on 6 HP.
+Warm: my fourth Shrine, and I had read Chat's 2240 line (Maud's range-2 strike from 7,3).
+Tension: 6/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 3. The soldier was on 9 and braced, the hexer on 9 in the forest at 8,3, the brigand at 5,3, and an archer due at 6,8. Ottilie's Aimed Shot from 7,4 killed the hexer at 90 twice. Then the question was where Maud kills the soldier from. From 7,3 there is no counter, but she faces 25 against 14. From 7,2 there is a 20 percent chance of a counter, but with Ottilie standing on 7,4 the archer has no tile in reach of her, and only the brigand can. I took 7,2 and it landed. `end` asked about Ottilie (19 against 18). The brigand took her, because she cannot counter at range 1, and left her on 6. Maud walked onto the altar on turn 4.
+Notes:
+- **Maud opens the door alone.** Radiance from 7,3 is 87 for 11 through the brace, and the door has 20 HP. Two strikes on turns 2 and 3 open it, with no help from the ally. The brace costs her 15 points of accuracy and nothing else, and the yard's only striker who reaches 7,3 on turn 2 is the hexer, for 4.
+- **What the ally does is the hexer and the cork.** The ally does not need to break the door, so Ottilie's weakness in 2130 doesn't matter here. Of the three south plays, two won on turn 4 (Chat 2240 with Teodor, this one with Ottilie). The slow one was 1530, which went to turn 10 after Radiance ran dry on counters.
+- **Holding 7,8 costs nothing on this line.** Ottilie stood on it on turn 1, the turn-2 brigand never landed, and she left on turn 3 for the hexer, after the archer's tile at 6,8 was already set. The turn-4 and turn-5 pursuers never mattered.
+- **The sanctum archer at 5,1 never acted again,** its fourth play. It braces every phase and covers nothing on Maud's path.
+- **Not tense:** turns 1 and 2. Turn 2's only threat was the hexer's 4.
+- **Verdict:** a rework candidate on surprise. The limit had six turns of slack. Lever proposed on the Table (round 424).
+
+— Code
