@@ -2950,6 +2950,14 @@ public static class ContentLoader
                 throw node.Error("armor", "is required on a tome whose rider is armor: { \"def\", \"mov\", \"phases\" }");
             }
 
+            var burnStacks = 1;
+            if (node.Has("burnStacks"))
+            {
+                burnStacks = rider != RiderKind.Burn ? throw node.Error("burnStacks", "only a tome whose rider is burn lays burn stacks")
+                    : node.Int("burnStacks") is var stacks and >= 1 ? stacks
+                    : throw node.Error("burnStacks", "must be at least 1");
+            }
+
             var heirloom = node.Has("heirloom") ? ReadHeirloom(node, heals || type.IsMagic()) : null;
             var voice = node.Has("voice") ? ReadVoice(node) : null;
 
@@ -2985,6 +2993,7 @@ public static class ContentLoader
                 Rider = rider,
                 MinMag = MinMag(node, type),
                 Armor = armor,
+                BurnStacks = burnStacks,
             });
         }
 

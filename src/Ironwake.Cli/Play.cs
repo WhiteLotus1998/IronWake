@@ -3187,7 +3187,7 @@ public sealed class PlaySession
             case UnitOpened o:
                 return $"{names[o.UnitId]} is open: allies of {names[o.ByUnitId]} strike it at Def -{o.Def}, Res -{o.Res} until the phase ends";
             case UnitIgnited i:
-                return $"{names[i.UnitId]} " + (i.Stacks > 1 ? "burns hotter" : "catches fire") + $": {i.Amount} hp at the start of each of its side's next {SchoolRider.PhasesText(i.Phases)} ({i.Stacks} {(i.Stacks == 1 ? "stack" : "stacks")})";
+                return $"{names[i.UnitId]} " + (i.Stacks > 1 ? "burns hotter" : "catches fire") + $": {i.Amount} hp at the start of each of its side's next {SchoolRider.PhasesText(i.Phases)} ({i.Stacks} {(i.Stacks == 1 ? "stack" : "stacks")}" + (i.Laid > 1 ? $", {i.Laid} laid by the hit)" : ")");
             case UnitDrained dr:
                 return $"{names[dr.UnitId]} drains {dr.Amount} from {names[dr.FromUnitId]} (hp {dr.HpAfter})";
             case BurnCashed c:

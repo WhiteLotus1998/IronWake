@@ -68,6 +68,7 @@ public class ProtocolJsonTests
         { new KinsbaneSpoke("keziah", "kinsbane", "kb_starved_eat", "Eat."), """{"type":"kinsbaneSpoke","unit":"keziah","item":"kinsbane","line":"kb_starved_eat","text":"Eat."}""" },
         { new HungerEased("keziah", "kinsbane", 5, 6), """{"type":"hungerEased","unit":"keziah","item":"kinsbane","healed":5,"hpAfter":6}""" },
         { new UnitIgnited("brigand-1", "pell", 2, 2, 1), """{"type":"unitIgnited","unit":"brigand-1","by":"pell","amount":2,"phases":2,"stacks":1}""" },
+        { new UnitIgnited("brigand-1", "pell", 4, 2, 2, 2), """{"type":"unitIgnited","unit":"brigand-1","by":"pell","amount":4,"phases":2,"stacks":2,"laid":2}""" },
         { new BurnCashed("brigand-1", "pell", 6, 3), """{"type":"burnCashed","unit":"brigand-1","by":"pell","amount":6,"hpAfter":3}""" },
         { new UnitDrained("pell", "brigand-1", 6, 11), """{"type":"unitDrained","unit":"pell","from":"brigand-1","amount":6,"hpAfter":11}""" },
         { new HollowRaised("pell", "hollow-brigand-1", "brigand-1", A, 12, 3), """{"type":"hollowRaised","unit":"pell","hollow":"hollow-brigand-1","fallen":"brigand-1","at":{"x":1,"y":2},"hp":12,"phases":3}""" },

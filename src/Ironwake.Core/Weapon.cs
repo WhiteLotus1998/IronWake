@@ -124,6 +124,14 @@ public sealed record Weapon(
     /// </summary>
     public ArmorSpell? Armor { get; init; }
 
+    /// <summary>
+    /// How many stacks of burn a hit from this tome lays (issue 1320, DECISIONS/0317): 1 by default, more only
+    /// on a tome whose <see cref="Rider"/> is <see cref="RiderKind.Burn"/>. The stacks still stop at the school
+    /// rider's <see cref="SchoolRider.Cap"/>, and the hit refreshes the one phase count as a single stack does
+    /// (<see cref="Burning.Laid"/>).
+    /// </summary>
+    public int BurnStacks { get; init; } = 1;
+
     public bool IsMagic => Type.IsMagic();
 
     public bool InRange(int distance) => distance >= MinRange && distance <= MaxRange;

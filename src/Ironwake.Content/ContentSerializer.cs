@@ -1087,6 +1087,11 @@ public static class ContentSerializer
             writer.WriteNumber("minMag", minMag);
         }
 
+        if (weapon.BurnStacks != 1)
+        {
+            writer.WriteNumber("burnStacks", weapon.BurnStacks);
+        }
+
         if (weapon.CritAgainst.Count > 0)
         {
             writer.WriteStartArray("critAgainst");
