@@ -111,6 +111,12 @@ public sealed record Weapon(
     /// </summary>
     public RiderKind? Rider { get; init; }
 
+    /// <summary>
+    /// The least Mag a unit needs to wield this tome (issue 1246, a grimoire's gate), or null for
+    /// none. It stands beside the rank requirement, never in its place (<see cref="Unit.CanWield"/>).
+    /// </summary>
+    public int? MinMag { get; init; }
+
     public bool IsMagic => Type.IsMagic();
 
     public bool InRange(int distance) => distance >= MinRange && distance <= MaxRange;

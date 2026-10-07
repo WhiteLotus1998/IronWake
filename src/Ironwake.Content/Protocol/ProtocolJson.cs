@@ -136,6 +136,10 @@ public static class ProtocolJson
                 w.WriteString("item", k.ItemId);
                 WriteCoord(w, "at", k.At);
                 break;
+            case TomeDropped t:
+                w.WriteString("unit", t.UnitId);
+                WriteStrings(w, "items", t.ItemIds);
+                break;
             case KeepsakeRecovered k:
                 w.WriteString("unit", k.UnitId);
                 w.WriteString("fallen", k.FallenId);
@@ -1399,6 +1403,11 @@ public static class ProtocolJson
             w.WriteEndObject();
         }
 
+        if (u.Learned.Count > 0)
+        {
+            WriteStrings(w, "learned", u.Learned.Select(s => s.Label()));
+        }
+
         if (u.Drake is { } drake)
         {
             w.WriteStartObject("drake");
@@ -1498,6 +1507,16 @@ public static class ProtocolJson
     }
 
     /// <summary>
+    /// The optional <c>learned</c> of a unit (issue 1246): the schools it learned from primers, in the
+    /// order learned. A unit written before it, or without one, has learned none; a word that is not a
+    /// school is refused.
+    /// </summary>
+    private static ValueList<MagicSchool> ReadLearned(JsonElement e) =>
+        !e.TryGetProperty("learned", out _) ? ValueList<MagicSchool>.Empty : ValueList<MagicSchool>.From(ReadStrings(e, "learned").Select(word =>
+            Enum.GetValues<MagicSchool>().Where(s => s.Label() == word).Select(s => (MagicSchool?)s).FirstOrDefault()
+                ?? throw new ProtocolException($"field 'learned' must hold only {string.Join(", ", Enum.GetValues<MagicSchool>().Select(s => s.Label()))}, not '{word}'")));
+
+    /// <summary>
     /// The optional <c>drake</c> of a unit (issue 805): its <c>stage</c> as the screen words it and the
     /// main maps <c>flown</c>. A unit written before it, or without one, rides none.
     /// </summary>
@@ -1564,6 +1583,7 @@ public static class ProtocolJson
                 Pronoun = ReadPronoun(e, id),
                 Doors = ReadDoors(e),
                 Drake = ReadDrake(e),
+                Learned = ReadLearned(e),
             };
         }
         catch (ArgumentException ex)

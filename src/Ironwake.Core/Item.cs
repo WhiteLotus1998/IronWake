@@ -11,4 +11,11 @@ public sealed record Item(string Id, string Name, int Heals, int Uses, int? Pric
 {
     /// <summary>The one line the item card prints for this item (issue 650); empty only in an item built outside the content files.</summary>
     public string Description { get; init; } = "";
+
+    /// <summary>
+    /// The school this item teaches when read at camp (issue 1246, a primer), or null for a heal.
+    /// A primer heals nothing (<see cref="Heals"/> is 0), is read once with
+    /// <see cref="CampaignRecord.Read"/>, and is refused by the battle's Item action.
+    /// </summary>
+    public MagicSchool? Teaches { get; init; }
 }

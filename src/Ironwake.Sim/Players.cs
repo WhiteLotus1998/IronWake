@@ -617,9 +617,9 @@ public sealed class HeuristicPlayer : IPlayer
         for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
         {
             var stack = unit.Unit.Inventory.Items[slot];
-            if (content.Items.ContainsKey(stack.ItemId))
+            if (content.Items.TryGetValue(stack.ItemId, out var item))
             {
-                if (unit.Hp * 2 < unit.MaxHp(content) && stack.Uses > 0)
+                if (item.Teaches is null && unit.Hp * 2 < unit.MaxHp(content) && stack.Uses > 0)
                 {
                     return WithMove(unit, safest[0], new UseItem(unit.Id, slot));
                 }

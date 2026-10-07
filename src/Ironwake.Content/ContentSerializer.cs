@@ -635,7 +635,15 @@ public static class ContentSerializer
         writer.WriteStartObject();
         writer.WriteString("id", item.Id);
         writer.WriteString("name", item.Name);
-        writer.WriteNumber("heals", item.Heals);
+        if (item.Teaches is { } teaches)
+        {
+            writer.WriteString("teaches", teaches.Label());
+        }
+        else
+        {
+            writer.WriteNumber("heals", item.Heals);
+        }
+
         writer.WriteNumber("uses", item.Uses);
         if (item.Price is { } price)
         {
@@ -757,6 +765,18 @@ public static class ContentSerializer
                     writer.WriteStartObject(school.Label());
                     writer.WriteStartObject("rider");
                     writer.WriteString("kind", SchoolRider.Label(rider.Kind));
+                    if (rider.Gate is not 0)
+                    {
+                        if (rider.Gate is { } gate)
+                        {
+                            writer.WriteNumber("gate", gate);
+                        }
+                        else
+                        {
+                            writer.WriteNull("gate");
+                        }
+                    }
+
                     if (rider.Kind == RiderKind.Burn)
                     {
                         writer.WriteNumber("amount", rider.Amount);
@@ -1035,6 +1055,11 @@ public static class ContentSerializer
         if (weapon.Rider is { } rider)
         {
             writer.WriteString("rider", SchoolRider.Label(rider));
+        }
+
+        if (weapon.MinMag is { } minMag)
+        {
+            writer.WriteNumber("minMag", minMag);
         }
 
         if (weapon.CritAgainst.Count > 0)

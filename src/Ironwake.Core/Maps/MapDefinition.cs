@@ -325,6 +325,13 @@ public sealed record MapDefinition(
     /// </summary>
     public string? SeizeName { get; init; }
 
+    /// <summary>
+    /// The <c>drops:</c> header (issue 1246): the tiles of placed enemies whose Lore tomes go to the
+    /// wagon when they die (<see cref="TomeDrop"/>), kept only if the map is won, as a chest's overflow
+    /// is. Each tile places an enemy that carries a Lore tome. Empty for none.
+    /// </summary>
+    public ValueList<Coord> Drops { get; init; } = ValueList<Coord>.Empty;
+
     /// <summary>Whether <paramref name="unit"/> is oath-bound here (issue 691): an enemy whose group <see cref="Oathbound"/> names.</summary>
     public bool IsOathbound(BattleUnit unit) => unit.Side == Side.Enemy && unit.Group is { } group && Oathbound.Contains(group);
 

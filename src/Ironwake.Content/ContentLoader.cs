@@ -1769,10 +1769,28 @@ public static class ContentLoader
                 throw node.Error("id", $"'{node.Entry}' is already a weapon");
             }
 
-            var heals = node.Int("heals");
-            if (heals < 1)
+            MagicSchool? teaches = null;
+            var heals = 0;
+            if (node.Has("teaches"))
             {
-                throw node.Error("heals", "must be at least 1");
+                if (node.Has("heals"))
+                {
+                    throw node.Error("teaches", "a primer teaches and heals nothing; drop heals");
+                }
+
+                teaches = node.ParseEnum<MagicSchool>("teaches", node.String("teaches"));
+                if (teaches == MagicSchool.Earth)
+                {
+                    throw node.Error("teaches", "earth is never taught; only fire, ice and lightning are");
+                }
+            }
+            else
+            {
+                heals = node.Int("heals");
+                if (heals < 1)
+                {
+                    throw node.Error("heals", "must be at least 1");
+                }
             }
 
             var uses = node.Int("uses");
@@ -1781,10 +1799,32 @@ public static class ContentLoader
                 throw node.Error("uses", "must be at least 1");
             }
 
-            builder.Add(node.Entry!, new Item(node.Entry!, node.String("name"), heals, uses, Price(node)) { Description = Description(node) });
+            if (teaches is not null && uses != 1)
+            {
+                throw node.Error("uses", "a primer is read once; must be 1");
+            }
+
+            builder.Add(node.Entry!, new Item(node.Entry!, node.String("name"), heals, uses, Price(node)) { Description = Description(node), Teaches = teaches });
         }
 
         return builder.ToImmutable();
+    }
+
+    /// <summary>A tome's optional <c>minMag</c> (issue 1246): at least 1, and only on a Lore (reason) tome.</summary>
+    private static int? MinMag(EntryNode node, WeaponType type)
+    {
+        if (!node.Has("minMag"))
+        {
+            return null;
+        }
+
+        if (type != WeaponType.Reason)
+        {
+            throw node.Error("minMag", "only a Lore (reason) tome is gated on Mag");
+        }
+
+        var minMag = node.Int("minMag");
+        return minMag >= 1 ? minMag : throw node.Error("minMag", "must be at least 1");
     }
 
     /// <summary>
@@ -1868,16 +1908,16 @@ public static class ContentLoader
             var kind = System.Enum.GetValues<RiderKind>().First(k => SchoolRider.Label(k) == kindName);
             string[] fields = kind switch
             {
-                RiderKind.Burn => ["kind", "amount", "phases"],
-                RiderKind.Stun => ["kind", "classes"],
-                RiderKind.Raise => ["kind", "terrain"],
-                _ => ["kind"],
+                RiderKind.Burn => ["kind", "amount", "phases", "gate"],
+                RiderKind.Stun => ["kind", "classes", "gate"],
+                RiderKind.Raise => ["kind", "terrain", "gate"],
+                _ => ["kind", "gate"],
             };
             foreach (var field in rider.Element.EnumerateObject())
             {
                 if (!fields.Contains(field.Name))
                 {
-                    throw entry.Error("rider." + field.Name, $"is not a field of a {kindName} rider; expected " + (fields.Length == 1 ? "kind alone" : string.Join(", ", fields)));
+                    throw entry.Error("rider." + field.Name, $"is not a field of a {kindName} rider; expected " + string.Join(", ", fields));
                 }
             }
 
@@ -1934,6 +1974,14 @@ public static class ContentLoader
             {
                 builder[school] = new SchoolRider(kind, 0, 0);
             }
+
+            var gate = rider.Has("gate") ? rider.NullableInt("gate") : 0;
+            if (gate < 0)
+            {
+                throw entry.Error("rider.gate", "must be at least 0, or null for no gate");
+            }
+
+            builder[school] = builder[school] with { Gate = gate };
         }
 
         return builder.ToImmutable();
@@ -2837,6 +2885,7 @@ public static class ContentLoader
                 CritBonus = critBonus,
                 School = school,
                 Rider = rider,
+                MinMag = MinMag(node, type),
             });
         }
 
@@ -2943,7 +2992,8 @@ public static class ContentLoader
     /// An enemy template declares its ranks in content and nothing raises them (issue 67),
     /// so a weapon its class uses above its declared rank could never be equipped: that is
     /// a content error, named by the inventory slot. A cast member may carry such a weapon,
-    /// since a player unit's rank grows by use.
+    /// since a player unit's rank grows by use. A template's school and a grimoire's Mag gate
+    /// (issue 1246) are checked the same way, at the level the template is written at.
     /// </summary>
     private static void ValidateTemplateRanks(
         EntryNode node,
@@ -2954,9 +3004,14 @@ public static class ContentLoader
         var unitClass = classes[unit.ClassId];
         for (var i = 0; i < unit.Inventory.Count; i++)
         {
-            if (weapons.TryGetValue(unit.Inventory.Items[i].ItemId, out var weapon) && MagicSchoolExtensions.SchoolShort(unitClass, weapon) is { } why)
+            if (weapons.TryGetValue(unit.Inventory.Items[i].ItemId, out var weapon) && MagicSchoolExtensions.SchoolShort(unit, unitClass, weapon) is { } why)
             {
                 throw node.Error("inventory[" + i + "].item", $"{unit.Id} carries {weapon.Id}, which {why}");
+            }
+
+            if (weapons.TryGetValue(unit.Inventory.Items[i].ItemId, out weapon) && unitClass.CanUse(weapon.Type) && MagicSchoolExtensions.MagShort(unit, unitClass, weapon) is { } mag)
+            {
+                throw node.Error("inventory[" + i + "].item", $"{unit.Id} carries {weapon.Id}, which {mag}");
             }
 
             if (weapons.TryGetValue(unit.Inventory.Items[i].ItemId, out weapon) && unitClass.CanUse(weapon.Type) && !unit.CanWield(weapon, unitClass))

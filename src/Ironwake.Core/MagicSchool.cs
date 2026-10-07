@@ -21,15 +21,27 @@ public static class MagicSchoolExtensions
     public static string Label(this MagicSchool school) => school.ToString().ToLowerInvariant();
 
     /// <summary>
-    /// Why <paramref name="unitClass"/> cannot wield <paramref name="weapon"/> for want of its school,
-    /// <c>needs the fire school; an adept reaches ice, lightning</c>, or null when the weapon is
-    /// unschooled or the class reaches it.
+    /// Why <paramref name="unit"/> in <paramref name="unitClass"/> cannot wield <paramref name="weapon"/>
+    /// for want of its school, <c>needs the fire school; an adept reaches ice, lightning</c>, a learned
+    /// school named after the class's (<c>; learned ice</c>, issue 1246), or null when the weapon is
+    /// unschooled or the unit reaches it.
     /// </summary>
-    public static string? SchoolShort(UnitClass unitClass, Weapon weapon) =>
-        weapon.School is not { } school || unitClass.Reaches(school)
+    public static string? SchoolShort(Unit unit, UnitClass unitClass, Weapon weapon) =>
+        weapon.School is not { } school || unit.Reaches(school, unitClass)
             ? null
             : $"needs the {school.Label()} school; {Article(unitClass.Name)} {unitClass.Name} reaches "
-              + (unitClass.Schools.Count == 0 ? "none" : string.Join(", ", unitClass.Schools.Select(s => s.Label())));
+              + (unitClass.Schools.Count == 0 ? "none" : string.Join(", ", unitClass.Schools.Select(s => s.Label())))
+              + (unit.Learned.Count == 0 ? "" : "; learned " + string.Join(", ", unit.Learned.Select(s => s.Label())));
+
+    /// <summary>
+    /// Why <paramref name="unit"/> in <paramref name="unitClass"/> cannot wield <paramref name="weapon"/>
+    /// for want of Mag (issue 1246), <c>needs Mag 8; pell has 6</c>, or null when the tome sets no
+    /// <see cref="Weapon.MinMag"/> or the unit's Mag reaches it.
+    /// </summary>
+    public static string? MagShort(Unit unit, UnitClass unitClass, Weapon weapon) =>
+        weapon.MinMag is { } minMag && unit.EffectiveStats(unitClass).Mag < minMag
+            ? $"needs Mag {minMag}; {unit.Id} has {unit.EffectiveStats(unitClass).Mag}"
+            : null;
 
     private static string Article(string name) => "AEIOUaeiou".Contains(name[0]) ? "an" : "a";
 }

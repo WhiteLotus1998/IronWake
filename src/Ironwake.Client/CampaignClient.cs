@@ -159,6 +159,9 @@ public sealed class CampaignClient
     /// <summary>Moves wagon entry <paramref name="index"/>, counted from 0, into the unit's pack (issue 786).</summary>
     public bool Take(string unitId, int index) => Screen(() => Record.TakeFromWagon(unitId, index, Content));
 
+    /// <summary>Reads the primer in <paramref name="slot"/>, counted from 0, so the unit learns its school (issue 1246).</summary>
+    public bool Read(string unitId, int slot) => Screen(() => Record.Read(unitId, slot, Content));
+
     /// <summary>Refines the weapon in <paramref name="slot"/>, counted from 0, by <c>mt</c> or <c>hit</c> at the forge (issue 786).</summary>
     public bool Refine(string unitId, int slot, string stat) => Screen(() => Record.Refine(unitId, slot, stat, Content));
 

@@ -21,11 +21,21 @@ public static class Burning
     /// from a burning school's tome landed on is set burning (<see cref="UnitIgnited"/>), its count
     /// refreshed. <paramref name="aWeapon"/> is what <paramref name="aId"/> struck with and
     /// <paramref name="bWeapon"/> what <paramref name="bId"/> did; a null weapon never burns.
+    /// A learned school's rider fires only past its gate (issue 1246, <see cref="LearnedGate"/>), read
+    /// on <paramref name="a"/> and <paramref name="b"/>, the two as they entered the combat, else as
+    /// <paramref name="state"/> finds them.
     /// </summary>
-    public static BattleState AfterCombat(BattleState state, GameContent content, string aId, Weapon? aWeapon, string bId, Weapon? bWeapon, ValueList<StrikeEvent> strikes, List<GameEvent> events)
+    public static BattleState AfterCombat(BattleState state, GameContent content, string aId, Weapon? aWeapon, string bId, Weapon? bWeapon, ValueList<StrikeEvent> strikes, List<GameEvent> events, BattleUnit? a = null, BattleUnit? b = null)
     {
-        foreach (var (strikerId, weapon, targetId) in new[] { (aId, aWeapon, bId), (bId, bWeapon, aId) })
+        a ??= state.Find(aId);
+        b ??= state.Find(bId);
+        foreach (var (strikerId, weapon, targetId, striker, struck) in new[] { (aId, aWeapon, bId, a, b), (bId, bWeapon, aId, b, a) })
         {
+            if (!LearnedGate.Fires(content, striker, weapon, struck))
+            {
+                continue;
+            }
+
             if (Rider(content, weapon) is not { } rider || !strikes.Any(s => s.AttackerId == strikerId && s.TargetId == targetId && s.Hit))
             {
                 continue;

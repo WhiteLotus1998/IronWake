@@ -33,6 +33,7 @@ public sealed class CampaignSession
           refine <unit> <slot> mt|hit  Raise a weapon one step at the keep's forge, for one material and the smith's fee
           drop <unit> <slot>       Throw away an item, no refund; a signature item is never dropped
           take <unit> <n>          Move entry n of the wagon (what chests sent past a full pack) into the unit's pack
+          read <unit> <slot>       Read a primer: a Lore unit learns its school for the campaign; a learned rider fires only on Mag over Res
           classes [unit]           What each class asks for promotion into it, and what the unit still lacks
           certify <unit> <class>   Promote into a class, paying a seal from the purse
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
@@ -1351,6 +1352,9 @@ public sealed class CampaignSession
             case ["take", var unitId, var indexText] when int.TryParse(indexText, out var index):
                 Take(_record.TakeFromWagon(unitId, index - 1, _content), text);
                 break;
+            case ["read", var unitId, var slotText] when int.TryParse(slotText, out var slot):
+                Take(_record.Read(unitId, slot - 1, _content), text);
+                break;
             case ["refine", var unitId, var slotText, var stat] when int.TryParse(slotText, out var slot):
                 Take(_record.Refine(unitId, slot - 1, stat, _content), text);
                 break;
@@ -1488,6 +1492,9 @@ public sealed class CampaignSession
                 break;
             case ["take", ..]:
                 Error(text, "usage: take <unit> <n>");
+                break;
+            case ["read", ..]:
+                Error(text, "usage: read <unit> <slot>");
                 break;
             case ["refine", ..]:
                 Error(text, "usage: refine <unit> <slot> mt|hit");
@@ -2051,6 +2058,11 @@ public sealed class CampaignSession
         lines.Add($"    HP {stats.Hp}  Str {stats.Str} Mag {stats.Mag} Dex {stats.Dex} Spd {stats.Spd} Lck {stats.Lck} Def {stats.Def} Res {stats.Res} Cha {stats.Cha}");
         var ranks = unitClass.Weapons.Select(type => $"{type.ToString().ToLowerInvariant()} {unit.Skill.Rank(type)} ({unit.Skill.Points(type)})");
         lines.Add($"    Ranks: {string.Join(", ", ranks)}");
+        if (unit.Learned.Count > 0)
+        {
+            lines.Add($"    Learned: {string.Join(", ", unit.Learned.Select(school => school.Label()))} (from primers; a learned rider fires only on Mag over Res)");
+        }
+
         if (PlaySession.MasteryLine(new BattleUnit(unit, Side.Player, default, stats.Hp, false, false), content) is { } mastery)
         {
             lines.Add("  " + UnitNames.Sentence(mastery));
