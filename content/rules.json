@@ -36,5 +36,8 @@
       "tier": 1,
       "lethalConfirm": false
     }
+  },
+  "schools": {
+    "fire": { "rider": { "kind": "burn", "amount": 2, "phases": 2 } }
   }
 }

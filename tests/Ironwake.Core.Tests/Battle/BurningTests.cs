@@ -7,11 +7,11 @@ using Ironwake.Core.Tests.Content;
 namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
-/// A school's rider and fire's burn (issue 1243, DECISIONS/0297): the rider is data on the school in
-/// <c>rules.json</c>, a tome carries its school's, and a hit (not a miss, not a kill) from a burn
+/// A school's rider and fire's burn (issue 1243, DECISIONS/0297, 0298): the rider's shape is data on
+/// the school in <c>rules.json</c>, a tome carries it only by naming its kind (issue 1250), and a hit (not a miss, not a kill) from a burn
 /// rider's tome leaves the target losing its amount at each of its side's next phase starts, never
-/// below 1, refreshed and never stacked, and never stacked with tile fire. The shipped fire school
-/// carries no rider until the Table turns it on, so these tests give it one: 2 for two phases.
+/// below 1, refreshed and never stacked, and never stacked with tile fire. Shipped fire carries burn 2
+/// for two phases, but shipped Cinder is plain fire (round 418), so these tests have Cinder name it.
 /// Played on the sample <c>the_tollgate_frost.map</c>, Pell with Cinder against the woods brigand.
 /// </summary>
 public class BurningTests
@@ -22,8 +22,15 @@ public class BurningTests
 
     private static readonly GameContent Burns = Shipped with
     {
-        Riders = ImmutableSortedDictionary<MagicSchool, SchoolRider>.Empty.Add(MagicSchool.Fire, FireBurn),
+        Weapons = Shipped.Weapons.SetItem("cinder", Shipped.Weapon("cinder") with { Rider = RiderKind.Burn }),
     };
+
+    /// <summary>The shipped files as the serializer writes them, with <paramref name="edit"/> applied to weapons.json.</summary>
+    private static ContentFiles ShippedWithWeapons(Func<string, string> edit)
+    {
+        var files = ContentSerializer.Write(Shipped);
+        return files with { Weapons = new ContentFile(files.Weapons.Name, edit(files.Weapons.Text)) };
+    }
 
     private static readonly string SamplePath = Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples", "the_tollgate_frost.map");
 
@@ -57,22 +64,49 @@ public class BurningTests
     }
 
     [Fact]
-    public void ASchoolsRiderLoadsFromRulesAndEveryTomeOfTheSchoolCarriesIt()
+    public void ASchoolsRiderLoadsFromRulesAndATomeThatNamesItCarriesIt()
     {
         var content = ContentLoader.Parse(Fixture.Files(rules: RiderRules));
 
         Assert.Equal(FireBurn, content.Riders[MagicSchool.Fire]);
         Assert.False(content.Riders.ContainsKey(MagicSchool.Ice));
         Assert.Equal(FireBurn, Burns.RiderOf(Burns.Weapon("cinder")));
+        Assert.Null(Shipped.RiderOf(Shipped.Weapon("cinder")));
         Assert.Null(Burns.RiderOf(Burns.Weapon("bolt")));
         Assert.Null(Burns.RiderOf(Burns.Weapon("iron_lance")));
     }
 
     [Fact]
-    public void TheShippedFireSchoolCarriesNoRiderUntilTheTableTurnsItOn()
+    public void FirstSpellsArePlainNoShippedTomeNamesARider()
     {
-        Assert.Empty(Shipped.Riders);
+        Assert.Equal(FireBurn, Shipped.Riders[MagicSchool.Fire]);
+        Assert.All(Shipped.Weapons.Values, w => Assert.Null(w.Rider));
         Assert.Null(Shipped.RiderOf(Shipped.Weapon("cinder")));
+    }
+
+    [Fact]
+    public void ATomeNamingItsRiderLoadsAndRoundTrips()
+    {
+        var content = ContentLoader.Parse(ShippedWithWeapons(w => w.Replace("\"school\": \"fire\"", "\"school\": \"fire\", \"rider\": \"burn\"")));
+        var again = ContentLoader.Parse(ContentSerializer.Write(content));
+
+        Assert.Equal(RiderKind.Burn, content.Weapon("cinder").Rider);
+        Assert.Equal(FireBurn, content.RiderOf(content.Weapon("cinder")));
+        Assert.Equal(RiderKind.Burn, again.Weapon("cinder").Rider);
+    }
+
+    [Theory]
+    [InlineData("\"school\": \"fire\"", "\"school\": \"fire\", \"rider\": \"smoulder\"", "unknown rider kind 'smoulder'")]
+    [InlineData("\"school\": \"fire\"", "\"school\": \"lightning\", \"rider\": \"burn\"", "the lightning school has no rider")]
+    [InlineData("\"school\": \"fire\"", "\"rider\": \"burn\"", "only a tome with a school names a rider")]
+    public void ATomesBadRiderIsRefusedAtLoadNamingFileEntryAndField(string from, string to, string why)
+    {
+        var error = Assert.Throws<ContentException>(() => ContentLoader.Parse(ShippedWithWeapons(w => w.Replace(from, to))));
+
+        Assert.Equal(ContentFiles.WeaponsName, error.File);
+        Assert.Equal("cinder", error.Entry);
+        Assert.Equal("rider", error.Field);
+        Assert.Contains(why, error.Message);
     }
 
     [Theory]

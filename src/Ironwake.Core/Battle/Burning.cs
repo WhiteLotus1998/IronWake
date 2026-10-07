@@ -2,7 +2,7 @@ namespace Ironwake.Core;
 
 /// <summary>
 /// A school's burn rider (issue 1243, DECISIONS/0297; fire's, from <c>rules.json</c>). A hit from a
-/// tome whose school carries a <see cref="RiderKind.Burn"/> rider (<see cref="GameContent.RiderOf"/>)
+/// tome that names its school's <see cref="RiderKind.Burn"/> rider (<see cref="GameContent.RiderOf"/>)
 /// on a unit that survives the combat leaves it burning: at the start of each of its own side's next
 /// <see cref="SchoolRider.Phases"/> phases it loses <see cref="SchoolRider.Amount"/> HP, never below 1.
 /// <list type="bullet">
