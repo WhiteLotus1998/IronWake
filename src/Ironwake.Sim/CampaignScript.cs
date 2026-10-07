@@ -210,7 +210,7 @@ public static class CampaignScript
         // The captain's ladder is the promotion every run meets; a recruit's certify waits for its advanced form.
         foreach (var unit in client.Record.Present(content))
         {
-            var forms = content.Classes.Values.OrderBy(c => c.Id, StringComparer.Ordinal).ToList();
+            var forms = content.Classes.Values.Where(c => !c.Enemy).OrderBy(c => c.Id, StringComparer.Ordinal).ToList();
             foreach (var form in forms.Skip(variant % forms.Count).Concat(forms.Take(variant % forms.Count)))
             {
                 var kind = form.Advances is null ? "certify" : "advance";

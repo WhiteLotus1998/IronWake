@@ -110,6 +110,11 @@ public static class Certifications
             refusals.Add(new("class", $"{unit.Id} is already {Article(target.Name)} {target.Name}"));
         }
 
+        if (target.Enemy)
+        {
+            refusals.Add(new("enemy", $"{target.Name} is an enemy's class; nobody joins it"));
+        }
+
         if (target.Hidden)
         {
             refusals.Add(new("hidden", $"{target.Name} is not certified; it is earned"));

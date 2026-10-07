@@ -341,6 +341,50 @@
       "masteryPoints": 12,
       "modifiers": { "hp": 2, "str": 1, "def": 2 },
       "growthModifiers": { "hp": 5, "def": 5 }
+    },
+    {
+      "id": "frost_caster",
+      "name": "Frost Caster",
+      "description": "Placeholder. Keeps the cold in a jar and opens it on whoever comes first.",
+      "enemy": true,
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["reason"],
+      "schools": ["ice"],
+      "modifiers": { "mag": 2, "res": 1 }
+    },
+    {
+      "id": "earth_shaper",
+      "name": "Earth Shaper",
+      "description": "Placeholder. Raises ground for the line in front, and armor for itself when nobody is close.",
+      "enemy": true,
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["reason"],
+      "schools": ["earth"],
+      "modifiers": { "mag": 1, "def": 1, "res": 1 }
+    },
+    {
+      "id": "storm_caster",
+      "name": "Storm Caster",
+      "description": "Placeholder. Sworn, and late to the war. Calls the weather down on purpose.",
+      "enemy": true,
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["reason"],
+      "schools": ["lightning"],
+      "modifiers": { "mag": 3, "res": 2 }
+    },
+    {
+      "id": "grave_caller",
+      "name": "Grave Caller",
+      "description": "Placeholder. The dark-mage and those who follow him. Stands the dead back up and drinks from the living.",
+      "enemy": true,
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["reason"],
+      "schools": ["dark"],
+      "modifiers": { "mag": 3, "res": 2 }
     }
   ]
 }
