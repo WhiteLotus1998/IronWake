@@ -1,0 +1,47 @@
+quest maud_2 pell
+move maud 7,7
+wait maud
+move pell 8,7
+wait pell
+end
+move maud 7,3
+wait maud
+move pell 7,8
+wait pell
+end
+move pell 7,4
+attack pell hexer-1
+attack maud hexer-1
+recall 22
+move maud 7,7
+wait maud
+move pell 6,8
+wait pell
+end
+move pell 7,8
+attack pell hexer-1
+move maud 3,7
+wait maud
+end
+move pell 6,8
+attack pell brigand-1
+move maud 6,7
+item maud 2 pell
+end
+move maud 8,7
+attack maud brigand-3
+move pell 7,8
+attack pell brigand-3
+end
+move maud 7,4
+wait maud
+move pell 7,5
+wait pell
+end
+move maud 7,3
+attack maud soldier-1
+move pell 7,2
+attack pell soldier-1
+end
+attack pell archer-1
+move maud 7,0

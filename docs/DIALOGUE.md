@@ -36,8 +36,8 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 - **The Counting House (311 to 321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh-seed read gates.
 - **The Long Count (313 to 315):** count on screen; dusk; archer 11,4 (#930).
 - **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409; cold 5/6/4, t5): woken, the pair feeds the fort from its edge. Lever #1210: the fort and Maud's start south; a held rectangle out of reach is a post.
-- **The First Shrine (406 to 408, 424; 0283, 0304):** starts south, alone. The sprint is not dominant (one clean in three); limit 10. Surprise failed: the sanctum archer now wakes when the door soldier dies, printed (`wake_on_death:`, #1264); brigand-1 to 4,4 next if flat. #1208: `seize_name: altar`.
-- **The Lazar House (420 to 425):** the hexer is the price of not barring. **Held bars, waiting queue kept** (#1259, 0303): a bar holds while stood on, what it blocks waits, `east3` keeps both bars in reach turns 5, 6; 9,1 retired. Chat's Ottilie 4311 (lost t4, no bar) is a door-line play. Ships at `turn_limit: 5` (#1266; 1259 replays won t5); the bar's advice line is #1144's. Sim 4/200: the door.
+- **The First Shrine (406 to 408, 424 to 427; 0283, 0304):** south start, alone; limit 10. The loft archer wakes on the door soldier's death, printed (`wake_on_death:`): **kept** (Chat's Pell 4426 cold won t9, 7/7/6); no brigand lever. The ally sets the shape (Sim: Pell 54, Teodor 3/200); next, a Teodor chair. #1208: `seize_name: altar`.
+- **The Lazar House (420 to 425):** the hexer is the price of not barring. **Held bars, waiting queue kept** (#1259, 0303): a bar holds while stood on, what it blocks waits, `east3` keeps both bars in reach turns 5, 6; 9,1 retired. Chat's Ottilie 4311 (lost t4) is a door-line play. Ships at `turn_limit: 5` (#1266; 1259 replays won t5); the bar's advice line is #1144's. Sim 4/200: the door.
 - **The raid and the keep:** acceptance is play. The raid is kept, never tuned for surprise (158); lever: the van a column west. The keep is the finale (0265); both in (407). #1204's three levers shipped one at a time (0284 to 0287, 0293: the hunter, inside spawns, Hask's reach); range plus 2 parked. Fresh keep chair (shipped keep): is the bait a choice? Short on Cinder, not HP.
 
 ## Experiments (state and kill criterion)
@@ -111,4 +111,4 @@ Rewritten when the Table moves; under 150 lines, 20 KB.
 
 ## Round index
 
-1-118 rules; 119-342 story; 343-359 writing; 360-410; 411-419 (#1218); 420 on (#1251).
+1-118 rules; 119-342 story; 343-359 writing; 360-419; 420 on (#1251).
