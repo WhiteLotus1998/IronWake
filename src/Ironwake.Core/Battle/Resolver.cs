@@ -25,6 +25,11 @@ public static class Resolver
                 RejectionReason.BattleOver, $"the battle is {verdict} ({outcome.Reason}); only Recall is left"));
         }
 
+        if (Hollow.Refusal(state, command) is { } hollowed)
+        {
+            return new ApplyResult(state, ValueList<GameEvent>.Empty, hollowed);
+        }
+
         switch (command)
         {
             case Move move:
@@ -173,6 +178,7 @@ public static class Resolver
             next = OpenCanto(next, content, acted, healed: command is UseItem && events.OfType<UnitHealed>().Any(h => h.UnitId != acted));
         }
 
+        next = Hollow.After(next, events);
         next = HeldBars.After(next, events);
         next = Lock.After(next, events);
         next = Freed.After(state, next, events);
@@ -1061,6 +1067,11 @@ public static class Resolver
             return ApplyArmor(state, content, use, unit, spell, events);
         }
 
+        if (Hollow.Raises(content, spell))
+        {
+            return ApplyHollow(state, content, use, unit, spell, events);
+        }
+
         if (!spell.Heals || !content.Class(unit.Unit.ClassId).CanUse(spell.Type))
         {
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is a weapon, not an item; attack with it"));
@@ -1227,6 +1238,57 @@ public static class Resolver
     }
 
     /// <summary>
+    /// The Item action with a tome naming hollow (issue 1284, <see cref="Hollow"/>): checked as a sunder is (no art, the
+    /// caster may wield it, a use left), on a body named by the fallen unit's id or by its tile, <c>x,y</c>, in its
+    /// range, never an ally's, then raised.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyHollow(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, List<GameEvent> events)
+    {
+        if (use.Art is not null)
+        {
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} raises the dead; no art is declared with it"));
+        }
+
+        if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {spell.Id}: " + (MagicSchoolExtensions.SchoolShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? MagicSchoolExtensions.MagShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? RankShort(unit.Unit, spell))));
+        }
+
+        var stack = unit.Unit.Inventory.Items[use.Slot];
+        if (stack.Uses == 0)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} has no uses left this battle"));
+        }
+
+        if (use.TargetId is null)
+        {
+            return (state, new Rejection(RejectionReason.NoTarget, $"{spell.Name} raises a fallen foe: item {unit.Id} {use.Slot} <fallen|x,y>; attack with it to strike"));
+        }
+
+        var body = state.Bodies.LastOrDefault(b => b.Id == use.TargetId)
+            ?? (Sunder.TileOf(use.TargetId) is { } tile && state.Map.Contains(tile) ? Hollow.BodyAt(state, tile) : null);
+        if (body is null)
+        {
+            return (state, new Rejection(RejectionReason.NoSuchTarget, $"no body '{use.TargetId}' to raise; a body is a unit that died on this map"));
+        }
+
+        if (body.Side == unit.Side)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{body.Id} fell on {unit.Id}'s side; the dead raise only from the foe, never a fallen ally"));
+        }
+
+        var distance = unit.At.DistanceTo(body.At);
+        if (!spell.InRange(distance))
+        {
+            return (state, new Rejection(
+                RejectionReason.OutOfRange,
+                $"{body.Id}'s body at {body.At} is {distance} tiles from {unit.Id} at {unit.At}; {spell.Name} reaches {spell.MinRange}-{spell.MaxRange}"));
+        }
+
+        return Hollow.Raise(state, content, unit, use.Slot, spell, body, use.TargetId, events);
+    }
+
+    /// <summary>
     /// The Item action with a tome naming sunder (issue 1281, <see cref="Sunder"/>): checked as a raise is (no art, the
     /// caster may wield it, a use left), on a target named as a unit of either side or as a tile, <c>x,y</c>, in its
     /// range, then dropped.
@@ -1352,13 +1414,13 @@ public static class Resolver
     /// Section 6 for one side of a combat: a living player unit earns EXP once, from its
     /// best outcome (a strike landed, the enemy killed, a boss killed), and levels up for
     /// every 100 crossed under the section 3 growth keys. Enemies earn nothing: they are
-    /// templates that do not outlive the map (DECISIONS/0017). An HP gain raises current HP
+    /// templates that do not outlive the map (DECISIONS/0017), and neither does a Hollow (issue 1284). An HP gain raises current HP
     /// by the same amount. Events follow the combat and precede any death.
     /// </summary>
     private static BattleUnit AwardExp(
         BattleUnit earner, BattleUnit other, ValueList<StrikeEvent> strikes, bool killed, GameContent content, ulong seed, List<GameEvent> events)
     {
-        if (earner.Side != Side.Player || earner.Hp == 0)
+        if (earner.Side != Side.Player || earner.Hp == 0 || earner.Hollow is not null)
         {
             return earner;
         }
@@ -1408,7 +1470,7 @@ public static class Resolver
     /// </summary>
     private static BattleUnit AwardMastery(BattleUnit earner, GameContent content, List<GameEvent> events)
     {
-        if (earner.Side != Side.Player || earner.Hp == 0)
+        if (earner.Side != Side.Player || earner.Hp == 0 || earner.Hollow is not null)
         {
             return earner;
         }
@@ -1427,7 +1489,7 @@ public static class Resolver
     /// <summary>Adds rank points to a player unit and emits <see cref="RankRaised"/> when they cross a threshold; an enemy is returned unchanged.</summary>
     private static BattleUnit GainRank(BattleUnit earner, WeaponType type, int points, List<GameEvent> events)
     {
-        if (earner.Side != Side.Player)
+        if (earner.Side != Side.Player || earner.Hollow is not null)
         {
             return earner;
         }
@@ -1462,10 +1524,17 @@ public static class Resolver
     /// <see cref="KeepsakeLeft"/> each: a player unit its weapon and any keepsake it carried,
     /// an enemy every keepsake it carried (issue 295). Nothing is left on a map without the
     /// header. Every death passes here, so a <c>drops:</c> enemy's tomes go to the wagon here
-    /// first, on any map (issue 1246, <see cref="TomeDrop"/>).
+    /// first, on any map (issue 1246, <see cref="TomeDrop"/>), and the fallen joins the board's bodies
+    /// (issue 1284, <see cref="Hollow.LeaveBody"/>). A Hollow leaves nothing: no body, no drop, no keepsake.
     /// </summary>
     private static BattleState LeaveKeepsake(BattleState state, BattleUnit fallen, GameContent content, List<GameEvent> events)
     {
+        if (fallen.Hollow is not null)
+        {
+            return state;
+        }
+
+        state = Hollow.LeaveBody(state, fallen);
         state = TomeDrop.After(state, fallen, content, events);
         if (!state.Map.KeepsakesEnabled)
         {
@@ -1964,6 +2033,7 @@ public static class Resolver
             next = next with { LitGroups = ValueList<string>.Empty };
         }
 
+        next = Hollow.AtPhaseChange(next, ended, nextPhase, events);
         next = Rime.AtPhaseChange(next, content, ended, nextPhase, events);
         next = Earthwork.AtPhaseChange(next, ended, nextPhase, events);
         next = Kinsbane.AtPhaseStart(next, content, nextPhase, events);

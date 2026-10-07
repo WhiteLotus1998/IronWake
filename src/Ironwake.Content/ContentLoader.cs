@@ -1931,6 +1931,11 @@ public static class ContentLoader
                 throw entry.Error("rider.kind", "armor is named by a tome on a school whose rider is raise, never a school's own rider");
             }
 
+            if (kind == RiderKind.Hollow)
+            {
+                throw entry.Error("rider.kind", "a hollow is named by a tome on a school whose rider is drain, never a school's own rider");
+            }
+
             string[] fields = kind switch
             {
                 RiderKind.Burn => ["kind", "amount", "phases", "cap", "gate"],

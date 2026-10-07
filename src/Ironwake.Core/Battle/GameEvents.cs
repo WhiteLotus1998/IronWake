@@ -379,6 +379,18 @@ public sealed record ArmorDonned(string UnitId, string SpellId, int Def, int Mov
 /// <summary>The armor <paramref name="SpellId"/> laid on <paramref name="UnitId"/> fell as its side's last phase under it ended (issue 1282, <see cref="Armor"/>).</summary>
 public sealed record ArmorFell(string UnitId, string SpellId) : GameEvent;
 
+/// <summary>
+/// <paramref name="UnitId"/>'s dark tome raised the body of <paramref name="FallenId"/> on <paramref name="At"/> as the Hollow
+/// <paramref name="HollowId"/>, on its side, at <paramref name="Hp"/>, to act in its side's next <paramref name="Phases"/> phases (issue 1284, <see cref="Hollow"/>).
+/// </summary>
+public sealed record HollowRaised(string UnitId, string HollowId, string FallenId, Coord At, int Hp, int Phases) : GameEvent;
+
+/// <summary>
+/// The Hollow <paramref name="UnitId"/> crumbled and left the board, no death and no body: its last phase ended, or
+/// <paramref name="RaiserFell"/>, its raiser left the board (issue 1284, <see cref="Hollow"/>).
+/// </summary>
+public sealed record HollowCrumbled(string UnitId, bool RaiserFell) : GameEvent;
+
 /// <summary>A stunned unit's side's phase began, and it skips it: it neither moves nor acts until the phase ends (issue 1244, <see cref="Stun"/>).</summary>
 public sealed record StunSkipped(string UnitId) : GameEvent;
 

@@ -69,6 +69,8 @@ public class ProtocolJsonTests
         { new UnitIgnited("brigand-1", "pell", 2, 2, 1), """{"type":"unitIgnited","unit":"brigand-1","by":"pell","amount":2,"phases":2,"stacks":1}""" },
         { new BurnCashed("brigand-1", "pell", 6, 3), """{"type":"burnCashed","unit":"brigand-1","by":"pell","amount":6,"hpAfter":3}""" },
         { new UnitDrained("pell", "brigand-1", 6, 11), """{"type":"unitDrained","unit":"pell","from":"brigand-1","amount":6,"hpAfter":11}""" },
+        { new HollowRaised("pell", "hollow-brigand-1", "brigand-1", A, 12, 3), """{"type":"hollowRaised","unit":"pell","hollow":"hollow-brigand-1","fallen":"brigand-1","at":{"x":1,"y":2},"hp":12,"phases":3}""" },
+        { new HollowCrumbled("hollow-brigand-1", true), """{"type":"hollowCrumbled","unit":"hollow-brigand-1","raiserFell":true}""" },
         { new GroundRaised("pell", "teodor", A, "earthwork"), """{"type":"groundRaised","unit":"pell","target":"teodor","at":{"x":1,"y":2},"terrain":"earthwork"}""" },
         { new UnitStunned("brigand-1", "pell", Side.Enemy), """{"type":"unitStunned","unit":"brigand-1","by":"pell","side":"enemy"}""" },
         { new UnitStunned("pell", "brigand-1", Side.Player, Next: true), """{"type":"unitStunned","unit":"pell","by":"brigand-1","side":"player","next":true}""" },

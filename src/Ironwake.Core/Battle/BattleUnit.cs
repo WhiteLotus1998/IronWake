@@ -101,6 +101,15 @@ public sealed record BattleUnit(
     /// <summary>Whether the unit's stun rider has stunned someone this map (issue 1244, <see cref="Core.Stun"/>): once a map per caster.</summary>
     public bool StunSpent { get; init; }
 
+    /// <summary>Whether the unit has raised the dead this map (issue 1284, <see cref="Core.Hollow"/>): once a map per caster.</summary>
+    public bool RaiseSpent { get; init; }
+
+    /// <summary>
+    /// What the unit is bound to when it is a Hollow (issue 1284, <see cref="Core.Hollow"/>): its raiser, the body it rose
+    /// from and its crumble clock; null for every other unit.
+    /// </summary>
+    public HollowMark? Hollow { get; init; }
+
     /// <summary>
     /// The frost hold's clock (issue 1127, <see cref="DrakeFrost"/>), counted as the chill's is
     /// (<see cref="Frost.AtPhaseChange"/>): 0 not held; 1 struck by a drake's frost, its side's next phase
