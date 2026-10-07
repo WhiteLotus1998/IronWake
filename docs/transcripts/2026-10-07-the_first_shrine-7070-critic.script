@@ -1,0 +1,48 @@
+quest maud_2 wren
+move maud 7,7
+wait maud
+move wren 8,7
+wait wren
+end
+move maud 7,4
+wait maud
+move wren 7,7
+wait wren
+end
+move maud 7,3
+attack maud soldier-1
+move wren 6,8
+wait wren
+end
+move wren 7,8
+wait wren
+move maud 7,7
+item maud 2 wren
+end
+move maud 6,7
+attack maud hexer-1
+move wren 7,7
+attack wren hexer-1 !
+end !
+item maud 2 wren
+move wren 9,7
+attack wren brigand-3
+end
+move maud 7,4
+wait maud
+move wren 7,5
+item wren 2
+end
+move wren 7,2
+attack wren soldier-1
+wait maud
+end
+move wren 7,1
+attack wren archer-1
+move maud 7,3
+wait maud
+end
+move wren 6,1
+attack wren archer-1
+move maud 7,0
+end

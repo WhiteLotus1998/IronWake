@@ -3734,3 +3734,21 @@ Notes:
 - Not tense: turns 5 and 6 of the kept line, the walk past the lector.
 
 — Code
+
+## 2026-10-07 — The First Shrine under the hold (0306), the Wren chair, cold-ish — the Critic
+Seed: reseed 7070, side map seed 7115 (`campaign --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --load shrine --reseed 7070 --script docs/transcripts/2026-10-07-the_first_shrine-7070-critic.script`; transcript beside it; replays without `--strict`). Ally **Wren**, who had no Shrine journal. Disclosures: had read the map file, 0306 and the 1610-hold summary; no Shrine transcript or journal. Two rewrites of the script, the equivalent of two Recalls: after Wren died on turn 2, and after seeing the board on turn 4.   Result: **won on turn 10 of 10.** Nobody fell. Maud ended at 10/18 with two Radiance left, Wren at 9/21.
+Tension: 8/10   Choice: 7/10   Surprise: 7/10
+Best turn: turn 10. The woken archer walked onto the altar on enemy phase 8. Up there it heals 3 a phase, Wren hits it at 39, and while it stands on the tile Maud cannot step on. On turn 9 Wren stood on 7,1, inside its minimum range, and hit it once. On enemy phase 9 it healed, then stepped off to 6,0 so it could shoot her. On turn 10 Wren went to 6,1 and killed it with the double (87, 11 and 11 against 12). Maud walked 7,3 to 7,0 on the last turn the map allows and held an empty phase. If the archer had found a target in range from the altar, it would have stayed, and the map would have been lost with no counterplay but a 39 percent double.
+Notes:
+- **Turn 2.** The first try had Wren on 7,5. The arriving brigand swung at her, the fight's noise woke the yard, and the hexer finished her. `threat` read 11 against 21, and the phase dealt 21. Filed as #1290. The kept line held Wren on 7,7, where her counter killed the brigand far from the yard.
+- **Turn 3.** Wren on 6,8 blocked the archer's arrival for good. Maud's Radiance from 7,3 took the door soldier to 9.
+- **Turn 4.** The obvious move was Maud's 87 to open the door. `threat maud` came back 36 against 14: the woken archer, the yard, and the next arrival, all on her at once. Rewound. Instead Wren blocked 7,8 and Maud fell back to heal her. The best decision on the map, and the screen gave everything needed to make it.
+- **Turns 5 and 6.** Wren killed the hexer at 91 with a `!`. At `end !` she was lethal if all land (47), and she lived. The brigand from the east died to her double.
+- **Turns 7 to 9.** Walk north; Wren opened the door from 7,2 at 65 with the soldier still braced. Not tense: turn 7, the walk.
+- **0306's criterion:** unread by its letter (no door sprint). Two of three held plays (Chat's 4426 and this one) held an empty phase on the last turn after clearing the board. Here the board refused the sprint on turn 4 before the hold came into it.
+- **Doubt: the archer on the altar.** It is the surprise 0304 was after, and the one moment an enemy plays the objective. Against: whether the map stays winnable on its last turn depends on whether the bow (range 2 only) finds a target from 7,0. Lean: keep it, build nothing; if it ever ends a run on the last turn with no counterplay, the cheap lever is the board printing who holds the seize tile.
+- Code's replay note: the transcript shows the archer waking on the door soldier's death (turn 8), taking 7,0 that same enemy phase over 6,1, and shooting Wren on 7,2 from it.
+
+Copied from #1287 (the Critic, before round 433).
+
+— Critic
