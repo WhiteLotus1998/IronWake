@@ -1,13 +1,13 @@
 # STATE
 
-Updated: 2026-10-07 (#1291: 19 KB working cap off main, decision numbers unique; Table #1287). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-07 (#1281: Sunder drops raised ground and lands a flier, 0311; #1293 `blocked`: the sandbox refused the workflow edit, it waits for Lotus). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243). The Table is #1287 (#1251 archived). Casting (`docs/look/`) waits on Lotus. Pillar 5: eleven and the captain (0264). #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804, #806, #807 and #872 are `blocked` on plays, #634 or #535; the dash (0255), the wind (0256) and the one answer (0257) are kept on their samples.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
 ~4850 tests green; `ci`, `ci-windows` run.
-No forks are open. The chain heartbeat stays (#406). Recent records: `confirm-lethal` (0260); the Drake Warden, never a bare "Warden" (#1126); Rook's frost (0262); the pick at L4 (0263); a guard boss holds his post (#1138, the 0264 on guard bosses); the keep is the finale (0265); the door (0268 to 0277); `holds:` and limit 9 (0279, 0280); the freed tile (0281); the Shrine (0283, 0288, 0304, 0306); `threat` lines (0294, 0295, 0302, #1258, #1290). **The schools** (Lotus, rounds 416, 417) are built (0296 to 0301); his spell rulings (0307) are `ready` as #1281 to #1286, burn stacks (0308) and Lightning Rod (0309) shipped; content waits on revised #1247. #1259 (0303): held bars kept on a sample; the Lazar House ships them (0305).
+No forks are open. The chain heartbeat stays (#406). Recent records: `confirm-lethal` (0260); the Drake Warden, never a bare "Warden" (#1126); Rook's frost (0262); the pick at L4 (0263); a guard boss holds his post (#1138, the 0264 on guard bosses); the keep is the finale (0265); the door (0268 to 0277); `holds:` and limit 9 (0279, 0280); the freed tile (0281); the Shrine (0283, 0288, 0304, 0306); `threat` lines (0294, 0295, 0302, #1258, #1290). **The schools** (Lotus, rounds 416, 417) are built (0296 to 0301); his spell rulings (0307) are `ready` as #1281 to #1286, burn stacks (0308), Lightning Rod (0309) and Sunder (0311) shipped; content waits on revised #1247. #1259 (0303): held bars kept on a sample; the Lazar House ships them (0305).
 
 ## Next
 

@@ -718,6 +718,7 @@ public static class Resolver
         next = Stun.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Lock.AfterAttack(next, art, unit.Id, target.Id, result.Strikes, events);
         next = Grounding.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
+        next = Sunder.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Opening.AfterAttack(next, content, unit, target.Id, result.Strikes, events);
         next = Windup.AfterCombat(next, content, unit, target, result.Strikes, events);
         next = EndStruckWatches(next, result.Strikes, events);
@@ -828,6 +829,7 @@ public static class Resolver
             state = Burning.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
             state = Stun.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Grounding.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
+            state = Sunder.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Windup.AfterCombat(state, content, shooter, struck, strikes, events);
             state = EndStruckWatches(state, strikes, events);
         }
@@ -1047,6 +1049,11 @@ public static class Resolver
             return ApplyRaise(state, content, use, unit, spell, raise, events);
         }
 
+        if (Sunder.Sunders(content, spell))
+        {
+            return ApplySunder(state, content, use, unit, spell, events);
+        }
+
         if (!spell.Heals || !content.Class(unit.Unit.ClassId).CanUse(spell.Type))
         {
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is a weapon, not an item; attack with it"));
@@ -1181,6 +1188,59 @@ public static class Resolver
         }
 
         return Earthwork.Raise(state, content, unit, use.Slot, spell, raise, target, events);
+    }
+
+    /// <summary>
+    /// The Item action with a tome naming sunder (issue 1281, <see cref="Sunder"/>): checked as a raise is (no art, the
+    /// caster may wield it, a use left), on a target named as a unit of either side or as a tile, <c>x,y</c>, in its
+    /// range, then dropped.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplySunder(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, List<GameEvent> events)
+    {
+        if (use.Art is not null)
+        {
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} drops raised ground; no art is declared with it"));
+        }
+
+        if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {spell.Id}: " + (MagicSchoolExtensions.SchoolShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? MagicSchoolExtensions.MagShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? RankShort(unit.Unit, spell))));
+        }
+
+        var stack = unit.Unit.Inventory.Items[use.Slot];
+        if (stack.Uses == 0)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} has no uses left this battle"));
+        }
+
+        if (use.TargetId is null)
+        {
+            return (state, new Rejection(RejectionReason.NoTarget, $"{spell.Name} drops raised ground: item {unit.Id} {use.Slot} <unit|x,y>; attack with it to strike"));
+        }
+
+        Coord at;
+        if (state.Find(use.TargetId) is { } target)
+        {
+            at = target.At;
+        }
+        else if (Sunder.TileOf(use.TargetId) is { } tile && state.Map.Contains(tile))
+        {
+            at = tile;
+        }
+        else
+        {
+            return (state, new Rejection(RejectionReason.NoSuchTarget, $"no living unit or tile '{use.TargetId}' to sunder"));
+        }
+
+        var distance = unit.At.DistanceTo(at);
+        if (!spell.InRange(distance))
+        {
+            return (state, new Rejection(
+                RejectionReason.OutOfRange,
+                $"{at} is {distance} tiles from {unit.Id} at {unit.At}; {spell.Name} reaches {spell.MinRange}-{spell.MaxRange}"));
+        }
+
+        return Sunder.Drop(state, content, unit, use.Slot, spell, at, use.TargetId, events);
     }
 
     /// <summary>

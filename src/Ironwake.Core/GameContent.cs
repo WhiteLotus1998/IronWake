@@ -67,10 +67,10 @@ public sealed record GameContent(
     public ImmutableSortedDictionary<MagicSchool, SchoolRider> Riders { get; init; } =
         ImmutableSortedDictionary<MagicSchool, SchoolRider>.Empty;
 
-    /// <summary>The rider <paramref name="weapon"/> carries from its school (issues 1243, 1250): the school's, when the tome names its kind, or the school's burn read as an <see cref="RiderKind.Ember"/> when the tome names ember (issue 1279); null for a plain tome, an unschooled one, or a school with none.</summary>
+    /// <summary>The rider <paramref name="weapon"/> carries from its school (issues 1243, 1250): the school's, when the tome names its kind, or the school's burn read as an <see cref="RiderKind.Ember"/> when the tome names ember (issue 1279), or the school's raise read as a <see cref="RiderKind.Sunder"/> when the tome names sunder (issue 1281); null for a plain tome, an unschooled one, or a school with none.</summary>
     public SchoolRider? RiderOf(Weapon? weapon) =>
         weapon is { School: { } school, Rider: { } kind } && Riders.TryGetValue(school, out var rider)
-            ? rider.Kind == kind ? rider : kind == RiderKind.Ember && rider.Kind == RiderKind.Burn ? rider with { Kind = RiderKind.Ember } : null
+            ? rider.Kind == kind ? rider : SchoolRider.Borrows(kind, rider.Kind) ? rider with { Kind = kind } : null
             : null;
 
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
