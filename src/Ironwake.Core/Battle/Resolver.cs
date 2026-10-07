@@ -620,6 +620,13 @@ public static class Resolver
             return (state.WithUnit(unit with { Moved = true, Acted = true, WindupAt = target.At }), null);
         }
 
+        if (LightningRod.Catcher(state, content, unit.At, weapon, target) is { } holder)
+        {
+            events.Add(new RodCaught(holder.Id, target.Id, unit.Id));
+            target = holder;
+            distance = unit.At.DistanceTo(holder.At);
+        }
+
         if (CoverRule.Swapped(state, target) is ({ } swappedBoard, { } coverer, { } ally))
         {
             var aimed = Combat.Forecast(unit.ToCombatant(state, content, art: art, against: target), target.Answering(state, content, unit.At, unit), distance, state.Scheme);

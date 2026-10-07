@@ -126,7 +126,9 @@ public static class Queries
             return null;
         }
 
-        var forecast = Combat.Forecast(Stoop.Poised(content, armed, from).ToCombatant(state, content, art: declared, against: target), target.Answering(state, content, from, armed), distance, state.Scheme);
+        var holder = LightningRod.Catcher(state, content, from, weapon, target);
+        var struck = holder ?? target;
+        var forecast = Combat.Forecast(Stoop.Poised(content, armed, from).ToCombatant(state, content, art: declared, against: struck), struck.Answering(state, content, from, armed), from.DistanceTo(struck.At), state.Scheme) with { CaughtBy = holder?.Id };
         return declared is null ? forecast : forecast with { ArtCost = declared.Cost };
     }
 
@@ -1005,9 +1007,10 @@ public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon W
     /// lives to make: a double stops at the first round when the unit's plain counter
     /// between them kills the enemy (<see cref="CombatForecast.AttackerDamageLivedFor"/>, issue 315).
     /// 0 for a line that only raises a blow (<see cref="Raises"/>), which deals nothing that
-    /// phase (issue 444).
+    /// phase (issue 444), and for a strike a Lightning Rod catches (<see cref="CombatForecast.CaughtBy"/>,
+    /// issue 1280), which lands on the holder.
     /// </summary>
-    public int IfAllLand => Raises ? 0 : Forecast.AttackerDamageLivedFor(Enemy.Hp);
+    public int IfAllLand => Raises || Forecast.CaughtBy is not null ? 0 : Forecast.AttackerDamageLivedFor(Enemy.Hp);
 
     /// <summary>
     /// The coverer this strike lands on instead of the unit (DESIGN.md 13.19), standing on the

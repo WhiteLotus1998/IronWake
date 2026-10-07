@@ -345,6 +345,12 @@ public sealed record BurnCashed(string UnitId, string ByUnitId, int Amount, int 
 public sealed record UnitStunned(string UnitId, string ByUnitId, Side Side, bool Next = false) : GameEvent;
 
 /// <summary>
+/// A Lightning Rod caught a spell (issue 1280, <see cref="LightningRod"/>): <paramref name="ByUnitId"/>'s attack,
+/// aimed at <paramref name="AimedId"/>, strikes the holder <paramref name="UnitId"/> instead. The combat follows.
+/// </summary>
+public sealed record RodCaught(string UnitId, string AimedId, string ByUnitId) : GameEvent;
+
+/// <summary>
 /// A tome naming its school's raise rider laid <paramref name="TerrainId"/> under <paramref name="TargetId"/>
 /// at <paramref name="At"/> (issue 1245, <see cref="Earthwork"/>); the <see cref="TerrainChanged"/> follows.
 /// </summary>

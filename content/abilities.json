@@ -46,6 +46,8 @@
       "effect": { "kind": "deep_rime", "rounds": 1 } },
     { "id": "drake_frost", "name": "Drake Frost", "text": "Rook's drake: when she lands a flight beside enemies, each takes 1 and moves 1 tile next phase (bosses: no hold). Rests a turn after.",
       "effect": { "kind": "drake_frost", "damage": 1, "rest": 1 } },
+    { "id": "lightning_rod", "name": "Lightning Rod", "text": "Enemy lightning aimed at an ally within 2 tiles strikes this unit instead, if it reaches.",
+      "effect": { "kind": "rod", "school": "lightning", "radius": 2 } },
     { "id": "stoop", "name": "Stoop", "text": "After flying 4 or more tiles this phase, her first strike deals +2. Not with a drake.",
       "effect": { "kind": "stoop", "flight": 4, "damage": 2 } },
     { "id": "lookout", "name": "Lookout", "text": "+1 Spd and +2 Lck.",

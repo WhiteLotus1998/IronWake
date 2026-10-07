@@ -816,21 +816,28 @@ public static class EnemyAi
     /// strikes with its equipped weapon; <see cref="PlanUnit"/> scores another slot by
     /// passing the unit with that slot moved to the front. A strike on an ally a cover would
     /// swap out (DESIGN.md 13.19) is scored against the coverer on the ally's tile
-    /// (<see cref="CoverRule.Swapped"/>), so the planner prices the swap. A burn rider on either
+    /// (<see cref="CoverRule.Swapped"/>), so the planner prices the swap, and a spell a Lightning Rod catches is
+    /// scored against the holder (issue 1280, <see cref="LightningRod.Catcher"/>), so the planner aims elsewhere
+    /// or strikes the holder knowingly. A burn rider on either
     /// side's weapon adds its expected ticks to that side's line (issue 1243, <see cref="Burning.Expected"/>),
     /// weighted by the chance some strike lands; a priced kill leaves no one to burn, and a learned
     /// school's burn its gate holds back adds nothing (issue 1246, <see cref="LearnedGate"/>).
     /// </summary>
     public static double Score(BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target)
     {
+        var weapon = attacker.EquippedWeapon(content)
+            ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
+        if (LightningRod.Catcher(state, content, from, weapon, target) is { } holder)
+        {
+            target = holder;
+        }
+
         if (CoverRule.Swapped(state, target) is ({ } covered, { } coverer, _))
         {
             state = covered;
             target = coverer;
         }
 
-        var weapon = attacker.EquippedWeapon(content)
-            ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
         var there = attacker with { At = from };
         var me = content.CombatantOf(attacker.Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false), beside: Formation.Beside(state, content, there)) with { Aura = Formation.Aura(state, content, there) };
         var them = target.Answering(state, content, from, there);

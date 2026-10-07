@@ -1181,9 +1181,17 @@ public sealed class PlaySession
                     throw new InvalidOperationException($"the enemy AI's {command} has no forecast");
                 }
 
+                var rodNote = "";
+                var named = target!;
+                if (RodHolder(board, _content, attacker!, forecast, attack.Slot) is var (holder, rod))
+                {
+                    rodNote = LightningRod.ForecastText(_content, holder, names[holder.Id], rod);
+                    target = holder;
+                }
+
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
                 var (riders, counterRiders) = Riders(_content, attacker!, target!, attack.Slot);
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, riders, counterRiders, CounterUses(_content, target!, forecast.Defender)));
+                _out.WriteLine(ForecastLine(attacker!, named, forecast, rodNote, with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, riders, counterRiders, CounterUses(_content, target!, forecast.Defender)));
                 PrintRivalry(target!, countering: true);
                 if (SwornLine(attacker!, target!, names) is { } sworn)
                 {
@@ -1616,11 +1624,18 @@ public sealed class PlaySession
     public static string ForecastText(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile, bool fromTile, int? slot = null, string? art = null)
     {
         var where = fromTile ? $" from {tile} ({state.Map.TerrainAt(tile, content).Name})" : "";
+        var names = UnitNames.Of(state, content);
+        var aimed = target;
+        if (RodHolder(state, content, unit, forecast, slot) is var (holder, rod))
+        {
+            where += LightningRod.ForecastText(content, holder, names[holder.Id], rod);
+            target = holder;
+        }
+
         var (with, counterWith) = Arms(content, unit, target, slot, tile);
         var raises = RaisesWith(state, content, unit, slot);
-        var names = UnitNames.Of(state, content);
         var (riders, counterRiders) = Riders(content, unit, target, slot);
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, riders, counterRiders, CounterUses(content, target, forecast.Defender)) };
+        var lines = new List<string> { ForecastLine(unit, aimed, forecast, where, with, counterWith, raises, names, riders, counterRiders, CounterUses(content, target, forecast.Defender)) };
         var hunger = HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state, forecast).ToList();
         if (ClaimantLine(state, unit, target, forecast, raises, names, hunger) is { } claimant)
         {
@@ -2047,9 +2062,16 @@ public sealed class PlaySession
                     arrives += $" (once {names[stepper.Id]} steps off {line.From})";
                 }
 
+                var caught = line.Forecast.CaughtBy is { } rodId ? state.Find(rodId) : null;
                 var covered = line.CoveredBy is { } by ? $"covered by {names[by.Id]}, strikes {names[by.Id]} on {tile}, " : "";
-                var answers = line.CoveredBy ?? unit;
-                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From}{(counted is null ? "" : CountedNote(line, counted[index], names))} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
+                if (caught is not null && line.Weapon.School is { } school)
+                {
+                    covered = $"{LightningRod.RodName(content, caught, school)} catches it, strikes {names[caught.Id]} on {caught.At} (not in the total), ";
+                }
+
+                var answers = caught ?? line.CoveredBy ?? unit;
+                var answerDistance = caught is null ? line.From.DistanceTo(tile) : line.From.DistanceTo(caught.At);
+                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From}{(counted is null ? "" : CountedNote(line, counted[index], names))} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, answerDistance) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
                 var falls = !line.Raises && line.HeldBy is null && line.Forecast.CounterIsLethal(line.Enemy.Hp, answers.Hp) ? Returned.Falls(state, line.Enemy, names) : null;
                 if (!line.Raises && line.HeldBy is null && line.Forecast.Defender.Strikes && Kinsbane.CounterFeedLine(answers, line.Enemy, line.Forecast, content, names[answers.Id], falls) is { } feed)
                 {
@@ -2181,11 +2203,15 @@ public sealed class PlaySession
     /// <summary>Why a group wakes, as the wake event prints it: <c>called by ford</c> for a linked call, else the cause in lower case.</summary>
     public static string WakeCauseText(GroupWoke woke) => woke.CalledBy is { } by ? (woke.Cause == WakeCause.Death ? $"a death in {by}" : $"called by {by}") : woke.Cause.ToString().ToLowerInvariant();
 
+    /// <summary>The holder whose Lightning Rod catches <paramref name="forecast"/>'s attack (issue 1280) and the school it catches, or null when none does.</summary>
+    private static (BattleUnit Holder, MagicSchool School)? RodHolder(BattleState state, GameContent content, BattleUnit unit, CombatForecast forecast, int? slot) =>
+        forecast.CaughtBy is { } id && state.Find(id) is { } holder && Resolver.ChooseWeapon(unit, content, slot).Weapon?.School is { } school ? (holder, school) : null;
+
     /// <summary>
     /// The one forecast line, printed before an attack from either side and by the
     /// <c>forecast</c> command: the attacker's strike, then the counter or <c>none</c>.
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
-    /// unit has not moved to (issue 151), empty for a forecast on the standing board.
+    /// unit has not moved to (issue 151), empty for a forecast on the standing board; a Lightning Rod's note follows it (issue 1280).
     /// </summary>
     public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, string riders = "", string counterRiders = "", string counterUses = "")
     {
@@ -3124,6 +3150,8 @@ public sealed class PlaySession
                 return $"{names[c.ByUnitId]} cashes the burn on {names[c.UnitId]}: {c.Amount} at once (hp {c.HpAfter}), and it burns no more";
             case GroundRaised g:
                 return $"{names[g.UnitId]} raises {(content.Terrain.TryGetValue(g.TerrainId, out var raised) ? raised.Name.ToLowerInvariant() : g.TerrainId)} under {names[g.TargetId]} at {g.At}: held by whoever stands on it until the caster's next phase ends";
+            case RodCaught rc:
+                return $"{names[rc.UnitId]}'s rod catches {names[rc.ByUnitId]}'s spell aimed at {names[rc.AimedId]}: it strikes {names[rc.UnitId]}";
             case UnitStunned st:
                 return $"{names[st.UnitId]} is stunned: it skips {(st.Next ? "its side's phase after this one" : "its side's next phase")}, and still counters";
             case StunSkipped sk:

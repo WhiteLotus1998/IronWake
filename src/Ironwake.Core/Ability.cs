@@ -59,6 +59,9 @@ public enum AbilityTrigger
 
     /// <summary>On the holder's first strike of an attack after a long flight: the Sky Captain's Stoop (issue 1127).</summary>
     OnDive,
+
+    /// <summary>When an enemy spell is aimed at an ally near the holder: Lightning Rod (issue 1280).</summary>
+    OnAimed,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -323,6 +326,17 @@ public sealed record StoopEffect(int Flight, int Damage) : AbilityEffect
 }
 
 /// <summary>
+/// Lightning Rod (issue 1280, Lotus's #1247 rulings; <see cref="LightningRod"/>): always on, an attack by a
+/// unit of another side with a tome of <see cref="School"/>, aimed at an ally of the holder within
+/// <see cref="Radius"/> tiles of it, strikes the holder instead, when the tome reaches the holder from where
+/// the caster stands. Spells of other schools pass.
+/// </summary>
+public sealed record RodEffect(MagicSchool School, int Radius) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnAimed;
+}
+
+/// <summary>
 /// Which opponents a combat modifier answers to: a weapon type, a movement type, both
 /// (both must match), or neither (every opponent). An opponent with no weapon never
 /// matches a weapon condition. <see cref="Oathbound"/> also asks that the opponent be
@@ -499,6 +513,10 @@ public static class AbilityRules
     /// <summary>The Stoop <paramref name="unit"/> carries (issue 1127, <see cref="StoopEffect"/>): the first among <paramref name="abilities"/> while it rides no drake, else null.</summary>
     public static StoopEffect? Stoop(ValueList<Ability> abilities, Unit unit) =>
         unit.Drake is not null ? null : abilities.Select(a => a.Effect).OfType<StoopEffect>().FirstOrDefault();
+
+    /// <summary>The rod among <paramref name="abilities"/> that catches spells of <paramref name="school"/> (issue 1280, <see cref="RodEffect"/>), the widest first; null when none does.</summary>
+    public static RodEffect? Rod(ValueList<Ability> abilities, MagicSchool school) =>
+        abilities.Select(a => a.Effect).OfType<RodEffect>().Where(r => r.School == school).OrderByDescending(r => r.Radius).FirstOrDefault();
 
     /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>
     public static bool Braces(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is BraceEffect);
