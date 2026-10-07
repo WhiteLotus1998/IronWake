@@ -92,7 +92,7 @@ threat captain
 threat dunstan
 threat keziah
 threat ottilie
-end
+end !
 move teodor 12,7
 wait teodor
 move pell 11,6

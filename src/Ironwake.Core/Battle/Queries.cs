@@ -249,24 +249,54 @@ public static class Queries
             return lines;
         }
 
+        var direct = new Dictionary<string, ThreatLine>(StringComparer.Ordinal);
+        var blocked = new List<BattleUnit>();
         foreach (var enemy in board.UnitsOf(Side.Enemy))
         {
-            if (board.EffectiveBehavior(enemy, content) is null || EnemyAi.StrikeOn(board, content, enemy, moved) is not { } strike)
+            if (board.EffectiveBehavior(enemy, content) is null)
             {
                 continue;
             }
 
-            var carrier = board.Carrying(enemy, strike.From);
-            var weapon = carrier.UsableWeaponAt(content, strike.Slot)!;
-            var covered = Windup.Raises(board, weapon) ? null : CoverRule.Swapped(board, moved);
-            var forecast = covered is ({ } swapped, { } coverer, _)
-                ? StrikeForecast(swapped, content, carrier, coverer, strike)
-                : StrikeForecast(board, content, carrier, moved, strike);
-            Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
-            lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, forecast, arrives, StrikeTiles(board, content, enemy, moved), Windup.Raises(board, weapon)) { CoveredBy = covered?.Struck });
+            if (EnemyAi.StrikeOn(board, content, enemy, moved) is not { } strike)
+            {
+                blocked.Add(enemy);
+                continue;
+            }
+
+            direct[enemy.Id] = Line(board, enemy, strike);
         }
 
-        foreach (var (enemy, lighter, lit, strike) in LitStrikes(board, content, moved, lines))
+        var held = new Dictionary<string, ThreatLine>(StringComparer.Ordinal);
+        foreach (var enemy in blocked)
+        {
+            if (HeldStrike(board, content, moved, enemy, direct.Values) is var (onto, strike, freedBy, heldBy))
+            {
+                held[enemy.Id] = Line(onto, enemy, strike) with { FreedBy = freedBy, HeldBy = heldBy };
+            }
+        }
+
+        foreach (var enemy in board.UnitsOf(Side.Enemy))
+        {
+            if (direct.TryGetValue(enemy.Id, out var line) || held.TryGetValue(enemy.Id, out line))
+            {
+                lines.Add(line);
+            }
+        }
+
+        ThreatLine Line(BattleState on, BattleUnit enemy, EnemyStrike strike)
+        {
+            var carrier = on.Carrying(enemy, strike.From);
+            var weapon = carrier.UsableWeaponAt(content, strike.Slot)!;
+            var covered = Windup.Raises(on, weapon) ? null : CoverRule.Swapped(on, moved);
+            var forecast = covered is ({ } swapped, { } coverer, _)
+                ? StrikeForecast(swapped, content, carrier, coverer, strike)
+                : StrikeForecast(on, content, carrier, moved, strike);
+            Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
+            return new ThreatLine(carrier, strike.From, strike.Slot, weapon, forecast, arrives, StrikeTiles(board, content, enemy, moved), Windup.Raises(on, weapon)) { CoveredBy = covered?.Struck };
+        }
+
+        foreach (var (enemy, lighter, lit, strike) in LitStrikes(board, content, moved, lines.Where(l => l.HeldBy is null).ToList()))
         {
             var carrier = lit.Carrying(enemy, strike.From);
             var weapon = carrier.UsableWeaponAt(content, strike.Slot)!;
@@ -275,6 +305,51 @@ public static class Queries
         }
 
         return lines;
+    }
+
+    /// <summary>
+    /// The strike of an <paramref name="enemy"/> that <see cref="EnemyAi.StrikeOn"/> refuses on the
+    /// phase-start <paramref name="board"/> only because a side-mate stands on a tile it would
+    /// strike from (issue 1256). A holder that has a line of its own from another tile
+    /// (<paramref name="direct"/>) steps off first in the worst case the total prices, so the
+    /// enemy is asked again on the board with the holder on its strike tile, one wave deep as a
+    /// tile a counter frees is (issue 1191): the strike comes with <c>FreedBy</c> set and is counted.
+    /// Otherwise a holder that stays (no line, or a line from where it stands) keeps the tile: the
+    /// enemy is asked with the holder lifted off the board, and a strike from that very tile comes
+    /// with <c>HeldBy</c> set, printed but not counted, so a line is never silently absent. Holders
+    /// are tried in unit order, steppers first; null when none lets the enemy strike.
+    /// </summary>
+    private static (BattleState Board, EnemyStrike Strike, BattleUnit? FreedBy, BattleUnit? HeldBy)? HeldStrike(BattleState board, GameContent content, BattleUnit moved, BattleUnit enemy, IEnumerable<ThreatLine> direct)
+    {
+        var steps = direct.ToDictionary(l => l.Enemy.Id, l => l.From, StringComparer.Ordinal);
+        var weapons = Enumerable.Range(0, enemy.Unit.Inventory.Count)
+            .Select(slot => enemy.UsableWeaponAt(content, slot))
+            .OfType<Weapon>()
+            .ToList();
+        var mayMove = !enemy.Moved && board.EffectiveBehavior(enemy, content) == Behavior.Aggressive;
+        var reach = mayMove ? board.ReachOf(enemy, content).Entries.Select(e => e.At).ToHashSet() : new HashSet<Coord>();
+        var holders = board.UnitsOf(Side.Enemy)
+            .Where(h => h.Id != enemy.Id && reach.Contains(h.At) && weapons.Any(w => w.InRange(h.At.DistanceTo(moved.At))))
+            .ToList();
+        foreach (var holder in holders.Where(h => steps.TryGetValue(h.Id, out var to) && to != h.At))
+        {
+            var stepped = board.WithUnit(holder with { At = steps[holder.Id], Moved = true });
+            if (EnemyAi.StrikeOn(stepped, content, enemy, moved) is { } strike)
+            {
+                return (stepped, strike, holder, null);
+            }
+        }
+
+        foreach (var holder in holders.Where(h => !steps.TryGetValue(h.Id, out var to) || to == h.At))
+        {
+            var lifted = board.WithoutUnit(holder.Id);
+            if (EnemyAi.StrikeOn(lifted, content, enemy, moved) is { } strike && strike.From == holder.At)
+            {
+                return (lifted, strike, null, holder);
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -450,7 +525,7 @@ public static class Queries
     /// phase and is left out, so it holds no tile (issue 444).
     /// </summary>
     public static int IfAllLand(IReadOnlyList<ThreatLine> lines) =>
-        Exposure.SeatedSum(lines.Where(l => !l.Raises).Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
+        Exposure.SeatedSum(lines.Where(l => !l.Raises && l.HeldBy is null).Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
 
     /// <summary>
     /// Where <see cref="IfAllLand(IReadOnlyList{ThreatLine})"/> seats each of the
@@ -465,7 +540,7 @@ public static class Queries
     /// </summary>
     public static IReadOnlyList<Coord?> CountedFrom(IReadOnlyList<ThreatLine> lines)
     {
-        var priced = Enumerable.Range(0, lines.Count).Where(i => !lines[i].Raises).ToList();
+        var priced = Enumerable.Range(0, lines.Count).Where(i => !lines[i].Raises && lines[i].HeldBy is null).ToList();
         var tiles = priced.Select(i => (IReadOnlyList<Coord>)new[] { lines[i].From }.Concat((lines[i].Tiles ?? ValueList<Coord>.Of(lines[i].From)).Where(t => t != lines[i].From)).ToList()).ToList();
         var seats = new Dictionary<int, Coord>(Exposure.SeatedOn(priced.Select((i, k) => (lines[i].IfAllLand, tiles[k])).ToList()));
         var settled = false;
@@ -532,7 +607,7 @@ public static class Queries
                 continue;
             }
 
-            var lines = all.Where(l => !l.Raises && l.CoveredBy is null && (!playerView || l.Arrives is not null || Dusk.Seen(state, l.Enemy))).ToList();
+            var lines = all.Where(l => !l.Raises && l.HeldBy is null && l.CoveredBy is null && (!playerView || l.Arrives is not null || Dusk.Seen(state, l.Enemy))).ToList();
             var seated = Exposure.Seated(lines.Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
             var strikers = new List<LethalStriker>();
             if (RaisedBlowOn(state, content, unit, unit.At) is { } blow)
@@ -570,7 +645,7 @@ public static class Queries
     /// </summary>
     public static IReadOnlyList<FreedStrike> FreedStrikes(IReadOnlyList<ThreatLine> lines, BattleUnit unit)
     {
-        var priced = lines.Where(l => !l.Raises).ToList();
+        var priced = lines.Where(l => !l.Raises && l.HeldBy is null).ToList();
         var seats = Exposure.SeatedOn(priced.Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
         var freedBy = new Dictionary<Coord, ThreatLine>();
         foreach (var (index, tile) in seats.OrderBy(pair => pair.Key))
@@ -931,6 +1006,20 @@ public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon W
     /// <see cref="Forecast"/> is read with the side-mate on its strike tile. Null otherwise.
     /// </summary>
     public BattleUnit? LitBy { get; init; }
+
+    /// <summary>
+    /// The side-mate standing on <see cref="From"/> at phase start that strikes from another tile
+    /// of its own, so it steps off before this enemy takes the tile (issue 1256); the line is
+    /// counted, one wave deep, and <see cref="Forecast"/> is read with the side-mate moved. Null otherwise.
+    /// </summary>
+    public BattleUnit? FreedBy { get; init; }
+
+    /// <summary>
+    /// The side-mate standing on <see cref="From"/> at phase start that does not step off it
+    /// (issue 1256): the enemy has no other tile to strike from, so the line is printed and left
+    /// out of every total, and <see cref="Forecast"/> is read as if the tile were free. Null otherwise.
+    /// </summary>
+    public BattleUnit? HeldBy { get; init; }
 }
 
 /// <summary>

@@ -551,6 +551,16 @@ public sealed class ProtocolSession
                     w.WriteBoolean("raises", true);
                 }
 
+                if (line.FreedBy is { } stepper)
+                {
+                    w.WriteString("freedBy", stepper.Id);
+                }
+
+                if (line.HeldBy is { } holder)
+                {
+                    w.WriteString("heldBy", holder.Id);
+                }
+
                 if (line.LitBy is { } lighter)
                 {
                     if (Hidden(_state.Find(lighter.Id) ?? lighter))

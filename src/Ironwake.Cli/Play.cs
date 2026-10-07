@@ -1917,11 +1917,13 @@ public sealed class PlaySession
     /// The note after a <c>threat</c> line's tile that says where the total counts it (issue
     /// 1237, round 415): <c> (counted from 9,4)</c> when the seating puts it on another tile than
     /// the one printed, <c> (not counted: 8,3 taken)</c> when the seating drops it. Empty for a
-    /// line counted where it reads, a raise or a line that deals nothing; the covered case,
+    /// line counted where it reads, a raise or a line that deals nothing; a line whose only tile a
+    /// side-mate keeps reads <c> (not counted: 5,1 held by Brigand 2)</c> (issue 1256); the covered case,
     /// whose total is not the seated sum, does not ask.
     /// </summary>
-    private static string CountedNote(ThreatLine line, Coord? counted) =>
-        line.Raises || line.IfAllLand <= 0 ? ""
+    private static string CountedNote(ThreatLine line, Coord? counted, UnitNames names) =>
+        line.HeldBy is { } holder ? $" (not counted: {line.From} held by {names[holder.Id]})"
+        : line.Raises || line.IfAllLand <= 0 ? ""
         : counted is { } seat ? (seat == line.From ? "" : $" (counted from {seat})")
         : $" (not counted: {line.From} taken)";
 
@@ -2035,11 +2037,16 @@ public sealed class PlaySession
                     arrives += Dusk.Seen(state, state.Find(lighter.Id) ?? lighter) ? $" (once {names[lighter.Id]} lights you)" : " (once a side-mate in the dark lights you)";
                 }
 
+                if (line.FreedBy is { } stepper)
+                {
+                    arrives += $" (once {names[stepper.Id]} steps off {line.From})";
+                }
+
                 var covered = line.CoveredBy is { } by ? $"covered by {names[by.Id]}, strikes {names[by.Id]} on {tile}, " : "";
                 var answers = line.CoveredBy ?? unit;
-                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From}{(counted is null ? "" : CountedNote(line, counted[index]))} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
-                var falls = !line.Raises && line.Forecast.CounterIsLethal(line.Enemy.Hp, answers.Hp) ? Returned.Falls(state, line.Enemy, names) : null;
-                if (!line.Raises && line.Forecast.Defender.Strikes && Kinsbane.CounterFeedLine(answers, line.Enemy, line.Forecast, content, names[answers.Id], falls) is { } feed)
+                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From}{(counted is null ? "" : CountedNote(line, counted[index], names))} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
+                var falls = !line.Raises && line.HeldBy is null && line.Forecast.CounterIsLethal(line.Enemy.Hp, answers.Hp) ? Returned.Falls(state, line.Enemy, names) : null;
+                if (!line.Raises && line.HeldBy is null && line.Forecast.Defender.Strikes && Kinsbane.CounterFeedLine(answers, line.Enemy, line.Forecast, content, names[answers.Id], falls) is { } feed)
                 {
                     rows.Add($"    {feed}");
                 }
@@ -2076,7 +2083,7 @@ public sealed class PlaySession
                 }
             }
 
-            if (state.Map.OneAnswerEnabled && lines.Count(l => !l.Raises && l.Forecast.Defender.Strikes) > 1)
+            if (state.Map.OneAnswerEnabled && lines.Count(l => !l.Raises && l.HeldBy is null && l.Forecast.Defender.Strikes) > 1)
             {
                 rows.Add($"  one answer: {name} counters only the first of these to strike; the rest go unanswered");
             }
@@ -2251,7 +2258,7 @@ public sealed class PlaySession
             return null;
         }
 
-        var counters = lines.Where(l => !l.Raises && l.Forecast.Defender.Strikes).Select(l => l.Forecast.Defender.StrikeCount).ToList();
+        var counters = lines.Where(l => !l.Raises && l.HeldBy is null && l.Forecast.Defender.Strikes).Select(l => l.Forecast.Defender.StrikeCount).ToList();
         var spends = state.Map.OneAnswerEnabled ? counters.Take(1).Sum() : counters.Sum();
         return counters.Count > 0 && spends >= spell.Uses ? $"  counters could spend {spell.Weapon.Name}'s last use" : null;
     }

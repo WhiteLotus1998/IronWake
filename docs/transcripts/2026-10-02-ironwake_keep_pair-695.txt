@@ -1510,12 +1510,14 @@ pair rule binds: Sworn Hunter
 Threat on Ottilie at 10,6 (Plain):
   Archer 1 from 8,6 with Iron Bow (slot 1): acc 72% dmg 7 crit 0%; counter: acc 86% dmg 9 crit 7%
   Brigand 1 from 9,6 with Iron Axe (slot 1): acc 51% dmg 13 crit 0%; counter: none
+  Soldier 1 from 9,6 (not counted: 9,6 held by Brigand 1) with Iron Lance (slot 1): acc 63% dmg 10 crit 0%; counter: none
   If all land: 20 against 19 hp
   Front: defends the gate
   Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders
 > threat captain
 Threat on Alder Fenn at 10,5 (Plain):
   Archer 1 from 8,5 with Iron Bow (slot 1): acc 63% dmg 4 crit 0%; counter: none
+  Brigand 1 from 9,5 (not counted: 9,5 held by Soldier 1) with Iron Axe (slot 1): acc 41% dmg 10 crit 0%; counter: acc 91% dmg 12 x2 crit 7%
   Soldier 1 from 9,5 with Iron Lance (slot 1): acc 54% dmg 7 crit 0%; counter: acc 88% dmg 10 x2 crit 6%
   If all land: 11 against 25 hp
   Front: defends the gate
@@ -2160,6 +2162,7 @@ pair rule binds: Sworn Hunter
 > threat wren
 Threat on Wren at 10,1 (Plain):
   Archer 1 from 9,2 with Iron Bow (slot 1): acc 62% dmg 6 crit 0%; counter: none
+  Brigand 3 from 9,1 (not counted: 9,1 held by Sworn Hunter) with Iron Axe (slot 1): acc 39% dmg 12 crit 0%; counter: acc 90% dmg 11 x2 crit 7%
   Sworn Hunter from 9,1 with Iron Sword (slot 1): acc 80% dmg 12 crit 0%; counter: acc 73% dmg 6 crit 0%
   If all land: 18 against 15 hp
   Front: defends the north
@@ -3219,7 +3222,7 @@ Threat on Alder Fenn at 9,5 (Plain):
   Sworn Hunter hunts the south next: 2 defenders, 37 hp (weakest); strikes only its defenders
 > end !
 Lethal if all land: Alder Fenn (Archer 1 for 3, Archer 2 for 3, Archer 3 for 3, Brigand 4 for 9, Brigand 5 for 9, against 25 hp)
-Lethal if all land: Ottilie (Archer 2 for 7, Archer 3 for 7, Brigand 4 for 13, Brigand 5 for 13, against 18 hp)
+Lethal if all land: Ottilie (Archer 1 for 7, Archer 2 for 7, Brigand 4 for 13, Brigand 5 for 13, against 18 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
 enemy: move archer-1 9,3

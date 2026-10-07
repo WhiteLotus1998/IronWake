@@ -412,7 +412,7 @@ move pell 14,8
 attack pell brigand-1
 wait dunstan
 wait ottilie
-end
+end !
 move dunstan 11,3
 attack dunstan archer-1
 move teodor 12,6

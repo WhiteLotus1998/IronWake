@@ -1664,7 +1664,9 @@ Threat on Ottilie at 6,7 (Plain):
   Veteran from 7,7 with Steel Lance (slot 1): acc 76% dmg 16 crit 0%; counter: none
   If all land: 24 against 18 hp
 > threat pell from 5,5
-Threat on Pell at 5,5 (Plain): no enemy can strike her next phase
+Threat on Pell at 5,5 (Plain):
+  Archer 2 from 7,5 (not counted: 7,5 held by Veteran) with Iron Bow (slot 1): acc 85% dmg 9 crit 2%; counter with Cinder: acc 99% dmg 14 crit 3% (Cinder 8 of 8 left)
+  If all land: 0 against 17 hp
 > move pell 5,5
 Pell moves 3,7 -> 5,5 via 3,6 3,5 4,5
 Sallow Grange  turn 3 of 10  player phase  seize  recall 2

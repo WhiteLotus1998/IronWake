@@ -520,7 +520,7 @@ public sealed class ClientSession
         }
 
         var terrain = State.Map.TerrainAt(tile, Content);
-        var strikers = lines.Count(line => !line.Raises);
+        var strikers = lines.Count(line => !line.Raises && line.HeldBy is null);
         var asleep = (Queries.SleepingThreats(State, Content, unit, tile) ?? Array.Empty<SleepingThreat>()).Select(group => group.Group).ToList();
         return new MovePreview(tile, terrain.Name, entry.Cost, Reach!.Mov, terrain.AvoidFor(Reach.Movement), strikers, Queries.IfAllLand(lines), asleep);
     }
