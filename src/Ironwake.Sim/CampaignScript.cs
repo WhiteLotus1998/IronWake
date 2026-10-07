@@ -41,12 +41,18 @@ public static class CampaignScript
     /// first camp where that unit's certify into that class would be accepted, before any action there
     /// (issue 1100: a save at the camp where Rook first reaches the Drake Warden's door, the door unpicked).
     /// </summary>
-    public static Result Write(GameContent content, string contentDir, ulong seed, IReadOnlyDictionary<string, string>? handPlays = null, string difficulty = CampaignRecord.NormalDifficulty, bool permadeath = true, int variant = 0, string? quest = null, (string Unit, string Class)? until = null)
+    /// <para><paramref name="deploy"/>, when given, names units each camp seats on the next map once every named
+    /// quest has been fought (so the hand plays meet the company they were played with): while one is
+    /// out of the deployment, the last member of the deployment order who is neither the captain nor named is
+    /// benched (issue 1308 slice 5: Maud, seventh in the order, deployed so her Psalter's art is reached).
+    /// <paramref name="stopAfter"/>, when given, ends the script at the first camp after a map on which every
+    /// named kind has been taken, so a short script can carry what the full run never reaches.</para>
+    public static Result Write(GameContent content, string contentDir, ulong seed, IReadOnlyDictionary<string, string>? handPlays = null, string difficulty = CampaignRecord.NormalDifficulty, bool permadeath = true, int variant = 0, string? quest = null, (string Unit, string Class)? until = null, IReadOnlyCollection<string>? deploy = null, IReadOnlyCollection<string>? stopAfter = null)
     {
         var client = new CampaignClient(content, contentDir, CampaignRecord.Start(content, seed, difficulty, permadeath));
         var lines = new List<string>
         {
-            $"# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")} --variant {variant}{(quest is null ? "" : $" --quest {quest}")}`.",
+            $"# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")} --variant {variant}{(quest is null ? "" : $" --quest {quest}")}{(deploy is null ? "" : $" --deploy {string.Join(',', deploy)}")}{(stopAfter is null ? "" : $" --stop-after {string.Join(',', stopAfter)}")}`.",
             $"# Played by `campaign --seed {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")}`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 632);",
             "# the heuristic player fights the rest; each camp takes the actions not yet taken that the record accepts.",
         };
@@ -62,9 +68,20 @@ public static class CampaignScript
                 return new Result(string.Concat(lines.Select(l => l + "\n")), touched, null, maps);
             }
 
+            if (stopAfter is not null && stopAfter.All(touched.Contains))
+            {
+                lines.Add($"# stopped at the camp before {mapId}: {string.Join(", ", stopAfter)} taken");
+                return new Result(string.Concat(lines.Select(l => l + "\n")), touched, null, maps);
+            }
+
             if (hand is null)
             {
                 Camp(client, content, contentDir, lines, touched, variant, quest?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>(), handPlays);
+                var named = quest?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+                if (named.All(id => lines.Any(l => l.StartsWith($"quest {id} ", StringComparison.Ordinal))))
+                {
+                    Seat(client, content, lines, deploy ?? Array.Empty<string>());
+                }
             }
 
             if (client.Record.Pick is null && client.Record.NextMap(content).Branch.Count > 0)
@@ -292,6 +309,27 @@ public static class CampaignScript
         }
     }
 
+    /// <summary>Benches from the back of the deployment order until every unit in <paramref name="deploy"/> who is present deploys on the next map.</summary>
+    private static void Seat(CampaignClient client, GameContent content, List<string> lines, IReadOnlyCollection<string> deploy)
+    {
+        while (client.NextMap is { } map)
+        {
+            var order = client.Record.Deployment(map, content);
+            if (deploy.All(id => order.Contains(id) || client.Record.Find(id) is null || client.Record.Benched.Contains(id)))
+            {
+                return;
+            }
+
+            var last = order.LastOrDefault(id => !deploy.Contains(id) && client.Record.Find(id) is { } u && !CampaignRecord.IsCaptain(u, content));
+            if (last is null || !client.Bench(last))
+            {
+                return;
+            }
+
+            lines.Add($"bench {last}");
+        }
+    }
+
     /// <summary>The allies a hand play's own <c>quest</c> line seats for <paramref name="questId"/>, so the side map is fought with the company it was played with; none without one.</summary>
     private static IReadOnlyList<string> HandAllies(string? hand, string questId) =>
         (hand ?? "").Split('\n').Select(l => l.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries))
@@ -353,6 +391,13 @@ public static class CampaignScript
             }
 
             if (TryCarry(battle, lines, touched, commands))
+            {
+                continue;
+            }
+
+            // Issue 1308 slice 5: an art-bearer who has not acted takes the art from where it stands as soon as the
+            // core accepts one, before the plan moves its target, since Unasked wants an ally who has not acted.
+            if (!touched.Contains("art") && battle.State.UnitsOf(Side.Player).Where(u => !u.Acted && battle.Content.HealArtsOf(u.Unit).Any()).Any(u => TryArt(battle, lines, touched, new Wait(u.Id))))
             {
                 continue;
             }
@@ -469,7 +514,7 @@ public static class CampaignScript
             return false;
         }
 
-        foreach (var (ability, _) in battle.Content.ArtsOf(unit.Unit))
+        foreach (var (ability, _) in battle.Content.HealArtsOf(unit.Unit))
         {
             for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
             {

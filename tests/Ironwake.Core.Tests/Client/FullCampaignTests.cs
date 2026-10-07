@@ -141,6 +141,61 @@ public class FullCampaignTests
         Assert.Contains(client.Record.Find("maud")!.Inventory.Items, stack => stack.ItemId == "maud_psalter");
     }
 
+    private static string ArtScriptPath() => Path.Combine(ClientParityTests.Root(), "tests", "parity", "campaign", $"psalter-art-{Seed}.script");
+
+    private const string ArtQuests = Quest + ",maud_1,maud_2";
+
+    private static CampaignScript.Result WriteArt(IReadOnlyCollection<string>? deploy) =>
+        CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, ArtQuests, deploy: deploy, stopAfter: new[] { "art" });
+
+    [Fact]
+    public void ThePsalterArtScriptMatchesTheConsoleByteForByteThroughTheClickPath()
+    {
+        var log = Path.Combine(Path.GetTempPath(), $"ironwake-psalter-art-{Guid.NewGuid():N}.log");
+        try
+        {
+            var output = ConsoleCapture.Run(() => CampaignSession.Run(new[]
+            {
+                "--seed", Seed.ToString(), "--difficulty", Difficulty, "--permadeath", "off", "--script", ArtScriptPath(), "--strict",
+                "--content", Fixture.RealContentDirectory(), "--log", log,
+            }));
+            var console = File.ReadAllText(log);
+            var client = Script.PlayCampaign(new CampaignClient(Content, Fixture.RealContentDirectory(), Start()), File.ReadAllText(ArtScriptPath()));
+
+            Assert.DoesNotContain("ERROR", output);
+            Assert.DoesNotContain("Rejected", output);
+            Assert.Contains("Maud declares Unasked with Maud's Psalter", console);
+            Assert.Null(Parity.FirstDifference(console, client));
+        }
+        finally
+        {
+            File.Delete(log);
+        }
+    }
+
+    [Fact]
+    public void CommittedPsalterArtScriptIsWhatTheSimWrites()
+    {
+        var written = WriteArt(new[] { "maud" });
+
+        Assert.Null(written.LostOn);
+        Assert.Contains("art", written.Touched);
+        Assert.Contains("\nitem maud maud_psalter teodor art unasked\n", written.Text);
+        Assert.EndsWith("# stopped at the camp before sallow_grange: art taken\n", written.Text);
+        Assert.Equal(File.ReadAllText(ArtScriptPath()), written.Text);
+    }
+
+    [Fact]
+    public void DeploySeatsTheArtBearerOnlyAfterTheNamedQuestsByBenchingFromTheBack()
+    {
+        var seated = WriteArt(new[] { "maud" }).Text.Split('\n');
+        var unseated = WriteArt(null);
+
+        Assert.DoesNotContain("art", unseated.Touched);
+        Assert.Equal("bench dunstan", seated[Array.IndexOf(seated, "pick rook") - 1]);
+        Assert.True(Array.IndexOf(seated, "bench dunstan") > Array.IndexOf(seated, "quest maud_2 wren"));
+    }
+
     [Fact]
     public void ASideMapsHandPlayIsFoughtOnlyWhenTheQuestIsNamed()
     {

@@ -579,7 +579,7 @@ public sealed class ClientSession
                 rows.Add(Aimed($"Item: {name}", line, unit, slot, null, byTile, names));
                 if (spell.Heals)
                 {
-                    foreach (var (ability, _) in Content.ArtsOf(unit.Unit))
+                    foreach (var (ability, _) in Content.HealArtsOf(unit.Unit))
                     {
                         var art = Aimed($"Item: {name}, {PlaySession.AbilityName(ability.Id, Content)}", line, unit, slot, ability.Id, byTile, names);
                         if (art.Legal)
