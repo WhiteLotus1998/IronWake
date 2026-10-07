@@ -133,6 +133,10 @@ public sealed record GameContent(
     public IEnumerable<(Ability Ability, CombatArtEffect Art)> ArtsOf(Unit unit) =>
         AbilitiesOf(unit).Where(a => a.Effect is CombatArtEffect).Select(a => (a, (CombatArtEffect)a.Effect));
 
+    /// <summary>The heal arts a unit knows (issue 635, <see cref="HealArtEffect"/>): the arts an item use declares with a healing spell, in its order; a combat art is declared on an attack instead.</summary>
+    public IEnumerable<(Ability Ability, HealArtEffect Art)> HealArtsOf(Unit unit) =>
+        AbilitiesOf(unit).Where(a => a.Effect is HealArtEffect).Select(a => (a, (HealArtEffect)a.Effect));
+
     /// <summary>
     /// The numbers a unit fights with: its stats, its class modifiers, and its passive
     /// ability deltas. Max HP is this <c>Hp</c>, the same number <see cref="Combatant.Stats"/> carries.

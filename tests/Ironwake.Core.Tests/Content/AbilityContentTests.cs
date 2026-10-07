@@ -208,6 +208,16 @@ public class AbilityContentTests
     }
 
     [Fact]
+    public void AHealArtIsListedAmongHealArtsAndNeverAmongCombatArts()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var maud = content.Unit("maud");
+
+        Assert.Equal(new[] { "unasked" }, content.HealArtsOf(maud).Select(a => a.Ability.Id));
+        Assert.Empty(content.ArtsOf(maud));
+    }
+
+    [Fact]
     public void AnArtCostsAtLeastOneUse()
     {
         var e = Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 0, \"mt\": 3 }")));
