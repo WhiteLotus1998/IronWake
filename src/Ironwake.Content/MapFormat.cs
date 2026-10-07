@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "seize_name", "drops", "arrivals" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "seize_name", "drops", "arrivals", "wake_on_death" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -113,6 +113,11 @@ public static class MapFormat
         if (map.ArrivalsWait)
         {
             sb.Append("arrivals: wait\n");
+        }
+
+        if (map.DeathWakes.Count > 0)
+        {
+            sb.Append("wake_on_death: ").Append(string.Join(", ", map.DeathWakes)).Append('\n');
         }
 
         if (map.BraceEnabled)
@@ -451,13 +456,65 @@ public static class MapFormat
             map = map with { HuntWaits = ParseHuntWaits(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
             map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map), SeizeName = ParseSeizeName(header, win) };
-            map = map with { Drops = ParseDrops(header, map), ArrivalsWait = ParseArrivals(header, map) };
+            map = map with { Drops = ParseDrops(header, map), ArrivalsWait = ParseArrivals(header, map), DeathWakes = ParseDeathWakes(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
             }
 
             return map;
+        }
+
+        /// <summary>
+        /// The <c>wake_on_death:</c> header (issue 1264): comma-separated <c>group by other</c> entries.
+        /// Both groups must be on the map; the first must have a Guard member, since only a sleeping
+        /// group can wake; a group never names itself, and is named once.
+        /// </summary>
+        private ValueList<DeathWake> ParseDeathWakes(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("wake_on_death", out var entry))
+            {
+                return ValueList<DeathWake>.Empty;
+            }
+
+            var enemies = map.Placements.OfType<EnemyPlacement>().Concat(map.Spawns()).ToList();
+            var wakes = new List<DeathWake>();
+            foreach (var part in entry.Value.Split(',', StringSplitOptions.TrimEntries))
+            {
+                var sides = part.Split(" by ", StringSplitOptions.TrimEntries);
+                if (sides.Length != 2 || sides[0].Length == 0 || sides[1].Length == 0)
+                {
+                    throw ErrorAt(entry.Line, $"wake_on_death: '{part}' is not 'group by other'");
+                }
+
+                var wake = new DeathWake(sides[0], sides[1]);
+                foreach (var group in sides)
+                {
+                    if (enemies.All(e => e.Group != group))
+                    {
+                        throw ErrorAt(entry.Line, $"wake_on_death: no enemy is in group '{group}'");
+                    }
+                }
+
+                if (wake.Group == wake.By)
+                {
+                    throw ErrorAt(entry.Line, $"wake_on_death: group '{wake.Group}' names itself");
+                }
+
+                if (enemies.All(e => e.Group != wake.Group || e.Behavior != Behavior.Guard))
+                {
+                    throw ErrorAt(entry.Line, $"wake_on_death: group '{wake.Group}' has no guard member, so nothing in it sleeps");
+                }
+
+                if (wakes.Any(w => w.Group == wake.Group))
+                {
+                    throw ErrorAt(entry.Line, $"wake_on_death: group '{wake.Group}' is named twice");
+                }
+
+                wakes.Add(wake);
+            }
+
+            return ValueList<DeathWake>.From(wakes);
         }
 
         /// <summary>

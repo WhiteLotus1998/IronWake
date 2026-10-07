@@ -2156,7 +2156,12 @@ public sealed class PlaySession
             rows.Add($"  {UnitNames.Group(group.Group)} is asleep, could strike here if woken: {string.Join(", ", group.Members.Select(m => $"{names[m.Id]} at {m.At}"))}");
         }
 
-        if (asleep.Count > 0)
+        if (MapRenderer.DeathWakeLegend(state.Map, g => asleep.Any(a => a.Group == g)) is { } deaf)
+        {
+            rows.Add($"  {deaf}");
+        }
+
+        if (asleep.Any(a => !state.Map.IsDeaf(a.Group)))
         {
             rows.Add($"  {MapRenderer.WakeLegend(content)}");
             if (Wind.Line(state.Map, content, state.Turn) is { } wind)
@@ -2174,7 +2179,7 @@ public sealed class PlaySession
     }
 
     /// <summary>Why a group wakes, as the wake event prints it: <c>called by ford</c> for a linked call, else the cause in lower case.</summary>
-    public static string WakeCauseText(GroupWoke woke) => woke.CalledBy is { } by ? $"called by {by}" : woke.Cause.ToString().ToLowerInvariant();
+    public static string WakeCauseText(GroupWoke woke) => woke.CalledBy is { } by ? (woke.Cause == WakeCause.Death ? $"a death in {by}" : $"called by {by}") : woke.Cause.ToString().ToLowerInvariant();
 
     /// <summary>
     /// The one forecast line, printed before an attack from either side and by the
@@ -3161,7 +3166,7 @@ public sealed class PlaySession
             case PhaseBegan p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase, turn {p.Turn} --";
             case GroupWoke g:
-                return $"{UnitNames.Group(g.Group)} wakes ({(g.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(g))})"
+                return $"{UnitNames.Group(g.Group)} wakes ({(g.CalledBy is { } by ? (g.Cause == WakeCause.Death ? "a death in " : "called by ") + UnitNames.Group(by) : WakeCauseText(g))})"
                     + (g.Lamps.Count > 0 ? $"; their lamps are lit ({string.Join(", ", g.Lamps.Select(l => $"{names[l.UnitId]} {l.At}"))})" : "");
             case MapEventFired m:
                 return names.Event(m.Name, m.Blocked, m.Terrain is null ? null : content.Terrain.TryGetValue(m.Terrain, out var barring) ? barring.Name : m.Terrain);

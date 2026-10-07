@@ -155,7 +155,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `artDeclared` | `unit`, `art`, `item` (the weapon it strikes with, or the spell it heals with), `cost` (extra uses, spent hit or miss; issue 68; 0 for a heal art); precedes the `combatFought`, or for a heal art (issue 635) the `itemUsed`, after which the held ally's `unitWaited` follows |
 | `weaponBroke` | `unit`, `item` |
 | `spellSpent` | `unit`, `item` |
-| `groupWoke` | `group`, `cause` (`death`, `noise`, `proximity`, `call`), with `by`, the calling group, when the cause is `call` (the map's `wake_links:` header, issue 393), and at dusk, on a wake a player-phase command caused, `lamps`: the lit members row-major by tile, each `{unit, at}` (issue 382; omitted otherwise) |
+| `groupWoke` | `group`, `cause` (`death`, `noise`, `proximity`, `call`), with `by`, the calling group, when the cause is `call` (the map's `wake_links:` header, issue 393), or the group whose death woke it when the cause is `death` and the death was in the group a `wake_on_death:` header names (issue 1264), and at dusk, on a wake a player-phase command caused, `lamps`: the lit members row-major by tile, each `{unit, at}` (issue 382; omitted otherwise) |
 | `mapEventFired` | `name`, `blocked`, `terrain` (only on a spawn barred by its tile's terrain, issue 655) |
 | `terrainChanged` | `at`, `terrain` |
 | `unitSpawned` | `unit`, `at`, `group`, `behavior` |

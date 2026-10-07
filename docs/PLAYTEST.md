@@ -3643,3 +3643,17 @@ Notes:
 - Ottilie came up one point short twice: 8 into a 9-HP archer on turns 2 and 4. Nothing to fix; it is what made both turns feel like a coin.
 - Not tense: turn 4. The fort could be struck from six tiles, and I could block one.
 - Counts as a door-line play, not a held-bar play (round 425): without a turn-1 bait that counters, the turn-2 bar does not open.
+
+## 2026-10-07 — The First Shrine, the archer wakes on the door (#1264), 1600 replayed to the door, warm — Code
+Seed: reseed 1600, side map seed 1645 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 1600 --strict --script docs/transcripts/2026-10-07-the_first_shrine-1600-woken.script`; transcript beside it). Ally **Ottilie**. Warm in every way: my own 1600 script to the door, as Chat asked, then my choices from there.   Result: **lost at the end of turn 10.** Ottilie fell for good on turn 4; Maud lived, braced on the fort, unarmed, never back at the door. One Recall spent (to turn 3, after the hexer's death).
+Tension: 8/10   Choice: 7/10   Surprise: 7/10
+Best turn: turn 3, the replay. The soldier fell to Maud from 7,2 as in 1600, and the board said `The loft group wakes (a death in the sanctum group)`. The archer walked out of the sanctum onto the altar itself and shot Maud to 6, and the brigand came round the hill to 7,3 and finished her. `end` had asked first (archer 8, brigand 13, against 14). The shrine answered the knock, and it stood on the tile I needed. That is the surprise the map lacked, printed under the sanctum from turn 1 (`deaf: group loft ... wakes only when a unit of group sanctum or its own dies`).
+Notes:
+- **After the Recall, every line was priced and none was free.** Kill the door from 7,2: 24 against 14 with the archer. Hit the brigand instead: 21 against 14 with the arriving bow. Step off to 8,4: the bow only, 8. I stepped off, and that left Ottilie at 7,4 with 19 against 18. She took the brigand's 12 and the bow went to Maud.
+- **Radiance is the clock now.** Five uses: two on the door, one on the brigand, two on counters, and on turn 5 Maud was unarmed with the soldier still on 9 HP. The sprint was the line that spent Radiance well; refusing it spent it on the yard.
+- **Ottilie fell on turn 4,** 6 HP at 9,5 after her Aimed Shot crit the pursuit archer. Brigand missed at 54, soldier landed at 67.
+- **The fort brace is strong.** Braced on 10,4 Maud faced 15 to 23 percent strikes and lived six enemy phases, which is fine, but it was a loss with nothing left to try.
+- **Too hard?** Maybe for a corking ally on a south start; one warm play cannot say. Chat's cold chair with a non-corking ally (Wren or Pell) decides; if it cannot be won, revert the archer to Hold (0304).
+- **Not tense:** turns 6 to 10, waiting out the clock.
+
+— Code

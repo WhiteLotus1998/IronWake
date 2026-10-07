@@ -204,7 +204,7 @@ public static class MapRenderer
             sb.Append(letters[i]).Append("  ").Append(Describe(map.Placements[i], map, content)).Append('\n');
         }
 
-        if (map.Placements.OfType<EnemyPlacement>().Any(e => e.Behavior == Behavior.Guard))
+        if (map.Placements.OfType<EnemyPlacement>().Any(e => e is { Behavior: Behavior.Guard, Group: var g } && !map.IsDeaf(g)))
         {
             sb.Append(WakeLegend(content)).Append('\n');
         }
@@ -212,6 +212,11 @@ public static class MapRenderer
         if (LinkLegend(map, _ => true) is { } called)
         {
             sb.Append(called).Append('\n');
+        }
+
+        if (DeathWakeLegend(map, _ => true) is { } deaf)
+        {
+            sb.Append(deaf).Append('\n');
         }
 
         if (Wind.Line(map, content, 1) is { } wind)
@@ -559,7 +564,7 @@ public static class MapRenderer
             sb.Append(dusk).Append('\n');
         }
 
-        if (state.Units.Any(u => u is { Behavior: Behavior.Guard, Group: { } group } && !state.IsAwake(group) && Dusk.Seen(state, u)))
+        if (state.Units.Any(u => u is { Behavior: Behavior.Guard, Group: { } group } && !state.IsAwake(group) && !map.IsDeaf(group) && Dusk.Seen(state, u)))
         {
             sb.Append(WakeLegend(content)).Append('\n');
         }
@@ -567,6 +572,11 @@ public static class MapRenderer
         if (LinkLegend(map, group => !state.IsAwake(group)) is { } called)
         {
             sb.Append(called).Append('\n');
+        }
+
+        if (DeathWakeLegend(map, group => !state.IsAwake(group)) is { } deaf)
+        {
+            sb.Append(deaf).Append('\n');
         }
 
         if (Wind.Line(map, content, state.Turn) is { } wind)
@@ -781,6 +791,18 @@ public static class MapRenderer
     {
         var links = map.WakeLinks.Where(l => asleep(l.To)).Select(l => $"group {l.To} wakes when group {l.From} does").ToList();
         return links.Count == 0 ? null : "called: " + string.Join("; ", links);
+    }
+
+    /// <summary>
+    /// The line under the wake legend on a map with a <c>wake_on_death:</c> header (issue 1264):
+    /// <c>deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies</c>,
+    /// one clause per entry whose group <paramref name="asleep"/> says is still asleep, in header order;
+    /// null when none is.
+    /// </summary>
+    public static string? DeathWakeLegend(MapDefinition map, Func<string, bool> asleep)
+    {
+        var wakes = map.DeathWakes.Where(d => asleep(d.Group)).Select(d => $"group {d.Group} hears and sees nothing; it wakes only when a unit of group {d.By} or its own dies").ToList();
+        return wakes.Count == 0 ? null : "deaf: " + string.Join("; ", wakes);
     }
 
     /// <summary>The wake rule alone, as the legend and <c>threat</c>'s sleeping-group rows print it (issue 248).</summary>
