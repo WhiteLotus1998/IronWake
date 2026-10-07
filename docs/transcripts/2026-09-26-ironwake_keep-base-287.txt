@@ -2991,6 +2991,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,4   hp 18/21  Plain  done
 B  wren             Wren L2 cadet              12,3   hp 20/20  Plain  done
 > end !
+Lethal if all land: Teodor (Archer 2 for 5, Hexer 1 for 11, Soldier 4 for 8, against 18 hp)
 Lethal if all land: Wren (Archer 2 for 5, Hexer 1 for 10, Soldier 4 for 8, against 20 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
