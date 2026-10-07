@@ -122,6 +122,12 @@ public sealed record Combatant
     /// </summary>
     public int Stoop { get; init; }
 
+    /// <summary>
+    /// Whether this side is a Hollow (issue 1284, <see cref="Ironwake.Core.Hollow"/>), read on the board from its mark: a light strike
+    /// that is effective against Hollows triples its Mt against it (<see cref="Combat.IsEffective"/>, issue 1321). False off the board.
+    /// </summary>
+    public bool Hollow { get; init; }
+
     /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, not <see cref="Blind"/>, and not <see cref="AnswerSpent"/>.</summary>
     public bool CanStrike(int distance) => !Blind && !AnswerSpent && Weapon is not null && Weapon.InRange(distance);
 }

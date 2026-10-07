@@ -1031,6 +1031,11 @@ public static class ContentSerializer
             writer.WriteStringValue(movement.ToString().ToLowerInvariant());
         }
 
+        if (weapon.EffectiveAgainstHollows)
+        {
+            writer.WriteStringValue("hollow");
+        }
+
         writer.WriteEndArray();
         writer.WriteBoolean("heals", weapon.Heals);
         if (weapon.Cleanses)

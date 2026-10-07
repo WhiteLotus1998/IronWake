@@ -42,9 +42,15 @@ public static class ItemCard
         var uses = weapon.IsMagic ? $"{weapon.Durability} uses a battle" : $"{weapon.Durability} uses";
         var school = (weapon.School is { } s ? $", {s.Label()} school" : "") + (weapon.MinMag is { } minMag ? $", needs Mag {minMag}" : "");
         var parts = new List<string> { $"{weapon.Name}, {type} {weapon.Rank}{school}. Acc {weapon.Hit}, {power}, Crit {weapon.Crit}, Wt {weapon.Wt}, {range}, {uses}." };
-        if (weapon.EffectiveAgainst.Count > 0)
+        var effective = weapon.EffectiveAgainst.Select(m => m.ToString().ToLowerInvariant()).ToList();
+        if (weapon.EffectiveAgainstHollows)
         {
-            parts.Add($"Effective against {string.Join(" and ", weapon.EffectiveAgainst.Select(m => m.ToString().ToLowerInvariant()))}.");
+            effective.Add("hollows");
+        }
+
+        if (effective.Count > 0)
+        {
+            parts.Add($"Effective against {string.Join(" and ", effective)}.");
         }
 
         if (weapon.CritAgainst.Count > 0)
