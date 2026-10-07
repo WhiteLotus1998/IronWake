@@ -425,6 +425,18 @@ public static class ProtocolJson
             case StunSkipped sk:
                 w.WriteString("unit", sk.UnitId);
                 break;
+            case UnitCleansed uc:
+                w.WriteString("unit", uc.UnitId);
+                w.WriteString("by", uc.ByUnitId);
+                w.WriteBoolean("burn", uc.Burn);
+                w.WriteBoolean("chill", uc.Chill);
+                w.WriteBoolean("stun", uc.Stun);
+                if (uc.Freed)
+                {
+                    w.WriteBoolean("freed", true);
+                }
+
+                break;
             case UnitChilled c:
                 w.WriteString("unit", c.UnitId);
                 w.WriteString("by", c.ByUnitId);

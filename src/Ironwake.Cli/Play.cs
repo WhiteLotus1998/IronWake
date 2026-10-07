@@ -3210,6 +3210,8 @@ public sealed class PlaySession
                 return $"{names[st.UnitId]} is stunned: it skips {(st.Next ? "its side's phase after this one" : "its side's next phase")}, and still counters";
             case StunSkipped sk:
                 return $"{names[sk.UnitId]} is stunned and skips this phase";
+            case UnitCleansed uc:
+                return $"{names[uc.UnitId]} is cleansed by {names[uc.ByUnitId]}: " + string.Join(", ", new[] { uc.Burn ? "the burn" : null, uc.Chill ? "the chill" : null, uc.Stun ? "the stun" : null }.Where(p => p is not null)) + " cleared" + (uc.Freed ? "; it may move and act this phase" : "");
             case UnitChilled c:
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
             case UnitFrosted f:

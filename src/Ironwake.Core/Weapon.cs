@@ -132,6 +132,13 @@ public sealed record Weapon(
     /// </summary>
     public int BurnStacks { get; init; } = 1;
 
+    /// <summary>
+    /// Whether this healing spell is a cleanse (issue 1321, DECISIONS/0317, light's ladder): cast through the Item action
+    /// on an ally in range, it clears that ally's burn, chill and stun and heals nothing (<see cref="Cleanse"/>). Only a
+    /// Faith spell with <see cref="Heals"/> set names it, so it is a staff everywhere a heal is and never a strike.
+    /// </summary>
+    public bool Cleanses { get; init; }
+
     public bool IsMagic => Type.IsMagic();
 
     public bool InRange(int distance) => distance >= MinRange && distance <= MaxRange;

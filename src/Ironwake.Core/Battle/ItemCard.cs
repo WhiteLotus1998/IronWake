@@ -37,7 +37,7 @@ public static class ItemCard
 
         var weapon = content.Weapon(id);
         var type = weapon.Type.Label();
-        var power = weapon.Heals ? "heals" : $"Power {weapon.Mt}";
+        var power = weapon.Cleanses ? "cleanses burn, chill and stun" : weapon.Heals ? "heals" : $"Power {weapon.Mt}";
         var range = weapon.MinRange == weapon.MaxRange ? $"range {weapon.MinRange}" : $"range {weapon.MinRange}-{weapon.MaxRange}";
         var uses = weapon.IsMagic ? $"{weapon.Durability} uses a battle" : $"{weapon.Durability} uses";
         var school = (weapon.School is { } s ? $", {s.Label()} school" : "") + (weapon.MinMag is { } minMag ? $", needs Mag {minMag}" : "");

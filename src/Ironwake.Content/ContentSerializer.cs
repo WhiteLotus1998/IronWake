@@ -1033,7 +1033,11 @@ public static class ContentSerializer
 
         writer.WriteEndArray();
         writer.WriteBoolean("heals", weapon.Heals);
-        if (weapon.Heals)
+        if (weapon.Cleanses)
+        {
+            writer.WriteBoolean("cleanses", true);
+        }
+        else if (weapon.Heals)
         {
             writer.WriteNumber("healBase", weapon.HealBase);
         }
