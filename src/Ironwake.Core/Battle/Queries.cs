@@ -910,7 +910,9 @@ public static class Queries
     /// <summary>
     /// The board <see cref="Threats"/> and <see cref="SleepingThreats"/> read: the exposure
     /// sum's, <see cref="Exposure.Board"/> (the unit on the tile, every group its standing
-    /// there certainly wakes awake), with the player phase then ended through the resolver,
+    /// there certainly wakes awake), with the enter events a stop on that tile fires applied
+    /// as the move would apply them (issue 1258: a bar's wall closes its lane in the read), an
+    /// unannounced spawn among them taken off again, and the player phase then ended through the resolver,
     /// so the phase-start healing and events the enemy phase would see are applied. An enemy
     /// an unannounced event spawned in that phase start is taken off the board again, and
     /// an announced one is kept and named in <c>Arrivals</c> with its tile. <c>Moved</c> is
@@ -928,7 +930,18 @@ public static class Queries
 
         var asked = dashed ? unit with { Winded = true } : unit;
         var arrivals = new Dictionary<string, Coord>(StringComparer.Ordinal);
-        var ended = Resolver.Apply(Exposure.Board(state.WithUnit(asked), content, asked, from), content, new EndPhase());
+        var stood = Exposure.Board(state.WithUnit(asked), content, asked, from);
+        if (from != unit.At && stood.Find(unit.Id) is { } stopped)
+        {
+            var entered = new List<GameEvent>();
+            stood = MapEvents.AfterMove(stood, content, stopped, entered);
+            foreach (var spawned in entered.OfType<UnitSpawned>().Where(_ => !state.Map.Announced))
+            {
+                stood = stood.WithoutUnit(spawned.UnitId);
+            }
+        }
+
+        var ended = Resolver.Apply(stood, content, new EndPhase());
         if (!ended.Accepted || ended.Next.Outcome.IsOver || ended.Next.Find(unit.Id) is not { } moved)
         {
             return (state, null, arrivals);
