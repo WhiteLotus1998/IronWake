@@ -130,9 +130,9 @@
       "name": "Earthwork",
       "glyph": "[",
       "cost": { "infantry": 1, "cavalry": 1, "flying": 1, "armored": 1 },
-      "avoid": 15,
-      "def": 2,
-      "res": 2,
+      "avoid": 0,
+      "def": 5,
+      "res": 0,
       "appliesToFlyers": true
     }
   ]

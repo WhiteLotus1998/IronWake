@@ -1926,6 +1926,11 @@ public static class ContentLoader
                 throw entry.Error("rider.kind", "a sunder is named by a tome on a school whose rider is raise, never a school's own rider");
             }
 
+            if (kind == RiderKind.Armor)
+            {
+                throw entry.Error("rider.kind", "armor is named by a tome on a school whose rider is raise, never a school's own rider");
+            }
+
             string[] fields = kind switch
             {
                 RiderKind.Burn => ["kind", "amount", "phases", "cap", "gate"],
@@ -2878,6 +2883,35 @@ public static class ContentLoader
                     ?? throw node.Error("rider", $"unknown rider kind '{riderName}'; expected " + string.Join(", ", System.Enum.GetValues<RiderKind>().Select(SchoolRider.Label)));
             }
 
+            ArmorSpell? armor = null;
+            if (node.OptionalObject("armor") is { } armorNode)
+            {
+                if (rider != RiderKind.Armor)
+                {
+                    throw node.Error("armor", "only a tome whose rider is armor carries armor numbers");
+                }
+
+                foreach (var field in armorNode.Element.EnumerateObject())
+                {
+                    if (field.Name is not ("def" or "mov" or "phases"))
+                    {
+                        throw node.Error("armor." + field.Name, "is not an armor field; expected def, mov, phases");
+                    }
+                }
+
+                var def = armorNode.Int("def");
+                var mov = armorNode.Int("mov");
+                var phases = armorNode.Int("phases");
+                armor = def < 1 ? throw node.Error("armor.def", "must be at least 1")
+                    : mov < 0 ? throw node.Error("armor.mov", "must be at least 0 (the Mov it costs)")
+                    : phases < 1 ? throw node.Error("armor.phases", "must be at least 1")
+                    : new ArmorSpell(def, mov, phases);
+            }
+            else if (rider == RiderKind.Armor)
+            {
+                throw node.Error("armor", "is required on a tome whose rider is armor: { \"def\", \"mov\", \"phases\" }");
+            }
+
             var heirloom = node.Has("heirloom") ? ReadHeirloom(node, heals || type.IsMagic()) : null;
             var voice = node.Has("voice") ? ReadVoice(node) : null;
 
@@ -2912,6 +2946,7 @@ public static class ContentLoader
                 School = school,
                 Rider = rider,
                 MinMag = MinMag(node, type),
+                Armor = armor,
             });
         }
 

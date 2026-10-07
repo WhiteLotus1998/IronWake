@@ -3752,3 +3752,17 @@ Notes:
 Copied from #1287 (the Critic, before round 433).
 
 — Critic
+
+## 2026-10-07 — The Tollgate with an armor tome (fixture), issue 1282's play, warm — Code
+Seed: 1282. Command: `play the_tollgate --seed 1282 --content <copy> --script docs/transcripts/2026-10-07-the_tollgate-1282-armor.script`. The transcript is beside the script. Built on main at 936f2d0 plus #1282's branch. The content is the shipped content with one fixture tome, `test_earth_armor` ("Earth Armor": Cinder's numbers, 3 uses, earth, `"rider": "armor"`, `{ def 10, mov 2, phases 2 }`), in Pell's slot 2 in place of Gust. The Adept is given earth. No shipped tome wears armor. Rampart's new numbers (flat +5 Def) are in the content but were not cast.   Result: **won on turn 9**, the captain on the gate. Nobody fell, no Recall was spent, and Pell ended at 6/17.
+Warm: I built the armor and have played the Tollgate five times before.
+Tension: 7/10   Choice: 7/10   Surprise: 7/10
+Best turn: turn 7. Pell stood alone in the corridor mouth at 6,3 at 6 HP. `threat pell` read **22 against 6**: the keep archer at 8 and the Bandit Leader at 14. I cast the last armor and read it again: **4 against 6**, the archer at 0. The archer shot anyway and ate a 13 counter. The leader held. The next turn the captain walked through her to 6,1, and he seized on turn 9.
+Notes:
+- **The enemy walks around it.** I didn't expect this, and it's the best thing the spell does. On turn 3 the armored Pell stood beside the woods brigand. The brigand hit Teodor for 10 instead, and the archer shot Wren. On turn 5 the turn-5 rider woke on Pell's stop at 6,4 (0072) and chose Teodor over her too. The planner prefers a target it can hurt, so armor works as a **bait-refuser** more than a tank. It moves the enemy's swings onto everyone else, and I walked Teodor into two of them without checking `threat`. The only enemies that struck the armor were holders with nothing else in reach: the Toll Warden on turn 5 (0 damage, 12 back) and the woods archer.
+- **The fall is a real clock.** It fell as player phase 4 ended. On enemy phase 4 the archer that had done 0 to her hit her for 8. The card's `falls as this player phase ends` told me it was coming, and I still let her stand there.
+- **+10 on a 2-Def mage is a lot against steel.** The brigand's 3 and the archers' 0 made Pell a counter-turret with Cinder. What capped her was Cinder's uses (eight, all spent by turn 8), not the armor. The leader's Steel Axe still read 9 against her 6 HP at Def 12 on turn 8. The armor made the corridor survivable, not free. Mov -2 cost me a turn of walking twice, and that was the price I felt.
+- **Lean holds for now.** +10 Def, Mov -2, two phases. Watch for a play where an armored unit holds a choke for both phases and the Mov cost never bites. That is the kill criterion's first lever (one phase fewer).
+- **Not tense:** turns 1 and 2, the walk.
+
+— Code

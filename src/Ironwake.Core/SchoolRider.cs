@@ -31,6 +31,13 @@ public enum RiderKind
     /// a school's own rider is never a sunder.
     /// </summary>
     Sunder,
+
+    /// <summary>
+    /// Cast through the Item action on the caster alone, it wears stone: more Def, less Mov, for some of its phases
+    /// (issue 1282, <see cref="Core.Armor"/>). Only a tome names it, carrying its own numbers (<see cref="Weapon.Armor"/>),
+    /// and only where its school's rider is <see cref="Raise"/>; a school's own rider is never armor.
+    /// </summary>
+    Armor,
 }
 
 /// <summary>
@@ -63,15 +70,15 @@ public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
 
     /// <summary>
     /// Whether a tome may name <paramref name="tomeKind"/> on a school whose rider is <paramref name="schoolKind"/>
-    /// though the two differ: an ember on a burn (issue 1279), a sunder on a raise (issue 1281).
+    /// though the two differ: an ember on a burn (issue 1279), a sunder (issue 1281) or armor (issue 1282) on a raise.
     /// </summary>
     public static bool Borrows(RiderKind tomeKind, RiderKind schoolKind) =>
-        (tomeKind, schoolKind) is (RiderKind.Ember, RiderKind.Burn) or (RiderKind.Sunder, RiderKind.Raise);
+        (tomeKind, schoolKind) is (RiderKind.Ember, RiderKind.Burn) or (RiderKind.Sunder, RiderKind.Raise) or (RiderKind.Armor, RiderKind.Raise);
 
     /// <summary>A burn rider's <see cref="Cap"/> when rules.json names none.</summary>
     public const int DefaultCap = 4;
 
-    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>.</summary>
+    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>, <c>armor</c>.</summary>
     public static string Label(RiderKind kind) => kind.ToString().ToLowerInvariant();
 
     /// <summary>A count of phases as a line says it: <c>one phase</c>, <c>two phases</c>; past nine, in digits.</summary>

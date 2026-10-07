@@ -72,6 +72,8 @@ public class ProtocolJsonTests
         { new UnitStunned("brigand-1", "pell", Side.Enemy), """{"type":"unitStunned","unit":"brigand-1","by":"pell","side":"enemy"}""" },
         { new UnitStunned("pell", "brigand-1", Side.Player, Next: true), """{"type":"unitStunned","unit":"pell","by":"brigand-1","side":"player","next":true}""" },
         { new GroundSundered("pell", A, "earthwork", "wren"), """{"type":"groundSundered","unit":"pell","at":{"x":1,"y":2},"terrain":"earthwork","owner":"wren"}""" },
+        { new ArmorDonned("pell", "test_earth_armor", 10, 2, 2), """{"type":"armorDonned","unit":"pell","item":"test_earth_armor","def":10,"mov":2,"phases":2}""" },
+        { new ArmorFell("pell", "test_earth_armor"), """{"type":"armorFell","unit":"pell","item":"test_earth_armor"}""" },
         { new RodCaught("wren", "pell", "mage-1"), """{"type":"rodCaught","unit":"wren","aimed":"pell","by":"mage-1"}""" },
         { new StunSkipped("brigand-1"), """{"type":"stunSkipped","unit":"brigand-1"}""" },
         { new UnitChilled("brigand-1", "teodor", Side.Enemy), """{"type":"unitChilled","unit":"brigand-1","by":"teodor","side":"enemy"}""" },
