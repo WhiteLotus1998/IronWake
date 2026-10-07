@@ -4,9 +4,10 @@ namespace Ironwake.Core;
 /// The enemy phase as DESIGN.md section 8 writes it: a planner over a working copy, never
 /// a mutator. <see cref="Plan"/> returns the command list for the whole phase; the caller
 /// applies it to the real state through <see cref="Resolver.Apply"/>, the same function
-/// the planner used, so the two agree. Enemies act in ascending unit id, each on the board
-/// as the one before it left it, except that on a <c>pincer: on</c> map an anvil acts ahead
-/// of the rest (<see cref="Anvil"/>, issue 419). A unit's plan is at most a Move then an Attack or a Wait.
+/// the planner used, so the two agree. Enemies act in the state's unit order, each on the board
+/// as the one before it left it, except that a unit holding a raise or Rampart tome acts after
+/// the rest of its side (<see cref="CastsOnTheBoard"/>, DECISIONS/0316 amended) and on a
+/// <c>pincer: on</c> map an anvil acts ahead of the rest (<see cref="Anvil"/>, issue 419). A unit's plan is at most a Move then an Attack or a Wait.
 /// The scorer prices a hit through <see cref="Combat.HitProbability"/> under the state's
 /// roll scheme, the one hit function the forecast and the resolver share, and the whole
 /// score is a double so the crit expectation is never eaten by integer division.
@@ -39,7 +40,7 @@ public static class EnemyAi
 
         var plan = new List<Command>();
         var working = state;
-        var order = state.UnitsOf(Side.Enemy).Select(u => u.Id).ToList();
+        var order = state.UnitsOf(Side.Enemy).OrderBy(u => CastsOnTheBoard(content, u)).Select(u => u.Id).ToList();
         var claimed = new HashSet<string>();
         var anvils = new List<AnvilPlan>();
         while (order.Count > 0)
@@ -88,6 +89,15 @@ public static class EnemyAi
 
         return (ValueList<Command>.From(plan), ValueList<AnvilPlan>.From(anvils));
     }
+
+    /// <summary>
+    /// Whether <paramref name="unit"/> holds a tome that casts on the board rather than strikes, a raise
+    /// (<see cref="Hollow.Raises"/>) or a Rampart (<see cref="Earthwork.Rider"/>), that it can wield with a use left.
+    /// Such a unit plans after the rest of its side (a stable partition, DECISIONS/0316 amended), so the allies it
+    /// may ward have moved and this phase's bodies lie on the board whatever order the map file lists them in.
+    /// </summary>
+    public static bool CastsOnTheBoard(GameContent content, BattleUnit unit) =>
+        Tome(content, unit, w => Hollow.Raises(content, w) || Earthwork.Rider(content, w) is not null) is not null;
 
     /// <summary>
     /// The enemy that acts next among <paramref name="order"/>, the ids not yet planned in
@@ -379,7 +389,8 @@ public static class EnemyAi
     /// side that will stay where it stands this phase (it has moved or acted, or its behavior keeps it on its tile),
     /// on open ground or on the unit's own earthwork, which a recast refreshes, and that a player unit can strike next
     /// phase (<see cref="Exposure.OfBoss"/> above 0, the player phase priced as it can play). It casts in place of any strike that is not a kill, after a raise
-    /// (<see cref="PlanUnit"/>). The ally is the one with the most no-crit exposure, then the least HP; the tile is
+    /// (<see cref="PlanUnit"/>). An ally <see cref="WardedFirst"/> is warded ahead of the rest whenever a tile reaches
+    /// one. Otherwise the ally is the one with the most no-crit exposure, then the least HP; the tile is
     /// the one fewest player units can reach, then the cheapest, then the first in reach order, as the raise's is
     /// (<see cref="Raise"/>). The commands are a Move when the tile is not its own, then the Item action naming the
     /// ally; null when it has no Rampart to lay.
@@ -403,11 +414,32 @@ public static class EnemyAi
             .ThenBy(w => w.Ally.Hp)
             .Select(w => w.Ally)
             .ToList();
-        if (wards.Count == 0)
+        var first = wards.Where(w => WardedFirst(state, w)).ToList();
+        if (((first.Count > 0 ? RampartTile(tome, tiles, reach, playerReach, first) : null) ?? RampartTile(tome, tiles, reach, playerReach, wards)) is not { } chosen)
         {
             return null;
         }
 
+        var use = new UseItem(unit.Id, slot, chosen.Ward.Id);
+        return chosen.Tile == unit.At ? new Command[] { use } : new Command[] { new Move(unit.Id, chosen.Tile), use };
+    }
+
+    /// <summary>
+    /// Whether an exposed ally is warded ahead of any other (DECISIONS/0316 amended): a boss on a Defeat Boss map, or
+    /// a raiser with a Hollow of its own standing, whose death ends the map or ends other units, as the board shows.
+    /// </summary>
+    public static bool WardedFirst(BattleState state, BattleUnit ally) =>
+        (ally.IsBoss && state.Map.Win == WinCondition.DefeatBoss)
+        || state.Units.Any(u => u.Hollow is { } mark && mark.RaiserId == ally.Id);
+
+    /// <summary>
+    /// The tile a Rampart is cast from and its ward: for each tile, the first of <paramref name="wards"/> in the tome's
+    /// range; the tile fewest player units can reach, then the cheapest, then the first in reach order. Null when no
+    /// tile reaches a ward.
+    /// </summary>
+    private static (Coord Tile, BattleUnit Ward)? RampartTile(
+        Weapon tome, IReadOnlyList<Coord> tiles, Reach reach, IReadOnlyList<Reach> playerReach, IReadOnlyList<BattleUnit> wards)
+    {
         (Coord Tile, int Exposure, int Cost, BattleUnit Ward)? pick = null;
         foreach (var tile in tiles)
         {
@@ -425,13 +457,7 @@ public static class EnemyAi
             }
         }
 
-        if (pick is not { } chosen)
-        {
-            return null;
-        }
-
-        var use = new UseItem(unit.Id, slot, chosen.Ward.Id);
-        return chosen.Tile == unit.At ? new Command[] { use } : new Command[] { new Move(unit.Id, chosen.Tile), use };
+        return pick is { } chosen ? (chosen.Tile, chosen.Ward) : null;
     }
 
     /// <summary>

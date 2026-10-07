@@ -201,4 +201,81 @@ public class EnemyEarthTests
         Assert.Equal(Side.Player, next.Phase);
         Assert.Equal("earthwork", next.Map.TerrainIdAt(next.Find(brigand)!.At));
     }
+
+    /// <summary><paramref name="state"/> with <paramref name="first"/> moved to the front of the unit list, the rest in their order.</summary>
+    private static BattleState Listed(BattleState state, string first) =>
+        state with { Units = ValueList<BattleUnit>.From(state.Units.Where(u => u.Id == first).Concat(state.Units.Where(u => u.Id != first))) };
+
+    [Fact]
+    public void AnEarthShaperPlansAfterTheRestOfItsSideWhateverTheMapListsFirst()
+    {
+        var (state, caster, brigand) = EnemyPhase("test_rampart");
+        state = state.WithUnit(state.Find(brigand)! with { Behavior = Behavior.Aggressive });
+
+        var casterListedFirst = EnemyAi.Plan(state, Earthen);
+        var brigandListedFirst = EnemyAi.Plan(Listed(state, brigand), Earthen);
+
+        Assert.True(state.Units.ToList().FindIndex(u => u.Id == caster) < state.Units.ToList().FindIndex(u => u.Id == brigand));
+        Assert.Contains(new UseItem(caster, 1, brigand), casterListedFirst);
+        Assert.Equal(brigandListedFirst.OfType<UseItem>(), casterListedFirst.OfType<UseItem>());
+        Assert.IsType<UseItem>(casterListedFirst[^2]);
+        Assert.True(EnemyAi.CastsOnTheBoard(Earthen, state.Find(caster)!));
+        Assert.False(EnemyAi.CastsOnTheBoard(Earthen, state.Find(brigand)!));
+    }
+
+    /// <summary>
+    /// The enemy phase of <see cref="EnemyPhase"/> with the keep archer moved to 4,6 to stand beside the woods as a
+    /// second ward, less exposed to Pell than the woods brigand; its id.
+    /// </summary>
+    private static (BattleState State, string Caster, string Brigand, string Second) TwoWards()
+    {
+        var (state, caster, brigand) = EnemyPhase("test_rampart");
+        var second = state.UnitAt(new Coord(6, 1))!;
+        state = state.WithUnit(second with { At = new Coord(4, 6) });
+        return (state, caster, brigand, second.Id);
+    }
+
+    [Fact]
+    public void WithoutABossOrARaiserTheMostExposedAllyIsWarded()
+    {
+        var (state, caster, brigand, second) = TwoWards();
+
+        Assert.True(Exposure.OfBoss(state, Earthen, state.Find(brigand)!, Woods) > Exposure.OfBoss(state, Earthen, state.Find(second)!, new Coord(4, 6)));
+        Assert.Contains(new UseItem(caster, 1, brigand), Plan(state, caster));
+    }
+
+    [Fact]
+    public void ADefeatBossBossIsWardedFirstWheneverItIsExposed()
+    {
+        var (state, caster, _, second) = TwoWards();
+        var boss = state.WithUnit(state.Find(second)! with { IsBoss = true });
+        var defeatBoss = boss with { Map = boss.Map with { Win = WinCondition.DefeatBoss } };
+
+        Assert.True(EnemyAi.WardedFirst(defeatBoss, defeatBoss.Find(second)!));
+        Assert.False(EnemyAi.WardedFirst(boss, boss.Find(second)!));
+        Assert.Contains(new UseItem(caster, 1, second), Plan(defeatBoss, caster));
+    }
+
+    [Fact]
+    public void ARaiserWithAHollowStandingIsWardedFirstWheneverItIsExposed()
+    {
+        var (state, caster, brigand, second) = TwoWards();
+        var warden = state.UnitAt(new Coord(6, 2))!;
+        var raiser = state.WithUnit(warden with { Hollow = new HollowMark(second, "fallen", Hollow.Phases) });
+
+        Assert.True(EnemyAi.WardedFirst(raiser, raiser.Find(second)!));
+        Assert.False(EnemyAi.WardedFirst(raiser, raiser.Find(brigand)!));
+        Assert.Contains(new UseItem(caster, 1, second), Plan(raiser, caster));
+    }
+
+    [Fact]
+    public void AWardedFirstAllyNoPlayerUnitCanStrikeGivesWayToTheMostExposed()
+    {
+        var (state, caster, brigand, second) = TwoWards();
+        var far = state.WithUnit(state.Find(second)! with { At = new Coord(12, 1) });
+        far = far.WithUnit(far.UnitAt(new Coord(6, 2))! with { Hollow = new HollowMark(second, "fallen", Hollow.Phases) });
+
+        Assert.Equal(0, Exposure.OfBoss(far, Earthen, far.Find(second)!, new Coord(12, 1)));
+        Assert.Contains(new UseItem(caster, 1, brigand), Plan(far, caster));
+    }
 }

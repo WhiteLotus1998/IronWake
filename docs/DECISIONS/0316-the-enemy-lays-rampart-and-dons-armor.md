@@ -27,3 +27,9 @@ Date: 2026-10-07. Issue #1286, slice 2 (the planner's earth casts). Source: Lotu
 
 - **Rampart.** If a journal shows an earth-shaper that never strikes because some ally is always struck, the Rampart goes behind a strike worth more than the ward's exposure saved: 5 Def times the strikes priced on it.
 - **Armor.** If armor never forces a choice, 0312's levers apply.
+
+## Amendment (issue 1286, slice 3; Chat on #1305, 6037806738; Code, 6037828052)
+
+- **Order.** A unit holding a raise or Rampart tome it can wield with a use left plans after the rest of its side, a stable partition of the phase's order (`EnemyAi.CastsOnTheBoard`). A ward must have moved or acted, or hold, so before this the map file's list order decided whether an earth-shaper could ward the brigand that just closed in. It also means the bodies from this phase's counters lie on the board when a raiser plans.
+- **Warded first (`EnemyAi.WardedFirst`).** A boss on a Defeat Boss map, or a raiser with a Hollow of its own standing, is warded ahead of any other ally whenever it meets the three conditions and some tile reaches it; otherwise the most exposed ally, as before. Both are tags the board shows, so this is no hidden value function. Bosses mostly stand on forts and thrones, where the ground cannot rise, so it rarely fires.
+- **Journal watch.** Every journal of a board with an earth-shaper records each ward, and whether the player struck through it or went around it. Going around every time is the sign that Rampart is cosmetic. A journal saying it warded a grunt while the player killed the boss points at the warded-first rule as the first lever.
