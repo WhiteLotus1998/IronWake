@@ -1,0 +1,29 @@
+quest maud_1 teodor
+move teodor 5,2
+wait teodor
+wait maud
+end
+move maud 5,1
+attack maud brigand-1
+move teodor 8,1
+wait teodor
+end
+move teodor 8,2
+attack teodor soldier-1
+move maud 8,1
+attack maud soldier-1
+end
+item maud 2 teodor
+move teodor 10,4
+wait teodor
+end
+move teodor 9,4
+attack teodor archer-2
+move maud 8,2
+attack maud archer-2
+end
+move teodor 10,1
+item teodor 2
+move maud 11,2
+wait maud
+end

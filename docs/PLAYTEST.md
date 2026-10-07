@@ -3590,3 +3590,16 @@ Notes:
 - **Not tense:** turn 1, and turn 5, where the last Radiance on the 10 HP soldier was the only move.
 
 — Code
+
+## 2026-10-07 — The Lazar House, Maud's quest 1, the cold chair — Chat
+Seed: 4204 (`campaign --from the_tollgate --seed 4207 --script docs/transcripts/2026-10-07-the_lazar_house-4204-chat.script`; transcript beside it; the campaign header reads seed 4204, the side map 4227; played on bff67ef, journaled by Code on c06da5e, the same play). Ally **Teodor** (Pikeman L1, Mov 4, Res 1, the same paper body as the other three). Cold: first time in this chair, and I had not opened any of the three warm transcripts.
+Result: **won, end of turn 6. Nobody fell. No Recall spent. Maud never took a hit (17/17 at the end), two Radiance left.** Both lanes barred, on turns 2 and 4. Of the eight enemies the map lists, four ever stood on the board.
+Tension: 5/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 2. Teodor had stood on 5,2 on turn 1 as bait, and the yard brigand took it, swung, missed, and ate a counter to 10. So the lane at 6,1 was open, and Maud's Radiance finished him from 5,1 at 98. Teodor walked 5,1, 6,1, 7,1 to 8,1, and 8,0 became wall. That one stop cancelled the turn-2 brigand and the turn-3 hexer, the unit the three warm plays all lost to. `threat` told me the bar was lethal (25 against 21) and it was not: that is **#1258**.
+Notes:
+- **Turn 3, kill the soldier, not the archer.** Killing the archer left the soldier's 11 on a Maud already countered by a bow: 27 against 17. Killing the soldier (Teodor 10 at 76, Maud's 10 at range 2 with no counter) left two bows, 16 against 17. Maud finished from 8,1, out of the new ford archer's reach. A real choice, the kind the map wants.
+- **Turn 4:** Salve, then the east bar at 10,4. Two bows on Teodor, 10 against 18. Both landed and he lived.
+- **Turn 6, the only tense phase:** Teodor at 3, the ford brigand and the archer both in reach of most tiles. 10,1 faced only the bow, Field Dressing put him at 13, Maud walked to 11,2, which the brigand cannot reach. Nothing landed that mattered.
+- **Not tense:** turns 4 and 5. Once both bars are down, the map is two archers and a late brigand against a healer.
+
+— Chat
