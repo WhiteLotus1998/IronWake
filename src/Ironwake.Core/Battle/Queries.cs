@@ -911,7 +911,8 @@ public static class Queries
     /// The board <see cref="Threats"/> and <see cref="SleepingThreats"/> read: the exposure
     /// sum's, <see cref="Exposure.Board"/> (the unit on the tile, every group its standing
     /// there certainly wakes awake), with the enter events a stop on that tile fires applied
-    /// as the move would apply them (issue 1258: a bar's wall closes its lane in the read), an
+    /// as the move would apply them (issue 1258: a bar's wall closes its lane in the read), a held
+    /// bar its holder leaves given back as the resolver would after the move (issue 1259), an
     /// unannounced spawn among them taken off again, and the player phase then ended through the resolver,
     /// so the phase-start healing and events the enemy phase would see are applied. An enemy
     /// an unannounced event spawned in that phase start is taken off the board again, and
@@ -940,6 +941,8 @@ public static class Queries
                 stood = stood.WithoutUnit(spawned.UnitId);
             }
         }
+
+        stood = HeldBars.After(stood, new List<GameEvent>());
 
         var ended = Resolver.Apply(stood, content, new EndPhase());
         if (!ended.Accepted || ended.Next.Outcome.IsOver || ended.Next.Find(unit.Id) is not { } moved)

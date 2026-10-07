@@ -3603,3 +3603,17 @@ Notes:
 - **Not tense:** turns 4 and 5. Once both bars are down, the map is two archers and a late brigand against a healer.
 
 — Chat
+
+## 2026-10-07 — The Lazar House, held bars (#1259 sample), warm — Code
+Seed: 1259 (`campaign --from the_tollgate --seed 1259 --content <dir> --script docs/transcripts/2026-10-07-the_lazar_house-1259-held.script`, where `<dir>` is `content/` with `docs/samples/the_lazar_house_held.map` copied over `quests/the_lazar_house.map`; transcript beside it; side map seed 1279). Ally **Teodor**. Warm: I wrote the sample and had read Chat's 4204 line, so turns 1 and 2 are Chat's bait and bar, on purpose. The quest's opening card still says a bar closes its lane "for the rest of the map"; on this sample the announce lines are the rule.   Result: **lost, enemy phase of turn 6.** Teodor fell for good holding the north bar on turn 3; Maud fell to the turn-5 east archer. One Recall spent (to turn 3), one left.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 3, the first time the bar asked for a body. Teodor sat on 8,1 at 6 HP with the soldier coming and the brigand on the board line as `waiting: brigand`. Salve meant Maud on 7,1 or 8,2, both 19 against her 17. Leaving him meant 13 against 6. Stepping him off meant `threat ... from 7,1` named the waiting brigand landing at 8,0, 23 against 6. Three readable prices, none free. I Salved first. The soldier took Maud to 6, and on turn 4 two bows reach every tile she can stand on, so I recalled to turn 3 and sent Maud home to the fort. Teodor held and died on the bar, and the bar gave way under him. That is the price the sample was built to show.
+Notes:
+- **The kill criterion's keep clause is met on this play:** turn 3 (stay on the bar for the ally's HP, or Salve at Maud's) and turn 4 on the first line (Teodor at 8,2 to kill the soldier would have given the lane back; `threat` priced the released brigand at 63 for 10). Every released arrival was priced before it landed.
+- **The queue lands one a phase, and that is where the map's second half comes from.** With Teodor gone, the north lane let in the brigand on turn 4 and the hexer on turn 5, beside the east brigand, the ford brigand and the new east archer. Under the shipped bars all of that is gone by turn 4. Here it was a crowd at the fort door on turn 6.
+- **One healer, one bar is the crux Chat predicted (round 421).** Maud cannot Salve the holder without standing in the yard, and Salve does not reach herself. A Teodor who holds 8,1 from turn 2 is alone there from turn 3.
+- **The reach condition:** the turn-5 archer on 11,2 (`east3`) reaches both holder tiles. It ended the map, at 56 for 6 against Maud's 5 on the fort.
+- **Is it too hard?** It may be. Four plays of the old map lost the ally three times. This one lost both, and the queue added two bodies to the late game. A cold chair with Ottilie (range 2) decides it; if both lose, the first lever is to drop `east3`, not the queue.
+- **Not tense:** turn 1 (the known bait), and turn 6, which was a single wait on the fort.
+
+— Code

@@ -79,6 +79,18 @@ public sealed record BattleState(
     public ValueList<TileOverlay> Overlays { get; init; }
 
     /// <summary>
+    /// The held bars in force (issue 1259, <see cref="HeldBars"/>), in the order they fired. A Recall
+    /// restores the list with the board.
+    /// </summary>
+    public ValueList<HeldBar> Bars { get; init; }
+
+    /// <summary>
+    /// The spawn events waiting at their tiles under <c>arrivals: wait</c> (issue 1259), oldest first.
+    /// A Recall restores the list with the board.
+    /// </summary>
+    public ValueList<string> Waiting { get; init; }
+
+    /// <summary>
     /// What opened chests sent to the wagon (issue 679): the item ids that did not fit in the
     /// opener's pack, and the tomes a <c>drops:</c> enemy carried (issue 1246, <see cref="TomeDrop"/>),
     /// in the order they were taken, each at full uses. The campaign collects them
@@ -839,6 +851,22 @@ public sealed record BattleState(
             }
 
             sb.Append('\n');
+        }
+
+        if (Bars.Count > 0)
+        {
+            sb.Append("bars");
+            foreach (var bar in Bars)
+            {
+                sb.Append(' ').Append(bar.Event).Append('/').Append(bar.Holder).Append('/').Append(bar.At).Append('/').Append(bar.TerrainId).Append('/').Append(bar.UnderId);
+            }
+
+            sb.Append('\n');
+        }
+
+        if (Waiting.Count > 0)
+        {
+            sb.Append("waiting ").Append(string.Join(' ', Waiting)).Append('\n');
         }
 
         if (Wagon.Count > 0)

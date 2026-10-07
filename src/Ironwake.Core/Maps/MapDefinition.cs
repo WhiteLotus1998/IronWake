@@ -224,6 +224,14 @@ public sealed record MapDefinition(
     public bool DashEnabled { get; init; }
 
     /// <summary>
+    /// The <c>arrivals: wait</c> header (issue 1259, experiment, samples): a non-boss spawn whose tile is
+    /// held or impassable is not spent but waits at its tile, and lands at the first enemy phase that
+    /// starts with the tile open, one a tile a phase, the oldest first (<see cref="MapEvents"/>). Off by
+    /// default, when a blocked spawn is spent.
+    /// </summary>
+    public bool ArrivalsWait { get; init; }
+
+    /// <summary>
     /// The <c>one_answer: on</c> header (DESIGN.md 13.29, experiment, samples): a unit that counters
     /// makes no further counter until the next phase begins, on either side (<see cref="Answer"/>). Off by default.
     /// </summary>

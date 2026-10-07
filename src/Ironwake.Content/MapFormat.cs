@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "seize_name", "drops" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "seize_name", "drops", "arrivals" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -108,6 +108,11 @@ public static class MapFormat
         if (map.PincerEnabled)
         {
             sb.Append("pincer: on\n");
+        }
+
+        if (map.ArrivalsWait)
+        {
+            sb.Append("arrivals: wait\n");
         }
 
         if (map.BraceEnabled)
@@ -325,7 +330,7 @@ public static class MapFormat
         };
         var action = mapEvent.Action switch
         {
-            ChangeTerrain c => "terrain " + c.At + " " + content.TerrainById(c.TerrainId).Glyph,
+            ChangeTerrain c => "terrain " + c.At + " " + content.TerrainById(c.TerrainId).Glyph + (c.Held ? " held" : ""),
             SpawnEnemy s => "spawn " + (s.Placement.IsBoss ? "boss " : "") + s.Placement.TemplateId + " " + s.Placement.At + " group:" + s.Placement.Group + " behavior:" + s.Placement.Behavior.ToString().ToLowerInvariant(),
             SetFlag f => "flag " + f.Flag,
             _ => throw new ArgumentOutOfRangeException(nameof(mapEvent), mapEvent.Action, "unknown map event action"),
@@ -446,13 +451,37 @@ public static class MapFormat
             map = map with { HuntWaits = ParseHuntWaits(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
             map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map), SeizeName = ParseSeizeName(header, win) };
-            map = map with { Drops = ParseDrops(header, map) };
+            map = map with { Drops = ParseDrops(header, map), ArrivalsWait = ParseArrivals(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
             }
 
             return map;
+        }
+
+        /// <summary>
+        /// The <c>arrivals:</c> header (issue 1259, experiment): only <c>wait</c>, and only on a map with a spawn
+        /// event, or absent, when a blocked spawn is spent.
+        /// </summary>
+        private bool ParseArrivals(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("arrivals", out var entry))
+            {
+                return false;
+            }
+
+            if (entry.Value != "wait")
+            {
+                throw ErrorAt(entry.Line, $"arrivals may only be 'wait' (or absent), got '{entry.Value}'");
+            }
+
+            if (!map.Events.Any(e => e.Action is SpawnEnemy { Placement.IsBoss: false }))
+            {
+                throw ErrorAt(entry.Line, "arrivals: wait needs a spawn event to hold back");
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -1484,7 +1513,7 @@ public static class MapFormat
             return ValueList<Placement>.From(placements);
         }
 
-        private Placement ParseUnitLine(string line, int width, int height, ValueList<string> terrain, bool arriving = false)
+        private Placement ParseUnitLine(string line, int width, int height, ValueList<string> terrain, bool arriving = false, IReadOnlySet<Coord>? retiled = null)
         {
             var tokens = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (tokens[0] is not ("P" or "E" or "B"))
@@ -1523,7 +1552,7 @@ public static class MapFormat
             }
 
             var movement = _content.Class(template.ClassId).Movement;
-            if (!tile.IsPassable(movement))
+            if (!tile.IsPassable(movement) && retiled?.Contains(at) != true)
             {
                 throw Error($"{template.Name} ({movement.ToString().ToLowerInvariant()}) cannot start on {tile.Name} at {at}");
             }
@@ -1640,6 +1669,7 @@ public static class MapFormat
             }
 
             _index++;
+            var retiled = RetiledTiles(width, height, terrain, turnLimit);
             var events = new List<MapEvent>();
             var names = new Dictionary<string, int>(StringComparer.Ordinal);
             for (; !AtEnd; _index++)
@@ -1663,16 +1693,51 @@ public static class MapFormat
 
                 names[name] = LineNumber;
                 var (trigger, rest) = ParseTrigger(tokens, width, height, turnLimit);
-                var action = ParseAction(rest, width, height, terrain, edgeOnly: trigger is not FallsTrigger);
+                var action = ParseAction(rest, width, height, terrain, edgeOnly: trigger is not FallsTrigger, retiled);
                 if (action is SpawnEnemy { Placement.IsBoss: true } && trigger is not TurnTrigger)
                 {
                     throw Error("a boss spawn needs a turn trigger, so the boss's arrival is a turn the board can name: 'assault turn 9 enemy spawn boss bandit_leader 0,5 group:assault'");
+                }
+
+                if (action is ChangeTerrain { Held: true } && trigger is not EnterTrigger { Tiles.Count: 1 })
+                {
+                    throw Error("a held terrain change needs an enter trigger on one tile, the tile that holds it: 'north_bar enter 8,1 terrain 8,0 # held'");
                 }
 
                 events.Add(new MapEvent(name, trigger, action));
             }
 
             return ValueList<MapEvent>.From(events);
+        }
+
+        /// <summary>
+        /// The tiles the events block's terrain changes name, read ahead of the block without moving past it
+        /// (issue 1259). A spawn on one of them may stand on terrain its template cannot enter, since a
+        /// battle's map written back (the protocol state) carries what the change made: the shipped Lazar
+        /// House's wall over its north lane. A line that does not parse is left for the block's own pass to refuse.
+        /// </summary>
+        private HashSet<Coord> RetiledTiles(int width, int height, ValueList<string> terrain, int turnLimit)
+        {
+            var retiled = new HashSet<Coord>();
+            var first = _index;
+            for (; !AtEnd; _index++)
+            {
+                var tokens = Current.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                try
+                {
+                    var (_, rest) = ParseTrigger(tokens, width, height, turnLimit);
+                    if (rest.Length > 0 && rest[0] == "terrain" && ParseAction(rest, width, height, terrain, edgeOnly: false, retiled) is ChangeTerrain change)
+                    {
+                        retiled.Add(change.At);
+                    }
+                }
+                catch (MapException)
+                {
+                }
+            }
+
+            _index = first;
+            return retiled;
         }
 
         private (MapEventTrigger, string[]) ParseTrigger(string[] tokens, int width, int height, int turnLimit)
@@ -1748,7 +1813,7 @@ public static class MapFormat
             }
         }
 
-        private MapEventAction ParseAction(string[] tokens, int width, int height, ValueList<string> terrain, bool edgeOnly)
+        private MapEventAction ParseAction(string[] tokens, int width, int height, ValueList<string> terrain, bool edgeOnly, IReadOnlySet<Coord> retiled)
         {
             if (tokens.Length == 0)
             {
@@ -1758,15 +1823,16 @@ public static class MapFormat
             switch (tokens[0])
             {
                 case "terrain":
-                    if (tokens.Length != 3 || tokens[2].Length != 1)
+                    var held = tokens.Length == 4 && tokens[3] == "held";
+                    if ((tokens.Length != 3 && !held) || tokens[2].Length != 1)
                     {
-                        throw Error("terrain action needs a tile and one glyph: 'terrain 6,1 ='");
+                        throw Error("terrain action needs a tile and one glyph, and may end in 'held': 'terrain 6,1 =', 'terrain 8,0 # held'");
                     }
 
                     var at = ParseCoord(tokens[1], width, height);
                     var glyph = tokens[2][0];
                     var tile = _content.TerrainByGlyph(glyph) ?? throw Error($"unknown terrain glyph '{glyph}' in terrain action");
-                    return new ChangeTerrain(at, tile.Id);
+                    return new ChangeTerrain(at, tile.Id, held);
                 case "spawn":
                     if (tokens.Length < 3)
                     {
@@ -1779,7 +1845,7 @@ public static class MapFormat
                         throw Error("a boss spawn needs a template and an edge tile: 'spawn boss bandit_leader 0,5 group:assault'");
                     }
 
-                    var placement = ParseUnitLine((boss ? "B " : "E ") + string.Join(' ', tokens[(boss ? 2 : 1)..]), width, height, terrain, arriving: boss);
+                    var placement = ParseUnitLine((boss ? "B " : "E ") + string.Join(' ', tokens[(boss ? 2 : 1)..]), width, height, terrain, arriving: boss, retiled: retiled);
                     if (placement is not EnemyPlacement enemy)
                     {
                         throw Error("spawn action places an enemy");

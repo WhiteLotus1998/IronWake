@@ -1,0 +1,37 @@
+quest maud_1 teodor
+move teodor 5,2
+wait teodor
+wait maud
+end
+move maud 5,1
+attack maud brigand-1
+threat teodor from 8,1
+threat teodor from 7,1
+move teodor 8,1
+wait teodor
+end
+threat teodor
+threat teodor from 7,1
+threat maud from 3,2
+move maud 7,1
+item maud 2 teodor
+threat maud
+wait teodor
+end !
+attack maud soldier-1 !
+wait teodor
+end !
+recall
+recall 19
+move maud 3,2
+wait maud
+wait teodor
+end !
+threat maud
+wait maud
+end !
+attack maud archer-1
+end !
+threat maud
+wait maud
+end !

@@ -123,7 +123,7 @@ public class MapEventTests
     [InlineData("a turn 2 enemy spawn brigand 7,0 group:g", "behavior:aggressive")]
     [InlineData("a turn 2 enemy spawn brigand 7,0 group:g behavior:boss", "B line")]
     [InlineData("a turn 2 enemy spawn dragon 7,0 group:g behavior:hold", "unknown enemy template 'dragon'")]
-    [InlineData("a turn 2 enemy spawn brigand 3,0 group:g behavior:hold", "cannot start on Wall")]
+    [InlineData("a turn 2 enemy spawn brigand 3,3 group:g behavior:hold", "cannot start on Wall")]
     [InlineData("lever turn 2 enemy flag x", "event name 'lever' is already used on line 20")]
     [InlineData("a:b turn 2 enemy flag x", "starts with its name")]
     public void AMalformedEventLineIsRefusedNamingItsLine(string line, string fragment)

@@ -110,6 +110,9 @@ public class ProtocolJsonTests
         { new UnitSpawned("rider-1", B, "flank", Behavior.Aggressive), """{"type":"unitSpawned","unit":"rider-1","at":{"x":3,"y":4},"group":"flank","behavior":"aggressive"}""" },
         { new UnitWinded("wren"), """{"type":"unitWinded","unit":"wren"}""" },
         { new FlagSet("gate_open"), """{"type":"flagSet","flag":"gate_open"}""" },
+        { new BarReleased("north_bar", new Coord(8, 1), new Coord(8, 0), "plain"), """{"type":"barReleased","event":"north_bar","holder":{"x":8,"y":1},"at":{"x":8,"y":0},"terrain":"plain"}""" },
+        { new ArrivalWaits("north1", "brigand", new Coord(8, 0), "wall"), """{"type":"arrivalWaits","event":"north1","template":"brigand","at":{"x":8,"y":0},"terrain":"wall"}""" },
+        { new ArrivalWaits("east1", "soldier", new Coord(11, 4), null), """{"type":"arrivalWaits","event":"east1","template":"soldier","at":{"x":11,"y":4}}""" },
         { new FrontFell("north_breach"), """{"type":"frontFell","front":"north_breach"}""" },
     };
 
