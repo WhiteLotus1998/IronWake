@@ -1063,6 +1063,15 @@ public static class ContentSerializer
             writer.WriteString("rider", SchoolRider.Label(rider));
         }
 
+        if (weapon.Armor is { } armor)
+        {
+            writer.WriteStartObject("armor");
+            writer.WriteNumber("def", armor.Def);
+            writer.WriteNumber("mov", armor.Mov);
+            writer.WriteNumber("phases", armor.Phases);
+            writer.WriteEndObject();
+        }
+
         if (weapon.MinMag is { } minMag)
         {
             writer.WriteNumber("minMag", minMag);

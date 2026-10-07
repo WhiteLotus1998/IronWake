@@ -20,7 +20,7 @@ public class EarthworkTests
 
     private static readonly GameContent Raising = Shipped with
     {
-        Weapons = Shipped.Weapons.SetItem("test_cairn", Cinder with { Id = "test_cairn", Name = "Test Cairn", School = MagicSchool.Earth, Rider = RiderKind.Raise, Ignites = false }),
+        Weapons = Shipped.Weapons.SetItem("test_cairn", Cinder with { Id = "test_cairn", Name = "Test Rampart", School = MagicSchool.Earth, Rider = RiderKind.Raise, Ignites = false }),
         Classes = Shipped.Classes.SetItem("adept", Shipped.Class("adept") with { Schools = ValueList<MagicSchool>.Of(MagicSchool.Fire, MagicSchool.Ice, MagicSchool.Lightning, MagicSchool.Earth) }),
     };
 
@@ -48,8 +48,7 @@ public class EarthworkTests
         Assert.Equal(new SchoolRider(RiderKind.Raise, 0, 0) { Terrain = "earthwork" }, Shipped.Riders[MagicSchool.Earth]);
         Assert.All(Shipped.Weapons.Values, w => Assert.Null(w.Rider));
         var earthwork = Shipped.TerrainById("earthwork");
-        var fort = Shipped.TerrainById("fort");
-        Assert.Equal((fort.Avoid, fort.Def, fort.Res, fort.AppliesToFlyers), (earthwork.Avoid, earthwork.Def, earthwork.Res, earthwork.AppliesToFlyers));
+        Assert.Equal((0, 5, 0, true), (earthwork.Avoid, earthwork.Def, earthwork.Res, earthwork.AppliesToFlyers));
         Assert.Equal((0, 0), (earthwork.HealPercent, earthwork.BurnPercent));
     }
 
@@ -86,15 +85,18 @@ public class EarthworkTests
         Assert.Empty(fallen.Next.Overlays);
     }
 
+    /// <summary>Rampart is a flat +5 Def, its own number (Lotus, #1247; issue 1282): no Avo, no Res, for fliers too.</summary>
     [Fact]
-    public void EarthworkGivesWhoeverStandsOnItAFortsCover()
+    public void RampartGivesWhoeverStandsOnItAFlatFiveDefAndNothingElse()
     {
         var raised = Raise(Board(), "teodor").Next;
         var teodor = raised.Find("teodor")!;
         var movement = Raising.Class(teodor.Unit.ClassId).Movement;
 
-        Assert.Equal(2, raised.Map.TerrainAt(TeodorAt, Raising).DefFor(movement));
-        Assert.Equal(15, raised.Map.TerrainAt(TeodorAt, Raising).AvoidFor(movement));
+        Assert.Equal(5, raised.Map.TerrainAt(TeodorAt, Raising).DefFor(movement));
+        Assert.Equal(0, raised.Map.TerrainAt(TeodorAt, Raising).AvoidFor(movement));
+        Assert.Equal(0, raised.Map.TerrainAt(TeodorAt, Raising).ResFor(movement));
+        Assert.Equal(5, raised.Map.TerrainAt(TeodorAt, Raising).DefFor(MovementType.Flying));
         Assert.Equal(0, Board().Map.TerrainAt(TeodorAt, Raising).DefFor(movement));
     }
 
@@ -182,7 +184,7 @@ public class EarthworkTests
         Assert.Contains("earthwork ([): 7,11 raised by pell", MapRenderer.Render(raised, Raising));
         var card = TerrainCard.Text(raised, Raising, "earthwork");
         Assert.Contains("7,11 raised by pell, falls as the next player phase ends.", card);
-        Assert.Contains("+2 Def, +2 Res", card);
+        Assert.Contains("+5 Def", card);
         Assert.Null(Earthwork.Line(Board(), Raising));
     }
 

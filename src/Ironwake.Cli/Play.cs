@@ -2604,6 +2604,11 @@ public sealed class PlaySession
             lines.Add("  " + burning);
         }
 
+        if (Armor.CardLine(content, unit) is { } armored)
+        {
+            lines.Add("  " + armored);
+        }
+
         if (Stun.CardLine(unit) is { } stunned)
         {
             lines.Add("  " + stunned);
@@ -3169,6 +3174,10 @@ public sealed class PlaySession
                 return $"{names[c.ByUnitId]} cashes the burn on {names[c.UnitId]}: {c.Amount} at once (hp {c.HpAfter}), and it burns no more";
             case GroundRaised g:
                 return $"{names[g.UnitId]} raises {(content.Terrain.TryGetValue(g.TerrainId, out var raised) ? raised.Name.ToLowerInvariant() : g.TerrainId)} under {names[g.TargetId]} at {g.At}: held by whoever stands on it until the caster's next phase ends";
+            case ArmorDonned ad:
+                return $"{names[ad.UnitId]} wears {(content.Weapons.TryGetValue(ad.SpellId, out var worn) ? worn.Name : ad.SpellId)}: Def +{ad.Def}, Mov -{ad.Mov} through its side's next {SchoolRider.PhasesText(ad.Phases)}";
+            case ArmorFell af:
+                return $"{names[af.UnitId]}'s {(content.Weapons.TryGetValue(af.SpellId, out var shed) ? shed.Name : af.SpellId)} falls away";
             case GroundSundered gs:
                 return $"{names[gs.UnitId]} sunders the {(content.Terrain.TryGetValue(gs.TerrainId, out var sundered) ? sundered.Name.ToLowerInvariant() : gs.TerrainId)} {names[gs.OwnerId]} raised at {gs.At}: the ground falls back";
             case RodCaught rc:

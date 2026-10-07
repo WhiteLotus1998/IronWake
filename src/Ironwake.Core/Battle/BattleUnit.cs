@@ -169,6 +169,12 @@ public sealed record BattleUnit(
     /// </summary>
     public bool Answered { get; init; }
 
+    /// <summary>
+    /// The armor the unit wears (issue 1282, <see cref="Core.Armor"/>), or null: more Def in every combat
+    /// (<see cref="Core.Armor.Bonus"/>), less Mov (<see cref="Core.Armor.Mov"/>), until it falls.
+    /// </summary>
+    public ArmorMark? Armor { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 
@@ -324,7 +330,7 @@ public sealed record BattleUnit(
         }
 
         var terrain = state.Map.TerrainAt(At, content);
-        var beside = Formation.Beside(state, content, this);
+        var beside = Formation.Beside(state, content, this) + Core.Armor.Bonus(this);
         var combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, WeaponBroken(content), hit, crit, beside);
         if (countering && Opening.Reads(this, against))
         {

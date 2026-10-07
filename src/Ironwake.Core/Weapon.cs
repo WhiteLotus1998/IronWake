@@ -117,6 +117,13 @@ public sealed record Weapon(
     /// </summary>
     public int? MinMag { get; init; }
 
+    /// <summary>
+    /// What an armor tome lays on its caster (issue 1282, <see cref="Core.Armor"/>), or null for any other weapon.
+    /// Present exactly when <see cref="Rider"/> is <see cref="RiderKind.Armor"/>: Earth Armor and Obsidian Armor
+    /// carry their own numbers, where every other rider takes its school's.
+    /// </summary>
+    public ArmorSpell? Armor { get; init; }
+
     public bool IsMagic => Type.IsMagic();
 
     public bool InRange(int distance) => distance >= MinRange && distance <= MaxRange;

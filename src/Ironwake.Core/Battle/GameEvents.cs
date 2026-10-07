@@ -362,6 +362,16 @@ public sealed record GroundRaised(string UnitId, string TargetId, Coord At, stri
 /// </summary>
 public sealed record GroundSundered(string UnitId, Coord At, string TerrainId, string OwnerId) : GameEvent;
 
+/// <summary>
+/// A tome naming armor was worn by its caster <paramref name="UnitId"/> (issue 1282, <see cref="Armor"/>): Def
+/// <paramref name="Def"/> more and Mov <paramref name="Mov"/> less, never below 1, through its side's next
+/// <paramref name="Phases"/> phases; the <see cref="ItemUsed"/> precedes it.
+/// </summary>
+public sealed record ArmorDonned(string UnitId, string SpellId, int Def, int Mov, int Phases) : GameEvent;
+
+/// <summary>The armor <paramref name="SpellId"/> laid on <paramref name="UnitId"/> fell as its side's last phase under it ended (issue 1282, <see cref="Armor"/>).</summary>
+public sealed record ArmorFell(string UnitId, string SpellId) : GameEvent;
+
 /// <summary>A stunned unit's side's phase began, and it skips it: it neither moves nor acts until the phase ends (issue 1244, <see cref="Stun"/>).</summary>
 public sealed record StunSkipped(string UnitId) : GameEvent;
 

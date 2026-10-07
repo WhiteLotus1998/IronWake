@@ -418,7 +418,7 @@ public static class Resolver
         }
 
         return unit.Canto is null
-            ? state.WithUnit(unit with { Canto = Frost.Mov(content.Class(unit.Unit.ClassId).Mov, unit) })
+            ? state.WithUnit(unit with { Canto = Armor.Mov(Frost.Mov(content.Class(unit.Unit.ClassId).Mov, unit), unit) })
             : state;
     }
 
@@ -1054,6 +1054,11 @@ public static class Resolver
             return ApplySunder(state, content, use, unit, spell, events);
         }
 
+        if (Armor.Armors(content, spell))
+        {
+            return ApplyArmor(state, content, use, unit, spell, events);
+        }
+
         if (!spell.Heals || !content.Class(unit.Unit.ClassId).CanUse(spell.Type))
         {
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is a weapon, not an item; attack with it"));
@@ -1188,6 +1193,35 @@ public static class Resolver
         }
 
         return Earthwork.Raise(state, content, unit, use.Slot, spell, raise, target, events);
+    }
+
+    /// <summary>
+    /// The Item action with a tome naming armor (issue 1282, <see cref="Armor"/>): checked as a raise is (no art, the
+    /// caster may wield it, a use left), on the caster alone, then worn.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyArmor(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, List<GameEvent> events)
+    {
+        if (use.Art is not null)
+        {
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} is worn; no art is declared with it"));
+        }
+
+        if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {spell.Id}: " + (MagicSchoolExtensions.SchoolShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? MagicSchoolExtensions.MagShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? RankShort(unit.Unit, spell))));
+        }
+
+        if (unit.Unit.Inventory.Items[use.Slot].Uses == 0)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} has no uses left this battle"));
+        }
+
+        if (use.TargetId is not null && use.TargetId != unit.Id)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is worn by its caster alone; it cannot be cast on {use.TargetId}: item {unit.Id} {use.Slot}"));
+        }
+
+        return (Armor.Don(state, unit, use.Slot, spell, events), null);
     }
 
     /// <summary>
@@ -1919,7 +1953,7 @@ public static class Resolver
             }
 
             var ticked = unit.Side == nextPhase && unit.BurnPhases > 0 ? Burning.Ticked(unit) : unit;
-            units.Add(ticked with { Hp = hp, Moved = resting || stunned, Acted = resting || stunned, Stun = stun, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
+            units.Add(ticked with { Armor = Armor.AtPhaseChange(unit, ended, nextPhase, events), Hp = hp, Moved = resting || stunned, Acted = resting || stunned, Stun = stun, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
