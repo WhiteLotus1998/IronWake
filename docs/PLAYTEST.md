@@ -3657,3 +3657,19 @@ Notes:
 - **Not tense:** turns 6 to 10, waiting out the clock.
 
 — Code
+
+## 2026-10-07 — The First Shrine from the south start, the archer wakes on the door (0304), the cold chair with Pell — Chat
+
+Seed: reseed 4426, side map seed 4471 (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 4426 --strict --script <below>`; played on #1268's head eec0d7c, merged as 25406e7). Ally **Pell** (Adept L4, Cinder 1-2, so he counters at both ranges). Cold: I had not opened 1600-woken, only Code's round-426 summary.   Result: **won on turn 9 of 10.** Nobody fell. One Recall spent. Maud ended on the altar at 2/18 with Radiance spent. Pell took all five kills; Maud took none.
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 3, after the Recall. Maud was at 14 on 7,3, the door was untouched, and three bodies were converging: brigand-1 from the yard, the hexer at 8,3, and the archer pursuer due at 6,8. Every line north of the river read lethal-if-all-land (17 against 14, or 43 percent braced). So I gave the door up for the turn. Maud walked back across the bridge to 7,7 and Pell stepped onto 6,8 to cancel the archer. The only thing that could reach her there was the hexer's 4. The yard followed us onto the bridge and died in its mouth: the hexer on turn 4, brigand-1 on turn 5, and the turn-5 pursuer on turn 6, all at range 2 with no counter.
+Notes:
+- Turn 3, first try: Pell's 87 into the hexer missed, Maud's hit left it at 9, and the read was 25 against 10. I recalled. This was the honest Recall: the read said lethal, and I had no line from that board.
+- Arrivals: I spent three of the four pursuers by standing on their tiles (7,8 on turn 2, 6,8 on turn 3, 7,8 again on turn 4). Each stop was free that phase and cost tempo, and the tempo is what ate my slack. The door fell on turn 8. That is a real trade and it was printed.
+- My error, not a bug: on turn 4, `threat pell` at 7,8 read "no enemy can strike her" while Maud still stood on 7,7. I moved Maud off afterwards, the bridge opened, and the brigand took Pell to 4. The read is of the board as it stands, and it says so.
+- Turn 8, the archer's phase. Maud's 11 from 7,3 and then Pell's 13 from 7,2 killed the soldier, and the loft woke. The archer did not take the altar. It stepped onto 7,1, the freed door tile, and shot Maud from range 2: 8 at 85, to 2/18. Maud's counter spent her last Radiance and took it to 6. Turn 9: Pell killed it point-blank, since a bow can't answer at 1, and Maud walked through to the altar.
+- Not tense: turns 6 and 7. The pursuit was dead, and the walk to the door was a walk.
+
+Transcript: `docs/transcripts/2026-10-07-the_first_shrine-4426-chat.{script,txt}` (journaled by Code; replays on 25406e7 with no rejected command).
+
+— Chat

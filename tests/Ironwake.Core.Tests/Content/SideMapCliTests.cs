@@ -224,6 +224,38 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Chat's cold chair on Maud's quest 2 from the south start after issue 1264, reseeded to
+    /// 4426 from the 875 save with Pell as the ally: three pursuer arrivals are blocked by
+    /// standing on their tiles, the yard dies at the bridge, the door soldier falls on turn 8,
+    /// the woken archer steps onto the freed door tile and spends Maud's last Radiance, and
+    /// Maud takes the altar on turn 9 of 10 with nobody fallen.
+    /// </summary>
+    [Fact]
+    public void TheWokenShrineArcherTakesTheFreedDoorTileAgainstPellAndMaudSeizesOnTurnNine()
+    {
+        var script = Transcript("2026-10-07-the_first_shrine-4426-chat.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "4426", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Reinforcements are blocked: a unit holds 6,8\n", output);
+            Assert.Contains("The loft group wakes (a death in the sanctum group)\n", output);
+            Assert.Contains("Archer 1 moves 5,1 -> 7,1 via 6,1\n", output);
+            Assert.Contains("Maud's Radiance is spent for this battle\n", output);
+            Assert.Contains("Battle won: seize", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Code's journaled play of Pell's quest 1 (seed 884), from a save at the camp after map 4:
     /// Wren's counter breaks the shieldbearer at the east gate, Pell turns back for the north
     /// chest and is boxed in its door, Wren leaves first, and Pell gets out on turn 6 at 5 hp
