@@ -62,22 +62,74 @@ public sealed record ActionRow(string Label, string Line, Command Command, strin
 
     /// <summary>
     /// The target pick choosing the row arms instead of applying <see cref="Command"/> (issue 1308):
-    /// an item that needs a target, a heal or a cast, is aimed by a board click. Null for a row that
-    /// applies at once.
+    /// an item that needs a target, a heal or a cast, is aimed by a board click, and the drake's
+    /// carry and breath by clicks in steps. Null for a row that applies at once.
     /// </summary>
-    public ItemPick? Pick { get; init; }
+    public TargetPick? Pick { get; init; }
+}
+
+/// <summary>
+/// A pick an action row arms (issue 1308): the next board click aims it. Its marked tiles are the
+/// ones the resolver accepts, so the client decides nothing.
+/// </summary>
+public abstract record TargetPick(string UnitId, string Label)
+{
+    /// <summary>What the player clicks next, as the status line says it.</summary>
+    public abstract string Prompt { get; }
+
+    /// <summary>Whether a click on <paramref name="at"/> is taken by the pick.</summary>
+    public abstract bool Marks(Coord at);
+
+    /// <summary>The command a click on <paramref name="at"/> submits, or null when the tile submits nothing.</summary>
+    public abstract Command? At(Coord at);
 }
 
 /// <summary>
 /// An armed item pick (issue 1308): the unit, the slot and the art an item row named, and every
 /// tile a click may aim it at with the target word the core accepts there (the unit's id, or
-/// <c>x,y</c> for ground or a body the cast takes by tile). The tiles are the ones the resolver
-/// accepts, so the client decides nothing.
+/// <c>x,y</c> for ground or a body the cast takes by tile).
 /// </summary>
-public sealed record ItemPick(string UnitId, int Slot, string? Art, string Label, IReadOnlyDictionary<Coord, string> Targets)
+public sealed record ItemPick(string UnitId, int Slot, string? Art, string Label, IReadOnlyDictionary<Coord, string> Targets) : TargetPick(UnitId, Label)
 {
-    /// <summary>The command a click on <paramref name="at"/> submits, or null when the tile is no target.</summary>
-    public UseItem? At(Coord at) => Targets.TryGetValue(at, out var word) ? new UseItem(UnitId, Slot, word, Art) : null;
+    /// <inheritdoc/>
+    public override string Prompt => "click a marked target";
+
+    /// <inheritdoc/>
+    public override bool Marks(Coord at) => Targets.ContainsKey(at);
+
+    /// <inheritdoc/>
+    public override UseItem? At(Coord at) => Targets.TryGetValue(at, out var word) ? new UseItem(UnitId, Slot, word, Art) : null;
+}
+
+/// <summary>One way to finish a <see cref="StepPick"/>: the tiles clicked in turn and the command the last click submits.</summary>
+public sealed record PickPath(IReadOnlyList<Coord> Clicks, Command Command);
+
+/// <summary>
+/// A pick taken in steps (issue 1308, slice 2): the drake's carry (the ally, where to fly, where to
+/// set it down) and its breath (the first tile of the line). <see cref="Paths"/> holds every command
+/// the resolver accepts with the clicks that name it; each step marks the tiles some remaining path
+/// clicks next, and the last click submits the one path left.
+/// </summary>
+public sealed record StepPick(string UnitId, string Label, IReadOnlyList<string> Prompts, IReadOnlyList<PickPath> Paths, int Step = 0) : TargetPick(UnitId, Label)
+{
+    /// <inheritdoc/>
+    public override string Prompt => Prompts[Step];
+
+    /// <summary>Whether the next click is the last one, the one that submits.</summary>
+    public bool Last => Step == Prompts.Count - 1;
+
+    /// <inheritdoc/>
+    public override bool Marks(Coord at) => Paths.Any(path => path.Clicks[Step] == at);
+
+    /// <inheritdoc/>
+    public override Command? At(Coord at) => Last && Paths.FirstOrDefault(path => path.Clicks[Step] == at) is { } path ? path.Command : null;
+
+    /// <summary>The pick's next step after a click on <paramref name="at"/>, or null when the click is the last or takes nothing.</summary>
+    public StepPick? After(Coord at)
+    {
+        var left = Paths.Where(path => path.Clicks[Step] == at).ToList();
+        return Last || left.Count == 0 ? null : this with { Paths = left, Step = Step + 1 };
+    }
 }
 
 /// <summary>
@@ -373,14 +425,110 @@ public sealed class ClientSession
             rows.Add(new ActionRow("Exit", line, exit, refusal));
         }
 
+        if (!unit.Acted)
+        {
+            rows.AddRange(DrakeRows(unit, names));
+        }
+
         return rows;
     }
+
+    private (BattleState State, string Unit, IReadOnlyList<ActionRow> Rows)? _drakeRows;
+
+    /// <summary>
+    /// The drake's rows of the action list (issue 1308, slice 2), last so none moves: <c>Carry</c>
+    /// for a rider whose drake can lift where the carry is open, and <c>Breathe</c> for one whose
+    /// drake can breathe where the breath is open. Each arms a <see cref="StepPick"/> of every
+    /// command the resolver accepts: the carry clicks the ally, then the tile to fly to, then the
+    /// tile to set it down on; the breath clicks the first tile of its line. A row with nothing the
+    /// core accepts is greyed with the core's refusal, or "no carry in reach" when the rider could
+    /// fly but no ally beside it can be set down anywhere.
+    /// </summary>
+    private IReadOnlyList<ActionRow> DrakeRows(BattleUnit unit, UnitNames names)
+    {
+        if (_drakeRows is { } cached && ReferenceEquals(cached.State, State) && cached.Unit == unit.Id)
+        {
+            return cached.Rows;
+        }
+
+        var rows = new List<ActionRow>();
+        if (DrakeCarry.Open(State) && DrakeCarry.CanLift(unit))
+        {
+            var paths = new List<PickPath>();
+            var allies = unit.At.Neighbors().Select(UnitAt).OfType<BattleUnit>().Where(u => u.Side == unit.Side).ToList();
+            foreach (var ally in allies)
+            {
+                var reach = State.WithoutUnit(ally.Id).ReachOf(unit, Content);
+                foreach (var entry in reach.Entries.Where(e => e.CanEnd))
+                {
+                    foreach (var setDown in entry.At.Neighbors())
+                    {
+                        var carry = new Carry(unit.Id, ally.Id, entry.At, setDown);
+                        if (Resolver.Apply(State, Content, carry).Accepted)
+                        {
+                            paths.Add(new PickPath(new[] { ally.At, entry.At, setDown }, carry));
+                        }
+                    }
+                }
+            }
+
+            string? refusal = null;
+            if (paths.Count == 0)
+            {
+                var probe = new Carry(unit.Id, allies.FirstOrDefault()?.Id ?? "", unit.At, unit.At);
+                var rejected = Resolver.Apply(State, Content, probe).Rejection;
+                refusal = rejected is null || (rejected.Reason == RejectionReason.CannotCarry && RiderCanFly(unit))
+                    ? (allies.Count == 0 ? "no ally beside it to carry" : "no carry in reach")
+                    : names.Message(rejected.Message);
+            }
+
+            var prompts = new[] { "click the ally to lift", "click where to fly", "click where to set it down" };
+            rows.Add(new ActionRow("Carry", "lift an ally beside it, fly, and set it down; the whole turn", new Carry(unit.Id, "", unit.At, unit.At), refusal)
+            {
+                Pick = new StepPick(unit.Id, "Carry", prompts, paths),
+            });
+        }
+
+        if (Rime.Open(State) && Rime.CanBreathe(unit))
+        {
+            var paths = new List<PickPath>();
+            Rejection? rejected = null;
+            foreach (var toward in unit.At.Neighbors().Where(State.Map.Contains))
+            {
+                var breathe = new Breathe(unit.Id, toward);
+                var result = Resolver.Apply(State, Content, breathe);
+                if (result.Accepted)
+                {
+                    paths.Add(new PickPath(new[] { toward }, breathe));
+                }
+                else
+                {
+                    rejected ??= result.Rejection;
+                }
+            }
+
+            var refusal = paths.Count == 0 && rejected is not null ? names.Message(rejected.Message) : null;
+            rows.Add(new ActionRow("Breathe", "rime down a line of three: chills who stands there, freezes water; once a map", new Breathe(unit.Id, unit.At), refusal)
+            {
+                Pick = new StepPick(unit.Id, "Breathe", new[] { "click the first tile of the line" }, paths),
+            });
+        }
+
+        _drakeRows = (State, unit.Id, rows);
+        return rows;
+    }
+
+    /// <summary>
+    /// Whether the core's refusals that come before the ally (the carry's phase, the rider's Move,
+    /// its grounding) all pass, so an empty carry pick is about the allies and not the rider.
+    /// </summary>
+    private bool RiderCanFly(BattleUnit unit) => !unit.Moved && !unit.Shoved && unit.Grounded <= 0;
 
     /// <summary>Whether this battle is part of a campaign, so the exit row warns that left behind counts as fallen, as the console does.</summary>
     public bool Campaign { get; init; }
 
-    /// <summary>The armed item pick (issue 1308), or null: the next board click aims it, Esc closes it.</summary>
-    public ItemPick? Pick { get; private set; }
+    /// <summary>The armed pick (issue 1308), an item's or the drake's, or null: the next board click aims it, Esc closes it.</summary>
+    public TargetPick? Pick { get; private set; }
 
     private (BattleState State, string Unit, IReadOnlyList<ActionRow> Rows)? _itemRows;
 
@@ -486,10 +634,17 @@ public sealed class ClientSession
     /// What aiming the armed pick at <paramref name="tile"/> would print (issue 1308): the console's
     /// own event lines for the use, the heal's amount and the HP it ends at, or the cast's effect,
     /// read from the resolver without applying it. Experience and level lines are left out; they
-    /// are the result, not the choice. Empty when the tile is no target.
+    /// are the result, not the choice. A step of the drake's carry before the last names what the
+    /// click picks and what comes next. Empty when the tile is no target.
     /// </summary>
     public IReadOnlyList<string> PickPreview(Coord tile)
     {
+        if (Pick is StepPick { Last: false } step && step.After(tile) is { } next)
+        {
+            var picked = UnitAt(tile) is { } lifted && step.Step == 0 ? $"lift {UnitNames.Of(State, Content)[lifted.Id]}" : $"fly to {tile}";
+            return new[] { $"{picked}; then {next.Prompt}" };
+        }
+
         if (Pick?.At(tile) is not { } use || Resolver.Apply(State, Content, use) is not { Accepted: true } result)
         {
             return Array.Empty<string>();
@@ -501,6 +656,16 @@ public sealed class ClientSession
             .Select(e => PlaySession.Describe(e, Content, names))
             .ToList();
     }
+
+    /// <summary>
+    /// The tiles aiming the armed pick at <paramref name="tile"/> would strike (issue 1308, slice 2):
+    /// the breath's line, read from the core's own <see cref="Rime.LineOf"/>, so the board can mark
+    /// it on hover. Empty for any other pick or a tile it does not take.
+    /// </summary>
+    public IReadOnlyList<Coord> PickArea(Coord tile) =>
+        Pick?.At(tile) is Breathe breathe && State.Find(breathe.UnitId) is { } rider
+            ? Rime.LineOf(State.Map, rider.At, breathe.Toward)
+            : Array.Empty<Coord>();
 
     /// <summary>
     /// Takes the action row at <paramref name="row"/> of <see cref="Actions"/>: its command goes
@@ -525,7 +690,7 @@ public sealed class ClientSession
         {
             Menu = null;
             Pick = pick;
-            Status = $"{pick.Label}: click a marked target";
+            Status = $"{pick.Label}: {pick.Prompt}";
             return null;
         }
 
@@ -900,12 +1065,19 @@ public sealed class ClientSession
         Menu = null;
         if (Pick is { } pick)
         {
-            // An armed item pick (issue 1308) takes the click: a marked tile submits the use,
-            // anything else closes the pick and leaves the unit selected.
+            // An armed pick (issue 1308) takes the click: a marked tile submits the use, or arms
+            // the next step of a carry; anything else closes the pick and leaves the unit selected.
             Pick = null;
             if (pick.At(at) is { } use)
             {
                 return Submit(use) ? use : null;
+            }
+
+            if (pick is StepPick step && step.After(at) is { } next)
+            {
+                Pick = next;
+                Status = $"{next.Label}: {next.Prompt}";
+                return null;
             }
 
             Status = $"{pick.Label}: no target there; the pick is closed";
