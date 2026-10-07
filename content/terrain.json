@@ -124,6 +124,16 @@
       "def": 0,
       "res": 0,
       "thawsTo": "water"
+    },
+    {
+      "id": "earthwork",
+      "name": "Earthwork",
+      "glyph": "[",
+      "cost": { "infantry": 1, "cavalry": 1, "flying": 1, "armored": 1 },
+      "avoid": 15,
+      "def": 2,
+      "res": 2,
+      "appliesToFlyers": true
     }
   ]
 }

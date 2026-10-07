@@ -152,6 +152,7 @@ token_warden_enemy
 token_captain_player
 token_pikeman_enemy_hooked
 token_reaver_enemy_double
+tile_earthwork
 tile_fire
 tile_forest
 tile_fort

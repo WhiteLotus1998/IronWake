@@ -624,6 +624,11 @@ public static class MapRenderer
             sb.Append(rime).Append('\n');
         }
 
+        if (Earthwork.Line(state, content) is { } raised)
+        {
+            sb.Append(raised).Append('\n');
+        }
+
         if (ChestLegend(state.ClosedChests, content) is { } chests)
         {
             sb.Append(chests).Append('\n');

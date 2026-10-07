@@ -3563,3 +3563,17 @@ Notes:
 - **Not tense:** turns 1, 2 and 4, the approach and the mop-up. Turn 8 was a walk.
 
 — Code
+
+## 2026-10-07 — The Tollgate with a raise tome (fixture), issue 1245's play, warm — Code
+Seed: 1245 (`play the_tollgate --seed 1245 --content <copy> --script docs/transcripts/2026-10-07-the_tollgate-1245-cairn.script`; transcript beside it; main at f0c7300 plus #1245's branch). The content is the shipped content with one fixture tome, `test_cairn` (Cinder's numbers, Mt 4, 6 uses, earth, `"rider": "raise"`), in Pell's slot 2 in place of Gust, and the Adept given earth. No shipped tome raises ground.   Result: **lost on turn 10**, the captain at 6,4, a tile short of the gate; Teodor fell on turn 7; no Recall spent.
+Warm: I built the raise and drew the Tollgate; I have played it four times before.
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 4. Teodor on the hill at 4,5 held earthwork, and the woods brigand read him at 28. Wren then walked to 6,6 and took the brigand to 14. Pell had one earthwork. Moving it to Wren dropped her brigand line to 18 and gave Teodor his hill back at 36. I moved it, and the brigand went for Teodor and hit him for 9. One per caster made it a real question of which body gets the ground, and the enemy answered it by going for the one I left.
+Notes:
+- **The cast reads as a heal and plays as a guard.** Move first, fight, then raise under the one who fought. Turn 2's raise under a Teodor nobody could reach was a wasted use, and the board told me so: `threat teodor` said "no enemy can strike him". By turn 3 the order had become move, strike, raise.
+- **Earthwork is strong.** Fort numbers on any open tile took the brigand from 36 to 28 against Teodor on the hill and from 41 to 18 against Wren on plain. Turn 8's corridor mouth at 6,3 read "20 against 20 hp" across three attackers at 45, 21 and 28, and nothing landed but one arrow. The tome's 6 uses are the real limit. I spent all six by turn 9 and wanted a seventh.
+- **The fall is the clock you play around.** Turn 7 opened with `falls as this player phase ends` on Teodor's tile and the rider at 1 HP beside him. I wanted the kill and the ground both. Teodor swung at 76 with `!`, missed, and died to the counter. The earthwork was falling either way. That loss was my swing, not the spell.
+- **Surprise is the map's, not the spell's.** The keep's three never left their posts, and the clock beat me because I spent turns 1 and 2 learning the cast. A pressured map with a moving enemy would test it harder.
+- **Not tense:** turns 1, 2 and 5.
+
+— Code

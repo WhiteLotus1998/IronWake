@@ -1027,6 +1027,11 @@ public static class Resolver
         }
 
         var spell = content.WeaponOf(unit.Unit, content.Weapon(stack.ItemId));
+        if (Earthwork.Rider(content, spell) is { } raise)
+        {
+            return ApplyRaise(state, content, use, unit, spell, raise, events);
+        }
+
         if (!spell.Heals || !content.Class(unit.Unit.ClassId).CanUse(spell.Type))
         {
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is a weapon, not an item; attack with it"));
@@ -1111,6 +1116,56 @@ public static class Resolver
         var braced = Brace.BracesOnWait(next, content, target);
         events.Add(new UnitWaited(target.Id, braced));
         return (next.WithUnit(target with { Hp = healed, Moved = true, Acted = true, Braced = braced }), null);
+    }
+
+    /// <summary>
+    /// The Item action with a tome naming its school's raise rider (issue 1245, <see cref="Earthwork"/>):
+    /// checked as a heal is (no art, the caster may wield it, a use left, an ally of its side in range),
+    /// then raised.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyRaise(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, SchoolRider raise, List<GameEvent> events)
+    {
+        if (use.Art is not null)
+        {
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} raises ground; no art is declared with it"));
+        }
+
+        if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {spell.Id}: " + (MagicSchoolExtensions.SchoolShort(content.Class(unit.Unit.ClassId), spell) ?? RankShort(unit.Unit, spell))));
+        }
+
+        var stack = unit.Unit.Inventory.Items[use.Slot];
+        if (stack.Uses == 0)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} has no uses left this battle"));
+        }
+
+        if (use.TargetId is null)
+        {
+            return (state, new Rejection(RejectionReason.NoTarget, $"{spell.Name} raises ground under an ally: item {unit.Id} {use.Slot} <ally>"));
+        }
+
+        var target = state.Find(use.TargetId);
+        if (target is null)
+        {
+            return (state, new Rejection(RejectionReason.NoSuchTarget, $"no living unit '{use.TargetId}' to raise ground under"));
+        }
+
+        if (target.Side != unit.Side)
+        {
+            return (state, new Rejection(RejectionReason.NotAnAlly, $"{target.Id} is not on {unit.Id}'s side"));
+        }
+
+        var distance = unit.At.DistanceTo(target.At);
+        if (!spell.InRange(distance))
+        {
+            return (state, new Rejection(
+                RejectionReason.OutOfRange,
+                $"{target.Id} at {target.At} is {distance} tiles from {unit.Id} at {unit.At}; {spell.Name} reaches {spell.MinRange}-{spell.MaxRange}"));
+        }
+
+        return Earthwork.Raise(state, content, unit, use.Slot, spell, raise, target, events);
     }
 
     /// <summary>
@@ -1797,6 +1852,7 @@ public static class Resolver
         }
 
         next = Rime.AtPhaseChange(next, content, ended, nextPhase, events);
+        next = Earthwork.AtPhaseChange(next, ended, nextPhase, events);
         next = Kinsbane.AtPhaseStart(next, content, nextPhase, events);
         next = LandBlows(next, content, nextPhase, events);
         if (nextPhase == Side.Player)

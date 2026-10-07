@@ -773,6 +773,12 @@ public static class ContentSerializer
 
                         writer.WriteEndArray();
                     }
+
+                    if (rider.Terrain is { } laid)
+                    {
+                        writer.WriteString("terrain", laid);
+                    }
+
                     writer.WriteEndObject();
                     writer.WriteEndObject();
                 }

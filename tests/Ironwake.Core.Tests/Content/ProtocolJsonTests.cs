@@ -66,6 +66,7 @@ public class ProtocolJsonTests
         { new KinsbaneSpoke("keziah", "kinsbane", "kb_starved_eat", "Eat."), """{"type":"kinsbaneSpoke","unit":"keziah","item":"kinsbane","line":"kb_starved_eat","text":"Eat."}""" },
         { new HungerEased("keziah", "kinsbane", 5, 6), """{"type":"hungerEased","unit":"keziah","item":"kinsbane","healed":5,"hpAfter":6}""" },
         { new UnitIgnited("brigand-1", "pell", 2, 2), """{"type":"unitIgnited","unit":"brigand-1","by":"pell","amount":2,"phases":2}""" },
+        { new GroundRaised("pell", "teodor", A, "earthwork"), """{"type":"groundRaised","unit":"pell","target":"teodor","at":{"x":1,"y":2},"terrain":"earthwork"}""" },
         { new UnitStunned("brigand-1", "pell", Side.Enemy), """{"type":"unitStunned","unit":"brigand-1","by":"pell","side":"enemy"}""" },
         { new UnitStunned("pell", "brigand-1", Side.Player, Next: true), """{"type":"unitStunned","unit":"pell","by":"brigand-1","side":"player","next":true}""" },
         { new StunSkipped("brigand-1"), """{"type":"stunSkipped","unit":"brigand-1"}""" },

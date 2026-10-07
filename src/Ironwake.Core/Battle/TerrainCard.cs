@@ -72,6 +72,17 @@ public static class TerrainCard
             parts.Add($"Wears: each unit that walks off it wears it one step, a horse or armour two, a flyer none ({chain}).");
         }
 
+        var raised = state.Overlays.Where(o => o.TerrainId == terrain.Id).ToList();
+        if (raised.Count > 0 || content.Riders.Values.Any(r => r.Kind == RiderKind.Raise && r.Terrain == terrain.Id))
+        {
+            parts.Add("Raised: a spell lays it over open ground until its caster's next phase ends, then the ground under it comes back; whoever stands on it holds it.");
+        }
+
+        foreach (var overlay in raised)
+        {
+            parts.Add(Capital(Earthwork.Describe(state, overlay)) + ".");
+        }
+
         if (terrain.ThawsTo is { } thawsTo)
         {
             parts.Add($"Thaws: it turns back to {content.TerrainById(thawsTo).Name} when the breather's side's next phase ends; a tile with a unit on it holds until it is empty.");

@@ -318,6 +318,12 @@ public sealed record UnitIgnited(string UnitId, string ByUnitId, int Amount, int
 /// </summary>
 public sealed record UnitStunned(string UnitId, string ByUnitId, Side Side, bool Next = false) : GameEvent;
 
+/// <summary>
+/// A tome naming its school's raise rider laid <paramref name="TerrainId"/> under <paramref name="TargetId"/>
+/// at <paramref name="At"/> (issue 1245, <see cref="Earthwork"/>); the <see cref="TerrainChanged"/> follows.
+/// </summary>
+public sealed record GroundRaised(string UnitId, string TargetId, Coord At, string TerrainId) : GameEvent;
+
 /// <summary>A stunned unit's side's phase began, and it skips it: it neither moves nor acts until the phase ends (issue 1244, <see cref="Stun"/>).</summary>
 public sealed record StunSkipped(string UnitId) : GameEvent;
 

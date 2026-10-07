@@ -62,7 +62,7 @@ public static class ContentLoader
         var items = ParseItems(files.Items, weapons);
         var (units, cast, signatures, pronouns) = ParseUnits(files.Units, classes, weapons, items, abilities);
         ValidateSignatureItems(files, weapons, abilities, cast);
-        var (wakeRadius, rivalry, difficulties, riders) = ParseRules(files.Rules, classes.Keys.ToHashSet(StringComparer.Ordinal));
+        var (wakeRadius, rivalry, difficulties, riders) = ParseRules(files.Rules, classes.Keys.ToHashSet(StringComparer.Ordinal), terrain);
         ValidateTomeRiders(files, weapons, riders);
         var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast) : CampaignRules.None;
         ValidateUniqueClasses(files, classes, cast, campaign);
@@ -1791,7 +1791,7 @@ public static class ContentLoader
     /// The global rule constants of DESIGN.md: today only the Guard wake radius (section 8),
     /// which lives in content so it is identical on every map and never in a map file.
     /// </summary>
-    private static (int WakeRadius, RivalryRules Rivalry, ImmutableSortedDictionary<string, Difficulty> Difficulties, ImmutableSortedDictionary<MagicSchool, SchoolRider> Riders) ParseRules(ContentFile file, IReadOnlySet<string> knownClasses)
+    private static (int WakeRadius, RivalryRules Rivalry, ImmutableSortedDictionary<string, Difficulty> Difficulties, ImmutableSortedDictionary<MagicSchool, SchoolRider> Riders) ParseRules(ContentFile file, IReadOnlySet<string> knownClasses, ImmutableSortedDictionary<string, Terrain> terrain)
     {
         JsonDocument document;
         try
@@ -1820,7 +1820,7 @@ public static class ContentLoader
             ? ParseDifficulties(block)
             : ImmutableSortedDictionary<string, Difficulty>.Empty.WithComparers(StringComparer.Ordinal);
         var riders = root.OptionalObject("schools") is { } schools
-            ? ParseSchoolRiders(schools, knownClasses)
+            ? ParseSchoolRiders(schools, knownClasses, terrain)
             : ImmutableSortedDictionary<MagicSchool, SchoolRider>.Empty;
         return (wakeRadius, rivalryRules, difficulties, riders);
     }
@@ -1830,10 +1830,11 @@ public static class ContentLoader
     /// <c>lightning</c>, <c>earth</c>) to an object with an optional <c>rider</c>: a <c>kind</c> Core
     /// knows and its fields: <c>burn</c> with an <c>amount</c> and a count of <c>phases</c>, each at least 1;
     /// <c>chill</c> alone (frozen iron's, issue 1244); <c>stun</c> with the <c>classes</c> whose casters fire
-    /// it, at least one, each a class in classes.json. A tome of the school carries the rider only when it
+    /// it, at least one, each a class in classes.json; <c>raise</c> with the <c>terrain</c> it lays, a terrain in
+    /// terrain.json every movement type may enter that neither wears nor thaws (issue 1245). A tome of the school carries the rider only when it
     /// names its kind (issue 1250, <see cref="GameContent.RiderOf"/>).
     /// </summary>
-    private static ImmutableSortedDictionary<MagicSchool, SchoolRider> ParseSchoolRiders(EntryNode node, IReadOnlySet<string> knownClasses)
+    private static ImmutableSortedDictionary<MagicSchool, SchoolRider> ParseSchoolRiders(EntryNode node, IReadOnlySet<string> knownClasses, ImmutableSortedDictionary<string, Terrain> terrain)
     {
         var builder = ImmutableSortedDictionary.CreateBuilder<MagicSchool, SchoolRider>();
         foreach (var property in node.Element.EnumerateObject())
@@ -1869,6 +1870,7 @@ public static class ContentLoader
             {
                 RiderKind.Burn => ["kind", "amount", "phases"],
                 RiderKind.Stun => ["kind", "classes"],
+                RiderKind.Raise => ["kind", "terrain"],
                 _ => ["kind"],
             };
             foreach (var field in rider.Element.EnumerateObject())
@@ -1912,6 +1914,21 @@ public static class ContentLoader
                 }
 
                 builder[school] = new SchoolRider(kind, 0, 0) { Classes = ValueList<string>.From(classes.Distinct().Order(StringComparer.Ordinal)) };
+            }
+            else if (kind == RiderKind.Raise)
+            {
+                var terrainId = rider.String("terrain");
+                if (!terrain.TryGetValue(terrainId, out var laid))
+                {
+                    throw entry.Error("rider.terrain", $"unknown terrain '{terrainId}': not in {ContentFiles.TerrainName}");
+                }
+
+                if (System.Enum.GetValues<MovementType>().Any(m => !laid.IsPassable(m)) || laid.WearsTo is not null || laid.ThawsTo is not null)
+                {
+                    throw entry.Error("rider.terrain", $"'{terrainId}' must be ground every unit can stand on that neither wears nor thaws");
+                }
+
+                builder[school] = new SchoolRider(kind, 0, 0) { Terrain = terrainId };
             }
             else
             {

@@ -14,20 +14,26 @@ public enum RiderKind
 
     /// <summary>A hit from a caster of a gated class stuns the target, once a map (issue 1244, <see cref="Stun"/>).</summary>
     Stun,
+
+    /// <summary>Cast on an ally's tile as a support action, it lays a timed terrain overlay there (issue 1245, <see cref="Earthwork"/>).</summary>
+    Raise,
 }
 
 /// <summary>
 /// A school's rider, from <c>rules.json</c>'s <c>schools</c> block (issue 1243): the shape a tome
 /// of the school takes when it names the kind (issue 1250, <see cref="GameContent.RiderOf"/>). <paramref name="Amount"/> is how hard it
 /// bites and <paramref name="Phases"/> for how many of the struck side's phases; a burn's alone, 0 for
-/// a chill or a stun, whose clocks are fixed (issue 1244).
+/// a chill, a stun or a raise, whose clocks are fixed (issues 1244, 1245).
 /// </summary>
 public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
 {
     /// <summary>The classes whose casters fire a stun rider (issue 1244, <see cref="Stun"/>); empty for any other kind.</summary>
     public ValueList<string> Classes { get; init; } = ValueList<string>.Empty;
 
-    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>.</summary>
+    /// <summary>The terrain a raise rider lays as its overlay (issue 1245, <see cref="Earthwork"/>); null for any other kind.</summary>
+    public string? Terrain { get; init; }
+
+    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>.</summary>
     public static string Label(RiderKind kind) => kind.ToString().ToLowerInvariant();
 
     /// <summary>A count of phases as a line says it: <c>one phase</c>, <c>two phases</c>; past nine, in digits.</summary>

@@ -336,6 +336,12 @@ public static class ProtocolJson
                 w.WriteNumber("amount", i.Amount);
                 w.WriteNumber("phases", i.Phases);
                 break;
+            case GroundRaised g:
+                w.WriteString("unit", g.UnitId);
+                w.WriteString("target", g.TargetId);
+                WriteCoord(w, "at", g.At);
+                w.WriteString("terrain", g.TerrainId);
+                break;
             case UnitStunned st:
                 w.WriteString("unit", st.UnitId);
                 w.WriteString("by", st.ByUnitId);
@@ -928,6 +934,24 @@ public static class ProtocolJson
             w.WriteEndArray();
         }
 
+        if (state.Overlays.Count > 0)
+        {
+            w.WriteStartArray("overlays");
+            foreach (var overlay in state.Overlays)
+            {
+                w.WriteStartObject();
+                WriteCoord(w, "at", overlay.At);
+                w.WriteString("terrain", overlay.TerrainId);
+                w.WriteString("under", overlay.UnderId);
+                w.WriteString("owner", overlay.OwnerId);
+                w.WriteString("side", Name(overlay.Side));
+                w.WriteNumber("clock", overlay.Clock);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
         if (state.Map.KeepsakesEnabled)
         {
             w.WriteStartArray("keepsakes");
@@ -1072,6 +1096,11 @@ public static class ProtocolJson
             Rime = e.TryGetProperty("rime", out var rime)
                 ? ValueList<RimeTile>.From(Array(rime, "rime").Select(r => new RimeTile(ReadCoord(r, "at"), ParseEnum<Side>(RequiredString(r, "side"), "side"), Math.Clamp(RequiredInt(r, "clock"), 1, 3)) { Extra = Math.Max(0, OptionalInt(r, "extra") ?? 0) }))
                 : ValueList<RimeTile>.Empty,
+            Overlays = e.TryGetProperty("overlays", out var overlays)
+                ? ValueList<TileOverlay>.From(Array(overlays, "overlays").Select(o => new TileOverlay(
+                    ReadCoord(o, "at"), RequiredString(o, "terrain"), RequiredString(o, "under"), RequiredString(o, "owner"),
+                    ParseEnum<Side>(RequiredString(o, "side"), "side"), Math.Clamp(RequiredInt(o, "clock"), 1, 2))))
+                : ValueList<TileOverlay>.Empty,
         };
     }
 
