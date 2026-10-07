@@ -129,7 +129,7 @@ public static class CampActions
 
         var from = content.Class(unit.ClassId);
         var captain = CampaignRecord.IsCaptain(unit, content);
-        foreach (var target in content.Classes.Values.Where(c => c.Id != unit.ClassId && !c.Hidden && (c.Unique is null || c.Unique == unitId)))
+        foreach (var target in content.Classes.Values.Where(c => c.Id != unit.ClassId && !c.Hidden && !c.Enemy && (c.Unique is null || c.Unique == unitId)))
         {
             var classId = target.Id;
             if (Certifications.Check(unit, target, from, captain, record.WonQuestIds).Count == 0)

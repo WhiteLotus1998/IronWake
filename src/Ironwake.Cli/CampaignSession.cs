@@ -1721,7 +1721,7 @@ public sealed class CampaignSession
         var advanced = _content.Classes.Values.Any(c => c.Advances is not null) ? $", {_content.Campaign.AdvancedCertificationPrice} for an advanced form" : "";
         _out.WriteLine($"Classes: what each asks, read against a unit's own stats without its class's; a seal costs {_content.Campaign.CertificationPrice}{advanced}");
         var names = UnitNames.Of(_record, _content);
-        foreach (var target in _content.Classes.Values.Where(c => (!c.Hidden || c.Id == unit?.ClassId) && (c.Unique is null || unit is null || c.Unique == unit.Id)))
+        foreach (var target in _content.Classes.Values.Where(c => !c.Enemy && (!c.Hidden || c.Id == unit?.ClassId) && (c.Unique is null || unit is null || c.Unique == unit.Id)))
         {
             var from = target.Advances is { } basis ? $" (from {basis.Name}; adds {Adds(target, basis)})" : "";
             if (target.Unique is { } owner)

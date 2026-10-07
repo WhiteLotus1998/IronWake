@@ -93,13 +93,15 @@ def main():
     out.append("<h2>The enemy</h2><p>Theirs are slate and bone, one token per class. The last two are the tells a "
                "shipped enemy carries on his token: the hooked pike and the boss's double bit.</p><div class=\"grid\">")
     for name in tokens:
-        parts = name.split("_")
-        if parts[2] != "enemy":
+        # A class id may hold an underscore (frost_caster): split on the side word, not on every underscore.
+        class_id, side, tell = name[len("token_"):].partition("_enemy")
+        if not side:
             continue
-        if len(parts) == 4:
-            out.append(token(name, f"{classes[parts[1]]}, {parts[3]}: {CARRIERS.get(parts[3], 'no carrier named')}"))
+        if tell:
+            tell = tell[1:]
+            out.append(token(name, f"{classes[class_id]}, {tell}: {CARRIERS.get(tell, 'no carrier named')}"))
         else:
-            out.append(token(name, classes[parts[1]]))
+            out.append(token(name, classes[class_id]))
     out.append("</div>")
 
     out.append("<h2>The ground</h2><p>A cold world. Fire is the only warm thing in it.</p><div class=\"grid\">")

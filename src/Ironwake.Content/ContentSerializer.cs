@@ -944,6 +944,16 @@ public static class ContentSerializer
             writer.WriteBoolean("singleStrike", true);
         }
 
+        if (unitClass.Enemy)
+        {
+            writer.WriteBoolean("enemy", true);
+        }
+
+        if (unitClass.Description is { } description)
+        {
+            writer.WriteString("description", description);
+        }
+
         if (unitClass.Schools.Count > 0)
         {
             writer.WriteStartArray("schools");

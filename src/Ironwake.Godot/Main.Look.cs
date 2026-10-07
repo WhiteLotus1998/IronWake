@@ -567,6 +567,10 @@ public partial class Main
                 Stroke(P(-9, 0), P(8, 0));
                 break;
             case "adept":
+            case "frost_caster":
+            case "earth_shaper":
+            case "storm_caster":
+            case "grave_caller":
                 Fill(Cubic(P(0, -12), P(8, -4), P(7, 8), P(0, 9))
                     .Concat(Cubic(P(0, 9), P(-7, 8), P(-8, -2), P(-2, -6)))
                     .Concat(Cubic(P(-2, -6), P(-2, -2), P(0, 0), P(1, -2)))

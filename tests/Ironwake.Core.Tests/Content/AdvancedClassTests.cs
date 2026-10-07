@@ -41,7 +41,7 @@ public class AdvancedClassTests
     [Fact]
     public void EveryVisibleFirstTierClassButTheCadetHasAnAdvancedForm()
     {
-        var bases = Content.Classes.Values.Where(c => c.Advances is null && !c.Hidden && c.Id != "cadet").Select(c => c.Id);
+        var bases = Content.Classes.Values.Where(c => c.Advances is null && !c.Hidden && !c.Enemy && c.Id != "cadet").Select(c => c.Id);
 
         Assert.All(bases, id => Assert.Contains(Content.Classes.Values, c => c.Advances?.Id == id));
     }

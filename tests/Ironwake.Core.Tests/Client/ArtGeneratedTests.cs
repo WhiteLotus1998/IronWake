@@ -112,10 +112,13 @@ public class ArtGeneratedTests
     [Fact]
     public void AVariantTokenIsItsClassTokenWithTheTellAdded()
     {
-        Assert.All(Generated().Where(n => n.StartsWith("token_", StringComparison.Ordinal) && n.Split('_').Length == 4), name =>
+        // A class id may hold an underscore (frost_caster), so a variant is a token that does not end in its side.
+        var variants = Generated().Where(n => n.StartsWith("token_", StringComparison.Ordinal) && !n.EndsWith("_player", StringComparison.Ordinal) && !n.EndsWith("_enemy", StringComparison.Ordinal)).ToList();
+        Assert.NotEmpty(variants);
+        Assert.All(variants, name =>
         {
             var variant = Png.Read(Path.Combine(ArtDirectory(), name + ".png"));
-            var plain = Png.Read(Path.Combine(ArtDirectory(), string.Join('_', name.Split('_')[..3]) + ".png"));
+            var plain = Png.Read(Path.Combine(ArtDirectory(), name[..name.LastIndexOf('_')] + ".png"));
             Assert.Null(TellFault(variant, plain));
         });
     }

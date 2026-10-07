@@ -98,6 +98,16 @@ public sealed record UnitClass(
     /// </summary>
     public ValueList<MagicSchool> Schools { get; init; } = ValueList<MagicSchool>.Empty;
 
+    /// <summary>
+    /// Whether only the enemy stands in the class (issue 1286, DECISIONS/0319): nobody certifies, trials, is
+    /// promoted or is cast into it, the camp's class lists leave it out, and it is the only kind of class that
+    /// may reach dark (DECISIONS/0317: among enemies, the dark-mage mini-boss and his followers alone).
+    /// </summary>
+    public bool Enemy { get; init; }
+
+    /// <summary>The class's line for a reader, or null; a placeholder class says so here until the naming pass (DECISIONS/0317).</summary>
+    public string? Description { get; init; }
+
     public bool CanUse(WeaponType type) => Weapons.Contains(type);
 
     /// <summary>Whether the class reaches <paramref name="school"/> (<see cref="Schools"/>).</summary>

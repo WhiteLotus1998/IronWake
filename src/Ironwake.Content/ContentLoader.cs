@@ -563,9 +563,14 @@ public static class ContentLoader
         {
             foreach (var property in trialNode.Element.EnumerateObject())
             {
-                if (!classes.ContainsKey(property.Name))
+                if (!classes.TryGetValue(property.Name, out var trialClass))
                 {
                     throw root.Error("trials." + property.Name, "is not a class");
+                }
+
+                if (trialClass.Enemy)
+                {
+                    throw root.Error("trials." + property.Name, "is an enemy class; nobody trials into it");
                 }
 
                 if (property.Value.ValueKind != JsonValueKind.String || string.IsNullOrWhiteSpace(property.Value.GetString()))
@@ -2504,6 +2509,8 @@ public static class ContentLoader
                 Loses = node.Has("loses") ? node.Enum<SidegradeMeasure>("loses") : null,
                 SingleStrike = node.BoolOr("singleStrike", false),
                 Schools = ParseSchools(node, weapons),
+                Enemy = node.BoolOr("enemy", false),
+                Description = node.OptionalString("description"),
             });
         }
 
@@ -2512,12 +2519,38 @@ public static class ContentLoader
             throw new ContentException(file.Name, null, "classes", "must contain at least one class");
         }
 
+        foreach (var node in entries)
+        {
+            var unitClass = builder[node.Entry!];
+            if (unitClass.Enemy)
+            {
+                foreach (var field in new[] { "advances", "captain", "hidden", "unique", "certification" }.Where(node.Has))
+                {
+                    throw node.Error(field, "an enemy class is first-tier and nobody joins it; name no " + field);
+                }
+            }
+            else if (unitClass.Reaches(MagicSchool.Dark))
+            {
+                throw node.Error("schools", "only an enemy class reaches dark (DECISIONS/0317)");
+            }
+
+            if (unitClass.Description is { } description && string.IsNullOrWhiteSpace(description))
+            {
+                throw node.Error("description", "must not be blank");
+            }
+        }
+
         foreach (var node in entries.Where(n => n.Has("advances")))
         {
             var basisId = node.String("advances");
             if (!builder.TryGetValue(basisId, out var basis))
             {
                 throw node.Error("advances", $"unknown class '{basisId}'");
+            }
+
+            if (basis.Enemy)
+            {
+                throw node.Error("advances", $"'{basisId}' is an enemy class; nobody is promoted out of it");
             }
 
             if (basis.Id == node.Entry || basis.Hidden)
@@ -3040,6 +3073,11 @@ public static class ContentLoader
         var castIds = new HashSet<string>(cast.Select(u => u.Id), StringComparer.Ordinal);
         for (var i = 0; i < cast.Count; i++)
         {
+            if (classes.TryGetValue(cast[i].ClassId, out var castClass) && castClass.Enemy)
+            {
+                throw castNodes[i].Error("class", $"'{castClass.Id}' is an enemy class; no cast member stands in it");
+            }
+
             ValidateCastEntry(castNodes[i], cast[i], castIds, classes, weapons);
         }
 

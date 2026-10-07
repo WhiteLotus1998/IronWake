@@ -65,13 +65,13 @@ public class DrainTests
     private static bool PellHit(CombatFought fought) => fought.Strikes.Any(s => s.AttackerId == "pell" && s.Hit);
 
     [Fact]
-    public void DarkIsASchoolWhoseShippedRiderIsTheDrainAndNoShippedTomeOrClassUsesIt()
+    public void DarkIsASchoolWhoseShippedRiderIsTheDrainAndNoShippedTomeOrPlayerClassUsesIt()
     {
         Assert.Equal(new SchoolRider(RiderKind.Drain, 0, 0), Shipped.Riders[MagicSchool.Dark]);
         Assert.Equal("dark", MagicSchool.Dark.Label());
         Assert.Equal("drain", SchoolRider.Label(RiderKind.Drain));
         Assert.DoesNotContain(Shipped.Weapons.Values, w => w.School == MagicSchool.Dark || w.Rider == RiderKind.Drain);
-        Assert.DoesNotContain(Shipped.Classes.Values, c => c.Reaches(MagicSchool.Dark));
+        Assert.DoesNotContain(Shipped.Classes.Values, c => c.Reaches(MagicSchool.Dark) && !c.Enemy);
     }
 
     [Fact]

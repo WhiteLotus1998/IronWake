@@ -38,9 +38,10 @@ CLIP_SHEET = os.path.join("docs", "art", "contact-clips.png")
 FX_SHEET = os.path.join("docs", "art", "contact-effects.png")
 FRAME = 96  # ART_SPEC: 48 px tokens and tiles, delivered at 2x
 
-# An advanced form (issue 704) is drawn as its base class until it has a shape of its own.
+# An advanced form (issue 704) is drawn as its base class until it has a shape of its own, and an
+# enemy caster class (issue 1286, every one Lore only) as the Adept.
 with open(os.path.join("content", "classes.json")) as _f:
-    BASE = {c["id"]: c.get("advances", c["id"]) for c in json.load(_f)["classes"]}
+    BASE = {c["id"]: c.get("advances", "adept" if c.get("enemy") else c["id"]) for c in json.load(_f)["classes"]}
 
 
 def hex_rgb(value):
@@ -806,9 +807,10 @@ def main():
             art[f"token_{class_id}_{side}"] = token(class_id, side)
     variants = []
     for name in spec_names():
-        parts = name.split("_")
-        if name.startswith("token_") and len(parts) == 4 and parts[2] == "enemy":
-            art[name] = token(parts[1], "enemy", parts[3])
+        # A class id may hold an underscore (frost_caster): a variant is token_<class>_enemy_<tell>.
+        class_id, side, tell = name[len("token_"):].partition("_enemy_")
+        if name.startswith("token_") and side and class_id in classes:
+            art[name] = token(class_id, "enemy", tell)
             variants.append(name)
     for terrain in terrains:
         art[f"tile_{terrain}"] = tile(terrain)
