@@ -757,8 +757,22 @@ public static class ContentSerializer
                     writer.WriteStartObject(school.Label());
                     writer.WriteStartObject("rider");
                     writer.WriteString("kind", SchoolRider.Label(rider.Kind));
-                    writer.WriteNumber("amount", rider.Amount);
-                    writer.WriteNumber("phases", rider.Phases);
+                    if (rider.Kind == RiderKind.Burn)
+                    {
+                        writer.WriteNumber("amount", rider.Amount);
+                        writer.WriteNumber("phases", rider.Phases);
+                    }
+
+                    if (rider.Kind == RiderKind.Stun)
+                    {
+                        writer.WriteStartArray("classes");
+                        foreach (var classId in rider.Classes)
+                        {
+                            writer.WriteStringValue(classId);
+                        }
+
+                        writer.WriteEndArray();
+                    }
                     writer.WriteEndObject();
                     writer.WriteEndObject();
                 }

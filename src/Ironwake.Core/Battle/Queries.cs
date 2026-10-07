@@ -278,6 +278,14 @@ public static class Queries
     }
 
     /// <summary>
+    /// The enemies that skip the coming enemy phase stunned (issue 1244, <see cref="Stun"/>) on the
+    /// board <see cref="Threats"/> reads for <paramref name="unit"/> on <paramref name="from"/>, so
+    /// <c>threat</c> says why they have no line; null where <see cref="Threats"/> is.
+    /// </summary>
+    public static IReadOnlyList<BattleUnit>? Stunned(BattleState state, GameContent content, BattleUnit unit, Coord from) =>
+        ThreatBoard(state, content, unit, from) is (var board, _, _) ? board.UnitsOf(Side.Enemy).Where(Stun.Skipping).ToList() : null;
+
+    /// <summary>
     /// The enemies that strike <paramref name="moved"/> on a dusk map only once a side-mate lights
     /// it (issue 987): <see cref="Dusk.Knows"/> and the strike's own sight read the live board, so
     /// an enemy that does not know where the unit is, or cannot see it from where it would strike,

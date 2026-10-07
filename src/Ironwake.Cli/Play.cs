@@ -1901,6 +1901,12 @@ public sealed class PlaySession
         }
 
         _out.WriteLine(ThreatText(board, _content, unit, tile, lines, Queries.SleepingThreats(board, _content, unit, tile)!, Queries.Unseeing(board, _content, unit, tile), Queries.MoveWins(board, _content, unit, tile), Queries.Anvils(board, _content, unit, tile), Queries.StopWakes(board, _content, unit, tile), Queries.Refusals(board, _content, unit, tile)));
+        if (Queries.Stunned(board, _content, unit, tile) is { Count: > 0 } stunned)
+        {
+            var names = UnitNames.Of(board, _content);
+            _out.WriteLine($"Stunned, no line: {string.Join(", ", stunned.Select(u => $"{names[u.Id]} ({u.At})"))} skips the enemy phase");
+        }
+
         if (BracedThreat(board, _content, unit, tile) is { } braced)
         {
             _out.WriteLine(braced);
@@ -2179,13 +2185,15 @@ public sealed class PlaySession
     /// What each side of a forecast leaves on a hit, printed after that side's strike columns: the
     /// attacker with <paramref name="slot"/> (else its equipped weapon), the target with the weapon it
     /// holds in front. <c> chills</c> for frozen iron (issue 702, <see cref="Frost"/>), then
-    /// <c> burns 2 for two phases</c> for a school's burn (issue 1243, <see cref="Burning"/>).
+    /// <c> burns 2 for two phases</c> for a school's burn (issue 1243, <see cref="Burning"/>). <c> chills</c>
+    /// also for an ice tome's chill rider, and <c> stuns</c> (or <c> stun: bosses spared</c>, <c> stun spent</c>)
+    /// for a stun rider in a gated caster's hands (issue 1244, <see cref="Stun"/>).
     /// </summary>
     public static (string Riders, string CounterRiders) Riders(GameContent content, BattleUnit unit, BattleUnit target, int? slot) =>
-        (RiderText(content, Resolver.ChooseWeapon(unit, content, slot).Weapon), RiderText(content, target.EquippedWeapon(content)));
+        (RiderText(content, unit, Resolver.ChooseWeapon(unit, content, slot).Weapon, target), RiderText(content, target, target.EquippedWeapon(content), unit));
 
-    private static string RiderText(GameContent content, Weapon? weapon) =>
-        (weapon is { FrozenIron: true } ? " chills" : "") + Burning.ForecastText(content, weapon);
+    private static string RiderText(GameContent content, BattleUnit striker, Weapon? weapon, BattleUnit struck) =>
+        (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon) + Stun.ForecastText(content, striker, weapon, struck);
 
     /// <summary>
     /// The weapon suffixes of a forecast line (DESIGN.md 13.11, issue 313): <c> with Toll Axe</c>
@@ -2521,6 +2529,11 @@ public sealed class PlaySession
         if (Burning.CardLine(unit) is { } burning)
         {
             lines.Add("  " + burning);
+        }
+
+        if (Stun.CardLine(unit) is { } stunned)
+        {
+            lines.Add("  " + stunned);
         }
 
         if (DrakeFrost.HeldLine(state, unit) is { } frosted)
@@ -3077,6 +3090,10 @@ public sealed class PlaySession
                 return $"{names[o.UnitId]} is open: allies of {names[o.ByUnitId]} strike it at Def -{o.Def}, Res -{o.Res} until the phase ends";
             case UnitIgnited i:
                 return $"{names[i.UnitId]} catches fire: {i.Amount} hp at the start of each of its side's next {SchoolRider.PhasesText(i.Phases)}";
+            case UnitStunned st:
+                return $"{names[st.UnitId]} is stunned: it skips {(st.Next ? "its side's phase after this one" : "its side's next phase")}, and still counters";
+            case StunSkipped sk:
+                return $"{names[sk.UnitId]} is stunned and skips this phase";
             case UnitChilled c:
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
             case UnitFrosted f:

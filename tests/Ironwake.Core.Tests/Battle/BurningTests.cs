@@ -113,7 +113,7 @@ public class BurningTests
     [InlineData("\"kind\": \"burn\"", "\"kind\": \"smoulder\"", "rider.kind", "unknown rider kind 'smoulder'")]
     [InlineData("\"amount\": 2", "\"amount\": 0", "rider.amount", "at least 1")]
     [InlineData("\"phases\": 2", "\"phases\": 0", "rider.phases", "at least 1")]
-    [InlineData("\"phases\": 2", "\"phases\": 2, \"gate\": 3", "rider.gate", "is not a rider field")]
+    [InlineData("\"phases\": 2", "\"phases\": 2, \"gate\": 3", "rider.gate", "is not a field of a burn rider")]
     public void ABadRiderIsRefusedAtLoadNamingFileEntryAndField(string from, string to, string field, string why)
     {
         var error = Assert.Throws<ContentException>(() => ContentLoader.Parse(Fixture.Files(rules: RiderRules.Replace(from, to))));

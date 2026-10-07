@@ -336,6 +336,19 @@ public static class ProtocolJson
                 w.WriteNumber("amount", i.Amount);
                 w.WriteNumber("phases", i.Phases);
                 break;
+            case UnitStunned st:
+                w.WriteString("unit", st.UnitId);
+                w.WriteString("by", st.ByUnitId);
+                w.WriteString("side", Name(st.Side));
+                if (st.Next)
+                {
+                    w.WriteBoolean("next", true);
+                }
+
+                break;
+            case StunSkipped sk:
+                w.WriteString("unit", sk.UnitId);
+                break;
             case UnitChilled c:
                 w.WriteString("unit", c.UnitId);
                 w.WriteString("by", c.ByUnitId);
@@ -1159,6 +1172,16 @@ public static class ProtocolJson
             w.WriteNumber("burnPhases", unit.BurnPhases);
         }
 
+        if (unit.Stun > 0)
+        {
+            w.WriteNumber("stun", unit.Stun);
+        }
+
+        if (unit.StunSpent)
+        {
+            w.WriteBoolean("stunSpent", true);
+        }
+
         if (unit.LockedBy is { } lockedBy)
         {
             w.WriteString("lockedBy", lockedBy);
@@ -1395,6 +1418,8 @@ public static class ProtocolJson
             Chill = OptionalInt(e, "chill") ?? 0,
             Burn = OptionalInt(e, "burn") ?? 0,
             BurnPhases = OptionalInt(e, "burnPhases") ?? 0,
+            Stun = OptionalInt(e, "stun") ?? 0,
+            StunSpent = e.TryGetProperty("stunSpent", out _) && RequiredBool(e, "stunSpent"),
             LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
             Frosted = OptionalInt(e, "frosted") ?? 0,
