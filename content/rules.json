@@ -38,7 +38,7 @@
     }
   },
   "schools": {
-    "fire": { "rider": { "kind": "burn", "amount": 2, "phases": 2 } },
+    "fire": { "rider": { "kind": "burn", "amount": 2, "phases": 2, "cap": 4 } },
     "ice": { "rider": { "kind": "chill" } },
     "earth": { "rider": { "kind": "raise", "terrain": "earthwork" } }
   }

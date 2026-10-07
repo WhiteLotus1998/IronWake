@@ -254,7 +254,7 @@ public class PrimerTests
         var over = Facing(Learning, res + 2);
         var under = Facing(Learning, res);
 
-        Assert.Equal($" burns 2 for two phases: Mag {res + 2} over Res {res}", PlaySession.Riders(Learning, over.Find("pell")!, Brigand(over), null).Riders);
+        Assert.Equal($" burn {Math.Max(1, 2 - res / 2)} (1 stack, 2 phases): Mag {res + 2} over Res {res}", PlaySession.Riders(Learning, over.Find("pell")!, Brigand(over), null).Riders);
         Assert.Equal($" no burn: Mag {res}, Res {res}", PlaySession.Riders(Learning, under.Find("pell")!, Brigand(under), null).Riders);
     }
 

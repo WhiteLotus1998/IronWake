@@ -1829,7 +1829,7 @@ public static class Resolver
                     events.Add(new UnitHealed(unit.Id, hp - unit.Hp, hp));
                 }
 
-                var burnt = Math.Max(Math.Min(1, hp), hp - Math.Max(state.Map.TerrainAt(unit.At, content).BurnFor(max), Burning.Due(unit)));
+                var burnt = Math.Max(Math.Min(1, hp), hp - Math.Max(state.Map.TerrainAt(unit.At, content).BurnFor(max), Burning.Tick(content, unit)));
                 if (burnt < hp)
                 {
                     events.Add(new UnitBurned(unit.Id, hp - burnt, burnt));

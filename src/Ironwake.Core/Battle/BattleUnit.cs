@@ -80,12 +80,15 @@ public sealed record BattleUnit(
     public int Chill { get; init; }
 
     /// <summary>
-    /// A rider's burn (issue 1243, <see cref="Burning"/>): the HP it takes at each start of the
-    /// unit's side's phase, never below 1; 0 when not burning.
+    /// A rider's burn (issue 1243, <see cref="Burning"/>): the amount each of its stacks adds to a
+    /// tick (issue 1279, <see cref="Burning.Tick"/>); 0 when not burning.
     /// </summary>
     public int Burn { get; init; }
 
-    /// <summary>The phase starts of its own side the burn still has to tick (issue 1243); 0 when not burning.</summary>
+    /// <summary>How many times the burn has been laid on, up to its rider's cap (issue 1279, <see cref="Burning"/>); 0 when not burning.</summary>
+    public int BurnStacks { get; init; }
+
+    /// <summary>The phase starts of its own side the burn still has to tick (issue 1243), refreshed by each new stack (issue 1279); 0 when not burning.</summary>
     public int BurnPhases { get; init; }
 
     /// <summary>
