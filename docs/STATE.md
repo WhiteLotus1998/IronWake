@@ -1,13 +1,13 @@
 # STATE
 
-Updated: 2026-10-07 (0278 warm play: the Counting House, 2030). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-07 (Lotus's second spell rulings, 0317). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243). The Table is #1287 (#1251 archived). Casting (`docs/look/`) waits on Lotus. Pillar 5: eleven and the captain (0264). #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804, #806, #807 and #872 are `blocked` on plays, #634 or #535; the dash (0255), the wind (0256) and the one answer (0257) are kept on their samples.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
 ~4850 tests green; `ci`, `ci-windows` run.
-No forks are open. The chain heartbeat stays (#406). Recent records: the door (0268 to 0277); `holds:` and limit 9 (0279, 0280); the freed tile (0281); the Shrine (0283, 0288, 0304, 0306); `threat` lines (0294, 0295, 0302, #1258, #1290). **The schools** (Lotus, rounds 416, 417) are built (0296 to 0301); his spell rulings (0307) are `ready` as #1281 to #1286, burn stacks (0308), Lightning Rod (0309), Sunder (0311) and Rampart's +5 with the armor rider (0312; Code 1282 warm 7/7/7 on a fixture), dark's drain (0313), raise dead, the Hollow (0314; Code 1284 warm 6/7/7, lost) and tomes in chests (#1285: the open line names `(cannot wield: fire school)`; placement waits on Lotus; the Burned School holds a Bolt) shipped; #1286 slices 1 to 4 (0315, 0316 amended twice): the enemy raises its own dead or lays Rampart in place of a non-kill strike (a boss or raiser first), dons armor with no strike; casters plan last; `threat` says such a line may cast instead, still counted. Content waits on revised #1247. #1259 (0303): held bars kept on a sample; the Lazar House ships them (0305).
+No forks are open. The chain heartbeat stays (#406). Recent records: the door (0268 to 0277); `holds:` and limit 9 (0279, 0280); the freed tile (0281); the Shrine (0283, 0288, 0304, 0306); `threat` lines (0294, 0295, 0302, #1258, #1290). **The schools** (Lotus, rounds 416, 417) are built (0296 to 0301); his first rulings (0307) shipped as #1279 to #1285 (0308 to 0314; Code 1282 warm 7/7/7, 1284 6/7/7 on fixtures; chest placement waits on Lotus) and #1286 slices 1 to 4 (0315, 0316): enemy raise, Rampart, armor, casters last, `threat` flags a cast. His second (0317): dark rare, Gust is lightning (#1319), a two-stack burn (#1320), light's ladder (#1321), #1286's classes and drops unblocked (placement waits on #1144); fire's and earth's tops and the Ledger class pitched on #1247. Content waits on his signature. #1259 (0303): held bars kept on a sample; the Lazar House ships them (0305).
 
 ## Next
 
