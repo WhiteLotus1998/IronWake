@@ -91,7 +91,7 @@ public static class Script
 
     /// <summary>
     /// Plays a script through a fresh client and returns its event log: each command is
-    /// submitted as the player would click it, <c>item</c> and <c>exit</c> through the action
+    /// submitted as the player would click it, <c>item</c>, <c>exit</c>, <c>carry</c> and <c>breathe</c> through the action
     /// list and its target pick (<see cref="ApplyByClicks"/>, issue 1308), and each enemy phase
     /// is stepped to its end.
     /// </summary>
@@ -121,9 +121,11 @@ public static class Script
 
     /// <summary>
     /// Submits each command a script names as <see cref="Apply"/> does, but takes every
-    /// <c>item</c> and <c>exit</c> line the way a mouse would (issue 1308): the unit is selected
-    /// by a click on its tile, the matching row of <see cref="ClientSession.Actions"/> is taken,
-    /// and an item that needs a target is aimed by a click on the target's tile. A line the core
+    /// <c>item</c>, <c>exit</c>, <c>carry</c> and <c>breathe</c> line the way a mouse would (issue
+    /// 1308): the unit is selected by a click on its tile, the matching row of
+    /// <see cref="ClientSession.Actions"/> is taken, an item that needs a target is aimed by a
+    /// click on the target's tile, and the drake's verbs by a click on each tile of their pick
+    /// (the ally, where to fly, where to set it down; the breath's first tile). A line the core
     /// refuses is submitted as it stands, to print its refusal as the console does; a line it
     /// accepts with no row to take it throws, naming it, so a verb the action list cannot reach
     /// fails the parity gate.
@@ -132,29 +134,43 @@ public static class Script
     {
         foreach (var line in script.Split('\n'))
         {
-            var command = Parse(line, client.State);
-            if (command is null)
-            {
-                continue;
-            }
-
-            if (command is UseItem or Exit && client.State.Find(UnitOf(command)) is { } unit && Resolver.Apply(client.State, client.Content, command).Accepted)
-            {
-                TakeByClicks(client, command, unit, line.Trim());
-            }
-            else
-            {
-                client.Submit(command);
-            }
-
-            client.Continue();
+            ApplyLineByClicks(client, line);
         }
+    }
+
+    /// <summary>
+    /// One line of <see cref="ApplyByClicks"/>: <c>item</c>, <c>exit</c>, <c>carry</c> and
+    /// <c>breathe</c> the core accepts are taken through the action list and its pick, every other
+    /// command is submitted, and the enemy phase it starts is stepped to its end. Returns whether
+    /// the line named a command.
+    /// </summary>
+    public static bool ApplyLineByClicks(ClientSession client, string line)
+    {
+        var command = Parse(line, client.State);
+        if (command is null)
+        {
+            return false;
+        }
+
+        if (command is UseItem or Exit or Carry or Breathe && client.State.Find(UnitOf(command)) is { } unit && Resolver.Apply(client.State, client.Content, command).Accepted)
+        {
+            TakeByClicks(client, command, unit, line.Trim());
+        }
+        else
+        {
+            client.Submit(command);
+        }
+
+        client.Continue();
+        return true;
     }
 
     private static string UnitOf(Command command) => command switch
     {
         UseItem use => use.UnitId,
         Exit exit => exit.UnitId,
+        Carry carry => carry.UnitId,
+        Breathe breathe => breathe.UnitId,
         _ => "",
     };
 
@@ -162,8 +178,14 @@ public static class Script
     {
         client.Select(unit.At);
         var rows = client.Actions();
+        if (command is Carry or Breathe)
+        {
+            TakeStepsByClicks(client, command, rows, line);
+            return;
+        }
+
         var index = command is UseItem { TargetId: { } targetId } aimed
-            ? rows.ToList().FindIndex(row => row.Pick is { } pick && pick.UnitId == aimed.UnitId && pick.Slot == aimed.Slot && pick.Art == aimed.Art)
+            ? rows.ToList().FindIndex(row => row.Pick is ItemPick pick && pick.UnitId == aimed.UnitId && pick.Slot == aimed.Slot && pick.Art == aimed.Art)
             : rows.ToList().FindIndex(row => row.Pick is null && row.Command == command);
         if (index < 0)
         {
@@ -189,12 +211,45 @@ public static class Script
     }
 
     /// <summary>
+    /// Takes a carry or a breath (issue 1308, slice 2) through its drake row: the row is taken, and
+    /// each tile of the path that names the command is clicked in turn, the last click submitting.
+    /// </summary>
+    private static void TakeStepsByClicks(ClientSession client, Command command, IReadOnlyList<ActionRow> rows, string line)
+    {
+        var index = rows.ToList().FindIndex(row => row.Pick is StepPick pick && pick.Paths.Any(path => path.Command == command));
+        if (index < 0)
+        {
+            throw new InvalidOperationException($"no action row takes '{line}'");
+        }
+
+        var path = ((StepPick)rows[index].Pick!).Paths.First(p => p.Command == command);
+        client.TakeAction(index);
+        Command? taken = null;
+        foreach (var at in path.Clicks)
+        {
+            if (client.Pick is null)
+            {
+                break;
+            }
+
+            taken = client.Click(at);
+        }
+
+        if (taken != command)
+        {
+            throw new InvalidOperationException($"the drake pick did not take '{line}': {client.Status}");
+        }
+    }
+
+    /// <summary>
     /// Plays a whole <c>campaign --script</c> through a fresh campaign presenter (issue 360) and
     /// returns its event log. On the between-map screen a line that changes the record is taken as
     /// the screen's action (buy, repair, drop, take, refine, certify, trial, quest, hire, pick, build,
     /// bench, unbench, march); a listing
     /// prints no event and is skipped. In a battle, <c>leave</c> leaves it and every other line is
-    /// read as <see cref="Parse"/> reads a <c>play</c> line, each enemy phase stepped to its end.
+    /// read as <see cref="Parse"/> reads a <c>play</c> line and taken as <see cref="ApplyLineByClicks"/>
+    /// takes it, items, exits and the drake's verbs through the action list (issue 1308), each
+    /// enemy phase stepped to its end.
     /// </summary>
     public static string PlayCampaign(CampaignClient campaign, string script)
     {
@@ -207,10 +262,9 @@ public static class Script
                 {
                     campaign.Leave();
                 }
-                else if (Parse(line, battle.State) is { } command)
+                else
                 {
-                    battle.Submit(command);
-                    battle.Continue();
+                    ApplyLineByClicks(battle, line);
                 }
 
                 continue;

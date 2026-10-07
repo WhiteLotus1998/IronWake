@@ -1032,10 +1032,16 @@ public partial class Main : Node2D
                     DrawRect(rect.Grow(-3 * S), Ink, filled: false, width: 3 * S);
                 }
 
-                // An armed item pick (issue 1308): each tile the core takes it at, outlined.
-                if (_client.Pick is { } pick && pick.Targets.ContainsKey(at))
+                // An armed pick (issue 1308): each tile the core takes it at, outlined, and the
+                // breath's line from the hovered tile, filled.
+                if (_client.Pick is { } pick && pick.Marks(at))
                 {
                     DrawRect(rect.Grow(-1 * S), MarkColour("reach", 0.95f), filled: false, width: 3 * S);
+                }
+
+                if (_client.Pick is not null && _hover is { } aimed && _client.PickArea(aimed).Contains(at))
+                {
+                    DrawRect(rect.Grow(-4 * S), MarkColour("threat", 0.5f), filled: true);
                 }
 
                 if (map.Win == WinCondition.Seize && map.IsThrone(at))
@@ -1551,15 +1557,16 @@ public partial class Main : Node2D
 
         if (_hover is not { } tile)
         {
-            yield return client.Pick is null ? "Point at a tile to see the forecast there." : "Point at a marked tile to see what the item does there.";
+            yield return client.Pick is null ? "Point at a tile to see the forecast there." : $"{client.Pick.Label}: point at a marked tile; {client.Pick.Prompt}.";
             yield break;
         }
 
         if (client.Pick is { } pick)
         {
-            // The armed item pick (issue 1308): the console's own lines for the use, or how to aim it.
+            // The armed pick (issue 1308): the console's own lines for the use, the next step of a
+            // carry, or how to aim it.
             var lines = client.PickPreview(tile);
-            yield return lines.Count == 0 ? $"{pick.Label}: not a target; click a marked tile, Esc closes" : $"{pick.Label}, click to use:";
+            yield return lines.Count == 0 ? $"{pick.Label}: not a target; {pick.Prompt}, Esc closes" : pick.At(tile) is null ? $"{pick.Label}, click to pick:" : $"{pick.Label}, click to use:";
             foreach (var text in lines)
             {
                 yield return text;

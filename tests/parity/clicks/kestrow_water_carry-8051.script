@@ -1,0 +1,85 @@
+move teodor 9,8
+move wren 7,8
+move maud 9,9
+move pell 8,10
+move captain 8,8
+move rook 8,9
+wait teodor
+wait wren
+wait maud
+wait pell
+wait captain
+wait rook
+end
+carry rook pell 11,7 11,6
+attack pell shieldbearer-1 cinder art overcast
+move teodor 11,8
+wait teodor
+move maud 12,8
+wait maud
+move captain 10,8
+wait captain
+move wren 9,9
+wait wren
+end !
+move rook 10,7
+wait rook
+move pell 11,7
+attack pell brigand-2 cinder
+move teodor 11,6
+wait teodor
+move maud 11,8
+item maud 2 pell
+move captain 8,8
+attack captain brigand-3
+move wren 10,8
+item wren 2
+end !
+attack pell archer-1 cinder !
+move teodor 11,5
+attack teodor shieldbearer-1
+move captain 10,9
+attack captain rider-1
+attack maud rider-2 !
+move wren 11,6
+wait wren
+move rook 10,8
+wait rook
+end
+attack teodor brigand-1
+carry rook captain 12,5 12,4
+attack captain brigand-1
+move wren 10,3
+attack wren archer-2
+move pell 11,3
+attack pell archer-2 cinder !
+move maud 11,4
+item maud 2 pell
+end
+move pell 9,1
+attack pell soldier-1 gust
+move wren 8,1
+attack wren soldier-1
+carry rook teodor 10,1 10,0
+move teodor 8,0
+wait teodor
+move maud 9,2
+wait maud
+move captain 11,1
+wait captain
+end
+exit teodor
+carry rook pell 5,0 4,0
+wait pell
+move wren 6,0
+wait wren
+move maud 7,0
+wait maud
+move captain 8,0
+wait captain
+end
+exit rook
+exit pell
+exit wren
+exit maud
+exit captain
