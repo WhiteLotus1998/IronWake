@@ -6,8 +6,8 @@ namespace Ironwake.Core.Tests.Content;
 /// <summary>
 /// The schools of Lore magic, step one (issue 1242, DECISIONS/0296): a <c>school</c> tag on a Lore
 /// tome, a class's reach as <c>schools</c> in <c>classes.json</c>, and the rule that a schooled tome
-/// is wielded only in a class that reaches its school. Cinder is fire and Bolt lightning; nothing
-/// else shipped is schooled.
+/// is wielded only in a class that reaches its school. Cinder is fire; Bolt and Gust are lightning
+/// (Gust folded into lightning as storm, issue 1319, DECISIONS/0317).
 /// </summary>
 public class MagicSchoolTests
 {
@@ -16,14 +16,14 @@ public class MagicSchoolTests
     [Theory]
     [InlineData("cinder", MagicSchool.Fire)]
     [InlineData("bolt", MagicSchool.Lightning)]
-    [InlineData("gust", null)]
+    [InlineData("gust", MagicSchool.Lightning)]
     [InlineData("pell_commonplace", null)]
-    public void ShippedTomesCarryTheirSchoolAndGustAndTheCommonplaceNone(string id, MagicSchool? school) =>
+    public void ShippedTomesCarryTheirSchoolAndTheCommonplaceNone(string id, MagicSchool? school) =>
         Assert.Equal(school, Content.Weapon(id).School);
 
     [Fact]
-    public void OnlyCinderAndBoltAreSchooledInContent() =>
-        Assert.Equal(new[] { "bolt", "cinder" }, Content.Weapons.Values.Where(w => w.School is not null).Select(w => w.Id).Order(StringComparer.Ordinal));
+    public void OnlyCinderBoltAndGustAreSchooledInContent() =>
+        Assert.Equal(new[] { "bolt", "cinder", "gust" }, Content.Weapons.Values.Where(w => w.School is not null).Select(w => w.Id).Order(StringComparer.Ordinal));
 
     [Theory]
     [InlineData("adept", "fire,ice,lightning")]
@@ -59,6 +59,38 @@ public class MagicSchoolTests
             }
         }
     }
+
+    [Fact]
+    public void GustIsLightningAsStormAndCarriesNoRiderSoItStunsNoOne()
+    {
+        var gust = Content.Weapon("gust");
+
+        Assert.Equal(MagicSchool.Lightning, gust.School);
+        Assert.Null(gust.Rider);
+        Assert.Null(Content.RiderOf(gust));
+    }
+
+    [Fact]
+    public void EveryPlayerSideLoreClassReachesGustSoNoBuyerLosesIt()
+    {
+        var gust = Content.Weapon("gust");
+        var lore = Content.Classes.Values.Where(c => !c.Enemy && c.CanUse(WeaponType.Reason)).ToList();
+
+        Assert.NotEmpty(lore);
+        Assert.All(lore, c => Assert.True(MagicSchoolExtensions.SchoolShort(Content.Cast[0], c, gust) is null, c.Id));
+    }
+
+    [Fact]
+    public void PellStillWieldsHerGustAsAnAdept()
+    {
+        var pell = Content.Units["pell"];
+
+        Assert.True(pell.CanWield(Content.Weapon("gust"), Content.Class(pell.ClassId)));
+    }
+
+    [Fact]
+    public void GustsCardNamesTheLightningSchool() =>
+        Assert.StartsWith("Gust, lore E, lightning school. Acc 100", ItemCard.Text(Content, "gust"), StringComparison.Ordinal);
 
     [Fact]
     public void TheAdeptHireStaysPlainWithCinderAlone()
