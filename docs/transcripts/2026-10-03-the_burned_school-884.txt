@@ -220,6 +220,7 @@ chests ($): 1,1 Bolt; 6,2 Gust; 6,6 Field Dressing (a unit on a chest or beside 
 > threat pell from 6,3
 Threat on Pell at 6,3 (Plain):
   Brigand 2 from 6,4 with Iron Axe (slot 1): acc 67% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 14 crit 3% (Cinder 7 of 8 left)
+    Its strike here wakes: the chapel group (noise, heard from 6,3); not in the total
   If all land: 13 against 17 hp
 > move pell 6,3
 Pell moves 7,4 -> 6,3 via 6,4

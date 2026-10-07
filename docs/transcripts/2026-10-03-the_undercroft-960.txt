@@ -508,6 +508,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 > threat pell from 14,1
 Threat on Pell at 14,1 (Plain):
   Lector from 14,3 with Radiance (slot 2): acc 96% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 9 crit 3% (Cinder 8 of 8 left)
+    Its strike here wakes: the stacks group (noise, heard from 14,3 and 14,1); not in the total
   If all land: 10 against 17 hp
 > move pell 14,1
 Pell moves 13,1 -> 14,1

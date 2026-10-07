@@ -306,7 +306,35 @@ public static class Queries
             lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, StrikeForecast(lit, content, carrier, moved, strike), arrives, StrikeTiles(lit, content, enemy, moved), Windup.Raises(lit, weapon)) { LitBy = lighter });
         }
 
-        return lines;
+        return lines.Select(l => StrikeWakes(board, content, moved, l) is { Count: > 0 } wakes ? l with { Wakes = ValueList<FightWake>.From(wakes) } : l).ToList();
+    }
+
+    /// <summary>
+    /// The sleeping groups the noise of one priced enemy strike would wake (issue 1290), in
+    /// <see cref="FightWakes"/>' shape: <see cref="WakeCheck.Run"/> on <see cref="Threats"/>' board with the
+    /// enemy moved to its strike tile, once with the fight's two tiles (the strike tile and the tile struck:
+    /// the unit's, or a Lightning Rod holder's) as noise at <see cref="Signatures.NoiseRadius"/> and once
+    /// without, keeping the groups only the noisy run wakes. A group the stop already wakes is awake on that
+    /// board and never named. Unpriced, so the one-wave total of DECISIONS/0281 is untouched. Empty for a
+    /// raise, which fights no combat, and for a held line, which is not counted.
+    /// </summary>
+    private static IReadOnlyList<FightWake> StrikeWakes(BattleState board, GameContent content, BattleUnit moved, ThreatLine line)
+    {
+        if (line.Raises || line.HeldBy is not null || !board.Units.Any(u => u is { Behavior: Behavior.Guard, Group: { } g } && !board.IsAwake(g)))
+        {
+            return Array.Empty<FightWake>();
+        }
+
+        var rod = line.Forecast.CaughtBy is { } rodId ? board.Find(rodId) : null;
+        var struck = rod ?? line.CoveredBy ?? moved;
+        var after = board.WithUnit(line.Enemy with { At = line.From });
+        var radius = Signatures.NoiseRadius(board, content, line.Enemy, struck);
+        var noisy = new[] { new Noise(line.From, radius), new Noise(rod?.At ?? moved.At, radius) };
+        var quiet = WakeCheck.Run(board, after, content, Array.Empty<Noise>(), Array.Empty<string>()).Select(w => w.Group).ToHashSet(StringComparer.Ordinal);
+        return WakeCheck.Run(board, after, content, noisy, Array.Empty<string>())
+            .Where(w => !quiet.Contains(w.Group))
+            .Select(w => new FightWake(w.Group, w.CalledBy, w.Cause == WakeCause.Noise ? ValueList<Coord>.From(WakeCheck.HeardFrom(after, w.Group, noisy)) : ValueList<Coord>.Empty))
+            .ToList();
     }
 
     /// <summary>
@@ -1039,6 +1067,13 @@ public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon W
     /// out of every total, and <see cref="Forecast"/> is read as if the tile were free. Null otherwise.
     /// </summary>
     public BattleUnit? HeldBy { get; init; }
+
+    /// <summary>
+    /// The sleeping groups this strike's noise would wake (issue 1290), each naming the fight's tiles
+    /// that reach it, or its <c>wake_links:</c> caller. Unpriced: a woken group's strikes are not in any
+    /// total (DECISIONS/0281). Empty when the strike wakes nothing.
+    /// </summary>
+    public ValueList<FightWake> Wakes { get; init; } = ValueList<FightWake>.Empty;
 }
 
 /// <summary>

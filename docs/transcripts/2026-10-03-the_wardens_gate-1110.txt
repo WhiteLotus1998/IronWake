@@ -221,6 +221,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 > threat teodor from 4,4
 Threat on Teodor at 4,4 (Plain):
   Soldier 1 from 3,4 with Iron Lance (slot 1): acc 73% dmg 7 crit 0%; counter with Family Lance: acc 88% dmg 15 crit 3%
+    Its strike here wakes: the gate group (noise, heard from 3,4 and 4,4); not in the total
   If all land: 7 against 24 hp
   Stopping here wakes: the west group (proximity)
 > move teodor 4,4

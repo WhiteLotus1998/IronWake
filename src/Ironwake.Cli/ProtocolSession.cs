@@ -440,31 +440,7 @@ public sealed class ProtocolSession
                 w.WriteNull("counterLethalIfMiss");
             }
 
-            w.WriteStartArray("wakes");
-            foreach (var woke in Queries.FightWakes(_state, _content, unit, target, tile))
-            {
-                w.WriteStartObject();
-                w.WriteString("group", woke.Group);
-                w.WriteString("cause", woke.CalledBy is null ? "noise" : "call");
-                if (woke.CalledBy is { } by)
-                {
-                    w.WriteString("by", by);
-                }
-
-                w.WriteStartArray("heardFrom");
-                foreach (var heard in woke.HeardFrom)
-                {
-                    w.WriteStartObject();
-                    w.WriteNumber("x", heard.X);
-                    w.WriteNumber("y", heard.Y);
-                    w.WriteEndObject();
-                }
-
-                w.WriteEndArray();
-                w.WriteEndObject();
-            }
-
-            w.WriteEndArray();
+            WriteWakes(w, Queries.FightWakes(_state, _content, unit, target, tile));
             w.WriteString("text", PlaySession.ForecastText(_state, _content, unit, target, forecast, tile, from is not null, slot, art));
         });
     }
@@ -474,6 +450,40 @@ public sealed class ProtocolSession
     /// when it does not counter. Written on every forecast and threat line whatever the console's
     /// filter says (issue 313); a renderer may hide it.
     /// </summary>
+    /// <summary>
+    /// A <c>wakes</c> array: one object per sleeping group a fight's noise would wake, with <c>group</c>,
+    /// <c>cause</c> (<c>noise</c> or <c>call</c>), <c>by</c> for a call, and <c>heardFrom</c>, the fight's tiles
+    /// that reach it. The forecast's (issue 1106) and each <c>threat</c> line's (issue 1290).
+    /// </summary>
+    private static void WriteWakes(Utf8JsonWriter w, IEnumerable<FightWake> wakes)
+    {
+        w.WriteStartArray("wakes");
+        foreach (var woke in wakes)
+        {
+            w.WriteStartObject();
+            w.WriteString("group", woke.Group);
+            w.WriteString("cause", woke.CalledBy is null ? "noise" : "call");
+            if (woke.CalledBy is { } by)
+            {
+                w.WriteString("by", by);
+            }
+
+            w.WriteStartArray("heardFrom");
+            foreach (var heard in woke.HeardFrom)
+            {
+                w.WriteStartObject();
+                w.WriteNumber("x", heard.X);
+                w.WriteNumber("y", heard.Y);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+            w.WriteEndObject();
+        }
+
+        w.WriteEndArray();
+    }
+
     private void WriteCounterWeapon(Utf8JsonWriter w, BattleUnit defender, CombatForecast forecast)
     {
         var slot = defender.EquippedSlot(_content);
@@ -576,6 +586,7 @@ public sealed class ProtocolSession
                 w.WritePropertyName("forecast");
                 ProtocolJson.WriteForecast(w, line.Forecast);
                 WriteCounterWeapon(w, unit, line.Forecast);
+                WriteWakes(w, line.Wakes.Where(woke => _state.Units.Any(u => u.Group == woke.Group && !Hidden(u))));
                 w.WriteEndObject();
             }
 
