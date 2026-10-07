@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-07 (#1321 slice 2, 0321; round 444, 0322). Under 19 KB on a branch, 20 KB on main (#1291).
+Updated: 2026-10-07 (#1321 slice 2, 0321; rounds 444-445, 0322-0323). Under 19 KB on a branch, 20 KB on main (#1291).
 
 ## Where we are
 
