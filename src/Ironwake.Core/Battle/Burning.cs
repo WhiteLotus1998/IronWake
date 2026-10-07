@@ -9,7 +9,8 @@ namespace Ironwake.Core;
 /// <c>max(1, stacks * amount - Res / 2)</c>, never below 1 HP.
 /// <list type="bullet">
 /// <item>A miss does nothing, and a kill leaves no one to burn.</item>
-/// <item>Each burning hit adds a stack, up to the rider's <see cref="SchoolRider.Cap"/>, and refreshes
+/// <item>Each burning hit adds a stack (a tome's <see cref="Weapon.BurnStacks"/>, issue 1320, two on a
+/// tome that lays two), up to the rider's <see cref="SchoolRider.Cap"/>, and refreshes
 /// the one phase count the stacks share: one count, so the card prints the burn as one line and the
 /// cash-out is the tick times the phases left.</item>
 /// <item>A hit from a tome that names <see cref="RiderKind.Ember"/> (Last Ember's) on a burning unit that
@@ -51,8 +52,8 @@ public static class Burning
 
             if (Rider(content, weapon) is { } rider)
             {
-                var laid = Laid(target, rider);
-                events.Add(new UnitIgnited(target.Id, strikerId, Tick(content, laid), laid.BurnPhases, laid.BurnStacks));
+                var laid = Laid(target, rider, weapon!.BurnStacks);
+                events.Add(new UnitIgnited(target.Id, strikerId, Tick(content, laid), laid.BurnPhases, laid.BurnStacks, weapon.BurnStacks));
                 state = state.WithUnit(laid);
             }
             else if (Embers(content, weapon) && target.BurnPhases > 0)
@@ -74,11 +75,14 @@ public static class Burning
     public static bool Embers(GameContent content, Weapon? weapon) =>
         content.RiderOf(weapon) is { Kind: RiderKind.Ember };
 
-    /// <summary><paramref name="unit"/> with one more stack of <paramref name="rider"/>'s burn on it, up to the cap, its count refreshed.</summary>
-    public static BattleUnit Laid(BattleUnit unit, SchoolRider rider) =>
+    /// <summary>
+    /// <paramref name="unit"/> with <paramref name="stacks"/> more stacks of <paramref name="rider"/>'s burn on it (one
+    /// by default; a tome's <see cref="Weapon.BurnStacks"/>, issue 1320), up to the cap, its one count refreshed.
+    /// </summary>
+    public static BattleUnit Laid(BattleUnit unit, SchoolRider rider, int stacks = 1) =>
         unit.BurnPhases > 0
-            ? unit with { Burn = Math.Max(unit.Burn, rider.Amount), BurnStacks = Math.Min(rider.Cap, unit.BurnStacks + 1), BurnPhases = rider.Phases }
-            : unit with { Burn = rider.Amount, BurnStacks = Math.Min(rider.Cap, 1), BurnPhases = rider.Phases };
+            ? unit with { Burn = Math.Max(unit.Burn, rider.Amount), BurnStacks = Math.Min(rider.Cap, unit.BurnStacks + stacks), BurnPhases = rider.Phases }
+            : unit with { Burn = rider.Amount, BurnStacks = Math.Min(rider.Cap, stacks), BurnPhases = rider.Phases };
 
     /// <summary>
     /// What <paramref name="unit"/>'s burn takes at its side's next phase start (issue 1279):
@@ -97,11 +101,12 @@ public static class Burning
 
     /// <summary>
     /// The forecast's words for a side whose weapon burns or embers <paramref name="struck"/>, after its
-    /// strike columns: the burn a hit leaves, <c> burn 3 (2 stacks, 2 phases)</c>, or what a hit cashes,
+    /// strike columns: the burn a hit leaves, <c> burn 3 (2 stacks, 2 phases)</c>, with <c>, lays 2</c> after it from
+    /// a tome that lays more than one stack a hit (issue 1320), or what a hit cashes,
     /// <c> cashes burn 6</c> or <c> cashes no burn</c>; empty when it does neither.
     /// </summary>
     public static string ForecastText(GameContent content, Weapon? weapon, BattleUnit struck) =>
-        Rider(content, weapon) is { } rider ? " " + Text(content, Laid(struck, rider))
+        Rider(content, weapon) is { } rider ? " " + Text(content, Laid(struck, rider, weapon!.BurnStacks)) + (weapon.BurnStacks > 1 ? $", lays {weapon.BurnStacks}" : "")
         : Embers(content, weapon) ? (struck.BurnPhases > 0 ? $" cashes burn {Owed(content, struck)}" : " cashes no burn")
         : "";
 
@@ -111,13 +116,13 @@ public static class Burning
 
     /// <summary>
     /// What a burn or ember rider is worth to a planner striking <paramref name="target"/> (issues 1243,
-    /// 1279): the HP a stack adds to what the burn already owes, or the HP an ember cashes, never past
+    /// 1279): the HP the hit's stacks add to what the burn already owes, or the HP an ember cashes, never past
     /// leaving 1 of the HP <paramref name="hpAfter"/> the strikes are expected to leave, weighted by
     /// <paramref name="landed"/>, the chance some strike hits. 0 when the weapon carries neither.
     /// </summary>
     public static double Expected(GameContent content, Weapon? weapon, BattleUnit target, double hpAfter, double landed)
     {
-        double worth = Rider(content, weapon) is { } rider ? Owed(content, Laid(target, rider)) - Owed(content, target)
+        double worth = Rider(content, weapon) is { } rider ? Owed(content, Laid(target, rider, weapon!.BurnStacks)) - Owed(content, target)
             : Embers(content, weapon) ? Owed(content, target)
             : 0;
         return Math.Max(0, Math.Min(worth, hpAfter - 1)) * landed;

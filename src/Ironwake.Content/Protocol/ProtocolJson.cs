@@ -354,6 +354,11 @@ public static class ProtocolJson
                 w.WriteNumber("amount", i.Amount);
                 w.WriteNumber("phases", i.Phases);
                 w.WriteNumber("stacks", i.Stacks);
+                if (i.Laid != 1)
+                {
+                    w.WriteNumber("laid", i.Laid);
+                }
+
                 break;
             case BurnCashed c:
                 w.WriteString("unit", c.UnitId);

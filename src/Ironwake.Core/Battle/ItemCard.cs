@@ -52,6 +52,11 @@ public static class ItemCard
             parts.Add($"Crit +{weapon.CritBonus} against {string.Join(" and ", weapon.CritAgainst.Select(m => m.ToString().ToLowerInvariant()))}.");
         }
 
+        if (weapon.BurnStacks > 1)
+        {
+            parts.Add($"A hit lays {weapon.BurnStacks} stacks of burn.");
+        }
+
         if (weapon.Type == WeaponType.Bow)
         {
             parts.Add("A crit on a flier grounds it for plain damage.");
