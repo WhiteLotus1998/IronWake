@@ -36,6 +36,7 @@ public class ProtocolJsonTests
         { new KeepsakeRecovered("wren", "dunstan", "iron_axe"), """{"type":"keepsakeRecovered","unit":"wren","fallen":"dunstan","item":"iron_axe"}""" },
         { new ChestOpened("wren", new Coord(2, 1), ValueList<string>.Of("steel_sword", "field_dressing"), ValueList<string>.Empty), """{"type":"chestOpened","unit":"wren","at":{"x":2,"y":1},"items":["steel_sword","field_dressing"]}""" },
         { new ChestOpened("wren", new Coord(2, 1), ValueList<string>.Of("steel_sword"), ValueList<string>.Of("iron_bow")), """{"type":"chestOpened","unit":"wren","at":{"x":2,"y":1},"items":["steel_sword"],"wagon":["iron_bow"]}""" },
+        { new ChestOpened("pell", new Coord(2, 1), ValueList<string>.Of("cinder"), ValueList<string>.Empty, ValueList<WieldShort>.Of(new WieldShort("cinder", "fire school"))), """{"type":"chestOpened","unit":"pell","at":{"x":2,"y":1},"items":["cinder"],"cannotWield":[{"item":"cinder","why":"fire school"}]}""" },
         { new KeepsakeTaken("brigand-2", "teodor", "iron_lance"), """{"type":"keepsakeTaken","unit":"brigand-2","fallen":"teodor","item":"iron_lance"}""" },
         { new KeepsakeLost("teodor", "iron_lance", new Coord(12, 3), null), """{"type":"keepsakeLost","fallen":"teodor","item":"iron_lance","at":{"x":12,"y":3}}""" },
         { new KeepsakeLost("teodor", "iron_lance", new Coord(12, 3), "brigand-2"), """{"type":"keepsakeLost","fallen":"teodor","item":"iron_lance","at":{"x":12,"y":3},"carrier":"brigand-2"}""" },

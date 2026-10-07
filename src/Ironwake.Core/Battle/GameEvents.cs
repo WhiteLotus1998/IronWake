@@ -47,9 +47,17 @@ public sealed record KeepsakeRecovered(string UnitId, string FallenId, string It
 /// <summary>
 /// A player unit opened the chest at <paramref name="At"/> (issue 649): <paramref name="ItemIds"/>
 /// went to its pack and <paramref name="Wagon"/>, what did not fit, to the wagon, each in file
-/// order (issue 679).
+/// order (issue 679). <paramref name="CannotWield"/> names each tome or grimoire in it the opener
+/// takes but cannot wield, once an id, in file order, and why (issue 1285).
 /// </summary>
-public sealed record ChestOpened(string UnitId, Coord At, ValueList<string> ItemIds, ValueList<string> Wagon) : GameEvent;
+public sealed record ChestOpened(string UnitId, Coord At, ValueList<string> ItemIds, ValueList<string> Wagon, ValueList<WieldShort> CannotWield = default) : GameEvent;
+
+/// <summary>
+/// A tome or grimoire its holder cannot wield and the short reason (issue 1285): the type its class
+/// never uses (<c>lore</c>), the rank it needs (<c>rank D</c>), the school it does not reach
+/// (<c>fire school</c>), or the Mag it lacks (<c>Mag 8</c>), the first that applies in that order.
+/// </summary>
+public sealed record WieldShort(string ItemId, string Why);
 
 /// <summary>An enemy ended a move on a keepsake and took it; it carries the weapon until it dies (DESIGN.md 13.8, issue 295).</summary>
 public sealed record KeepsakeTaken(string UnitId, string FallenId, string ItemId) : GameEvent;

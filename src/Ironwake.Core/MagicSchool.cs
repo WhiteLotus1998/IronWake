@@ -44,5 +44,17 @@ public static class MagicSchoolExtensions
             ? $"needs Mag {minMag}; {unit.Id} has {unit.EffectiveStats(unitClass).Mag}"
             : null;
 
+    /// <summary>
+    /// The short reason <paramref name="unit"/> in <paramref name="unitClass"/> cannot wield the tome
+    /// or grimoire <paramref name="weapon"/> (issue 1285), as <see cref="WieldShort"/> words it, or null
+    /// when the weapon is neither schooled nor Mag-gated, or the unit wields it.
+    /// </summary>
+    public static string? TomeShort(Unit unit, UnitClass unitClass, Weapon weapon) =>
+        (weapon.School is null && weapon.MinMag is null) || unit.CanWield(weapon, unitClass) ? null
+        : !unitClass.CanUse(weapon.Type) || !(weapon.Heals ? unitClass.CanHealWith(weapon.Type) : unitClass.CanStrikeWith(weapon.Type)) ? weapon.Type.Label()
+        : unit.Skill.Rank(weapon.Type) < weapon.Rank ? $"rank {weapon.Rank}"
+        : weapon.School is { } school && !unit.Reaches(school, unitClass) ? $"{school.Label()} school"
+        : $"Mag {weapon.MinMag}";
+
     private static string Article(string name) => "AEIOUaeiou".Contains(name[0]) ? "an" : "a";
 }

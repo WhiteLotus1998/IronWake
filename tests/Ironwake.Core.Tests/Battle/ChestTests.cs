@@ -119,6 +119,102 @@ public class ChestTests
         Assert.Equal(ValueList<Coord>.Of(Lid), result.Next.Opened);
     }
 
+    /// <summary>
+    /// The shipped content with an adept reaching ice and lightning only, and two test grimoires on
+    /// Cinder's numbers: <c>test_grimoire_fire</c> (fire, Mag 8) and <c>test_grimoire_ice</c> (ice, Mag 8).
+    /// </summary>
+    private static readonly GameContent Tomes = Starter with
+    {
+        Weapons = Starter.Weapons
+            .SetItem("test_grimoire_fire", Starter.Weapon("cinder") with { Id = "test_grimoire_fire", Name = "Test Fire Grimoire", MinMag = 8 })
+            .SetItem("test_grimoire_ice", Starter.Weapon("cinder") with { Id = "test_grimoire_ice", Name = "Test Ice Grimoire", School = MagicSchool.Ice, Ignites = false, MinMag = 8 }),
+        Classes = Starter.Classes.SetItem("adept", Starter.Class("adept") with { Schools = ValueList<MagicSchool>.Of(MagicSchool.Ice, MagicSchool.Lightning) }),
+    };
+
+    /// <summary>An adept with Hale's id and Mag <paramref name="mag"/> (unit plus class), rank E in lore, carrying nothing.</summary>
+    private static Unit Ash(int mag) =>
+        Recruit("hale", "adept", new Stats(18, 1, mag - Tomes.Class("adept").Modifiers.Mag, 6, 6, 4, 2, 5, 4));
+
+    /// <summary><paramref name="opener"/> on 1,1, beside a Vault chest holding <paramref name="items"/>, opens it.</summary>
+    private static ApplyResult OpenWith(Unit opener, string items)
+    {
+        var map = Vault.Replace("2,1 steel_sword field_dressing", "2,1 " + items).Replace("P captain 0,1", "P captain 1,1");
+        var state = BattleState.From(MapFormat.Parse("vault.map", map, Tomes), Tomes, ValueList<Unit>.Of(opener, Wren), 7);
+        var result = Resolver.Apply(state, Tomes, new Open("hale", Lid));
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        return result;
+    }
+
+    [Fact]
+    public void AChestHoldingATomeAndAGrimoireHandsBothToTheOpenerAtFullUses()
+    {
+        var result = OpenWith(Ash(9), "cinder test_grimoire_ice");
+
+        var opened = Assert.Single(result.Events.OfType<ChestOpened>());
+        Assert.Equal(ValueList<string>.Of("cinder", "test_grimoire_ice"), opened.ItemIds);
+        var items = result.Next.Find("hale")!.Unit.Inventory.Items;
+        Assert.Equal(new ItemStack("cinder", Tomes.Weapon("cinder").Durability), items[^2]);
+        Assert.Equal(new ItemStack("test_grimoire_ice", Tomes.Weapon("test_grimoire_ice").Durability), items[^1]);
+    }
+
+    [Fact]
+    public void AnOpenerWhoWieldsEveryTomeInTheChestIsNamedShortOfNone()
+    {
+        var opened = Assert.Single(OpenWith(Ash(9), "test_grimoire_ice steel_sword").Events.OfType<ChestOpened>());
+
+        Assert.Empty(opened.CannotWield);
+    }
+
+    [Theory]
+    [InlineData("cinder", 9, "fire school")]
+    [InlineData("test_grimoire_fire", 9, "fire school")]
+    [InlineData("test_grimoire_ice", 7, "Mag 8")]
+    [InlineData("bolt", 9, "rank D")]
+    public void AnOpenerWhoCannotWieldATomeStillTakesItAndTheEventSaysWhy(string tome, int mag, string why)
+    {
+        var result = OpenWith(Ash(mag), tome);
+
+        var opened = Assert.Single(result.Events.OfType<ChestOpened>());
+        Assert.Equal(ValueList<string>.Of(tome), opened.ItemIds);
+        Assert.Equal(ValueList<WieldShort>.Of(new WieldShort(tome, why)), opened.CannotWield);
+        Assert.Equal(tome, result.Next.Find("hale")!.Unit.Inventory.Items[^1].ItemId);
+    }
+
+    [Fact]
+    public void AnOpenerWhoseClassCastsNoLoreIsShortOfTheType()
+    {
+        var opened = Assert.Single(OpenWith(Hale with { Inventory = Inventory.Empty }, "test_grimoire_ice").Events.OfType<ChestOpened>());
+
+        Assert.Equal(ValueList<WieldShort>.Of(new WieldShort("test_grimoire_ice", "lore")), opened.CannotWield);
+    }
+
+    [Fact]
+    public void AWeaponTheOpenerCannotWieldIsNamedShortOnlyIfItIsATome()
+    {
+        var opened = Assert.Single(OpenWith(Ash(9), "steel_sword iron_bow").Events.OfType<ChestOpened>());
+
+        Assert.Empty(opened.CannotWield);
+    }
+
+    [Fact]
+    public void ATomeTwiceInAChestIsNamedShortOnce()
+    {
+        var opened = Assert.Single(OpenWith(Ash(9), "cinder cinder").Events.OfType<ChestOpened>());
+
+        Assert.Equal(ValueList<string>.Of("cinder", "cinder"), opened.ItemIds);
+        Assert.Equal(ValueList<WieldShort>.Of(new WieldShort("cinder", "fire school")), opened.CannotWield);
+    }
+
+    [Fact]
+    public void AnUnknownChestItemIsRefusedNamingTheFileTheChestAndTheItem()
+    {
+        var error = Assert.Throws<MapException>(() => MapFixture.Parse(Vault.Replace("2,1 steel_sword field_dressing", "2,1 cinder ember_grimoire"), "vault.map"));
+
+        Assert.Contains("vault.map", error.Message);
+        Assert.Contains("2,1", error.Message);
+        Assert.Contains("'ember_grimoire'", error.Message);
+    }
+
     [Fact]
     public void AUnitOnTheChestsTileOpensIt()
     {
