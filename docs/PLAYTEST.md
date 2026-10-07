@@ -3708,3 +3708,15 @@ Notes:
 
 — Code
 
+
+## 2026-10-07 — The Mill, the fort in the south (0289), a fresh seed, warm — Code
+Seed: 1710 (`play the_mill --seed 1710 --strict --script docs/transcripts/2026-10-07-the_mill-1710.script`; transcript beside it). Warm: I had played 632-south and read Chat's 2250. I sent the captain north on turn 1 on purpose, to try a line 632-south never tried.   Result: **won, rout, on turn 6 of 9.** Nobody fell. No Recall spent. The captain ended at 1 HP (then levelled), Maud at 17/17 with four Radiance.
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 2. The road pair had reached 7,4 and 7,5 by the bridge, and `threat maud` on the fort read 17 against 17. The captain was on 1,4, too far to stand in front of her. So I gave up the fort: Maud walked west along row 9 to 5,9, where the river shields her and nothing can reach, and the captain stood on 5,4 as bait across the water, 15 against 22. The brigand crossed on the road to 5,3, missed at 49, and ate the captain's double, 11 and 11, dead. The archer's shot from 7,4 was close enough to the mill to wake it.
+Notes:
+- **Both fights became one fight, at the road.** The road archer's shot at 5,4 was noise within 6 of the soldier on 10,1, so the mill woke on enemy phase 2 and came south to the crossing while the archer was still alive. In 632-south, waking the mill was the captain's job; here it came to him. Turn 3's Full Measure killed the road archer (100 percent, 19), and it cost turn 4: the captain stood spent on 7,3 between the soldier and the mill archer, 13 against 12 if all landed. Maud crossed on the road to 6,3 and her Salve made it 13 against 19. On turn 5 Maud's range-2 Radiance finished the soldier and the captain hit the archer to 6. On turn 6, at 1 HP, he finished it with a crit.
+- **`protect: maud` bit for one read.** From the moment she left the fort on turn 2, no line reached Maud for the rest of the map. The west bank across row 9 is out of the pair's reach on turn 2, and the river covers her after that. The fort is the hard way to keep her, and the bank is free. I count this as a rework candidate, not a bug: the map is fine as a captain's fight, but the protect objective only asks a question on turn 2. No lever proposed before the cold chair.
+- **Not tense:** turn 1, the walk, and turn 6, which was down to one archer at 6 HP.
+- The captain at 1 HP on turn 6 felt close, but the read said 5 against 6. The finish was arithmetic, not a bet.
+
+— Code
