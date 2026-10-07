@@ -215,7 +215,7 @@ public class CleanseTests
     [Fact]
     public void TheItemCardSaysWhatACleanseClears()
     {
-        Assert.Contains("cleanses burn, chill and stun", ItemCard.Text(Cleansing, "test_cleanse"));
+        Assert.Contains("cleanses burn, chill, stun and curse", ItemCard.Text(Cleansing, "test_cleanse"));
     }
 
     /// <summary>The starter content written out with Salve's <c>heals</c> and <c>healBase</c> replaced by <paramref name="to"/>.</summary>

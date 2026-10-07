@@ -789,6 +789,13 @@ public static class ContentSerializer
                         writer.WriteNumber("cap", rider.Cap);
                     }
 
+                    if (rider.Kind == RiderKind.Curse)
+                    {
+                        writer.WriteNumber("amount", rider.Amount);
+                        writer.WriteNumber("phases", rider.Phases);
+                        writer.WriteNumber("blind", rider.Blind);
+                    }
+
                     if (rider.Kind == RiderKind.Stun)
                     {
                         writer.WriteStartArray("classes");

@@ -354,6 +354,22 @@ public sealed record BurnCashed(string UnitId, string ByUnitId, int Amount, int 
 public sealed record UnitDrained(string UnitId, string FromUnitId, int Amount, int HpAfter) : GameEvent;
 
 /// <summary>
+/// A hit from a tome naming its school's curse rider cursed <paramref name="UnitId"/>, which survived it (issue 1328,
+/// <see cref="Curse"/>): it strikes and counters at <paramref name="Blind"/> less Hit, and loses <paramref name="Amount"/>
+/// HP, its Res read, at each of its side's next <paramref name="Phases"/> phase starts, never below 1, each tick healing
+/// <paramref name="ByUnitId"/>. A curse already on it is refreshed and pays the new caster.
+/// </summary>
+public sealed record UnitCursed(string UnitId, string ByUnitId, int Amount, int Phases, int Blind) : GameEvent;
+
+/// <summary>
+/// A curse's tick at the start of <paramref name="UnitId"/>'s side's phase (issue 1328, <see cref="Curse"/>): it lost
+/// <paramref name="Amount"/>, never below 1 HP, to <paramref name="HpAfter"/>, and its caster <paramref name="CasterId"/>
+/// was healed <paramref name="Healed"/> to <paramref name="CasterHpAfter"/>, up to max HP; <paramref name="CasterId"/> is
+/// null, and the two 0, when the caster is off the board.
+/// </summary>
+public sealed record CurseTicked(string UnitId, int Amount, int HpAfter, string? CasterId, int Healed, int CasterHpAfter) : GameEvent;
+
+/// <summary>
 /// A hit from a stunning caster stunned a unit that survived it (issue 1244, <see cref="Stun"/>): it
 /// skips <paramref name="Side"/>'s next phase, the struck unit's side, and still counters. <paramref name="Next"/>
 /// is true when it was struck on its own side's phase, so the skip falls on that side's phase after this one.
@@ -404,9 +420,10 @@ public sealed record HollowCrumbled(string UnitId, bool RaiserFell) : GameEvent;
 /// A cleanse cast by <paramref name="ByUnitId"/> cleared <paramref name="UnitId"/>'s afflictions (issue 1321,
 /// <see cref="Cleanse"/>): <paramref name="Burn"/> its burn (every stack and its phase count), <paramref name="Chill"/>
 /// its chill (and any lock riding on it), <paramref name="Stun"/> its stun. <paramref name="Freed"/> when the stun was
-/// being skipped this phase and nothing else holds the unit: it may move and act again. The <see cref="ItemUsed"/> precedes it.
+/// being skipped this phase and nothing else holds the unit: it may move and act again. <paramref name="Curse"/> its curse
+/// (issue 1328). The <see cref="ItemUsed"/> precedes it.
 /// </summary>
-public sealed record UnitCleansed(string UnitId, string ByUnitId, bool Burn, bool Chill, bool Stun, bool Freed) : GameEvent;
+public sealed record UnitCleansed(string UnitId, string ByUnitId, bool Burn, bool Chill, bool Stun, bool Freed, bool Curse = false) : GameEvent;
 
 /// <summary>A stunned unit's side's phase began, and it skips it: it neither moves nor acts until the phase ends (issue 1244, <see cref="Stun"/>).</summary>
 public sealed record StunSkipped(string UnitId) : GameEvent;

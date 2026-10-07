@@ -91,6 +91,18 @@ public sealed record BattleUnit(
     /// <summary>The phase starts of its own side the burn still has to tick (issue 1243), refreshed by each new stack (issue 1279); 0 when not burning.</summary>
     public int BurnPhases { get; init; }
 
+    /// <summary>A curse's tick before Res (issue 1328, <see cref="Core.Curse"/>); 0 when not cursed.</summary>
+    public int Curse { get; init; }
+
+    /// <summary>The Hit the unit strikes and counters at less while cursed (issue 1328, <see cref="Core.Curse.HitOf"/>); 0 when not cursed.</summary>
+    public int CurseBlind { get; init; }
+
+    /// <summary>The phase starts of its own side the curse still has to tick (issue 1328); 0 when not cursed.</summary>
+    public int CursePhases { get; init; }
+
+    /// <summary>The caster each tick of the curse heals (issue 1328), the last to lay it; null when not cursed.</summary>
+    public string? CursedBy { get; init; }
+
     /// <summary>
     /// A stun rider's clock (issue 1244, <see cref="Core.Stun"/>), counted as the chill's is
     /// (<see cref="Frost.AtPhaseChange"/>): 0 not stunned; 1 stunned, its side's next phase not yet
