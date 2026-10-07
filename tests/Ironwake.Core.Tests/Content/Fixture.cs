@@ -190,6 +190,65 @@ internal static class Fixture
         return target;
     }
 
+    /// <summary>The Lazar House quest card's rules line as shipped with held bars at five turns (issue 1266).</summary>
+    private const string LazarHouseHeldRules = "(Hold out five turns. The lanes in are announced. A unit that ends its move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane while it stays there; what the bar blocks waits behind it and comes through, one a turn, once the bar is left. The ford south cannot be barred.)";
+
+    /// <summary>The Lazar House quest card's rules line as it read before held bars (issue 1266).</summary>
+    private const string LazarHousePermanentRules = "(Hold out six turns. The lanes in are announced. A unit that ends its move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane for the rest of the map. The ford south cannot be barred.)";
+
+    /// <summary>
+    /// Puts the Lazar House in the copy at <paramref name="target"/> back to its permanent bars at six turns,
+    /// with no waiting arrivals and no turn-5 archer, its card saying so: the map every play before held bars
+    /// shipped was journaled on (issue 1266).
+    /// </summary>
+    private static string WithLazarHousePermanentBars(string target)
+    {
+        var path = Path.Combine(target, MapFiles.QuestsDirectory, "the_lazar_house.map");
+        var text = File.ReadAllText(path);
+        string[] now = { "turn_limit: 5\n", "arrivals: wait\n", "8,0 # held\n", "11,4 # held\n", "east3 turn 5 enemy spawn archer 11,2 group:east behavior:aggressive\n" };
+        if (now.Any(line => !text.Contains(line, StringComparison.Ordinal)))
+        {
+            throw new InvalidOperationException($"{path}: no held bars to put back to permanent ones");
+        }
+
+        File.WriteAllText(path, text
+            .Replace(now[0], "turn_limit: 6\n", StringComparison.Ordinal)
+            .Replace(now[1], "", StringComparison.Ordinal)
+            .Replace(now[2], "8,0 #\n", StringComparison.Ordinal)
+            .Replace(now[3], "11,4 #\n", StringComparison.Ordinal)
+            .Replace(now[4], "", StringComparison.Ordinal));
+        return WithLazarHouseRules(target, LazarHousePermanentRules);
+    }
+
+    private static string WithLazarHouseRules(string target, string rules)
+    {
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        var campaign = File.ReadAllText(campaignPath);
+        if (!campaign.Contains(LazarHouseHeldRules, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{campaignPath}: no held-bar rules line on the Lazar House card");
+        }
+
+        File.WriteAllText(campaignPath, campaign.Replace(LazarHouseHeldRules, rules, StringComparison.Ordinal));
+        return target;
+    }
+
+    private static readonly Lazy<string> LazarHouseHeldSample = new(() => WithLazarHouseHeldSample(CopyFiles("ironwake-lazar-held-sample-")));
+
+    /// <summary>
+    /// A copy of the real content directory whose Lazar House is issue 1259's sample, held bars at six turns,
+    /// <c>docs/samples/the_lazar_house_held.map</c>, under the card that sample was played under, and nothing
+    /// else changed, for the plays journaled on the sample before it shipped at five turns (issue 1266). Made once per test run.
+    /// </summary>
+    public static string LazarHouseHeldSampleContentDirectory() => LazarHouseHeldSample.Value;
+
+    private static string WithLazarHouseHeldSample(string target)
+    {
+        var sample = Path.Combine(RealContentDirectory(), "..", "docs", "samples", "the_lazar_house_held.map");
+        File.Copy(sample, Path.Combine(target, MapFiles.QuestsDirectory, "the_lazar_house.map"), overwrite: true);
+        return WithLazarHouseRules(target, LazarHousePermanentRules);
+    }
+
     private static readonly Lazy<string> FieldUnseen = new(() => WithFieldUnseen(CopyFiles("ironwake-field-unseen-")));
 
     /// <summary>
@@ -458,9 +517,10 @@ internal static class Fixture
     /// some transcript was journaled on, all of them before the keep sold rooms, so the keep's
     /// <c>beds</c> and <c>rooms</c> are taken out (issue 687), and before the forge, so the
     /// <c>forge</c> and the quests' material payouts are taken out too (issue 647), and before the
-    /// barracks, so a hire's quest goes with the hires (issue 691).
+    /// barracks, so a hire's quest goes with the hires (issue 691), and before held bars, so the Lazar House
+    /// keeps its permanent bars (issue 1266).
     /// </summary>
-    private static string CopyContentAsIs(string prefix) => WithoutTheField(CopyFiles(prefix));
+    private static string CopyContentAsIs(string prefix) => WithoutTheField(WithLazarHousePermanentBars(CopyFiles(prefix)));
 
     /// <summary>A file-for-file copy of the real content directory under the temp directory, nothing taken out.</summary>
     private static string CopyFiles(string prefix)

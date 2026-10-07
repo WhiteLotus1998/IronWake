@@ -672,7 +672,7 @@ public class SideMapTests
 
         var players = battle.UnitsOf(Ironwake.Core.Side.Player).OrderBy(u => u.PlacementIndex).ToList();
         Assert.Equal(new[] { ("maud", true), ("teodor", false) }, players.Select(u => (u.Id, u.IsCaptain)));
-        Assert.Equal("Hold out until the end of turn 6. Maud must survive.", Objective.Line(battle, Content));
+        Assert.Equal("Hold out until the end of turn 5. Maud must survive.", Objective.Line(battle, Content));
     }
 
     [Theory]
