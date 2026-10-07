@@ -1750,18 +1750,26 @@ public sealed class PlaySession
     /// falling (<see cref="CampaignRecord"/> scores it so on every map). Null for anyone but the captain,
     /// and when nobody would be left.
     /// </summary>
-    private string? ExitLine(string unitId)
+    private string? ExitLine(string unitId) => ExitLine(_state, _content, unitId, _campaign);
+
+    /// <summary>
+    /// What <c>exit</c> prints before the captain leaves an Escape map with others still on it:
+    /// <c>Exit: leaves Wren, Pell behind</c>, with <c>(left behind counts as fallen)</c> in a
+    /// campaign; null for anyone else or with no one left. The client's exit row reads the same
+    /// line (issue 1308).
+    /// </summary>
+    public static string? ExitLine(BattleState state, GameContent content, string unitId, bool campaign)
     {
-        if (_state.Find(unitId) is not { IsCaptain: true } captain || _state.Map.Win != WinCondition.Escape)
+        if (state.Find(unitId) is not { IsCaptain: true } captain || state.Map.Win != WinCondition.Escape)
         {
             return null;
         }
 
-        var names = UnitNames.Of(_state, _content);
-        var left = _state.UnitsOf(Side.Player).Where(u => u.Id != captain.Id).Select(u => names[u.Id]).ToList();
+        var names = UnitNames.Of(state, content);
+        var left = state.UnitsOf(Side.Player).Where(u => u.Id != captain.Id).Select(u => names[u.Id]).ToList();
         return left.Count == 0
             ? null
-            : $"Exit: leaves {string.Join(", ", left)} behind" + (_campaign ? " (left behind counts as fallen)" : "");
+            : $"Exit: leaves {string.Join(", ", left)} behind" + (campaign ? " (left behind counts as fallen)" : "");
     }
 
     /// <summary>
@@ -3296,7 +3304,8 @@ public sealed class PlaySession
         return c.Wagon.Count == 0 ? line : line + $"\n  To the wagon, kept if the map is won: {string.Join(", ", c.Wagon.Select(Name))}";
     }
 
-    private static string AbilityName(string id, GameContent content) =>
+    /// <summary>An ability's name as the console prints it, its id when content names none.</summary>
+    public static string AbilityName(string id, GameContent content) =>
         content.Abilities.TryGetValue(id, out var ability) ? ability.Name : id;
 
     private static string ClassName(string id, GameContent content) =>

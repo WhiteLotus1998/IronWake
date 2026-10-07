@@ -59,6 +59,25 @@ public sealed record ActionRow(string Label, string Line, Command Command, strin
 {
     /// <summary>True when choosing the row applies its command; a greyed row only teaches its refusal.</summary>
     public bool Legal => Refusal is null;
+
+    /// <summary>
+    /// The target pick choosing the row arms instead of applying <see cref="Command"/> (issue 1308):
+    /// an item that needs a target, a heal or a cast, is aimed by a board click. Null for a row that
+    /// applies at once.
+    /// </summary>
+    public ItemPick? Pick { get; init; }
+}
+
+/// <summary>
+/// An armed item pick (issue 1308): the unit, the slot and the art an item row named, and every
+/// tile a click may aim it at with the target word the core accepts there (the unit's id, or
+/// <c>x,y</c> for ground or a body the cast takes by tile). The tiles are the ones the resolver
+/// accepts, so the client decides nothing.
+/// </summary>
+public sealed record ItemPick(string UnitId, int Slot, string? Art, string Label, IReadOnlyDictionary<Coord, string> Targets)
+{
+    /// <summary>The command a click on <paramref name="at"/> submits, or null when the tile is no target.</summary>
+    public UseItem? At(Coord at) => Targets.TryGetValue(at, out var word) ? new UseItem(UnitId, Slot, word, Art) : null;
 }
 
 /// <summary>
@@ -301,7 +320,9 @@ public sealed class ClientSession
     /// pick or the captain beside the claimant who came back as a foe, a <c>talk</c> row (issue 633), then, for
     /// the captain on a map where orders are open and unspent, one row per order (<c>order</c>),
     /// its line the console's <c>order ... preview</c> from <paramref name="from"/> (a hovered
-    /// tile, to read a call from there before moving) or from where he stands.
+    /// tile, to read a call from there before moving) or from where he stands; then, for a unit
+    /// that has not acted, its item rows (issue 1308, <see cref="ItemRows"/>) and, on an exit tile
+    /// of an Escape map, an <c>exit</c> row whose line is the console's exit warning.
     /// </summary>
     public IReadOnlyList<ActionRow> Actions(Coord? from = null)
     {
@@ -339,7 +360,146 @@ public sealed class ClientSession
             }
         }
 
+        if (!unit.Acted)
+        {
+            rows.AddRange(ItemRows(unit, names));
+        }
+
+        if (State.Map.Win == WinCondition.Escape && State.Map.IsExit(unit.At) && !unit.Acted)
+        {
+            var exit = new Exit(unit.Id);
+            var refusal = Resolver.Apply(State, Content, exit).Rejection is { } rejected ? names.Message(rejected.Message) : null;
+            var line = PlaySession.ExitLine(State, Content, unit.Id, Campaign) ?? (unit.IsCaptain ? "leaves the field; the battle ends" : "leaves the field");
+            rows.Add(new ActionRow("Exit", line, exit, refusal));
+        }
+
         return rows;
+    }
+
+    /// <summary>Whether this battle is part of a campaign, so the exit row warns that left behind counts as fallen, as the console does.</summary>
+    public bool Campaign { get; init; }
+
+    /// <summary>The armed item pick (issue 1308), or null: the next board click aims it, Esc closes it.</summary>
+    public ItemPick? Pick { get; private set; }
+
+    private (BattleState State, string Unit, IReadOnlyList<ActionRow> Rows)? _itemRows;
+
+    /// <summary>
+    /// The item rows of the action list (issue 1308), after every other row so none moves: one row
+    /// per inventory slot the Item action takes (a consumable, a heal, a cast that raises, sunders,
+    /// armors or raises the dead; a tome is read at camp and has none), then one per heal art with a
+    /// target in reach. A row whose item needs a target carries an <see cref="ItemPick"/> of the tiles
+    /// the resolver accepts; one with none in reach is greyed. The line is the console's own
+    /// <c>show</c> slot, uses left included.
+    /// </summary>
+    private IReadOnlyList<ActionRow> ItemRows(BattleUnit unit, UnitNames names)
+    {
+        if (_itemRows is { } cached && ReferenceEquals(cached.State, State) && cached.Unit == unit.Id)
+        {
+            return cached.Rows;
+        }
+
+        var rows = new List<ActionRow>();
+        for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
+        {
+            var stack = unit.Unit.Inventory.Items[slot];
+            var name = Heirloom.Name(stack, Content);
+            var line = $"{slot + 1}: {name}{Keepsake.Suffix(stack, Content)} x{stack.Uses}";
+            if (Content.Items.TryGetValue(stack.ItemId, out var item))
+            {
+                if (item.Teaches is null)
+                {
+                    rows.Add(Applied($"Item: {name}", line, new UseItem(unit.Id, slot), names));
+                }
+
+                continue;
+            }
+
+            if (!Content.Weapons.ContainsKey(stack.ItemId))
+            {
+                continue;
+            }
+
+            var spell = Content.WeaponOf(unit.Unit, Content.Weapon(stack.ItemId));
+            var byTile = Sunder.Sunders(Content, spell) || Hollow.Raises(Content, spell);
+            if (Armor.Armors(Content, spell))
+            {
+                rows.Add(Applied($"Item: {name}", line, new UseItem(unit.Id, slot), names));
+            }
+            else if (spell.Heals || byTile || Earthwork.Rider(Content, spell) is not null)
+            {
+                rows.Add(Aimed($"Item: {name}", line, unit, slot, null, byTile, names));
+                if (spell.Heals)
+                {
+                    foreach (var (ability, _) in Content.ArtsOf(unit.Unit))
+                    {
+                        var art = Aimed($"Item: {name}, {PlaySession.AbilityName(ability.Id, Content)}", line, unit, slot, ability.Id, byTile, names);
+                        if (art.Legal)
+                        {
+                            rows.Add(art);
+                        }
+                    }
+                }
+            }
+        }
+
+        _itemRows = (State, unit.Id, rows);
+        return rows;
+    }
+
+    private ActionRow Applied(string label, string line, UseItem use, UnitNames names) =>
+        new(label, line, use, Resolver.Apply(State, Content, use).Rejection is { } rejected ? names.Message(rejected.Message) : null);
+
+    /// <summary>
+    /// An item row that arms a pick: every unit's tile, and with <paramref name="byTile"/> every
+    /// other tile too, probed through the resolver with the word the console would type there.
+    /// With no target in reach the row is greyed with the core's refusal, or "no target in reach"
+    /// when the only refusal is the missing target.
+    /// </summary>
+    private ActionRow Aimed(string label, string line, BattleUnit unit, int slot, string? art, bool byTile, UnitNames names)
+    {
+        var targets = new Dictionary<Coord, string>();
+        var tiles = byTile
+            ? Enumerable.Range(0, State.Map.Height).SelectMany(y => Enumerable.Range(0, State.Map.Width).Select(x => new Coord(x, y)))
+            : State.Units.Select(u => u.At);
+        foreach (var tile in tiles)
+        {
+            var word = UnitAt(tile)?.Id ?? $"{tile.X},{tile.Y}";
+            if (Resolver.Apply(State, Content, new UseItem(unit.Id, slot, word, art)).Accepted)
+            {
+                targets[tile] = word;
+            }
+        }
+
+        var bare = new UseItem(unit.Id, slot, null, art);
+        string? refusal = null;
+        if (targets.Count == 0)
+        {
+            var rejected = Resolver.Apply(State, Content, bare).Rejection;
+            refusal = rejected is null || rejected.Reason == RejectionReason.NoTarget ? "no target in reach" : names.Message(rejected.Message);
+        }
+
+        return new ActionRow(label, line, bare, refusal) { Pick = new ItemPick(unit.Id, slot, art, label, targets) };
+    }
+
+    /// <summary>
+    /// What aiming the armed pick at <paramref name="tile"/> would print (issue 1308): the console's
+    /// own event lines for the use, the heal's amount and the HP it ends at, or the cast's effect,
+    /// read from the resolver without applying it. Experience and level lines are left out; they
+    /// are the result, not the choice. Empty when the tile is no target.
+    /// </summary>
+    public IReadOnlyList<string> PickPreview(Coord tile)
+    {
+        if (Pick?.At(tile) is not { } use || Resolver.Apply(State, Content, use) is not { Accepted: true } result)
+        {
+            return Array.Empty<string>();
+        }
+
+        var names = UnitNames.Of(result.Next, Content);
+        return result.Events
+            .Where(e => e is not (ExpGained or LeveledUp or RankRaised or MasteryEarned))
+            .Select(e => PlaySession.Describe(e, Content, names))
+            .ToList();
     }
 
     /// <summary>
@@ -358,6 +518,14 @@ public sealed class ClientSession
         if (rows[row].Refusal is { } refusal)
         {
             Status = refusal;
+            return null;
+        }
+
+        if (rows[row].Pick is { } pick)
+        {
+            Menu = null;
+            Pick = pick;
+            Status = $"{pick.Label}: click a marked target";
             return null;
         }
 
@@ -383,7 +551,7 @@ public sealed class ClientSession
     }
 
     /// <summary>Clears the selected unit, the inspected enemy and the attack menu.</summary>
-    public void ClearSelection() => (Selected, Inspected, Menu) = (null, null, null);
+    public void ClearSelection() => (Selected, Inspected, Menu, Pick) = (null, null, null, null);
 
     /// <summary>
     /// The seen enemy a click picked out when no unit of ours was selected (issue 533), whose reach
@@ -699,8 +867,8 @@ public sealed class ClientSession
         return Submit(chosen.Option.Command) ? chosen.Option.Command : null;
     }
 
-    /// <summary>Closes the attack menu without striking, as Esc does; the unit stays selected.</summary>
-    public void CloseMenu() => Menu = null;
+    /// <summary>Closes the attack menu without striking, or an armed item pick without using it, as Esc does; the unit stays selected.</summary>
+    public void CloseMenu() => (Menu, Pick) = (null, null);
 
     /// <summary>
     /// Whether the selected unit has moved and not acted, so Esc or a right-click on the board
@@ -730,6 +898,20 @@ public sealed class ClientSession
         }
 
         Menu = null;
+        if (Pick is { } pick)
+        {
+            // An armed item pick (issue 1308) takes the click: a marked tile submits the use,
+            // anything else closes the pick and leaves the unit selected.
+            Pick = null;
+            if (pick.At(at) is { } use)
+            {
+                return Submit(use) ? use : null;
+            }
+
+            Status = $"{pick.Label}: no target there; the pick is closed";
+            return null;
+        }
+
         if (Selected is not { } id || State.Find(id) is not { } unit)
         {
             Select(at);
@@ -796,6 +978,7 @@ public sealed class ClientSession
 
         Status = null;
         Menu = null;
+        Pick = null;
         if (command is EndPhase or Ironwake.Core.Recall || Playing is not null)
         {
             _fallen.Clear();

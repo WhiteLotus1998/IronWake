@@ -493,7 +493,7 @@ public partial class Main : Node2D
                         ToggleMute();
                         break;
                     case Key.Escape:
-                        switch (Screens.Escape(_client.Menu is not null, _client.Selected is not null, _client.RecallOpen, _campaign is not null, _client.CanTakeBack))
+                        switch (Screens.Escape(_client.Menu is not null || _client.Pick is not null, _client.Selected is not null, _client.RecallOpen, _campaign is not null, _client.CanTakeBack))
                         {
                             case EscapeAction.CloseAttackMenu:
                                 _client.CloseMenu();
@@ -1032,6 +1032,12 @@ public partial class Main : Node2D
                     DrawRect(rect.Grow(-3 * S), Ink, filled: false, width: 3 * S);
                 }
 
+                // An armed item pick (issue 1308): each tile the core takes it at, outlined.
+                if (_client.Pick is { } pick && pick.Targets.ContainsKey(at))
+                {
+                    DrawRect(rect.Grow(-1 * S), MarkColour("reach", 0.95f), filled: false, width: 3 * S);
+                }
+
                 if (map.Win == WinCondition.Seize && map.IsThrone(at))
                 {
                     DrawRect(rect.Grow(-2 * S), UiColour("ink"), filled: false, width: 2 * S);
@@ -1399,7 +1405,8 @@ public partial class Main : Node2D
         }
 
         // The action list (issue 786): what the selected unit can take that no board click names,
-        // a chest beside it and the captain's orders, each row clicked to take it.
+        // a chest beside it, the captain's orders, its items and an exit (issue 1308), each row
+        // clicked to take it; an item that needs a target arms a pick the next board click aims.
         var actions = client.Actions(_hover);
         if (actions.Count > 0)
         {
@@ -1544,7 +1551,20 @@ public partial class Main : Node2D
 
         if (_hover is not { } tile)
         {
-            yield return "Point at a tile to see the forecast there.";
+            yield return client.Pick is null ? "Point at a tile to see the forecast there." : "Point at a marked tile to see what the item does there.";
+            yield break;
+        }
+
+        if (client.Pick is { } pick)
+        {
+            // The armed item pick (issue 1308): the console's own lines for the use, or how to aim it.
+            var lines = client.PickPreview(tile);
+            yield return lines.Count == 0 ? $"{pick.Label}: not a target; click a marked tile, Esc closes" : $"{pick.Label}, click to use:";
+            foreach (var text in lines)
+            {
+                yield return text;
+            }
+
             yield break;
         }
 

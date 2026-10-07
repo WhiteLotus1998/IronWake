@@ -202,7 +202,7 @@ public sealed class CampaignClient
         }
 
         _log.AddRange(CampaignSession.TrialLines(Record, Content, trial, unitId, classId));
-        Battle = new ClientSession(Content, Record.BeginTrial(trial, unitId, Content, _scheme));
+        Battle = new ClientSession(Content, Record.BeginTrial(trial, unitId, Content, _scheme)) { Campaign = true };
         _trial = unitId;
         Status = null;
         return true;
@@ -228,7 +228,7 @@ public sealed class CampaignClient
 
         QueueCard(CampaignSession.QuestBeforeCard(Content, map, questId));
         _log.AddRange(CampaignSession.QuestOpening(Record, Content, map, questId, allyIds));
-        Battle = new ClientSession(Content, Record.BeginQuest(map, questId, allyIds, Content, _scheme));
+        Battle = new ClientSession(Content, Record.BeginQuest(map, questId, allyIds, Content, _scheme)) { Campaign = true };
         _quest = questId;
         Status = null;
         return true;
@@ -263,7 +263,7 @@ public sealed class CampaignClient
 
         _log.Add(CampaignSession.MapLine(Record, Content, map));
         QueueCard(CampaignSession.SceneLines(Record, Content, ScenePoint.Before, Record.NextMap(Content).MapId, map.Name));
-        Battle = new ClientSession(Content, Record.Begin(map, Content, _scheme));
+        Battle = new ClientSession(Content, Record.Begin(map, Content, _scheme)) { Campaign = true };
         Status = null;
         return true;
     }

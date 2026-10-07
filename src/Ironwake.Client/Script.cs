@@ -118,6 +118,75 @@ public static class Script
     }
 
     /// <summary>
+    /// Submits each command a script names as <see cref="Apply"/> does, but takes every
+    /// <c>item</c> and <c>exit</c> line the way a mouse would (issue 1308): the unit is selected
+    /// by a click on its tile, the matching row of <see cref="ClientSession.Actions"/> is taken,
+    /// and an item that needs a target is aimed by a click on the target's tile. A line the core
+    /// refuses is submitted as it stands, to print its refusal as the console does; a line it
+    /// accepts with no row to take it throws, naming it, so a verb the action list cannot reach
+    /// fails the parity gate.
+    /// </summary>
+    public static void ApplyByClicks(ClientSession client, string script)
+    {
+        foreach (var line in script.Split('\n'))
+        {
+            var command = Parse(line, client.State);
+            if (command is null)
+            {
+                continue;
+            }
+
+            if (command is UseItem or Exit && client.State.Find(UnitOf(command)) is { } unit && Resolver.Apply(client.State, client.Content, command).Accepted)
+            {
+                TakeByClicks(client, command, unit, line.Trim());
+            }
+            else
+            {
+                client.Submit(command);
+            }
+
+            client.Continue();
+        }
+    }
+
+    private static string UnitOf(Command command) => command switch
+    {
+        UseItem use => use.UnitId,
+        Exit exit => exit.UnitId,
+        _ => "",
+    };
+
+    private static void TakeByClicks(ClientSession client, Command command, BattleUnit unit, string line)
+    {
+        client.Select(unit.At);
+        var rows = client.Actions();
+        var index = command is UseItem { TargetId: { } targetId } aimed
+            ? rows.ToList().FindIndex(row => row.Pick is { } pick && pick.UnitId == aimed.UnitId && pick.Slot == aimed.Slot && pick.Art == aimed.Art)
+            : rows.ToList().FindIndex(row => row.Pick is null && row.Command == command);
+        if (index < 0)
+        {
+            throw new InvalidOperationException($"no action row takes '{line}'");
+        }
+
+        if (command is UseItem { TargetId: { } target })
+        {
+            var at = client.State.Find(target)?.At ?? (TryCoord(target, out var tile) ? tile : (Coord?)null);
+            client.TakeAction(index);
+            if (client.Pick is null || at is null || client.Click(at.Value) is null)
+            {
+                throw new InvalidOperationException($"the item pick did not take '{line}': {client.Status}");
+            }
+
+            return;
+        }
+
+        if (client.TakeAction(index) is null)
+        {
+            throw new InvalidOperationException($"the action row did not take '{line}': {client.Status}");
+        }
+    }
+
+    /// <summary>
     /// Plays a whole <c>campaign --script</c> through a fresh campaign presenter (issue 360) and
     /// returns its event log. On the between-map screen a line that changes the record is taken as
     /// the screen's action (buy, repair, drop, take, refine, certify, trial, quest, hire, pick, build,
