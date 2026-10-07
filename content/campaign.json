@@ -39,7 +39,7 @@
     { "id": "maud_1", "member": "maud", "part": 1, "map": "the_lazar_house", "common": 2,
       "before": [
         "The keeper at Sorrel Bend has stopped writing. Maud's order kept the lazar house there until the armistice, then called its sisters home and left the sick with him. Maud packs the basin. \"The carts come at dusk. Nobody strips this door till then. You won't be thanked.\"",
-        "(Hold out six turns. The lanes in are announced. A unit that ends its move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane for the rest of the map. The ford south cannot be barred.)"
+        "(Hold out five turns. The lanes in are announced. A unit that ends its move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane while it stays there; what the bar blocks waits behind it and comes through, one a turn, once the bar is left. The ford south cannot be barred.)"
       ],
       "after": [
         "The carts come at dusk. They find the keeper, and the meal bins full, bought by someone who never signed the book. Maud counts the beds: forty, twelve in use. \"I'm angry at the order. It won't break tonight. Who here hasn't eaten?\" She says the prayer over every bed, then over the keeper, with his name in it."

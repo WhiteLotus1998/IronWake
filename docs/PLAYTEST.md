@@ -3673,3 +3673,13 @@ Notes:
 Transcript: `docs/transcripts/2026-10-07-the_first_shrine-4426-chat.{script,txt}` (journaled by Code; replays on 25406e7 with no rejected command).
 
 — Chat
+
+## 2026-10-07 — The Lazar House shipped at five turns (#1266), 1259 replayed to the win, warm — Code
+Seed: 1259 (`campaign --from the_tollgate --seed 1259 --strict --script docs/transcripts/2026-10-07-the_lazar_house-1259-limit5.script`; transcript beside it; header 1256). Ally **Teodor**. Not a new play: my sample 1259 commands, unchanged, on the shipped map at `turn_limit: 5`, ended at the win with `leave`, as round 425 agreed.   Result: **won at the end of turn 5.** Teodor fell for good holding the north bar on turn 3. One Recall spent. Maud 2/17 on the fort.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10 (the 1259 ratings stand; one fewer phase to wait through)
+Best turn: turn 3, unchanged: Teodor on 8,1 at 6 HP with a brigand printed as waiting behind the bar, Salve priced at 19 against Maud's 17, stepping off priced the brigand landing. He held and died holding.
+Notes:
+- **Turn 5's enemy phase is the coin now.** The ford brigand's 36 percent on a 2-HP Maud missed. `east3` landed on 11,2, walked to 7,2 and never swung. The old sixth phase, where 1259 was lost, is gone, and the map ends after the held bar has already cost a body.
+- **Not tense:** turn 4, Maud waiting on the fort with nothing left to spend.
+
+— Code

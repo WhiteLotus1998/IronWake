@@ -4,8 +4,8 @@ using Ironwake.Core.Tests.Content;
 namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
-/// Issue 1259 on its sample, <c>docs/samples/the_lazar_house_held.map</c>, played as Maud's quest 1 through
-/// the campaign with the sample in the quest map's place: Code's warm play, seed 1259, at turn 3 with
+/// Issue 1259's held bars, shipped on the Lazar House at five turns (issue 1266), played as Maud's quest 1
+/// through the campaign: Code's warm play, seed 1259, at turn 3 with
 /// Teodor holding the north bar and a brigand waiting behind it. <c>threat</c> from the bar prices the lane
 /// shut; from any tile off it, the next waiting arrival lands, and only the one.
 /// </summary>
@@ -20,36 +20,15 @@ public sealed class HeldBarSampleTests
 
     private static string Play(params string[] queries)
     {
-        var root = Path.Combine(Path.GetTempPath(), "ironwake-1259-" + Guid.NewGuid().ToString("N"));
-        var content = Path.Combine(root, "content");
-        Copy(Fixture.RealContentDirectory(), content);
-        File.Copy(SamplePath(), Path.Combine(content, "quests", "the_lazar_house.map"), overwrite: true);
-        var script = Path.Combine(root, "play.script");
+        var script = Path.Combine(Path.GetTempPath(), "ironwake-1259-" + Guid.NewGuid().ToString("N") + ".script");
         File.WriteAllLines(script, Turn3.Concat(queries));
         try
         {
-            return ConsoleCapture.Run(() => Program.Main(new[] { "campaign", "--from", "the_tollgate", "--seed", "1259", "--script", script, "--content", content }));
+            return ConsoleCapture.Run(() => Program.Main(new[] { "campaign", "--from", "the_tollgate", "--seed", "1259", "--script", script, "--content", Fixture.RealContentDirectory() }));
         }
         finally
         {
-            Directory.Delete(root, recursive: true);
-        }
-    }
-
-    private static string SamplePath() =>
-        Path.Combine(Fixture.RealContentDirectory(), "..", "docs", "samples", "the_lazar_house_held.map");
-
-    private static void Copy(string from, string to)
-    {
-        Directory.CreateDirectory(to);
-        foreach (var file in Directory.GetFiles(from))
-        {
-            File.Copy(file, Path.Combine(to, Path.GetFileName(file)));
-        }
-
-        foreach (var dir in Directory.GetDirectories(from))
-        {
-            Copy(dir, Path.Combine(to, Path.GetFileName(dir)));
+            File.Delete(script);
         }
     }
 
@@ -62,23 +41,27 @@ public sealed class HeldBarSampleTests
     [Fact]
     public void ChatsColdChairWithOttilieLosesOnTurnFourWithoutStandingOnABar()
     {
-        var root = Path.Combine(Path.GetTempPath(), "ironwake-4311-" + Guid.NewGuid().ToString("N"));
-        var content = Path.Combine(root, "content");
-        Copy(Fixture.RealContentDirectory(), content);
-        File.Copy(SamplePath(), Path.Combine(content, "quests", "the_lazar_house.map"), overwrite: true);
         var script = Path.Combine(Fixture.RealContentDirectory(), "..", "docs", "transcripts", "2026-10-07-the_lazar_house_held-4311-chat.script");
-        try
-        {
-            var output = ConsoleCapture.Run(() => Program.Main(new[] { "campaign", "--from", "the_tollgate", "--seed", "4311", "--script", script, "--strict", "--content", content }));
+        var output = ConsoleCapture.Run(() => Program.Main(new[] { "campaign", "--from", "the_tollgate", "--seed", "4311", "--script", script, "--strict", "--content", Fixture.LazarHouseHeldSampleContentDirectory() }));
 
-            Assert.Contains("Maud falls at 3,2\n", output);
-            Assert.DoesNotContain("barred while", output);
-            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
-        }
-        finally
-        {
-            Directory.Delete(root, recursive: true);
-        }
+        Assert.Contains("Maud falls at 3,2\n", output);
+        Assert.DoesNotContain("barred while", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Code's warm play (seed 1259) replayed on the shipped map at five turns and ended at the win (issue 1266):
+    /// Teodor falls holding the north bar on turn 3, and Maud lives the turn-5 enemy phase at 2 hp on the fort.
+    /// </summary>
+    [Fact]
+    public void TheWarmPlayAtFiveTurnsWinsWithTeodorFallenHoldingTheBar()
+    {
+        var script = Path.Combine(Fixture.RealContentDirectory(), "..", "docs", "transcripts", "2026-10-07-the_lazar_house-1259-limit5.script");
+        var output = ConsoleCapture.Run(() => Program.Main(new[] { "campaign", "--from", "the_tollgate", "--seed", "1259", "--script", script, "--strict", "--content", Fixture.RealContentDirectory() }));
+
+        Assert.Contains("Teodor falls at 8,1\n", output);
+        Assert.Contains("Maud wins maud_1; the stores take 2 common material; fallen for good: Teodor\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
     [Fact]
