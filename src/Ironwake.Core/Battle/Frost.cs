@@ -12,6 +12,8 @@ namespace Ironwake.Core;
 /// <item>It does not stack: a second hit refreshes the clock and takes no second point.</item>
 /// <item>It never takes Mov below 1 (<see cref="Mov"/>).</item>
 /// <item>Bosses are chilled like anyone.</item>
+/// <item>An ice tome that names its school's <see cref="RiderKind.Chill"/> rider chills as frozen iron
+/// does (issue 1244, <see cref="Chills"/>): the same clock and the same Mov, never a second point.</item>
 /// </list>
 /// The clock counts as <see cref="BattleUnit.Spent"/> does: a hit sets 1, the chilled side's phase
 /// beginning turns 1 to 2, and a phase of that side ending clears 2 (<see cref="AtPhaseChange"/>).
@@ -65,17 +67,21 @@ public static class Frost
         : side == ended && chill == 2 ? 0
         : chill;
 
+    /// <summary>Whether a hit from <paramref name="weapon"/> chills: frozen iron, or a tome that names its school's chill rider (issue 1244).</summary>
+    public static bool Chills(GameContent content, Weapon? weapon) =>
+        weapon is { FrozenIron: true } || content.RiderOf(weapon) is { Kind: RiderKind.Chill };
+
     /// <summary>
     /// After a combat or a strike: each unit in <paramref name="strikes"/> still standing that a
-    /// hit from a frozen-iron weapon landed on is chilled (<see cref="UnitChilled"/>), its clock
+    /// hit from a weapon that chills (<see cref="Chills"/>) landed on is chilled (<see cref="UnitChilled"/>), its clock
     /// set to 1. <paramref name="aWeapon"/> is what <paramref name="aId"/> struck with and
     /// <paramref name="bWeapon"/> what <paramref name="bId"/> did; a null weapon never chills.
     /// </summary>
-    public static BattleState AfterCombat(BattleState state, string aId, Weapon? aWeapon, string bId, Weapon? bWeapon, ValueList<StrikeEvent> strikes, List<GameEvent> events)
+    public static BattleState AfterCombat(BattleState state, GameContent content, string aId, Weapon? aWeapon, string bId, Weapon? bWeapon, ValueList<StrikeEvent> strikes, List<GameEvent> events)
     {
         foreach (var (strikerId, weapon, targetId) in new[] { (aId, aWeapon, bId), (bId, bWeapon, aId) })
         {
-            if (weapon is not { FrozenIron: true } || !strikes.Any(s => s.AttackerId == strikerId && s.TargetId == targetId && s.Hit))
+            if (!Chills(content, weapon) || !strikes.Any(s => s.AttackerId == strikerId && s.TargetId == targetId && s.Hit))
             {
                 continue;
             }

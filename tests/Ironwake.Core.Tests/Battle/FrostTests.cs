@@ -203,7 +203,7 @@ public class FrostTests
         var strikes = ValueList<StrikeEvent>.Empty.Add(new StrikeEvent(0, "teodor", brigand.Id, true, false, 3, brigand.Hp - 3));
         var events = new List<GameEvent>();
 
-        var next = Frost.AfterCombat(state, "teodor", Teodor(state).EquippedWeapon(Shipped), brigand.Id, null, strikes, events);
+        var next = Frost.AfterCombat(state, Shipped, "teodor", Teodor(state).EquippedWeapon(Shipped), brigand.Id, null, strikes, events);
 
         Assert.Equal(1, next.Find(brigand.Id)!.Chill);
         Assert.Equal(Shipped.Class(brigand.Unit.ClassId).Mov - 1, next.ReachOf(next.Find(brigand.Id)!, Shipped).Mov);

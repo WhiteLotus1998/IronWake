@@ -89,6 +89,16 @@ public sealed record BattleUnit(
     public int BurnPhases { get; init; }
 
     /// <summary>
+    /// A stun rider's clock (issue 1244, <see cref="Core.Stun"/>), counted as the chill's is
+    /// (<see cref="Frost.AtPhaseChange"/>): 0 not stunned; 1 stunned, its side's next phase not yet
+    /// begun; 2 that phase under way, which it skips (moved and acted), cleared when it ends.
+    /// </summary>
+    public int Stun { get; init; }
+
+    /// <summary>Whether the unit's stun rider has stunned someone this map (issue 1244, <see cref="Core.Stun"/>): once a map per caster.</summary>
+    public bool StunSpent { get; init; }
+
+    /// <summary>
     /// The frost hold's clock (issue 1127, <see cref="DrakeFrost"/>), counted as the chill's is
     /// (<see cref="Frost.AtPhaseChange"/>): 0 not held; 1 struck by a drake's frost, its side's next phase
     /// not yet begun; 2 that phase under way, cleared when it ends. While it is not 0 the unit's Mov is at

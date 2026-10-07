@@ -483,7 +483,7 @@ public static class EnemyAi
     /// weapon slot among its options against that one unit, by <see cref="PlanUnit"/>'s
     /// own score and order, so when the planner's best option is this target the strike
     /// named here is the strike that comes. Null when the unit would retreat, has no
-    /// weapon, or has no option against the target; a unit that holds strikes only from
+    /// weapon, skips the phase stunned (issue 1244, <see cref="Stun"/>), or has no option against the target; a unit that holds strikes only from
     /// its own tile, and one that has moved only from where it stands. On a dusk map a target
     /// the unit does not know of (<see cref="Dusk.Knows"/>) is no option; given
     /// <paramref name="inDaylight"/>, the dark is ignored, both that and the sight a strike
@@ -493,7 +493,7 @@ public static class EnemyAi
     {
         var behavior = state.EffectiveBehavior(unit, content)
             ?? throw new ArgumentException($"{unit.Id} is a player unit and has no behavior", nameof(unit));
-        if (unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit))
+        if (unit.EquippedWeapon(content) is null || Stun.Skipping(unit) || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit))
         {
             return null;
         }
