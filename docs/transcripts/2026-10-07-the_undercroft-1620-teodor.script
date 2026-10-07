@@ -1,0 +1,58 @@
+quest pell_2 teodor
+move pell 3,5
+wait pell
+move teodor 2,7
+wait teodor
+end
+threat teodor from 5,7
+move teodor 5,7
+wait teodor
+threat pell from 3,7
+move pell 3,7
+wait pell
+end
+forecast pell soldier-1 from 4,7
+move pell 4,7
+attack pell soldier-1
+forecast teodor brigand-2 from 3,7
+move teodor 3,7
+attack teodor brigand-2
+end
+forecast teodor archer-1 from 5,7
+move teodor 5,7
+attack teodor archer-1
+move pell 8,7
+wait pell
+end !
+recall 26
+move pell 4,7
+attack pell soldier-1
+forecast teodor archer-1 from 9,7
+move teodor 9,7
+attack teodor archer-1
+end !
+recall 11
+move teodor 3,4
+wait teodor
+move pell 2,3
+wait pell
+end
+forecast pell hexer-1 from 5,4
+move pell 5,4
+attack pell hexer-1
+forecast teodor hexer-1 from 6,4
+move teodor 6,4
+attack teodor hexer-1
+end
+move pell 9,4
+wait pell
+move teodor 4,4
+wait teodor
+end
+threat pell from 12,4
+move pell 12,4
+wait pell
+attack teodor brigand-2
+end
+move pell 16,4
+leave

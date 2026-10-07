@@ -3720,3 +3720,17 @@ Notes:
 - The captain at 1 HP on turn 6 felt close, but the read said 5 against 6. The finish was arithmetic, not a bet.
 
 — Code
+
+## 2026-10-07 — The Undercroft, Pell's quest 2, the Teodor chair under 0278, warm — Code
+Seed: reseed 1620, side map seed 1686 (`campaign --load undercroft --saves <copy of docs/transcripts/2026-10-03-the_undercroft-960.saves> --reseed 1620 --strict --script docs/transcripts/2026-10-07-the_undercroft-1620-teodor.script`; transcript beside it). Ally **Teodor** (Pikeman L5, 23 HP, lance at 1). Warm: I built the board and played 960 on the north's quiet stops, so this chair went loud on purpose, as 960's journal asked.   Result: **won on turn 6 of 7.** Nobody fell. Both Recalls spent. Teodor ended at 1/23, Pell at 10/17.
+Tension: 8/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 4 of the kept line. The stacks were dead (Teodor's 3 percent crit on the brigand at 4,4 on turn 2, then Pell and Teodor on the hexer at 7,4 on turn 3), and Pell stood at 5,4 with the room open to the east. The obvious move was Teodor walking east beside her. Instead he stepped back to 4,4, the only tile between the west column and the stacks, and waited there. The sworn brigand swung at him and missed, the soldier behind it could not reach him, and everything from the stair and the cells had to go round by row 7. The cells' soldier reached 14,7 on turn 5, a turn after Pell needed it to.
+Notes:
+- **The south route lost twice on tempo.** Turn 2: Teodor woke the cells from 5,7 to fight the soldier with a pike. The combat's noise woke the stacks as well. Pell needed 15 tiles in four turns, the soldier and then the archer stood in the one-wide row 7, and every turn she stopped to clear one cost her the walk. The first try left Pell at 2 HP on 8,7 on turn 5 with Teodor dead (the stacks' hexer shot her from 8,5 through the row-6 wall). I recalled to turn 3 and tried a different turn 3: Teodor ran east to the archer and missed it (the same roll), and the sworn brigand's 65 percent landed on Pell. Both at 3 HP, 15 tiles to go. I recalled again, to turn 2.
+- **The middle is the strong line, and the map's west door is its cork.** An ally on 3,4 wakes the stacks at the 4,4 choke, and they come one at a time. After that, the same tile shuts the stair out of the room for as long as the ally lives.
+- **The lector never acted** (filed below). From 12,4 the desk is one move away: 13,4, 14,4, 15,4, 16,4. That walk passes through his range 2 without ever ending in it. He corks the north door, so on 960's route he was the map. On the middle route he is scenery.
+- The objective still reads `Get Pell to the gate`, while the card says the reading desk. 0288 left every name other than the Shrine's to the Fable pass, so this is not a bug.
+- Disclosed luck: Teodor's crit on turn 2 (3 percent, 39 damage). Without it the brigand stands at 10 and Pell's 15 kills it on turn 3, a turn later.
+- Not tense: turns 5 and 6 of the kept line, the walk past the lector.
+
+— Code
