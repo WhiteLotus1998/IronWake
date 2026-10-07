@@ -110,7 +110,8 @@ public class ClientBattleActionsTests
         Assert.Equal(new[] { new Coord(1, 9), new Coord(2, 5), new Coord(3, 0), new Coord(14, 0) }, client.Chests);
         client.Select(new Coord(1, 9));
 
-        var row = Assert.Single(client.Actions());
+        var row = Assert.Single(client.Actions(), r => !r.Label.StartsWith("Item:", StringComparison.Ordinal));
+        Assert.Equal(row, client.Actions()[0]);
         Assert.Equal("Open chest 1,9", row.Label);
         Assert.Equal(client.Content.ItemName("field_dressing"), row.Line);
         Assert.True(row.Legal);
@@ -153,7 +154,8 @@ public class ClientBattleActionsTests
         var captain = client.State.Find("captain")!;
         client.Select(captain.At);
 
-        var rows = client.Actions();
+        // The captain's item rows (issue 1308) follow the orders, so the orders keep rows 0 to 2.
+        var rows = client.Actions().TakeWhile(r => !r.Label.StartsWith("Item:", StringComparison.Ordinal)).ToList();
 
         Assert.Equal(new[] { "Order: Press", "Order: Rally", "Order: Fall back" }, rows.Select(r => r.Label));
         Assert.All(rows, r => Assert.True(r.Legal));

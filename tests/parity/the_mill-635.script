@@ -1,0 +1,15 @@
+# Issue 1308: a staff heal taken through the item row and a click on its target.
+move captain 5,8
+wait captain
+wait maud
+end !
+move captain 5,6
+wait captain
+move maud 5,9
+wait maud
+end !
+move maud 5,7
+item maud 2 captain
+move captain 4,6
+wait captain
+end !

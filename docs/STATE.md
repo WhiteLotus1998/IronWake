@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-07 (#1286 slice 4: `threat` names a cast a non-kill strike may give way to, 0316 amended again; #1293 `blocked`, waits for Lotus). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-07 (#1308 slice 1: the client takes Item and Exit from the action list, an item that needs a target armed as a pick a board click aims; parity drives them by clicks). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
@@ -13,16 +13,16 @@ No forks are open. The chain heartbeat stays (#406). Recent records: the door (0
 
 - 13.2 Commander's Word is spiked (#85, 0136; DESIGN 13.2): `order <press|rally|fall back>` once a map as the captain's action, radius `2 + Cha / 4`. Open behind `orders: on` and on campaign maps from the second; the client calls it from its action list (#786).
 - 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23): sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slices 1, 2, #851, #856 (0195, 0207, 0209, 0211): teeth 2,4,5,8,12, `--kinsbane [--axe|--heeding]`, issued beside the axe; 279's bar passes. Slice 3 (0212): a woken kill's full Move again once a map (`the_gleaning_kinsbane_woken.map`). #865: `campaign ... --fed N`. #871 (0214, Lotus): the reach gate reverted; `keziah_warning: on` on Sallow alone (drains p50 2); `march` asks, `march sure` answers. The voice (0221): `kinsbaneSpoke`, 3 a battle (#1002); Code 804 warm 8/6/5. The choice screen (0222): `pitch` in `campaign.json`, each claimant's line under the offer until the pick; placeholder. What is left on #804 is art (the hound, the screen's staging), waiting on #535.
-- #805 slices 1 to 3 (0213, 0215, 0216): the stages; the carry (`carry:`, Code 805 warm 7/6/7); the breath (`breath:`, `breathe`; Code 805 warm 6/7/8). #872 (0217): the Drover replaces the Scout (never doubles; Drake Bite 3/5; Long Carry; Deep Rime). #882 (0217 amended): `--drover`'s gate is a price ceiling, Grown median at least 70% of the Sky Captain where he leads, per phase and level; passes (0.72 to 0.74). Code 805 warm as a Drake Warden 7/6/6. Slice 4 (0218): a rider fallen for good takes the drake off the field (`drakeFlew` on the record; ending text waits on #634). #805 is closed (0252, Chat 8051). #1094 (0254): both on every campaign battle. #1100: Chat's cold chair is on the synthetic save; the pick joins trained (0263).
+- #805 (0213, 0215 to 0218, 0252; closed): the stages, the carry, the breath, `drakeFlew`. #872 (0217): the Drover replaces the Scout; #882: `--drover`'s price ceiling passes (0.72 to 0.74). #1094 (0254): both on every campaign battle; the pick joins trained (0263).
 - #916 (0227): `region:` picks the ground; outland sand waits on Chat's look at `docs/look/sand-916.png`.
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` (versioned, PROTOCOL.md), `pending` until #634.
 - #77 slice 8 (0245): `support <a> <b>` at a camp, lowest unseen tier once, free; #77 `blocked` on a chair's A read.
+- #1308 slice 1: item rows (a slot the Item action takes, a heal art with a target), a target pick of the tiles the resolver accepts with the console's own lines on hover, the exit row with the console's warning; `Script.ApplyByClicks` drives `item` and `exit` through rows and clicks. Slice 2: Carry and Breathe, the full-campaign script by clicks (heal, a Psalter art, an exit, a carry), screenshots.
 - #1003: card = text plus its rules line in parentheses (348 to 363); reads through 367 applied; Keziah's Oath Stone feeling waits for #634.
 - #811 voice sheets, #1001 scene scripts (0244), #1005 scenes are in; then #634; #813 builds on 0243. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
 - #611 (six arts); #535 slices 1, 2 (0114, 0115); clips await #621.
 - #636 (0125, 0170): Full Measure costs the next phase, never doubles; the veto prices no arts (0251).
-- Built: see `docs/DECISIONS/` (DESIGN 14, maps, items, `--finale`, `--ladder`, unique classes; Field Surgeon, Drover unplayed by hand).
 - The story gate is open (Lotus closed #656; build from STORY draft 6, built to change). #635 slices 4 to 11 (0196, 0198 to 0204) built the side maps in the Maps table (slice 11, Rook 1, opens the Drover) and three paid items (Psalter, Commonplace, Tally; the last two with 3 frozen iron). The campaign packs the Family Lance behind Teodor's iron and holds it at sound until The Old Watch is won (`held`, `wakes`, `--heirloom --quest`). Slice 12 (0205): Teodor 2, The Warden's Gate, names the lance and opens Turn the Key (the lock); no hand play declares it yet. Slices 13 to 16 (0206, 0208, 0224, 0225): Keziah 1 and 2, Rook 2. #635 is closed as built; #77 slices 1 to 7 are built (0183 to 0189): 26 pairs, C 16, B 28, A 48 (best, not sum); A by a committed human waits on a chair's campaign.
 - #81 (0190, 0191, 0226): the field is map 9, level 4; `route_drift:` wakes the untaken route's group on turn 5. #936 (0233): `tuned`.
 - #633 (0192 to 0194): `branch`, `pick`, `talk`, `meet`. #844: the Roster names a contested place.
