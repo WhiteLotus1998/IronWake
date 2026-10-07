@@ -1,0 +1,50 @@
+quest maud_2 dunstan
+move dunstan 7,7
+wait dunstan
+move maud 6,7
+wait maud
+end
+wait dunstan
+move maud 7,6
+threat dunstan
+wait maud
+end
+attack maud brigand-2
+move dunstan 6,8
+wait dunstan
+end
+move dunstan 7,8
+wait dunstan
+move maud 7,3
+attack maud soldier-1
+threat maud
+end
+move dunstan 7,5
+wait dunstan
+move maud 7,6
+threat dunstan
+wait maud
+end
+attack dunstan brigand-1
+move maud 7,3
+attack maud soldier-1
+end
+move maud 7,4
+attack maud brigand-3
+move dunstan 7,2
+forecast dunstan soldier-1
+attack dunstan soldier-1
+end
+threat dunstan
+move dunstan 7,1
+attack dunstan archer-1
+move maud 7,3
+wait maud
+end
+move dunstan 6,1
+attack dunstan archer-1
+move maud 7,0
+threat maud
+wait maud
+end
+leave
