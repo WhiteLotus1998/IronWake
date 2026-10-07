@@ -52,7 +52,7 @@
     { "id": "maud_2", "member": "maud", "part": 2, "map": "the_first_shrine", "pays": "maud_psalter",
       "before": [
         "Maud is going to the first shrine, a half-day off the weir road and older than the split. No rite-keeper alive has been inside. The causeway in is trodden to mud this month. \"Somebody's put a man in the door. Move him. I'm going up to the altar.\"",
-        "(Get Maud onto the altar at 7,0 by the end of turn 10. The map is lost if she falls. Pursuers cross the causeway at 7,6 from turn 2, announced; a unit that waits where it began its phase braces.)"
+        "(Get Maud onto the altar at 7,0 and hold it through one enemy phase by the end of turn 10. The map is lost if she falls. Pursuers cross the causeway at 7,6 from turn 2, announced; a unit that waits where it began its phase braces.)"
       ],
       "after": [
         "Maud kneels at the altar and says the rite, the words in order. At the response she stops. She stays on her knees longer than any prayer takes, listening, then says the response again with one word changed. On the road back she goes down the line looking at hands, and treats the frostbite first.",

@@ -143,9 +143,43 @@ internal static class Fixture
         return target;
     }
 
-    private static readonly Lazy<string> ShrineNorthStart = new(() => WithShrineNorthStart(WithShrineArcherHeld(CopyFiles("ironwake-shrine-north-"))));
+    private static readonly Lazy<string> ShrineNorthStart = new(() => WithShrineNorthStart(WithShrineArcherHeld(WithShrineSeizedOnTheStep(CopyFiles("ironwake-shrine-north-")))));
 
-    private static readonly Lazy<string> ShrineArcherHeld = new(() => WithShrineArcherHeld(CopyFiles("ironwake-shrine-held-")));
+    private static readonly Lazy<string> ShrineArcherHeld = new(() => WithShrineArcherHeld(WithShrineSeizedOnTheStep(CopyFiles("ironwake-shrine-held-"))));
+
+    private static readonly Lazy<string> ShrineSeizedOnTheStep = new(() => WithShrineSeizedOnTheStep(CopyFiles("ironwake-shrine-step-")));
+
+    /// <summary>The First Shrine quest card's rules line as shipped with the held altar (issue 1274).</summary>
+    private const string ShrineHeldRules = "(Get Maud onto the altar at 7,0 and hold it through one enemy phase by the end of turn 10.";
+
+    /// <summary>
+    /// A copy of the real content directory whose First Shrine is won on the step onto the altar, with
+    /// no <c>seize_hold:</c> header and the quest card saying so, and nothing else changed, for a play
+    /// journaled before the altar was held through an enemy phase (issue 1274). Made once per test run.
+    /// </summary>
+    public static string ShrineSeizedOnTheStepContentDirectory() => ShrineSeizedOnTheStep.Value;
+
+    private static string WithShrineSeizedOnTheStep(string target)
+    {
+        var path = Path.Combine(target, MapFiles.QuestsDirectory, "the_first_shrine.map");
+        var text = File.ReadAllText(path);
+        const string header = "seize_hold: 1\n";
+        if (!text.Contains(header, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{path}: no held altar to put back to a seize on the step");
+        }
+
+        File.WriteAllText(path, text.Replace(header, "", StringComparison.Ordinal));
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        var campaign = File.ReadAllText(campaignPath);
+        if (!campaign.Contains(ShrineHeldRules, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{campaignPath}: no held-altar rules line on the First Shrine card");
+        }
+
+        File.WriteAllText(campaignPath, campaign.Replace(ShrineHeldRules, "(Get Maud onto the altar at 7,0 by the end of turn 10.", StringComparison.Ordinal));
+        return target;
+    }
 
     /// <summary>
     /// A copy of the real content directory whose First Shrine keeps the sanctum archer on Hold in

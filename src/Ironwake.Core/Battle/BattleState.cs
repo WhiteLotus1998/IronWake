@@ -501,7 +501,8 @@ public sealed record BattleState(
     /// Whether the battle is over and why, DESIGN.md section 7, computed from the board
     /// and never stored. Checked in order: the captain dead, the protected recruit dead or
     /// left behind by the captain's exit (issue 269), the map's win condition met (on
-    /// Escape, the captain has left through an exit), the turn limit passed (a win for Survive, a loss for
+    /// Escape, the captain has left through an exit; on a <c>seize_hold: 1</c> map, the captain still
+    /// on the seize tile when a player phase begins, issue 1274), the turn limit passed (a win for Survive, a loss for
     /// everything else), else ongoing. A finished battle refuses every command but Recall.
     /// </summary>
     public BattleOutcome Outcome
@@ -531,7 +532,7 @@ public sealed record BattleState(
             var won = Map.Win switch
             {
                 WinCondition.Rout => !UnitsOf(Side.Enemy).Any(),
-                WinCondition.Seize => Map.IsThrone(captain!.At),
+                WinCondition.Seize => Map.IsThrone(captain!.At) && (!Map.SeizeHold || AtPlayerPhaseStart),
                 WinCondition.DefeatBoss => !UnitsOf(Side.Enemy).Any(u => u.IsBoss) && Map.BossSpawns().All(e => HasFired(e.Name)),
                 WinCondition.Escape => captainEscaped,
                 WinCondition.Survive => Turn > Map.TurnLimit,
@@ -550,6 +551,14 @@ public sealed record BattleState(
             return BattleOutcome.Ongoing;
         }
     }
+
+    /// <summary>
+    /// Whether this state is the start of a player phase, the one an enemy phase just ended into
+    /// (or the turn past the limit it decides): what a <c>seize_hold: 1</c> map reads (issue 1274), since
+    /// the captain on the seize tile now stood on it through that whole enemy phase. False on turn 1,
+    /// which no enemy phase came before.
+    /// </summary>
+    public bool AtPlayerPhaseStart => Phase == Side.Player && History.Count > 0 && History[^1].Phase == Side.Enemy;
 
     /// <summary>The living unit with an id, or null.</summary>
     public BattleUnit? Find(string id)

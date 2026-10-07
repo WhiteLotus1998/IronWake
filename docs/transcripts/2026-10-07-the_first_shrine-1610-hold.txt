@@ -1,0 +1,529 @@
+Campaign, seed 1610, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+reseeded from 830 to 1610: not the save's battle
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 6 of 10: Raid on Ironwake; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L4, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L4, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L4, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Ottilie: Bowman L4, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L4, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L4, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L4, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Brannock: Cadet L4, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 8)
+The last seat: Keziah (Reaver) or Rook (Skyrider) (pick <unit>). The one passed on rides home.
+Keziah: "Everyone here is offering you a promise. Mine's hungry, and you'll hear it ask."
+Rook: "She's the last one. Pick me and you're the second person alive who knows her name."
+They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.
+== Keep ==
+Purse: 500
+Rooms: beds: 8/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  pell_1: Pell's quest 1, The Burned School (quest pell_1 <ally>); permadeath applies
+  maud_2: Maud's quest 2, The First Shrine (quest maud_2 <ally>); permadeath applies
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 6, Raid on Ironwake. Defeat every enemy by the end of turn 7. Captain Fenn must survive.
+> quest maud_2 teodor
+-- The First Shrine --
+Maud is going to the first shrine, a half-day off the weir road and
+older than the split. No rite-keeper alive has been inside. The causeway
+in is trodden to mud this month. "Somebody's put a man in the door. Move
+him. I'm going up to the altar."
+
+(Get Maud onto the altar at 7,0 and hold it through one enemy phase by
+the end of turn 10. The map is lost if she falls. Pursuers cross the
+causeway at 7,6 from turn 2, announced; a unit that waits where it began
+its phase braces.)
+
+Side map: The First Shrine, seed 1655
+Maud goes with Teodor. This map is lost if Maud falls; who falls here is gone for good.
+  turn 2, enemy phase: a brigand arrives at 7,8 (aggressive). A unit standing on 7,8 stops it.
+  turn 3, enemy phase: an archer arrives at 6,8 (aggressive). A unit standing on 6,8 stops it.
+  turn 4, enemy phase: a soldier arrives at 7,8 (aggressive). A unit standing on 7,8 stops it.
+  turn 5, enemy phase: a brigand arrives at 13,8 (aggressive). A unit standing on 13,8 stops it.
+Objective: Get Maud to the altar alive and hold it through an enemy phase by the end of turn 10.
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^..A..=..B..^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           4,8    hp 18/18  Plain  captain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+B  teodor           Teodor L4 pikeman          10,8   hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move maud 7,7
+Maud moves 4,8 -> 7,7 via 4,7 5,7 6,7
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....A....^.
+ 8 ^^.....=..B..^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           7,7    hp 18/18  Road  captain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+B  teodor           Teodor L4 pikeman          10,8   hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait maud
+Maud waits
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....A....^.
+ 8 ^^.....=..B..^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           7,7    hp 18/18  Road  captain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+B  teodor           Teodor L4 pikeman          10,8   hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move teodor 8,7
+Teodor moves 10,8 -> 8,7 via 10,7 9,7
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....AB...^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           7,7    hp 18/18  Road  captain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+B  teodor           Teodor L4 pikeman          8,7    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait teodor
+Teodor waits
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....AB...^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           7,7    hp 18/18  Road  captain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+B  teodor           Teodor L4 pikeman          8,7    hp 22/22  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait soldier-1
+Soldier 1 waits and braces
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The First Shrine  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....AB...^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           7,7    hp 18/18  Road  captain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold, braced
+B  teodor           Teodor L4 pikeman          8,7    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move maud 7,3
+Maud moves 7,7 -> 7,3 via 7,6 7,5 7,4
+The yard group wakes (proximity)
+The First Shrine  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^A^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=B...^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, awake
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold, braced
+B  teodor           Teodor L4 pikeman          8,7    hp 22/22  Plain
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack maud soldier-1
+Forecast Maud -> Soldier 1: acc 87% dmg 11 crit 3%; counter: none
+  Brace: Soldier 1 braced: Maud acc -15
+Maud attacks Soldier 1
+  Maud hits Soldier 1 for 11 (hp 9)
+  Maud hp 18, Soldier 1 hp 9
+Maud gains 6 exp (6)
+The First Shrine  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^A^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=B...^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, awake
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+B  teodor           Teodor L4 pikeman          8,7    hp 22/22  Plain
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move teodor 7,4
+Teodor moves 8,7 -> 7,4 via 7,7 7,6 7,5
+The First Shrine  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^A^..d.^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, awake
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+B  teodor           Teodor L4 pikeman          7,4    hp 22/22  Plain
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait teodor
+Teodor waits
+The First Shrine  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^A^..d.^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, awake
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+B  teodor           Teodor L4 pikeman          7,4    hp 22/22  Plain  done
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Brigand 2 arrives at 7,8 with the pursuit group, aggressive
+enemy: wait archer-1
+Archer 1 waits
+enemy: move brigand-1 5,3
+Brigand 1 moves 2,3 -> 5,3 via 3,3 4,3
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 7,5
+Brigand 2 moves 7,8 -> 7,5 via 7,7 7,6
+enemy: attack brigand-2 teodor
+Forecast Brigand 2 -> Teodor: acc 63% dmg 9 crit 0%; counter: acc 81% dmg 13 crit 3%
+Brigand 2 attacks Teodor
+  Brigand 2 hits Teodor for 9 (hp 13)
+  Teodor hits Brigand 2 for 13 (hp 9)
+  Brigand 2 hp 9, Teodor hp 13
+Teodor gains 6 exp (6)
+enemy: move hexer-1 8,3
+Hexer moves 11,3 -> 8,3 via 10,3 9,3
+enemy: attack hexer-1 teodor
+Forecast Hexer -> Teodor: acc 99% dmg 11 crit 1%; counter: none
+Hexer attacks Teodor
+  Hexer hits Teodor for 11 (hp 2)
+  Hexer hp 16, Teodor hp 2
+enemy: wait soldier-1
+Soldier 1 waits and braces
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^...c^Ad....^
+ 4 ....n..B..F..^
+ 5 .^.....e.....^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          5,3    hp 22/22  Plain  group yard, guard, awake
+e  brigand-2        Brigand L2 reaver          7,5    hp 9/22   Plain  group pursuit, aggressive
+d  hexer-1          Hexer L2 adept             8,3    hp 16/16  Forest  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+B  teodor           Teodor L4 pikeman          7,4    hp 2/22   Plain
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move teodor 7,2
+Teodor moves 7,4 -> 7,2 via 7,3
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####B####n.
+ 3 .^...c^Ad....^
+ 4 ....n.....F..^
+ 5 .^.....e.....^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          5,3    hp 22/22  Plain  group yard, guard, awake
+e  brigand-2        Brigand L2 reaver          7,5    hp 9/22   Plain  group pursuit, aggressive
+d  hexer-1          Hexer L2 adept             8,3    hp 16/16  Forest  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+B  teodor           Teodor L4 pikeman          7,2    hp 2/22   Plain
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack teodor soldier-1 !
+Forecast Teodor -> Soldier 1: acc 52% dmg 11 crit 2%; counter: acc 74% dmg 7 crit 1%
+  Kills if the first strike lands (52)
+  Counter: lethal to Teodor only if the first round misses (48 in 100) (7 against 2 hp)
+  Brace: Soldier 1 braced: Teodor acc -15
+Teodor attacks Soldier 1
+  Teodor hits Soldier 1 for 11 (hp 0)
+  Teodor hp 2, Soldier 1 hp 0
+Teodor gains 20 exp (26)
+Soldier 1 falls at 7,1
+The loft group wakes (a death in the sanctum group)
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.....#M.
+ 2 ..n####B####n.
+ 3 .^...c^Ad....^
+ 4 ....n.....F..^
+ 5 .^.....e.....^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, awake
+c  brigand-1        Brigand L2 reaver          5,3    hp 22/22  Plain  group yard, guard, awake
+e  brigand-2        Brigand L2 reaver          7,5    hp 9/22   Plain  group pursuit, aggressive
+d  hexer-1          Hexer L2 adept             8,3    hp 16/16  Forest  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain
+B  teodor           Teodor L4 pikeman          7,2    hp 2/22   Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move maud 7,0
+Maud moves 7,3 -> 7,0 via 7,2 7,1
+Maud stands on the altar. The map is won if Maud still stands there when turn 3's enemy phase ends.
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.A.###M^
+ 1 ^.M#.b.....#M.
+ 2 ..n####B####n.
+ 3 .^...c^.d....^
+ 4 ....n.....F..^
+ 5 .^.....e.....^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, awake
+c  brigand-1        Brigand L2 reaver          5,3    hp 22/22  Plain  group yard, guard, awake
+e  brigand-2        Brigand L2 reaver          7,5    hp 9/22   Plain  group pursuit, aggressive
+d  hexer-1          Hexer L2 adept             8,3    hp 16/16  Forest  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,0    hp 18/18  Altar (heals 20 percent, 3 hp)  captain
+B  teodor           Teodor L4 pikeman          7,2    hp 2/22   Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> threat maud
+Threat on Maud at 7,0 (Altar):
+  Archer 1 from 6,1 with Iron Bow (slot 1): acc 36% dmg 5 crit 0%; counter: acc 98% dmg 11 crit 3% (Radiance 4 of 5 left)
+  If all land: 5 against 18 hp
+> wait maud
+Maud waits
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.A.###M^
+ 1 ^.M#.b.....#M.
+ 2 ..n####B####n.
+ 3 .^...c^.d....^
+ 4 ....n.....F..^
+ 5 .^.....e.....^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, awake
+c  brigand-1        Brigand L2 reaver          5,3    hp 22/22  Plain  group yard, guard, awake
+e  brigand-2        Brigand L2 reaver          7,5    hp 9/22   Plain  group pursuit, aggressive
+d  hexer-1          Hexer L2 adept             8,3    hp 16/16  Forest  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,0    hp 18/18  Altar (heals 20 percent, 3 hp)  captain  done
+B  teodor           Teodor L4 pikeman          7,2    hp 2/22   Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end !
+Lethal if all land: Teodor (Archer 1 for 4, Brigand 1 for 9, Hexer for 11, against 2 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Archer 2 arrives at 6,8 with the pursuit group, aggressive
+enemy: move archer-1 6,1
+Archer 1 moves 5,1 -> 6,1
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 4 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 4 (hp 0)
+  Archer 1 hp 17, Teodor hp 0
+Teodor falls at 7,2
+enemy: move archer-2 7,6
+Archer 2 moves 6,8 -> 7,6 via 6,7 7,7
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-1 7,2
+Brigand 1 moves 5,3 -> 7,2 via 6,3 7,3
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 7,1
+Brigand 2 moves 7,5 -> 7,1 via 7,4 7,3 7,2
+enemy: attack brigand-2 maud
+Forecast Brigand 2 -> Maud: acc 20% dmg 10 crit 0%; counter: acc 98% dmg 12 crit 4% (Radiance 4 of 5 left)
+Brigand 2 attacks Maud
+  Brigand 2 hits Maud for 10 (hp 8)
+  Maud hits Brigand 2 for 12 (hp 0)
+  Brigand 2 hp 0, Maud hp 8
+Maud gains 20 exp (26)
+Brigand 2 falls at 7,1
+enemy: move hexer-1 7,1
+Hexer moves 8,3 -> 7,1 via 7,3 7,2
+enemy: attack hexer-1 maud
+Forecast Hexer -> Maud: acc 70% dmg 1 crit 0%; counter: acc 98% dmg 7 crit 3% (Radiance 3 of 5 left)
+Hexer attacks Maud
+  Hexer misses Maud
+  Maud hits Hexer for 7 (hp 9)
+  Hexer hp 9, Maud hp 8
+Maud gains 6 exp (32)
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Maud heals 3 (hp 11)
+The First Shrine  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.A.###M^
+ 1 ^.M#..bd...#M.
+ 2 ..n####c####n.
+ 3 .^....^.^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~f~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           6,1    hp 17/17  Plain  group loft, guard, awake
+f  archer-2         Archer L2 bowman           7,6    hp 17/17  Road  group pursuit, aggressive
+c  brigand-1        Brigand L2 reaver          7,2    hp 22/22  Plain  group yard, guard, awake
+d  hexer-1          Hexer L2 adept             7,1    hp 9/16   Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,0    hp 11/18  Altar (heals 20 percent, 3 hp)  captain
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+Battle won: seize; only recall is left, or leave
+> leave
+Maud wins maud_2; Maud receives Maud's Psalter; fallen for good: Teodor
+-- After The First Shrine --
+Maud kneels at the altar and says the rite, the words in order. At the
+response she stops. She stays on her knees longer than any prayer takes,
+listening, then says the response again with one word changed. On the
+road back she goes down the line looking at hands, and treats the
+frostbite first.
+
+(Maud carries Maud's Psalter now: a heal at range 1 to 2, bound to her.
+Its art, Unasked, doubles a heal on an ally who has not moved or acted,
+and that ally's phase ends where it stands.)
+
+Campaign stopped before Raid on Ironwake: the script ended on the screen

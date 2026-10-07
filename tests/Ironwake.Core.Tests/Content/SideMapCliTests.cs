@@ -207,7 +207,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1600", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1600", "--script", script, "--strict", "--content", Fixture.ShrineSeizedOnTheStepContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("The loft group wakes (a death in the sanctum group)\n", output);
@@ -239,7 +239,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "4426", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "4426", "--script", script, "--strict", "--content", Fixture.ShrineSeizedOnTheStepContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Reinforcements are blocked: a unit holds 6,8\n", output);
@@ -270,13 +270,43 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1610", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1610", "--script", script, "--strict", "--content", Fixture.ShrineSeizedOnTheStepContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Soldier 1 falls at 7,1\nThe loft group wakes (a death in the sanctum group)\n", output);
             Assert.Contains("Maud moves 7,3 -> 7,0 via 7,2 7,1\n", output);
             Assert.DoesNotContain("enemy: move archer-1", output);
             Assert.Contains("Maud wins maud_2; Maud receives Maud's Psalter; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
+    /// Code's 1610 order replayed under the held altar (issue 1274): Teodor kills the door and Maud steps
+    /// onto the altar on turn 3 as before, but the step wins nothing; the woken archer kills Teodor in the
+    /// door, the yard comes through behind him, and Maud holds 7,0 through the enemy phase at 8 hp to win
+    /// as turn 4 begins, Teodor fallen for good.
+    /// </summary>
+    [Fact]
+    public void UnderTheHeldAltarTheDoorSprintCostsTheAllyInTheDoorAndWinsAsTheNextPhaseBegins()
+    {
+        var script = Transcript("2026-10-07-the_first_shrine-1610-hold.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1610", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Maud moves 7,3 -> 7,0 via 7,2 7,1\nMaud stands on the altar. The map is won if Maud still stands there when turn 3's enemy phase ends.\n", output);
+            Assert.Contains("Archer 1 hits Teodor for 4 (hp 0)\n", output);
+            Assert.Contains("-- Player phase, turn 4 --\n", output);
+            Assert.Contains("Maud wins maud_2; Maud receives Maud's Psalter; fallen for good: Teodor\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
         finally
