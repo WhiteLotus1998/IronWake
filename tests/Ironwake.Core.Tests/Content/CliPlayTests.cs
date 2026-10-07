@@ -291,7 +291,7 @@ public class CliPlayTests
         {
             var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
 
-            Assert.Contains("> threat captain from 4,1\nThreat on Alder Fenn at 4,1 (Plain):\n  Soldier 2 (arrives this enemy phase at 7,0) from 4,0 with Iron Lance (slot 1): acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%\n  If all land: 8 against 22 hp\n> ", output);
+            Assert.Contains("> threat captain from 4,1\nThreat on Alder Fenn at 4,1 (Plain):\n  Soldier 2 (arrives this enemy phase at 7,0) from 4,0 with Iron Lance (slot 1): acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%\n    Its strike here wakes: the y group (noise, heard from 4,1); not in the total\n  If all land: 8 against 22 hp\n> ", output);
             Assert.Contains("> threat wren from 4,3\nThreat on Wren at 4,3 (Plain): no enemy can strike her next phase\n  The y group is asleep, could strike here if woken: Archer at 10,3\n  Asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies\n", output);
         }
         finally

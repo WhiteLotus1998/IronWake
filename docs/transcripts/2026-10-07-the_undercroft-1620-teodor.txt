@@ -218,6 +218,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 > threat teodor from 5,7
 Threat on Teodor at 5,7 (Plain):
   Soldier 1 from 6,7 with Iron Lance (slot 1): acc 72% dmg 8 crit 1%; counter: acc 77% dmg 10 crit 2%
+    Its strike here wakes: the stacks group (noise, heard from 6,7 and 5,7); not in the total
   If all land: 8 against 23 hp
   Stopping here wakes: the cells group (proximity)
 > move teodor 5,7

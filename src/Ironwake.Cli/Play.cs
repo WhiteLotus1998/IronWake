@@ -1700,6 +1700,20 @@ public sealed class PlaySession
     }
 
     /// <summary>
+    /// The row under a <c>threat</c> line whose strike would wake a sleeping group by its noise (issue 1290),
+    /// in the forecast's words (<see cref="FightWakesLine"/>):
+    /// <c>    its strike here wakes: the yard group (noise, heard from 7,5); not in the total</c>, unpriced. At dusk a group
+    /// with no member the player sees is left out. Null when the strike wakes nothing.
+    /// </summary>
+    private static string? StrikeWakesRow(BattleState state, ThreatLine line)
+    {
+        var wakes = line.Wakes.Where(w => state.Units.Any(u => u.Group == w.Group && Dusk.Seen(state, u))).ToList();
+        return wakes.Count == 0
+            ? null
+            : $"    its strike here wakes: {string.Join(", ", wakes.Select(w => $"{UnitNames.Group(w.Group)} ({(w.CalledBy is { } by ? "called by " + UnitNames.Group(by) : "noise, heard from " + string.Join(" and ", w.HeardFrom))})"))}; not in the total";
+    }
+
+    /// <summary>
     /// The first row under a forecast that would kill the returned claimant (issue 1068, Design Table round 372),
     /// from any attacker: <c>  kills on hit: Rook falls for good (the claimant)</c> when one plain strike reaches
     /// her HP, <c>  kills if all land: ...</c> when the strikes the attacker lives for do
@@ -2085,6 +2099,11 @@ public sealed class PlaySession
                 if (line.Raises)
                 {
                     rows.Add($"    windup: no strike; {names[line.Enemy.Id]} raises over {tile}, lands next enemy phase for {line.Forecast.Attacker.Damage}, sure, unless a hit from within its reach breaks it (not in the total)");
+                }
+
+                if (StrikeWakesRow(state, line) is { } heard)
+                {
+                    rows.Add(heard);
                 }
             }
 

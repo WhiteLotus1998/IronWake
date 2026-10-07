@@ -90,6 +90,7 @@ count: Rook 3 turns to an exit (last start: turn 6), Wren no way to an exit
 > threat wren from 6,5
 Threat on Wren at 6,5 (Road):
   Soldier from 7,5 with Iron Lance (slot 1): acc 52% dmg 9 crit 0%; counter: acc 86% dmg 9 x2 crit 5%
+    Its strike here wakes: the loft group (noise, heard from 7,5 and 6,5); not in the total
   If all land: 9 against 23 hp
   Stopping here wakes: the bridge group (proximity)
   The loft group is asleep, could strike here if woken: Wing Captain at 5,1

@@ -107,6 +107,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 > threat captain
 Threat on Alder Fenn at 5,4 (Fort):
   Brigand from 6,4 with Iron Axe (slot 1): acc 23% dmg 8 crit 0%; counter: acc 90% dmg 11 x2 crit 5%
+    Its strike here wakes: the hill group (noise, heard from 6,4 and 5,4); not in the total
   If all land: 8 against 22 hp
   The hill group is asleep, could strike here if woken: Hexer at 8,2
   Asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
