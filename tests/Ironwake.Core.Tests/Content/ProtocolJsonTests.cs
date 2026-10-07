@@ -71,6 +71,7 @@ public class ProtocolJsonTests
         { new GroundRaised("pell", "teodor", A, "earthwork"), """{"type":"groundRaised","unit":"pell","target":"teodor","at":{"x":1,"y":2},"terrain":"earthwork"}""" },
         { new UnitStunned("brigand-1", "pell", Side.Enemy), """{"type":"unitStunned","unit":"brigand-1","by":"pell","side":"enemy"}""" },
         { new UnitStunned("pell", "brigand-1", Side.Player, Next: true), """{"type":"unitStunned","unit":"pell","by":"brigand-1","side":"player","next":true}""" },
+        { new RodCaught("wren", "pell", "mage-1"), """{"type":"rodCaught","unit":"wren","aimed":"pell","by":"mage-1"}""" },
         { new StunSkipped("brigand-1"), """{"type":"stunSkipped","unit":"brigand-1"}""" },
         { new UnitChilled("brigand-1", "teodor", Side.Enemy), """{"type":"unitChilled","unit":"brigand-1","by":"teodor","side":"enemy"}""" },
         { new UnitFrosted("brigand-1", "rook", 1, 7, true, false, Side.Enemy), """{"type":"unitFrosted","unit":"brigand-1","by":"rook","damage":1,"hpAfter":7,"held":true,"side":"enemy"}""" },

@@ -602,6 +602,11 @@ public static class ContentSerializer
                 writer.WriteNumber("flight", stoop.Flight);
                 writer.WriteNumber("damage", stoop.Damage);
                 break;
+            case RodEffect rod:
+                writer.WriteString("kind", "rod");
+                writer.WriteString("school", rod.School.Label());
+                writer.WriteNumber("radius", rod.Radius);
+                break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
         }

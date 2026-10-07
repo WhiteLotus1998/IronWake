@@ -1557,8 +1557,17 @@ public static class ContentLoader
                 }
 
                 return stoop;
+            case "rod":
+                RequireOnly(entry, effect, "effect", "kind", "school", "radius");
+                var rod = new RodEffect(entry.ParseEnum<MagicSchool>("effect.school", effect.String("school")), effect.Int("radius"));
+                if (rod.Radius < 1)
+                {
+                    throw entry.Error("effect.radius", "must be at least 1");
+                }
+
+                return rod;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, range, killheal, beside, aura, footing, opening, bite, long_carry, deep_rime, drake_frost or stoop");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, range, killheal, beside, aura, footing, opening, bite, long_carry, deep_rime, drake_frost, stoop or rod");
         }
     }
 

@@ -60,6 +60,12 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     public bool CounterAnswered { get; init; }
 
     /// <summary>
+    /// The holder of a Lightning Rod that catches this attack (issue 1280, <see cref="LightningRod"/>), when one does:
+    /// both sides' columns are then the strike on the holder and the holder's counter. Null otherwise.
+    /// </summary>
+    public string? CaughtBy { get; init; }
+
+    /// <summary>
     /// The most uses the attacker's weapon spends: one per strike it can make, or one for
     /// the whole combat with a gauntlet (issue 70), and an art's cost, paid hit or miss.
     /// </summary>

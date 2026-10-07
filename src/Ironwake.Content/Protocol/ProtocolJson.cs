@@ -353,6 +353,11 @@ public static class ProtocolJson
                 WriteCoord(w, "at", g.At);
                 w.WriteString("terrain", g.TerrainId);
                 break;
+            case RodCaught rc:
+                w.WriteString("unit", rc.UnitId);
+                w.WriteString("aimed", rc.AimedId);
+                w.WriteString("by", rc.ByUnitId);
+                break;
             case UnitStunned st:
                 w.WriteString("unit", st.UnitId);
                 w.WriteString("by", st.ByUnitId);
