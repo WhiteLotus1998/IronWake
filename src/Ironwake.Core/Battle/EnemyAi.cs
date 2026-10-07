@@ -821,7 +821,10 @@ public static class EnemyAi
     /// or strikes the holder knowingly. A burn rider on either
     /// side's weapon adds its expected ticks to that side's line (issue 1243, <see cref="Burning.Expected"/>),
     /// weighted by the chance some strike lands; a priced kill leaves no one to burn, and a learned
-    /// school's burn its gate holds back adds nothing (issue 1246, <see cref="LearnedGate"/>).
+    /// school's burn its gate holds back adds nothing (issue 1246, <see cref="LearnedGate"/>). A drain rider
+    /// prices its heal as HP (issue 1283, <see cref="Drain.Expected"/>): the attacker's adds the expected damage
+    /// it deals, up to the HP it is expected to be missing after the counter, and a draining counter takes
+    /// back what it heals the target, so a drainer prefers a long fight it can win.
     /// </summary>
     public static double Score(BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target)
     {
@@ -853,17 +856,25 @@ public static class EnemyAi
             score += LearnedGate.Fires(content, attacker, weapon, target) ? Burning.Expected(content, weapon, target, target.Hp - dealt * hit, Landed(hit, strikes)) : 0;
         }
 
+        var lost = 0.0;
         if (forecast.Defender.Strikes)
         {
             var counterStrikes = forecast.Defender.StrikeCount;
             var taken = Math.Min(attacker.Hp, Expected(forecast.Defender, counterStrikes));
             var counterHit = Combat.HitProbability(forecast.Defender.HitChance, state.Scheme);
+            lost = taken * counterHit;
             var burnt = LearnedGate.Fires(content, target, target.EquippedWeapon(content), attacker) ? Burning.Expected(content, target.EquippedWeapon(content), attacker, attacker.Hp - taken * counterHit, Landed(counterHit, counterStrikes)) : 0;
-            score -= (taken * counterHit + burnt) * CounterWeight;
+            var drunk = LearnedGate.Fires(content, target, target.EquippedWeapon(content), attacker) ? Drain.Expected(content, target.EquippedWeapon(content), lost, content.StatsOf(target.Unit).Hp - (target.Hp - dealt * hit)) : 0;
+            score -= (lost + burnt) * CounterWeight + drunk;
         }
         else
         {
             score += NoCounterBonus;
+        }
+
+        if (LearnedGate.Fires(content, attacker, weapon, target))
+        {
+            score += Drain.Expected(content, weapon, dealt * hit, content.StatsOf(attacker.Unit).Hp - (attacker.Hp - lost));
         }
 
         if (IsHealer(target, content))

@@ -93,6 +93,7 @@ public class PrimerTests
 
     [Theory]
     [InlineData("\"teaches\": \"earth\", \"uses\": 1", "teaches", "earth is never taught")]
+    [InlineData("\"teaches\": \"dark\", \"uses\": 1", "teaches", "dark is never taught")]
     [InlineData("\"teaches\": \"fire\", \"heals\": 5, \"uses\": 1", "teaches", "heals nothing")]
     [InlineData("\"teaches\": \"fire\", \"uses\": 2", "uses", "read once")]
     [InlineData("\"teaches\": \"sand\", \"uses\": 1", "teaches", "'sand'")]

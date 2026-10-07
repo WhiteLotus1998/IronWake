@@ -5,7 +5,7 @@ namespace Ironwake.Core;
 /// <see cref="WeaponType.Reason"/> tome, <see cref="Weapon.School"/>. A class reaches a school by
 /// naming it in <see cref="UnitClass.Schools"/>, and only a unit whose class reaches a tome's school
 /// may wield it (<see cref="Unit.CanWield"/>). An unschooled tome is wielded as any Lore tome is.
-/// Faith and the dark grimoire are not schools.
+/// Faith is not a school; dark is (issue 1283, DECISIONS/0307), its rider the drain.
 /// </summary>
 public enum MagicSchool
 {
@@ -13,6 +13,7 @@ public enum MagicSchool
     Ice,
     Lightning,
     Earth,
+    Dark,
 }
 
 public static class MagicSchoolExtensions

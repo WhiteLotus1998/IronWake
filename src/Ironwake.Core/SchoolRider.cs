@@ -38,6 +38,9 @@ public enum RiderKind
     /// and only where its school's rider is <see cref="Raise"/>; a school's own rider is never armor.
     /// </summary>
     Armor,
+
+    /// <summary>A hit heals its caster by the HP it took off the target, up to max HP (issue 1283, <see cref="Drain"/>).</summary>
+    Drain,
 }
 
 /// <summary>
@@ -78,7 +81,7 @@ public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
     /// <summary>A burn rider's <see cref="Cap"/> when rules.json names none.</summary>
     public const int DefaultCap = 4;
 
-    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>, <c>armor</c>.</summary>
+    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>, <c>armor</c>, <c>drain</c>.</summary>
     public static string Label(RiderKind kind) => kind.ToString().ToLowerInvariant();
 
     /// <summary>A count of phases as a line says it: <c>one phase</c>, <c>two phases</c>; past nine, in digits.</summary>

@@ -3766,3 +3766,17 @@ Notes:
 - **Not tense:** turns 1 and 2, the walk.
 
 — Code
+
+## 2026-10-07 — The Tollgate with a drain tome (fixture), issue 1283's play, warm — Code
+Seed: 1283. Command: `play the_tollgate --seed 1283 --content <copy> --script docs/transcripts/2026-10-07-the_tollgate-1283-drain.script`. The transcript is beside the script. Built on main at b1361a7 plus #1283's branch. The content is the shipped content with one fixture tome, `test_ledger` ("Grave Ledger": Cinder's numbers, 8 uses, dark, `"rider": "drain"`), in Pell's slot 1 in place of Cinder. The Adept and the Scholar are given dark. No shipped tome drains. Result: **won on turn 10**, the captain on the gate. Nobody fell, no Recall was spent, and Pell ended at 8/18.
+Warm: I built the drain and have played the Tollgate six times before.
+Tension: 7/10   Choice: 6/10   Surprise: 7/10
+Best turn: enemy phase 7. Pell stood alone at 6,3, the corridor mouth, at 17 HP with the Ledger on 3 uses. `end` refused: **lethal if all land, 22 against 17** (the keep archer 8, the Bandit Leader 14). I ended anyway on the arithmetic the line does not do: every counter of hers was 99 percent and each one drains. The archer missed and took 12. The leader's Toll Axe took her to **3**, her counter spent the Ledger's last use, and it drained 12 back: **3 to 15**. The next turn she finished the leader with Gust.
+Notes:
+- **`end` and `threat` read the drainer as dying three times, and she never came close.** Turns 3, 6 and 7 all asked for `end !`. That is the after-the-combat lean working as built: the lethal sum prices each strike, not the heal her counter takes between them. It makes the drainer feel braver than the board, which is fun once and a lie by the third time. Next: a `threat` note under a drainer's lines (the heal its counters would take) is the cheap fix; the total stays the worst case (0281).
+- **The planner walks around her, as it did around the armor.** The woods brigand hit Teodor on turn 3, the woods archer shot the captain on turn 4 rather than a wounded Pell beside it, and the rider took Teodor on turn 6. Only holders with nothing else in reach struck her. The drain prices her counter up, so she refuses bait as well as tanking it.
+- **Uses are the real clock.** Eight uses; the last went on the counter that saved her. A drainer at the mouth spends a use on every swing at her, so the tome, not HP, decides how long she holds.
+- **The forecast changed during the play.** It first counted crits, `drains up to 23` beside `dmg 13` at 3 percent crit. It now prints the damage column's number, crits aside (0313).
+- **Not tense:** turns 1, 2 and 9, the walk and the gate.
+
+— Code

@@ -1190,7 +1190,7 @@ public sealed class PlaySession
                 }
 
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
-                var (riders, counterRiders) = Riders(_content, attacker!, target!, attack.Slot);
+                var (riders, counterRiders) = Riders(_content, attacker!, target!, attack.Slot, forecast);
                 _out.WriteLine(ForecastLine(attacker!, named, forecast, rodNote, with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, riders, counterRiders, CounterUses(_content, target!, forecast.Defender)));
                 PrintRivalry(target!, countering: true);
                 if (SwornLine(attacker!, target!, names) is { } sworn)
@@ -1634,7 +1634,7 @@ public sealed class PlaySession
 
         var (with, counterWith) = Arms(content, unit, target, slot, tile);
         var raises = RaisesWith(state, content, unit, slot);
-        var (riders, counterRiders) = Riders(content, unit, target, slot);
+        var (riders, counterRiders) = Riders(content, unit, target, slot, forecast);
         var lines = new List<string> { ForecastLine(unit, aimed, forecast, where, with, counterWith, raises, names, riders, counterRiders, CounterUses(content, target, forecast.Defender)) };
         var hunger = HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state, forecast).ToList();
         if (ClaimantLine(state, unit, target, forecast, raises, names, hunger) is { } claimant)
@@ -2250,22 +2250,22 @@ public sealed class PlaySession
     /// <c> burn 4 (2 stacks, 2 phases)</c>, the burn a hit leaves, for a school's burn, or <c> cashes burn 8</c>
     /// for an ember (issues 1243, 1279, <see cref="Burning"/>). <c> chills</c>
     /// also for an ice tome's chill rider, and <c> stuns</c> (or <c> stun: bosses spared</c>, <c> stun spent</c>)
-    /// for a stun rider in a gated caster's hands (issue 1244, <see cref="Stun"/>). A learned school's
+    /// for a stun rider in a gated caster's hands (issue 1244, <see cref="Stun"/>), and <c> drains up to 12</c> for a drain rider when <paramref name="forecast"/> is given (issue 1283, <see cref="Drain"/>). A learned school's
     /// rider prints its gate (issue 1246, <see cref="LearnedGate"/>): <c> burn 2 (1 stack, 2 phases): Mag 6
     /// over Res 4</c> when it fires, <c> no burn: Mag 4, Res 4</c> when it does not.
     /// </summary>
-    public static (string Riders, string CounterRiders) Riders(GameContent content, BattleUnit unit, BattleUnit target, int? slot) =>
-        (RiderText(content, unit, Resolver.ChooseWeapon(unit, content, slot).Weapon, target), RiderText(content, target, target.EquippedWeapon(content), unit));
+    public static (string Riders, string CounterRiders) Riders(GameContent content, BattleUnit unit, BattleUnit target, int? slot, CombatForecast? forecast = null) =>
+        (RiderText(content, unit, Resolver.ChooseWeapon(unit, content, slot).Weapon, target, forecast?.Attacker), RiderText(content, target, target.EquippedWeapon(content), unit, forecast?.Defender));
 
-    private static string RiderText(GameContent content, BattleUnit striker, Weapon? weapon, BattleUnit struck)
+    private static string RiderText(GameContent content, BattleUnit striker, Weapon? weapon, BattleUnit struck, SideForecast? side)
     {
         if (LearnedGate.Read(content, striker, weapon, struck) is { Passes: false } held)
         {
-            return LearnedGate.Refused(Frost.Chills(content, weapon) ? "chill" : Burning.Embers(content, weapon) ? "ember" : "burn", held);
+            return LearnedGate.Refused(Frost.Chills(content, weapon) ? "chill" : Burning.Embers(content, weapon) ? "ember" : Drain.Drains(content, weapon) ? "drain" : "burn", held);
         }
 
         var gate = LearnedGate.Suffix(LearnedGate.Read(content, striker, weapon, struck));
-        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck);
+        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck);
     }
 
     /// <summary>
@@ -3170,6 +3170,8 @@ public sealed class PlaySession
                 return $"{names[o.UnitId]} is open: allies of {names[o.ByUnitId]} strike it at Def -{o.Def}, Res -{o.Res} until the phase ends";
             case UnitIgnited i:
                 return $"{names[i.UnitId]} " + (i.Stacks > 1 ? "burns hotter" : "catches fire") + $": {i.Amount} hp at the start of each of its side's next {SchoolRider.PhasesText(i.Phases)} ({i.Stacks} {(i.Stacks == 1 ? "stack" : "stacks")})";
+            case UnitDrained dr:
+                return $"{names[dr.UnitId]} drains {dr.Amount} from {names[dr.FromUnitId]} (hp {dr.HpAfter})";
             case BurnCashed c:
                 return $"{names[c.ByUnitId]} cashes the burn on {names[c.UnitId]}: {c.Amount} at once (hp {c.HpAfter}), and it burns no more";
             case GroundRaised g:
