@@ -873,14 +873,15 @@ public static class Program
     /// <summary>
     /// The hand plays the full-campaign script opens maps with (issue 786): Starting Alone and
     /// The Mill as Code played them on seeds 631 and 632 (issues 631, 632; the Mill replayed with
-    /// the fort in the south, issue 1210), read from <c>docs/transcripts</c> beside the content
-    /// directory; none when that folder is absent.
+    /// the fort in the south, issue 1210), and the side maps Code played inside the 644 campaign (the
+    /// Chapter Roll; the Lazar House and the First Shrine, issue 1308), read from <c>docs/transcripts</c>
+    /// beside the content directory; none when that folder is absent.
     /// </summary>
     public static IReadOnlyDictionary<string, string> HandPlays(string contentDir)
     {
         var transcripts = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(contentDir).TrimEnd(Path.DirectorySeparatorChar))!, "docs", "transcripts");
         var plays = new Dictionary<string, string>(StringComparer.Ordinal);
-        foreach (var (map, file) in new[] { ("starting_alone", "2026-10-01-starting_alone-631.script"), ("the_mill", "2026-10-06-the_mill-632-south.script"), ("the_chapter_roll", "2026-10-07-the_chapter_roll-644-campaign.script") })
+        foreach (var (map, file) in new[] { ("starting_alone", "2026-10-01-starting_alone-631.script"), ("the_mill", "2026-10-06-the_mill-632-south.script"), ("the_chapter_roll", "2026-10-07-the_chapter_roll-644-campaign.script"), ("the_lazar_house", "2026-10-07-the_lazar_house-644-campaign.script"), ("the_first_shrine", "2026-10-07-the_first_shrine-644-campaign.script") })
         {
             var path = Path.Combine(transcripts, file);
             if (File.Exists(path))

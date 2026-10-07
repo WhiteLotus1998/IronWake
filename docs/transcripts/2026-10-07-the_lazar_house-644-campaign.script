@@ -1,0 +1,23 @@
+quest maud_1 wren
+move wren 3,3
+wait wren
+wait maud
+end
+move maud 3,4
+attack maud brigand-1
+move wren 4,4
+attack wren brigand-1
+end
+move wren 3,3
+item wren 2
+move maud 3,2
+item maud 2 wren
+end
+attack maud soldier-1
+item wren 2
+end !
+item maud 2 wren
+move wren 3,4
+attack wren archer-2
+end !
+leave

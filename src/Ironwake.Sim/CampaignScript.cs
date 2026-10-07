@@ -37,7 +37,7 @@ public static class CampaignScript
     /// before the last map benches the wounded, repairs every weapon and buys each member the dearest
     /// stocked one it can wield (issue 81: with the field before it, no other camp wins the keep).
     /// <paramref name="quest"/>, when given, is a comma-separated list of quests each taken at every camp that
-    /// offers it, before and beside the first quest the camps take anyway. <paramref name="until"/>, when given, ends the script at the
+    /// offers it, before and beside the first quest the camps take anyway; only a named quest's side map is fought from its hand play. <paramref name="until"/>, when given, ends the script at the
     /// first camp where that unit's certify into that class would be accepted, before any action there
     /// (issue 1100: a save at the camp where Rook first reaches the Drake Warden's door, the door unpicked).
     /// </summary>
@@ -275,7 +275,9 @@ public static class CampaignScript
 
             var map = QuestMap(client, contentDir, quest);
             var needed = CampaignRecord.QuestAllies(map);
-            var hand = handPlays is not null && handPlays.TryGetValue(quest.MapId, out var played) ? played : null;
+            // Issue 1308 slice 4: a side map's hand play is fought only when the quest is named, so a run
+            // that takes the quest unnamed keeps the heuristic's fight and the committed script stands.
+            var hand = preferred.Contains(quest.Id) && handPlays is not null && handPlays.TryGetValue(quest.MapId, out var played) ? played : null;
             var allies = client.Record.Present(content)
                 .Where(u => u.Id != quest.MemberId && !CampaignRecord.IsCaptain(u, content))
                 .OrderByDescending(u => HandAllies(hand, quest.Id).Contains(u.Id)).ThenByDescending(u => u.Level).ThenBy(u => u.Id, StringComparer.Ordinal)

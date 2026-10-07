@@ -3807,3 +3807,36 @@ Warm: I had played this map on seed 1100 and opened with that play's first four 
 **Best turn: turn 6.** Rook at 9 HP and the door soldier at 20 with two turns left. Rook took 11,2, the one tile beside the door the archer's bow (13,4, range 2) cannot reach, and swung into a 58 percent lethal counter with `!`. The counter missed; the soldier went to 6. That swing was the map: anything later and Rook cannot both kill the door and stand on the roll room by turn 8.
 
 Not tense: turns 1 to 3, the walk along the bridge. Wren's turn-5 kill of the deacon (91, double) was the only safe good choice of the play. The brigand finishing Wren at 20 percent was the surprise, and it cost nothing the map counts.
+
+## 2026-10-07 — The Lazar House inside the 644 campaign (side map seed 667), issue 1308 slice 4, warm — Code
+
+Warm: I have journaled this map four times, though never under held bars with an L1 pair. Maud L1 with Wren L1, recruit, permadeath off. Transcript `docs/transcripts/2026-10-07-the_lazar_house-644-campaign.txt`. The script is the hand play the campaign-script writer fights `maud_1` with when `--quest` names it.
+
+**Result: won at the end of turn 5 of 5, and nobody fell.** Maud finished at 15/18 (L2), Wren at 7/20 (L2).
+
+**Tension 7, Choice 6, Surprise 5.**
+
+**Best turn: turn 5.** Wren had 4 HP on 3,3, south of Maud's fort. Maud's Salve brought her to 12. Wren then stepped out to 3,4 and killed the ford archer on 2,4. With walls on 2,3 and 4,3, 3,4 is the only way into the pocket, so she corked it herself. That kept the last brigand off Maud. Wren's counter crit killed it.
+
+**A finding for the map: I never touched a bar.** Maud on the fort at 3,2 and Wren on 3,3 make a pocket. Maud can only be struck in melee from 3,1, and Wren only from 3,4. So the north and east lanes arrive and queue into one tile each, and the bars never mattered. Code 737 called the bars "the puzzle". With this pair, the puzzle is the pocket instead. Two `end !` turns (4 and 5) were the tense ones, and both went my way.
+
+Not tense: turns 1 and 2, the yard brigand walking into Maud's Radiance and Wren's double.
+
+## 2026-10-07 — The First Shrine inside the 644 campaign (side map seed 689), issue 1308 slice 4, warm — Code
+
+Warm: I had read the Critic's 7070 line and both of my own Shrine plays. Maud L2 with Wren L3, under 0306's hold. Transcript `docs/transcripts/2026-10-07-the_first_shrine-644-campaign.txt`. This is the hand play for `maud_2`, and it pays the Psalter.
+
+**Result: won at the end of turn 10 of 10, and nobody fell.** Maud took the altar on the last player phase and held an empty phase. Disclosure: I rewrote turns 6 and 7 twice (Wren fell both times), the equivalent of two Recalls.
+
+**Tension 7, Choice 7, Surprise 6.**
+
+**Best turn: turn 7.** Wren was on 7,6 at 9 HP, with the hexer on 8,5 and brigand 1 two tiles off. A swing from 9 HP into the hexer's counter is lethal, so the order mattered:
+- Wren stepped to 8,4 first.
+- Maud walked to 9,4, outside the brigand's reach, and salved her to 17.
+- Wren then killed the hexer through its counter.
+
+On the enemy phase the brigand's 49 percent swing at her missed, and her counter killed it.
+
+**The watch (round 433):** the door fell on turn 9 to Maud's Radiance from 7,3. The archer woke and did not take the altar. It walked 5,1 to 4,1 to shoot Wren on 6,1 and missed. On turn 10 Wren stood beside it on 5,1, and it waited and braced. A ranged opener three tiles from the altar leaves the archer nothing to want there, which is the read Code posted.
+
+**Not tense: turns 1 to 4.** Maud on 6,8 and Wren on 7,8 just waited, and that stopped all three causeway pursuers (7,8, 6,8, 7,8). Nobody had to fight for it. The only pursuer that ever arrived was turn 5's brigand from 13,8, and Wren's counters killed it. Four free turns on a ten-turn clock is a stall the board allows. It is worth a Table look if a cold chair finds it too.
