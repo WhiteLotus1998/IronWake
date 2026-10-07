@@ -1,0 +1,787 @@
+Campaign, seed 1587, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+-- Before map 4 of 10: The Tollgate; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 8)
+== Keep ==
+Purse: 500
+Rooms: beds: 8/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath applies
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, iron_bow 400, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 4, The Tollgate. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+> quest maud_1 dunstan
+-- The Lazar House --
+The keeper at Sorrel Bend has stopped writing. Maud's order kept the
+lazar house there until the armistice, then called its sisters home and
+left the sick with him. Maud packs the basin. "The carts come at dusk.
+Nobody strips this door till then. You won't be thanked."
+
+(Hold out six turns. The lanes in are announced. A unit that ends its
+move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane
+for the rest of the map. The ford south cannot be barred.)
+
+Side map: The Lazar House, seed 1610
+Maud goes with Dunstan. This map is lost if Maud falls; who falls here is gone for good.
+  when one of yours stops on 8,1: 8,0 becomes wall, unless one who cannot enter wall stands on it.
+  when one of yours stops on 10,4: 11,4 becomes wall, unless one who cannot enter wall stands on it.
+  turn 2, enemy phase: a brigand arrives at 8,0 (aggressive). A unit standing on 8,0 stops it.
+  turn 2, enemy phase: a soldier arrives at 11,4 (aggressive). A unit standing on 11,4 stops it.
+  turn 3, enemy phase: an archer arrives at 6,7 (aggressive). A unit standing on 6,7 stops it.
+  turn 3, enemy phase: a hexer arrives at 8,0 (aggressive). A unit standing on 8,0 stops it.
+  turn 4, enemy phase: a brigand arrives at 11,4 (aggressive). A unit standing on 11,4 stops it.
+  turn 5, enemy phase: a brigand arrives at 6,7 (aggressive). A unit standing on 6,7 stops it.
+Objective: Hold out until the end of turn 6. Maud must survive.
+The Lazar House  turn 1 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 ...B.=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         3,4    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+> move dunstan 4,1
+Dunstan moves 3,4 -> 4,1 via 3,3 3,2 3,1
+The Lazar House  turn 1 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...B....n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+> wait dunstan
+Dunstan waits
+The Lazar House  turn 1 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...B....n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+> wait maud
+Maud waits
+The Lazar House  turn 1 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...B....n.M
+ 2 ..#A#.......
+ 3 ..#.#...a^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......b^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           9,6    hp 17/17  Forest  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          8,3    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 7,4
+Archer 1 moves 9,6 -> 7,4 via 9,5 9,4 8,4
+enemy: wait archer-1
+Archer 1 waits
+enemy: move brigand-1 6,1
+Brigand 1 moves 8,3 -> 6,1 via 8,2 8,1 7,1
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...B.a..n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,1    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+> move dunstan 5,1
+Dunstan moves 4,1 -> 5,1
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....Ba..n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,1    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+> attack dunstan brigand-1
+Forecast Dunstan -> Brigand 1: acc 77% dmg 11 crit 1%; counter: acc 73% dmg 8 crit 0%
+Dunstan attacks Brigand 1
+  Dunstan hits Brigand 1 for 11 (hp 11)
+  Brigand 1 hits Dunstan for 8 (hp 15)
+  Dunstan hp 15, Brigand 1 hp 11
+Dunstan gains 10 exp (10)
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....Ba..n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,1    hp 11/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,1    hp 15/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+> move maud 4,1
+Maud moves 3,2 -> 4,1 via 3,1
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...ABa..n.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,1    hp 11/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,1    hp 15/23  Plain  done
+A  maud             Maud L1 chaplain           4,1    hp 17/17  Plain  captain
+> attack maud brigand-1
+Forecast Maud -> Brigand 1: acc 98% dmg 11 crit 3%; counter: none
+Maud attacks Brigand 1
+  Maud hits Brigand 1 for 11 (hp 0)
+  Maud hp 17, Brigand 1 hp 0
+Maud gains 30 exp (30)
+Brigand 1 falls at 6,1
+The Lazar House  turn 2 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...AB...n.M
+ 2 ..#F#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         5,1    hp 15/23  Plain  done
+A  maud             Maud L1 chaplain           4,1    hp 17/17  Plain  captain  done
+> threat maud
+Threat on Maud at 4,1 (Plain):
+  Archer 1 from 6,1 with Iron Bow (slot 1): acc 86% dmg 8 crit 0%; counter: acc 97% dmg 10 crit 2% (Radiance 4 of 5 left)
+  If all land: 8 against 17 hp
+> threat dunstan
+Threat on Dunstan at 5,1 (Plain):
+  Archer 1 from 7,1 with Iron Bow (slot 1): acc 87% dmg 3 crit 3%; counter: none
+  Brigand 2 (arrives this enemy phase at 8,0) from 6,1 with Iron Axe (slot 1): acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
+  If all land: 11 against 15 hp
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Brigand 2 arrives at 8,0 with the north group, aggressive
+Reinforcements arrive
+  Soldier arrives at 11,4 with the east group, aggressive
+enemy: move archer-1 7,1
+Archer 1 moves 7,4 -> 7,1 via 7,3 7,2
+enemy: attack archer-1 dunstan
+Forecast Archer 1 -> Dunstan: acc 87% dmg 3 crit 3%; counter: none
+Archer 1 attacks Dunstan
+  Archer 1 crits Dunstan for 9 (hp 6)
+  Archer 1 hp 17, Dunstan hp 6
+enemy: move brigand-2 6,1
+Brigand 2 moves 8,0 -> 6,1 via 8,1 7,1
+enemy: attack brigand-2 dunstan
+Forecast Brigand 2 -> Dunstan: acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
+Brigand 2 attacks Dunstan
+  Brigand 2 hits Dunstan for 8 (hp 0)
+  Brigand 2 hp 22, Dunstan hp 0
+Dunstan falls at 5,1
+enemy: move soldier-1 9,2
+Soldier moves 11,4 -> 9,2 via 11,3 11,2 10,2
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Lazar House  turn 3 of 6  player phase  survive  recall 2
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...A.cb.n.M
+ 2 ..#F#....d..
+ 3 ..#.#....^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,1    hp 17/17  Plain  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          6,1    hp 22/22  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           4,1    hp 17/17  Plain  captain
+d  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group east, aggressive
+> recall 9
+Recalled to state 9; 1 charge left
+Undone: gives back 1 kill (Brigand 1), 30 exp, 22 enemy hp; returns Dunstan alive at 23 hp, Brigand 2 not yet arrived, Soldier not yet arrived
+The rolls do not change: the same attack will roll the same
+The Lazar House  turn 2 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^...B.a..n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,1    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         4,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+> move dunstan 3,1
+Dunstan moves 4,1 -> 3,1
+The Lazar House  turn 2 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B..a..n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,1    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+> wait dunstan
+Dunstan waits
+The Lazar House  turn 2 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B..a..n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,1    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+> wait maud
+Maud waits
+The Lazar House  turn 2 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B..a..n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....==b====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Road  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          6,1    hp 22/22  Plain  group yard, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Brigand 2 arrives at 8,0 with the north group, aggressive
+Reinforcements arrive
+  Soldier arrives at 11,4 with the east group, aggressive
+enemy: move archer-1 5,2
+Archer 1 moves 7,4 -> 5,2 via 7,3 7,2 6,2
+enemy: attack archer-1 maud
+Forecast Archer 1 -> Maud: acc 65% dmg 6 crit 0%; counter: acc 97% dmg 10 crit 2% (Radiance 5 of 5 left)
+Archer 1 attacks Maud
+  Archer 1 misses Maud
+  Maud hits Archer 1 for 10 (hp 7)
+  Archer 1 hp 7, Maud hp 17
+Maud gains 10 exp (10)
+enemy: move brigand-1 4,1
+Brigand 1 moves 6,1 -> 4,1 via 5,1
+enemy: attack brigand-1 dunstan
+Forecast Brigand 1 -> Dunstan: acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
+Brigand 1 attacks Dunstan
+  Brigand 1 misses Dunstan
+  Dunstan hits Brigand 1 for 11 (hp 11)
+  Brigand 1 hp 11, Dunstan hp 23
+Dunstan gains 10 exp (10)
+enemy: move brigand-2 5,1
+Brigand 2 moves 8,0 -> 5,1 via 8,1 7,1 6,1
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move soldier-1 7,4
+Soldier moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Lazar House  turn 3 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..Bac...n.M
+ 2 ..#A#b......
+ 3 ..#.#....^..
+ 4 .....==d====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,2    hp 7/17   Plain  group yard, aggressive
+a  brigand-1        Brigand L1 reaver          4,1    hp 11/22  Plain  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 22/22  Plain  group north, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 23/23  Plain
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 20/20  Road  group east, aggressive
+> attack dunstan brigand-1
+Forecast Dunstan -> Brigand 1: acc 77% dmg 11 crit 1%; counter: acc 73% dmg 8 crit 0%
+Dunstan attacks Brigand 1
+  Dunstan hits Brigand 1 for 11 (hp 0)
+  Dunstan hp 23, Brigand 1 hp 0
+Dunstan gains 30 exp (40)
+Brigand 1 falls at 4,1
+The Lazar House  turn 3 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.c...n.M
+ 2 ..#A#b......
+ 3 ..#.#....^..
+ 4 .....==d====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+b  archer-1         Archer L1 bowman           5,2    hp 7/17   Plain  group yard, aggressive
+c  brigand-2        Brigand L1 reaver          5,1    hp 22/22  Plain  group north, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         7,4    hp 20/20  Road  group east, aggressive
+> attack maud archer-1
+Forecast Maud -> Archer 1: acc 97% dmg 10 crit 2%; counter: acc 65% dmg 6 crit 0%
+Maud attacks Archer 1
+  Maud hits Archer 1 for 10 (hp 0)
+  Maud hp 17, Archer 1 hp 0
+Maud gains 30 exp (40)
+Archer 1 falls at 5,2
+The Lazar House  turn 3 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.c...n.M
+ 2 ..#A#.......
+ 3 ..#.#....^..
+ 4 .....==d====
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+c  brigand-2        Brigand L1 reaver          5,1    hp 22/22  Plain  group north, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 23/23  Plain  done
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         7,4    hp 20/20  Road  group east, aggressive
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Archer 2 arrives at 6,7 with the ford group, aggressive
+Reinforcements arrive
+  Hexer arrives at 8,0 with the north group, aggressive
+enemy: move archer-2 6,3
+Archer 2 moves 6,7 -> 6,3 via 6,6 6,5 6,4
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-2 4,1
+Brigand 2 moves 5,1 -> 4,1
+enemy: attack brigand-2 dunstan
+Forecast Brigand 2 -> Dunstan: acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
+Brigand 2 attacks Dunstan
+  Brigand 2 hits Dunstan for 8 (hp 15)
+  Dunstan hits Brigand 2 for 11 (hp 11)
+  Brigand 2 hp 11, Dunstan hp 15
+Dunstan gains 10 exp (50)
+enemy: move hexer-1 5,1
+Hexer moves 8,0 -> 5,1 via 8,1 7,1 6,1
+enemy: attack hexer-1 dunstan
+Forecast Hexer -> Dunstan: acc 99% dmg 11 crit 1%; counter: none
+Hexer attacks Dunstan
+  Hexer hits Dunstan for 11 (hp 4)
+  Hexer hp 16, Dunstan hp 4
+enemy: move soldier-1 3,4
+Soldier moves 7,4 -> 3,4 via 6,4 5,4 4,4
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Lazar House  turn 4 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..Bcf...n.M
+ 2 ..#A#.......
+ 3 ..#.#.e..^..
+ 4 ...d.=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+c  brigand-2        Brigand L1 reaver          4,1    hp 11/22  Plain  group north, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 4/23   Plain
+f  hexer-1          Hexer L1 adept             5,1    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         3,4    hp 20/20  Plain  group east, aggressive
+> attack maud brigand-2
+Forecast Maud -> Brigand 2: acc 98% dmg 11 crit 3%; counter: none
+Maud attacks Brigand 2
+  Maud hits Brigand 2 for 11 (hp 0)
+  Maud hp 17, Brigand 2 hp 0
+Maud gains 30 exp (70)
+Brigand 2 falls at 4,1
+The Lazar House  turn 4 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^..B.f...n.M
+ 2 ..#A#.......
+ 3 ..#.#.e..^..
+ 4 ...d.=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         3,1    hp 4/23   Plain
+f  hexer-1          Hexer L1 adept             5,1    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         3,4    hp 20/20  Plain  group east, aggressive
+> move dunstan 3,3
+Dunstan moves 3,1 -> 3,3 via 3,2
+The Lazar House  turn 4 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....f...n.M
+ 2 ..#A#.......
+ 3 ..#B#.e..^..
+ 4 ...d.=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         3,3    hp 4/23   Plain
+f  hexer-1          Hexer L1 adept             5,1    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         3,4    hp 20/20  Plain  group east, aggressive
+> wait dunstan
+Dunstan waits
+The Lazar House  turn 4 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^....f...n.M
+ 2 ..#A#.......
+ 3 ..#B#.e..^..
+ 4 ...d.=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           6,3    hp 17/17  Plain  group ford, aggressive
+B  dunstan          Dunstan L1 bulwark         3,3    hp 4/23   Plain  done
+f  hexer-1          Hexer L1 adept             5,1    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 percent, 3 hp)  captain  done
+d  soldier-1        Soldier L1 pikeman         3,4    hp 20/20  Plain  group east, aggressive
+> end !
+Lethal if all land: Dunstan (Archer 2 for 3, Hexer for 11, Soldier for 6, against 4 hp)
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Reinforcements arrive
+  Brigand 3 arrives at 11,4 with the east group, aggressive
+enemy: move archer-2 5,3
+Archer 2 moves 6,3 -> 5,3
+enemy: attack archer-2 dunstan
+Forecast Archer 2 -> Dunstan: acc 87% dmg 3 crit 3%; counter: none
+Archer 2 attacks Dunstan
+  Archer 2 misses Dunstan
+  Archer 2 hp 17, Dunstan hp 4
+enemy: move brigand-3 9,2
+Brigand 3 moves 11,4 -> 9,2 via 11,3 11,2 10,2
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move hexer-1 4,4
+Hexer moves 5,1 -> 4,4 via 5,2 5,3 5,4
+enemy: attack hexer-1 dunstan
+Forecast Hexer -> Dunstan: acc 99% dmg 11 crit 1%; counter: none
+Hexer attacks Dunstan
+  Hexer hits Dunstan for 11 (hp 0)
+  Hexer hp 16, Dunstan hp 0
+Dunstan falls at 3,3
+enemy: move soldier-1 3,3
+Soldier moves 3,4 -> 3,3
+enemy: attack soldier-1 maud
+Forecast Soldier -> Maud: acc 58% dmg 9 crit 0%; counter: acc 97% dmg 10 crit 2% (Radiance 2 of 5 left)
+Soldier attacks Maud
+  Soldier hits Maud for 9 (hp 8)
+  Maud hits Soldier for 10 (hp 10)
+  Soldier hp 10, Maud hp 8
+Maud gains 10 exp (80)
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Maud heals 3 (hp 11)
+The Lazar House  turn 5 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#....g..
+ 3 ..#d#e...^..
+ 4 ....f=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           5,3    hp 17/17  Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          9,2    hp 22/22  Plain  group east, aggressive
+f  hexer-1          Hexer L1 adept             4,4    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L1 chaplain           3,2    hp 11/17  Fort (heals 20 percent, 3 hp)  captain
+d  soldier-1        Soldier L1 pikeman         3,3    hp 10/20  Plain  group east, aggressive
+> attack maud soldier-1
+Forecast Maud -> Soldier: acc 97% dmg 10 crit 2%; counter: acc 58% dmg 9 crit 0%
+Maud attacks Soldier
+  Maud hits Soldier for 10 (hp 0)
+  Maud hp 11, Soldier hp 0
+Maud's Radiance is spent for this battle
+Maud gains 30 exp (10)
+Maud reaches level 2: hp +1 mag +1
+Soldier falls at 3,3
+The Lazar House  turn 5 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^........n.M
+ 2 ..#A#....g..
+ 3 ..#.#e...^..
+ 4 ....f=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           5,3    hp 17/17  Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          9,2    hp 22/22  Plain  group east, aggressive
+f  hexer-1          Hexer L1 adept             4,4    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           3,2    hp 12/18  Fort (heals 20 percent, 3 hp)  captain  unarmed  done
+> threat maud
+Threat on Maud at 3,2 (Fort):
+  Archer 2 from 5,2 with Iron Bow (slot 1): acc 58% dmg 6 crit 0%; counter: none
+  Hexer from 3,4 with Cinder (slot 1): acc 90% dmg 3 crit 0%; counter: none
+  If all land: 9 against 12 hp
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Reinforcements arrive
+  Brigand 4 arrives at 6,7 with the ford group, aggressive
+enemy: move archer-2 5,2
+Archer 2 moves 5,3 -> 5,2
+enemy: attack archer-2 maud
+Forecast Archer 2 -> Maud: acc 58% dmg 6 crit 0%; counter: none
+Archer 2 attacks Maud
+  Archer 2 hits Maud for 6 (hp 6)
+  Archer 2 hp 17, Maud hp 6
+enemy: move brigand-3 6,1
+Brigand 3 moves 9,2 -> 6,1 via 8,2 8,1 7,1
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move brigand-4 5,4
+Brigand 4 moves 6,7 -> 5,4 via 6,6 6,5 6,4
+enemy: wait brigand-4
+Brigand 4 waits
+enemy: move hexer-1 3,4
+Hexer moves 4,4 -> 3,4
+enemy: attack hexer-1 maud
+Forecast Hexer -> Maud: acc 90% dmg 3 crit 0%; counter: none
+Hexer attacks Maud
+  Hexer hits Maud for 3 (hp 3)
+  Hexer hp 16, Maud hp 3
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Maud heals 3 (hp 6)
+The Lazar House  turn 6 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^^^^^^^.^^M
+ 1 ^.....g..n.M
+ 2 ..#A#e......
+ 3 ..#.#....^..
+ 4 ...f.h======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           5,2    hp 17/17  Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          6,1    hp 22/22  Plain  group east, aggressive
+h  brigand-4        Brigand L1 reaver          5,4    hp 22/22  Road  group ford, aggressive
+f  hexer-1          Hexer L1 adept             3,4    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           3,2    hp 6/18   Fort (heals 20 percent, 3 hp)  captain  unarmed
+> move maud 2,0
+Maud moves 3,2 -> 2,0 via 3,1 2,1
+The Lazar House  turn 6 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^A^^^^^.^^M
+ 1 ^.....g..n.M
+ 2 ..#F#e......
+ 3 ..#.#....^..
+ 4 ...f.h======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           5,2    hp 17/17  Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          6,1    hp 22/22  Plain  group east, aggressive
+h  brigand-4        Brigand L1 reaver          5,4    hp 22/22  Road  group ford, aggressive
+f  hexer-1          Hexer L1 adept             3,4    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           2,0    hp 6/18   Forest  captain  unarmed
+> wait maud
+Maud waits
+The Lazar House  turn 6 of 6  player phase  survive  recall 1
+   012345678901
+ 0 ^^A^^^^^.^^M
+ 1 ^.....g..n.M
+ 2 ..#F#e......
+ 3 ..#.#....^..
+ 4 ...f.h======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           5,2    hp 17/17  Plain  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          6,1    hp 22/22  Plain  group east, aggressive
+h  brigand-4        Brigand L1 reaver          5,4    hp 22/22  Road  group ford, aggressive
+f  hexer-1          Hexer L1 adept             3,4    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           2,0    hp 6/18   Forest  captain  unarmed  done
+> end !
+Lethal if all land: Maud (Archer 2 for 7, Brigand 3 for 12, Hexer for 5, against 6 hp)
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: move archer-2 4,0
+Archer 2 moves 5,2 -> 4,0 via 5,1 4,1
+enemy: attack archer-2 maud
+Forecast Archer 2 -> Maud: acc 49% dmg 7 crit 0%; counter: none
+Archer 2 attacks Maud
+  Archer 2 misses Maud
+  Archer 2 hp 17, Maud hp 6
+enemy: move brigand-3 2,1
+Brigand 3 moves 6,1 -> 2,1 via 5,1 4,1 3,1
+enemy: attack brigand-3 maud
+Forecast Brigand 3 -> Maud: acc 29% dmg 12 crit 0%; counter: none
+Brigand 3 attacks Maud
+  Brigand 3 misses Maud
+  Brigand 3 hp 22, Maud hp 6
+enemy: move brigand-4 3,2
+Brigand 4 moves 5,4 -> 3,2 via 4,4 3,4 3,3
+enemy: wait brigand-4
+Brigand 4 waits
+enemy: move hexer-1 3,1
+Hexer moves 3,4 -> 3,1 via 3,3 3,2
+enemy: attack hexer-1 maud
+Forecast Hexer -> Maud: acc 85% dmg 5 crit 0%; counter: none
+Hexer attacks Maud
+  Hexer hits Maud for 5 (hp 1)
+  Hexer hp 16, Maud hp 1
+enemy: end
+-- Enemy phase ends, turn 6 --
+The Lazar House  over after turn 6 of 6  survive  recall 1
+   012345678901
+ 0 ^^A^e^^^.^^M
+ 1 ^.gf.....n.M
+ 2 ..#h#.......
+ 3 ..#.#....^..
+ 4 .....=======
+ 5 .^........^.
+ 6 .^^......^^.
+ 7 ~~~~~~.~~~~~
+
+e  archer-2         Archer L1 bowman           4,0    hp 17/17  Forest  group ford, aggressive
+g  brigand-3        Brigand L1 reaver          2,1    hp 22/22  Plain  group east, aggressive
+h  brigand-4        Brigand L1 reaver          3,2    hp 22/22  Fort (heals 20 percent, 4 hp)  group ford, aggressive
+f  hexer-1          Hexer L1 adept             3,1    hp 16/16  Plain  group north, aggressive
+A  maud             Maud L2 chaplain           2,0    hp 1/18   Forest  captain  unarmed
+Battle won: survive; only recall is left, or leave
+> leave
+Maud wins maud_1; the stores take 2 common material; fallen for good: Dunstan
+-- After The Lazar House --
+The carts come at dusk. They find the keeper, and the meal bins full,
+bought by someone who never signed the book. Maud counts the beds:
+forty, twelve in use. "I'm angry at the order. It won't break tonight.
+Who here hasn't eaten?" She says the prayer over every bed, then over
+the keeper, with his name in it.
+
+> roster
+Roster: company 7/12
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Maud: Chaplain L2, EXP 10; 1: Radiance 5/5, 2: Salve 8/8
+  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Fallen: Dunstan (fell on The Lazar House)
+Campaign stopped before The Tollgate: the script ended on the screen

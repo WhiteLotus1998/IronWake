@@ -3577,3 +3577,16 @@ Notes:
 - **Not tense:** turns 1, 2 and 5.
 
 — Code
+
+## 2026-10-07 — The Lazar House, a fresh seed, the weakest untuned map under 0278, warm — Code
+Seed: 1590 (`campaign --from the_tollgate --seed 1590 --script docs/transcripts/2026-10-07-the_lazar_house-1590.script`; transcript beside it; main at bff67ef). Maud's quest 1, ally **Dunstan** (Bulwark L1), the first time a Bulwark holds the house. Warm: I have played it twice (701, 670) and wrote its notes.   Result: **won, end of turn 6, Maud at 1 HP.** Dunstan fell for good on turn 4. One Recall spent, one left.
+Tension: 8/10   Choice: 6/10   Surprise: 6/10
+Best turn: turn 6. Maud had 6 HP, no Radiance left, and four enemies around the house. The fort was the obvious tile, with its heal and its -15. But `threat` from each of her ten tiles said the fort faced four strikers, and the forest corner at 2,0 faced three. The two brigands each had 11 at 37 on the fort, and the hexer's 5 alone does not kill her in the corner. I made it about 17 percent to live on the fort and about 36 in the corner. I left the fort. The arrow missed, the axe missed, the Cinder hit her to 1, and the carts came.
+Notes:
+- **Turn 2 was the real choice: the bar or the door.** Dunstan at 4,1 could not reach 8,1, because the yard brigand stood in the lane at 6,1. The kill line was Dunstan at 5,1 for 11 and Maud's Radiance from 4,1 to finish. That left him at 15 against the archer's 3 and the new brigand's 8. The archer crit for 9 (3 percent) and the brigand finished him. I recalled and held the door instead: Dunstan at 3,1, Maud on the fort. The north lane stayed open for the whole map, and the hexer came through it.
+- **The hexer on arrival is what this map does to an ally.** It arrived at 8,0 on turn 3, walked to 5,1, and hit Dunstan's Res 1 for 11 at 99. `threat` had read 8 against 23, because brigand-2 stood on 5,1 at phase start, the hexer's only tile. Brigand-2 then stepped off it to swing. Filed as **#1256** (`bug`). At 4 HP, Dunstan had no tile the hexer could not reach, so on turn 4 I spent him as a cork on 3,3. That kept the soldier off the fort's south side for a phase.
+- **Three plays, three allies lost, Radiance gone by turn 5 in all three.** Wren fell on 701, Rook fell on 670 (and Maud too), and Dunstan fell here. Every time, Maud's five Radiance ran out on turn 5 and she finished the map unarmed. With two L1 units, six waves and five uses, the second half is a coin flip on enemy hit rolls, not a choice. This is a rework candidate under 0278. 701's notes already named the levers, the turn-3 hexer north first, then the turn-5 ford brigand. Nothing is built, because the map has no cold chair yet (a map is retuned only after both entries are in).
+- **Small thing:** `show maud` prints Unasked with "with Maud's Psalter, not carried", and I still read it as hers and expected a doubled Salve on turn 4 (it healed 7). Not filed; the line is accurate, and I misread it.
+- **Not tense:** turn 1, and turn 5, where the last Radiance on the 10 HP soldier was the only move.
+
+— Code
