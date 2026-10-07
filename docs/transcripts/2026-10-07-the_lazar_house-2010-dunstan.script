@@ -1,0 +1,30 @@
+quest maud_1 dunstan
+move dunstan 5,2
+wait dunstan
+wait maud
+end
+move maud 5,1
+attack maud brigand-1
+move dunstan 8,1
+wait dunstan
+end
+move maud 3,2
+wait maud
+wait dunstan
+end
+wait maud
+wait dunstan
+end
+recall 29
+move dunstan 4,1
+move maud 3,1
+item maud 2 dunstan
+wait dunstan
+end
+move maud 3,2
+wait maud
+move dunstan 3,1
+threat maud
+wait dunstan
+end !
+leave

@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-07 (warm play under 0278: the First Shrine, Dunstan, seed 1950). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
+Updated: 2026-10-07 (0278 warm play: the Lazar House, 2010). Under 19 KB on a branch, 20 KB on main (#1291); history in git, `docs/DECISIONS/`.
 
 ## Where we are
 
@@ -44,7 +44,7 @@ No forks are open. The chain heartbeat stays (#406). Recent records: the door (0
 | the_burned_shrine | Side map, Keziah 1 (0206, #635); 2 common. Rout, limit 10; a ring wall, the hearth fort beside a held shieldbearer, a fight from it wakes the grove. Sim 0/200. Code 1113 warm 7/7/5, 1550 6/7/5 (Teodor), both won t8; the turn-5 brigand walks (#1234). A cold chair owed. |
 | the_oath_stone | Side map, Keziah 2 (0224, 0225, #635); 2 common. Defeat Boss, limit 10 (#939, 0232); Joab corks the door, `freed` by the envoy's fall; the envoy keeps his fort. Chat 4410 warm 7/6/7 (lost t10; ~55% from t8). #940 (0239): rider on turn 5; Code 940 warm 8/7/6, won t10. Chat's read owed. |
 | the_rookery | Side map, Rook 2 (0208, #635); 2 common, #805's key for Unbroken. Escape, limit 9; a ravine bridge, a woken loft, Rook leaves last. #862 (0208 addendum): sentry 13,3, archer 12,6, 14,5 free. Sim 36/200 (was 72), all captain alone. Code 862 warm 7/7/5, 1132-carry 8/7/6 (Grown, lost t8). Cold chair owed. |
-| the_lazar_house | Side map, Maud's quest 1 (0127, #635). Survive, limit 5 (0305), Recall 2; held bars, `arrivals: wait` (0303), `east3` reaches both. Sim 154/200 (never bars). Old bars: Code 701, 670, 1590; Chat cold 4204 5/7/5. Sample: Code 1259 8/7/6, lost t6 (won t5 at limit 5); Chat 4311 cold 6/4/3, door line. Next: a cold chair with an ally who counters at 1. |
+| the_lazar_house | Side map, Maud's quest 1 (0127, #635). Survive, limit 5 (0305), Recall 2; held bars, `arrivals: wait` (0303). Sim 154/200 (never bars). Old bars: Code 701, 670, 1590; Chat cold 4204 5/7/5. Sample: Code 1259 8/7/6; Chat 4311 cold 6/4/3. Shipped: Code 2010 warm 7/6/4 (Dunstan fell to the queued hexer; Maud never in reach: rework candidate, Table). Next: a cold chair, an ally who counters at 1. |
 | starting_alone | Lesson, exempt from the Fun Gate (0123, #631). Captain alone, rout, limit 10. Gate 1 1/200. Code 631 warm 7/6/4, won turn 6. Chat's play owed. |
 | the_tollgate | **tuned** (0073). Rider at 13,4 on a stop on 6,4 or 6,3 (0072). Four deployed, limit 10. Gate 1 84 percent (169/200, 0292), gate 4 ok at 0.300. Fun Gate: Code 211, Chat 227, 8/7/7 warm. |
 | brackwater_cut | **tuned** (0078). Escape at `dusk: 5`, exit without a Move (0074), lamps on a player-phase wake (0076). Gate 1 65 percent (0173); campaign point 6 (0178), `carried` 83, gate 4 ok at 0.282 (#971). Fun Gate: Chat 271 8/7/7, Code 283 7/7/8, both warm; the Critic cold 509 7/6/7; Code warm, four, 8/7/7 to 8/8/8. |

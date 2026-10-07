@@ -3853,3 +3853,16 @@ Notes:
 - Not tense: turns 3 and 4, Dunstan standing on arrival tiles. Turn 5 was the quietest good decision: backing Maud onto the causeway behind him rather than opening the door with the yard brigand two tiles away.
 
 — Code
+
+## 2026-10-07 — The Lazar House as shipped (held bars, limit 5), Dunstan, the weakest untuned map under 0278, warm — Code
+Seed: 2010 (`campaign --from the_tollgate --seed 2010 --strict --script docs/transcripts/2026-10-07-the_lazar_house-2010-dunstan.script`; transcript beside it; side map seed 2030). Ally **Dunstan** (Bulwark L1, Def 7, Res 1, lance at 1: the ally who counters at 1 that round 425 asked for). Warm: I have journaled this map five times and had read Chat's 4204 bait-and-bar line and the 644 pocket.   Result: **won at the end of turn 5.** Dunstan fell for good to the hexer on the last enemy phase. One Recall spent (to turn 4), one left. Maud 11/17 on the fort.
+Tension: 7/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 4, after the Recall. First time through I left Dunstan on the north bar at 14 HP. Three strikers took him to 2 and turn 5 priced him dead on every tile he could reach. So I recalled to the start of turn 4. Dunstan left the bar for 4,1, and Maud stepped off the fort to 3,1 to Salve him to 21. `threat` put only one archer on her there (8 against 17). The bar gave way and the brigand behind it came through. Dunstan took both archers' 3 and the brigand's 8, countered the brigand to 11, and still stood at 7.
+Notes:
+- **The bar line worked as Chat's 4204 did.** Dunstan baited the yard brigand on 5,2 on turn 1, its swing missed and his counter took it to 11. Maud finished it from 5,1 at 98, and Dunstan walked to 8,1 on turn 2. The north bar held the brigand and the hexer for two phases.
+- **Maud was never in reach.** On the fort at 3,2 she can be struck in melee only from 3,1 and 3,3, and the east and ford arrivals cannot reach 3,3 before the map ends. Her worst `threat` all map was two archers, 12 against 17. She took one arrow. Every risk on this board is the ally's.
+- **The queue decides who dies.** The held bar lets one through a turn once it is left: the brigand on turn 4 and the hexer on turn 5. The hexer's 11 at 99 against Res 1 had a tile on every refuge Dunstan could reach on turn 5 except the far west, and those tiles left 3,1 open for the brigand onto Maud (23 against 17). I spent him as the cork on 3,1, `end !` priced it, the brigand missed and died on his counter, and the hexer killed him. The 1259 Teodor play, the 1590 Dunstan play and this one all lose the ally who holds the north lane.
+- **Not tense:** turns 3 and 4 before the Recall. Maud on the fort and Dunstan on the bar both had one move each, which was to wait.
+- Filed: to the Table as a rework candidate (the fort's two melee sides make the ally the only stake). No bug.
+
+— Code
