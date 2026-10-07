@@ -1116,6 +1116,11 @@ public static class Resolver
                 $"{target.Id} at {target.At} is {distance} tiles from {unit.Id} at {unit.At}; {spell.Name} reaches {spell.MinRange}-{spell.MaxRange}"));
         }
 
+        if (spell.Cleanses)
+        {
+            return ApplyCleanse(state, content, use, unit, spell, target, events);
+        }
+
         var targetMax = target.MaxHp(content);
         if (target.Hp >= targetMax)
         {
@@ -1156,6 +1161,38 @@ public static class Resolver
         var braced = Brace.BracesOnWait(next, content, target);
         events.Add(new UnitWaited(target.Id, braced));
         return (next.WithUnit(target with { Hp = healed, Moved = true, Acted = true, Braced = braced }), null);
+    }
+
+    /// <summary>
+    /// The Item action with a cleanse (issue 1321, <see cref="Cleanse"/>), checked as a heal is up to the target: no art,
+    /// and an ally carrying a burn, a chill or a stun; then cleared, one use and the action spent, a heal's EXP earned.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyCleanse(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, BattleUnit target, List<GameEvent> events)
+    {
+        if (use.Art is not null)
+        {
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} cleanses; no art is declared with it"));
+        }
+
+        if (!Cleanse.Afflicted(target))
+        {
+            return (state, new Rejection(RejectionReason.NothingToCleanse, $"{target.Id} carries no burn, chill or stun to cleanse"));
+        }
+
+        var stack = unit.Unit.Inventory.Items[use.Slot];
+        var usesLeft = stack.Uses - 1;
+        events.Add(new ItemUsed(unit.Id, spell.Id, target.Id, usesLeft));
+        var cleansed = Cleanse.Clear(target, unit.Id, events);
+        if (usesLeft == 0)
+        {
+            events.Add(new SpellSpent(unit.Id, spell.Id));
+        }
+
+        var healer = unit with { Moved = true, Acted = true, Unit = unit.Unit with { Inventory = unit.Unit.Inventory.Replace(use.Slot, stack with { Uses = usesLeft }) } };
+        healer = AwardHealExp(healer, false, content, state.Seed, events);
+        healer = GainRank(healer, spell.Type, WeaponRanks.PerCombat, events);
+        healer = AwardMastery(healer, content, events);
+        return (state.WithUnit(healer).WithUnit(cleansed), null);
     }
 
     /// <summary>
@@ -2319,7 +2356,7 @@ public static class Resolver
 
             foreach (var ally in state.UnitsOf(unit.Side))
             {
-                if (spell.InRange(unit.At.DistanceTo(ally.At)) && ally.Hp < ally.MaxHp(content))
+                if (spell.InRange(unit.At.DistanceTo(ally.At)) && (spell.Cleanses ? Cleanse.Afflicted(ally) : ally.Hp < ally.MaxHp(content)))
                 {
                     yield return new UseItem(unit.Id, slot, ally.Id);
                 }

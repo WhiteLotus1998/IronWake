@@ -2878,6 +2878,12 @@ public static class ContentLoader
                 throw node.Error("frozenIron", "frozen iron is a physical weapon, never a spell");
             }
 
+            var cleanses = node.BoolOr("cleanses", false);
+            if (cleanses && (!heals || node.Has("healBase")))
+            {
+                throw node.Error("cleanses", "a cleanse is a healing spell that heals nothing: heals true, no healBase");
+            }
+
             var effective = node.StringArrayOrEmpty("effective")
                 .Select(e => node.ParseEnum<MovementType>("effective", e)).ToList();
             if (effective.Distinct().Count() != effective.Count)
@@ -2994,6 +3000,7 @@ public static class ContentLoader
                 MinMag = MinMag(node, type),
                 Armor = armor,
                 BurnStacks = burnStacks,
+                Cleanses = cleanses,
             });
         }
 

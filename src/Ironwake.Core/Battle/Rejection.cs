@@ -43,6 +43,7 @@ public enum RejectionReason
     CannotUndo,
     BattleOver,
     UnknownCommand,
+    NothingToCleanse,
 }
 
 /// <summary>A refused command: the rule it broke and a sentence a player can read.</summary>

@@ -81,6 +81,7 @@ public class ProtocolJsonTests
         { new ArmorFell("pell", "test_earth_armor"), """{"type":"armorFell","unit":"pell","item":"test_earth_armor"}""" },
         { new RodCaught("wren", "pell", "mage-1"), """{"type":"rodCaught","unit":"wren","aimed":"pell","by":"mage-1"}""" },
         { new StunSkipped("brigand-1"), """{"type":"stunSkipped","unit":"brigand-1"}""" },
+        { new UnitCleansed("wren", "mira", true, true, false, false), """{"type":"unitCleansed","unit":"wren","by":"mira","burn":true,"chill":true,"stun":false}""" },
         { new UnitChilled("brigand-1", "teodor", Side.Enemy), """{"type":"unitChilled","unit":"brigand-1","by":"teodor","side":"enemy"}""" },
         { new UnitFrosted("brigand-1", "rook", 1, 7, true, false, Side.Enemy), """{"type":"unitFrosted","unit":"brigand-1","by":"rook","damage":1,"hpAfter":7,"held":true,"side":"enemy"}""" },
         { new UnitFrosted("hask", "rook", 1, 30, false, true, Side.Enemy), """{"type":"unitFrosted","unit":"hask","by":"rook","damage":1,"hpAfter":30,"held":false,"boss":true,"side":"enemy"}""" },
