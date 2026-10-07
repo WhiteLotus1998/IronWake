@@ -290,6 +290,12 @@ public static class EnemyAi
         var equipped = unit.EquippedSlot(content);
         var sworn = Sworn(state, unit, known);
         var best = Choose(state, content, unit, tiles, reach, known, playerReach, sworn).Best;
+        if (Raise(state, content, unit, tiles, reach, playerReach) is { } raise
+            && (best is null || !Kills(state, content, Armed(content, state.Carrying(unit, best.Tile), best.Slot), best.Tile, state.Find(best.TargetId)!)))
+        {
+            return raise;
+        }
+
         if (best is not null)
         {
             var attack = new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot);
@@ -310,6 +316,75 @@ public static class EnemyAi
         return end != unit.At
             ? new Command[] { new Move(unit.Id, end), last }
             : new Command[] { last };
+    }
+
+    /// <summary>
+    /// An enemy raiser's raise dead (issue 1286, <see cref="Hollow"/>): a unit that may still raise this map, holding a
+    /// tome naming hollow that it can wield with a use left, raises a body of its own side lying on an empty tile in
+    /// the tome's range of a tile it may end on. The company's dead are never raised (permadeath). It raises in place
+    /// of any strike that is not a kill (<see cref="PlanUnit"/>), since a Hollow is a body on the board for three
+    /// phases and a strike is one exchange. The tile is the one fewest player units can reach, then the cheapest, then
+    /// the first in reach order; the body is the one that rises with the most HP, then the newest. The commands are a
+    /// Move when the tile is not its own, then the Item action naming the body; null when it has no raise to make.
+    /// </summary>
+    public static IReadOnlyList<Command>? Raise(
+        BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach, IReadOnlyList<Reach> playerReach)
+    {
+        if (unit.RaiseSpent || unit.Hollow is not null || state.Bodies.Count == 0)
+        {
+            return null;
+        }
+
+        var unitClass = content.Class(unit.Unit.ClassId);
+        var slot = -1;
+        Weapon? tome = null;
+        for (var i = 0; i < unit.Unit.Inventory.Count; i++)
+        {
+            var stack = unit.Unit.Inventory.Items[i];
+            if (stack.Uses > 0 && content.Weapons.TryGetValue(stack.ItemId, out var weapon) && Hollow.Raises(content, weapon) && unit.Unit.CanWield(weapon, unitClass))
+            {
+                slot = i;
+                tome = weapon;
+                break;
+            }
+        }
+
+        if (tome is null)
+        {
+            return null;
+        }
+
+        var bodies = state.Bodies
+            .Select((body, index) => (Body: body, Index: index))
+            .Where(b => b.Body.Side == Side.Enemy && state.UnitAt(b.Body.At) is null && state.Bodies.LastOrDefault(o => o.Id == b.Body.Id) == b.Body)
+            .OrderByDescending(b => Hollow.RisenHp(b.Body.MaxHp(content)))
+            .ThenByDescending(b => b.Index)
+            .Select(b => b.Body)
+            .ToList();
+        (Coord Tile, int Exposure, int Cost, BattleUnit Body)? pick = null;
+        foreach (var tile in tiles)
+        {
+            var body = bodies.FirstOrDefault(b => b.At != tile && tome.InRange(tile.DistanceTo(b.At)));
+            if (body is null)
+            {
+                continue;
+            }
+
+            var exposure = playerReach.Count(r => r.CanEnd(tile));
+            var cost = reach.CostTo(tile)!.Value;
+            if (pick is null || exposure < pick.Value.Exposure || (exposure == pick.Value.Exposure && cost < pick.Value.Cost))
+            {
+                pick = (tile, exposure, cost, body);
+            }
+        }
+
+        if (pick is not { } chosen)
+        {
+            return null;
+        }
+
+        var use = new UseItem(unit.Id, slot, chosen.Body.Id);
+        return chosen.Tile == unit.At ? new Command[] { use } : new Command[] { new Move(unit.Id, chosen.Tile), use };
     }
 
     /// <summary>
@@ -787,6 +862,10 @@ public static class EnemyAi
         return best;
     }
 
+    /// <summary><paramref name="carrier"/> as it strikes with the weapon in <paramref name="slot"/> (<see cref="Arms"/>).</summary>
+    private static BattleUnit Armed(GameContent content, BattleUnit carrier, int slot) =>
+        Arms(content, carrier).First(a => a.Slot == slot).Armed;
+
     /// <summary>
     /// The weapons <paramref name="carrier"/> may strike with, by slot in inventory order, each
     /// with the unit as it strikes (that slot moved to the front). <see cref="BestOption"/>
@@ -828,23 +907,7 @@ public static class EnemyAi
     /// </summary>
     public static double Score(BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target)
     {
-        var weapon = attacker.EquippedWeapon(content)
-            ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
-        if (LightningRod.Catcher(state, content, from, weapon, target) is { } holder)
-        {
-            target = holder;
-        }
-
-        if (CoverRule.Swapped(state, target) is ({ } covered, { } coverer, _))
-        {
-            state = covered;
-            target = coverer;
-        }
-
-        var there = attacker with { At = from };
-        var me = content.CombatantOf(attacker.Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false), beside: Formation.Beside(state, content, there) + Armor.Bonus(there)) with { Aura = Formation.Aura(state, content, there) };
-        var them = target.Answering(state, content, from, there);
-        var forecast = Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme);
+        (state, target, var weapon, var there, var forecast) = Scored(state, content, attacker, from, target);
 
         var strikes = forecast.Attacker.StrikeCount;
         var canKill = forecast.AttackerDamageLivedFor(attacker.Hp) >= target.Hp;
@@ -883,6 +946,42 @@ public static class EnemyAi
         }
 
         return score;
+    }
+
+    /// <summary>
+    /// Whether <see cref="Score"/> prices the strike as a kill (issue 1286): its deterministic damage over the strikes
+    /// the attacker lives to make takes the target's HP. A raiser (<see cref="Raise"/>) strikes only for this.
+    /// </summary>
+    public static bool Kills(BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target)
+    {
+        (_, target, _, _, var forecast) = Scored(state, content, attacker, from, target);
+        return forecast.AttackerDamageLivedFor(attacker.Hp) >= target.Hp;
+    }
+
+    /// <summary>
+    /// The combat <see cref="Score"/> prices: the board and target after a Lightning Rod's catch or a cover's swap, the
+    /// attacker's equipped weapon, the attacker on <paramref name="from"/>, and the forecast.
+    /// </summary>
+    private static (BattleState State, BattleUnit Target, Weapon Weapon, BattleUnit There, CombatForecast Forecast) Scored(
+        BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target)
+    {
+        var weapon = attacker.EquippedWeapon(content)
+            ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
+        if (LightningRod.Catcher(state, content, from, weapon, target) is { } holder)
+        {
+            target = holder;
+        }
+
+        if (CoverRule.Swapped(state, target) is ({ } covered, { } coverer, _))
+        {
+            state = covered;
+            target = coverer;
+        }
+
+        var there = attacker with { At = from };
+        var me = content.CombatantOf(attacker.Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false), beside: Formation.Beside(state, content, there) + Armor.Bonus(there)) with { Aura = Formation.Aura(state, content, there) };
+        var them = target.Answering(state, content, from, there);
+        return (state, target, weapon, there, Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme));
     }
 
     /// <summary>A unit carrying a healing spell its class can use: the only healers the content can have before issue 9.</summary>

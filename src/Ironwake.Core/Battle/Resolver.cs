@@ -1240,7 +1240,7 @@ public static class Resolver
     /// <summary>
     /// The Item action with a tome naming hollow (issue 1284, <see cref="Hollow"/>): checked as a sunder is (no art, the
     /// caster may wield it, a use left), on a body named by the fallen unit's id or by its tile, <c>x,y</c>, in its
-    /// range, never an ally's, then raised.
+    /// range, never the company's (issue 1286: either side raises only the enemy's dead), then raised.
     /// </summary>
     private static (BattleState, Rejection?) ApplyHollow(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, List<GameEvent> events)
     {
@@ -1272,9 +1272,9 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NoSuchTarget, $"no body '{use.TargetId}' to raise; a body is a unit that died on this map"));
         }
 
-        if (body.Side == unit.Side)
+        if (body.Side != Side.Enemy)
         {
-            return (state, new Rejection(RejectionReason.NotUsable, $"{body.Id} fell on {unit.Id}'s side; the dead raise only from the foe, never a fallen ally"));
+            return (state, new Rejection(RejectionReason.NotUsable, $"{body.Id} fell for the company; its dead stay dead, and only the enemy's dead rise"));
         }
 
         var distance = unit.At.DistanceTo(body.At);
