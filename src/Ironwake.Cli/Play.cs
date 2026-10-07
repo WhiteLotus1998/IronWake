@@ -2105,6 +2105,11 @@ public sealed class PlaySession
                 {
                     rows.Add(heard);
                 }
+
+                if (line.Casts is { } cast)
+                {
+                    rows.Add($"    may {(cast == CastKind.Raise ? "raise the dead" : "lay Rampart")} instead: it casts in place of any strike that does not kill (still in the total)");
+                }
             }
 
             if (lines.FirstOrDefault(l => l.CoveredBy is not null)?.CoveredBy is { } coverer)

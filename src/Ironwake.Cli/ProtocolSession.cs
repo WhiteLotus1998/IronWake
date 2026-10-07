@@ -571,6 +571,11 @@ public sealed class ProtocolSession
                     w.WriteString("heldBy", holder.Id);
                 }
 
+                if (line.Casts is { } cast)
+                {
+                    w.WriteString("casts", cast == CastKind.Raise ? "raise" : "rampart");
+                }
+
                 if (line.LitBy is { } lighter)
                 {
                     if (Hidden(_state.Find(lighter.Id) ?? lighter))
