@@ -140,6 +140,14 @@ public sealed record Weapon(
     public bool Cleanses { get; init; }
 
     /// <summary>
+    /// The radius of this healing spell's area heal (issue 1321 slice 3, DECISIONS/0317, light's ladder), or 0 for a
+    /// heal on one ally: cast with no target, it heals every wounded unit of its caster's side within this many tiles of
+    /// the caster, the caster too (<see cref="AreaHeal"/>). Only a Faith spell with <see cref="Heals"/> set, never a
+    /// cleanse, names it.
+    /// </summary>
+    public int AreaHeal { get; init; }
+
+    /// <summary>
     /// Whether this light strike is effective against Hollows (issue 1321 slice 2, DECISIONS/0317, light's ladder): its Mt
     /// is tripled against a raised unit as against a movement type it names (<see cref="Combat.IsEffective"/>). Content
     /// writes it as a <c>hollow</c> entry in the <c>effective</c> list, and only a Faith strike may carry it.

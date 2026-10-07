@@ -628,7 +628,7 @@ public sealed class HeuristicPlayer : IPlayer
             }
 
             var spell = content.WeaponOf(unit.Unit, content.Weapon(stack.ItemId));
-            if (!spell.Heals || spell.Cleanses || !unit.Unit.CanWield(spell, unitClass) || stack.Uses == 0)
+            if (!spell.Heals || spell.Cleanses || spell.AreaHeal > 0 || !unit.Unit.CanWield(spell, unitClass) || stack.Uses == 0)
             {
                 continue;
             }

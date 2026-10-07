@@ -39,7 +39,7 @@ public sealed class PlaySession
           move <unit> <x,y> via <x,y>  Move by way of a tile: the cheapest route to it, then on, within the unit's Mov
           move <unit> <x,y> [via <x,y>] preview  The route the move would walk and the planks it would wear, without moving
           attack <unit> <target> [slot|weapon] [art <id>] [!]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first); a swing whose counter is lethal to the attacker is refused unless the line ends in !
-          item <unit> <slot|item> [ally] Use the item in a slot or named by id; a healing spell names the ally, and so does a tome that raises ground (earthwork under the ally until the caster's next phase ends); a tome that raises the dead names a fallen foe or its tile
+          item <unit> <slot|item> [ally] Use the item in a slot or named by id; a healing spell names the ally, and so does a tome that raises ground (earthwork under the ally until the caster's next phase ends); a tome that raises the dead names a fallen foe or its tile; an area heal names no one, and `item <unit> <slot> preview` lists whom it would heal
           wait <unit>              End the unit's action
           undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
           canto <unit> <x,y|stay>  After acting, a unit with Move Again moves on what its move left, or stays
@@ -853,6 +853,13 @@ public sealed class PlaySession
             case "recall":
                 Error("usage: recall <n> | recall list  (history holds " + _state.History.Count + " states)");
                 break;
+            case "item" when words.Length == 4 && words[3] == "preview":
+                if (TrySlot(words[1], words[2], out var previewSlot))
+                {
+                    PrintAreaHealPreview(words[1], previewSlot!.Value);
+                }
+
+                break;
             case "item" when words.Length is 3 or 4:
                 if (TrySlot(words[1], words[2], out var itemSlot))
                 {
@@ -984,6 +991,27 @@ public sealed class PlaySession
                 Error($"unknown command '{words[0]}'; type help");
                 break;
         }
+    }
+
+    /// <summary>
+    /// <c>item &lt;unit&gt; &lt;slot&gt; preview</c> (issue 1321 slice 3): an area heal's forecast, every unit it would heal and
+    /// by how much, with nothing applied. Any other item is refused: a heal on one ally shows its number when cast.
+    /// </summary>
+    private void PrintAreaHealPreview(string unitId, int slot)
+    {
+        if (Find(unitId) is not { } caster)
+        {
+            return;
+        }
+
+        var stack = caster.Unit.Inventory.Items[slot];
+        if (!_content.Weapons.TryGetValue(stack.ItemId, out var weapon) || weapon.AreaHeal == 0)
+        {
+            Error($"only an area heal is previewed; {stack.ItemId} is not one");
+            return;
+        }
+
+        _out.WriteLine(AreaHeal.Preview(_state, _content, caster, _content.WeaponOf(caster.Unit, weapon)));
     }
 
     /// <summary>The terrain's card (issue 610) after its glyph: <c>^  Forest. -20 to hit a unit here, ...</c>.</summary>

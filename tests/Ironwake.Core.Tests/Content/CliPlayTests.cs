@@ -85,6 +85,15 @@ public class CliPlayTests
         Assert.DoesNotContain("unavailable", output);
     }
 
+    [Fact]
+    public void ItemPreviewIsRefusedOnAnythingButAnAreaHeal()
+    {
+        var output = Play(out _, "item captain 2 preview\nhelp\n");
+
+        Assert.Contains("> item captain 2 preview\nERROR: Only an area heal is previewed; field_dressing is not one\n", output);
+        Assert.Contains("an area heal names no one, and `item <unit> <slot> preview` lists whom it would heal", output);
+    }
+
     [Theory]
     [InlineData("move captain", "ERROR: Usage: move <unit> <x,y>")]
     [InlineData("move captain 9", "ERROR: Usage: move <unit> <x,y>")]
