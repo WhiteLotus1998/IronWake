@@ -346,7 +346,7 @@ public sealed record BattleUnit(
             combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, WeaponBroken(content), hit, crit, beside + Opening.Lowered(Open!, combatant.Stats));
         }
 
-        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true }, Aura = Formation.Aura(state, content, this) + Supports.Bonus(state, content, this), Stoop = countering ? 0 : Ironwake.Core.Stoop.Bonus(content, this) };
+        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true }, Aura = Formation.Aura(state, content, this) + Supports.Bonus(state, content, this), Stoop = countering ? 0 : Ironwake.Core.Stoop.Bonus(content, this), Hollow = Hollow is not null };
     }
 
     /// <summary>
