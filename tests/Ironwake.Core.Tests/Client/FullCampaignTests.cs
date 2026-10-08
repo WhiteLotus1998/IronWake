@@ -132,8 +132,8 @@ public class FullCampaignTests
     [Fact]
     public void TheLazarHouseAndShrineHandPlaysPayThePsalterInsideTheCampaign()
     {
-        // Without casts, as the Psalter-art script is written (issue 1392).
-        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, Quest + ",maud_1,maud_2", casts: false);
+        // With casts since the seize step (issue 1409): the Shrine's hand play runs out a turn early and the heuristic takes the altar.
+        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, Quest + ",maud_1,maud_2");
         var lines = written.Text.Split('\n');
         var client = new CampaignClient(Content, Fixture.RealContentDirectory(), Start());
         Script.PlayCampaign(client, written.Text);
@@ -147,10 +147,9 @@ public class FullCampaignTests
 
     private const string ArtQuests = Quest + ",maud_1,maud_2";
 
-    // Written by a heuristic that casts no area tome (issue 1392): casting, it fails to reach the art at each of twelve
-    // variants tried from 32 to 58, most lost on map 7.
+    // Written by the casting heuristic since the seize step (issue 1409); before it, the Shrine was lost and the art never reached.
     private static CampaignScript.Result WriteArt(IReadOnlyCollection<string>? deploy) =>
-        CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, ArtQuests, deploy: deploy, stopAfter: new[] { "art" }, casts: false);
+        CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, ArtQuests, deploy: deploy, stopAfter: new[] { "art" });
 
     [Fact]
     public void ThePsalterArtScriptMatchesTheConsoleByteForByteThroughTheClickPath()
@@ -192,10 +191,12 @@ public class FullCampaignTests
     [Fact]
     public void DeploySeatsTheArtBearerOnlyAfterTheNamedQuestsByBenchingFromTheBack()
     {
-        var seated = WriteArt(new[] { "maud" }).Text.Split('\n');
+        var seatedRun = WriteArt(new[] { "maud" });
+        var seated = seatedRun.Text.Split('\n');
         var unseated = WriteArt(null);
 
-        Assert.DoesNotContain("art", unseated.Touched);
+        // Since the seize step (issue 1409) the unseated company reaches the art too, three maps later.
+        Assert.True(!unseated.Touched.Contains("art") || unseated.Maps > seatedRun.Maps);
         Assert.Equal("bench dunstan", seated[Array.IndexOf(seated, "pick rook") - 1]);
         Assert.True(Array.IndexOf(seated, "bench dunstan") > Array.IndexOf(seated, "quest maud_2 wren"));
     }

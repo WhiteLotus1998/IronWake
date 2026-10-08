@@ -1,4 +1,4 @@
-# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script 644 --difficulty recruit --permadeath off --variant 44 --quest pell_1,maud_1,maud_2 --deploy maud --stop-after art --no-casts`.
+# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script 644 --difficulty recruit --permadeath off --variant 44 --quest pell_1,maud_1,maud_2 --deploy maud --stop-after art`.
 # Played by `campaign --seed 644 --difficulty recruit --permadeath off`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 645);
 # the heuristic player fights the rest; each camp takes the actions not yet taken that the record accepts.
 march
@@ -151,30 +151,32 @@ wait wren
 end
 move captain 4,6
 wait captain
-move pell 5,6
-attack pell archer-2
-move teodor 4,7
+move pell 3,5
+item pell gust 5,5
+move teodor 5,7
 wait teodor
-move wren 3,5
+move wren 3,6
 wait wren
 end
-attack pell archer-2
-move captain 5,5
-attack captain toll_brigand-1
-move teodor 4,4
+move pell 4,4
+item pell gust 5,5
+move captain 5,4
+order fall back
+fallback pell stay
+move teodor 6,5
 wait teodor
-move wren 5,4
+move wren 4,5
 wait wren
 end
 move captain 6,3
 attack captain toll_warden-1
-move pell 6,5
-wait pell
-move teodor 6,4
-wait teodor
-move wren 6,2
-attack wren archer-1
-end !
+move pell 6,4
+item pell gust 6,2
+move teodor 6,2
+attack teodor archer-1
+move wren 6,5
+wait wren
+end
 move captain 7,1
 leave
 build forge
@@ -244,12 +246,12 @@ move dunstan 6,4
 attack dunstan rider-1
 move ottilie 6,5
 attack ottilie rider-1
-move pell 9,6
-attack pell weir_shieldbearer-1
-move teodor 7,3
-attack teodor rider-1
-move wren 8,4
-attack wren rider-1
+move pell 9,4
+attack pell rider-1
+move teodor 9,6
+wait teodor
+move wren 9,9
+attack wren soldier-1
 end
 move captain 12,6
 attack captain weir_foreman-1
@@ -259,7 +261,7 @@ move ottilie 6,1
 item ottilie field_dressing
 move pell 11,6
 attack pell weir_foreman-1
-move teodor 10,2
+move teodor 12,7
 wait teodor
 move wren 10,6
 wait wren
@@ -270,10 +272,8 @@ move dunstan 12,6
 attack dunstan weir_foreman-1
 move ottilie 9,2
 wait ottilie
-move teodor 9,5
-wait teodor
-move wren 13,5
-attack wren weir_foreman-1
+move teodor 13,7
+attack teodor weir_foreman-1
 leave
 quest maud_2 wren
 move maud 6,8
@@ -314,8 +314,9 @@ move wren 6,1
 attack wren archer-1
 end
 move wren 5,1
-attack wren archer-1
 move maud 7,0
+wait maud
+wait wren
 end
 leave
 bench dunstan
@@ -336,26 +337,27 @@ move wren 9,4
 wait wren
 end
 item maud maud_psalter teodor art unasked
-move captain 7,3
+move captain 8,4
 attack captain archer-1
-move ottilie 9,8
+move ottilie 9,6
 attack ottilie brigand-1
 move rook 8,6
 attack rook brigand-1
+move wren 9,3
 attack wren soldier-1
 end !
-move captain 4,2
-attack captain soldier-2
-move maud 9,5
-attack maud soldier-1
-move ottilie 8,6
+move captain 8,3
+attack captain brigand-2
+move maud 8,6
+attack maud hexer-1
+move ottilie 7,5
 attack ottilie hexer-1
 move teodor 7,6
 attack teodor hexer-1
-end
+move wren 5,3
+attack wren soldier-2
+end !
 move captain 6,4
-wait captain
-move maud 7,5
-attack maud brigand-3
+attack captain brigand-3
 leave
 # stopped at the camp before sallow_grange: art taken

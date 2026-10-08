@@ -326,6 +326,12 @@ public sealed class HeuristicPlayer : IPlayer
             return WithMove(unit, stand, new Wait(unit.Id));
         }
 
+        var seized = SeizeTile(state, content, unit, tiles);
+        if (seized is { } throne)
+        {
+            tiles = new List<Coord> { throne };
+        }
+
         var enemies = state.UnitsOf(Side.Enemy).ToList();
         var enemyReach = enemies.Select(e => state.ReachOf(e, content)).ToList();
 
@@ -397,6 +403,11 @@ public sealed class HeuristicPlayer : IPlayer
         if (heal is not null)
         {
             return heal;
+        }
+
+        if (seized is { } held)
+        {
+            return WithMove(unit, held, Idle(state, content, unit, held));
         }
 
         if (unit.Moved || state.Map.Win == WinCondition.Survive)
@@ -507,6 +518,32 @@ public sealed class HeuristicPlayer : IPlayer
         }
 
         return CheapestExit(state, tiles, reach);
+    }
+
+    /// <summary>
+    /// The seize step (issue 1409): on a Seize map, the throne tile a captain that has not moved can end on this turn,
+    /// or null. Its attack, cast or heal is then planned from that tile alone, and with none it waits there, so a heal
+    /// or a strike from elsewhere never costs the throne. On a plain Seize map the step wins outright and is always
+    /// taken. On a map that must hold the throne through an enemy phase it is taken when the tile's no-crit exposure
+    /// stays under the captain's HP, the veto's rule, and on the last turn regardless, when not stepping loses the map
+    /// as surely as falling does.
+    /// </summary>
+    public static Coord? SeizeTile(BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles)
+    {
+        if (state.Map.Win != WinCondition.Seize || !unit.IsCaptain || unit.Moved)
+        {
+            return null;
+        }
+
+        foreach (var tile in tiles.Where(state.Map.IsThrone).OrderBy(t => t == unit.At ? 0 : 1).ThenBy(t => t))
+        {
+            if (!state.Map.SeizeHold || state.Turn >= state.Map.TurnLimit || Exposure.Of(state, content, unit, tile).NoCrit < unit.Hp)
+            {
+                return tile;
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
