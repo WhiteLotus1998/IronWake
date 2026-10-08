@@ -35,7 +35,8 @@ public sealed record CombatResult(ValueList<StrikeEvent> Strikes, int AttackerHp
 /// <see cref="RollKey.Combat"/> documents, and the crit roll is drawn only when the hit landed.
 /// When the exchange is over and both stand, a side with a <see cref="SideForecast.Bite"/> one of whose
 /// strikes hit bites once (issue 872): the attacker's drake, or else the defender's; one bite a combat.
-/// The bite draws no roll. A side's <see cref="SideForecast.Stoop"/> is added to its first strike when it hits (issue 1127).
+/// The bite draws no roll. A side's <see cref="SideForecast.Stoop"/> is added to its first strike when it hits (issue 1127),
+/// and a side that <see cref="SideForecast.CashesMark"/> deals its marked damage on its first hit alone (issue 1329).
 /// </summary>
 public static class CombatResolver
 {
@@ -48,22 +49,24 @@ public static class CombatResolver
         var defenderHp = defender.Hp;
         var attackerStrikes = 0;
         var defenderStrikes = 0;
+        var attackerCashed = false;
+        var defenderCashed = false;
 
-        Round(attacker, defender, forecast.Attacker, ref defenderHp, ref attackerStrikes);
+        Round(attacker, defender, forecast.Attacker, ref defenderHp, ref attackerStrikes, ref attackerCashed);
         if (defenderHp > 0 && forecast.Defender.Strikes)
         {
-            Round(defender, attacker, forecast.Defender, ref attackerHp, ref defenderStrikes);
+            Round(defender, attacker, forecast.Defender, ref attackerHp, ref defenderStrikes, ref defenderCashed);
         }
 
         if (attackerHp > 0 && defenderHp > 0)
         {
             if (forecast.Attacker.Doubles)
             {
-                Round(attacker, defender, forecast.Attacker, ref defenderHp, ref attackerStrikes);
+                Round(attacker, defender, forecast.Attacker, ref defenderHp, ref attackerStrikes, ref attackerCashed);
             }
             else if (forecast.Defender.Strikes && forecast.Defender.Doubles)
             {
-                Round(defender, attacker, forecast.Defender, ref attackerHp, ref defenderStrikes);
+                Round(defender, attacker, forecast.Defender, ref attackerHp, ref defenderStrikes, ref defenderCashed);
             }
         }
 
@@ -81,15 +84,15 @@ public static class CombatResolver
 
         return new CombatResult(strikes, attackerHp, defenderHp) { Bite = bite };
 
-        void Round(Combatant striker, Combatant target, SideForecast side, ref int targetHp, ref int strikeIndex)
+        void Round(Combatant striker, Combatant target, SideForecast side, ref int targetHp, ref int strikeIndex, ref bool cashed)
         {
             for (var i = 0; i < side.StrikesPerRound && targetHp > 0; i++)
             {
-                Strike(striker, target, side, ref targetHp, strikeIndex++);
+                Strike(striker, target, side, ref targetHp, strikeIndex++, ref cashed);
             }
         }
 
-        void Strike(Combatant striker, Combatant target, SideForecast side, ref int targetHp, int strikeIndex)
+        void Strike(Combatant striker, Combatant target, SideForecast side, ref int targetHp, int strikeIndex, ref bool cashed)
         {
             var rollA = rng.Roll(RollKey.Combat(context.Turn, context.Phase, striker.Id, target.Id, strikeIndex, CombatRoll.HitA));
             var rollB = scheme == RollScheme.TwoRollAverage
@@ -98,7 +101,9 @@ public static class CombatResolver
             var hit = Combat.Lands(side.HitChance, rollA, rollB, scheme);
             var crit = hit
                 && rng.Roll(RollKey.Combat(context.Turn, context.Phase, striker.Id, target.Id, strikeIndex, CombatRoll.Crit)) < side.CritChance;
-            var damage = !hit ? 0 : (crit ? side.CritDamage : side.Damage) + (strikeIndex == 0 ? side.Stoop : 0);
+            var marked = hit && side.CashesMark && !cashed;
+            cashed |= marked;
+            var damage = !hit ? 0 : (marked ? (crit ? side.MarkedCritDamage : side.MarkedDamage) : crit ? side.CritDamage : side.Damage) + (strikeIndex == 0 ? side.Stoop : 0);
             targetHp = Math.Max(0, targetHp - damage);
             strikes = strikes.Add(new StrikeEvent(strikes.Count, striker.Id, target.Id, hit, crit, damage, targetHp));
         }

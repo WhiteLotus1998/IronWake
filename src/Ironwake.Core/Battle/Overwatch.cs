@@ -178,7 +178,7 @@ public static class Overwatch
             : 0;
         var hit = Combat.Lands(forecast.HitChance, rollA, rollB, state.Scheme);
         var crit = hit && rng.Roll(RollKey.Watch(state.Turn, state.Phase, watcher.Id, target.Id, CombatRoll.Crit)) < forecast.CritChance;
-        var damage = !hit ? 0 : crit ? forecast.CritDamage : forecast.Damage;
+        var damage = !hit ? 0 : forecast.CashesMark ? (crit ? forecast.MarkedCritDamage : forecast.MarkedDamage) : crit ? forecast.CritDamage : forecast.Damage;
         var after = Math.Max(0, target.Hp - damage);
         return new StrikeEvent(0, watcher.Id, target.Id, hit, crit, damage, after);
     }

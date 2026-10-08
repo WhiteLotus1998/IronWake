@@ -1059,6 +1059,16 @@ public static class ContentSerializer
             writer.WriteNumber("areaHeal", weapon.AreaHeal);
         }
 
+        if (weapon.Area > 0)
+        {
+            writer.WriteNumber("area", weapon.Area);
+        }
+
+        if (weapon.Marks)
+        {
+            writer.WriteBoolean("marks", true);
+        }
+
         if (weapon.Ignites)
         {
             writer.WriteBoolean("ignites", true);

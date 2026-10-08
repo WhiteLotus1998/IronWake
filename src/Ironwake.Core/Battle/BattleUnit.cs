@@ -103,6 +103,9 @@ public sealed record BattleUnit(
     /// <summary>The caster each tick of the curse heals (issue 1328), the last to lay it; null when not cursed.</summary>
     public string? CursedBy { get; init; }
 
+    /// <summary>The school whose next hit on the unit is marked (issue 1329, <see cref="Core.Mark"/>); null when not marked.</summary>
+    public MagicSchool? Mark { get; init; }
+
     /// <summary>
     /// A stun rider's clock (issue 1244, <see cref="Core.Stun"/>), counted as the chill's is
     /// (<see cref="Frost.AtPhaseChange"/>): 0 not stunned; 1 stunned, its side's next phase not yet
@@ -233,7 +236,7 @@ public sealed record BattleUnit(
 
     /// <summary>
     /// The weapon in a slot if the unit can strike with it: a weapon its class can use at a
-    /// rank the unit has reached (issue 67) that is not a healing spell, skipping a spell with no uses left this battle
+    /// rank the unit has reached (issue 67) that is not a healing spell nor an area tome (issue 1329), skipping a spell with no uses left this battle
     /// (section 5: a physical weapon at zero uses still fights, broken; a spent spell
     /// does not). Null for an empty slot, an item, a healing spell, or a spent spell.
     /// </summary>
@@ -246,7 +249,7 @@ public sealed record BattleUnit(
 
         var item = Unit.Inventory.Items[slot];
         var unitClass = content.Class(Unit.ClassId);
-        return content.Weapons.TryGetValue(item.ItemId, out var weapon) && Unit.CanWield(weapon, unitClass) && !weapon.Heals
+        return content.Weapons.TryGetValue(item.ItemId, out var weapon) && Unit.CanWield(weapon, unitClass) && !weapon.Heals && weapon.Area == 0
             && (item.Uses > 0 || !weapon.IsMagic)
             ? content.WeaponOf(Unit, Frost.Shape(Forge.Shape(Heirloom.Shape(Kinsbane.Shape(weapon, item), item), item), item, content))
             : null;
@@ -332,9 +335,11 @@ public sealed record BattleUnit(
     /// partner's tier beside it joins the aura (<see cref="Supports.Bonus"/>, issue 77).
     /// An art that strikes once makes the side <see cref="Combatant.SingleStrike"/> (issue 739).
     /// An open unit answering a strike by an ally of its opener reads its Def and Res lower (<see cref="Opening.Lowered"/>, issue 772).
+    /// <paramref name="casting"/> is an area tome the unit casts in place of its equipped weapon (issue 1329, <see cref="AreaCast"/>):
+    /// whole, and striking once.
     /// A strike, never a counter, carries the Sky Captain's Stoop after a long flight (<see cref="Ironwake.Core.Stoop"/>, issue 1127).
     /// </summary>
-    public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null)
+    public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null, Weapon? casting = null)
     {
         if (countering && art is not null)
         {
@@ -344,7 +349,7 @@ public sealed record BattleUnit(
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, this, countering);
         critAvoid += Grudges.CritAvoidAgainst(this, against);
         hit += Brace.StrikeHit(state, this, against) + Signatures.StrikeHit(state, content, this, countering);
-        var weapon = EquippedWeapon(content);
+        var weapon = casting ?? EquippedWeapon(content);
         if (art is not null && weapon is not null)
         {
             weapon = art.Apply(weapon);
@@ -352,13 +357,14 @@ public sealed record BattleUnit(
 
         var terrain = state.Map.TerrainAt(At, content);
         var beside = Formation.Beside(state, content, this) + Core.Armor.Bonus(this);
-        var combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, WeaponBroken(content), hit, crit, beside);
+        var broken = casting is null && WeaponBroken(content);
+        var combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, broken, hit, crit, beside);
         if (countering && Opening.Reads(this, against))
         {
-            combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, WeaponBroken(content), hit, crit, beside + Opening.Lowered(Open!, combatant.Stats));
+            combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, broken, hit, crit, beside + Opening.Lowered(Open!, combatant.Stats));
         }
 
-        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true }, Aura = Formation.Aura(state, content, this) + Supports.Bonus(state, content, this), Stoop = countering ? 0 : Ironwake.Core.Stoop.Bonus(content, this), Hollow = Hollow is not null };
+        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true } || casting is not null, Aura = Formation.Aura(state, content, this) + Supports.Bonus(state, content, this), Stoop = countering ? 0 : Ironwake.Core.Stoop.Bonus(content, this), Hollow = Hollow is not null, Marked = Mark };
     }
 
     /// <summary>

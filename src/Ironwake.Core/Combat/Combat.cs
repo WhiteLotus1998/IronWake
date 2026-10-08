@@ -226,7 +226,8 @@ public static class Combat
             CritGrounds: Armed(striker).GroundsAgainst(target.Movement),
             Bite: Bite(striker, distance),
             NeverDoubles: striker.Class.SingleStrike,
-            Stoop: striker.Stoop);
+            Stoop: striker.Stoop,
+            CashesMark: Mark.Cashes(striker, target));
     }
 
     private static Weapon Armed(Combatant unit) =>

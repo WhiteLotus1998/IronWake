@@ -39,7 +39,7 @@ public sealed class PlaySession
           move <unit> <x,y> via <x,y>  Move by way of a tile: the cheapest route to it, then on, within the unit's Mov
           move <unit> <x,y> [via <x,y>] preview  The route the move would walk and the planks it would wear, without moving
           attack <unit> <target> [slot|weapon] [art <id>] [!]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first); a swing whose counter is lethal to the attacker is refused unless the line ends in !
-          item <unit> <slot|item> [ally] Use the item in a slot or named by id; a healing spell names the ally, and so does a tome that raises ground (earthwork under the ally until the caster's next phase ends); a tome that raises the dead names a fallen foe or its tile; an area heal names no one, and `item <unit> <slot> preview` lists whom it would heal
+          item <unit> <slot|item> [ally] Use the item in a slot or named by id; a healing spell names the ally, and so does a tome that raises ground (earthwork under the ally until the caster's next phase ends); a tome that raises the dead names a fallen foe or its tile; an area heal names no one, and `item <unit> <slot> preview` lists whom it would heal; an area tome names a unit or a tile, and `item <unit> <slot> <unit|x,y> preview` lists every strike it would make
           wait <unit>              End the unit's action
           undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
           canto <unit> <x,y|stay>  After acting, a unit with Move Again moves on what its move left, or stays
@@ -860,6 +860,13 @@ public sealed class PlaySession
                 }
 
                 break;
+            case "item" when words.Length == 5 && words[4] == "preview":
+                if (TrySlot(words[1], words[2], out var castSlot))
+                {
+                    PrintAreaCastPreview(words[1], castSlot!.Value, words[3]);
+                }
+
+                break;
             case "item" when words.Length is 3 or 4:
                 if (TrySlot(words[1], words[2], out var itemSlot))
                 {
@@ -1012,6 +1019,33 @@ public sealed class PlaySession
         }
 
         _out.WriteLine(AreaHeal.Preview(_state, _content, caster, _content.WeaponOf(caster.Unit, weapon)));
+    }
+
+    /// <summary>
+    /// <c>item &lt;unit&gt; &lt;slot&gt; &lt;unit|x,y&gt; preview</c> (issue 1329): an area tome's forecast, every enemy it would
+    /// strike with its hit and damage, with nothing applied. Any other item is refused.
+    /// </summary>
+    private void PrintAreaCastPreview(string unitId, int slot, string target)
+    {
+        if (Find(unitId) is not { } caster)
+        {
+            return;
+        }
+
+        var stack = caster.Unit.Inventory.Items[slot];
+        if (!_content.Weapons.TryGetValue(stack.ItemId, out var weapon) || weapon.Area == 0)
+        {
+            Error($"only an area tome is previewed at a target; {stack.ItemId} is not one");
+            return;
+        }
+
+        if (AreaCast.TileOf(_state, target) is not { } at)
+        {
+            Error($"no living unit or tile '{target}' to cast at");
+            return;
+        }
+
+        _out.WriteLine(AreaCast.Preview(_state, _content, caster, _content.WeaponOf(caster.Unit, weapon), at));
     }
 
     /// <summary>The terrain's card (issue 610) after its glyph: <c>^  Forest. -20 to hit a unit here, ...</c>.</summary>
@@ -2306,7 +2340,7 @@ public sealed class PlaySession
         }
 
         var gate = LearnedGate.Suffix(LearnedGate.Read(content, striker, weapon, struck));
-        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + Curse.ForecastText(content, weapon) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck);
+        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + Curse.ForecastText(content, weapon) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck) + (side is null ? "" : Mark.ForecastText(side));
     }
 
     /// <summary>
@@ -2648,6 +2682,11 @@ public sealed class PlaySession
         if (Curse.CardLine(content, unit, UnitNames.Of(state, content)) is { } cursed)
         {
             lines.Add("  " + cursed);
+        }
+
+        if (Mark.CardLine(unit) is { } marked)
+        {
+            lines.Add("  " + marked);
         }
 
         if (Armor.CardLine(content, unit) is { } armored)
@@ -3225,6 +3264,12 @@ public sealed class PlaySession
                 return $"{names[dr.UnitId]} drains {dr.Amount} from {names[dr.FromUnitId]} (hp {dr.HpAfter})";
             case UnitCursed cu:
                 return $"{names[cu.UnitId]} is cursed by {names[cu.ByUnitId]}: Hit -{cu.Blind}, and {cu.Amount} hp to {names[cu.ByUnitId]} at the start of each of its side's next {SchoolRider.PhasesText(cu.Phases)}";
+            case UnitMarked um:
+                return $"{names[um.UnitId]} is marked by {names[um.ByUnitId]}: the next {um.School.Label()} hit on it deals {Mark.Times}";
+            case MarkCashed mc:
+                return $"{names[mc.ByUnitId]} cashes the mark on {names[mc.UnitId]}";
+            case AreaCastAt ac:
+                return $"{names[ac.CasterId]} casts {(content.Weapons.TryGetValue(ac.SpellId, out var storm) ? storm.Name : ac.SpellId)} at {ac.At}, striking {string.Join(", ", ac.Struck.Select(id => names[id]))} ({ac.UsesLeft} {(ac.UsesLeft == 1 ? "use" : "uses")} left)";
             case CurseTicked ct:
                 return $"the curse takes {ct.Amount} from {names[ct.UnitId]} (hp {ct.HpAfter})" + (ct.CasterId is { } caster ? $"; {names[caster]} heals {ct.Healed} (hp {ct.CasterHpAfter})" : "; its caster is gone, and it heals no one");
             case BurnCashed c:
