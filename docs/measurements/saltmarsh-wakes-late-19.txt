@@ -1,0 +1,17 @@
+Saltmarsh Ford, the late sample at turn_limit 19 (Table round 472, after issue 1365 and DECISIONS/0339). Sim --full, 200 seeds, two rolls, main at 663ce4c.
+
+== docs/samples/saltmarsh_ford_wakes_late_19.map (wakes fort late, turn_limit 19)
+gate 1 beatable: docs/samples/saltmarsh_ford_wakes_late_19.map, heuristic wins 39/200 (20 %), winning turn median 10 p90 15 limit 19, losses 147 timeout 14 captain 0 protected, quiet tail 3.5, refused kill p50 0.8674 over 147, at the stall p50 0.0070 over 147, two-roll average: FAILED
+gate 4 no dead weight: docs/samples/saltmarsh_ford_wakes_late_19.map, 3 recruits x 200 seeds, median drop 0.005: FAILED
+
+== for comparison (docs/measurements/saltmarsh-wakes-1365.txt)
+late at 18: heuristic wins 39/200, winning turn median 10 p90 15, losses 147 timeout 14 captain
+shipped cut: heuristic wins 50/200, winning turn median 12 p90 16, losses 133 timeout 17 captain
+
+== the loss split, --trace on seeds 1 to 40 of the 19-turn sample
+6 won (turns 9 to 14), 4 lost with the captain dead (turns 6 to 14), 30 lost on the clock.
+In all 30 timeouts the Bandit Leader is alive on his fort at the end; in 27 he is the last enemy to swing,
+at the captain parked beside him, phase after phase to turn 19 (seed 1: the captain alone at 12 HP, the leader at 26 of 26 swinging and missing from turn 13 on, neither ever striking first).
+Recruit deaths in the 30 timeouts: 1 in 5 games, 2 in 11, 3 in 14.
+The extra turn buys nothing: the stall is the heuristic's refusal to strike the leader (refused kill p50 0.8674,
+the same figure on every arm), not the clock.
