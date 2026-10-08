@@ -89,6 +89,31 @@ public class WakeOnDeathTests
     }
 
     [Fact]
+    public void ASleepingGuardThatStrikesFromItsOwnTileIsPricedAndNotNamedAsAQuestion()
+    {
+        var state = Start(map: Field);
+        var hale = state.Find("hale")!;
+        var tile = new Coord(4, 1);
+
+        Assert.Contains(Queries.Threats(state, Starter, hale, tile)!, l => l.Enemy.Id == "archer-1");
+        Assert.Empty(Queries.SleepingThreats(state, Starter, hale, tile)!);
+        Assert.DoesNotContain("could strike here if woken", Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, tile, Queries.Threats(state, Starter, hale, tile)!, Queries.SleepingThreats(state, Starter, hale, tile)!));
+    }
+
+    [Fact]
+    public void ASleepingGuardThatStrikesOnlyWokenIsStillNamedAsAQuestion()
+    {
+        var state = Start(map: Field);
+        var hale = state.Find("hale")!;
+        var tile = new Coord(3, 1);
+
+        Assert.DoesNotContain(Queries.Threats(state, Starter, hale, tile)!, l => l.Enemy.Id == "archer-1");
+        var asleep = Assert.Single(Queries.SleepingThreats(state, Starter, hale, tile)!);
+        Assert.Equal("loft", asleep.Group);
+        Assert.Equal(new[] { "archer-1" }, asleep.Members.Select(m => m.Id));
+    }
+
+    [Fact]
     public void TheWakeOnDeathHeaderParsesAndWritesBack()
     {
         var map = MapFixture.Parse(Field);
