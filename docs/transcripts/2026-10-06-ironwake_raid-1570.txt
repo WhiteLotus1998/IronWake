@@ -1079,6 +1079,7 @@ C  teodor           Teodor L4 pikeman          11,4   hp 6/22   Plain
 B  wren             Wren L4 cadet              10,3   hp 21/21  Plain
 > attack captain archer-1
 Forecast Alder Fenn -> Archer: acc 86% dmg 11 crit 5%; counter: none
+  Seen before the recall: Alder Fenn hits
 Alder Fenn attacks Archer
   Alder Fenn hits Archer for 11 (hp 8)
   Alder Fenn hp 23, Archer hp 8
@@ -1139,6 +1140,7 @@ C  teodor           Teodor L4 pikeman          11,4   hp 6/22   Plain
 B  wren             Wren L4 cadet              9,3    hp 21/21  Plain
 > attack wren archer-1
 Forecast Wren -> Archer: acc 83% dmg 10 crit 4%; counter: none
+  Seen before the recall: Wren hits
 Wren attacks Archer
   Wren hits Archer for 10 (hp 0)
   Wren hp 21, Archer hp 0
@@ -1225,6 +1227,7 @@ C  teodor           Teodor L4 pikeman          11,4   hp 6/22   Plain
 B  wren             Wren L4 cadet              9,3    hp 21/21  Plain  done
 > attack pell hexer-1
 Forecast Pell -> Hexer with Cinder: acc 99% dmg 8 crit 2%; counter: acc 99% dmg 8 crit 1% (Cinder 8 of 8 left)
+  Seen before the recall: Pell hits, Hexer hits
 Pell attacks Hexer
   Pell hits Hexer for 8 (hp 9)
   Hexer hits Pell for 8 (hp 9)
@@ -1257,6 +1260,7 @@ C  teodor           Teodor L4 pikeman          11,4   hp 6/22   Plain
 B  wren             Wren L4 cadet              9,3    hp 21/21  Plain  done
 > attack dunstan hexer-1
 Forecast Dunstan -> Hexer: acc 79% dmg 13 crit 0%; counter: acc 99% dmg 13 crit 2% (Cinder 7 of 8 left)
+  Seen before the recall: Dunstan hits
 Dunstan attacks Hexer
   Dunstan hits Hexer for 13 (hp 0)
   Dunstan hp 15, Hexer hp 0
@@ -1670,6 +1674,7 @@ C  teodor           Teodor L4 pikeman          11,4   hp 16/22  Plain
 B  wren             Wren L4 cadet              9,3    hp 11/21  Plain
 > attack ottilie soldier-2
 Forecast Ottilie -> Soldier 2: acc 81% dmg 6 crit 5%; counter: none
+  Seen before the recall: Ottilie hits
 Ottilie attacks Soldier 2
   Ottilie hits Soldier 2 for 6 (hp 8)
   Ottilie hp 4, Soldier 2 hp 8
@@ -1700,6 +1705,7 @@ C  teodor           Teodor L4 pikeman          11,4   hp 16/22  Plain
 B  wren             Wren L4 cadet              9,3    hp 11/21  Plain
 > attack wren soldier-2
 Forecast Wren -> Soldier 2: acc 83% dmg 8 crit 4%; counter: acc 62% dmg 10 crit 0%
+  Seen before the recall: Wren hits
 Wren attacks Soldier 2
   Wren hits Soldier 2 for 8 (hp 0)
   Wren hp 11, Soldier 2 hp 0
@@ -1756,6 +1762,7 @@ C  teodor           Teodor L4 pikeman          11,4   hp 16/22  Plain
 B  wren             Wren L5 cadet              9,3    hp 12/22  Plain  done
 > attack pell brigand-2 art overcast
 Forecast Pell -> Brigand 2 with Cinder: acc 99% dmg 19 crit 3%; counter: none
+  Seen before the recall: Pell hits
   Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 6 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Brigand 2
@@ -1812,6 +1819,7 @@ C  teodor           Teodor L4 pikeman          11,4   hp 16/22  Plain
 B  wren             Wren L5 cadet              9,3    hp 12/22  Plain  done
 > attack dunstan brigand-2
 Forecast Dunstan -> Brigand 2: acc 74% dmg 11 crit 1%; counter: acc 74% dmg 9 crit 0%
+  Seen before the recall: Dunstan hits
 Dunstan attacks Brigand 2
   Dunstan crits Brigand 2 for 33 (hp 0)
   Dunstan hp 15, Brigand 2 hp 0

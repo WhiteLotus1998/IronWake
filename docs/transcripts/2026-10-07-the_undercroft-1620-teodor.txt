@@ -759,6 +759,7 @@ c  soldier-1        Soldier L4 pikeman         6,7    hp 11/21  Plain  group cel
 B  teodor           Teodor L5 pikeman          5,7    hp 15/23  Plain
 > attack pell soldier-1
 Forecast Pell -> Soldier 1 with Cinder: acc 99% dmg 14 crit 3%; counter: none
+  Seen before the recall: Pell hits
 Pell attacks Soldier 1
   Pell hits Soldier 1 for 14 (hp 0)
   Pell hp 17, Soldier 1 hp 0

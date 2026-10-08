@@ -1102,6 +1102,7 @@ C  teodor           Teodor L4 pikeman          8,4    hp 14/22  Plain
 B  wren             Wren L4 cadet              8,3    hp 21/21  Plain
 > attack keziah hexer-1
 Forecast Keziah -> Hexer with Kinsbane: acc 80% dmg 18 crit 1%; counter: acc 99% dmg 14 crit 1% (Cinder 8 of 8 left)
+  Seen before the recall: Keziah hits
   Kills on hit: Keziah +10 HP, to max 24 (Kinsbane feeds, fed 2)
 Keziah attacks Hexer
   Keziah hits Hexer for 18 (hp 0)
@@ -1164,6 +1165,7 @@ C  teodor           Teodor L4 pikeman          7,3    hp 14/22  Plain
 B  wren             Wren L4 cadet              8,3    hp 21/21  Plain
 > attack teodor brigand-2
 Forecast Teodor -> Brigand 2 with Iron Lance: acc 79% dmg 12 crit 3%; counter: acc 65% dmg 11 crit 0%
+  Seen before the recall: Teodor hits
 Teodor attacks Brigand 2
   Teodor hits Brigand 2 for 12 (hp 12)
   Brigand 2 misses Teodor

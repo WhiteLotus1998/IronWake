@@ -1605,6 +1605,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 1 turn to an exit (last start: turn 7), Wren 1 turn to an exit (last start: turn 7)
 > attack pell rider-1
 Forecast Pell -> Rider 1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
+  Seen before the recall: Pell hits
 Pell attacks Rider 1
   Pell hits Rider 1 for 12 (hp 0)
   Pell hp 16, Rider 1 hp 0

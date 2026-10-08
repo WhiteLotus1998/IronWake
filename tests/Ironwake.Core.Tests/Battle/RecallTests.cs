@@ -24,7 +24,7 @@ public class RecallTests
         Assert.True(result.Accepted);
         Assert.Equal(new Recalled(1, 2), Assert.Single(result.Events));
         Assert.Equal(2, result.Next.RecallCharges);
-        Assert.Equal(moved with { RecallCharges = 2 }, result.Next);
+        Assert.Equal(moved with { RecallCharges = 2, Seen = fought.Struck }, result.Next);
         Assert.Single(result.Next.History);
         Assert.Equal(start with { History = ValueList<BattleState>.Empty }, result.Next.History[0]);
     }

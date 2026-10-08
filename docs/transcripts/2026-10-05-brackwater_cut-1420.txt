@@ -1233,6 +1233,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > attack pell shieldbearer-1 art overcast
 Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 18 crit 3%; counter: none
+  Seen before the recall: Pell hits
   Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 7 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Shieldbearer
@@ -1270,6 +1271,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > attack wren shieldbearer-1
 Forecast Wren -> Shieldbearer: acc 93% dmg 3 x2 crit 4%; counter: acc 25% dmg 7 crit 0%
+  Seen before the recall: Wren hits
 Wren attacks Shieldbearer
   Wren hits Shieldbearer for 3 (hp 0)
   Wren hp 12, Shieldbearer hp 0

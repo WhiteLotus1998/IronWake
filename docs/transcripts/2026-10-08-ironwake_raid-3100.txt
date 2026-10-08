@@ -974,6 +974,7 @@ C  teodor           Teodor L3 pikeman          11,7   hp 22/22  Plain
 B  wren             Wren L3 cadet              11,4   hp 11/21  Plain
 > attack pell soldier-1 1
 Forecast Pell -> Soldier 1 with Cinder: acc 99% dmg 13 crit 2%; counter: none
+  Seen before the recall: Pell hits
 Pell attacks Soldier 1
   Pell hits Soldier 1 for 13 (hp 2)
   Pell hp 16, Soldier 1 hp 2
@@ -1125,6 +1126,7 @@ C  teodor           Teodor L3 pikeman          11,7   hp 22/22  Plain
 B  wren             Wren L3 cadet              11,4   hp 1/21   Plain  done
 > attack keziah brigand-1
 Forecast Keziah -> Brigand 1 with Kinsbane: acc 76% dmg 16 crit 2%; counter: acc 65% dmg 14 crit 0%
+  Seen before the recall: Keziah misses, Brigand 1 hits
   Kills on hit: Keziah +10 HP, to max 24 (Kinsbane feeds, fed 1)
 Keziah attacks Brigand 1
   Keziah misses Brigand 1
@@ -1216,6 +1218,7 @@ C  teodor           Teodor L3 pikeman          11,7   hp 22/22  Plain
 B  wren             Wren L3 cadet              11,4   hp 11/21  Plain
 > attack pell soldier-1 1
 Forecast Pell -> Soldier 1 with Cinder: acc 99% dmg 13 crit 2%; counter: none
+  Seen before the recall: Pell hits
 Pell attacks Soldier 1
   Pell hits Soldier 1 for 13 (hp 2)
   Pell hp 16, Soldier 1 hp 2
@@ -1399,6 +1402,7 @@ C  teodor           Teodor L3 pikeman          11,7   hp 22/22  Plain
 B  wren             Wren L3 cadet              11,4   hp 11/21  Plain
 > attack pell soldier-1 1 art overcast
 Forecast Pell -> Soldier 1 with Cinder: acc 99% dmg 18 crit 2%; counter: none
+  Seen before the recall: Pell hits
   Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Soldier 1
@@ -1491,6 +1495,7 @@ C  teodor           Teodor L3 pikeman          11,7   hp 22/22  Plain
 B  wren             Wren L3 cadet              11,4   hp 11/21  Plain
 > attack teodor brigand-1
 Forecast Teodor -> Brigand 1 with Iron Lance: acc 77% dmg 11 crit 2%; counter: acc 65% dmg 12 crit 0%
+  Seen before the recall: Teodor hits, Brigand 1 hits
 Teodor attacks Brigand 1
   Teodor hits Brigand 1 for 11 (hp 0)
   Teodor hp 22, Brigand 1 hp 0

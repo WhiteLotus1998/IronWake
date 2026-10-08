@@ -1259,6 +1259,7 @@ A  teodor           Teodor L4 pikeman          7,3    hp 11/22  Plain  captain
 B  wren             Wren L4 cadet              7,1    hp 14/21  Plain
 > attack wren sworn_captain-1 art heavy_cut
 Forecast Wren -> Sworn Captain: acc 52% dmg 8 x2 crit 2%; counter: acc 73% dmg 13 crit 0%
+  Seen before the recall: Wren hits, Sworn Captain hits
   Technique Heavy Cut: Iron Sword at acc 65 power 9 crit 0 wt 8 range 1-1; spends up to 4 of 29 uses, 2 of them hit or miss
 Wren declares Heavy Cut with Iron Sword, spending 2 extra uses
 Wren attacks Sworn Captain
@@ -1301,6 +1302,7 @@ A  teodor           Teodor L4 pikeman          8,1    hp 11/22  Plain  captain
 B  wren             Wren L4 cadet              7,1    hp 1/21   Plain  done
 > attack teodor sworn_captain-1 family_lance art long_thrust
 Forecast Teodor -> Sworn Captain: acc 67% dmg 6 crit 0%; counter: none
+  Seen before the recall: Teodor misses
   Technique Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 23 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Family Lance, spending 2 extra uses
 Teodor attacks Sworn Captain

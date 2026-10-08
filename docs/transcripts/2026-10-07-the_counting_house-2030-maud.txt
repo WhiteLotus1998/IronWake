@@ -1349,6 +1349,7 @@ b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group ban
 f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 > attack ottilie archer-1
 Forecast Ottilie -> Archer: acc 85% dmg 9 crit 6%; counter: acc 39% dmg 6 crit 0%
+  Seen before the recall: Ottilie hits
 Ottilie attacks Archer
   Ottilie hits Archer for 9 (hp 0)
   Ottilie hp 18, Archer hp 0

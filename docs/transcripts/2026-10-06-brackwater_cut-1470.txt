@@ -2942,8 +2942,10 @@ count: Alder Fenn 1 turn to an exit (last start: turn 7), Dunstan cannot leave b
 > threat dunstan
 Threat on Dunstan at 14,7 (Plain):
   Brawler from 15,7 with Iron Gauntlets (slot 1): acc 95% dmg 4 x2 crit 0%; counter: acc 74% dmg 11 crit 1%
+    Seen before the recall: Brawler hits, Dunstan hits
   Soldier from 14,6 with Iron Lance (slot 1): acc 82% dmg 6 crit 1%; counter: acc 73% dmg 9 crit 0%
   Shieldbearer (once Brawler lights you) from 15,7 (not counted: 15,7 taken) with Iron Lance (slot 1): acc 80% dmg 5 crit 0%; counter: acc 85% dmg 4 crit 1%
+    Seen before the recall: Shieldbearer hits
   If all land: 14 against 11 hp
   In the dark, unpriced: ? at 14,3 (4), ? at 13,3 (5), ? at 10,6 (5), ? at 11,3 (7)
 > end !

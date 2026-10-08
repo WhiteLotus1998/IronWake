@@ -836,6 +836,7 @@ C  teodor           Teodor L1 pikeman          11,7   hp 3/21   Plain
 B  wren             Wren L1 cadet              11,4   hp 14/20  Plain
 > attack pell brigand-2
 Forecast Pell -> Brigand 2 with Cinder: acc 99% dmg 13 crit 3%; counter: none
+  Seen before the recall: Pell hits
 Pell attacks Brigand 2
   Pell hits Brigand 2 for 13 (hp 0)
   Pell hp 16, Brigand 2 hp 0
@@ -1045,6 +1046,7 @@ C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 14/20  Plain
 > attack wren archer-1
 Forecast Wren -> Archer 1: acc 85% dmg 10 crit 3%; counter: none
+  Seen before the recall: Wren misses
 Wren attacks Archer 1
   Wren misses Archer 1
   Wren hp 14, Archer 1 hp 17
@@ -2353,6 +2355,7 @@ C  teodor           Teodor L1 pikeman          12,6   hp 18/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 12/20  Plain
 > attack pell soldier-3
 Forecast Pell -> Soldier 3 with Cinder: acc 99% dmg 12 crit 2%; counter: none
+  Seen before the recall: Pell hits
 Pell attacks Soldier 3
   Pell hits Soldier 3 for 12 (hp 0)
   Pell hp 5, Soldier 3 hp 0
@@ -2417,6 +2420,7 @@ C  teodor           Teodor L1 pikeman          12,7   hp 18/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 12/20  Plain
 > attack teodor archer-1
 Forecast Teodor -> Archer 1: acc 76% dmg 12 crit 1%; counter: none
+  Seen before the recall: Teodor hits
 Teodor attacks Archer 1
   Teodor hits Archer 1 for 12 (hp 5)
   Teodor hp 18, Archer 1 hp 5
@@ -2479,6 +2483,7 @@ C  teodor           Teodor L1 pikeman          12,7   hp 18/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 12/20  Plain
 > attack dunstan archer-1
 Forecast Dunstan -> Archer 1: acc 73% dmg 11 crit 0%; counter: none
+  Seen before the recall: Dunstan hits
 Dunstan attacks Archer 1
   Dunstan hits Archer 1 for 11 (hp 0)
   Dunstan hp 7, Archer 1 hp 0
