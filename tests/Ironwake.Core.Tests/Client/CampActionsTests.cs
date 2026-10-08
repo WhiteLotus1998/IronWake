@@ -41,7 +41,7 @@ public class CampActionsTests
     }
 
     /// <summary>The console's output and event log for <paramref name="script"/> from <see cref="Stocked"/>, loaded from a save.</summary>
-    internal static (string Output, string Log) Console(string script, bool strict = true)
+    internal static (string Output, string Log) Console(string script, bool strict = true, string? contentRoot = null)
     {
         var dir = Path.Combine(Path.GetTempPath(), $"ironwake-camp-actions-{Guid.NewGuid():N}");
         var log = Path.Combine(dir, "campaign.log");
@@ -51,7 +51,7 @@ public class CampActionsTests
             var store = new SaveStore(dir);
             Assert.Null(store.Save("stocked", Stocked()));
             File.WriteAllText(scriptFile, script);
-            var args = new List<string> { "--saves", dir, "--load", "stocked", "--script", scriptFile, "--content", Fixture.RealContentDirectory(), "--log", log };
+            var args = new List<string> { "--saves", dir, "--load", "stocked", "--script", scriptFile, "--content", contentRoot ?? Fixture.RealContentDirectory(), "--log", log };
             if (strict)
             {
                 args.Add("--strict");

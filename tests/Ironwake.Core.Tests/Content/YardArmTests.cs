@@ -83,17 +83,88 @@ public class YardArmTests
     }
 
     [Fact]
-    public void TheTallyCountsDrillsWinsTheClockFallsAndLevels()
+    public void TheTallyReadsTeacherFallsFirstPerDrillAndFirstFallsPerRun()
     {
         var drills = new[]
         {
             new YardRun.Drill(1, "captain", "wren", WeaponType.Sword, true, false, false, 1),
             new YardRun.Drill(2, "captain", "wren", WeaponType.Sword, false, false, false, 0),
             new YardRun.Drill(3, "captain", "wren", WeaponType.Sword, false, true, true, 0),
+            new YardRun.Drill(4, "captain", "wren", WeaponType.Sword, false, true, true, 0),
         };
         var run = new LevelRun.Run([], null) { Drills = drills };
+        var clean = new LevelRun.Run([], null) { Drills = drills[..2] };
 
-        Assert.Equal("  yard: 1 runs, 3 drills, won 1, lost on the clock 1, student fell 1, teacher fell 1, levels taken 1 (1.00 a drill won)", YardRun.TallyLine(YardRun.Arm.On, new[] { run }));
+        Assert.Equal("  yard: teacher fell in 2 of 6 drills; first falls 1 of 2 runs, 1 more after a first; won 2, lost on the clock 2, student fell 2, levels taken 2 (1.00 a drill won)", YardRun.TallyLine(YardRun.Arm.On, new[] { run, clean }));
         Assert.Equal("  no yard: 1 runs, no drills", YardRun.TallyLine(YardRun.Arm.Off, new[] { new LevelRun.Run([], null) }));
+    }
+
+    /// <summary>A lane: the student (Wren) at 1,1, the teacher (the captain) at 3,1, one axe hand at <paramref name="hand"/>.</summary>
+    private static BattleState Lane(string hand, int handHp = 0)
+    {
+        var map = MapFormat.Parse("lane.map", $"""
+            name: Lane
+            size: 9x3
+            win: rout
+            turn_limit: 6
+            recall: 0
+            enemy_level: 1
+
+            .........
+            .........
+            .........
+
+            units:
+            P captain 1,1
+            P recruit 3,1
+            E axe_hand {hand} group:hands behavior:hold
+
+            """, Shipped);
+        var state = Camp().BeginYard(map, "captain", "wren", WeaponType.Sword, Shipped);
+        if (handHp > 0)
+        {
+            var foe = state.UnitsOf(Side.Enemy).Single();
+            state = state.WithUnit(foe with { Hp = handHp });
+        }
+
+        return state;
+    }
+
+    private static BattleUnit Unit(BattleState state, string id) => state.Units.Single(u => u.Id == id);
+
+    [Fact]
+    public void TheYardTeacherSoftensAHandTheStudentCanReachAndFinishThisPhase()
+    {
+        var state = Lane("5,1");
+
+        var plan = new YardPlayer("captain", "wren").Next(state, Shipped);
+
+        Assert.Equal(new Attack("captain", "axe_hand-1"), plan.OfType<Attack>().Single());
+        Assert.True(YardPlayer.Finishes(state, Shipped, Unit(state, "wren"), Unit(state, "axe_hand-1"), 1, null));
+    }
+
+    [Fact]
+    public void TheYardTeacherScreensWhenTheStudentCannotReachTheHand()
+    {
+        var state = Lane("8,1");
+        var far = state.WithUnit(Unit(state, "wren") with { At = new Coord(0, 0) });
+        var reach = far.ReachOf(Unit(far, "wren"), Shipped).Destinations.ToList();
+        Assert.DoesNotContain(reach, t => t.DistanceTo(new Coord(8, 1)) <= 1);
+
+        var plan = new YardPlayer("captain", "wren").Next(far, Shipped);
+
+        Assert.Empty(plan.OfType<Attack>());
+        Assert.Equal(new Wait("captain"), plan[^1]);
+        Assert.Equal(1, plan.OfType<Move>().Single().To.DistanceTo(new Coord(0, 0)));
+    }
+
+    [Fact]
+    public void TheYardStudentActsFirstWhenItCanFinishAHandNow()
+    {
+        var state = Lane("5,1", handHp: 1);
+
+        var plan = new YardPlayer("captain", "wren").Next(state, Shipped);
+
+        Assert.Equal(new Attack("wren", "axe_hand-1"), plan.OfType<Attack>().Single() with { Slot = null });
     }
 }

@@ -1,0 +1,72 @@
+# Issue 1332 (DECISIONS/0335): `ironwake-sim --yard --seeds 40`, Release, on the Ring and the Post with Mt 1 practice weapons and the Sim's soften rule (YardPlayer). Compare yard-arm-1331.txt (the placeholder board, no soften).
+yard: 40 seeds, the heuristic's campaign under three arms; each camp's drill sends the lowest unit to the strongest teacher who can raise it; gate 4 at each arm's carried levels, data only
+  no yard: 40 runs, no drills
+  yard: teacher fell in 12 of 113 drills; first falls 10 of 40 runs, 2 more after a first; won 97, lost on the clock 5, student fell 11, levels taken 45 (0.46 a drill won)
+  yard, no pull: teacher fell in 7 of 115 drills; first falls 7 of 40 runs, 0 more after a first; won 102, lost on the clock 1, student fell 12, levels taken 32 (0.31 a drill won)
+map 1 starting_alone:
+  no yard 1 over 15: gate 1 beatable: starting_alone, heuristic wins 0/40 (0 %), no wins, losses 0 timeout 40 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
+    gate 4 no dead weight: starting_alone, 0 recruits x 40 seeds, median drop 0.000: ok
+  yard 1 over 15: gate 1 beatable: starting_alone, heuristic wins 0/40 (0 %), no wins, losses 0 timeout 40 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
+    gate 4 no dead weight: starting_alone, 0 recruits x 40 seeds, median drop 0.000: ok
+  yard, no pull 1 over 15: gate 1 beatable: starting_alone, heuristic wins 0/40 (0 %), no wins, losses 0 timeout 40 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
+    gate 4 no dead weight: starting_alone, 0 recruits x 40 seeds, median drop 0.000: ok
+map 2 the_mill:
+  no yard 2/1 over 15: gate 1 beatable: the_mill, heuristic wins 25/40 (62 %), winning turn median 8 p90 9 limit 9, losses 5 timeout 0 captain 10 protected, quiet tail 1.0, refused kill p50 0.9724 over 5, at the stall p50 0.0322 over 4, two-roll average: ok
+    gate 4 no dead weight: the_mill, 0 recruits x 40 seeds, median drop 0.000: ok
+  yard 2/1 over 15: gate 1 beatable: the_mill, heuristic wins 25/40 (62 %), winning turn median 8 p90 9 limit 9, losses 5 timeout 0 captain 10 protected, quiet tail 1.0, refused kill p50 0.9724 over 5, at the stall p50 0.0322 over 4, two-roll average: ok
+    gate 4 no dead weight: the_mill, 0 recruits x 40 seeds, median drop 0.000: ok
+  yard, no pull 2/1 over 15: gate 1 beatable: the_mill, heuristic wins 25/40 (62 %), winning turn median 8 p90 9 limit 9, losses 5 timeout 0 captain 10 protected, quiet tail 1.0, refused kill p50 0.9724 over 5, at the stall p50 0.0322 over 4, two-roll average: ok
+    gate 4 no dead weight: the_mill, 0 recruits x 40 seeds, median drop 0.000: ok
+map 3 saltmarsh_ford:
+  no yard 2/1/1/1 over 15: gate 1 beatable: saltmarsh_ford, heuristic wins 8/40 (20 %), winning turn median 11 p90 18 limit 18, losses 28 timeout 4 captain 0 protected, quiet tail 1.8, refused kill p50 0.8674 over 28, at the stall p50 0.0051 over 28, two-roll average: FAILED
+    gate 4 no dead weight: saltmarsh_ford, 3 recruits x 40 seeds, median drop 0.000: FAILED
+  yard 2/1/1/1 over 15: gate 1 beatable: saltmarsh_ford, heuristic wins 8/40 (20 %), winning turn median 11 p90 18 limit 18, losses 28 timeout 4 captain 0 protected, quiet tail 1.8, refused kill p50 0.8674 over 28, at the stall p50 0.0051 over 28, two-roll average: FAILED
+    gate 4 no dead weight: saltmarsh_ford, 3 recruits x 40 seeds, median drop 0.000: FAILED
+  yard, no pull 2/1/1/1 over 15: gate 1 beatable: saltmarsh_ford, heuristic wins 8/40 (20 %), winning turn median 11 p90 18 limit 18, losses 28 timeout 4 captain 0 protected, quiet tail 1.8, refused kill p50 0.8674 over 28, at the stall p50 0.0051 over 28, two-roll average: FAILED
+    gate 4 no dead weight: saltmarsh_ford, 3 recruits x 40 seeds, median drop 0.000: FAILED
+map 4 the_tollgate:
+  no yard 4/1/1/1 over 15: gate 1 beatable: the_tollgate, heuristic wins 39/40 (97 %), winning turn median 8 p90 10 limit 10, losses 1 timeout 0 captain 0 protected, quiet tail 0.0, refused kill p50 0.9849 over 1, at the stall p50 0.9849 over 1, two-roll average: ok
+    gate 4 no dead weight: the_tollgate, 3 recruits x 40 seeds, median drop 0.350: ok
+  yard 3/1/1/1 over 15: gate 1 beatable: the_tollgate, heuristic wins 33/40 (82 %), winning turn median 8 p90 10 limit 10, losses 7 timeout 0 captain 0 protected, quiet tail 0.1, refused kill p50 0.8674 over 7, at the stall p50 0.8674 over 7, two-roll average: ok
+    gate 4 no dead weight: the_tollgate, 3 recruits x 40 seeds, median drop 0.200: FAILED
+  yard, no pull 4/1/1/1 over 15: gate 1 beatable: the_tollgate, heuristic wins 39/40 (97 %), winning turn median 8 p90 10 limit 10, losses 1 timeout 0 captain 0 protected, quiet tail 0.0, refused kill p50 0.9849 over 1, at the stall p50 0.9849 over 1, two-roll average: ok
+    gate 4 no dead weight: the_tollgate, 3 recruits x 40 seeds, median drop 0.350: ok
+map 5 harrow_weir:
+  no yard 4/2/2/2/2/2 over 15: gate 1 beatable: harrow_weir, heuristic wins 33/40 (82 %), winning turn median 7 p90 11 limit 15, losses 4 timeout 3 captain 0 protected, quiet tail 1.8, refused kill p50 0.9891 over 4, at the stall p50 0.4675 over 4, two-roll average: ok
+    gate 4 no dead weight: harrow_weir, 5 recruits x 40 seeds, median drop 0.250: ok
+  yard 4/3/2/2/2/2 over 15: gate 1 beatable: harrow_weir, heuristic wins 33/40 (82 %), winning turn median 7 p90 11 limit 15, losses 4 timeout 3 captain 0 protected, quiet tail 1.8, refused kill p50 0.9891 over 4, at the stall p50 0.4675 over 4, two-roll average: ok
+    gate 4 no dead weight: harrow_weir, 5 recruits x 40 seeds, median drop 0.250: ok
+  yard, no pull 4/3/2/2/2/2 over 15: gate 1 beatable: harrow_weir, heuristic wins 33/40 (82 %), winning turn median 7 p90 11 limit 15, losses 4 timeout 3 captain 0 protected, quiet tail 1.8, refused kill p50 0.9891 over 4, at the stall p50 0.4675 over 4, two-roll average: ok
+    gate 4 no dead weight: harrow_weir, 5 recruits x 40 seeds, median drop 0.250: ok
+map 6 ironwake_raid:
+  no yard 5/3/3/3/3/3 over 15: gate 1 beatable: ironwake_raid, heuristic wins 28/40 (70 %), winning turn median 5 p90 6 limit 7, losses 11 timeout 1 captain 0 protected, quiet tail 0.2, refused kill p50 0.9872 over 11, at the stall p50 0.0801 over 11, two-roll average: ok
+    gate 4 no dead weight: ironwake_raid, 5 recruits x 40 seeds, median drop 0.275: ok
+  yard 5/4/3/3/3/3 over 15: gate 1 beatable: ironwake_raid, heuristic wins 29/40 (72 %), winning turn median 5 p90 6 limit 7, losses 8 timeout 3 captain 0 protected, quiet tail 0.1, refused kill p50 0.9872 over 8, at the stall p50 0.0641 over 8, two-roll average: ok
+    gate 4 no dead weight: ironwake_raid, 5 recruits x 40 seeds, median drop 0.325: ok
+  yard, no pull 5/4/3/3/3/3 over 15: gate 1 beatable: ironwake_raid, heuristic wins 29/40 (72 %), winning turn median 5 p90 6 limit 7, losses 8 timeout 3 captain 0 protected, quiet tail 0.1, refused kill p50 0.9872 over 8, at the stall p50 0.0641 over 8, two-roll average: ok
+    gate 4 no dead weight: ironwake_raid, 5 recruits x 40 seeds, median drop 0.325: ok
+map 7 sallow_grange:
+  no yard 6/4/4/4/4/4 over 15: gate 1 beatable: sallow_grange, heuristic wins 17/40 (42 %), winning turn median 9 p90 10 limit 10, losses 19 timeout 4 captain 0 protected, quiet tail 0.6, refused kill p50 0.9824 over 19, at the stall p50 0.4219 over 12, two-roll average: FAILED
+    gate 4 no dead weight: sallow_grange, 5 recruits x 40 seeds, median drop 0.075: FAILED
+  yard 5/5/4/4/4/4 over 14: gate 1 beatable: sallow_grange, heuristic wins 20/40 (50 %), winning turn median 7 p90 10 limit 10, losses 18 timeout 2 captain 0 protected, quiet tail 0.7, refused kill p50 0.8569 over 18, at the stall p50 0.1201 over 12, two-roll average: FAILED
+    gate 4 no dead weight: sallow_grange, 5 recruits x 40 seeds, median drop 0.275: ok
+  yard, no pull 5/4/4/4/4/4 over 15: gate 1 beatable: sallow_grange, heuristic wins 21/40 (53 %), winning turn median 7 p90 9 limit 10, losses 17 timeout 2 captain 0 protected, quiet tail 0.5, refused kill p50 0.8569 over 17, at the stall p50 0.0961 over 12, two-roll average: FAILED
+    gate 4 no dead weight: sallow_grange, 5 recruits x 40 seeds, median drop 0.300: ok
+map 8 brackwater_cut:
+  no yard 7/5/5/5/4 over 15: gate 1 beatable: brackwater_cut, heuristic wins 37/40 (93 %), winning turn median 5 p90 6 limit 8, losses 0 timeout 3 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 30, two-roll average: ok
+    gate 4 no dead weight: brackwater_cut, 4 recruits x 40 seeds, units out, 0 to 4, median drop 0.362: ok
+  yard 6/5/5/5/4 over 14: gate 1 beatable: brackwater_cut, heuristic wins 35/40 (88 %), winning turn median 5 p90 6 limit 8, losses 0 timeout 5 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 29, two-roll average: ok
+    gate 4 no dead weight: brackwater_cut, 4 recruits x 40 seeds, units out, 0 to 4, median drop 0.338: ok
+  yard, no pull 6/5/5/5/4 over 15: gate 1 beatable: brackwater_cut, heuristic wins 35/40 (88 %), winning turn median 5 p90 6 limit 8, losses 0 timeout 5 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 29, two-roll average: ok
+    gate 4 no dead weight: brackwater_cut, 4 recruits x 40 seeds, units out, 0 to 4, median drop 0.338: ok
+map 9 the_field:
+  no yard 7/6/6/6/4/1 over 15: gate 1 beatable: the_field, heuristic wins 38/40 (95 %), winning turn median 9 p90 10 limit 20, losses 0 timeout 2 captain 0 protected, quiet tail -, refused kill -, route line 23 drifted 0 won 22 p50 9 lost 1.3; south 17 drifted 0 won 16 p50 9 lost 2.1; none 0 drifted 0 won 0, two-roll average: ok
+    gate 4 no dead weight: the_field, 5 recruits x 40 seeds, median drop 0.075: FAILED
+  yard 7/6/6/6/5/1 over 14: gate 1 beatable: the_field, heuristic wins 38/40 (95 %), winning turn median 9 p90 10 limit 20, losses 0 timeout 2 captain 0 protected, quiet tail -, refused kill -, route line 23 drifted 0 won 22 p50 9 lost 1.3; south 17 drifted 0 won 16 p50 9 lost 2.1; none 0 drifted 0 won 0, two-roll average: ok
+    gate 4 no dead weight: the_field, 5 recruits x 40 seeds, median drop 0.075: FAILED
+  yard, no pull 6/6/6/6/4/1 over 15: gate 1 beatable: the_field, heuristic wins 38/40 (95 %), winning turn median 9 p90 10 limit 20, losses 1 timeout 1 captain 0 protected, quiet tail 6.0, refused kill p50 0.9481 over 1, at the stall -, route line 23 drifted 0 won 22 p50 9 lost 1.3; south 17 drifted 0 won 16 p50 9 lost 2.1; none 0 drifted 0 won 0, two-roll average: ok
+    gate 4 no dead weight: the_field, 5 recruits x 40 seeds, median drop 0.075: FAILED
+map 10 ironwake_keep:
+  no yard: no run won this map
+  yard: no run won this map
+  yard, no pull: no run won this map
