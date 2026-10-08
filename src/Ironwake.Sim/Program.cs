@@ -133,7 +133,7 @@ public static class Program
                 }
             }
 
-            return KinsbaneTable(seeds, args.Contains("--axe") ? KinsbaneRun.Arm.Axe : args.Contains("--heeding") ? KinsbaneRun.Arm.Heeding : KinsbaneRun.Arm.Committed);
+            return KinsbaneTable(seeds, args.Contains("--axe") ? KinsbaneRun.Arm.Axe : args.Contains("--heeding") ? KinsbaneRun.Arm.Heeding : KinsbaneRun.Arm.Committed, args.Contains("--quests"));
         }
 
         if (args.Length > 0 && args[0] == "--levels")
@@ -419,9 +419,9 @@ public static class Program
     /// Kinsbane's timing table (issue 804, <see cref="KinsbaneRun"/>): the campaign map each tooth grows
     /// on, the fifth waking it, with Keziah picked, armed and fielded under the heuristic player;
     /// <paramref name="arm"/> picks the arm: committed, heeding (benched on a <c>keziah_warning</c>
-    /// map, issue 871) or the iron-axe control on the same seeds (round 263).
+    /// map, issue 871) or the iron-axe control on the same seeds (round 263); <paramref name="quests"/> takes the quest arm (issue 1378).
     /// </summary>
-    public static int KinsbaneTable(int seeds, KinsbaneRun.Arm arm = KinsbaneRun.Arm.Committed)
+    public static int KinsbaneTable(int seeds, KinsbaneRun.Arm arm = KinsbaneRun.Arm.Committed, bool quests = false)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -431,7 +431,7 @@ public static class Program
         }
 
         var content = ContentLoader.Load(contentDir);
-        foreach (var line in KinsbaneRun.Lines(KinsbaneRun.Measure(contentDir, content, seeds, arm), arm))
+        foreach (var line in KinsbaneRun.Lines(KinsbaneRun.Measure(contentDir, content, seeds, arm, quests), arm))
         {
             Console.WriteLine(line);
         }
