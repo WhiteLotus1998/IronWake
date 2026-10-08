@@ -338,6 +338,34 @@ public class SideMapCliTests
     }
 
     /// <summary>
+    /// Chat's cold chair on Maud's quest 2 under the held altar (Table round 455), reseeded to 5303
+    /// from the 875 save with Ottilie as the ally: she corks the south arrivals, spends both Recalls
+    /// around a missed Radiance, takes the doorway on 7,1, and Maud holds the altar through the
+    /// enemy phase with nobody fallen.
+    /// </summary>
+    [Fact]
+    public void OttilieInTheShrineDoorwayHoldsTheAltarForMaudOnTurnEight()
+    {
+        var script = Transcript("2026-10-08-the_first_shrine-5303-chat.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "5303", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Reinforcements are blocked: a unit holds 7,8\n", output);
+            Assert.Contains("Battle won: seize; no recall is left, so leave\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
     /// Code's warm Dunstan chair under the held altar, reseeded to 1950 from the 875 save: Dunstan
     /// corks the causeway braced and stands on two arrival tiles, the door falls to his strike from
     /// 7,2 on turn 7, the woken archer takes the altar that phase with a shot at him, steps off to
