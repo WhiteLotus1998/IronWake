@@ -109,6 +109,22 @@ internal static class Fixture
     /// </summary>
     public static string DoublingStrikeContentDirectory() => DoublingStrike.Value;
 
+    private static readonly Lazy<string> SallowHome = new(() => WithSallowHome(CopyFiles("ironwake-sallow-home-")));
+
+    /// <summary>
+    /// A copy of the real content directory whose Sallow Grange is the <c>goes_home: hall</c> sample
+    /// (<c>docs/samples/sallow_grange_home.map</c>, issue 1372) and nothing else changed, so a campaign
+    /// replay reads the lever where it would ship. Made once per test run.
+    /// </summary>
+    public static string SallowHomeContentDirectory() => SallowHome.Value;
+
+    private static string WithSallowHome(string target)
+    {
+        var root = Directory.GetParent(RealContentDirectory())!.FullName;
+        File.Copy(Path.Combine(root, "docs", "samples", "sallow_grange_home.map"), Path.Combine(target, MapFiles.MapsDirectory, "sallow_grange.map"), overwrite: true);
+        return target;
+    }
+
     private static readonly Lazy<string> OathRiderOnTurnThree = new(() => WithOathRiderOnTurnThree(CopyFiles("ironwake-oath-rider-three-")));
 
     /// <summary>

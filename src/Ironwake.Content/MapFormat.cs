@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "seize_name", "seize_hold", "drops", "arrivals", "wake_on_death" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "goes_home", "seize_name", "seize_hold", "drops", "arrivals", "wake_on_death" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -260,6 +260,11 @@ public static class MapFormat
             sb.Append("holds: ").Append(holds).Append('\n');
         }
 
+        if (map.Homing is { } homing)
+        {
+            sb.Append("goes_home: ").Append(homing).Append('\n');
+        }
+
         if (map.Region != MapRegion.Seam)
         {
             sb.Append("region: ").Append(MapRegions.Word(map.Region)).Append('\n');
@@ -461,7 +466,7 @@ public static class MapFormat
             map = map with { Hunter = ParseHunter(header, map) };
             map = map with { HuntWaits = ParseHuntWaits(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
-            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map), SeizeName = ParseSeizeName(header, win), SeizeHold = ParseSeizeHold(header, win) };
+            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map), Homing = ParseHoming(header, map), SeizeName = ParseSeizeName(header, win), SeizeHold = ParseSeizeHold(header, win) };
             map = map with { Drops = ParseDrops(header, map), ArrivalsWait = ParseArrivals(header, map), DeathWakes = ParseDeathWakes(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
@@ -1303,6 +1308,37 @@ public static class MapFormat
             }
 
             return new SeenFar(parts[0], extra);
+        }
+
+        /// <summary>
+        /// The <c>goes_home:</c> header (issue 1372): one enemy group placed on the map with a Guard or
+        /// Aggressive member, the only behaviors that ever leave a post.
+        /// </summary>
+        private Homing? ParseHoming(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("goes_home", out var entry))
+            {
+                return null;
+            }
+
+            var parts = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 1)
+            {
+                throw ErrorAt(entry.Line, $"goes_home: needs one group, 'goes_home: hall', got '{entry.Value}'");
+            }
+
+            var members = map.Placements.OfType<EnemyPlacement>().Where(p => p.Group == parts[0]).ToList();
+            if (members.Count == 0)
+            {
+                throw ErrorAt(entry.Line, $"goes_home: no enemy is placed in group '{parts[0]}'");
+            }
+
+            if (members.All(m => m.Behavior is not (Behavior.Guard or Behavior.Aggressive)))
+            {
+                throw ErrorAt(entry.Line, $"goes_home: group '{parts[0]}' has no guard or aggressive member, so nothing in it leaves its post");
+            }
+
+            return new Homing(parts[0]);
         }
 
         /// <summary>

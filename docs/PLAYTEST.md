@@ -4093,3 +4093,27 @@ Notes:
 - Not tense: turns 3, 5 and 6.
 
 — Code
+
+## 2026-10-08 — Chat — Saltmarsh Ford, east-pair sample, seed 4490 (warm, floor L1 four)
+
+Copied from the Design Table (#1368, round 482). `play docs/samples/saltmarsh_ford_east_pair.map --seed 4490 --level 1`, the default four at L1, main at 5649416. Warm: Chat had read Code's 1370 summary and the header. Script `docs/transcripts/2026-10-08-saltmarsh_ford_east_pair-4490.script` (the clean line, queries and the scratch removed); Code replayed it on main, transcript beside it.   Result: **won, rout, on turn 8 of 18.** No Recall, nobody fell; one scratch line disclosed (a free Recall, counted).
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 5, the bait is the trigger. Teodor stepped onto 10,2 to strip the brace and the pair arrived on that same step: the bait and the summons are one decision. `threat` sent Ottilie off 11,4 to 9,4; `end` asked about Wren (11 plus 9 against 20, braced) and she took one hit to 11.
+Notes:
+- Turns 1 to 4 as in 4471: the fort woken from 10,5, down to the leader by the end of turn 4.
+- Turn 6: the pair or the leader, not a choice; nobody but Wren and Teodor could reach him. Wren's swing on the brigand needed `!` (12 in 100 to die).
+- Turn 8: Aimed Shot 4, Wren 7 twice, Teodor's thrust 5, Full Measure 15: 37 against 26. Wren's double and Teodor's 51 both landing is luck.
+- The kill criterion did not fire: two bodies braced against the rear on the siege's first phase. The pincer lasts one phase, and that phase is the best turn in both chairs.
+- Not tense: turns 1, 2 and 7.
+
+— Chat
+
+## 2026-10-08 — Code — Sallow Grange, `goes_home: hall` sample, the seed 3400 line replayed (floor L4, Rook)
+
+`campaign --seed 3400 --from sallow_grange --level 4 --pick rook` with the sample in place of the map (`Fixture.SallowHomeContentDirectory`), the 3400 script command for command; transcript `docs/transcripts/2026-10-08-sallow_grange_home-3400.txt`. Not a fresh chair and not rated: the decisions were made under the old rule. It is the kill criterion's first read.   Result: **won, seize, on turn 6 of 10.** No Recall, nobody fell, the Reeve at 28/28.
+Notes:
+- **The rule does what it says.** Enemy phase 4 is unchanged: the Reeve walks 15,6 -> 12,7 and puts Rook at 5. Enemy phase 5 he walks home to 15,6 and strikes the captain on 14,5 from the gate (52 percent, 9, the captain to 14) instead of throwing at Wren from 12,7.
+- **It doesn't matter.** The captain steps 14,5 -> 16,6 on turn 6 and the map is won on the step. The price of the walk went from nothing to one 52 percent swing for 9, which a 23-HP captain pays. The seize tile beside his post is the hole, not where the Reeve stands between strikes.
+- The Sim agrees it's no harder: 174/200 against 161 on the same code, the heuristic no longer chased around the yard.
+
+— Code

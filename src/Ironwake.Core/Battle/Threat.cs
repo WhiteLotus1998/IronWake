@@ -55,9 +55,12 @@ public static class Threat
         }
 
         var mayMove = unit.Side == Side.Player || state.EffectiveBehavior(unit, content) == Behavior.Aggressive;
-        var origins = mayMove
-            ? state.ReachOf(unit, content).Destinations.Append(unit.At).Distinct()
-            : new[] { unit.At };
+        var reach = mayMove ? state.ReachOf(unit, content) : null;
+        var origins = reach is null
+            ? new[] { unit.At }
+            : unit.Side == Side.Enemy && EnemyAi.HomeTile(state, unit, reach) is { } home
+                ? new[] { home }
+                : reach.Destinations.Append(unit.At).Distinct();
         var maxRange = weapons.Max(w => w.MaxRange);
         foreach (var from in origins)
         {

@@ -751,7 +751,8 @@ public static class Queries
     /// board, with any usable weapon: its own tile only when it holds or has moved, as
     /// <see cref="EnemyAi.StrikeOn"/> reads it, otherwise every tile of its reach it may end
     /// on, and a tile another enemy stands on who may move off it first, since the phase
-    /// can play in either order. In row-major order.
+    /// can play in either order; a <c>goes_home:</c> member off its post, its home tile alone
+    /// (<see cref="EnemyAi.HomeTile"/>, issue 1372). In row-major order.
     /// </summary>
     private static ValueList<Coord> StrikeTiles(BattleState board, GameContent content, BattleUnit enemy, BattleUnit target)
     {
@@ -765,6 +766,11 @@ public static class Queries
         if (!MayMove(enemy))
         {
             return ValueList<Coord>.Of(enemy.At);
+        }
+
+        if (EnemyAi.HomeTile(board, enemy, board.ReachOf(enemy, content)) is { } home)
+        {
+            return Strikes(home) ? ValueList<Coord>.Of(home) : ValueList<Coord>.Empty;
         }
 
         var tiles = board.ReachOf(enemy, content).Entries
