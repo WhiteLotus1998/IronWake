@@ -134,12 +134,60 @@ public sealed class HeuristicPlayer : IPlayer
     /// <see cref="PlanOrder(BattleState)"/>, and on a Seize map whose throne the captain has no
     /// open path to (<see cref="Corked"/>, issue 1206), on a turn it can strike some enemy without
     /// a counter, the captain plans last, so the cork's other attackers strike first and the
-    /// captain finishes from the safe tile.
+    /// captain finishes from the safe tile. Ahead of either, a unit that can feed a hungering weapon
+    /// this turn (<see cref="CanFeed"/>, issue 1395) plans first, so the kill its hunt would take is
+    /// not taken by an ally planning before it; the rest keep their order.
     /// </summary>
-    public static IEnumerable<BattleUnit> PlanOrder(BattleState state, GameContent content) =>
-        Corked(state, content) is { } captain && !captain.Acted && SafeStrikeTiles(state, content, captain).Count > 0
+    public static IEnumerable<BattleUnit> PlanOrder(BattleState state, GameContent content)
+    {
+        var order = Corked(state, content) is { } captain && !captain.Acted && SafeStrikeTiles(state, content, captain).Count > 0
             ? state.UnitsOf(Side.Player).OrderBy(u => u.IsCaptain)
             : PlanOrder(state);
+        return order.OrderBy(u => !CanFeed(state, content, u));
+    }
+
+    /// <summary>
+    /// Whether <paramref name="unit"/>, not yet acted, carries a hungering weapon not yet woken
+    /// (<see cref="Hunts"/>) that kills some enemy it can see on one plain hit (<see cref="KillsOnHit"/>)
+    /// from a tile it may end on this turn, one not left free for a corked captain: the attack its hunt
+    /// ranks first (issue 1395). On the keep the scythe-bearer planned after allies who took those kills,
+    /// went unfed and drained, and the company won fewer games carrying Kinsbane than without it.
+    /// </summary>
+    public static bool CanFeed(BattleState state, GameContent content, BattleUnit unit)
+    {
+        if (unit.Acted || unit.Moved)
+        {
+            return false;
+        }
+
+        var slot = Kinsbane.Slot(unit, content);
+        if (slot < 0 || unit.UsableWeaponAt(content, slot) is not { } weapon || !Hunts(unit, slot, weapon))
+        {
+            return false;
+        }
+
+        var armed = unit.WithSlotInFront(slot);
+        var captains = CaptainsTiles(state, content, unit);
+        var enemies = state.UnitsOf(Side.Enemy).ToList();
+        foreach (var tile in state.ReachOf(unit, content).Destinations)
+        {
+            if (!MayEndOn(state, content, unit, tile) || captains.Contains(tile))
+            {
+                continue;
+            }
+
+            foreach (var target in enemies)
+            {
+                if (weapon.InRange(tile.DistanceTo(target.At)) && Dusk.Sees(state, unit.Side, target.At, unit.Id, tile)
+                    && !LedgerRefuses(state, content, armed, tile, target) && KillsOnHit(state, content, armed, tile, target))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 
     /// <summary>
     /// The living captain on a Seize map when no throne tile has an open path from where it

@@ -1,0 +1,36 @@
+# Issue 1395 slice 2: the scythe plans first when it can feed (DECISIONS/0354).
+# --finale content/keep/ironwake_keep.map, L8, 200 seeds, two-roll average (full / depleted / floor).
+#
+# main (adddbf0, Kitted, 0353)                       149 / 101 / 0
+# this branch, CanFeed plans first                   157 / 101 / 0
+#
+# Planning-order arms, full company, seeds 1-200 (scratch probe, not committed):
+#   arm                                              wins  Keziah decisions at fed 0 / fed 2+ / starved
+#   Kitted, as main                                  149   691 / 110 / 55
+#   hungry carrier always first                      149   479 / 198 / 53
+#   hungry carrier always last                       135   970 /  17 / 170
+#   first only when the scythe kills on a hit (this) 157   506 / 397 / 50
+#   no scythe (0353's control)                       153   n/a
+#
+# --full --all on this branch: the gate 1 and gate 4 cells STATE records are unchanged
+# (brackwater 133 / 0.235, harrow_weir 132 / 0.230, sallow_grange 162 / 0.385);
+# old_mill_road's 57/200 FAILED is the fixture's, the same on main. The campaign maps field no scythe.
+
+## this branch, --finale
+finale: content/keep/ironwake_keep.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 157/200 (79 %), losses 37 timeout 6 captain 0 protected: ok
+  length: median 9 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 73 ms: ok
+  bond: hunter killed 197, freed 0, standing 3 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 14, blocked 12, unfired 174, gate_in1 arrived 2, blocked 3, unfired 195, gate_in2 arrived 4, blocked 1, unfired 195, south_in arrived 4, blocked 0, unfired 196 of 200 (data; all blocked is decoration)
+finale depleted: 12 units at level 8, heuristic wins 101/200 (51 %), losses 74 timeout 25 captain 0 protected: FAILED
+  length: median 11 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 93 ms: ok
+  bond: hunter killed 190, freed 0, standing 10 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 36, blocked 1, unfired 163, gate_in1 arrived 26, blocked 3, unfired 171, gate_in2 arrived 26, blocked 3, unfired 171, south_in arrived 5, blocked 0, unfired 195 of 200 (data; all blocked is decoration)
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 119 timeout 81 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 44 ms: ok
+  bond: hunter killed 135, freed 0, standing 65 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 120, blocked 9, unfired 71, gate_in1 arrived 89, blocked 28, unfired 83, gate_in2 arrived 108, blocked 9, unfired 83, south_in arrived 35, blocked 2, unfired 163 of 200 (data; all blocked is decoration)
+finale: FAILED
