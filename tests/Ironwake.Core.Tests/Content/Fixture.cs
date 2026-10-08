@@ -711,7 +711,10 @@ internal static class Fixture
     /// </summary>
     private static string CopyContentAsIs(string prefix) => WithoutTheField(WithLazarHousePermanentBars(CopyFiles(prefix)));
 
-    /// <summary>A file-for-file copy of the real content directory under the temp directory, nothing taken out.</summary>
+    /// <summary>
+    /// A file-for-file copy of the real content directory under the temp directory, nothing taken
+    /// out, with Gust as every copy's journaled plays met it (<see cref="WithGust"/>).
+    /// </summary>
     private static string CopyFiles(string prefix)
     {
         var source = RealContentDirectory();
@@ -723,8 +726,39 @@ internal static class Fixture
             File.Copy(file, copy);
         }
 
+        return WithGust(target);
+    }
+
+    /// <summary>The tome <c>gust</c> as it shipped before it became Spark Storm (issue 1329, DECISIONS/0348).</summary>
+    public const string GustAsJournaled = """{ "id": "gust", "name": "Gust", "type": "reason", "mt": 4, "hit": 100, "crit": 5, "wt": 1, "minRange": 1, "maxRange": 2, "durability": 6, "rank": "E", "price": 600, "effective": ["flying"], "school": "lightning", "description": "A squall shoved hard in one direction. Riders on wings hate it most." }""";
+
+    /// <summary>
+    /// Puts Gust back in place of Spark Storm in the copy at <paramref name="target"/>: a single-target
+    /// tome, Mt 4, Hit 100, 6 uses, effective against fliers. Every play journaled before issue 1329
+    /// attacked or countered with it, and an attack with an area tome is refused, so those plays
+    /// replay only on it (DECISIONS/0348).
+    /// </summary>
+    private static string WithGust(string target)
+    {
+        var path = Path.Combine(target, ContentFiles.WeaponsName);
+        var text = File.ReadAllText(path);
+        var entry = System.Text.RegularExpressions.Regex.Match(text, @"\{ ""id"": ""gust"",[^\n]*\}");
+        if (!entry.Success)
+        {
+            throw new InvalidOperationException("weapons.json carries no gust entry to put Gust back over");
+        }
+
+        File.WriteAllText(path, text.Remove(entry.Index, entry.Length).Insert(entry.Index, GustAsJournaled));
         return target;
     }
+
+    private static readonly Lazy<string> GustContent = new(() => CopyFiles("ironwake-gust-"));
+
+    /// <summary>
+    /// A copy of the real content directory with Gust in place of Spark Storm (<see cref="WithGust"/>),
+    /// for the journaled plays from before issue 1329. Made once per test run under the temp directory.
+    /// </summary>
+    public static string GustContentDirectory() => GustContent.Value;
 
     /// <summary>
     /// Takes The Field Before the Keep (issue 81) out of the campaign's maps, and puts the branch

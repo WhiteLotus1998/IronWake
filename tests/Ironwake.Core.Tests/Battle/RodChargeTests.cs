@@ -16,7 +16,7 @@ public class RodChargeTests
 {
     private static readonly GameContent Real = ContentLoader.Load(Fixture.RealContentDirectory());
 
-    private static readonly Weapon Gust = Real.Weapon("gust") with { EffectiveAgainst = ValueList<MovementType>.Empty };
+    private static readonly Weapon Gust = ContentLoader.Load(Fixture.GustContentDirectory()).Weapon("gust") with { EffectiveAgainst = ValueList<MovementType>.Empty };
 
     private static readonly GameContent Shipped = Real with
     {

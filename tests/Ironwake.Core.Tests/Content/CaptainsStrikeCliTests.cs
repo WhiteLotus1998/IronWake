@@ -50,7 +50,7 @@ public class CaptainsStrikeCliTests
         var script = Transcript("2026-10-02-the_tollgate-739.script");
         var code = 0;
 
-        var output = ConsoleCapture.Run(() => code = Program.Main(new[] { "play", "the_tollgate", "--seed", "739", "--script", script, "--strict", "--content", Fixture.RealContentDirectory() }));
+        var output = ConsoleCapture.Run(() => code = Program.Main(new[] { "play", "the_tollgate", "--seed", "739", "--script", script, "--strict", "--content", Fixture.GustContentDirectory() }));
 
         Assert.Equal(0, code);
         Assert.Contains("  Alder Fenn hits Bandit Leader for 17 (hp 0)\n", output);

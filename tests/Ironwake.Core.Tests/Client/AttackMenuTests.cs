@@ -71,7 +71,7 @@ public class AttackMenuTests
 
         var rows = Queries.AttackOptions(state, Shipped, state.Find("pell")!, EnemyAt(state, Brigand));
 
-        Assert.Equal(new (string?, string?, int?)[] { ("cinder", null, null), ("gust", null, 1), ("cinder", "overcast", null), ("gust", "overcast", 1) },
+        Assert.Equal(new (string?, string?, int?)[] { ("cinder", null, null), ("cinder", "overcast", null) },
             rows.Select(r => (r.WeaponId, r.Art?.Id, r.Command.Slot)));
         Assert.All(rows, r => Assert.True(r.Legal));
     }
@@ -222,7 +222,11 @@ public class AttackMenuTests
     [Fact]
     public void AGreyedRowLeavesTheMenuOpenWithItsRefusal()
     {
-        var client = Selected(WithUses(Placed("pell", new Coord(5, 6)), "pell", 2), "pell");
+        // On Gust (DECISIONS/0348), so Pell has a second legal row to open the menu; Spark Storm is never an attack row.
+        var onGust = ContentLoader.Load(Fixture.GustContentDirectory());
+        var state = WithUses(Placed("pell", new Coord(5, 6), Tollgate(onGust)), "pell", 2);
+        var client = new ClientSession(onGust, state);
+        client.Click(state.Find("pell")!.At);
         client.Click(Brigand);
         var greyed = client.Menu!.Rows.ToList().FindIndex(r => !r.Legal);
 

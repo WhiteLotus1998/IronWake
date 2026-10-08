@@ -16,7 +16,7 @@ public class SallowGrangeWarmReplayTests
     {
         var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(root, "docs", "transcripts", "2026-10-06-sallow_grange-1580.script");
-        var args = new[] { "campaign", "--seed", "1580", "--from", "sallow_grange", "--level", "5", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
+        var args = new[] { "campaign", "--seed", "1580", "--from", "sallow_grange", "--level", "5", "--strict", "--script", script, "--content", Fixture.GustContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Program.Main(args));
 

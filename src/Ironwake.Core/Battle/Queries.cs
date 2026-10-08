@@ -134,8 +134,8 @@ public static class Queries
 
     /// <summary>
     /// Every way the unit could strike the target from where it stands (issue 611), the attack
-    /// menu's rows in order: the plain attack with each weapon it carries (healing spells and
-    /// items left out), then each art it knows under each carried weapon of the art's type, or
+    /// menu's rows in order: the plain attack with each weapon it carries (healing spells, area
+    /// tomes, which are cast with the Item action (issue 1329), and items left out), then each art it knows under each carried weapon of the art's type, or
     /// once under no weapon when it carries none of that type; a signature art (issue 635) is
     /// listed only under its own item, and not at all while the unit does not carry it. Each row is the
     /// <see cref="Attack"/> it would submit, with the forecast <see cref="Forecast(BattleState, GameContent, BattleUnit, BattleUnit, int?, string?)"/>
@@ -148,7 +148,7 @@ public static class Queries
     {
         var equipped = unit.EquippedSlot(content);
         var slots = Enumerable.Range(0, unit.Unit.Inventory.Count)
-            .Where(slot => content.Weapons.TryGetValue(unit.Unit.Inventory.Items[slot].ItemId, out var weapon) && !weapon.Heals)
+            .Where(slot => content.Weapons.TryGetValue(unit.Unit.Inventory.Items[slot].ItemId, out var weapon) && !weapon.Heals && weapon.Area == 0)
             .ToList();
         var rows = new List<AttackOption>();
         void Add(int? slot, Ability? art)

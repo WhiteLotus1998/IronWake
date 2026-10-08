@@ -152,7 +152,7 @@ end
 move captain 4,6
 wait captain
 move pell 5,6
-attack pell archer-2 gust
+attack pell archer-2
 move teodor 4,7
 wait teodor
 move wren 3,5
@@ -197,7 +197,6 @@ end
 move pell 12,4
 wait pell
 end !
-exit pell
 leave
 march
 move captain 3,4

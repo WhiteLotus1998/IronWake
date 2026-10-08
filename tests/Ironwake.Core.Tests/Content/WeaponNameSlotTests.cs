@@ -6,7 +6,8 @@ namespace Ironwake.Core.Tests.Content;
 /// <summary>
 /// Issue 477: the slot argument of <c>attack</c> and <c>forecast</c> also takes a weapon's id
 /// or display name, ignoring case, since an equip reorders the slots. A number reads as before;
-/// a name that matches nothing, or two slots, is refused with the unit's slots listed.
+/// a name that matches nothing, or two slots, is refused with the unit's slots listed. Played on Gust
+/// (DECISIONS/0348), where Pell strikes with either of two tomes; Spark Storm is never equipped.
 /// </summary>
 [Collection("console")]
 public class WeaponNameSlotTests
@@ -17,7 +18,7 @@ public class WeaponNameSlotTests
         File.WriteAllText(path, script);
         try
         {
-            return ConsoleCapture.Run(() => Program.Main(["play", "harrow_weir", "--seed", "487", "--script", path, "--content", Fixture.RealContentDirectory()]));
+            return ConsoleCapture.Run(() => Program.Main(["play", "harrow_weir", "--seed", "487", "--script", path, "--content", Fixture.GustContentDirectory()]));
         }
         finally
         {

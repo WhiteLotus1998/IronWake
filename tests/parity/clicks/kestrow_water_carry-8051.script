@@ -57,7 +57,7 @@ move maud 11,4
 item maud 2 pell
 end
 move pell 9,1
-attack pell soldier-1 gust
+wait pell
 move wren 8,1
 attack wren soldier-1
 carry rook teodor 10,1 10,0
@@ -67,19 +67,16 @@ move maud 9,2
 wait maud
 move captain 11,1
 wait captain
-end
+end !
 exit teodor
 carry rook pell 5,0 4,0
 wait pell
 move wren 6,0
 wait wren
-move maud 7,0
-wait maud
 move captain 8,0
 wait captain
 end
 exit rook
 exit pell
 exit wren
-exit maud
 exit captain

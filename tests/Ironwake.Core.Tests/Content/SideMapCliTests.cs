@@ -79,7 +79,7 @@ public class SideMapCliTests
     {
         var script = Transcript("2026-10-07-the_lazar_house-2010-dunstan.script");
 
-        var output = Run(out var exit, "campaign", "--from", "the_tollgate", "--seed", "2010", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "campaign", "--from", "the_tollgate", "--seed", "2010", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
         Assert.Equal(1, exit);
         Assert.Contains("north bar (8,0): barred while dunstan holds 8,1; waiting: brigand, hexer\n", output);
@@ -322,7 +322,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1610", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1610", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Maud moves 7,3 -> 7,0 via 7,2 7,1\nMaud stands on the altar. The map is won if Maud still stands there when turn 3's enemy phase ends.\n", output);
@@ -352,7 +352,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "5303", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "5303", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Reinforcements are blocked: a unit holds 7,8\n", output);
@@ -381,7 +381,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1950", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1950", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Reinforcements are blocked: a unit holds 6,8\n", output);
@@ -418,7 +418,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_old_watch-961.saves", "watch.json")), Path.Combine(saves, "watch.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "watch", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "watch", "--saves", saves, "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("The rust holds; it waits on Teodor.", output);
@@ -513,7 +513,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--reseed", "2030", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--reseed", "2030", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Reinforcements are blocked: a unit holds 0,8\n", output);
@@ -543,7 +543,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--reseed", "1380", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--reseed", "1380", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Reinforcements are blocked: a unit holds 0,8\n", output);
@@ -573,7 +573,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--reseed", "1375", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--reseed", "1375", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Reinforcements are blocked: a unit holds 0,0\n", output);
@@ -597,7 +597,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_burned_school-884.saves", "school.json")), Path.Combine(saves, "school.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "school", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "school", "--saves", saves, "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Pell opens the chest at 6,2: Gust\n", output);
@@ -626,7 +626,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_undercroft-960.saves", "undercroft.json")), Path.Combine(saves, "undercroft.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "undercroft", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "undercroft", "--saves", saves, "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("The stacks group wakes (noise)\n", output);
@@ -655,7 +655,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_undercroft-960.saves", "undercroft.json")), Path.Combine(saves, "undercroft.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "undercroft", "--saves", saves, "--reseed", "1620", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "undercroft", "--saves", saves, "--reseed", "1620", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Undercroft, seed 1686\n", output);
@@ -719,7 +719,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_long_count-91.saves", "longcount.json")), Path.Combine(saves, "longcount.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--reseed", "1540", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--reseed", "1540", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Long Count, seed 1638\n", output);
@@ -779,7 +779,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_chapter_roll-1100.saves", "chapter.json")), Path.Combine(saves, "chapter.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "chapter", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "chapter", "--saves", saves, "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Chapter Roll, seed 1100\n", output);
@@ -816,7 +816,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_wardens_gate-1110.saves", "wardens.json")), Path.Combine(saves, "wardens.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "wardens", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "wardens", "--saves", saves, "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Warden's Gate, seed 1110\n", output);
@@ -845,7 +845,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_burned_shrine-1113.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Burned Shrine, seed 1113\n", output);
@@ -875,7 +875,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_burned_shrine-1113.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1550", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--reseed", "1550", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Burned Shrine, seed 1677\n", output);
@@ -906,7 +906,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_rookery-1132.saves", "rookery.json")), Path.Combine(saves, "rookery.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "rookery", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "rookery", "--saves", saves, "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Rookery, seed 1132\n", output);
@@ -937,7 +937,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-05-the_rookery-1132-carry.saves", "rookery.json")), Path.Combine(saves, "rookery.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "rookery", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "rookery", "--saves", saves, "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.DoesNotContain("carry: ", output);
@@ -1072,7 +1072,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-04-the_oath_stone-1133.saves", "oath.json")), Path.Combine(saves, "oath.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--reseed", "940", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--reseed", "940", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("  turn 5, enemy phase: a rider arrives at 0,0 (aggressive). A unit standing on 0,0 stops it.\n", output);

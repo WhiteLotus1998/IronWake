@@ -9,14 +9,14 @@ namespace Ironwake.Core.Tests.Battle;
 /// Spark Storm's area cast and its mark (issue 1329 slice 1, DECISIONS/0322, 0326). A tome naming <c>area</c> is cast
 /// through the Item action at a unit or a tile and strikes every enemy within its radius once with no counter; a tome
 /// naming <c>marks</c> marks every unit it hits that survives, and the first hit on a marked unit from any tome of that
-/// school deals x1.5 on final damage and spends the mark. No shipped tome carries either until Lotus signs Spark Storm's
-/// numbers, so these tests use fixtures cut from Gust: <c>test_storm</c> (area 1, marks) and <c>test_bolt</c> (a plain
-/// lightning tome), with the flier rider dropped, Pell holding them on the sample <c>the_tollgate_frost.map</c>, two
+/// school deals x1.5 on final damage and spends the mark. These rule tests were written before the shipped tome became
+/// Spark Storm (slice 3, DECISIONS/0348), so they run on the content with Gust put back and use fixtures cut from it:
+/// <c>test_storm</c> (area 1, marks) and <c>test_bolt</c> (a plain lightning tome), with the flier rider dropped, Pell holding them on the sample <c>the_tollgate_frost.map</c>, two
 /// tiles below the woods brigand at 6,5 and its archer at 5,5.
 /// </summary>
 public class SparkStormTests
 {
-    private static readonly GameContent Shipped = ContentLoader.Load(Fixture.RealContentDirectory());
+    private static readonly GameContent Shipped = ContentLoader.Load(Fixture.GustContentDirectory());
 
     private static readonly Weapon Gust = Shipped.Weapon("gust") with { EffectiveAgainst = ValueList<MovementType>.Empty };
 
@@ -351,8 +351,6 @@ public class SparkStormTests
 
         Assert.Equal(1, again.Weapon("gust").Area);
         Assert.True(again.Weapon("gust").Marks);
-        Assert.All(Shipped.Weapons.Values, w => Assert.Equal(0, w.Area));
-        Assert.All(Shipped.Weapons.Values, w => Assert.False(w.Marks));
     }
 
     /// <summary>The shipped content written out with <paramref name="extra"/> added to the weapon <paramref name="id"/>'s entry.</summary>

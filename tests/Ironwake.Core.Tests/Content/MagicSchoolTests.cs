@@ -89,8 +89,8 @@ public class MagicSchoolTests
     }
 
     [Fact]
-    public void GustsCardNamesTheLightningSchool() =>
-        Assert.StartsWith("Gust, lore E, lightning school. Acc 100", ItemCard.Text(Content, "gust"), StringComparison.Ordinal);
+    public void SparkStormsCardNamesTheLightningSchool() =>
+        Assert.StartsWith("Spark Storm, lore E, lightning school. Acc 90", ItemCard.Text(Content, "gust"), StringComparison.Ordinal);
 
     [Fact]
     public void TheAdeptHireStaysPlainWithCinderAlone()

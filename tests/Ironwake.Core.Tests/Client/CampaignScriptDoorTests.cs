@@ -10,7 +10,8 @@ namespace Ironwake.Core.Tests.Client;
 /// wherever it is offered, <c>--until-certify</c> ends the script at the first camp where a named
 /// promotion would be accepted, before any action there, and names the refusal when no camp reaches
 /// it. And the hand plays the script opens with are written as the console reads them since issue
-/// 1093: a bare <c>end</c> into a lethal gains its <c>!</c>.
+/// 1093: a bare <c>end</c> into a lethal gains its <c>!</c>. Its seed was read on Gust, so the heuristic campaign is
+/// written on the content with Gust put back (DECISIONS/0348); the hand plays are still read from the repository.
 /// </summary>
 [Collection("console")]
 public class CampaignScriptDoorTests
@@ -19,10 +20,10 @@ public class CampaignScriptDoorTests
     private const string Difficulty = "recruit";
     private const int Variant = 66;
 
-    private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
+    private static readonly GameContent Content = ContentLoader.Load(Fixture.GustContentDirectory());
 
     private static CampaignScript.Result Write(string? quest = null, (string, string)? until = null) =>
-        CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, quest, until);
+        CampaignScript.Write(Content, Fixture.GustContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, quest, until);
 
     /// <summary>The written script up to and including the first map's <c>leave</c>.</summary>
     private static string FirstMap(string text)
@@ -40,7 +41,7 @@ public class CampaignScriptDoorTests
             return ConsoleCapture.Run(() => CampaignSession.Run(new[]
             {
                 "--seed", Seed.ToString(), "--difficulty", Difficulty, "--permadeath", "off", "--script", path, "--strict",
-                "--content", Fixture.RealContentDirectory(),
+                "--content", Fixture.GustContentDirectory(),
             }));
         }
         finally

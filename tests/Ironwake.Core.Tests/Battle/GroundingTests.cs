@@ -9,7 +9,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// Grounding (issue 703, Lotus's batch item 5, round 216): a bow's crit on a flier that survives lands
 /// it until the end of its side's next phase, so it moves on foot, and over a tile infantry cannot
 /// enter it cannot move at all but still acts. Bows trade the effective tag for +20 crit against
-/// fliers; Gust keeps its tag. Since issue 723 (round 220) that crit deals plain damage, not triple,
+/// fliers; Gust kept its tag, and Spark Storm, which it became, drops it (DECISIONS/0348). Since issue 723 (round 220) that crit deals plain damage, not triple,
 /// for either side. The forecast prints <c>grounds N%</c> in the crit's place, the card and the event name the
 /// clock, and every reach reads it. Played on the shipped Saltmarsh Ford, whose wingrider holds the
 /// north bank above the river row.
@@ -58,9 +58,9 @@ public class GroundingTests
     }
 
     [Fact]
-    public void GustKeepsItsEffectiveTag()
+    public void SparkStormDropsGustsEffectiveTag()
     {
-        Assert.True(Shipped.Weapon("gust").IsEffectiveAgainst(MovementType.Flying));
+        Assert.False(Shipped.Weapon("gust").IsEffectiveAgainst(MovementType.Flying));
         Assert.Empty(Shipped.Weapon("gust").CritAgainst);
     }
 

@@ -935,7 +935,7 @@ public static class Resolver
             var itemId = unit.Unit.Inventory.Items[slot.Value].ItemId;
             var why = content.Items.ContainsKey(itemId) ? "an item, not a weapon"
                 : content.Weapon(itemId).Heals ? "a healing spell; use it with item"
-                : content.Weapon(itemId).Area > 0 ? $"an area cast; use it with item: item {unit.Id} {slot} <unit|x,y>"
+                : content.Weapon(itemId).Area > 0 ? $"an area cast; use it with item: item {unit.Id} {slot + 1} <unit|x,y>"
                 : content.Weapon(itemId).IsMagic && unit.Unit.Inventory.Items[slot.Value].Uses == 0 ? "spent for this battle"
                 : !content.Class(unit.Unit.ClassId).CanUse(content.Weapon(itemId).Type) ? $"not a weapon a {unit.Unit.ClassId} can use"
                 : MagicSchoolExtensions.SchoolShort(unit.Unit, content.Class(unit.Unit.ClassId), content.Weapon(itemId))
@@ -1297,7 +1297,7 @@ public static class Resolver
 
         if (use.TargetId is null)
         {
-            return (state, new Rejection(RejectionReason.NoTarget, $"{spell.Name} strikes an area: item {unit.Id} {use.Slot} <unit|x,y>"));
+            return (state, new Rejection(RejectionReason.NoTarget, $"{spell.Name} strikes an area: item {unit.Id} {use.Slot + 1} <unit|x,y>"));
         }
 
         if (AreaCast.TileOf(state, use.TargetId) is not { } at)
@@ -1305,17 +1305,9 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NoSuchTarget, $"no living unit or tile '{use.TargetId}' to cast at"));
         }
 
-        var distance = unit.At.DistanceTo(at);
-        if (!spell.InRange(distance))
+        if (AreaCast.Unreachable(state, unit, spell, at) is { } refusal)
         {
-            return (state, new Rejection(
-                RejectionReason.OutOfRange,
-                $"{at} is {distance} tiles from {unit.Id} at {unit.At}; {spell.Name} reaches {spell.MinRange}-{spell.MaxRange}"));
-        }
-
-        if (!Dusk.Sees(state, unit.Side, at))
-        {
-            return (state, new Rejection(RejectionReason.Unseen, $"no unit on {unit.Id}'s side can see {at} at dusk (sight {Dusk.Sight(state)})"));
+            return (state, refusal);
         }
 
         var struck = AreaCast.Struck(state, unit, spell, at);
@@ -1336,7 +1328,7 @@ public static class Resolver
             var result = CombatResolver.Resolve(
                 caster.ToCombatant(next, content, against: target, casting: spell),
                 target.ToCombatant(next, content, countering: true, against: caster) with { Blind = true },
-                distance,
+                unit.At.DistanceTo(at),
                 new CombatContext(next.Turn, next.Phase),
                 new KeyedRng(next.Seed),
                 next.Scheme);
