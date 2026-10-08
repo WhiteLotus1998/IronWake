@@ -34,10 +34,7 @@ March (march): map 6, Raid on Ironwake. Defeat every enemy by the end of turn 7.
 > pick keziah
 Keziah takes the seat at level 4; Rook rides home
 > bench dunstan
-Dunstan is benched from Raid on Ironwake
-Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Maud (deploy 6 of 9)
-> bench maud
-Maud is benched from Raid on Ironwake
+Dunstan is benched from Raid on Ironwake; Keziah takes the seat
 Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Keziah (deploy 6 of 9)
 > march
 Map 6 of 10: Raid on Ironwake, seed 2055

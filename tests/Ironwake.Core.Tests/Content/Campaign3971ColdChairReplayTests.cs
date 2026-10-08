@@ -40,7 +40,7 @@ public class Campaign3971ColdChairReplayTests
         Assert.DoesNotContain("Teodor drilled", output);
         Assert.Contains("Pell drilled with the levy: L2 -> L3, 84 EXP kept.\n", output);
         Assert.Contains("Pell gains 16 exp (0)\nPell reaches level 4: hp +1 cha +1\n", output);
-        Assert.Contains("Rejected 1 of 456 commands:\n", output);
+        Assert.Contains("Rejected 1 of 457 commands:\n", output);
     }
 
     private static void CopyDirectory(string from, string to)

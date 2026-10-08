@@ -74,11 +74,13 @@ public static class CampaignScript
                 return new Result(string.Concat(lines.Select(l => l + "\n")), touched, null, maps);
             }
 
+            var seats = false;
             if (hand is null)
             {
                 Camp(client, content, contentDir, lines, touched, variant, quest?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>(), handPlays);
                 var named = quest?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
-                if (named.All(id => lines.Any(l => l.StartsWith($"quest {id} ", StringComparison.Ordinal))))
+                seats = named.All(id => lines.Any(l => l.StartsWith($"quest {id} ", StringComparison.Ordinal)));
+                if (seats)
                 {
                     Seat(client, content, lines, deploy ?? Array.Empty<string>());
                 }
@@ -91,6 +93,13 @@ public static class CampaignScript
                 if (client.Pick(claimant))
                 {
                     lines.Add($"pick {claimant}");
+
+                    // Issue 1357: on her join map the pick takes the seat of the first unit benched before her,
+                    // so a bench made before the pick is checked again.
+                    if (seats)
+                    {
+                        Seat(client, content, lines, deploy ?? Array.Empty<string>());
+                    }
                 }
             }
 

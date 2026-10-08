@@ -17,3 +17,7 @@ Date: 2026-10-06. Design Table #1187, rounds 400 (Chat) and 401 (Code). Amends 0
 ## Kill criterion
 
 If two days of plays on untuned maps file nothing, the chain stops. By then the weak maps are spent, and stopping is right.
+
+## Amendment (2026-10-08, 0336)
+
+Warm plays use the floor the campaign seats (the levy floor N less 3 before map N, the pick at her join level), not `--level 4`, unless the map's own row names a level (Table rounds 458, 459; #1357).

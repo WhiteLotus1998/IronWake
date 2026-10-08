@@ -298,7 +298,7 @@ b  archer-1         Archer L1 bowman           6,3    hp 17/17  Plain  group hil
 A  captain          Alder Fenn L1 cadet        5,3    hp 21/22  Plain  captain
 c  hexer-1          Hexer L1 adept             5,2    hp 16/16  Plain  group hill, guard, awake
 > attack captain hexer-1
-Forecast Alder Fenn -> Hexer: acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
+Forecast Alder Fenn -> Hexer: acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 6 of 8 left)
 Alder Fenn attacks Hexer
   Alder Fenn hits Hexer for 12 (hp 4)
   Hexer hits Alder Fenn for 10 (hp 11)
@@ -710,7 +710,7 @@ Alder Fenn masters the Cadet class and keeps Fundamentals
 enemy: move brigand-1 9,5
 Brigand moves 10,5 -> 9,5
 enemy: attack brigand-1 maud
-Forecast Brigand -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3%
+Forecast Brigand -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3% (Radiance 5 of 5 left)
 Brigand attacks Maud
   Brigand hits Maud for 11 (hp 6)
   Maud hits Brigand for 11 (hp 11)
@@ -826,7 +826,7 @@ Archer 1 waits
 enemy: move soldier-1 8,4
 Soldier moves 8,3 -> 8,4
 enemy: attack soldier-1 maud
-Forecast Soldier -> Maud: acc 58% dmg 9 crit 0%; counter: acc 97% dmg 10 crit 2%
+Forecast Soldier -> Maud: acc 58% dmg 9 crit 0%; counter: acc 97% dmg 10 crit 2% (Radiance 3 of 5 left)
 Soldier attacks Maud
   Soldier misses Maud
   Maud hits Soldier for 10 (hp 10)
@@ -1035,13 +1035,13 @@ Shop: iron_sword 400, iron_lance 400, iron_axe 400, iron_bow 400, iron_gauntlets
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 3, Saltmarsh Ford. Defeat every enemy by the end of turn 18. Captain Fenn must survive.
 > bench wren
-Wren is benched from Saltmarsh Ford
+Wren is benched from Saltmarsh Ford; Pell takes the seat
 Deploys to Saltmarsh Ford: Alder Fenn, Teodor, Ottilie, Pell (deploy 4 of 8)
 > bench pell
-Pell is benched from Saltmarsh Ford
+Pell is benched from Saltmarsh Ford; Dunstan takes the seat
 Deploys to Saltmarsh Ford: Alder Fenn, Teodor, Ottilie, Dunstan (deploy 4 of 8)
 > bench dunstan
-Dunstan is benched from Saltmarsh Ford
+Dunstan is benched from Saltmarsh Ford; Maud takes the seat
 Deploys to Saltmarsh Ford: Alder Fenn, Teodor, Ottilie, Maud (deploy 4 of 8)
 > march
 Map 3 of 10: Saltmarsh Ford, seed 3973
@@ -3791,7 +3791,7 @@ Teodor buys Steel Lance for 900; the purse holds 800
 > repair captain 1
 Alder Fenn's Iron Sword repaired from 19 to 40 uses for 210; the purse holds 590
 > bench dunstan
-Dunstan is benched from The Tollgate
+Dunstan is benched from The Tollgate; nobody takes the seat
 Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 8)
 > march
 Map 4 of 10: The Tollgate, seed 3974
@@ -5621,18 +5621,18 @@ B  wren             Wren L1 cadet              6,4    hp 20/20  Forest
 Battle won: seize; only recall is left, or leave
 > leave
 The Tollgate won: seize; reward 1000, the purse holds 1590; nobody fell
-Wren drilled with the levy: L1 -> L2.
+Wren drilled with the levy: L1 -> L2, 14 EXP kept.
 Ottilie drilled with the levy: L1 -> L2.
-Pell drilled with the levy: L1 -> L2.
+Pell drilled with the levy: L1 -> L2, 14 EXP kept.
 Dunstan drilled with the levy: L1 -> L2.
 Brannock drilled with the levy: L1 -> L2.
 -- Before map 5 of 10: Harrow Weir; the purse holds 1590 --
 == Roster ==
   Alder Fenn (captain): Vanguard L3, EXP 98; 1: Iron Sword 33/40 (repair 70), 2: Field Dressing 2/3; ladder: Vanguard, then Champion at 10
-  Wren: Cadet L2, EXP 0; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
+  Wren: Cadet L2, EXP 14; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
   Teodor: Pikeman L4, EXP 26; 1: Steel Lance 20/30 (repair 300), 2: Iron Lance 30/40 (repair 100), 3: Field Dressing 3/3, 4: Family Lance 40/40
   Ottilie: Bowman L2, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
-  Pell: Adept L2, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Pell: Adept L2, EXP 14; 1: Cinder 8/8, 2: Gust 6/6
   Dunstan: Bulwark L2, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L2, EXP 73; 1: Radiance 5/5, 2: Salve 8/8
   Brannock: Cadet L2, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
@@ -5655,7 +5655,7 @@ Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 5, Harrow Weir. Defeat the boss by the end of turn 15. Captain Fenn must survive.
 > bench wren
-Wren is benched from Harrow Weir
+Wren is benched from Harrow Weir; Maud takes the seat
 Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Maud (deploy 6 of 8)
 > march
 Map 5 of 10: Harrow Weir, seed 3975
@@ -5726,7 +5726,7 @@ Forecast Pell -> Brigand 1 with Cinder: acc 87% dmg 13 crit 3%; counter: none
 Pell attacks Brigand 1
   Pell hits Brigand 1 for 13 (hp 9)
   Pell hp 16, Brigand 1 hp 9
-Pell gains 10 exp (10)
+Pell gains 10 exp (24)
 Harrow Weir  turn 1 of 15  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -6686,7 +6686,7 @@ Forecast Pell -> Rider with Cinder: acc 99% dmg 12 crit 2%; counter: none
 Pell attacks Rider
   Pell hits Rider for 12 (hp 8)
   Pell hp 16, Rider hp 8
-Pell gains 10 exp (20)
+Pell gains 10 exp (34)
 Harrow Weir  turn 4 of 15  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -7799,7 +7799,7 @@ Forecast Pell -> Brigand 3 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Brigand 3
   Pell hits Brigand 3 for 13 (hp 9)
   Pell hp 16, Brigand 3 hp 9
-Pell gains 10 exp (30)
+Pell gains 10 exp (44)
 Harrow Weir  turn 7 of 15  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -8625,7 +8625,7 @@ Forecast Pell -> Weir Shieldbearer with Cinder: acc 99% dmg 10 crit 3%; counter:
 Pell attacks Weir Shieldbearer
   Pell hits Weir Shieldbearer for 10 (hp 14)
   Pell hp 16, Weir Shieldbearer hp 14
-Pell gains 10 exp (40)
+Pell gains 10 exp (54)
 The ford group wakes (noise)
 Harrow Weir  turn 9 of 15  player phase  defeat_boss  recall 3
    0123456789012345
@@ -9430,7 +9430,7 @@ Forecast Pell -> Soldier with Cinder: acc 99% dmg 12 crit 2%; counter: none
 Pell attacks Soldier
   Pell hits Soldier for 12 (hp 0)
   Pell hp 16, Soldier hp 0
-Pell gains 30 exp (70)
+Pell gains 30 exp (84)
 Soldier falls at 11,6
 Harrow Weir  turn 11 of 15  player phase  defeat_boss  recall 3
    0123456789012345
@@ -9982,19 +9982,19 @@ B  teodor           Teodor L5 pikeman          11,6   hp 19/23  Road  done
 Battle won: defeat_boss; only recall is left, or leave
 > leave
 Harrow Weir won: defeat_boss; reward 1200, the purse holds 2790; nobody fell
-Wren drilled with the levy: L2 -> L3.
-Ottilie drilled with the levy: L2 -> L3.
-Pell drilled with the levy: L2 -> L3.
-Dunstan drilled with the levy: L2 -> L3.
+Wren drilled with the levy: L2 -> L3, 14 EXP kept.
+Ottilie drilled with the levy: L2 -> L3, 10 EXP kept.
+Pell drilled with the levy: L2 -> L3, 84 EXP kept.
+Dunstan drilled with the levy: L2 -> L3, 20 EXP kept.
 Brannock drilled with the levy: L2 -> L3.
 -- Before map 6 of 10: Raid on Ironwake; the purse holds 2790 --
 == Roster ==
   Alder Fenn (captain): Vanguard L4, EXP 8; 1: Iron Sword 30/40 (repair 100), 2: Field Dressing 2/3; ladder: Vanguard, then Champion at 10
-  Wren: Cadet L3, EXP 0; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
+  Wren: Cadet L3, EXP 14; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
   Teodor: Pikeman L5, EXP 76; 1: Steel Lance 6/30 (repair 720), 2: Iron Lance 30/40 (repair 100), 3: Field Dressing 3/3, 4: Family Lance 40/40; door: lance 99/50
-  Ottilie: Bowman L3, EXP 0; 1: Iron Bow 39/40 (repair 10), 2: Field Dressing 3/3
-  Pell: Adept L3, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L3, EXP 0; 1: Iron Lance 38/40 (repair 20)
+  Ottilie: Bowman L3, EXP 10; 1: Iron Bow 39/40 (repair 10), 2: Field Dressing 3/3
+  Pell: Adept L3, EXP 84; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L3, EXP 20; 1: Iron Lance 38/40 (repair 20)
   Maud: Chaplain L3, EXP 43; 1: Radiance 5/5, 2: Salve 8/8
   Brannock: Cadet L3, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
   Supports: Alder Fenn and Pell C
@@ -10027,7 +10027,10 @@ Teodor buys Steel Lance for 900; the purse holds 1890
 > repair captain 1
 Alder Fenn's Iron Sword repaired from 30 to 40 uses for 100; the purse holds 1790
 > bench wren
-Wren is benched from Raid on Ironwake
+Wren is benched from Raid on Ironwake; Rook takes the seat
+Deploys to Raid on Ironwake: Alder Fenn, Rook, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 9)
+> bench rook
+Rook is benched from Raid on Ironwake; Maud takes the seat
 Deploys to Raid on Ironwake: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Maud (deploy 6 of 9)
 > march
 Map 6 of 10: Raid on Ironwake, seed 3976
@@ -10548,7 +10551,8 @@ Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Brigand 1
   Pell hits Brigand 1 for 13 (hp 11)
   Pell hp 16, Brigand 1 hp 11
-Pell gains 16 exp (16)
+Pell gains 16 exp (0)
+Pell reaches level 4: hp +1 cha +1
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -10572,7 +10576,7 @@ E  dunstan          Dunstan L3 bulwark         12,6   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             4,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           14,5   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain  done
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain  done
 B  teodor           Teodor L6 pikeman          11,4   hp 16/23  Plain  done
 > wait captain
 Alder Fenn waits
@@ -10599,7 +10603,7 @@ E  dunstan          Dunstan L3 bulwark         12,6   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             4,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           14,5   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain  done
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain  done
 B  teodor           Teodor L6 pikeman          11,4   hp 16/23  Plain  done
 > wait dunstan
 Dunstan waits
@@ -10626,7 +10630,7 @@ E  dunstan          Dunstan L3 bulwark         12,6   hp 23/23  Plain  done
 e  hexer-1          Hexer L6 adept             4,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           14,5   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain  done
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain  done
 B  teodor           Teodor L6 pikeman          11,4   hp 16/23  Plain  done
 > wait ottilie
 Ottilie waits
@@ -10653,7 +10657,7 @@ E  dunstan          Dunstan L3 bulwark         12,6   hp 23/23  Plain  done
 e  hexer-1          Hexer L6 adept             4,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           14,5   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain  done
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain  done
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain  done
 B  teodor           Teodor L6 pikeman          11,4   hp 16/23  Plain  done
 > end
 -- Player phase ends, turn 2 --
@@ -10720,11 +10724,11 @@ E  dunstan          Dunstan L3 bulwark         12,6   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           14,5   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 > recall 25
 Recalled to state 25; 2 charges left
-Undone: gives back 16 exp, 13 enemy hp; returns Teodor alive at 16 hp, Brigand 3 not yet arrived, Soldier 2 not yet arrived
+Undone: gives back 16 exp, 1 level, 13 enemy hp; returns Teodor alive at 16 hp, Brigand 3 not yet arrived, Soldier 2 not yet arrived
 The rolls do not change: the same attack will roll the same
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 2
    0123456789012345
@@ -10893,7 +10897,8 @@ Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Brigand 1
   Pell hits Brigand 1 for 13 (hp 11)
   Pell hp 16, Brigand 1 hp 11
-Pell gains 16 exp (16)
+Pell gains 16 exp (0)
+Pell reaches level 4: hp +1 cha +1
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -10917,7 +10922,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain  done
 e  hexer-1          Hexer L6 adept             4,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain  done
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain  done
 B  teodor           Teodor L6 pikeman          11,4   hp 23/23  Plain  done
 > wait captain
 Alder Fenn waits
@@ -10944,7 +10949,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain  done
 e  hexer-1          Hexer L6 adept             4,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain  done
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain  done
 B  teodor           Teodor L6 pikeman          11,4   hp 23/23  Plain  done
 > wait ottilie
 Ottilie waits
@@ -10971,7 +10976,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain  done
 e  hexer-1          Hexer L6 adept             4,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain  done
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain  done
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain  done
 B  teodor           Teodor L6 pikeman          11,4   hp 23/23  Plain  done
 > end
 Rapport Alder Fenn and Maud +4 (12)
@@ -11039,7 +11044,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain
 > item maud salve teodor
@@ -11071,7 +11076,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,4   hp 22/23  Plain
 > move teodor 11,8
@@ -11100,7 +11105,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 22/23  Plain
 > attack teodor brigand-1 1
@@ -11133,7 +11138,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 22/23  Plain  done
 > move captain 10,4
@@ -11162,7 +11167,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 22/23  Plain  done
 > attack captain archer-1
@@ -11197,7 +11202,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              12,7   hp 16/16  Plain
+D  pell             Pell L4 adept              12,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 22/23  Plain  done
 > move pell 14,8
@@ -11226,15 +11231,15 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 22/23  Plain  done
 > attack pell brigand-1
 Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Brigand 1
   Pell hits Brigand 1 for 13 (hp 0)
-  Pell hp 16, Brigand 1 hp 0
-Pell gains 45 exp (61)
+  Pell hp 17, Brigand 1 hp 0
+Pell gains 40 exp (40)
 Brigand 1 falls at 12,8
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 2
    0123456789012345
@@ -11259,7 +11264,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain  done
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain  done
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 22/23  Plain  done
 > wait dunstan
@@ -11287,7 +11292,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain  done
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain  done
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain  done
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 22/23  Plain  done
 > wait ottilie
@@ -11315,10 +11320,11 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 23/23  Plain  done
 e  hexer-1          Hexer L6 adept             8,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain  done
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain  done
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain  done
 f  soldier-2        Soldier L6 pikeman         4,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 22/23  Plain  done
-> end
+> end !
+Lethal if all land: Alder Fenn (Archer for 3, Brigand 2 for 9, Hexer for 12, against 24 hp)
 Rapport Dunstan and Maud +4 (8)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -11381,7 +11387,7 @@ E  dunstan          Dunstan L3 bulwark         12,5   hp 19/23  Plain
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 10/23  Plain
 > move dunstan 11,3
@@ -11408,7 +11414,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 10/23  Plain
 > attack dunstan archer-1
@@ -11416,7 +11422,7 @@ Forecast Dunstan -> Archer: acc 70% dmg 10 crit 0%; counter: none
 Dunstan attacks Archer
   Dunstan hits Archer for 10 (hp 0)
   Dunstan hp 19, Archer hp 0
-Dunstan gains 45 exp (45)
+Dunstan gains 45 exp (65)
 Archer falls at 12,3
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
    0123456789012345
@@ -11439,7 +11445,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,8   hp 10/23  Plain
 > move teodor 12,6
@@ -11465,7 +11471,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 10/23  Plain
 > wait teodor
@@ -11491,7 +11497,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           12,4   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 10/23  Plain  done
 > move maud 13,6
@@ -11517,7 +11523,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 10/23  Plain  done
 > item maud salve teodor
@@ -11545,7 +11551,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 18/23  Plain  done
 > wait captain
@@ -11571,7 +11577,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,8   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 18/23  Plain  done
 > move ottilie 13,7
@@ -11597,7 +11603,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 17/17  Plain
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 18/23  Plain  done
 > wait ottilie
@@ -11623,7 +11629,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 17/17  Plain  done
-D  pell             Pell L3 adept              14,8   hp 16/16  Plain
+D  pell             Pell L4 adept              14,8   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 18/23  Plain  done
 > move pell 14,6
@@ -11649,7 +11655,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 17/17  Plain  done
-D  pell             Pell L3 adept              14,6   hp 16/16  Plain
+D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 18/23  Plain  done
 > wait pell
@@ -11675,7 +11681,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 e  hexer-1          Hexer L6 adept             9,8    hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 17/17  Plain  done
-D  pell             Pell L3 adept              14,6   hp 16/16  Plain  done
+D  pell             Pell L4 adept              14,6   hp 17/17  Plain  done
 f  soldier-2        Soldier L6 pikeman         8,3    hp 22/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 18/23  Plain  done
 > end
@@ -11702,7 +11708,7 @@ Soldier 2 attacks Dunstan
   Dunstan hits Soldier 2 for 8 (hp 14)
   Soldier 2 misses Dunstan
   Soldier 2 hp 14, Dunstan hp 19
-Dunstan gains 16 exp (61)
+Dunstan gains 16 exp (81)
 enemy: end
 -- Enemy phase ends, turn 4 --
 -- Player phase, turn 5 --
@@ -11727,7 +11733,7 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 e  hexer-1          Hexer L6 adept             12,8   hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 17/17  Plain
-D  pell             Pell L3 adept              14,6   hp 16/16  Plain
+D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 6/23   Plain
 > item maud salve teodor
@@ -11755,16 +11761,16 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 e  hexer-1          Hexer L6 adept             12,8   hp 17/17  Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 17/17  Plain
-D  pell             Pell L3 adept              14,6   hp 16/16  Plain
+D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > attack ottilie hexer-1
-Forecast Ottilie -> Hexer: acc 87% dmg 9 crit 4%; counter: acc 99% dmg 12 crit 0%
+Forecast Ottilie -> Hexer: acc 87% dmg 9 crit 4%; counter: acc 99% dmg 12 crit 0% (Cinder 6 of 8 left)
 Ottilie attacks Hexer
   Ottilie hits Hexer for 9 (hp 8)
   Hexer hits Ottilie for 12 (hp 5)
   Ottilie hp 5, Hexer hp 8
-Ottilie gains 16 exp (16)
+Ottilie gains 16 exp (26)
 Raid on Ironwake  turn 5 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -11786,11 +11792,11 @@ E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 e  hexer-1          Hexer L6 adept             12,8   hp 8/17   Plain  group wave, aggressive
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain  done
-D  pell             Pell L3 adept              14,6   hp 16/16  Plain
+D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > attack teodor hexer-1 1 art long_thrust
-Forecast Teodor -> Hexer: acc 89% dmg 15 crit 2%; counter: acc 99% dmg 12 crit 2%
+Forecast Teodor -> Hexer: acc 89% dmg 15 crit 2%; counter: acc 99% dmg 12 crit 2% (Cinder 5 of 8 left)
   Technique Long Thrust: Steel Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 3 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Steel Lance, spending 2 extra uses
 Teodor attacks Hexer
@@ -11819,7 +11825,7 @@ A  captain          Alder Fenn L4 vanguard     10,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain  done
-D  pell             Pell L3 adept              14,6   hp 16/16  Plain
+D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain  done
 > move captain 14,4
@@ -11844,7 +11850,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain  done
-D  pell             Pell L3 adept              14,6   hp 16/16  Plain
+D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain  done
 > wait captain
@@ -11869,7 +11875,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain  
 E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain  done
-D  pell             Pell L3 adept              14,6   hp 16/16  Plain
+D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain  done
 > wait dunstan
@@ -11894,7 +11900,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain  
 E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain  done
-D  pell             Pell L3 adept              14,6   hp 16/16  Plain
+D  pell             Pell L4 adept              14,6   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain  done
 > move pell 15,7
@@ -11919,7 +11925,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain  
 E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain  done
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain  done
 > wait pell
@@ -11944,7 +11950,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain  
 E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain  done
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain  done
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain  done
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain  done
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain  done
 > end
@@ -11984,7 +11990,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > item maud salve ottilie
@@ -12012,7 +12018,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 G  maud             Maud L4 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 13/17  Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > attack dunstan soldier-2
@@ -12022,7 +12028,7 @@ Dunstan attacks Soldier 2
   Soldier 2 hits Dunstan for 7 (hp 12)
   Soldier 2 hits Dunstan for 7 (hp 5)
   Dunstan hp 5, Soldier 2 hp 6
-Dunstan gains 16 exp (77)
+Dunstan gains 16 exp (97)
 Raid on Ironwake  turn 6 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -12043,7 +12049,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 5/23   Plain  done
 G  maud             Maud L4 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 13/17  Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 6/22   Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > move teodor 11,4
@@ -12068,7 +12074,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 5/23   Plain  done
 G  maud             Maud L4 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 13/17  Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 6/22   Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain
 > attack teodor soldier-2 5 art long_thrust
@@ -12101,7 +12107,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 5/23   Plain  done
 G  maud             Maud L4 chaplain           13,6   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 13/17  Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain  done
 > move captain 10,3
 ERROR: Alder Fenn cannot move to 10,3: not within 4 movement from 14,4
@@ -12129,7 +12135,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 19/23  Plain
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > attack dunstan soldier-2
@@ -12139,7 +12145,7 @@ Dunstan attacks Soldier 2
   Soldier 2 hits Dunstan for 7 (hp 12)
   Soldier 2 hits Dunstan for 7 (hp 5)
   Dunstan hp 5, Soldier 2 hp 6
-Dunstan gains 16 exp (77)
+Dunstan gains 16 exp (97)
 Raid on Ironwake  turn 6 of 7  player phase  rout  recall 1
    0123456789012345
  0 ....^^....#.....
@@ -12160,7 +12166,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 5/23   Plain  done
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 6/22   Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > move teodor 11,4
@@ -12185,7 +12191,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 5/23   Plain  done
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 f  soldier-2        Soldier L6 pikeman         10,3   hp 6/22   Plain  group wave, aggressive
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain
 > attack teodor soldier-2 5 art long_thrust
@@ -12218,7 +12224,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 5/23   Plain  done
 G  maud             Maud L3 chaplain           13,6   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain  done
 > move maud 12,3
 Maud moves 13,6 -> 12,3 via 13,5 13,4 13,3
@@ -12242,7 +12248,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 5/23   Plain  done
 G  maud             Maud L3 chaplain           12,3   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain  done
 > item maud salve dunstan
 Maud uses Salve on dunstan (3 left)
@@ -12269,7 +12275,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
 E  dunstan          Dunstan L3 bulwark         11,3   hp 13/23  Plain  done
 G  maud             Maud L4 chaplain           12,3   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain  done
 > wait captain
 Alder Fenn waits
@@ -12293,7 +12299,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain  
 E  dunstan          Dunstan L3 bulwark         11,3   hp 13/23  Plain  done
 G  maud             Maud L4 chaplain           12,3   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain  done
 > wait ottilie
 Ottilie waits
@@ -12317,7 +12323,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain  
 E  dunstan          Dunstan L3 bulwark         11,3   hp 13/23  Plain  done
 G  maud             Maud L4 chaplain           12,3   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain  done
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain  done
 > wait pell
 Pell waits
@@ -12341,7 +12347,7 @@ A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain  
 E  dunstan          Dunstan L3 bulwark         11,3   hp 13/23  Plain  done
 G  maud             Maud L4 chaplain           12,3   hp 19/19  Plain  done
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain  done
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain  done
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain  done
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain  done
 > end
 Rapport Dunstan and Maud +4 (12)
@@ -12356,7 +12362,8 @@ Brigand 3 attacks Dunstan
   Brigand 3 hits Dunstan for 10 (hp 3)
   Dunstan hits Brigand 3 for 10 (hp 14)
   Brigand 3 hp 14, Dunstan hp 3
-Dunstan gains 16 exp (93)
+Dunstan gains 16 exp (13)
+Dunstan reaches level 4: hp +1
 enemy: end
 -- Enemy phase ends, turn 6 --
 -- Player phase, turn 7 --
@@ -12377,10 +12384,10 @@ Raid on Ironwake  turn 7 of 7  player phase  rout  recall 1
 
 g  brigand-3        Brigand L6 reaver          10,3   hp 14/24  Plain  group wave, aggressive
 A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
-E  dunstan          Dunstan L3 bulwark         11,3   hp 3/23   Plain
+E  dunstan          Dunstan L4 bulwark         11,3   hp 4/24   Plain
 G  maud             Maud L4 chaplain           12,3   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain
 > move teodor 10,4
 Teodor moves 11,4 -> 10,4
@@ -12401,10 +12408,10 @@ Raid on Ironwake  turn 7 of 7  player phase  rout  recall 1
 
 g  brigand-3        Brigand L6 reaver          10,3   hp 14/24  Plain  group wave, aggressive
 A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
-E  dunstan          Dunstan L3 bulwark         11,3   hp 3/23   Plain
+E  dunstan          Dunstan L4 bulwark         11,3   hp 4/24   Plain
 G  maud             Maud L4 chaplain           12,3   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 B  teodor           Teodor L6 pikeman          10,4   hp 14/23  Plain
 > show teodor
 Teodor, Pikeman L6, at 10,4 on Plain
@@ -12441,27 +12448,25 @@ Raid on Ironwake  turn 7 of 7  player phase  rout  recall 1
 11 ....^^....#.....
 
 A  captain          Alder Fenn L4 vanguard     14,4   hp 24/24  Plain  captain
-E  dunstan          Dunstan L3 bulwark         11,3   hp 3/23   Plain
+E  dunstan          Dunstan L4 bulwark         11,3   hp 4/24   Plain
 G  maud             Maud L4 chaplain           12,3   hp 19/19  Plain
 C  ottilie          Ottilie L3 bowman          13,7   hp 5/17   Plain
-D  pell             Pell L3 adept              15,7   hp 16/16  Plain
+D  pell             Pell L4 adept              15,7   hp 17/17  Plain
 B  teodor           Teodor L7 pikeman          10,4   hp 15/24  Plain  done
 Battle won: rout; only recall is left, or leave
 > leave
 Raid on Ironwake won: rout; reward 1000, the purse holds 2790; nobody fell
-Wren drilled with the levy: L3 -> L4.
-Ottilie drilled with the levy: L3 -> L4.
-Pell drilled with the levy: L3 -> L4.
-Dunstan drilled with the levy: L3 -> L4.
+Wren drilled with the levy: L3 -> L4, 14 EXP kept.
+Ottilie drilled with the levy: L3 -> L4, 26 EXP kept.
 Brannock drilled with the levy: L3 -> L4.
 -- Before map 7 of 10: Sallow Grange; the purse holds 2790 --
 == Roster ==
   Alder Fenn (captain): Vanguard L4, EXP 62; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 2/3; ladder: Vanguard, then Champion at 10
-  Wren: Cadet L4, EXP 0; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
+  Wren: Cadet L4, EXP 14; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
   Teodor: Pikeman L7, EXP 13; 1: Steel Lance 26/30 (repair 120), 2: Steel Lance 0/30 (repair 900), 3: Iron Lance 30/40 (repair 100), 4: Field Dressing 3/3, 5: Family Lance 40/40; door: lance 125/50
-  Ottilie: Bowman L4, EXP 0; 1: Iron Bow 38/40 (repair 20), 2: Field Dressing 3/3
-  Pell: Adept L4, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
-  Dunstan: Bulwark L4, EXP 0; 1: Iron Lance 33/40 (repair 70)
+  Ottilie: Bowman L4, EXP 26; 1: Iron Bow 38/40 (repair 20), 2: Field Dressing 3/3
+  Pell: Adept L4, EXP 40; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L4, EXP 13; 1: Iron Lance 33/40 (repair 70)
   Maud: Chaplain L4, EXP 13; 1: Radiance 5/5, 2: Salve 8/8
   Rook: Skyrider L4, EXP 0; 1: Iron Lance 40/40
   Brannock: Cadet L4, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
@@ -12516,5 +12521,5 @@ Classes: what each asks, read against a unit's own stats without its class's; a 
   Vanguard: level 3 -- only the captain takes Vanguard
   Warden (from Chaplain; adds sword, Far Mending): level 7, faith 50 (between D and C) -- needs to be a Chaplain first; needs faith 50, has 0
 Campaign stopped before Sallow Grange: the script ended on the screen
-Rejected 1 of 456 commands:
-  line 441: move captain 10,3: Alder Fenn cannot move to 10,3: not within 4 movement from 14,4
+Rejected 1 of 457 commands:
+  line 442: move captain 10,3: Alder Fenn cannot move to 10,3: not within 4 movement from 14,4

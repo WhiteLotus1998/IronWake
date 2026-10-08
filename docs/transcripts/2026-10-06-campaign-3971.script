@@ -370,6 +370,7 @@ pick rook
 buy steel_lance teodor
 repair captain 1
 bench wren
+bench rook
 march
 move teodor 11,4
 wait teodor

@@ -820,7 +820,7 @@ public sealed partial record CampaignRecord(
     {
         map = Seated(NextMap(content).Prepare(map), content);
         var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
-        var roster = Present(content).Where(u => map.DeploysAll || !Benched.Contains(u.Id)).ToList();
+        var roster = SeatOrder(map, content);
         var turnedAway = TurnedAway(content);
         var fallenNamed = map.Placements.OfType<PlayerPlacement>()
             .Where(p => p.Slot == PlayerSlot.NamedRecruit && p.RecruitId is { } id && (Fallen.Contains(id) || turnedAway.Contains(id)))
@@ -835,6 +835,35 @@ public sealed partial record CampaignRecord(
         }
 
         return battle;
+    }
+
+    /// <summary>
+    /// The units <see cref="Begin"/> seats, the bench left out, in the order they fill bare slots: roster
+    /// order, but on the map the pick joins (issue 1357, round 458) the pick takes the place of the
+    /// first unit benched, in bench order, who stands before her, so the first seat a bench frees is
+    /// hers and nobody else's tile moves. A later bench, and every later map, follows roster order.
+    /// </summary>
+    private List<Unit> SeatOrder(MapDefinition map, GameContent content)
+    {
+        var present = Present(content);
+        if (map.DeploysAll)
+        {
+            return present.ToList();
+        }
+
+        var order = present.Select(u => u.Id).ToList();
+        var seated = present.Where(u => !Benched.Contains(u.Id)).ToList();
+        if (Pick is not { } pick || Find(pick) is not null || !NextMap(content).Branch.Contains(pick) || seated.FindIndex(u => u.Id == pick) is var from && from < 0
+            || Benched.FirstOrDefault(id => order.IndexOf(id) is var at && at >= 0 && at < order.IndexOf(pick)) is not { } freed)
+        {
+            return seated;
+        }
+
+        var unit = seated[from];
+        seated.RemoveAt(from);
+        var to = seated.FindIndex(u => order.IndexOf(u.Id) > order.IndexOf(freed));
+        seated.Insert(to < 0 ? seated.Count : to, unit);
+        return seated;
     }
 
     /// <summary>
@@ -1767,7 +1796,8 @@ public sealed partial record CampaignRecord(
 
     /// <summary>
     /// Benches <paramref name="unitId"/> from <paramref name="map"/>, the next map: its bare slot
-    /// goes to the next recruit in roster order. Anyone <see cref="Present"/> for it may be benched,
+    /// goes to the next recruit in roster order, or on the pick's join map to the pick (<see cref="SeatOrder"/>),
+    /// and the line names who takes it (issue 1357). Anyone <see cref="Present"/> for it may be benched,
     /// so a joiner, the branch's pick or a side character met at this camp is benched like a member
     /// (issue 842) and still joins the roster after the map. Refused for the captain, the map's
     /// protected recruit, its <c>seen_far:</c> unit (issue 973), a recruit the map places by name, a unit not present, or one already benched.
@@ -1809,7 +1839,27 @@ public sealed partial record CampaignRecord(
             return ScreenResult.Refused(this, $"{unit.Id} is already benched");
         }
 
-        return new ScreenResult(this with { Benched = Benched.Add(unit.Id) }, $"{unit.Id} is benched from {map.Name}", true);
+        var benched = this with { Benched = Benched.Add(unit.Id) };
+        return new ScreenResult(benched, $"{unit.Id} is benched from {map.Name}{SeatTaker(benched, map, content)}", true);
+    }
+
+    /// <summary>
+    /// What <see cref="Bench"/> prints after the bench (issue 1357, round 458): who takes the seat it
+    /// frees, by <see cref="Deployment"/> before and after, or that nobody does when the company is
+    /// short; nothing when the map cannot be deployed to read it.
+    /// </summary>
+    private string SeatTaker(CampaignRecord benched, MapDefinition map, GameContent content)
+    {
+        try
+        {
+            var before = Deployment(map, content);
+            var taker = benched.Deployment(map, content).FirstOrDefault(id => !before.Contains(id));
+            return taker is null ? "; nobody takes the seat" : $"; {taker} takes the seat";
+        }
+        catch (ArgumentException)
+        {
+            return "";
+        }
     }
 
     /// <summary>Returns a benched unit to the deployment order; refused for a unit not benched.</summary>

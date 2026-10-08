@@ -1299,7 +1299,7 @@ Alder Fenn buys Field Dressing for 150; the purse holds 1250
 > drop captain 3
 Alder Fenn drops Field Dressing
 > bench brannock
-Brannock is benched from Saltmarsh Ford
+Brannock is benched from Saltmarsh Ford; nobody takes the seat
 Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Ottilie (deploy 4 of 8)
 > unbench brannock
 Brannock returns to the deployment order

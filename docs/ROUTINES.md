@@ -101,7 +101,10 @@ it on the Design Table in one paragraph, and spike it on
 experiment/<name>. Play it. Post the journal. If three or more wait,
 spike nothing: play the weakest untuned map warm through --script
 instead (the lowest last rating on any axis in STATE's Maps table; an
-abandoned or unrated map counts as lowest), journal it in PLAYTEST.md
+abandoned or unrated map counts as lowest) at the floor the campaign
+seats (the levy floor N less 3 before map N, the pick at her join
+level), not `--level 4`, unless the map's row names a level (0336),
+journal it in PLAYTEST.md
 with its transcript, and file what the play finds (DECISIONS/0237,
 amended by 0278). A play that files nothing on a low map goes to the
 Table as a rework candidate.

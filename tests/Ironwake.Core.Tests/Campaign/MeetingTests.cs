@@ -113,7 +113,7 @@ public class MeetingTests
         var benched = met.Bench("ansgar", field, Content);
 
         Assert.True(benched.Accepted, benched.Text);
-        Assert.Equal("ansgar is benched from The Field Before the Keep", benched.Text);
+        Assert.Equal("ansgar is benched from The Field Before the Keep; rook takes the seat", benched.Text);
         Assert.DoesNotContain("ansgar", benched.Record.Deployment(field, Content));
         Assert.Contains("rook", benched.Record.Deployment(field, Content));
     }
