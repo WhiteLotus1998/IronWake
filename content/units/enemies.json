@@ -204,7 +204,7 @@
       "class": "iron_warden",
       "description": "The Iron Warden. The shard in his lance's pommel is frozen iron.",
       "level": 14,
-      "stats": { "hp": 52, "str": 13, "mag": 0, "dex": 16, "spd": 9, "lck": 10, "def": 14, "res": 11, "cha": 12 },
+      "stats": { "hp": 44, "str": 10, "mag": 0, "dex": 15, "spd": 8, "lck": 10, "def": 11, "res": 8, "cha": 12 },
       "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 20, "lck": 10, "def": 30, "res": 10, "cha": 10 },
       "ranks": { "lance": "A" },
       "inventory": [ { "item": "wardens_lance" } ]

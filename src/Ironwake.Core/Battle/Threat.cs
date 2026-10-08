@@ -7,7 +7,9 @@ namespace Ironwake.Core;
 /// on, its own tile included, when it may move next phase, and from its own tile only when
 /// it holds; a sleeping Guard threatens nothing, since it acts only once its group wakes.
 /// Player units always may move. Walls are respected through the reach set; the weapon
-/// ranges are Manhattan, every usable weapon the unit carries counted.
+/// ranges are Manhattan, every usable weapon the unit carries counted. A unit holding a line
+/// strike also strikes its cross from every origin, out to the reach and short of a wall
+/// (issue 1389, <see cref="LineStrike.Cross"/>).
 /// </summary>
 public static class Threat
 {
@@ -62,6 +64,7 @@ public static class Threat
                 ? new[] { home }
                 : reach.Destinations.Append(unit.At).Distinct();
         var maxRange = weapons.Max(w => w.MaxRange);
+        var line = unit.EquippedWeapon(content) is null ? null : LineStrike.Of(content, unit);
         foreach (var from in origins)
         {
             for (var dy = -maxRange; dy <= maxRange; dy++)
@@ -75,6 +78,11 @@ public static class Threat
                         struck.Add(tile);
                     }
                 }
+            }
+
+            if (line is not null)
+            {
+                struck.UnionWith(LineStrike.Cross(state, content, from, line.Reach));
             }
         }
 

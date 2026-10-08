@@ -51,6 +51,38 @@ public static class LineStrike
         return line;
     }
 
+    /// <summary>
+    /// Every tile a line of <paramref name="reach"/> struck from <paramref name="from"/> could fall on, in all four
+    /// directions (<see cref="LineOf"/>): the cross the Sim's danger area reads (issue 1389).
+    /// </summary>
+    public static IEnumerable<Coord> Cross(BattleState state, GameContent content, Coord from, int reach) =>
+        Directions.SelectMany(d => LineOf(state, content, from, new Coord(from.X + d.Dx, from.Y + d.Dy), reach));
+
+    /// <summary>
+    /// Every tile a line of <paramref name="reach"/> could be struck from to fall on <paramref name="target"/>: the tiles
+    /// up to the reach away in one cardinal line whose <see cref="LineOf"/> runs on to it, so a wall between them
+    /// shuts the tile out (issue 1389, the exposure the Sim's player prices).
+    /// </summary>
+    public static IEnumerable<Coord> StruckFrom(BattleState state, GameContent content, Coord target, int reach)
+    {
+        foreach (var (dx, dy, _) in Directions)
+        {
+            for (var step = 1; step <= reach; step++)
+            {
+                var from = new Coord(target.X - dx * step, target.Y - dy * step);
+                if (!state.Map.Contains(from))
+                {
+                    break;
+                }
+
+                if (LineOf(state, content, from, new Coord(from.X + dx, from.Y + dy), reach).Contains(target))
+                {
+                    yield return from;
+                }
+            }
+        }
+    }
+
     /// <summary>Every unit of another side than <paramref name="striker"/>'s on <paramref name="line"/>, nearest first.</summary>
     public static IReadOnlyList<BattleUnit> Struck(BattleState state, BattleUnit striker, IReadOnlyList<Coord> line) =>
         line.Select(state.UnitAt).OfType<BattleUnit>().Where(u => u.Side != striker.Side).ToList();

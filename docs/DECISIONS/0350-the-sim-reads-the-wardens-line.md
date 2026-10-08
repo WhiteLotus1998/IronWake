@@ -1,0 +1,8 @@
+# 0350: The Sim reads the Warden's line; stage 1 on the Table's row
+
+Issue 1389, from rounds 490 and 491 (#1368).
+
+- **Content (the Table's row, restated):** `hask_warden` is HP 44, Str 10, Dex 15, Spd 8, Lck 10, Def 11, Res 8, lance A, L14, on `docs/samples/ironwake_keep_warden.map` only. The campaign keep keeps the stand-in Hask (0346). A pitch on Lotus's Hask list, not a ruling.
+- **The danger area reads the line.** `Threat.StruckByUnit` adds the cross (`LineStrike.Cross`) from every origin it already counts. `Exposure.Of` counts a line striker at the worse of its plain attack and its line from any tile it can end on whose line runs on to the tile (`LineStrike.StruckFrom`), one strike read as if adjacent. That is a worst case like the rest of the sum: it ignores the planner's two-caught threshold, because a second unit stepping into the line is a later command in the same cycle.
+- **The read (`docs/measurements/keep-1389.txt`):** reading the line moves almost nothing. The row goes from 75 / 49 to 75 / 50 (full / depleted), and the stand-in numbers with the strike from 141 / 94 to 144 / 89. The heuristic consults exposure only for the veto and lethal tiles, never to spread a line out, so the strike's cost is not blindness the sum can cure. Round 490's guess that the 40 depleted wins were "a party that lines up blind" does not hold for this player.
+- **The tripwire fires:** the row's depleted company is 50, under 120. Stage 1 comes down only after a lever is named on the Table. The baseline also moved underneath it: the campaign keep itself fell from 167 / 136 to 108 / 101 across #1393 and #1394 (#1395, a `bug`), so no stage-1 lever is read until #1395 settles the line it is read against.

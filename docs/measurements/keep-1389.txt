@@ -1,0 +1,45 @@
+# Issue 1389: the Warden's stage 1 on the Table's row, and the Sim reading the line strike.
+# --finale at level 8, 200 seeds, two-roll average. 'before' is main at b624264 (the Sim blind to the line);
+# 'after' is this branch (Threat.StruckByUnit and Exposure.Of read the line). The stand-in rows put hask_warden at
+# the stand-in Hask's numbers (L10, HP 44, Str 9, Dex 14, Spd 8, Def 9, Res 7, lance D) on the sample, strike kept.
+# The 1255c9b reads (keep-1384.txt; Chat's round 490) predate #1393 and #1394, which moved the keep itself (#1395).
+
+## the Table's row, before
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 75/200 (38 %), losses 82 timeout 43 captain 0 protected: FAILED
+finale depleted: 12 units at level 8, heuristic wins 49/200 (24 %), losses 84 timeout 67 captain 0 protected: FAILED
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 96 timeout 104 captain 0 protected: data, a cold chair's play decides (never won)
+finale: FAILED
+
+## the Table's row, after
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 75/200 (38 %), losses 75 timeout 50 captain 0 protected: FAILED
+finale depleted: 12 units at level 8, heuristic wins 50/200 (25 %), losses 81 timeout 69 captain 0 protected: FAILED
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 90 timeout 110 captain 0 protected: data, a cold chair's play decides (never won)
+finale: FAILED
+
+## the stand-in numbers with the strike, before
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 141/200 (70 %), losses 47 timeout 12 captain 0 protected: ok
+finale depleted: 12 units at level 8, heuristic wins 94/200 (47 %), losses 82 timeout 24 captain 0 protected: FAILED
+finale floor: 11 units at level 8, heuristic wins 1/200 (1 %), losses 108 timeout 91 captain 0 protected: data, a cold chair's play decides (won at least once)
+finale: FAILED
+
+## the stand-in numbers with the strike, after
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 144/200 (72 %), losses 46 timeout 10 captain 0 protected: ok
+finale depleted: 12 units at level 8, heuristic wins 89/200 (45 %), losses 84 timeout 27 captain 0 protected: FAILED
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 97 timeout 103 captain 0 protected: data, a cold chair's play decides (never won)
+finale: FAILED
+
+## the campaign keep on this branch (equal to main: no line striker on it)
+finale: content/keep/ironwake_keep.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 108/200 (54 %), losses 88 timeout 4 captain 0 protected: FAILED
+finale depleted: 12 units at level 8, heuristic wins 101/200 (51 %), losses 81 timeout 18 captain 0 protected: FAILED
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 119 timeout 81 captain 0 protected: data, a cold chair's play decides (never won)
+finale: FAILED
+
+## the campaign keep at b7167e4 (#1393, before #1394)
+finale full: 12 units at level 8, heuristic wins 148/200 (74 %), losses 43 timeout 9 captain 0 protected: ok
+finale depleted: 12 units at level 8, heuristic wins 89/200 (45 %), losses 89 timeout 22 captain 0 protected: FAILED
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 119 timeout 81 captain 0 protected: data, a cold chair's play decides (never won)

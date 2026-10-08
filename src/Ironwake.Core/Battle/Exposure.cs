@@ -38,7 +38,10 @@ public static class Exposure
     /// (DECISIONS/0025) and gate 1's captain-loss count is where that regime is seen.
     /// An enemy is counted at the worst of every weapon it can strike with, since its
     /// attack options range over all of them (section 8); the counter to the unit's own
-    /// attack is the weapon the target holds in front now, the one it last swung.
+    /// attack is the weapon the target holds in front now, the one it last swung. An enemy
+    /// holding a line strike is also counted at its line from every tile it can end on whose
+    /// line runs on to the tile, one strike read as if adjacent (issue 1389,
+    /// <see cref="LineStrike.StruckFrom"/>), whether or not the line would catch a second unit.
     /// </summary>
     public static ExposureSum Of(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit? target = null, int? slot = null)
     {
@@ -72,6 +75,25 @@ public static class Exposure
                     var striker = content.CombatantOf(enemy.Unit, Grounding.ForMap(board.Map, weapon), board.Map.TerrainAt(from, content), enemy.Hp, 0, armed.WeaponBroken(content)) with { PairHeld = PairRule.Holds(board, enemy, moved) };
                     var forecast = Combat.Forecast(striker, me, from.DistanceTo(tile), state.Scheme);
                     var here = Worst(forecast.Attacker);
+                    if (!found || here.Plain > worst.Plain || (here.Plain == worst.Plain && here.Crit > worst.Crit))
+                    {
+                        worst = here;
+                        found = true;
+                    }
+                }
+            }
+
+            if (enemy.EquippedWeapon(content) is not null && LineStrike.Of(content, enemy) is { } line)
+            {
+                foreach (var from in LineStrike.StruckFrom(board, content, tile, line.Reach))
+                {
+                    if (from != enemy.At && (!mayMove || !reach.CanEnd(from)))
+                    {
+                        continue;
+                    }
+
+                    var there = enemy with { At = from };
+                    var here = Worst(LineStrike.Forecast(board.WithUnit(there), content, there, moved).Attacker);
                     if (!found || here.Plain > worst.Plain || (here.Plain == worst.Plain && here.Crit > worst.Crit))
                     {
                         worst = here;

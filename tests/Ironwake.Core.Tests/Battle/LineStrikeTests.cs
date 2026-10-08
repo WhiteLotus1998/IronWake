@@ -5,7 +5,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// Hask's line strike (issue 1384, round 487; numbers provisional on #1247). The pitched Iron Warden is <c>hask_warden</c>,
 /// seated on the sample <c>docs/samples/ironwake_keep_warden.map</c> while the campaign keep keeps the stand-in Hask
-/// (DECISIONS/0346: the Sim wins the keep with him in 0 of 200). As his action he strikes every company unit
+/// (DECISIONS/0346; the Table's row since issue 1389). As his action he strikes every company unit
 /// on up to four tiles in one cardinal line out from him, once each, at his lance's numbers read as if adjacent, with no
 /// double and no counter. The line stops at the map's edge and before a wall. The planner takes it when a line catches
 /// two or more units, and swings plainly otherwise; <c>threat</c> prints the line through a unit.
@@ -62,13 +62,13 @@ public class LineStrikeTests
     }
 
     [Fact]
-    public void TheWardenCarriesThePitchedNumbersAndTheLineStrike()
+    public void TheWardenCarriesTheTablesRowAndTheLineStrike()
     {
         var hask = Starter.Unit("hask_warden");
 
         Assert.Equal("iron_warden", hask.ClassId);
         Assert.Equal(14, hask.Level);
-        Assert.Equal(new Stats(52, 13, 0, 16, 9, 10, 14, 11, 12), hask.Stats);
+        Assert.Equal(new Stats(44, 10, 0, 15, 8, 10, 11, 8, 12), hask.Stats);
         Assert.Equal(WeaponRank.A, hask.Skill.Rank(WeaponType.Lance));
         Assert.Equal(4, LineStrike.Of(Starter, Hask(Start()))!.Reach);
     }
@@ -134,8 +134,8 @@ public class LineStrikeTests
         var hale = state.Find("hale")!;
         var side = LineStrike.Forecast(state, Starter, Hask(state), hale).Attacker;
 
-        // Str 13 plus the Warden's Lance's Mt 9, against the captain's Def 5 on plain.
-        Assert.Equal(13 + Starter.Weapon("wardens_lance").Mt - hale.Unit.Stats.Def, side.Damage);
+        // Str 10 plus the Warden's Lance's Mt 9, against the captain's Def 5 on plain.
+        Assert.Equal(10 + Starter.Weapon("wardens_lance").Mt - hale.Unit.Stats.Def, side.Damage);
     }
 
     [Fact]
@@ -230,6 +230,52 @@ public class LineStrikeTests
         var from = Assert.IsType<Move>(plan.First()).To;
         Assert.Equal(4, from.Y);
         Assert.Equal(new Coord(from.X - 1, 4), strike.Toward);
+    }
+
+    [Fact]
+    public void TheStrikeSetReadsTheWardensCrossShortOfTheWall()
+    {
+        var state = Start() with { Phase = Side.Player };
+
+        var struck = Threat.StruckByUnit(state, Starter, Hask(state));
+
+        Assert.Contains(new Coord(0, 2), struck);
+        Assert.Contains(new Coord(7, 2), struck);
+        Assert.Contains(new Coord(4, 0), struck);
+        Assert.Contains(new Coord(4, 4), struck);
+        Assert.DoesNotContain(new Coord(9, 2), struck);
+    }
+
+    [Fact]
+    public void ExposurePricesTheLineOnATileOnlyTheLineReaches()
+    {
+        var state = Start() with { Phase = Side.Player };
+        var ivo = state.Units.Single(u => u.Unit.Id == "ivo");
+        var tile = new Coord(4, 0);
+        var there = state.WithUnit(ivo with { At = tile });
+
+        var line = LineStrike.Forecast(there, Starter, Hask(there), there.Find(ivo.Id)!).Attacker;
+
+        Assert.True(line.Damage > 0);
+        Assert.Equal(line.Damage, Exposure.Of(state, Starter, ivo, tile).NoCrit);
+    }
+
+    [Fact]
+    public void ExposurePricesNoLineThroughAWall()
+    {
+        var state = Start() with { Phase = Side.Player };
+        var ivo = state.Units.Single(u => u.Unit.Id == "ivo");
+
+        Assert.Equal(0, Exposure.Of(state, Starter, ivo, new Coord(9, 2)).NoCrit);
+        Assert.DoesNotContain(new Coord(4, 2), LineStrike.StruckFrom(state, Starter, new Coord(9, 2), 4));
+    }
+
+    [Fact]
+    public void ALineIsStruckFromTheTilesUpToTheReachInLineWithTheTarget()
+    {
+        var from = LineStrike.StruckFrom(Start(), Starter, new Coord(4, 0), 4).ToHashSet();
+
+        Assert.Equal(new HashSet<Coord> { new(4, 1), new(4, 2), new(4, 3), new(4, 4), new(5, 0), new(6, 0), new(7, 0), new(8, 0), new(3, 0), new(2, 0), new(1, 0), new(0, 0) }, from);
     }
 
     [Fact]
