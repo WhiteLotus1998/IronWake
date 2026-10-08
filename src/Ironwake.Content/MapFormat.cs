@@ -333,6 +333,7 @@ public static class MapFormat
         {
             TurnTrigger t => "turn " + t.Turn + " " + t.Phase.ToString().ToLowerInvariant(),
             EnterTrigger e => "enter " + string.Join(' ', e.Tiles),
+            WakesTrigger w => "wakes " + w.Group + (w.Late ? " late" : ""),
             MessengerTrigger => "messenger",
             FallsTrigger f => "falls " + f.Front,
             DropTrigger d => "drop " + d.Ledge,
@@ -444,7 +445,7 @@ public static class MapFormat
             SkipBlankLines();
             var placements = ParseUnits(width, height, terrain);
             var chests = ParseChests(width, height);
-            var events = ParseEvents(width, height, terrain, turnLimit);
+            var events = ParseEvents(width, height, terrain, turnLimit, placements);
             if (announce && events.Count == 0)
             {
                 throw ErrorAt(header["announce"].Line, "announce: on needs an events: block to announce");
@@ -1743,11 +1744,11 @@ public static class MapFormat
 
         /// <summary>
         /// The optional <c>events:</c> block after the units (issue 32): one line per event,
-        /// <c>name trigger action</c>. Triggers are <c>turn N player|enemy</c> and
-        /// <c>enter x,y</c>; actions are <c>terrain x,y glyph</c>, <c>spawn template x,y
+        /// <c>name trigger action</c>. Triggers are <c>turn N player|enemy</c>,
+        /// <c>enter x,y</c> and <c>wakes group [late]</c> (issue 1365), among others; actions are <c>terrain x,y glyph</c>, <c>spawn template x,y
         /// group:g behavior:b</c> on an edge tile, and <c>flag name</c>. Names are unique.
         /// </summary>
-        private ValueList<MapEvent> ParseEvents(int width, int height, ValueList<string> terrain, int turnLimit)
+        private ValueList<MapEvent> ParseEvents(int width, int height, ValueList<string> terrain, int turnLimit, IReadOnlyList<Placement> placements)
         {
             if (AtEnd)
             {
@@ -1790,11 +1791,20 @@ public static class MapFormat
                     throw Error("a held terrain change needs an enter trigger on one tile, the tile that holds it: 'north_bar enter 8,1 terrain 8,0 # held'");
                 }
 
+                if (trigger is WakesTrigger wakes && !SleepsAtStart(placements, wakes.Group))
+                {
+                    throw Error($"wakes trigger names group '{wakes.Group}', but no E line places a guard in it, so it never wakes: 'ford wakes fort spawn brigand 0,9 group:ford behavior:aggressive'");
+                }
+
                 events.Add(new MapEvent(name, trigger, action));
             }
 
             return ValueList<MapEvent>.From(events);
         }
+
+        /// <summary>Whether <paramref name="group"/> has a guard among the placements: a group that can wake (issue 1365).</summary>
+        private static bool SleepsAtStart(IReadOnlyList<Placement> placements, string group) =>
+            placements.OfType<EnemyPlacement>().Any(e => e.Group == group && e.Behavior == Behavior.Guard);
 
         /// <summary>
         /// The tiles the events block's terrain changes name, read ahead of the block without moving past it
@@ -1878,6 +1888,15 @@ public static class MapFormat
                     }
 
                     return (new EnterTrigger(ValueList<Coord>.From(tiles)), tokens[(2 + count)..]);
+                case "wakes":
+                    if (tokens.Length < 3 || tokens[2].Contains(','))
+                    {
+                        throw Error("wakes trigger needs a group's name: 'wakes fort'");
+                    }
+
+                    return tokens.Length > 3 && tokens[3] == "late"
+                        ? (new WakesTrigger(tokens[2], Late: true), tokens[4..])
+                        : (new WakesTrigger(tokens[2]), tokens[3..]);
                 case "messenger":
                     return (new MessengerTrigger(), tokens[2..]);
                 case "falls":
@@ -1895,7 +1914,7 @@ public static class MapFormat
 
                     return (new DropTrigger(ParseCoord(tokens[2], width, height)), tokens[3..]);
                 default:
-                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn, enter, messenger, falls or drop");
+                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn, enter, wakes, messenger, falls or drop");
             }
         }
 

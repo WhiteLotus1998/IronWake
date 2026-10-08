@@ -245,7 +245,7 @@ public static class Resolver
             next = next.Light(woke.Group);
         }
 
-        return Routes.AfterWake(next, woken);
+        return MapEvents.AfterWake(Routes.AfterWake(next, woken), content, events);
     }
 
     /// <summary>The unit a command names, if it is on the board, on the acting side, and has not acted.</summary>

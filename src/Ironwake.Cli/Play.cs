@@ -506,6 +506,8 @@ public sealed class PlaySession
         {
             TurnTrigger turn => WhenWords(turn),
             EnterTrigger enter => $"when one of yours stops on {string.Join(" or ", enter.Tiles)}",
+            WakesTrigger { Late: true } wakes => $"at the start of your next phase after {wakes.Group.Replace('_', ' ')} wakes",
+            WakesTrigger wakes => $"when {wakes.Group.Replace('_', ' ')} wakes",
             MessengerTrigger => "if the messenger reaches the road",
             FallsTrigger falls => $"if {falls.Front.Replace('_', ' ')} falls",
             DropTrigger drop => $"when one of yours drops the rock from {drop.Ledge}",

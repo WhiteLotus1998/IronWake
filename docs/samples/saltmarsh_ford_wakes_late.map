@@ -1,0 +1,33 @@
+name: Saltmarsh Ford
+size: 14x10
+win: rout
+turn_limit: 18
+recall: 3
+enemy_level: 2
+brace: on
+region: sallow
+
+....^^....F...
+..^....nn.....
+......n.......
+~~~=~~~~~~=~~~
+...^^.........
+....^^........
+..^^..........
+..............
+..............
+..............
+
+units:
+P captain 6,8
+P recruit 5,8
+P recruit 7,8
+P recruit 6,9
+E archer 10,1 group:fort behavior:guard
+E soldier 9,0 group:fort behavior:guard
+E wingrider 12,2 group:fort behavior:guard
+B bandit_leader 10,0 group:fort behavior:boss
+
+events:
+ford wakes fort late spawn brigand 0,9 group:ford behavior:aggressive
+ford_second wakes fort late spawn soldier 1,9 group:ford behavior:aggressive
