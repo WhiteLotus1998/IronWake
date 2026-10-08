@@ -82,4 +82,22 @@ public class SparkStormShippedTests
         Assert.Contains("> item pell 2 6,5 preview\n6,5 is 5 tiles from pell at 6,10; Spark Storm reaches 1-2\n", output);
         Assert.DoesNotContain("Unhandled", output);
     }
+
+    /// <summary>
+    /// Code's hand play of the shipped tome (seed 1329, three turns of the Tollgate): one storm strikes the woods archer
+    /// and brigand for 10 and 11 and marks both, no counter; the archer dies to Pell's counter, and the next storm cashes
+    /// the brigand's mark for 16 and kills it.
+    /// </summary>
+    [Fact]
+    public void TheJournaledStormPlayCashesTheMarkOnTheWoodsBrigand()
+    {
+        var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(root, "docs", "transcripts", "2026-10-08-the_tollgate-1329-storm.script");
+
+        var output = ConsoleCapture.Run(() => Program.Main(["play", "the_tollgate", "--seed", "1329", "--script", script, "--strict", "--content", Fixture.RealContentDirectory()]));
+
+        Assert.Contains("Toll Brigand is marked by Pell: the next lightning hit on it deals x1.5\n", output);
+        Assert.Contains("  Pell hits Toll Brigand for 16 (hp 0)\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
 }
