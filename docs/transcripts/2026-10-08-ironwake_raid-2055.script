@@ -1,0 +1,55 @@
+pick keziah
+bench dunstan
+bench maud
+march
+move keziah 11,7
+move teodor 11,4
+move wren 12,3
+move pell 13,4
+move ottilie 12,6
+move captain 12,5
+wait keziah
+wait teodor
+wait wren
+wait pell
+wait ottilie
+wait captain
+end
+move pell 12,4
+attack pell soldier-1 1
+attack keziah brigand-1
+move teodor 8,4
+attack teodor archer-1
+move wren 8,3
+wait wren
+move captain 9,4
+wait captain
+move ottilie 11,4
+wait ottilie
+end
+move keziah 8,7
+attack keziah hexer-1
+move captain 7,5
+attack captain archer-1
+move wren 7,3
+attack wren brigand-2
+move teodor 6,4
+attack teodor brigand-2
+recall 46
+move keziah 8,7
+attack keziah hexer-1
+move teodor 7,3
+attack teodor brigand-2
+move wren 8,4
+attack wren archer-1
+move captain 6,4
+attack captain brigand-2
+move ottilie 8,3
+wait ottilie
+move pell 9,3
+wait pell
+end
+move pell 7,2
+attack pell soldier-2 1
+attack captain brigand-3
+leave

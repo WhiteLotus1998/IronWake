@@ -3934,3 +3934,17 @@ Notes:
 - **Brannock drilled "in the sword" with a hatchet.** The yard accepts a weapon the student's class uses but the student does not carry, so his axe rose to D and his sword stayed E. That is a refusal the yard could use (Unsure on the PR).
 
 — Code
+
+## 2026-10-08 — The Raid on Ironwake, Keziah seated, the weakest untuned map under 0278, warm — Code
+Seed: 2055 (`campaign --seed 2055 --from ironwake_raid --level 4 --strict --script docs/transcripts/2026-10-08-ironwake_raid-2055.script`; transcript beside it; main at b123bc7). The camp before map 6 of 10, at L4 against the raid's L6. This time the pick plays: Keziah picked, then `bench dunstan` and `bench maud` to seat her, so the six are the captain, Wren, Teodor, Ottilie, Pell and Keziah.   Result: **won on turn 4 of 7**, rout, one Recall, nobody fell.
+Warm: I played 288, 633 and 1570 here and read 301. Picked under 0278: the raid's 1570 surprise of 4 ties the Lazar House's, and the Lazar House waits on the Critic's chair.
+Tension: 6/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 3, after the Recall. My first pass sent Wren at brigand 2 first; its 49 percent counter landed, she was left at 8 on 7,3, and `threat wren` read the soldier's 10 against 8 at 62. Recalled to the turn start, I gave the counter to someone who could take it: Teodor softened the brigand from 7,3 (it missed him), Wren stepped to 8,4 and killed the archer, whose bow has no answer at one tile, and the captain walked through 7,4 to 6,4 and doubled the brigand at 89. Same dice, a different order, and every line read safe (the captain 21 against 23, Wren and Keziah clear). That is the raid's one real question, and `threat` asked it.
+Notes:
+- **Going out through the gap is faster than holding it.** 1570 held the wall and won on turn 5. Here the van's two melee died on their own swings into the gaps on turn 1 and to Pell and Keziah on turn 2, and then the company walked out west through 10,3 to 10,4 and met the waves in the open. Turn 4 was two kills on enemies at 12 and 2 HP. The waves still arrive one at a time behind a dead van (288, 301, 633, 1570 and now this): brigand 2 waited at 6,3 on turn 2, two short of Wren, and the turn-2 wave was still at the west edge when the van was gone. **Rework candidate, no lever** (round 158 keeps the raid untuned for surprise); Chat's 301 lever (the van a column west, so the waves overlap it) is still the one I would try.
+- **Keziah earns her seat here.** The scythe's hunger is a pull forward that the raid's open middle rewards: an unfed turn 1 drained her 5, so she took the wounded brigand on turn 2 (healed to full) and walked to the hexer on turn 3 (one hit, 18 into 17, a tooth). On turn 4 nothing was in her four tiles, and the drain would have bitten if the map had gone on. That is the cost reading as a choice.
+- **The pick sits last in the fill order.** `bench dunstan` seated Maud, not the claimant I had just picked; it took a second bench to field her. 633 and 1570 both left her on the bench for the same reason. Not a bug, the fill order is the roster's; but a player who picks Keziah and benches one veteran expects her in. Table question below.
+- **The first tooth's bark** ("That one was limping before you reached it.") came on a hexer killed from full HP in one hit. The tooth lines are a ladder, not a reading of the kill, so it is the god's contempt, not a misread; it lands as a sneer and I'd keep it.
+- **Not tense:** turns 1 and 4.
+
+— Code
