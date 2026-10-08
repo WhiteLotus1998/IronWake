@@ -438,6 +438,23 @@ internal static class Fixture
     /// </summary>
     public static string LadderFreeSaltmarsh0030ContentDirectory() => LadderFreeSaltmarsh0030.Value;
 
+    private static readonly Lazy<string> SaltmarshWakesLate = new(() => WithSaltmarshSample(CopyFiles("ironwake-saltmarsh-wakes-late-"), "saltmarsh_ford_wakes_late.map"));
+
+    /// <summary>
+    /// A file-for-file copy of the real content directory with Saltmarsh Ford replaced by
+    /// <c>docs/samples/saltmarsh_ford_wakes_late.map</c> (issue 1365, DECISIONS/0339: the pair on the
+    /// fort's wake, a phase late), so a campaign journaled on the sample at the floor replays on it.
+    /// Made once per test run under the temp directory.
+    /// </summary>
+    public static string SaltmarshWakesLateContentDirectory() => SaltmarshWakesLate.Value;
+
+    private static string WithSaltmarshSample(string target, string sample)
+    {
+        var repo = Directory.GetParent(RealContentDirectory())!.FullName;
+        File.Copy(Path.Combine(repo, "docs", "samples", sample), Path.Combine(target, "maps", "saltmarsh_ford.map"), overwrite: true);
+        return target;
+    }
+
     private static string WithSaltmarsh0030(string target)
     {
         var repo = Directory.GetParent(RealContentDirectory())!.FullName;

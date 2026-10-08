@@ -4005,3 +4005,18 @@ Notes:
 - **Not tense:** turns 1, 5, and 8 to 12.
 
 — Code
+
+## 2026-10-08 — Saltmarsh Ford's late sample at the campaign's floor, round 472's read, warm — Code
+
+Seed: 3300 (`campaign --seed 3300 --from saltmarsh_ford --level 1 --strict --script docs/transcripts/2026-10-08-saltmarsh_ford_wakes_late-3300.script --content <content with docs/samples/saltmarsh_ford_wakes_late.map as saltmarsh_ford.map>`; transcript beside it; main at 663ce4c). The 18-turn late sample (`wakes fort late`), since the 19-turn one also read 39/200 (`docs/measurements/saltmarsh-wakes-late-19.txt`). The default four at L1. Warm: I built the trigger and played 3200 here. Result: **won, rout, on turn 12 of 18.** All three Recalls spent, nobody fell.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 5, the turn round. The pair had spawned at 0,9 and 1,9 at the start of turn 3 and walked to 5,6 and 6,6. The fort's soldier stood on the ford at 2 HP with the archer behind it at 6, and the captain sat at 1 HP on 10,4 after a braced 41 and a braced 34 both landed. Everyone had a job. Ottilie took the soldier off the ford from 11,4, the captain stepped east and dressed, Wren walked onto the ford and speared the archer, and Teodor stayed braced on 9,6 as the one body facing the rear: 18 against 20 with both of them in. They swung at 36 and 49 and both missed, and his counters took each to 10. That is the question Chat wanted the wake to ask, and it asked it.
+Notes:
+- **The overlap is real.** Under the cut the pair reached the ford after the leader died (571, 1560, 3200). Here it struck on turn 5, the turn the fort's last two bodies died, and the first Recall (turn 4) was spent because Ottilie's 82 missed and the soldier's counter left the captain at 6, lethal to the fort's two survivors, with the pair two turns out. Turns 3 to 6 each had two fronts.
+- **The floor's ceiling held.** Recalls went on turns 4, 6 (the captain's 87 on the 4-HP soldier missed and its counter left him at 3) and 10. Each one took back a lethal: the captain at 6, the captain at 3, then Wren at 6 on 9,0.
+- **I lost that lesson a turn later.** On turn 11, with no Recall, Teodor's 51 missed the 8-HP leader and I sent Wren in anyway, knowing from the recalled pass that his counter would hit her for 12. She stood at 6 against a 63 percent axe through his phase, and it missed. **Disclosed luck:** a hit there is the map's only death.
+- **The leader is still the 3200 dance.** Bait the brace off with Wren on 10,2 (turn 9), then Full Measure from 10,1. It went in at 98 for 15 and did not crit. At L1 only the captain and Teodor reach 10,1 from the south, and only one of them can stand there, so 25 is the most a turn does to his 26. Two turns are needed and he heals 5 between them.
+- **The Sim's 39 is not the floor's verdict.** In 30 of 40 traced timeouts the heuristic parks the captain beside the leader and never strikes. A person kills him by turn 12.
+- **Not tense:** turns 1, 8 and 9.
+
+— Code

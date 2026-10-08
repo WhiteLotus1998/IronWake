@@ -164,4 +164,17 @@ public class WakesTriggerTests
         var map = MapFixture.Parse(string.Join('\n', sample) + "\n", file);
         Assert.All(map.Events, e => Assert.Equal(new WakesTrigger("fort", late), e.Trigger));
     }
+
+    [Fact]
+    public void TheSaltmarshLateSampleAtNineteenTurnsIsTheLateSampleWithOnlyItsTurnLimitRaised()
+    {
+        var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var late = File.ReadAllLines(Path.Combine(root, "docs", "samples", "saltmarsh_ford_wakes_late.map"));
+        var nineteen = File.ReadAllLines(Path.Combine(root, "docs", "samples", "saltmarsh_ford_wakes_late_19.map"));
+
+        Assert.Equal(late.Length, nineteen.Length);
+        var changed = Enumerable.Range(0, late.Length).Where(i => late[i] != nineteen[i]).ToList();
+        Assert.Equal(new[] { "turn_limit: 19" }, changed.Select(i => nineteen[i]));
+        Assert.Equal(19, MapFixture.Parse(string.Join('\n', nineteen) + "\n", "saltmarsh_ford_wakes_late_19.map").TurnLimit);
+    }
 }

@@ -31,9 +31,9 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 
 - **The Tollgate** (0073), **Brackwater Cut at dusk** (0078): `tuned`.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). A crest mass freezing the Foreman is a solve (#1087); lever: the archer out of Pell's turn-5 reach.
-- **Saltmarsh Ford:** not tuned (0093, 0095). The pair on the fort's wake (470, 0339): under 0095's 40 (36, late 39), samples only.
+- **Saltmarsh Ford:** not tuned (0093, 0095). The pair on the fort's wake (470, 0339): under 0095's 40 (36, late 39, a miss; samples only, 472). The late shape is the candidate; limit 19 also reads 39, so not the clock. Next: Chat's cold chair; flat from both, the cut stays (a cool-down), untuned.
 - **The Rookery (0208):** not passed; no lever before a cold chair.
-- **The Counting House (311-321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh read in (2030, Maud, lost; 441).
+- **The Counting House (311-321):** archer 11,2 (#925), limit 11 (#931), no third lever (441).
 - **The Mill:** `holds:` (0279), limit 9 (0280), fort south (#1210). A free lesson is a tile (466, 467): the road brigand is undoubled by the L1 captain (0338), so the 7,8 cork and 1710's bank cost an axe trade; Chat's cold floor chair reads it.
 - **The First Shrine (406-455; 0283, 0304, 0306):** south start, limit 10; the loft archer wakes on the door's death and takes the held altar (`seize_hold: 1`). **Kept, no lever, no chair owed** (455, Chat 5303): whoever corks the doorway (7,2) decides the held phase; brigand 1 to 4,4 retired. #1351, #1352 filed from it.
 - **The Undercroft (431):** the middle wins (4,4 corks the stair); the lector is scenery off the north route. Held for a cold chair: his reach over the desk, or 13,4.
@@ -111,4 +111,4 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 
 ## Round index
 
-1-118 rules; 119-342 story; 343-359 writing; 360-419; 420-432 (#1251); 433-443 (#1287); 444 on (#1334).
+1-118 rules; 119-342 story; 343-359 writing; 360-419; 420-432 (#1251); 433-443 (#1287); 444-473 (#1334); 474 on (#1368).
