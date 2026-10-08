@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-08 (#1362, 0338, the Mill's road brigand). Under 19 KB on a branch, 20 KB on main (#1291).
+Updated: 2026-10-08 (0278, Saltmarsh at the floor, #1365). Under 19 KB on a branch, 20 KB on main (#1291).
 
 ## Where we are
 
@@ -11,7 +11,7 @@ No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain 
 
 ## Next
 
-- 13.2 Commander's Word is spiked (#85, 0136; DESIGN 13.2): `order <press|rally|fall back>` once a map as the captain's action, radius `2 + Cha / 4`. Open behind `orders: on` and on campaign maps from the second; the client calls it from its action list (#786).
+- 13.2 Commander's Word (#85, 0136): `order <press|rally|fall back>` once a map, the captain's action, radius `2 + Cha / 4`; behind `orders: on` and on campaign maps from the second; the client's action list (#786).
 - 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23): sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slices 1, 2, #851, #856 (0195, 0207, 0209, 0211): teeth 2,4,5,8,12, `--kinsbane [--axe|--heeding]`, issued beside the axe; 279's bar passes. Slice 3 (0212): a woken kill's full Move again once a map (`the_gleaning_kinsbane_woken.map`). #865: `campaign ... --fed N`. #871 (0214, Lotus): the reach gate reverted; `keziah_warning: on` on Sallow alone (drains p50 2); `march` asks, `march sure` answers. The voice (0221): `kinsbaneSpoke`, 3 a battle (#1002); Code 804 warm 8/6/5. The choice screen (0222): `pitch` in `campaign.json`, each claimant's line under the offer until the pick; placeholder. What is left on #804 is art (the hound, the screen's staging), waiting on #535.
 - #805 (0213, 0215 to 0218, 0252; closed): the stages, the carry, the breath, `drakeFlew`. #872 (0217): the Drover replaces the Scout; #882: `--drover`'s price ceiling passes (0.72 to 0.74). #1094 (0254): both on every campaign battle; the pick joins trained (0263).
 - #916 (0227): `region:` picks the ground; outland sand waits on Chat's look at `docs/look/sand-916.png`.
@@ -49,7 +49,7 @@ No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain 
 | harrow_weir | **tuned** (0088, 0100). The crest file (#471 over #456), `turn_limit: 15` (0100). Guard Foreman with the Toll Axe under the boss veto, goes home when refused (0080), `wake_links: ford>weir`. Gate 1 68 percent (136/200, 0264), gate 4 ok at 0.215. Fun Gate: Code 481 7/8/7 (warm), Chat 487 7/8/7; the Critic 617 7/6/6. Code 1360 7/7/8; 1410 5/7/6, 1450 6/7/5 (the ford): the Foreman frozen from either bank (#1087). |
 | the_field | **tuned on Keziah's pick** (0233); **Rook's pick tuned on hand plays, gate 1 short** (0246, 0250; tripwire: the owed cold chair). Map 9 (0190, 0191), level 4. Defeat Boss, limit 20; `route_drift` turn 5 (0226). Gate 1 69 percent (138/200, 0264), gate 4 ok; route claims come from hand plays (0248). Keziah: Chat cold 4071 7/7/7, Code warm 936 to 1460, four, 7/7/6 to 8/7/7. Rook (`seen_far: rook 2`, 0240; Sim 92/200, 0264): Chat 5150 7/7/7, Code warm 1340, 1390, 1440, 7/7/6 to 8/7/7. |
 | old_mill_road | A fixture, out of the campaign (0124). |
-| saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 50/200, gate 4 fails at 0.075 (#971). On the cut: Code 547 7/7/6, Chat cold 571 7/7/5; Code 1560 warm 6/6/5, the pair late. The spawn lever #524 failed (0095). |
+| saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 50/200, gate 4 0.075 (#971). Code 547 7/7/6, Chat cold 571 7/7/5; Code 1560 warm 6/6/5; floor Code 3200 7/6/5 (three Recalls, a crit). The pair late every read: #1365, Table; #524's lever failed (0095). |
 | sallow_grange | Not tuned. Seize, the Reeve a guard boss at 15,6 (0055), hexer at 13,7 (#275). `keziah_warning: on` (0214). Gate 1 81 percent (161/200), gate 4 ok at 0.330 (#971). Chat 7/7/6 (44); Code 61 6/6/5, 871 7/7/5, 1580 warm 7/7/5 (t8): two holders never act. |
 | ironwake_raid | Not tuned (round 158). Map 6 (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat 301 7/7/5, 633 9/7/6 (L1), 1570, 2055 6/6/4 (L4); 3100 warm 8/7/6 at the floor (L3, Keziah L4): no lever (461); Chat's cold floor chair owed. |
 | ironwake_keep | Not tuned. The finale (0265, #1149): defeat boss, limit 12, fronts north/gate/south, the raid's wall broken. `--finale` L8 floor 0 (data). Levers 1 to 3 (0284 to 0287): 87/71, 87/70, 84/58. Chat 2410: sample 6/7/6, keep 7/6/5; the reach shipped (0293; Sim 84/58). Next: a fresh keep chair (is the bait a choice?). |
