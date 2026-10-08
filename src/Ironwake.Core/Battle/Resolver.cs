@@ -723,6 +723,7 @@ public static class Resolver
         next = Burning.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Drain.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Curse.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
+        next = Mark.AfterCombat(next, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Stun.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Lock.AfterAttack(next, art, unit.Id, target.Id, result.Strikes, events);
         next = Grounding.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
@@ -837,6 +838,7 @@ public static class Resolver
             state = Frost.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
             state = Burning.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
             state = Curse.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
+            state = Mark.AfterCombat(state, shooter.Id, weapon, struck.Id, null, strikes, events, watcher, target);
             state = Stun.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Grounding.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Sunder.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
@@ -917,6 +919,7 @@ public static class Resolver
             var itemId = unit.Unit.Inventory.Items[slot.Value].ItemId;
             var why = content.Items.ContainsKey(itemId) ? "an item, not a weapon"
                 : content.Weapon(itemId).Heals ? "a healing spell; use it with item"
+                : content.Weapon(itemId).Area > 0 ? $"an area cast; use it with item: item {unit.Id} {slot} <unit|x,y>"
                 : content.Weapon(itemId).IsMagic && unit.Unit.Inventory.Items[slot.Value].Uses == 0 ? "spent for this battle"
                 : !content.Class(unit.Unit.ClassId).CanUse(content.Weapon(itemId).Type) ? $"not a weapon a {unit.Unit.ClassId} can use"
                 : MagicSchoolExtensions.SchoolShort(unit.Unit, content.Class(unit.Unit.ClassId), content.Weapon(itemId))
@@ -1072,6 +1075,11 @@ public static class Resolver
         if (Hollow.Raises(content, spell))
         {
             return ApplyHollow(state, content, use, unit, spell, events);
+        }
+
+        if (spell.Area > 0)
+        {
+            return ApplyAreaCast(state, content, use, unit, spell, events);
         }
 
         if (!spell.Heals || !content.Class(unit.Unit.ClassId).CanUse(spell.Type))
@@ -1246,6 +1254,112 @@ public static class Resolver
         healer = GainRank(healer, spell.Type, WeaponRanks.PerCombat, events);
         healer = AwardMastery(healer, content, events);
         return (next.WithUnit(healer), null);
+    }
+
+    /// <summary>
+    /// The Item action with an area tome (issue 1329, <see cref="AreaCast"/>): checked as a strike's tome is (no art, the
+    /// caster may wield it, a use left), at a unit or a tile in range that its side can see with an enemy within the
+    /// radius; then each of them struck once with no counter, one use and the action spent, one combat's EXP earned.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyAreaCast(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, List<GameEvent> events)
+    {
+        if (use.Art is not null)
+        {
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} strikes an area; no art is declared with it"));
+        }
+
+        if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {spell.Id}: " + (MagicSchoolExtensions.SchoolShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? MagicSchoolExtensions.MagShort(unit.Unit, content.Class(unit.Unit.ClassId), spell) ?? RankShort(unit.Unit, spell))));
+        }
+
+        var stack = unit.Unit.Inventory.Items[use.Slot];
+        if (stack.Uses == 0)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} has no uses left this battle"));
+        }
+
+        if (use.TargetId is null)
+        {
+            return (state, new Rejection(RejectionReason.NoTarget, $"{spell.Name} strikes an area: item {unit.Id} {use.Slot} <unit|x,y>"));
+        }
+
+        if (AreaCast.TileOf(state, use.TargetId) is not { } at)
+        {
+            return (state, new Rejection(RejectionReason.NoSuchTarget, $"no living unit or tile '{use.TargetId}' to cast at"));
+        }
+
+        var distance = unit.At.DistanceTo(at);
+        if (!spell.InRange(distance))
+        {
+            return (state, new Rejection(
+                RejectionReason.OutOfRange,
+                $"{at} is {distance} tiles from {unit.Id} at {unit.At}; {spell.Name} reaches {spell.MinRange}-{spell.MaxRange}"));
+        }
+
+        if (!Dusk.Sees(state, unit.Side, at))
+        {
+            return (state, new Rejection(RejectionReason.Unseen, $"no unit on {unit.Id}'s side can see {at} at dusk (sight {Dusk.Sight(state)})"));
+        }
+
+        var struck = AreaCast.Struck(state, unit, spell, at);
+        if (struck.Count == 0)
+        {
+            return (state, new Rejection(RejectionReason.NoSuchTarget, $"no enemy within {spell.Area} of {at}; {spell.Name} would strike no one"));
+        }
+
+        var usesLeft = stack.Uses - 1;
+        events.Add(new AreaCastAt(unit.Id, spell.Id, at, ValueList<string>.From(struck.Select(t => t.Id)), usesLeft));
+        var caster = unit with { Moved = true, Acted = true, Unit = unit.Unit with { Inventory = unit.Unit.Inventory.Replace(use.Slot, stack with { Uses = usesLeft }) } };
+        var next = state.WithUnit(caster);
+        (BattleUnit Target, ValueList<StrikeEvent> Strikes, bool Killed, int Pays)? best = null;
+        var killedAny = false;
+        foreach (var aimed in struck)
+        {
+            var target = next.Find(aimed.Id)!;
+            var result = CombatResolver.Resolve(
+                caster.ToCombatant(next, content, against: target, casting: spell),
+                target.ToCombatant(next, content, countering: true, against: caster) with { Blind = true },
+                distance,
+                new CombatContext(next.Turn, next.Phase),
+                new KeyedRng(next.Seed),
+                next.Scheme);
+            events.Add(new CombatFought(unit.Id, target.Id, next.Turn, next.Phase, result.Strikes, caster.Hp, result.DefenderHp));
+            var landed = result.Strikes.Any(s => s.Hit);
+            var pays = Experience.ForCombat(caster.Unit.Level, target.Unit.Level, landed, result.DefenderDied, target.IsBoss);
+            if (best is null || pays > best.Value.Pays)
+            {
+                best = (target, result.Strikes, result.DefenderDied, pays);
+            }
+
+            killedAny |= result.DefenderDied;
+            next = next.WithUnit(target with { Hp = result.DefenderHp });
+            if (result.DefenderDied)
+            {
+                events.Add(new UnitDied(target.Id, target.Side, target.At));
+                next = LeaveKeepsake(next, target with { Hp = 0 }, content, events).WithoutUnit(target.Id);
+                if (Freed.IsBound(state, target))
+                {
+                    next = next with { BondKilledBy = Freed.KillBy(caster, content) };
+                }
+
+                next = SwearGrudges(next, content, target, caster, events);
+                continue;
+            }
+
+            next = Mark.AfterCombat(next, unit.Id, spell, target.Id, null, result.Strikes, events, caster, target);
+        }
+
+        if (usesLeft == 0)
+        {
+            events.Add(new SpellSpent(unit.Id, spell.Id));
+        }
+
+        caster = next.Find(unit.Id)!;
+        caster = AwardExp(caster, best!.Value.Target, best.Value.Strikes, best.Value.Killed, content, state.Seed, events);
+        caster = GainRank(caster, spell.Type, WeaponRanks.ForCombat(killedAny), events);
+        caster = AwardMastery(caster, content, events);
+        return (next.WithUnit(caster), null);
     }
 
     /// <summary>

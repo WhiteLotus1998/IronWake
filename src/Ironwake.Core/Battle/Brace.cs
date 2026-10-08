@@ -38,7 +38,7 @@ public static class Brace
     /// the pin (<see cref="Pincer.HitAgainst"/>) plus the brace plus the winded mark of a dash
     /// (<see cref="Winded.HitAgainst"/>, DESIGN.md 13.27), plus the striker's own curse blind (<see cref="Curse.HitOf"/>,
     /// issue 1328), on a strike and a counter alike. The one function
-    /// <see cref="BattleUnit.ToCombatant(BattleState, GameContent, bool, CombatArtEffect?, BattleUnit?)"/>
+    /// <see cref="BattleUnit.ToCombatant(BattleState, GameContent, bool, CombatArtEffect?, BattleUnit?, Weapon?)"/>
     /// and <see cref="EnemyAi.Score"/> both call, so the planner's target choice reads what the
     /// forecast and the resolver read.
     /// </summary>

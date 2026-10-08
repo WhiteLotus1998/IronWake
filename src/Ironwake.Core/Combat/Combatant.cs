@@ -128,6 +128,12 @@ public sealed record Combatant
     /// </summary>
     public bool Hollow { get; init; }
 
+    /// <summary>
+    /// The school whose first hit on this side is marked (issue 1329, <see cref="Ironwake.Core.Mark"/>), read on the board;
+    /// null off the board and for every unmarked unit.
+    /// </summary>
+    public MagicSchool? Marked { get; init; }
+
     /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, not <see cref="Blind"/>, and not <see cref="AnswerSpent"/>.</summary>
     public bool CanStrike(int distance) => !Blind && !AnswerSpent && Weapon is not null && Weapon.InRange(distance);
 }

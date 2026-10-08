@@ -58,6 +58,16 @@ public static class ItemCard
             parts.Add($"Crit +{weapon.CritBonus} against {string.Join(" and ", weapon.CritAgainst.Select(m => m.ToString().ToLowerInvariant()))}.");
         }
 
+        if (weapon.Area > 0)
+        {
+            parts.Add($"Cast at a unit or a tile: strikes every enemy within {weapon.Area} of it once, no counter.");
+        }
+
+        if (weapon.Marks && weapon.School is { } marking)
+        {
+            parts.Add($"A hit marks: the next {marking.Label()} hit on it deals {Mark.Times}.");
+        }
+
         if (weapon.BurnStacks > 1)
         {
             parts.Add($"A hit lays {weapon.BurnStacks} stacks of burn.");

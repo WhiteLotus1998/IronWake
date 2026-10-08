@@ -32,9 +32,20 @@ public static class RollSchemes
 /// both units stand (issue 872, <see cref="BiteEffect"/>), 0 for every side without one; never a strike.
 /// <see cref="NeverDoubles"/> marks a side in a single-strike class (<see cref="UnitClass.SingleStrike"/>), so the line can say why.
 /// <see cref="Stoop"/> is what the side's first strike adds when it hits (issue 1127, <see cref="Ironwake.Core.Stoop"/>), 0 for every side that does not stoop.
+/// <see cref="CashesMark"/> is a side whose first hit lands on a mark of its tome's school (issue 1329, <see cref="Mark"/>):
+/// that hit deals <see cref="MarkedDamage"/> or <see cref="MarkedCritDamage"/>, every later one plain damage.
 /// </summary>
-public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1, bool CritGrounds = false, int Bite = 0, bool NeverDoubles = false, int Stoop = 0)
+public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1, bool CritGrounds = false, int Bite = 0, bool NeverDoubles = false, int Stoop = 0, bool CashesMark = false)
 {
+    /// <summary>What this side's first hit deals when it cashes a mark: <see cref="Damage"/> times the mark's multiple, rounded down once.</summary>
+    public int MarkedDamage => Mark.Of(Damage);
+
+    /// <summary>What this side's first hit deals when it crits and cashes a mark: <see cref="CritDamage"/> times the mark's multiple, rounded down once.</summary>
+    public int MarkedCritDamage => Mark.Of(CritDamage);
+
+    /// <summary>What the mark adds to this side's first hit, plain: <see cref="MarkedDamage"/> less <see cref="Damage"/> when it cashes one, else 0.</summary>
+    public int MarkBonus => CashesMark ? MarkedDamage - Damage : 0;
+
     public static SideForecast None { get; } = new(false, 0, 0, 0, 0, false);
 
     /// <summary>What one crit from this side deals: <see cref="Damage"/> times <see cref="Combat.CritMultiplier"/>, or plain <see cref="Damage"/> when the crit grounds instead (issue 723).</summary>
@@ -85,11 +96,11 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
 
     /// <summary>
     /// The attacker's plain damage over the strikes it lives to make (<see cref="AttackerStrikesLivedFor"/>), no crit,
-    /// its first strike's Stoop (issue 1127), and its drake's bite (issue 872) when the counter, every strike landing, leaves it standing: the bite needs both
+    /// its first strike's Stoop (issue 1127), what a mark adds to its first hit (issue 1329), and its drake's bite (issue 872) when the counter, every strike landing, leaves it standing: the bite needs both
     /// units up after the exchange, and if the strikes alone kill, the bite adds nothing that matters.
     /// </summary>
     public int AttackerDamageLivedFor(int attackerHp) =>
-        Attacker.Damage * AttackerStrikesLivedFor(attackerHp) + Attacker.Stoop
+        Attacker.Damage * AttackerStrikesLivedFor(attackerHp) + Attacker.Stoop + Attacker.MarkBonus
         + (Attacker.Bite > 0 && Defender.Damage * Defender.StrikeCount < attackerHp ? Attacker.Bite : 0);
 
     /// <summary>
@@ -114,7 +125,7 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     /// </summary>
     public int? FirstRoundMissChance(int defenderHp)
     {
-        if (!Attacker.Strikes || Attacker.Damage + Attacker.Stoop < defenderHp || Attacker.DisplayedHit is <= 0 or >= 100)
+        if (!Attacker.Strikes || Attacker.Damage + Attacker.Stoop + Attacker.MarkBonus < defenderHp || Attacker.DisplayedHit is <= 0 or >= 100)
         {
             return null;
         }
@@ -124,8 +135,8 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     }
 
     /// <summary>
-    /// The counter's plain damage if every strike it can make lands, no crit (issue 539), with its drake's bite
+    /// The counter's plain damage if every strike it can make lands, no crit (issue 539), with what a mark adds to its first hit (issue 1329) and its drake's bite
     /// (issue 872): when the strikes alone fall short of the attacker's HP the attacker stands, so the bite lands.
     /// </summary>
-    public int CounterIfAllLand => Defender.Strikes ? Defender.Damage * Defender.StrikeCount + Defender.Bite : 0;
+    public int CounterIfAllLand => Defender.Strikes ? Defender.Damage * Defender.StrikeCount + Defender.MarkBonus + Defender.Bite : 0;
 }

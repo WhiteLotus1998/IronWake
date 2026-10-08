@@ -370,6 +370,25 @@ public sealed record UnitCursed(string UnitId, string ByUnitId, int Amount, int 
 public sealed record CurseTicked(string UnitId, int Amount, int HpAfter, string? CasterId, int Healed, int CasterHpAfter) : GameEvent;
 
 /// <summary>
+/// A hit from a marking tome left <paramref name="UnitId"/> standing and marked (issue 1329, <see cref="Mark"/>): the first
+/// hit on it from any tome of <paramref name="School"/> deals the mark's multiple and spends it. <paramref name="ByUnitId"/> struck.
+/// </summary>
+public sealed record UnitMarked(string UnitId, string ByUnitId, MagicSchool School) : GameEvent;
+
+/// <summary>
+/// A hit from a tome of <paramref name="School"/> by <paramref name="ByUnitId"/> spent the mark on <paramref name="UnitId"/>
+/// (issue 1329, <see cref="Mark"/>); the strike that cashed it already dealt the multiple.
+/// </summary>
+public sealed record MarkCashed(string UnitId, string ByUnitId, MagicSchool School) : GameEvent;
+
+/// <summary>
+/// An area tome cast at <paramref name="At"/> (issue 1329, <see cref="AreaCast"/>): <paramref name="CasterId"/> struck
+/// every unit in <paramref name="Struck"/>, board order, once each with no counter; a <see cref="CombatFought"/> per unit follows.
+/// <paramref name="UsesLeft"/> is the tome's uses after it.
+/// </summary>
+public sealed record AreaCastAt(string CasterId, string SpellId, Coord At, ValueList<string> Struck, int UsesLeft) : GameEvent;
+
+/// <summary>
 /// A hit from a stunning caster stunned a unit that survived it (issue 1244, <see cref="Stun"/>): it
 /// skips <paramref name="Side"/>'s next phase, the struck unit's side, and still counters. <paramref name="Next"/>
 /// is true when it was struck on its own side's phase, so the skip falls on that side's phase after this one.

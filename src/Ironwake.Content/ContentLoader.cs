@@ -2922,6 +2922,18 @@ public static class ContentLoader
                 throw node.Error("areaHeal", "an area heal is a healing spell, never a cleanse, with a radius of at least 1");
             }
 
+            var area = node.IntOr("area", 0);
+            if (node.Has("area") && (area < 1 || heals || !type.IsMagic() || node.Has("rider")))
+            {
+                throw node.Error("area", "an area cast is a magic strike, never a heal and naming no rider, with a radius of at least 1");
+            }
+
+            var marks = node.BoolOr("marks", false);
+            if (marks && (heals || !node.Has("school")))
+            {
+                throw node.Error("marks", "a mark is laid by a tome of a school, never by a heal");
+            }
+
             var effectiveNames = node.StringArrayOrEmpty("effective").ToList();
             var effectiveHollows = effectiveNames.Contains(HollowEntry);
             if (effectiveNames.Count(e => e == HollowEntry) > 1)
@@ -3052,6 +3064,8 @@ public static class ContentLoader
                 BurnStacks = burnStacks,
                 Cleanses = cleanses,
                 AreaHeal = areaHeal,
+                Area = area,
+                Marks = marks,
                 EffectiveAgainstHollows = effectiveHollows,
             });
         }

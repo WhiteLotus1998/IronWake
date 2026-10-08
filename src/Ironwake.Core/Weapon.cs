@@ -148,6 +148,21 @@ public sealed record Weapon(
     public int AreaHeal { get; init; }
 
     /// <summary>
+    /// The radius of this tome's area cast (issue 1329, DECISIONS/0322, Spark Storm), or 0 for a tome that strikes one
+    /// unit: cast through the Item action at a unit or a tile in range, it strikes every enemy of its caster within this
+    /// many tiles of that tile once, with no double and no counter (<see cref="AreaCast"/>). An area tome is never
+    /// equipped, so it never attacks and never counters. Only a magic strike that names no rider carries it.
+    /// </summary>
+    public int Area { get; init; }
+
+    /// <summary>
+    /// Whether a hit from this tome marks the unit it strikes (issue 1329, DECISIONS/0322, Spark Storm's mark): the first
+    /// hit on it from any tome of the same <see cref="School"/>, from any caster, deals <see cref="Mark"/>'s multiple and
+    /// spends the mark. Only a tome with a school carries it.
+    /// </summary>
+    public bool Marks { get; init; }
+
+    /// <summary>
     /// Whether this light strike is effective against Hollows (issue 1321 slice 2, DECISIONS/0317, light's ladder): its Mt
     /// is tripled against a raised unit as against a movement type it names (<see cref="Combat.IsEffective"/>). Content
     /// writes it as a <c>hollow</c> entry in the <c>effective</c> list, and only a Faith strike may carry it.

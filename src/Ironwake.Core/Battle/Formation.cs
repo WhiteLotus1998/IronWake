@@ -3,7 +3,7 @@ namespace Ironwake.Core;
 /// <summary>
 /// The captain's formation effects (issue 705, DESIGN section 3), read on the board where units stand:
 /// the Vanguard's stats with an ally beside it (<see cref="BesideStatsEffect"/>) and the Marshal's aura
-/// on the allies near it (<see cref="AuraEffect"/>). <see cref="BattleUnit.ToCombatant(BattleState, GameContent, bool, CombatArtEffect?, BattleUnit?)"/>
+/// on the allies near it (<see cref="AuraEffect"/>). <see cref="BattleUnit.ToCombatant(BattleState, GameContent, bool, CombatArtEffect?, BattleUnit?, Weapon?)"/>
 /// reads both, so every forecast, <c>threat</c>, both planners and the resolver read one number. A unit is
 /// read at its own <see cref="BattleUnit.At"/>, so a forecast may pass it at a tile it has not moved to;
 /// every other unit is read where it stands on the board.

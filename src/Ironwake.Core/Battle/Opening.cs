@@ -7,7 +7,7 @@ namespace Ironwake.Core;
 /// <list type="bullet">
 /// <item>Every strike on the open unit by a unit of another side, other than its opener, reads its Def and Res
 /// lower by the effect's numbers, never below 0 (<see cref="Lowered"/>), read where the struck side answers
-/// (<see cref="BattleUnit.ToCombatant(BattleState, GameContent, bool, CombatArtEffect?, BattleUnit?)"/>), so
+/// (<see cref="BattleUnit.ToCombatant(BattleState, GameContent, bool, CombatArtEffect?, BattleUnit?, Weapon?)"/>), so
 /// the forecast, both planners and the resolver read one number.</item>
 /// <item>The opener's own strikes never read it; a counter never opens; a miss opens nothing.</item>
 /// <item>A second opening refreshes the mark and takes nothing more: it never stacks.</item>

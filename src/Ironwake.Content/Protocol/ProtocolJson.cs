@@ -412,6 +412,23 @@ public static class ProtocolJson
                 w.WriteNumber("amount", dr.Amount);
                 w.WriteNumber("hpAfter", dr.HpAfter);
                 break;
+            case UnitMarked um:
+                w.WriteString("unit", um.UnitId);
+                w.WriteString("by", um.ByUnitId);
+                w.WriteString("school", um.School.Label());
+                break;
+            case MarkCashed mc:
+                w.WriteString("unit", mc.UnitId);
+                w.WriteString("by", mc.ByUnitId);
+                w.WriteString("school", mc.School.Label());
+                break;
+            case AreaCastAt ac:
+                w.WriteString("unit", ac.CasterId);
+                w.WriteString("spell", ac.SpellId);
+                WriteCoord(w, "at", ac.At);
+                WriteStrings(w, "struck", ac.Struck);
+                w.WriteNumber("usesLeft", ac.UsesLeft);
+                break;
             case UnitCursed cu:
                 w.WriteString("unit", cu.UnitId);
                 w.WriteString("by", cu.ByUnitId);
@@ -1373,6 +1390,11 @@ public static class ProtocolJson
             w.WriteString("cursedBy", cursedBy);
         }
 
+        if (unit.Mark is { } mark)
+        {
+            w.WriteString("mark", mark.Label());
+        }
+
         if (unit.Stun > 0)
         {
             w.WriteNumber("stun", unit.Stun);
@@ -1653,6 +1675,7 @@ public static class ProtocolJson
             CurseBlind = OptionalInt(e, "curseBlind") ?? 0,
             CursePhases = OptionalInt(e, "cursePhases") ?? 0,
             CursedBy = OptionalString(e, "cursedBy"),
+            Mark = ReadMark(e),
             Stun = OptionalInt(e, "stun") ?? 0,
             StunSpent = e.TryGetProperty("stunSpent", out _) && RequiredBool(e, "stunSpent"),
             RaiseSpent = e.TryGetProperty("raiseSpent", out _) && RequiredBool(e, "raiseSpent"),
@@ -1705,6 +1728,15 @@ public static class ProtocolJson
 
         return ValueList<(string, string)>.From(doors.EnumerateObject().Select(p => (p.Name, p.Value.GetString() ?? throw new ProtocolException($"field 'doors.{p.Name}' must be a class id"))));
     }
+
+    /// <summary>
+    /// The optional <c>mark</c> of a unit (issue 1329, <see cref="Mark"/>): the school whose next hit on it is marked. A unit
+    /// written before it, or without one, is unmarked; a word that is not a school is refused.
+    /// </summary>
+    private static MagicSchool? ReadMark(JsonElement e) =>
+        OptionalString(e, "mark") is not { } word ? null
+            : Enum.GetValues<MagicSchool>().Where(s => s.Label() == word).Select(s => (MagicSchool?)s).FirstOrDefault()
+                ?? throw new ProtocolException($"field 'mark' must be one of {string.Join(", ", Enum.GetValues<MagicSchool>().Select(s => s.Label()))}, not '{word}'");
 
     /// <summary>
     /// The optional <c>learned</c> of a unit (issue 1246): the schools it learned from primers, in the
@@ -2481,11 +2513,16 @@ public static class ProtocolJson
             w.WriteNumber("stoop", side.Stoop);
         }
 
+        if (side.CashesMark)
+        {
+            w.WriteBoolean("cashesMark", true);
+        }
+
         w.WriteEndObject();
     }
 
     private static SideForecast ReadSide(JsonElement e) => new(
-        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1, e.TryGetProperty("critGrounds", out _) && RequiredBool(e, "critGrounds"), OptionalInt(e, "bite") ?? 0, e.TryGetProperty("neverDoubles", out _) && RequiredBool(e, "neverDoubles"), OptionalInt(e, "stoop") ?? 0);
+        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1, e.TryGetProperty("critGrounds", out _) && RequiredBool(e, "critGrounds"), OptionalInt(e, "bite") ?? 0, e.TryGetProperty("neverDoubles", out _) && RequiredBool(e, "neverDoubles"), OptionalInt(e, "stoop") ?? 0, e.TryGetProperty("cashesMark", out _) && RequiredBool(e, "cashesMark"));
 
     private static readonly string[] StatKeys = { "hp", "str", "mag", "dex", "spd", "lck", "def", "res", "cha" };
 

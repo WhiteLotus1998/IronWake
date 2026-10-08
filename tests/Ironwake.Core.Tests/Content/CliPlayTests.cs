@@ -94,6 +94,15 @@ public class CliPlayTests
         Assert.Contains("an area heal names no one, and `item <unit> <slot> preview` lists whom it would heal", output);
     }
 
+    [Fact]
+    public void AreaCastPreviewIsRefusedOnAnythingButAnAreaTome()
+    {
+        var output = Play(out _, "item captain 2 3,3 preview\nhelp\n");
+
+        Assert.Contains("> item captain 2 3,3 preview\nERROR: Only an area tome is previewed at a target; field_dressing is not one\n", output);
+        Assert.Contains("an area tome names a unit or a tile, and `item <unit> <slot> <unit|x,y> preview` lists every strike it would make", output);
+    }
+
     [Theory]
     [InlineData("move captain", "ERROR: Usage: move <unit> <x,y>")]
     [InlineData("move captain 9", "ERROR: Usage: move <unit> <x,y>")]
