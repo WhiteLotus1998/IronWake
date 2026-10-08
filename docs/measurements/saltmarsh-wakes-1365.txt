@@ -1,0 +1,13 @@
+Saltmarsh Ford, the pair on the fort's wake (issue 1365, DECISIONS/0339). Sim --full, 200 seeds, two rolls, main at 9ac1f32 plus the wakes trigger.
+
+== shipped (pair on the north cut's enter tiles)
+gate 1 beatable: saltmarsh_ford, heuristic wins 50/200 (25 %), winning turn median 12 p90 16 limit 18, losses 133 timeout 17 captain 0 protected, quiet tail 1.8, refused kill p50 0.8674 over 133, at the stall p50 0.0077 over 131, two-roll average: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.075: FAILED
+
+== docs/samples/saltmarsh_ford_wakes.map (wakes fort)
+gate 1 beatable: saltmarsh_ford_wakes, heuristic wins 36/200 (18 %), winning turn median 11 p90 17 limit 18, losses 153 timeout 11 captain 0 protected, quiet tail 1.7, refused kill p50 0.8674 over 153, at the stall p50 0.0055 over 152, two-roll average: FAILED
+gate 4 no dead weight: saltmarsh_ford_wakes, 3 recruits x 200 seeds, median drop -0.005: FAILED
+
+== docs/samples/saltmarsh_ford_wakes_late.map (wakes fort late)
+gate 1 beatable: saltmarsh_ford_wakes_late, heuristic wins 39/200 (20 %), winning turn median 10 p90 15 limit 18, losses 147 timeout 14 captain 0 protected, quiet tail 2.9, refused kill p50 0.8674 over 147, at the stall p50 0.0053 over 147, two-roll average: FAILED
+gate 4 no dead weight: saltmarsh_ford_wakes_late, 3 recruits x 200 seeds, median drop 0.020: FAILED

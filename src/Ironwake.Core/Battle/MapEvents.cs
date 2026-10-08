@@ -3,7 +3,7 @@ namespace Ironwake.Core;
 /// <summary>
 /// Fires a map's scripted events (issue 32, DESIGN.md section 10). The resolver asks
 /// after every accepted command: at a phase start for turn triggers, after a player Move
-/// for enter triggers. Events fire in file order, each at most once per battle. A fired
+/// for enter triggers, after a wake for wakes triggers (issue 1365). Events fire in file order, each at most once per battle. A fired
 /// event emits <see cref="MapEventFired"/> and then its action's own event. An event whose
 /// tile is barred is blocked and spent, with no action: a spawn tile with any unit on it or
 /// terrain the template cannot stand on (the event names that terrain, issue 655), or a
@@ -18,8 +18,10 @@ namespace Ironwake.Core;
 public static class MapEvents
 {
     /// <summary>The events whose turn trigger names the phase that has just begun.</summary>
+    /// <remarks>A late <see cref="WakesTrigger"/> whose group is awake fires at a player phase's start, with them (issue 1365).</remarks>
     public static BattleState AtPhaseStart(BattleState state, GameContent content, List<GameEvent> events) =>
-        Fire(LandWaiting(state, content, events), content, events, t => t is TurnTrigger turn && turn.Turn == state.Turn && turn.Phase == state.Phase);
+        Fire(LandWaiting(state, content, events), content, events, t => (t is TurnTrigger turn && turn.Turn == state.Turn && turn.Phase == state.Phase)
+            || (t is WakesTrigger { Late: true } late && state.Phase == Side.Player && state.IsAwake(late.Group)));
 
     /// <summary>
     /// At an enemy phase start, the waiting arrivals (issue 1259): for each tile, in the order its
@@ -61,6 +63,10 @@ public static class MapEvents
     /// <summary>The events whose drop trigger names <paramref name="ledge"/> (DESIGN.md 13.26): a terrain change strikes its occupant first.</summary>
     public static BattleState AfterDrop(BattleState state, GameContent content, Coord ledge, List<GameEvent> events) =>
         Fire(state, content, events, t => t is DropTrigger drop && drop.Ledge == ledge);
+
+    /// <summary>The events whose <see cref="WakesTrigger"/>, not late, names a group awake on <paramref name="state"/> (issue 1365).</summary>
+    public static BattleState AfterWake(BattleState state, GameContent content, List<GameEvent> events) =>
+        Fire(state, content, events, t => t is WakesTrigger { Late: false } wakes && state.IsAwake(wakes.Group));
 
     /// <summary>The events whose trigger is the fall of <paramref name="front"/> (issue 692).</summary>
     public static BattleState AfterFall(BattleState state, GameContent content, string front, List<GameEvent> events) =>

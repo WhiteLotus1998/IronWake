@@ -43,6 +43,15 @@ public sealed record MessengerTrigger : MapEventTrigger;
 public sealed record DropTrigger(Coord Ledge) : MapEventTrigger;
 
 /// <summary>
+/// When any member of <paramref name="Group"/> wakes (issue 1365): fired in the same resolution as the
+/// wake, after its <see cref="GroupWoke"/>, whether the command or a phase start woke it. A group already
+/// awake fires it at the first check. A <paramref name="Late"/> one (<c>wakes fort late</c>) waits for
+/// the first player phase to begin after the wake and fires at its start, so its arrival moves one
+/// enemy phase later and is on the board before the player acts. Once a battle, like every event.
+/// </summary>
+public sealed record WakesTrigger(string Group, bool Late = false) : MapEventTrigger;
+
+/// <summary>
 /// The <c>messenger:</c> header (DESIGN.md 13.24): the enemy placed at <paramref name="From"/>
 /// is the messenger, and <paramref name="Road"/> is the edge tile it runs for.
 /// </summary>
