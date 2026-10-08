@@ -247,6 +247,29 @@ public class SideMapTests
         Assert.True(new Coord(7, 3).DistanceTo(bankFight) < others.Min(e => e.At.DistanceTo(bankFight)));
     }
 
+    /// <summary>
+    /// Issue 1375 (rounds 481, 482): the Counting House seats its own Sworn Captain, the shared one at
+    /// two Def less and nothing else changed, so a bow or a sword wounds him inside the clock; the
+    /// shared one on the four other maps is untouched, and the card still names the armour.
+    /// </summary>
+    [Fact]
+    public void TheCountingHousesSwornCaptainIsTheSharedOneAtTwoDefLess()
+    {
+        var house = Content.Unit("house_captain");
+        var shared = Content.Unit("sworn_captain");
+
+        Assert.Equal(shared.Stats.Def - 2, house.Stats.Def);
+        Assert.Equal(shared.Stats with { Def = house.Stats.Def }, house.Stats);
+        Assert.Equal((shared.Name, shared.ClassId, shared.Level), (house.Name, house.ClassId, house.Level));
+        Assert.Equal(shared.Growths, house.Growths);
+        Assert.Equal(shared.Inventory, house.Inventory);
+
+        var enemies = Side("the_counting_house").Placements.OfType<EnemyPlacement>().ToList();
+        Assert.Single(enemies, e => e.TemplateId == "house_captain" && e.Group == "house");
+        Assert.DoesNotContain(enemies, e => e.TemplateId == "sworn_captain");
+        Assert.Contains(Content.Campaign.Quest("ottilie_1")!.Before, line => line.Contains("Sworn Captain on the house fort is armoured", StringComparison.Ordinal));
+    }
+
     [Fact]
     public void OttiliesSecondQuestIsTheLongCountAnEscapeAtDuskThatPaysHerTally()
     {

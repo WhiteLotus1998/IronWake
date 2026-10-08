@@ -450,7 +450,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--script", script, "--strict", "--content", Fixture.CountingHouseDefSevenContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Counting House, seed 980\n", output);
@@ -482,7 +482,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--script", script, "--strict", "--content", Fixture.CountingHouseDefSevenContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Objective: Defeat every enemy by the end of turn 11. Ottilie must survive.\n", output);
@@ -550,6 +550,36 @@ public class SideMapCliTests
             Assert.Contains("Reinforcements are blocked: a unit holds 0,0\n", output);
             Assert.Contains("Lost because turn 11 ended and 3 enemies still stand.\n", output);
             Assert.Contains("Side map ottilie_1 is lost: turn 11 passed; it opens again after the next map; fallen for good: Rook\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
+    /// <summary>
+    /// Code's warm read of issue 1375's lever (reseeded to 1375 from the 980 save), with Teodor: both
+    /// road arrivals held off, both Recalls spent on turn 7, and on turn 10 Ottilie's 6 x2 and
+    /// Teodor's Long Thrust for 7 take the house's Sworn Captain from 27 to 8 with no counter before
+    /// the hexer and the archer kill them both. The captain is wounded at Def 5; the map is lost.
+    /// </summary>
+    [Fact]
+    public void TheJournaledTeodorCountingHousePlayWoundsTheSwornCaptainAtDefFive()
+    {
+        var script = Transcript("2026-10-08-the_counting_house-1375-teodor.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-counting-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--reseed", "1375", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Reinforcements are blocked: a unit holds 0,0\n", output);
+            Assert.Contains("Forecast Ottilie -> Sworn Captain: acc 88% dmg 6 x2 crit 4%; counter: none\n", output);
+            Assert.Contains("  Teodor hp 3, Sworn Captain hp 8\n", output);
+            Assert.Contains("Lost because Ottilie fell.\n", output);
             Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
         }
         finally
