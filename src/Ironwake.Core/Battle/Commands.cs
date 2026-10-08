@@ -174,3 +174,10 @@ public sealed record Order(OrderKind Kind) : Command;
 /// wake a sleeping group. Not a second action; the unit's own tile declines it.
 /// </summary>
 public sealed record FallBack(string UnitId, Coord To) : Command;
+
+/// <summary>
+/// The line strike (issue 1384, <see cref="LineStrike"/>): a unit holding <see cref="LineStrikeEffect"/> strikes, as its
+/// action after a move or without one, every unit of another side on the line out through <paramref name="Toward"/>,
+/// the tile orthogonally beside it. No Canto follows. Only the enemy holds one; the enemy planner issues it.
+/// </summary>
+public sealed record StrikeLine(string UnitId, Coord Toward) : Command;

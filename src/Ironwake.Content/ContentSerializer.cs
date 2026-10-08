@@ -607,6 +607,10 @@ public static class ContentSerializer
                 writer.WriteString("school", rod.School.Label());
                 writer.WriteNumber("radius", rod.Radius);
                 break;
+            case LineStrikeEffect line:
+                writer.WriteString("kind", "line_strike");
+                writer.WriteNumber("reach", line.Reach);
+                break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
         }

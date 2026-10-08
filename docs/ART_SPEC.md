@@ -125,6 +125,8 @@ token_grave_caller_player
 token_grave_caller_enemy
 token_halberdier_player
 token_halberdier_enemy
+token_iron_warden_player
+token_iron_warden_enemy
 token_lancer_player
 token_lancer_enemy
 token_marksman_player
@@ -358,6 +360,14 @@ halberdier_axe_miss_recover
 halberdier_axe_dodge
 halberdier_axe_hit_react
 halberdier_axe_fall
+iron_warden_lance_idle
+iron_warden_lance_advance
+iron_warden_lance_strike
+iron_warden_lance_strike_crit
+iron_warden_lance_miss_recover
+iron_warden_lance_dodge
+iron_warden_lance_hit_react
+iron_warden_lance_fall
 lancer_lance_idle
 lancer_lance_advance
 lancer_lance_strike

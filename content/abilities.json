@@ -48,6 +48,8 @@
       "effect": { "kind": "drake_frost", "damage": 1, "rest": 1 } },
     { "id": "lightning_rod", "name": "Lightning Rod", "text": "Enemy lightning aimed at an ally within 2 tiles strikes this unit instead, if it reaches.",
       "effect": { "kind": "rod", "school": "lightning", "radius": 2 } },
+    { "id": "line_strike", "name": "Line Strike", "text": "Placeholder. His action: the lance strikes every foe in one straight line of 4 tiles from him. One roll each, no counter.",
+      "effect": { "kind": "line_strike", "reach": 4 } },
     { "id": "stoop", "name": "Stoop", "text": "After flying 4 or more tiles this phase, her first strike deals +2. Not with a drake.",
       "effect": { "kind": "stoop", "flight": 4, "damage": 2 } },
     { "id": "lookout", "name": "Lookout", "text": "+1 Spd and +2 Lck.",

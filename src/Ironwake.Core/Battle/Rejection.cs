@@ -44,6 +44,7 @@ public enum RejectionReason
     BattleOver,
     UnknownCommand,
     NothingToCleanse,
+    CannotStrikeLine,
 }
 
 /// <summary>A refused command: the rule it broke and a sentence a player can read.</summary>

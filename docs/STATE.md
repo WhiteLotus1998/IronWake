@@ -1,13 +1,13 @@
 # STATE
 
-Updated: 2026-10-08 (Sallow's seize hold killed, #1383). Under 19 KB on a branch, 20 KB on main (#1291).
+Updated: 2026-10-08 (the Iron Warden's line strike, #1384). Under 19 KB on a branch, 20 KB on main (#1291).
 
 ## Where we are
 
 Phase 3 is under way; `tools/rejournal.py` regenerates transcripts (0243). The Table is #1368. Casting (`docs/look/`) waits on Lotus. Pillar 5: eleven and the captain (0264). #1002: Kinsbane's barks, cold read pending. #1003: Bet's cards next. #1042 (0247): Bet the cook, the Cold Kitchen, Banked. #804, #806, #807 and #872 are `blocked` on plays, #634 or #535; the dash (0255), the wind (0256) and the one answer (0257) are kept on their samples.
 Four maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0088, 0100) and the field, Keziah's pick (0233) and Rook's on hand plays with gate 1 short at 86/200 (0250, DESIGN 11's pick-keyed clause). A cold chair on Rook's arm is owed (its tripwire). Maps 1 and 2 and the rest wait on plays (Maps).
 ~5580 tests green; `ci`, `ci-windows` run.
-No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain heartbeat stays (#406). **The schools** (Lotus, rounds 416, 417) are built (0296 to 0301); his first rulings (0307) shipped as #1279 to #1285 (0308 to 0314; chest placement waits on Lotus) and #1286 slices 1 to 4 (0315, 0316): enemy raise, Rampart, armor, casters last, `threat` flags a cast. His second (0317): dark rare, Gust is lightning (#1319, built; Spark Storm is #1329), a two-stack burn (#1320, built: `burnStacks`, fixture only), light's ladder (#1321, built: cleanse 0320, Hollow strike 0321, area heal 0324), #1286 slice 5 (0319): four `enemy` caster classes, placeholder names, dark on the Grave Caller alone; placement waits on #1144; fire's and earth's tops and the Ledger class pitched on #1247. Round 3 (0322): Curse (#1328, 0325), Spark Storm's area and mark (#1329 slice 1, 0326), the rod's x0.5 and charge (slice 2, 0327), fixture only; slice 3 (Gust to Spark Storm) is `blocked` on #1247; Still Water's freeze on or beside water (#1330, 0328; the tile freeze unbuilt; its word vs 0323's, Table); the yard (#1331, #1332; 0329 to 0335): `duty`, `yard`, the ceilings, the pull, the forge duty's free step, `--yard` (gate 4's arm), camp rows; the Ring and the Post replace the placeholder, hands carry Mt 1 practice weapons, the Sim's teacher softens; rerun in `docs/measurements/yard-arm-1332.txt`. Content waits on his signature. #1357 (0336) `bench`; #1359 (0337). #1365 (0339), #1370 (0340), 0341, #1372 (0342): samples. #1375 (0343): the house's Sworn Captain at Def 5. #1378 (0344): `--kinsbane --quests`. #1383 (0345): Sallow's hold killed. Hask: #1384 to #1386.
+No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain heartbeat stays (#406). **The schools** (Lotus, rounds 416, 417) are built (0296 to 0301); his first rulings (0307) shipped as #1279 to #1285 (0308 to 0314; chest placement waits on Lotus) and #1286 slices 1 to 4 (0315, 0316): enemy raise, Rampart, armor, casters last, `threat` flags a cast. His second (0317): dark rare, Gust is lightning (#1319, built; Spark Storm is #1329), a two-stack burn (#1320, built: `burnStacks`, fixture only), light's ladder (#1321, built: cleanse 0320, Hollow strike 0321, area heal 0324), #1286 slice 5 (0319): four `enemy` caster classes, placeholder names, dark on the Grave Caller alone; placement waits on #1144; fire's and earth's tops and the Ledger class pitched on #1247. Round 3 (0322): Curse (#1328, 0325), Spark Storm's area and mark (#1329 slice 1, 0326), the rod's x0.5 and charge (slice 2, 0327), fixture only; slice 3 (Gust to Spark Storm) is `blocked` on #1247; Still Water's freeze on or beside water (#1330, 0328; the tile freeze unbuilt; its word vs 0323's, Table); the yard (#1331, #1332; 0329 to 0335): `duty`, `yard`, the ceilings, the pull, the forge duty's free step, `--yard` (gate 4's arm), camp rows; the Ring and the Post replace the placeholder, hands carry Mt 1 practice weapons, the Sim's teacher softens; rerun in `docs/measurements/yard-arm-1332.txt`. Content waits on his signature. #1357 (0336) `bench`; #1359 (0337). #1365 (0339), #1370 (0340), 0341, #1372 (0342): samples. #1375 (0343): the house's Sworn Captain at Def 5. #1378 (0344): `--kinsbane --quests`. #1383 (0345): Sallow's hold killed. #1384 (0346): the line strike built; the pitched Hask on `ironwake_keep_warden.map` (the keep 0/200); #1385, #1386 next.
 
 ## Next
 
@@ -20,7 +20,7 @@ No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain 
 - #77 slice 8 (0245): `support <a> <b>` at a camp, lowest unseen tier once, free; #77 `blocked` on a chair's A read.
 - #1308 slices 1 to 5: item, exit, carry, breathe rows, click parity; `--quest a,b`; side-map plays fought only when named; Godot `--action` shots. Slice 5: heal arts offered (`HealArtsOf`); `tests/parity/campaign/psalter-art-644.script` matched by clicks. Open: a carry in a campaign script; the Godot run of the art script.
 - #1003: card = text plus its rules line in parentheses (348 to 363); reads through 367 applied; Keziah's Oath Stone feeling waits for #634.
-- #811 voice sheets, #1001 scene scripts (0244), #1005 scenes are in; then #634; #813 builds on 0243. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
+- #811, #1001 (0244), #1005 are in; then #634; #813 builds on 0243. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
 - #611 (six arts); #535 slices 1, 2 (0114, 0115); clips await #621. #636 (0125, 0170, 0251): Full Measure costs the next phase, never doubles; the veto prices no arts.
 - The story gate is open (Lotus closed #656; build from STORY draft 6, built to change). #635 slices 4 to 11 (0196, 0198 to 0204) built the side maps in the Maps table (slice 11, Rook 1, opens the Drover) and three paid items (Psalter, Commonplace, Tally; the last two with 3 frozen iron). The campaign packs the Family Lance behind Teodor's iron and holds it at sound until The Old Watch is won (`held`, `wakes`, `--heirloom --quest`). Slice 12 (0205): Teodor 2, The Warden's Gate, names the lance and opens Turn the Key (the lock); no hand play declares it yet. Slices 13 to 16 (0206, 0208, 0224, 0225): Keziah 1 and 2, Rook 2. #635 is closed as built; #77 slices 1 to 7 are built (0183 to 0189): 26 pairs, C 16, B 28, A 48 (best, not sum); A by a committed human waits on a chair's campaign.
 - #633 (0192 to 0194): `branch`, `pick`, `talk`, `meet`. #844: the Roster names a contested place.
@@ -52,7 +52,7 @@ No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain 
 | saltmarsh_ford | Not tuned. Toll Axe boss (0029), `brace: on` (0091), the north cut (0093). Gate 1 50/200, gate 4 0.075 (#971). Chat 571 7/7/5; Code 1560 6/6/5, 3200 7/6/5: the pair late. Samples: `wakes fort` 36, late 39 (0339; 3300 warm 8/7/6, Chat 4471 cold 6/7/4: pace); the east pair, `arrivals: wait` (#1370, 0340): 35, hits the siege at any pace, losses the leader stall; Code 1370 7/7/6, Chat 4490 7/7/5. A sample until #1377 traces the stall. |
 | sallow_grange | Not tuned. Seize, the Reeve a guard boss at 15,6 (0055), hexer at 13,7 (#275). `keziah_warning: on` (0214). Gate 1 161/200, gate 4 0.330 (#971). Code 871 7/7/5, 1580 warm 7/7/5 (t8). Floor 3400 warm 6/7/4 (L4, t6). `goes_home: hall` (0342): 174/200, 3400 seizes. The hold killed (0345): free on the Gate's avoid. |
 | ironwake_raid | Not tuned (round 158). Map 6 (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat 301 7/7/5, 633 9/7/6 (L1), 1570, 2055 6/6/4 (L4); 3100 warm 8/7/6 at the floor (L3, Keziah L4): no lever (461); Chat's cold floor chair owed. |
-| ironwake_keep | Not tuned. The finale (0265, #1149): defeat boss, limit 12, fronts north/gate/south, the raid's wall broken. `--finale` L8 floor 0 (data). Levers 0284 to 0287, the reach (0293; Sim 84/58). Chat 2410: sample 6/7/6, keep 7/6/5. Next: a fresh keep chair (is the bait a choice?). |
+| ironwake_keep | Not tuned. The finale (0265, #1149): defeat boss, limit 12, fronts, the raid's wall broken. `--finale` L8 167/136/0 (0346). Levers 0284 to 0287, the reach (0293). Chat 2410: sample 6/7/6, keep 7/6/5. The Warden sample: 0/0/0 (0346; next lever the Table's). Next: a fresh keep chair (is the bait a choice?). |
 
 ## Open experiments and the play that decides each
 
@@ -60,13 +60,13 @@ No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain 
 |---|---|---|
 | 13.4 grudges | `docs/samples/old_mill_road_grudges.map` (0065, 0066) | Chat's seed 23 replay under #331 |
 | 13.5 the keep | the campaign (0059, 0060); the raid is in from both chairs (round 158) | Chat's play of the camp |
-| 13.20 the keep as a home | DESIGN 13.20 (0137), built (#687, 0138; 12 beds until the levy roster; the forge #647, 0139; the barracks #690, 0145) | a campaign play from each chair (0137), once a meeting can be refused |
+| 13.20 the keep as a home | DESIGN 13.20 (0137), built (#687, 0138, 0139, 0145) | a campaign play from each chair, once a meeting can be refused |
 | 13.6 trials | `content/trials/` (0057) | Chat's cold Outrider trial (closes #73) |
 | 13.7 dusk, `threat` row | Brackwater Cut, #403 (built) | a cold dusk play of Brackwater on main |
 | 13.8 carrier arm | `*_keepsakes.map` | Chat's cold carrier-arm plays |
 | 13.10 retreat, third pass | `river_refuge_hold.map` (0037) | Chat's cold play |
-| 13.11 two-weapon boss | kept (0061); the kill clause cannot fire after seed 521's three bait turns picked the leader's axe (round 121) | none waits |
-| 13.13 pincer | kept on its samples (0082, 0083); ships only where the enemy can anvil too | none until a keep round names a board |
+| 13.11 two-weapon boss | kept (0061; round 121) | none waits |
+| 13.13 pincer | kept on its samples (0082, 0083) | none until a keep round names a board |
 | 13.15 wildfire | kept whole on its samples (0085, 0110) | none; keep rounds closed |
 | 13.21 tide | `ebb_ford_tide.map` (0111; Code 653 in) | Chat's cold play |
 | 13.23 Kinsbane | `docs/samples/the_gleaning_kinsbane.map` (#645, 0130; Code 645 warm in: both keep clauses shown) | the read passes (0211); Chat's cold field; the hunt (0212): a cold play of `the_gleaning_kinsbane_woken.map` |
@@ -92,8 +92,8 @@ Samples: rivalry, shove, Seize drift. Kept on samples: #1259 held bars (0303; 12
 - Routines (ROUTINES.md): Builder slots 02:00, 03:00, 05:00 NY, and the chain (one issue per merged Builder PR while `IRONWAKE_CHAIN` is `on`; 0050 amended, section 6); the Critic on Lotus's schedule, its `critic` issues the record; the Partner woken by Table comments.
 - `ci` parses workflow YAML before the build (#970).
 - A PR changing the Sim's player (`Players.cs`, planner, `EnemyAi`) re-runs `--full --all` and rewrites the Maps cells it moves (#971).
-- Full-campaign parity: `tests/parity/campaign/full-campaign-644.script` (0248; in ci.yml), `--variant 44 --quest pell_1` (#1174, #1210, #1206).
+- Full-campaign parity: `tests/parity/campaign/full-campaign-644.script` (0248; ci.yml), `--variant 44 --quest pell_1`.
 - Sim: `--smoke` (CI); `--heirloom`, `--kinsbane`, `--levels [...]`, `--supports`, `--ladder`, `--yard`, `--finale <map> [--level N] [--gates]`; `--full <map>|<file>|--all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D]` (gates 1 to 8, not in CI; Release ~20 s a map); `--trace <map> <seed>`; `--keep`; `--hitband`. Reads: `docs/measurements/`.
 - Content: `ContentLoader`; `units/cast.json`, captain first; terrain `cost` `null` is impassable.
 - Map files: DESIGN 10, 0011; hand-edited maps canonical. Coordinates `x,y` from the top-left, 0-based; CLI slots from 1.
-- CLI and Sim tests read the console via `ConsoleCapture.Run`, `[Collection("console")]`.
+- CLI and Sim tests read the console via `ConsoleCapture.Run`.
