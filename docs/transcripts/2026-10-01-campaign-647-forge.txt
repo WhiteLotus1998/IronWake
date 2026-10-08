@@ -712,6 +712,7 @@ Roster: company 10/12
   Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Duties: Maud on a side map, Wren on a side map
 > show wren
   Wren: Cadet L1, EXP 0, Wounded (2); 1: Iron Sword 40/40, 2: Field Dressing 3/3
     Wounded (2): Str -2, Spd -2 for 2 more main maps

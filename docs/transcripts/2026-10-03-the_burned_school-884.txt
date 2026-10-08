@@ -690,6 +690,7 @@ them from memory.
   Dunstan: Bulwark L4, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L4, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
   Brannock: Cadet L4, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Duties: Pell on a side map, Wren on a side map
 Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Wren (deploy 6 of 8)
 == Keep ==
 Purse: 500

@@ -904,6 +904,7 @@ and it never catches. Its art, Read Ahead, reaches one tile further for
   Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8; door: faith 30/50
   Rook: Skyrider L5, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
   Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Duties: Pell on a side map, Wren on a side map
 Deploys to Sallow Grange: Alder Fenn, Dunstan, Wren, Teodor, Pell, Ottilie (deploy 6 of 9)
 == Keep ==
 Purse: 500

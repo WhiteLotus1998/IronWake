@@ -22,7 +22,7 @@ public static class Resolver
         {
             var verdict = outcome.Result == BattleResult.Won ? "won" : "lost";
             return new ApplyResult(state, ValueList<GameEvent>.Empty, new Rejection(
-                RejectionReason.BattleOver, $"the battle is {verdict} ({outcome.Reason}); only Recall is left"));
+                RejectionReason.BattleOver, $"the battle is {verdict} ({Objective.Reason(state, content)}); only Recall is left"));
         }
 
         if (Hollow.Refusal(state, command) is { } hollowed)

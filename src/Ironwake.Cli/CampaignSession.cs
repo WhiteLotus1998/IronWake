@@ -1260,6 +1260,20 @@ public sealed class CampaignSession
     }
 
     /// <summary>
+    /// The lines that open a yard drill (issue 1331): the board and its seed, then who drills under
+    /// whom in what, and the price of a fall as the record's permadeath sets it.
+    /// </summary>
+    public static IReadOnlyList<string> YardOpening(CampaignRecord record, GameContent content, MapDefinition map, string teacherId, string studentId, WeaponType weapon)
+    {
+        var names = UnitNames.Of(record, content);
+        return new[]
+        {
+            $"Yard: {map.Name}, seed {record.YardSeed(content)}",
+            $"{names[studentId]} drills under {names[teacherId]} in the {weapon.ToString().ToLowerInvariant()}. The drill is lost if {names[studentId]} falls; who falls here {(record.Permadeath ? "is gone for good" : "comes back wounded")}.",
+        };
+    }
+
+    /// <summary>
     /// <c>yard &lt;teacher&gt; &lt;student&gt; &lt;weapon&gt;</c> (issue 1331): refused as
     /// <see cref="YardFor"/> says; otherwise the drill plays on the screen until <c>leave</c>, its
     /// result applied through <see cref="CampaignRecord.AfterYard"/>. False on a strict stop or when
@@ -1275,9 +1289,11 @@ public sealed class CampaignSession
         }
 
         var weapon = YardRules.Weapon(weaponName)!.Value;
-        var names = UnitNames.Of(_record, _content);
-        WriteEvent($"Yard: {map.Name}, seed {_record.YardSeed(_content)}");
-        WriteEvent($"{names[studentId]} drills under {names[teacherId]} in the {weapon.ToString().ToLowerInvariant()}. The drill is lost if {names[studentId]} falls; who falls here {(_record.Permadeath ? "is gone for good" : "comes back wounded")}.");
+        foreach (var opening in YardOpening(_record, _content, map, teacherId, studentId, weapon))
+        {
+            WriteEvent(opening);
+        }
+
         var battle = new PlaySession(_content, _record.BeginYard(map, teacherId, studentId, weapon, _content, _scheme), _out, _scripted, _line) { ConfirmLethal = LethalConfirmAsks };
         battle.WritePendingEvents();
         _out.WriteLine("Objective: " + Objective.Line(battle.State, _content));
@@ -2076,6 +2092,11 @@ public sealed class CampaignSession
             lines.Add(supports);
         }
 
+        if (DutiesLine(record, content) is { } duties)
+        {
+            lines.Add(duties);
+        }
+
         if (record.Fallen.Count > 0)
         {
             var names = UnitNames.Of(record, content);
@@ -2104,6 +2125,27 @@ public sealed class CampaignSession
         }
 
         return notes.Count == 0 ? names[id] : $"{names[id]} ({string.Join("; ", notes)})";
+    }
+
+    /// <summary>
+    /// The roster's duties line (issue 1331): each living unit that took a duty at this camp, in
+    /// the order taken, as <c>  Duties: Teodor at the forge, Maud resting, Wren in the yard</c>;
+    /// null when no unit has taken one, so a camp where every unit rests by default prints none.
+    /// </summary>
+    public static string? DutiesLine(CampaignRecord record, GameContent content)
+    {
+        var names = UnitNames.Of(record, content);
+        var taken = record.Duties
+            .Where(d => record.Find(d.UnitId) is not null)
+            .Select(d => names[d.UnitId] + d.Duty switch
+            {
+                Duty.Forge => " at the forge",
+                Duty.Yard => " in the yard",
+                Duty.Quest => " on a side map",
+                _ => " resting",
+            })
+            .ToList();
+        return taken.Count == 0 ? null : "  Duties: " + string.Join(", ", taken);
     }
 
     /// <summary>

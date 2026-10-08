@@ -11,7 +11,7 @@ public sealed record CampAction(string Text, string Command, Func<bool> Run);
 
 /// <summary>
 /// The camp actions a mouse reaches without the console (issue 786): every between-map command
-/// that changes the record besides buy, bench and march, as rows the renderer draws. A row is
+/// that changes the record besides buy, bench and march (the duties and the yard, issue 1331), as rows the renderer draws. A row is
 /// offered where its command could be taken (a slot that holds a weapon, a room not built to its
 /// limit, a hire on the list, a class the unit meets, a side map open); the record still decides,
 /// and a refusal reaches the status line with the console's text. Each row's
@@ -127,6 +127,11 @@ public static class CampActions
             yield return new($"take {content.ItemName(record.Wagon[i])} from the wagon", $"take {unitId} {index + 1}", () => campaign.Take(unitId, index));
         }
 
+        foreach (var action in DutyActions(campaign, unit))
+        {
+            yield return action;
+        }
+
         var from = content.Class(unit.ClassId);
         var captain = CampaignRecord.IsCaptain(unit, content);
         foreach (var target in content.Classes.Values.Where(c => c.Id != unit.ClassId && !c.Hidden && !c.Enemy && (c.Unique is null || c.Unique == unitId)))
@@ -140,6 +145,60 @@ public static class CampActions
             if (content.Campaign.TrialFor(classId) is not null && record.TrialRefusal(unitId, classId, content) is null)
             {
                 yield return new($"play the trial for {target.Name}", $"trial {unitId} {classId}", () => campaign.Trial(unitId, classId));
+            }
+        }
+    }
+
+    /// <summary>
+    /// The unit's duty rows (issue 1331), offered only while it has taken none at this camp: rest;
+    /// with a forge, one free Refine step a weapon slot and stat (a bare forge duty for a unit with
+    /// no weapon); and the yard with the unit as the student, one row a teacher and weapon the
+    /// record would drill (<see cref="CampaignRecord.YardRefusal"/>). A side map's party takes its
+    /// duty through the side map's row.
+    /// </summary>
+    private static IEnumerable<CampAction> DutyActions(CampaignClient campaign, Unit unit)
+    {
+        var record = campaign.Record;
+        var content = campaign.Content;
+        var unitId = unit.Id;
+        if (record.Duties.Any(d => d.UnitId == unitId))
+        {
+            yield break;
+        }
+
+        yield return new("rest at this camp (the duty)", $"duty {unitId} rest", () => campaign.Duty(unitId, "rest"));
+        if (record.ForgeBuilt(content) && record.DutyRefusal(unitId, Duty.Forge) is null)
+        {
+            var weapons = 0;
+            for (var i = 0; i < unit.Inventory.Count; i++)
+            {
+                var (slot, stack) = (i, unit.Inventory.Items[i]);
+                if (!content.Weapons.ContainsKey(stack.ItemId))
+                {
+                    continue;
+                }
+
+                weapons++;
+                var name = content.ItemName(stack.ItemId);
+                yield return new($"work the forge, slot {slot + 1}: {name}, Mt (no gold)", $"duty {unitId} forge {slot + 1} mt", () => campaign.ForgeDuty(unitId, slot, "mt"));
+                yield return new($"work the forge, slot {slot + 1}: {name}, hit (no gold)", $"duty {unitId} forge {slot + 1} hit", () => campaign.ForgeDuty(unitId, slot, "hit"));
+            }
+
+            if (weapons == 0)
+            {
+                yield return new("work the forge (the duty)", $"duty {unitId} forge", () => campaign.Duty(unitId, "forge"));
+            }
+        }
+
+        foreach (var teacher in record.Roster.Where(t => t.Id != unitId))
+        {
+            foreach (var weapon in Enum.GetValues<WeaponType>())
+            {
+                var (teacherId, word) = (teacher.Id, weapon.ToString().ToLowerInvariant());
+                if (record.YardRefusal(teacherId, unitId, word, content) is null)
+                {
+                    yield return new($"train under {teacher.Name} in the {word} (the yard)", $"yard {teacherId} {unitId} {word}", () => campaign.Yard(teacherId, unitId, word));
+                }
             }
         }
     }

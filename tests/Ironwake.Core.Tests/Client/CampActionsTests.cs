@@ -16,7 +16,7 @@ public class CampActionsTests
     private const string Map = "sallow_grange";
     private const ulong Seed = 41;
 
-    private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
+    internal static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
 
     private static string ScriptPath() => Path.Combine(ClientParityTests.Root(), "tests", "parity", "campaign", "camp-actions-41.script");
 
