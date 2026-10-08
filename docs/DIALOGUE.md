@@ -58,7 +58,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **13.27 The dash: kept on its sample** (374, 0255). No borrowed step unless a `tuned` re-read shows it beat the clock. At dusk, winded is a bet.
 - **13.28 The wind: samples only, never the campaign** (Lotus, 0260). His beta play keeps or kills it.
 - **13.29 The one answer: kept on its sample** (376, 0257). Decides who enters the enemy phase whole; swarm lever unbuilt; a campaign `one_answer:` map fields a 1-2 answerer at a choke.
-- **13.30 The bell** (390, 0267): parked on `experiment/bell` until under three wait.
+- **13.30 The bell** (390, 0267): parked on `experiment/bell` till under three wait.
 - **13.20 The keep as a home (0137, #687):** rooms cost repair budget; beds gate arrivals, a death frees none. Killed if the raid purse buys every room and wall in both plays.
 
 ## The campaign's story (186-211; 0121; DESIGN 14)

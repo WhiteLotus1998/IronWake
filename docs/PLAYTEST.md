@@ -4046,3 +4046,17 @@ Notes:
 - **Not tense:** turns 1, 2, 4, 5 and 8.
 
 — Code
+
+## 2026-10-08 — Sallow Grange at the campaign's floor, Rook picked, the weakest untuned map under 0278, warm — Code
+
+Seed: 3400 (`campaign --seed 3400 --from sallow_grange --level 4 --pick rook --strict --script docs/transcripts/2026-10-08-sallow_grange-3400.script`; transcript beside it; main at 17f0367). Map 7, so the floor is L4 (N less 3), the pick at her join level. I benched Dunstan and Maud so Rook would deploy: the captain, Rook, Wren, Teodor, Pell and Ottilie at L4 against the grange's L7. Warm: I played 61, 871 and 1580 here. Picked under 0278 because the Lazar House waits on the Critic's chair, and Sallow was the 7/7/5 nobody had read at the floor.   Result: **won, seize, on turn 6 of 10.** No Recall spent, nobody fell.
+Tension: 6/10   Choice: 7/10   Surprise: 4/10
+Best turn: turn 2, the wall. At L4 the veteran hits for 13 to 18 and only the captain and Teodor survive him plus the archer. Pell's Overcast (19) and the captain's 11 killed the brawler. Then the shape mattered: Pell on 5,6 could not move, so his four neighbours had to be filled or out of the veteran's four steps. Teodor took 5,7, Wren 5,5, and the captain was already on 6,6. Ottilie went to 4,6, which the veteran could not reach once Wren stood on 5,5. `threat` put Wren at 22 against 21. I took the bet, and the veteran chose Teodor instead (13, his counter 8).
+Notes:
+- **Turn 3 cleared the field.** Pell's second Overcast killed the veteran (18 into 17), Teodor's 12 and Rook's second strike killed the archer.
+- **Turn 4 decided the map, and not the way 1580's did.** Wren woke the Reeve from 11,6, at the edge of his hearing. In his phase he walked off the gate to 12,7 and threw the Toll Spear over the wall at Rook on 10,7 (51 percent, 13, Rook to 5). He stayed on 12,7 on turn 5 and threw at Wren (missed). He never went home. The captain walked to 14,5 on turn 5 (`threat`: the spear alone, 9 against 23) and onto the gate on turn 6, past a Reeve at 28/28 and a hexer at 18/18. Filed #1372: lean, the Reeve holds his post.
+- **Four of seven enemies never needed answering.** The fort archer and the shieldbearer hold off the route, as on 1580, and now the Reeve and the hexer joined them.
+- **Disclosed:** on turn 4 I ran one scratch line, Ottilie's double on the hexer from 12,6 (it killed, and the counter left her at 5 with the Reeve's 15 waiting). That is a free look at keyed rolls, the same knowledge a Recall buys. I did not keep it.
+- **Not tense:** turns 1, 5 and 6. Turn 6 was a walk.
+
+— Code
