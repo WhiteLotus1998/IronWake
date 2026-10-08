@@ -731,7 +731,7 @@ public static class Resolver
         next = Drain.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Curse.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Freeze.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
-        next = Mark.AfterCombat(next, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
+        next = Mark.AfterCombat(next, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target, caught ? target.Id : null);
         next = LightningRod.Spend(next, unit, weapon, events);
         if (caught)
         {
@@ -1275,7 +1275,9 @@ public static class Resolver
     /// <summary>
     /// The Item action with an area tome (issue 1329, <see cref="AreaCast"/>): checked as a strike's tome is (no art, the
     /// caster may wield it, a use left), at a unit or a tile in range that its side can see with an enemy within the
-    /// radius; then each of them struck once with no counter, one use and the action spent, one combat's EXP earned.
+    /// radius; then each of them struck once with no counter, one use and the action spent, one combat's EXP earned. A storm
+    /// a Lightning Rod catches (issue 1400, <see cref="AreaCast.Catcher"/>) strikes the holder alone, once, at x0.5, marks
+    /// no one, and charges a holder left standing.
     /// </summary>
     private static (BattleState, Rejection?) ApplyAreaCast(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, List<GameEvent> events)
     {
@@ -1316,8 +1318,19 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NoSuchTarget, $"no enemy within {spell.Area} of {at}; {spell.Name} would strike no one"));
         }
 
+        var caughtBy = AreaCast.Catcher(state, content, unit, spell, at);
+        if (caughtBy is ({ } holder, _))
+        {
+            struck = [holder];
+        }
+
         var usesLeft = stack.Uses - 1;
         events.Add(new AreaCastAt(unit.Id, spell.Id, at, ValueList<string>.From(struck.Select(t => t.Id)), usesLeft));
+        if (caughtBy is ({ } catcher, { } drawn))
+        {
+            events.Add(new RodCaught(catcher.Id, drawn.Id, unit.Id));
+        }
+
         var caster = unit with { Moved = true, Acted = true, Unit = unit.Unit with { Inventory = unit.Unit.Inventory.Replace(use.Slot, stack with { Uses = usesLeft }) } };
         var next = state.WithUnit(caster);
         (BattleUnit Target, ValueList<StrikeEvent> Strikes, bool Killed, int Pays)? best = null;
@@ -1325,10 +1338,11 @@ public static class Resolver
         foreach (var aimed in struck)
         {
             var target = next.Find(aimed.Id)!;
+            var caught = caughtBy is not null;
             var result = CombatResolver.Resolve(
                 caster.ToCombatant(next, content, against: target, casting: spell),
-                target.ToCombatant(next, content, countering: true, against: caster) with { Blind = true },
-                unit.At.DistanceTo(at),
+                target.ToCombatant(next, content, countering: true, against: caster) with { Blind = true, Catching = caught },
+                caught ? unit.At.DistanceTo(target.At) : unit.At.DistanceTo(at),
                 new CombatContext(next.Turn, next.Phase),
                 new KeyedRng(next.Seed),
                 next.Scheme);
@@ -1355,7 +1369,11 @@ public static class Resolver
                 continue;
             }
 
-            next = Mark.AfterCombat(next, unit.Id, spell, target.Id, null, result.Strikes, events, caster, target);
+            next = Mark.AfterCombat(next, unit.Id, spell, target.Id, null, result.Strikes, events, caster, target, caught ? target.Id : null);
+            if (caught)
+            {
+                next = LightningRod.Charge(next, target.Id, spell.School!.Value, events);
+            }
         }
 
         next = LightningRod.Spend(next, caster, spell, events);
