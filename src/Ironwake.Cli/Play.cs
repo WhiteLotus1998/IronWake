@@ -2664,8 +2664,8 @@ public sealed class PlaySession
         if (unit.Kin is { } kin)
         {
             lines.Add(unit.Swallowed
-                ? $"  Swallowed: the Kin heals {kin.Heal} at his side's phase start; Frozen Iron lands for {state.FrozenIron} on every unit at the next phase start"
-                : $"  At 0 HP he swallows the shard: stage 2 on a fresh bar (hp {kin.Hp}, Def +{kin.Def}, Res +{kin.Res}), the Kin heals {kin.Heal} a phase, and Frozen Iron falls on every unit");
+                ? $"  Swallowed: the Kin heals {kin.Heal} at his side's phase start; Frozen Iron lands for {state.FrozenIron} on every unit at his side's next phase start"
+                : $"  At 0 HP he swallows the shard: stage 2 on a fresh bar (hp {kin.Hp}, Def +{kin.Def}, Res +{kin.Res}), the Kin heals {kin.Heal} and Frozen Iron falls on every unit at each of his phase starts");
         }
 
         var unitClass = content.Class(unit.Unit.ClassId);
@@ -3372,7 +3372,7 @@ public sealed class PlaySession
                 return (ad.WearerId is { } on ? $"{names[ad.UnitId]} lays {(content.Weapons.TryGetValue(ad.SpellId, out var given) ? given.Name : ad.SpellId)} on {names[on]}" : $"{names[ad.UnitId]} wears {(content.Weapons.TryGetValue(ad.SpellId, out var worn) ? worn.Name : ad.SpellId)}")
                     + $": Def +{ad.Def}, Mov -{ad.Mov} through its side's next {SchoolRider.PhasesText(ad.Phases)}";
             case ShardSwallowed ss:
-                return $"{names[ss.UnitId]} pulls the shard from the lance's pommel and swallows it: stage 2 on a fresh bar (hp {ss.Hp}); Frozen Iron falls on every unit from the next phase";
+                return $"{names[ss.UnitId]} pulls the shard from the lance's pommel and swallows it: stage 2 on a fresh bar (hp {ss.Hp}); Frozen Iron falls on every unit from his next phase";
             case FrozenIronFell fi:
                 return $"Frozen Iron falls on every unit for {fi.Amount}, past Def and Res: " + string.Join(", ", fi.Struck.Select((id, i) => $"{names[id]} (hp {fi.HpAfter[i]})"));
             case KinHealed kh:

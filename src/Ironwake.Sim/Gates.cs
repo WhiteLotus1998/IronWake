@@ -273,7 +273,7 @@ public static class Runner
                     covers = covers.After(e);
                 }
 
-                stage = StageTwo.After(stage, state, result.Events);
+                stage = StageTwo.After(stage, state, result.Next, result.Events);
                 fired.AddRange(result.Events.OfType<MapEventFired>());
                 drifted |= result.Events.OfType<RouteDrifted>().Any();
                 if (result.Events.OfType<CombatFought>().Any())
@@ -1104,19 +1104,21 @@ public static class Gates
 
 /// <summary>
 /// A game's second stage (issue 1385's Sim gate): <paramref name="Phases"/> begun from the swallow to the game's end, and
-/// <paramref name="ClockDeaths"/>, the player units Frozen Iron killed.
+/// <paramref name="ClockDeaths"/>, the player units Frozen Iron killed, and the company the swallow found (issue 1395):
+/// <paramref name="Standing"/> player units on the board and the captain's HP, <paramref name="CaptainHp"/>.
 /// </summary>
-public sealed record StageTwo(int Phases, int ClockDeaths)
+public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int CaptainHp = 0)
 {
-    /// <summary><paramref name="stage"/> after a command's <paramref name="events"/> on <paramref name="before"/>: begun by a swallow, counting phases and Frozen Iron's player kills.</summary>
-    public static StageTwo? After(StageTwo? stage, BattleState before, IEnumerable<GameEvent> events)
+    /// <summary><paramref name="stage"/> after a command's <paramref name="events"/> on <paramref name="before"/>, leaving <paramref name="after"/>: begun by a swallow, counting phases and Frozen Iron's player kills.</summary>
+    public static StageTwo? After(StageTwo? stage, BattleState before, BattleState after, IEnumerable<GameEvent> events)
     {
         foreach (var e in events)
         {
             switch (e)
             {
                 case ShardSwallowed when stage is null:
-                    stage = new StageTwo(0, 0);
+                    var company = after.UnitsOf(Side.Player).ToList();
+                    stage = new StageTwo(0, 0, company.Count, company.FirstOrDefault(u => u.IsCaptain)?.Hp ?? 0);
                     break;
                 case PhaseBegan when stage is not null:
                     stage = stage with { Phases = stage.Phases + 1 };

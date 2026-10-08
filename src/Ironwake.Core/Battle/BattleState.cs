@@ -191,7 +191,7 @@ public sealed record BattleState(
     public OrderKind? OrderCalled { get; init; }
 
     /// <summary>
-    /// What Frozen Iron lands for at the next phase start (issue 1385, <see cref="Swallow"/>), or 0 while no boss has
+    /// What Frozen Iron lands for at the swallowed boss's side's next phase start (issues 1385, 1395, <see cref="Swallow"/>), or 0 while no boss has
     /// swallowed: set by the swallow, it climbs after each landing.
     /// </summary>
     public int FrozenIron { get; init; }

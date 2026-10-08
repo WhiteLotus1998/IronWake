@@ -146,8 +146,9 @@ public static class FinaleRun
 
     /// <summary>
     /// The boss's second stage over the games (issue 1385's Sim gate): how many reached it, its median length in phases
-    /// begun, and the games by player units Frozen Iron killed; null when no game reached it. Data; the gate is that the
-    /// clock kills at most one unit of a party that commits.
+    /// begun, the games by player units Frozen Iron killed, and the median company the swallow found (units standing, the
+    /// captain's HP; issue 1395); null when no game reached it. Data; the gate is that the clock kills at most one unit
+    /// of a party that commits.
     /// </summary>
     public static string? StageLine(IReadOnlyList<GameResult> games)
     {
@@ -158,7 +159,7 @@ public static class FinaleRun
         }
 
         var won = games.Count(g => g.Stage is not null && g.Won);
-        return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (gate: at most 1)";
+        return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (gate: at most 1); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP";
     }
 
     private static int Median(IEnumerable<int> values)

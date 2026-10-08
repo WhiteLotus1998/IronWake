@@ -1,0 +1,199 @@
+# issue 1395, the one-pass keep tuning: what the Warden sample's whole fight reads
+# --finale docs/samples/ironwake_keep_warden.map --level 8, two-roll average. Wins full / depleted.
+# Screens are 100 seeds (scratch copies of content/ and the map, one edit set each); the rows marked 200 are 200 seeds.
+
+## after this PR (Frozen Iron at his side's phase start alone), the sample as shipped, 200 seeds
+finale full: 12 units at level 8, heuristic wins 0/200 (0 %), losses 78 timeout 122 captain 0 protected: FAILED
+  stage 2: reached 108 of 200, won 0; median 3 phases; clock deaths 0 in 36, 1 in 40, 2+ in 32 (gate: at most 1); at the swallow, median 4 standing, captain at 16 HP
+finale depleted: 12 units at level 8, heuristic wins 0/200 (0 %), losses 100 timeout 100 captain 0 protected: FAILED
+  stage 2: reached 55 of 200, won 0; median 2 phases; clock deaths 0 in 17, 1 in 22, 2+ in 16 (gate: at most 1); at the swallow, median 4 standing, captain at 13 HP
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 90 timeout 110 captain 0 protected: data, a cold chair's play decides (never won)
+
+## screens
+# 'stand-in' = stage 1 at the stand-in's bulk with lance A and the line: HP 44 Str 9 Dex 14 Spd 8 Def 9 Res 7
+# rows A to H: Frozen Iron at every phase start (as #1385 shipped); I onward: at his side's phase start alone
+
+== A {"limit": 15}
+finale full: 12 units at level 8, heuristic wins 0/100 (0 %), losses 14 timeout 86 captain 0 protected: FAILED
+  stage 2: reached 57 of 100, won 0; median 2 phases; clock deaths 0 in 12, 1 in 9, 2+ in 36 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 23 timeout 77 captain 0 protected: FAILED
+  stage 2: reached 30 of 100, won 0; median 3 phases; clock deaths 0 in 7, 1 in 6, 2+ in 17 (gate: at most 1)
+
+== B {"spawn": 4}
+finale full: 12 units at level 8, heuristic wins 1/100 (1 %), losses 33 timeout 66 captain 0 protected: FAILED
+  stage 2: reached 35 of 100, won 1; median 2 phases; clock deaths 0 in 7, 1 in 10, 2+ in 18 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 58 timeout 42 captain 0 protected: FAILED
+
+== C {"limit": 15, "spawn": 4}
+finale full: 12 units at level 8, heuristic wins 1/100 (1 %), losses 14 timeout 85 captain 0 protected: FAILED
+  stage 2: reached 37 of 100, won 1; median 2 phases; clock deaths 0 in 8, 1 in 11, 2+ in 18 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 31 timeout 69 captain 0 protected: FAILED
+
+== D {"limit": 15, "swallow": {"hp": 30, "heal": 4}}
+finale full: 12 units at level 8, heuristic wins 9/100 (9 %), losses 14 timeout 77 captain 0 protected: FAILED
+  stage 2: reached 57 of 100, won 9; median 2 phases; clock deaths 0 in 12, 1 in 12, 2+ in 33 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 23 timeout 77 captain 0 protected: FAILED
+  stage 2: reached 30 of 100, won 0; median 3 phases; clock deaths 0 in 7, 1 in 6, 2+ in 17 (gate: at most 1)
+
+== E {"swallow": {"hp": 20}}
+finale full: 12 units at level 8, heuristic wins 13/100 (13 %), losses 33 timeout 54 captain 0 protected: FAILED
+  stage 2: reached 55 of 100, won 13; median 2 phases; clock deaths 0 in 12, 1 in 13, 2+ in 30 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 2/100 (2 %), losses 49 timeout 49 captain 0 protected: FAILED
+  stage 2: reached 25 of 100, won 2; median 2 phases; clock deaths 0 in 8, 1 in 8, 2+ in 9 (gate: at most 1)
+
+== F {"swallow": {"hp": 20, "def": 1, "res": 1}}
+finale full: 12 units at level 8, heuristic wins 16/100 (16 %), losses 33 timeout 51 captain 0 protected: FAILED
+  stage 2: reached 55 of 100, won 16; median 2 phases; clock deaths 0 in 12, 1 in 14, 2+ in 29 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 6/100 (6 %), losses 49 timeout 45 captain 0 protected: FAILED
+  stage 2: reached 25 of 100, won 6; median 2 phases; clock deaths 0 in 9, 1 in 8, 2+ in 8 (gate: at most 1)
+
+== G {"stats": {"def": 9, "res": 7}, "swallow": {"hp": 30}}
+finale full: 12 units at level 8, heuristic wins 7/100 (7 %), losses 29 timeout 64 captain 0 protected: FAILED
+  stage 2: reached 65 of 100, won 7; median 2 phases; clock deaths 0 in 9, 1 in 15, 2+ in 41 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 3/100 (3 %), losses 44 timeout 53 captain 0 protected: FAILED
+  stage 2: reached 35 of 100, won 3; median 2 phases; clock deaths 0 in 10, 1 in 7, 2+ in 18 (gate: at most 1)
+
+== H {"limit": 15, "stats": {"def": 9, "res": 7}, "swallow": {"hp": 24, "heal": 4}}
+finale full: 12 units at level 8, heuristic wins 24/100 (24 %), losses 15 timeout 61 captain 0 protected: FAILED
+  stage 2: reached 68 of 100, won 24; median 3 phases; clock deaths 0 in 10, 1 in 18, 2+ in 40 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 8/100 (8 %), losses 24 timeout 68 captain 0 protected: FAILED
+  stage 2: reached 40 of 100, won 8; median 2 phases; clock deaths 0 in 13, 1 in 8, 2+ in 19 (gate: at most 1)
+
+== I {}
+finale full: 12 units at level 8, heuristic wins 0/100 (0 %), losses 41 timeout 59 captain 0 protected: FAILED
+  stage 2: reached 55 of 100, won 0; median 3 phases; clock deaths 0 in 18, 1 in 18, 2+ in 19 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 50 timeout 50 captain 0 protected: FAILED
+
+== J {"limit": 15}
+finale full: 12 units at level 8, heuristic wins 0/100 (0 %), losses 13 timeout 87 captain 0 protected: FAILED
+  stage 2: reached 57 of 100, won 0; median 3 phases; clock deaths 0 in 16, 1 in 21, 2+ in 20 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 23 timeout 77 captain 0 protected: FAILED
+  stage 2: reached 30 of 100, won 0; median 3 phases; clock deaths 0 in 12, 1 in 8, 2+ in 10 (gate: at most 1)
+
+== K {"swallow": {"hp": 30}}
+finale full: 12 units at level 8, heuristic wins 0/100 (0 %), losses 41 timeout 59 captain 0 protected: FAILED
+  stage 2: reached 55 of 100, won 0; median 3 phases; clock deaths 0 in 18, 1 in 18, 2+ in 19 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 50 timeout 50 captain 0 protected: FAILED
+
+== L {"limit": 14, "swallow": {"hp": 30}}
+finale full: 12 units at level 8, heuristic wins 0/100 (0 %), losses 19 timeout 81 captain 0 protected: FAILED
+  stage 2: reached 57 of 100, won 0; median 3 phases; clock deaths 0 in 18, 1 in 19, 2+ in 20 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 30 timeout 70 captain 0 protected: FAILED
+  stage 2: reached 29 of 100, won 0; median 3 phases; clock deaths 0 in 11, 1 in 10, 2+ in 8 (gate: at most 1)
+
+== M {"swallow": {"def": 0, "res": 0}}
+finale full: 12 units at level 8, heuristic wins 3/100 (3 %), losses 41 timeout 56 captain 0 protected: FAILED
+  stage 2: reached 55 of 100, won 3; median 3 phases; clock deaths 0 in 18, 1 in 17, 2+ in 20 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 49 timeout 51 captain 0 protected: FAILED
+  stage 2: reached 25 of 100, won 0; median 2 phases; clock deaths 0 in 9, 1 in 10, 2+ in 6 (gate: at most 1)
+
+== N {"swallow": {"hp": 30, "def": 1, "res": 1}}
+finale full: 12 units at level 8, heuristic wins 5/100 (5 %), losses 40 timeout 55 captain 0 protected: FAILED
+  stage 2: reached 55 of 100, won 5; median 3 phases; clock deaths 0 in 19, 1 in 17, 2+ in 19 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 1/100 (1 %), losses 49 timeout 50 captain 0 protected: FAILED
+  stage 2: reached 25 of 100, won 1; median 2 phases; clock deaths 0 in 9, 1 in 10, 2+ in 6 (gate: at most 1)
+
+== O {"stats": {"def": 9, "res": 7}, "swallow": {"hp": 30, "def": 2, "res": 2}}
+finale full: 12 units at level 8, heuristic wins 8/100 (8 %), losses 39 timeout 53 captain 0 protected: FAILED
+  stage 2: reached 65 of 100, won 8; median 5 phases; clock deaths 0 in 16, 1 in 20, 2+ in 29 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/100 (0 %), losses 47 timeout 53 captain 0 protected: FAILED
+  stage 2: reached 35 of 100, won 0; median 3 phases; clock deaths 0 in 11, 1 in 14, 2+ in 10 (gate: at most 1)
+
+== P {"stats": {"def": 8, "res": 6}, "swallow": {"hp": 30}}
+finale full: 12 units at level 8, heuristic wins 13/100 (13 %), losses 36 timeout 51 captain 0 protected: FAILED
+  stage 2: reached 73 of 100, won 13; median 3 phases; clock deaths 0 in 23, 1 in 22, 2+ in 28 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 1/100 (1 %), losses 45 timeout 54 captain 0 protected: FAILED
+  stage 2: reached 43 of 100, won 1; median 3 phases; clock deaths 0 in 16, 1 in 14, 2+ in 13 (gate: at most 1)
+
+== Q {"stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 30}}
+finale full: 12 units at level 8, heuristic wins 8/100 (8 %), losses 41 timeout 51 captain 0 protected: FAILED
+  stage 2: reached 71 of 100, won 8; median 5 phases; clock deaths 0 in 20, 1 in 18, 2+ in 33 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 2/100 (2 %), losses 59 timeout 39 captain 0 protected: FAILED
+  stage 2: reached 39 of 100, won 2; median 5 phases; clock deaths 0 in 5, 1 in 14, 2+ in 20 (gate: at most 1)
+
+== R {"limit": 14, "stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 30}}
+finale full: 12 units at level 8, heuristic wins 11/100 (11 %), losses 20 timeout 69 captain 0 protected: FAILED
+  stage 2: reached 73 of 100, won 11; median 5 phases; clock deaths 0 in 18, 1 in 19, 2+ in 36 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 2/100 (2 %), losses 39 timeout 59 captain 0 protected: FAILED
+  stage 2: reached 45 of 100, won 2; median 5 phases; clock deaths 0 in 8, 1 in 14, 2+ in 23 (gate: at most 1)
+
+== S2 {"stats": {"hp": 40, "str": 8, "def": 9, "res": 7}, "swallow": {"hp": 30}}
+finale full: 12 units at level 8, heuristic wins 21/100 (21 %), losses 36 timeout 43 captain 0 protected: FAILED
+  stage 2: reached 88 of 100, won 21; median 4 phases; clock deaths 0 in 26, 1 in 24, 2+ in 38 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 3/100 (3 %), losses 51 timeout 46 captain 0 protected: FAILED
+  stage 2: reached 54 of 100, won 3; median 4 phases; clock deaths 0 in 12, 1 in 23, 2+ in 19 (gate: at most 1)
+
+== T {"stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 24, "heal": 4}}
+finale full: 12 units at level 8, heuristic wins 32/100 (32 %), losses 36 timeout 32 captain 0 protected: FAILED
+  stage 2: reached 71 of 100, won 32; median 4 phases; clock deaths 0 in 19, 1 in 24, 2+ in 28 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 8/100 (8 %), losses 58 timeout 34 captain 0 protected: FAILED
+  stage 2: reached 39 of 100, won 8; median 5 phases; clock deaths 0 in 6, 1 in 15, 2+ in 18 (gate: at most 1)
+
+== Y1 {"limit": 15, "stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 24, "heal": 4}}
+finale full: 12 units at level 8, heuristic wins 35/100 (35 %), losses 15 timeout 50 captain 0 protected: FAILED
+  stage 2: reached 74 of 100, won 35; median 4 phases; clock deaths 0 in 19, 1 in 24, 2+ in 31 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 12/100 (12 %), losses 30 timeout 58 captain 0 protected: FAILED
+  stage 2: reached 49 of 100, won 12; median 5 phases; clock deaths 0 in 12, 1 in 16, 2+ in 21 (gate: at most 1)
+
+== Y2 {"limit": 14, "spawn": 4, "stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 24, "heal": 4}}
+finale full: 12 units at level 8, heuristic wins 23/100 (23 %), losses 25 timeout 52 captain 0 protected: FAILED
+  stage 2: reached 62 of 100, won 23; median 5 phases; clock deaths 0 in 14, 1 in 33, 2+ in 15 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 9/100 (9 %), losses 43 timeout 48 captain 0 protected: FAILED
+  stage 2: reached 29 of 100, won 9; median 3 phases; clock deaths 0 in 14, 1 in 10, 2+ in 5 (gate: at most 1)
+
+== Y3 {"stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 24, "heal": 4}, "sub": [["^assault.*\\n", ""]]}
+finale full: 12 units at level 8, heuristic wins 43/100 (43 %), losses 25 timeout 32 captain 0 protected: FAILED
+  stage 2: reached 86 of 100, won 43; median 4 phases; clock deaths 0 in 27, 1 in 23, 2+ in 36 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 19/100 (19 %), losses 40 timeout 41 captain 0 protected: FAILED
+  stage 2: reached 66 of 100, won 19; median 3 phases; clock deaths 0 in 18, 1 in 17, 2+ in 31 (gate: at most 1)
+
+== Y4 {"stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 24, "heal": 4}, "sub": [["enemy_level: 6", "enemy_level: 5"]]}
+finale full: 12 units at level 8, heuristic wins 35/100 (35 %), losses 30 timeout 35 captain 0 protected: FAILED
+  stage 2: reached 77 of 100, won 35; median 5 phases; clock deaths 0 in 21, 1 in 27, 2+ in 29 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 11/100 (11 %), losses 49 timeout 40 captain 0 protected: FAILED
+  stage 2: reached 53 of 100, won 11; median 5 phases; clock deaths 0 in 8, 1 in 16, 2+ in 29 (gate: at most 1)
+
+# U1 to U4: as I onward, and the clock also at 1, +1 a phase (a scratch build; not shipped)
+
+== U1 {"stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 24, "heal": 4}}
+finale full: 12 units at level 8, heuristic wins 32/100 (32 %), losses 44 timeout 24 captain 0 protected: FAILED
+  stage 2: reached 71 of 100, won 32; median 4 phases; clock deaths 0 in 36, 1 in 24, 2+ in 11 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 8/100 (8 %), losses 62 timeout 30 captain 0 protected: FAILED
+  stage 2: reached 39 of 100, won 8; median 4 phases; clock deaths 0 in 14, 1 in 18, 2+ in 7 (gate: at most 1)
+  stage 2: reached 1 of 100, won 0; median 5 phases; clock deaths 0 in 0, 1 in 1, 2+ in 0 (gate: at most 1)
+
+== U2 {"swallow": {"hp": 24, "heal": 4}}
+finale full: 12 units at level 8, heuristic wins 5/100 (5 %), losses 45 timeout 50 captain 0 protected: FAILED
+  stage 2: reached 55 of 100, won 5; median 5 phases; clock deaths 0 in 22, 1 in 22, 2+ in 11 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 2/100 (2 %), losses 50 timeout 48 captain 0 protected: FAILED
+  stage 2: reached 25 of 100, won 2; median 2 phases; clock deaths 0 in 11, 1 in 12, 2+ in 2 (gate: at most 1)
+
+== U3 {"stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 30}}
+finale full: 12 units at level 8, heuristic wins 8/100 (8 %), losses 51 timeout 41 captain 0 protected: FAILED
+  stage 2: reached 71 of 100, won 8; median 5 phases; clock deaths 0 in 34, 1 in 17, 2+ in 20 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 3/100 (3 %), losses 62 timeout 35 captain 0 protected: FAILED
+  stage 2: reached 39 of 100, won 3; median 5 phases; clock deaths 0 in 14, 1 in 18, 2+ in 7 (gate: at most 1)
+  stage 2: reached 1 of 100, won 0; median 5 phases; clock deaths 0 in 0, 1 in 1, 2+ in 0 (gate: at most 1)
+
+== U4 {"stats": {"hp": 40, "str": 8, "def": 9, "res": 7}, "swallow": {"hp": 30, "heal": 4}}
+finale full: 12 units at level 8, heuristic wins 29/100 (29 %), losses 56 timeout 15 captain 0 protected: FAILED
+  stage 2: reached 88 of 100, won 29; median 5 phases; clock deaths 0 in 45, 1 in 25, 2+ in 18 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 8/100 (8 %), losses 68 timeout 24 captain 0 protected: FAILED
+  stage 2: reached 54 of 100, won 8; median 6 phases; clock deaths 0 in 22, 1 in 23, 2+ in 9 (gate: at most 1)
+  stage 2: reached 5 of 100, won 0; median 0 phases; clock deaths 0 in 4, 1 in 1, 2+ in 0 (gate: at most 1)
+
+## the two best screens at 200 seeds
+
+== T200 {"stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 24, "heal": 4}}
+finale full: 12 units at level 8, heuristic wins 56/200 (28 %), losses 72 timeout 72 captain 0 protected: FAILED
+  stage 2: reached 146 of 200, won 56; median 4 phases; clock deaths 0 in 36, 1 in 50, 2+ in 60 (gate: at most 1); at the swallow, median 5 standing, captain at 15 HP
+finale depleted: 12 units at level 8, heuristic wins 16/200 (8 %), losses 109 timeout 75 captain 0 protected: FAILED
+  stage 2: reached 90 of 200, won 16; median 5 phases; clock deaths 0 in 20, 1 in 35, 2+ in 35 (gate: at most 1); at the swallow, median 5 standing, captain at 14 HP
+  stage 2: reached 2 of 200, won 0; median 0 phases; clock deaths 0 in 1, 1 in 1, 2+ in 0 (gate: at most 1); at the swallow, median 2 standing, captain at 5 HP
+
+== Y3200 {"stats": {"hp": 44, "str": 9, "dex": 14, "spd": 8, "def": 9, "res": 7}, "swallow": {"hp": 24, "heal": 4}, "sub": [["^assault.*\\n", ""]]}
+finale full: 12 units at level 8, heuristic wins 76/200 (38 %), losses 57 timeout 67 captain 0 protected: FAILED
+  stage 2: reached 172 of 200, won 76; median 4 phases; clock deaths 0 in 47, 1 in 50, 2+ in 75 (gate: at most 1); at the swallow, median 6 standing, captain at 15 HP
+finale depleted: 12 units at level 8, heuristic wins 38/200 (19 %), losses 80 timeout 82 captain 0 protected: FAILED
+  stage 2: reached 138 of 200, won 38; median 3 phases; clock deaths 0 in 35, 1 in 47, 2+ in 56 (gate: at most 1); at the swallow, median 5 standing, captain at 14 HP
+  stage 2: reached 11 of 200, won 0; median 2 phases; clock deaths 0 in 8, 1 in 3, 2+ in 0 (gate: at most 1); at the swallow, median 3 standing, captain at 16 HP

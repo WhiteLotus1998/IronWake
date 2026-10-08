@@ -150,7 +150,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `armorFell` | `unit`, `item` (the armor `item` laid fell as the last of its wearer's side's phases under it ended; issue 1282) |
 | `armorShattered` | `unit`, `item`, `by` (the shell `item` on `unit` broke on a hit from `by` that landed, a 0-damage hit too; issue 1403) |
 | `shardSwallowed` | `unit`, `at`, `hp` (stage 1's bar reached 0 and `unit` swallowed the shard instead of dying: stage 2 on a fresh bar of `hp`; Frozen Iron lands from the next phase start; issue 1385) |
-| `frozenIronFell` | `amount`, `struck`, `hpAfter` (at a phase start, `amount` on every unit on the board, either side, past Def and Res; `hpAfter` gives each struck unit's HP in order; a `unitDied` or `shardSwallowed` follows for each taken to 0; issue 1385) |
+| `frozenIronFell` | `amount`, `struck`, `hpAfter` (at the swallowed boss's side's phase start, issue 1395, `amount` on every unit on the board, either side, past Def and Res; `hpAfter` gives each struck unit's HP in order; a `unitDied` or `shardSwallowed` follows for each taken to 0; issue 1385) |
 | `kinHealed` | `unit`, `amount`, `hpAfter` (the Kin healed the swallowed `unit` at its side's phase start, after Frozen Iron; issue 1385) |
 | `coldDrained` | `unit`, `at` (the swallowed `unit` fell; the shard lies on `at`, its tile; follows its `unitDied`; issue 1385) |
 | `stunSkipped` | `unit` (a stunned unit's side's phase began: it begins it moved and acted and skips it; issue 1244) |
