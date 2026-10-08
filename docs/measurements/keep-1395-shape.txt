@@ -1,0 +1,36 @@
+# issue 1395, the keep's shape (round 501, agreed in round 502): what the Warden sample reads
+# --finale docs/samples/ironwake_keep_warden.map --level 8 --seeds 200, two-roll average. Wins full / depleted.
+# The shape: no turn-5 assault; Hask on turn 3 at 0,6 anchoring that turn's wave (its hexer moved to 0,7);
+# stage 1 at the stand-in's bulk with lance A and the line (HP 44 Str 9 Dex 14 Spd 8 Def 9 Res 7); stage 2 HP 24, Def/Res +3, heal 4.
+# Reading the losses line: 'losses A timeout B captain C protected' is A timeouts, B captain falls, C protected falls.
+
+## the shape alone (before the veto counts Frozen Iron)
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 70/200 (35 %), losses 31 timeout 99 captain 0 protected: FAILED
+  stage 2: reached 165 of 200, won 70; median 5 phases; clock deaths 0 in 45, 1 in 63, 2+ in 57 (gate: at most 1); at the swallow, median 5 standing, captain at 15 HP
+finale depleted: 12 units at level 8, heuristic wins 31/200 (15 %), losses 73 timeout 96 captain 0 protected: FAILED
+  stage 2: reached 110 of 200, won 31; median 4 phases; clock deaths 0 in 25, 1 in 38, 2+ in 47 (gate: at most 1); at the swallow, median 5 standing, captain at 14 HP
+finale floor: 11 units at level 8, heuristic wins 1/200 (1 %), losses 82 timeout 117 captain 0 protected: data, a cold chair's play decides (won at least once)
+  stage 2: reached 7 of 200, won 1; median 3 phases; clock deaths 0 in 4, 1 in 1, 2+ in 2 (gate: at most 1); at the swallow, median 3 standing, captain at 20 HP
+finale: FAILED
+
+## the shape, with the exposure sum counting the landing still to come (this PR), and the new stall and captain reads
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 78/200 (39 %), losses 42 timeout 80 captain 0 protected: FAILED
+  stage 2: reached 165 of 200, won 78; median 5 phases; clock deaths 0 in 40, 1 in 64, 2+ in 61 (gate: at most 1); at the swallow, median 5 standing, captain at 15 HP
+  stage 2 timeouts: 17; at the limit, median boss HP 12, 1 standing; median blows on him a player phase 0.3 over 3 player phases
+  captain falls: 10 before the swallow (Hexer 4, Hask 2, Hask (countering) 1, Soldier 1, Sworn Hunter 1, Sworn Hunter (countering) 1), 70 after (Hask 57, frozen iron 13)
+finale depleted: 12 units at level 8, heuristic wins 34/200 (17 %), losses 77 timeout 89 captain 0 protected: FAILED
+  stage 2: reached 110 of 200, won 34; median 5 phases; clock deaths 0 in 25, 1 in 38, 2+ in 47 (gate: at most 1); at the swallow, median 5 standing, captain at 14 HP
+  stage 2 timeouts: 16; at the limit, median boss HP 15, 2 standing; median blows on him a player phase 0.3 over 2 player phases
+  captain falls: 29 before the swallow (Hask 16, Sworn Hunter 5, Hexer 4, Soldier 2, Brigand 1, Sworn Hunter (countering) 1), 60 after (Hask 50, frozen iron 10)
+finale floor: 11 units at level 8, heuristic wins 1/200 (1 %), losses 82 timeout 117 captain 0 protected: data, a cold chair's play decides (won at least once)
+  stage 2: reached 7 of 200, won 1; median 3 phases; clock deaths 0 in 4, 1 in 1, 2+ in 2 (gate: at most 1); at the swallow, median 3 standing, captain at 20 HP
+  stage 2 timeouts: 1; at the limit, median boss HP 19, 3 standing; median blows on him a player phase 2.0 over 1 player phases
+  captain falls: 112 before the swallow (Hexer 34, Hask 33, Sworn Hunter 28, Soldier 10, Brigand 3, Archer 2, Sworn Hunter (countering) 2), 5 after (Hask 5)
+finale: FAILED
+
+## the campaign keep (stand-in Hask, no swallow), unchanged by this PR
+finale full: 12 units at level 8, heuristic wins 148/200 (74 %), losses 46 timeout 6 captain 0 protected: ok
+finale depleted: 12 units at level 8, heuristic wins 114/200 (57 %), losses 65 timeout 21 captain 0 protected: FAILED
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 119 timeout 81 captain 0 protected: data, a cold chair's play decides (never won)

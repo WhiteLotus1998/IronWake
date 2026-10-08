@@ -88,6 +88,16 @@ public static class FinaleRun
             {
                 yield return "  " + stage;
             }
+
+            if (StallLine(Games) is { } stall)
+            {
+                yield return "  " + stall;
+            }
+
+            if (CaptainLine(Games) is { } captain)
+            {
+                yield return "  " + captain;
+            }
         }
     }
 
@@ -160,6 +170,41 @@ public static class FinaleRun
 
         var won = games.Count(g => g.Stage is not null && g.Won);
         return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (gate: at most 1); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP";
+    }
+
+    /// <summary>
+    /// The stall read (round 502): of the games that reached the second stage and ran out the clock, the median boss HP
+    /// and units standing as the limit passed, and the median combats opened on him a player phase, in tenths; null when
+    /// none did. Few blows with the company standing is the planner's nerve; many blows the heal outpaces is a shortfall.
+    /// </summary>
+    public static string? StallLine(IReadOnlyList<GameResult> games)
+    {
+        var stalled = games.Where(g => g.Stage is not null && g.Cause == LossCause.Timeout).Select(g => g.Stage!).ToList();
+        if (stalled.Count == 0)
+        {
+            return null;
+        }
+
+        var rate = Median(stalled.Select(s => s.PlayerPhases == 0 ? 0 : s.Blows * 10 / s.PlayerPhases));
+        return $"stage 2 timeouts: {stalled.Count}; at the limit, median boss HP {Median(stalled.Select(s => s.BossHp))}, {Median(stalled.Select(s => s.StandingEnd))} standing; median blows on him a player phase {rate / 10}.{rate % 10} over {Median(stalled.Select(s => s.PlayerPhases))} player phases";
+    }
+
+    /// <summary>
+    /// The captain losses by stage and by what struck the last blow (round 502's read), most first; null when the captain
+    /// never fell. Data: it says whether the finale is lost to the waves, to stage 1, or to the swallowed boss and his clock.
+    /// </summary>
+    public static string? CaptainLine(IReadOnlyList<GameResult> games)
+    {
+        var fell = games.Where(g => g.CaptainKiller is not null).ToList();
+        if (fell.Count == 0)
+        {
+            return null;
+        }
+
+        string By(IEnumerable<GameResult> some) => string.Join(", ", some.GroupBy(g => g.CaptainKiller!).OrderByDescending(k => k.Count()).ThenBy(k => k.Key, StringComparer.Ordinal).Select(k => $"{k.Key} {k.Count()}"));
+        var before = fell.Where(g => !g.CaptainFellInStageTwo).ToList();
+        var after = fell.Where(g => g.CaptainFellInStageTwo).ToList();
+        return $"captain falls: {before.Count} before the swallow ({(before.Count == 0 ? "none" : By(before))}), {after.Count} after ({(after.Count == 0 ? "none" : By(after))})";
     }
 
     private static int Median(IEnumerable<int> values)
