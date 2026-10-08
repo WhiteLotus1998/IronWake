@@ -3991,3 +3991,17 @@ Notes:
 - **Sim:** gate 1 fell from 136 to 107 of 200, more than the 10 points Chat allowed. Giving back HP can't fix that: the captain hits for 11, so anything from 12 to 22 effective HP takes two hits, and 11 or less undoes the lever. Under Unsure on the PR.
 
 — Code
+
+## 2026-10-08 — Saltmarsh Ford at the campaign's floor, the weakest untuned map under 0278, warm — Code
+
+Seed: 3200 (`campaign --seed 3200 --from saltmarsh_ford --level 1 --strict --script docs/transcripts/2026-10-08-saltmarsh_ford-3200.script`; transcript beside it; main at 1a52379). Map 3, so the floor is the levy at L1: the default four (captain, Wren, Teodor, Ottilie). 1560 was `play`'s lab company; this is the first floor read. Warm: I built the cut and played 523, 547 and 1560 here, and I read 571.   Result: **won, rout, on turn 12 of 18.** All three Recalls spent, nobody fell.
+Tension: 7/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 4, the third pass. The fort group had crossed. The archer was at 9,6, the soldier at 11,5, and the wingrider at 11,6 with 4 HP. The first two passes had shown me the dice. Ottilie's shot on the wingrider crits, Wren's misses, Teodor's misses the soldier, and the captain's swing on the soldier hits for 9. My first order left Ottilie lethal (10 against 9). My second left Teodor at 7 and Ottilie at 9 beside the wingrider. The kept line took the soldier with Ottilie's 6 then the captain's 9, so it died before it could counter. Wren and Teodor took the archer. The wingrider at 4 was left as the one survivor, because its 8 could not kill anyone. It took Ottilie to 1 and died the next turn.
+Notes:
+- **At the floor the fort group is the map.** On turn 2 Teodor woke it from 10,5. On turn 3 four strikes missed the 4-HP wingrider: Ottilie at 77, the captain at 82, Teodor at 70, and Wren at 80. All four were keyed misses, so on turn 3 nobody could kill it. That cost the first Recall. I spent the turn falling back instead, and the whole group walked across the ford into my line.
+- **The leader, the 1560 way.** Teodor stood unbraced on 10,2, and the leader's throw at him (58 percent) missed, which stripped the brace. On turn 7 the captain's Full Measure from 11,0 went in at 98 for 15. **Disclosed luck:** it crit for 45. Without the crit the leader stands at 11 on his fort and heals 5. The captain is spent for a phase, Teodor's 51 and Wren's 63 have to land, and his counter is 11 against either of them. That turn would have been the map's hardest, and I did not have to play it.
+- **The pair, a third time.** 10,2 is in the fort area, so the bait spawned them on turn 6. They reached the ford on turn 8, after the leader was dead. The brigand swung into Wren braced on 10,2 at 25 and her double left it at 2. The soldier walked west to 5,4 for the other crossing, then back to 9,4, out of reach, where it waited. That is the same shape as 571 and 1560. Filed #1365 for the Table, not `ready`: lever 1 spawns the pair on the fort group's wake, so its arrival overlaps the leader instead of following him.
+- **Recall as knowledge** decided turns 3 and 4 (round 460 named it on the raid). It is the strongest tool at the floor and it is not tense while you use it. The tension was in the first pass of each turn.
+- **Not tense:** turns 1, 5, and 8 to 12.
+
+— Code

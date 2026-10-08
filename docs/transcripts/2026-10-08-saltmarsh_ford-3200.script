@@ -1,0 +1,129 @@
+march
+move teodor 8,5
+wait teodor
+move captain 8,6
+wait captain
+move wren 7,6
+wait wren
+move ottilie 7,7
+wait ottilie
+end
+move teodor 10,5
+wait teodor
+move captain 9,6
+wait captain
+move wren 8,5
+wait wren
+move ottilie 9,7
+wait ottilie
+threat captain
+end
+move ottilie 10,6
+attack ottilie wingrider-1
+move captain 9,4
+attack captain wingrider-1
+attack teodor wingrider-1
+recall 31
+forecast ottilie archer-1 from 9,4
+forecast teodor wingrider-1
+about field dressing
+move teodor 9,8
+item teodor 2
+move captain 10,5
+wait captain
+move wren 8,8
+wait wren
+move ottilie 11,7
+wait ottilie
+end
+move ottilie 12,7
+attack ottilie wingrider-1
+move wren 8,6
+attack wren archer-1
+move teodor 9,7
+attack teodor archer-1
+attack captain soldier-1
+recall 48
+move captain 11,4
+attack captain soldier-1
+move teodor 10,5
+attack teodor soldier-1
+attack ottilie soldier-1
+move wren 10,6
+attack wren wingrider-1
+recall 48
+attack ottilie soldier-1
+attack captain soldier-1
+move wren 8,6
+attack wren archer-1
+move teodor 9,7
+attack teodor archer-1
+threat ottilie
+threat teodor
+threat wren
+threat captain
+end
+move ottilie 11,8
+attack ottilie wingrider-1
+move captain 11,5
+attack captain wingrider-1
+threat captain
+threat ottilie
+threat wren from 10,6
+threat teodor from 10,4
+move teodor 10,6
+item teodor 2
+move wren 9,5
+wait wren
+end
+move ottilie 10,5
+item ottilie 2
+move teodor 10,2
+wait teodor
+move captain 10,3
+wait captain
+move wren 10,4
+wait wren
+threat captain
+threat wren
+threat ottilie
+threat teodor
+end
+move captain 11,0
+attack captain bandit_leader-1 art full_measure
+move teodor 9,0
+wait teodor
+move ottilie 10,1
+wait ottilie
+move wren 10,2
+wait wren
+end
+wait wren
+wait ottilie
+move teodor 10,0
+wait teodor
+threat wren
+end
+threat wren
+wait wren
+wait ottilie
+wait teodor
+wait captain
+end
+attack ottilie brigand-1
+wait wren
+wait teodor
+wait captain
+end
+move wren 9,5
+attack wren soldier-2
+move ottilie 11,4
+attack ottilie soldier-2
+move teodor 10,4
+attack teodor soldier-2
+move captain 10,3
+wait captain
+end
+attack ottilie soldier-2
+attack wren soldier-2
+leave
