@@ -19,12 +19,20 @@ namespace Ironwake.Sim;
 /// Issue 871 adds the walking drains (a drain paid at a phase start with no enemy in her reach,
 /// <see cref="Kinsbane.Smells"/> read on the board it fired on) and the heeding arm, which benches
 /// her on every <c>keziah_warning</c> map instead of answering the question.
+/// Issue 1378 (rounds 483, 484) adds the quest arm: at each camp the run takes every side map offered,
+/// at its seat, retried like a map and skipped when no try wins it, until it has tried
+/// <see cref="Shrine"/>, her own quest; after that it takes none, so the field and the keep are fought
+/// as the main line leaves them. The shrine's read is the feed on entering and leaving it and whether
+/// it woke the scythe, split against the keep's wins. A tooth grown on a side map counts on the map its camp follows.
 /// A measurement only; nothing here changes what ships.
 /// </summary>
 public static class KinsbaneRun
 {
     /// <summary>The claimant who carries the scythe (STORY draft 6, DESIGN 13.23).</summary>
     public const string Owner = "keziah";
+
+    /// <summary>Her first side map, the Burned Shrine (issue 1378): the quest arm takes side maps up to and including this one.</summary>
+    public const string Shrine = "keziah_1";
 
     /// <summary>The three arms (issue 871): committed fields her everywhere, heeding benches her on a flagged map, axe is the control.</summary>
     public enum Arm
@@ -37,11 +45,24 @@ public static class KinsbaneRun
     /// <summary>One map won: its campaign number, the feed count by its end, whether she was deployed, the drains she paid and the times it starved on it, the tries it took, the attacks she made on the winning try with the scythe and with anything else (issue 851, round 277), whether the scythe was still in its starved form at the map's end (issue 856, round 281), whether the woken scythe ran the hunt on (issue 804 item 4), and the drains among them paid with no enemy in her reach (issue 871), and the tries on which she fell (round 286; the winning try never has her fallen).</summary>
     public sealed record MapRead(int Map, int Fed, bool Deployed, int Drains, int Starved, int Attempts, int ScytheAttacks = 0, int OtherAttacks = 0, bool EndedStarved = false, bool HuntRan = false, int WalkingDrains = 0, int Falls = 0);
 
-    /// <summary>One run: the maps won from her first, the campaign map each tooth grew on (0 when it never did), and the map no try won, or null.</summary>
-    public sealed record Run(IReadOnlyList<MapRead> Maps, IReadOnlyList<int> ToothOn, int? LostOn);
+    /// <summary>One try at the shrine (issue 1378): the feed by its end (the last feed it saw, or the feed entering), the turn it ended on, and how it ended.</summary>
+    public sealed record ShrineTry(int Fed, int Turn, BattleResult Result, LossCause Cause);
+
+    /// <summary>The shrine on the quest arm (issue 1378): the map its camp follows, the feed on entering and on leaving it (entering again when no try won it), whether a try won it, and every try, won or lost.</summary>
+    public sealed record ShrineRead(int After, int FedIn, int FedOut, bool Won, IReadOnlyList<ShrineTry> Tries);
+
+    /// <summary>One run: the maps won from her first, the campaign map each tooth grew on (0 when it never did), and the map no try won, or null; on the quest arm the side maps it won and the shrine's read, null when it was never offered.</summary>
+    public sealed record Run(IReadOnlyList<MapRead> Maps, IReadOnlyList<int> ToothOn, int? LostOn)
+    {
+        /// <summary>The side maps the quest arm won, the shrine included.</summary>
+        public int QuestsWon { get; init; }
+
+        /// <summary>The shrine's read on the quest arm; null when it was never offered or the arm is off.</summary>
+        public ShrineRead? Shrine { get; init; }
+    }
 
     /// <summary>Every run over seeds 1..<paramref name="seeds"/>.</summary>
-    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, Arm arm = Arm.Committed)
+    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, Arm arm = Arm.Committed, bool quests = false)
     {
         var axe = arm == Arm.Axe;
         var runs = new List<Run>();
@@ -52,6 +73,8 @@ public static class KinsbaneRun
             var toothOn = new int[Kinsbane.MtCap];
             var issued = false;
             int? lost = null;
+            var questsWon = 0;
+            ShrineRead? shrine = null;
             while (!record.IsFinished(content))
             {
                 if (record.Pick is null && record.NextMap(content).Branch.Contains(Owner))
@@ -110,6 +133,12 @@ public static class KinsbaneRun
                 }
 
                 record = record.AfterBattle(won, content);
+                if (quests && shrine is null)
+                {
+                    (record, var taken, shrine) = TakeQuests(record, contentRoot, content, seed, number, toothOn);
+                    questsWon += taken;
+                }
+
                 if (!issued)
                 {
                     continue;
@@ -125,10 +154,75 @@ public static class KinsbaneRun
                 maps.Add(new MapRead(number, stack?.Fed ?? 0, won.History[0].UnitsOf(Side.Player).Any(u => u.Id == Owner), drains.Count, drains.Count(d => d.Starved), attempt, swings.Scythe, swings.Other, stack?.Starved ?? false, events.OfType<HuntRanOn>().Any(h => h.UnitId == Owner), walked, falls));
             }
 
-            runs.Add(new Run(maps, toothOn, lost));
+            runs.Add(new Run(maps, toothOn, lost) { QuestsWon = questsWon, Shrine = shrine });
         }
 
         return runs;
+    }
+
+    /// <summary>
+    /// The quest arm's camp after map <paramref name="number"/> (issue 1378): every side map offered is
+    /// taken in the order offered, its member beside the first standing recruits who are neither the
+    /// member nor the captain, as many as its board seats, on fresh seeds up to
+    /// <see cref="HeirloomRun.Attempts"/> times; one refused (a full pack, a short roster) or never won is
+    /// left. Returns the record, the side maps won, and the shrine's read if it was offered here.
+    /// </summary>
+    private static (CampaignRecord Record, int Won, ShrineRead? Shrine) TakeQuests(CampaignRecord record, string contentRoot, GameContent content, int seed, int number, int[] toothOn)
+    {
+        var won = 0;
+        ShrineRead? shrine = null;
+        var tried = new HashSet<string>(StringComparer.Ordinal);
+        while (record.QuestsOffered(content).FirstOrDefault(q => !tried.Contains(q.Id)) is { } quest)
+        {
+            tried.Add(quest.Id);
+            var board = MapFiles.Load(Path.Combine(contentRoot, MapFiles.QuestsDirectory, quest.MapId + MapFiles.Extension), content);
+            var allies = record.Roster.Select(u => u.Id).Where(id => id != quest.MemberId && id != content.Cast[0].Id).Take(CampaignRecord.QuestAllies(board)).ToList();
+            if (CampaignRecord.QuestAlliesRefusal(board, allies) is not null || record.QuestRefusal(quest.Id, allies, content) is not null)
+            {
+                continue;
+            }
+
+            var fedIn = FedOf(record);
+            var tries = new List<ShrineTry>();
+            BattleState? end = null;
+            List<GameEvent> events = new();
+            while (tries.Count < HeirloomRun.Attempts && end is null)
+            {
+                var attempt = record with { Seed = unchecked(record.Seed + (ulong)tries.Count * 7919UL) };
+                var (fought, seen, _, _) = Fight(attempt.BeginQuest(board, quest.Id, allies, content), content, seed, number);
+                tries.Add(new ShrineTry(seen.OfType<HungerFed>().Where(f => f.UnitId == Owner).Select(f => f.Fed).DefaultIfEmpty(fedIn).Last(), fought.Turn, fought.Outcome.Result, fought.Outcome.Cause));
+                if (fought.Outcome.Result == BattleResult.Won)
+                {
+                    end = fought;
+                    events = seen;
+                }
+            }
+
+            if (end is not null)
+            {
+                record = record.AfterQuest(end, quest.Id, content).Record;
+                won++;
+                foreach (var fed in events.OfType<HungerFed>().Where(f => f.UnitId == Owner && Kinsbane.ToothGrew(f.Fed)))
+                {
+                    toothOn[Kinsbane.Teeth(fed.Fed) - 1] = number;
+                }
+            }
+
+            if (quest.Id == Shrine)
+            {
+                shrine = new ShrineRead(number, fedIn, FedOf(record), end is not null, tries);
+                break;
+            }
+        }
+
+        return (record, won, shrine);
+    }
+
+    /// <summary>The scythe's feed count on the record, 0 when she does not carry it.</summary>
+    private static int FedOf(CampaignRecord record)
+    {
+        var stack = record.Find(Owner)?.Inventory.Items.FirstOrDefault(s => s.ItemId == Kinsbane.ItemId);
+        return stack?.Fed ?? 0;
     }
 
     /// <summary>One battle under the heuristic player to its end, with the hunger's events it saw and the attacks <see cref="Owner"/> made with the scythe and with anything else.</summary>
@@ -201,6 +295,11 @@ public static class KinsbaneRun
         }
 
         var last = runs.SelectMany(r => r.Maps.Select(m => m.Map)).DefaultIfEmpty(0).Max();
+        foreach (var line in ShrineLines(runs, last))
+        {
+            yield return line;
+        }
+
         var entering = runs.Select(r => r.Maps.FirstOrDefault(m => m.Map == last - 1)).OfType<MapRead>().ToList();
         yield return $"  woken entering the keep (map {last}, fed {Kinsbane.WakeKills} by map {last - 1}'s end): {entering.Count(m => Kinsbane.Woken(m.Fed))} of {entering.Count} reachers";
         var armed = runs.Where(r => r.Maps.Count > 0).ToList();
@@ -212,6 +311,31 @@ public static class KinsbaneRun
             var label = i + 1 == Kinsbane.MtCap ? $"tooth {i + 1} (wakes, fed {Kinsbane.WakeKills})" : $"tooth {i + 1} (fed {Kinsbane.FedFor(i + 1)})";
             yield return $"  {label}: grew in {on.Count} of {armed.Count}, median map {median}";
         }
+    }
+
+    /// <summary>
+    /// The quest arm's shrine read (issue 1378, round 483's bar): the runs offered it and won it, the feed
+    /// entering and leaving at p25/p50/p75 over the winners, the runs woken by its end, and the keep
+    /// (map <paramref name="last"/>) won by runs the shrine woke against the shrine's other winners. Empty off the quest arm.
+    /// </summary>
+    private static IEnumerable<string> ShrineLines(IReadOnlyList<Run> runs, int last)
+    {
+        var offered = runs.Where(r => r.Shrine is not null).ToList();
+        if (offered.Count == 0)
+        {
+            yield break;
+        }
+
+        var won = offered.Where(r => r.Shrine!.Won).ToList();
+        var tries = offered.SelectMany(r => r.Shrine!.Tries).ToList();
+        var woken = won.Where(r => Kinsbane.Woken(r.Shrine!.FedOut)).ToList();
+        var rest = won.Where(r => !Kinsbane.Woken(r.Shrine!.FedOut)).ToList();
+        bool Keep(Run r) => r.Maps.Any(m => m.Map == last);
+        yield return $"  side maps won before and at the shrine p50 {Percentile(offered.Select(r => r.QuestsWon), 0.5)}";
+        yield return $"  the shrine ({Shrine}): offered in {offered.Count}, after map p50 {Percentile(offered.Select(r => r.Shrine!.After), 0.5)}, won in {won.Count}, tries p50 {Percentile(offered.Select(r => r.Shrine!.Tries.Count), 0.5)}, fed entering p25 {Percentile(offered.Select(r => r.Shrine!.FedIn), 0.25)} p50 {Percentile(offered.Select(r => r.Shrine!.FedIn), 0.5)} p75 {Percentile(offered.Select(r => r.Shrine!.FedIn), 0.75)}, leaving (winners) p25 {Percentile(won.Select(r => r.Shrine!.FedOut), 0.25)} p50 {Percentile(won.Select(r => r.Shrine!.FedOut), 0.5)} p75 {Percentile(won.Select(r => r.Shrine!.FedOut), 0.75)}";
+        yield return $"  every try, won or lost: {tries.Count}, fed by its end p25 {Percentile(tries.Select(t => t.Fed), 0.25)} p50 {Percentile(tries.Select(t => t.Fed), 0.5)} p75 {Percentile(tries.Select(t => t.Fed), 0.75)} max {tries.Select(t => t.Fed).DefaultIfEmpty(0).Max()}, woken by its end in {tries.Count(t => Kinsbane.Woken(t.Fed))}, ended turn p50 {Percentile(tries.Select(t => t.Turn), 0.5)}, lost on her fall {tries.Count(t => t.Cause == LossCause.Captain)}, on the clock {tries.Count(t => t.Cause == LossCause.Timeout)}; runs with a try that woke it {offered.Count(r => r.Shrine!.Tries.Any(t => Kinsbane.Woken(t.Fed)))} of {offered.Count}";
+        yield return $"  woken by the shrine's end: {woken.Count} of {won.Count} winners (woken entering it: {won.Count(r => Kinsbane.Woken(r.Shrine!.FedIn))})";
+        yield return $"  the keep (map {last}) won: shrine-woken {woken.Count(Keep)} of {woken.Count}, the shrine's other winners {rest.Count(Keep)} of {rest.Count}, the shrine lost {offered.Count(r => !r.Shrine!.Won && Keep(r))} of {offered.Count - won.Count}";
     }
 
     /// <summary>The control arm's owner: the hungering weapon taken out of her pack, leaving her cast iron axe in front at full uses (issue 851: it already sits behind the scythe).</summary>

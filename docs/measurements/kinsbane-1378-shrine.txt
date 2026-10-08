@@ -1,0 +1,24 @@
+# issue 1378: the Burned Shrine's wake read. ironwake-sim --kinsbane --seeds 200 --quests (Release, main at 837421b plus the quest arm). The quest arm takes every side map offered at its seat, member beside the first standing recruits, up to 50 tries each, until it has tried keziah_1; none after. Round 483's bar: woken by the shrine's end in at most a third of the runs that take it is a feature, at p50 a hole, between a cold chair; plus keep wins split by woken on the shrine.
+
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the scythe in front of her pack, her iron axe behind it, as the campaign issues it
+  map 6 (her map 1): won 82, deployed in 82, tries p50 2, fed by its end p25 2 p50 2 p75 3 (teeth p50 1/5), drains p50 1 (walking p50 0, p75 0), her falls 134, starved in 7, her attacks 234 (scythe 212), woken by its end in 0, ended starved in 5, the hunt ran on in 0
+  map 7 (her map 2): won 34, deployed in 34, tries p50 14, fed by its end p25 4 p50 5 p75 6 (teeth p50 3/5), drains p50 5 (walking p50 2, p75 2), her falls 534, starved in 20, her attacks 129 (scythe 81), woken by its end in 0, ended starved in 8, the hunt ran on in 0
+  map 8 (her map 3): won 34, deployed in 34, tries p50 3, fed by its end p25 5 p50 6 p75 7 (teeth p50 3/5), drains p50 3 (walking p50 1, p75 1), her falls 81, starved in 10, her attacks 34 (scythe 30), woken by its end in 0, ended starved in 4, the hunt ran on in 0
+  map 9 (her map 4): won 33, deployed in 33, tries p50 5, fed by its end p25 9 p50 10 p75 12 (teeth p50 4/5), drains p50 5 (walking p50 2, p75 3), her falls 255, starved in 11, her attacks 163 (scythe 125), woken by its end in 13, ended starved in 4, the hunt ran on in 13
+  map 10 (her map 5): won 5, deployed in 5, tries p50 19, fed by its end p25 13 p50 13 p75 13 (teeth p50 5/5), drains p50 1 (walking p50 0, p75 0), her falls 81, starved in 0, her attacks 29 (scythe 14), woken by its end in 5, ended starved in 0, the hunt ran on in 5
+  no try won map 1: 118
+  no try won map 7: 48
+  no try won map 9: 1
+  no try won map 10: 28
+  side maps won before and at the shrine p50 3
+  the shrine (keziah_1): offered in 34, after map p50 7, won in 0, tries p50 50, fed entering p25 4 p50 5 p75 6, leaving (winners) p25 0 p50 0 p75 0
+  every try, won or lost: 1700, fed by its end p25 4 p50 5 p75 6 max 9, woken by its end in 0, ended turn p50 4, lost on her fall 1698, on the clock 2; runs with a try that woke it 0 of 34
+  woken by the shrine's end: 0 of 0 winners (woken entering it: 0)
+  the keep (map 10) won: shrine-woken 0 of 0, the shrine's other winners 0 of 0, the shrine lost 5 of 34
+  woken entering the keep (map 10, fed 12 by map 9's end): 13 of 33 reachers
+  teeth, over the 82 runs that won her first map (a run lost later counts as never):
+  tooth 1 (fed 2): grew in 76 of 82, median map 6
+  tooth 2 (fed 4): grew in 39 of 82, median map never
+  tooth 3 (fed 5): grew in 35 of 82, median map never
+  tooth 4 (fed 8): grew in 27 of 82, median map never
+  tooth 5 (wakes, fed 12): grew in 17 of 82, median map never
