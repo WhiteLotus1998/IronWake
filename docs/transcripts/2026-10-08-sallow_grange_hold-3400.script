@@ -1,0 +1,66 @@
+bench dunstan
+bench maud
+buy field_dressing rook
+march
+move captain 2,6
+wait captain
+move wren 2,5
+wait wren
+move teodor 2,7
+wait teodor
+move pell 1,6
+wait pell
+move ottilie 3,8
+wait ottilie
+move rook 4,8
+wait rook
+end
+move pell 5,6
+attack pell brawler-1 cinder art overcast
+move captain 6,6
+attack captain brawler-1
+move teodor 5,7
+wait teodor
+move wren 5,5
+wait wren
+move ottilie 4,6
+wait ottilie
+wait rook
+end !
+attack pell veteran-1 cinder art overcast
+move teodor 5,8
+attack teodor archer-2
+move rook 7,8
+attack rook archer-2
+move captain 10,6
+wait captain
+move wren 9,5
+wait wren
+move ottilie 8,6
+wait ottilie
+end
+move wren 11,6
+wait wren
+move captain 10,5
+wait captain
+move ottilie 9,6
+wait ottilie
+move pell 8,6
+wait pell
+move teodor 8,7
+item teodor 2
+move rook 10,7
+wait rook
+end
+move captain 14,5
+wait captain
+move rook 5,7
+wait rook
+wait wren
+wait ottilie
+wait pell
+wait teodor
+end
+move captain 16,6
+threat captain
+end

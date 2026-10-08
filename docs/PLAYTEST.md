@@ -4132,3 +4132,9 @@ Notes:
 
 — Code
 
+## 2026-10-08 — Code — Sallow Grange, `seize_hold: 1` on the `goes_home` sample, the seed 3400 line (floor L4, Rook, warm)
+
+`campaign --seed 3400 --from sallow_grange --level 4 --pick rook --strict` with `docs/samples/sallow_grange_hold.map` in place of the map (`Fixture.SallowHoldContentDirectory`); script and transcript `docs/transcripts/2026-10-08-sallow_grange_hold-3400.*`. Turns 1 to 5 are 3400's commands (the hold changes nothing before the step); turn 6 is the new decision. Warm: I proposed the lever.   Result: **won, seize, held through turn 6's enemy phase.** No Recall, nobody fell, the Reeve at 28/28. Not rated: one new decision is not a chair.
+
+The step onto the gate was the one tense moment, for about a second: the captain at 14 beside a 9-damage spear, and the hold now asking him to stay. Then `threat captain` said 9 percent for 6, and the tension was gone. The Gate is a fort with a door on it (30 avoid, +3 Def). The Reeve, on his post and free to strike out, walked two tiles to hit Wren for 10 at 54 instead. Best turn: none new; the bait on turn 4 is still the map. What I learned is that the hold works as a rule and costs nothing here, because the tile he must hold is the safest one he can stand on. Lever (b) is killed (0345).
+

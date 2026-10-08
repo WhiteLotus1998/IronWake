@@ -125,6 +125,22 @@ internal static class Fixture
         return target;
     }
 
+    private static readonly Lazy<string> SallowHold = new(() => WithSallowSample(CopyFiles("ironwake-sallow-hold-"), "sallow_grange_hold.map"));
+
+    /// <summary>
+    /// A copy of the real content directory whose Sallow Grange is the <c>goes_home: hall</c> sample
+    /// with <c>seize_hold: 1</c> (<c>docs/samples/sallow_grange_hold.map</c>, issue 1383) and nothing
+    /// else changed. Made once per test run.
+    /// </summary>
+    public static string SallowHoldContentDirectory() => SallowHold.Value;
+
+    private static string WithSallowSample(string target, string sample)
+    {
+        var root = Directory.GetParent(RealContentDirectory())!.FullName;
+        File.Copy(Path.Combine(root, "docs", "samples", sample), Path.Combine(target, MapFiles.MapsDirectory, "sallow_grange.map"), overwrite: true);
+        return target;
+    }
+
     private static readonly Lazy<string> CountingHouseDefSeven = new(() => WithCountingHouseDefSeven(CopyFiles("ironwake-counting-def-seven-")));
 
     /// <summary>
