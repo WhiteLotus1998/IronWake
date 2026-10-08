@@ -3449,6 +3449,28 @@ public static class ContentLoader
             Skill = ParseRanks(node),
             Description = node.Has("description") ? Description(node) : null,
             Named = node.BoolOr("named", false),
+            Swallow = node.OptionalObject("swallow") is { } swallow ? ParseSwallow(node, swallow) : null,
         };
+    }
+
+    /// <summary>
+    /// A template's <c>swallow</c> block (issue 1385, <see cref="Core.Swallow"/>): <c>hp</c> at least 1, <c>def</c>,
+    /// <c>res</c> and <c>heal</c> at least 0, an optional one-line <c>description</c>.
+    /// </summary>
+    private static KinStage ParseSwallow(EntryNode node, EntryNode swallow)
+    {
+        int Read(string field, int least)
+        {
+            var value = swallow.Has(field) ? swallow.Int(field) : throw node.Error("swallow." + field, "is required");
+            return value >= least ? value : throw node.Error("swallow." + field, $"must be at least {least}");
+        }
+
+        var description = swallow.OptionalString("description");
+        if (description is not null && (description.Contains('\n') || description.Contains('\r') || description.Length > DescriptionMax))
+        {
+            throw node.Error("swallow.description", $"must be one line of at most {DescriptionMax} characters");
+        }
+
+        return new KinStage(Read("hp", 1), Read("def", 0), Read("res", 0), Read("heal", 0), description);
     }
 }

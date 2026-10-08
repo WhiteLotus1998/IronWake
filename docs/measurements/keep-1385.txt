@@ -1,0 +1,40 @@
+# issue 1385: --finale docs/samples/ironwake_keep_warden.map --level 8, 200 seeds
+# before (main at b4b7839, no second stage)
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 108/200 (54 %), losses 57 timeout 35 captain 0 protected: FAILED
+  length: median 10 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 91 ms: ok
+  bond: hunter killed 197, freed 0, standing 3 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 21, blocked 7, unfired 172, gate_in1 arrived 6, blocked 2, unfired 192, gate_in2 arrived 7, blocked 1, unfired 192, south_in arrived 3, blocked 0, unfired 197 of 200 (data; all blocked is decoration)
+finale depleted: 12 units at level 8, heuristic wins 55/200 (28 %), losses 85 timeout 60 captain 0 protected: FAILED
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 46 ms: ok
+  bond: hunter killed 192, freed 0, standing 8 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 38, blocked 1, unfired 161, gate_in1 arrived 28, blocked 3, unfired 169, gate_in2 arrived 28, blocked 3, unfired 169, south_in arrived 7, blocked 0, unfired 193 of 200 (data; all blocked is decoration)
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 90 timeout 110 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 39 ms: ok
+  bond: hunter killed 123, freed 0, standing 77 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 117, blocked 7, unfired 76, gate_in1 arrived 89, blocked 28, unfired 83, gate_in2 arrived 110, blocked 7, unfired 83, south_in arrived 39, blocked 2, unfired 159 of 200 (data; all blocked is decoration)
+finale: FAILED
+
+# after (hask_warden swallows: HP 40, Def +3, Res +3, heal 6; Frozen Iron 2 +2 to 10)
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 1/200 (1 %), losses 65 timeout 134 captain 0 protected: FAILED
+  length: median 11 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 76 ms: ok
+  bond: hunter killed 197, freed 0, standing 3 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 21, blocked 7, unfired 172, gate_in1 arrived 6, blocked 2, unfired 192, gate_in2 arrived 7, blocked 1, unfired 192, south_in arrived 3, blocked 0, unfired 197 of 200 (data; all blocked is decoration)
+  stage 2: reached 108 of 200, won 1; median 2 phases; clock deaths 0 in 25, 1 in 19, 2+ in 64 (gate: at most 1)
+finale depleted: 12 units at level 8, heuristic wins 0/200 (0 %), losses 97 timeout 103 captain 0 protected: FAILED
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 51 ms: ok
+  bond: hunter killed 192, freed 0, standing 8 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 38, blocked 1, unfired 161, gate_in1 arrived 28, blocked 3, unfired 169, gate_in2 arrived 28, blocked 3, unfired 169, south_in arrived 7, blocked 0, unfired 193 of 200 (data; all blocked is decoration)
+  stage 2: reached 55 of 200, won 0; median 2 phases; clock deaths 0 in 13, 1 in 17, 2+ in 25 (gate: at most 1)
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 90 timeout 110 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 48 ms: ok
+  bond: hunter killed 123, freed 0, standing 77 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 117, blocked 7, unfired 76, gate_in1 arrived 89, blocked 28, unfired 83, gate_in2 arrived 110, blocked 7, unfired 83, south_in arrived 39, blocked 2, unfired 159 of 200 (data; all blocked is decoration)
+finale: FAILED

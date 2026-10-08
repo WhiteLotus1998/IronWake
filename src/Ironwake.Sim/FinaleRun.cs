@@ -83,6 +83,11 @@ public static class FinaleRun
             {
                 yield return "  " + FallsLine(Falls, Games);
             }
+
+            if (StageLine(Games) is { } stage)
+            {
+                yield return "  " + stage;
+            }
         }
     }
 
@@ -138,6 +143,23 @@ public static class FinaleRun
             var fired = games.Select(g => g.Fired.FirstOrDefault(f => f.Name == name)).ToList();
             return $"{name} arrived {fired.Count(f => f is { Blocked: false })}, blocked {fired.Count(f => f is { Blocked: true })}, unfired {fired.Count(f => f is null)}";
         })) + $" of {games.Count} (data; all blocked is decoration)";
+
+    /// <summary>
+    /// The boss's second stage over the games (issue 1385's Sim gate): how many reached it, its median length in phases
+    /// begun, and the games by player units Frozen Iron killed; null when no game reached it. Data; the gate is that the
+    /// clock kills at most one unit of a party that commits.
+    /// </summary>
+    public static string? StageLine(IReadOnlyList<GameResult> games)
+    {
+        var reached = games.Where(g => g.Stage is not null).Select(g => g.Stage!).ToList();
+        if (reached.Count == 0)
+        {
+            return null;
+        }
+
+        var won = games.Count(g => g.Stage is not null && g.Won);
+        return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (gate: at most 1)";
+    }
 
     private static int Median(IEnumerable<int> values)
     {

@@ -1324,6 +1324,21 @@ public static class ContentSerializer
             writer.WriteBoolean("named", true);
         }
 
+        if (unit.Swallow is { } swallow)
+        {
+            writer.WriteStartObject("swallow");
+            writer.WriteNumber("hp", swallow.Hp);
+            writer.WriteNumber("def", swallow.Def);
+            writer.WriteNumber("res", swallow.Res);
+            writer.WriteNumber("heal", swallow.Heal);
+            if (swallow.Description is not null)
+            {
+                writer.WriteString("description", swallow.Description);
+            }
+
+            writer.WriteEndObject();
+        }
+
         if (signature is { } kind)
         {
             writer.WriteString("signature", kind.ToString().ToLowerInvariant());

@@ -156,7 +156,11 @@ public static class LineStrike
                 next.Scheme);
             events.Add(new CombatFought(unit.Id, target.Id, next.Turn, next.Phase, result.Strikes, striker.Hp, result.DefenderHp));
             next = next.WithUnit(target with { Hp = result.DefenderHp });
-            if (result.DefenderDied)
+            if (result.DefenderDied && Swallow.Takes(target))
+            {
+                next = Swallow.Take(next, content, target.Id, events);
+            }
+            else if (result.DefenderDied)
             {
                 events.Add(new UnitDied(target.Id, target.Side, target.At));
                 next = died(next, target with { Hp = 0 }, striker);

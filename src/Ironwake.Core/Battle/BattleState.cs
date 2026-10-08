@@ -191,6 +191,12 @@ public sealed record BattleState(
     public OrderKind? OrderCalled { get; init; }
 
     /// <summary>
+    /// What Frozen Iron lands for at the next phase start (issue 1385, <see cref="Swallow"/>), or 0 while no boss has
+    /// swallowed: set by the swallow, it climbs after each landing.
+    /// </summary>
+    public int FrozenIron { get; init; }
+
+    /// <summary>
     /// Whether Commander's Word is open on this battle (issue 85): on a map with <c>orders: on</c>,
     /// and on every campaign map from the second, where it is the captain's from Maud's arrival.
     /// </summary>
@@ -501,7 +507,7 @@ public sealed record BattleState(
             throw new ArgumentException(Movement.CannotStandMessage(at, terrain, unitClass.Movement), nameof(unit));
         }
 
-        return new BattleUnit(RefreshSpells(unit, content), side, at, content.StatsOf(unit).Hp, false, false);
+        return new BattleUnit(RefreshSpells(unit, content), side, at, content.StatsOf(unit).Hp, false, false) { Kin = unit.Swallow };
     }
 
     /// <summary>Section 5: spells have uses per battle, so every Reason or Faith weapon starts a map at its full durability. Physical weapons carry what they have.</summary>
@@ -922,6 +928,11 @@ public sealed record BattleState(
             sb.Append("order ").Append(Orders.Word(order)).Append('\n');
         }
 
+        if (FrozenIron > 0)
+        {
+            sb.Append("frozeniron ").Append(FrozenIron).Append('\n');
+        }
+
         if (Map.Fronts.Count > 0)
         {
             sb.Append("fallen");
@@ -1020,6 +1031,11 @@ public sealed record BattleState(
             if (unit.RaiseSpent)
             {
                 sb.Append(" raisespent");
+            }
+
+            if (unit.Swallowed)
+            {
+                sb.Append(" swallowed");
             }
 
             if (unit.Side == Side.Enemy)
