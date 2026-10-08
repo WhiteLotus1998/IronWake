@@ -278,6 +278,8 @@ public static class EnemyAi
     /// moves to the approach tile the veto passes, or stays, and then strikes the best target
     /// in reach of that tile unvetoed: the veto picks the tile, not the swing (issue 389).
     /// A guard boss with a post goes home instead (<see cref="GoesHome"/>, issue 393).
+    /// A member of the <c>goes_home:</c> group standing off its post plans from <see cref="HomeTile"/>
+    /// alone, striking from it or else ending on it (issue 1372).
     /// </summary>
     public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit)
     {
@@ -286,7 +288,8 @@ public static class EnemyAi
         var weapon = unit.EquippedWeapon(content);
         var mayMove = behavior == Behavior.Aggressive && !unit.Moved;
         var reach = state.ReachOf(unit, content);
-        var tiles = mayMove ? reach.Destinations.ToList() : new List<Coord> { unit.At };
+        var home = mayMove ? HomeTile(state, unit, reach) : null;
+        var tiles = home is { } homeward ? new List<Coord> { homeward } : mayMove ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
         var known = Hunt.Narrow(state, unit, players.Where(p => Dusk.Knows(state, content, unit, p)).ToList());
@@ -324,6 +327,12 @@ public static class EnemyAi
             return best.Tile == unit.At
                 ? new Command[] { attack }
                 : new Command[] { new Move(unit.Id, best.Tile), attack };
+        }
+
+        if (home is { } walksHome)
+        {
+            var idle = Don(state, content, unit, walksHome) ?? Idle(state, content, unit);
+            return walksHome == unit.At ? new Command[] { idle } : new Command[] { new Move(unit.Id, walksHome), idle };
         }
 
         if (!mayMove || HoldsTheThrone(state, unit))
@@ -594,6 +603,32 @@ public static class EnemyAi
     }
 
     /// <summary>
+    /// Where a member of the <c>goes_home:</c> group (issue 1372, <see cref="Homing"/>) plans from when it
+    /// stands off its post and has not moved this phase: the tile of <paramref name="reach"/> or its own
+    /// tile nearest its post by Manhattan distance, then its own tile, then the lower movement cost, then
+    /// the reach's order, as <see cref="GoesHome"/> orders them. It strikes only from that tile, and ends
+    /// there when it has no strike. Null when the rule does not bind: no header, another group, no post
+    /// (a spawned unit), standing on the post, or already moved.
+    /// </summary>
+    public static Coord? HomeTile(BattleState state, BattleUnit unit, Reach reach)
+    {
+        if (state.Map.Homing is not { } homing || !homing.Binds(unit) || unit.Moved || Post(state, unit) is not { } post || unit.At == post)
+        {
+            return null;
+        }
+
+        return reach.Destinations
+            .Append(unit.At)
+            .Distinct()
+            .Select((tile, order) => (tile, order))
+            .OrderBy(t => t.tile.DistanceTo(post))
+            .ThenBy(t => t.tile == unit.At ? 0 : 1)
+            .ThenBy(t => t.tile == unit.At ? 0 : reach.CostTo(t.tile) ?? int.MaxValue)
+            .ThenBy(t => t.order)
+            .First().tile;
+    }
+
+    /// <summary>
     /// An enemy's post: the tile of the map placement it filled, where it stood when the battle
     /// began. Null for a unit a map event spawned, which has no placement, and for a player unit.
     /// </summary>
@@ -696,7 +731,9 @@ public static class EnemyAi
         }
 
         var reach = state.ReachOf(unit, content);
-        var tiles = behavior == Behavior.Aggressive && !unit.Moved ? reach.Destinations.ToList() : new List<Coord> { unit.At };
+        var mayMove = behavior == Behavior.Aggressive && !unit.Moved;
+        var tiles = mayMove && HomeTile(state, unit, reach) is { } home ? new List<Coord> { home }
+            : mayMove ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
         var known = Hunt.Narrow(state, unit, players.Where(p => inDaylight || Dusk.Knows(state, content, unit, p)).ToList());

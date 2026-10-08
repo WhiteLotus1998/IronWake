@@ -234,6 +234,11 @@ public static class MapRenderer
             sb.Append(held.Line()).Append('\n');
         }
 
+        if (map.Homing is { } homing)
+        {
+            sb.Append(homing.Line()).Append('\n');
+        }
+
         if (map.RouteDrift is { } drift)
         {
             sb.Append(Routes.Line(drift, 1)).Append('\n');
@@ -597,6 +602,11 @@ public static class MapRenderer
         if (map.Holds is { } held && state.Units.Any(held.Binds))
         {
             sb.Append(held.Line()).Append('\n');
+        }
+
+        if (map.Homing is { } homing && state.Units.Any(homing.Binds))
+        {
+            sb.Append(homing.Line()).Append('\n');
         }
 
         if (Routes.Line(state) is { } drifting)

@@ -320,6 +320,12 @@ public sealed record MapDefinition(
     public HeldGround? Holds { get; init; }
 
     /// <summary>
+    /// The <c>goes_home:</c> header (issue 1372): an enemy group whose placed members, standing off
+    /// their posts, walk home and strike only from there (<see cref="Homing"/>). Null for none.
+    /// </summary>
+    public Homing? Homing { get; init; }
+
+    /// <summary>
     /// The <c>keziah_warning: on</c> header (issue 871, Lotus's ruling): a map where the hungering
     /// weapon's walking drains run high, so a campaign asks once before marching with its bearer
     /// deployed (<see cref="CampaignRecord.MarchWarning"/>). Refused on a map that places the bearer
