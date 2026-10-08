@@ -161,6 +161,10 @@ public static class LineStrike
                 events.Add(new UnitDied(target.Id, target.Side, target.At));
                 next = died(next, target with { Hp = 0 }, striker);
             }
+            else
+            {
+                next = Armor.AfterCombat(next, unit.Id, target.Id, result.Strikes, events);
+            }
         }
 
         return next;

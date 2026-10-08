@@ -1162,7 +1162,7 @@ public static class EnemyAi
         }
 
         var there = attacker with { At = from };
-        var me = content.CombatantOf(attacker.Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false), beside: Formation.Beside(state, content, there) + Armor.Bonus(there)) with { Aura = Formation.Aura(state, content, there), Charged = attacker.RodCharge };
+        var me = content.CombatantOf(attacker.Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false), beside: Formation.Beside(state, content, there) + Armor.Bonus(there)) with { Aura = Formation.Aura(state, content, there), Charged = attacker.RodCharge, Shell = Armor.Shell(there) };
         var them = target.Answering(state, content, from, there) with { Catching = caught };
         return (state, target, weapon, there, Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme));
     }

@@ -1,0 +1,17 @@
+# 0361 — Obsidian Armor is a one-hit shell, laid on the caster or an adjacent ally (slice 2 of #1403)
+
+Date: 2026-10-08. Issue #1403, slice 2. Amends DECISIONS/0312 (armor on its caster alone, worn whole) and the signed list's Earth row (0347) on Lotus's rulings of 2026-10-08 (Table #1368: Obsidian Armor reworked, it shatters after one hit, +20 Def), with Code's three readings and Chat's edges agreed in round 500. Fixture only: no armor tome ships.
+
+## Built
+
+- **Data.** An armor tome's `armor` block takes `shell: true` (a one-hit shell) and `range` (0, the caster alone, the default; 1, the caster or an adjacent ally of its side). The loader refuses any other range, naming `armor.range`. The fixture `test_obsidian_armor` is now +20 Def, Mov 0, three phases, shell, range 1. Earth Armor stays +10, Mov -2, two phases, self-only, worn whole.
+- **The cast.** `item <caster> <slot> <ally>` lays it on an adjacent ally; an ally two away or a foe is refused (`... on its caster or an ally within 1`). The caster spends the use and the action; the wearer keeps its own. `armorDonned` carries `on` (the wearer, when not the caster) and `shell`.
+- **The shell in combat.** A shell is no part of the wearer's stats. Its Def rides `Combatant.Shell`, and a side's forecast carries `Shell` and `Shelled` (the unscaled damage on the shell's Def; Res is untouched, so magic meets it at plain damage). The first hit that lands on the wearer in a combat deals `FirstHit`: on the shell's Def, then the mark and the rod's scale, the crit tripling first, the same slot the mark's first hit uses. A miss leaves it for the next strike; a double's second strike, and a counter after the breaking hit, meet no shell.
+- **The break.** After every combat, watch shot, line strike and area cast, a wearer still standing that a hit landed on loses the shell (`armorShattered`, naming the striker). A hit for 0 breaks it. The wearer's own strikes, a miss, and burn or curse ticks never do. A caught storm is a landed hit. Riders on the breaking hit land as usual. It still falls after three phases if nothing hits it. Once a map is the tome's uses; there is no recast after a break.
+- **Pricing.** Every read the planners and `threat` share takes the shell on the first hit: `AttackerDamageLivedFor`, `CounterIfAllLand`, `FirstRoundMissChance`, `AttackerStrikesLivedFor` and `CounterIsLethal`; the watch shot and the area cast's score and preview read `FirstHit`. Combats resolve one at a time on the board, so a second attacker plans against the bare wearer once a jab has broken the glass.
+- **Text.** The forecast says ` meets the shell (Def +20): first hit 0`; the card `shell: Def +20 against the first hit (Obsidian Armor), falls ...`; the console `Pell lays Obsidian Armor on Wren: a shell, Def +20 against the first hit, through its side's next three phases` and `<striker>'s hit shatters the Obsidian Armor on <wearer>`.
+
+## Not built
+
+- `Legal`, the client's action list and the Sim's player still offer no armor cast, and the enemy earth-shaper stays self-only (round 499). The client offers armor as a self cast; an ally aim waits on a tome shipping.
+- The Sim read Lotus asked for (drake rider, healer, highest-Def front-liner; how often the shell eats a jab and how often a real blow) needs the player to cast the shell, so it is slice 3. The enemy planner prices the shell per strike but does not reorder its attackers to open with a jab; whether it should is a reading from that Sim run.

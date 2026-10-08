@@ -36,7 +36,8 @@ public sealed record CombatResult(ValueList<StrikeEvent> Strikes, int AttackerHp
 /// When the exchange is over and both stand, a side with a <see cref="SideForecast.Bite"/> one of whose
 /// strikes hit bites once (issue 872): the attacker's drake, or else the defender's; one bite a combat.
 /// The bite draws no roll. A side's <see cref="SideForecast.Stoop"/> is added to its first strike when it hits (issue 1127),
-/// and a side that <see cref="SideForecast.CashesMark"/> deals its marked damage on its first hit alone (issue 1329).
+/// and a side that <see cref="SideForecast.CashesMark"/> deals its marked damage on its first hit alone (issue 1329), as a
+/// side meeting a shell (<see cref="SideForecast.Shelled"/>, issue 1403) deals its shelled damage on its first hit alone.
 /// A side that <see cref="Combatant.Pulls"/> never takes its target below 1 HP (issue 1331), and its strike or bite
 /// reports the damage it dealt.
 /// </summary>
@@ -105,9 +106,9 @@ public static class CombatResolver
             var hit = Combat.Lands(side.HitChance, rollA, rollB, scheme);
             var crit = hit
                 && rng.Roll(RollKey.Combat(context.Turn, context.Phase, striker.Id, target.Id, strikeIndex, CombatRoll.Crit)) < side.CritChance;
-            var marked = hit && side.CashesMark && !cashed;
-            cashed |= marked;
-            var damage = !hit ? 0 : (marked ? (crit ? side.MarkedCritDamage : side.MarkedDamage) : crit ? side.CritDamage : side.Damage) + (strikeIndex == 0 ? side.Stoop : 0);
+            var first = hit && (side.CashesMark || side.Shelled is not null) && !cashed;
+            cashed |= first;
+            var damage = !hit ? 0 : (first ? side.FirstHit(crit) : crit ? side.CritDamage : side.Damage) + (strikeIndex == 0 ? side.Stoop : 0);
             if (striker.Pulls)
             {
                 damage = Math.Min(damage, targetHp - 1);

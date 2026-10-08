@@ -34,6 +34,8 @@ public static class RollSchemes
 /// <see cref="Stoop"/> is what the side's first strike adds when it hits (issue 1127, <see cref="Ironwake.Core.Stoop"/>), 0 for every side that does not stoop.
 /// <see cref="CashesMark"/> is a side whose first hit lands on a mark of its tome's school (issue 1329, <see cref="Mark"/>):
 /// that hit deals <see cref="MarkedDamage"/> or <see cref="MarkedCritDamage"/>, every later one plain damage.
+/// <see cref="Shell"/> is the Def a one-hit shell on the target adds to this side's first hit that lands (issue 1403,
+/// <see cref="Armor"/>): that hit deals <see cref="FirstHit"/> on <see cref="Shelled"/>, every later one plain damage.
 /// </summary>
 public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1, bool CritGrounds = false, int Bite = 0, bool NeverDoubles = false, int Stoop = 0, bool CashesMark = false)
 {
@@ -51,6 +53,30 @@ public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int D
     public DamageScale Scale { get; init; } = DamageScale.One;
 
     private int Raw => Unscaled ?? Damage;
+
+    /// <summary>The Def the target's shell adds to this side's first hit that lands (issue 1403), 0 when it wears none.</summary>
+    public int Shell { get; init; }
+
+    /// <summary>This side's damage before its <see cref="Scale"/> on the hit that meets the target's shell: Atk less Def plus <see cref="Shell"/> (Res for magic, which the shell does not touch). Null when the target wears no shell.</summary>
+    public int? Shelled { get; init; }
+
+    /// <summary>
+    /// What this side's first hit that lands deals (issues 1329, 1403): on the shell's Def when the target wears one, times
+    /// the mark's multiple when it cashes one, then its <see cref="Scale"/>, rounded down once; the crit triples the unscaled
+    /// damage first unless it grounds. Its Stoop is not counted here.
+    /// </summary>
+    public int FirstHit(bool crit)
+    {
+        var raw = Shelled ?? Raw;
+        var scale = CashesMark ? Scale.Times(Mark.Scale) : Scale;
+        return scale.Of(crit && !CritGrounds ? raw * Combat.CritMultiplier : raw);
+    }
+
+    /// <summary>What the target's shell turns aside from this side's first plain hit (issue 1403): <see cref="Damage"/> less that hit on the shell, 0 when it wears none.</summary>
+    public int ShellTurned => Shelled is { } shelled ? Damage - Scale.Of(shelled) : 0;
+
+    /// <summary>What the first hit that lands deals beyond plain <see cref="Damage"/>: the mark's gain less what the shell turns aside, 0 for a side meeting neither.</summary>
+    public int FirstHitBonus => CashesMark || Shelled is not null ? FirstHit(crit: false) - Damage : 0;
 
     /// <summary>What this side's first hit deals when it cashes a mark: its damage times the mark's multiple and its <see cref="Scale"/>, rounded down once.</summary>
     public int MarkedDamage => Scale.Times(Mark.Scale).Of(Raw);
@@ -105,17 +131,17 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     /// section 8's kill flag and <c>threat</c>'s "if all land".
     /// </summary>
     public int AttackerStrikesLivedFor(int attackerHp) =>
-        Attacker.Rounds < 2 || !Defender.Strikes || Defender.Damage * Defender.StrikesPerRound < attackerHp
+        Attacker.Rounds < 2 || !Defender.Strikes || Defender.Damage * Defender.StrikesPerRound - Defender.ShellTurned < attackerHp
             ? Attacker.StrikeCount
             : Attacker.StrikesPerRound;
 
     /// <summary>
     /// The attacker's plain damage over the strikes it lives to make (<see cref="AttackerStrikesLivedFor"/>), no crit,
-    /// its first strike's Stoop (issue 1127), what a mark adds to its first hit (issue 1329), and its drake's bite (issue 872) when the counter, every strike landing, leaves it standing: the bite needs both
+    /// its first strike's Stoop (issue 1127), what a mark adds to its first hit (issue 1329) less what a shell turns aside (issue 1403), and its drake's bite (issue 872) when the counter, every strike landing, leaves it standing: the bite needs both
     /// units up after the exchange, and if the strikes alone kill, the bite adds nothing that matters.
     /// </summary>
     public int AttackerDamageLivedFor(int attackerHp) =>
-        Attacker.Damage * AttackerStrikesLivedFor(attackerHp) + Attacker.Stoop + Attacker.MarkBonus
+        Attacker.Damage * AttackerStrikesLivedFor(attackerHp) + Attacker.Stoop + Attacker.FirstHitBonus
         + (Attacker.Bite > 0 && Defender.Damage * Defender.StrikeCount < attackerHp ? Attacker.Bite : 0);
 
     /// <summary>
@@ -128,7 +154,7 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     public bool CounterIsLethal(int attackerHp, int defenderHp) =>
         Defender.Strikes
         && CounterIfAllLand >= attackerHp
-        && !(Attacker.Strikes && Attacker.DisplayedHit == 100 && Attacker.Damage * Attacker.StrikesPerRound >= defenderHp);
+        && !(Attacker.Strikes && Attacker.DisplayedHit == 100 && Attacker.Damage * Attacker.StrikesPerRound - Attacker.ShellTurned >= defenderHp);
 
     /// <summary>
     /// The chance in 100 that every strike of the attacker's first round misses, when one plain strike of that
@@ -140,7 +166,7 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     /// </summary>
     public int? FirstRoundMissChance(int defenderHp)
     {
-        if (!Attacker.Strikes || Attacker.Damage + Attacker.Stoop + Attacker.MarkBonus < defenderHp || Attacker.DisplayedHit is <= 0 or >= 100)
+        if (!Attacker.Strikes || Attacker.FirstHit(crit: false) + Attacker.Stoop < defenderHp || Attacker.DisplayedHit is <= 0 or >= 100)
         {
             return null;
         }
@@ -150,10 +176,10 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     }
 
     /// <summary>
-    /// The counter's plain damage if every strike it can make lands, no crit (issue 539), with what a mark adds to its first hit (issue 1329) and its drake's bite
+    /// The counter's plain damage if every strike it can make lands, no crit (issue 539), with what a mark adds to its first hit (issue 1329) less what a shell turns aside (issue 1403) and its drake's bite
     /// (issue 872): when the strikes alone fall short of the attacker's HP the attacker stands, so the bite lands.
     /// </summary>
-    public int CounterIfAllLand => Defender.Strikes ? Defender.Damage * Defender.StrikeCount + Defender.MarkBonus + Defender.Bite : 0;
+    public int CounterIfAllLand => Defender.Strikes ? Defender.Damage * Defender.StrikeCount + Defender.FirstHitBonus + Defender.Bite : 0;
 }
 
 /// <summary>

@@ -142,6 +142,12 @@ public sealed record Combatant
     public MagicSchool? Marked { get; init; }
 
     /// <summary>
+    /// The Def this side's shell adds against the first hit that lands on it in the combat (issue 1403, <see cref="Ironwake.Core.Armor"/>):
+    /// read on the board, never part of <see cref="Stats"/>; 0 off the board and for every unit wearing no shell.
+    /// </summary>
+    public int Shell { get; init; }
+
+    /// <summary>
     /// The school of this side's Lightning Rod charge (issue 1329, <see cref="Ironwake.Core.LightningRod"/>): a strike, never a counter,
     /// with a tome of it deals x1.25 on final damage. Read on the board; null off it and for every uncharged unit.
     /// </summary>

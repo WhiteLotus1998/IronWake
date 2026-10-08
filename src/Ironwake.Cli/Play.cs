@@ -2409,7 +2409,7 @@ public sealed class PlaySession
         }
 
         var gate = LearnedGate.Suffix(LearnedGate.Read(content, striker, weapon, struck));
-        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + Curse.ForecastText(content, weapon) + (state is null ? "" : Freeze.ForecastText(state, content, weapon, struck)) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck) + (side is null ? "" : Mark.ForecastText(side) + LightningRod.ForecastText(side));
+        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + Curse.ForecastText(content, weapon) + (state is null ? "" : Freeze.ForecastText(state, content, weapon, struck)) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck) + (side is null ? "" : Mark.ForecastText(side) + Armor.ForecastText(side) + LightningRod.ForecastText(side));
     }
 
     /// <summary>
@@ -3358,8 +3358,14 @@ public sealed class PlaySession
                 return $"{names[c.ByUnitId]} cashes the burn on {names[c.UnitId]}: {c.Amount} at once (hp {c.HpAfter}), and it burns no more";
             case GroundRaised g:
                 return $"{names[g.UnitId]} raises {(content.Terrain.TryGetValue(g.TerrainId, out var raised) ? raised.Name.ToLowerInvariant() : g.TerrainId)} under {names[g.TargetId]} at {g.At}: held by whoever stands on it until the caster's next phase ends";
+            case ArmorDonned { Shell: true } shell:
+                return (shell.WearerId is { } shelled ? $"{names[shell.UnitId]} lays {(content.Weapons.TryGetValue(shell.SpellId, out var laid) ? laid.Name : shell.SpellId)} on {names[shelled]}" : $"{names[shell.UnitId]} wears {(content.Weapons.TryGetValue(shell.SpellId, out var own) ? own.Name : shell.SpellId)}")
+                    + $": a shell, Def +{shell.Def} against the first hit{(shell.Mov > 0 ? $", Mov -{shell.Mov}" : "")}, through its side's next {SchoolRider.PhasesText(shell.Phases)}";
             case ArmorDonned ad:
-                return $"{names[ad.UnitId]} wears {(content.Weapons.TryGetValue(ad.SpellId, out var worn) ? worn.Name : ad.SpellId)}: Def +{ad.Def}, Mov -{ad.Mov} through its side's next {SchoolRider.PhasesText(ad.Phases)}";
+                return (ad.WearerId is { } on ? $"{names[ad.UnitId]} lays {(content.Weapons.TryGetValue(ad.SpellId, out var given) ? given.Name : ad.SpellId)} on {names[on]}" : $"{names[ad.UnitId]} wears {(content.Weapons.TryGetValue(ad.SpellId, out var worn) ? worn.Name : ad.SpellId)}")
+                    + $": Def +{ad.Def}, Mov -{ad.Mov} through its side's next {SchoolRider.PhasesText(ad.Phases)}";
+            case ArmorShattered ash:
+                return $"{names[ash.ByUnitId]}'s hit shatters the {(content.Weapons.TryGetValue(ash.SpellId, out var glass) ? glass.Name : ash.SpellId)} on {names[ash.UnitId]}";
             case ArmorFell af:
                 return $"{names[af.UnitId]}'s {(content.Weapons.TryGetValue(af.SpellId, out var shed) ? shed.Name : af.SpellId)} falls away";
             case HollowRaised hr:

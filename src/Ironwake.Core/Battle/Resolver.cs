@@ -732,6 +732,7 @@ public static class Resolver
         next = Curse.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Freeze.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Mark.AfterCombat(next, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target, caught ? target.Id : null);
+        next = Armor.AfterCombat(next, unit.Id, target.Id, result.Strikes, events);
         next = LightningRod.Spend(next, unit, weapon, events);
         if (caught)
         {
@@ -855,6 +856,7 @@ public static class Resolver
             state = Curse.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
             state = Freeze.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
             state = Mark.AfterCombat(state, shooter.Id, weapon, struck.Id, null, strikes, events, watcher, target);
+            state = Armor.AfterCombat(state, shooter.Id, struck.Id, strikes, events);
             state = Stun.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Grounding.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Sunder.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
@@ -1370,6 +1372,7 @@ public static class Resolver
             }
 
             next = Mark.AfterCombat(next, unit.Id, spell, target.Id, null, result.Strikes, events, caster, target, caught ? target.Id : null);
+            next = Armor.AfterCombat(next, unit.Id, target.Id, result.Strikes, events);
             if (caught)
             {
                 next = LightningRod.Charge(next, target.Id, spell.School!.Value, events);
@@ -1441,7 +1444,8 @@ public static class Resolver
 
     /// <summary>
     /// The Item action with a tome naming armor (issue 1282, <see cref="Armor"/>): checked as a raise is (no art, the
-    /// caster may wield it, a use left), on the caster alone, then worn.
+    /// caster may wield it, a use left), on the caster, or on an ally of its side within the tome's
+    /// <see cref="ArmorSpell.Range"/> (issue 1403), then worn.
     /// </summary>
     private static (BattleState, Rejection?) ApplyArmor(BattleState state, GameContent content, UseItem use, BattleUnit unit, Weapon spell, List<GameEvent> events)
     {
@@ -1460,12 +1464,22 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} has no uses left this battle"));
         }
 
-        if (use.TargetId is not null && use.TargetId != unit.Id)
+        if (use.TargetId is null || use.TargetId == unit.Id)
+        {
+            return (Armor.Don(state, unit, use.Slot, spell, events), null);
+        }
+
+        if (spell.Armor!.Range < 1)
         {
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is worn by its caster alone; it cannot be cast on {use.TargetId}: item {unit.Id} {use.Slot}"));
         }
 
-        return (Armor.Don(state, unit, use.Slot, spell, events), null);
+        if (state.Find(use.TargetId) is not { } wearer || wearer.Side != unit.Side || unit.At.DistanceTo(wearer.At) > spell.Armor.Range)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is laid on its caster or an ally within {spell.Armor.Range}; {use.TargetId} is not one"));
+        }
+
+        return (Armor.Don(state, unit, use.Slot, spell, events, wearer), null);
     }
 
     /// <summary>

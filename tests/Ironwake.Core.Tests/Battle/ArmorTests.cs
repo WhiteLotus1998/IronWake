@@ -10,8 +10,8 @@ namespace Ironwake.Core.Tests.Battle;
 /// whose rider is raise carries its own numbers and is cast through the Item action on its caster alone: Def up in
 /// every combat, Mov down, never below 1, through the caster's next phases, falling as the last ends. No shipped tome
 /// names it, so these tests use fixture tomes, <c>test_earth_armor</c> (+10 Def, Mov -2, two phases) and
-/// <c>test_obsidian_armor</c> (+14 Def, Mov -2, three phases, a grimoire gated on Mag), in Pell's hands on the
-/// sample <c>the_tollgate_frost.map</c>, her class given earth.
+/// <c>test_obsidian_armor</c> (issue 1403, Lotus: a one-hit shell, +20 Def, no Mov cost, three phases, cast on Pell or an
+/// adjacent ally, a grimoire gated on Mag), in Pell's hands on the sample <c>the_tollgate_frost.map</c>, her class given earth.
 /// </summary>
 public class ArmorTests
 {
@@ -21,7 +21,7 @@ public class ArmorTests
 
     private static readonly ArmorSpell EarthArmor = new(10, 2, 2);
 
-    private static readonly ArmorSpell ObsidianArmor = new(14, 2, 3);
+    private static readonly ArmorSpell ObsidianArmor = new(20, 0, 3) { Shell = true, Range = 1 };
 
     private const int Uses = 2;
 
@@ -147,13 +147,12 @@ public class ArmorTests
 
         Assert.False(refused.Accepted);
         Assert.Contains("Mag", refused.Rejection!.Message);
-        Assert.Equal(new ArmorMark("test_obsidian_armor", 14, 2, 3), worn.Next.Find("pell")!.Armor);
+        Assert.Equal(new ArmorMark("test_obsidian_armor", 20, 0, 3) { Shell = true }, worn.Next.Find("pell")!.Armor);
     }
 
     /// <summary>The issue's numbers: the armor's Def is added to the wearer's in every combat, and nothing else moves.</summary>
     [Theory]
     [InlineData("test_earth_armor", 10)]
-    [InlineData("test_obsidian_armor", 14)]
     public void ArmorAddsItsDefToTheWearerInCombat(string tome, int def)
     {
         var board = Board(tome);
@@ -267,6 +266,161 @@ public class ArmorTests
 
         var back = ProtocolJson.ReadState(ProtocolJson.State(worn.Next, Armoring), Armoring);
         Assert.Equal(worn.Next.Find("pell")!.Armor, back.Find("pell")!.Armor);
+    }
+
+    [Fact]
+    public void AShellTomeLoadsWithShellAndRangeAndRoundTrips()
+    {
+        var content = ContentLoader.Parse(ShippedWithWeapons(w => w.Replace("\"school\": \"fire\"", "\"school\": \"earth\", \"rider\": \"armor\", \"armor\": { \"def\": 20, \"mov\": 0, \"phases\": 3, \"shell\": true, \"range\": 1 }")));
+        var again = ContentLoader.Parse(ContentSerializer.Write(content));
+
+        Assert.Equal(ObsidianArmor, content.Weapon("cinder").Armor);
+        Assert.Equal(ObsidianArmor, again.Weapon("cinder").Armor);
+    }
+
+    [Fact]
+    public void AnArmorRangeBeyondOneIsRefusedAtLoad()
+    {
+        var error = Assert.Throws<ContentException>(() => ContentLoader.Parse(ShippedWithWeapons(w => w.Replace("\"school\": \"fire\"", "\"school\": \"earth\", \"rider\": \"armor\", \"armor\": { \"def\": 20, \"mov\": 0, \"phases\": 3, \"range\": 2 }"))));
+
+        Assert.Equal("cinder", error.Entry);
+        Assert.Equal("armor.range", error.Field);
+        Assert.Contains("must be 0", error.Message);
+    }
+
+    private static BattleUnit Captain(BattleState state) => state.Units.Single(u => u.Side == Side.Player && u.IsCaptain);
+
+    [Fact]
+    public void AShellIsLaidOnAnAdjacentAllyAndTheCasterSpendsTheAction()
+    {
+        var board = Board("test_obsidian_armor");
+        var captain = Captain(board);
+        Assert.Equal(1, board.Find("pell")!.At.DistanceTo(captain.At));
+
+        var result = Don(board, captain.Id);
+
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.Contains(new ArmorDonned("pell", "test_obsidian_armor", 20, 0, 3) { WearerId = captain.Id, Shell = true }, result.Events);
+        Assert.Contains(new ItemUsed("pell", "test_obsidian_armor", captain.Id, Uses - 1), result.Events);
+        Assert.Equal(new ArmorMark("test_obsidian_armor", 20, 0, 3) { Shell = true }, result.Next.Find(captain.Id)!.Armor);
+        Assert.Null(result.Next.Find("pell")!.Armor);
+        Assert.True(result.Next.Find("pell")!.Acted);
+        Assert.False(result.Next.Find(captain.Id)!.Acted);
+    }
+
+    [Fact]
+    public void AShellOnAnAllyTwoAwayOrOnAnEnemyIsRefused()
+    {
+        var board = Board("test_obsidian_armor");
+        Assert.Equal(2, board.Find("pell")!.At.DistanceTo(board.Find("wren")!.At));
+        var enemy = board.Units.First(u => u.Side == Side.Enemy);
+        var beside = board.WithUnit(enemy with { At = new Coord(7, 10) });
+
+        var far = Don(board, "wren");
+        var foe = Don(beside, enemy.Id);
+
+        Assert.False(far.Accepted);
+        Assert.Contains("an ally within 1", far.Rejection!.Message);
+        Assert.False(foe.Accepted);
+        Assert.Contains("an ally within 1", foe.Rejection!.Message);
+    }
+
+    [Fact]
+    public void AShellAddsNothingToTheWearersStatsAndRidesTheCombatantInstead()
+    {
+        var board = Board("test_obsidian_armor");
+        var worn = Don(board).Next;
+
+        var before = board.Find("pell")!.ToCombatant(board, Armoring);
+        var after = worn.Find("pell")!.ToCombatant(worn, Armoring);
+
+        Assert.Equal(before.Stats, after.Stats);
+        Assert.Equal(0, before.Shell);
+        Assert.Equal(20, after.Shell);
+        Assert.Equal(20, worn.Find("pell")!.Answering(worn, Armoring, new Coord(6, 9)).Shell);
+        Assert.Equal(5, Armor.Mov(5, worn.Find("pell")!));
+    }
+
+    /// <summary>The frost sample with Wren at 6,6 beside the woods brigand at 6,5, <paramref name="shelled"/> wearing the shell.</summary>
+    private static BattleState Beside(ulong seed, Func<BattleState, BattleUnit> shelled)
+    {
+        var state = BattleState.From(MapFiles.Load(SamplePath, Armoring), Armoring, Armoring.Cast, seed);
+        state = state.WithUnit(state.Find("wren")! with { At = new Coord(6, 6) });
+        return state.WithUnit(shelled(state) with { Armor = new ArmorMark("test_obsidian_armor", 20, 0, 3) { Shell = true } });
+    }
+
+    private static BattleUnit WoodsBrigand(BattleState state) => state.Units.Single(u => u.Side == Side.Enemy && u.At == new Coord(6, 5));
+
+    /// <summary>The first seed under 400 whose attack by Wren on the woods brigand passes <paramref name="keep"/>.</summary>
+    private static (BattleState Before, ApplyResult Result) Seeded(Func<BattleState, BattleUnit> shelled, Func<BattleState, ApplyResult, bool> keep)
+    {
+        for (ulong seed = 1; seed < 400; seed++)
+        {
+            var state = Beside(seed, shelled);
+            var result = Resolver.Apply(state, Armoring, new Attack("wren", WoodsBrigand(state).Id));
+            Assert.True(result.Accepted, result.Rejection?.Message);
+            if (keep(state, result))
+            {
+                return (state, result);
+            }
+        }
+
+        throw new InvalidOperationException("no seed under 400 gives the combat asked for");
+    }
+
+    private static CombatFought Fought(ApplyResult result) => result.Events.OfType<CombatFought>().Single();
+
+    [Fact]
+    public void TheFirstHitThatLandsMeetsTheShellAndBreaksItAndTheRestArePlain()
+    {
+        var (before, result) = Seeded(WoodsBrigand, (s, r) => Fought(r).Strikes.Count(x => x.AttackerId == "wren" && x.Hit) >= 2 && !Fought(r).Strikes.Any(x => x.Crit) && r.Next.Find(WoodsBrigand(s).Id) is not null);
+        var brigand = WoodsBrigand(before);
+        var forecast = Ironwake.Core.Combat.Forecast(before.Find("wren")!.ToCombatant(before, Armoring, against: brigand), brigand.Answering(before, Armoring, new Coord(6, 6)), 1, before.Scheme).Attacker;
+        var hits = Fought(result).Strikes.Where(x => x.AttackerId == "wren" && x.Hit).Select(x => x.Damage).ToList();
+
+        Assert.Equal(20, forecast.Shell);
+        Assert.True(forecast.FirstHit(crit: false) < forecast.Damage);
+        Assert.Equal([forecast.FirstHit(crit: false), forecast.Damage], hits.Take(2));
+        Assert.Contains(new ArmorShattered(brigand.Id, "test_obsidian_armor", "wren"), result.Events);
+        Assert.Null(result.Next.Find(brigand.Id)!.Armor);
+    }
+
+    [Fact]
+    public void AMissLeavesTheShellAndTheWearersOwnHitsNeverBreakIt()
+    {
+        var (_, result) = Seeded(s => s.Find("wren")!, (s, r) => Fought(r).Strikes.Any(x => x.AttackerId == "wren" && x.Hit) && !Fought(r).Strikes.Any(x => x.TargetId == "wren" && x.Hit) && r.Next.Find("wren") is not null);
+
+        Assert.DoesNotContain(result.Events, e => e is ArmorShattered);
+        Assert.NotNull(result.Next.Find("wren")!.Armor);
+    }
+
+    [Fact]
+    public void ACounterThatLandsBreaksTheAttackersShell()
+    {
+        var (before, result) = Seeded(s => s.Find("wren")!, (s, r) => Fought(r).Strikes.Any(x => x.TargetId == "wren" && x.Hit) && r.Next.Find("wren") is not null);
+        var brigand = WoodsBrigand(before);
+
+        Assert.Contains(new ArmorShattered("wren", "test_obsidian_armor", brigand.Id), result.Events);
+        Assert.Null(result.Next.Find("wren")!.Armor);
+    }
+
+    [Fact]
+    public void TheShellsCardForecastAndEventsSayItBreaksOnTheFirstHit()
+    {
+        var board = Board("test_obsidian_armor");
+        var captain = Captain(board);
+        var worn = Don(board, captain.Id);
+        var names = UnitNames.Of(worn.Next, Armoring);
+        var shelled = worn.Next.Find(captain.Id)!;
+
+        Assert.Equal("shell: Def +20 against the first hit (Test Obsidian Armor), falls after 3 more player phases", Armor.CardLine(Armoring, shelled));
+        Assert.Contains($"Pell lays Test Obsidian Armor on {names[captain.Id]}: a shell, Def +20 against the first hit, through its side's next three phases", worn.Events.Select(e => PlaySession.Describe(e, Armoring, names)));
+        Assert.Equal($"Wren's hit shatters the Test Obsidian Armor on {names[captain.Id]}", PlaySession.Describe(new ArmorShattered(captain.Id, "test_obsidian_armor", "wren"), Armoring, names));
+        Assert.Equal(" meets the shell (Def +20): first hit 0", Armor.ForecastText(new SideForecast(true, 9, 90, 90, 0, false) { Shell = 20, Shelled = 0 }));
+        Assert.Equal("", Armor.ForecastText(new SideForecast(true, 9, 90, 90, 0, false)));
+
+        var back = ProtocolJson.ReadState(ProtocolJson.State(worn.Next, Armoring), Armoring);
+        Assert.Equal(shelled.Armor, back.Find(captain.Id)!.Armor);
     }
 
     /// <summary>The shipped content written out, the Adept given earth so Cinder may join the school, with <paramref name="edit"/> applied to weapons.json.</summary>
