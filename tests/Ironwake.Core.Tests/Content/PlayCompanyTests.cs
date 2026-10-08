@@ -93,8 +93,47 @@ public class PlayCompanyTests
         Assert.Contains(roster.Single(u => u.Id == "teodor").Inventory.Items, s => s.ItemId == "family_lance");
         Assert.Equal(DrakeStage.HalfGrown, roster.Single(u => u.Id == "rook").Drake?.Stage);
         Assert.All(content.Cast.Skip(1), u => Assert.Equal(
-            content.Campaign.Keep.FinaleRanked(CampaignRecord.Kitted(u, content).ScaledTo(8, content.Class(u.ClassId))),
+            FinaleCompanies.Stocked(content.Campaign.Keep.FinaleRanked(CampaignRecord.Kitted(u, content).ScaledTo(8, content.Class(u.ClassId))), content),
             roster.Single(r => r.Id == u.Id)));
+    }
+
+    [Fact]
+    public void TheFinaleCompanyCarriesTheKeepsBestStockWithinItsRanks()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var roster = FinaleCompanies.Roster(content, FinaleCompany.Full, 8);
+        var gained = roster
+            .Select(u => (u.Id, Before: content.Campaign.Keep.FinaleRanked(CampaignRecord.Kitted(content.Cast.FirstOrDefault(c => c.Id == u.Id) ?? u, content).ScaledTo(8, content.Class(u.ClassId))), After: u))
+            .Where(p => content.Cast.Any(c => c.Id == p.Id))
+            .Select(p => $"{p.Id}: {string.Join(",", p.After.Inventory.Items.Select(s => s.ItemId).Except(p.Before.Inventory.Items.Select(s => s.ItemId)))}")
+            .Where(line => !line.EndsWith(": ", StringComparison.Ordinal))
+            .ToList();
+
+        Assert.Equal(["pell: bolt", "rook: steel_lance"], gained);
+        Assert.Equal(["bolt", "cinder", "gust"], roster.Single(u => u.Id == "pell").Inventory.Items.Select(s => s.ItemId));
+        Assert.Equal(["steel_lance", "iron_lance"], roster.Single(u => u.Id == "rook").Inventory.Items.Select(s => s.ItemId));
+    }
+
+    [Fact]
+    public void AFinaleMemberTheStockOutranksNothingForIsUnchanged()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var wren = CampaignRecord.Kitted(content.Cast.Single(u => u.Id == "wren"), content).ScaledTo(8, content.Class("cadet"));
+
+        Assert.Equal(wren.Inventory.Items, FinaleCompanies.Stocked(wren, content).Inventory.Items);
+    }
+
+    [Fact]
+    public void AFullPackDropsItsLastStackForTheStockWeapon()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var rook = content.Campaign.Keep.FinaleRanked(content.Cast.Single(u => u.Id == "rook").ScaledTo(8, content.Class("skyrider")));
+        var full = rook with { Inventory = new Inventory(ValueList<ItemStack>.From([
+            new ItemStack("iron_lance", 40), new ItemStack("field_dressing", 3), new ItemStack("field_dressing", 3), new ItemStack("field_dressing", 3), new ItemStack("salve", 1)])) };
+
+        var stocked = FinaleCompanies.Stocked(full, content);
+
+        Assert.Equal(["steel_lance", "iron_lance", "field_dressing", "field_dressing", "field_dressing"], stocked.Inventory.Items.Select(s => s.ItemId));
     }
 
     [Fact]

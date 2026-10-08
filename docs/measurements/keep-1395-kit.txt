@@ -1,0 +1,21 @@
+# Issue 1395 slice 2 layer 3: the finale company's kit within rank (DECISIONS/0356).
+# --finale content/keep/ironwake_keep.map, L8, 200 seeds, two-roll average (full / depleted / floor), Release:
+# main (84af510, finaleRanks, 0355)                         157 / 101 / 0
+# this branch: Pell Bolt in front, Rook Steel Lance in front 148 / 114 / 0
+#   Bolt only (Steel Lance withheld)                         149 / 114 / 0
+#   Steel Lance only (Bolt withheld)                         159 / 101 / 0
+#   both, each stocked weapon behind its type, not in front  148 / 114 / 0   (placement moves nothing)
+# The depleted company fields Pell but not Rook, so its +13 is Bolt's. The full company's -9 is Bolt's too
+# (-8 alone); the Steel Lance is +2 in full and absent from depleted. Floor fields neither.
+finale: content/keep/ironwake_keep.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 148/200 (74 %), losses 46 timeout 6 captain 0 protected: ok
+  length: median 9 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 140 ms: ok
+  bond: hunter killed 197, freed 0, standing 3 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 20, blocked 7, unfired 173, gate_in1 arrived 6, blocked 2, unfired 192, gate_in2 arrived 7, blocked 1, unfired 192, south_in arrived 3, blocked 0, unfired 197 of 200 (data; all blocked is decoration)
+finale depleted: 12 units at level 8, heuristic wins 114/200 (57 %), losses 65 timeout 21 captain 0 protected: FAILED
+  length: median 10 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 55 ms: ok
+  bond: hunter killed 190, freed 1, standing 9 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 35, blocked 1, unfired 164, gate_in1 arrived 24, blocked 3, unfired 173, gate_in2 arrived 26, blocked 1, unfired 173, south_in arrived 6, blocked 0, unfired 194 of 200 (data; all blocked is decoration)
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 119 timeout 81 captain 0 protected: data, a cold chair's play decides (never won)
