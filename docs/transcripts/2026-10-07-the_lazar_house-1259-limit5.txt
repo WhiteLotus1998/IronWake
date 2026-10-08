@@ -493,6 +493,7 @@ Battle lost: Maud is dead; only recall is left, or leave
 Lost because Maud fell.
 > recall
 Player turns start at: turn 1 state 0, turn 2 state 9, turn 3 state 19, turn 4 state 29; history holds 34 states; 2 charges left
+Rolls are fixed by the turn: a recall changes the plan, not the dice.
 > recall 19
 Recalled to state 19; 1 charge left
 Undone: gives back 1 kill (Soldier), 20 enemy hp; returns Maud alive at 17 hp, Archer 2 not yet arrived, Brigand 3 not yet arrived
