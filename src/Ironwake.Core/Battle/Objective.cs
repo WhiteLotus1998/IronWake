@@ -205,10 +205,11 @@ public static class Objective
     /// <summary>
     /// Whether the unit in the captain slot is another member of the cast standing in it (issue
     /// 635): a side map's member or a trial's candidate, named plainly rather than given the
-    /// captain's rank. A unit the cast does not list is the captain of its own board.
+    /// captain's rank, and so is a yard drill's student, a hire included (issue 1331). Any other unit the
+    /// cast does not list is the captain of its own board.
     /// </summary>
     private static bool Leads(BattleUnit captain, GameContent content) =>
-        content.Cast.Count > 0 && captain.Id != content.Cast[0].Id && content.Cast.Any(u => u.Id == captain.Id);
+        captain.Yard is not null || (content.Cast.Count > 0 && captain.Id != content.Cast[0].Id && content.Cast.Any(u => u.Id == captain.Id));
 
     private static BattleUnit? CaptainUnit(BattleState state) =>
         state.Units.FirstOrDefault(u => u.IsCaptain)

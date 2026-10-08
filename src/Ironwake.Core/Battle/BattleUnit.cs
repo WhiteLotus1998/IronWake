@@ -91,6 +91,12 @@ public sealed record BattleUnit(
     /// <summary>The phase starts of its own side the burn still has to tick (issue 1243), refreshed by each new stack (issue 1279); 0 when not burning.</summary>
     public int BurnPhases { get; init; }
 
+    /// <summary>
+    /// The unit's part in a yard drill (issue 1331), or null on any other board: the teacher earns
+    /// nothing, the student trains under the teacher's ceilings (<see cref="YardHand"/>).
+    /// </summary>
+    public YardHand? Yard { get; init; }
+
     /// <summary>A curse's tick before Res (issue 1328, <see cref="Core.Curse"/>); 0 when not cursed.</summary>
     public int Curse { get; init; }
 

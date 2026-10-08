@@ -90,9 +90,18 @@ public static class Program
                 }
             }
 
+            var yard = MapFiles.LoadDirectory(contentDir, MapFiles.YardDirectory, content);
+            foreach (var (id, board) in yard)
+            {
+                if (CampaignRecord.YardMapRefusal(board) is { } refusal)
+                {
+                    throw new ContentException(MapFiles.YardDirectory + "/" + id + MapFiles.Extension, id, "units", refusal);
+                }
+            }
+
             Console.WriteLine(
                 $"OK: {content.Terrain.Count} terrain, {content.Classes.Count} classes, " +
-                $"{content.Weapons.Count} weapons, {content.Units.Count} units, {maps.Count} maps, {trials.Count} trials, {quests.Count} side maps, {keep.Count} keep maps from {contentDir}");
+                $"{content.Weapons.Count} weapons, {content.Units.Count} units, {maps.Count} maps, {trials.Count} trials, {quests.Count} side maps, {yard.Count} yard maps, {keep.Count} keep maps from {contentDir}");
             return 0;
         }
         catch (ContentException e)

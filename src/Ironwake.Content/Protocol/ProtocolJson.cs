@@ -2086,6 +2086,20 @@ public static class ProtocolJson
             WriteStrings(w, "questsSeen", record.QuestsSeen);
         }
 
+        if (record.Duties.Count > 0)
+        {
+            w.WriteStartArray("duties");
+            foreach (var duty in record.Duties)
+            {
+                w.WriteStartObject();
+                w.WriteString("unit", duty.UnitId);
+                w.WriteString("duty", YardRules.Word(duty.Duty));
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
         w.WriteStartArray("keep");
         foreach (var work in record.Keep)
         {
@@ -2303,6 +2317,7 @@ public static class ProtocolJson
             QuestsWon = ReadQuestsWon(e, content),
             QuestsTried = e.TryGetProperty("questsTried", out _) ? ReadStrings(e, "questsTried") : ValueList<string>.Empty,
             QuestsSeen = e.TryGetProperty("questsSeen", out _) ? ReadStrings(e, "questsSeen") : ValueList<string>.Empty,
+            Duties = ReadDuties(e),
             FellOn = ReadFellOn(e),
             Keep = ReadKeep(e, content),
             Rooms = ReadRooms(e, content),
@@ -2449,6 +2464,14 @@ public static class ProtocolJson
     }
 
     /// <summary>The optional <c>fellOn</c> array of a campaign record (issue 678), the board each of the fallen fell on; a record written before it reads as none.</summary>
+    /// <summary>The optional <c>duties</c> array of a campaign record (issue 1331), each <c>unit</c> and <c>duty</c>; a record written before it reads as none taken.</summary>
+    private static ValueList<UnitDuty> ReadDuties(JsonElement e) =>
+        e.TryGetProperty("duties", out _)
+            ? ValueList<UnitDuty>.From(Array(Required(e, "duties"), "duties").Select(d => new UnitDuty(
+                RequiredString(d, "unit"),
+                YardRules.Parse(RequiredString(d, "duty")) ?? throw new ProtocolException($"field 'duties.duty' must be one of {string.Join(", ", Enum.GetValues<Duty>().Select(YardRules.Word))}"))))
+            : ValueList<UnitDuty>.Empty;
+
     private static ValueList<FellOn> ReadFellOn(JsonElement e) =>
         e.TryGetProperty("fellOn", out _)
             ? ValueList<FellOn>.From(Array(Required(e, "fellOn"), "fellOn").Select(f => new FellOn(RequiredString(f, "unit"), RequiredString(f, "map"))))

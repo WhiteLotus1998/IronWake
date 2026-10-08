@@ -1,0 +1,338 @@
+# Issue 1331: the full-campaign-644 parity script to the camp before Sallow Grange, then Code's hand play of the yard (captain teaches Corin the sword).
+# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script 644 --difficulty recruit --permadeath off --variant 44 --quest pell_1`.
+# Played by `campaign --seed 644 --difficulty recruit --permadeath off`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 632);
+# the heuristic player fights the rest; each camp takes the actions not yet taken that the record accepts.
+march
+move captain 5,4
+wait captain
+end
+wait captain
+end
+move captain 5,3
+attack captain hexer-1 1
+end
+move captain 5,2
+attack captain archer-1 1
+end !
+recall 22
+move captain 5,4
+item captain 2
+end
+move captain 5,3
+attack captain archer-1 1
+end
+move captain 5,2
+attack captain archer-1 1
+leave
+march
+move captain 4,9
+wait captain
+wait maud
+end
+move captain 7,8
+wait captain
+wait maud
+end
+move captain 7,7
+attack captain archer-2
+move maud 8,6
+attack maud archer-2
+end
+move captain 7,3
+order press
+move maud 8,4
+wait maud
+end
+move captain 10,2
+attack captain soldier-1
+move maud 9,4
+wait maud
+end
+move captain 10,1
+attack captain archer-1
+move maud 9,2
+attack maud archer-1
+leave
+buy field_dressing captain
+drop captain 3
+bench brannock
+unbench brannock
+repair captain 1
+march
+move captain 6,4
+wait captain
+move ottilie 6,5
+wait ottilie
+move teodor 7,4
+wait teodor
+move wren 7,6
+wait wren
+end
+move captain 10,4
+order rally
+move ottilie 9,4
+wait ottilie
+move teodor 10,3
+wait teodor
+move wren 10,5
+wait wren
+end
+move captain 6,4
+wait captain
+move ottilie 8,4
+attack ottilie wingrider-1
+attack teodor soldier-1 !
+move wren 9,4
+attack wren wingrider-1
+end !
+move captain 10,4
+wait captain
+attack ottilie wingrider-1
+move wren 10,2
+attack wren archer-1
+end
+move captain 9,2
+attack captain archer-1
+move ottilie 10,3
+wait ottilie
+move wren 10,1
+attack wren bandit_leader-1
+end !
+move captain 9,0
+attack captain bandit_leader-1
+move ottilie 10,4
+wait ottilie
+move wren 7,0
+item wren field_dressing
+end
+move captain 10,3
+wait captain
+move ottilie 9,4
+attack ottilie brigand-1
+move wren 10,1
+wait wren
+end !
+attack captain soldier-2
+move wren 9,4
+attack wren brigand-1
+leave
+certify captain vanguard
+quest maud_1 brannock
+wait brannock
+wait maud
+end
+move brannock 4,4
+attack brannock brigand-1
+move maud 3,4
+item maud salve brannock
+end !
+move brannock 6,3
+attack brannock archer-1
+wait maud
+end !
+leave
+march
+move captain 4,9
+wait captain
+move pell 4,8
+wait pell
+move teodor 4,10
+wait teodor
+move wren 3,9
+wait wren
+end
+move captain 4,6
+wait captain
+move pell 5,6
+attack pell archer-2 gust
+move teodor 4,7
+wait teodor
+move wren 3,5
+wait wren
+end
+attack pell archer-2
+move captain 5,5
+attack captain toll_brigand-1
+move teodor 4,4
+wait teodor
+move wren 5,4
+wait wren
+end
+move captain 6,3
+attack captain toll_warden-1
+move pell 6,5
+wait pell
+move teodor 6,4
+wait teodor
+move wren 6,2
+attack wren archer-1
+end !
+attack pell rider-1
+move teodor 5,2
+wait teodor
+move captain 5,1
+attack captain archer-1
+end
+move captain 7,1
+leave
+build forge
+quest pell_1 brannock
+move brannock 8,4
+attack brannock shieldbearer-1
+move pell 7,4
+attack pell shieldbearer-1
+end
+move brannock 12,4
+wait brannock
+move pell 6,4
+attack pell brigand-2
+end
+exit brannock
+move pell 10,4
+wait pell
+end
+move pell 12,4
+wait pell
+end !
+exit pell
+leave
+march
+move captain 3,4
+attack captain brigand-1
+move dunstan 0,3
+wait dunstan
+move ottilie 1,3
+attack ottilie brigand-1
+move pell 2,4
+attack pell brigand-1
+move teodor 2,3
+attack teodor brigand-1
+move wren 4,6
+wait wren
+end
+move captain 7,4
+wait captain
+move dunstan 2,5
+wait dunstan
+move ottilie 3,5
+wait ottilie
+move pell 6,4
+wait pell
+move teodor 5,3
+wait teodor
+move wren 8,6
+wait wren
+end
+move captain 9,6
+wait captain
+move dunstan 6,5
+wait dunstan
+move ottilie 7,5
+wait ottilie
+move pell 9,5
+wait pell
+move teodor 9,3
+wait teodor
+move wren 10,6
+attack wren weir_shieldbearer-1
+end
+move captain 9,7
+attack captain brawler-1
+move dunstan 6,4
+attack dunstan rider-1
+move ottilie 6,5
+attack ottilie rider-1
+move pell 9,6
+attack pell weir_shieldbearer-1
+move teodor 7,3
+attack teodor rider-1
+move wren 8,4
+attack wren rider-1
+end
+move captain 12,6
+attack captain weir_foreman-1
+move dunstan 9,5
+wait dunstan
+move ottilie 6,1
+item ottilie field_dressing
+move pell 11,6
+attack pell weir_foreman-1
+move teodor 10,2
+wait teodor
+move wren 10,6
+wait wren
+end !
+move captain 13,4
+attack captain archer-1
+move dunstan 12,6
+attack dunstan weir_foreman-1
+move ottilie 9,2
+wait ottilie
+move teodor 9,5
+wait teodor
+move wren 13,5
+attack wren weir_foreman-1 !
+leave
+refine captain 1 mt
+pick rook
+march
+move captain 10,4
+wait captain
+move dunstan 10,7
+wait dunstan
+move ottilie 11,7
+wait ottilie
+move pell 11,4
+wait pell
+move teodor 9,7
+wait teodor
+move wren 9,4
+wait wren
+end
+move captain 7,3
+attack captain archer-1
+move dunstan 8,6
+attack dunstan brigand-1
+move ottilie 10,7
+attack ottilie brigand-1
+move pell 9,6
+attack pell brigand-1
+move teodor 8,5
+attack teodor soldier-1
+attack wren soldier-1 !
+end !
+move captain 4,2
+attack captain soldier-2
+move ottilie 8,7
+attack ottilie soldier-1
+attack pell soldier-1
+move teodor 6,5
+attack teodor hexer-1 !
+end
+move captain 8,2
+wait captain
+move ottilie 9,7
+attack ottilie hexer-1 !
+leave
+build barracks
+build barracks_wing
+hire corin
+build wall 10,2
+trial wren outrider
+move wren 3,3
+attack wren hexer-1 iron_sword
+canto wren 3,3
+end
+leave
+yard captain corin sword
+move captain 2,5
+wait captain
+move corin 1,6
+wait corin
+end
+move corin 1,3
+attack corin brigand-1
+wait captain
+end !
+leave
+roster

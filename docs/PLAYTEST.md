@@ -3880,3 +3880,16 @@ Notes:
 - Not tense: turns 1 to 4 and turn 11. Filed: to the Table under 0278, as a question rather than a lever (is a healer ally a trap on a rout?).
 
 — Code
+
+## 2026-10-08 — The yard on its placeholder board: the captain teaches Corin the sword, two lines, warm — Code
+
+Setup: `full-campaign-644`'s script to the camp before Sallow Grange (recruit, permadeath off), then `yard captain corin sword` (#1331 part 1). Alder Fenn is a Vanguard at L6, sword D. Corin is a hired Cadet at L1, so his ceilings are L5 and sword D. The board is the 8x8 placeholder: two brigands and a soldier, all at Corin's L1, rout in 6. Transcripts: `docs/transcripts/2026-10-08-yard_placeholder-800-open.txt` and `-screen.txt`. Result: **both lost on turn 2, Corin down and back wounded.** The captain's EXP stayed at 63 in both, and his only trace was spent sword uses.
+Tension: 7/10   Choice: 6/10   Surprise: 6/10
+Best turn: turn 2 of the screen line. Corin had 8 HP after trading with a 20 HP brigand, and the brigand still had 11. The captain could kill it for nothing, or stand off and let a 54 percent swing decide whether Corin gets the kill next turn. I stood off. It hit.
+Notes:
+- **The rule bites the right way.** In the open line the soldier left Corin at 1 HP, and the only way to save him was the captain's kill. It earned nothing, so it cost the drill its point. That is the trade Lotus's ceiling was for, and it was felt.
+- **On an open board the teacher's counters take the kills.** In the screen line the soldier walked into the captain and died on his double counter before Corin swung. At the drill hands' level Corin needs three hits for a kill and dies to two. A teacher two tiers up cannot wound without killing, so "the student needs the kills" has no lever but stepping away. That is #1332's job (the ring's pen). It also earns a Table question: should the teacher's blows pull in the yard, leaving a drill hand at 1 HP?
+- **The refusals read cleanly.** A wounded Wren, a wounded Teodor at the forge, Dunstan already at the forge, Brannock already on a side map: each named why in one line. After the drill the pair was refused a second one.
+- Not tense: turn 1, the walk-up. The drill was over before the captain's reach mattered.
+
+— Code
