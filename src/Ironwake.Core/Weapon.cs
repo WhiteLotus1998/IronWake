@@ -59,7 +59,8 @@ public sealed record Weapon(
 
     /// <summary>
     /// Marks a glass weapon (issue 702, obsidian): the sharpest edge sold, spent as it is used. It is
-    /// never repaired and never Refined; the smith refuses it with <see cref="GlassRefusal"/>.
+    /// repaired at half the per-use rate (issue 1403, <see cref="CampaignRules.RepairPricePerUse"/>)
+    /// and never Refined (<see cref="Forge.MaterialFor"/>).
     /// </summary>
     public bool Glass { get; init; }
 
@@ -90,9 +91,6 @@ public sealed record Weapon(
     /// </summary>
     public bool GroundsAgainst(MovementType movement) =>
         Type == WeaponType.Bow && movement == MovementType.Flying && !IsEffectiveAgainst(movement);
-
-    /// <summary>The smith's line when asked to repair or Refine a glass weapon (issue 702).</summary>
-    public const string GlassRefusal = "You don't mend glass. You buy another.";
 
     /// <summary>The one line the item card prints for this weapon (issue 650); empty only in a weapon built outside the content files.</summary>
     public string Description { get; init; } = "";

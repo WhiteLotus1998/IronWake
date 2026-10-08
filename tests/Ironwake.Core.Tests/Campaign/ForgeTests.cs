@@ -179,22 +179,32 @@ public class ForgeTests
         Assert.Equal("Rusty Thing is no shop's weapon; the smith will not work it", Forge.MaterialFor(Content.Weapon("iron_sword") with { Name = "Rusty Thing", Price = null }, Content).Refusal);
     }
 
-    /// <summary>Issue 702: obsidian is glass, never Refined and never repaired, and the smith says why in one line.</summary>
+    /// <summary>Issue 1403 (amends 702): glass is never Refined, and the forge says so in one line.</summary>
     [Fact]
-    public void AGlassWeaponIsNeverRefinedOrRepairedAndTheSmithSaysWhy()
+    public void AGlassWeaponIsNeverRefined()
     {
         var record = AtTheForge(pack: new ItemStack("obsidian_sword", 4));
-        var line = $"the smith: \"{Weapon.GlassRefusal}\"";
 
-        Assert.Equal("the smith: \"You don't mend glass. You buy another.\"", line);
         var refine = record.Refine("captain", 0, "mt", Content);
+
         Assert.False(refine.Accepted);
-        Assert.Equal(line, refine.Text);
+        Assert.Equal("Obsidian Sword is glass; the forge cannot raise its edge", refine.Text);
+        Assert.NotNull(Forge.MaterialFor(Content.Weapon("obsidian_sword") with { Glass = false }, Content).Material);
+    }
+
+    /// <summary>Issue 1403: glass is repaired at half the per-use rate, so a full repair of 8 uses costs 896, not the 1800 of another.</summary>
+    [Fact]
+    public void AGlassWeaponIsRepairedAtHalfTheRate()
+    {
+        var record = AtTheForge(pack: new ItemStack("obsidian_sword", 0)) with { Purse = 1000 };
+
         var repair = record.Repair("captain", 0, Content);
-        Assert.False(repair.Accepted);
-        Assert.Equal(line, repair.Text);
-        Assert.Null(CampaignRules.RepairPricePerUse(Content.Weapon("obsidian_sword")));
-        Assert.True(record.Repair("captain", 0, Content with { Weapons = Content.Weapons.SetItem("obsidian_sword", Content.Weapon("obsidian_sword") with { Glass = false }) }).Accepted);
+
+        Assert.Equal(112, CampaignRules.RepairPricePerUse(Content.Weapon("obsidian_sword")));
+        Assert.Equal(225, CampaignRules.RepairPricePerUse(Content.Weapon("obsidian_sword") with { Glass = false }));
+        Assert.True(repair.Accepted);
+        Assert.Equal(104, repair.Record.Purse);
+        Assert.Equal(8, repair.Record.Find("captain")!.Inventory.Items.Single(s => s.ItemId == "obsidian_sword").Uses);
     }
 
     /// <summary>Issue 702: the rare material reads frozen iron on screen; the id stays.</summary>
