@@ -1,0 +1,41 @@
+# Issue 1395 slice 2, layer 1: the finale company Kitted (CampaignRecord.Kitted on every story member).
+# --finale content/keep/ironwake_keep.map, L8, 200 seeds, two-roll average (full / depleted / floor).
+#
+# main (2844031, slice 1, 0352)                     153 / 101 / 0
+# this branch, Kitted                                149 / 101 / 0
+# this branch, Kitted less Kinsbane (scratch: campaign.json "issues": {})
+#                                                    153 / 101 / 0
+#
+# Kitted adds Kinsbane in front of Keziah's pack, the Family Lance behind Teodor's, and Rook's drake at half-grown.
+# Depleted and floor field neither Keziah nor Rook, and Teodor never swings the lance he carries behind his own, so they do not move.
+# The whole full-company move is Kinsbane's. The lance and the half-grown drake change nothing.
+#
+# The majority rule (round 497): LevelRun's heuristic campaign fights no side map, so no run pays a quest by the keep.
+# The drake therefore stays half-grown (Grown needs rook_1 won), and no quest-paid weapon is carried.
+#
+# Keziah, full company, seeds 1-200 (scratch probe, not committed):
+#                       won  her attacks  her player-phase kills  games her HP fell to 5 or less
+#   Kitted              149  538          159                     93
+#   Kitted, no Kinsbane 153  747          242                     52
+# She swings about 28 % less with the scythe in front, and she sinks low almost twice as often.
+# Read: the Sim holds her back as the drain bites (fewer attacks, not fewer kills per attack), so she cannot feed.
+# Round 497 calls that a player fix if it is the Sim feeding badly. It is the next trace (slice 2's follow-up), not a reason to leave the weapon out.
+
+## this branch, --finale
+finale: content/keep/ironwake_keep.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 149/200 (74 %), losses 43 timeout 8 captain 0 protected: ok
+  length: median 9 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 121 ms: ok
+  bond: hunter killed 197, freed 0, standing 3 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 12, blocked 3, unfired 185, gate_in1 arrived 6, blocked 1, unfired 193, gate_in2 arrived 7, blocked 0, unfired 193, south_in arrived 1, blocked 0, unfired 199 of 200 (data; all blocked is decoration)
+finale depleted: 12 units at level 8, heuristic wins 101/200 (51 %), losses 74 timeout 25 captain 0 protected: FAILED
+  length: median 11 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 105 ms: ok
+  bond: hunter killed 190, freed 0, standing 10 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 36, blocked 1, unfired 163, gate_in1 arrived 26, blocked 3, unfired 171, gate_in2 arrived 26, blocked 3, unfired 171, south_in arrived 5, blocked 0, unfired 195 of 200 (data; all blocked is decoration)
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 119 timeout 81 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 74 ms: ok
+  bond: hunter killed 135, freed 0, standing 65 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 120, blocked 9, unfired 71, gate_in1 arrived 89, blocked 28, unfired 83, gate_in2 arrived 108, blocked 9, unfired 83, south_in arrived 35, blocked 2, unfired 163 of 200 (data; all blocked is decoration)
+finale: FAILED

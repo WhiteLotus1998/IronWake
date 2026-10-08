@@ -44,7 +44,8 @@ public static class FinaleCompanies
 
     /// <summary>
     /// The roster of <paramref name="company"/> in deploy order, captain first: story members in
-    /// cast order raised to <paramref name="level"/>, then hires in the keep's hire order at
+    /// cast order as the campaign first fields them (<see cref="CampaignRecord.Kitted"/>, issue 1395:
+    /// the issued weapon, the bound heirloom, a half-grown drake) raised to <paramref name="level"/>, then hires in the keep's hire order at
     /// <paramref name="level"/> less <see cref="Barracks.LevelsBelow"/>.
     /// </summary>
     public static ValueList<Unit> Roster(GameContent content, FinaleCompany company, int level)
@@ -56,7 +57,7 @@ public static class FinaleCompanies
             _ => FloorStory,
         };
         var hiresLevel = Math.Max(Unit.MinLevel, level - Barracks.LevelsBelow);
-        var members = content.Cast.Take(1 + Math.Min(story, content.Cast.Count - 1)).Select(u => u.ScaledTo(level, content.Class(u.ClassId))).ToList();
+        var members = content.Cast.Take(1 + Math.Min(story, content.Cast.Count - 1)).Select(u => CampaignRecord.Kitted(u, content).ScaledTo(level, content.Class(u.ClassId))).ToList();
         var hires = content.Campaign.Keep.Hires.Select(h => Barracks.Recruit(h, hiresLevel, content));
         members.AddRange(company == FinaleCompany.Floor ? hires : hires.Take(Math.Max(0, CampaignRecord.CompanyCap - members.Count)));
         return ValueList<Unit>.From(members);
