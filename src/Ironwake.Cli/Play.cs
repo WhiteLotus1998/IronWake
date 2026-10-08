@@ -2661,6 +2661,13 @@ public sealed class PlaySession
             lines.Add("  " + description);
         }
 
+        if (unit.Kin is { } kin)
+        {
+            lines.Add(unit.Swallowed
+                ? $"  Swallowed: the Kin heals {kin.Heal} at his side's phase start; Frozen Iron lands for {state.FrozenIron} on every unit at the next phase start"
+                : $"  At 0 HP he swallows the shard: stage 2 on a fresh bar (hp {kin.Hp}, Def +{kin.Def}, Res +{kin.Res}), the Kin heals {kin.Heal} a phase, and Frozen Iron falls on every unit");
+        }
+
         var unitClass = content.Class(unit.Unit.ClassId);
         lines.Add($"  HP {unit.Hp}/{stats.Hp}  Str {stats.Str} Mag {stats.Mag} Dex {stats.Dex} Spd {stats.Spd} Lck {stats.Lck} Def {stats.Def} Res {stats.Res} Cha {stats.Cha}  Mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
         if (unit.Unit.Wound is { } wound)
@@ -3364,6 +3371,14 @@ public sealed class PlaySession
             case ArmorDonned ad:
                 return (ad.WearerId is { } on ? $"{names[ad.UnitId]} lays {(content.Weapons.TryGetValue(ad.SpellId, out var given) ? given.Name : ad.SpellId)} on {names[on]}" : $"{names[ad.UnitId]} wears {(content.Weapons.TryGetValue(ad.SpellId, out var worn) ? worn.Name : ad.SpellId)}")
                     + $": Def +{ad.Def}, Mov -{ad.Mov} through its side's next {SchoolRider.PhasesText(ad.Phases)}";
+            case ShardSwallowed ss:
+                return $"{names[ss.UnitId]} pulls the shard from the lance's pommel and swallows it: stage 2 on a fresh bar (hp {ss.Hp}); Frozen Iron falls on every unit from the next phase";
+            case FrozenIronFell fi:
+                return $"Frozen Iron falls on every unit for {fi.Amount}, past Def and Res: " + string.Join(", ", fi.Struck.Select((id, i) => $"{names[id]} (hp {fi.HpAfter[i]})"));
+            case KinHealed kh:
+                return $"The Kin heals {names[kh.UnitId]} {kh.Amount} (hp {kh.HpAfter})";
+            case ColdDrained cd:
+                return $"The cold drains out of {names[cd.UnitId]}; for a breath he is himself (his last line waits on Lotus). The shard lies on {cd.At}";
             case ArmorShattered ash:
                 return $"{names[ash.ByUnitId]}'s hit shatters the {(content.Weapons.TryGetValue(ash.SpellId, out var glass) ? glass.Name : ash.SpellId)} on {names[ash.UnitId]}";
             case ArmorFell af:

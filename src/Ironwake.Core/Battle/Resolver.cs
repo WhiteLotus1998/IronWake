@@ -181,6 +181,7 @@ public static class Resolver
             next = OpenCanto(next, content, acted, healed: command is UseItem && events.OfType<UnitHealed>().Any(h => h.UnitId != acted));
         }
 
+        Swallow.AfterFall(state, events);
         next = Hollow.After(next, events);
         next = HeldBars.After(next, events);
         next = Lock.After(next, events);
@@ -678,48 +679,60 @@ public static class Resolver
             attackerAfter = attackerAfter with { Spent = 1 };
         }
 
+        var defenderDied = result.DefenderDied && !Swallow.Takes(target);
+        var attackerDied = result.AttackerDied && !Swallow.Takes(unit);
         var targetAfter = SpendDurability(target with { Hp = result.DefenderHp, Answered = target.Answered || Answer.Spends(state.Map, target.Id, result.Strikes) }, result.Strikes, content, events);
-        attackerAfter = AwardExp(attackerAfter, targetAfter, result.Strikes, result.DefenderDied, content, state.Seed, events);
-        targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, result.AttackerDied, content, state.Seed, events);
-        attackerAfter = AwardRank(attackerAfter, weapon, result.Strikes, result.DefenderDied, events);
-        targetAfter = AwardRank(targetAfter, defenderWeapon, result.Strikes, result.AttackerDied, events);
+        attackerAfter = AwardExp(attackerAfter, targetAfter, result.Strikes, defenderDied, content, state.Seed, events);
+        targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, attackerDied, content, state.Seed, events);
+        attackerAfter = AwardRank(attackerAfter, weapon, result.Strikes, defenderDied, events);
+        targetAfter = AwardRank(targetAfter, defenderWeapon, result.Strikes, attackerDied, events);
         attackerAfter = AwardMastery(attackerAfter, content, events);
         targetAfter = AwardMastery(targetAfter, content, events);
-        attackerAfter = Kinsbane.AfterCombat(attackerAfter, content, result.Strikes, result.DefenderDied, events);
-        targetAfter = Kinsbane.AfterCombat(targetAfter, content, result.Strikes, result.AttackerDied, events);
-        attackerAfter = KillHeal(attackerAfter, weapon, result.DefenderDied, content, events);
-        targetAfter = KillHeal(targetAfter, defenderWeapon, result.AttackerDied, content, events);
+        attackerAfter = Kinsbane.AfterCombat(attackerAfter, content, result.Strikes, defenderDied, events);
+        targetAfter = Kinsbane.AfterCombat(targetAfter, content, result.Strikes, attackerDied, events);
+        attackerAfter = KillHeal(attackerAfter, weapon, defenderDied, content, events);
+        targetAfter = KillHeal(targetAfter, defenderWeapon, attackerDied, content, events);
         attackerAfter = Heirloom.AfterCombat(attackerAfter, state, content, result.Strikes, events);
         targetAfter = Heirloom.AfterCombat(targetAfter, state, content, result.Strikes, events);
         var next = state.WithUnit(attackerAfter);
         next = next.WithUnit(targetAfter);
-        if (result.DefenderDied)
+        if (result.DefenderDied && !defenderDied)
+        {
+            next = Swallow.Take(next, content, target.Id, events);
+        }
+
+        if (result.AttackerDied && !attackerDied)
+        {
+            next = Swallow.Take(next, content, unit.Id, events);
+        }
+
+        if (defenderDied)
         {
             events.Add(new UnitDied(target.Id, target.Side, target.At));
             next = LeaveKeepsake(next, targetAfter, content, events).WithoutUnit(target.Id);
         }
 
-        if (result.AttackerDied)
+        if (attackerDied)
         {
             events.Add(new UnitDied(unit.Id, unit.Side, unit.At));
             next = LeaveKeepsake(next, attackerAfter, content, events).WithoutUnit(unit.Id);
         }
 
-        if (result.DefenderDied && Freed.IsBound(state, target))
+        if (defenderDied && Freed.IsBound(state, target))
         {
             next = next with { BondKilledBy = Freed.KillBy(attackerAfter, content) };
         }
 
-        if (result.AttackerDied && Freed.IsBound(state, unit))
+        if (attackerDied && Freed.IsBound(state, unit))
         {
             next = next with { BondKilledBy = Freed.KillBy(targetAfter, content) };
         }
 
-        if (result.DefenderDied && !result.AttackerDied)
+        if (defenderDied && !attackerDied)
         {
             next = SwearGrudges(next, content, target, unit, events);
         }
-        else if (result.AttackerDied && !result.DefenderDied)
+        else if (attackerDied && !defenderDied)
         {
             next = SwearGrudges(next, content, unit, target, events);
         }
@@ -832,7 +845,7 @@ public static class Resolver
             var strike = Overwatch.Shoot(state, content, watcher, target, new KeyedRng(state.Seed));
             var strikes = ValueList<StrikeEvent>.Empty.Add(strike);
             events.Add(new WatchFired(watcher.Id, target.Id, target.At, strike));
-            var died = strike.TargetHpAfter == 0;
+            var died = strike.TargetHpAfter == 0 && !Swallow.Takes(target);
             var weapon = watcher.EquippedWeapon(content);
             var shooter = SpendDurability(watcher with { Watching = false }, strikes, content, events);
             var struck = target with { Hp = strike.TargetHpAfter };
@@ -841,6 +854,11 @@ public static class Resolver
             shooter = AwardRank(shooter, weapon, strikes, died, events);
             shooter = AwardMastery(shooter, content, events);
             state = state.WithUnit(shooter).WithUnit(struck);
+            if (strike.TargetHpAfter == 0 && !died)
+            {
+                state = Swallow.Take(state, content, target.Id, events);
+            }
+
             state = LightningRod.Spend(state, watcher, weapon, events);
             state = Drain.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, watcher, target);
             if (died)
@@ -1350,15 +1368,21 @@ public static class Resolver
                 next.Scheme);
             events.Add(new CombatFought(unit.Id, target.Id, next.Turn, next.Phase, result.Strikes, caster.Hp, result.DefenderHp));
             var landed = result.Strikes.Any(s => s.Hit);
-            var pays = Experience.ForCombat(caster.Unit.Level, target.Unit.Level, landed, result.DefenderDied, target.IsBoss);
+            var swallows = result.DefenderDied && Swallow.Takes(target);
+            var killed = result.DefenderDied && !swallows;
+            var pays = Experience.ForCombat(caster.Unit.Level, target.Unit.Level, landed, killed, target.IsBoss);
             if (best is null || pays > best.Value.Pays)
             {
-                best = (target, result.Strikes, result.DefenderDied, pays);
+                best = (target, result.Strikes, killed, pays);
             }
 
-            killedAny |= result.DefenderDied;
+            killedAny |= killed;
             next = next.WithUnit(target with { Hp = result.DefenderHp });
-            if (result.DefenderDied)
+            if (swallows)
+            {
+                next = Swallow.Take(next, content, target.Id, events);
+            }
+            else if (result.DefenderDied)
             {
                 events.Add(new UnitDied(target.Id, target.Side, target.At));
                 next = LeaveKeepsake(next, target with { Hp = 0 }, content, events).WithoutUnit(target.Id);
@@ -2331,6 +2355,7 @@ public static class Resolver
         next = Earthwork.AtPhaseChange(next, ended, nextPhase, events);
         next = Kinsbane.AtPhaseStart(next, content, nextPhase, events);
         next = LandBlows(next, content, nextPhase, events);
+        next = Swallow.Fall(next, content, nextPhase, events, (board, fallen) => LeaveKeepsake(board, fallen, content, events).WithoutUnit(fallen.Id));
         if (nextPhase == Side.Player)
         {
             next = Wildfire.Spread(next, events);
@@ -2374,7 +2399,11 @@ public static class Resolver
             events.Add(new BlowLanded(id, target.Id, at, target.Hp - hp, hp));
             var struck = target with { Hp = hp };
             state = state.WithUnit(struck);
-            if (hp == 0)
+            if (hp == 0 && Swallow.Takes(target))
+            {
+                state = Swallow.Take(state, content, target.Id, events);
+            }
+            else if (hp == 0)
             {
                 events.Add(new UnitDied(target.Id, target.Side, target.At));
                 state = LeaveKeepsake(state, struck, content, events).WithoutUnit(target.Id);

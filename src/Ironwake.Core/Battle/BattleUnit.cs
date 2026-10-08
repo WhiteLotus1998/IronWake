@@ -218,6 +218,15 @@ public sealed record BattleUnit(
     /// </summary>
     public ArmorMark? Armor { get; init; }
 
+    /// <summary>
+    /// The second stage the unit carries from its template (issue 1385, <see cref="Core.Swallow"/>), or null for none:
+    /// a hit taking it to 0 HP before <see cref="Swallowed"/> begins the stage instead of killing it.
+    /// </summary>
+    public KinStage? Kin { get; init; }
+
+    /// <summary>Whether the unit has swallowed the shard and stands in its second stage (issue 1385, <see cref="Core.Swallow"/>).</summary>
+    public bool Swallowed { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 

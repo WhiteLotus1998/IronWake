@@ -49,6 +49,12 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// <summary>Every map event that fired in the game, blocked or not, in order (issue 1204: whether a fallen front's spawn arrived).</summary>
     public IReadOnlyList<MapEventFired> Fired { get; init; } = Array.Empty<MapEventFired>();
 
+    /// <summary>
+    /// The boss's second stage in this game (issue 1385, <see cref="Swallow"/>): null when no one swallowed; else the phases
+    /// begun from the swallow to the game's end and the player units Frozen Iron killed.
+    /// </summary>
+    public StageTwo? Stage { get; init; }
+
     /// <summary>How the enemy a <c>freed:</c> header binds left the board (issue 750): null while she stood at the end or on a map without one.</summary>
     public BondFate? Bond { get; init; }
 
@@ -207,6 +213,7 @@ public static class Runner
         var pins = PinCounts.Zero;
         var covers = CoverCounts.Zero;
         var fired = new List<MapEventFired>();
+        StageTwo? stage = null;
         while (!state.Outcome.IsOver)
         {
             if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
@@ -266,6 +273,7 @@ public static class Runner
                     covers = covers.After(e);
                 }
 
+                stage = StageTwo.After(stage, state, result.Events);
                 fired.AddRange(result.Events.OfType<MapEventFired>());
                 drifted |= result.Events.OfType<RouteDrifted>().Any();
                 if (result.Events.OfType<CombatFought>().Any())
@@ -299,6 +307,7 @@ public static class Runner
             Recruits = recruits,
             Fired = fired,
             Bond = state.Bond,
+            Stage = stage,
             Weapons = weapons,
             Items = items,
             Camp = state.Outcome.Result == BattleResult.Won ? LevelRun.Read(start, state, content) : null,
@@ -1090,5 +1099,35 @@ public static class Gates
     {
         var sorted = values.OrderBy(v => v).ToList();
         return sorted.Count % 2 == 1 ? sorted[sorted.Count / 2] : (sorted[sorted.Count / 2 - 1] + sorted[sorted.Count / 2]) / 2;
+    }
+}
+
+/// <summary>
+/// A game's second stage (issue 1385's Sim gate): <paramref name="Phases"/> begun from the swallow to the game's end, and
+/// <paramref name="ClockDeaths"/>, the player units Frozen Iron killed.
+/// </summary>
+public sealed record StageTwo(int Phases, int ClockDeaths)
+{
+    /// <summary><paramref name="stage"/> after a command's <paramref name="events"/> on <paramref name="before"/>: begun by a swallow, counting phases and Frozen Iron's player kills.</summary>
+    public static StageTwo? After(StageTwo? stage, BattleState before, IEnumerable<GameEvent> events)
+    {
+        foreach (var e in events)
+        {
+            switch (e)
+            {
+                case ShardSwallowed when stage is null:
+                    stage = new StageTwo(0, 0);
+                    break;
+                case PhaseBegan when stage is not null:
+                    stage = stage with { Phases = stage.Phases + 1 };
+                    break;
+                case FrozenIronFell fell when stage is not null:
+                    var killed = fell.Struck.Where((id, i) => fell.HpAfter[i] == 0 && before.Find(id) is { Side: Side.Player, Kin: null }).Count();
+                    stage = stage with { ClockDeaths = stage.ClockDeaths + killed };
+                    break;
+            }
+        }
+
+        return stage;
     }
 }

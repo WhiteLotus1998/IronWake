@@ -94,6 +94,12 @@ public sealed record Unit(
     public bool Named { get; init; }
 
     /// <summary>
+    /// The second stage a boss template begins when its first bar reaches 0 (issue 1385, <see cref="Swallow"/>), or
+    /// null for none. A template's rule, placed on the battle unit (<see cref="BattleUnit.Kin"/>); the save does not carry it.
+    /// </summary>
+    public KinStage? Swallow { get; init; }
+
+    /// <summary>
     /// Whether this unit may equip <paramref name="weapon"/>: its class uses the type, its rank in the type
     /// reaches the weapon's, a healing spell is not of a type the class strikes with only (issue 704), and
     /// anything else is not of a type the class heals with only (issue 706), and a schooled tome's school is

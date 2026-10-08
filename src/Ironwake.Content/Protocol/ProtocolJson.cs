@@ -393,6 +393,31 @@ public static class ProtocolJson
                 w.WriteString("unit", af.UnitId);
                 w.WriteString("item", af.SpellId);
                 break;
+            case ShardSwallowed ss:
+                w.WriteString("unit", ss.UnitId);
+                WriteCoord(w, "at", ss.At);
+                w.WriteNumber("hp", ss.Hp);
+                break;
+            case FrozenIronFell fi:
+                w.WriteNumber("amount", fi.Amount);
+                WriteStrings(w, "struck", fi.Struck);
+                w.WriteStartArray("hpAfter");
+                foreach (var hp in fi.HpAfter)
+                {
+                    w.WriteNumberValue(hp);
+                }
+
+                w.WriteEndArray();
+                break;
+            case KinHealed kh:
+                w.WriteString("unit", kh.UnitId);
+                w.WriteNumber("amount", kh.Amount);
+                w.WriteNumber("hpAfter", kh.HpAfter);
+                break;
+            case ColdDrained cd:
+                w.WriteString("unit", cd.UnitId);
+                WriteCoord(w, "at", cd.At);
+                break;
             case ArmorShattered ash:
                 w.WriteString("unit", ash.UnitId);
                 w.WriteString("item", ash.SpellId);
@@ -1060,6 +1085,11 @@ public static class ProtocolJson
             w.WriteBoolean("sideMap", true);
         }
 
+        if (state.FrozenIron > 0)
+        {
+            w.WriteNumber("frozenIron", state.FrozenIron);
+        }
+
         if (state.OrderCalled is { } order)
         {
             w.WriteString("order", OrderName(order));
@@ -1318,6 +1348,7 @@ public static class ProtocolJson
             CampaignMap = OptionalInt(e, "campaignMap"),
             SideMap = e.TryGetProperty("sideMap", out _) && RequiredBool(e, "sideMap"),
             OrderCalled = OptionalString(e, "order") is { } order ? ReadOrderKind(order) : null,
+            FrozenIron = OptionalInt(e, "frozenIron") ?? 0,
             Opened = e.TryGetProperty("chests", out var chests)
                 ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
                 : ValueList<Coord>.Empty,
@@ -1520,6 +1551,26 @@ public static class ProtocolJson
         if (unit.LockedBy is { } lockedBy)
         {
             w.WriteString("lockedBy", lockedBy);
+        }
+
+        if (unit.Kin is { } kin)
+        {
+            w.WriteStartObject("kin");
+            w.WriteNumber("hp", kin.Hp);
+            w.WriteNumber("def", kin.Def);
+            w.WriteNumber("res", kin.Res);
+            w.WriteNumber("heal", kin.Heal);
+            if (kin.Description is not null)
+            {
+                w.WriteString("description", kin.Description);
+            }
+
+            w.WriteEndObject();
+        }
+
+        if (unit.Swallowed)
+        {
+            w.WriteBoolean("swallowed", true);
         }
 
         if (unit.Armor is { } armor)
@@ -1788,6 +1839,8 @@ public static class ProtocolJson
             Stun = OptionalInt(e, "stun") ?? 0,
             StunSpent = e.TryGetProperty("stunSpent", out _) && RequiredBool(e, "stunSpent"),
             RaiseSpent = e.TryGetProperty("raiseSpent", out _) && RequiredBool(e, "raiseSpent"),
+            Kin = e.TryGetProperty("kin", out var kin) ? new KinStage(RequiredInt(kin, "hp"), RequiredInt(kin, "def"), RequiredInt(kin, "res"), RequiredInt(kin, "heal"), OptionalString(kin, "description")) : null,
+            Swallowed = e.TryGetProperty("swallowed", out _) && RequiredBool(e, "swallowed"),
             Hollow = e.TryGetProperty("hollow", out var hollow) ? new HollowMark(RequiredString(hollow, "by"), RequiredString(hollow, "fallen"), RequiredInt(hollow, "phases")) : null,
             LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
