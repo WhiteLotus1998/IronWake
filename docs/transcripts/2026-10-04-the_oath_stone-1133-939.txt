@@ -385,6 +385,7 @@ d  soldier-1        Soldier L6 pikeman         3,8    hp 22/22  Plain  group cam
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > attack keziah brigand-1 !
 Forecast Keziah -> Brigand 1 with Kinsbane: acc 79% dmg 22 crit 3%; counter: acc 60% dmg 13 crit 0%
+  Seen before the recall: Keziah hits, Brigand 1 misses
   Kills if the first strike lands (79)
   Counter: lethal to Keziah only if the first round misses (21 in 100) (13 against 8 hp)
   Kills on hit: Keziah +10 HP, to max 26 (Kinsbane feeds, fed 10)
@@ -1361,6 +1362,7 @@ B  maud             Maud L7 chaplain           11,4   hp 7/19   Plain
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > attack maud sworn_captain-1
 Forecast Maud -> Sworn Captain: acc 87% dmg 9 crit 2%; counter: none
+  Seen before the recall: Maud hits
   Joab is bound to Sworn Captain: freed when Sworn Captain falls
 Maud attacks Sworn Captain
   Maud hits Sworn Captain for 9 (hp 19)

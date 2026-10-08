@@ -1248,6 +1248,7 @@ Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside
 pair rule binds: Sworn Hunter
 > attack ottilie soldier-1
 Forecast Ottilie -> Soldier 1: acc 86% dmg 7 crit 7%; counter: none
+  Seen before the recall: Ottilie hits
 Ottilie attacks Soldier 1
   Ottilie hits Soldier 1 for 7 (hp 15)
   Ottilie hp 19, Soldier 1 hp 15
@@ -1324,6 +1325,7 @@ Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside
 pair rule binds: Sworn Hunter
 > attack captain soldier-1
 Forecast Alder Fenn -> Soldier 1: acc 88% dmg 10 x2 crit 6%; counter: acc 54% dmg 7 crit 0%
+  Seen before the recall: Alder Fenn misses, Soldier 1 misses
 Alder Fenn attacks Soldier 1
   Alder Fenn misses Soldier 1
   Soldier 1 misses Alder Fenn
@@ -1511,7 +1513,9 @@ pair rule binds: Sworn Hunter
 Threat on Ottilie at 10,6 (Plain):
   Archer 1 from 8,6 with Iron Bow (slot 1): acc 72% dmg 7 crit 0%; counter: acc 86% dmg 9 crit 7%
   Brigand 1 from 9,6 with Iron Axe (slot 1): acc 51% dmg 13 crit 0%; counter: none
+    Seen before the recall: Brigand 1 misses
   Soldier 1 from 9,6 (not counted: 9,6 held by Brigand 1) with Iron Lance (slot 1): acc 63% dmg 10 crit 0%; counter: none
+    Seen before the recall: Soldier 1 hits
   If all land: 20 against 19 hp
   Front: defends the gate
   Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only its defenders

@@ -1217,6 +1217,7 @@ C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brawler-1
 Forecast Alder Fenn -> Brawler: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
+  Seen before the recall: Alder Fenn hits, Brawler hits
 Alder Fenn attacks Brawler
   Alder Fenn hits Brawler for 11 (hp 12)
   Brawler hits Alder Fenn for 6 (hp 16)
@@ -1375,6 +1376,7 @@ C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brawler-1
 Forecast Alder Fenn -> Brawler: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
+  Seen before the recall: Alder Fenn hits, Brawler hits
 Alder Fenn attacks Brawler
   Alder Fenn hits Brawler for 11 (hp 12)
   Brawler hits Alder Fenn for 6 (hp 16)
@@ -1661,6 +1663,7 @@ C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brawler-1
 Forecast Alder Fenn -> Brawler: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
+  Seen before the recall: Alder Fenn hits, Brawler hits
 Alder Fenn attacks Brawler
   Alder Fenn hits Brawler for 11 (hp 0)
   Alder Fenn hp 22, Brawler hp 0

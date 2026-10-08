@@ -3463,6 +3463,7 @@ B  teodor           Teodor L2 pikeman          10,3   hp 19/21  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack captain bandit_leader-1 art feint
 Forecast Alder Fenn -> Bandit Leader: acc 96% dmg 7 x2 crit 4%; counter with Toll Axe: acc 36% dmg 9 crit 0%
+  Seen before the recall: Alder Fenn hits, Bandit Leader misses
   Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 3 of 24 uses, 1 of them hit or miss
 Alder Fenn declares Feint with Iron Sword, spending 1 extra use
 Alder Fenn attacks Bandit Leader
@@ -3536,6 +3537,7 @@ B  teodor           Teodor L2 pikeman          10,3   hp 19/21  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack captain bandit_leader-1 art feint
 Forecast Alder Fenn -> Bandit Leader: acc 96% dmg 7 x2 crit 4%; counter with Toll Axe: acc 36% dmg 9 crit 0%
+  Seen before the recall: Alder Fenn hits, Bandit Leader misses
   Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 3 of 24 uses, 1 of them hit or miss
 Alder Fenn declares Feint with Iron Sword, spending 1 extra use
 Alder Fenn attacks Bandit Leader
@@ -10894,6 +10896,7 @@ D  pell             Pell L3 adept              12,7   hp 16/16  Plain
 B  teodor           Teodor L6 pikeman          11,4   hp 23/23  Plain  done
 > attack pell brigand-1
 Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
+  Seen before the recall: Pell hits
 Pell attacks Brigand 1
   Pell hits Brigand 1 for 13 (hp 11)
   Pell hp 16, Brigand 1 hp 11
@@ -12140,6 +12143,7 @@ f  soldier-2        Soldier L6 pikeman         10,3   hp 14/22  Plain  group wav
 B  teodor           Teodor L6 pikeman          12,6   hp 14/23  Plain
 > attack dunstan soldier-2
 Forecast Dunstan -> Soldier 2: acc 70% dmg 8 crit 0%; counter: acc 83% dmg 7 x2 crit 1%
+  Seen before the recall: Dunstan hits, Soldier 2 hits
 Dunstan attacks Soldier 2
   Dunstan hits Soldier 2 for 8 (hp 6)
   Soldier 2 hits Dunstan for 7 (hp 12)
@@ -12196,6 +12200,7 @@ f  soldier-2        Soldier L6 pikeman         10,3   hp 6/22   Plain  group wav
 B  teodor           Teodor L6 pikeman          11,4   hp 14/23  Plain
 > attack teodor soldier-2 5 art long_thrust
 Forecast Teodor -> Soldier 2: acc 82% dmg 11 crit 2%; counter: none
+  Seen before the recall: Teodor hits
   Technique Long Thrust: Steel Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 30 uses, 2 of them hit or miss
 Teodor equips Steel Lance
 Teodor declares Long Thrust with Steel Lance, spending 2 extra uses

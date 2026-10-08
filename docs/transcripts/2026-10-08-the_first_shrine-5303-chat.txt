@@ -865,6 +865,7 @@ a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group san
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack maud soldier-1
 Forecast Maud -> Soldier 1: acc 87% dmg 11 crit 3%; counter: none
+  Seen before the recall: Maud misses
   Brace: Soldier 1 braced: Maud acc -15
 Maud attacks Soldier 1
   Maud misses Soldier 1
@@ -958,6 +959,7 @@ B  ottilie          Ottilie L4 bowman          7,1    hp 18/18  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack ottilie archer-1 art aimed_shot
 Forecast Ottilie -> Archer 1: acc 98% dmg 9 crit 15%; counter: acc 76% dmg 7 crit 1%
+  Seen before the recall: Ottilie hits, Archer 1 hits
   Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 38 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Archer 1

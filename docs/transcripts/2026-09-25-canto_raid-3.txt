@@ -724,6 +724,7 @@ d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2 !
 Forecast Ansgar -> Soldier 2 with Iron Lance: acc 76% dmg 9 crit 2%; counter: acc 72% dmg 10 crit 0%
+  Seen before the recall: Ansgar hits
   Kills if the first strike lands (76)
   Counter: lethal to Ansgar only if the first round misses (24 in 100) (10 against 10 hp)
 Ansgar attacks Soldier 2
@@ -838,6 +839,7 @@ d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2 !
 Forecast Ansgar -> Soldier 2 with Iron Lance: acc 76% dmg 9 crit 2%; counter: acc 72% dmg 10 crit 0%
+  Seen before the recall: Ansgar hits
   Kills if the first strike lands (76)
   Counter: lethal to Ansgar only if the first round misses (24 in 100) (10 against 10 hp)
 Ansgar attacks Soldier 2
@@ -862,6 +864,7 @@ C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > threat ansgar from 7,5
 Threat on Ansgar at 7,5 (Plain):
   Soldier 1 from 8,5 with Iron Lance (slot 1): acc 72% dmg 10 crit 0%; counter with Iron Lance: acc 76% dmg 9 crit 2%
+    Seen before the recall: Soldier 1 hits
   If all land: 10 against 10 hp
 > threat ansgar from 5,5
 Threat on Ansgar at 5,5 (Plain): no enemy can strike him next phase

@@ -783,7 +783,9 @@ holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and g
 > threat captain
 Threat on Alder Fenn at 9,4 (Plain):
   Archer 1 from 9,2 with Iron Bow (slot 1): acc 68% dmg 5 crit 0%; counter: none
+    Seen before the recall: Archer 1 hits
   Soldier from 9,3 with Iron Lance (slot 1): acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%
+    Seen before the recall: Soldier hits
   If all land: 13 against 14 hp
 > end
 -- Player phase ends, turn 6 --

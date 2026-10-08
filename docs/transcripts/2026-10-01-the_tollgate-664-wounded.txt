@@ -2073,6 +2073,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack pell archer-2
 Forecast Pell -> Archer 2 with Cinder: acc 86% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%
+  Seen before the recall: Pell hits, Archer 2 hits
 Pell attacks Archer 2
   Pell hits Archer 2 for 12 (hp 5)
   Archer 2 hits Pell for 8 (hp 8)
@@ -2104,6 +2105,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack wren archer-2
 Forecast Wren -> Archer 2: acc 54% dmg 7 crit 3%; counter: none
+  Seen before the recall: Wren hits
 Wren attacks Archer 2
   Wren hits Archer 2 for 7 (hp 0)
   Wren hp 20, Archer 2 hp 0
@@ -2233,6 +2235,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack teodor rider-1
 Forecast Teodor -> Rider with Iron Lance: acc 76% dmg 11 crit 1%; counter: acc 39% dmg 7 crit 1%
+  Seen before the recall: Teodor hits, Rider hits
 Teodor attacks Rider
   Teodor hits Rider for 11 (hp 0)
   Teodor hp 21, Rider hp 0

@@ -1305,6 +1305,7 @@ B  maud             Maud L7 chaplain           13,2   hp 7/19   Plain
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > attack maud sworn_captain-1
 Forecast Maud -> Sworn Captain: acc 87% dmg 9 crit 2%; counter: none
+  Seen before the recall: Maud hits
   Joab is bound to Sworn Captain: freed when Sworn Captain falls
 Maud attacks Sworn Captain
   Maud hits Sworn Captain for 9 (hp 19)
@@ -1352,6 +1353,7 @@ B  maud             Maud L7 chaplain           13,2   hp 7/19   Plain  done
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > attack keziah sworn_captain-1
 Forecast Keziah -> Sworn Captain with Kinsbane: acc 54% dmg 16 crit 0%; counter: acc 81% dmg 13 crit 1%
+  Seen before the recall: Keziah hits, Sworn Captain misses
   Joab is bound to Sworn Captain: freed when Sworn Captain falls
 Keziah attacks Sworn Captain
   Keziah hits Sworn Captain for 16 (hp 3)

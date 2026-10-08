@@ -952,6 +952,7 @@ B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack captain archer-1
 Forecast Alder Fenn -> Archer: acc 87% dmg 11 crit 4%; counter: none
+  Seen before the recall: Alder Fenn hits
 Alder Fenn attacks Archer
   Alder Fenn hits Archer for 11 (hp 6)
   Alder Fenn hp 22, Archer hp 6

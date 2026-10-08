@@ -1395,6 +1395,7 @@ A  ottilie          Ottilie L5 bowman          3,7    hp 12/18  Plain  captain
 B  teodor           Teodor L5 pikeman          4,8    hp 2/23   Plain
 > attack ottilie archer-1 art aimed_shot
 Forecast Ottilie -> Archer: acc 99% dmg 9 crit 16%; counter: acc 77% dmg 7 crit 0%
+  Seen before the recall: Archer hits
   Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 24 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Archer
