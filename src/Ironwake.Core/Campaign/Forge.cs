@@ -47,7 +47,7 @@ public static class Forge
     {
         if (weapon.Glass)
         {
-            return (null, $"the smith: \"{Weapon.GlassRefusal}\"");
+            return (null, $"{weapon.Name} is glass; the forge cannot raise its edge");
         }
 
         if (weapon.Hungers)

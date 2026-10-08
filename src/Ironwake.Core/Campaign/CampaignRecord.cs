@@ -1164,7 +1164,7 @@ public sealed partial record CampaignRecord(
     /// Repairs the weapon in <paramref name="slot"/> (0-based) of <paramref name="unitId"/> to its
     /// full durability at <see cref="CampaignRules.RepairPricePerUse"/> for every missing use, a
     /// broken weapon included, since repair is what makes broken a state and not a slot (section 5).
-    /// Refused for an empty slot, a consumable, a spell, a glass weapon (the smith's line, issue 702),
+    /// A glass weapon pays half the rate (issue 1403). Refused for an empty slot, a consumable, a spell,
     /// a weapon without a price, a weapon already at full uses, or a purse short of the cost.
     /// </summary>
     public ScreenResult Repair(string unitId, int slot, GameContent content)
@@ -1188,11 +1188,6 @@ public sealed partial record CampaignRecord(
         if (weapon.IsMagic)
         {
             return ScreenResult.Refused(this, $"{weapon.Name} is a spell; its uses refresh every map");
-        }
-
-        if (weapon.Glass)
-        {
-            return ScreenResult.Refused(this, $"the smith: \"{Weapon.GlassRefusal}\"");
         }
 
         if (CampaignRules.RepairPricePerUse(weapon) is not { } perUse)
@@ -2166,7 +2161,7 @@ public sealed partial record CampaignRecord(
     /// <see cref="ForgeRules.Mt"/>, <c>hit</c> adds <see cref="ForgeRules.Hit"/>, for one material of
     /// the weapon's kind (<see cref="Forge.MaterialFor"/>) and <see cref="ForgeRules.Price"/> from
     /// the purse. Refused without a forge, for a unit or slot that is not there, an item, a weapon
-    /// the forge never works (named), a glass weapon (the smith's line, issue 702), an heirloom short of its last stage (the smith's own line at
+    /// the forge never works (named), a glass weapon (issue 702), an heirloom short of its last stage (the smith's own line at
     /// rust), a weapon at its last step, a stat other than mt or hit, and a short store or purse.
     /// </summary>
     public ScreenResult Refine(string unitId, int slot, string stat, GameContent content)
