@@ -6,9 +6,9 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// Hask's second stage (issue 1385, Lotus's rework, Table round 487; numbers provisional on #1247), on the pitched
 /// Iron Warden (<c>hask_warden</c>) alone. Stage 1's bar reaching 0 is the swallow: he stays on his tile on a fresh
-/// bar of 40 with Def and Res +3, and from the next phase start Frozen Iron lands on every unit on the board, his
-/// side and him too, flat past Def and Res, 2 and then 2 more each phase to 10. The Kin heals him 6 at his phase
-/// start, after the Frozen Iron. His fall in stage 2 drains the cold and leaves the shard on his tile.
+/// bar of 40 with Def and Res +3, and from his next phase start Frozen Iron lands on every unit on the board, his
+/// side and him too, flat past Def and Res, 2 and then 2 more each of his phases to 10; it lands at his side's phase
+/// start alone (issue 1395). The Kin heals him 6 at his phase start, after the Frozen Iron. His fall in stage 2 drains the cold and leaves the shard on his tile.
 /// </summary>
 public class SwallowTests
 {
@@ -105,9 +105,9 @@ public class SwallowTests
     }
 
     [Fact]
-    public void FrozenIronLandsOnEveryUnitAtTheNextPhaseStartPastDefAndRes()
+    public void FrozenIronLandsOnEveryUnitAtHisNextPhaseStartPastDefAndRes()
     {
-        var state = Swallowed(Start()) with { Phase = Side.Enemy };
+        var state = Swallowed(Start()) with { Phase = Side.Player };
         var before = state.Units.ToDictionary(u => u.Id, u => u.Hp);
 
         var result = state.Try(new EndPhase());
@@ -115,7 +115,8 @@ public class SwallowTests
         var fell = result.Events.OfType<FrozenIronFell>().Single();
         Assert.Equal(2, fell.Amount);
         Assert.Equal(before.Keys.Order(StringComparer.Ordinal), fell.Struck.Order(StringComparer.Ordinal));
-        Assert.All(result.Next.Units, u => Assert.Equal(before[u.Id] - 2, u.Hp));
+        Assert.Equal(fell.Struck.Select(id => before[id] - 2), fell.HpAfter);
+        Assert.All(result.Next.Units.Where(u => !u.Swallowed), u => Assert.Equal(before[u.Id] - 2, u.Hp));
         Assert.Equal(4, result.Next.FrozenIron);
     }
 
@@ -125,9 +126,11 @@ public class SwallowTests
         var state = Swallowed(Start()) with { FrozenIron = 8 };
 
         var once = state.Try(new EndPhase());
-        var twice = once.Next.Try(new EndPhase());
+        var between = once.Next.Try(new EndPhase());
+        var twice = between.Next.Try(new EndPhase());
 
         Assert.Equal(8, once.Events.OfType<FrozenIronFell>().Single().Amount);
+        Assert.Equal(Side.Enemy, twice.Next.Phase);
         Assert.Equal(10, twice.Events.OfType<FrozenIronFell>().Single().Amount);
         Assert.Equal(Swallow.MostDose, twice.Next.FrozenIron);
     }
@@ -169,15 +172,30 @@ public class SwallowTests
     }
 
     [Fact]
-    public void TheKinDoesNotHealHimOnTheOtherSidesPhaseStart()
+    public void NeitherFrozenIronNorTheKinLandsOnTheOtherSidesPhaseStart()
     {
-        var state = Swallowed(Start()) with { Phase = Side.Enemy };
+        var state = Swallowed(Start()) with { Phase = Side.Enemy, FrozenIron = 6 };
         state = state.WithUnit(Hask(state) with { Hp = 20 });
+        var before = state.Units.ToDictionary(u => u.Id, u => u.Hp);
 
         var result = state.Try(new EndPhase());
 
-        Assert.DoesNotContain(result.Events, e => e is KinHealed);
-        Assert.Equal(18, Hask(result.Next).Hp);
+        Assert.Equal(Side.Player, result.Next.Phase);
+        Assert.DoesNotContain(result.Events, e => e is FrozenIronFell or KinHealed);
+        Assert.All(result.Next.Units, u => Assert.Equal(before[u.Id], u.Hp));
+        Assert.Equal(6, result.Next.FrozenIron);
+    }
+
+    [Fact]
+    public void TheSimsStageReadRecordsTheCompanyTheSwallowFound()
+    {
+        var before = Start();
+        var after = Swallowed(before);
+        after = after.WithUnit(Captain(after) with { Hp = 9 });
+
+        var stage = Ironwake.Sim.StageTwo.After(null, before, after, new GameEvent[] { new ShardSwallowed(Hask(after).Id, Hask(after).At, 40) });
+
+        Assert.Equal(new Ironwake.Sim.StageTwo(0, 0, 3, 9), stage);
     }
 
     [Fact]
