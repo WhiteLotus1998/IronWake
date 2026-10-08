@@ -219,8 +219,9 @@ public static class Queries
     /// the phase's own order, each the strike the planner would make
     /// were it to choose this unit, through <see cref="EnemyAi.StrikeOn"/>, with the
     /// forecast the enemy phase prints before that strike. The board is
-    /// <see cref="ThreatBoard"/>'s. A group still asleep is not listed (see
-    /// <see cref="SleepingThreats"/>) and a unit that holds strikes only from its own tile.
+    /// <see cref="ThreatBoard"/>'s. A member of a group still asleep behaves as Hold (DESIGN.md 8):
+    /// it is listed only for a strike from its own tile, and what it could do woken is
+    /// <see cref="SleepingThreats"/>' business; a unit that holds strikes only from its own tile.
     /// An enemy an announced event spawns at the start of that enemy phase is priced like
     /// any other and carries the tile it arrives on (issue 248); an unannounced one is not
     /// on the board the query reads (DECISIONS/0045). Each line reads that phase-start
@@ -778,7 +779,9 @@ public static class Queries
     /// member could strike <paramref name="unit"/> on <paramref name="from"/> were the group
     /// awake (issue 248, the thirty-sixth round's shape one): each group with the members that
     /// could strike the tile were it awake, never one that could not (issue 454), in group order, and no numbers, so the player learns a sleeping group is a
-    /// question without being handed its answer. A group the tile itself certainly wakes is
+    /// question without being handed its answer. A sleeping member already priced by <see cref="Threats"/>,
+    /// as a Hold strike from its own tile, is left out, so a strike is never both priced and only a
+    /// question (issue 1351); a group with no member left is not named. A group the tile itself certainly wakes is
     /// already awake on that board and priced by <see cref="Threats"/> instead. Null exactly when <see cref="Threats"/> is. Read-only.
     /// </summary>
     public static IReadOnlyList<SleepingThreat>? SleepingThreats(BattleState state, GameContent content, BattleUnit unit, Coord from)
@@ -794,6 +797,7 @@ public static class Queries
             return groups;
         }
 
+        var priced = (Threats(state, content, unit, from) ?? Array.Empty<ThreatLine>()).Select(l => l.Enemy.Id).ToHashSet(StringComparer.Ordinal);
         var sleeping = board.UnitsOf(Side.Enemy)
             .Where(u => u is { Behavior: Behavior.Guard, Group: not null } && !board.IsAwake(u.Group))
             .Select(u => u.Group!)
@@ -802,7 +806,7 @@ public static class Queries
         foreach (var group in sleeping)
         {
             var woken = board.Wake(group);
-            var members = ValueList<BattleUnit>.From(woken.UnitsOf(Side.Enemy).Where(u => u.Group == group && EnemyAi.StrikeOn(woken, content, u, moved) is not null));
+            var members = ValueList<BattleUnit>.From(woken.UnitsOf(Side.Enemy).Where(u => u.Group == group && !priced.Contains(u.Id) && EnemyAi.StrikeOn(woken, content, u, moved) is not null));
             if (members.Count == 0)
             {
                 continue;
