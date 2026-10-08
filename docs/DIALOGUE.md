@@ -31,7 +31,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 
 - **The Tollgate** (0073), **Brackwater Cut at dusk** (0078): `tuned`.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). A crest mass freezing the Foreman is a solve (#1087); lever: the archer out of Pell's turn-5 reach.
-- **Saltmarsh Ford:** not tuned (0093, 0095). The pair on the fort's wake (0339): samples only (36, late 39; limit 19 also 39, the leader stall). Agreed (475): under that trigger the overlap is the player's pace (3300 8/7/6, cold 4471 6/7/4), and the lone leader is the flat part. Lever (476): spawn distance, not a trigger, the pair on the east edge (#1370); a chair with no rear swing in the siege kills it, the cut a cool-down.
+- **Saltmarsh Ford:** not tuned (0093, 0095). The pair on the fort's wake (0339): samples only (36, late 39; limit 19 also 39, the leader stall). Agreed (475, 476): under that trigger the overlap is the player's pace (3300 8/7/6, cold 4471 6/7/4); the lone leader is the flat part. Levers: `thins <group>` (#1365) for when, the east-edge spawn (#1370, content only) for the walk; a chair with no rear swing in the siege kills it, the cut a cool-down.
 - **The Rookery (0208):** not passed; no lever before a cold chair.
 - **The Counting House (311-321):** archer 11,2 (#925), limit 11 (#931), no third lever (441).
 - **The Mill:** `holds:` (0279), limit 9 (0280), fort south (#1210). A free lesson is a tile (466, 467): the road brigand is undoubled by the L1 captain (0338), so the 7,8 cork and 1710's bank cost an axe trade; Chat's cold floor chair reads it.
