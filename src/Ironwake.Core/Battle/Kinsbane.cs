@@ -359,7 +359,7 @@ public static class Kinsbane
     /// <see cref="BattleState.ReachOf"/> reads it (a Press counted, the chill taken off, 0 while locked).
     /// </summary>
     public static int HuntMov(BattleState state, GameContent content, BattleUnit unit) =>
-        Lock.Holds(state, unit) ? 0 : Armor.Mov(Frost.Mov(content.Class(unit.Unit.ClassId).Mov + (unit.Pressed ? 1 : 0), unit), unit);
+        Lock.Holds(state, unit) ? 0 : Freeze.Mov(Armor.Mov(Frost.Mov(content.Class(unit.Unit.ClassId).Mov + (unit.Pressed ? 1 : 0), unit), unit), unit);
 
     /// <summary>
     /// Whether a kill now by <paramref name="unit"/> with the hungering weapon on <paramref name="stack"/>

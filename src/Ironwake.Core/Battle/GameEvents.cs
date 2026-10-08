@@ -452,9 +452,16 @@ public sealed record HollowCrumbled(string UnitId, bool RaiserFell) : GameEvent;
 /// <see cref="Cleanse"/>): <paramref name="Burn"/> its burn (every stack and its phase count), <paramref name="Chill"/>
 /// its chill (and any lock riding on it), <paramref name="Stun"/> its stun. <paramref name="Freed"/> when the stun was
 /// being skipped this phase and nothing else holds the unit: it may move and act again. <paramref name="Curse"/> its curse
-/// (issue 1328). The <see cref="ItemUsed"/> precedes it.
+/// (issue 1328), <paramref name="Frozen"/> its freeze (issue 1330). The <see cref="ItemUsed"/> precedes it.
 /// </summary>
-public sealed record UnitCleansed(string UnitId, string ByUnitId, bool Burn, bool Chill, bool Stun, bool Freed, bool Curse = false) : GameEvent;
+public sealed record UnitCleansed(string UnitId, string ByUnitId, bool Burn, bool Chill, bool Stun, bool Freed, bool Curse = false, bool Frozen = false) : GameEvent;
+
+/// <summary>
+/// A hit from a tome naming a freeze froze <paramref name="UnitId"/>, which survived it on or beside water (issue 1330,
+/// <see cref="Freeze"/>): Mov 0 until <paramref name="Side"/>'s next phase ends, Mov 1 for a <paramref name="Boss"/>.
+/// <paramref name="Next"/> when it was struck in its own side's phase, so the phase that holds it is the one after this.
+/// </summary>
+public sealed record UnitFrozen(string UnitId, string ByUnitId, Side Side, bool Boss, bool Next = false) : GameEvent;
 
 /// <summary>A stunned unit's side's phase began, and it skips it: it neither moves nor acts until the phase ends (issue 1244, <see cref="Stun"/>).</summary>
 public sealed record StunSkipped(string UnitId) : GameEvent;

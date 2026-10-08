@@ -126,7 +126,7 @@ public static class EscapeCount
             return 0;
         }
 
-        var mov = Armor.Mov(Frost.Mov(content.Class(unit.Unit.ClassId).Mov, unit), unit);
+        var mov = Freeze.Mov(Armor.Mov(Frost.Mov(content.Class(unit.Unit.ClassId).Mov, unit), unit), unit);
         if (mov <= 0)
         {
             return null;

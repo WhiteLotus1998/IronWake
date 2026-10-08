@@ -251,7 +251,7 @@ public class CurseTests
         Assert.Equal(new UnitCleansed(brigand.Id, "mira", false, false, false, false, Curse: true), Assert.Single(events));
         Assert.EndsWith("the curse cleared", PlaySession.Describe(Assert.Single(events), Curses, UnitNames.None));
         var staff = Shipped.Weapons.Values.First(w => w.Heals) with { Id = "test_cleanse", Cleanses = true };
-        Assert.Contains("cleanses burn, chill, stun and curse", ItemCard.Text(Curses with { Weapons = Curses.Weapons.SetItem("test_cleanse", staff) }, "test_cleanse"));
+        Assert.Contains("cleanses burn, chill, stun, curse and freeze", ItemCard.Text(Curses with { Weapons = Curses.Weapons.SetItem("test_cleanse", staff) }, "test_cleanse"));
     }
 
     [Fact]

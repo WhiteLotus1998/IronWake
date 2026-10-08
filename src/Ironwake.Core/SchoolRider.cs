@@ -54,6 +54,13 @@ public enum RiderKind
     /// <see cref="SchoolRider.Blind"/> less Hit, and at each of its side's next phase starts loses a tick that heals the caster.
     /// </summary>
     Curse,
+
+    /// <summary>
+    /// A hit on a unit on or beside water freezes it, Mov 0 through its side's next phase, bosses Mov 1 (issue 1330,
+    /// Still Water's second use, <see cref="Core.Freeze"/>). Only a tome names it, and only where its school's rider is
+    /// <see cref="Chill"/>; a school's own rider is never a freeze.
+    /// </summary>
+    Freeze,
 }
 
 /// <summary>
@@ -87,11 +94,11 @@ public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
     /// <summary>
     /// Whether a tome may name <paramref name="tomeKind"/> on a school whose rider is <paramref name="schoolKind"/>
     /// though the two differ: an ember on a burn (issue 1279), a sunder (issue 1281) or armor (issue 1282) on a raise, a hollow on a drain (issue 1284),
-    /// and a drain or a hollow on a curse (issue 1328: dark is Curse, Drain Life and Hollow once its rider is the curse).
+    /// a drain or a hollow on a curse (issue 1328: dark is Curse, Drain Life and Hollow once its rider is the curse), and a freeze on a chill (issue 1330).
     /// </summary>
     public static bool Borrows(RiderKind tomeKind, RiderKind schoolKind) =>
         (tomeKind, schoolKind) is (RiderKind.Ember, RiderKind.Burn) or (RiderKind.Sunder, RiderKind.Raise) or (RiderKind.Armor, RiderKind.Raise) or (RiderKind.Hollow, RiderKind.Drain)
-            or (RiderKind.Drain, RiderKind.Curse) or (RiderKind.Hollow, RiderKind.Curse);
+            or (RiderKind.Drain, RiderKind.Curse) or (RiderKind.Hollow, RiderKind.Curse) or (RiderKind.Freeze, RiderKind.Chill);
 
     /// <summary>
     /// The Hit a cursed unit loses on every strike and counter while its curse runs (issue 1328, DECISIONS/0322: 30).
@@ -102,7 +109,7 @@ public sealed record SchoolRider(RiderKind Kind, int Amount, int Phases)
     /// <summary>A burn rider's <see cref="Cap"/> when rules.json names none.</summary>
     public const int DefaultCap = 4;
 
-    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>, <c>armor</c>, <c>drain</c>, <c>hollow</c>, <c>curse</c>.</summary>
+    /// <summary>The word content writes for <paramref name="kind"/>: <c>burn</c>, <c>chill</c>, <c>stun</c>, <c>raise</c>, <c>ember</c>, <c>sunder</c>, <c>armor</c>, <c>drain</c>, <c>hollow</c>, <c>curse</c>, <c>freeze</c>.</summary>
     public static string Label(RiderKind kind) => kind.ToString().ToLowerInvariant();
 
     /// <summary>A count of phases as a line says it: <c>one phase</c>, <c>two phases</c>; past nine, in digits.</summary>
