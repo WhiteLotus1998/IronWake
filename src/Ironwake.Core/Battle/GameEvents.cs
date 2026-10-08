@@ -409,7 +409,9 @@ public sealed record UnitStunned(string UnitId, string ByUnitId, Side Side, bool
 
 /// <summary>
 /// A Lightning Rod caught a spell (issue 1280, <see cref="LightningRod"/>): <paramref name="ByUnitId"/>'s attack,
-/// aimed at <paramref name="AimedId"/>, strikes the holder <paramref name="UnitId"/> instead. The combat follows.
+/// aimed at <paramref name="AimedId"/>, strikes the holder <paramref name="UnitId"/> instead. The combat follows. After an
+/// area cast (issue 1400, <see cref="AreaCast.Catcher"/>), <paramref name="AimedId"/> is the struck ally that drew the catch,
+/// and the one strike on the holder follows.
 /// </summary>
 public sealed record RodCaught(string UnitId, string AimedId, string ByUnitId) : GameEvent;
 

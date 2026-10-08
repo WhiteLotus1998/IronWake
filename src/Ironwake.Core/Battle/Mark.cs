@@ -12,6 +12,8 @@ namespace Ironwake.Core;
 /// status and spell multipliers multiply on final damage; effectiveness stays on Mt).</item>
 /// <item>A marking hit on a marked unit cashes the old mark, then lays its own: the unit ends marked.</item>
 /// <item>The mark has no clock. It lasts until it is cashed or the map ends.</item>
+/// <item>A Lightning Rod's catch marks no one, whatever it caught (issue 1400, the partners' lean in DECISIONS/0351): a
+/// caught hit on the holder cashes a mark he carries and lays none.</item>
 /// </list>
 /// The mark is board state, so Recall restores it with the board. No shipped tome marks until Lotus signs Spark Storm's
 /// numbers (#1247).
@@ -41,9 +43,10 @@ public static class Mark
     /// After a combat or a strike: for each side, the mark on the other is spent when a hit from a tome of its school
     /// landed (<see cref="MarkCashed"/>), and a hit from a marking tome on a unit still standing marks it
     /// (<see cref="UnitMarked"/>). <paramref name="a"/> and <paramref name="b"/> are the two as they entered the combat,
-    /// whose marks are read; else as <paramref name="state"/> finds them.
+    /// whose marks are read; else as <paramref name="state"/> finds them. <paramref name="caughtId"/> names a rod holder struck
+    /// by the spell it caught: <paramref name="a"/>'s hit on it lays no mark.
     /// </summary>
-    public static BattleState AfterCombat(BattleState state, string aId, Weapon? aWeapon, string bId, Weapon? bWeapon, ValueList<StrikeEvent> strikes, List<GameEvent> events, BattleUnit? a = null, BattleUnit? b = null)
+    public static BattleState AfterCombat(BattleState state, string aId, Weapon? aWeapon, string bId, Weapon? bWeapon, ValueList<StrikeEvent> strikes, List<GameEvent> events, BattleUnit? a = null, BattleUnit? b = null, string? caughtId = null)
     {
         a ??= state.Find(aId);
         b ??= state.Find(bId);
@@ -61,7 +64,7 @@ public static class Mark
                 target = target with { Mark = null };
             }
 
-            if (weapon.Marks)
+            if (weapon.Marks && !(strikerId == aId && targetId == caughtId))
             {
                 events.Add(new UnitMarked(targetId, strikerId, school));
                 target = target with { Mark = school };
