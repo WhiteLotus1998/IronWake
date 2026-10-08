@@ -2092,6 +2092,11 @@ public sealed class CampaignSession
             lines.Add(supports);
         }
 
+        if (DutiesLine(record, content) is { } duties)
+        {
+            lines.Add(duties);
+        }
+
         if (record.Fallen.Count > 0)
         {
             var names = UnitNames.Of(record, content);
@@ -2120,6 +2125,27 @@ public sealed class CampaignSession
         }
 
         return notes.Count == 0 ? names[id] : $"{names[id]} ({string.Join("; ", notes)})";
+    }
+
+    /// <summary>
+    /// The roster's duties line (issue 1331): each living unit that took a duty at this camp, in
+    /// the order taken, as <c>  Duties: Teodor at the forge, Maud resting, Wren in the yard</c>;
+    /// null when no unit has taken one, so a camp where every unit rests by default prints none.
+    /// </summary>
+    public static string? DutiesLine(CampaignRecord record, GameContent content)
+    {
+        var names = UnitNames.Of(record, content);
+        var taken = record.Duties
+            .Where(d => record.Find(d.UnitId) is not null)
+            .Select(d => names[d.UnitId] + d.Duty switch
+            {
+                Duty.Forge => " at the forge",
+                Duty.Yard => " in the yard",
+                Duty.Quest => " on a side map",
+                _ => " resting",
+            })
+            .ToList();
+        return taken.Count == 0 ? null : "  Duties: " + string.Join(", ", taken);
     }
 
     /// <summary>

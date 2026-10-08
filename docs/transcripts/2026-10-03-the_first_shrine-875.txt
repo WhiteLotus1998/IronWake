@@ -492,6 +492,7 @@ and that ally's phase ends where it stands.)
   Dunstan: Bulwark L4, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L4, EXP 46; 1: Radiance 5/5, 2: Salve 8/8, 3: Maud's Psalter 4/4
   Brannock: Cadet L4, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Duties: Maud on a side map, Wren on a side map
 Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 8)
 The last seat: Keziah (Reaver) or Rook (Skyrider) (pick <unit>). The one passed on rides home.
 Keziah: "Everyone here is offering you a promise. Mine's hungry, and you'll hear it ask."

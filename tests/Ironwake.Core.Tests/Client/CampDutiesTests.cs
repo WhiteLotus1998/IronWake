@@ -1,3 +1,4 @@
+using Ironwake.Cli;
 using Ironwake.Client;
 using Ironwake.Core.Tests.Content;
 
@@ -110,5 +111,30 @@ public class CampDutiesTests
         Assert.Contains("ERROR: " + client.Status, output);
         Assert.Null(client.Battle);
         Assert.Equal("", client.LogText);
+    }
+
+    [Fact]
+    public void TheRosterNamesEachDutyTaken()
+    {
+        var client = Client();
+        Assert.Null(CampaignSession.DutiesLine(client.Record, client.Content));
+        Assert.True(client.BuildRoom("forge"));
+        Assert.True(client.ForgeDuty("teodor", 0, "mt"));
+        Assert.True(client.Duty("maud", "rest"));
+
+        Assert.Equal("  Duties: Teodor at the forge, Maud resting", CampaignSession.DutiesLine(client.Record, client.Content));
+        Assert.Contains("  Duties: Teodor at the forge, Maud resting", CampaignSession.RosterLines(client.Record, client.Content));
+    }
+
+    [Fact]
+    public void AMoveAfterTheStudentFallsNamesTheStudentNotTheCaptain()
+    {
+        var client = Client();
+        Assert.True(client.Yard("captain", "wren", "sword"));
+        Script.PlayCampaign(client, "end !\nmove captain 3,5\nattack captain soldier-1 1\nattack wren soldier-1 1\nend !\n");
+
+        var refused = Resolver.Apply(client.Battle!.State, client.Content, new Wait("captain"));
+
+        Assert.Equal("the battle is lost (wren is dead); only Recall is left", refused.Rejection!.Message);
     }
 }
