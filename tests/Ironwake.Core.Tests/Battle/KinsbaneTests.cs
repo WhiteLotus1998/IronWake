@@ -321,6 +321,46 @@ public class KinsbaneTests
         Assert.Null(attack.Slot);
     }
 
+    /// <summary>Keziah at 6,7 beside brigand-1 at <paramref name="brigandHp"/>, the scythe fed <paramref name="fed"/> (issue 1395).</summary>
+    private static BattleState BesideTheBrigand(int brigandHp, int fed = 0)
+    {
+        var start = WithScythe(Placed(), 23, fed: fed);
+        var placed = start.WithUnit(Keziah(start) with { At = new Coord(6, 7) });
+        return placed.WithUnit(placed.Find("brigand-1")! with { Hp = brigandHp });
+    }
+
+    [Fact]
+    public void TheSimsPlayerPlansTheCarrierFirstWhenTheScytheCanFeed()
+    {
+        var state = BesideTheBrigand(1);
+
+        Assert.NotEqual("keziah", Ironwake.Sim.HeuristicPlayer.PlanOrder(state).First().Id);
+        Assert.True(Ironwake.Sim.HeuristicPlayer.CanFeed(state, Shipped, Keziah(state)));
+        Assert.Equal("keziah", Ironwake.Sim.HeuristicPlayer.PlanOrder(state, Shipped).First().Id);
+        Assert.Equal(Ironwake.Sim.HeuristicPlayer.PlanOrder(state).Select(u => u.Id).OrderBy(id => id), Ironwake.Sim.HeuristicPlayer.PlanOrder(state, Shipped).Select(u => u.Id).OrderBy(id => id));
+    }
+
+    [Fact]
+    public void TheCarrierKeepsItsPlaceWhenNoKillOnAHitIsInReach()
+    {
+        var state = BesideTheBrigand(22);
+
+        Assert.False(Ironwake.Sim.HeuristicPlayer.CanFeed(state, Shipped, Keziah(state)));
+        Assert.Equal(Ironwake.Sim.HeuristicPlayer.PlanOrder(state).Select(u => u.Id), Ironwake.Sim.HeuristicPlayer.PlanOrder(state, Shipped).Select(u => u.Id));
+    }
+
+    [Fact]
+    public void AWokenScytheOrACarrierThatHasActedIsNotPlannedFirst()
+    {
+        var woken = BesideTheBrigand(1, fed: Kinsbane.WakeKills);
+        var acted = BesideTheBrigand(1);
+        acted = acted.WithUnit(Keziah(acted) with { Acted = true });
+
+        Assert.False(Ironwake.Sim.HeuristicPlayer.CanFeed(woken, Shipped, Keziah(woken)));
+        Assert.False(Ironwake.Sim.HeuristicPlayer.CanFeed(acted, Shipped, Keziah(acted)));
+        Assert.NotEqual("keziah", Ironwake.Sim.HeuristicPlayer.PlanOrder(woken, Shipped).First().Id);
+    }
+
     [Theory]
     [InlineData(0, true)]
     [InlineData(11, true)]
