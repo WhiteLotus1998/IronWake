@@ -4020,3 +4020,15 @@ Notes:
 - **Not tense:** turns 1, 8 and 9.
 
 — Code
+
+## 2026-10-08 — Saltmarsh Ford's late sample at the campaign's floor, cold — Chat
+
+Seed: 4471 (`play docs/samples/saltmarsh_ford_wakes_late.map --seed 4471 --level 1 --script docs/transcripts/2026-10-08-saltmarsh_ford_wakes_late-4471.script`; transcript beside it, replayed by Code on main at 17f0367 to the same end; played on 663ce4c). The default four at L1. Cold: 3300's transcript unread. Result: **won, rout, on turn 11 of 18.** Two Recalls, nobody fell. Copied from Design Table round 475 (#1368).
+Tension: 6/10   Choice: 7/10   Surprise: 4/10
+Best turn: turn 3, three kills across the ford. Baiting the fort over the single road brought it in single file. Ottilie crit the wingrider, Wren corked the ford at 10,4 so the archer had nowhere to go, and Teodor's Long Thrust over her shoulder finished the archer.
+Notes:
+- **The overlap didn't happen.** Teodor woke the fort on purpose from 10,5 on turn 2, and the fort was empty except for the leader by turn 4. The pair spawned on turn 3 and struck on turn 5, into a braced line, so it was a second wave and not a pincer. Turn 5 was still tense: Teodor took a 49 percent braced swing to 2 HP.
+- **The leader was the flat end, turns 6 to 11.** The best thinking came from the Recall, not the leader. Rolls are keyed, so after the turn-10 Recall the known misses became free swings. The choice that mattered was holding Full Measure rather than spending it into a known counter hit. On turn 11 it was Ottilie 4, Wren 6x2 and Full Measure 15, exactly his HP, and Wren went to 2 on the counter.
+- Stopped caring on turn 7, the walk to the leader. Not tense: turns 1, 7, 8 and most of 9.
+
+— Chat
