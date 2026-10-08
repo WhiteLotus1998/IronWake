@@ -22,7 +22,14 @@ public sealed record UnitDuty(string UnitId, Duty Duty);
 /// <paramref name="RankCeiling"/>; the EXP and points it earns past them are kept short of the
 /// next step (<see cref="YardRules.CapPoints"/>).
 /// </summary>
-public sealed record YardHand(bool Teaches, int LevelCeiling, WeaponType Weapon, WeaponRank RankCeiling);
+public sealed record YardHand(bool Teaches, int LevelCeiling, WeaponType Weapon, WeaponRank RankCeiling)
+{
+    /// <summary>
+    /// Whether a teacher's blows pull (Table round 448): on in every drill and never a player
+    /// option. Only the Sim's ablation arm sets it off, to measure what the pull is worth.
+    /// </summary>
+    public bool Pulls { get; init; } = true;
+}
 
 /// <summary>
 /// The yard's rules (issue 1331): a teacher and a student both spend their duty on a short real

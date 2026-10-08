@@ -150,6 +150,25 @@ public static class Program
             return args.Contains("--drill") ? DrillTable(seeds) : args.Contains("--chip") ? ChipTable(seeds) : args.Contains("--gate") ? GateTable(seeds) : args.Contains("--rank-trace") ? RankTraceTable(seeds) : args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
         }
 
+        if (args.Length > 0 && args[0] == "--yard")
+        {
+            var seeds = Gates.DefaultSeeds;
+            string? only = null;
+            for (var i = 1; i + 1 < args.Length; i++)
+            {
+                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                {
+                    seeds = n;
+                }
+                else if (args[i] == "--map")
+                {
+                    only = args[i + 1];
+                }
+            }
+
+            return YardTable(seeds, only);
+        }
+
         if (args.Length > 0 && args[0] == "--supports")
         {
             var seeds = Gates.DefaultSeeds;
@@ -297,7 +316,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] [--lead <id>]... | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>[,<id>]...] [--until-certify <unit> <class>] [--deploy <unit>[,<unit>]...] [--stop-after <kind>[,<kind>]...] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip|--drill] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] [--lead <id>]... | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>[,<id>]...] [--until-certify <unit> <class>] [--deploy <unit>[,<unit>]...] [--stop-after <kind>[,<kind>]...] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip|--drill] | --supports [--seeds N] [--pair <a> <b>] | --yard [--seeds N] [--map <id>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -467,6 +486,66 @@ public static class Program
         foreach (var line in even ? LevelRun.EvenLines(content, runs) : LevelRun.Lines(content, runs))
         {
             Console.WriteLine(line);
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// Gate 4's yard arm (issue 1331, slice 3, <see cref="YardRun"/>): the heuristic's campaign over the same
+    /// seeds with no yard, with the yard, and with the yard and the teacher's pull off, one thread each; each
+    /// arm's drill tally; then on every campaign map, or the one <paramref name="only"/> names, gate 1 and
+    /// gate 4's headline at each arm's <c>carried</c> levels (the file's party at the levels that arm's
+    /// campaign brings to the camp, slot by slot, as <see cref="CurveTable(int, string?)"/> reads them).
+    /// A measurement only, wired to no exit code until the Table reads it.
+    /// </summary>
+    public static int YardTable(int seeds, string? only)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("yard: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var entries = content.Campaign.Maps.Where(m => only is null || m.MapId == only).ToList();
+        if (entries.Count == 0)
+        {
+            Console.WriteLine($"yard: no campaign map '{only}'; the campaign lists {string.Join(", ", content.Campaign.Maps.Select(m => m.MapId))}");
+            return 2;
+        }
+
+        var arms = new[] { YardRun.Arm.Off, YardRun.Arm.On, YardRun.Arm.NoPull };
+        var measured = arms.Select(arm => Task.Run(() => LevelRun.Measure(contentDir, content, seeds, yard: arm))).ToList();
+        var runs = arms.Zip(measured, (arm, task) => (Arm: arm, Runs: (IReadOnlyList<LevelRun.Run>)task.Result)).ToList();
+        Console.WriteLine($"yard: {seeds} seeds, the heuristic's campaign under three arms; each camp's drill sends the lowest unit to the strongest teacher who can raise it; gate 4 at each arm's carried levels, data only");
+        foreach (var (arm, armRuns) in runs)
+        {
+            Console.WriteLine(YardRun.TallyLine(arm, armRuns));
+        }
+
+        foreach (var entry in entries)
+        {
+            var number = content.Campaign.Maps.ToList().IndexOf(entry) + 1;
+            var fought = entry.Prepare(MapFiles.Load(MapFiles.CampaignPath(contentDir, content, entry.MapId), content));
+            Console.WriteLine($"map {number} {entry.MapId}:");
+            var slots = BattleState.From(fought, content, content.Cast, 1).UnitsOf(Side.Player).Count();
+            foreach (var (arm, armRuns) in runs)
+            {
+                var camps = armRuns.SelectMany(r => r.Maps.Where(m => m.Map == number).Select(m => m.Camp)).ToList();
+                if (camps.Count == 0)
+                {
+                    Console.WriteLine($"  {YardRun.Name(arm)}: no run won this map");
+                    continue;
+                }
+
+                var (company, applied) = AtSlotLevels(content, fought, LevelRun.SlotLevels(camps, slots));
+                var (gate1, games) = Gates.Gate1(company, fought, entry.MapId, seeds);
+                var gate4 = Gates.Gate4(company, fought, entry.MapId, games);
+                Console.WriteLine($"  {YardRun.Name(arm)} {string.Join("/", applied)} over {camps.Count}: {gate1.Line.Split('\n')[0]}");
+                Console.WriteLine($"    {gate4.Line.Split('\n')[0]}");
+            }
         }
 
         return 0;
