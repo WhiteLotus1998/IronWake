@@ -62,6 +62,9 @@ public enum AbilityTrigger
 
     /// <summary>When an enemy spell is aimed at an ally near the holder: Lightning Rod (issue 1280).</summary>
     OnAimed,
+
+    /// <summary>Taken as the holder's action in place of an attack: Hask's line strike (issue 1384).</summary>
+    Action,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -326,6 +329,16 @@ public sealed record StoopEffect(int Flight, int Damage) : AbilityEffect
 }
 
 /// <summary>
+/// The Iron Warden's line strike (issue 1384, round 487; <see cref="LineStrike"/>): as the holder's action, its equipped
+/// lance strikes every unit of another side on up to <see cref="Reach"/> tiles in one cardinal line out from it, once
+/// each, with no counter.
+/// </summary>
+public sealed record LineStrikeEffect(int Reach) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.Action;
+}
+
+/// <summary>
 /// Lightning Rod (issue 1280, Lotus's #1247 rulings; <see cref="LightningRod"/>): always on, an attack by a
 /// unit of another side with a tome of <see cref="School"/>, aimed at an ally of the holder within
 /// <see cref="Radius"/> tiles of it, strikes the holder instead, when the tome reaches the holder from where
@@ -517,6 +530,10 @@ public static class AbilityRules
     /// <summary>The rod among <paramref name="abilities"/> that catches spells of <paramref name="school"/> (issue 1280, <see cref="RodEffect"/>), the widest first; null when none does.</summary>
     public static RodEffect? Rod(ValueList<Ability> abilities, MagicSchool school) =>
         abilities.Select(a => a.Effect).OfType<RodEffect>().Where(r => r.School == school).OrderByDescending(r => r.Radius).FirstOrDefault();
+
+    /// <summary>The longest line strike among <paramref name="abilities"/> (issue 1384, <see cref="LineStrikeEffect"/>), null when none strikes a line.</summary>
+    public static LineStrikeEffect? LineStrike(ValueList<Ability> abilities) =>
+        abilities.Select(a => a.Effect).OfType<LineStrikeEffect>().OrderByDescending(l => l.Reach).FirstOrDefault();
 
     /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>
     public static bool Braces(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is BraceEffect);

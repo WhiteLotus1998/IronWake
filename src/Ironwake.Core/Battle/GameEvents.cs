@@ -515,3 +515,10 @@ public sealed record OrderCalled(string CaptainId, OrderKind Kind, int Radius, V
 
 /// <summary>An ally used the move a Fall back order owed it (issue 85); from equal to to and an empty path: declined.</summary>
 public sealed record FellBack(string UnitId, Coord From, Coord To, ValueList<Coord> Path) : GameEvent;
+
+/// <summary>
+/// <paramref name="UnitId"/> struck a line from <paramref name="From"/> (issue 1384, <see cref="LineStrike"/>):
+/// <paramref name="Line"/> is every tile it reached, nearest first, and <paramref name="Struck"/> the units on it it
+/// struck, in that order, once each with no counter; a <see cref="CombatFought"/> per unit follows.
+/// </summary>
+public sealed record LineStruck(string UnitId, Coord From, ValueList<Coord> Line, ValueList<string> Struck) : GameEvent;

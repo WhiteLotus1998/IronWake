@@ -113,6 +113,9 @@ public static class Resolver
             case Breathe breathe:
                 (next, rejection) = ApplyBreathe(state, content, breathe, events);
                 break;
+            case StrikeLine strikeLine:
+                (next, rejection) = ApplyStrikeLine(state, content, strikeLine, events);
+                break;
             case Canto canto:
                 (next, rejection) = ApplyCanto(state, content, canto, events);
                 if (rejection is null)
@@ -1856,6 +1859,35 @@ public static class Resolver
         }
 
         return (Rime.Apply(state, content, rider, breathe.Toward, events), null);
+    }
+
+    /// <summary>
+    /// Issue 1384's line strike: a unit holding one, as its action, strikes every unit of another side on a line out
+    /// through a tile beside it (<see cref="LineStrike"/>). A death is handled as an area cast's is.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyStrikeLine(BattleState state, GameContent content, StrikeLine strike, List<GameEvent> events)
+    {
+        var unit = Acting(state, strike.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (LineStrike.Refusal(state, content, unit, strike.Toward) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotStrikeLine, $"{unit.Id} cannot strike a line: {refusal}"));
+        }
+
+        return (LineStrike.Apply(state, content, unit, strike.Toward, events, (next, dead, striker) =>
+        {
+            next = LeaveKeepsake(next, dead, content, events).WithoutUnit(dead.Id);
+            if (Freed.IsBound(state, dead))
+            {
+                next = next with { BondKilledBy = Freed.KillBy(striker, content) };
+            }
+
+            return SwearGrudges(next, content, dead, striker, events);
+        }), null);
     }
 
     /// <summary>The tile one step past <paramref name="target"/>, directly away from <paramref name="from"/>.</summary>

@@ -430,6 +430,12 @@ public static class ProtocolJson
                 w.WriteString("unit", rcs.UnitId);
                 w.WriteString("school", rcs.School.Label());
                 break;
+            case LineStruck ls:
+                w.WriteString("unit", ls.UnitId);
+                WriteCoord(w, "from", ls.From);
+                WriteCoords(w, "line", ls.Line);
+                WriteStrings(w, "struck", ls.Struck);
+                break;
             case AreaCastAt ac:
                 w.WriteString("unit", ac.CasterId);
                 w.WriteString("spell", ac.SpellId);
@@ -837,6 +843,11 @@ public static class ProtocolJson
                 w.WriteString("unit", breathe.UnitId);
                 WriteCoord(w, "toward", breathe.Toward);
                 break;
+            case StrikeLine strikeLine:
+                w.WriteString("type", "strikeLine");
+                w.WriteString("unit", strikeLine.UnitId);
+                WriteCoord(w, "toward", strikeLine.Toward);
+                break;
             case Carry carry:
                 w.WriteString("type", "carry");
                 w.WriteString("unit", carry.UnitId);
@@ -904,6 +915,7 @@ public static class ProtocolJson
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
             "carry" => new Carry(RequiredString(e, "unit"), RequiredString(e, "ally"), ReadCoord(e, "to"), ReadCoord(e, "setDown")),
             "breathe" => new Breathe(RequiredString(e, "unit"), ReadCoord(e, "toward")),
+            "strikeLine" => new StrikeLine(RequiredString(e, "unit"), ReadCoord(e, "toward")),
             "dash" => new Dash(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "order" => new Order(ReadOrderKind(RequiredString(e, "kind"))),
             "fallBack" => new FallBack(RequiredString(e, "unit"), ReadCoord(e, "to")),

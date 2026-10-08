@@ -28,6 +28,8 @@ token_grave_caller_player.png
 token_grave_caller_enemy.png
 token_halberdier_player.png
 token_halberdier_enemy.png
+token_iron_warden_player.png
+token_iron_warden_enemy.png
 token_lancer_player.png
 token_lancer_enemy.png
 token_marksman_player.png
@@ -260,6 +262,14 @@ halberdier_axe_miss_recover.png
 halberdier_axe_dodge.png
 halberdier_axe_hit_react.png
 halberdier_axe_fall.png
+iron_warden_lance_idle.png
+iron_warden_lance_advance.png
+iron_warden_lance_strike.png
+iron_warden_lance_strike_crit.png
+iron_warden_lance_miss_recover.png
+iron_warden_lance_dodge.png
+iron_warden_lance_hit_react.png
+iron_warden_lance_fall.png
 lancer_lance_idle.png
 lancer_lance_advance.png
 lancer_lance_strike.png

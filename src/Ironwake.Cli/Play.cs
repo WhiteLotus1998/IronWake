@@ -2043,6 +2043,11 @@ public sealed class PlaySession
         }
 
         _out.WriteLine(ThreatText(board, _content, unit, tile, lines, Queries.SleepingThreats(board, _content, unit, tile)!, Queries.Unseeing(board, _content, unit, tile), Queries.MoveWins(board, _content, unit, tile), Queries.Anvils(board, _content, unit, tile), Queries.StopWakes(board, _content, unit, tile), Queries.Refusals(board, _content, unit, tile)));
+        if (LineStrikeThreat(board, _content, unit, tile) is { } line)
+        {
+            _out.WriteLine(line);
+        }
+
         if (Queries.Stunned(board, _content, unit, tile) is { Count: > 0 } stunned)
         {
             var names = UnitNames.Of(board, _content);
@@ -2053,6 +2058,26 @@ public sealed class PlaySession
         {
             _out.WriteLine(braced);
         }
+    }
+
+    /// <summary>
+    /// The <c>threat</c> line for a line strike through <paramref name="unit"/> on <paramref name="tile"/> (issue 1384,
+    /// <see cref="LineStrike.Through"/>): <c>Hask's line strike from 3,6 east catches Captain, Pell: acc 71% dmg 12
+    /// (hp 23), no counter; not in the total</c>. Null when the planner strikes no line through it.
+    /// </summary>
+    public static string? LineStrikeThreat(BattleState state, GameContent content, BattleUnit unit, Coord tile)
+    {
+        if (LineStrike.Through(state, content, unit, tile) is not { } through)
+        {
+            return null;
+        }
+
+        var board = tile == unit.At ? state : state.WithUnit(unit with { At = tile });
+        var names = UnitNames.Of(board, content);
+        var target = board.Find(unit.Id)!;
+        var side = LineStrike.Forecast(board.WithUnit(through.Striker), content, through.Striker, target).Attacker;
+        return $"{names[through.Striker.Id]}'s line strike from {through.Line.From} {through.Line.Direction} catches {string.Join(", ", through.Line.Caught.Select(u => names[u.Id]))}: "
+            + $"{names[unit.Id]} acc {side.DisplayedHit}% dmg {side.Damage} (hp {target.Hp}), no counter; not in the total";
     }
 
     /// <summary>
@@ -3184,6 +3209,7 @@ public sealed class PlaySession
         Dash d => $"dash {d.UnitId} {d.To}",
         Carry c => $"carry {c.UnitId} {c.AllyId} {c.To} {c.SetDown}",
         Breathe b => $"breathe {b.UnitId} {b.Toward}",
+        StrikeLine l => $"strikeline {l.UnitId} {l.Toward}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
@@ -3322,6 +3348,8 @@ public sealed class PlaySession
                 return $"{names[um.UnitId]} is marked by {names[um.ByUnitId]}: the next {um.School.Label()} hit on it deals {Mark.Times}";
             case MarkCashed mc:
                 return $"{names[mc.ByUnitId]} cashes the mark on {names[mc.UnitId]}";
+            case LineStruck ls:
+                return $"{names[ls.UnitId]} strikes a line {LineStrike.Directions.Single(d => ls.Line.Count > 0 && ls.From.X + d.Dx == ls.Line[0].X && ls.From.Y + d.Dy == ls.Line[0].Y).Name} from {ls.From} over {string.Join(" ", ls.Line)}, striking {string.Join(", ", ls.Struck.Select(id => names[id]))}";
             case AreaCastAt ac:
                 return $"{names[ac.CasterId]} casts {(content.Weapons.TryGetValue(ac.SpellId, out var storm) ? storm.Name : ac.SpellId)} at {ac.At}, striking {string.Join(", ", ac.Struck.Select(id => names[id]))} ({ac.UsesLeft} {(ac.UsesLeft == 1 ? "use" : "uses")} left)";
             case CurseTicked ct:

@@ -1,0 +1,62 @@
+name: Ironwake Keep (the Iron Warden)
+size: 16x12
+win: defeat_boss
+turn_limit: 12
+recall: 3
+enemy_level: 6
+announce: on
+break: on
+oathbound: van, hunt, lord
+pair_rule: hunt, lord
+fronts: north 10,1 10,2; gate 10,5 10,6; south 10,9 10,10
+hunter: 7,6
+freed: 7,6 by lord
+holds: lord 0,6 0,6
+deploy: all
+
+....^^....#.....
+................
+...^............
+..........#.....
+....n.....#.....
+................
+................
+....n.....#.....
+..........#.....
+...^............
+................
+....^^....#.....
+
+units:
+P captain 13,5
+P recruit 12,2
+P recruit 12,9
+P recruit 13,6
+P recruit 14,2
+P recruit 14,9
+P recruit 12,4
+P recruit 12,7
+P recruit 14,4
+P recruit 14,7
+P recruit 15,5
+P recruit 15,6
+E soldier 6,4 group:van behavior:aggressive
+E brigand 6,7 group:van behavior:aggressive
+E archer 4,5 group:van behavior:aggressive
+E brigand 3,1 group:van behavior:aggressive
+E soldier 3,10 group:van behavior:aggressive
+E finale_hunter 7,6 group:hunt behavior:aggressive
+
+events:
+wave1 turn 2 enemy spawn brigand 0,1 group:wave behavior:aggressive
+wave2 turn 2 enemy spawn archer 0,10 group:wave behavior:aggressive
+wave3 turn 3 enemy spawn soldier 0,5 group:wave behavior:aggressive
+wave4 turn 3 enemy spawn hexer 0,6 group:wave behavior:aggressive
+assault1 turn 5 enemy spawn soldier 0,5 group:assault behavior:aggressive
+assault2 turn 5 enemy spawn brigand 0,6 group:assault behavior:aggressive
+assault3 turn 5 enemy spawn archer 0,4 group:assault behavior:aggressive
+north_in falls north spawn brigand 11,1 group:inside behavior:aggressive
+gate_in1 falls gate spawn soldier 11,5 group:inside behavior:aggressive
+gate_in2 falls gate spawn brigand 11,6 group:inside behavior:aggressive
+lord turn 6 enemy spawn boss hask_warden 0,6 group:lord behavior:aggressive
+south_in falls south spawn brigand 11,10 group:inside behavior:aggressive

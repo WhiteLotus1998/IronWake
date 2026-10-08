@@ -1574,8 +1574,17 @@ public static class ContentLoader
                 }
 
                 return rod;
+            case "line_strike":
+                RequireOnly(entry, effect, "effect", "kind", "reach");
+                var line = new LineStrikeEffect(effect.Int("reach"));
+                if (line.Reach < 1)
+                {
+                    throw entry.Error("effect.reach", "must be at least 1");
+                }
+
+                return line;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, range, killheal, beside, aura, footing, opening, bite, long_carry, deep_rime, drake_frost, stoop or rod");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, range, killheal, beside, aura, footing, opening, bite, long_carry, deep_rime, drake_frost, stoop, rod or line_strike");
         }
     }
 

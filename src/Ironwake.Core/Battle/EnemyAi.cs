@@ -280,6 +280,8 @@ public static class EnemyAi
     /// A guard boss with a post goes home instead (<see cref="GoesHome"/>, issue 393).
     /// A member of the <c>goes_home:</c> group standing off its post plans from <see cref="HomeTile"/>
     /// alone, striking from it or else ending on it (issue 1372).
+    /// A unit holding a line strike strikes a line instead of any plain option whenever one from its tiles catches two or
+    /// more units it knows (issue 1384, <see cref="LineStrike.Best"/>), a boss under the veto only from a tile it passes.
     /// </summary>
     public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit)
     {
@@ -315,6 +317,13 @@ public static class EnemyAi
         var equipped = unit.EquippedSlot(content);
         var sworn = Sworn(state, unit, known);
         var best = Choose(state, content, unit, tiles, reach, known, playerReach, sworn).Best;
+        var lineVeto = BossVetoApplies(state, content, unit);
+        if (LineStrike.Best(state, content, unit, tiles, known, lineVeto ? tile => BossVetoRefuses(state, content, unit, tile) : null) is { } line)
+        {
+            var strike = new StrikeLine(unit.Id, line.Toward);
+            return line.From == unit.At ? new Command[] { strike } : new Command[] { new Move(unit.Id, line.From), strike };
+        }
+
         if ((Raise(state, content, unit, tiles, reach, playerReach) ?? Rampart(state, content, unit, tiles, reach, playerReach)) is { } cast
             && (best is null || !Kills(state, content, Armed(content, state.Carrying(unit, best.Tile), best.Slot), best.Tile, state.Find(best.TargetId)!)))
         {

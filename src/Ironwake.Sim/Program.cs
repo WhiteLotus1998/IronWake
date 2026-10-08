@@ -1315,6 +1315,7 @@ public static class Program
         Canto c => $"canto {c.UnitId} {c.To}",
         Carry c => $"carry {c.UnitId} {c.AllyId} {c.To} {c.SetDown}",
         Breathe b => $"breathe {b.UnitId} {b.Toward}",
+        StrikeLine l => $"strikeline {l.UnitId} {l.Toward}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
         _ => command.ToString() ?? "",

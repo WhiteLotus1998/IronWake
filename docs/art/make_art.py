@@ -242,7 +242,7 @@ def silhouette(canvas, class_id, cx, cy, k, rgba, tell=None):
     elif class_id == "skyrider":
         stroke(P(-10, 2), P(-4, -6), P(0, 0), P(4, -6), P(10, 2))
         stroke(P(0, 0), P(0, 10))
-    elif class_id == "bulwark":
+    elif class_id in ("bulwark", "iron_warden"):
         fill(P(-8, -9), P(8, -9), P(8, 1), P(0, 10), P(-8, 1))
     else:
         raise SystemExit(f"make_art: class '{class_id}' has no silhouette; add one here and in Main.Look.cs")
@@ -403,7 +403,7 @@ class Figure:
         self.c = canvas
         self.class_id, self.kind, self.weapon_id, self.boss = class_id, kind, weapon_id, boss
         self.mount = {"outrider": "horse", "skyrider": "wings"}.get(class_id)
-        self.bulk = 1.18 if boss or class_id == "bulwark" else 1.0
+        self.bulk = 1.18 if boss or class_id in ("bulwark", "iron_warden") else 1.0
 
     def draw(self, p, origin):
         c = self.c
@@ -441,7 +441,7 @@ class Figure:
         swing = p["swing"]
         hand, angle, grip = self.hand(shoulder, swing)
         # The far arm and anything carried behind the body.
-        if self.class_id == "bulwark" or (self.boss and self.kind == "lance"):
+        if self.class_id in ("bulwark", "iron_warden") or (self.boss and self.kind == "lance"):
             shield = [upper((-2, -44)), upper((18, -44)), upper((18, -14)), upper((8, -2)), upper((-2, -14))]
             c.polygon(shield, DARK)
         c.stroke([upper(shoulder), upper(((shoulder[0] + grip[0]) / 2 - 6, (shoulder[1] + grip[1]) / 2 + 8)), upper(grip)], 8, SHADE)

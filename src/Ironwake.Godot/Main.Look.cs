@@ -594,6 +594,7 @@ public partial class Main
                 Stroke(P(0, 0), P(0, 10));
                 break;
             case "bulwark":
+            case "iron_warden":
                 Fill(P(-8, -9), P(8, -9), P(8, 1), P(0, 10), P(-8, 1));
                 break;
             default:

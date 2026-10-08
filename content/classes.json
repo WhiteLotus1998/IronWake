@@ -343,6 +343,16 @@
       "growthModifiers": { "hp": 5, "def": 5 }
     },
     {
+      "id": "iron_warden",
+      "name": "Iron Warden",
+      "description": "Placeholder. Hask's own: the lance first, and the Kin's cold through the pommel shard.",
+      "enemy": true,
+      "movement": "armored",
+      "mov": 4,
+      "abilities": ["line_strike"],
+      "weapons": ["lance"]
+    },
+    {
       "id": "frost_caster",
       "name": "Frost Caster",
       "description": "Placeholder. Keeps the cold in a jar and opens it on whoever comes first.",
