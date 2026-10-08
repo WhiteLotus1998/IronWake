@@ -21,7 +21,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **The Sim's veto** covers every unit whose death loses the map, no-crit worst case, a certain kill removed (0024-0026). Recruits take no veto; one on a lethal approach tile takes the captain's key (368, #1054). Gate 4 is relative ablation (0019, 0020); on Escape it pairs units out (0068).
 - **`threat`** prices the coming enemy phase with the planner's choices (DESIGN 8): one enemy per strike tile, announced spawns (0045), sleepers unnumbered, at dusk only what the player sees (#403), `from <tile>` names what a stop would wake (#458). **A freed tile** (404, #1191): strikers sharing the one tile a counter frees are priced one wave deep; `end` asks on that lethal at any counter chance, the chance printed. A spell counter prints uses left (0282); a line explains, never predicts (0294). A priced strike whose noise wakes a group names it (#1290).
 - **Escape:** `exit` is an action (0056).
-- **Recall** restores the rolls: knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75).
+- **Recall** restores the rolls: knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75). Then forecast and `threat` print discarded first strikes whose outcome still follows (0337).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
 - **Content:** a Lore or Faith unit ships an unconditional cast; an unarmed one says so; one contested place per two deployed; a sleeper in the open can be slipped past, in a corridor only woken.
 - **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill, the raid's wall; protection is a terrain feature or map event, never a unit action.
@@ -35,11 +35,11 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **The Rookery (0208):** not passed; no lever before a cold chair.
 - **The Counting House (311-321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh read in (2030, Maud, lost; 441).
 - **The Long Count (313-315):** count on screen; dusk; archer 11,4 (#930).
-- **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409): the pair feeds the fort from its edge. #1210: fort, Maud south. 1710 (431): Maud safe west of the river from t2; if a cold chair agrees, the pair's lane reaches row 9.
+- **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409): the pair feeds the fort from its edge. #1210: fort, Maud south. 1710 (431): Maud safe west of the river from t2; a cold chair agreeing: the pair's lane to row 9.
 - **The First Shrine (406-455; 0283, 0304, 0306):** south start, limit 10; the loft archer wakes on the door's death and takes the held altar (`seize_hold: 1`). **Kept, no lever, no chair owed** (455, Chat 5303): whoever corks the doorway (7,2) decides the held phase; brigand 1 to 4,4 retired. #1351, #1352 filed from it.
 - **The Undercroft (431):** the middle wins (4,4 corks the stair); the lector is scenery off the north route. Held for a cold chair: his reach over the desk, or 13,4.
 - **The Lazar House (420-440):** held bars and the queue kept (#1259, 0303), limit 5 (0305); bar advice is #1144's. No lever before the Critic's cold chair (Pell or Wren on the north lane; journals whether that ally lives, and turns 3, 4). Ally dies every line: the turn-5 hexer later or east; saved at surprise 4 or under: a turn-3, 4 change; 2,3 or 4,3 only if Maud's HP never mattered.
-- **The raid and the keep:** acceptance is play. The raid is never tuned for surprise (158); rework only if a floor read (L3, pick L4) repeats the dead van, then 301's lever (458). The keep is the finale (0265); both in (407). Levers 0284-0287, 0293 shipped; range plus 2 parked. Fresh keep chair: is the bait a choice?
+- **The raid and the keep:** acceptance is play. The raid is never tuned for surprise (158); Code's floor 3100 8/7/6: no lever (461); Chat's cold floor chair owed; if flat, 301's lever. The keep is the finale (0265); both in (407). Levers 0284-0287, 0293 shipped; range plus 2 parked. Fresh keep chair: is the bait a choice?
 
 ## Experiments (state and kill criterion)
 
@@ -59,7 +59,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **13.27 The dash: kept on its sample** (374, 0255). No borrowed step unless a `tuned` re-read shows a free dash beat the clock. At dusk, winded is a bet.
 - **13.28 The wind: samples only, never the campaign** (Lotus, 0260). His beta play keeps or kills it.
 - **13.29 The one answer: kept on its sample** (376, 0257). Decides who enters the enemy phase whole; swarm lever unbuilt; a campaign `one_answer:` map fields a 1-2 answerer at a choke.
-- **13.30 The bell** (390, 0267): parked on `experiment/bell` until under three wait (0237).
+- **13.30 The bell** (390, 0267): parked on `experiment/bell` until under three wait.
 - **13.20 The keep as a home (0137, #687):** rooms cost repair budget; beds gate arrivals, a death frees none. Killed if the raid purse buys every room and wall in both plays.
 
 ## The campaign's story (186-211; 0121; DESIGN 14)

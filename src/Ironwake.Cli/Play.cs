@@ -1706,6 +1706,11 @@ public sealed class PlaySession
         var raises = RaisesWith(state, content, unit, slot);
         var (riders, counterRiders) = Riders(content, unit, target, slot, forecast, state);
         var lines = new List<string> { ForecastLine(unit, aimed, forecast, where, with, counterWith, raises, names, riders, counterRiders, CounterUses(content, target, forecast.Defender)) };
+        if (SeenRolls.Line(state, state.Turn, state.Phase, unit.Id, names[unit.Id], forecast.Attacker.HitChance, target.Id, names[target.Id], forecast.Defender.Strikes ? forecast.Defender.HitChance : null) is { } seen)
+        {
+            lines.Add("  " + seen);
+        }
+
         var hunger = HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state, forecast).ToList();
         if (ClaimantLine(state, unit, target, forecast, raises, names, hunger) is { } claimant)
         {
@@ -2187,6 +2192,12 @@ public sealed class PlaySession
                 var answers = caught ?? line.CoveredBy ?? unit;
                 var answerDistance = caught is null ? line.From.DistanceTo(tile) : line.From.DistanceTo(caught.At);
                 rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From}{(counted is null ? "" : CountedNote(line, counted[index], names))} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, answerDistance) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
+                if (!line.Raises && line.Arrives is null && line.Forecast.CaughtBy is null
+                    && SeenRolls.Line(state, state.Turn, Side.Enemy, line.Enemy.Id, names[line.Enemy.Id], line.Forecast.Attacker.HitChance, answers.Id, names[answers.Id], line.Forecast.Defender.Strikes ? line.Forecast.Defender.HitChance : null) is { } seen)
+                {
+                    rows.Add($"    {seen}");
+                }
+
                 var falls = !line.Raises && line.HeldBy is null && line.Forecast.CounterIsLethal(line.Enemy.Hp, answers.Hp) ? Returned.Falls(state, line.Enemy, names) : null;
                 if (!line.Raises && line.HeldBy is null && line.Forecast.Defender.Strikes && Kinsbane.CounterFeedLine(answers, line.Enemy, line.Forecast, content, names[answers.Id], falls) is { } feed)
                 {

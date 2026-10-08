@@ -1130,6 +1130,8 @@ public static class ProtocolJson
             w.WriteEndArray();
         }
 
+        WriteStrikes(w, "struck", state.Struck);
+        WriteStrikes(w, "seen", state.Seen);
         if (state.Bars.Count > 0)
         {
             w.WriteStartArray("bars");
@@ -1309,8 +1311,44 @@ public static class ProtocolJson
                     RequiredString(b, "event"), ReadCoord(b, "holder"), ReadCoord(b, "at"), RequiredString(b, "terrain"), RequiredString(b, "under"))))
                 : ValueList<HeldBar>.Empty,
             Waiting = e.TryGetProperty("waiting", out _) ? ReadStrings(e, "waiting") : ValueList<string>.Empty,
+            Struck = ReadStrikes(e, "struck"),
+            Seen = ReadStrikes(e, "seen"),
         };
     }
+
+    /// <summary>
+    /// A state's first strikes (issue 1359, <see cref="SeenRolls"/>): each <c>turn</c>, <c>phase</c>, <c>striker</c>,
+    /// <c>target</c>, <c>hitChance</c> and <c>hit</c>, oldest first. Written only when the list holds one.
+    /// </summary>
+    private static void WriteStrikes(Utf8JsonWriter w, string name, ValueList<SeenStrike> strikes)
+    {
+        if (strikes.Count == 0)
+        {
+            return;
+        }
+
+        w.WriteStartArray(name);
+        foreach (var strike in strikes)
+        {
+            w.WriteStartObject();
+            w.WriteNumber("turn", strike.Turn);
+            w.WriteString("phase", Name(strike.Phase));
+            w.WriteString("striker", strike.StrikerId);
+            w.WriteString("target", strike.TargetId);
+            w.WriteNumber("hitChance", strike.HitChance);
+            w.WriteBoolean("hit", strike.Hit);
+            w.WriteEndObject();
+        }
+
+        w.WriteEndArray();
+    }
+
+    private static ValueList<SeenStrike> ReadStrikes(JsonElement e, string name) =>
+        e.TryGetProperty(name, out var strikes)
+            ? ValueList<SeenStrike>.From(Array(strikes, name).Select(s => new SeenStrike(
+                RequiredInt(s, "turn"), ParseEnum<Side>(RequiredString(s, "phase"), "phase"), RequiredString(s, "striker"),
+                RequiredString(s, "target"), RequiredInt(s, "hitChance"), RequiredBool(s, "hit"))))
+            : ValueList<SeenStrike>.Empty;
 
     /// <summary>
     /// The string array <paramref name="name"/> of item ids (issue 679's wagon), each a weapon in

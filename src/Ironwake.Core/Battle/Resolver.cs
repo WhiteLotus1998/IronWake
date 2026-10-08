@@ -646,7 +646,8 @@ public static class Resolver
 
         var striker = unit.ToCombatant(state, content, art: art, against: target);
         var answer = target.Answering(state, content, unit.At, unit) with { Catching = caught };
-        var shown = Combat.Forecast(striker, answer, distance, state.Scheme).Attacker.DisplayedHit;
+        var rolled = Combat.Forecast(striker, answer, distance, state.Scheme);
+        var shown = rolled.Attacker.DisplayedHit;
         if (Signatures.Refuses(state, content, unit, shown))
         {
             return (state, new Rejection(RejectionReason.SignatureRefused, Signatures.LedgerRefusal(unit, target.Id, shown)));
@@ -661,6 +662,7 @@ public static class Resolver
             new KeyedRng(state.Seed),
             state.Scheme);
         events.Add(new CombatFought(unit.Id, target.Id, state.Turn, state.Phase, result.Strikes, result.AttackerHp, result.DefenderHp) { Bite = result.Bite });
+        state = state with { Struck = ValueList<SeenStrike>.From(state.Struck.Concat(SeenRolls.FirstStrikes(result, rolled, new CombatContext(state.Turn, state.Phase), striker.Id))) };
 
         var attackerAfter = SpendDurability(unit with { Hp = result.AttackerHp, Moved = true, Acted = true }, result.Strikes, content, events, art?.Cost ?? 0);
         if (art is { PerMap: not null })
@@ -2606,7 +2608,7 @@ public static class Resolver
         }
 
         var charges = state.RecallCharges - 1;
-        var restored = state.History[recall.ToIndex] with { History = ValueList<BattleState>.From(kept), RecallCharges = charges };
+        var restored = SeenRolls.Carry(state, state.History[recall.ToIndex] with { History = ValueList<BattleState>.From(kept), RecallCharges = charges });
         return new ApplyResult(restored, ValueList<GameEvent>.Of(new Recalled(recall.ToIndex, charges)), null);
     }
 }

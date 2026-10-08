@@ -79,6 +79,18 @@ public sealed record BattleState(
     public ValueList<TileOverlay> Overlays { get; init; }
 
     /// <summary>
+    /// The first strike of each side in every combat this line has fought (issue 1359, <see cref="SeenRolls"/>),
+    /// oldest first. A Recall restores the list with the board; what it drops goes to <see cref="Seen"/>.
+    /// </summary>
+    public ValueList<SeenStrike> Struck { get; init; }
+
+    /// <summary>
+    /// The first strikes that resolved in lines a Recall discarded (issue 1359, <see cref="SeenRolls"/>), from
+    /// every Recall this battle, oldest first. Knowledge, not board: a Recall keeps it and adds to it.
+    /// </summary>
+    public ValueList<SeenStrike> Seen { get; init; }
+
+    /// <summary>
     /// Every unit that has died on this map, as it fell, where it fell, oldest first (issue 1284, <see cref="Hollow"/>):
     /// the bodies dark's raise reads. A raised body leaves the list, and a Hollow's death adds none. A Recall restores
     /// the list with the board.

@@ -371,6 +371,23 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 1359: after a Recall, the forecast and <c>threat</c> print what the discarded line rolled for
+    /// each first strike, the striker's then the counter's, and only a strike that resolved: Wren fell to the
+    /// brigand before she could counter, so its threat row names its hit alone.
+    /// </summary>
+    [Fact]
+    public void AfterARecallTheForecastAndThreatPrintTheFirstStrikesTheDiscardedLineRolled()
+    {
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1 1\nattack wren brigand-1 1 !\nend !\nrecall 11\nforecast wren brigand-1 1\nthreat wren\n");
+
+        var recall = output.IndexOf("> recall 11", StringComparison.Ordinal);
+        Assert.DoesNotContain("Seen before the recall", output[..recall]);
+        Assert.Contains("> forecast wren brigand-1 1\nForecast Wren -> Brigand: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%\n  Seen before the recall: Wren misses, Brigand misses\n", output[recall..]);
+        Assert.Contains("  Archer 2 from 4,6 with Iron Bow (slot 1): acc 70% dmg 6 crit 0%; counter: none\n    Seen before the recall: Archer 2 hits\n", output);
+        Assert.Contains("counter: acc 88% dmg 10 x2 crit 4%\n    Seen before the recall: Brigand hits\n  If all land: 17 against 9 hp\n", output);
+    }
+
+    /// <summary>
     /// Issue 552: a number printed next to a unit's name is that unit's own number. A Recall that
     /// returns Teodor dead at 17 and gives Wren back 14 names each with its own HP, never the 31
     /// they sum to beside Teodor's name (seed 113's turn-4 rewind on the Tollgate).
