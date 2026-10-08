@@ -1,0 +1,82 @@
+march
+move teodor 9,6
+wait teodor
+move captain 8,6
+wait captain
+move wren 7,6
+wait wren
+move ottilie 8,7
+wait ottilie
+end
+move teodor 10,5
+wait teodor
+move captain 9,6
+wait captain
+move wren 10,6
+wait wren
+move ottilie 9,7
+wait ottilie
+threat teodor
+end
+forecast captain wingrider-1 from 9,4
+forecast captain wingrider-1 from 11,4
+forecast ottilie wingrider-1 from 11,5
+forecast teodor wingrider-1
+forecast teodor archer-1 art long_thrust
+forecast wren wingrider-1 from 11,4
+move ottilie 11,5
+attack ottilie wingrider-1
+move captain 9,4
+attack captain wingrider-1
+move wren 10,4
+attack wren archer-1
+attack teodor archer-1 art long_thrust
+threat captain
+end
+attack wren archer-1
+item teodor 2
+threat captain
+wait captain
+move ottilie 10,6
+wait ottilie
+end
+move ottilie 11,4
+attack ottilie soldier-1
+attack teodor soldier-1 art long_thrust
+attack wren soldier-1
+wait captain
+end
+move captain 10,2
+wait captain
+item wren 2
+move ottilie 9,5
+wait ottilie
+threat teodor
+threat ottilie
+threat wren
+item teodor 2
+end
+attack teodor brigand-1
+forecast ottilie soldier-2 from 11,6
+attack wren soldier-2
+move ottilie 11,6
+attack ottilie soldier-2
+item captain 2
+threat captain
+end
+item teodor 2
+wait captain
+move wren 11,2
+wait wren
+move ottilie 10,4
+wait ottilie
+threat wren
+threat captain
+end
+move ottilie 9,1
+attack ottilie bandit_leader-1 art aimed_shot
+move wren 11,0
+attack wren bandit_leader-1
+move captain 10,1
+attack captain bandit_leader-1 art full_measure
+leave

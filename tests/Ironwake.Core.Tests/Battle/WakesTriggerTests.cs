@@ -177,4 +177,20 @@ public class WakesTriggerTests
         Assert.Equal(new[] { "turn_limit: 19" }, changed.Select(i => nineteen[i]));
         Assert.Equal(19, MapFixture.Parse(string.Join('\n', nineteen) + "\n", "saltmarsh_ford_wakes_late_19.map").TurnLimit);
     }
+    [Fact]
+    public void TheSaltmarshEastPairSampleIsTheShippedMapWithArrivalsWaitingAndOnlyThePairsTilesMoved()
+    {
+        var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var shipped = File.ReadAllLines(Path.Combine(root, "content", "maps", "saltmarsh_ford.map")).ToList();
+        var sample = File.ReadAllLines(Path.Combine(root, "docs", "samples", "saltmarsh_ford_east_pair.map")).ToList();
+
+        Assert.Equal("arrivals: wait", sample[shipped.IndexOf("brace: on") + 1]);
+        sample.RemoveAt(shipped.IndexOf("brace: on") + 1);
+        Assert.Equal(shipped.Count, sample.Count);
+        var changed = Enumerable.Range(0, shipped.Count).Where(i => shipped[i] != sample[i]).ToList();
+        Assert.Equal(new[] { "ford", "ford_second" }, changed.Select(i => sample[i].Split(' ')[0]));
+        Assert.Equal(changed.Select(i => shipped[i].Replace("spawn brigand 0,9", "spawn brigand 13,4").Replace("spawn soldier 1,9", "spawn soldier 13,5")), changed.Select(i => sample[i]));
+        var map = MapFixture.Parse(string.Join('\n', File.ReadAllLines(Path.Combine(root, "docs", "samples", "saltmarsh_ford_east_pair.map"))) + "\n", "saltmarsh_ford_east_pair.map");
+        Assert.True(map.ArrivalsWait);
+    }
 }

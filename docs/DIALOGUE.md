@@ -7,7 +7,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **Lotus's roadmap (`docs/ROADMAP.md`):** all but art first; no new scenes, supports or cards on the old text while he rewrites the story (#1144; hooks fine); then his story, his no-art beta, art, others' beta.
 - **Fun Gate entries.** Blind, Code's first; a disclosed warm chair counts (0073); tricks unnamed until both are in. On a save each chair takes its own seed; a pinned seed, or a roll retried after a Recall, is one read (0238, #963; 334). A board a branch pick changes is gated per arm, gate 1 too; the file's number names the arm (334, 364).
 - **A map is retuned only after both entries on it are in**, one lever at a time, Sim-measured before a partner plays it. Levers are content first.
-- **Queue order (61, 184, 188):** bugs, Lotus's notes, campaign issues, experiment plays, retunes with both entries in, Phase 3. #1308 (client Item, Exit, drake verbs; click-path parity) precedes warm plays (436). Cold chairs owed (the Critic's): the Oath Stone; the Rookery, fresh seed, a countering ally (341); Rook's field as shipped (0250).
+- **Queue order (61, 184, 188):** bugs, Lotus's notes, campaign issues, experiment plays, retunes with both entries in, Phase 3. #1308 (client verbs, click parity) precedes warm plays (436). Cold chairs owed (the Critic's): the Oath Stone; the Rookery, fresh seed, a countering ally (341); Rook's field as shipped (0250).
 - **Experiments.** At most three spikes wait on a deciding play (330, 0237); with nothing `ready`, the Builder plays the weakest untuned map warm, at the campaign's floor (0278, 402, 459); not the School (404); the Shrine and keep played by both (406, 407). A header lives on a sample until a keep round ships it. STATE names each deciding play. A kill criterion comes first; a new player action names its cost.
 - **`end` names the lethal** (158, 159; #558): a line per unit `threat` kills. It asks only if Options say so on Recruit or Captain, never on Tactician (0260, #1120). An attack whose counter kills still asks; `attack ... !` swings (336; #975).
 - **The claimant's death prints first** (372, #1068): `<name> falls for good (the claimant)`; no veto, no ending named.
@@ -31,13 +31,13 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 
 - **The Tollgate** (0073), **Brackwater Cut at dusk** (0078): `tuned`.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). A crest mass freezing the Foreman is a solve (#1087); lever: the archer out of Pell's turn-5 reach.
-- **Saltmarsh Ford:** not tuned (0093, 0095). The pair on the fort's wake (0339): samples only (36, late 39; limit 19 39, the leader stall). Agreed (475, 476): the overlap is pace (3300 8/7/6, 4471 6/7/4); the lone leader is flat. Levers: `thins` (#1365), the east-edge pair (#1370); no rear swing in the siege kills one.
+- **Saltmarsh Ford:** not tuned (0093, 0095). Samples: the pair on the fort's wake (0339; 36, late 39), the east pair (0340; 35). Agreed (475-479): overlap under `wakes` is pace; the leader alone is flat; when it fires and how far it walks are two levers; the east pair (`arrivals: wait`) goes before `thins` (#1365), built only if it fails. Kill: no Recall or body spent on a rear swing during the siege.
 - **The Rookery (0208):** not passed; no lever before a cold chair.
-- **The Counting House (311-321):** archer 11,2 (#925), limit 11 (#931), no third lever (441).
+- **The Counting House (311-321):** archer 11,2, limit 11; no third lever (441).
 - **The Mill:** `holds:` (0279), limit 9 (0280), fort south (#1210). A free lesson is a tile (466, 467): the road brigand is undoubled by the L1 captain (0338), so the 7,8 cork and 1710's bank cost an axe trade; Chat's cold floor chair reads it.
 - **The First Shrine (406-455; 0283, 0304, 0306):** south start, limit 10; the loft archer wakes on the door's death and takes the held altar (`seize_hold: 1`). **Kept, no lever, no chair owed** (455, Chat 5303): whoever corks the doorway (7,2) decides the held phase; brigand 1 to 4,4 retired. #1351, #1352 filed from it.
 - **The Undercroft (431):** the middle wins (4,4 corks the stair); the lector is scenery off the north route. Held for a cold chair: his reach over the desk, or 13,4.
-- **The Lazar House (420-440):** held bars and the queue kept (#1259, 0303), limit 5 (0305); bar advice is #1144's. No lever before the Critic's cold chair (Pell or Wren on the north lane).
+- **The Lazar House (420-440):** held bars, the queue (0303), limit 5 (0305); bar advice is #1144's. No lever before the Critic's cold chair.
 - **The raid and the keep:** acceptance is play. The raid is never tuned for surprise (158); Code's floor 3100 8/7/6: no lever (461); Chat's cold floor chair owed (flat: 301's lever). The keep is the finale (0265); both in (407). Levers 0284-0287, 0293 shipped; range plus 2 parked. Fresh keep chair: is the bait a choice?
 
 ## Experiments (state and kill criterion)

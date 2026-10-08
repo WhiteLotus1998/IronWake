@@ -1,0 +1,16 @@
+Saltmarsh Ford, the pair spawned on the east edge of the south bank (issue 1370; Table rounds 477 to 479). Sim --full, 200 seeds, two rolls, main at 181d702 plus docs/samples/saltmarsh_ford_east_pair.map: the shipped map with `arrivals: wait` and the pair's spawn tiles moved from 0,9 and 1,9 to 13,4 and 13,5, the shipped enter line kept.
+
+gate 1 beatable: docs/samples/saltmarsh_ford_east_pair.map, heuristic wins 35/200 (17 %), winning turn median 11 p90 17 limit 18, losses 153 timeout 12 captain 0 protected, quiet tail 2.3, refused kill p50 0.8674 over 153, at the stall p50 0.0000 over 153, two-roll average: FAILED
+gate 2 decisions matter: random wins 0/200 (0 %): ok
+gate 3 no cheap shots: 0 player units killed from deployment: ok
+gate 4 no dead weight: 3 recruits x 200 seeds, median drop 0.030: FAILED
+gates 5 to 8: ok
+
+Against (docs/measurements/saltmarsh-wakes-1365.txt): shipped 50 (timeout 133, captain 17), wakes fort 36 (153, 11), wakes fort late 39 (147, 14).
+
+Trace, seeds 1 to 40 (--trace, as round 474):
+- 3 won, 3 lost to the captain's death, 34 lost on the clock.
+- In all 34 clock losses the leader is the only enemy left and the last to swing (the heuristic's leader stall, round 474).
+- The pair arrived in 39 of 40 seeds. In seed 19 the captain died on turn 8 before anyone entered the fort area. The pair struck in the enemy phase of the turn it arrived in 35 of the 39, and on the next phase in the other 4. Its first target was a body on the south bank by the ford: Wren in 27, Ottilie in 5, the captain in 5, Teodor in 2.
+
+Reading: under the issue's written floor (40, or a shortfall within the timeouts the `at the stall` column proves are stalls), 35 fails. The stall column reads 0.0000, so the clause proves none, as on the wakes samples. Captain deaths fall from 17 to 12, so the pair is not too strong. The pair now reaches the siege at any pace, which is what the sample was built to show. The shortfall is the same leader stall as round 474's.
