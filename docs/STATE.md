@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-08 (0336, #1357). Under 19 KB on a branch, 20 KB on main (#1291).
+Updated: 2026-10-08 (0336, #1357; raid 3100). Under 19 KB on a branch, 20 KB on main (#1291).
 
 ## Where we are
 
@@ -18,11 +18,10 @@ No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain 
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` (versioned, PROTOCOL.md), `pending` until #634.
 - #77 slice 8 (0245): `support <a> <b>` at a camp, lowest unseen tier once, free; #77 `blocked` on a chair's A read.
-- #1308 slices 1 to 5: item, exit, carry and breathe rows, parity by clicks; `--quest a,b`; side-map hand plays fought only when named; Godot `--action` screenshots. Slice 5: heal arts offered (`HealArtsOf`); `tests/parity/campaign/psalter-art-644.script` matched by clicks. Open: a carry in a campaign script; the Godot run of the art script.
+- #1308 slices 1 to 5: item, exit, carry, breathe rows, click parity; `--quest a,b`; side-map plays fought only when named; Godot `--action` shots. Slice 5: heal arts offered (`HealArtsOf`); `tests/parity/campaign/psalter-art-644.script` matched by clicks. Open: a carry in a campaign script; the Godot run of the art script.
 - #1003: card = text plus its rules line in parentheses (348 to 363); reads through 367 applied; Keziah's Oath Stone feeling waits for #634.
 - #811 voice sheets, #1001 scene scripts (0244), #1005 scenes are in; then #634; #813 builds on 0243. `rejournal.py --apply` also rewrites stale unreplayed transcripts; keep only the failing ones.
-- #611 (six arts); #535 slices 1, 2 (0114, 0115); clips await #621.
-- #636 (0125, 0170): Full Measure costs the next phase, never doubles; the veto prices no arts (0251).
+- #611 (six arts); #535 slices 1, 2 (0114, 0115); clips await #621. #636 (0125, 0170, 0251): Full Measure costs the next phase, never doubles; the veto prices no arts.
 - The story gate is open (Lotus closed #656; build from STORY draft 6, built to change). #635 slices 4 to 11 (0196, 0198 to 0204) built the side maps in the Maps table (slice 11, Rook 1, opens the Drover) and three paid items (Psalter, Commonplace, Tally; the last two with 3 frozen iron). The campaign packs the Family Lance behind Teodor's iron and holds it at sound until The Old Watch is won (`held`, `wakes`, `--heirloom --quest`). Slice 12 (0205): Teodor 2, The Warden's Gate, names the lance and opens Turn the Key (the lock); no hand play declares it yet. Slices 13 to 16 (0206, 0208, 0224, 0225): Keziah 1 and 2, Rook 2. #635 is closed as built; #77 slices 1 to 7 are built (0183 to 0189): 26 pairs, C 16, B 28, A 48 (best, not sum); A by a committed human waits on a chair's campaign.
 - #633 (0192 to 0194): `branch`, `pick`, `talk`, `meet`. #844: the Roster names a contested place.
 
@@ -52,7 +51,7 @@ No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain 
 | old_mill_road | A fixture, out of the campaign (0124). |
 | saltmarsh_ford | Not tuned. Toll Axe boss (0029), ford forest (0030), spawn behind (0090), `brace: on` (0091), the north cut (0093). Gate 1 50/200, gate 4 fails at 0.075 (#971). On the cut: Code 547 7/7/6, Chat cold 571 7/7/5; Code 1560 warm 6/6/5, the pair late. The spawn lever #524 failed (0095). |
 | sallow_grange | Not tuned. Seize, the Reeve a guard boss at 15,6 (0055), hexer at 13,7 (#275). `keziah_warning: on` (0214). Gate 1 81 percent (161/200), gate 4 ok at 0.330 (#971). Chat 7/7/6 (44); Code 61 6/6/5, 871 7/7/5, 1580 warm 7/7/5 (t8): two holders never act. |
-| ironwake_raid | Not tuned (round 158). Map 6 (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat cold 301 7/7/5, 633 9/7/6 (L1), 1570 warm 6/6/4 (L4, t5; #1237); 2055 warm 6/6/4 (Keziah, t4). Next: a read at the floor, L3 (0336). |
+| ironwake_raid | Not tuned (round 158). Map 6 (0060): rout, limit 7. Gate 1 94 percent. Code 288 6/6/6, Chat 301 7/7/5, 633 9/7/6 (L1), 1570, 2055 6/6/4 (L4); 3100 warm 8/7/6 at the floor (L3, Keziah L4; t5, three Recalls): at the floor the van is the map; no lever. |
 | ironwake_keep | Not tuned. The finale (0265, #1149): defeat boss, limit 12, fronts north/gate/south, the raid's wall broken. `--finale` L8 floor 0 (data). Levers 1 to 3 (0284 to 0287): 87/71, 87/70, 84/58. Chat's depleted pair 2410: sample 6/7/6 t11, keep 7/6/5 t12; the reach shipped (0293; Sim 84/58). Next: a fresh keep chair (is the bait a choice?). |
 
 ## Open experiments and the play that decides each
