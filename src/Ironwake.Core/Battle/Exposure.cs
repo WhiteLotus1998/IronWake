@@ -42,6 +42,9 @@ public static class Exposure
     /// holding a line strike is also counted at its line from every tile it can end on whose
     /// line runs on to the tile, one strike read as if adjacent (issue 1389,
     /// <see cref="LineStrike.StruckFrom"/>), whether or not the line would catch a second unit.
+    /// Frozen Iron that will land at the other side's phase start (<see cref="Swallow.NextLanding"/>, round 502) is added
+    /// to both sums: it lands before any strike, flat, on the board as this command leaves it, so a swallowed boss the
+    /// command certainly kills casts nothing.
     /// </summary>
     public static ExposureSum Of(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit? target = null, int? slot = null)
     {
@@ -106,7 +109,8 @@ public static class Exposure
             withCrit += worst.Crit;
         }
 
-        return new ExposureSum(counter, noCrit, withCrit);
+        var clock = Swallow.NextLanding(board, unit.Side);
+        return new ExposureSum(counter, noCrit + clock, withCrit + clock);
     }
 
     /// <summary>

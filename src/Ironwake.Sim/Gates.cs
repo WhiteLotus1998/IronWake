@@ -55,6 +55,15 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// </summary>
     public StageTwo? Stage { get; init; }
 
+    /// <summary>
+    /// What killed the captain on a captain loss (round 502's read of the finale's losses): the killer's name,
+    /// or <c>frozen iron</c>, or <c>other</c>; with <see cref="CaptainFellInStageTwo"/> when the boss had swallowed. Null otherwise.
+    /// </summary>
+    public string? CaptainKiller { get; init; }
+
+    /// <summary>Whether the captain fell after the swallow (<see cref="Stage"/> begun).</summary>
+    public bool CaptainFellInStageTwo { get; init; }
+
     /// <summary>How the enemy a <c>freed:</c> header binds left the board (issue 750): null while she stood at the end or on a map without one.</summary>
     public BondFate? Bond { get; init; }
 
@@ -214,6 +223,9 @@ public static class Runner
         var covers = CoverCounts.Zero;
         var fired = new List<MapEventFired>();
         StageTwo? stage = null;
+        string? captainKiller = null;
+        var captainSeen = false;
+        var captainInStageTwo = false;
         while (!state.Outcome.IsOver)
         {
             if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
@@ -273,6 +285,13 @@ public static class Runner
                     covers = covers.After(e);
                 }
 
+                captainKiller ??= Gates.CaptainKillerOf(state, result.Events);
+                if (captainKiller is not null && !captainSeen)
+                {
+                    captainSeen = true;
+                    captainInStageTwo = stage is not null;
+                }
+
                 stage = StageTwo.After(stage, state, result.Next, result.Events);
                 fired.AddRange(result.Events.OfType<MapEventFired>());
                 drifted |= result.Events.OfType<RouteDrifted>().Any();
@@ -308,6 +327,8 @@ public static class Runner
             Fired = fired,
             Bond = state.Bond,
             Stage = stage,
+            CaptainKiller = state.Outcome.Cause == LossCause.Captain ? captainKiller ?? "other" : null,
+            CaptainFellInStageTwo = state.Outcome.Cause == LossCause.Captain && captainInStageTwo,
             Weapons = weapons,
             Items = items,
             Camp = state.Outcome.Result == BattleResult.Won ? LevelRun.Read(start, state, content) : null,
@@ -532,6 +553,25 @@ public static class Gates
     /// <summary>The survivors row and a separator on an Escape map; nothing on any other.</summary>
     private static string EscapeSurvivors(IReadOnlyList<GameResult> games, MapDefinition map) =>
         map.Win == WinCondition.Escape ? $"{Survivors(games)}, " : "";
+
+    /// <summary>The captain's killer in <paramref name="events"/> on <paramref name="before"/>: a combat's other side by name, marked when it was countering the captain, or Frozen Iron; null when the captain did not fall.</summary>
+    public static string? CaptainKillerOf(BattleState before, IReadOnlyList<GameEvent> events)
+    {
+        foreach (var e in events)
+        {
+            switch (e)
+            {
+                case CombatFought fought when fought.TargetHpAfter == 0 && before.Find(fought.TargetId) is { IsCaptain: true }:
+                    return before.Find(fought.AttackerId)?.Unit.Name ?? "other";
+                case CombatFought fought when fought.AttackerHpAfter == 0 && before.Find(fought.AttackerId) is { IsCaptain: true }:
+                    return (before.Find(fought.TargetId)?.Unit.Name ?? "other") + " (countering)";
+                case FrozenIronFell fell when fell.Struck.Where((id, i) => fell.HpAfter[i] == 0 && before.Find(id) is { IsCaptain: true }).Any():
+                    return "frozen iron";
+            }
+        }
+
+        return null;
+    }
 
     /// <summary>The losses by cause, zeros printed so pasted rows line up, and the mean quiet tail of the timeouts or a dash when there were none.</summary>
     public static string Losses(IReadOnlyList<GameResult> games, MapDefinition map)
@@ -1106,9 +1146,27 @@ public static class Gates
 /// A game's second stage (issue 1385's Sim gate): <paramref name="Phases"/> begun from the swallow to the game's end, and
 /// <paramref name="ClockDeaths"/>, the player units Frozen Iron killed, and the company the swallow found (issue 1395):
 /// <paramref name="Standing"/> player units on the board and the captain's HP, <paramref name="CaptainHp"/>.
+/// The stall read (round 502) follows the stage to the game's end: the boss's HP and the units standing as it ended, and the
+/// player phases begun and the combats a player unit opened on the boss in them, so a timeout reads as nerve (few blows) or
+/// shortfall (blows the heal outpaces).
 /// </summary>
 public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int CaptainHp = 0)
 {
+    /// <summary>The boss that swallowed the shard.</summary>
+    public string Boss { get; init; } = "";
+
+    /// <summary>The player phases begun in the stage.</summary>
+    public int PlayerPhases { get; init; }
+
+    /// <summary>The combats a player unit opened on the boss in the stage's player phases.</summary>
+    public int Blows { get; init; }
+
+    /// <summary>The boss's HP after the last command read, 0 once he fell.</summary>
+    public int BossHp { get; init; }
+
+    /// <summary>The player units on the board after the last command read.</summary>
+    public int StandingEnd { get; init; }
+
     /// <summary><paramref name="stage"/> after a command's <paramref name="events"/> on <paramref name="before"/>, leaving <paramref name="after"/>: begun by a swallow, counting phases and Frozen Iron's player kills.</summary>
     public static StageTwo? After(StageTwo? stage, BattleState before, BattleState after, IEnumerable<GameEvent> events)
     {
@@ -1116,12 +1174,15 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
         {
             switch (e)
             {
-                case ShardSwallowed when stage is null:
+                case ShardSwallowed swallowed when stage is null:
                     var company = after.UnitsOf(Side.Player).ToList();
-                    stage = new StageTwo(0, 0, company.Count, company.FirstOrDefault(u => u.IsCaptain)?.Hp ?? 0);
+                    stage = new StageTwo(0, 0, company.Count, company.FirstOrDefault(u => u.IsCaptain)?.Hp ?? 0) { Boss = swallowed.UnitId };
                     break;
-                case PhaseBegan when stage is not null:
-                    stage = stage with { Phases = stage.Phases + 1 };
+                case PhaseBegan began when stage is not null:
+                    stage = stage with { Phases = stage.Phases + 1, PlayerPhases = stage.PlayerPhases + (began.Side == Side.Player ? 1 : 0) };
+                    break;
+                case CombatFought fought when stage is not null && fought.Phase == Side.Player && fought.TargetId == stage.Boss:
+                    stage = stage with { Blows = stage.Blows + 1 };
                     break;
                 case FrozenIronFell fell when stage is not null:
                     var killed = fell.Struck.Where((id, i) => fell.HpAfter[i] == 0 && before.Find(id) is { Side: Side.Player, Kin: null }).Count();
@@ -1130,6 +1191,6 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
             }
         }
 
-        return stage;
+        return stage is null ? null : stage with { BossHp = after.Find(stage.Boss)?.Hp ?? 0, StandingEnd = after.UnitsOf(Side.Player).Count() };
     }
 }

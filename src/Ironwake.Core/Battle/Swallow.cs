@@ -129,6 +129,14 @@ public static class Swallow
     /// Whether Frozen Iron lands at <paramref name="side"/>'s phase start (issue 1395): he casts it, so it lands at his
     /// own side's phase start alone, once a round, the landing the Kin's heal answers.
     /// </summary>
+    /// <summary>
+    /// The Frozen Iron that lands on a unit of <paramref name="side"/> at the other side's next phase start (round 502):
+    /// the set dose while a swallowed unit of the other side stands (<see cref="Casts"/>), else 0. It lands before that
+    /// phase strikes, so <see cref="Exposure.Of"/> counts it.
+    /// </summary>
+    public static int NextLanding(BattleState state, Side side) =>
+        state.FrozenIron > 0 && Casts(state, side == Side.Player ? Side.Enemy : Side.Player) ? state.FrozenIron : 0;
+
     public static bool Casts(BattleState state, Side side) => state.Units.Any(u => u is { Swallowed: true, Retreated: false } && u.Side == side);
 
     /// <summary>

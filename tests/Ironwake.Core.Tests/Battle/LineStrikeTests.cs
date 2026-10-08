@@ -5,7 +5,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// Hask's line strike (issue 1384, round 487; numbers provisional on #1247). The pitched Iron Warden is <c>hask_warden</c>,
 /// seated on the sample <c>docs/samples/ironwake_keep_warden.map</c> while the campaign keep keeps the stand-in Hask
-/// (DECISIONS/0346; the Table's row since issue 1389). As his action he strikes every company unit
+/// (DECISIONS/0346; the Table's row since issue 1389, at the stand-in's bulk with lance A since round 502). As his action he strikes every company unit
 /// on up to four tiles in one cardinal line out from him, once each, at his lance's numbers read as if adjacent, with no
 /// double and no counter. The line stops at the map's edge and before a wall. The planner takes it when a line catches
 /// two or more units, and swings plainly otherwise; <c>threat</c> prints the line through a unit.
@@ -68,7 +68,7 @@ public class LineStrikeTests
 
         Assert.Equal("iron_warden", hask.ClassId);
         Assert.Equal(14, hask.Level);
-        Assert.Equal(new Stats(44, 10, 0, 15, 8, 10, 11, 8, 12), hask.Stats);
+        Assert.Equal(new Stats(44, 9, 0, 14, 8, 10, 9, 7, 12), hask.Stats);
         Assert.Equal(WeaponRank.A, hask.Skill.Rank(WeaponType.Lance));
         Assert.Equal(4, LineStrike.Of(Starter, Hask(Start()))!.Reach);
     }
@@ -134,8 +134,8 @@ public class LineStrikeTests
         var hale = state.Find("hale")!;
         var side = LineStrike.Forecast(state, Starter, Hask(state), hale).Attacker;
 
-        // Str 10 plus the Warden's Lance's Mt 9, against the captain's Def 5 on plain.
-        Assert.Equal(10 + Starter.Weapon("wardens_lance").Mt - hale.Unit.Stats.Def, side.Damage);
+        // Str 9 plus the Warden's Lance's Mt 9, against the captain's Def 5 on plain.
+        Assert.Equal(9 + Starter.Weapon("wardens_lance").Mt - hale.Unit.Stats.Def, side.Damage);
     }
 
     [Fact]

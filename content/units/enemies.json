@@ -204,11 +204,11 @@
       "class": "iron_warden",
       "description": "The Iron Warden. The shard in his lance's pommel is frozen iron.",
       "level": 14,
-      "stats": { "hp": 44, "str": 10, "mag": 0, "dex": 15, "spd": 8, "lck": 10, "def": 11, "res": 8, "cha": 12 },
+      "stats": { "hp": 44, "str": 9, "mag": 0, "dex": 14, "spd": 8, "lck": 10, "def": 9, "res": 7, "cha": 12 },
       "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 20, "lck": 10, "def": 30, "res": 10, "cha": 10 },
       "ranks": { "lance": "A" },
       "inventory": [ { "item": "wardens_lance" } ],
-      "swallow": { "hp": 40, "def": 3, "res": 3, "heal": 6, "description": "The Iron Warden. His lance's pommel is empty; the shard is in him now." }
+      "swallow": { "hp": 24, "def": 3, "res": 3, "heal": 4, "description": "The Iron Warden. His lance's pommel is empty; the shard is in him now." }
     },
     {
       "id": "finale_hunter",
