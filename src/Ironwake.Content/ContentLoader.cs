@@ -3062,19 +3062,21 @@ public static class ContentLoader
 
                 foreach (var field in armorNode.Element.EnumerateObject())
                 {
-                    if (field.Name is not ("def" or "mov" or "phases"))
+                    if (field.Name is not ("def" or "mov" or "phases" or "shell" or "range"))
                     {
-                        throw node.Error("armor." + field.Name, "is not an armor field; expected def, mov, phases");
+                        throw node.Error("armor." + field.Name, "is not an armor field; expected def, mov, phases, shell, range");
                     }
                 }
 
                 var def = armorNode.Int("def");
                 var mov = armorNode.Int("mov");
                 var phases = armorNode.Int("phases");
+                var range = armorNode.IntOr("range", 0);
                 armor = def < 1 ? throw node.Error("armor.def", "must be at least 1")
                     : mov < 0 ? throw node.Error("armor.mov", "must be at least 0 (the Mov it costs)")
                     : phases < 1 ? throw node.Error("armor.phases", "must be at least 1")
-                    : new ArmorSpell(def, mov, phases);
+                    : range is not (0 or 1) ? throw node.Error("armor.range", "must be 0 (the caster alone) or 1 (the caster or an adjacent ally)")
+                    : new ArmorSpell(def, mov, phases) { Shell = armorNode.BoolOr("shell", false), Range = range };
             }
             else if (rider == RiderKind.Armor)
             {

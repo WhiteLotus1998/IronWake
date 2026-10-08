@@ -378,10 +378,25 @@ public static class ProtocolJson
                 w.WriteNumber("def", ad.Def);
                 w.WriteNumber("mov", ad.Mov);
                 w.WriteNumber("phases", ad.Phases);
+                if (ad.WearerId is { } wearer)
+                {
+                    w.WriteString("on", wearer);
+                }
+
+                if (ad.Shell)
+                {
+                    w.WriteBoolean("shell", true);
+                }
+
                 break;
             case ArmorFell af:
                 w.WriteString("unit", af.UnitId);
                 w.WriteString("item", af.SpellId);
+                break;
+            case ArmorShattered ash:
+                w.WriteString("unit", ash.UnitId);
+                w.WriteString("item", ash.SpellId);
+                w.WriteString("by", ash.ByUnitId);
                 break;
             case HollowRaised hr:
                 w.WriteString("unit", hr.UnitId);
@@ -1514,6 +1529,11 @@ public static class ProtocolJson
             w.WriteNumber("def", armor.Def);
             w.WriteNumber("mov", armor.Mov);
             w.WriteNumber("phases", armor.Phases);
+            if (armor.Shell)
+            {
+                w.WriteBoolean("shell", true);
+            }
+
             w.WriteEndObject();
         }
 
@@ -1778,7 +1798,7 @@ public static class ProtocolJson
             Breathed = e.TryGetProperty("breathed", out _) && RequiredBool(e, "breathed"),
             Winded = e.TryGetProperty("winded", out _) && RequiredBool(e, "winded"),
             Answered = e.TryGetProperty("answered", out _) && RequiredBool(e, "answered"),
-            Armor = e.TryGetProperty("armor", out var armor) ? new ArmorMark(RequiredString(armor, "item"), RequiredInt(armor, "def"), RequiredInt(armor, "mov"), RequiredInt(armor, "phases")) : null,
+            Armor = e.TryGetProperty("armor", out var armor) ? new ArmorMark(RequiredString(armor, "item"), RequiredInt(armor, "def"), RequiredInt(armor, "mov"), RequiredInt(armor, "phases")) { Shell = armor.TryGetProperty("shell", out _) && RequiredBool(armor, "shell") } : null,
             Open = e.TryGetProperty("open", out var open) ? new OpenMark(RequiredString(open, "by"), RequiredInt(open, "def"), RequiredInt(open, "res")) : null,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,

@@ -87,6 +87,8 @@ public class ProtocolJsonTests
         { new GroundSundered("pell", A, "earthwork", "wren"), """{"type":"groundSundered","unit":"pell","at":{"x":1,"y":2},"terrain":"earthwork","owner":"wren"}""" },
         { new ArmorDonned("pell", "test_earth_armor", 10, 2, 2), """{"type":"armorDonned","unit":"pell","item":"test_earth_armor","def":10,"mov":2,"phases":2}""" },
         { new ArmorFell("pell", "test_earth_armor"), """{"type":"armorFell","unit":"pell","item":"test_earth_armor"}""" },
+        { new ArmorDonned("pell", "test_obsidian_armor", 20, 0, 3) { WearerId = "teodor", Shell = true }, """{"type":"armorDonned","unit":"pell","item":"test_obsidian_armor","def":20,"mov":0,"phases":3,"on":"teodor","shell":true}""" },
+        { new ArmorShattered("teodor", "test_obsidian_armor", "brigand-1"), """{"type":"armorShattered","unit":"teodor","item":"test_obsidian_armor","by":"brigand-1"}""" },
         { new RodCaught("wren", "pell", "mage-1"), """{"type":"rodCaught","unit":"wren","aimed":"pell","by":"mage-1"}""" },
         { new RodCharged("wren", MagicSchool.Lightning), """{"type":"rodCharged","unit":"wren","school":"lightning"}""" },
         { new RodChargeSpent("wren", MagicSchool.Lightning), """{"type":"rodChargeSpent","unit":"wren","school":"lightning"}""" },

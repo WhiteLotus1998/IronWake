@@ -432,10 +432,20 @@ public sealed record GroundSundered(string UnitId, Coord At, string TerrainId, s
 /// <paramref name="Def"/> more and Mov <paramref name="Mov"/> less, never below 1, through its side's next
 /// <paramref name="Phases"/> phases; the <see cref="ItemUsed"/> precedes it.
 /// </summary>
-public sealed record ArmorDonned(string UnitId, string SpellId, int Def, int Mov, int Phases) : GameEvent;
+public sealed record ArmorDonned(string UnitId, string SpellId, int Def, int Mov, int Phases) : GameEvent
+{
+    /// <summary>The adjacent ally the caster laid it on (issue 1403), or null when the caster wears it.</summary>
+    public string? WearerId { get; init; }
+
+    /// <summary>Whether it is a one-hit shell (issue 1403, <see cref="ArmorSpell.Shell"/>).</summary>
+    public bool Shell { get; init; }
+}
 
 /// <summary>The armor <paramref name="SpellId"/> laid on <paramref name="UnitId"/> fell as its side's last phase under it ended (issue 1282, <see cref="Armor"/>).</summary>
 public sealed record ArmorFell(string UnitId, string SpellId) : GameEvent;
+
+/// <summary>The shell <paramref name="SpellId"/> on <paramref name="UnitId"/> broke on a hit from <paramref name="ByUnitId"/> that landed (issue 1403, <see cref="Armor.AfterCombat"/>).</summary>
+public sealed record ArmorShattered(string UnitId, string SpellId, string ByUnitId) : GameEvent;
 
 /// <summary>
 /// <paramref name="UnitId"/>'s dark tome raised the body of <paramref name="FallenId"/> on <paramref name="At"/> as the Hollow

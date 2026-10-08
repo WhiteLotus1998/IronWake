@@ -61,11 +61,12 @@ public static class Combat
         return (weapon.IsMagic ? attacker.Stats.Mag : attacker.Stats.Str) + mt;
     }
 
-    public static int Damage(Combatant attacker, Combatant target)
+    /// <summary>Atk less the target's Def or Res with its terrain's, never below 0; <paramref name="shell"/> is Def a shell adds against a physical strike (issue 1403).</summary>
+    public static int Damage(Combatant attacker, Combatant target, int shell = 0)
     {
         var defence = Armed(attacker).IsMagic
             ? target.Stats.Res + target.Terrain.ResFor(target.Movement)
-            : target.Stats.Def + target.Terrain.DefFor(target.Movement);
+            : target.Stats.Def + shell + target.Terrain.DefFor(target.Movement);
         return Math.Max(0, Atk(attacker, target) - defence);
     }
 
@@ -229,7 +230,7 @@ public static class Combat
             Bite: Bite(striker, distance),
             NeverDoubles: striker.Class.SingleStrike,
             Stoop: striker.Stoop,
-            CashesMark: Mark.Cashes(striker, target)) { Unscaled = scale.IsOne ? null : raw, Scale = scale };
+            CashesMark: Mark.Cashes(striker, target)) { Unscaled = scale.IsOne ? null : raw, Scale = scale, Shell = target.Shell, Shelled = target.Shell > 0 ? Damage(striker, target, target.Shell) : null };
     }
 
     private static Weapon Armed(Combatant unit) =>

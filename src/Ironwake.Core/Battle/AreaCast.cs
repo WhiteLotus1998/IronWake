@@ -130,15 +130,15 @@ public static class AreaCast
         if (Catcher(state, content, caster, spell, at) is ({ } holder, _))
         {
             var caught = CaughtForecast(state, content, caster, spell, holder).Attacker;
-            var dealt = caught.CashesMark ? caught.MarkedDamage : caught.Damage;
-            return $"{spell.Name} at {at}{LightningRod.ForecastText(content, holder, holder.Id, spell.School!.Value)}: {holder.Id} acc {caught.DisplayedHit}% dmg {dealt} (hp {holder.Hp}){LightningRod.ForecastText(caught)}{Mark.ForecastText(caught)}, no counter";
+            var dealt = caught.FirstHit(crit: false);
+            return $"{spell.Name} at {at}{LightningRod.ForecastText(content, holder, holder.Id, spell.School!.Value)}: {holder.Id} acc {caught.DisplayedHit}% dmg {dealt} (hp {holder.Hp}){LightningRod.ForecastText(caught)}{Mark.ForecastText(caught)}{Armor.ForecastText(caught)}, no counter";
         }
 
         return $"{spell.Name} at {at} strikes " + string.Join("; ", struck.Select(target =>
         {
             var side = Forecast(state, content, caster, spell, target, at).Attacker;
-            var damage = side.CashesMark ? side.MarkedDamage : side.Damage;
-            return $"{target.Id} acc {side.DisplayedHit}% dmg {damage} (hp {target.Hp}){Mark.ForecastText(side)}{(spell.Marks ? ", marks" : "")}";
+            var damage = side.FirstHit(crit: false);
+            return $"{target.Id} acc {side.DisplayedHit}% dmg {damage} (hp {target.Hp}){Mark.ForecastText(side)}{Armor.ForecastText(side)}{(spell.Marks ? ", marks" : "")}";
         })) + ", no counter";
     }
 
@@ -262,7 +262,7 @@ public static class AreaCast
         foreach (var target in struck)
         {
             var side = (catcher is null ? Forecast(state, content, caster, spell, target, at) : CaughtForecast(state, content, caster, spell, target)).Attacker;
-            var damage = side.CashesMark ? side.MarkedDamage : side.Damage;
+            var damage = side.FirstHit(crit: false);
             var hit = Combat.HitProbability(side.HitChance, state.Scheme);
             var kill = damage >= target.Hp;
             kills |= kill;

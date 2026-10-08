@@ -1131,6 +1131,16 @@ public static class ContentSerializer
             writer.WriteNumber("def", armor.Def);
             writer.WriteNumber("mov", armor.Mov);
             writer.WriteNumber("phases", armor.Phases);
+            if (armor.Shell)
+            {
+                writer.WriteBoolean("shell", true);
+            }
+
+            if (armor.Range > 0)
+            {
+                writer.WriteNumber("range", armor.Range);
+            }
+
             writer.WriteEndObject();
         }
 
