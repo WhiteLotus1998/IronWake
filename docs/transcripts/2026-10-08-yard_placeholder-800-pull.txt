@@ -566,9 +566,9 @@ The Mill  turn 1 of 9  player phase  rout  recall 4
 
 b  archer-1         Archer L1 bowman           11,1   hp 16/16  Plain  group mill, guard, asleep
 d  archer-2         Archer L1 bowman           11,4   hp 16/16  Plain  group road, aggressive
-c  brigand-1        Brigand L1 reaver          11,5   hp 20/20  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        1,8    hp 23/23  Plain  captain
 B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     11,5   hp 20/20  Plain  group road, aggressive
 a  soldier-1        Soldier L1 pikeman         10,1   hp 18/18  Hill  group mill, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
@@ -589,9 +589,9 @@ The Mill  turn 1 of 9  player phase  rout  recall 4
 
 b  archer-1         Archer L1 bowman           11,1   hp 16/16  Plain  group mill, guard, asleep
 d  archer-2         Archer L1 bowman           11,4   hp 16/16  Plain  group road, aggressive
-c  brigand-1        Brigand L1 reaver          11,5   hp 20/20  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        4,9    hp 23/23  Plain  captain
 B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     11,5   hp 20/20  Plain  group road, aggressive
 a  soldier-1        Soldier L1 pikeman         10,1   hp 18/18  Hill  group mill, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
@@ -612,9 +612,9 @@ The Mill  turn 1 of 9  player phase  rout  recall 4
 
 b  archer-1         Archer L1 bowman           11,1   hp 16/16  Plain  group mill, guard, asleep
 d  archer-2         Archer L1 bowman           11,4   hp 16/16  Plain  group road, aggressive
-c  brigand-1        Brigand L1 reaver          11,5   hp 20/20  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        4,9    hp 23/23  Plain  captain  done
 B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     11,5   hp 20/20  Plain  group road, aggressive
 a  soldier-1        Soldier L1 pikeman         10,1   hp 18/18  Hill  group mill, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
@@ -635,9 +635,9 @@ The Mill  turn 1 of 9  player phase  rout  recall 4
 
 b  archer-1         Archer L1 bowman           11,1   hp 16/16  Plain  group mill, guard, asleep
 d  archer-2         Archer L1 bowman           11,4   hp 16/16  Plain  group road, aggressive
-c  brigand-1        Brigand L1 reaver          11,5   hp 20/20  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        4,9    hp 23/23  Plain  captain  done
 B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)  done
+c  road_brigand-1   Road Brigand L1 reaver     11,5   hp 20/20  Plain  group road, aggressive
 a  soldier-1        Soldier L1 pikeman         10,1   hp 18/18  Hill  group mill, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
@@ -650,10 +650,10 @@ enemy: move archer-2 7,4
 Archer 2 moves 11,4 -> 7,4 via 10,4 9,4 8,4
 enemy: wait archer-2
 Archer 2 waits
-enemy: move brigand-1 7,5
-Brigand moves 11,5 -> 7,5 via 10,5 9,5 8,5
-enemy: wait brigand-1
-Brigand waits
+enemy: move road_brigand-1 7,5
+Road Brigand moves 11,5 -> 7,5 via 10,5 9,5 8,5
+enemy: wait road_brigand-1
+Road Brigand waits
 enemy: wait soldier-1
 Soldier waits
 enemy: end
@@ -674,9 +674,9 @@ The Mill  turn 2 of 9  player phase  rout  recall 4
 
 b  archer-1         Archer L1 bowman           11,1   hp 16/16  Plain  group mill, guard, asleep
 d  archer-2         Archer L1 bowman           7,4    hp 16/16  Plain  group road, aggressive
-c  brigand-1        Brigand L1 reaver          7,5    hp 20/20  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        4,9    hp 23/23  Plain  captain
 B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     7,5    hp 20/20  Plain  group road, aggressive
 a  soldier-1        Soldier L1 pikeman         10,1   hp 18/18  Hill  group mill, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
@@ -697,9 +697,9 @@ The Mill  turn 2 of 9  player phase  rout  recall 4
 
 b  archer-1         Archer L1 bowman           11,1   hp 16/16  Plain  group mill, guard, asleep
 d  archer-2         Archer L1 bowman           7,4    hp 16/16  Plain  group road, aggressive
-c  brigand-1        Brigand L1 reaver          7,5    hp 20/20  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        7,8    hp 23/23  Plain  captain
 B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     7,5    hp 20/20  Plain  group road, aggressive
 a  soldier-1        Soldier L1 pikeman         10,1   hp 18/18  Hill  group mill, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
@@ -720,9 +720,9 @@ The Mill  turn 2 of 9  player phase  rout  recall 4
 
 b  archer-1         Archer L1 bowman           11,1   hp 16/16  Plain  group mill, guard, asleep
 d  archer-2         Archer L1 bowman           7,4    hp 16/16  Plain  group road, aggressive
-c  brigand-1        Brigand L1 reaver          7,5    hp 20/20  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        7,8    hp 23/23  Plain  captain  done
 B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     7,5    hp 20/20  Plain  group road, aggressive
 a  soldier-1        Soldier L1 pikeman         10,1   hp 18/18  Hill  group mill, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
@@ -743,9 +743,9 @@ The Mill  turn 2 of 9  player phase  rout  recall 4
 
 b  archer-1         Archer L1 bowman           11,1   hp 16/16  Plain  group mill, guard, asleep
 d  archer-2         Archer L1 bowman           7,4    hp 16/16  Plain  group road, aggressive
-c  brigand-1        Brigand L1 reaver          7,5    hp 20/20  Plain  group road, aggressive
 A  captain          Alder Fenn L2 cadet        7,8    hp 23/23  Plain  captain  done
 B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)  done
+c  road_brigand-1   Road Brigand L1 reaver     7,5    hp 20/20  Plain  group road, aggressive
 a  soldier-1        Soldier L1 pikeman         10,1   hp 18/18  Hill  group mill, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
@@ -762,17 +762,16 @@ Forecast Archer 2 -> Alder Fenn: acc 68% dmg 4 crit 0%; counter: none
 Archer 2 attacks Alder Fenn
   Archer 2 misses Alder Fenn
   Archer 2 hp 16, Alder Fenn hp 23
-enemy: move brigand-1 7,7
-Brigand moves 7,5 -> 7,7 via 7,6
-enemy: attack brigand-1 captain
-Forecast Brigand -> Alder Fenn: acc 49% dmg 9 crit 0%; counter: acc 91% dmg 12 x2 crit 6%
-Brigand attacks Alder Fenn
-  Brigand misses Alder Fenn
-  Alder Fenn hits Brigand for 12 (hp 8)
-  Alder Fenn hits Brigand for 12 (hp 0)
-  Brigand hp 0, Alder Fenn hp 23
+enemy: move road_brigand-1 7,7
+Road Brigand moves 7,5 -> 7,7 via 7,6
+enemy: attack road_brigand-1 captain
+Forecast Road Brigand -> Alder Fenn: acc 49% dmg 9 crit 0%; counter: acc 89% dmg 12 crit 6%
+Road Brigand attacks Alder Fenn
+  Road Brigand misses Alder Fenn
+  Alder Fenn crits Road Brigand for 36 (hp 0)
+  Road Brigand hp 0, Alder Fenn hp 23
 Alder Fenn gains 25 exp (25)
-Brigand falls at 7,7
+Road Brigand falls at 7,7
 enemy: wait soldier-1
 Soldier waits
 enemy: end
@@ -1270,7 +1269,7 @@ as long as a name would take, and goes on.
 
 -- Before map 3 of 10: Saltmarsh Ford; the purse holds 1400 --
 == Roster ==
-  Alder Fenn (captain): Cadet L2, EXP 74; 1: Iron Sword 27/40 (repair 130), 2: Field Dressing 2/3; promotes at 3: Marshal, Ranger or Vanguard
+  Alder Fenn (captain): Cadet L2, EXP 74; 1: Iron Sword 28/40 (repair 120), 2: Field Dressing 2/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
@@ -1305,7 +1304,7 @@ Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Ottilie (deploy 4 of 8)
 Brannock returns to the deployment order
 Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Ottilie (deploy 4 of 8)
 > repair captain 1
-Alder Fenn's Iron Sword repaired from 27 to 40 uses for 130; the purse holds 1120
+Alder Fenn's Iron Sword repaired from 28 to 40 uses for 120; the purse holds 1130
 > march
 Map 3 of 10: Saltmarsh Ford, seed 646
 Objective: Defeat every enemy by the end of turn 18. Captain Fenn must survive.
@@ -2804,8 +2803,8 @@ B  wren             Wren L1 cadet              9,4    hp 13/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 Battle won: rout; only recall is left, or leave
 > leave
-Saltmarsh Ford won: rout; reward 800, the purse holds 1920; fell and came back wounded: Teodor, Ottilie
--- Before map 4 of 10: The Tollgate; the purse holds 1920 --
+Saltmarsh Ford won: rout; reward 800, the purse holds 1930; fell and came back wounded: Teodor, Ottilie
+-- Before map 4 of 10: The Tollgate; the purse holds 1930 --
 == Roster ==
   Alder Fenn (captain): Cadet L3, EXP 87; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 2/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 61; 1: Iron Sword 35/40 (repair 50), 2: Field Dressing 2/3
@@ -2817,7 +2816,7 @@ Saltmarsh Ford won: rout; reward 800, the purse holds 1920; fell and came back w
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 8)
 == Keep ==
-Purse: 1920
+Purse: 1930
 Rooms: beds: 8/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 0 of 2
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won
@@ -2833,7 +2832,7 @@ Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 4, The Tollgate. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
 > certify captain vanguard
-Alder Fenn certifies from Cadet to Vanguard for 500; the purse holds 1420
+Alder Fenn certifies from Cadet to Vanguard for 500; the purse holds 1430
 > quest maud_1 brannock
 -- The Lazar House --
 The keeper at Sorrel Bend has stopped writing. Maud's order kept the
@@ -4374,14 +4373,14 @@ D  pell             Pell L1 adept              6,5    hp 5/16   Forest
 C  teodor           Teodor L1 pikeman          5,2    hp 11/21  Plain
 Battle won: seize; only recall is left, or leave
 > leave
-The Tollgate won: seize; reward 1000, the purse holds 2420; fell and came back wounded: Wren
+The Tollgate won: seize; reward 1000, the purse holds 2430; fell and came back wounded: Wren
 Wren drilled with the levy: L1 -> L2.
 Teodor drilled with the levy: L1 -> L2, 14 EXP kept.
 Ottilie drilled with the levy: L1 -> L2.
 Pell drilled with the levy: L1 -> L2, 94 EXP kept.
 Dunstan drilled with the levy: L1 -> L2.
 Brannock drilled with the levy: L1 -> L2, 20 EXP kept.
--- Before map 5 of 10: Harrow Weir; the purse holds 2420 --
+-- Before map 5 of 10: Harrow Weir; the purse holds 2430 --
 == Roster ==
   Alder Fenn (captain): Vanguard L4, EXP 67; 1: Iron Sword 29/40 (repair 110), 2: Field Dressing 2/3; ladder: Vanguard, then Champion at 10
   Wren: Cadet L2, EXP 0, Wounded (2); 1: Iron Sword 35/40 (repair 50), 2: Field Dressing 2/3
@@ -4394,7 +4393,7 @@ Brannock drilled with the levy: L1 -> L2, 20 EXP kept.
   Supports: Alder Fenn and Teodor C
 Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Wren (deploy 6 of 8)
 == Keep ==
-Purse: 2420
+Purse: 2430
 Rooms: beds: 8/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 0 of 2
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
@@ -4411,7 +4410,7 @@ Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 5, Harrow Weir. Defeat the boss by the end of turn 15. Captain Fenn must survive.
 > build forge
-Forge built for 600, the purse holds 1820; refine <unit> <slot> mt|hit works here
+Forge built for 600, the purse holds 1830; refine <unit> <slot> mt|hit works here
 > quest pell_1 brannock
 -- The Burned School --
 The shrine-school at Aldmere burned around Pell when she was fourteen.
@@ -7317,12 +7316,12 @@ B  teodor           Teodor L2 pikeman          9,5    hp 13/21  Plain  done
 G  wren             Wren L3 cadet              13,5   hp 11/21  Plain  done
 Battle won: defeat_boss; only recall is left, or leave
 > leave
-Harrow Weir won: defeat_boss; reward 1200, the purse holds 3020; fell and came back wounded: Pell
+Harrow Weir won: defeat_boss; reward 1200, the purse holds 3030; fell and came back wounded: Pell
 Teodor drilled with the levy: L2 -> L3, 44 EXP kept.
 Ottilie drilled with the levy: L2 -> L3, 10 EXP kept.
 Dunstan drilled with the levy: L2 -> L3, 10 EXP kept.
 Brannock drilled with the levy: L2 -> L3, 30 EXP kept.
--- Before map 6 of 10: Raid on Ironwake; the purse holds 3020 --
+-- Before map 6 of 10: Raid on Ironwake; the purse holds 3030 --
 == Roster ==
   Alder Fenn (captain): Vanguard L5, EXP 28; 1: Iron Sword 19/40 (repair 210), 2: Field Dressing 2/3; ladder: Vanguard, then Champion at 10
   Wren: Cadet L3, EXP 5, Wounded (1); 1: Iron Sword 29/40 (repair 110), 2: Field Dressing 2/3
@@ -7339,7 +7338,7 @@ Keziah: "Everyone here is offering you a promise. Mine's hungry, and you'll hear
 Rook: "She's the last one. Pick me and you're the second person alive who knows her name."
 They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.
 == Keep ==
-Purse: 3020
+Purse: 3030
 Rooms: beds: 8/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 0 of 2
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 1 of 1
@@ -7358,7 +7357,7 @@ Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 6, Raid on Ironwake. Defeat every enemy by the end of turn 7. Captain Fenn must survive.
 > refine captain 1 mt
-Refine Iron Sword: Iron Sword +1, Acc 75, Power 6, for 1 common material and 100; the purse holds 2920
+Refine Iron Sword: Iron Sword +1, Acc 75, Power 6, for 1 common material and 100; the purse holds 2930
 > pick rook
 Rook takes the seat at level 4; Keziah rides home
 > march
@@ -8487,14 +8486,14 @@ D  ottilie          Ottilie L3 bowman          9,7    hp 6/17   Plain  done
 E  pell             Pell L3 adept              9,6    hp 16/16  Plain
 Battle won: rout; only recall is left, or leave
 > leave
-Raid on Ironwake won: rout; reward 1000, the purse holds 3920; fell and came back wounded: Wren, Teodor, Dunstan
+Raid on Ironwake won: rout; reward 1000, the purse holds 3930; fell and came back wounded: Wren, Teodor, Dunstan
 Wren drilled with the levy: L3 -> L4.
 Teodor drilled with the levy: L3 -> L4.
 Ottilie drilled with the levy: L3 -> L4, 87 EXP kept.
 Pell drilled with the levy: L3 -> L4, 90 EXP kept.
 Dunstan drilled with the levy: L3 -> L4.
 Brannock drilled with the levy: L3 -> L4, 30 EXP kept.
--- Before map 7 of 10: Sallow Grange; the purse holds 3920 --
+-- Before map 7 of 10: Sallow Grange; the purse holds 3930 --
 == Roster ==
   Alder Fenn (captain): Vanguard L6, EXP 63; 1: Iron Sword +1 11/40 (repair 290), 2: Field Dressing 2/3; ladder: Vanguard, then Champion at 10
   Wren: Cadet L4, EXP 0, Wounded (2); 1: Iron Sword 29/40 (repair 110), 2: Field Dressing 2/3
@@ -8508,14 +8507,14 @@ Brannock drilled with the levy: L3 -> L4, 30 EXP kept.
   Supports: Alder Fenn and Wren C, Alder Fenn and Teodor C
 Deploys to Sallow Grange: Alder Fenn, Dunstan, Wren, Teodor, Pell, Ottilie (deploy 6 of 9)
 == Keep ==
-Purse: 3920
+Purse: 3930
 Rooms: beds: 9/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 0 of 2
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 1 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
   barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; needs the Barracks first
   Stores: common 1, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
-Keep: Ironwake Keep; built: nothing; the purse holds 3920
+Keep: Ironwake Keep; built: nothing; the purse holds 3930
   wall: Rebuild a wall, 400
     Wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
     Wall 10,9: Wall; no unit can stand on it; the gap 10,9 to 10,10 narrows from 2 tiles to 1 (10,10)
@@ -8533,13 +8532,13 @@ Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 7, Sallow Grange. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
 > build barracks
-Barracks built for 500, the purse holds 3420; beds: 9/14; hire <id> takes Corin Ashby, Bet Lowry, Ines Tarrow, Mattias Grue for 300 each
+Barracks built for 500, the purse holds 3430; beds: 9/14; hire <id> takes Corin Ashby, Bet Lowry, Ines Tarrow, Mattias Grue for 300 each
 > build barracks_wing
-Barracks wing built for 300, the purse holds 3120; beds: 9/15; hire <id> takes Tamsin Hale, Wat Dunmore, Edda Vane for 300 each
+Barracks wing built for 300, the purse holds 3130; beds: 9/15; hire <id> takes Tamsin Hale, Wat Dunmore, Edda Vane for 300 each
 > hire corin
-Corin Ashby joins as a Cadet at L1 for 300, the purse holds 2820; beds: 10/15
+Corin Ashby joins as a Cadet at L1 for 300, the purse holds 2830; beds: 10/15
 > build wall 10,2
-Built for 400, the purse holds 2420: wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
+Built for 400, the purse holds 2430: wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
 > trial wren outrider
 Trial: Trial of the Outrider, seed 660
 Promotion trial: Wren plays as Outrider with iron_lance, iron_sword

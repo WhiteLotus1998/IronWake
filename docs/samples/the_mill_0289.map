@@ -23,5 +23,5 @@ P captain 1,8
 P recruit:maud 7,9
 E soldier 10,1 group:mill behavior:guard
 E archer 11,1 group:mill behavior:guard
-E road_brigand 11,5 group:road behavior:aggressive
+E brigand 11,5 group:road behavior:aggressive
 E archer 11,4 group:road behavior:aggressive

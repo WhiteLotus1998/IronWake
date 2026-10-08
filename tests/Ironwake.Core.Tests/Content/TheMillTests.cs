@@ -16,7 +16,7 @@ public class TheMillTests
 
     private static string Transcript(string name) => Path.Combine(Repo, "docs", "transcripts", name);
 
-    /// <summary>The captain never comes: on seed 2 the road pair reaches the fort on enemy phase 2 and Maud falls, which loses the map.</summary>
+    /// <summary>The captain never comes: on seed 13 the road pair reaches the fort on enemy phase 2 and Maud falls, which loses the map (seed 2 did before the road brigand, issue 1362).</summary>
     [Fact]
     public void LeavingMaudToHoldTheFortAloneLosesTheMap()
     {
@@ -24,7 +24,7 @@ public class TheMillTests
         File.WriteAllText(path, string.Concat(Enumerable.Repeat("wait captain\nwait maud\nend !\n", 4)));
         try
         {
-            var output = Run(out var exit, "play", "the_mill", "--seed", "2", "--script", path, "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "play", "the_mill", "--seed", "13", "--script", path, "--content", Fixture.RealContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Maud falls at 7,9\n", output);
@@ -148,14 +148,15 @@ public class TheMillTests
     /// of Maud and the road pair is dead on turn 4 with no noise near the mill; the captain walks
     /// north to wake it, and the woken pair costs two Recalls (the captain falls on turn 6, then a
     /// bait at 14 HP leaves him on 1) before a Salve-first bait at 21 HP lets Maud's range-2 Radiance
-    /// and the captain take the soldier on the road and the archer on the hill, won on turn 8 of 9.
+    /// and the captain take the soldier on the road and the archer on the hill, won on turn 8 of 9. It
+    /// replays on the Mill before the road brigand (issue 1362), <c>docs/samples/the_mill_0289.map</c>.
     /// </summary>
     [Fact]
     public void WithTheFortSouthTheMillIsTheCaptainsErrandAndTheClockBinds()
     {
         var script = Transcript("2026-10-06-the_mill-632-south.script");
 
-        var output = Run(out var exit, "play", "the_mill", "--seed", "632", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Path.Combine(Repo, "docs", "samples", "the_mill_0289.map"), "--seed", "632", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.Contains("Brigand hits Alder Fenn for 10 (hp 7)\n", output);
@@ -172,14 +173,15 @@ public class TheMillTests
     /// Code's warm play on a fresh seed (1710): Maud leaves the fort west along row 9 on turn 2 and
     /// no line reaches her again; the captain baits the road pair across the river at 5,4, the road
     /// archer's shot wakes the mill by noise, Full Measure kills that archer on turn 3 and spends
-    /// turn 4, and the woken pair dies at the road crossing, won on turn 6 of 9 with no Recall.
+    /// turn 4, and the woken pair dies at the road crossing, won on turn 6 of 9 with no Recall. It
+    /// replays on the Mill before the road brigand (issue 1362), <c>docs/samples/the_mill_0289.map</c>.
     /// </summary>
     [Fact]
     public void LeavingTheFortWestTurnsBothFightsIntoOneAtTheRoad()
     {
         var script = Transcript("2026-10-07-the_mill-1710.script");
 
-        var output = Run(out var exit, "play", "the_mill", "--seed", "1710", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Path.Combine(Repo, "docs", "samples", "the_mill_0289.map"), "--seed", "1710", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.Contains("Maud moves 7,9 -> 5,9", output);
@@ -198,14 +200,15 @@ public class TheMillTests
     /// captain corks its north tile 7,8 on turn 2, so the road brigand's only swing is into his
     /// double and it dies on its own swing; the road archer falls on turn 3, a 24 percent Full
     /// Measure crit kills the mill soldier on turn 5, and Maud finishes the archer on turn 7 of 9,
-    /// with no Recall and no strike on Maud.
+    /// with no Recall and no strike on Maud. It replays on the Mill it was played on, before the road
+    /// brigand (issue 1362), kept as <c>docs/samples/the_mill_0289.map</c>.
     /// </summary>
     [Fact]
     public void CorkingTheFortsNorthTileKillsTheRoadBrigandOnItsOwnSwing()
     {
         var script = Transcript("2026-10-08-the_mill-1810.script");
 
-        var output = Run(out var exit, "play", "the_mill", "--seed", "1810", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Path.Combine(Repo, "docs", "samples", "the_mill_0289.map"), "--seed", "1810", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.Contains("Alder Fenn moves 5,8 -> 7,8", output);
@@ -214,6 +217,60 @@ public class TheMillTests
         Assert.DoesNotContain("attacks Maud", output);
         Assert.DoesNotContain("Recalled", output);
         Assert.Contains("The Mill  turn 7 of 9  player phase", output);
+        Assert.EndsWith("Battle won: rout\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// The Mill's road brigand is the map's own template (issue 1362, DECISIONS/0338): one Spd over the
+    /// shared Brigand, so the L1 captain no longer doubles it (DESIGN 5, attack speed 8 against 5) and it
+    /// still does not double Maud (5 against 2); the shared Brigand on the 0289 copy is doubled.
+    /// </summary>
+    [Fact]
+    public void TheL1CaptainDoesNotDoubleTheMillsRoadBrigand()
+    {
+        var content = MapFixture.Content;
+        var road = content.Unit("road_brigand");
+        var shared = content.Unit("brigand");
+
+        Assert.Equal(shared.Stats.Spd + 1, road.Stats.Spd);
+        Assert.Equal(shared.Stats with { Spd = road.Stats.Spd }, road.Stats);
+        Assert.Equal(shared.Growths, road.Growths);
+        Assert.Equal(shared.ClassId, road.ClassId);
+        Assert.Equal(shared.Inventory, road.Inventory);
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "the_mill.map"), content);
+        Assert.Single(map.Placements.OfType<EnemyPlacement>(), p => p.TemplateId == "road_brigand");
+        Assert.DoesNotContain(map.Placements.OfType<EnemyPlacement>(), p => p.TemplateId == "brigand");
+
+        var output = File.ReadAllText(Transcript("2026-10-08-the_mill-1820.txt"));
+        Assert.Contains("Forecast Road Brigand -> Alder Fenn: acc 49% dmg 10 crit 0%; counter: acc 88% dmg 11 crit 5%\n", output);
+        Assert.Contains("  Road Brigand from 7,8 with Iron Axe (slot 1): acc 45% dmg 11 crit 0%;", output);
+        var old = File.ReadAllText(Transcript("2026-10-08-the_mill-1810.txt"));
+        Assert.Contains("Forecast Brigand -> Alder Fenn: acc 49% dmg 10 crit 0%; counter: acc 90% dmg 11 x2 crit 5%\n", old);
+    }
+
+    /// <summary>
+    /// Code's warm play at the floor on the road brigand's Mill (seed 1820, issue 1362): the same turn-2
+    /// cork on 7,8 is now a trade, the brigand's 49 percent swing lands for 10 and the captain's single
+    /// counter leaves it at 11; Maud finishes it from the fort at range 2, the captain reaches the mill
+    /// short of HP, so Maud leaves the fort to Salve him twice, and the map is won on turn 8 of 9 with
+    /// no Recall.
+    /// </summary>
+    [Fact]
+    public void CorkingTheFortsNorthTileIsATradeUnderTheRoadBrigand()
+    {
+        var script = Transcript("2026-10-08-the_mill-1820.script");
+
+        var output = Run(out var exit, "play", "the_mill", "--seed", "1820", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Alder Fenn moves 5,8 -> 7,8", output);
+        Assert.Contains("  Road Brigand hits Alder Fenn for 10 (hp 12)\n  Alder Fenn hits Road Brigand for 11 (hp 11)\n", output);
+        Assert.Contains("Maud hits Road Brigand for 11 (hp 0)\n", output);
+        Assert.Equal(2, output.Split("Maud uses Salve on captain").Length - 1);
+        Assert.DoesNotContain("attacks Maud", output);
+        Assert.DoesNotContain("Recalled", output);
+        Assert.Contains("The Mill  turn 8 of 9  player phase", output);
         Assert.EndsWith("Battle won: rout\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
@@ -304,19 +361,19 @@ public class TheMillTests
     /// The Mill's after card is replaced by its scene (issue 1005): winning the map in the campaign
     /// prints the scene below the won line and above the next camp, inside the card width; the old
     /// card's "Two names on the list" is retired, and none of the scene is in the log. The Mill is
-    /// Code's campaign play of the fort in the south on seed 631 (issue 1210), won on turn 7.
+    /// Code's campaign play of the road brigand's Mill on seed 644 at Recruit (issue 1362), won on turn 6.
     /// </summary>
     [Fact]
     public void WinningTheMillPrintsItsAfterSceneBelowTheWonLine()
     {
         var alone = File.ReadAllText(Transcript("2026-10-01-starting_alone-631.script"));
-        var mill = File.ReadAllText(Transcript("2026-10-06-the_mill-632-campaign.script"));
+        var mill = File.ReadAllText(Transcript("2026-10-08-the_mill-645-campaign.script"));
         var path = Path.Combine(Path.GetTempPath(), "ironwake-mill-" + Guid.NewGuid().ToString("N") + ".script");
         var log = Path.ChangeExtension(path, ".log");
         File.WriteAllText(path, "march\n" + alone + "leave\nmarch\n" + mill + "leave\n");
         try
         {
-            var output = Run(out _, "campaign", "--seed", "631", "--script", path, "--content", Fixture.RealContentDirectory(), "--log", log);
+            var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--script", path, "--content", Fixture.RealContentDirectory(), "--log", log);
 
             Assert.Contains("The Mill won: rout; reward 600, the purse holds 1400; nobody fell\n-- After The Mill --\nWhen the last raider is down, Maud comes from the house", output);
             Assert.Contains("Maud: They stopped me at the crossing and asked for the rite-keeper by\n", output);

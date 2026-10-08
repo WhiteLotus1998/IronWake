@@ -1,0 +1,37 @@
+move captain 5,8
+wait captain
+wait maud
+end
+threat maud
+threat captain from 7,8
+move captain 7,8
+wait captain
+wait maud
+end
+attack maud road_brigand-1
+forecast captain archer-2 from 7,7
+move captain 7,7
+attack captain archer-2
+end
+move captain 7,6
+attack captain archer-2
+move maud 7,7
+item maud 2 captain
+end
+move captain 8,6
+attack captain archer-2
+move maud 8,7
+attack maud archer-2
+end
+item maud 2 captain
+move captain 8,4
+wait captain
+end
+attack captain soldier-1
+move maud 8,5
+attack maud soldier-1
+end
+move captain 9,4
+attack captain archer-1
+move maud 9,5
+attack maud archer-1
