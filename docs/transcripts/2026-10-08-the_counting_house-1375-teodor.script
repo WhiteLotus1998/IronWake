@@ -1,0 +1,61 @@
+quest ottilie_1 teodor
+move ottilie 0,8
+wait ottilie
+move teodor 3,3
+wait teodor
+end
+wait ottilie
+move teodor 1,1
+wait teodor
+end
+wait ottilie
+move teodor 0,0
+wait teodor
+end
+move ottilie 4,8
+wait ottilie
+move teodor 1,2
+wait teodor
+end
+move ottilie 5,7
+attack ottilie soldier-1
+move teodor 2,5
+wait teodor
+end
+move ottilie 4,7
+attack ottilie brigand-1
+move teodor 5,6
+attack teodor brigand-1 art long_thrust
+end !
+move ottilie 3,7
+attack ottilie brigand-1
+move teodor 3,5
+item teodor 2
+end
+recall 76
+move ottilie 3,7
+attack ottilie brigand-1
+move teodor 5,7
+item teodor 2
+end !
+recall 76
+move ottilie 3,7
+attack ottilie brigand-1
+move teodor 3,5
+item teodor 2
+end
+move ottilie 0,6
+item ottilie 2
+move teodor 2,3
+wait teodor
+end
+move ottilie 1,6
+attack ottilie lector-1
+item teodor 2
+end !
+move ottilie 3,7
+attack ottilie house_captain-1
+move teodor 1,5
+attack teodor house_captain-1 art long_thrust
+end !
+leave

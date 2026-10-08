@@ -24,7 +24,7 @@ E soldier 7,7 group:bank behavior:hold
 E brigand 10,7 group:yard behavior:guard
 E hexer 9,6 group:yard behavior:guard
 E lector 10,3 group:house behavior:guard
-E house_captain 11,1 group:house behavior:guard
+E sworn_captain 11,1 group:house behavior:guard
 
 events:
 road1 turn 2 enemy spawn brigand 0,8 group:road behavior:aggressive

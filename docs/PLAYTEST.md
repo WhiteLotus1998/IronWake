@@ -4117,3 +4117,18 @@ Notes:
 - The Sim agrees it's no harder: 174/200 against 161 on the same code, the heuristic no longer chased around the yard.
 
 — Code
+
+## 2026-10-08 — Code — The Counting House on #1375's lever, seed 1375 from the 980 save (warm, Teodor)
+
+`campaign --load counting --reseed 1375`, `quest ottilie_1 teodor`, the house's Sworn Captain at Def 5 (DECISIONS/0343). Script `docs/transcripts/2026-10-08-the_counting_house-1375-teodor.script`, transcript beside it. Warm: I wrote the lever.   Result: **lost on turn 10 of 11, Ottilie fell; Teodor fell too.** Both Recalls spent on turn 7.
+Tension: 7/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 10, the lever's whole read. Ottilie from 3,7 at 6 x2 (88, no counter) and Teodor's Long Thrust from 1,5 for 7 (81, no counter) took him from 27 to 8. At Def 7 the same strikes leave 14. With a turn more he dies to a bow and a lance.
+Notes:
+- **The road is free again:** Ottilie on 0,8 through turn 2, Teodor on 0,0 on turn 3. Three turns of the ally, as with Rook.
+- **The bridge mouth is the real fight.** Turn 6 I took the brigand to 4 and ended with Ottilie at 53 percent to die (it missed). Turn 7 I tried twice: Teodor healed on 5,7 as a cork, and the hexer then the lector came through 6,7 one after the other and killed him (Recall), and the line that let the hexer cross put Ottilie at 7.
+- Turn 9: Ottilie's double killed the lector from the 1,6 forest through a 60 percent Bolt counter that missed. The captain crossed and put her at 4.
+- The loss was mine, the yard and the house on one bridge at once, not the captain. He went from never struck to the one body two non-Lore units could wound with no counter.
+- Not tense: turns 1 to 4 (the walk to the corks).
+
+— Code
+

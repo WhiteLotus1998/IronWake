@@ -52,7 +52,8 @@ collect. I want to know who."
 (Rout: every enemy falls by the end of turn 11. The map is lost if
 Ottilie falls. The canal is crossed only at the bridges, 6,1 and 6,7; a
 bow reaches over it and a sword does not. More come up the near bank
-from turn 2, announced.)
+from turn 2, announced. The Sworn Captain on the house fort is armoured:
+leave time for him.)
 
 Side map: The Counting House, seed 2116
 Ottilie goes with Maud. This map is lost if Ottilie falls; who falls here is gone for good.
@@ -74,11 +75,11 @@ The Counting House  turn 1 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           3,7    hp 18/18  Plain
 A  ottilie          Ottilie L5 bowman          2,6    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move maud 0,8
 Maud moves 3,7 -> 0,8 via 2,7 1,7 0,7
@@ -97,11 +98,11 @@ The Counting House  turn 1 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           0,8    hp 18/18  Road
 A  ottilie          Ottilie L5 bowman          2,6    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait maud
 Maud waits
@@ -120,11 +121,11 @@ The Counting House  turn 1 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           0,8    hp 18/18  Road  done
 A  ottilie          Ottilie L5 bowman          2,6    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 2,7
 Ottilie moves 2,6 -> 2,7
@@ -143,11 +144,11 @@ The Counting House  turn 1 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           0,8    hp 18/18  Road  done
 A  ottilie          Ottilie L5 bowman          2,7    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 Ottilie waits
@@ -166,11 +167,11 @@ The Counting House  turn 1 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           0,8    hp 18/18  Road  done
 A  ottilie          Ottilie L5 bowman          2,7    hp 18/18  Plain  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- Player phase ends, turn 1 --
@@ -181,12 +182,12 @@ enemy: wait brigand-1
 Brigand 1 waits
 enemy: wait hexer-1
 Hexer 1 waits
+enemy: wait house_captain-1
+Sworn Captain waits
 enemy: wait lector-1
 Lector waits
 enemy: wait soldier-1
 Soldier waits
-enemy: wait sworn_captain-1
-Sworn Captain waits
 enemy: end
 -- Enemy phase ends, turn 1 --
 -- Player phase, turn 2 --
@@ -205,11 +206,11 @@ The Counting House  turn 2 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           0,8    hp 18/18  Road
 A  ottilie          Ottilie L5 bowman          2,7    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move maud 1,5
 Maud moves 0,8 -> 1,5 via 0,7 0,6 0,5
@@ -228,11 +229,11 @@ The Counting House  turn 2 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,5    hp 18/18  Plain
 A  ottilie          Ottilie L5 bowman          2,7    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait maud
 Maud waits
@@ -251,11 +252,11 @@ The Counting House  turn 2 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,5    hp 18/18  Plain  done
 A  ottilie          Ottilie L5 bowman          2,7    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 0,8
 Ottilie moves 2,7 -> 0,8 via 1,7 0,7
@@ -274,11 +275,11 @@ The Counting House  turn 2 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,5    hp 18/18  Plain  done
 A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 Ottilie waits
@@ -297,11 +298,11 @@ The Counting House  turn 2 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,5    hp 18/18  Plain  done
 A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- Player phase ends, turn 2 --
@@ -313,12 +314,12 @@ enemy: wait brigand-1
 Brigand 1 waits
 enemy: wait hexer-1
 Hexer 1 waits
+enemy: wait house_captain-1
+Sworn Captain waits
 enemy: wait lector-1
 Lector waits
 enemy: wait soldier-1
 Soldier waits
-enemy: wait sworn_captain-1
-Sworn Captain waits
 enemy: end
 -- Enemy phase ends, turn 2 --
 -- Player phase, turn 3 --
@@ -337,11 +338,11 @@ The Counting House  turn 3 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,5    hp 18/18  Plain
 A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move maud 1,3
 Maud moves 1,5 -> 1,3 via 1,4
@@ -360,11 +361,11 @@ The Counting House  turn 3 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,3    hp 18/18  Plain
 A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait maud
 Maud waits
@@ -383,11 +384,11 @@ The Counting House  turn 3 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,3    hp 18/18  Plain  done
 A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 1,7
 Ottilie moves 0,8 -> 1,7 via 0,7
@@ -406,11 +407,11 @@ The Counting House  turn 3 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,3    hp 18/18  Plain  done
 A  ottilie          Ottilie L5 bowman          1,7    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 Ottilie waits
@@ -429,11 +430,11 @@ The Counting House  turn 3 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,3    hp 18/18  Plain  done
 A  ottilie          Ottilie L5 bowman          1,7    hp 18/18  Plain  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- Player phase ends, turn 3 --
@@ -456,12 +457,12 @@ Hexer 2 attacks Maud
   Hexer 2 hp 0, Maud hp 14
 Maud gains 20 exp (20)
 Hexer 2 falls at 1,1
+enemy: wait house_captain-1
+Sworn Captain waits
 enemy: wait lector-1
 Lector waits
 enemy: wait soldier-1
 Soldier waits
-enemy: wait sworn_captain-1
-Sworn Captain waits
 enemy: end
 -- Enemy phase ends, turn 3 --
 -- Player phase, turn 4 --
@@ -480,11 +481,11 @@ The Counting House  turn 4 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,3    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,7    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 4,6
 Ottilie moves 1,7 -> 4,6 via 2,7 2,6 3,6
@@ -503,11 +504,11 @@ The Counting House  turn 4 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,3    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          4,6    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 Ottilie waits
@@ -526,11 +527,11 @@ The Counting House  turn 4 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           1,3    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          4,6    hp 18/18  Plain  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move maud 3,5
 Maud moves 1,3 -> 3,5 via 2,3 3,3 3,4
@@ -549,11 +550,11 @@ The Counting House  turn 4 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           3,5    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          4,6    hp 18/18  Plain  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait maud
 Maud waits
@@ -572,11 +573,11 @@ The Counting House  turn 4 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           3,5    hp 14/18  Plain  done
 A  ottilie          Ottilie L5 bowman          4,6    hp 18/18  Plain  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- Player phase ends, turn 4 --
@@ -587,12 +588,12 @@ enemy: wait brigand-1
 Brigand 1 waits
 enemy: wait hexer-1
 Hexer 1 waits
+enemy: wait house_captain-1
+Sworn Captain waits
 enemy: wait lector-1
 Lector waits
 enemy: wait soldier-1
 Soldier waits
-enemy: wait sworn_captain-1
-Sworn Captain waits
 enemy: end
 -- Enemy phase ends, turn 4 --
 -- Player phase, turn 5 --
@@ -611,11 +612,11 @@ The Counting House  turn 5 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           3,5    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          4,6    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 5,6
 Ottilie moves 4,6 -> 5,6
@@ -635,11 +636,11 @@ The Counting House  turn 5 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, awake
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           3,5    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          5,6    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move maud 4,6
 Maud moves 3,5 -> 4,6 via 4,5
@@ -658,11 +659,11 @@ The Counting House  turn 5 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, awake
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           4,6    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          5,6    hp 18/18  Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 Ottilie waits
@@ -681,11 +682,11 @@ The Counting House  turn 5 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, awake
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           4,6    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          5,6    hp 18/18  Plain  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait maud
 Maud waits
@@ -704,11 +705,11 @@ The Counting House  turn 5 of 11  player phase  rout  recall 2
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
 c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, awake
 d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
 B  maud             Maud L5 chaplain           4,6    hp 14/18  Plain  done
 A  ottilie          Ottilie L5 bowman          5,6    hp 18/18  Plain  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- Player phase ends, turn 5 --
@@ -731,16 +732,16 @@ Hexer 1 attacks Ottilie
 Ottilie gains 20 exp (20)
 Hexer 1 falls at 7,6
 The house group wakes (noise)
+enemy: move house_captain-1 9,3
+Sworn Captain moves 11,1 -> 9,3 via 10,1 9,1 9,2
+enemy: wait house_captain-1
+Sworn Captain waits
 enemy: move lector-1 7,4
 Lector moves 10,3 -> 7,4 via 9,3 8,3 7,3
 enemy: wait lector-1
 Lector waits
 enemy: wait soldier-1
 Soldier waits
-enemy: move sworn_captain-1 9,3
-Sworn Captain moves 11,1 -> 9,3 via 10,1 9,1 9,2
-enemy: wait sworn_captain-1
-Sworn Captain waits
 enemy: end
 -- Enemy phase ends, turn 5 --
 -- Player phase, turn 6 --
@@ -758,11 +759,11 @@ The Counting House  turn 6 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          6,7    hp 23/23  Road  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           4,6    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          5,6    hp 7/18   Plain  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 > move ottilie 5,4
 Ottilie moves 5,6 -> 5,4 via 5,5
 The Counting House  turn 6 of 11  player phase  rout  recall 2
@@ -779,11 +780,11 @@ The Counting House  turn 6 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          6,7    hp 23/23  Road  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           4,6    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          5,4    hp 7/18   Forest  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 > item ottilie 2
 Ottilie uses Field Dressing (2 left)
 Ottilie heals 10 (hp 17)
@@ -801,11 +802,11 @@ The Counting House  turn 6 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          6,7    hp 23/23  Road  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           4,6    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          5,4    hp 17/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 > move maud 4,3
 Maud moves 4,6 -> 4,3 via 4,5 4,4
 The Counting House  turn 6 of 11  player phase  rout  recall 2
@@ -822,11 +823,11 @@ The Counting House  turn 6 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          6,7    hp 23/23  Road  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           4,3    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          5,4    hp 17/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 > wait maud
 Maud waits
 The Counting House  turn 6 of 11  player phase  rout  recall 2
@@ -843,11 +844,11 @@ The Counting House  turn 6 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          6,7    hp 23/23  Road  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           4,3    hp 14/18  Plain  done
 A  ottilie          Ottilie L5 bowman          5,4    hp 17/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
 > end !
 Lethal if all land: Ottilie (Brigand 1 for 12, Lector for 14, against 17 hp)
 -- Player phase ends, turn 6 --
@@ -863,6 +864,10 @@ Forecast Brigand 1 -> Ottilie: acc 21% dmg 12 crit 0%; counter: none
 Brigand 1 attacks Ottilie
   Brigand 1 misses Ottilie
   Brigand 1 hp 23, Ottilie hp 17
+enemy: move house_captain-1 7,1
+Sworn Captain moves 9,3 -> 7,1 via 8,3 7,3 7,2
+enemy: wait house_captain-1
+Sworn Captain waits
 enemy: attack lector-1 ottilie 2
 Forecast Lector -> Ottilie with Radiance: acc 76% dmg 14 crit 0%; counter: acc 92% dmg 10 x2 crit 6%
 Lector equips Radiance
@@ -875,10 +880,6 @@ Ottilie gains 20 exp (40)
 Lector falls at 7,4
 enemy: wait soldier-1
 Soldier waits
-enemy: move sworn_captain-1 7,1
-Sworn Captain moves 9,3 -> 7,1 via 8,3 7,3 7,2
-enemy: wait sworn_captain-1
-Sworn Captain waits
 enemy: end
 -- Enemy phase ends, turn 6 --
 -- Player phase, turn 7 --
@@ -896,10 +897,10 @@ The Counting House  turn 7 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          5,5    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           4,3    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          5,4    hp 3/18   Forest  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 > move ottilie 2,4
 Ottilie moves 5,4 -> 2,4 via 4,4 3,4
 The Counting House  turn 7 of 11  player phase  rout  recall 2
@@ -916,10 +917,10 @@ The Counting House  turn 7 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          5,5    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           4,3    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          2,4    hp 3/18   Hill  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 > item ottilie 2
 Ottilie uses Field Dressing (1 left)
 Ottilie heals 10 (hp 13)
@@ -937,10 +938,10 @@ The Counting House  turn 7 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          5,5    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           4,3    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          2,4    hp 13/18  Hill  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 > move maud 2,2
 Maud moves 4,3 -> 2,2 via 4,2 3,2
 The Counting House  turn 7 of 11  player phase  rout  recall 2
@@ -957,10 +958,10 @@ The Counting House  turn 7 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          5,5    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           2,2    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          2,4    hp 13/18  Hill  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 > wait maud
 Maud waits
 The Counting House  turn 7 of 11  player phase  rout  recall 2
@@ -977,10 +978,10 @@ The Counting House  turn 7 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          5,5    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           2,2    hp 14/18  Plain  done
 A  ottilie          Ottilie L5 bowman          2,4    hp 13/18  Hill  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   7,1    hp 27/27  Plain  group house, guard, awake
 > end
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
@@ -995,12 +996,12 @@ Forecast Brigand 1 -> Ottilie: acc 36% dmg 12 crit 0%; counter: none
 Brigand 1 attacks Ottilie
   Brigand 1 hits Ottilie for 12 (hp 1)
   Brigand 1 hp 23, Ottilie hp 1
+enemy: move house_captain-1 3,1
+Sworn Captain moves 7,1 -> 3,1 via 6,1 5,1 4,1
+enemy: wait house_captain-1
+Sworn Captain waits
 enemy: wait soldier-1
 Soldier waits
-enemy: move sworn_captain-1 3,1
-Sworn Captain moves 7,1 -> 3,1 via 6,1 5,1 4,1
-enemy: wait sworn_captain-1
-Sworn Captain waits
 enemy: end
 -- Enemy phase ends, turn 7 --
 -- Player phase, turn 8 --
@@ -1018,10 +1019,10 @@ The Counting House  turn 8 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           6,1    hp 17/17  Road  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          3,4    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           2,2    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          2,4    hp 1/18   Hill  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 > move ottilie 1,6
 Ottilie moves 2,4 -> 1,6 via 1,4 1,5
 The Counting House  turn 8 of 11  player phase  rout  recall 2
@@ -1038,10 +1039,10 @@ The Counting House  turn 8 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           6,1    hp 17/17  Road  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          3,4    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           2,2    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 1/18   Forest  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 > item ottilie 2
 Ottilie uses Field Dressing (0 left)
 Ottilie heals 10 (hp 11)
@@ -1059,10 +1060,10 @@ The Counting House  turn 8 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           6,1    hp 17/17  Road  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          3,4    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           2,2    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 11/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 > move maud 1,5
 Maud moves 2,2 -> 1,5 via 1,2 1,3 1,4
 The Counting House  turn 8 of 11  player phase  rout  recall 2
@@ -1079,10 +1080,10 @@ The Counting House  turn 8 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           6,1    hp 17/17  Road  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          3,4    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           1,5    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 11/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 > item maud 2 ottilie
 Maud uses Salve on ottilie (7 left)
 Ottilie heals 7 (hp 18)
@@ -1101,10 +1102,10 @@ The Counting House  turn 8 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           6,1    hp 17/17  Road  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          3,4    hp 23/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           1,5    hp 14/18  Plain  done
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   3,1    hp 27/27  Plain  group house, guard, awake
 > end !
 Lethal if all land: Maud (Brigand 1 for 14, against 14 hp)
 -- Player phase ends, turn 8 --
@@ -1122,12 +1123,12 @@ Brigand 1 attacks Maud
   Maud hits Brigand 1 for 12 (hp 11)
   Brigand 1 hp 11, Maud hp 14
 Maud gains 6 exp (37)
+enemy: move house_captain-1 1,3
+Sworn Captain moves 3,1 -> 1,3 via 2,1 1,1 1,2
+enemy: wait house_captain-1
+Sworn Captain waits
 enemy: wait soldier-1
 Soldier waits
-enemy: move sworn_captain-1 1,3
-Sworn Captain moves 3,1 -> 1,3 via 2,1 1,1 1,2
-enemy: wait sworn_captain-1
-Sworn Captain waits
 enemy: end
 -- Enemy phase ends, turn 8 --
 -- Player phase, turn 9 --
@@ -1145,10 +1146,10 @@ The Counting House  turn 9 of 11  player phase  rout  recall 2
 
 a  archer-1         Archer L3 bowman           2,1    hp 17/17  Plain  group house, guard, awake
 c  brigand-1        Brigand L3 reaver          2,5    hp 11/23  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,3    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           1,5    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,3    hp 27/27  Plain  group house, guard, awake
 > attack ottilie brigand-1
 Forecast Ottilie -> Brigand 1: acc 88% dmg 9 crit 7%; counter: none
 Ottilie attacks Brigand 1
@@ -1169,10 +1170,10 @@ The Counting House  turn 9 of 11  player phase  rout  recall 2
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           2,1    hp 17/17  Plain  group house, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,3    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           1,5    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,3    hp 27/27  Plain  group house, guard, awake
 > move maud 3,7
 Maud moves 1,5 -> 3,7 via 2,5 3,5 3,6
 The Counting House  turn 9 of 11  player phase  rout  recall 2
@@ -1188,10 +1189,10 @@ The Counting House  turn 9 of 11  player phase  rout  recall 2
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           2,1    hp 17/17  Plain  group house, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,3    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           3,7    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,3    hp 27/27  Plain  group house, guard, awake
 > wait maud
 Maud waits
 The Counting House  turn 9 of 11  player phase  rout  recall 2
@@ -1207,10 +1208,10 @@ The Counting House  turn 9 of 11  player phase  rout  recall 2
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           2,1    hp 17/17  Plain  group house, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,3    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           3,7    hp 14/18  Plain  done
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,3    hp 27/27  Plain  group house, guard, awake
 > end !
 Lethal if all land: Ottilie (Archer for 6, Sworn Captain for 13, against 18 hp)
 -- Player phase ends, turn 9 --
@@ -1224,15 +1225,15 @@ Archer attacks Ottilie
   Ottilie hits Archer for 9 (hp 8)
   Archer hp 8, Ottilie hp 18
 Ottilie gains 6 exp (66)
-enemy: wait soldier-1
-Soldier waits
-enemy: move sworn_captain-1 1,5
+enemy: move house_captain-1 1,5
 Sworn Captain moves 1,3 -> 1,5 via 1,4
-enemy: attack sworn_captain-1 ottilie
+enemy: attack house_captain-1 ottilie
 Forecast Sworn Captain -> Ottilie: acc 45% dmg 13 crit 0%; counter: none
 Sworn Captain attacks Ottilie
   Sworn Captain misses Ottilie
   Sworn Captain hp 27, Ottilie hp 18
+enemy: wait soldier-1
+Soldier waits
 enemy: end
 -- Enemy phase ends, turn 9 --
 -- Player phase, turn 10 --
@@ -1249,10 +1250,10 @@ The Counting House  turn 10 of 11  player phase  rout  recall 2
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           1,4    hp 8/17   Plain  group house, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           3,7    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 > attack ottilie archer-1
 Forecast Ottilie -> Archer: acc 85% dmg 9 crit 6%; counter: acc 39% dmg 6 crit 0%
 Ottilie attacks Archer
@@ -1272,10 +1273,10 @@ The Counting House  turn 10 of 11  player phase  rout  recall 2
  7 ...B..=b..^..
  8 ==....~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           3,7    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 > wait maud
 Maud waits
 The Counting House  turn 10 of 11  player phase  rout  recall 2
@@ -1290,24 +1291,24 @@ The Counting House  turn 10 of 11  player phase  rout  recall 2
  7 ...B..=b..^..
  8 ==....~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           3,7    hp 14/18  Plain  done
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 > end !
 Lethal if all land: Maud (Sworn Captain for 15, against 14 hp)
 -- Player phase ends, turn 10 --
 -- Enemy phase, turn 10 --
-enemy: wait soldier-1
-Soldier waits
-enemy: move sworn_captain-1 3,6
+enemy: move house_captain-1 3,6
 Sworn Captain moves 1,5 -> 3,6 via 2,5 3,5
-enemy: attack sworn_captain-1 maud
+enemy: attack house_captain-1 maud
 Forecast Sworn Captain -> Maud: acc 87% dmg 15 crit 0%; counter: acc 98% dmg 10 crit 1% (Radiance 3 of 5 left)
 Sworn Captain attacks Maud
   Sworn Captain hits Maud for 15 (hp 0)
   Sworn Captain hp 27, Maud hp 0
 Maud falls at 3,7
+enemy: wait soldier-1
+Soldier waits
 enemy: end
 -- Enemy phase ends, turn 10 --
 -- Player phase, turn 11 --
@@ -1323,9 +1324,9 @@ The Counting House  turn 11 of 11  player phase  rout  recall 2
  7 ......=b..^..
  8 ==....~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   3,6    hp 27/27  Plain  group house, guard, awake
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   3,6    hp 27/27  Plain  group house, guard, awake
 > recall 116
 Recalled to state 116; 1 charge left
 Undone: gives back 1 kill (Archer), 20 exp, 8 enemy hp; returns Maud alive at 14 hp
@@ -1343,10 +1344,10 @@ The Counting House  turn 10 of 11  player phase  rout  recall 1
  8 ==....~....^M
 
 a  archer-1         Archer L3 bowman           1,4    hp 8/17   Plain  group house, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           3,7    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 > attack ottilie archer-1
 Forecast Ottilie -> Archer: acc 85% dmg 9 crit 6%; counter: acc 39% dmg 6 crit 0%
   Seen before the recall: Ottilie hits
@@ -1367,10 +1368,10 @@ The Counting House  turn 10 of 11  player phase  rout  recall 1
  7 ...B..=b..^..
  8 ==....~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           3,7    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 > move maud 5,7
 Maud moves 3,7 -> 5,7 via 4,7
 The Counting House  turn 10 of 11  player phase  rout  recall 1
@@ -1385,10 +1386,10 @@ The Counting House  turn 10 of 11  player phase  rout  recall 1
  7 .....B=b..^..
  8 ==....~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           5,7    hp 14/18  Plain
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 > attack maud soldier-1
 Forecast Maud -> Soldier: acc 98% dmg 11 crit 3%; counter: none
 Maud attacks Soldier
@@ -1407,20 +1408,20 @@ The Counting House  turn 10 of 11  player phase  rout  recall 1
  7 .....B=b..^..
  8 ==....~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           5,7    hp 14/18  Plain  done
 A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain  done
 b  soldier-1        Soldier L3 pikeman         7,7    hp 10/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 > end
 -- Player phase ends, turn 10 --
 -- Enemy phase, turn 10 --
-enemy: wait soldier-1
-Soldier waits
-enemy: attack sworn_captain-1 ottilie
+enemy: attack house_captain-1 ottilie
 Forecast Sworn Captain -> Ottilie: acc 45% dmg 13 crit 0%; counter: none
 Sworn Captain attacks Ottilie
-  Sworn Captain hits Ottilie for 13 (hp 5)
-  Sworn Captain hp 27, Ottilie hp 5
+  Sworn Captain misses Ottilie
+  Sworn Captain hp 27, Ottilie hp 18
+enemy: wait soldier-1
+Soldier waits
 enemy: end
 -- Enemy phase ends, turn 10 --
 -- Player phase, turn 11 --
@@ -1436,10 +1437,10 @@ The Counting House  turn 11 of 11  player phase  rout  recall 1
  7 .....B=b..^..
  8 ==....~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           5,7    hp 14/18  Plain
-A  ottilie          Ottilie L5 bowman          1,6    hp 5/18   Forest  captain
+A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain
 b  soldier-1        Soldier L3 pikeman         7,7    hp 10/21  Plain  group bank, hold
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 > attack maud soldier-1
 Forecast Maud -> Soldier: acc 98% dmg 11 crit 3%; counter: none
 Maud attacks Soldier
@@ -1459,9 +1460,9 @@ The Counting House  turn 11 of 11  player phase  rout  recall 1
  7 .....B=...^..
  8 ==....~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           5,7    hp 14/18  Plain  done
-A  ottilie          Ottilie L5 bowman          1,6    hp 5/18   Forest  captain
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          1,6    hp 18/18  Forest  captain
 > move ottilie 3,8
 Ottilie moves 1,6 -> 3,8 via 2,6 3,6 3,7
 The Counting House  turn 11 of 11  player phase  rout  recall 1
@@ -1476,20 +1477,19 @@ The Counting House  turn 11 of 11  player phase  rout  recall 1
  7 .....B=...^..
  8 ==.A..~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           5,7    hp 14/18  Plain  done
-A  ottilie          Ottilie L5 bowman          3,8    hp 5/18   Plain  captain
-f  sworn_captain-1  Sworn Captain L3 pikeman   1,5    hp 27/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,8    hp 18/18  Plain  captain
 > end !
-Lethal if all land: Ottilie (Sworn Captain for 14, against 5 hp)
 -- Player phase ends, turn 11 --
 -- Enemy phase, turn 11 --
-enemy: move sworn_captain-1 3,7
+enemy: move house_captain-1 3,7
 Sworn Captain moves 1,5 -> 3,7 via 2,5 3,5 3,6
-enemy: attack sworn_captain-1 ottilie
+enemy: attack house_captain-1 ottilie
 Forecast Sworn Captain -> Ottilie: acc 79% dmg 14 crit 0%; counter: none
 Sworn Captain attacks Ottilie
-  Sworn Captain misses Ottilie
-  Sworn Captain hp 27, Ottilie hp 5
+  Sworn Captain hits Ottilie for 14 (hp 4)
+  Sworn Captain hp 27, Ottilie hp 4
 enemy: end
 -- Enemy phase ends, turn 11 --
 The Counting House  over after turn 11 of 11  rout  recall 1
@@ -1504,9 +1504,9 @@ The Counting House  over after turn 11 of 11  rout  recall 1
  7 ...f.B=...^..
  8 ==.A..~....^M
 
+f  house_captain-1  Sworn Captain L3 pikeman   3,7    hp 27/27  Plain  group house, guard, awake
 B  maud             Maud L5 chaplain           5,7    hp 14/18  Plain
-A  ottilie          Ottilie L5 bowman          3,8    hp 5/18   Plain  captain
-f  sworn_captain-1  Sworn Captain L3 pikeman   3,7    hp 27/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,8    hp 4/18   Plain  captain
 Battle lost: turn 11 passed; only recall is left, or leave
 Lost because turn 11 ended and 1 enemy still stands.
 > leave

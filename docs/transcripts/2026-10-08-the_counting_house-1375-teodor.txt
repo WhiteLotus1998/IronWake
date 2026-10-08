@@ -1,0 +1,1711 @@
+Campaign, seed 1375, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+reseeded from 894 to 1375: not the save's battle
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 7 of 10: Sallow Grange; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L5, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40; door: lance 0/50
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3; door: bow 0/50
+  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6; door: lore 0/50
+  Dunstan: Bulwark L5, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
+  Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8; door: faith 30/50
+  Rook: Skyrider L5, EXP 0; 1: Iron Lance 40/40; door: lance 0/50
+  Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Sallow Grange: Alder Fenn, Dunstan, Wren, Teodor, Pell, Ottilie (deploy 6 of 9)
+== Keep ==
+Purse: 500
+Rooms: beds: 9/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Keep: Ironwake Keep; built: nothing; the purse holds 500
+  wall: Rebuild a wall, 400
+    Wall 10,2: Wall; no unit can stand on it; the gap 10,1 to 10,2 narrows from 2 tiles to 1 (10,1)
+    Wall 10,9: Wall; no unit can stand on it; the gap 10,9 to 10,10 narrows from 2 tiles to 1 (10,10)
+  ditch: Dig a ditch, 300
+    Ditch 9,4: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,7: Water; infantry, cavalry and armored units cannot stand on it; flying can
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  pell_2: Pell's quest 2, The Undercroft (quest pell_2 <ally>); permadeath applies
+  ottilie_1: Ottilie's quest 1, The Counting House (quest ottilie_1 <ally>); permadeath applies
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+  pell_1: Pell's quest 1, The Burned School; paid 2 common material
+  maud_2: Maud's quest 2, The First Shrine; paid Maud's Psalter
+  teodor_1: Teodor's quest 1, The Old Watch; paid nothing
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 7, Sallow Grange. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+> quest ottilie_1 teodor
+-- The Counting House --
+The crown's bills on Ottilie's firm were marked paid the week it went
+under, at a counting house on the Sallow canal. The house keeps two
+books: one for the guild, one for whoever pays the lock-keeper. "The
+guild's book says paid. If they won't sell me the other one, I'll
+collect. I want to know who."
+
+(Rout: every enemy falls by the end of turn 11. The map is lost if
+Ottilie falls. The canal is crossed only at the bridges, 6,1 and 6,7; a
+bow reaches over it and a sword does not. More come up the near bank
+from turn 2, announced. The Sworn Captain on the house fort is armoured:
+leave time for him.)
+
+Side map: The Counting House, seed 1461
+Ottilie goes with Teodor. This map is lost if Ottilie falls; who falls here is gone for good.
+  turn 2, enemy phase: a brigand arrives at 0,8 (aggressive). A unit standing on 0,8 stops it.
+  turn 3, enemy phase: a hexer arrives at 0,0 (aggressive). A unit standing on 0,0 stops it.
+Objective: Defeat every enemy by the end of turn 11. Ottilie must survive.
+The Counting House  turn 1 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^A...~..d...
+ 7 ...B..=b..c..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          2,6    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,7    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 0,8
+Ottilie moves 2,6 -> 0,8 via 2,7 1,7 0,7
+The Counting House  turn 1 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ...B..=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,7    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ottilie
+Ottilie waits
+The Counting House  turn 1 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ...B..=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,7    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 3,3
+Teodor moves 3,7 -> 3,3 via 3,6 3,5 3,4
+The Counting House  turn 1 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ...B..~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,3    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Counting House  turn 1 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ...B..~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,3    hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait hexer-1
+Hexer 1 waits
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Counting House  turn 2 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ...B..~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,3    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ottilie
+Ottilie waits
+The Counting House  turn 2 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ...B..~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,3    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 1,1
+Teodor moves 3,3 -> 1,1 via 3,2 3,1 2,1
+The Counting House  turn 2 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^B....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,1    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Counting House  turn 2 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^B....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,1    hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements are blocked: a unit holds 0,8
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait hexer-1
+Hexer 1 waits
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Counting House  turn 3 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^B....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,1    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ottilie
+Ottilie waits
+The Counting House  turn 3 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^B....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,1    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 0,0
+Teodor moves 1,1 -> 0,0 via 1,0
+The Counting House  turn 3 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 B^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          0,0    hp 23/23  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Counting House  turn 3 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 B^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          0,0    hp 23/23  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements are blocked: a unit holds 0,0
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait hexer-1
+Hexer 1 waits
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Counting House  turn 4 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 B^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 A=....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          0,8    hp 18/18  Road  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          0,0    hp 23/23  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 4,8
+Ottilie moves 0,8 -> 4,8 via 1,8 2,8 3,8
+The Counting House  turn 4 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 B^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 ==..A.~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          4,8    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          0,0    hp 23/23  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ottilie
+Ottilie waits
+The Counting House  turn 4 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 B^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 ==..A.~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          4,8    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          0,0    hp 23/23  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 1,2
+Teodor moves 0,0 -> 1,2 via 1,0 1,1
+The Counting House  turn 4 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .B...^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 ==..A.~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          4,8    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,2    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Counting House  turn 4 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .B...^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 ==..A.~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          4,8    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,2    hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait hexer-1
+Hexer 1 waits
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Counting House  turn 5 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .B...^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 ......=b..c..
+ 8 ==..A.~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          4,8    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,2    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 5,7
+Ottilie moves 4,8 -> 5,7 via 4,7
+The Counting House  turn 5 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .B...^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 .....A=b..c..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, asleep
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, asleep
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          5,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 21/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,2    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack ottilie soldier-1
+Forecast Ottilie -> Soldier: acc 85% dmg 7 crit 6%; counter: none
+  Fighting here wakes: the yard group (noise, heard from 5,7 and 7,7)
+Ottilie attacks Soldier
+  Ottilie hits Soldier for 7 (hp 14)
+  Ottilie hp 18, Soldier hp 14
+Ottilie gains 6 exp (6)
+The yard group wakes (noise)
+The Counting House  turn 5 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .B...^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~..d...
+ 7 .....A=b..c..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          5,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,2    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 2,5
+Teodor moves 1,2 -> 2,5 via 1,3 1,4 1,5
+The Counting House  turn 5 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ..B...~.#####
+ 6 .^....~..d...
+ 7 .....A=b..c..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          5,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,5    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Counting House  turn 5 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~.#...#
+ 5 ..B...~.#####
+ 6 .^....~..d...
+ 7 .....A=b..c..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          10,7   hp 23/23  Forest  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             9,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          5,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,5    hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 6,7
+Brigand 1 moves 10,7 -> 6,7 via 9,7 8,7 7,7
+enemy: attack brigand-1 ottilie
+Forecast Brigand 1 -> Ottilie: acc 54% dmg 13 crit 0%; counter: none
+Brigand 1 attacks Ottilie
+  Brigand 1 misses Ottilie
+  Brigand 1 hp 23, Ottilie hp 18
+enemy: move hexer-1 7,4
+Hexer 1 moves 9,6 -> 7,4 via 8,6 7,6 7,5
+enemy: wait hexer-1
+Hexer 1 waits
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The Counting House  turn 6 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~d#...#
+ 5 ..B...~.#####
+ 6 .^....~......
+ 7 .....Acb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          6,7    hp 23/23  Road  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,4    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          5,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,5    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 4,7
+Ottilie moves 5,7 -> 4,7
+The Counting House  turn 6 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~d#...#
+ 5 ..B...~.#####
+ 6 .^....~......
+ 7 ....A.cb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          6,7    hp 23/23  Road  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,4    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          4,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,5    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack ottilie brigand-1
+Forecast Ottilie -> Brigand 1: acc 88% dmg 9 crit 7%; counter: none
+Ottilie attacks Brigand 1
+  Ottilie hits Brigand 1 for 9 (hp 14)
+  Ottilie hp 18, Brigand 1 hp 14
+Ottilie gains 6 exp (12)
+The Counting House  turn 6 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~d#...#
+ 5 ..B...~.#####
+ 6 .^....~......
+ 7 ....A.cb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          6,7    hp 14/23  Road  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,4    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          4,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,5    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 5,6
+Teodor moves 2,5 -> 5,6 via 3,5 4,5 5,5
+The Counting House  turn 6 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~d#...#
+ 5 ......~.#####
+ 6 .^...B~......
+ 7 ....A.cb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          6,7    hp 14/23  Road  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,4    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          4,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack teodor brigand-1 art long_thrust
+Forecast Teodor -> Brigand 1: acc 81% dmg 10 crit 3%; counter: none
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 40 uses, 2 of them hit or miss
+Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
+Teodor attacks Brigand 1
+  Teodor hits Brigand 1 for 10 (hp 4)
+  Teodor hp 23, Brigand 1 hp 4
+Teodor gains 6 exp (6)
+The Counting House  turn 6 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..f#
+ 2 .....^~.#..a#
+ 3 ......~...e..
+ 4 ..n..^~d#...#
+ 5 ......~.#####
+ 6 .^...B~......
+ 7 ....A.cb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, asleep
+c  brigand-1        Brigand L3 reaver          6,7    hp 4/23   Road  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,4    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   11,1   hp 27/27  Fort (heals 20 percent, 5 hp)  group house, guard, asleep
+e  lector-1         Lector L3 scholar          10,3   hp 16/16  Plain  group house, guard, asleep
+A  ottilie          Ottilie L5 bowman          4,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 23/23  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end !
+Lethal if all land: Ottilie (Brigand 1 for 13, Hexer 1 for 11, against 18 hp)
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 5,7
+Brigand 1 moves 6,7 -> 5,7
+enemy: attack brigand-1 ottilie
+Forecast Brigand 1 -> Ottilie: acc 54% dmg 13 crit 0%; counter: none
+Brigand 1 attacks Ottilie
+  Brigand 1 misses Ottilie
+  Brigand 1 hp 4, Ottilie hp 18
+enemy: move hexer-1 7,6
+Hexer 1 moves 7,4 -> 7,6 via 7,5
+enemy: attack hexer-1 teodor
+Forecast Hexer 1 -> Teodor: acc 99% dmg 12 crit 1%; counter: none
+Hexer 1 attacks Teodor
+  Hexer 1 hits Teodor for 12 (hp 11)
+  Hexer 1 hp 16, Teodor hp 11
+The house group wakes (noise)
+enemy: move house_captain-1 9,3
+Sworn Captain moves 11,1 -> 9,3 via 10,1 9,1 9,2
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: move lector-1 7,4
+Lector moves 10,3 -> 7,4 via 9,3 8,3 7,3
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+The Counting House  turn 7 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^...B~d.....
+ 7 ....Ac=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+c  brigand-1        Brigand L3 reaver          5,7    hp 4/23   Plain  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          4,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 11/23  Plain
+> move ottilie 3,7
+Ottilie moves 4,7 -> 3,7
+The Counting House  turn 7 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^...B~d.....
+ 7 ...A.c=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+c  brigand-1        Brigand L3 reaver          5,7    hp 4/23   Plain  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 11/23  Plain
+> attack ottilie brigand-1
+Forecast Ottilie -> Brigand 1: acc 88% dmg 9 crit 7%; counter: none
+Ottilie attacks Brigand 1
+  Ottilie hits Brigand 1 for 9 (hp 0)
+  Ottilie hp 18, Brigand 1 hp 0
+Ottilie gains 20 exp (32)
+Brigand 1 falls at 5,7
+The Counting House  turn 7 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^...B~d.....
+ 7 ...A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 11/23  Plain
+> move teodor 3,5
+Teodor moves 5,6 -> 3,5 via 5,5 4,5
+The Counting House  turn 7 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ...B..~.#####
+ 6 .^....~d.....
+ 7 ...A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,5    hp 11/23  Plain
+> item teodor 2
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 21)
+The Counting House  turn 7 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ...B..~.#####
+ 6 .^....~d.....
+ 7 ...A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,5    hp 21/23  Plain  done
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: move archer-1 8,3
+Archer moves 11,2 -> 8,3 via 10,2 9,2 9,3
+enemy: wait archer-1
+Archer waits
+enemy: move hexer-1 4,7
+Hexer 1 moves 7,6 -> 4,7 via 7,7 6,7 5,7
+enemy: attack hexer-1 ottilie
+Forecast Hexer 1 -> Ottilie: acc 98% dmg 11 crit 0%; counter: none
+Hexer 1 attacks Ottilie
+  Hexer 1 hits Ottilie for 11 (hp 7)
+  Hexer 1 hp 16, Ottilie hp 7
+enemy: move house_captain-1 7,5
+Sworn Captain moves 9,3 -> 7,5 via 8,3 7,3 7,4
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: move lector-1 6,7
+Lector moves 7,4 -> 6,7 via 7,5 7,6 7,7
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+The Counting House  turn 8 of 11  player phase  rout  recall 2
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~.a....
+ 4 ..n..^~.#...#
+ 5 ...B..~f#####
+ 6 .^....~......
+ 7 ...Ad.eb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,7    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          6,7    hp 16/16  Road  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 7/18   Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,5    hp 21/23  Plain
+> recall 76
+Recalled to state 76; 1 charge left
+Undone: gives back 1 kill (Brigand 1), 20 exp, 4 enemy hp; returns 11 hp to Ottilie
+The rolls do not change: the same attack will roll the same
+The Counting House  turn 7 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^...B~d.....
+ 7 ....Ac=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+c  brigand-1        Brigand L3 reaver          5,7    hp 4/23   Plain  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          4,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 11/23  Plain
+> move ottilie 3,7
+Ottilie moves 4,7 -> 3,7
+The Counting House  turn 7 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^...B~d.....
+ 7 ...A.c=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+c  brigand-1        Brigand L3 reaver          5,7    hp 4/23   Plain  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 11/23  Plain
+> attack ottilie brigand-1
+Forecast Ottilie -> Brigand 1: acc 88% dmg 9 crit 7%; counter: none
+  Seen before the recall: Ottilie hits
+Ottilie attacks Brigand 1
+  Ottilie hits Brigand 1 for 9 (hp 0)
+  Ottilie hp 18, Brigand 1 hp 0
+Ottilie gains 20 exp (32)
+Brigand 1 falls at 5,7
+The Counting House  turn 7 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^...B~d.....
+ 7 ...A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 11/23  Plain
+> move teodor 5,7
+Teodor moves 5,6 -> 5,7
+The Counting House  turn 7 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^....~d.....
+ 7 ...A.B=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,7    hp 11/23  Plain
+> item teodor 2
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 21)
+The Counting House  turn 7 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^....~d.....
+ 7 ...A.B=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,7    hp 21/23  Plain  done
+> end !
+Lethal if all land: Teodor (Lector for 16, Hexer 1 for 12 on 6,7 if Teodor's counter kills Lector (89 hit, all counters landing), against 21 hp)
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: move archer-1 8,3
+Archer moves 11,2 -> 8,3 via 10,2 9,2 9,3
+enemy: wait archer-1
+Archer waits
+enemy: move hexer-1 6,7
+Hexer 1 moves 7,6 -> 6,7 via 7,7
+enemy: attack hexer-1 teodor
+Forecast Hexer 1 -> Teodor: acc 99% dmg 12 crit 1%; counter with Iron Lance: acc 85% dmg 14 x2 crit 2%
+Hexer 1 attacks Teodor
+  Hexer 1 hits Teodor for 12 (hp 9)
+  Teodor hits Hexer 1 for 14 (hp 2)
+  Teodor hits Hexer 1 for 14 (hp 0)
+  Hexer 1 hp 0, Teodor hp 9
+Teodor gains 20 exp (26)
+Hexer 1 falls at 6,7
+enemy: move house_captain-1 7,5
+Sworn Captain moves 9,3 -> 7,5 via 8,3 7,3 7,4
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: move lector-1 6,7
+Lector moves 7,4 -> 6,7 via 7,5 7,6 7,7
+enemy: attack lector-1 teodor 2
+Forecast Lector -> Teodor with Radiance: acc 97% dmg 15 crit 1%; counter with Iron Lance: acc 87% dmg 14 x2 crit 2%
+Lector equips Radiance
+Lector attacks Teodor
+  Lector hits Teodor for 15 (hp 0)
+  Lector hp 16, Teodor hp 0
+Teodor falls at 5,7
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+The Counting House  turn 8 of 11  player phase  rout  recall 1
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~.a....
+ 4 ..n..^~.#...#
+ 5 ......~f#####
+ 6 .^....~......
+ 7 ...A..eb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          6,7    hp 16/16  Road  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+> recall 76
+Recalled to state 76; 0 charges left
+Undone: gives back 2 kills (Brigand 1, Hexer 1), 20 exp, 20 enemy hp; returns Teodor alive at 11 hp
+The rolls do not change: the same attack will roll the same
+The Counting House  turn 7 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^...B~d.....
+ 7 ....Ac=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+c  brigand-1        Brigand L3 reaver          5,7    hp 4/23   Plain  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          4,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 11/23  Plain
+> move ottilie 3,7
+Ottilie moves 4,7 -> 3,7
+The Counting House  turn 7 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^...B~d.....
+ 7 ...A.c=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+c  brigand-1        Brigand L3 reaver          5,7    hp 4/23   Plain  group yard, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 11/23  Plain
+> attack ottilie brigand-1
+Forecast Ottilie -> Brigand 1: acc 88% dmg 9 crit 7%; counter: none
+  Seen before the recall: Ottilie hits
+Ottilie attacks Brigand 1
+  Ottilie hits Brigand 1 for 9 (hp 0)
+  Ottilie hp 18, Brigand 1 hp 0
+Ottilie gains 20 exp (32)
+Brigand 1 falls at 5,7
+The Counting House  turn 7 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ......~.#####
+ 6 .^...B~d.....
+ 7 ...A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          5,6    hp 11/23  Plain
+> move teodor 3,5
+Teodor moves 5,6 -> 3,5 via 5,5 4,5
+The Counting House  turn 7 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ...B..~.#####
+ 6 .^....~d.....
+ 7 ...A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,5    hp 11/23  Plain
+> item teodor 2
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 21)
+The Counting House  turn 7 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#..a#
+ 3 ......~..f...
+ 4 ..n..^~e#...#
+ 5 ...B..~.#####
+ 6 .^....~d.....
+ 7 ...A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           11,2   hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             7,6    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   9,3    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          7,4    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 18/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,5    hp 21/23  Plain  done
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: move archer-1 8,3
+Archer moves 11,2 -> 8,3 via 10,2 9,2 9,3
+enemy: wait archer-1
+Archer waits
+enemy: move hexer-1 4,7
+Hexer 1 moves 7,6 -> 4,7 via 7,7 6,7 5,7
+enemy: attack hexer-1 ottilie
+Forecast Hexer 1 -> Ottilie: acc 98% dmg 11 crit 0%; counter: none
+Hexer 1 attacks Ottilie
+  Hexer 1 hits Ottilie for 11 (hp 7)
+  Hexer 1 hp 16, Ottilie hp 7
+enemy: move house_captain-1 7,5
+Sworn Captain moves 9,3 -> 7,5 via 8,3 7,3 7,4
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: move lector-1 6,7
+Lector moves 7,4 -> 6,7 via 7,5 7,6 7,7
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+The Counting House  turn 8 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~.a....
+ 4 ..n..^~.#...#
+ 5 ...B..~f#####
+ 6 .^....~......
+ 7 ...Ad.eb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,7    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          6,7    hp 16/16  Road  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 7/18   Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,5    hp 21/23  Plain
+> move ottilie 0,6
+Ottilie moves 3,7 -> 0,6 via 2,7 1,7 0,7
+The Counting House  turn 8 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~.a....
+ 4 ..n..^~.#...#
+ 5 ...B..~f#####
+ 6 A^....~......
+ 7 ....d.eb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,7    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          6,7    hp 16/16  Road  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          0,6    hp 7/18   Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,5    hp 21/23  Plain
+> item ottilie 2
+Ottilie uses Field Dressing (2 left)
+Ottilie heals 10 (hp 17)
+The Counting House  turn 8 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~.a....
+ 4 ..n..^~.#...#
+ 5 ...B..~f#####
+ 6 A^....~......
+ 7 ....d.eb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,7    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          6,7    hp 16/16  Road  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          0,6    hp 17/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          3,5    hp 21/23  Plain
+> move teodor 2,3
+Teodor moves 3,5 -> 2,3 via 3,4 3,3
+The Counting House  turn 8 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ..B...~.a....
+ 4 ..n..^~.#...#
+ 5 ......~f#####
+ 6 A^....~......
+ 7 ....d.eb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,7    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          6,7    hp 16/16  Road  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          0,6    hp 17/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,3    hp 21/23  Plain
+> wait teodor
+Teodor waits
+The Counting House  turn 8 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ..B...~.a....
+ 4 ..n..^~.#...#
+ 5 ......~f#####
+ 6 A^....~......
+ 7 ....d.eb..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           8,3    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,7    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   7,5    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          6,7    hp 16/16  Road  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          0,6    hp 17/18  Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,3    hp 21/23  Plain  done
+> end
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
+enemy: move archer-1 6,1
+Archer moves 8,3 -> 6,1 via 7,3 7,2 7,1
+enemy: wait archer-1
+Archer waits
+enemy: move hexer-1 4,3
+Hexer 1 moves 4,7 -> 4,3 via 4,6 4,5 4,4
+enemy: attack hexer-1 teodor
+Forecast Hexer 1 -> Teodor: acc 99% dmg 12 crit 1%; counter: none
+Hexer 1 attacks Teodor
+  Hexer 1 hits Teodor for 12 (hp 9)
+  Hexer 1 hp 16, Teodor hp 9
+enemy: move house_captain-1 5,7
+Sworn Captain moves 7,5 -> 5,7 via 7,6 7,7 6,7
+enemy: wait house_captain-1
+Sworn Captain waits
+enemy: move lector-1 2,7
+Lector moves 6,7 -> 2,7 via 5,7 4,7 3,7
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
+The Counting House  turn 9 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....a.#..F#
+ 2 .....^~.#...#
+ 3 ..B.d.~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 A^....~......
+ 7 ..e..f=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Road  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,3    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   5,7    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          2,7    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          0,6    hp 17/18  Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,3    hp 9/23   Plain
+> move ottilie 1,6
+Ottilie moves 0,6 -> 1,6
+The Counting House  turn 9 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....a.#..F#
+ 2 .....^~.#...#
+ 3 ..B.d.~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .A....~......
+ 7 ..e..f=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Road  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,3    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   5,7    hp 27/27  Plain  group house, guard, awake
+e  lector-1         Lector L3 scholar          2,7    hp 16/16  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          1,6    hp 17/18  Forest  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,3    hp 9/23   Plain
+> attack ottilie lector-1
+Forecast Ottilie -> Lector: acc 94% dmg 10 x2 crit 6%; counter with Bolt: acc 60% dmg 15 crit 8% (Bolt 5 of 5 left)
+Ottilie attacks Lector
+  Ottilie hits Lector for 10 (hp 6)
+  Lector misses Ottilie
+  Ottilie hits Lector for 10 (hp 0)
+  Ottilie hp 17, Lector hp 0
+Ottilie gains 20 exp (52)
+Lector falls at 2,7
+The Counting House  turn 9 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....a.#..F#
+ 2 .....^~.#...#
+ 3 ..B.d.~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .A....~......
+ 7 .....f=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Road  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,3    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   5,7    hp 27/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          1,6    hp 17/18  Forest  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,3    hp 9/23   Plain
+> item teodor 2
+Teodor uses Field Dressing (1 left)
+Teodor heals 10 (hp 19)
+The Counting House  turn 9 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....a.#..F#
+ 2 .....^~.#...#
+ 3 ..B.d.~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .A....~......
+ 7 .....f=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Road  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,3    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   5,7    hp 27/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          1,6    hp 17/18  Forest  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,3    hp 19/23  Plain  done
+> end !
+Lethal if all land: Ottilie (Hexer 1 for 11, Sworn Captain for 13, against 17 hp)
+-- Player phase ends, turn 9 --
+-- Enemy phase, turn 9 --
+enemy: move archer-1 2,1
+Archer moves 6,1 -> 2,1 via 5,1 4,1 3,1
+enemy: attack archer-1 teodor
+Forecast Archer -> Teodor: acc 79% dmg 4 crit 3%; counter: none
+Archer attacks Teodor
+  Archer hits Teodor for 4 (hp 15)
+  Archer hp 17, Teodor hp 15
+enemy: attack hexer-1 teodor
+Forecast Hexer 1 -> Teodor: acc 99% dmg 12 crit 1%; counter: none
+Hexer 1 attacks Teodor
+  Hexer 1 hits Teodor for 12 (hp 3)
+  Hexer 1 hp 16, Teodor hp 3
+enemy: move house_captain-1 1,7
+Sworn Captain moves 5,7 -> 1,7 via 4,7 3,7 2,7
+enemy: attack house_captain-1 ottilie
+Forecast Sworn Captain -> Ottilie: acc 45% dmg 13 crit 0%; counter: none
+Sworn Captain attacks Ottilie
+  Sworn Captain hits Ottilie for 13 (hp 4)
+  Sworn Captain hp 27, Ottilie hp 4
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 9 --
+-- Player phase, turn 10 --
+The Counting House  turn 10 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.a...=.#..F#
+ 2 .....^~.#...#
+ 3 ..B.d.~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .A....~......
+ 7 .f....=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           2,1    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,3    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,7    hp 27/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          1,6    hp 4/18   Forest  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,3    hp 3/23   Plain
+> move ottilie 3,7
+Ottilie moves 1,6 -> 3,7 via 2,6 3,6
+The Counting House  turn 10 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.a...=.#..F#
+ 2 .....^~.#...#
+ 3 ..B.d.~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~......
+ 7 .f.A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           2,1    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,3    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,7    hp 27/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 4/18   Plain  captain
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,3    hp 3/23   Plain
+> attack ottilie house_captain-1
+Forecast Ottilie -> Sworn Captain: acc 88% dmg 6 x2 crit 4%; counter: none
+Ottilie attacks Sworn Captain
+  Ottilie hits Sworn Captain for 6 (hp 21)
+  Ottilie hits Sworn Captain for 6 (hp 15)
+  Ottilie hp 4, Sworn Captain hp 15
+Ottilie gains 6 exp (58)
+The Counting House  turn 10 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.a...=.#..F#
+ 2 .....^~.#...#
+ 3 ..B.d.~......
+ 4 ..n..^~.#...#
+ 5 ......~.#####
+ 6 .^....~......
+ 7 .f.A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           2,1    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,3    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,7    hp 15/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 4/18   Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          2,3    hp 3/23   Plain
+> move teodor 1,5
+Teodor moves 2,3 -> 1,5 via 1,3 1,4
+The Counting House  turn 10 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.a...=.#..F#
+ 2 .....^~.#...#
+ 3 ....d.~......
+ 4 ..n..^~.#...#
+ 5 .B....~.#####
+ 6 .^....~......
+ 7 .f.A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           2,1    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,3    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,7    hp 15/27  Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 4/18   Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,5    hp 3/23   Plain
+> attack teodor house_captain-1 art long_thrust
+Forecast Teodor -> Sworn Captain: acc 81% dmg 7 crit 0%; counter: none
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 37 uses, 2 of them hit or miss
+Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
+Teodor attacks Sworn Captain
+  Teodor hits Sworn Captain for 7 (hp 8)
+  Teodor hp 3, Sworn Captain hp 8
+Teodor gains 6 exp (12)
+The Counting House  turn 10 of 11  player phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.a...=.#..F#
+ 2 .....^~.#...#
+ 3 ....d.~......
+ 4 ..n..^~.#...#
+ 5 .B....~.#####
+ 6 .^....~......
+ 7 .f.A..=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           2,1    hp 17/17  Plain  group house, guard, awake
+d  hexer-1          Hexer L3 adept             4,3    hp 16/16  Plain  group yard, guard, awake
+f  house_captain-1  Sworn Captain L3 pikeman   1,7    hp 8/27   Plain  group house, guard, awake
+A  ottilie          Ottilie L5 bowman          3,7    hp 4/18   Plain  captain  done
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+B  teodor           Teodor L5 pikeman          1,5    hp 3/23   Plain  done
+> end !
+Lethal if all land: Ottilie (Hexer 1 for 11, Sworn Captain for 14, against 4 hp)
+Lethal if all land: Teodor (Archer for 4, Hexer 1 for 12, Sworn Captain for 11, against 3 hp)
+-- Player phase ends, turn 10 --
+-- Enemy phase, turn 10 --
+enemy: move archer-1 2,4
+Archer moves 2,1 -> 2,4 via 2,2 2,3
+enemy: attack archer-1 teodor
+Forecast Archer -> Teodor: acc 79% dmg 4 crit 3%; counter: none
+Archer attacks Teodor
+  Archer hits Teodor for 4 (hp 0)
+  Archer hp 17, Teodor hp 0
+Teodor falls at 1,5
+enemy: move hexer-1 3,6
+Hexer 1 moves 4,3 -> 3,6 via 3,3 3,4 3,5
+enemy: attack hexer-1 ottilie
+Forecast Hexer 1 -> Ottilie: acc 98% dmg 11 crit 0%; counter: none
+Hexer 1 attacks Ottilie
+  Hexer 1 hits Ottilie for 11 (hp 0)
+  Hexer 1 hp 16, Ottilie hp 0
+Ottilie falls at 3,7
+The Counting House  turn 10 of 11  enemy phase  rout  recall 0
+   0123456789012
+ 0 ^^...n~######
+ 1 ^.....=.#..F#
+ 2 .....^~.#...#
+ 3 ......~......
+ 4 ..a..^~.#...#
+ 5 ......~.#####
+ 6 .^.d..~......
+ 7 .f....=b..^..
+ 8 ==....~....^M
+
+a  archer-1         Archer L3 bowman           2,4    hp 17/17  Hill  group house, guard, awake  done
+d  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group yard, guard, awake  done
+f  house_captain-1  Sworn Captain L3 pikeman   1,7    hp 8/27   Plain  group house, guard, awake
+b  soldier-1        Soldier L3 pikeman         7,7    hp 14/21  Plain  group bank, hold
+Battle lost: Ottilie is dead; no recall is left, so leave
+Lost because Ottilie fell.
+> leave
+Ottilie falls on ottilie_1, which closes for good; fallen for good: Teodor, Ottilie
+Campaign stopped before Sallow Grange: the script ended on the screen

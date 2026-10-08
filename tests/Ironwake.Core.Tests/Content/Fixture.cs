@@ -125,6 +125,34 @@ internal static class Fixture
         return target;
     }
 
+    private static readonly Lazy<string> CountingHouseDefSeven = new(() => WithCountingHouseDefSeven(CopyFiles("ironwake-counting-def-seven-")));
+
+    /// <summary>
+    /// A copy of the real content directory whose Counting House is the map before issue 1375
+    /// (<c>docs/samples/the_counting_house_1375.map</c>: the shared Sworn Captain, Def 7 on the board),
+    /// its card without the armour line, and nothing else changed, for a play journaled before the
+    /// house captain's Def came down to 5. Made once per test run.
+    /// </summary>
+    public static string CountingHouseDefSevenContentDirectory() => CountingHouseDefSeven.Value;
+
+    private static string WithCountingHouseDefSeven(string target)
+    {
+        var root = Directory.GetParent(RealContentDirectory())!.FullName;
+        File.Copy(Path.Combine(root, "docs", "samples", "the_counting_house_1375.map"), Path.Combine(target, MapFiles.QuestsDirectory, "the_counting_house.map"), overwrite: true);
+
+        // The card names the armour since issue 1375, and a transcript prints the card.
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        const string card = " The Sworn Captain on the house fort is armoured: leave time for him.";
+        var campaign = File.ReadAllText(campaignPath);
+        if (!campaign.Contains(card, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException($"{campaignPath}: no '{card.Trim()}' to take back out");
+        }
+
+        File.WriteAllText(campaignPath, campaign.Replace(card, string.Empty, StringComparison.Ordinal));
+        return target;
+    }
+
     private static readonly Lazy<string> OathRiderOnTurnThree = new(() => WithOathRiderOnTurnThree(CopyFiles("ironwake-oath-rider-three-")));
 
     /// <summary>
