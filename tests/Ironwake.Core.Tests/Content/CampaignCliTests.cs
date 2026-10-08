@@ -72,7 +72,7 @@ public class CampaignCliTests
     {
         var script = Transcript("2026-10-08-the_post-800.script");
 
-        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.GustContentDirectory());
 
         Assert.Contains("Yard: The Post, seed 800\n", output);
         Assert.Contains("Pike Hand 2 falls at 6,2\n", output);
@@ -90,7 +90,7 @@ public class CampaignCliTests
     {
         var script = Transcript("2026-10-08-the_ring-799.script");
 
-        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.GustContentDirectory());
 
         Assert.Contains("Yard: The Ring, seed 799\n", output);
         Assert.Contains("Brannock trained under Alder Fenn: L3 -> L4 (ceiling L4)", output);

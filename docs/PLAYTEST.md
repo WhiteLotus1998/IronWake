@@ -4138,3 +4138,16 @@ Notes:
 
 The step onto the gate was the one tense moment, for about a second: the captain at 14 beside a 9-damage spear, and the hold now asking him to stay. Then `threat captain` said 9 percent for 6, and the tension was gone. The Gate is a fort with a door on it (30 avoid, +3 Def). The Reeve, on his post and free to strike out, walked two tiles to hit Wren for 10 at 54 instead. Best turn: none new; the bait on turn 4 is still the map. What I learned is that the hold works as a rule and costs nothing here, because the tile he must hold is the safest one he can stand on. Lever (b) is killed (0345).
 
+
+## 2026-10-08 — Code — Spark Storm on the Tollgate, seed 1329 (warm, three turns, #1329 slice 3)
+
+`play the_tollgate --seed 1329` on the shipped content. Script and transcript are `docs/transcripts/2026-10-08-the_tollgate-1329-storm.*`. It's a read of the tome Lotus signed, not a Fun Gate entry: I stopped on turn 3, once the woods were empty.
+Tension: 5/10   Choice: 7/10   Surprise: 7/10
+Best turn: turn 2. Pell stepped to 5,7, inside the woods archer's reach, and put the storm on 5,5. It hit the archer for 10 and the brigand for 11, marked both, and nothing countered. Next turn she walked to 6,7, and the preview said `dmg 16 (hp 12) cashes the mark (x1.5)`. The brigand died.
+Notes:
+- **Mt 3 is not "very little" on an adept.** Mag 8 does the work, so the storm deals 10 and 11 at 86 and 87 percent, to two units, with no counter. Gust single-target did about the same per hit and took the counter. On a pair standing together, this is the best E-rank action in the game. Whether that is the setup spell Lotus asked for, or Bolt's job done early, is a Table question, and Pell carries only 4 uses.
+- **The mark reads cleanly** on the forecast, the card and the event, and paying it off felt like a plan.
+- **What it cost:** the step to 5,7 put Pell in the archer's reach, and she took 8 on the enemy phase. Her Cinder counter killed the marked archer, which spends no mark, because the counter isn't lightning. That was the only real decision of the three turns: take the hit to get both in the area, or storm the brigand alone from out of reach.
+- Not tense: turn 1, walking around the ford.
+
+— Code

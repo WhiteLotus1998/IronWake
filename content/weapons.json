@@ -42,7 +42,7 @@
 
     { "id": "cinder", "name": "Cinder", "type": "reason", "mt": 5, "hit": 90, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 8, "rank": "E", "price": 500, "ignites": true, "school": "fire", "description": "A spark coaxed out of the air. Catches dry wood if you are careless." },
     { "id": "pell_commonplace", "name": "Pell's Commonplace", "type": "reason", "mt": 5, "hit": 90, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 8, "rank": "E", "boundTo": "pell", "description": "Placeholder. Copied out by hand, margins full. None of it will burn." },
-    { "id": "gust", "name": "Gust", "type": "reason", "mt": 4, "hit": 100, "crit": 5, "wt": 1, "minRange": 1, "maxRange": 2, "durability": 6, "rank": "E", "price": 600, "effective": ["flying"], "school": "lightning", "description": "A squall shoved hard in one direction. Riders on wings hate it most." },
+    { "id": "gust", "name": "Spark Storm", "type": "reason", "mt": 3, "hit": 90, "crit": 5, "wt": 1, "minRange": 1, "maxRange": 2, "durability": 4, "rank": "E", "price": 600, "school": "lightning", "area": 1, "marks": true, "description": "A crackle thrown over a crowd. Stings, and leaves them ready to burn." },
     { "id": "bolt", "name": "Bolt", "type": "reason", "mt": 7, "hit": 75, "crit": 10, "wt": 5, "minRange": 1, "maxRange": 2, "durability": 5, "rank": "D", "price": 900, "school": "lightning", "description": "Lightning on a short leash. Bites hard and burns through its uses." },
 
     { "id": "iron_gauntlets", "name": "Iron Gauntlets", "type": "gauntlet", "mt": 2, "hit": 85, "crit": 0, "wt": 2, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E", "price": 400, "description": "Iron over the knuckles. Not much reach, but they never get dropped." },

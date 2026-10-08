@@ -143,7 +143,7 @@ end
 move captain 4,6
 wait captain
 move pell 5,6
-attack pell archer-2 gust
+attack pell archer-2
 move teodor 4,7
 wait teodor
 move wren 3,5
@@ -193,7 +193,6 @@ end
 move pell 12,4
 wait pell
 end !
-exit pell
 leave
 march
 move captain 3,4
@@ -241,38 +240,68 @@ move dunstan 6,4
 attack dunstan rider-1
 move ottilie 6,5
 attack ottilie rider-1
-move pell 9,6
-attack pell weir_shieldbearer-1
-move teodor 7,3
-attack teodor rider-1
-move wren 8,4
-attack wren rider-1
-end
-move captain 12,6
-attack captain weir_foreman-1
+move pell 9,4
+attack pell rider-1
+move teodor 9,6
+wait teodor
+move wren 9,9
+attack wren soldier-1
+end !
+move captain 10,6
+attack captain weir_shieldbearer-1
 move dunstan 9,5
 wait dunstan
 move ottilie 6,1
 item ottilie field_dressing
-move pell 11,6
-attack pell weir_foreman-1
-move teodor 10,2
-wait teodor
-move wren 10,6
-wait wren
-end !
-move captain 13,4
-attack captain archer-1
+move pell 9,8
+attack pell soldier-1
+move teodor 9,9
+attack teodor soldier-1
+end
+move captain 8,7
+attack captain brigand-3
 move dunstan 12,6
 attack dunstan weir_foreman-1
 move ottilie 9,2
 wait ottilie
-move teodor 9,5
+move pell 11,6
+attack pell weir_foreman-1 !
+move teodor 5,9
 wait teodor
-move wren 13,5
-attack wren weir_foreman-1 !
+end
+move captain 4,7
+wait captain
+move dunstan 13,4
+attack dunstan archer-1
+move ottilie 13,2
+wait ottilie
+attack teodor brigand-2
+end
+move captain 7,6
+wait captain
+attack dunstan archer-1
+move ottilie 13,3
+attack ottilie weir_foreman-1 !
+move teodor 5,5
+wait teodor
+end
+move captain 7,2
+wait captain
+move dunstan 13,3
+attack dunstan weir_foreman-1
+move teodor 6,2
+wait teodor
+end
+move captain 11,2
+wait captain
+move dunstan 13,2
+attack dunstan weir_foreman-1 !
+move teodor 10,2
+wait teodor
+end
+move captain 13,3
+attack captain weir_foreman-1
 leave
-refine captain 1 mt
 pick rook
 march
 move captain 10,4
@@ -302,26 +331,29 @@ attack wren soldier-1 !
 end !
 move captain 4,2
 attack captain soldier-2
-move ottilie 8,7
-attack ottilie soldier-1
-attack pell soldier-1
+move ottilie 8,6
+attack ottilie hexer-1
+move pell 7,5
+attack pell hexer-1
 move teodor 6,5
 attack teodor hexer-1 !
-end
-move captain 8,2
+end !
+move captain 6,4
 wait captain
-move ottilie 9,7
-attack ottilie hexer-1 !
+move ottilie 8,5
+attack ottilie brigand-3
+move pell 7,4
+attack pell brigand-3
+move teodor 7,5
+attack teodor brigand-3
 leave
 build barracks
 build barracks_wing
 hire corin
 build wall 10,2
-trial wren outrider
-move wren 3,3
-attack wren hexer-1 iron_sword
-canto wren 3,3
-end
+trial teodor bulwark
+wait teodor
+end !
 leave
 march
 move captain 3,4
@@ -337,51 +369,57 @@ wait teodor
 move wren 4,4
 wait wren
 end !
-move captain 6,4
+move captain 6,3
 attack captain archer-2
 move dunstan 4,7
 attack dunstan brawler-1 !
 attack pell brawler-1
 move teodor 5,6
 attack teodor brawler-1
-move wren 3,2
+move wren 4,3
 attack wren archer-1
-end
+end !
 move captain 5,2
 attack captain archer-1
 move pell 3,3
 attack pell archer-1
-attack teodor veteran-1 !
-move wren 5,4
-attack wren veteran-1
+move teodor 5,4
+attack teodor veteran-1
+attack wren veteran-1 !
 end !
-move captain 4,5
+move captain 4,3
 attack captain veteran-1
 move pell 7,3
 wait pell
-move wren 9,4
-wait wren
+move teodor 9,4
+wait teodor
 end
-move captain 8,5
+move captain 8,3
 wait captain
 move pell 10,2
 attack pell shieldbearer-1
-move wren 12,5
-wait wren
+move teodor 12,5
+wait teodor
 end
-move captain 11,6
+move captain 10,5
 wait captain
+attack pell shieldbearer-1
+move teodor 12,3
+attack teodor shieldbearer-1
+end
+move captain 12,7
+attack captain hexer-1
 move pell 11,5
 wait pell
-move wren 13,6
-attack wren hexer-1
-end !
-move captain 13,5
+move teodor 13,6
+attack teodor hexer-1
+end
+move captain 14,6
 attack captain grange_reeve-1
-move pell 12,5
+move pell 14,5
 attack pell grange_reeve-1
-move wren 12,3
-item wren field_dressing
+move teodor 12,3
+item teodor field_dressing
 end
 move captain 16,6
 leave
@@ -427,8 +465,26 @@ exit rook
 move captain 19,3
 wait captain
 end
-exit wren
 exit captain
+leave
+quest pell_1 brannock
+move brannock 8,4
+attack brannock shieldbearer-1
+move pell 7,4
+attack pell shieldbearer-1
+end
+move brannock 12,4
+wait brannock
+move pell 6,4
+attack pell brigand-2
+end
+exit brannock
+move pell 10,4
+wait pell
+end
+move pell 12,4
+wait pell
+end !
 leave
 meet ansgar
 march
@@ -442,115 +498,134 @@ move pell 3,11
 wait pell
 move rook 2,12
 wait rook
-move teodor 4,10
+move teodor 5,11
 wait teodor
 end
-move captain 7,11
+move captain 7,10
 attack captain archer-2
-move maud 5,12
+move maud 6,12
 attack maud archer-2
 move ottilie 5,13
 attack ottilie brigand-1
-move pell 4,12
+move pell 5,12
 attack pell keziah
-move rook 6,11
-talk rook keziah
-move teodor 6,12
-attack teodor soldier-3
-end !
-move captain 6,14
-attack captain brigand-1
-attack maud brigand-1
-move ottilie 4,13
+move rook 6,13
+attack rook brigand-1
+attack teodor keziah !
+end
+move captain 7,14
+wait captain
+move maud 4,13
+attack maud soldier-3
+move ottilie 6,15
 attack ottilie soldier-3
-move pell 7,12
 attack pell soldier-3
-move rook 6,5
+move rook 12,13
 wait rook
-move teodor 10,12
-wait teodor
+move teodor 4,8
+item teodor field_dressing
 end
-move captain 10,14
+move captain 11,14
 wait captain
-move maud 4,12
+move maud 6,14
 item maud salve ottilie
-move ottilie 4,9
+move ottilie 8,13
 wait ottilie
-move pell 7,8
+move pell 9,12
 wait pell
-move rook 5,2
-attack rook archer-1
-move teodor 13,13
+attack rook rider-1
+move teodor 5,5
 wait teodor
-end !
-move captain 11,13
-attack captain rider-1
-move maud 7,11
-wait maud
-move ottilie 5,7
-attack ottilie soldier-2
-move pell 6,8
-attack pell soldier-2
-attack rook soldier-1
-attack teodor rider-1 !
 end
-move captain 8,12
-attack captain rider-1
-move maud 7,8
-item maud salve pell
-move ottilie 9,7
-wait ottilie
-move pell 10,8
-wait pell
-move rook 11,2
-wait rook
-end
-move captain 10,10
+move captain 11,10
 wait captain
-move maud 10,7
+move maud 6,10
 wait maud
+move ottilie 10,11
+wait ottilie
+move pell 10,9
+wait pell
+move rook 12,10
+wait rook
+move teodor 6,2
+wait teodor
+end
+move captain 12,7
+wait captain
+move maud 6,7
+wait maud
+move ottilie 10,7
+wait ottilie
+move pell 13,8
+wait pell
+move rook 17,9
+attack rook archer-3
+move teodor 8,1
+attack teodor archer-1
+end !
+move captain 14,7
+attack captain sentry-1
+move maud 5,7
+attack maud soldier-2
 move ottilie 13,7
 attack ottilie sentry-1
 move pell 14,8
 attack pell sentry-1
-move rook 13,5
-wait rook
-end
-move captain 11,7
-wait captain
-move maud 14,7
-attack maud brigand-2 !
-attack ottilie brigand-2
-attack pell brigand-2
-move rook 18,5
+move rook 17,6
 attack rook sworn_captain-1 !
+move teodor 6,0
+attack teodor archer-1
 end
-move captain 15,7
-wait captain
+move captain 17,6
+attack captain sworn_captain-1
+move maud 5,3
+attack maud archer-1 !
 move ottilie 16,6
 attack ottilie sworn_captain-1
 move pell 17,7
 attack pell sworn_captain-1
+move teodor 5,0
+attack teodor archer-1
 end
-move captain 17,6
 attack captain sworn_captain-1
 attack ottilie sworn_captain-1
 attack pell sworn_captain-1
 leave
-certify pell scholar
+certify teodor sentinel
 repair captain 1
-buy obsidian_sword captain
+buy steel_sword captain
 repair wren 1
-buy steel_sword wren
+buy iron_axe wren
 repair teodor 1
-buy iron_lance teodor
+buy steel_lance teodor
 repair ottilie 1
-buy steel_bow ottilie
+buy iron_bow ottilie
 buy bolt pell
-repair dunstan 1
 buy iron_axe dunstan
+buy salve maud
+buy iron_lance ansgar
 repair rook 1
+buy iron_lance rook
 repair brannock 1
+quest pell_1 brannock
+move brannock 8,4
+attack brannock shieldbearer-1
+move pell 7,4
+attack pell shieldbearer-1
+end
+move brannock 12,4
+wait brannock
+move pell 6,4
+attack pell brigand-2 bolt
+end
+exit brannock
+move pell 10,4
+wait pell
+end
+move pell 12,4
+wait pell
+end !
+leave
 march
 move ansgar 8,6
 attack ansgar finale_hunter-1
@@ -559,122 +634,84 @@ move brannock 12,5
 wait brannock
 move captain 10,5
 wait captain
-move corin 11,6
+move corin 13,5
 wait corin
 move dunstan 11,9
 wait dunstan
-move keziah 13,5
-wait keziah
 move maud 12,6
 wait maud
 move ottilie 9,6
-attack ottilie finale_hunter-1 steel_bow
+attack ottilie finale_hunter-1
 move pell 11,3
 wait pell
 move rook 11,5
 wait rook
-move teodor 10,9
+move teodor 9,8
 wait teodor
 move wren 11,4
 wait wren
 end !
 move brannock 9,6
-attack brannock veteran-1
-move captain 8,7
+attack brannock marauder-1 !
+move captain 12,5
 wait captain
-move corin 8,5
-attack corin marauder-1 !
-move dunstan 7,9
-attack dunstan soldier-1
-move keziah 12,5
-wait keziah
+move corin 10,5
+attack corin veteran-1
+wait dunstan
 move maud 10,6
-attack maud marauder-1
-move pell 9,5
-attack pell marauder-1
+attack maud veteran-1
+move pell 9,1
+attack pell brigand-1 bolt
 move rook 5,5
 attack rook longbowman-1
-move teodor 7,8
-wait teodor
-move wren 11,3
-wait wren
+move teodor 9,6
+attack teodor marauder-1 steel_lance
+move wren 8,5
+attack wren marauder-1
 end !
-move brannock 9,4
-attack brannock brigand-1
-move captain 6,8
-attack captain soldier-1 obsidian_sword
-attack corin brigand-1 !
-move keziah 10,5
-wait keziah
-move maud 7,6
-attack maud finale_hunter-1
-move pell 7,4
-attack pell finale_hunter-1 bolt
-move rook 4,9
-attack rook archer-1
-move teodor 5,10
-attack teodor archer-1
-move wren 9,1
-wait wren
-end
-move brannock 8,2
-attack brannock brigand-2 !
-move captain 5,5
-attack captain soldier-2
-move corin 4,5
-attack corin hexer-1 !
-move keziah 9,6
-wait keziah
-move maud 6,6
-attack maud hexer-1
-move pell 4,4
-attack pell hexer-1 gust
-move rook 4,10
-attack rook archer-1
-move teodor 5,11
-attack teodor archer-1
-move wren 5,1
-wait wren
-end
-move brannock 6,0
-item brannock field_dressing
-move captain 3,7
+move captain 10,5
 wait captain
-move keziah 7,6
-wait keziah
-move maud 4,8
-attack maud archer-1 !
-move pell 4,7
-wait pell
-move rook 4,9
+move dunstan 11,6
+wait dunstan
+move maud 8,6
+attack maud brigand-1
+move pell 9,3
+attack pell marauder-1 cinder
+move rook 1,6
 attack rook archer-1
+move teodor 6,5
 wait teodor
-wait wren
+end !
+move captain 7,5
+attack captain soldier-1 steel_sword
+move dunstan 7,6
+wait dunstan
+move pell 8,3
+attack pell brigand-2 bolt
+move teodor 2,5
+attack teodor soldier-2
 end
-move brannock 4,1
-wait brannock
-move captain 3,6
-attack captain archer-2
-move keziah 5,6
-attack keziah brigand-3 !
+move captain 3,5
+wait captain
+move dunstan 4,5
+wait dunstan
+move pell 5,3
 wait pell
-wait rook
-wait teodor
-wait wren
+move teodor 1,5
+attack teodor archer-1
+end !
+move captain 4,3
+attack captain archer-2
+attack dunstan brigand-3 !
+attack teodor soldier-3
 end
-move brannock 0,1
-wait brannock
-move captain 1,6
+move captain 2,5
+wait captain
+attack teodor brigand-3 !
+end
+move captain 0,5
 attack captain hask-1
-move keziah 4,4
-wait keziah
-move pell 2,6
-attack pell hask-1 bolt
-move rook 0,7
-attack rook hask-1 !
-move teodor 4,8
-wait teodor
-move wren 1,1
-wait wren
+move teodor 1,6
+attack teodor hask-1 !
 end
 leave

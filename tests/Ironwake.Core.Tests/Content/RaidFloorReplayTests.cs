@@ -18,7 +18,7 @@ public class RaidFloorReplayTests
     {
         var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(root, "docs", "transcripts", "2026-10-08-ironwake_raid-3100.script");
-        var args = new[] { "campaign", "--seed", "3100", "--from", "ironwake_raid", "--level", "3", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
+        var args = new[] { "campaign", "--seed", "3100", "--from", "ironwake_raid", "--level", "3", "--strict", "--script", script, "--content", Fixture.GustContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Program.Main(args));
 

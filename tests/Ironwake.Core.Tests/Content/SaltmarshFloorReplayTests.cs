@@ -18,7 +18,7 @@ public class SaltmarshFloorReplayTests
     {
         var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(root, "docs", "transcripts", "2026-10-08-saltmarsh_ford-3200.script");
-        var args = new[] { "campaign", "--seed", "3200", "--from", "saltmarsh_ford", "--level", "1", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
+        var args = new[] { "campaign", "--seed", "3200", "--from", "saltmarsh_ford", "--level", "1", "--strict", "--script", script, "--content", Fixture.GustContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Program.Main(args));
 

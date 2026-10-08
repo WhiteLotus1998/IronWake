@@ -57,7 +57,7 @@ public sealed class HeldBarSampleTests
     public void TheWarmPlayAtFiveTurnsWinsWithTeodorFallenHoldingTheBar()
     {
         var script = Path.Combine(Fixture.RealContentDirectory(), "..", "docs", "transcripts", "2026-10-07-the_lazar_house-1259-limit5.script");
-        var output = ConsoleCapture.Run(() => Program.Main(new[] { "campaign", "--from", "the_tollgate", "--seed", "1259", "--script", script, "--strict", "--content", Fixture.RealContentDirectory() }));
+        var output = ConsoleCapture.Run(() => Program.Main(new[] { "campaign", "--from", "the_tollgate", "--seed", "1259", "--script", script, "--strict", "--content", Fixture.GustContentDirectory() }));
 
         Assert.Contains("Teodor falls at 8,1\n", output);
         Assert.Contains("Maud wins maud_1; the stores take 2 common material; fallen for good: Teodor\n", output);

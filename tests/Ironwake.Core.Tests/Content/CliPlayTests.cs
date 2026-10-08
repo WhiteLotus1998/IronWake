@@ -21,7 +21,7 @@ public class CliPlayTests
         File.WriteAllText(path, script);
         try
         {
-            return Run(out exit, "play", OldMillRoad, "--seed", seed, "--script", path, "--content", Fixture.RealContentDirectory());
+            return Run(out exit, "play", OldMillRoad, "--seed", seed, "--script", path, "--content", Fixture.GustContentDirectory());
         }
         finally
         {
@@ -508,8 +508,8 @@ public class CliPlayTests
         File.WriteAllText(path, "show rider-1\nend\nend\nend\nend\nend\nshow rider-1\n");
         try
         {
-            var first = Run(out _, "play", "the_tollgate", "--seed", "163", "--script", path, "--content", Fixture.RealContentDirectory());
-            var second = Run(out _, "play", "the_tollgate", "--seed", "163", "--script", path, "--content", Fixture.RealContentDirectory());
+            var first = Run(out _, "play", "the_tollgate", "--seed", "163", "--script", path, "--content", Fixture.GustContentDirectory());
+            var second = Run(out _, "play", "the_tollgate", "--seed", "163", "--script", path, "--content", Fixture.GustContentDirectory());
 
             Assert.Contains("-- Enemy phase, turn 4 --", first);
             Assert.DoesNotContain("Event riders", first);
@@ -799,11 +799,11 @@ public class CliPlayTests
         Assert.Contains("; counter: acc ", output);
     }
 
-    /// <summary>Issue 313: a player unit with two spells names the one it strikes with, and <c>threat</c> names its counter's; against Pell the chief's planner takes the Steel Axe.</summary>
+    /// <summary>Issue 313: a player unit with two spells names the one it strikes with, and <c>threat</c> names its counter's; against Pell the chief's planner takes the Steel Axe. Played on Gust (DECISIONS/0348): Spark Storm is never equipped, so Pell strikes with one spell today.</summary>
     [Fact]
     public void APlayerUnitWithTwoWeaponsInRangeIsNamedOnForecastAndThreat()
     {
-        var output = RunInline(ArmsYard, "forecast pell ford_chief-1 from 1,1\nthreat pell from 2,1\n");
+        var output = RunInline(ArmsYard, "forecast pell ford_chief-1 from 1,1\nthreat pell from 2,1\n", Fixture.GustContentDirectory());
 
         Assert.Contains("Forecast Pell -> Ford Chief from 1,1 (Plain) with Cinder: acc ", output);
         Assert.Contains("  Ford Chief from 3,1 with Steel Axe (slot 2): acc ", output);
@@ -1207,7 +1207,7 @@ public class CliPlayTests
         Assert.DoesNotContain("breaks and flees", output);
     }
 
-    private static string RunInline(string mapText, string scriptText)
+    private static string RunInline(string mapText, string scriptText, string? content = null)
     {
         var map = Path.Combine(Path.GetTempPath(), "ironwake-arms-" + Guid.NewGuid().ToString("N") + ".map");
         var script = Path.ChangeExtension(map, ".script");
@@ -1215,7 +1215,7 @@ public class CliPlayTests
         File.WriteAllText(script, scriptText);
         try
         {
-            return Run(out _, "play", map, "--seed", "1", "--script", script, "--content", Fixture.RealContentDirectory());
+            return Run(out _, "play", map, "--seed", "1", "--script", script, "--content", content ?? Fixture.RealContentDirectory());
         }
         finally
         {
@@ -1861,7 +1861,7 @@ public class CliPlayTests
         File.WriteAllText(path, string.Join("\n", kept) + (dropTail > 0 ? "\nend !\n" : "\n"));
         try
         {
-            return Run(out _, "play", "harrow_weir", "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", path, "--content", Fixture.RealContentDirectory());
+            return Run(out _, "play", "harrow_weir", "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", path, "--content", Fixture.GustContentDirectory());
         }
         finally
         {
@@ -1877,7 +1877,7 @@ public class CliPlayTests
     private static string RunLoose(string script, int seed, string map = "harrow_weir_0081.map")
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        return Run(out _, "play", Path.Combine(repo, "docs", "samples", map), "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", Path.Combine(repo, "docs", "transcripts", script), "--content", Fixture.RealContentDirectory());
+        return Run(out _, "play", Path.Combine(repo, "docs", "samples", map), "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", Path.Combine(repo, "docs", "transcripts", script), "--content", Fixture.GustContentDirectory());
     }
 
     /// <summary>The enemy phase of <paramref name="turn"/> as the console printed it.</summary>
@@ -1900,7 +1900,7 @@ public class CliPlayTests
             Path.Combine(repo, "docs", "transcripts", script),
             "--strict",
             "--content",
-            content ?? Fixture.RealContentDirectory());
+            content ?? Fixture.GustContentDirectory());
     }
 
     private static string RunSample(string map, string script, int seed, out int exit, string? content = null)
@@ -1916,7 +1916,7 @@ public class CliPlayTests
             Path.Combine(repo, "docs", "transcripts", script),
             "--strict",
             "--content",
-            content ?? Fixture.RealContentDirectory());
+            content ?? Fixture.GustContentDirectory());
     }
 
     private const string DarkWaitMap = """
@@ -2379,7 +2379,7 @@ public class CliPlayTests
         var map = Path.Combine(repo, "docs", "samples", "ironwake_keep_pair.map");
         var script = Path.Combine(repo, "docs", "transcripts", "2026-10-02-ironwake_keep_pair-695.script");
 
-        var output = Run(out _, "play", map, "--seed", "695", "--level", "8", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "play", map, "--seed", "695", "--level", "8", "--script", script, "--content", Fixture.GustContentDirectory());
         var text = File.ReadAllText(map).ReplaceLineEndings("\n");
 
         Assert.Equal(text, Ironwake.Content.MapFormat.Write(Ironwake.Content.MapFormat.Parse("ironwake_keep_pair.map", text, Maps.MapFixture.Content), Maps.MapFixture.Content));
@@ -2400,7 +2400,7 @@ public class CliPlayTests
         var map = Path.Combine(repo, "docs", "samples", "rotten_bridge_planks.map");
         var script = Path.Combine(repo, "docs", "transcripts", "2026-10-02-rotten_bridge_planks-251.script");
 
-        var output = Run(out _, "play", map, "--seed", "251", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "play", map, "--seed", "251", "--script", script, "--content", Fixture.GustContentDirectory());
         var text = File.ReadAllText(map).ReplaceLineEndings("\n");
 
         Assert.Equal(text, Ironwake.Content.MapFormat.Write(Ironwake.Content.MapFormat.Parse("rotten_bridge_planks.map", text, Maps.MapFixture.Content), Maps.MapFixture.Content));
@@ -2426,7 +2426,7 @@ public class CliPlayTests
         File.WriteAllText(path, "move dunstan 7,5 via 6,5 preview\nmove dunstan 7,5 preview\nmove dunstan 7,5\n");
         try
         {
-            var output = Run(out _, "play", map, "--seed", "4", "--script", path, "--content", Fixture.RealContentDirectory());
+            var output = Run(out _, "play", map, "--seed", "4", "--script", path, "--content", Fixture.GustContentDirectory());
 
             Assert.Contains("preview: Dunstan would move 6,8 -> 7,5 via 6,7 6,6 6,5; would wear 6,5 (Water)\n", output);
             Assert.Contains("preview: Dunstan would move 6,8 -> 7,5 via 6,7 6,6 7,6; wears nothing\n", output);
@@ -2452,7 +2452,7 @@ public class CliPlayTests
         var map = Path.Combine(repo, "docs", "samples", "rotten_bridge_straggler.map");
         var script = Path.Combine(repo, "docs", "transcripts", "2026-10-02-rotten_bridge_straggler-783.script");
 
-        var output = Run(out _, "play", map, "--seed", "783", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "play", map, "--seed", "783", "--script", script, "--content", Fixture.GustContentDirectory());
         var text = File.ReadAllText(map).ReplaceLineEndings("\n");
 
         Assert.Equal(text, Ironwake.Content.MapFormat.Write(Ironwake.Content.MapFormat.Parse("rotten_bridge_straggler.map", text, Maps.MapFixture.Content), Maps.MapFixture.Content));
@@ -2475,8 +2475,8 @@ public class CliPlayTests
         File.WriteAllText(path, "end !\nend !\nend !\nmap\n");
         try
         {
-            var weir = Run(out _, "play", "harrow_weir", "--seed", "7", "--script", path, "--content", Fixture.RealContentDirectory());
-            var tollgate = Run(out _, "play", "the_tollgate", "--seed", "7", "--script", path, "--content", Fixture.RealContentDirectory());
+            var weir = Run(out _, "play", "harrow_weir", "--seed", "7", "--script", path, "--content", Fixture.GustContentDirectory());
+            var tollgate = Run(out _, "play", "the_tollgate", "--seed", "7", "--script", path, "--content", Fixture.GustContentDirectory());
 
             var start = weir[..weir.IndexOf("> end", StringComparison.Ordinal)];
             Assert.Contains("  turn 3, enemy phase: a rider arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.\n", start);
@@ -2507,7 +2507,7 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-ironwake_keep-walls-82.script");
 
-        var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "82", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "82", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: survive\n", output);
@@ -2527,7 +2527,7 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-ironwake_keep-ditchforts-91.script");
 
-        var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "91", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "91", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: survive\n", output);
@@ -2548,7 +2548,7 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-ironwake_keep-base-287.script");
 
-        var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "287", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "287", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: survive\n", output);
@@ -2573,7 +2573,7 @@ public class CliPlayTests
         var chats = File.ReadAllLines(Path.Combine(repo, "docs", "transcripts", "2026-10-06-ironwake_keep-2210-chat.script"));
         var turnFour = chats.Select((line, i) => (line, i)).Where(l => l.line.Trim() == "end").ElementAt(3).i;
 
-        var output = Run(out _, "campaign", "--from", "ironwake_keep", "--level", "8", "--seed", "2210", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "campaign", "--from", "ironwake_keep", "--level", "8", "--seed", "2210", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
         Assert.Equal(chats.Take(turnFour + 1), File.ReadAllLines(script));
         Assert.DoesNotContain("Rejected ", output);
@@ -2596,7 +2596,7 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-sallow_grange-61.script");
 
-        var output = Run(out var exit, "play", "sallow_grange", "--seed", "61", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", "sallow_grange", "--seed", "61", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: seize\n", output);
@@ -2624,7 +2624,7 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-brackwater_cut-29.script");
 
-        var output = Run(out var exit, "play", BrackwaterDaylight, "--seed", "29", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", BrackwaterDaylight, "--seed", "29", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: escape\nEscaped: Alder Fenn; left behind: none; fell: Dunstan, Pell, Rook, Wren\n", output);
@@ -2647,7 +2647,7 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-brackwater_cut-73-exit.script");
 
-        var output = Run(out var exit, "play", BrackwaterDaylight, "--seed", "73", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", BrackwaterDaylight, "--seed", "73", "--script", script, "--strict", "--content", Fixture.GustContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: escape\nEscaped: Rook, Wren, Pell, Alder Fenn; left behind: none; fell: Dunstan\n", output);
@@ -2709,7 +2709,7 @@ public class CliPlayTests
         File.WriteAllText(path, "help\n");
         try
         {
-            var output = Run(out _, "play", ProtocolSessionTests.TollgateRowFive, "--seed", "7", "--script", path, "--content", Fixture.RealContentDirectory());
+            var output = Run(out _, "play", ProtocolSessionTests.TollgateRowFive, "--seed", "7", "--script", path, "--content", Fixture.GustContentDirectory());
 
             Assert.Contains("\nObjective: Get the captain to the gate by the end of turn 10. Captain Fenn must survive.\n", output);
             Assert.Contains("help                     This list", output);

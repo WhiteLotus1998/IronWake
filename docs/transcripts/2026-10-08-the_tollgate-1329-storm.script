@@ -1,0 +1,16 @@
+move pell 4,8
+move wren 4,10
+move teodor 8,10
+move captain 7,10
+end
+threat pell from 5,7
+move pell 5,7
+item pell 2 5,5 preview
+item pell 2 5,5
+move wren 4,8
+move teodor 9,7
+move captain 4,9
+end
+move pell 6,7
+item pell 2 6,5 preview
+item pell 2 6,5

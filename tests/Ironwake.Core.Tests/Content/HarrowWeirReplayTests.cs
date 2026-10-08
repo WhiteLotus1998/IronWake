@@ -42,7 +42,7 @@ public class HarrowWeirReplayTests
     {
         var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(root, "docs", "transcripts", "2026-10-05-harrow_weir-1410.script");
-        var args = new[] { "play", "harrow_weir", "--seed", "1410", "--scheme", "two", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
+        var args = new[] { "play", "harrow_weir", "--seed", "1410", "--scheme", "two", "--strict", "--script", script, "--content", Fixture.GustContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Program.Main(args));
 
@@ -59,7 +59,7 @@ public class HarrowWeirReplayTests
     {
         var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(root, "docs", "transcripts", "2026-10-06-harrow_weir-1450.script");
-        var args = new[] { "play", "harrow_weir", "--seed", "1450", "--scheme", "two", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
+        var args = new[] { "play", "harrow_weir", "--seed", "1450", "--scheme", "two", "--strict", "--script", script, "--content", Fixture.GustContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Program.Main(args));
 

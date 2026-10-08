@@ -17,7 +17,7 @@ public class RaidKeziahReplayTests
     {
         var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(root, "docs", "transcripts", "2026-10-08-ironwake_raid-2055.script");
-        var args = new[] { "campaign", "--seed", "2055", "--from", "ironwake_raid", "--level", "4", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
+        var args = new[] { "campaign", "--seed", "2055", "--from", "ironwake_raid", "--level", "4", "--strict", "--script", script, "--content", Fixture.GustContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Program.Main(args));
 

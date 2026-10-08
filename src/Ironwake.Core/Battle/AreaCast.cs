@@ -14,7 +14,8 @@ namespace Ironwake.Core;
 /// <item>A marking tome marks every unit it hits that survives, cashing any mark already on it first (<see cref="Mark"/>).</item>
 /// </list>
 /// An area tome is never equipped (<see cref="BattleUnit.UsableWeaponAt"/>), so it never attacks and never counters.
-/// <see cref="Resolver.Legal"/>, the Sim's player and the enemy planner never cast it until a shipped unit carries one.
+/// Spark Storm (Gust's id, DECISIONS/0348) is the one shipped area tome. <see cref="Resolver.Legal"/>, the Sim's player
+/// and the enemy planner do not cast it yet: Pell carries it, and they strike with Cinder.
 /// </summary>
 public static class AreaCast
 {
@@ -29,6 +30,25 @@ public static class AreaCast
         state.Units.Where(u => u.Side != caster.Side && u.At.DistanceTo(at) <= spell.Area).ToList();
 
     /// <summary>
+    /// Why <paramref name="caster"/> cannot cast <paramref name="spell"/> at <paramref name="at"/>: the tile out of range, or
+    /// unseen by the caster's side at dusk; null when it can be cast there. The cast and its preview both ask it.
+    /// </summary>
+    public static Rejection? Unreachable(BattleState state, BattleUnit caster, Weapon spell, Coord at)
+    {
+        var distance = caster.At.DistanceTo(at);
+        if (!spell.InRange(distance))
+        {
+            return new Rejection(
+                RejectionReason.OutOfRange,
+                $"{at} is {distance} tiles from {caster.Id} at {caster.At}; {spell.Name} reaches {spell.MinRange}-{spell.MaxRange}");
+        }
+
+        return Dusk.Sees(state, caster.Side, at)
+            ? null
+            : new Rejection(RejectionReason.Unseen, $"no unit on {caster.Id}'s side can see {at} at dusk (sight {Dusk.Sight(state)})");
+    }
+
+    /// <summary>
     /// The forecast of <paramref name="caster"/>'s cast at <paramref name="at"/> on <paramref name="target"/>: one strike, no
     /// counter, read at the cast's distance (the tile's, in range), since a unit at the area's edge may stand beyond it.
     /// </summary>
@@ -41,10 +61,15 @@ public static class AreaCast
 
     /// <summary>
     /// The preview's line for the cast: <c>Test Storm at 6,5 strikes brigand-1 acc 80% dmg 3 (hp 18), marks; ...</c>,
-    /// or what refuses it.
+    /// or what refuses it: the tile out of range or unseen (<see cref="Unreachable"/>), or no enemy in the area.
     /// </summary>
     public static string Preview(BattleState state, GameContent content, BattleUnit caster, Weapon spell, Coord at)
     {
+        if (Unreachable(state, caster, spell, at) is { } refusal)
+        {
+            return refusal.Message;
+        }
+
         var struck = Struck(state, caster, spell, at);
         if (struck.Count == 0)
         {

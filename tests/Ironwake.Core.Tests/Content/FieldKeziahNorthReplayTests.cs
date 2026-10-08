@@ -18,7 +18,7 @@ public class FieldKeziahNorthReplayTests
     {
         var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(root, "docs", "transcripts", "2026-10-05-the_field-1400.script");
-        var args = new[] { "campaign", "--seed", "1400", "--from", "the_field", "--pick", "keziah", "--fed", "10", "--level", "5", "--script", script, "--content", Fixture.RealContentDirectory() };
+        var args = new[] { "campaign", "--seed", "1400", "--from", "the_field", "--pick", "keziah", "--fed", "10", "--level", "5", "--script", script, "--content", Fixture.GustContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Program.Main(args));
 
