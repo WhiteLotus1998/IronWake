@@ -147,7 +147,7 @@ public static class Program
                 }
             }
 
-            return args.Contains("--drill") ? DrillTable(seeds) : args.Contains("--chip") ? ChipTable(seeds) : args.Contains("--gate") ? GateTable(seeds) : args.Contains("--rank-trace") ? RankTraceTable(seeds) : args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
+            return args.Contains("--finale-ranks") ? FinaleRanksTable(seeds) : args.Contains("--drill") ? DrillTable(seeds) : args.Contains("--chip") ? ChipTable(seeds) : args.Contains("--gate") ? GateTable(seeds) : args.Contains("--rank-trace") ? RankTraceTable(seeds) : args.Contains("--focused") ? FocusedTable(seeds) : LevelTable(seeds, args.Contains("--even"));
         }
 
         if (args.Length > 0 && args[0] == "--yard")
@@ -316,7 +316,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] [--lead <id>]... | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>[,<id>]...] [--until-certify <unit> <class>] [--deploy <unit>[,<unit>]...] [--stop-after <kind>[,<kind>]...] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip|--drill] | --supports [--seeds N] [--pair <a> <b>] | --yard [--seeds N] [--map <id>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] [--lead <id>]... | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>[,<id>]...] [--until-certify <unit> <class>] [--deploy <unit>[,<unit>]...] [--stop-after <kind>[,<kind>]...] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip|--drill|--finale-ranks] | --supports [--seeds N] [--pair <a> <b>] | --yard [--seeds N] [--map <id>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -663,6 +663,36 @@ public static class Program
             .Select(p => Task.Run(() => measure(p.Count, p.First)))
             .ToList();
         return Task.WhenAll(parts).ContinueWith(t => t.Result.SelectMany(r => r).ToList(), TaskScheduler.Default);
+    }
+
+    /// <summary>
+    /// The finale's earned ranks (issue 1395, layer 2): the heuristic's campaign over seeds 1..<paramref name="seeds"/>,
+    /// four threads, read by <see cref="LevelRun.FinaleRankLines"/>.
+    /// </summary>
+    public static int FinaleRanksTable(int seeds)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("levels: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        const int Threads = 4;
+        var chunk = (seeds + Threads - 1) / Threads;
+        var parts = Enumerable.Range(0, Threads)
+            .Select(k => (First: 1 + k * chunk, Count: Math.Min(chunk, seeds - k * chunk)))
+            .Where(p => p.Count > 0)
+            .Select(p => Task.Run(() => LevelRun.Measure(contentDir, content, p.Count, firstSeed: p.First)))
+            .ToList();
+        var runs = parts.SelectMany(t => t.Result).ToList();
+        foreach (var line in LevelRun.FinaleRankLines(content, runs))
+        {
+            Console.WriteLine(line);
+        }
+
+        return 0;
     }
 
     /// <summary>

@@ -191,6 +191,7 @@
       { "id": "barracks", "name": "Barracks", "price": 500, "beds": 2, "max": 1, "after": "ironwake_raid", "hires": ["corin", "bet", "ines", "mattias"] },
       { "id": "barracks_wing", "name": "Barracks wing", "price": 300, "beds": 1, "max": 1, "after": "ironwake_raid", "requires": "barracks", "hires": ["tamsin", "wat", "edda"] }
     ],
+    "finaleRanks": { "wren": { "sword": 8 }, "teodor": { "lance": 11 }, "ottilie": { "bow": 16 }, "pell": { "reason": 69 }, "dunstan": { "lance": 3 }, "maud": { "faith": 40 }, "rook": { "lance": 30 } },
     "hirePrice": 300,
     "hires": [
       { "id": "corin", "name": "Corin Ashby", "pronoun": "he", "class": "cadet", "items": ["iron_sword"], "line": "Took the bounty because the harvest failed. Says so." },

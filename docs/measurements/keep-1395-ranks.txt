@@ -1,0 +1,18 @@
+# Issue 1395 slice 2 layer 2: the finale company's earned ranks (DECISIONS/0355).
+# --levels --finale-ranks --seeds 200 (Release, four threads, 5m 48s), on main after #1405:
+levels --finale-ranks: 200 runs, 82 won map 9 the_field, the map before the keep; each story member's median rank points per type its class uses (issue 1395, layer 2)
+  wren: in 82; sword 8 (E)
+  teodor: in 82; lance 11 (E)
+  ottilie: in 82; bow 16 (E)
+  pell: in 82; reason 69 (D)
+  dunstan: in 82; lance 3 (E)
+  maud: in 82; faith 40 (D)
+  ansgar: in 82; none
+  rook: in 82; lance 30 (D)
+  keziah: in 0; none
+  brannock: in 82; none
+  finaleRanks: { "wren": { "sword": 8 }, "teodor": { "lance": 11 }, "ottilie": { "bow": 16 }, "pell": { "reason": 69 }, "dunstan": { "lance": 3 }, "maud": { "faith": 40 }, "rook": { "lance": 30 } }
+#
+# --finale content/keep/ironwake_keep.map, L8, 200 seeds, two-roll average (full / depleted / floor):
+# main (fc3ac50, the scythe plans first, 0354)       157 / 101 / 0
+# this branch, finaleRanks                          157 / 101 / 0

@@ -93,8 +93,35 @@ public class PlayCompanyTests
         Assert.Contains(roster.Single(u => u.Id == "teodor").Inventory.Items, s => s.ItemId == "family_lance");
         Assert.Equal(DrakeStage.HalfGrown, roster.Single(u => u.Id == "rook").Drake?.Stage);
         Assert.All(content.Cast.Skip(1), u => Assert.Equal(
-            CampaignRecord.Kitted(u, content).ScaledTo(8, content.Class(u.ClassId)),
+            content.Campaign.Keep.FinaleRanked(CampaignRecord.Kitted(u, content).ScaledTo(8, content.Class(u.ClassId))),
             roster.Single(r => r.Id == u.Id)));
+    }
+
+    [Fact]
+    public void AFinaleRankRaisesAMembersPointsAndNeverLowersThem()
+    {
+        var shipped = ContentLoader.Load(Fixture.RealContentDirectory());
+        var ranks = ValueList<(string Id, WeaponSkill Skill)>.From([
+            ("pell", WeaponSkill.Zero.With(WeaponType.Reason, 100)),
+            ("maud", WeaponSkill.Zero.With(WeaponType.Faith, 1)),
+        ]);
+        var content = shipped with { Campaign = shipped.Campaign with { Keep = shipped.Campaign.Keep with { FinaleRanks = ranks } } };
+        var roster = FinaleCompanies.Roster(content, FinaleCompany.Full, 8);
+
+        Assert.Equal(100, roster.Single(u => u.Id == "pell").Skill.Points(WeaponType.Reason));
+        Assert.Equal(WeaponRanks.Threshold(WeaponRank.D), roster.Single(u => u.Id == "maud").Skill.Points(WeaponType.Faith));
+        Assert.Equal(0, roster.Single(u => u.Id == "wren").Skill.Points(WeaponType.Sword));
+    }
+
+    [Fact]
+    public void TheShippedFinaleRanksReachTheFinaleCompany()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var roster = FinaleCompanies.Roster(content, FinaleCompany.Full, 8);
+
+        Assert.NotEmpty(content.Campaign.Keep.FinaleRanks);
+        Assert.All(content.Campaign.Keep.FinaleRanks, r => Assert.All(r.Skill.All.Where(t => t.Points > 0), t =>
+            Assert.True(roster.Single(u => u.Id == r.Id).Skill.Points(t.Type) >= t.Points, $"{r.Id} {t.Type}")));
     }
 
     [Fact]
