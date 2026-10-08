@@ -1,0 +1,29 @@
+# Code, The Mill inside the 644 full campaign (recruit, permadeath off), map seed 645 (issue 1362). The line the campaign played on main before the road brigand,
+# eight hand commands then the heuristic's, kept whole as the hand play: the road brigand dies to the captain's turn-2 counter crit (6 percent), so it holds on the new file.
+move captain 4,9
+wait captain
+wait maud
+end
+move captain 7,8
+wait captain
+wait maud
+end
+move captain 7,7
+attack captain archer-2
+move maud 8,6
+attack maud archer-2
+end
+move captain 7,3
+order press
+move maud 8,4
+wait maud
+end
+move captain 10,2
+attack captain soldier-1
+move maud 9,4
+wait maud
+end
+move captain 10,1
+attack captain archer-1
+move maud 9,2
+attack maud archer-1

@@ -3977,3 +3977,17 @@ Notes:
 - **Not tense:** turns 1, 3, 4, 6 and 7. The only lethal line all map was turn 2's, and one move erased it.
 
 — Code
+
+## 2026-10-08 — The Mill at the campaign's floor, the road brigand (#1362), the fort held, warm — Code
+
+Seed: 1820 (`play the_mill --seed 1820 --strict --script docs/transcripts/2026-10-08-the_mill-1820.script`; transcript beside it). Lever 1 from Table round 466: the road brigand is the Mill's own template, Spd 5, so the L1 captain no longer doubles it (attack speed 8 against 5). Floor: the captain and Maud at L1. Warm: I played 1810 this morning and played the same cork on purpose, to read the lever and not the line.   Result: **won, rout, on turn 8 of 9.** Nobody fell, no Recall, no strike reached Maud, two Salves spent.
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 3. The cork on 7,8 held, but it was a trade now: the brigand's 49 landed for 10 and the captain's single counter left it at 11, adjacent to him, with the archer one row behind. Captain at 12. Swing again (88, 11, and a 49 percent 10 back if he misses), or Maud's Radiance from the fort at range 2, 97 for exactly 11, with no axe to answer. Maud took it, and the captain stepped up to 7,7 to open the archer where a bow can't reply.
+Notes:
+- **The lever does what Chat said it would.** The captain reached the middle of the map wounded (7 HP after the archer's turn-3 shot), so Maud left the fort on turn 4 to Salve him, and again on turn 6. The protect objective asked twice in the middle of the map, where 1810 asked nothing.
+- **Turn 5 was the tense one.** Two misses in a row (87, then 58 into the forest at 9,6) left the road archer at 6 and the captain at 9, with the mill awake. Maud's 80 from 8,7, with an 86 percent counter for 8 if she missed, closed it. I didn't Recall.
+- **The clock bit.** The mill pair died on turns 6 to 8, and the soldier needed the captain (87, 9) plus Maud (97, 10) on turn 7 for its last 11. Won with one turn to spare.
+- **Surprise is still the map's floor.** The mill pair plays exactly as it did before. The lever fixed the flat middle; it did not add anything new to see.
+- **Sim:** gate 1 fell from 136 to 107 of 200, more than the 10 points Chat allowed. Giving back HP can't fix that: the captain hits for 11, so anything from 12 to 22 effective HP takes two hits, and 11 or less undoes the lever. Under Unsure on the PR.
+
+— Code

@@ -53,7 +53,7 @@ public static class CampaignScript
         var lines = new List<string>
         {
             $"# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")} --variant {variant}{(quest is null ? "" : $" --quest {quest}")}{(deploy is null ? "" : $" --deploy {string.Join(',', deploy)}")}{(stopAfter is null ? "" : $" --stop-after {string.Join(',', stopAfter)}")}`.",
-            $"# Played by `campaign --seed {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")}`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 632);",
+            $"# Played by `campaign --seed {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")}`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 645);",
             "# the heuristic player fights the rest; each camp takes the actions not yet taken that the record accepts.",
         };
         var touched = new HashSet<string>(StringComparer.Ordinal);
@@ -382,6 +382,12 @@ public static class CampaignScript
 
             lines.Add(written);
             battle.Continue();
+
+            // Issue 1362: an order a hand play calls is taken, as one the heuristic calls is.
+            if (played is Order order)
+            {
+                touched.Add(Orders.Word(order.Kind));
+            }
         }
 
         var player = new HeuristicPlayer();

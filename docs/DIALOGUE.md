@@ -35,7 +35,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **The Rookery (0208):** not passed; no lever before a cold chair.
 - **The Counting House (311-321):** archer 11,2 (#925), limit 11 (#931), no third lever; Code's fresh read in (2030, Maud, lost; 441).
 - **The Long Count (313-315):** count on screen; dusk; archer 11,4 (#930).
-- **The Mill:** `holds:` (0279), limit 9 (0280). Both in (409): the pair feeds the fort from its edge. #1210: fort, Maud south. 1710 (431): Maud safe west of the river; a cold chair agreeing: the pair's lane. 1810 (464): the captain on 7,8 corks the fort; #1362: rework or lesson.
+- **The Mill:** `holds:` (0279), limit 9 (0280), fort south (#1210). A free lesson is a tile (466, 467): the road brigand is undoubled by the L1 captain (0338), so the 7,8 cork and 1710's bank cost an axe trade; Chat's cold floor chair reads it.
 - **The First Shrine (406-455; 0283, 0304, 0306):** south start, limit 10; the loft archer wakes on the door's death and takes the held altar (`seize_hold: 1`). **Kept, no lever, no chair owed** (455, Chat 5303): whoever corks the doorway (7,2) decides the held phase; brigand 1 to 4,4 retired. #1351, #1352 filed from it.
 - **The Undercroft (431):** the middle wins (4,4 corks the stair); the lector is scenery off the north route. Held for a cold chair: his reach over the desk, or 13,4.
 - **The Lazar House (420-440):** held bars and the queue kept (#1259, 0303), limit 5 (0305); bar advice is #1144's. No lever before the Critic's cold chair (Pell or Wren on the north lane). Ally dies every line: the turn-5 hexer later or east; saved at surprise 4 or under: a turn-3, 4 change; 2,3 or 4,3 only if Maud's HP never mattered.
