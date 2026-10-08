@@ -103,6 +103,13 @@ public sealed record Combatant
     public bool Oathbound { get; init; }
 
     /// <summary>
+    /// Whether this side's blows pull (issue 1331, Table round 448): the teacher in a yard drill. A strike or bite
+    /// from it that would take its target to 0 leaves it at 1 HP instead, counters included
+    /// (<see cref="CombatResolver"/>), so the student takes the kill. False everywhere else.
+    /// </summary>
+    public bool Pulls { get; init; }
+
+    /// <summary>
     /// Whether this side is held by the pair rule here (issue 692): an enemy in a group its map's
     /// <c>pair_rule:</c> header names, striking or answering a unit with an ally beside it
     /// (<see cref="PairRule"/>). It neither doubles (<see cref="Combat.Doubles"/>) nor crits

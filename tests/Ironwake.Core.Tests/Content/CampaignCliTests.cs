@@ -46,6 +46,22 @@ public class CampaignCliTests
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Issue 1331 slice 2 (Table round 448): the yard under the pull. The captain softens each drill
+    /// hand to 1 HP, counters included, and Corin takes all three kills.
+    /// </summary>
+    [Fact]
+    public void TheJournaledPulledDrillReplaysToItsTranscript()
+    {
+        var script = Transcript("2026-10-08-yard_placeholder-800-pull.script");
+
+        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.RealContentDirectory());
+
+        Assert.Contains("  Pulls: Alder Fenn stops at 1 HP on Brigand 2; the kill is the student's\n", output);
+        Assert.Contains("  Alder Fenn hits Soldier for 5 (hp 1)\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
     [Fact]
     public void TheJournaledLadderReadingReplaysToItsTranscriptOnTheShippedContent()
     {

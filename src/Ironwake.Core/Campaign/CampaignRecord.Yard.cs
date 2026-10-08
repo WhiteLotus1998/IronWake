@@ -9,7 +9,8 @@ public sealed partial record CampaignRecord
     /// <summary>
     /// Why <paramref name="unitId"/> cannot take <paramref name="duty"/> at this camp, or null when it can:
     /// it took another already (one duty a unit; a second side map is the same duty), or it is
-    /// wounded and the duty is the forge or the yard, since a wounded unit's only duty is rest.
+    /// wounded and the duty is the yard (Table round 448: the yard is not where a hurt unit heals;
+    /// the forge and side maps take it).
     /// </summary>
     public string? DutyRefusal(string unitId, Duty duty)
     {
@@ -19,8 +20,8 @@ public sealed partial record CampaignRecord
             return $"{name} took the {YardRules.Word(taken.Duty)} duty at this camp; one duty a unit";
         }
 
-        return duty is Duty.Forge or Duty.Yard && Find(unitId)?.Wound is { } wound
-            ? $"{name} is {wound.Label}; a wounded unit's only duty is rest"
+        return duty == Duty.Yard && Find(unitId)?.Wound is { } wound
+            ? $"{name} is {wound.Label}; a wounded unit is refused the yard"
             : null;
     }
 
@@ -58,6 +59,35 @@ public sealed partial record CampaignRecord
                     ? ScreenResult.Refused(this, $"{unit.Name} took the {word} duty at this camp already")
                     : new ScreenResult(this with { Duties = WithDuty(new[] { unitId }, duty) }, $"{unit.Name} takes the {word} duty at this camp", true);
         }
+    }
+
+    /// <summary>
+    /// <c>duty &lt;unit&gt; forge &lt;slot&gt; mt|hit</c> (issue 1331, Table round 448): the unit works the
+    /// forge at this camp, one <see cref="Refine"/> step on the weapon in <paramref name="slot"/> (0-based)
+    /// with no gold, the material still paid. Refused as <see cref="DutyRefusal"/> says (a unit that took
+    /// the forge duty already has had its step) and as <see cref="Refine"/> refuses, the purse aside.
+    /// </summary>
+    public ScreenResult ForgeDuty(string unitId, int slot, string stat, GameContent content)
+    {
+        if (Find(unitId) is not { } unit)
+        {
+            return ScreenResult.Refused(this, $"no unit '{unitId}' on the roster");
+        }
+
+        if (DutyRefusal(unitId, Duty.Forge) is { } refusal)
+        {
+            return ScreenResult.Refused(this, refusal);
+        }
+
+        if (Duties.Any(d => d.UnitId == unitId))
+        {
+            return ScreenResult.Refused(this, $"{unit.Name} took the forge duty at this camp already");
+        }
+
+        var worked = RefineStep(unitId, slot, stat, content, 0);
+        return worked.Accepted
+            ? new ScreenResult(worked.Record with { Duties = worked.Record.WithDuty(new[] { unitId }, Duty.Forge) }, $"{unit.Name} works the forge: {worked.Text}", true)
+            : worked;
     }
 
     /// <summary>

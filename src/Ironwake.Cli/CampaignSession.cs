@@ -39,7 +39,8 @@ public sealed class CampaignSession
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
           quest <id> <ally>...     Fight a member's side map with the allies its board takes; who falls there is gone for good with permadeath on, back wounded with it off
           duty <unit> rest|forge   Spend a unit's one duty at this camp; a unit no command names rests
-          yard <teacher> <student> <weapon>  Drill in the yard: the student trains to the teacher's level less one and rank; the teacher earns nothing; both spend their duty
+          duty <unit> forge <slot> mt|hit  Work the forge as the duty: one Refine step for no gold, the material paid
+          yard <teacher> <student> <weapon>  Drill in the yard: the student trains to the teacher's level less one and rank; the teacher earns nothing and the teacher's blows leave a hand at 1 HP; both spend their duty
           keep                     The keep's rooms and beds; once the raid is fought, each wall placement, its price and what it does
           build <room>             Buy a room for the keep from the purse; each adds beds, and no bed free means a recruit will not join
           hire [<id>]              List the barracks' hires, or hire one into the company from the purse (once the barracks is built)
@@ -1589,11 +1590,14 @@ public sealed class CampaignSession
             case ["quest", ..]:
                 Error(text, "usage: quest <id> <ally> [<ally>...]");
                 break;
+            case ["duty", var unitId, "forge", var slotText, var stat] when int.TryParse(slotText, out var slot):
+                Take(_record.ForgeDuty(unitId, slot - 1, stat, _content), text);
+                break;
             case ["duty", var unitId, var duty]:
                 Take(_record.AssignDuty(unitId, duty), text);
                 break;
             case ["duty", ..]:
-                Error(text, "usage: duty <unit> rest|forge|quest|yard");
+                Error(text, "usage: duty <unit> rest|forge|quest|yard; duty <unit> forge <slot> mt|hit works one step for no gold");
                 break;
             case ["yard", ..]:
                 Error(text, "usage: yard <teacher> <student> <weapon>");

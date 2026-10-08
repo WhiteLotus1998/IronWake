@@ -2121,6 +2121,17 @@ public sealed partial record CampaignRecord(
     /// </summary>
     public ScreenResult Refine(string unitId, int slot, string stat, GameContent content)
     {
+        var refined = RefineStep(unitId, slot, stat, content, content.Campaign.Forge.Price);
+        return refined.Accepted ? refined with { Text = "Refine " + refined.Text } : refined;
+    }
+
+    /// <summary>
+    /// One <see cref="Refine"/> step for <paramref name="price"/> gold: <see cref="ForgeRules.Price"/> at
+    /// <c>refine</c>, none on the forge duty (<see cref="ForgeDuty"/>). The accepted text names the weapon
+    /// and what the step took: <c>Iron Lance: Iron Lance +1, Acc 80, Power 8, for 1 common and 100; ...</c>.
+    /// </summary>
+    private ScreenResult RefineStep(string unitId, int slot, string stat, GameContent content, int price)
+    {
         var rules = content.Campaign.Forge;
         if (!ForgeBuilt(content))
         {
@@ -2177,9 +2188,9 @@ public sealed partial record CampaignRecord(
             return ScreenResult.Refused(this, $"Refining {weapon.Name} takes 1 {word} and the stores hold none");
         }
 
-        if (Purse < rules.Price)
+        if (Purse < price)
         {
-            return ScreenResult.Refused(this, $"Refining {weapon.Name} costs {rules.Price} and the purse holds {Purse}");
+            return ScreenResult.Refused(this, $"Refining {weapon.Name} costs {price} and the purse holds {Purse}");
         }
 
         var refined = stat == "mt"
@@ -2187,14 +2198,14 @@ public sealed partial record CampaignRecord(
             : stack with { RefineHit = stack.RefineHit + rules.Hit, Refines = stack.Refines + 1 };
         var after = Replace(unit with { Inventory = unit.Inventory.Replace(slot, refined) }) with
         {
-            Purse = Purse - rules.Price,
+            Purse = Purse - price,
             CommonMaterial = kind == Material.Common ? CommonMaterial - 1 : CommonMaterial,
             RareMaterial = kind == Material.Rare ? RareMaterial - 1 : RareMaterial,
         };
         var shaped = Forge.Shape(Heirloom.Shape(weapon, refined), refined);
         return new ScreenResult(
             after,
-            $"Refine {weapon.Name}: {Forge.Name(weapon.Name, refined)}, Acc {shaped.Hit}, Power {shaped.Mt}, for 1 {word} and {rules.Price}; the purse holds {after.Purse}",
+            $"{weapon.Name}: {Forge.Name(weapon.Name, refined)}, Acc {shaped.Hit}, Power {shaped.Mt}, for 1 {word} and {(price == 0 ? "no gold" : price)}; the purse holds {after.Purse}",
             true);
     }
 
