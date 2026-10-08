@@ -735,6 +735,7 @@ a  soldier-1        Soldier L1 pikeman         10,2   hp 11/20  Plain  group mil
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
 > recall
 Player turns start at: turn 1 state 0, turn 2 state 12, turn 3 state 21, turn 4 state 30, turn 5 state 37, turn 6 state 47; history holds 48 states; 2 charges left
+Rolls are fixed by the turn: a recall changes the plan, not the dice.
 > recall 47
 Recalled to state 47; 1 charge left
 Undone: returns 8 hp to Alder Fenn

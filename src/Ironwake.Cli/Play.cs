@@ -1375,7 +1375,15 @@ public sealed class PlaySession
             .ToList();
         var list = starts.Count == 0 ? "none yet" : string.Join(", ", starts);
         _out.WriteLine($"Player turns start at: {list}; history holds {_state.History.Count} states; {ChargesLeft(_state.RecallCharges)}");
+        _out.WriteLine(RollsFixed);
     }
+
+    /// <summary>
+    /// The line under the bare <c>recall</c> listing (issue 1352): rolls are keyed by the turn and
+    /// the strike (section 7), so a reordered turn after a Recall draws the same dice; said before
+    /// a charge is spent, not after.
+    /// </summary>
+    public const string RollsFixed = "Rolls are fixed by the turn: a recall changes the plan, not the dice.";
 
     /// <summary>How many Recall charges are left, as printed: "1 charge left", "N charges left" (issue 1066).</summary>
     public static string ChargesLeft(int charges) => charges == 1 ? "1 charge left" : $"{charges} charges left";

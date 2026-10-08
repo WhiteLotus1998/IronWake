@@ -703,6 +703,7 @@ Battle lost: the captain is dead; only recall is left
 Lost because the captain, Alder Fenn, fell.
 > recall
 Player turns start at: turn 1 state 0, turn 2 state 13, turn 3 state 25, turn 4 state 34, turn 5 state 45; history holds 52 states; 3 charges left
+Rolls are fixed by the turn: a recall changes the plan, not the dice.
 > recall 45
 Recalled to state 45; 2 charges left
 Undone: gives back 1 kill (Soldier 2), 30 exp, 11 enemy hp; returns Alder Fenn alive at 16 hp

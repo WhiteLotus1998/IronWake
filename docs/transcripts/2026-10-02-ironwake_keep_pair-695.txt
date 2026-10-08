@@ -1027,6 +1027,7 @@ Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside
 pair rule binds: Sworn Hunter
 > recall
 Player turns start at: turn 1 state 0, turn 2 state 26; history holds 54 states; 3 charges left
+Rolls are fixed by the turn: a recall changes the plan, not the dice.
 > recall 26
 Recalled to state 26; 2 charges left
 Undone: gives back 18 exp, 40 enemy hp; returns 10 hp to Ottilie, 7 hp to Teodor, Archer 2 not yet arrived, Brigand 3 not yet arrived, Brigand 6 not yet arrived, Brigand 7 not yet arrived, Soldier 5 not yet arrived

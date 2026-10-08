@@ -229,11 +229,24 @@ public class CliPlayTests
         var output = Play(out _, "end\nrecall\nrecall 3\nend\nrecall\n");
 
         Assert.DoesNotContain("Unhandled", output);
-        Assert.Contains("> recall\nPlayer turns start at: turn 1 state 0; history holds 9 states; 3 charges left\n", output);
+        Assert.Contains("> recall\nPlayer turns start at: turn 1 state 0; history holds 9 states; 3 charges left\nRolls are fixed by the turn: a recall changes the plan, not the dice.\n", output);
         Assert.Contains("> recall 3\nERROR: State 3 is inside the enemy phase of turn 1; Recall returns only to a player phase; the nearest player-phase state is 0\n", output);
         Assert.Contains("-- Player phase, turn 3 --\n", output);
-        Assert.Contains("> recall\nPlayer turns start at: turn 1 state 0, turn 2 state 9; history holds 18 states; 3 charges left\n", output);
+        Assert.Contains("> recall\nPlayer turns start at: turn 1 state 0, turn 2 state 9; history holds 18 states; 3 charges left\nRolls are fixed by the turn: a recall changes the plan, not the dice.\n", output);
         Assert.Contains("  recall                   List the state each player turn started at", Play(out _, "help\n"));
+    }
+
+    /// <summary>
+    /// Issue 1352: the bare <c>recall</c> listing says the rolls are fixed by the turn, before a
+    /// charge is spent; <c>recall list</c> and a rewind keep their own lines and do not print it.
+    /// </summary>
+    [Fact]
+    public void TheBareRecallListingSaysTheRollsAreFixedByTheTurn()
+    {
+        var output = Play(out _, "recall\nrecall list\nend\nrecall 0\n");
+
+        Assert.Contains("> recall\nPlayer turns start at: none yet; history holds 0 states; 3 charges left\nRolls are fixed by the turn: a recall changes the plan, not the dice.\n> recall list\n", output);
+        Assert.Equal(2, output.Split(PlaySession.RollsFixed).Length);
     }
 
     /// <summary>
