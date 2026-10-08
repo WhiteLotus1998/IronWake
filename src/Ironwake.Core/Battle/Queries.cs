@@ -128,7 +128,7 @@ public static class Queries
 
         var holder = LightningRod.Catcher(state, content, from, weapon, target);
         var struck = holder ?? target;
-        var forecast = Combat.Forecast(Stoop.Poised(content, armed, from).ToCombatant(state, content, art: declared, against: struck), struck.Answering(state, content, from, armed), from.DistanceTo(struck.At), state.Scheme) with { CaughtBy = holder?.Id };
+        var forecast = Combat.Forecast(Stoop.Poised(content, armed, from).ToCombatant(state, content, art: declared, against: struck), struck.Answering(state, content, from, armed) with { Catching = holder is not null }, from.DistanceTo(struck.At), state.Scheme) with { CaughtBy = holder?.Id };
         return declared is null ? forecast : forecast with { ArtCost = declared.Cost };
     }
 

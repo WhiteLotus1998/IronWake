@@ -422,6 +422,14 @@ public static class ProtocolJson
                 w.WriteString("by", mc.ByUnitId);
                 w.WriteString("school", mc.School.Label());
                 break;
+            case RodCharged rch:
+                w.WriteString("unit", rch.UnitId);
+                w.WriteString("school", rch.School.Label());
+                break;
+            case RodChargeSpent rcs:
+                w.WriteString("unit", rcs.UnitId);
+                w.WriteString("school", rcs.School.Label());
+                break;
             case AreaCastAt ac:
                 w.WriteString("unit", ac.CasterId);
                 w.WriteString("spell", ac.SpellId);
@@ -1395,6 +1403,11 @@ public static class ProtocolJson
             w.WriteString("mark", mark.Label());
         }
 
+        if (unit.RodCharge is { } charge)
+        {
+            w.WriteString("rodCharge", charge.Label());
+        }
+
         if (unit.Stun > 0)
         {
             w.WriteNumber("stun", unit.Stun);
@@ -1676,6 +1689,7 @@ public static class ProtocolJson
             CursePhases = OptionalInt(e, "cursePhases") ?? 0,
             CursedBy = OptionalString(e, "cursedBy"),
             Mark = ReadMark(e),
+            RodCharge = ReadSchool(e, "rodCharge"),
             Stun = OptionalInt(e, "stun") ?? 0,
             StunSpent = e.TryGetProperty("stunSpent", out _) && RequiredBool(e, "stunSpent"),
             RaiseSpent = e.TryGetProperty("raiseSpent", out _) && RequiredBool(e, "raiseSpent"),
@@ -1733,10 +1747,16 @@ public static class ProtocolJson
     /// The optional <c>mark</c> of a unit (issue 1329, <see cref="Mark"/>): the school whose next hit on it is marked. A unit
     /// written before it, or without one, is unmarked; a word that is not a school is refused.
     /// </summary>
-    private static MagicSchool? ReadMark(JsonElement e) =>
-        OptionalString(e, "mark") is not { } word ? null
+    private static MagicSchool? ReadMark(JsonElement e) => ReadSchool(e, "mark");
+
+    /// <summary>
+    /// The optional school word <paramref name="field"/> of a unit: <c>mark</c> (issue 1329, <see cref="Mark"/>) or <c>rodCharge</c>
+    /// (<see cref="LightningRod"/>). Absent is none; a word that is not a school is refused.
+    /// </summary>
+    private static MagicSchool? ReadSchool(JsonElement e, string field) =>
+        OptionalString(e, field) is not { } word ? null
             : Enum.GetValues<MagicSchool>().Where(s => s.Label() == word).Select(s => (MagicSchool?)s).FirstOrDefault()
-                ?? throw new ProtocolException($"field 'mark' must be one of {string.Join(", ", Enum.GetValues<MagicSchool>().Select(s => s.Label()))}, not '{word}'");
+                ?? throw new ProtocolException($"field '{field}' must be one of {string.Join(", ", Enum.GetValues<MagicSchool>().Select(s => s.Label()))}, not '{word}'");
 
     /// <summary>
     /// The optional <c>learned</c> of a unit (issue 1246): the schools it learned from primers, in the
@@ -2518,11 +2538,23 @@ public static class ProtocolJson
             w.WriteBoolean("cashesMark", true);
         }
 
+        if (!side.Scale.IsOne)
+        {
+            w.WriteNumber("unscaled", side.Unscaled ?? side.Damage);
+            w.WriteNumber("scaleNumerator", side.Scale.Numerator);
+            w.WriteNumber("scaleDenominator", side.Scale.Denominator);
+        }
+
         w.WriteEndObject();
     }
 
     private static SideForecast ReadSide(JsonElement e) => new(
-        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1, e.TryGetProperty("critGrounds", out _) && RequiredBool(e, "critGrounds"), OptionalInt(e, "bite") ?? 0, e.TryGetProperty("neverDoubles", out _) && RequiredBool(e, "neverDoubles"), OptionalInt(e, "stoop") ?? 0, e.TryGetProperty("cashesMark", out _) && RequiredBool(e, "cashesMark"));
+        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1, e.TryGetProperty("critGrounds", out _) && RequiredBool(e, "critGrounds"), OptionalInt(e, "bite") ?? 0, e.TryGetProperty("neverDoubles", out _) && RequiredBool(e, "neverDoubles"), OptionalInt(e, "stoop") ?? 0, e.TryGetProperty("cashesMark", out _) && RequiredBool(e, "cashesMark"))
+    {
+        Unscaled = OptionalInt(e, "unscaled"),
+        Scale = OptionalInt(e, "scaleNumerator") is { } numerator && OptionalInt(e, "scaleDenominator") is { } denominator && denominator > 0
+            ? new DamageScale(numerator, denominator) : DamageScale.One,
+    };
 
     private static readonly string[] StatKeys = { "hp", "str", "mag", "dex", "spd", "lck", "def", "res", "cha" };
 

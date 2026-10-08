@@ -2340,7 +2340,7 @@ public sealed class PlaySession
         }
 
         var gate = LearnedGate.Suffix(LearnedGate.Read(content, striker, weapon, struck));
-        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + Curse.ForecastText(content, weapon) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck) + (side is null ? "" : Mark.ForecastText(side));
+        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + Curse.ForecastText(content, weapon) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck) + (side is null ? "" : Mark.ForecastText(side) + LightningRod.ForecastText(side));
     }
 
     /// <summary>
@@ -2687,6 +2687,11 @@ public sealed class PlaySession
         if (Mark.CardLine(unit) is { } marked)
         {
             lines.Add("  " + marked);
+        }
+
+        if (LightningRod.CardLine(unit) is { } charged)
+        {
+            lines.Add("  " + charged);
         }
 
         if (Armor.CardLine(content, unit) is { } armored)
@@ -3288,6 +3293,10 @@ public sealed class PlaySession
                 return $"{names[gs.UnitId]} sunders the {(content.Terrain.TryGetValue(gs.TerrainId, out var sundered) ? sundered.Name.ToLowerInvariant() : gs.TerrainId)} {names[gs.OwnerId]} raised at {gs.At}: the ground falls back";
             case RodCaught rc:
                 return $"{names[rc.UnitId]}'s rod catches {names[rc.ByUnitId]}'s spell aimed at {names[rc.AimedId]}: it strikes {names[rc.UnitId]}";
+            case RodCharged rch:
+                return $"{names[rch.UnitId]}'s rod is charged: the next {rch.School.Label()} cast deals {LightningRod.BoostText}";
+            case RodChargeSpent rcs:
+                return $"{names[rcs.UnitId]} spends the rod's charge";
             case UnitStunned st:
                 return $"{names[st.UnitId]} is stunned: it skips {(st.Next ? "its side's phase after this one" : "its side's next phase")}, and still counters";
             case StunSkipped sk:

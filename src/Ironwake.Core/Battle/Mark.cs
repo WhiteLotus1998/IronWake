@@ -24,6 +24,9 @@ public static class Mark
     /// <summary>The mark's multiple as a fraction, x1.5 (Lotus's rulings): the denominator.</summary>
     public const int Denominator = 2;
 
+    /// <summary>The mark's multiple as a <see cref="DamageScale"/>.</summary>
+    public static DamageScale Scale { get; } = new(Numerator, Denominator);
+
     /// <summary>The multiple as a line prints it.</summary>
     public const string Times = "x1.5";
 

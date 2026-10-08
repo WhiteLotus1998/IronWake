@@ -134,6 +134,18 @@ public sealed record Combatant
     /// </summary>
     public MagicSchool? Marked { get; init; }
 
+    /// <summary>
+    /// The school of this side's Lightning Rod charge (issue 1329, <see cref="Ironwake.Core.LightningRod"/>): a strike, never a counter,
+    /// with a tome of it deals x1.25 on final damage. Read on the board; null off it and for every uncharged unit.
+    /// </summary>
+    public MagicSchool? Charged { get; init; }
+
+    /// <summary>
+    /// Whether this side is a Lightning Rod holder struck by the spell it caught (issue 1329, <see cref="Ironwake.Core.LightningRod"/>):
+    /// a tome's strikes on it deal x0.5 on final damage. False everywhere else.
+    /// </summary>
+    public bool Catching { get; init; }
+
     /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, not <see cref="Blind"/>, and not <see cref="AnswerSpent"/>.</summary>
     public bool CanStrike(int distance) => !Blind && !AnswerSpent && Weapon is not null && Weapon.InRange(distance);
 }

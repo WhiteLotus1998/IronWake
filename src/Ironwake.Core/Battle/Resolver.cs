@@ -626,11 +626,13 @@ public static class Resolver
             return (state.WithUnit(unit with { Moved = true, Acted = true, WindupAt = target.At }), null);
         }
 
+        var caught = false;
         if (LightningRod.Catcher(state, content, unit.At, weapon, target) is { } holder)
         {
             events.Add(new RodCaught(holder.Id, target.Id, unit.Id));
             target = holder;
             distance = unit.At.DistanceTo(holder.At);
+            caught = true;
         }
 
         if (CoverRule.Swapped(state, target) is ({ } swappedBoard, { } coverer, { } ally))
@@ -643,7 +645,7 @@ public static class Resolver
         }
 
         var striker = unit.ToCombatant(state, content, art: art, against: target);
-        var answer = target.Answering(state, content, unit.At, unit);
+        var answer = target.Answering(state, content, unit.At, unit) with { Catching = caught };
         var shown = Combat.Forecast(striker, answer, distance, state.Scheme).Attacker.DisplayedHit;
         if (Signatures.Refuses(state, content, unit, shown))
         {
@@ -724,6 +726,12 @@ public static class Resolver
         next = Drain.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Curse.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Mark.AfterCombat(next, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
+        next = LightningRod.Spend(next, unit, weapon, events);
+        if (caught)
+        {
+            next = LightningRod.Charge(next, target.Id, weapon.School!.Value, events);
+        }
+
         next = Stun.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Lock.AfterAttack(next, art, unit.Id, target.Id, result.Strikes, events);
         next = Grounding.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
@@ -826,6 +834,7 @@ public static class Resolver
             shooter = AwardRank(shooter, weapon, strikes, died, events);
             shooter = AwardMastery(shooter, content, events);
             state = state.WithUnit(shooter).WithUnit(struck);
+            state = LightningRod.Spend(state, watcher, weapon, events);
             state = Drain.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, watcher, target);
             if (died)
             {
@@ -1350,6 +1359,7 @@ public static class Resolver
             next = Mark.AfterCombat(next, unit.Id, spell, target.Id, null, result.Strikes, events, caster, target);
         }
 
+        next = LightningRod.Spend(next, caster, spell, events);
         if (usesLeft == 0)
         {
             events.Add(new SpellSpent(unit.Id, spell.Id));
