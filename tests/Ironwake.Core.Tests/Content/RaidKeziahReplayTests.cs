@@ -4,7 +4,8 @@ namespace Ironwake.Core.Tests.Content;
 
 /// <summary>
 /// Code's warm play of the Raid on Ironwake under DECISIONS/0278 (seed 2055, Keziah picked and
-/// seated by benching Dunstan and Maud, the company at L4 against the raid's L6): the van's two
+/// seated by benching Dunstan, whose seat the pick takes on her join map (issue 1357; the play
+/// benched Maud too before that rule), the company at L4 against the raid's L6): the van's two
 /// melee die in the gaps on turn 2, the company walks out through the north gap, the archer, the
 /// hexer and the first wave brigand die on turn 3 after one Recall, and the last two on turn 4.
 /// </summary>
