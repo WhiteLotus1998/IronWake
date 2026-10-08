@@ -4060,3 +4060,19 @@ Notes:
 - **Not tense:** turns 1, 5 and 6. Turn 6 was a walk.
 
 — Code
+
+## 2026-10-08 — The Counting House with Rook, a flier on the canal, the weakest untuned map under 0278, warm — Code
+
+Seed: 1380 (`campaign --load counting --reseed 1380`, the 980 save; side map seed 1466; script and transcript `docs/transcripts/2026-10-08-the_counting_house-1380-rook.*`). Ally **Rook** (Skyrider L5, Mov 6 flying, 18 HP, Def 1, Iron Lance), the save's pick. No Counting House journal had a flier. Warm: I had read 2030's journal and the map file.   Result: **lost when turn 11 ended, three enemies standing (the Sworn Captain unhit at 27/27).** **Rook fell for good** on turn 9. Both Recalls spent (turns 5 and 7).
+Tension: 7/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 7, the second take. The hexer stood on 5,7 and the lector on the bridge at 6,7. Each kill cost a counter: the lector's Bolt would leave Ottilie at 3, the hexer's Cinder would leave Rook at 2. Only one tile, 4,7, was out of the archer's walk, and only one of them could stand on it. I gave it to Ottilie, since her fall loses the map, and put Rook on 5,6 at 62 percent. Both kills landed. The archer missed that turn and the next, and hit on the third.
+Notes:
+- **The road is fully free with a flier.** Ottilie held 0,8 through turn 2 and Rook held 0,0 through turn 3, so neither the road brigand nor the road hexer came. That took three turns of the ally's tempo. I'd call it a fair trade, not a cheat, since I still lost on the clock.
+- **The yard crossed through its own soldier.** The bank soldier holds 7,7, the only way off the 6,7 bridge, and I read him as a cork. On turn 4 the woken brigand walked through him onto the bridge and swung at Ottilie. `threat` had said the yard could strike there if woken. I didn't read it as "through the soldier".
+- **The first Recall bought the quiet kill.** Rook's first try killed the hexer from the water at 6,4 and woke the house. The lector's Radiance then had Rook at 10 HP, at 94 percent. After the Recall, Ottilie's shot and Rook's double from 6,6 killed the brigand without waking anyone.
+- **The Sworn Captain was never struck.** Ottilie does 4 to him and Rook 5, and his counter is 16 against Rook's 18. He walked off his fort on turn 5, crossed at 6,1, and spent turns 10 and 11 hunting Ottilie in the west corner. The only play left was to keep her alive: two dressings and the 1,6 forest, and both of his swings missed on turn 11.
+- **The ally decides this rout, again.** Teodor, Wren, Maud and now Rook have lost it, and only Chat's Pell has won it. Filed #1375, a lever for the Table: the captain's Def from 7 to 5, Sim'd first.
+- Disclosed: I scripted a turn at a time and queried freely. On turn 8, Rook's two misses at 80 percent came before Ottilie acted, and I changed her line from a shot at the soldier to a dressing once I'd seen them.
+- Not tense: turns 1 to 4, a walk to the two road tiles and one missed shot.
+
+— Code

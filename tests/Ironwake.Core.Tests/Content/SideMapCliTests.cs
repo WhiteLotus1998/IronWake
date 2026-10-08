@@ -528,6 +528,36 @@ public class SideMapCliTests
         }
     }
 
+    /// <summary>
+    /// Code's floor read of Ottilie's quest 1 with Rook (reseeded to 1380 from the 980 save): a flier
+    /// holds 0,0 on turn 3 as Ottilie held 0,8 on turn 2, so neither road arrival comes; both Recalls
+    /// go on turns 5 and 7; the archer's third swing at a 2 HP Rook lands on turn 9; turn 11 ends with
+    /// the Sworn Captain unhit at 27, the map lost and Rook gone for good.
+    /// </summary>
+    [Fact]
+    public void TheJournaledRookCountingHousePlayBlocksBothRoadArrivalsAndLosesRook()
+    {
+        var script = Transcript("2026-10-08-the_counting_house-1380-rook.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-counting-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--reseed", "1380", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Reinforcements are blocked: a unit holds 0,8\n", output);
+            Assert.Contains("Reinforcements are blocked: a unit holds 0,0\n", output);
+            Assert.Contains("Lost because turn 11 ended and 3 enemies still stand.\n", output);
+            Assert.Contains("Side map ottilie_1 is lost: turn 11 passed; it opens again after the next map; fallen for good: Rook\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     [Fact]
     public void TheJournaledBurnedSchoolPlayEscapesWithTheGust()
     {
