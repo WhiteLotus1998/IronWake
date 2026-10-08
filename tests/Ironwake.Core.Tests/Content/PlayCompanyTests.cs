@@ -84,6 +84,20 @@ public class PlayCompanyTests
     }
 
     [Fact]
+    public void TheFinaleCompanyIsKittedAsTheCampaignFieldsIt()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var roster = FinaleCompanies.Roster(content, FinaleCompany.Full, 8);
+
+        Assert.Equal("kinsbane", roster.Single(u => u.Id == "keziah").Inventory.Items[0].ItemId);
+        Assert.Contains(roster.Single(u => u.Id == "teodor").Inventory.Items, s => s.ItemId == "family_lance");
+        Assert.Equal(DrakeStage.HalfGrown, roster.Single(u => u.Id == "rook").Drake?.Stage);
+        Assert.All(content.Cast.Skip(1), u => Assert.Equal(
+            CampaignRecord.Kitted(u, content).ScaledTo(8, content.Class(u.ClassId)),
+            roster.Single(r => r.Id == u.Id)));
+    }
+
+    [Fact]
     public void PlayCompanyWithoutALevelIsRefused()
     {
         var output = Play(out var exit, CampaignKeep, "--company", "depleted");
