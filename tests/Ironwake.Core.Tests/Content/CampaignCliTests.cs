@@ -30,6 +30,22 @@ public class CampaignCliTests
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Issue 1331: the yard at the console. The captain teaches Corin the sword at the camp before
+    /// Sallow Grange; Corin falls, comes back wounded, and the yard refuses the pair a second drill.
+    /// </summary>
+    [Fact]
+    public void TheJournaledYardDrillReplaysToItsTranscript()
+    {
+        var script = Transcript("2026-10-08-yard_placeholder-800-open.script");
+
+        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.RealContentDirectory());
+
+        Assert.Contains("Corin Ashby drills under Alder Fenn in the sword. The drill is lost if Corin Ashby falls; who falls here comes back wounded.\n", output);
+        Assert.Contains("> yard captain corin sword\nERROR: Alder Fenn drilled in the yard at this camp already; one duty a unit\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
     [Fact]
     public void TheJournaledLadderReadingReplaysToItsTranscriptOnTheShippedContent()
     {

@@ -11,6 +11,9 @@ public static class MapFiles
     public const string TrialsDirectory = "trials";
     public const string QuestsDirectory = "quests";
 
+    /// <summary>The yard's pool of drill boards (issue 1331), taken in turn by the camp's <c>yard</c> command.</summary>
+    public const string YardDirectory = "yard";
+
     /// <summary>
     /// Where the campaign map <paramref name="mapId"/> lives: under <c>content/keep</c> for the keep
     /// and its raid (issue 288), under <c>content/maps</c> for every other map.
@@ -41,7 +44,7 @@ public static class MapFiles
     /// <summary>
     /// Loads every <c>.map</c> under <c>content/&lt;subdirectory&gt;</c> the way
     /// <see cref="LoadAll"/> loads <c>content/maps</c>: <see cref="TrialsDirectory"/> for the
-    /// certification trials, <see cref="QuestsDirectory"/> for the side maps (issue 635) and <see cref="KeepDirectory"/> for the keep and its raid, so
+    /// certification trials, <see cref="QuestsDirectory"/> for the side maps (issue 635), <see cref="YardDirectory"/> for the yard's drills (issue 1331) and <see cref="KeepDirectory"/> for the keep and its raid, so
     /// <c>validate</c> parses every map the campaign can load (issue 397).
     /// </summary>
     public static IReadOnlyList<(string Id, MapDefinition Map)> LoadDirectory(string contentRoot, string subdirectory, GameContent content)

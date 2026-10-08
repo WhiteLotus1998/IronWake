@@ -1605,16 +1605,16 @@ public static class Resolver
         return unit with { Hp = hp };
     }
 
-    /// <summary>Section 5's healer EXP through the same level-up path as combat: player units only, nothing at the cap.</summary>
+    /// <summary>Section 5's healer EXP through the same level-up path as combat: player units only, nothing at the cap, nothing to a yard drill's teacher (issue 1331).</summary>
     private static BattleUnit AwardHealExp(BattleUnit healer, bool targetBelowHalf, GameContent content, ulong seed, List<GameEvent> events)
     {
-        if (healer.Side != Side.Player || healer.Unit.Level >= Unit.MaxLevel)
+        if (healer.Side != Side.Player || healer.Unit.Level >= Unit.MaxLevel || healer.Yard is { Teaches: true })
         {
             return healer;
         }
 
         var amount = Experience.ForHeal(targetBelowHalf);
-        var result = healer.Unit.GainExp(amount, content.Class(healer.Unit.ClassId), new KeyedRng(seed));
+        var result = healer.Unit.GainExp(amount, content.Class(healer.Unit.ClassId), new KeyedRng(seed), healer.Yard?.LevelCeiling ?? Unit.MaxLevel);
         events.Add(new ExpGained(healer.Id, amount, result.Unit.Exp));
         var hp = healer.Hp;
         foreach (var levelUp in result.LevelUps)
@@ -1630,13 +1630,14 @@ public static class Resolver
     /// Section 6 for one side of a combat: a living player unit earns EXP once, from its
     /// best outcome (a strike landed, the enemy killed, a boss killed), and levels up for
     /// every 100 crossed under the section 3 growth keys. Enemies earn nothing: they are
-    /// templates that do not outlive the map (DECISIONS/0017), and neither does a Hollow (issue 1284). An HP gain raises current HP
+    /// templates that do not outlive the map (DECISIONS/0017), and neither does a Hollow (issue 1284), nor a yard drill's teacher (issue 1331), whose student
+    /// takes no level past the teacher's level less one. An HP gain raises current HP
     /// by the same amount. Events follow the combat and precede any death.
     /// </summary>
     private static BattleUnit AwardExp(
         BattleUnit earner, BattleUnit other, ValueList<StrikeEvent> strikes, bool killed, GameContent content, ulong seed, List<GameEvent> events)
     {
-        if (earner.Side != Side.Player || earner.Hp == 0 || earner.Hollow is not null)
+        if (earner.Side != Side.Player || earner.Hp == 0 || earner.Hollow is not null || earner.Yard is { Teaches: true })
         {
             return earner;
         }
@@ -1648,7 +1649,7 @@ public static class Resolver
             return earner;
         }
 
-        var result = earner.Unit.GainExp(amount, content.Class(earner.Unit.ClassId), new KeyedRng(seed));
+        var result = earner.Unit.GainExp(amount, content.Class(earner.Unit.ClassId), new KeyedRng(seed), earner.Yard?.LevelCeiling ?? Unit.MaxLevel);
         events.Add(new ExpGained(earner.Id, amount, result.Unit.Exp));
         var hp = earner.Hp;
         foreach (var levelUp in result.LevelUps)
@@ -1682,11 +1683,11 @@ public static class Resolver
     /// fought the combat, and emits
     /// <see cref="MasteryEarned"/> on reaching the class's requirement. A mastery that
     /// raises max HP raises current HP by as much, as a level-up does, and one that lowers it caps current HP at the new max. Enemies earn
-    /// nothing, as with EXP and ranks (DECISIONS/0017).
+    /// nothing, as with EXP and ranks (DECISIONS/0017), and neither does a yard drill's teacher (issue 1331).
     /// </summary>
     private static BattleUnit AwardMastery(BattleUnit earner, GameContent content, List<GameEvent> events)
     {
-        if (earner.Side != Side.Player || earner.Hp == 0 || earner.Hollow is not null)
+        if (earner.Side != Side.Player || earner.Hp == 0 || earner.Hollow is not null || earner.Yard is { Teaches: true })
         {
             return earner;
         }
@@ -1702,16 +1703,24 @@ public static class Resolver
         return earner with { Unit = unit, Hp = raised > 0 ? earner.Hp + raised : Math.Min(earner.Hp, max) };
     }
 
-    /// <summary>Adds rank points to a player unit and emits <see cref="RankRaised"/> when they cross a threshold; an enemy is returned unchanged.</summary>
+    /// <summary>
+    /// Adds rank points to a player unit and emits <see cref="RankRaised"/> when they cross a threshold; an enemy is returned unchanged.
+    /// A yard drill's teacher earns none, and its student's points in the taught weapon stop under the teacher's rank (issue 1331).
+    /// </summary>
     private static BattleUnit GainRank(BattleUnit earner, WeaponType type, int points, List<GameEvent> events)
     {
-        if (earner.Side != Side.Player || earner.Hollow is not null)
+        if (earner.Side != Side.Player || earner.Hollow is not null || earner.Yard is { Teaches: true })
         {
             return earner;
         }
 
         var before = earner.Unit.Skill.Rank(type);
         var skill = earner.Unit.Skill.Add(type, points);
+        if (earner.Yard is { } hand && hand.Weapon == type)
+        {
+            skill = skill.With(type, Math.Max(earner.Unit.Skill.Points(type), YardRules.CapPoints(skill.Points(type), hand.RankCeiling)));
+        }
+
         var after = skill.Rank(type);
         if (after != before)
         {

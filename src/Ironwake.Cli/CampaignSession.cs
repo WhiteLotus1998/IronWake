@@ -38,6 +38,8 @@ public sealed class CampaignSession
           certify <unit> <class>   Promote into a class, paying a seal from the purse
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
           quest <id> <ally>...     Fight a member's side map with the allies its board takes; who falls there is gone for good with permadeath on, back wounded with it off
+          duty <unit> rest|forge   Spend a unit's one duty at this camp; a unit no command names rests
+          yard <teacher> <student> <weapon>  Drill in the yard: the student trains to the teacher's level less one and rank; the teacher earns nothing; both spend their duty
           keep                     The keep's rooms and beds; once the raid is fought, each wall placement, its price and what it does
           build <room>             Buy a room for the keep from the purse; each adds beds, and no bed free means a recruit will not join
           hire [<id>]              List the barracks' hires, or hire one into the company from the purse (once the barracks is built)
@@ -1222,6 +1224,78 @@ public sealed class CampaignSession
     }
 
     /// <summary>
+    /// The yard's board for the next drill (issue 1331): the pool under <c>content/yard</c> in turn
+    /// (<see cref="CampaignRecord.YardBoard"/>), or the refusal the screen prints: the record's own
+    /// (<see cref="CampaignRecord.YardRefusal"/>), an empty pool, a board that will not load, or one
+    /// whose slots are not a drill's.
+    /// </summary>
+    public static (MapDefinition? Map, string? Refusal) YardFor(string contentDir, GameContent content, CampaignRecord record, string teacherId, string studentId, string weaponName)
+    {
+        if (record.YardRefusal(teacherId, studentId, weaponName, content) is { } refusal)
+        {
+            return (null, refusal);
+        }
+
+        var dir = Path.Combine(contentDir, MapFiles.YardDirectory);
+        var pool = Directory.Exists(dir)
+            ? Directory.GetFiles(dir, "*" + MapFiles.Extension).Select(Path.GetFileNameWithoutExtension).OrderBy(id => id, StringComparer.Ordinal).ToList()
+            : new List<string?>();
+        if (record.YardBoard(pool!) is not { } board)
+        {
+            return (null, "the yard has no boards yet");
+        }
+
+        MapDefinition map;
+        try
+        {
+            map = MapFiles.Load(Path.Combine(dir, board + MapFiles.Extension), content);
+        }
+        catch (MapException e)
+        {
+            return (null, e.Message);
+        }
+
+        return CampaignRecord.YardMapRefusal(map) is { } shape ? (null, shape) : (map, null);
+    }
+
+    /// <summary>
+    /// <c>yard &lt;teacher&gt; &lt;student&gt; &lt;weapon&gt;</c> (issue 1331): refused as
+    /// <see cref="YardFor"/> says; otherwise the drill plays on the screen until <c>leave</c>, its
+    /// result applied through <see cref="CampaignRecord.AfterYard"/>. False on a strict stop or when
+    /// the input ends inside it.
+    /// </summary>
+    private bool RunYard(TextReader input, string text, string teacherId, string studentId, string weaponName, bool strict)
+    {
+        var (map, refusal) = YardFor(_contentDir, _content, _record, teacherId, studentId, weaponName);
+        if (map is null)
+        {
+            Error(text, refusal!);
+            return true;
+        }
+
+        var weapon = YardRules.Weapon(weaponName)!.Value;
+        var names = UnitNames.Of(_record, _content);
+        WriteEvent($"Yard: {map.Name}, seed {_record.YardSeed(_content)}");
+        WriteEvent($"{names[studentId]} drills under {names[teacherId]} in the {weapon.ToString().ToLowerInvariant()}. The drill is lost if {names[studentId]} falls; who falls here {(_record.Permadeath ? "is gone for good" : "comes back wounded")}.");
+        var battle = new PlaySession(_content, _record.BeginYard(map, teacherId, studentId, weapon, _content, _scheme), _out, _scripted, _line) { ConfirmLethal = LethalConfirmAsks };
+        battle.WritePendingEvents();
+        _out.WriteLine("Objective: " + Objective.Line(battle.State, _content));
+        _out.Write(MapRenderer.Render(battle.State, _content));
+        var stopped = battle.RunCommands(input, strict, ref _commands);
+        _line = battle.Line;
+        _rejections.AddRange(battle.Rejections);
+        _log.Write(battle.EventLog);
+        if (stopped || !battle.Left)
+        {
+            _out.WriteLine($"Campaign stopped in {map.Name} at turn {battle.State.Turn}, {(battle.State.Outcome.IsOver ? "decided and not left" : "undecided")}");
+            return false;
+        }
+
+        Take(_record.AfterYard(battle.State, teacherId, studentId, weapon, _content), text);
+        return true;
+    }
+
+    /// <summary>
     /// The between-map screen before <paramref name="map"/>: prints it, then applies commands until
     /// <c>march</c> (true) or the input ends or a strict stop (null).
     /// </summary>
@@ -1296,6 +1370,13 @@ public sealed class CampaignSession
             else if (words is ["quest", var questId, _, ..])
             {
                 if (!RunQuest(input, text, questId, words[2..], strict))
+                {
+                    return null;
+                }
+            }
+            else if (words is ["yard", var teacherId, var studentId, var weaponName])
+            {
+                if (!RunYard(input, text, teacherId, studentId, weaponName, strict))
                 {
                     return null;
                 }
@@ -1507,6 +1588,15 @@ public sealed class CampaignSession
                 break;
             case ["quest", ..]:
                 Error(text, "usage: quest <id> <ally> [<ally>...]");
+                break;
+            case ["duty", var unitId, var duty]:
+                Take(_record.AssignDuty(unitId, duty), text);
+                break;
+            case ["duty", ..]:
+                Error(text, "usage: duty <unit> rest|forge|quest|yard");
+                break;
+            case ["yard", ..]:
+                Error(text, "usage: yard <teacher> <student> <weapon>");
                 break;
             case ["bench" or "unbench" or "show" or "classes", ..]:
                 Error(text, $"usage: {words[0]} <unit>");

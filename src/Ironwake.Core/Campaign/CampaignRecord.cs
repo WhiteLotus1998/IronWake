@@ -43,7 +43,7 @@ public enum ClaimantFate
 /// returns a new record. The between-map screen is the only place a record changes, and a battle
 /// is the only thing between two screens.
 /// </summary>
-public sealed record CampaignRecord(
+public sealed partial record CampaignRecord(
     ValueList<Unit> Roster,
     ValueList<string> Fallen,
     int Purse,
@@ -74,6 +74,13 @@ public sealed record CampaignRecord(
     /// side map lost on the clock opens again after the next map.
     /// </summary>
     public ValueList<string> QuestsTried { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
+    /// The duties taken at this camp (issue 1331), one a unit, in the order taken: a side map's
+    /// party, the forge, rest named outright, or the yard. A unit not named here rests; a won main
+    /// map clears them.
+    /// </summary>
+    public ValueList<UnitDuty> Duties { get; init; } = ValueList<UnitDuty>.Empty;
 
     /// <summary>
     /// The side maps offered at a camp the company has left (issue 1129), tried or not, in the
@@ -972,6 +979,7 @@ public sealed record CampaignRecord(
             Benched = ValueList<string>.Empty,
             TrialsTried = ValueList<TrialAttempt>.Empty,
             QuestsTried = ValueList<string>.Empty,
+            Duties = ValueList<UnitDuty>.Empty,
             QuestsSeen = SeenAfterCamp(content),
             Wagon = ValueList<string>.From(Wagon.Concat(end.Wagon)),
             FreedUnitFell = FreedUnitFell || end.Bond == BondFate.Fell,
@@ -1480,7 +1488,7 @@ public sealed record CampaignRecord(
     /// <summary>
     /// <see cref="QuestRefusal(string, string, GameContent)"/> for a side map that takes more than
     /// one ally (issue 691): each of <paramref name="allyIds"/> is checked as the one ally is, and
-    /// no ally is named twice. How many the board takes is the board's (<see cref="QuestAlliesRefusal"/>).
+    /// no ally is named twice, and nobody in the party has taken another duty at this camp (issue 1331). How many the board takes is the board's (<see cref="QuestAlliesRefusal"/>).
     /// </summary>
     public string? QuestRefusal(string questId, IReadOnlyList<string> allyIds, GameContent content)
     {
@@ -1526,6 +1534,11 @@ public sealed record CampaignRecord(
         if (allyIds.GroupBy(id => id).FirstOrDefault(g => g.Count() > 1) is { } twice)
         {
             return $"{twice.Key} is named twice; pick each ally once";
+        }
+
+        if (allyIds.Prepend(quest.MemberId).Select(id => DutyRefusal(id, Duty.Quest)).FirstOrDefault(r => r is not null) is { } busy)
+        {
+            return busy;
         }
 
         return quest.Pays is { } item && Find(quest.MemberId) is { Inventory.IsFull: true }
@@ -1614,7 +1627,7 @@ public sealed record CampaignRecord(
     /// The record after a decided side map (issue 635). The price is permadeath and nothing else
     /// (DESIGN section 14): whoever fell on it is fallen for good and leaves the roster, and
     /// whoever stands comes back as the battle left it (EXP, levels, uses), with spells refreshed.
-    /// The attempt is recorded either way; a win is recorded with the map it was won before,
+    /// The attempt is recorded either way, and so is the party's duty (issue 1331); a win is recorded with the map it was won before,
     /// which times the member's next quest. A loss never ends the campaign; the side map opens
     /// again after the next map unless its member fell. No purse reward: the quest's payout is
     /// the member's own, and a won quest that <see cref="CampaignQuest.Pays"/> puts that signature
@@ -1720,6 +1733,7 @@ public sealed record CampaignRecord(
             FellOn = FellOnAdd(lost, end.Map.Name),
             DrakeFlew = DrakeFlewAfter(gone),
             QuestsTried = QuestsTried.Add(questId),
+            Duties = WithDuty(opening.UnitsOf(Side.Player).Select(u => u.Id).Where(id => !lost.Contains(id)), Duty.Quest),
             QuestsWon = won ? QuestsWon.Add(new QuestWon(questId, MapIndex)) : QuestsWon,
             CommonMaterial = CommonMaterial + common,
             RareMaterial = RareMaterial + rare,

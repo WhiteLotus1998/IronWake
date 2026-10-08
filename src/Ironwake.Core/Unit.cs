@@ -175,9 +175,11 @@ public sealed record Unit(
     /// Adds EXP and levels up for every 100 crossed (DESIGN.md sections 3 and 6). At the
     /// level cap nothing is gained and the unit is returned unchanged; a level-up that
     /// reaches the cap discards the remainder. <paramref name="unitClass"/> must be the
-    /// unit's own, since the rolls test the effective growth.
+    /// unit's own, since the rolls test the effective growth. Below
+    /// <paramref name="ceiling"/> (the yard's teacher's level less one, issue 1331) no level is
+    /// taken past it: the EXP is kept, up to <see cref="MaxExp"/>, as the levy drill keeps it.
     /// </summary>
-    public ExpResult GainExp(int amount, UnitClass unitClass, IRng rng)
+    public ExpResult GainExp(int amount, UnitClass unitClass, IRng rng, int ceiling = MaxLevel)
     {
         if (amount < 0)
         {
@@ -192,7 +194,7 @@ public sealed record Unit(
         var unit = this;
         var levelUps = new List<LevelUp>();
         var total = Exp + amount;
-        while (total >= Experience.LevelUpAt && unit.Level < MaxLevel)
+        while (total >= Experience.LevelUpAt && unit.Level < MaxLevel && unit.Level < ceiling)
         {
             total -= Experience.LevelUpAt;
             var (next, gains) = unit.LevelUp(unitClass, rng);
@@ -200,7 +202,7 @@ public sealed record Unit(
             levelUps.Add(new LevelUp(unit.Level, gains));
         }
 
-        unit = unit with { Exp = unit.Level >= MaxLevel ? 0 : total };
+        unit = unit with { Exp = unit.Level >= MaxLevel ? 0 : Math.Min(total, MaxExp) };
         return new ExpResult(unit, ValueList<LevelUp>.From(levelUps));
     }
 
