@@ -362,9 +362,10 @@ public sealed class HeuristicPlayer : IPlayer
 
     /// <summary>
     /// The area cast the heuristic weighs against its best attack (issue 1391, <see cref="AreaCast.Best"/>): from a tile it
-    /// may end on that is not one left free for a corked captain, at the enemies its side can see. A unit whose death loses
-    /// the map (<see cref="LosesTheMap"/>) casts only from a tile whose no-crit exposure stays under its HP, the veto's
-    /// rule for a strike, since a cast takes no counter but the enemy phase still comes.
+    /// may end on that is not one left free for a corked captain, at the enemies its side can see, and only from a tile
+    /// whose no-crit exposure stays under its HP (issue 1395). A cast takes no counter, so its price never reads the tile
+    /// it stands on; without the rule the storm walked the caster into the crowd it struck, and on the keep Pell died in
+    /// twice the games she died in without it. The attack keeps its own rule: the veto, for a unit whose death loses the map.
     /// </summary>
     private static AreaCast.Choice? Cast(BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, IReadOnlySet<Coord> captains, IReadOnlyList<BattleUnit> enemies)
     {
@@ -374,8 +375,7 @@ public sealed class HeuristicPlayer : IPlayer
         }
 
         var seen = enemies.Where(e => Dusk.Sees(state, unit.Side, e.At)).ToList();
-        Func<Coord, bool>? refused = LosesTheMap(state, unit) ? tile => Exposure.Of(state, content, unit, tile).NoCrit >= unit.Hp : null;
-        return AreaCast.Best(state, content, unit, tiles.Where(t => !captains.Contains(t)), seen, refused);
+        return AreaCast.Best(state, content, unit, tiles.Where(t => !captains.Contains(t)), seen, tile => Exposure.Of(state, content, unit, tile).NoCrit >= unit.Hp);
     }
 
     /// <summary>
