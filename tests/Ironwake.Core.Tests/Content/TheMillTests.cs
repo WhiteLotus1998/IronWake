@@ -193,6 +193,31 @@ public class TheMillTests
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Code's warm play at the campaign's floor on a fresh seed (1810): Maud keeps the fort and the
+    /// captain corks its north tile 7,8 on turn 2, so the road brigand's only swing is into his
+    /// double and it dies on its own swing; the road archer falls on turn 3, a 24 percent Full
+    /// Measure crit kills the mill soldier on turn 5, and Maud finishes the archer on turn 7 of 9,
+    /// with no Recall and no strike on Maud.
+    /// </summary>
+    [Fact]
+    public void CorkingTheFortsNorthTileKillsTheRoadBrigandOnItsOwnSwing()
+    {
+        var script = Transcript("2026-10-08-the_mill-1810.script");
+
+        var output = Run(out var exit, "play", "the_mill", "--seed", "1810", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Alder Fenn moves 5,8 -> 7,8", output);
+        Assert.Contains("Brigand falls at 7,7\n", output);
+        Assert.Contains("Alder Fenn crits Soldier for 48 (hp 0)\n", output);
+        Assert.DoesNotContain("attacks Maud", output);
+        Assert.DoesNotContain("Recalled", output);
+        Assert.Contains("The Mill  turn 7 of 9  player phase", output);
+        Assert.EndsWith("Battle won: rout\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
     /// <summary>Each woken mill member and tile of the <c>holds:</c> ground from which it could strike Maud where she starts.</summary>
     private static List<(string Id, Coord At)> MillStrikesOnMaud(string directory, string file)
     {

@@ -3964,3 +3964,16 @@ Notes:
 - **Not tense:** turn 5 (one brigand at 13, two shots).
 
 — Code
+
+## 2026-10-08 — The Mill at the campaign's floor, the fort held, warm — Code
+Seed: 1810 (`play the_mill --seed 1810 --strict --script docs/transcripts/2026-10-08-the_mill-1810.script`; transcript beside it; main at 84f6368). Map 2, so the floor is the levy's lowest level: the captain and Maud at L1, the same company `play` seats. Warm: I played 632-south and 1710 and read Chat's 2250. 1710 gave up the fort; this chair held it on purpose, the "hard way" 1710's journal named.   Result: **won, rout, on turn 7 of 9.** Nobody fell, no Recall, no strike ever reached Maud.
+Tension: 5/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 2. `threat maud` on the fort read 17 against 17 with the road pair at 7,4 and 7,5. The captain crossed the row-9 ford to 7,8, the fort's north tile, and the threat dropped to 6 against 17: the archer alone, from 7,7. The brigand had nothing to swing at but the captain, 49 against a 90 percent double for 11 and 11, its whole 22. It missed and died.
+Notes:
+- **The cork is free.** One tile answers `protect: maud` for the whole map, and it costs the captain an archer shot (5). With 1710's west bank, both Maud lines are safe from turn 2. Filed as #1362, rework or "the cork is the lesson", for the Table.
+- **The road archer** fell on turn 3 to the captain (87, 11) and Maud from 7,8 (97, 10) with no answer back. The mill never heard it: 7,6 is 8 from the soldier.
+- **The mill** was the only decision with a price. Turn 4 I walked up and Salved the captain to full; turn 5 he woke it from 10,2 with Full Measure, 99 to hit for 16 and 24 to crit. **Disclosed luck:** the crit, 48, killed the soldier outright. Without it the soldier stands at 4 beside a spent captain, and that turn would have been the tense one.
+- **Turn 6, spent.** Maud stepped beside the archer on 8,1, where a bow can't answer (91, 10), and it shot the captain instead. Turn 7 she finished it.
+- **Not tense:** turns 1, 3, 4, 6 and 7. The only lethal line all map was turn 2's, and one move erased it.
+
+— Code
