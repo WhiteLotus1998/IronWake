@@ -39,7 +39,7 @@ public class CampaignCliTests
     {
         var script = Transcript("2026-10-08-yard_placeholder-800-open.script");
 
-        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.YardPlaceholderContentDirectory());
 
         Assert.Contains("Corin Ashby drills under Alder Fenn in the sword. The drill is lost if Corin Ashby falls; who falls here comes back wounded.\n", output);
         Assert.Contains("> yard captain corin sword\nERROR: Alder Fenn drilled in the yard at this camp already; one duty a unit\n", output);
@@ -55,10 +55,45 @@ public class CampaignCliTests
     {
         var script = Transcript("2026-10-08-yard_placeholder-800-pull.script");
 
-        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.YardPlaceholderContentDirectory());
 
         Assert.Contains("  Pulls: Alder Fenn stops at 1 HP on Brigand 2; the kill is the student's\n", output);
         Assert.Contains("  Alder Fenn hits Soldier for 5 (hp 1)\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Issue 1332: the Post at the camp before Sallow Grange. The captain pulls a hand on each side to
+    /// 1 HP, steps onto the post to let Corin through to the east lane, and Corin holds it alone, takes
+    /// two kills and ends the drill at 2 HP rather than step onto the post for the third.
+    /// </summary>
+    [Fact]
+    public void TheJournaledPostDrillReplaysToItsTranscript()
+    {
+        var script = Transcript("2026-10-08-the_post-800.script");
+
+        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.RealContentDirectory());
+
+        Assert.Contains("Yard: The Post, seed 800\n", output);
+        Assert.Contains("Pike Hand 2 falls at 6,2\n", output);
+        Assert.Contains("Battle won: survive", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Issue 1332: the Ring at the camp before the raid. Brannock holds the pen's mouth, the hands that
+    /// go for the captain come back at 1 HP, and Brannock walks out to take all three kills and the level
+    /// his ceiling allows.
+    /// </summary>
+    [Fact]
+    public void TheJournaledRingDrillReplaysToItsTranscript()
+    {
+        var script = Transcript("2026-10-08-the_ring-799.script");
+
+        var output = Run(out _, "campaign", "--seed", "644", "--difficulty", "recruit", "--permadeath", "off", "--script", script, "--content", Fixture.RealContentDirectory());
+
+        Assert.Contains("Yard: The Ring, seed 799\n", output);
+        Assert.Contains("Brannock trained under Alder Fenn: L3 -> L4 (ceiling L4)", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 

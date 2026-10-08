@@ -1,0 +1,22 @@
+name: The Ring
+size: 8x8
+win: rout
+turn_limit: 6
+recall: 0
+enemy_level: 1
+
+########
+#......#
+#......#
+#.#.#..#
+#.#.#..#
+#.###..#
+#......#
+########
+
+units:
+P captain 3,4
+P recruit 6,5
+E axe_hand 1,1 group:hands behavior:aggressive
+E pike_hand 6,1 group:hands behavior:aggressive
+E axe_hand 1,6 group:hands behavior:aggressive

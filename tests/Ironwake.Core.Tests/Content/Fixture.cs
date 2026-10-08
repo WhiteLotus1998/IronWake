@@ -143,6 +143,54 @@ internal static class Fixture
         return target;
     }
 
+    private static readonly Lazy<string> YardPlaceholder = new(() => WithYardPlaceholder(CopyFiles("ironwake-yard-placeholder-")));
+
+    /// <summary>The yard's one placeholder board, as it shipped before the ring and the post replaced it (issue 1332).</summary>
+    public const string YardPlaceholderBoard = """
+        name: The Yard (placeholder)
+        size: 8x8
+        win: rout
+        turn_limit: 6
+        recall: 0
+        enemy_level: 1
+
+        ########
+        #......#
+        #..^...#
+        #......#
+        #...^..#
+        #......#
+        #......#
+        ########
+
+        units:
+        P captain 2,6
+        P recruit 3,6
+        E brigand 5,2 group:hands behavior:aggressive
+        E soldier 2,1 group:hands behavior:aggressive
+        E brigand 6,4 group:post behavior:hold
+
+        """;
+
+    /// <summary>
+    /// A copy of the real content directory whose yard pool is the one placeholder board and nothing
+    /// else changed, for the drills journaled before the ring and the post replaced it (issue 1332).
+    /// Made once per test run.
+    /// </summary>
+    public static string YardPlaceholderContentDirectory() => YardPlaceholder.Value;
+
+    private static string WithYardPlaceholder(string target)
+    {
+        var yard = Path.Combine(target, MapFiles.YardDirectory);
+        foreach (var board in Directory.GetFiles(yard, "*" + MapFiles.Extension))
+        {
+            File.Delete(board);
+        }
+
+        File.WriteAllText(Path.Combine(yard, "yard_placeholder" + MapFiles.Extension), YardPlaceholderBoard);
+        return target;
+    }
+
     private static readonly Lazy<string> ShrineNorthStart = new(() => WithShrineNorthStart(WithShrineArcherHeld(WithShrineSeizedOnTheStep(CopyFiles("ironwake-shrine-north-")))));
 
     private static readonly Lazy<string> ShrineArcherHeld = new(() => WithShrineArcherHeld(WithShrineSeizedOnTheStep(CopyFiles("ironwake-shrine-held-"))));

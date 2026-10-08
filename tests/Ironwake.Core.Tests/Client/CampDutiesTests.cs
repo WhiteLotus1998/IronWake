@@ -14,7 +14,10 @@ public class CampDutiesTests
 {
     private static string ScriptPath() => Path.Combine(ClientParityTests.Root(), "tests", "parity", "campaign", "camp-duties-41.script");
 
-    private static CampaignClient Client() => new(CampActionsTests.Content, Fixture.RealContentDirectory(), CampActionsTests.Stocked());
+    /// <summary>The drill in the script was journaled on the placeholder board (issue 1332 replaced it).</summary>
+    private static string Root() => Fixture.YardPlaceholderContentDirectory();
+
+    private static CampaignClient Client() => new(CampActionsTests.Content, Root(), CampActionsTests.Stocked());
 
     private static List<string> Commands(CampaignClient client, string unitId) =>
         CampActions.For(client, unitId, Array.Empty<string>()).Select(r => r.Command).ToList();
@@ -22,7 +25,7 @@ public class CampDutiesTests
     [Fact]
     public void TheDutyAndYardRowsMatchTheConsoleByteForByte()
     {
-        var (output, console) = CampActionsTests.Console(File.ReadAllText(ScriptPath()));
+        var (output, console) = CampActionsTests.Console(File.ReadAllText(ScriptPath()), contentRoot: Root());
 
         Assert.DoesNotContain("ERROR", output);
         foreach (var line in new[]
@@ -41,7 +44,7 @@ public class CampDutiesTests
     [Fact]
     public void DutyParityFiresOnALogMissingTheForgeDuty()
     {
-        var (_, console) = CampActionsTests.Console(File.ReadAllText(ScriptPath()));
+        var (_, console) = CampActionsTests.Console(File.ReadAllText(ScriptPath()), contentRoot: Root());
         var client = Script.PlayCampaign(Client(), File.ReadAllText(ScriptPath()));
         var forge = client.IndexOf("Teodor works the forge", StringComparison.Ordinal);
         var without = client[..forge] + client[(client.IndexOf('\n', forge) + 1)..];

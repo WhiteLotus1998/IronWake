@@ -1,0 +1,1112 @@
+Campaign, seed 5303, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+reseeded from 830 to 5303: not the save's battle
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 6 of 10: Raid on Ironwake; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L4, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L4, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L4, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Ottilie: Bowman L4, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L4, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L4, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L4, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Brannock: Cadet L4, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 8)
+The last seat: Keziah (Reaver) or Rook (Skyrider) (pick <unit>). The one passed on rides home.
+Keziah: "Everyone here is offering you a promise. Mine's hungry, and you'll hear it ask."
+Rook: "She's the last one. Pick me and you're the second person alive who knows her name."
+They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.
+== Keep ==
+Purse: 500
+Rooms: beds: 8/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  pell_1: Pell's quest 1, The Burned School (quest pell_1 <ally>); permadeath applies
+  maud_2: Maud's quest 2, The First Shrine (quest maud_2 <ally>); permadeath applies
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 6, Raid on Ironwake. Defeat every enemy by the end of turn 7. Captain Fenn must survive.
+> quest maud_2 ottilie
+-- The First Shrine --
+Maud is going to the first shrine, a half-day off the weir road and
+older than the split. No rite-keeper alive has been inside. The causeway
+in is trodden to mud this month. "Somebody's put a man in the door. Move
+him. I'm going up to the altar."
+
+(Get Maud onto the altar at 7,0 and hold it through one enemy phase by
+the end of turn 10. The map is lost if she falls. Pursuers cross the
+causeway at 7,6 from turn 2, announced; a unit that waits where it began
+its phase braces.)
+
+Side map: The First Shrine, seed 5348
+Maud goes with Ottilie. This map is lost if Maud falls; who falls here is gone for good.
+  turn 2, enemy phase: a brigand arrives at 7,8 (aggressive). A unit standing on 7,8 stops it.
+  turn 3, enemy phase: an archer arrives at 6,8 (aggressive). A unit standing on 6,8 stops it.
+  turn 4, enemy phase: a soldier arrives at 7,8 (aggressive). A unit standing on 7,8 stops it.
+  turn 5, enemy phase: a brigand arrives at 13,8 (aggressive). A unit standing on 13,8 stops it.
+Objective: Get Maud to the altar alive and hold it through an enemy phase by the end of turn 10.
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^..A..=..B..^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           4,8    hp 18/18  Plain  captain
+B  ottilie          Ottilie L4 bowman          10,8   hp 18/18  Plain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move ottilie 7,8
+Ottilie moves 10,8 -> 7,8 via 9,8 8,8
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^..A..B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           4,8    hp 18/18  Plain  captain
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait ottilie
+Ottilie waits
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^..A..B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           4,8    hp 18/18  Plain  captain
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move maud 6,7
+Maud moves 4,8 -> 6,7 via 4,7 5,7
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^....A=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           6,7    hp 18/18  Plain  captain
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait maud
+Maud waits
+The First Shrine  turn 1 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^....A=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           6,7    hp 18/18  Plain  captain  done
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait soldier-1
+Soldier 1 waits and braces
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The First Shrine  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^....A=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           6,7    hp 18/18  Plain  captain
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold, braced
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move maud 7,4
+Maud moves 6,7 -> 7,4 via 7,7 7,6 7,5
+The First Shrine  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n..A..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           7,4    hp 18/18  Plain  captain
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold, braced
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait maud
+Maud waits
+The First Shrine  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n..A..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           7,4    hp 18/18  Plain  captain  done
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold, braced
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait ottilie
+Ottilie waits and braces
+The First Shrine  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n..A..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           7,4    hp 18/18  Plain  captain  done
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road  braced  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold, braced
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements are blocked: a unit holds 7,8
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait soldier-1
+Soldier 1 waits and braces
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^.^..d.^
+ 4 ....n..A..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, asleep
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, asleep
+A  maud             Maud L4 chaplain           7,4    hp 18/18  Plain  captain
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold, braced
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move maud 7,3
+Maud moves 7,4 -> 7,3
+The yard group wakes (proximity)
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^A^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, awake
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack maud soldier-1
+Forecast Maud -> Soldier 1: acc 87% dmg 11 crit 3%; counter: none
+  Brace: Soldier 1 braced: Maud acc -15
+Maud attacks Soldier 1
+  Maud hits Soldier 1 for 11 (hp 9)
+  Maud hp 18, Soldier 1 hp 9
+Maud gains 6 exp (6)
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^A^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, awake
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain  done
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move ottilie 7,6
+Ottilie moves 7,8 -> 7,6 via 7,7
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^A^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~B~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, awake
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain  done
+B  ottilie          Ottilie L4 bowman          7,6    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> threat ottilie
+Threat on Ottilie at 7,6 (Road):
+  Archer 2 (arrives this enemy phase at 6,8) from 6,7 with Iron Bow (slot 1): acc 73% dmg 7 crit 1%; counter: acc 83% dmg 9 crit 5%
+  If all land: 7 against 18 hp
+> wait ottilie
+Ottilie waits
+The First Shrine  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^c...^A^..d.^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~B~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          2,3    hp 22/22  Plain  group yard, guard, awake
+d  hexer-1          Hexer L2 adept             11,3   hp 16/16  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 18/18  Plain  captain  done
+B  ottilie          Ottilie L4 bowman          7,6    hp 18/18  Road  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Archer 2 arrives at 6,8 with the pursuit group, aggressive
+enemy: wait archer-1
+Archer 1 waits
+enemy: move archer-2 6,7
+Archer 2 moves 6,8 -> 6,7
+enemy: attack archer-2 ottilie
+Forecast Archer 2 -> Ottilie: acc 73% dmg 7 crit 1%; counter: acc 83% dmg 9 crit 5%
+Archer 2 attacks Ottilie
+  Archer 2 misses Ottilie
+  Ottilie hits Archer 2 for 9 (hp 8)
+  Archer 2 hp 8, Ottilie hp 18
+Ottilie gains 6 exp (6)
+enemy: move brigand-1 5,3
+Brigand 1 moves 2,3 -> 5,3 via 3,3 4,3
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move hexer-1 8,3
+Hexer moves 11,3 -> 8,3 via 10,3 9,3
+enemy: attack hexer-1 maud
+Forecast Hexer -> Maud: acc 98% dmg 4 crit 0%; counter: acc 81% dmg 7 crit 3% (Radiance 4 of 5 left)
+Hexer attacks Maud
+  Hexer hits Maud for 4 (hp 14)
+  Maud crits Hexer for 21 (hp 0)
+  Hexer hp 0, Maud hp 14
+Maud gains 20 exp (26)
+Hexer falls at 8,3
+enemy: wait soldier-1
+Soldier 1 waits and braces
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The First Shrine  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^...c^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~B~~~~~.
+ 7 .^....f=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+f  archer-2         Archer L2 bowman           6,7    hp 8/17   Plain  group pursuit, aggressive
+c  brigand-1        Brigand L2 reaver          5,3    hp 22/22  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 14/18  Plain  captain
+B  ottilie          Ottilie L4 bowman          7,6    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack maud brigand-1
+Forecast Maud -> Brigand 1: acc 98% dmg 12 crit 4%; counter: none
+Maud attacks Brigand 1
+  Maud hits Brigand 1 for 12 (hp 10)
+  Maud hp 14, Brigand 1 hp 10
+Maud gains 6 exp (32)
+The First Shrine  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^...c^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~B~~~~~.
+ 7 .^....f=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+f  archer-2         Archer L2 bowman           6,7    hp 8/17   Plain  group pursuit, aggressive
+c  brigand-1        Brigand L2 reaver          5,3    hp 10/22  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 14/18  Plain  captain  done
+B  ottilie          Ottilie L4 bowman          7,6    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move ottilie 7,8
+Ottilie moves 7,6 -> 7,8 via 7,7
+The First Shrine  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^...c^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^....f=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+f  archer-2         Archer L2 bowman           6,7    hp 8/17   Plain  group pursuit, aggressive
+c  brigand-1        Brigand L2 reaver          5,3    hp 10/22  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 14/18  Plain  captain  done
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack ottilie archer-2
+Forecast Ottilie -> Archer 2: acc 83% dmg 9 crit 5%; counter: acc 73% dmg 7 crit 1%
+Ottilie attacks Archer 2
+  Ottilie hits Archer 2 for 9 (hp 0)
+  Ottilie hp 18, Archer 2 hp 0
+Ottilie gains 20 exp (26)
+Archer 2 falls at 6,7
+The First Shrine  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^...c^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+c  brigand-1        Brigand L2 reaver          5,3    hp 10/22  Plain  group yard, guard, awake
+A  maud             Maud L4 chaplain           7,3    hp 14/18  Plain  captain  done
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Reinforcements are blocked: a unit holds 7,8
+enemy: wait archer-1
+Archer 1 waits
+enemy: move brigand-1 6,3
+Brigand 1 moves 5,3 -> 6,3
+enemy: attack brigand-1 maud
+Forecast Brigand 1 -> Maud: acc 70% dmg 13 crit 0%; counter: acc 82% dmg 12 crit 4% (Radiance 2 of 5 left)
+Brigand 1 attacks Maud
+  Brigand 1 hits Maud for 13 (hp 1)
+  Maud hits Brigand 1 for 12 (hp 0)
+  Brigand 1 hp 0, Maud hp 1
+Maud gains 20 exp (52)
+Brigand 1 falls at 6,3
+enemy: wait soldier-1
+Soldier 1 waits and braces
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The First Shrine  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....B.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          7,8    hp 18/18  Road
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move ottilie 7,4
+Ottilie moves 7,8 -> 7,4 via 7,7 7,6 7,5
+The First Shrine  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          7,4    hp 18/18  Plain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait ottilie
+Ottilie waits
+The First Shrine  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          7,4    hp 18/18  Plain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait maud
+Maud waits and braces
+The First Shrine  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain  braced  done
+B  ottilie          Ottilie L4 bowman          7,4    hp 18/18  Plain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Reinforcements arrive
+  Brigand 3 arrives at 13,8 with the pursuit group, aggressive
+enemy: wait archer-1
+Archer 1 waits
+enemy: move brigand-3 10,7
+Brigand 3 moves 13,8 -> 10,7 via 12,8 11,8 11,7
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: wait soldier-1
+Soldier 1 waits and braces
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The First Shrine  turn 6 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=..h.^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+h  brigand-3        Brigand L2 reaver          10,7   hp 22/22  Plain  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          7,4    hp 18/18  Plain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move ottilie 5,3
+Ottilie moves 7,4 -> 5,3 via 6,4 5,4
+The First Shrine  turn 6 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^...B^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=..h.^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+h  brigand-3        Brigand L2 reaver          10,7   hp 22/22  Plain  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          5,3    hp 18/18  Plain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack ottilie archer-1 art aimed_shot
+Forecast Ottilie -> Archer 1: acc 98% dmg 9 crit 15%; counter: acc 76% dmg 7 crit 1%
+  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 38 uses, 2 of them hit or miss
+Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
+Ottilie attacks Archer 1
+  Ottilie hits Archer 1 for 9 (hp 8)
+  Archer 1 hits Ottilie for 7 (hp 11)
+  Ottilie hp 11, Archer 1 hp 8
+Ottilie gains 6 exp (32)
+The First Shrine  turn 6 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^...B^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=..h.^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 8/17   Plain  group loft, guard, asleep
+h  brigand-3        Brigand L2 reaver          10,7   hp 22/22  Plain  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          5,3    hp 11/18  Plain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait maud
+Maud waits and braces
+The First Shrine  turn 6 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^...B^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=..h.^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 8/17   Plain  group loft, guard, asleep
+h  brigand-3        Brigand L2 reaver          10,7   hp 22/22  Plain  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain  braced  done
+B  ottilie          Ottilie L4 bowman          5,3    hp 11/18  Plain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: attack archer-1 ottilie
+Forecast Archer 1 -> Ottilie: acc 73% dmg 7 crit 1%; counter: acc 83% dmg 9 crit 5%
+Archer 1 attacks Ottilie
+  Archer 1 hits Ottilie for 7 (hp 4)
+  Ottilie hits Archer 1 for 9 (hp 0)
+  Archer 1 hp 0, Ottilie hp 4
+Ottilie gains 20 exp (52)
+Archer 1 falls at 5,1
+The loft group wakes (death)
+enemy: move brigand-3 7,6
+Brigand 3 moves 10,7 -> 7,6 via 9,7 8,7 7,7
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: wait soldier-1
+Soldier 1 waits and braces
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+The First Shrine  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#...a...#M.
+ 2 ..n####.####n.
+ 3 .^...B^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 22/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          5,3    hp 4/18   Plain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack maud soldier-1
+Forecast Maud -> Soldier 1: acc 87% dmg 11 crit 3%; counter: none
+  Brace: Soldier 1 braced: Maud acc -15
+Maud attacks Soldier 1
+  Maud misses Soldier 1
+  Maud hp 1, Soldier 1 hp 9
+Maud's Radiance is spent for this battle
+The First Shrine  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#...a...#M.
+ 2 ..n####.####n.
+ 3 .^...B^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 22/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain  unarmed  done
+B  ottilie          Ottilie L4 bowman          5,3    hp 4/18   Plain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> recall 60
+Recalled to state 60; 1 charge left
+Undone: moves only
+The rolls do not change: the same attack will roll the same
+The First Shrine  turn 7 of 10  player phase  seize  recall 1
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#...a...#M.
+ 2 ..n####.####n.
+ 3 .^...B^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 22/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          5,3    hp 4/18   Plain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move ottilie 7,4
+Ottilie moves 5,3 -> 7,4 via 5,4 6,4
+The First Shrine  turn 7 of 10  player phase  seize  recall 1
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#...a...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 22/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          7,4    hp 4/18   Plain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack ottilie brigand-3
+Forecast Ottilie -> Brigand 3: acc 87% dmg 9 crit 6%; counter: none
+Ottilie attacks Brigand 3
+  Ottilie hits Brigand 3 for 9 (hp 13)
+  Ottilie hp 4, Brigand 3 hp 13
+Ottilie gains 6 exp (58)
+The First Shrine  turn 7 of 10  player phase  seize  recall 1
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#...a...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 13/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          7,4    hp 4/18   Plain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack maud soldier-1
+Forecast Maud -> Soldier 1: acc 87% dmg 11 crit 3%; counter: none
+  Brace: Soldier 1 braced: Maud acc -15
+Maud attacks Soldier 1
+  Maud misses Soldier 1
+  Maud hp 1, Soldier 1 hp 9
+Maud's Radiance is spent for this battle
+The First Shrine  turn 7 of 10  player phase  seize  recall 1
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#...a...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 13/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain  unarmed  done
+B  ottilie          Ottilie L4 bowman          7,4    hp 4/18   Plain  done
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> recall 51
+Recalled to state 51; 0 charges left
+Undone: gives back 1 kill (Archer 1), 32 exp, 26 enemy hp; returns 14 hp to Ottilie
+The rolls do not change: the same attack will roll the same
+The First Shrine  turn 6 of 10  player phase  seize  recall 0
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.a...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=..h.^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, asleep
+h  brigand-3        Brigand L2 reaver          10,7   hp 22/22  Plain  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain
+B  ottilie          Ottilie L4 bowman          7,4    hp 18/18  Plain
+a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group sanctum, hold, braced
+deaf: group loft hears and sees nothing; it wakes only when a unit of group sanctum or its own dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack maud soldier-1
+Forecast Maud -> Soldier 1: acc 87% dmg 11 crit 3%; counter: none
+  Brace: Soldier 1 braced: Maud acc -15
+Maud attacks Soldier 1
+  Maud hits Soldier 1 for 11 (hp 0)
+  Maud hp 1, Soldier 1 hp 0
+Maud's Radiance is spent for this battle
+Maud gains 20 exp (72)
+Soldier 1 falls at 7,1
+The loft group wakes (a death in the sanctum group)
+The First Shrine  turn 6 of 10  player phase  seize  recall 0
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.....#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n..B..F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=..h.^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, awake
+h  brigand-3        Brigand L2 reaver          10,7   hp 22/22  Plain  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain  unarmed  done
+B  ottilie          Ottilie L4 bowman          7,4    hp 18/18  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move ottilie 7,1
+Ottilie moves 7,4 -> 7,1 via 7,3 7,2
+The First Shrine  turn 6 of 10  player phase  seize  recall 0
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.B...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=..h.^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 17/17  Plain  group loft, guard, awake
+h  brigand-3        Brigand L2 reaver          10,7   hp 22/22  Plain  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain  unarmed  done
+B  ottilie          Ottilie L4 bowman          7,1    hp 18/18  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> attack ottilie archer-1 art aimed_shot
+Forecast Ottilie -> Archer 1: acc 98% dmg 9 crit 15%; counter: acc 76% dmg 7 crit 1%
+  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 38 uses, 2 of them hit or miss
+Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
+Ottilie attacks Archer 1
+  Ottilie hits Archer 1 for 9 (hp 8)
+  Archer 1 hits Ottilie for 7 (hp 11)
+  Ottilie hp 11, Archer 1 hp 8
+Ottilie gains 6 exp (32)
+The First Shrine  turn 6 of 10  player phase  seize  recall 0
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#.b.B...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=..h.^.
+ 8 ^^.....=.....^
+
+b  archer-1         Archer L2 bowman           5,1    hp 8/17   Plain  group loft, guard, awake
+h  brigand-3        Brigand L2 reaver          10,7   hp 22/22  Plain  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain  unarmed  done
+B  ottilie          Ottilie L4 bowman          7,1    hp 11/18  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: attack archer-1 ottilie
+Forecast Archer 1 -> Ottilie: acc 73% dmg 7 crit 1%; counter: acc 83% dmg 9 crit 5%
+Archer 1 attacks Ottilie
+  Archer 1 hits Ottilie for 7 (hp 4)
+  Ottilie hits Archer 1 for 9 (hp 0)
+  Archer 1 hp 0, Ottilie hp 4
+Ottilie gains 20 exp (52)
+Archer 1 falls at 5,1
+enemy: move brigand-3 7,6
+Brigand 3 moves 10,7 -> 7,6 via 9,7 8,7 7,7
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+The First Shrine  turn 7 of 10  player phase  seize  recall 0
+   01234567890123
+ 0 ^^M###.T.###M^
+ 1 ^.M#...B...#M.
+ 2 ..n####.####n.
+ 3 .^....^A^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 22/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,3    hp 1/18   Plain  captain  unarmed
+B  ottilie          Ottilie L4 bowman          7,1    hp 4/18   Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> move maud 7,0
+Maud moves 7,3 -> 7,0 via 7,2 7,1
+Maud stands on the altar. The map is won if Maud still stands there when turn 7's enemy phase ends.
+The First Shrine  turn 7 of 10  player phase  seize  recall 0
+   01234567890123
+ 0 ^^M###.A.###M^
+ 1 ^.M#...B...#M.
+ 2 ..n####.####n.
+ 3 .^....^.^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 22/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,0    hp 1/18   Altar (heals 20 percent, 3 hp)  captain  unarmed
+B  ottilie          Ottilie L4 bowman          7,1    hp 4/18   Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> wait maud
+Maud waits
+The First Shrine  turn 7 of 10  player phase  seize  recall 0
+   01234567890123
+ 0 ^^M###.A.###M^
+ 1 ^.M#...B...#M.
+ 2 ..n####.####n.
+ 3 .^....^.^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 22/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,0    hp 1/18   Altar (heals 20 percent, 3 hp)  captain  unarmed  done
+B  ottilie          Ottilie L4 bowman          7,1    hp 4/18   Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> threat maud
+Threat on Maud at 7,0 (Altar): no enemy can strike her next phase
+> item ottilie 2
+Ottilie uses Field Dressing (2 left)
+Ottilie heals 10 (hp 14)
+The First Shrine  turn 7 of 10  player phase  seize  recall 0
+   01234567890123
+ 0 ^^M###.A.###M^
+ 1 ^.M#...B...#M.
+ 2 ..n####.####n.
+ 3 .^....^.^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~h~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,6    hp 22/22  Road  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,0    hp 1/18   Altar (heals 20 percent, 3 hp)  captain  unarmed  done
+B  ottilie          Ottilie L4 bowman          7,1    hp 14/18  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+> threat ottilie
+Threat on Ottilie at 7,1 (Plain):
+  Brigand 3 from 7,2 with Iron Axe (slot 1): acc 54% dmg 12 crit 0%; counter: none
+  If all land: 12 against 14 hp
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: move brigand-3 7,2
+Brigand 3 moves 7,6 -> 7,2 via 7,5 7,4 7,3
+enemy: attack brigand-3 ottilie
+Forecast Brigand 3 -> Ottilie: acc 54% dmg 12 crit 0%; counter: none
+Brigand 3 attacks Ottilie
+  Brigand 3 hits Ottilie for 12 (hp 2)
+  Brigand 3 hp 22, Ottilie hp 2
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+Maud heals 3 (hp 4)
+The First Shrine  turn 8 of 10  player phase  seize  recall 0
+   01234567890123
+ 0 ^^M###.A.###M^
+ 1 ^.M#...B...#M.
+ 2 ..n####h####n.
+ 3 .^....^.^....^
+ 4 ....n.....F..^
+ 5 .^...........^
+ 6 ~~~~~~~=~~~~~.
+ 7 .^.....=....^.
+ 8 ^^.....=.....^
+
+h  brigand-3        Brigand L2 reaver          7,2    hp 22/22  Plain  group pursuit, aggressive
+A  maud             Maud L4 chaplain           7,0    hp 4/18   Altar (heals 20 percent, 3 hp)  captain  unarmed
+B  ottilie          Ottilie L4 bowman          7,1    hp 2/18   Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
+Battle won: seize; no recall is left, so leave
+Campaign stopped in The First Shrine at turn 8, decided and not left

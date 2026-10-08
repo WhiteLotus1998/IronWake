@@ -3906,3 +3906,31 @@ Notes:
 - Not tense: turn 1, the walk-up again.
 
 — Code
+
+## 2026-10-08 — The First Shrine, Ottilie, cold, under the hold — Chat
+
+Seed: reseed 5303 from the 875 save (`campaign --load shrine --saves <copy of docs/transcripts/2026-10-03-the_first_shrine-875.saves> --reseed 5303 --strict`), on main b4094a6. Transcript: `docs/transcripts/2026-10-08-the_first_shrine-5303-chat.txt` (replays under `--strict`). Ally **Ottilie** (Bowman L4, bow at 2 only). Cold: no Shrine transcript opened since Chat's own 4426. Result: **won as turn 8 began**, nobody fell, both Recalls spent; Maud on the altar at 4/18, Ottilie at 2/18.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 6 after the second Recall. Maud opened the door with her last Radiance (87), the archer woke, Ottilie walked through the gap into the doorway on 7,1 and Aimed-Shot the archer on 5,1; `threat maud` read "no enemy can strike her next phase". The archer died to Ottilie's counter.
+Notes:
+- **Turns 1 to 4: Ottilie as the south cork.** She stood on 7,8 (`Reinforcements are blocked`), shot the turn-3 archer from the bridge, then stepped back onto 7,8 to kill it and block the soldier. Two of four pursuers never existed.
+- **Disclosed luck:** on turn 3 the yard hexer died to Maud's 3 percent crit counter, which also spent a Radiance not counted.
+- **Turn 4 set the map:** brigand 1 shot first for 12 so its swing left Maud at 1 and her counter killed it, exactly as `threat` printed. Maud was at 1 HP from turn 4 to the end.
+- **Turn 7, the miss:** the last Radiance missed the door at 87; a Recall and a reorder missed again. Rolls are keyed by the turn, not streamed, and the console never says so (filed as #1352).
+- **The hold is decided by the doorway.** The altar's only neighbours, 7,1 and 8,0, sit behind 7,2: one body in the doorway makes Maud unreachable to every melee enemy. Ottilie, with no melee counter, still corked. 0306's criterion did not fire; brigand 1 to 4,4 is retired.
+- A readout to trace (#1351): `threat ottilie from 5,3` counted the asleep loft archer's strike and also said "asleep, could strike here if woken"; it then struck while its row read asleep.
+
+— Chat
+
+## 2026-10-08 — The yard's two boards, the Post and the Ring, under the practice weapons, warm — Code
+
+Setup: `full-campaign-644`'s script (recruit, permadeath off) to two camps, the yard on each camp's board in turn (#1332). The hands carry Mt 1 practice weapons. **The Post** (seed 800, the camp before Sallow Grange): Alder Fenn (Vanguard L6) teaches Corin (Cadet L1) the sword; survive 5 turns on a 9x5 board, one lane each side of a fort. **The Ring** (seed 799, the camp before the raid): Alder Fenn (L5) teaches Brannock (Cadet L3) the sword; rout in 6, Brannock starts in a one-wide pen. Transcripts: `docs/transcripts/2026-10-08-the_post-800.txt`, `-the_ring-799.txt`. Results: **the Post won at the end of turn 5**, Corin on 2 of 19 HP, two kills, 80 EXP, no level. **The Ring won on turn 4**, Brannock took all three kills and reached L4, his ceiling.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10 (the Post); 6/10, 6/10, 5/10 (the Ring)
+Best turn: the Post, turn 4. Corin on 2 HP holding the east lane, now empty. The west hand sat at 1 HP against the captain on the fort. A swap puts Corin on the fort for the kill at 87, and the pike behind it then reaches him for 2 at about half: the third kill or the drill. I held. The lane-alone lesson was the turn before: the pike hit him on my swing and again in its own phase, 10 to 2, and he killed it on the counter.
+Notes:
+- **The practice weapon does what round 448 asked.** No lone hand came near killing a student in one exchange; the danger was two exchanges on one body. The teacher took 0 all drill, which reads as "barely scratched" and then some: his counters did all the pulling.
+- **The post's swap is the verb.** The captain pulled the east hand to 1, then stepped back onto the fort so Corin could pass him into the east lane. That swap is the one move the board teaches, and I found it without looking for it.
+- **The Ring's hands went for the teacher.** Two hands spent three phases swinging at the captain for 0, because the AI prices his counter as a kill (0331's Unsure). The pen did its job for one turn, then Brannock had to walk out to them. Not tense from turn 2 to 3. The ring's lesson (block the gap or not) never came up: the captain could not reach the gap on turn 1 (Mov 4), and the pen's mouth was Brannock's to hold.
+- **Brannock drilled "in the sword" with a hatchet.** The yard accepts a weapon the student's class uses but the student does not carry, so his axe rose to D and his sword stayed E. That is a refusal the yard could use (Unsure on the PR).
+
+— Code
