@@ -193,6 +193,23 @@ public class AreaCastPlannerTests
     }
 
     [Fact]
+    public void TheSimsPlayerCastsNoStormFromATileWhoseExposureWouldKillTheCaster()
+    {
+        var state = Facing();
+        state = state.WithUnit(state.Find("pell")! with { Moved = true });
+        var pell = state.Find("pell")!;
+        var exposure = Exposure.Of(state, Shipped, pell, pell.At).NoCrit;
+        Assert.InRange(exposure, 1, pell.Hp - 1);
+        Assert.Equal(new UseItem("pell", StormSlot, "6,5"), Assert.Single(HeuristicPlayer.PlanUnit(state, Shipped, pell)));
+
+        state = state.WithUnit(pell with { Hp = exposure });
+        var plan = HeuristicPlayer.PlanUnit(state, Shipped, state.Find("pell")!);
+
+        Assert.Null(state.Map.ProtectId);
+        Assert.DoesNotContain(plan, c => c is UseItem { Slot: StormSlot });
+    }
+
+    [Fact]
     public void TheEnemyPlannerCastsAStormOnTwoPlayerUnits()
     {
         var state = Facing();
