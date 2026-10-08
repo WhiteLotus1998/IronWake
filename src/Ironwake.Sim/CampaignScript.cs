@@ -390,7 +390,7 @@ public static class CampaignScript
             }
         }
 
-        var player = new HeuristicPlayer();
+        var player = WriterPlayer();
         var steps = 0;
         while (!battle.State.Outcome.IsOver)
         {
@@ -578,4 +578,10 @@ public static class CampaignScript
         lines.Add(line);
         battle.Continue();
     }
+
+    /// <summary>
+    /// The heuristic that plays the battles the script does not hand-play. It casts no area tome (issue 1391), since the
+    /// script is played back through the client's clicks, which take none until issue 1392.
+    /// </summary>
+    public static HeuristicPlayer WriterPlayer() => new() { Casts = false };
 }
