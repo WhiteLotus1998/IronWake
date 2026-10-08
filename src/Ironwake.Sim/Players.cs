@@ -70,6 +70,13 @@ public sealed class HeuristicPlayer : IPlayer
 
     private int _lastPhaseTurn;
 
+    /// <summary>
+    /// Whether this player casts an area tome when the cast outscores its best attack (issue 1391,
+    /// <see cref="AreaCast.Best"/>); on unless a caller turns it off, as the campaign script's writer does while the
+    /// client's click path takes no area cast (issue 1392).
+    /// </summary>
+    public bool Casts { get; init; } = true;
+
     public IReadOnlyList<Command> Next(BattleState state, GameContent content)
     {
         if (state.Outcome.IsOver || state.Phase != Side.Player)
@@ -95,7 +102,7 @@ public sealed class HeuristicPlayer : IPlayer
             return new Command[] { new EndPhase() };
         }
 
-        var plan = PlanUnit(state, content, unit, out var refused);
+        var plan = PlanUnit(state, content, unit, out var refused, Casts);
         if (refused is { } p && (HighestRefusedKill is null || p > HighestRefusedKill))
         {
             HighestRefusedKill = p;
@@ -248,9 +255,9 @@ public sealed class HeuristicPlayer : IPlayer
     /// <summary>
     /// One player unit's commands on the board as it stands. <paramref name="refusedKill"/>
     /// is the highest kill probability among the attacks the veto refused for this unit,
-    /// or null when it refused none.
+    /// or null when it refused none. With <paramref name="casts"/> off it never casts an area tome.
     /// </summary>
-    public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit, out double? refusedKill)
+    public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit, out double? refusedKill, bool casts = true)
     {
         refusedKill = null;
         var weapon = unit.EquippedWeapon(content);
@@ -275,11 +282,10 @@ public sealed class HeuristicPlayer : IPlayer
         var enemyReach = enemies.Select(e => state.ReachOf(e, content)).ToList();
 
         var arms = Arms(content, unit);
+        var captains = CaptainsTiles(state, content, unit);
+        Option? best = null;
         if (arms.Count > 0)
         {
-            var equipped = unit.EquippedSlot(content);
-            var captains = CaptainsTiles(state, content, unit);
-            Option? best = null;
             foreach (var tile in tiles)
             {
                 var avoid = state.Map.TerrainAt(tile, content).AvoidFor(movement);
@@ -327,10 +333,16 @@ public sealed class HeuristicPlayer : IPlayer
                 }
             }
 
-            if (best is not null)
-            {
-                return WithMove(unit, best.Tile, new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot));
-            }
+        }
+
+        if (casts && Cast(state, content, unit, tiles, captains, enemies) is { } cast && (best is null || (!best.Hunt && cast.Score > best.Score)))
+        {
+            return WithMove(unit, cast.From, new UseItem(unit.Id, cast.Slot, cast.At.ToString()));
+        }
+
+        if (best is not null)
+        {
+            return WithMove(unit, best.Tile, new Attack(unit.Id, best.TargetId, best.Slot == unit.EquippedSlot(content) ? null : best.Slot));
         }
 
         var heal = Heal(state, content, unit, tiles, enemyReach);
@@ -346,6 +358,24 @@ public sealed class HeuristicPlayer : IPlayer
 
         var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, Grounding.MovementOf(unit, content), CaptainsTiles(state, content, unit));
         return WithMove(unit, destination ?? unit.At, Idle(state, content, unit, destination));
+    }
+
+    /// <summary>
+    /// The area cast the heuristic weighs against its best attack (issue 1391, <see cref="AreaCast.Best"/>): from a tile it
+    /// may end on that is not one left free for a corked captain, at the enemies its side can see. A unit whose death loses
+    /// the map (<see cref="LosesTheMap"/>) casts only from a tile whose no-crit exposure stays under its HP, the veto's
+    /// rule for a strike, since a cast takes no counter but the enemy phase still comes.
+    /// </summary>
+    private static AreaCast.Choice? Cast(BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, IReadOnlySet<Coord> captains, IReadOnlyList<BattleUnit> enemies)
+    {
+        if (AreaCast.Tomes(content, unit).Count == 0)
+        {
+            return null;
+        }
+
+        var seen = enemies.Where(e => Dusk.Sees(state, unit.Side, e.At)).ToList();
+        Func<Coord, bool>? refused = LosesTheMap(state, unit) ? tile => Exposure.Of(state, content, unit, tile).NoCrit >= unit.Hp : null;
+        return AreaCast.Best(state, content, unit, tiles.Where(t => !captains.Contains(t)), seen, refused);
     }
 
     /// <summary>

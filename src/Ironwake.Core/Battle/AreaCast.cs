@@ -14,8 +14,8 @@ namespace Ironwake.Core;
 /// <item>A marking tome marks every unit it hits that survives, cashing any mark already on it first (<see cref="Mark"/>).</item>
 /// </list>
 /// An area tome is never equipped (<see cref="BattleUnit.UsableWeaponAt"/>), so it never attacks and never counters.
-/// Spark Storm (Gust's id, DECISIONS/0348) is the one shipped area tome. <see cref="Resolver.Legal"/>, the Sim's player
-/// and the enemy planner do not cast it yet: Pell carries it, and they strike with Cinder.
+/// Spark Storm (Gust's id, DECISIONS/0348) is the one shipped area tome. <see cref="Resolver.Legal"/> offers each cast by
+/// the set it strikes, and the Sim's player and the enemy planner price one with <see cref="Best"/> (issue 1391).
 /// </summary>
 public static class AreaCast
 {
@@ -82,5 +82,126 @@ public static class AreaCast
             var damage = side.CashesMark ? side.MarkedDamage : side.Damage;
             return $"{target.Id} acc {side.DisplayedHit}% dmg {damage} (hp {target.Hp}){Mark.ForecastText(side)}{(spell.Marks ? ", marks" : "")}";
         })) + ", no counter";
+    }
+
+    /// <summary>A cast a planner may make: the tile cast from, the tome's slot, the tile cast at, the units struck, and its score.</summary>
+    public sealed record Choice(Coord From, int Slot, Coord At, IReadOnlyList<BattleUnit> Struck, double Score);
+
+    /// <summary>
+    /// The area cast <paramref name="unit"/> makes from one of <paramref name="tiles"/>, or null (issue 1391). Each tome it
+    /// can cast (<see cref="Tomes"/>) is tried at every tile in range of every tile it may stand on, and priced on
+    /// <see cref="EnemyAi.Score"/>'s scale (<see cref="Price"/>). A cast qualifies only when it strikes two or more of
+    /// <paramref name="known"/> or its forecast kills one, so a single sting never stands in for an attack. The best
+    /// score wins, then the first tile in <paramref name="tiles"/>' order, then the first tile cast at in row order. A
+    /// tile <paramref name="refused"/> names is no option, which is how a veto applies; a tile another unit stands on is
+    /// never one but the unit's own.
+    /// </summary>
+    public static Choice? Best(
+        BattleState state,
+        GameContent content,
+        BattleUnit unit,
+        IEnumerable<Coord> tiles,
+        IReadOnlyCollection<BattleUnit> known,
+        Func<Coord, bool>? refused = null)
+    {
+        var tomes = Tomes(content, unit);
+        if (tomes.Count == 0)
+        {
+            return null;
+        }
+
+        var knownIds = known.Select(k => k.Id).ToHashSet();
+        Choice? best = null;
+        foreach (var tile in tiles)
+        {
+            if ((tile != unit.At && state.UnitAt(tile) is not null) || refused?.Invoke(tile) == true)
+            {
+                continue;
+            }
+
+            var there = unit with { At = tile };
+            var board = state.WithUnit(there);
+            foreach (var (slot, spell) in tomes)
+            {
+                for (var y = tile.Y - spell.MaxRange; y <= tile.Y + spell.MaxRange; y++)
+                {
+                    for (var x = tile.X - spell.MaxRange; x <= tile.X + spell.MaxRange; x++)
+                    {
+                        var at = new Coord(x, y);
+                        if (!board.Map.Contains(at) || Unreachable(board, there, spell, at) is not null)
+                        {
+                            continue;
+                        }
+
+                        var struck = Struck(board, there, spell, at).Where(u => knownIds.Contains(u.Id)).ToList();
+                        if (struck.Count == 0)
+                        {
+                            continue;
+                        }
+
+                        var (score, kills) = Price(board, content, there, spell, at, struck);
+                        if ((struck.Count >= 2 || kills) && (best is null || score > best.Score))
+                        {
+                            best = new Choice(tile, slot, at, struck, score);
+                        }
+                    }
+                }
+            }
+        }
+
+        return best;
+    }
+
+    /// <summary>
+    /// The area tomes <paramref name="unit"/> can cast now, by slot: those naming <c>area</c> that it may wield with a use
+    /// left. <see cref="Resolver.Legal"/> and <see cref="Best"/> both read it, so neither offers a cast the Item action refuses.
+    /// </summary>
+    public static IReadOnlyList<(int Slot, Weapon Spell)> Tomes(GameContent content, BattleUnit unit)
+    {
+        var unitClass = content.Class(unit.Unit.ClassId);
+        var tomes = new List<(int, Weapon)>();
+        for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
+        {
+            var stack = unit.Unit.Inventory.Items[slot];
+            if (stack.Uses == 0 || content.Items.ContainsKey(stack.ItemId))
+            {
+                continue;
+            }
+
+            var spell = content.WeaponOf(unit.Unit, content.Weapon(stack.ItemId));
+            if (spell.Area > 0 && unit.Unit.CanWield(spell, unitClass))
+            {
+                tomes.Add((slot, spell));
+            }
+        }
+
+        return tomes;
+    }
+
+    /// <summary>
+    /// A cast's score on <see cref="EnemyAi.Score"/>'s scale (issue 1391), and whether its forecast kills one struck: for
+    /// each struck unit the kill bonus when the forecast's damage (a cashed mark's, when it cashes one) takes its HP,
+    /// plus the expected damage capped at its HP; for a marking tome, each one that survives adds the expected x1.5 on
+    /// that damage, the next lightning hit's share; then <see cref="EnemyAi.NoCounterBonus"/> once, since no one counters.
+    /// </summary>
+    public static (double Score, bool Kills) Price(BattleState state, GameContent content, BattleUnit caster, Weapon spell, Coord at, IReadOnlyList<BattleUnit> struck)
+    {
+        var score = EnemyAi.NoCounterBonus;
+        var kills = false;
+        foreach (var target in struck)
+        {
+            var side = Forecast(state, content, caster, spell, target, at).Attacker;
+            var damage = side.CashesMark ? side.MarkedDamage : side.Damage;
+            var hit = Combat.HitProbability(side.HitChance, state.Scheme);
+            var kill = damage >= target.Hp;
+            kills |= kill;
+            score += (kill ? EnemyAi.KillBonus : 0) + Math.Min(target.Hp, damage) * hit;
+            if (!kill && spell.Marks)
+            {
+                score += (Mark.Of(side.Damage) - side.Damage) * hit;
+            }
+        }
+
+        return (score, kills);
     }
 }

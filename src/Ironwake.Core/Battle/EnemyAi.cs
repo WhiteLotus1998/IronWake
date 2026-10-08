@@ -309,19 +309,26 @@ public static class EnemyAi
                 : new Command[] { new Wait(unit.Id) };
         }
 
+        var lineVeto = BossVetoApplies(state, content, unit);
+        Func<Coord, bool>? vetoed = lineVeto ? tile => BossVetoRefuses(state, content, unit, tile) : null;
+        var storm = AreaCast.Best(state, content, unit, tiles, known, vetoed);
         if (weapon is null)
         {
-            return new Command[] { new Wait(unit.Id) };
+            return storm is null ? new Command[] { new Wait(unit.Id) } : Cast(unit, storm);
         }
 
         var equipped = unit.EquippedSlot(content);
         var sworn = Sworn(state, unit, known);
         var best = Choose(state, content, unit, tiles, reach, known, playerReach, sworn).Best;
-        var lineVeto = BossVetoApplies(state, content, unit);
-        if (LineStrike.Best(state, content, unit, tiles, known, lineVeto ? tile => BossVetoRefuses(state, content, unit, tile) : null) is { } line)
+        if (LineStrike.Best(state, content, unit, tiles, known, vetoed) is { } line)
         {
             var strike = new StrikeLine(unit.Id, line.Toward);
             return line.From == unit.At ? new Command[] { strike } : new Command[] { new Move(unit.Id, line.From), strike };
+        }
+
+        if (storm is not null && (best is null || storm.Score > best.Score))
+        {
+            return Cast(unit, storm);
         }
 
         if ((Raise(state, content, unit, tiles, reach, playerReach) ?? Rampart(state, content, unit, tiles, reach, playerReach)) is { } cast
@@ -356,6 +363,17 @@ public static class EnemyAi
         return end != unit.At
             ? new Command[] { new Move(unit.Id, end), last }
             : new Command[] { last };
+    }
+
+    /// <summary>
+    /// An enemy's area cast (issue 1391, <see cref="AreaCast.Best"/>): a Move when the tile is not its own, then the Item
+    /// action naming the tile cast at. <see cref="PlanUnit"/> takes it after a line strike, over any attack it outscores,
+    /// and as the only action of a caster with no weapon to equip.
+    /// </summary>
+    private static IReadOnlyList<Command> Cast(BattleUnit unit, AreaCast.Choice storm)
+    {
+        var use = new UseItem(unit.Id, storm.Slot, storm.At.ToString());
+        return storm.From == unit.At ? new Command[] { use } : new Command[] { new Move(unit.Id, storm.From), use };
     }
 
     /// <summary>

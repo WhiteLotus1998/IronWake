@@ -2569,6 +2569,16 @@ public static class Resolver
             }
 
             var spell = content.WeaponOf(unit.Unit, content.Weapon(stack.ItemId));
+            if (spell.Area > 0)
+            {
+                foreach (var cast in LegalAreaCasts(state, content, unit, slot, spell))
+                {
+                    yield return cast;
+                }
+
+                continue;
+            }
+
             if (!spell.Heals || !unit.Unit.CanWield(spell, unitClass) || stack.Uses == 0)
             {
                 continue;
@@ -2589,6 +2599,38 @@ public static class Resolver
                 if (spell.InRange(unit.At.DistanceTo(ally.At)) && (spell.Cleanses ? Cleanse.Afflicted(ally) : ally.Hp < ally.MaxHp(content)))
                 {
                     yield return new UseItem(unit.Id, slot, ally.Id);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// The casts of the area tome in <paramref name="slot"/> from where <paramref name="unit"/> stands (issue 1391,
+    /// <see cref="AreaCast"/>): one per set of enemies struck, naming the first tile in row order that strikes that set as
+    /// <c>x,y</c>, among the tiles in range its side can see. None when it cannot wield the tome or has no use left.
+    /// </summary>
+    private static IEnumerable<UseItem> LegalAreaCasts(BattleState state, GameContent content, BattleUnit unit, int slot, Weapon spell)
+    {
+        if (unit.Unit.Inventory.Items[slot].Uses == 0 || !unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
+        {
+            yield break;
+        }
+
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        for (var y = unit.At.Y - spell.MaxRange; y <= unit.At.Y + spell.MaxRange; y++)
+        {
+            for (var x = unit.At.X - spell.MaxRange; x <= unit.At.X + spell.MaxRange; x++)
+            {
+                var at = new Coord(x, y);
+                if (!state.Map.Contains(at) || AreaCast.Unreachable(state, unit, spell, at) is not null)
+                {
+                    continue;
+                }
+
+                var struck = AreaCast.Struck(state, unit, spell, at);
+                if (struck.Count > 0 && seen.Add(string.Join(" ", struck.Select(u => u.Id))))
+                {
+                    yield return new UseItem(unit.Id, slot, at.ToString());
                 }
             }
         }
