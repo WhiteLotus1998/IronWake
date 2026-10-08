@@ -424,7 +424,7 @@ public static class Resolver
         }
 
         return unit.Canto is null
-            ? state.WithUnit(unit with { Canto = Armor.Mov(Frost.Mov(content.Class(unit.Unit.ClassId).Mov, unit), unit) })
+            ? state.WithUnit(unit with { Canto = Freeze.Mov(Armor.Mov(Frost.Mov(content.Class(unit.Unit.ClassId).Mov, unit), unit), unit) })
             : state;
     }
 
@@ -725,6 +725,7 @@ public static class Resolver
         next = Burning.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Drain.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Curse.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
+        next = Freeze.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = Mark.AfterCombat(next, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events, unit, target);
         next = LightningRod.Spend(next, unit, weapon, events);
         if (caught)
@@ -847,6 +848,7 @@ public static class Resolver
             state = Frost.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
             state = Burning.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
             state = Curse.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
+            state = Freeze.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events, shooter, struck);
             state = Mark.AfterCombat(state, shooter.Id, weapon, struck.Id, null, strikes, events, watcher, target);
             state = Stun.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Grounding.AfterCombat(state, content, shooter.Id, weapon, struck.Id, null, strikes, events);
@@ -2182,6 +2184,7 @@ public static class Resolver
     /// A chill's clock turns (issue 702, <see cref="Frost.AtPhaseChange"/>), and a grounding's with it (issue 703).
     /// A rider's burn takes the larger of it and the tile's burn, one <see cref="UnitBurned"/>, and its count turns (issue 1243, <see cref="Burning"/>).
     /// A curse ticks after it, never below 1 HP, and its count turns; once every unit has ticked each caster is healed by what its curse took (issue 1328, <see cref="Curse"/>).
+    /// A freeze's clock turns on the chill's count (issue 1330, <see cref="Freeze"/>).
     /// A stun's clock turns on the chill's count; a unit whose clock turns to 2 skips the phase begun, moved and acted (issue 1244, <see cref="StunSkipped"/>).
     /// Every open mark clears (issue 772, <see cref="Opening"/>).
     /// Then the map events whose turn trigger names the phase that has begun fire, in
@@ -2247,7 +2250,7 @@ public static class Resolver
 
             var ticked = unit.Side == nextPhase && unit.BurnPhases > 0 ? Burning.Ticked(unit) : unit;
             ticked = unit.Side == nextPhase && unit.CursePhases > 0 ? Curse.Ticked(ticked) : ticked;
-            units.Add(ticked with { Armor = Armor.AtPhaseChange(unit, ended, nextPhase, events), Hp = hp, Moved = resting || stunned, Acted = resting || stunned, Stun = stun, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
+            units.Add(ticked with { Armor = Armor.AtPhaseChange(unit, ended, nextPhase, events), Hp = hp, Moved = resting || stunned, Acted = resting || stunned, Stun = stun, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), Frozen = Frost.AtPhaseChange(unit.Frozen, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
         }
 
         var next = Curse.PayCasters(state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) }, content, cursed, events);

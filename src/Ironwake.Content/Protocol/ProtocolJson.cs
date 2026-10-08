@@ -480,9 +480,29 @@ public static class ProtocolJson
                     w.WriteBoolean("curse", true);
                 }
 
+                if (uc.Frozen)
+                {
+                    w.WriteBoolean("frozen", true);
+                }
+
                 if (uc.Freed)
                 {
                     w.WriteBoolean("freed", true);
+                }
+
+                break;
+            case UnitFrozen fz:
+                w.WriteString("unit", fz.UnitId);
+                w.WriteString("by", fz.ByUnitId);
+                w.WriteString("side", Name(fz.Side));
+                if (fz.Boss)
+                {
+                    w.WriteBoolean("boss", true);
+                }
+
+                if (fz.Next)
+                {
+                    w.WriteBoolean("next", true);
                 }
 
                 break;
@@ -1457,6 +1477,11 @@ public static class ProtocolJson
             w.WriteNumber("frosted", unit.Frosted);
         }
 
+        if (unit.Frozen > 0)
+        {
+            w.WriteNumber("frozen", unit.Frozen);
+        }
+
         if (unit.FrostTurn is { } frostTurn)
         {
             w.WriteNumber("frostTurn", frostTurn);
@@ -1697,6 +1722,7 @@ public static class ProtocolJson
             LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
             Frosted = OptionalInt(e, "frosted") ?? 0,
+            Frozen = OptionalInt(e, "frozen") ?? 0,
             FrostTurn = OptionalInt(e, "frostTurn"),
             FlewFrom = e.TryGetProperty("flewFrom", out _) ? ReadCoord(e, "flewFrom") : null,
             Breathed = e.TryGetProperty("breathed", out _) && RequiredBool(e, "breathed"),

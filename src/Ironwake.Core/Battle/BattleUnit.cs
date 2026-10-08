@@ -139,6 +139,13 @@ public sealed record BattleUnit(
     /// </summary>
     public int Frosted { get; init; }
 
+    /// <summary>
+    /// A freeze's clock (issue 1330, <see cref="Core.Freeze"/>), counted as the chill's is (<see cref="Frost.AtPhaseChange"/>):
+    /// 0 not frozen; 1 frozen, its side's next phase not yet begun; 2 that phase under way, cleared when it ends. While it
+    /// is not 0 the unit's Mov is 0, a boss's at most 1 (<see cref="Core.Freeze.Mov"/>).
+    /// </summary>
+    public int Frozen { get; init; }
+
     /// <summary>The turn the unit's drake frost last fired (issue 1127, <see cref="DrakeFrost"/>), or null when it has not this battle.</summary>
     public int? FrostTurn { get; init; }
 

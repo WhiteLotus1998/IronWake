@@ -1940,6 +1940,11 @@ public static class ContentLoader
                 throw entry.Error("rider.kind", "armor is named by a tome on a school whose rider is raise, never a school's own rider");
             }
 
+            if (kind == RiderKind.Freeze)
+            {
+                throw entry.Error("rider.kind", "a freeze is named by a tome on a school whose rider is chill, never a school's own rider");
+            }
+
             if (kind == RiderKind.Hollow)
             {
                 throw entry.Error("rider.kind", "a hollow is named by a tome on a school whose rider is drain or curse, never a school's own rider");

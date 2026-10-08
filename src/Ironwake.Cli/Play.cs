@@ -1696,7 +1696,7 @@ public sealed class PlaySession
 
         var (with, counterWith) = Arms(content, unit, target, slot, tile);
         var raises = RaisesWith(state, content, unit, slot);
-        var (riders, counterRiders) = Riders(content, unit, target, slot, forecast);
+        var (riders, counterRiders) = Riders(content, unit, target, slot, forecast, state);
         var lines = new List<string> { ForecastLine(unit, aimed, forecast, where, with, counterWith, raises, names, riders, counterRiders, CounterUses(content, target, forecast.Defender)) };
         var hunger = HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state, forecast).ToList();
         if (ClaimantLine(state, unit, target, forecast, raises, names, hunger) is { } claimant)
@@ -2329,18 +2329,18 @@ public sealed class PlaySession
     /// rider prints its gate (issue 1246, <see cref="LearnedGate"/>): <c> burn 2 (1 stack, 2 phases): Mag 6
     /// over Res 4</c> when it fires, <c> no burn: Mag 4, Res 4</c> when it does not.
     /// </summary>
-    public static (string Riders, string CounterRiders) Riders(GameContent content, BattleUnit unit, BattleUnit target, int? slot, CombatForecast? forecast = null) =>
-        (RiderText(content, unit, Resolver.ChooseWeapon(unit, content, slot).Weapon, target, forecast?.Attacker), RiderText(content, target, target.EquippedWeapon(content), unit, forecast?.Defender));
+    public static (string Riders, string CounterRiders) Riders(GameContent content, BattleUnit unit, BattleUnit target, int? slot, CombatForecast? forecast = null, BattleState? state = null) =>
+        (RiderText(content, unit, Resolver.ChooseWeapon(unit, content, slot).Weapon, target, forecast?.Attacker, state), RiderText(content, target, target.EquippedWeapon(content), unit, forecast?.Defender, state));
 
-    private static string RiderText(GameContent content, BattleUnit striker, Weapon? weapon, BattleUnit struck, SideForecast? side)
+    private static string RiderText(GameContent content, BattleUnit striker, Weapon? weapon, BattleUnit struck, SideForecast? side, BattleState? state)
     {
         if (LearnedGate.Read(content, striker, weapon, struck) is { Passes: false } held)
         {
-            return LearnedGate.Refused(Frost.Chills(content, weapon) ? "chill" : Burning.Embers(content, weapon) ? "ember" : Drain.Drains(content, weapon) ? "drain" : Curse.Curses(content, weapon) ? "curse" : "burn", held);
+            return LearnedGate.Refused(Frost.Chills(content, weapon) ? "chill" : Burning.Embers(content, weapon) ? "ember" : Drain.Drains(content, weapon) ? "drain" : Curse.Curses(content, weapon) ? "curse" : Freeze.Freezes(content, weapon) ? "freeze" : "burn", held);
         }
 
         var gate = LearnedGate.Suffix(LearnedGate.Read(content, striker, weapon, struck));
-        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + Curse.ForecastText(content, weapon) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck) + (side is null ? "" : Mark.ForecastText(side) + LightningRod.ForecastText(side));
+        return (Frost.Chills(content, weapon) ? " chills" : "") + Burning.ForecastText(content, weapon, struck) + Curse.ForecastText(content, weapon) + (state is null ? "" : Freeze.ForecastText(state, content, weapon, struck)) + (side is null ? "" : Drain.ForecastText(content, weapon, side, struck)) + gate + Stun.ForecastText(content, striker, weapon, struck) + Sunder.ForecastText(content, weapon, struck) + (side is null ? "" : Mark.ForecastText(side) + LightningRod.ForecastText(side));
     }
 
     /// <summary>
@@ -2682,6 +2682,11 @@ public sealed class PlaySession
         if (Curse.CardLine(content, unit, UnitNames.Of(state, content)) is { } cursed)
         {
             lines.Add("  " + cursed);
+        }
+
+        if (Freeze.CardLine(unit) is { } frozen)
+        {
+            lines.Add("  " + frozen);
         }
 
         if (Mark.CardLine(unit) is { } marked)
@@ -3302,7 +3307,9 @@ public sealed class PlaySession
             case StunSkipped sk:
                 return $"{names[sk.UnitId]} is stunned and skips this phase";
             case UnitCleansed uc:
-                return $"{names[uc.UnitId]} is cleansed by {names[uc.ByUnitId]}: " + string.Join(", ", new[] { uc.Burn ? "the burn" : null, uc.Chill ? "the chill" : null, uc.Stun ? "the stun" : null, uc.Curse ? "the curse" : null }.Where(p => p is not null)) + " cleared" + (uc.Freed ? "; it may move and act this phase" : "");
+                return $"{names[uc.UnitId]} is cleansed by {names[uc.ByUnitId]}: " + string.Join(", ", new[] { uc.Burn ? "the burn" : null, uc.Chill ? "the chill" : null, uc.Stun ? "the stun" : null, uc.Curse ? "the curse" : null, uc.Frozen ? "the freeze" : null }.Where(p => p is not null)) + " cleared" + (uc.Freed ? "; it may move and act this phase" : "");
+            case UnitFrozen fz:
+                return $"{names[fz.UnitId]} is frozen: {Freeze.What(fz.Boss)} until {Frost.Until(fz.Side, fz.Next)}";
             case UnitChilled c:
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
             case UnitFrosted f:
