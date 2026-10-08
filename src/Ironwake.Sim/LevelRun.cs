@@ -163,6 +163,9 @@ public static class LevelRun
         /// <summary>The unit's id (issue 1157, so the focused chair can read its fed unit).</summary>
         public string Id { get; init; } = "";
 
+        /// <summary>The unit's rank points in every weapon type (issue 1395, so the finale's earned ranks can be read).</summary>
+        public WeaponSkill Skill { get; init; } = WeaponSkill.Zero;
+
         /// <summary>The bar's level half alone, read at <paramref name="level"/> or above.</summary>
         public bool AtLevel(int level) => Level >= level;
 
@@ -183,6 +186,7 @@ public static class LevelRun
             {
                 Refused = ready ? [] : Closest(unit, content),
                 Id = unit.Id,
+                Skill = unit.Skill,
             };
         }
     }
@@ -517,6 +521,40 @@ public static class LevelRun
         {
             yield return $"  no try won map {lostOn.Key}: {lostOn.Count()}";
         }
+    }
+
+    /// <summary>
+    /// The finale's earned ranks (issue 1395, layer 2; rounds 494 to 497): over the runs that won the map before
+    /// the keep, each story member's median rank points (the lower middle, <see cref="Median"/>) in every weapon
+    /// type its class uses, read from the company standing after that map; a type whose median is 0 is left out.
+    /// The last line is the <c>keep.finaleRanks</c> object <c>campaign.json</c> carries.
+    /// </summary>
+    public static IEnumerable<string> FinaleRankLines(GameContent content, IReadOnlyList<Run> runs)
+    {
+        var keepMap = content.Campaign.Maps.ToList().FindIndex(m => m.MapId == content.Campaign.Keep.MapId) + 1;
+        var before = keepMap - 1;
+        var companies = Companies(runs, before);
+        var id = before >= 1 ? content.Campaign.Maps[before - 1].MapId : "none";
+        yield return $"levels --finale-ranks: {runs.Count} runs, {companies.Count} won map {before} {id}, the map before the keep; each story member's median rank points per type its class uses (issue 1395, layer 2)";
+        var json = new List<string>();
+        foreach (var member in content.Cast.Skip(1))
+        {
+            var held = companies.Select(c => c.FirstOrDefault(m => m.Id == member.Id)).OfType<Member>().ToList();
+            var unitClass = content.Class(member.ClassId);
+            var medians = Enum.GetValues<WeaponType>()
+                .Where(unitClass.CanUse)
+                .Select(t => (Type: t, Points: Median(held.Select(m => m.Skill.Points(t)).ToList())))
+                .Where(p => p.Points > 0)
+                .ToList();
+            var text = medians.Count == 0 ? "none" : string.Join(", ", medians.Select(p => $"{p.Type.ToString().ToLowerInvariant()} {p.Points} ({WeaponRanks.RankAt(p.Points)})"));
+            yield return $"  {member.Id}: in {held.Count}; {text}";
+            if (medians.Count > 0)
+            {
+                json.Add($"\"{member.Id}\": {{ {string.Join(", ", medians.Select(p => $"\"{p.Type.ToString().ToLowerInvariant()}\": {p.Points}"))} }}");
+            }
+        }
+
+        yield return $"  finaleRanks: {{ {string.Join(", ", json)} }}";
     }
 
     /// <summary>The first map the even read covers (issue 1150): every map after map 5.</summary>

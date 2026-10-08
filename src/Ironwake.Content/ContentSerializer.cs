@@ -389,6 +389,23 @@ public static class ContentSerializer
                     writer.WriteEndArray();
                 }
 
+                if (campaign.Keep.FinaleRanks.Count > 0)
+                {
+                    writer.WriteStartObject("finaleRanks");
+                    foreach (var (id, skill) in campaign.Keep.FinaleRanks)
+                    {
+                        writer.WriteStartObject(id);
+                        foreach (var (type, points) in skill.All.Where(t => t.Points > 0))
+                        {
+                            writer.WriteNumber(type.ToString().ToLowerInvariant(), points);
+                        }
+
+                        writer.WriteEndObject();
+                    }
+
+                    writer.WriteEndObject();
+                }
+
                 writer.WriteStartArray("edits");
                 foreach (var edit in campaign.Keep.Edits)
                 {

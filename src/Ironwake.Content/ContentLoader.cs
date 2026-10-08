@@ -1199,7 +1199,56 @@ public static class ContentLoader
             Rooms = ValueList<KeepRoom>.From(rooms),
             Hires = ValueList<KeepHire>.From(hires),
             HirePrice = hirePrice,
+            FinaleRanks = ParseFinaleRanks(node, classes, cast),
         };
+    }
+
+    /// <summary>
+    /// The keep's optional <c>finaleRanks</c> (issue 1395, layer 2): an object from a cast member's id to an object from
+    /// a weapon type its class uses to rank points, each at least 1.
+    /// </summary>
+    private static ValueList<(string Id, WeaponSkill Skill)> ParseFinaleRanks(EntryNode node, ImmutableSortedDictionary<string, UnitClass> classes, IReadOnlyList<Unit> cast)
+    {
+        if (node.OptionalObject("finaleRanks") is not { } ranks)
+        {
+            return ValueList<(string Id, WeaponSkill Skill)>.Empty;
+        }
+
+        var list = new List<(string Id, WeaponSkill Skill)>();
+        foreach (var member in ranks.Element.EnumerateObject())
+        {
+            var field = "finaleRanks." + member.Name;
+            if (cast.FirstOrDefault(u => u.Id == member.Name) is not { } unit)
+            {
+                throw node.Error(field, $"'{member.Name}' is not a cast member");
+            }
+
+            if (member.Value.ValueKind != JsonValueKind.Object)
+            {
+                throw node.Error(field, "must be an object from weapon type to rank points");
+            }
+
+            var skill = WeaponSkill.Zero;
+            foreach (var property in member.Value.EnumerateObject())
+            {
+                var type = node.ParseEnum<WeaponType>(field, property.Name);
+                if (!classes[unit.ClassId].CanUse(type))
+                {
+                    throw node.Error(field + "." + property.Name, $"a {unit.ClassId} does not use {property.Name}");
+                }
+
+                if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt32(out var points) || points < 1)
+                {
+                    throw node.Error(field + "." + property.Name, "must be an integer of at least 1");
+                }
+
+                skill = skill.With(type, points);
+            }
+
+            list.Add((member.Name, skill));
+        }
+
+        return ValueList<(string Id, WeaponSkill Skill)>.From(list);
     }
 
     /// <summary>

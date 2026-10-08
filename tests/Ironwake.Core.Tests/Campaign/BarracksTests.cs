@@ -326,6 +326,16 @@ public class BarracksTests
         Assert.Equal("hirePrice", Fails(k => { k.AsObject().Remove("hirePrice"); return k; }).Field);
     }
 
+    [Fact]
+    public void AFinaleRankNamesACastMemberATypeTheirClassUsesAndAtLeastOnePoint()
+    {
+        Assert.Equal("finaleRanks.nobody", Fails(k => { k["finaleRanks"] = JsonNode.Parse("""{ "nobody": { "sword": 40 } }"""); return k; }).Field);
+        Assert.Equal("finaleRanks.pell.bow", Fails(k => { k["finaleRanks"] = JsonNode.Parse("""{ "pell": { "bow": 40 } }"""); return k; }).Field);
+        Assert.Equal("finaleRanks.pell.reason", Fails(k => { k["finaleRanks"] = JsonNode.Parse("""{ "pell": { "reason": 0 } }"""); return k; }).Field);
+        Assert.Equal("finaleRanks.pell.reason", Fails(k => { k["finaleRanks"] = JsonNode.Parse("""{ "pell": { "reason": "C" } }"""); return k; }).Field);
+        Assert.Equal("finaleRanks.pell", Fails(k => { k["finaleRanks"] = JsonNode.Parse("""{ "pell": 40 }"""); return k; }).Field);
+    }
+
     private static (string? Entry, string? Field) Entry(ContentException e) => (e.Entry, e.Field);
 }
 

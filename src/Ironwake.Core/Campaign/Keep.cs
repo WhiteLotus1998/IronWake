@@ -67,6 +67,31 @@ public sealed record KeepMenu(string MapId, ValueList<KeepEdit> Edits)
     /// <summary>What one hire costs from the purse (issue 690), or 0 when the keep hires nobody.</summary>
     public int HirePrice { get; init; }
 
+    /// <summary>
+    /// The rank points the keep finale's company fields each story member with (issue 1395, layer 2): the median
+    /// a heuristic campaign has earned by the keep in each weapon type the member's class uses, as
+    /// <c>--levels --finale-ranks</c> reads it, in content order. <see cref="FinaleCompanies.Roster"/> raises a
+    /// member's points in a listed type to this and never lowers them; a member not listed keeps its card's ranks.
+    /// </summary>
+    public ValueList<(string Id, WeaponSkill Skill)> FinaleRanks { get; init; } = ValueList<(string Id, WeaponSkill Skill)>.Empty;
+
+    /// <summary><paramref name="unit"/> with its points raised to its <see cref="FinaleRanks"/> entry in every type the entry names.</summary>
+    public Unit FinaleRanked(Unit unit)
+    {
+        if (FinaleRanks.FirstOrDefault(r => r.Id == unit.Id) is not { Skill: { } earned })
+        {
+            return unit;
+        }
+
+        var skill = unit.Skill;
+        foreach (var (type, points) in earned.All)
+        {
+            skill = skill.With(type, Math.Max(skill.Points(type), points));
+        }
+
+        return unit with { Skill = skill };
+    }
+
     /// <summary>The hire named <paramref name="id"/>, or null when the barracks lists none.</summary>
     public KeepHire? Hire(string id) => Hires.FirstOrDefault(h => h.Id == id);
 
