@@ -217,6 +217,17 @@ public class YardTests
     }
 
     [Fact]
+    public void ATeachersHandPullsUnlessTheSimsAblationArmTurnsItOff()
+    {
+        var state = Softened("wren", 1, 1);
+        var captain = state.Units.Single(u => u.Id == "captain");
+
+        Assert.True(captain.Yard!.Pulls);
+        var ablated = state.WithUnit(captain with { Yard = captain.Yard with { Pulls = false } });
+        Assert.False(ablated.Units.Single(u => u.Id == "captain").ToCombatant(ablated, Content).Pulls);
+    }
+
+    [Fact]
     public void ATeachersCounterPullsToo()
     {
         var seeds = Enumerable.Range(1, 40).Select(s => (ulong)s).ToList();

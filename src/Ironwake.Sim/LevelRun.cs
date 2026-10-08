@@ -58,6 +58,9 @@ public static class LevelRun
         /// entry in the same order, on every player.
         /// </summary>
         public IReadOnlyList<FedExp> Exp { get; init; } = [];
+
+        /// <summary>The drills the heuristic camp fought after each won map under a yard arm (issue 1331, <see cref="YardRun"/>); empty without one.</summary>
+        public IReadOnlyList<YardRun.Drill> Drills { get; init; } = [];
     }
 
     /// <summary>
@@ -252,7 +255,8 @@ public static class LevelRun
     /// </summary>
     /// <remarks>With <paramref name="even"/> set the player is <see cref="EvenPlayer"/>, the even-company chair (issue 1150); with <paramref name="focused"/> set it is <see cref="FocusedPlayer"/> under that guard (issue 1157).</remarks>
     /// <remarks>With <paramref name="firstSeed"/> set the seeds are <paramref name="firstSeed"/> onward, <paramref name="seeds"/> of them, so a read can be split across threads (issue 1170).</remarks>
-    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, (string A, string B)? pair = null, bool even = false, FocusedPlayer.Guard? focused = null, int firstSeed = 1)
+    /// <remarks>Under a <paramref name="yard"/> arm other than off, each camp after the levy drill fights the heuristic's yard drill (issue 1331, <see cref="YardRun.Camp"/>).</remarks>
+    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, (string A, string B)? pair = null, bool even = false, FocusedPlayer.Guard? focused = null, int firstSeed = 1, YardRun.Arm yard = YardRun.Arm.Off)
     {
         var runs = new List<Run>();
         for (var seed = firstSeed; seed < firstSeed + seeds; seed++)
@@ -265,6 +269,7 @@ public static class LevelRun
             var handed = 0;
             var prices = new List<Price>();
             var exp = new List<FedExp>();
+            var drills = new List<YardRun.Drill>();
             int? lost = null;
             int? lastPoints = null;
             while (!record.IsFinished(content))
@@ -320,6 +325,16 @@ public static class LevelRun
                 var fought = record.Fought(won, content);
                 exp.Add(FedExp.Of(record, fought, deployed, content));
                 record = fought.Drill(content);
+                if (yard != YardRun.Arm.Off && !record.IsFinished(content))
+                {
+                    var (drilled, drill) = YardRun.Camp(record, contentRoot, content, pull: yard == YardRun.Arm.On);
+                    record = drilled;
+                    if (drill is not null)
+                    {
+                        drills.Add(drill);
+                    }
+                }
+
                 var company = record.Present(content);
                 var afterPoints = FedPoints(company, content);
                 if (price is not null)
@@ -346,7 +361,7 @@ public static class LevelRun
                 }
             }
 
-            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport, Companies = companies, Handed = handed, Prices = prices, Exp = exp });
+            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport, Companies = companies, Handed = handed, Prices = prices, Exp = exp, Drills = drills });
         }
 
         return runs;
