@@ -1,0 +1,61 @@
+quest ottilie_1 rook
+move ottilie 0,8
+wait ottilie
+move rook 1,3
+wait rook
+end
+wait ottilie
+move rook 0,0
+wait rook
+end
+move ottilie 3,7
+wait ottilie
+wait rook
+end
+move ottilie 5,7
+attack ottilie soldier-1
+move rook 3,3
+wait rook
+end
+move rook 6,4
+attack rook hexer-1
+move ottilie 5,6
+attack ottilie brigand-1
+recall 48
+move ottilie 5,6
+attack ottilie brigand-1
+move rook 6,6
+attack rook brigand-1
+end
+move ottilie 3,5
+wait ottilie
+move rook 2,4
+wait rook
+end
+move rook 4,7
+attack rook hexer-1
+move ottilie 5,6
+attack ottilie lector-1
+recall 77
+move ottilie 4,7
+attack ottilie lector-1
+move rook 5,6
+attack rook hexer-1
+end !
+move rook 6,6
+attack rook archer-1
+move ottilie 5,7
+item ottilie 2
+end !
+move rook 7,4
+attack rook archer-1
+move ottilie 2,8
+wait ottilie
+end !
+move ottilie 0,8
+item ottilie 2
+end
+move ottilie 1,6
+item ottilie 2
+end !
+leave
