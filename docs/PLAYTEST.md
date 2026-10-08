@@ -4032,3 +4032,17 @@ Notes:
 - Stopped caring on turn 7, the walk to the leader. Not tense: turns 1, 7, 8 and most of 9.
 
 — Chat
+
+## 2026-10-08 — Saltmarsh Ford's east-pair sample at the campaign's floor, warm — Code
+
+Seed: 1370 (`campaign --seed 1370 --from saltmarsh_ford --level 1 --strict --script docs/transcripts/2026-10-08-saltmarsh_ford_east_pair-1370.script --content <content with docs/samples/saltmarsh_ford_east_pair.map as saltmarsh_ford.map>`; transcript beside it; main at 181d702). The default four at L1. Warm: I built the sample, read the Sim's 35 and its trace first, and had read both late-sample chairs. Result: **won, rout, on turn 9 of 18.** No Recall, nobody fell.
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 6. The south bank was clear and the fort was down to its leader, braced. The captain stepped onto 10,2 to take the Toll Axe's 43 percent and strip the brace, and the pair arrived on 13,4 and 13,5 on that step, one tile from the road. `threat` put Teodor at 18 against 16, braced at 36 and 49. That was the first real choice of the map: brace and take an 18 percent death, or dress and give up the brace. I dressed him to 21. The brigand hit him for 10 and ate a 12 counter, and the soldier missed Wren and took 8. The leader hit the captain for 11. Three bodies faced the rear while the fourth baited the fort, which is the shape round 475 asked for.
+Notes:
+- **The fort came to me, as it did for Chat.** Teodor woke it from 10,5 on turn 2, and the wingrider, archer and soldier came over the ford one at a time. The soldier walked west on turn 3 and came back to the ford on turn 4. All three were dead by turn 5 with no Recall. Turns 1 to 5 were Chat's 4471 again, and not tense past turn 3 (Teodor at 6 HP).
+- **The pair died on turn 7, before the alpha.** Teodor's 86 for 12 killed the 10-HP brigand, and Wren 8 plus Ottilie 6 killed the soldier. The captain dressed on 10,2 and took a miss. So the pair hit the bait turn, not the alpha turn. It is a pincer of one phase, not of the whole siege.
+- **The leader was quick, by luck.** Turn 9: Ottilie's Aimed Shot from 9,1 crit (13 percent) for 12, and his counter put her at 4. Wren from 11,0 took him to 8 and went to 8 herself. Full Measure finished it at 98. **Disclosed luck:** without the crit, this is the two-turn dance again, so this chair cannot say whether the leader is still a chore.
+- **The Sim's 35 is the leader stall again.** All 34 clock losses in 40 traced seeds end with only the leader left.
+- **Not tense:** turns 1, 2, 4, 5 and 8.
+
+— Code

@@ -448,6 +448,16 @@ internal static class Fixture
     /// </summary>
     public static string SaltmarshWakesLateContentDirectory() => SaltmarshWakesLate.Value;
 
+    private static readonly Lazy<string> SaltmarshEastPair = new(() => WithSaltmarshSample(CopyFiles("ironwake-saltmarsh-east-pair-"), "saltmarsh_ford_east_pair.map"));
+
+    /// <summary>
+    /// A file-for-file copy of the real content directory with Saltmarsh Ford replaced by
+    /// <c>docs/samples/saltmarsh_ford_east_pair.map</c> (issue 1370: the pair on the shipped enter line,
+    /// spawned on the east edge of the south bank, arrivals waiting), so a campaign journaled on the
+    /// sample at the floor replays on it. Made once per test run under the temp directory.
+    /// </summary>
+    public static string SaltmarshEastPairContentDirectory() => SaltmarshEastPair.Value;
+
     private static string WithSaltmarshSample(string target, string sample)
     {
         var repo = Directory.GetParent(RealContentDirectory())!.FullName;
