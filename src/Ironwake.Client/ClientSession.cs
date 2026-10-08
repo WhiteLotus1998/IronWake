@@ -535,7 +535,8 @@ public sealed class ClientSession
     /// <summary>
     /// The item rows of the action list (issue 1308), after every other row so none moves: one row
     /// per inventory slot the Item action takes (a consumable, a heal, a cast that raises, sunders,
-    /// armors or raises the dead; a tome is read at camp and has none), then one per heal art with a
+    /// armors or raises the dead, an area cast aimed at any tile in range (issue 1392); a tome is read
+    /// at camp and has none), then one per heal art with a
     /// target in reach. A row whose item needs a target carries an <see cref="ItemPick"/> of the tiles
     /// the resolver accepts; one with none in reach is greyed. The line is the console's own
     /// <c>show</c> slot, uses left included.
@@ -573,6 +574,10 @@ public sealed class ClientSession
             if (Armor.Armors(Content, spell))
             {
                 rows.Add(Applied($"Item: {name}", line, new UseItem(unit.Id, slot), names));
+            }
+            else if (spell.Area > 0)
+            {
+                rows.Add(Aimed($"Item: {name} (area)", line, unit, slot, null, byTile: true, names));
             }
             else if (spell.Heals || byTile || Earthwork.Rider(Content, spell) is not null)
             {
@@ -635,7 +640,8 @@ public sealed class ClientSession
     /// own event lines for the use, the heal's amount and the HP it ends at, or the cast's effect,
     /// read from the resolver without applying it. Experience and level lines are left out; they
     /// are the result, not the choice. A step of the drake's carry before the last names what the
-    /// click picks and what comes next. Empty when the tile is no target.
+    /// click picks and what comes next. An area cast (issue 1392) reads <see cref="AreaCast.Preview"/>
+    /// on any tile of the map, its refusal included. Empty when the tile is no target.
     /// </summary>
     public IReadOnlyList<string> PickPreview(Coord tile)
     {
@@ -643,6 +649,13 @@ public sealed class ClientSession
         {
             var picked = UnitAt(tile) is { } lifted && step.Step == 0 ? $"lift {UnitNames.Of(State, Content)[lifted.Id]}" : $"fly to {tile}";
             return new[] { $"{picked}; then {next.Prompt}" };
+        }
+
+        if (AreaOf(Pick) is var (caster, spell))
+        {
+            // An area cast (issue 1392) previews any tile, as the console's `item ... preview` does:
+            // what it strikes, or why it cannot be cast there.
+            return State.Map.Contains(tile) ? new[] { AreaCast.Preview(State, Content, caster, spell, tile) } : Array.Empty<string>();
         }
 
         if (Pick?.At(tile) is not { } use || Resolver.Apply(State, Content, use) is not { Accepted: true } result)
@@ -659,13 +672,42 @@ public sealed class ClientSession
 
     /// <summary>
     /// The tiles aiming the armed pick at <paramref name="tile"/> would strike (issue 1308, slice 2):
-    /// the breath's line, read from the core's own <see cref="Rime.LineOf"/>, so the board can mark
+    /// the breath's line, read from the core's own <see cref="Rime.LineOf"/>, or an area cast's tiles
+    /// within its radius of a tile it takes (issue 1392), so the board can mark
     /// it on hover. Empty for any other pick or a tile it does not take.
     /// </summary>
-    public IReadOnlyList<Coord> PickArea(Coord tile) =>
-        Pick?.At(tile) is Breathe breathe && State.Find(breathe.UnitId) is { } rider
+    public IReadOnlyList<Coord> PickArea(Coord tile)
+    {
+        if (AreaOf(Pick) is var (_, spell) && Pick!.Marks(tile))
+        {
+            return Enumerable.Range(0, State.Map.Height)
+                .SelectMany(y => Enumerable.Range(0, State.Map.Width).Select(x => new Coord(x, y)))
+                .Where(at => at.DistanceTo(tile) <= spell.Area)
+                .ToList();
+        }
+
+        return Pick?.At(tile) is Breathe breathe && State.Find(breathe.UnitId) is { } rider
             ? Rime.LineOf(State.Map, rider.At, breathe.Toward)
             : Array.Empty<Coord>();
+    }
+
+    /// <summary>The caster and its area tome when <paramref name="pick"/> aims an area cast (issue 1392), else null.</summary>
+    private (BattleUnit Caster, Weapon Spell)? AreaOf(TargetPick? pick)
+    {
+        if (pick is not ItemPick item || State.Find(item.UnitId) is not { } caster || item.Slot >= caster.Unit.Inventory.Count)
+        {
+            return null;
+        }
+
+        var stack = caster.Unit.Inventory.Items[item.Slot];
+        if (!Content.Weapons.ContainsKey(stack.ItemId))
+        {
+            return null;
+        }
+
+        var spell = Content.WeaponOf(caster.Unit, Content.Weapon(stack.ItemId));
+        return spell.Area > 0 ? (caster, spell) : null;
+    }
 
     /// <summary>
     /// Takes the action row at <paramref name="row"/> of <see cref="Actions"/>: its command goes

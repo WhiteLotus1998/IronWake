@@ -72,8 +72,8 @@ public sealed class HeuristicPlayer : IPlayer
 
     /// <summary>
     /// Whether this player casts an area tome when the cast outscores its best attack (issue 1391,
-    /// <see cref="AreaCast.Best"/>); on unless a caller turns it off, as the campaign script's writer does while the
-    /// client's click path takes no area cast (issue 1392).
+    /// <see cref="AreaCast.Best"/>); on unless a caller turns it off, as the campaign script's writer does for the
+    /// Psalter-art script (issue 1392).
     /// </summary>
     public bool Casts { get; init; } = true;
 

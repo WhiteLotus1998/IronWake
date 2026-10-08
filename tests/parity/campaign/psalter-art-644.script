@@ -1,4 +1,4 @@
-# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script 644 --difficulty recruit --permadeath off --variant 44 --quest pell_1,maud_1,maud_2 --deploy maud --stop-after art`.
+# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script 644 --difficulty recruit --permadeath off --variant 44 --quest pell_1,maud_1,maud_2 --deploy maud --stop-after art --no-casts`.
 # Played by `campaign --seed 644 --difficulty recruit --permadeath off`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 645);
 # the heuristic player fights the rest; each camp takes the actions not yet taken that the record accepts.
 march

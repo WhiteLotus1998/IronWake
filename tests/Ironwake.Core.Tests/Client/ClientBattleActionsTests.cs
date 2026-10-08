@@ -184,7 +184,8 @@ public class ClientBattleActionsTests
     {
         var harrow = Open("harrow_weir_orders", 85);
         harrow.Select(harrow.State.Find("pell")!.At);
-        Assert.Empty(harrow.Actions());
+        // Pell's only row is Spark Storm's, greyed with no enemy in reach (issue 1392).
+        Assert.Equal(new[] { "Item: Spark Storm (area)" }, harrow.Actions().Select(r => r.Label));
 
         var closed = Open("strongbox_chests", 649);
         closed.Select(closed.State.Find("captain")!.At);
