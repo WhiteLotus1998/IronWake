@@ -4076,3 +4076,20 @@ Notes:
 - Not tense: turns 1 to 4, a walk to the two road tiles and one missed shot.
 
 — Code
+
+## 2026-10-08 — The Burned Shrine at the campaign's floor, Ottilie as the ally, the weakest untuned map under 0278, warm — Code
+
+Seed: 1390 (`campaign --seed 1390 --from brackwater_cut --pick keziah --fed 6 --level 5 --strict --script docs/transcripts/2026-10-08-the_burned_shrine-1390.script --content <content with every quest but keziah_1 cut from campaign.json>`; transcript beside it; main at 792b0d8). The quest opens after Sallow, so the camp before map 8: the levy floor L5, Keziah fed 6 (the 804 control's p50 by the end of map 7). The cut is only so the camp offers this quest; the earlier quests otherwise hold the interlude's two seats (`Fixture.KeziahQuestOnlyContentDirectory`). 1113 and 1550 were the cast at L7. Warm: I built the board and played both.   Result: **won, rout, on turn 9 of 10.** One Recall (turn 7), nobody fell.
+Tension: 7/10   Choice: 6/10   Surprise: 7/10
+Best turn: turn 8. Fed 11, the grove strung along the north wall's outside, three turns left. Keziah went out the west door to 3,1 and took the archer at 73 percent: the fifth tooth, "Keziah. I remember what I'm for.", and the hunt ran on, so she walked on to 4,0 to stand in the hexer's face. The scythe woke on her mother's floor, before map 8.
+Notes:
+- **At the floor the hunger runs the map.** Unfed, she loses 5 a phase, so every turn is "who does Keziah kill". My first try woke the nave from 3,4 and the brawler's double plus the drain left her at 2. The keep was stepping to 3,5 instead (wakes the nave, in no one's reach) and letting him come; Ottilie chipped 9 and the scythe killed him.
+- **Keziah made all seven kills.** The acolyte through the door, the shieldbearer (14 x2), the rider on her counter and then her swing, the brigand on the west door, the archer, the hexer. Ottilie's one kept arrow was the brawler's 9. Filed #1378 (for the Table): the quest takes Kinsbane from the median feed to woken, and the ally is a spectator.
+- **The Recall.** Turn 7, Ottilie from 7,2 at the hexer through the north wall, 89 x2: hit, Cinder 12, miss, and she stood at 6 against a 98 percent 12. I took it back and kept her on the fort.
+- **Turn 9, the swing with `!`.** The hexer at 17 on the hill, Keziah at 11 against his 14: 67 to kill, 33 that the counter killed her and the map. One Recall left. It landed.
+- **The acolyte throws over the wall.** Radiance at range 2 from 5,4 put 12 into Keziah on 3,4 through the 4,4 wall. Fair, and printed by `threat`.
+- **#1234 again:** the brigand reached the west door alone on turn 6; the grove walked the outside of the north wall from turn 4 to turn 7 and never pressed. Noted on #1378.
+- Disclosed: a turn at a time, queried freely; the turn-1 line (Keziah on 3,4) was a scratch run I threw away, and the turn-7 trade was seen and Recalled.
+- Not tense: turns 3, 5 and 6.
+
+— Code

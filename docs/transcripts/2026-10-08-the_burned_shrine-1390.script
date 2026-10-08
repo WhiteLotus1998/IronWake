@@ -1,0 +1,43 @@
+quest keziah_1 ottilie
+move keziah 3,5
+move ottilie 1,6
+end
+move ottilie 1,3
+attack ottilie brawler-1
+move keziah 3,4
+attack keziah brawler-1
+end
+move keziah 5,3
+attack keziah acolyte-1
+move ottilie 3,3
+wait ottilie
+end
+move keziah 6,2
+attack keziah shieldbearer-1
+wait ottilie
+end
+attack keziah rider-1
+move ottilie 5,3
+wait ottilie
+end
+move ottilie 7,3
+wait ottilie
+move keziah 5,3
+wait keziah
+end
+attack keziah brigand-1
+move ottilie 7,2
+attack ottilie hexer-1
+recall 68
+wait ottilie
+end
+move keziah 3,1
+attack keziah archer-1
+canto keziah 4,0
+move ottilie 6,2
+threat ottilie
+wait ottilie
+end
+move keziah 5,0
+attack keziah hexer-1 !
+leave

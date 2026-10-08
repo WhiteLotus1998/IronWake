@@ -458,6 +458,26 @@ internal static class Fixture
     /// </summary>
     public static string SaltmarshEastPairContentDirectory() => SaltmarshEastPair.Value;
 
+    private static readonly Lazy<string> KeziahQuestOnly = new(() => WithOnlyQuest(CopyFiles("ironwake-keziah-quest-only-"), "keziah_1"));
+
+    /// <summary>
+    /// The shipped content with every side map but Keziah's quest 1 (issue 635) cut from <c>campaign.json</c>,
+    /// so a campaign opened with <c>--from brackwater_cut</c> offers the Burned Shrine at the camp before map 8
+    /// instead of the earlier quests that hold the interlude's two seats (DECISIONS/0278's floor play of it).
+    /// </summary>
+    public static string KeziahQuestOnlyContentDirectory() => KeziahQuestOnly.Value;
+
+    /// <summary>Cuts every quest but <paramref name="questId"/> from the campaign's side maps.</summary>
+    public static string WithOnlyQuest(string target, string questId)
+    {
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
+        var kept = campaign["quests"]!.AsArray().Where(q => (string)q!["id"]! == questId).Select(q => q!.DeepClone()).ToArray();
+        campaign.AsObject()["quests"] = new System.Text.Json.Nodes.JsonArray(kept);
+        File.WriteAllText(campaignPath, campaign.ToJsonString());
+        return target;
+    }
+
     private static string WithSaltmarshSample(string target, string sample)
     {
         var repo = Directory.GetParent(RealContentDirectory())!.FullName;
