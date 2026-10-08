@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-08 (0337, #1359). Under 19 KB on a branch, 20 KB on main (#1291).
+Updated: 2026-10-08 (0278 play, the Mill 1810). Under 19 KB on a branch, 20 KB on main (#1291).
 
 ## Where we are
 
@@ -29,7 +29,7 @@ No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain 
 
 | Map | Status |
 |---|---|
-| the_mill | Map 2, Maud (0124, #632). Rout, limit 9 (0280), `protect: maud`, `holds: mill 0,0 11,2` (0279); the fort and Maud at 7,9, road pair from the east (0289). Gate 1 136/200, 19 timeouts. South: Code 632-south 8/7/6; Code 1710 7/7/5 (Maud safe west of the river from t2: rework). On 8,5 (`the_mill_0280.map`): Code 1500 6/7/6, 1510 8/7/6 warm; Chat 2250 cold 4/6/4. Next: a cold chair. |
+| the_mill | Map 2, Maud (0124, #632). Rout, limit 9 (0280), `protect: maud`, `holds: mill 0,0 11,2` (0279); the fort and Maud at 7,9 (0289). Gate 1 136/200. South: Code 632-south 8/7/6, 1710 7/7/5 (Maud safe west of the river); 1810 at the floor 5/6/4 (the captain on 7,8 corks the fort: #1362, rework or lesson). On 8,5: Code 1500 6/7/6, 1510 8/7/6; Chat 2250 cold 4/6/4. |
 | the_cold_kitchen | Side map, Bet's request (0146, #691; was the Postern, 0247), under `content/quests/`. Seize, limit 10, Recall 2, 4 deployed. Sim gate 1 75/200 (0292). Code 718 warm 8/7/7, won t5. Cold chair owed. |
 | the_first_shrine | Side map, Maud's quest 2 (0198, #635), after map 5; pays the Psalter. Seize, limit 10, `brace: on`; starts south (0283); the sanctum archer wakes when the door soldier dies (0304); the altar is held through an enemy phase (0306, `seize_hold: 1`). Sim (one-shot, not a gate): Pell 53, Teodor 2. Under 0304: Code 1600-woken 8/7/7 (lost); Chat 4426 cold 7/7/6 (Pell, t9); Code 1610 warm 7/6/3 (Teodor, t3, the door sprint). Under 0306: Code 1610-hold warm 7/7/6 (Teodor fell in the door); Critic 7070 8/7/7; Code 1950 warm 7/7/7 (Dunstan); Chat 5303 cold 8/7/6 (Ottilie, won t8, two Recalls). Kept, no lever, no chair owed (455): the doorway decides the hold. |
 | the_burned_school | Side map, Pell's quest 1 (0199, #635), after map 4; pays 2 common. Escape, limit 7, Recall 2; a shieldbearer corks the east gate, burners through the west from turn 1, three chests that turn you back. Sim gate 1 36/200. Code 884 warm 7/6/4 (t6, one chest), 1490 8/7/7 (t6; #1191). Cold chair owed. |
