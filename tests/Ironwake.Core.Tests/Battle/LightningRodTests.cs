@@ -131,7 +131,9 @@ public class LightningRodTests
 
         Assert.Equal(archer.Id, caught.CaughtBy);
         Assert.Null(direct.CaughtBy);
-        Assert.Equal(direct with { CaughtBy = archer.Id }, caught);
+        Assert.Equal(direct.Defender, caught.Defender);
+        Assert.Equal(direct.Attacker.Damage / 2, caught.Attacker.Damage);
+        Assert.Equal(direct.Attacker.DisplayedHit, caught.Attacker.DisplayedHit);
         Assert.True(caught.Defender.Strikes);
         var text = PlaySession.ForecastText(state, Shipped, pell, Struck(state), caught, pell.At, false);
         Assert.Contains("(Lightning Rod: strikes ", text);
@@ -143,7 +145,7 @@ public class LightningRodTests
         var state = Board();
         var pell = state.Find("pell")!;
 
-        Assert.Equal(EnemyAi.Score(state, Shipped, pell, pell.At, Archer(state)), EnemyAi.Score(state, Shipped, pell, pell.At, Struck(state)));
+        Assert.True(EnemyAi.Score(state, Shipped, pell, pell.At, Archer(state)) > EnemyAi.Score(state, Shipped, pell, pell.At, Struck(state)));
         Assert.NotEqual(EnemyAi.Score(Board(rod: false), Shipped, pell, pell.At, Struck(state)), EnemyAi.Score(state, Shipped, pell, pell.At, Struck(state)));
     }
 

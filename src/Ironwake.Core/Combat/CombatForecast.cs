@@ -37,19 +37,34 @@ public static class RollSchemes
 /// </summary>
 public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1, bool CritGrounds = false, int Bite = 0, bool NeverDoubles = false, int Stoop = 0, bool CashesMark = false)
 {
-    /// <summary>What this side's first hit deals when it cashes a mark: <see cref="Damage"/> times the mark's multiple, rounded down once.</summary>
-    public int MarkedDamage => Mark.Of(Damage);
+    /// <summary>
+    /// The side's damage before its <see cref="Scale"/>: Atk less Def or Res. Null when nothing scales it, so it is <see cref="Damage"/>.
+    /// </summary>
+    public int? Unscaled { get; init; }
 
-    /// <summary>What this side's first hit deals when it crits and cashes a mark: <see cref="CritDamage"/> times the mark's multiple, rounded down once.</summary>
-    public int MarkedCritDamage => Mark.Of(CritDamage);
+    /// <summary>
+    /// The multiple on this side's final damage from the status and spell multipliers other than the mark (DECISIONS/0322):
+    /// Lightning Rod's x0.5 on a caught spell and its charge's x1.25 (issue 1329, <see cref="LightningRod"/>). One by default.
+    /// <see cref="Damage"/>, <see cref="CritDamage"/>, <see cref="MarkedDamage"/> and <see cref="MarkedCritDamage"/> each take
+    /// every multiple on the unscaled damage, after the crit, rounded down once.
+    /// </summary>
+    public DamageScale Scale { get; init; } = DamageScale.One;
+
+    private int Raw => Unscaled ?? Damage;
+
+    /// <summary>What this side's first hit deals when it cashes a mark: its damage times the mark's multiple and its <see cref="Scale"/>, rounded down once.</summary>
+    public int MarkedDamage => Scale.Times(Mark.Scale).Of(Raw);
+
+    /// <summary>What this side's first hit deals when it crits and cashes a mark: its crit damage times the mark's multiple and its <see cref="Scale"/>, rounded down once.</summary>
+    public int MarkedCritDamage => Scale.Times(Mark.Scale).Of(CritGrounds ? Raw : Raw * Combat.CritMultiplier);
 
     /// <summary>What the mark adds to this side's first hit, plain: <see cref="MarkedDamage"/> less <see cref="Damage"/> when it cashes one, else 0.</summary>
     public int MarkBonus => CashesMark ? MarkedDamage - Damage : 0;
 
     public static SideForecast None { get; } = new(false, 0, 0, 0, 0, false);
 
-    /// <summary>What one crit from this side deals: <see cref="Damage"/> times <see cref="Combat.CritMultiplier"/>, or plain <see cref="Damage"/> when the crit grounds instead (issue 723).</summary>
-    public int CritDamage => CritGrounds ? Damage : Damage * Combat.CritMultiplier;
+    /// <summary>What one crit from this side deals: its unscaled damage times <see cref="Combat.CritMultiplier"/> and its <see cref="Scale"/>, rounded down once, or plain <see cref="Damage"/> when the crit grounds instead (issue 723).</summary>
+    public int CritDamage => CritGrounds ? Damage : Scale.Of(Raw * Combat.CritMultiplier);
 
     /// <summary>The turns this side takes in the combat: two when it doubles, one when it strikes at all.</summary>
     public int Rounds => !Strikes ? 0 : Doubles ? 2 : 1;
@@ -139,4 +154,23 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     /// (issue 872): when the strikes alone fall short of the attacker's HP the attacker stands, so the bite lands.
     /// </summary>
     public int CounterIfAllLand => Defender.Strikes ? Defender.Damage * Defender.StrikeCount + Defender.MarkBonus + Defender.Bite : 0;
+}
+
+/// <summary>
+/// A multiple on final damage as a fraction (DECISIONS/0322): status and spell multipliers multiply, and the product is applied
+/// to final damage after Def or Res and after the crit, rounded down once.
+/// </summary>
+public readonly record struct DamageScale(int Numerator, int Denominator)
+{
+    /// <summary>No multiple.</summary>
+    public static DamageScale One { get; } = new(1, 1);
+
+    /// <summary>Whether this is no multiple at all.</summary>
+    public bool IsOne => Numerator == Denominator;
+
+    /// <summary>This multiple times <paramref name="other"/>.</summary>
+    public DamageScale Times(DamageScale other) => new(Numerator * other.Numerator, Denominator * other.Denominator);
+
+    /// <summary><paramref name="damage"/> times this multiple, rounded down once.</summary>
+    public int Of(int damage) => damage * Numerator / Denominator;
 }

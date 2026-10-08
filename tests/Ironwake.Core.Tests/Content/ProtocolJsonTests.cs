@@ -87,6 +87,8 @@ public class ProtocolJsonTests
         { new ArmorDonned("pell", "test_earth_armor", 10, 2, 2), """{"type":"armorDonned","unit":"pell","item":"test_earth_armor","def":10,"mov":2,"phases":2}""" },
         { new ArmorFell("pell", "test_earth_armor"), """{"type":"armorFell","unit":"pell","item":"test_earth_armor"}""" },
         { new RodCaught("wren", "pell", "mage-1"), """{"type":"rodCaught","unit":"wren","aimed":"pell","by":"mage-1"}""" },
+        { new RodCharged("wren", MagicSchool.Lightning), """{"type":"rodCharged","unit":"wren","school":"lightning"}""" },
+        { new RodChargeSpent("wren", MagicSchool.Lightning), """{"type":"rodChargeSpent","unit":"wren","school":"lightning"}""" },
         { new StunSkipped("brigand-1"), """{"type":"stunSkipped","unit":"brigand-1"}""" },
         { new UnitCleansed("wren", "mira", true, true, false, false), """{"type":"unitCleansed","unit":"wren","by":"mira","burn":true,"chill":true,"stun":false}""" },
         { new UnitChilled("brigand-1", "teodor", Side.Enemy), """{"type":"unitChilled","unit":"brigand-1","by":"teodor","side":"enemy"}""" },

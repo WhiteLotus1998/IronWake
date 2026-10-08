@@ -382,6 +382,18 @@ public sealed record UnitMarked(string UnitId, string ByUnitId, MagicSchool Scho
 public sealed record MarkCashed(string UnitId, string ByUnitId, MagicSchool School) : GameEvent;
 
 /// <summary>
+/// <paramref name="UnitId"/>'s rod caught a spell of <paramref name="School"/> and it stands charged (issue 1329, <see cref="LightningRod"/>):
+/// its next cast of a tome of that school deals x1.25 on every strike and spends the charge, hit or miss.
+/// </summary>
+public sealed record RodCharged(string UnitId, MagicSchool School) : GameEvent;
+
+/// <summary>
+/// <paramref name="UnitId"/>'s cast of a tome of <paramref name="School"/> spent its rod's charge (issue 1329, <see cref="LightningRod"/>);
+/// the cast already dealt the multiple.
+/// </summary>
+public sealed record RodChargeSpent(string UnitId, MagicSchool School) : GameEvent;
+
+/// <summary>
 /// An area tome cast at <paramref name="At"/> (issue 1329, <see cref="AreaCast"/>): <paramref name="CasterId"/> struck
 /// every unit in <paramref name="Struck"/>, board order, once each with no counter; a <see cref="CombatFought"/> per unit follows.
 /// <paramref name="UsesLeft"/> is the tome's uses after it.

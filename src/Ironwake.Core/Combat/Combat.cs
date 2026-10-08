@@ -215,9 +215,11 @@ public static class Combat
     private static SideForecast ForSide(Combatant striker, Combatant target, int distance, RollScheme scheme)
     {
         var hit = HitChance(striker, target);
+        var raw = Damage(striker, target);
+        var scale = LightningRod.Scale(striker, target);
         return new SideForecast(
             Strikes: true,
-            Damage: Damage(striker, target),
+            Damage: scale.Of(raw),
             HitChance: hit,
             DisplayedHit: DisplayedHit(hit, scheme),
             CritChance: CritChance(striker, target),
@@ -227,7 +229,7 @@ public static class Combat
             Bite: Bite(striker, distance),
             NeverDoubles: striker.Class.SingleStrike,
             Stoop: striker.Stoop,
-            CashesMark: Mark.Cashes(striker, target));
+            CashesMark: Mark.Cashes(striker, target)) { Unscaled = scale.IsOne ? null : raw, Scale = scale };
     }
 
     private static Weapon Armed(Combatant unit) =>

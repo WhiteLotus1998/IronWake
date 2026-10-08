@@ -107,6 +107,12 @@ public sealed record BattleUnit(
     public MagicSchool? Mark { get; init; }
 
     /// <summary>
+    /// The school of the Lightning Rod charge the unit holds (issue 1329, <see cref="LightningRod"/>): set when its rod catches a
+    /// spell and it stands, spent by its next cast of a tome of that school, hit or miss. Never stacks; ends with the map.
+    /// </summary>
+    public MagicSchool? RodCharge { get; init; }
+
+    /// <summary>
     /// A stun rider's clock (issue 1244, <see cref="Core.Stun"/>), counted as the chill's is
     /// (<see cref="Frost.AtPhaseChange"/>): 0 not stunned; 1 stunned, its side's next phase not yet
     /// begun; 2 that phase under way, which it skips (moved and acted), cleared when it ends.
@@ -337,7 +343,8 @@ public sealed record BattleUnit(
     /// An open unit answering a strike by an ally of its opener reads its Def and Res lower (<see cref="Opening.Lowered"/>, issue 772).
     /// <paramref name="casting"/> is an area tome the unit casts in place of its equipped weapon (issue 1329, <see cref="AreaCast"/>):
     /// whole, and striking once.
-    /// A strike, never a counter, carries the Sky Captain's Stoop after a long flight (<see cref="Ironwake.Core.Stoop"/>, issue 1127).
+    /// A strike, never a counter, carries the Sky Captain's Stoop after a long flight (<see cref="Ironwake.Core.Stoop"/>, issue 1127),
+    /// and a Lightning Rod's charge (<see cref="Combatant.Charged"/>, issue 1329).
     /// </summary>
     public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null, Weapon? casting = null)
     {
@@ -364,7 +371,7 @@ public sealed record BattleUnit(
             combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, broken, hit, crit, beside + Opening.Lowered(Open!, combatant.Stats));
         }
 
-        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true } || casting is not null, Aura = Formation.Aura(state, content, this) + Supports.Bonus(state, content, this), Stoop = countering ? 0 : Ironwake.Core.Stoop.Bonus(content, this), Hollow = Hollow is not null, Marked = Mark };
+        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true } || casting is not null, Aura = Formation.Aura(state, content, this) + Supports.Bonus(state, content, this), Stoop = countering ? 0 : Ironwake.Core.Stoop.Bonus(content, this), Hollow = Hollow is not null, Marked = Mark, Charged = countering ? null : RodCharge };
     }
 
     /// <summary>

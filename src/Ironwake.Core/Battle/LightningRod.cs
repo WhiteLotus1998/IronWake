@@ -13,9 +13,92 @@ namespace Ironwake.Core;
 /// </list>
 /// The resolver, the forecast, <c>threat</c> and the enemy planner all read <see cref="Catcher"/>, so each sees the
 /// strike land where it will. A cover swap (DESIGN 13.19) is read after it, on whoever is struck.
+/// <para>
+/// The catch's price and pay (issue 1329, Lotus's round-3 rulings, DECISIONS/0322 and 0327):
+/// </para>
+/// <list type="bullet">
+/// <item>The caught spell's strikes on the holder deal <see cref="Half"/> (<see cref="Combatant.Catching"/>); his counter is plain.</item>
+/// <item>A holder still standing after a catch is charged (<see cref="BattleUnit.RodCharge"/>, <see cref="RodCharged"/>). His next
+/// cast of a tome of the rod's school, an attack, an area cast or a watch shot, deals <see cref="Boost"/> on every strike, and the
+/// cast spends the charge, hit or miss (<see cref="RodChargeSpent"/>). A counter neither reads nor spends it. Two catches give one
+/// charge. It ends with the map.</item>
+/// <item>Both are status and spell multipliers: they multiply with the mark on final damage, rounded down once (<see cref="DamageScale"/>).</item>
+/// </list>
 /// </summary>
 public static class LightningRod
 {
+    /// <summary>What a caught spell deals the holder: x0.5.</summary>
+    public static DamageScale Half { get; } = new(1, 2);
+
+    /// <summary>What a charged holder's next cast deals: x1.25.</summary>
+    public static DamageScale Boost { get; } = new(5, 4);
+
+    /// <summary>The charge's multiple as a line prints it.</summary>
+    public const string BoostText = "x1.25";
+
+    /// <summary>
+    /// The rod's multiple on <paramref name="striker"/>'s strikes at <paramref name="target"/>: <see cref="Boost"/> when the striker
+    /// is charged for its tome's school, times <see cref="Half"/> when the target is the holder struck by the spell it caught.
+    /// </summary>
+    public static DamageScale Scale(Combatant striker, Combatant target)
+    {
+        if (striker.Weapon?.School is not { } school)
+        {
+            return DamageScale.One;
+        }
+
+        var scale = striker.Charged == school ? Boost : DamageScale.One;
+        return target.Catching ? scale.Times(Half) : scale;
+    }
+
+    /// <summary>
+    /// After <paramref name="caster"/>'s cast with <paramref name="weapon"/>: the charge it held for the tome's school is spent, hit
+    /// or miss (<see cref="RodChargeSpent"/>). The board unchanged when the caster held none for it or has fallen.
+    /// </summary>
+    public static BattleState Spend(BattleState state, BattleUnit caster, Weapon? weapon, List<GameEvent> events)
+    {
+        if (weapon?.School is not { } school || caster.RodCharge != school || state.Find(caster.Id) is not { } now)
+        {
+            return state;
+        }
+
+        events.Add(new RodChargeSpent(caster.Id, school));
+        return state.WithUnit(now with { RodCharge = null });
+    }
+
+    /// <summary>
+    /// After a combat in which <paramref name="holderId"/>'s rod caught a spell of <paramref name="school"/>: a holder still standing is
+    /// charged (<see cref="RodCharged"/>). A charge already held stays one charge, and no event repeats it.
+    /// </summary>
+    public static BattleState Charge(BattleState state, string holderId, MagicSchool school, List<GameEvent> events)
+    {
+        if (state.Find(holderId) is not { } holder || holder.RodCharge == school)
+        {
+            return state;
+        }
+
+        events.Add(new RodCharged(holderId, school));
+        return state.WithUnit(holder with { RodCharge = school });
+    }
+
+    /// <summary>The unit card's line for a charged holder: <c>charged: next lightning x1.25</c>; null when it holds no charge.</summary>
+    public static string? CardLine(BattleUnit unit) =>
+        unit.RodCharge is { } school ? $"charged: next {school.Label()} {BoostText}" : null;
+
+    /// <summary>The forecast's words for a side the rod scales: <c> (charged x1.25)</c>, <c> (caught x0.5)</c>, or both; empty otherwise.</summary>
+    public static string ForecastText(SideForecast side)
+    {
+        var charged = side.Scale == Boost || side.Scale == Boost.Times(Half);
+        var caught = side.Scale == Half || side.Scale == Boost.Times(Half);
+        return (charged, caught) switch
+        {
+            (true, true) => $" (charged {BoostText}, caught x0.5)",
+            (true, false) => $" (charged {BoostText})",
+            (false, true) => " (caught x0.5)",
+            _ => "",
+        };
+    }
+
     /// <summary>
     /// The unit that catches an attack with <paramref name="weapon"/>, cast from <paramref name="from"/>, aimed at
     /// <paramref name="aimed"/> on <paramref name="state"/>; null when no rod catches it and the aimed unit is struck.
