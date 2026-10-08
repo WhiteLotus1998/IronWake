@@ -47,12 +47,12 @@ public static class CampaignScript
     /// benched (issue 1308 slice 5: Maud, seventh in the order, deployed so her Psalter's art is reached).
     /// <paramref name="stopAfter"/>, when given, ends the script at the first camp after a map on which every
     /// named kind has been taken, so a short script can carry what the full run never reaches.</para>
-    public static Result Write(GameContent content, string contentDir, ulong seed, IReadOnlyDictionary<string, string>? handPlays = null, string difficulty = CampaignRecord.NormalDifficulty, bool permadeath = true, int variant = 0, string? quest = null, (string Unit, string Class)? until = null, IReadOnlyCollection<string>? deploy = null, IReadOnlyCollection<string>? stopAfter = null)
+    public static Result Write(GameContent content, string contentDir, ulong seed, IReadOnlyDictionary<string, string>? handPlays = null, string difficulty = CampaignRecord.NormalDifficulty, bool permadeath = true, int variant = 0, string? quest = null, (string Unit, string Class)? until = null, IReadOnlyCollection<string>? deploy = null, IReadOnlyCollection<string>? stopAfter = null, bool casts = true)
     {
         var client = new CampaignClient(content, contentDir, CampaignRecord.Start(content, seed, difficulty, permadeath));
         var lines = new List<string>
         {
-            $"# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")} --variant {variant}{(quest is null ? "" : $" --quest {quest}")}{(deploy is null ? "" : $" --deploy {string.Join(',', deploy)}")}{(stopAfter is null ? "" : $" --stop-after {string.Join(',', stopAfter)}")}`.",
+            $"# Issue 786 slice 5: the full campaign from map 1, written by `ironwake-sim --campaign-script {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")} --variant {variant}{(quest is null ? "" : $" --quest {quest}")}{(deploy is null ? "" : $" --deploy {string.Join(',', deploy)}")}{(stopAfter is null ? "" : $" --stop-after {string.Join(',', stopAfter)}")}{(casts ? "" : " --no-casts")}`.",
             $"# Played by `campaign --seed {seed} --difficulty {difficulty} --permadeath {(permadeath ? "on" : "off")}`. Starting Alone and The Mill open with Code's hand plays (seeds 631, 645);",
             "# the heuristic player fights the rest; each camp takes the actions not yet taken that the record accepts.",
         };
@@ -77,7 +77,7 @@ public static class CampaignScript
             var seats = false;
             if (hand is null)
             {
-                Camp(client, content, contentDir, lines, touched, variant, quest?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>(), handPlays);
+                Camp(client, content, contentDir, lines, touched, variant, quest?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>(), handPlays, casts);
                 var named = quest?.Split(',', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
                 seats = named.All(id => lines.Any(l => l.StartsWith($"quest {id} ", StringComparison.Ordinal)));
                 if (seats)
@@ -136,7 +136,7 @@ public static class CampaignScript
 
             lines.Add(sure ? "march sure" : "march");
             maps++;
-            Fight(client, content, lines, touched, hand);
+            Fight(client, content, lines, touched, casts, hand);
             Leave(client, lines);
         }
 
@@ -150,7 +150,7 @@ public static class CampaignScript
         return new Result(string.Concat(lines.Select(l => l + "\n")), touched, lostOn, maps);
     }
 
-    private static void Camp(CampaignClient client, GameContent content, string contentDir, List<string> lines, HashSet<string> touched, int variant, IReadOnlyCollection<string> preferred, IReadOnlyDictionary<string, string>? handPlays)
+    private static void Camp(CampaignClient client, GameContent content, string contentDir, List<string> lines, HashSet<string> touched, int variant, IReadOnlyCollection<string> preferred, IReadOnlyDictionary<string, string>? handPlays, bool casts)
     {
         bool Take(string kind, string line, Func<bool> act)
         {
@@ -247,7 +247,7 @@ public static class CampaignScript
                 {
                     lines.Add($"trial {unit.Id} {trial.ClassId}");
                     touched.Add("trial");
-                    Fight(client, content, lines, touched);
+                    Fight(client, content, lines, touched, casts);
                     Leave(client, lines);
                 }
             }
@@ -312,7 +312,7 @@ public static class CampaignScript
             {
                 lines.Add($"quest {quest.Id} {string.Join(' ', allies)}");
                 touched.Add("quest");
-                Fight(client, content, lines, touched, hand);
+                Fight(client, content, lines, touched, casts, hand);
                 Leave(client, lines);
             }
         }
@@ -358,7 +358,7 @@ public static class CampaignScript
         lines.Add("leave");
     }
 
-    private static void Fight(CampaignClient client, GameContent content, List<string> lines, HashSet<string> touched, string? hand = null)
+    private static void Fight(CampaignClient client, GameContent content, List<string> lines, HashSet<string> touched, bool casts, string? hand = null)
     {
         var battle = client.Battle!;
         foreach (var line in (hand ?? "").Split('\n'))
@@ -390,7 +390,7 @@ public static class CampaignScript
             }
         }
 
-        var player = WriterPlayer();
+        var player = WriterPlayer(casts);
         var steps = 0;
         while (!battle.State.Outcome.IsOver)
         {
@@ -580,8 +580,8 @@ public static class CampaignScript
     }
 
     /// <summary>
-    /// The heuristic that plays the battles the script does not hand-play. It casts no area tome (issue 1391), since the
-    /// script is played back through the client's clicks, which take none until issue 1392.
+    /// The heuristic that plays the battles the script does not hand-play. It casts an area tome as the Sim's player does
+    /// (issue 1391), the client's clicks taking the cast (issue 1392), unless <paramref name="casts"/> is false.
     /// </summary>
-    public static HeuristicPlayer WriterPlayer() => new() { Casts = false };
+    public static HeuristicPlayer WriterPlayer(bool casts = true) => new() { Casts = casts };
 }

@@ -158,9 +158,10 @@ public class AreaCastPlannerTests
     }
 
     [Fact]
-    public void TheCampaignScriptsWriterCastsNoAreaTomeWhileTheClickPathTakesNone()
+    public void TheCampaignScriptsWriterCastsUnlessToldNotTo()
     {
-        Assert.False(CampaignScript.WriterPlayer().Casts);
+        Assert.True(CampaignScript.WriterPlayer().Casts);
+        Assert.False(CampaignScript.WriterPlayer(casts: false).Casts);
         Assert.True(new HeuristicPlayer().Casts);
     }
 

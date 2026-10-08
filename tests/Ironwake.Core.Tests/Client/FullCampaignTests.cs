@@ -87,7 +87,7 @@ public class FullCampaignTests
         var order = client.IndexOf("Alder Fenn calls fall back", StringComparison.Ordinal);
         var without = client[..order] + client[(client.IndexOf('\n', order) + 1)..];
 
-        Assert.StartsWith("event log differs at line 1481", Parity.FirstDifference(console, without));
+        Assert.StartsWith("event log differs at line 516", Parity.FirstDifference(console, without));
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class FullCampaignTests
         foreach (var start in new[]
         {
             "buy ", "drop ", "bench ", "unbench ", "repair ", "certify captain ", "quest ", "pick ", "build forge", "build barracks", "hire ", "build wall ",
-            "order press", "order rally", "order fall back", "fallback ", "recall ", "exit ", "meet ",
+            "order press", "order rally", "order fall back", "fallback ", "recall ", "exit ", "meet ", "item pell gust ",
         })
         {
             Assert.Contains(script, line => line.StartsWith(start, StringComparison.Ordinal));
@@ -132,7 +132,8 @@ public class FullCampaignTests
     [Fact]
     public void TheLazarHouseAndShrineHandPlaysPayThePsalterInsideTheCampaign()
     {
-        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, Quest + ",maud_1,maud_2");
+        // Without casts, as the Psalter-art script is written (issue 1392).
+        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, Quest + ",maud_1,maud_2", casts: false);
         var lines = written.Text.Split('\n');
         var client = new CampaignClient(Content, Fixture.RealContentDirectory(), Start());
         Script.PlayCampaign(client, written.Text);
@@ -146,8 +147,10 @@ public class FullCampaignTests
 
     private const string ArtQuests = Quest + ",maud_1,maud_2";
 
+    // Written by a heuristic that casts no area tome (issue 1392): casting, it fails to reach the art at each of twelve
+    // variants tried from 32 to 58, most lost on map 7.
     private static CampaignScript.Result WriteArt(IReadOnlyCollection<string>? deploy) =>
-        CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, ArtQuests, deploy: deploy, stopAfter: new[] { "art" });
+        CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, ArtQuests, deploy: deploy, stopAfter: new[] { "art" }, casts: false);
 
     [Fact]
     public void ThePsalterArtScriptMatchesTheConsoleByteForByteThroughTheClickPath()
