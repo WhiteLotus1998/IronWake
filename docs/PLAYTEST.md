@@ -3948,3 +3948,19 @@ Notes:
 - **Not tense:** turns 1 and 4.
 
 — Code
+
+## 2026-10-08 — The Raid on Ironwake at the campaign's floor, Keziah seated, warm — Code
+Seed: 3100 (`campaign --seed 3100 --from ironwake_raid --level 3 --strict --script docs/transcripts/2026-10-08-ironwake_raid-3100.script`; transcript beside it; main at 132be71). The read round 459 asked for: the levy at L3 (the floor before map 6) and Keziah at her join level 4, against the raid's L6. `bench dunstan` seats her on its own now (#1357). Six: the captain, Wren, Teodor, Ottilie, Pell, Keziah.   Result: **won as turn 5 ended**, rout, **all three Recalls spent**, nobody fell in the kept line (Keziah fell once and was recalled).
+Warm: I played 288, 633, 1570 and 2055 here and read 301.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 3. Keziah at 14 against the hexer: 80 percent to kill and feed, and a miss meant its 14 counter on her 14 HP, with no Recall left. The captain's once-a-map `order rally` from 12,5 reached all five and healed her 3, so a miss became survivable. Then she hit, fed, and was back at 24. The order was the only answer on the board, and I would not have looked for it without the lethal line in the forecast.
+Notes:
+- **At the floor the van is a threat.** Turn 1 I put Keziah unfed on 11,7 to take the brigand's swing. It hit for 14, her counter left it at 8, and the scythe's drain took her to 5. On turn 2 the game refused her swing without `!` (24 in 100 lethal). I swung, the 24 came, and she fell. That is the hunger working: an unfed carrier who trades in the gap is a carrier at 5.
+- **First Recall, to turn 1.** Teodor took the brigand's swing instead and Keziah stayed out of reach. Then turn 2 went 81, 82, 76: Ottilie and Wren missed the soldier at 2 HP, so Wren sat at 1 beside it, and Keziah missed the brigand again. The second miss was **the same keyed roll** (turn, phase, striker, target). The Recall line says "the same attack will roll the same", and I re-planned turn 1 but kept the turn-2 swing that had already missed. That's my error, not the game's. But a player who rewinds a whole turn has to remember every roll they saw, and nothing on the forecast helps them (Table question below).
+- **Second Recall, to turn 2, and a fourth miss (the captain at 85 on the soldier).** That left him lethal at 15 against 14 in the gap. **Third Recall, with what the first two taught me:** Wren, Ottilie and the captain all miss the soldier this turn whatever the order, so the only answer was Pell's Overcast, the same 99 roll at 18 power, which killed it from 15. Ottilie shot the brigand before Teodor, so his known hit finished it with no counter. Recall as knowledge is a real tool here. It's also the opposite of tense on the turn you use it.
+- **The pattern, half of it.** Both van melee died on turn 2 again and the waves came one or two at a time: the hexer and brigand 2 on turn 3, the soldier and brigand 3 on turn 4. But the van did not die on its own swings. It cost me a fall, three Recalls and two units at 1 and 5 HP before it went down. Chat's level reading holds: at the floor, the van is the map.
+- **Turn 4's `end !`.** Keziah had acted on 9,5 and `threat` read 25 against 24 from three open tiles. The captain could plug only 9,4. Either striker died to her counter and fed her, so the real risk was about one in eight, and I took it. The enemy went elsewhere instead: brigand 3 on Ottilie (14 to 3) and the soldier on Pell (12 to 4, then Pell's counter killed it and spent his last Cinder). Both chose the units that couldn't answer. That was the right call for them, and I didn't see it coming.
+- **The bark landed this time.** "That one was limping before you reached it" came on brigand 2 at 6 of 24. Last time it played as a sneer. Here it was true.
+- **Not tense:** turn 5 (one brigand at 13, two shots).
+
+— Code
