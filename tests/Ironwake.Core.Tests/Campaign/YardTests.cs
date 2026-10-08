@@ -123,14 +123,14 @@ public class YardTests
     }
 
     [Fact]
-    public void AWoundedUnitsOnlyDutyIsRest()
+    public void AWoundedUnitIsRefusedTheYardAloneAndTakesTheForgeOrRest()
     {
         var record = Wounded(Camp(), "wren");
 
-        Assert.False(record.AssignDuty("wren", "forge").Accepted);
+        Assert.True(record.AssignDuty("wren", "forge").Accepted);
         Assert.True(record.AssignDuty("wren", "rest").Accepted);
-        Assert.EndsWith("a wounded unit's only duty is rest", record.YardRefusal("captain", "wren", "sword", Content));
-        Assert.EndsWith("a wounded unit's only duty is rest", Wounded(Camp(), "captain").YardRefusal("captain", "wren", "sword", Content));
+        Assert.EndsWith("a wounded unit is refused the yard", record.YardRefusal("captain", "wren", "sword", Content));
+        Assert.EndsWith("a wounded unit is refused the yard", Wounded(Camp(), "captain").YardRefusal("captain", "wren", "sword", Content));
     }
 
     [Fact]
@@ -178,6 +178,81 @@ public class YardTests
         Assert.Equal((before.Level, before.Exp, before.Skill, before.Mastery), (after.Level, after.Exp, after.Skill, after.Mastery));
         Assert.DoesNotContain(taught.Events, e => e is ExpGained { UnitId: "captain" });
         Assert.Contains(plain.Events, e => e is ExpGained { UnitId: "captain" });
+    }
+
+    /// <summary>The drill's opening with brigand-1 beside <paramref name="unitId"/> at <paramref name="hp"/> HP, rolled from <paramref name="seed"/>.</summary>
+    private static BattleState Softened(string unitId, int hp, ulong seed)
+    {
+        var state = Beside(Camp().BeginYard(Map, "captain", "wren", WeaponType.Sword, Content), unitId) with { Seed = seed };
+        return state.WithUnit(state.Units.Single(u => u.Id == "brigand-1") with { Hp = hp });
+    }
+
+    [Fact]
+    public void TheTeachersBlowsPullADrillHandAtOneHp()
+    {
+        var seeds = Enumerable.Range(1, 40).Select(s => (ulong)s).ToList();
+        var killing = seeds.Where(seed => Resolver.Apply(Softened("captain", 3, seed).WithUnit(Softened("captain", 3, seed).Units.Single(u => u.Id == "captain") with { Yard = null }), Content, new Attack("captain", "brigand-1"))
+            .Events.Any(e => e is UnitDied { UnitId: "brigand-1" })).ToList();
+        Assert.NotEmpty(killing);
+
+        foreach (var seed in killing)
+        {
+            var taught = Resolver.Apply(Softened("captain", 3, seed), Content, new Attack("captain", "brigand-1"));
+
+            Assert.Null(taught.Rejection);
+            Assert.DoesNotContain(taught.Events, e => e is UnitDied { UnitId: "brigand-1" });
+            Assert.Equal(1, taught.Next.Units.Single(u => u.Id == "brigand-1").Hp);
+            var fought = taught.Events.OfType<CombatFought>().Single();
+            Assert.Equal(2, fought.Strikes.Where(s => s.AttackerId == "captain").Sum(s => s.Damage));
+        }
+    }
+
+    [Fact]
+    public void TheStudentsBlowsAreNotPulled()
+    {
+        var state = Softened("wren", 1, 1);
+
+        Assert.False(state.Units.Single(u => u.Id == "wren").ToCombatant(state, Content).Pulls);
+        Assert.True(state.Units.Single(u => u.Id == "captain").ToCombatant(state, Content).Pulls);
+    }
+
+    [Fact]
+    public void ATeachersCounterPullsToo()
+    {
+        var seeds = Enumerable.Range(1, 40).Select(s => (ulong)s).ToList();
+        var countered = 0;
+        foreach (var seed in seeds)
+        {
+            var state = Softened("captain", 3, seed);
+            var struck = state.Units.Single(u => u.Id == "brigand-1");
+            var result = CombatResolver.Resolve(
+                struck.ToCombatant(state, Content, against: state.Find("captain")),
+                state.Find("captain")!.Answering(state, Content, struck.At, struck),
+                1,
+                new CombatContext(1, Side.Enemy),
+                new KeyedRng(seed),
+                state.Scheme);
+            if (result.Strikes.Any(s => s.AttackerId == "captain" && s.Hit))
+            {
+                countered++;
+                Assert.Equal(1, result.AttackerHp);
+            }
+        }
+
+        Assert.True(countered > 0);
+    }
+
+    [Fact]
+    public void TheForecastSaysTheTeacherPulls()
+    {
+        var state = Softened("captain", 3, 1);
+        var captain = state.Find("captain")!;
+        var brigand = state.Find("brigand-1")!;
+        var forecast = Ironwake.Core.Combat.Forecast(captain.ToCombatant(state, Content, against: brigand), brigand.Answering(state, Content, captain.At, captain), 1, state.Scheme);
+        var names = UnitNames.Of(state, Content);
+
+        Assert.Equal($"  pulls: {names["captain"]} stops at 1 HP on {names["brigand-1"]}; the kill is the student's", Ironwake.Cli.PlaySession.PullLine(captain, brigand, forecast, names));
+        Assert.Null(Ironwake.Cli.PlaySession.PullLine(captain with { Yard = null }, brigand, forecast, names));
     }
 
     [Fact]

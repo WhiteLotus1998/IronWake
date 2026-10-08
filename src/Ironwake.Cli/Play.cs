@@ -1704,6 +1704,11 @@ public sealed class PlaySession
             lines.Add(claimant);
         }
 
+        if (PullLine(unit, target, forecast, names) is { } pull)
+        {
+            lines.Add(pull);
+        }
+
         if (LethalCounterLine(unit, target, forecast, raises, names) is { } lethal)
         {
             if (FirstRoundKillLine(unit, target, forecast, raises) is { } kills)
@@ -1744,6 +1749,24 @@ public sealed class PlaySession
         }
 
         return UnitNames.Sentence(string.Join("\n", lines));
+    }
+
+    /// <summary>
+    /// The row under a yard forecast whose teacher's blows would reach a kill (issue 1331, Table round 448):
+    /// <c>  pulls: Alder Fenn stops at 1 HP on Brigand; the kill is the student's</c> when the teacher strikes,
+    /// <c>  counter pulls: ...</c> when the teacher answers. The teacher's blows never take a drill hand
+    /// below 1 HP (<see cref="Combatant.Pulls"/>). Null anywhere else and when no blow would reach.
+    /// </summary>
+    public static string? PullLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, UnitNames names)
+    {
+        if (unit.Yard is { Teaches: true } && forecast.Attacker.Strikes && forecast.AttackerDamageLivedFor(unit.Hp) >= target.Hp)
+        {
+            return $"  pulls: {names[unit.Id]} stops at 1 HP on {names[target.Id]}; the kill is the student's";
+        }
+
+        return target.Yard is { Teaches: true } && forecast.CounterIfAllLand >= unit.Hp
+            ? $"  counter pulls: {names[target.Id]} stops at 1 HP on {names[unit.Id]}; the kill is the student's"
+            : null;
     }
 
     /// <summary>

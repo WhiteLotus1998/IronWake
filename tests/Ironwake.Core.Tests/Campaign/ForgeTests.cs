@@ -85,6 +85,47 @@ public class ForgeTests
     }
 
     [Fact]
+    public void TheForgeDutyWorksOneStepForNoGoldAndPaysTheMaterial()
+    {
+        var record = AtTheForge();
+        var sword = Content.Weapon("iron_sword");
+
+        var worked = record.ForgeDuty("captain", 0, "mt", Content);
+
+        Assert.True(worked.Accepted, worked.Text);
+        Assert.Equal($"Alder Fenn works the forge: Iron Sword: Iron Sword +1, Acc {sword.Hit}, Power {sword.Mt + 1}, for 1 common material and no gold; the purse holds 1000", worked.Text);
+        Assert.Equal((4, 1000, Duty.Forge), (worked.Record.CommonMaterial, worked.Record.Purse, worked.Record.DutyOf("captain")));
+        Assert.Equal(1, worked.Record.Find("captain")!.Inventory.Items[0].Refines);
+    }
+
+    [Fact]
+    public void TheForgeDutyIsOneStepAUnitACamp()
+    {
+        var worked = AtTheForge().ForgeDuty("captain", 0, "mt", Content).Record;
+
+        var again = worked.ForgeDuty("captain", 0, "hit", Content);
+        var paid = worked.Refine("captain", 0, "hit", Content);
+
+        Assert.False(again.Accepted);
+        Assert.Equal("Alder Fenn took the forge duty at this camp already", again.Text);
+        Assert.True(paid.Accepted);
+        Assert.Equal(900, paid.Record.Purse);
+    }
+
+    [Fact]
+    public void TheForgeDutyIsRefusedWhereRefineIsAndForAUnitWithAnotherDuty()
+    {
+        var bare = CampaignRecord.Start(Content, 647) with { MapIndex = IndexOf("the_tollgate") + 1 };
+
+        Assert.Equal("the keep has no forge; build it first", bare.ForgeDuty("captain", 0, "mt", Content).Text);
+        Assert.StartsWith("Refining Iron Sword takes 1 common material", AtTheForge(common: 0).ForgeDuty("captain", 0, "mt", Content).Text);
+        Assert.True(AtTheForge(purse: 0).ForgeDuty("captain", 0, "mt", Content).Accepted);
+        Assert.Equal("Alder Fenn took the rest duty at this camp; one duty a unit", AtTheForge().AssignDuty("captain", "rest").Record.ForgeDuty("captain", 0, "mt", Content).Text);
+        var none = AtTheForge().ForgeDuty("captain", 0, "mt", Content).Record;
+        Assert.Equal(none.Duties, none.ForgeDuty("captain", 0, "mt", Content).Record.Duties);
+    }
+
+    [Fact]
     public void ARefinedWeaponStrikesWithItsSteps()
     {
         var stack = new ItemStack("iron_sword", 40) { Refines = 2, RefineMt = 2 };

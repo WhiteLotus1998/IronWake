@@ -37,6 +37,8 @@ public sealed record CombatResult(ValueList<StrikeEvent> Strikes, int AttackerHp
 /// strikes hit bites once (issue 872): the attacker's drake, or else the defender's; one bite a combat.
 /// The bite draws no roll. A side's <see cref="SideForecast.Stoop"/> is added to its first strike when it hits (issue 1127),
 /// and a side that <see cref="SideForecast.CashesMark"/> deals its marked damage on its first hit alone (issue 1329).
+/// A side that <see cref="Combatant.Pulls"/> never takes its target below 1 HP (issue 1331), and its strike or bite
+/// reports the damage it dealt.
 /// </summary>
 public static class CombatResolver
 {
@@ -73,13 +75,15 @@ public static class CombatResolver
         BiteEvent? bite = null;
         if (forecast.Attacker.Bite > 0 && attackerHp > 0 && defenderHp > 0 && strikes.Any(s => s.Hit && s.AttackerId == attacker.Id))
         {
-            defenderHp = Math.Max(0, defenderHp - forecast.Attacker.Bite);
-            bite = new BiteEvent(attacker.Id, defender.Id, forecast.Attacker.Bite, defenderHp);
+            var bitten = attacker.Pulls ? Math.Min(forecast.Attacker.Bite, defenderHp - 1) : forecast.Attacker.Bite;
+            defenderHp = Math.Max(0, defenderHp - bitten);
+            bite = new BiteEvent(attacker.Id, defender.Id, bitten, defenderHp);
         }
         else if (forecast.Defender.Bite > 0 && attackerHp > 0 && defenderHp > 0 && strikes.Any(s => s.Hit && s.AttackerId == defender.Id))
         {
-            attackerHp = Math.Max(0, attackerHp - forecast.Defender.Bite);
-            bite = new BiteEvent(defender.Id, attacker.Id, forecast.Defender.Bite, attackerHp);
+            var bitten = defender.Pulls ? Math.Min(forecast.Defender.Bite, attackerHp - 1) : forecast.Defender.Bite;
+            attackerHp = Math.Max(0, attackerHp - bitten);
+            bite = new BiteEvent(defender.Id, attacker.Id, bitten, attackerHp);
         }
 
         return new CombatResult(strikes, attackerHp, defenderHp) { Bite = bite };
@@ -104,6 +108,11 @@ public static class CombatResolver
             var marked = hit && side.CashesMark && !cashed;
             cashed |= marked;
             var damage = !hit ? 0 : (marked ? (crit ? side.MarkedCritDamage : side.MarkedDamage) : crit ? side.CritDamage : side.Damage) + (strikeIndex == 0 ? side.Stoop : 0);
+            if (striker.Pulls)
+            {
+                damage = Math.Min(damage, targetHp - 1);
+            }
+
             targetHp = Math.Max(0, targetHp - damage);
             strikes = strikes.Add(new StrikeEvent(strikes.Count, striker.Id, target.Id, hit, crit, damage, targetHp));
         }

@@ -3893,3 +3893,16 @@ Notes:
 - Not tense: turn 1, the walk-up. The drill was over before the captain's reach mattered.
 
 — Code
+
+## 2026-10-08 — The yard under the pull: the captain softens, Corin takes all three, warm — Code
+
+Setup: the same camp as part 1's two lines (seed 644, recruit, permadeath off), `yard captain corin sword` on the placeholder board, now with the teacher's blows pulling (#1331 slice 2, DECISIONS/0331). Transcript: `docs/transcripts/2026-10-08-yard_placeholder-800-pull.txt`. Result: **won on turn 3; Corin took every kill**, ended on 8 of 19 HP with 90 EXP and no level. The captain earned nothing. Part 1's open-line transcript now replays under the pull: its last blow leaves the soldier at 1 instead of killing it. The screen-line transcript is kept as played under 0329.
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 3. The post brigand had 20 HP and Corin had 8, and the brigand's one hit kills him. The captain went in first and pulled it to 1 (14, then 5 for 1 on the second blow). Then Corin walked four tiles and swung at 87 with the counter lethal on the 13 percent miss. `attack` refused him until the `!`, which is right. It landed.
+Notes:
+- **The pull turns the teacher's turn into the drill's question.** The soldier walked into the captain on enemy phase 1 and stopped at 1 HP on the counter, the exact line that ended part 1's screen play. Corin killed it next turn from 2,3. That left him beside nothing, but brigand 1 came in at 54 percent and took him to 8. He killed it on the counter. Soften or screen was a real fork on every turn after the first.
+- **`for 0 (hp 1)` reads strangely the first time.** The captain's second strike on a hand already at 1 does nothing. The forecast's `pulls:` line explains it before the swing, so I'd keep the honest zero.
+- **The yard pays under its ceiling.** Three kills at L1 pay 90 EXP, and that is no level. The drill felt won and showed nothing on the card except the EXP. That's a Table question for #1332 (0331 Unsure), not a lever yet.
+- Not tense: turn 1, the walk-up again.
+
+— Code
