@@ -7,7 +7,7 @@ namespace Ironwake.Client;
 /// <summary>
 /// The thin renderer's campaign presenter (issue 360): what <c>ironwake campaign</c> does between
 /// maps, beside <see cref="ClientSession"/>, with no rules in it. Buy, repair, drop, take, refine,
-/// certify, trial, quest, hire, build, bench and unbench are the record's own actions, refused
+/// certify, trial, quest, the duties and the yard, hire, build, bench and unbench are the record's own actions, refused
 /// with the core's text; march opens the next map as a <see cref="ClientSession"/> and leave
 /// takes the record back once the battle is decided. Every line the screen shows is the console's, from the public statics on
 /// <see cref="CampaignSession"/>, and the event log is what <c>campaign --log</c> writes for the
@@ -52,6 +52,12 @@ public sealed class CampaignClient
 
     /// <summary>Whether the battle being played is a side map (issue 786).</summary>
     public bool InQuest => _quest is not null;
+
+    /// <summary>The yard drill being played as the battle (issue 1331): its teacher, student and weapon, or null outside one.</summary>
+    private (string Teacher, string Student, WeaponType Weapon)? _yard;
+
+    /// <summary>Whether the battle being played is a yard drill (issue 1331).</summary>
+    public bool InYard => _yard is not null;
 
     /// <summary>Whether the campaign is over: every map won, or a battle lost and left.</summary>
     public bool Over { get; private set; }
@@ -165,6 +171,12 @@ public sealed class CampaignClient
     /// <summary>Refines the weapon in <paramref name="slot"/>, counted from 0, by <c>mt</c> or <c>hit</c> at the forge (issue 786).</summary>
     public bool Refine(string unitId, int slot, string stat) => Screen(() => Record.Refine(unitId, slot, stat, Content));
 
+    /// <summary><c>duty &lt;unit&gt; rest|forge</c> (issue 1331): the record's own, refused with its text.</summary>
+    public bool Duty(string unitId, string duty) => Screen(() => Record.AssignDuty(unitId, duty));
+
+    /// <summary><c>duty &lt;unit&gt; forge &lt;slot&gt; mt|hit</c> (issue 1331): one Refine step for no gold, the material paid; <paramref name="slot"/> is 0-based.</summary>
+    public bool ForgeDuty(string unitId, int slot, string stat) => Screen(() => Record.ForgeDuty(unitId, slot, stat, Content));
+
     /// <summary>Buys the keep's room <paramref name="roomId"/> (issue 786).</summary>
     public bool BuildRoom(string roomId) => Screen(() => Record.BuildRoom(roomId, Content));
 
@@ -235,6 +247,32 @@ public sealed class CampaignClient
     }
 
     /// <summary>
+    /// Opens a yard drill as the battle (issue 1331), <paramref name="studentId"/> under
+    /// <paramref name="teacherId"/> in <paramref name="weaponName"/>, its opening lines in the log as
+    /// the console writes them. False, with the refusal in <see cref="Status"/>, as the console refuses it.
+    /// </summary>
+    public bool Yard(string teacherId, string studentId, string weaponName)
+    {
+        if (!OnScreen())
+        {
+            return false;
+        }
+
+        var (map, refusal) = CampaignSession.YardFor(_contentDir, Content, Record, teacherId, studentId, weaponName);
+        if (map is null)
+        {
+            return Refuse(refusal!);
+        }
+
+        var weapon = YardRules.Weapon(weaponName)!.Value;
+        _log.AddRange(CampaignSession.YardOpening(Record, Content, map, teacherId, studentId, weapon));
+        Battle = new ClientSession(Content, Record.BeginYard(map, teacherId, studentId, weapon, Content, _scheme)) { Campaign = true };
+        _yard = (teacherId, studentId, weapon);
+        Status = null;
+        return true;
+    }
+
+    /// <summary>
     /// Opens the next map as the battle, with its opening line in the log. On a <c>keziah_warning</c>
     /// map with the hungering weapon's bearer deployed, a bare march is refused with Lotus's question
     /// (issue 871) until <paramref name="sure"/> answers it, once per map.
@@ -293,6 +331,16 @@ public sealed class CampaignClient
         {
             _trial = null;
             var result = Record.AfterTrial(battle.State, trialUnit, Content);
+            Record = result.Record;
+            _log.Add(CampaignSession.Text(Record, Content, result.Text));
+            Autosave();
+            return true;
+        }
+
+        if (_yard is { } yard)
+        {
+            _yard = null;
+            var result = Record.AfterYard(battle.State, yard.Teacher, yard.Student, yard.Weapon, Content);
             Record = result.Record;
             _log.Add(CampaignSession.Text(Record, Content, result.Text));
             Autosave();

@@ -244,7 +244,7 @@ public static class Script
     /// <summary>
     /// Plays a whole <c>campaign --script</c> through a fresh campaign presenter (issue 360) and
     /// returns its event log. On the between-map screen a line that changes the record is taken as
-    /// the screen's action (buy, repair, drop, take, refine, certify, trial, quest, hire, pick, build,
+    /// the screen's action (buy, repair, drop, take, refine, certify, trial, quest, duty, yard, hire, pick, build,
     /// bench, unbench, march); a listing
     /// prints no event and is skipped. In a battle, <c>leave</c> leaves it and every other line is
     /// read as <see cref="Parse"/> reads a <c>play</c> line and taken as <see cref="ApplyLineByClicks"/>
@@ -280,6 +280,9 @@ public static class Script
                 ["certify", var unit, var classId] => campaign.Certify(unit, classId),
                 ["trial", var unit, var classId] => campaign.Trial(unit, classId),
                 ["quest", var quest, _, ..] => campaign.Quest(quest, words[2..]),
+                ["duty", var unit, "forge", var slot, var stat] when int.TryParse(slot, out var at) => campaign.ForgeDuty(unit, at - 1, stat),
+                ["duty", var unit, var duty] => campaign.Duty(unit, duty),
+                ["yard", var teacher, var student, var weapon] => campaign.Yard(teacher, student, weapon),
                 ["hire", var hire] => campaign.Hire(hire),
                 ["pick", var claimant] => campaign.Pick(claimant),
                 ["meet", var side] => campaign.Meet(side),

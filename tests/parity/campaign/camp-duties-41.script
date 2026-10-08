@@ -1,0 +1,15 @@
+# Issue 1331 slice 4: the duty and yard rows the client reaches, from CampActionsTests.Stocked (a camp before
+# Sallow Grange with 5000, common material 4, the captain at L3, Teodor at L4): a forge duty's free step,
+# a rest, then Wren drilled under the captain in the sword (the captain swings at the soldier and
+# misses, Wren falls to the brigand on turn 2), left, then the march.
+build forge
+duty teodor forge 1 mt
+duty maud rest
+yard captain wren sword
+end !
+move captain 3,5
+attack captain soldier-1 1
+attack wren soldier-1 1
+end !
+leave
+march
