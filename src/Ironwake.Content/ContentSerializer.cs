@@ -1351,6 +1351,16 @@ public static class ContentSerializer
                 writer.WriteBoolean("race", true);
             }
 
+            if (swallow.Dose != Core.Swallow.FirstDose)
+            {
+                writer.WriteNumber("dose", swallow.Dose);
+            }
+
+            if (swallow.Step != Core.Swallow.DoseStep)
+            {
+                writer.WriteNumber("step", swallow.Step);
+            }
+
             writer.WriteEndObject();
         }
 

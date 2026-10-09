@@ -2664,7 +2664,7 @@ public sealed class PlaySession
         if (unit.Kin is { } kin)
         {
             lines.Add(unit.Swallowed
-                ? $"  Swallowed: {(kin.Rooted ? "he holds his tile; " : "")}the Kin heals {kin.Heal} at his side's phase start; Frozen Iron lands for {state.FrozenIron}, {Swallow.DoseStep} more each time, on every unit but him at his side's {(state.FrozenIronHeld ? "phase start after next" : "next phase start")}{(kin.Race ? "; no turn limit while he stands" : "")}"
+                ? $"  Swallowed: {(kin.Rooted ? "he holds his tile; " : "")}the Kin heals {kin.Heal} at his side's phase start; Frozen Iron lands for {state.FrozenIron}, {kin.Step} more each time, on every unit but him at his side's {(state.FrozenIronHeld ? "phase start after next" : "next phase start")}{(kin.Race ? "; no turn limit while he stands" : "")}"
                 : $"  At 0 HP he swallows the shard: stage 2 on a fresh bar (hp {kin.Hp}, Def +{kin.Def}, Res +{kin.Res}){(kin.Rooted ? " rooted where he stands" : "")}, the Kin heals {kin.Heal} and Frozen Iron falls on every unit but him at each of his phase starts{(kin.Late ? " from the second" : "")}, climbing{(kin.Race ? "; from then the turn limit ends nothing" : "")}");
         }
 
