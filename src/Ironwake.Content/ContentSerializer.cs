@@ -1346,6 +1346,11 @@ public static class ContentSerializer
                 writer.WriteBoolean("late", true);
             }
 
+            if (swallow.Race)
+            {
+                writer.WriteBoolean("race", true);
+            }
+
             writer.WriteEndObject();
         }
 

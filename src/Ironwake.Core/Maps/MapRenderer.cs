@@ -377,7 +377,11 @@ public static class MapRenderer
         var map = state.Map;
         var sb = new StringBuilder();
         sb.Append(map.Name);
-        if (state.Turn > map.TurnLimit)
+        if (state.Turn > map.TurnLimit && state.Racing)
+        {
+            sb.Append("  turn ").Append(state.Turn).Append(", past the limit: the race").Append("  ").Append(state.Phase.ToString().ToLowerInvariant()).Append(" phase");
+        }
+        else if (state.Turn > map.TurnLimit)
         {
             sb.Append("  over after turn ").Append(map.TurnLimit).Append(" of ").Append(map.TurnLimit);
         }

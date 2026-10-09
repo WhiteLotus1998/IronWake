@@ -533,7 +533,7 @@ public sealed record BattleState(
     /// and never stored. Checked in order: the captain dead, the protected recruit dead or
     /// left behind by the captain's exit (issue 269), the map's win condition met (on
     /// Escape, the captain has left through an exit; on a <c>seize_hold: 1</c> map, the captain still
-    /// on the seize tile when a player phase begins, issue 1274), the turn limit passed (a win for Survive, a loss for
+    /// on the seize tile when a player phase begins, issue 1274), the turn limit passed and the board not <see cref="Racing"/> (a win for Survive, a loss for
     /// everything else), else ongoing. A finished battle refuses every command but Recall.
     /// </summary>
     public BattleOutcome Outcome
@@ -574,7 +574,7 @@ public sealed record BattleState(
                 return new BattleOutcome(BattleResult.Won, MapRenderer.WinName(Map.Win));
             }
 
-            if (Turn > Map.TurnLimit)
+            if (PastLimit)
             {
                 return new BattleOutcome(BattleResult.Lost, $"turn {Map.TurnLimit} passed", LossCause.Timeout);
             }
@@ -582,6 +582,15 @@ public sealed record BattleState(
             return BattleOutcome.Ongoing;
         }
     }
+
+    /// <summary>
+    /// Whether a swallowed unit whose stage is a race (<see cref="KinStage.Race"/>, Table rounds 514, 515, issue 1395)
+    /// stands on the board: while one does, the turn limit ends nothing, and stage 2 ends when he falls or the company does.
+    /// </summary>
+    public bool Racing => Units.Any(u => u is { Swallowed: true, Kin.Race: true });
+
+    /// <summary>Whether the turn limit has passed and ends the map: past <see cref="MapDefinition.TurnLimit"/> and not <see cref="Racing"/>.</summary>
+    public bool PastLimit => Turn > Map.TurnLimit && !Racing;
 
     /// <summary>
     /// Whether this state is the start of a player phase, the one an enemy phase just ended into
