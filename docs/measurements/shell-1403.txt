@@ -1,0 +1,12 @@
+# Obsidian Armor's Sim read (issue 1403 slice 3, DECISIONS/0365)
+
+Command: dotnet run -c Release --project src/Ironwake.Sim -- --shell docs/samples/ironwake_keep_warden.map --seeds 100
+Board: the Warden sample in round 502's shape (0364), the full finale company at level 8. Pell holds a fixture Obsidian Armor in her last slot, her class given earth.
+
+shell: docs/samples/ironwake_keep_warden.map, 100 seeds, the full company at level 8, pell holding a fixture Obsidian Armor (+20 Def against the first hit, 3 phases, range 1, one use); a jab is a breaking hit under a quarter of the wearer's max HP on bare Def (data)
+shell none: wins 36/100, laid in 0; broken by a jab 0, by a blow 0, unforecast 0; killed through it 0; fell unbroken 0; breaking hit's bare damage median -
+shell never: wins 35/100, laid in 0; broken by a jab 0, by a blow 0, unforecast 0; killed through it 0; fell unbroken 0; breaking hit's bare damage median -
+shell exposed: wins 27/100, laid in 100; broken by a jab 0, by a blow 86, unforecast 0; killed through it 13; fell unbroken 1; breaking hit's bare damage median 15
+shell drake: wins 35/100, laid in 12; broken by a jab 0, by a blow 8, unforecast 0; killed through it 3; fell unbroken 0; breaking hit's bare damage median 17
+shell healer: wins 29/100, laid in 46; broken by a jab 0, by a blow 4, unforecast 18; killed through it 9; fell unbroken 14; breaking hit's bare damage median 14
+shell front: wins 30/100, laid in 44; broken by a jab 0, by a blow 16, unforecast 21; killed through it 1; fell unbroken 2; breaking hit's bare damage median 11
