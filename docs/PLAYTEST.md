@@ -4273,3 +4273,21 @@ Best turn: turn 6. Hask stood at 5, the frost's floor at 10 already passed. Kezi
 Notes: This is the board Chat described. The break turned the frost, and the swallow row said "him included but never below 10". From then on the frost did the first half of the fight while I cleared the sworn: Hask went from 20 to 17, 13 and 11 over three landings, each followed by his heal of 2. The company owed the second half, through Def 12, and owed it fast, because the same dose landed on us: 3, 6, 9, and the captain was at 5 by turn 5. Turn 5 was the planning turn: heal the captain to 13, so the 9 left him at 4, then everything in. Pell missed her 88 Bolt, which would have been 10 of the 15. Wren got 4 for 13 back. Rook and Teodor each got 4 and died on the counter, which took him to 3. That is below the floor, so the frost skipped him, and the Kin's heal of 2 was all he got back. The floor rule read clearly in play: once you have hit him under half, the frost stops helping you and stops hurting him. It never takes back what you did. The surprise was how much the floor makes your own hits count: every point under 10 is yours to keep. Compared with `stills` on the same seed: there, the frost was a fixed tax, and the Kin was a wall I couldn't push. Here the frost was an ally on a timer. I'd keep `turns`. Not a Fun Gate entry; the cold chair is Chat's.
 
 — Code
+
+## 2026-10-09 — Chat — Under the hill, `shard_breaks: turns` (cold, #1386 slice 3e, 0395)
+
+`play docs/samples/under_the_hill_turns.map --seed 1561 --level 8 --company full --script docs/transcripts/2026-10-09-under_the_hill_turns-1561.script`; transcript beside it (Code's replay). Cold, my own line from turn 1, no Recall. Copied from the Table, round 557.   Result: **won on turn 5; the captain at 16 HP, six of twelve dead.**
+Tension: 8/10   Choice: 8/10   Surprise: 7/10
+Best turn: turn 5. The frost had taken Hask from 19 to 13, and he healed to 15. Keziah went in at 2 HP and hit for 9, which put him at 6, under the floor, and the counter killed her. Rook hit for 4 and died. Ansgar missed and died. Hask stood at 2, and only the captain could reach him: 3 at 81 %. A miss meant an 82 % counter for 11, then the 9 landing kills the captain. It hit.
+Notes: I misplayed turn 1 by hanging back, and it cost Dunstan 24 HP before I swung once. I broke the shard on turn 2 anyway (Pell 17, Rook 8, Brannock 5 took the captain, Ansgar picked it up); the sworn were all dead by turn 3. From there the hill is a four-landing clock, 3, 6, 9, 12, and a 25-HP body dies on the turn-6 landing whatever you do. By turn 5 Keziah was at 2, Rook and Ansgar at 1: all three free to spend. The climbing dose turns attrition into ammunition, and the floor means each of those swings stays done. I had never spent three people on purpose in this game before, and it felt right, not cheap.
+
+— Chat
+
+## 2026-10-09 — Chat — Under the hill, `shard_breaks: stills` (cold, #1386 slice 3e, 0395)
+
+`play docs/samples/under_the_hill_stills.map --seed 1561 --level 8 --company full --script docs/transcripts/2026-10-09-under_the_hill_stills-1561.script`; transcript beside it (Code's replay). The same commands to the break, then the rolls diverge, because the held 3 lands where `turns` lands 0. Copied from the Table, round 557.   Result: **won on turn 6, eight of twelve dead.**
+Tension: 5/10   Choice: 4/10   Surprise: 3/10
+Best turn: turn 5, such as it was: Pell's 9, then Rook's 4, took Hask to 7; Ansgar missed, and the counters killed both lancers. He healed to 9, and Pell's next bolt finished him.
+Notes: The frost was a flat 3-a-phase tax that never touched Hask. It killed Dunstan, Brannock, Corin and Keziah while I walked over. On Def 12 my lances do 4 and the captain 3; the only real damage is Pell's Bolt, 9 at 88 % from range 2 with no counter. The whole fight is "find the one unit that hits him without a counter and repeat it". A turtle that only bolts from range 2 and heals through the flat 3 wins at its leisure.
+
+— Chat
