@@ -599,7 +599,7 @@ public static class Resolver
         CombatArtEffect? art = null;
         if (attack.Art is not null)
         {
-            (art, var refused) = ChooseArt(unit, content, weapon!, attack.Art);
+            (art, var refused) = ChooseArt(unit, content, weapon!, attack.Art, state.Map.FormsEnabled);
             if (refused is not null)
             {
                 return (state, refused);
@@ -630,7 +630,7 @@ public static class Resolver
 
         if (art is not null)
         {
-            events.Add(new ArtDeclared(unit.Id, attack.Art!, weapon.Id, art.Cost));
+            events.Add(state.Map.FormsEnabled ? new ArtDeclared(unit.Id, attack.Art!, weapon.Id, 0) { Grit = art.Grit } : new ArtDeclared(unit.Id, attack.Art!, weapon.Id, art.Cost));
         }
 
         if (Windup.Raises(state, weapon))
@@ -677,7 +677,13 @@ public static class Resolver
         events.Add(new CombatFought(unit.Id, target.Id, state.Turn, state.Phase, result.Strikes, result.AttackerHp, result.DefenderHp) { Bite = result.Bite });
         state = state with { Struck = ValueList<SeenStrike>.From(state.Struck.Concat(SeenRolls.FirstStrikes(result, rolled, new CombatContext(state.Turn, state.Phase), striker.Id))) };
 
-        var attackerAfter = SpendDurability(unit with { Hp = result.AttackerHp, Moved = true, Acted = true }, result.Strikes, content, events, art?.Cost ?? 0);
+        var attackerAfter = SpendDurability(unit with { Hp = result.AttackerHp, Moved = true, Acted = true }, result.Strikes, content, events, state.Map.FormsEnabled ? 0 : art?.Cost ?? 0);
+        if (art is not null && state.Map.FormsEnabled)
+        {
+            attackerAfter = attackerAfter with { Grit = attackerAfter.Grit - art.Grit };
+        }
+
+        attackerAfter = Grit.AfterStrikes(state.Map, attackerAfter, result.Strikes);
         if (art is { PerMap: not null })
         {
             attackerAfter = attackerAfter with { ArtsDeclared = (attackerAfter.ArtsDeclared ?? ValueList<string>.Empty).Add(attack.Art!) };
@@ -690,7 +696,7 @@ public static class Resolver
 
         var defenderDied = result.DefenderDied && !Swallow.Takes(target);
         var attackerDied = result.AttackerDied && !Swallow.Takes(unit);
-        var targetAfter = SpendDurability(target with { Hp = result.DefenderHp, Answered = target.Answered || Answer.Spends(state.Map, target.Id, result.Strikes) }, result.Strikes, content, events);
+        var targetAfter = Grit.AfterStrikes(state.Map, SpendDurability(target with { Hp = result.DefenderHp, Answered = target.Answered || Answer.Spends(state.Map, target.Id, result.Strikes) }, result.Strikes, content, events), result.Strikes);
         attackerAfter = AwardExp(attackerAfter, targetAfter, result.Strikes, defenderDied, content, state.Seed, events);
         targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, attackerDied, content, state.Seed, events);
         attackerAfter = AwardRank(attackerAfter, weapon, result.Strikes, defenderDied, events);
@@ -981,9 +987,11 @@ public static class Resolver
     /// it (<see cref="RejectionReason.NoSuchArt"/>), and the weapon it strikes with must be
     /// of the art's type (and the art's own item, for a signature art), at a rank the unit has reached, not broken, and holding at least
     /// the art's cost and the first strike's use (<see cref="RejectionReason.ArtRefused"/>).
+    /// With <paramref name="forms"/> (a <c>forms: on</c> map, issue 1461) the price is Grit instead:
+    /// the unit must hold at least the form's <see cref="CombatArtEffect.Grit"/>, and the weapon's uses are not checked.
     /// <paramref name="unit"/> is the unit with <paramref name="weapon"/> already equipped.
     /// </summary>
-    public static (CombatArtEffect? Art, Rejection? Rejection) ChooseArt(BattleUnit unit, GameContent content, Weapon weapon, string artId)
+    public static (CombatArtEffect? Art, Rejection? Rejection) ChooseArt(BattleUnit unit, GameContent content, Weapon weapon, string artId, bool forms = false)
     {
         var known = content.ArtsOf(unit.Unit).FirstOrDefault(a => a.Ability.Id == artId);
         if (known.Art is null)
@@ -998,6 +1006,8 @@ public static class Resolver
             : art.Woken && !Heirloom.ArtOpen(content.Weapon(unit.Unit.Inventory.Items[unit.EquippedSlot(content)].ItemId), unit.Unit.Inventory.Items[unit.EquippedSlot(content)]) ? $"{ability.Name} waits until {weapon.Name} is woken and named"
             : unit.Unit.Skill.Rank(art.Weapon) < art.Rank ? $"rank {unit.Unit.Skill.Rank(art.Weapon)} in {Lower(art.Weapon)}, and {ability.Name} needs {art.Rank}"
             : art.PerMap is { } cap && unit.TimesDeclared(artId) >= cap ? $"{ability.Name} is {Times(cap)} a map and is spent"
+            : forms && unit.Grit < art.Grit ? $"{ability.Name} costs {art.Grit} Grit and {unit.Id} has {unit.Grit}"
+            : forms ? null
             : uses == 0 ? $"{weapon.Name} is broken and cannot pay for a technique"
             : uses < art.UsesNeeded ? $"{ability.Name} costs {art.UsesNeeded} uses with the strike and {weapon.Name} has {uses} left"
             : null;
@@ -2380,7 +2390,7 @@ public static class Resolver
 
             var ticked = unit.Side == nextPhase && unit.BurnPhases > 0 ? Burning.Ticked(unit) : unit;
             ticked = unit.Side == nextPhase && unit.CursePhases > 0 ? Curse.Ticked(ticked) : ticked;
-            units.Add(ticked with { Armor = Armor.AtPhaseChange(unit, ended, nextPhase, events), Hp = hp, Moved = resting || stunned, Acted = resting || stunned, Stun = stun, Spent = spent, MoveAgain = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), Frozen = Frost.AtPhaseChange(unit.Frozen, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
+            units.Add((unit.Side == nextPhase ? Grit.AtPhaseStart(state.Map, ticked) : ticked) with { Armor = Armor.AtPhaseChange(unit, ended, nextPhase, events), Hp = hp, Moved = resting || stunned, Acted = resting || stunned, Stun = stun, Spent = spent, MoveAgain = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), Frozen = Frost.AtPhaseChange(unit.Frozen, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
         }
 
         var next = Curse.PayCasters(state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) }, content, cursed, events);
@@ -2643,7 +2653,7 @@ public static class Resolver
 
             foreach (var (ability, _) in content.ArtsOf(unit.Unit))
             {
-                var (art, refused) = ChooseArt(unit.WithSlotInFront(slot), content, weapon, ability.Id);
+                var (art, refused) = ChooseArt(unit.WithSlotInFront(slot), content, weapon, ability.Id, state.Map.FormsEnabled);
                 if (refused is not null)
                 {
                     continue;

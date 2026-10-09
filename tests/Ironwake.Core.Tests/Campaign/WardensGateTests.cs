@@ -54,7 +54,7 @@ public class WardensGateTests
     {
         var art = Assert.IsType<CombatArtEffect>(Shipped.Ability("turn_the_key").Effect);
 
-        Assert.Equal(new CombatArtEffect(WeaponType.Lance, WeaponRank.E, 3, -4, 0, 0, 0, 0) { Single = true, Woken = true, Locks = true, Item = LanceId }, art);
+        Assert.Equal(new CombatArtEffect(WeaponType.Lance, WeaponRank.E, 3, -4, 0, 0, 0, 0) { Single = true, Woken = true, Locks = true, Item = LanceId, Grit = 2 }, art);
         Assert.Contains("turn_the_key", Shipped.Cast.Single(u => u.Id == "teodor").Abilities);
     }
 

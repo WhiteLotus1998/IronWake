@@ -407,7 +407,7 @@ public sealed record BattleState(
                         break;
                     }
 
-                    units.Add(Place(unit, Side.Player, p.At, map, content) with { IsCaptain = p.Slot == PlayerSlot.Captain, PlacementIndex = index });
+                    units.Add(Place(unit, Side.Player, p.At, map, content) with { IsCaptain = p.Slot == PlayerSlot.Captain, PlacementIndex = index, Grit = map.FormsEnabled ? 1 : 0 });
                     break;
                 case EnemyPlacement e:
                     var count = perTemplate.GetValueOrDefault(e.TemplateId) + 1;

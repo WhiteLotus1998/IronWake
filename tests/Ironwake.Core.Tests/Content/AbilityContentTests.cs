@@ -193,8 +193,20 @@ public class AbilityContentTests
     {
         var content = ContentLoader.Parse(Fixture.Files(abilities: Senses));
 
-        Assert.Equal(new CombatArtEffect(WeaponType.Sword, WeaponRank.D, 2, 4, 0, 0, 2, 1), content.Ability("sunder").Effect);
+        Assert.Equal(new CombatArtEffect(WeaponType.Sword, WeaponRank.D, 2, 4, 0, 0, 2, 1) { Grit = 2 }, content.Ability("sunder").Effect);
         Assert.Equal(AbilityTrigger.Declared, content.Ability("sunder").Trigger);
+    }
+
+    [Fact]
+    public void AnArtsGritDefaultsToTwoAndToZeroWithAPerMapCap()
+    {
+        var plain = ContentLoader.Parse(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 1, \"mt\": 3 }")));
+        var capped = ContentLoader.Parse(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 1, \"mt\": 3, \"perMap\": 1 }")));
+        var named = ContentLoader.Parse(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 1, \"mt\": 3, \"grit\": 1 }")));
+
+        Assert.Equal(2, ((CombatArtEffect)plain.Ability("a").Effect).Grit);
+        Assert.Equal(0, ((CombatArtEffect)capped.Ability("a").Effect).Grit);
+        Assert.Equal(1, ((CombatArtEffect)named.Ability("a").Effect).Grit);
     }
 
     [Fact]
@@ -236,6 +248,8 @@ public class AbilityContentTests
     public void AnArtsRangeIsNeverNegative()
     {
         AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"bow\", \"rank\": \"E\", \"cost\": 1, \"mt\": 3, \"range\": -1 }"))), ContentFiles.AbilitiesName, "a", "effect.range");
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 1, \"mt\": 3, \"grit\": 4 }"))), ContentFiles.AbilitiesName, "a", "effect.grit");
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 1, \"mt\": 3, \"grit\": -1 }"))), ContentFiles.AbilitiesName, "a", "effect.grit");
     }
 
     [Fact]

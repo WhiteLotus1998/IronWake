@@ -138,6 +138,12 @@ public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cos
     /// <summary>Whether the attack costs the unit its side's next phase: it begins that phase moved and acted (issue 636).</summary>
     public bool CostsNextPhase { get; init; }
 
+    /// <summary>
+    /// What the form costs in Grit on a <c>forms: on</c> map (issue 1461, <see cref="Ironwake.Core.Grit"/>): 1 for a
+    /// reposition, 2 for a payoff, 3 for Defend, 0 for a form whose own cap is its price. Off the header <see cref="Cost"/> is paid in uses instead.
+    /// </summary>
+    public int Grit { get; init; }
+
     /// <summary>Whether the attack never doubles, whatever the speed gap (issue 739); the counter is unchanged.</summary>
     public bool Single { get; init; }
 

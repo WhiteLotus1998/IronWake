@@ -49,7 +49,7 @@ public class AttackMenuTests
     [InlineData("overcast", WeaponType.Reason, 2, 5, 0, 0, 4, 0)]
     public void TheShippedArtsCarryTheIssuesNumbers(string id, WeaponType weapon, int cost, int mt, int hit, int crit, int wt, int range)
     {
-        Assert.Equal(new CombatArtEffect(weapon, WeaponRank.E, cost, mt, hit, crit, wt, range), Shipped.Ability(id).Effect);
+        Assert.Equal(new CombatArtEffect(weapon, WeaponRank.E, cost, mt, hit, crit, wt, range) { Grit = 2 }, Shipped.Ability(id).Effect);
     }
 
     [Theory]

@@ -1699,7 +1699,7 @@ public sealed class PlaySession
         var forecast = Queries.Forecast(_state, _content, unit, target, tile, slot, art);
         if (forecast is null)
         {
-            Error(Queries.WeaponRefusal(_content, unit, slot, art)?.Message ?? $"{unit.Id} cannot attack {target.Id} from {tile}");
+            Error(Queries.WeaponRefusal(_content, unit, slot, art, _state.Map.FormsEnabled)?.Message ?? $"{unit.Id} cannot attack {target.Id} from {tile}");
             return false;
         }
 
@@ -1760,7 +1760,7 @@ public sealed class PlaySession
 
         if (art is not null)
         {
-            lines.Add(ArtLine(content, unit, forecast, slot, art));
+            lines.Add(ArtLine(content, unit, forecast, slot, art, state.Map.FormsEnabled));
         }
 
         if (RivalryLine(state, content, unit with { At = tile }, countering: false, names) is { } rivalry)
@@ -1981,15 +1981,17 @@ public sealed class PlaySession
     /// included, since that is paid whether the strike lands or not. An art with a per-map cap
     /// says how many uses of it are left this map, and one that costs the next phase says so
     /// (issue 636), since a rule the player pays for is printed where it is chosen. One that
-    /// strikes once says <c>x1, never doubles</c> (issue 739).
+    /// strikes once says <c>x1, never doubles</c> (issue 739). On a <c>forms: on</c> map the price
+    /// is the form's Grit against the unit's (issue 1461), and the uses are the strikes' alone.
     /// </summary>
-    private static string ArtLine(GameContent content, BattleUnit unit, CombatForecast forecast, int? slot, string art)
+    private static string ArtLine(GameContent content, BattleUnit unit, CombatForecast forecast, int? slot, string art, bool forms)
     {
         var (armed, weapon, _) = Resolver.ChooseWeapon(unit, content, slot);
         var ability = content.Ability(art);
         var struck = ((CombatArtEffect)ability.Effect).Apply(weapon!);
         var uses = armed.Unit.Inventory.Items[armed.EquippedSlot(content)].Uses;
-        return $"  technique {ability.Name}: {struck.Name} at acc {struck.Hit} power {struck.Mt} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss"
+        return $"  technique {ability.Name}: {struck.Name} at acc {struck.Hit} power {struck.Mt} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; "
+            + (forms ? $"costs {((CombatArtEffect)ability.Effect).Grit} of {unit.Grit} Grit, hit or miss; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses" : $"spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss")
             + (((CombatArtEffect)ability.Effect).PerMap is { } cap ? $"; {cap - unit.TimesDeclared(art)} of {cap} left this map" : "")
             + (((CombatArtEffect)ability.Effect).Single ? "; x1, never doubles" : "")
             + (((CombatArtEffect)ability.Effect).CostsNextPhase ? "; costs the next phase: no move, no act" : "")
@@ -3536,7 +3538,9 @@ public sealed class PlaySession
             case WeaponEquipped w:
                 return $"{names[w.UnitId]} equips {content.ItemName(w.ItemId)}";
             case ArtDeclared a:
-                return $"{names[a.UnitId]} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Cost} extra {(a.Cost == 1 ? "use" : "uses")}";
+                return a.Cost == 0 && a.Grit > 0
+                    ? $"{names[a.UnitId]} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Grit} Grit"
+                    : $"{names[a.UnitId]} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Cost} extra {(a.Cost == 1 ? "use" : "uses")}";
             case WeaponBroke b:
                 return $"{names[b.UnitId]}'s {content.ItemName(b.ItemId)} breaks";
             case SpellSpent s:
