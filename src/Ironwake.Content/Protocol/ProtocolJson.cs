@@ -755,6 +755,10 @@ public static class ProtocolJson
                 w.WriteString("art", a.ArtId);
                 w.WriteString("item", a.ItemId);
                 w.WriteNumber("cost", a.Cost);
+                if (a.Grit != 0)
+                {
+                    w.WriteNumber("grit", a.Grit);
+                }
                 break;
             case WeaponBroke b:
                 w.WriteString("unit", b.UnitId);
@@ -1709,6 +1713,11 @@ public static class ProtocolJson
             w.WriteNumber("frozen", unit.Frozen);
         }
 
+        if (unit.Grit > 0)
+        {
+            w.WriteNumber("grit", unit.Grit);
+        }
+
         if (unit.FrostTurn is { } frostTurn)
         {
             w.WriteNumber("frostTurn", frostTurn);
@@ -1952,6 +1961,7 @@ public static class ProtocolJson
             Grounded = OptionalInt(e, "grounded") ?? 0,
             Frosted = OptionalInt(e, "frosted") ?? 0,
             Frozen = OptionalInt(e, "frozen") ?? 0,
+            Grit = OptionalInt(e, "grit") ?? 0,
             FrostTurn = OptionalInt(e, "frostTurn"),
             FlewFrom = e.TryGetProperty("flewFrom", out _) ? ReadCoord(e, "flewFrom") : null,
             Breathed = e.TryGetProperty("breathed", out _) && RequiredBool(e, "breathed"),

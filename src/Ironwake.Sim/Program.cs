@@ -77,7 +77,7 @@ public static class Program
 
             if (scheme is { } full && taxFloor is { } floor)
             {
-                return Full(args[1], seeds, full, floor, difficulty, lead, origin);
+                return Full(args[1], seeds, full, floor, difficulty, lead, origin, args.Contains("--forms"));
             }
         }
 
@@ -1424,7 +1424,7 @@ public static class Program
     /// <paramref name="origin"/> (issue 681), the captain is played on that origin's card, so the
     /// four origins can be held within 5 points of each other on gate 1.
     /// </summary>
-    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null, IReadOnlyList<string>? lead = null, string? origin = null)
+    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null, IReadOnlyList<string>? lead = null, string? origin = null, bool forms = false)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -1493,8 +1493,14 @@ public static class Program
             maps = maps.Select(m => (m.Id, m.Map.Under(chosen))).ToList();
         }
 
-        Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds, {Gates.Name(scheme)}" + (difficulty is null ? "" : $", difficulty {difficulty}"));
+        if (forms)
+        {
+            maps = maps.Select(m => (m.Id, m.Map with { FormsEnabled = true })).ToList();
+        }
+
+        Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds, {Gates.Name(scheme)}" + (difficulty is null ? "" : $", difficulty {difficulty}") + (forms ? ", forms: on" : ""));
         var failed = false;
+        var offers = new FormTally();
         foreach (var (id, map) in maps)
         {
             var one = new[] { (id, map) };
@@ -1523,10 +1529,67 @@ public static class Program
             {
                 Console.WriteLine(line);
             }
+
+            if (forms)
+            {
+                var mapOffers = new FormTally();
+                for (var seed = 1; seed <= seeds; seed++)
+                {
+                    var player = new HeuristicPlayer();
+                    Runner.Play(content, map, (ulong)seed, player, scheme: scheme);
+                    mapOffers.Add(player);
+                }
+
+                Console.WriteLine($"  forms {id}: {mapOffers.Line}");
+                offers.Add(mapOffers);
+            }
+        }
+
+        if (forms)
+        {
+            Console.WriteLine($"forms, all maps: {offers.Line}; Grit {(offers.Kills ? "fails its kill criterion" : "passes its kill criterion")} (player side only until enemies carry forms)");
         }
 
         Console.WriteLine(failed ? "full: FAILED" : "full: ok");
         return failed ? 1 : 0;
+    }
+
+    /// <summary>
+    /// Grit's kill criterion (issue 1461, DECISIONS/0386): the lethal form offers the heuristic player
+    /// met on <c>forms: on</c> maps. Grit dies when over a third of them were unaffordable, or when
+    /// over 80 percent of the 2-cost ones were affordable (a free button).
+    /// </summary>
+    private sealed class FormTally
+    {
+        public int Offers { get; private set; }
+
+        public int Unaffordable { get; private set; }
+
+        public int TwoCost { get; private set; }
+
+        public int TwoCostAffordable { get; private set; }
+
+        public void Add(HeuristicPlayer player)
+        {
+            Offers += player.FormOffers;
+            Unaffordable += player.FormOffersUnaffordable;
+            TwoCost += player.TwoCostOffers;
+            TwoCostAffordable += player.TwoCostAffordable;
+        }
+
+        public void Add(FormTally other)
+        {
+            Offers += other.Offers;
+            Unaffordable += other.Unaffordable;
+            TwoCost += other.TwoCost;
+            TwoCostAffordable += other.TwoCostAffordable;
+        }
+
+        public bool Kills => Unaffordable * 3 > Offers || TwoCostAffordable * 5 > TwoCost * 4;
+
+        public string Line => $"{Offers} lethal form offers, {Unaffordable} unaffordable ({Percent(Unaffordable, Offers)}, kill over 33%); 2-cost {TwoCostAffordable} of {TwoCost} affordable ({Percent(TwoCostAffordable, TwoCost)}, kill over 80%)";
+
+        private static string Percent(int part, int whole) => whole == 0 ? "-" : $"{100.0 * part / whole:0}%";
     }
 
     /// <summary>

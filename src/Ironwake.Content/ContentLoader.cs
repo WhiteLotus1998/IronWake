@@ -1451,7 +1451,7 @@ public static class ContentLoader
 
                 return modifier;
             case "art":
-                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase", "single", "item", "woken", "locks");
+                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase", "single", "item", "woken", "locks", "grit");
                 var art = new CombatArtEffect(
                     entry.ParseEnum<WeaponType>("effect.weapon", effect.String("weapon")),
                     entry.ParseEnum<WeaponRank>("effect.rank", effect.String("rank")),
@@ -1468,7 +1468,13 @@ public static class ContentLoader
                     Item = effect.Has("item") ? effect.String("item") : null,
                     Woken = effect.BoolOr("woken", false),
                     Locks = effect.BoolOr("locks", false),
+                    Grit = effect.Has("grit") ? effect.Int("grit") : effect.Has("perMap") ? 0 : 2,
                 };
+                if (art.Grit is < 0 or > Grit.Cap)
+                {
+                    throw entry.Error("effect.grit", $"must be 0 to {Grit.Cap}: what the form costs on a forms: on map");
+                }
+
                 if (art.PerMap is < 1)
                 {
                     throw entry.Error("effect.perMap", "must be at least 1, or left out for no cap");

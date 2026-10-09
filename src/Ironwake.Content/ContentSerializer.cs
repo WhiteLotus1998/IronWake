@@ -515,6 +515,7 @@ public static class ContentSerializer
                 writer.WriteNumber("crit", art.Crit);
                 writer.WriteNumber("wt", art.Wt);
                 writer.WriteNumber("range", art.Range);
+                writer.WriteNumber("grit", art.Grit);
                 if (art.PerMap is { } perMap)
                 {
                     writer.WriteNumber("perMap", perMap);

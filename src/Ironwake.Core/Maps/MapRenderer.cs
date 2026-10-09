@@ -269,6 +269,11 @@ public static class MapRenderer
             sb.Append(Winded.Legend).Append('\n');
         }
 
+        if (map.FormsEnabled)
+        {
+            sb.Append(Grit.Legend).Append('\n');
+        }
+
         if (map.OneAnswerEnabled)
         {
             sb.Append(Answer.Legend).Append('\n');
@@ -442,6 +447,11 @@ public static class MapRenderer
             var who = $"{unit.Unit.Name} L{unit.Unit.Level} {content.Class(unit.Unit.ClassId).Name.ToLowerInvariant()}";
             var hp = $"hp {unit.Hp}/{unit.MaxHp(content)}";
             sb.Append(LetterOf(unit, letters, map, content)).Append("  ").Append($"{unit.Id,-16} {who,-26} {unit.At,-6} {hp,-9} {terrain}");
+            if (map.FormsEnabled)
+            {
+                sb.Append("  ").Append(Grit.Label(unit));
+            }
+
             if (unit.Side == Side.Enemy)
             {
                 var role = unit.IsBoss ? "boss" : unit.Behavior.ToString()!.ToLowerInvariant();
@@ -672,6 +682,11 @@ public static class MapRenderer
         if (map.DashEnabled)
         {
             sb.Append(Winded.Legend).Append('\n');
+        }
+
+        if (map.FormsEnabled)
+        {
+            sb.Append(Grit.Legend).Append('\n');
         }
 
         if (map.OneAnswerEnabled)

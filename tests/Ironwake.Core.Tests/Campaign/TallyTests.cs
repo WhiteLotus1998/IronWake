@@ -44,7 +44,7 @@ public class TallyTests
     {
         var art = Assert.IsType<CombatArtEffect>(Content.Ability("paid_in_full").Effect);
 
-        Assert.Equal(new CombatArtEffect(WeaponType.Bow, WeaponRank.E, 4, 6, -25, 0, 0, 0) { Single = true, Item = "ottilie_tally" }, art);
+        Assert.Equal(new CombatArtEffect(WeaponType.Bow, WeaponRank.E, 4, 6, -25, 0, 0, 0) { Single = true, Item = "ottilie_tally", Grit = 2 }, art);
     }
 
     [Fact]

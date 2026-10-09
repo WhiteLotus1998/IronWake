@@ -416,7 +416,7 @@ public sealed class ProtocolSession
 
         if (Queries.Forecast(_state, _content, unit, target, tile, slot, art) is not { } forecast)
         {
-            var rejection = Queries.WeaponRefusal(_content, unit, slot, art);
+            var rejection = Queries.WeaponRefusal(_content, unit, slot, art, _state.Map.FormsEnabled);
             return rejection is not null
                 ? Error(ProtocolJson.Name(rejection.Reason), rejection.Message)
                 : Error(ProtocolJson.Name(RejectionReason.OutOfRange), $"{unit.Id} cannot attack {target.Id} from {tile}");

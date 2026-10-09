@@ -224,6 +224,13 @@ public sealed record MapDefinition(
     public bool DashEnabled { get; init; }
 
     /// <summary>
+    /// The <c>forms: on</c> header (issue 1461, DECISIONS/0398): every unit carries Grit
+    /// (<see cref="Grit"/>), and a declared form costs Grit instead of weapon uses. Off by default,
+    /// when an art costs uses as before.
+    /// </summary>
+    public bool FormsEnabled { get; init; }
+
+    /// <summary>
     /// The <c>arrivals: wait</c> header (issue 1259, experiment, samples): a non-boss spawn whose tile is
     /// held or impassable is not spent but waits at its tile, and lands at the first enemy phase that
     /// starts with the tile open, one a tile a phase, the oldest first (<see cref="MapEvents"/>). Off by

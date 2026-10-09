@@ -111,7 +111,7 @@ public static class Queries
         CombatArtEffect? declared = null;
         if (art is not null)
         {
-            (declared, rejection) = Resolver.ChooseArt(armed, content, weapon!, art);
+            (declared, rejection) = Resolver.ChooseArt(armed, content, weapon!, art, state.Map.FormsEnabled);
             if (rejection is not null)
             {
                 return null;
@@ -129,7 +129,7 @@ public static class Queries
         var holder = LightningRod.Catcher(state, content, from, weapon, target);
         var struck = holder ?? target;
         var forecast = Combat.Forecast(Stoop.Poised(content, armed, from).ToCombatant(state, content, art: declared, against: struck), struck.Answering(state, content, from, armed) with { Catching = holder is not null }, from.DistanceTo(struck.At), state.Scheme) with { CaughtBy = holder?.Id };
-        return declared is null ? forecast : forecast with { ArtCost = declared.Cost };
+        return declared is null || state.Map.FormsEnabled ? forecast : forecast with { ArtCost = declared.Cost };
     }
 
     /// <summary>
@@ -194,7 +194,7 @@ public static class Queries
     /// (<see cref="Resolver.ChooseWeapon"/>) or of the art (<see cref="Resolver.ChooseArt"/>),
     /// the same the resolver would give; null when both would be accepted.
     /// </summary>
-    public static Rejection? WeaponRefusal(GameContent content, BattleUnit unit, int? slot, string? art)
+    public static Rejection? WeaponRefusal(GameContent content, BattleUnit unit, int? slot, string? art, bool forms = false)
     {
         var (armed, weapon, rejection) = Resolver.ChooseWeapon(unit, content, slot);
         if (rejection is not null || art is null)
@@ -202,7 +202,7 @@ public static class Queries
             return rejection;
         }
 
-        return Resolver.ChooseArt(armed, content, weapon!, art).Rejection;
+        return Resolver.ChooseArt(armed, content, weapon!, art, forms).Rejection;
     }
 
     /// <summary>

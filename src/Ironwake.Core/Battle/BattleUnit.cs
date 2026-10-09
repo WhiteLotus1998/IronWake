@@ -125,6 +125,9 @@ public sealed record BattleUnit(
     /// </summary>
     public int Stun { get; init; }
 
+    /// <summary>The unit's Grit on a <c>forms: on</c> map (issue 1461, <see cref="Ironwake.Core.Grit"/>): 0 to 3; always 0 off the header.</summary>
+    public int Grit { get; init; }
+
     /// <summary>Whether the unit's stun rider has stunned someone this map (issue 1244, <see cref="Core.Stun"/>): once a map per caster.</summary>
     public bool StunSpent { get; init; }
 
