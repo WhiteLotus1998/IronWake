@@ -1,3 +1,4 @@
+using Ironwake.Sim;
 using Ironwake.Content;
 using Ironwake.Content.Protocol;
 using Ironwake.Core.Tests.Maps;
@@ -246,5 +247,66 @@ public class KinShardTests
             Assert.Equal(shard, back.Shard);
             Assert.Contains("shard " + KinShard.Word(shard) + "\n", state.Canonical());
         }
+    }
+    [Fact]
+    public void TheSimTakesALyingShardFromATileItCanEndOn()
+    {
+        var state = Dropped(Start());
+        var captain = Captain(state);
+        var plan = HeuristicPlayer.PlanUnit(state, Starter, captain);
+
+        Assert.Equal(new TakeShard(captain.Id, KinShard.Ground), plan[^1]);
+        var at = plan[0] is Move move ? move.To : captain.At;
+        Assert.True(at.DistanceTo(new Coord(5, 2)) <= 1);
+    }
+
+    [Fact]
+    public void TheSimNeverTakesTheShardFromATileWhoseNoCritExposureKills()
+    {
+        var state = Dropped(BattleFixture.Start(1386, ValueList<Unit>.Of(Hale, Wren, Ivo), Hill.Replace("7,2 group:sworn behavior:hold", "7,2 group:sworn behavior:aggressive")));
+        var captain = Captain(state);
+        Assert.Equal(new TakeShard(captain.Id, KinShard.Ground), HeuristicPlayer.PlanUnit(state, Starter, captain)[^1]);
+
+        var hurt = captain with { Hp = 1 };
+        Assert.DoesNotContain(HeuristicPlayer.PlanUnit(state.WithUnit(hurt), Starter, hurt), c => c is TakeShard);
+    }
+
+    private const string Far = """
+        name: Far hill
+        size: 16x5
+        win: defeat_boss
+        kin_shard: 1,2
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+
+        ................
+        ................
+        ................
+        ................
+        ................
+
+        units:
+        P captain 8,2
+        P recruit:wren 8,4
+        P recruit:ivo 8,0
+        B soldier 15,2 group:kin behavior:guard
+        E soldier 1,2 group:sworn behavior:hold
+        """;
+
+    [Fact]
+    public void WithNoTakeInReachTheSimWalksTowardTheLyingShardNotTheBoss()
+    {
+        var start = BattleFixture.Start(1386, ValueList<Unit>.Of(Hale, Wren, Ivo), Far);
+        var bearer = At(start, 1, 2);
+        var state = Hollow.LeaveBody(start, bearer).WithoutUnit(bearer.Id) with { Shard = ShardHold.Lying(new Coord(1, 2)) };
+        var captain = Captain(state);
+        var plan = HeuristicPlayer.PlanUnit(state, Starter, captain);
+
+        Assert.DoesNotContain(plan, c => c is Attack or TakeShard);
+        Assert.True(Assert.IsType<Move>(plan[0]).To.X < 8);
+
+        var carried = start.WithUnit(Captain(start));
+        Assert.DoesNotContain(HeuristicPlayer.PlanUnit(carried, Starter, Captain(carried)), c => c is TakeShard);
     }
 }
