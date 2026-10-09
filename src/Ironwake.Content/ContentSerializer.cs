@@ -1341,6 +1341,11 @@ public static class ContentSerializer
                 writer.WriteBoolean("rooted", true);
             }
 
+            if (swallow.Late)
+            {
+                writer.WriteBoolean("late", true);
+            }
+
             writer.WriteEndObject();
         }
 

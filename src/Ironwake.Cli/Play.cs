@@ -2664,8 +2664,8 @@ public sealed class PlaySession
         if (unit.Kin is { } kin)
         {
             lines.Add(unit.Swallowed
-                ? $"  Swallowed: {(kin.Rooted ? "he holds his tile; " : "")}the Kin heals {kin.Heal} at his side's phase start; Frozen Iron lands for {state.FrozenIron} on every unit at his side's next phase start"
-                : $"  At 0 HP he swallows the shard: stage 2 on a fresh bar (hp {kin.Hp}, Def +{kin.Def}, Res +{kin.Res}){(kin.Rooted ? " rooted where he stands" : "")}, the Kin heals {kin.Heal} and Frozen Iron falls on every unit at each of his phase starts");
+                ? $"  Swallowed: {(kin.Rooted ? "he holds his tile; " : "")}the Kin heals {kin.Heal} at his side's phase start; Frozen Iron lands for {state.FrozenIron} on every unit at his side's {(state.FrozenIronHeld ? "phase start after next" : "next phase start")}"
+                : $"  At 0 HP he swallows the shard: stage 2 on a fresh bar (hp {kin.Hp}, Def +{kin.Def}, Res +{kin.Res}){(kin.Rooted ? " rooted where he stands" : "")}, the Kin heals {kin.Heal} and Frozen Iron falls on every unit at each of his phase starts{(kin.Late ? " from the second" : "")}");
         }
 
         var unitClass = content.Class(unit.Unit.ClassId);

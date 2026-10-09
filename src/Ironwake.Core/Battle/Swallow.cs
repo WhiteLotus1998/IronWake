@@ -7,9 +7,11 @@ namespace Ironwake.Core;
 /// (<paramref name="Heal"/>), and the line his card prints under his name from then on
 /// (<paramref name="Description"/>, the empty pommel), or null to keep his own. <paramref name="Rooted"/> roots him on
 /// the tile he swallowed on (Table round 505, issue 1395): from the swallow he holds (<see cref="Behavior.Hold"/>), striking
-/// only what his lance and line reach from there. Read from a template's <c>swallow</c> block in <c>units/</c>.
+/// only what his lance and line reach from there. <paramref name="Late"/> starts the clock a phase late (Table rounds 507,
+/// 508, issue 1423): Frozen Iron first lands at his side's second phase start after the swallow, not its first. Read from
+/// a template's <c>swallow</c> block in <c>units/</c>.
 /// </summary>
-public sealed record KinStage(int Hp, int Def, int Res, int Heal, string? Description = null, bool Rooted = false);
+public sealed record KinStage(int Hp, int Def, int Res, int Heal, string? Description = null, bool Rooted = false, bool Late = false);
 
 /// <summary>Stage 1's bar reached 0 and <paramref name="UnitId"/> swallowed the shard (issue 1385): stage 2 begins on <paramref name="Hp"/>, a fresh bar, on <paramref name="At"/>.</summary>
 public sealed record ShardSwallowed(string UnitId, Coord At, int Hp) : GameEvent;
@@ -56,7 +58,8 @@ public static class Swallow
     /// <summary>
     /// The unit <paramref name="unitId"/>, at 0 HP on <paramref name="state"/>, swallows: its Def and Res rise by the
     /// stage's, its max HP becomes the stage's bar, it stands on that bar full, a <see cref="KinStage.Rooted"/> stage
-    /// holds its tile from then on, and Frozen Iron is set to land from the next phase start.
+    /// holds its tile from then on, and Frozen Iron is set to land from the next phase start, or the one after for a
+    /// <see cref="KinStage.Late"/> stage (<see cref="BattleState.FrozenIronHeld"/>).
     /// </summary>
     public static BattleState Take(BattleState state, GameContent content, string unitId, List<GameEvent> events)
     {
@@ -72,20 +75,30 @@ public static class Swallow
         };
         swallowed = swallowed with { Hp = swallowed.MaxHp(content) };
         events.Add(new ShardSwallowed(unitId, unit.At, swallowed.Hp));
-        return state.WithUnit(swallowed) with { FrozenIron = state.FrozenIron > 0 ? state.FrozenIron : FirstDose };
+        var set = state.FrozenIron > 0;
+        return state.WithUnit(swallowed) with
+        {
+            FrozenIron = set ? state.FrozenIron : FirstDose,
+            FrozenIronHeld = set ? state.FrozenIronHeld : stage.Late,
+        };
     }
 
     /// <summary>
     /// The phase start's Frozen Iron and the Kin's heal (issue 1385), after the terrain's heal and burn: while
     /// <see cref="BattleState.FrozenIron"/> is set and <paramref name="side"/> is his (<see cref="Casts"/>), every unit
-    /// on the board takes it, never below 0; a unit it takes to 0 swallows if it may (<see cref="Takes"/>), else dies
+    /// on the board takes it, never below 0, unless the landing is held (<see cref="BattleState.FrozenIronHeld"/>), when this
+    /// phase start only lifts the hold; a unit it takes to 0 swallows if it may (<see cref="Takes"/>), else dies
     /// through <paramref name="died"/>; the next landing
     /// climbs by <see cref="DoseStep"/> to <see cref="MostDose"/>. Then each swallowed unit of
     /// <paramref name="side"/> still standing heals its stage's <see cref="KinStage.Heal"/>, to max.
     /// </summary>
     public static BattleState Fall(BattleState state, GameContent content, Side side, List<GameEvent> events, Func<BattleState, BattleUnit, BattleState> died)
     {
-        if (state.FrozenIron > 0 && Casts(state, side))
+        if (state.FrozenIron > 0 && Casts(state, side) && state.FrozenIronHeld)
+        {
+            state = state with { FrozenIronHeld = false };
+        }
+        else if (state.FrozenIron > 0 && Casts(state, side))
         {
             var dose = state.FrozenIron;
             var struck = state.Units.Where(u => !u.Retreated).ToList();
@@ -133,11 +146,12 @@ public static class Swallow
     /// </summary>
     /// <summary>
     /// The Frozen Iron that lands on a unit of <paramref name="side"/> at the other side's next phase start (round 502):
-    /// the set dose while a swallowed unit of the other side stands (<see cref="Casts"/>), else 0. It lands before that
+    /// the set dose while a swallowed unit of the other side stands (<see cref="Casts"/>) and the landing is not held
+    /// (<see cref="BattleState.FrozenIronHeld"/>), else 0. It lands before that
     /// phase strikes, so <see cref="Exposure.Of"/> counts it.
     /// </summary>
     public static int NextLanding(BattleState state, Side side) =>
-        state.FrozenIron > 0 && Casts(state, side == Side.Player ? Side.Enemy : Side.Player) ? state.FrozenIron : 0;
+        state.FrozenIron > 0 && !state.FrozenIronHeld && Casts(state, side == Side.Player ? Side.Enemy : Side.Player) ? state.FrozenIron : 0;
 
     public static bool Casts(BattleState state, Side side) => state.Units.Any(u => u is { Swallowed: true, Retreated: false } && u.Side == side);
 

@@ -1,0 +1,49 @@
+# issue 1423 (Table rounds 507, 508): the late clock (b) built on the rooted stage 2 (c), the reach-share tripwire, and the
+# depleted pre-swallow falls by where the hunt stood.
+# --finale docs/samples/ironwake_keep_warden.map --level 8 --seeds 200, two-roll average. Wins full / depleted; gate 1 is 120 on both.
+# 'damage on him': as in keep-1420-rooted.txt; the tripwire (round 508) withdraws (b) if full's share passes 40 %.
+# 'by the hunt': each captain fall before the swallow, by the board as the falling command began: hunted when the
+# hunter's prey named him, alone / paired by whether another player unit defended his front, behind the fronts when he
+# defended none; his own phase when he fell attacking; 'down a line' counts the falls a line strike dealt.
+#
+# summary (full / depleted; clock deaths 2+ of the games that reached stage 2; reach share full / depleted):
+#   (c) rooted alone (0366)   120 / 53   2+ 85/165, 62/110   31 % / 43 %
+#   (c) + (b), built here     115 / 59   2+ 55/165, 37/110   33 % / 43 %   (tripwire 40 %: not met; (b) stays)
+#
+# depleted, the 29 falls before the swallow: hunted and alone 8 (Sworn Hunter 5), hunted and paired 1, hunted behind the
+# fronts 10 (Hask 7), not hunted behind the fronts 9 (Hask 8), his own phase 1. 15 of Hask's 16 come behind the fronts,
+# 5 down his line. The hunter's weakest-front pick finding a lone captain is 8 of 29; the larger share is Hask reaching
+# a captain who stands inside the walls, hunted or not.
+
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 115/200 (57 %), losses 68 timeout 17 captain 0 protected: FAILED
+  length: median 11 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 70 ms: ok
+  bond: hunter killed 197, freed 0, standing 3 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 18, blocked 7, unfired 175, gate_in1 arrived 6, blocked 0, unfired 194, gate_in2 arrived 2, blocked 4, unfired 194, south_in arrived 5, blocked 0, unfired 195 of 200 (data; all blocked is decoration)
+  stage 2: reached 165 of 200, won 115; median 7 phases; clock deaths 0 in 53, 1 in 57, 2+ in 55 (gate: at most 1); at the swallow, median 5 standing, captain at 15 HP; damage on him, 33 % from tiles he cannot reach (1023 of 3044)
+  stage 2 timeouts: 43; at the limit, median boss HP 12, 1 standing; median blows on him a player phase 1.0 over 4 player phases
+  captain falls: 10 before the swallow (Hexer 4, Hask 2, Hask (countering) 1, Soldier 1, Sworn Hunter 1, Sworn Hunter (countering) 1), 7 after (frozen iron 6, Hask 1)
+  after the swallow, by his last plan: cornered 6 (frozen iron 6); read safe, crit-lethal 1 (Hask 1)
+  before the swallow, by the hunt: hunted, alone 4 (Hexer 2, Soldier 1, Sworn Hunter 1); hunted, behind the fronts 3 (Hask 2, Hexer 1); not hunted, behind the fronts 1 (Hexer 1); his own phase 2 (Hask (countering) 1, Sworn Hunter (countering) 1); down a line 0
+finale depleted: 12 units at level 8, heuristic wins 59/200 (29 %), losses 110 timeout 31 captain 0 protected: FAILED
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 56 ms: ok
+  bond: hunter killed 186, freed 0, standing 14 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 34, blocked 4, unfired 162, gate_in1 arrived 21, blocked 5, unfired 174, gate_in2 arrived 23, blocked 3, unfired 174, south_in arrived 7, blocked 0, unfired 193 of 200 (data; all blocked is decoration)
+  stage 2: reached 110 of 200, won 59; median 5 phases; clock deaths 0 in 36, 1 in 37, 2+ in 37 (gate: at most 1); at the swallow, median 5 standing, captain at 14 HP; damage on him, 43 % from tiles he cannot reach (794 of 1806)
+  stage 2 timeouts: 49; at the limit, median boss HP 14, 2 standing; median blows on him a player phase 1.0 over 2 player phases
+  captain falls: 29 before the swallow (Hask 16, Sworn Hunter 5, Hexer 4, Soldier 2, Brigand 1, Sworn Hunter (countering) 1), 2 after (Hask 1, frozen iron 1)
+  after the swallow, by his last plan: cornered 1 (frozen iron 1); read safe, crit-lethal 1 (Hask 1)
+  before the swallow, by the hunt: hunted, alone 8 (Sworn Hunter 5, Hask 1, Hexer 1, Soldier 1); hunted, paired 1 (Hexer 1); hunted, behind the fronts 10 (Hask 7, Brigand 1, Hexer 1, Soldier 1); not hunted, behind the fronts 9 (Hask 8, Hexer 1); his own phase 1 (Sworn Hunter (countering) 1); down a line 5
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 87 timeout 113 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 11 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 48 ms: ok
+  bond: hunter killed 116, freed 0, standing 84 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 118, blocked 4, unfired 78, gate_in1 arrived 84, blocked 21, unfired 95, gate_in2 arrived 90, blocked 15, unfired 95, south_in arrived 38, blocked 4, unfired 158 of 200 (data; all blocked is decoration)
+  stage 2: reached 7 of 200, won 0; median 3 phases; clock deaths 0 in 4, 1 in 2, 2+ in 1 (gate: at most 1); at the swallow, median 3 standing, captain at 20 HP; damage on him, 0 % from tiles he cannot reach (0 of 11)
+  stage 2 timeouts: 6; at the limit, median boss HP 18, 2 standing; median blows on him a player phase 0.6 over 1 player phases
+  captain falls: 112 before the swallow (Hexer 34, Hask 33, Sworn Hunter 28, Soldier 10, Brigand 3, Archer 2, Sworn Hunter (countering) 2), 1 after (Hask 1)
+  after the swallow, by his last plan: read safe, crit-lethal 1 (Hask 1)
+  before the swallow, by the hunt: hunted, alone 18 (Hexer 8, Sworn Hunter 5, Soldier 4, Hask 1); hunted, behind the fronts 45 (Sworn Hunter 16, Hask 13, Hexer 12, Soldier 2, Archer 1, Brigand 1); not hunted, alone 7 (Brigand 2, Hexer 2, Hask 1, Soldier 1, Sworn Hunter 1); not hunted, behind the fronts 40 (Hask 18, Hexer 12, Sworn Hunter 6, Soldier 3, Archer 1); his own phase 2 (Sworn Hunter (countering) 2); down a line 2
+finale: FAILED
