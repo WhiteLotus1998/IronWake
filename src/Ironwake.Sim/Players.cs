@@ -46,7 +46,7 @@ public sealed class RandomLegalPlayer : IPlayer
 /// Gate 1's baseline (issue 12): a planner of its own over <see cref="EnemyAi.Score"/> and
 /// <see cref="EnemyAi.AttackTiles"/>, per unit in id order. The best-scoring attack from
 /// the best tile with any weapon it carries (<see cref="Arms"/>, issue 746), a hungering weapon not yet woken ahead of any other when it kills on a hit and behind any other when it does not (the hunt, issues 804 and 851), with section 8's tie-breaks mirrored (exposure counted over enemy reach
-/// sets); else a heal below half HP (a healing spell on the most wounded ally in range,
+/// sets); else a heal at half HP or below (a healing spell on the most wounded ally in range,
 /// else a consumable on itself); else the approach: toward the nearest enemy by section
 /// 8's rule for Rout and Defeat Boss, toward the throne for Seize, toward the nearest exit
 /// for Escape, hold for Survive. On Escape a unit that can reach an exit leaves through it
@@ -1057,8 +1057,15 @@ public sealed class HeuristicPlayer : IPlayer
         unit.IsCaptain || (state.Map.ProtectId is { } protectId && string.Equals(unit.Id, protectId, StringComparison.Ordinal));
 
     /// <summary>
-    /// A heal when one is wanted: a healing spell on the most wounded ally below half, else a consumable on itself below
-    /// half, from the safest tile that allows it. Safest is the lowest no-crit exposure for a unit the veto covers, and the
+    /// Whether <paramref name="unit"/> is wounded enough for the heuristic to heal it: at half its max HP or below (issue 1429).
+    /// The threshold was below half, and on the Mill 20 of 41 timeouts were the captain parked at exactly 11/22 with every
+    /// approach lethal at 11 and his own Field Dressing and Maud's Salve unused to the turn limit (DECISIONS/0367).
+    /// </summary>
+    public static bool Wounded(GameContent content, BattleUnit unit) => unit.Hp * 2 <= unit.MaxHp(content);
+
+    /// <summary>
+    /// A heal when one is wanted: a healing spell on the most wounded ally at half or below, else a consumable on itself at
+    /// half or below (<see cref="Wounded"/>), from the safest tile that allows it. Safest is the lowest no-crit exposure for a unit the veto covers, and the
     /// fewest enemies able to end beside the tile for the rest; a healer with no weapon (issue 1441, Table rounds 533 and
     /// 534) ranks by the no-crit exposure first and never casts from a tile whose no-crit sum reaches her HP, so with only
     /// lethal tiles in reach of the patient she heals no one and walks instead. Without the rule the keep's chaplain healed
@@ -1076,7 +1083,7 @@ public sealed class HeuristicPlayer : IPlayer
             var stack = unit.Unit.Inventory.Items[slot];
             if (content.Items.TryGetValue(stack.ItemId, out var item))
             {
-                if (item.Teaches is null && unit.Hp * 2 < unit.MaxHp(content) && stack.Uses > 0)
+                if (item.Teaches is null && Wounded(content, unit) && stack.Uses > 0)
                 {
                     return WithMove(unit, safest[0], new UseItem(unit.Id, slot));
                 }
@@ -1100,7 +1107,7 @@ public sealed class HeuristicPlayer : IPlayer
                 BattleUnit? wounded = null;
                 foreach (var ally in state.UnitsOf(Side.Player))
                 {
-                    if (ally.Id != unit.Id && spell.InRange(tile.DistanceTo(ally.At)) && ally.Hp * 2 < ally.MaxHp(content)
+                    if (ally.Id != unit.Id && spell.InRange(tile.DistanceTo(ally.At)) && Wounded(content, ally)
                         && (wounded is null || ally.Hp < wounded.Hp))
                     {
                         wounded = ally;
@@ -1120,7 +1127,7 @@ public sealed class HeuristicPlayer : IPlayer
     /// <summary>
     /// Where a healer with no weapon walks when it has no heal to give (issue 1395, Table rounds 524 and 525, DECISIONS/0377):
     /// on a Rout or Defeat Boss map section 8's approach has no destination for a unit that cannot strike, and without this
-    /// rule the keep's chaplain stood where she deployed all game. Toward the nearest ally below half HP (the heal's own
+    /// rule the keep's chaplain stood where she deployed all game. Toward the nearest ally at half HP or below (the heal's own
     /// threshold) when one has a path, by the fewest steps left to a tile her heal reaches it from; else behind the ally
     /// standing nearest a seen enemy (any enemy when none is seen): a tile from which that ally is within her Move and her
     /// heal's range next phase first, then the fewest steps left. Only a tile that closes on the ally, where no enemy's
@@ -1161,7 +1168,7 @@ public sealed class HeuristicPlayer : IPlayer
             return Movement.DistancesTo(state.Map, content, from, movement, OccupantAt, footing);
         }
 
-        var hurt = allies.Where(a => a.Hp * 2 < a.MaxHp(content))
+        var hurt = allies.Where(a => Wounded(content, a))
             .Select(a => (Ally: a, Toward: Toward(a)))
             .Where(a => a.Toward.From(unit.At) is not null)
             .OrderBy(a => a.Toward.From(unit.At))
