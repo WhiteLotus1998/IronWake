@@ -1,0 +1,51 @@
+The Mill's gate 1 trace (issue 1418). Main at e29f4f7, content/maps/the_mill.map, heuristic player,
+two-roll average. `--trace the_mill <seed>` for seeds 1 to 200 reproduces `--full`'s line exactly:
+107 won, 41 timeout, 47 Maud dead, 5 captain dead.
+
+1. The cork (Chat's question 1).
+   End of player turn 2, all 200 seeds: captain on 7,8, Maud on the fort 7,9. Every bucket.
+   The planner never leaves the fort open and never walks Maud off it into the brigand.
+
+   Maud's 47 deaths: turn 6 (5), 7 (5), 8 (33), 9 (4).
+   Killer: archer-1 37, soldier-1 10. Every one ends on `end !` (the lethal warning swung).
+   Her last action: wait 16, move and wait 16, move and salve the captain 14, salve in place 1.
+   Her last plan (Heal's tiles, no-crit exposure against her HP): 46 of 47 cornered, no tile under
+   her HP, 45 of them at 6 HP. One had a passing tile. The 6 is the soldier's single 11 a phase
+   earlier, taken on a tile the veto passed (11 under 17). The veto is one phase deep; the archer
+   (Mov 5, bow 2) then covers every tile she can reach. Cornered, not misjudged.
+
+2. The wake (Chat's question 2).
+   Mill pair woke on turn (wins): 3: 3, 4: 84, 5: 6, 6: 3, 7: 11. 82 of 107 by noise on turn 4.
+   Timeouts: never woke 20 of 41; woke on turn 4 to 8 in the rest.
+   The captain's last plan in the 41 timeouts: HP 11 in 20, 12 to 13 in 7, 17 to 20 in 4, 2 to 7 in 9.
+   Seed 2: the captain stands on 7,3 at 11/22 from turn 6 to the limit, Maud beside him with Salve 8/8,
+   himself with Field Dressing 3/3. Every approach to the pair is lethal at 11, and Heal wants a heal
+   only below half: 11 * 2 < 22 is false. Nobody heals, nobody walks.
+
+3. Screens (200 seeds; wins, then losses timeout / captain / Maud). Not shipped.
+   main                                                           107   41 /  5 / 47
+   A  veto-covered unit's own consumable at a real wound          103   26 /  2 / 69
+   B  A, plus a heal spell on a veto-covered ally at any wound     86   12 /  1 / 101
+   C  B, plus the healer heals only from a tile it survives        89   27 / 19 / 65
+   D  main thresholds, the healer heals only from a tile it survives 66 41 / 53 / 40
+   E  A, plus top-up heals (ally at half or more) only from a
+      tile the healer survives; heals below half unchanged        101   26 /  1 / 72
+   F  E, plus Maud refuses any exposed tile when one is unexposed 108   85 /  5 /  2  (ceiling probe)
+   main at turn_limit 10 (scratch copy of the map)                113   31 /  5 / 51
+   F at turn_limit 10                                             163   25 / 10 /  2
+
+   F is categorical (a protected recruit refuses any exposure when it can), which the veto is not
+   (DESIGN 11, the seventh round): it is Chat's 3407 shape (Maud parked out of reach on 8,5), not a fix.
+
+   Unstalling the captain turns timeouts into Maud deaths: he walks in, she follows, and she is
+   cornered a phase later as in 1. Keeping her back (F) saves her and times the captain out alone.
+   D says Maud's unpriced heals are what keep the captain alive: refusing them costs 41 wins.
+
+4. Arts. The heuristic plays none: 0 `art` commands in 200 traces. Chat's 3407 win turned on two
+   (Full Measure kills the soldier with no lethal counter on turn 7, Feint finishes the archer on 9),
+   and Code 1820 used none but no strike reached Maud.
+
+Reading. The planner corks on turn 2 in every game. It wakes the pair in 21 of 41 timeouts and the
+other 20 are the captain parked at exactly half. Fixing the park moves no wins. Every heal and
+approach screen lands between 101 and 108. The shortfall is the board, played by a heuristic
+with no arts and a one-phase veto, not a fault a fix closes.
