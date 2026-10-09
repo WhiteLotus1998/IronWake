@@ -160,6 +160,14 @@ public static class ContentSerializer
 
                     writer.WriteEndObject();
                 }
+
+                if (map.Secret is { } secret)
+                {
+                    writer.WriteStartObject("secret");
+                    writer.WriteString("bearer", secret.Bearer);
+                    writer.WriteString("quest", secret.Quest);
+                    writer.WriteEndObject();
+                }
                 writer.WriteEndObject();
             }
 

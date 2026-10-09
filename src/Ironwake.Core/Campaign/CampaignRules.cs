@@ -98,6 +98,13 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
     public ValueList<TemplateSwap> Swaps { get; init; } = ValueList<TemplateSwap>.Empty;
 
     /// <summary>
+    /// The secret path's conditions on this map (issue 1386 slice 2b, STORY's Under the Hill), or null on every
+    /// other map: when the record meets them (<see cref="CampaignRecord.UnderTheHill"/>) the map's secret shard race is
+    /// armed (<see cref="MapDefinition.ArmSecretRace"/>). At most one map carries it.
+    /// </summary>
+    public UnderTheHill? Secret { get; init; }
+
+    /// <summary>
     /// <paramref name="map"/> as the campaign fights it (issue 704): at <see cref="EnemyLevel"/> when one
     /// is named and with every <see cref="Swaps"/> entry made. Throws when a swap's tile holds no enemy
     /// placement, which the content tests hold for every shipped map.
@@ -119,6 +126,14 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
         return map with { EnemyLevel = EnemyLevel ?? map.EnemyLevel, Placements = placements };
     }
 }
+
+/// <summary>
+/// Under the Hill's conditions as content names them (issue 1386 slice 2b, STORY's secret ending): the hungering
+/// weapon's claimant, <paramref name="Bearer"/>, carries it woken; and the side map <paramref name="Quest"/> (Pell's
+/// second, the understanding) is won. Both claimants standing in the company is read from the branch itself, and
+/// the guide held, not killed, from the battle's bond (<see cref="ShardRun.Starts"/>).
+/// </summary>
+public sealed record UnderTheHill(string Bearer, string Quest);
 
 /// <summary>A campaign-only template swap (issue 704): the enemy placement on <see cref="At"/> fields <see cref="TemplateId"/>.</summary>
 public sealed record TemplateSwap(Coord At, string TemplateId);

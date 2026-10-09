@@ -178,7 +178,7 @@ public class KeepTests
     /// one-tile post at his spawn tile, so he strikes anything in his Move plus his range and walks
     /// back (0279's <c>holds:</c>). <c>docs/samples/ironwake_keep_hask_scenery.map</c> keeps the keep
     /// as it stood before the ship, Hask a Boss with no post, and differs from it by only that and
-    /// its name, so the depleted pair's control (Chat 2410) still replays.
+    /// its name (and the campaign's secret race, held off the board, 0385), so the depleted pair's control (Chat 2410) still replays.
     /// </summary>
     [Fact]
     public void TheCampaignKeepsHaskHoldsHisPostAndTheScenerySampleKeepsHimABoss()
@@ -192,7 +192,7 @@ public class KeepTests
         Assert.Null(sample.Holds);
         Assert.NotEqual(Base.Name, sample.Name);
         Assert.Equal(
-            Base with { Name = sample.Name, Holds = null, Events = sample.Events },
+            Base with { Name = sample.Name, Holds = null, Events = sample.Events, SecretRace = null },
             sample with { Events = sample.Events });
         Assert.Equal(Base.Events.Where(e => e.Name != "lord"), sample.Events.Where(e => e.Name != "lord"));
     }

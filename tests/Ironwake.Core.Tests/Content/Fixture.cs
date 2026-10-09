@@ -715,6 +715,9 @@ internal static class Fixture
     /// A file-for-file copy of the real content directory under the temp directory, nothing taken
     /// out, with Gust as every copy's journaled plays met it (<see cref="WithGust"/>).
     /// </summary>
+    /// <summary>A fresh file-for-file copy of the real content directory, for a test that edits one file and loads it.</summary>
+    public static string CopyRealContent() => CopyFiles("ironwake-copy-");
+
     private static string CopyFiles(string prefix)
     {
         var source = RealContentDirectory();

@@ -29,10 +29,14 @@ public sealed record CampaignEnding(
     bool FreedUnitFell,
     EndingKinsbane? Kinsbane,
     EndingDrake? Drake,
-    ValueList<string> Rooms)
+    ValueList<string> Rooms,
+    ValueList<string> Coma)
 {
-    /// <summary>The shape's version: a sequel reads the fields of the version it knows and refuses a newer one.</summary>
-    public const int CurrentVersion = 1;
+    /// <summary>
+    /// The shape's version: a sequel reads the fields of the version it knows and refuses a newer one. 2 added
+    /// <see cref="Coma"/> (issue 1386 slice 2b).
+    /// </summary>
+    public const int CurrentVersion = 2;
 
     /// <summary>The ending's word until the endings are built (#634): the campaign was won, which scene it closed on is not yet recorded.</summary>
     public const string Pending = "pending";
@@ -42,7 +46,8 @@ public sealed record CampaignEnding(
     /// pronoun and class; the branch's pick, the passed claimant and their fate on the return; who lived
     /// (the roster's ids in roster order) and who fell; whether the bound enemy fell (<see cref="CampaignRecord.FreedUnitFell"/>);
     /// Kinsbane's bearer, fed count and teeth when a living member carries it; the drake's stage and
-    /// whether its rider lived, when the rider ever joined; and the keep's rooms. Refused for a campaign
+    /// whether its rider lived, when the rider ever joined; the keep's rooms; and who was left in the coma
+    /// (<see cref="CampaignRecord.Coma"/>). Refused for a campaign
     /// still marching, since the ending is written once, when it ends.
     /// </summary>
     public static CampaignEnding Of(CampaignRecord record, GameContent content)
@@ -71,7 +76,8 @@ public sealed record CampaignEnding(
             record.FreedUnitFell,
             KinsbaneOf(record, content),
             DrakeOf(record),
-            record.Rooms);
+            record.Rooms,
+            record.Coma);
     }
 
     private static EndingKinsbane? KinsbaneOf(CampaignRecord record, GameContent content)

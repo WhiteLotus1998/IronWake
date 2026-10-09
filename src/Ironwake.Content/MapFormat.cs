@@ -42,9 +42,10 @@ public static class MapFormat
             sb.Append("seize_hold: 1\n");
         }
 
-        if (map.ShardRace is { } race)
+        if ((map.ShardRace ?? map.SecretRace?.Race) is { } race)
         {
-            sb.Append("shard_race: ").Append(race.Inner).Append(' ').Append(race.Phases).Append('\n');
+            var word = map.SecretRace is not null ? " secret" : race.Secret ? " armed" : "";
+            sb.Append("shard_race: ").Append(race.Inner).Append(' ').Append(race.Phases).Append(word).Append('\n');
         }
 
         if (map.Drops.Count > 0)
@@ -324,11 +325,12 @@ public static class MapFormat
             }
         }
 
-        if (map.Events.Count > 0)
+        var events = map.SecretRace is { } held ? map.Events.Concat(held.Events).ToList() : map.Events.ToList();
+        if (events.Count > 0)
         {
             sb.Append('\n');
             sb.Append("events:\n");
-            foreach (var mapEvent in map.Events)
+            foreach (var mapEvent in events)
             {
                 sb.Append(WriteEventLine(mapEvent, content)).Append('\n');
             }
@@ -472,7 +474,18 @@ public static class MapFormat
             map = map with { Hunter = ParseHunter(header, map) };
             map = map with { HuntWaits = ParseHuntWaits(header, map) };
             map = map with { Bond = ParseFreed(header, map), KeziahWarning = ParseOn(header, "keziah_warning") };
-            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map), Homing = ParseHoming(header, map), SeizeName = ParseSeizeName(header, win), SeizeHold = ParseSeizeHold(header, win), ShardRace = ParseShardRace(header, win, map) };
+            map = map with { RouteDrift = ParseRouteDrift(header, map), Region = ParseRegion(header), Wind = ParseWind(header, map), SeenFar = ParseSeenFar(header), Holds = ParseHolds(header, map), Homing = ParseHoming(header, map), SeizeName = ParseSeizeName(header, win), SeizeHold = ParseSeizeHold(header, win) };
+            var (shardRace, held) = ParseShardRace(header, win, map);
+            map = map with { ShardRace = shardRace };
+            if (held && shardRace is { } secretRace)
+            {
+                map = map with
+                {
+                    ShardRace = null,
+                    SecretRace = new SecretRace(secretRace, ValueList<MapEvent>.From(map.Events.Where(e => e.Trigger is RaceTrigger))),
+                    Events = ValueList<MapEvent>.From(map.Events.Where(e => e.Trigger is not RaceTrigger)),
+                };
+            }
             map = map with { Drops = ParseDrops(header, map), ArrivalsWait = ParseArrivals(header, map), DeathWakes = ParseDeathWakes(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
@@ -1456,9 +1469,12 @@ public static class MapFormat
         /// <summary>
         /// The <c>shard_race:</c> header (issue 1386, the secret path): the inner tile a beaten boss runs back to
         /// and the phases of his side he holds the shard before he swallows it, <c>shard_race: 0,6 5</c>; only on
-        /// <c>win: defeat_boss</c>, the tile inside the map and passable, the phases 1 to 9. Absent means no race.
+        /// <c>win: defeat_boss</c>, the tile inside the map and passable, the phases 1 to 9. Absent means no race. A
+        /// third word, <c>secret</c>, makes it the campaign's secret path (issue 1386 slice 2b): held apart with its
+        /// <c>race</c> events (<see cref="MapDefinition.SecretRace"/>) until a campaign arms it; <c>armed</c> is that race
+        /// once armed, on the board, as a battle's own map text writes it.
         /// </summary>
-        private ShardRace? ParseShardRace(Dictionary<string, (string Value, int Line)> header, WinCondition win, MapDefinition map)
+        private (ShardRace? Race, bool Held) ParseShardRace(Dictionary<string, (string Value, int Line)> header, WinCondition win, MapDefinition map)
         {
             if (!header.TryGetValue("shard_race", out var entry))
             {
@@ -1467,7 +1483,7 @@ public static class MapFormat
                     throw new MapException(_file, 0, $"event '{orphan.Name}' uses the race trigger but the map has no shard_race: header");
                 }
 
-                return null;
+                return (null, false);
             }
 
             if (win != WinCondition.DefeatBoss)
@@ -1476,10 +1492,11 @@ public static class MapFormat
             }
 
             var parts = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            var tile = parts.Length == 2 ? parts[0].Split(',') : Array.Empty<string>();
+            var word = parts.Length == 3 ? parts[2] : null;
+            var tile = parts.Length == 2 || word is "secret" or "armed" ? parts[0].Split(',') : Array.Empty<string>();
             if (tile.Length != 2 || !int.TryParse(tile[0], out var x) || !int.TryParse(tile[1], out var y) || !int.TryParse(parts[1], out var phases))
             {
-                throw ErrorAt(entry.Line, $"shard_race: needs the inner tile and the phases, 'shard_race: 0,6 5', got '{entry.Value}'");
+                throw ErrorAt(entry.Line, $"shard_race: needs the inner tile and the phases, and 'secret' for the campaign's secret path, 'shard_race: 0,6 5', 'shard_race: 0,6 5 secret' or 'armed', got '{entry.Value}'");
             }
 
             var inner = new Coord(x, y);
@@ -1503,7 +1520,7 @@ public static class MapFormat
                 throw ErrorAt(entry.Line, $"event '{late.Name}' fires {((RaceTrigger)late.Trigger).Phases} phases into the race, but he swallows after {phases}; a race trigger is 0 to {phases - 1}");
             }
 
-            return new ShardRace(inner, phases);
+            return (new ShardRace(inner, phases, word is not null), word == "secret");
         }
 
         /// <summary>The <c>region:</c> header (issue 916): one of the region words; absent means the seam.</summary>

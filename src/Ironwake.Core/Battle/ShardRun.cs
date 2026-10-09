@@ -4,12 +4,23 @@ namespace Ironwake.Core;
 /// A map's shard race (issue 1386, the secret path; Lotus 2026-10-08, shaped in Table round 487): the inner tile
 /// <paramref name="Inner"/> a beaten boss runs back to with the shard, and the phases of his side,
 /// <paramref name="Phases"/>, he holds it before he swallows. Read from the <c>shard_race:</c> header.
+/// <paramref name="Secret"/> marks the campaign's secret path (slice 2b, STORY's Under the Hill): the map holds the race
+/// apart (<see cref="MapDefinition.SecretRace"/>) until a campaign whose record meets the conditions arms it
+/// (<see cref="MapDefinition.ArmSecretRace"/>), and an armed secret race starts only while the enemy the map's
+/// <c>freed:</c> header binds still stands, since the guide down is held, not killed.
 /// </summary>
-public sealed record ShardRace(Coord Inner, int Phases)
+public sealed record ShardRace(Coord Inner, int Phases, bool Secret = false)
 {
     /// <summary>The most phases a race may give: past this it is no race.</summary>
     public const int MaxPhases = 9;
 }
+
+/// <summary>
+/// A secret shard race held apart from its map (issue 1386 slice 2b): <paramref name="Race"/> and the
+/// <see cref="RaceTrigger"/> events that resist it, <paramref name="Events"/>. Nothing of it is on the board, in the
+/// announcements or in the Sim until a campaign arms it (<see cref="MapDefinition.ArmSecretRace"/>).
+/// </summary>
+public sealed record SecretRace(ShardRace Race, ValueList<MapEvent> Events);
 
 /// <summary>
 /// Stage 1 fell on a shard race (issue 1386): <paramref name="UnitId"/> ran from <paramref name="From"/> to
@@ -46,9 +57,12 @@ public static class ShardRun
     /// <summary>Whether <paramref name="unit"/> is running with the shard.</summary>
     public static bool Running(BattleUnit unit) => unit.ShardIn is > 0;
 
-    /// <summary>Whether the fall of <paramref name="unit"/>'s first bar starts the race on <paramref name="state"/>: the map has one and he has not run.</summary>
+    /// <summary>
+    /// Whether the fall of <paramref name="unit"/>'s first bar starts the race on <paramref name="state"/>: the map has
+    /// one, he has not run, and on a secret race the enemy the map's <c>freed:</c> header binds has not been killed.
+    /// </summary>
     public static bool Starts(BattleState state, BattleUnit unit) =>
-        state.Map.ShardRace is not null && unit is { Kin: not null, Swallowed: false, ShardIn: null };
+        state.Map.ShardRace is { } race && (!race.Secret || state.Bond != BondFate.Fell) && unit is { Kin: not null, Swallowed: false, ShardIn: null };
 
     /// <summary>
     /// <paramref name="unitId"/>, at 0 HP on <paramref name="state"/>, runs: to the race's inner tile, or the free tile

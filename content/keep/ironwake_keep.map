@@ -1,6 +1,7 @@
 name: Ironwake Keep
 size: 16x12
 win: defeat_boss
+shard_race: 15,6 5 secret
 turn_limit: 12
 recall: 3
 enemy_level: 6
@@ -60,3 +61,6 @@ gate_in1 falls gate spawn soldier 11,5 group:inside behavior:aggressive
 gate_in2 falls gate spawn brigand 11,6 group:inside behavior:aggressive
 lord turn 6 enemy spawn boss hask 0,6 group:lord behavior:aggressive
 south_in falls south spawn brigand 11,10 group:inside behavior:aggressive
+race_guard race 0 spawn soldier 11,6 group:shard behavior:hold
+race_wave1 race 2 spawn brigand 15,0 group:shard behavior:aggressive
+race_wave2 race 2 spawn soldier 15,11 group:shard behavior:aggressive
