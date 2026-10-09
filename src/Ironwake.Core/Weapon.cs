@@ -59,7 +59,7 @@ public sealed record Weapon(
 
     /// <summary>
     /// Marks a glass weapon (issue 702, obsidian): the sharpest edge sold, spent as it is used. It is
-    /// repaired at half the per-use rate (issue 1403, <see cref="CampaignRules.RepairPricePerUse"/>)
+    /// repaired at a quarter of the per-use rate (issue 1403, <see cref="CampaignRules.RepairPricePerUse"/>)
     /// and never Refined (<see cref="Forge.MaterialFor"/>).
     /// </summary>
     public bool Glass { get; init; }

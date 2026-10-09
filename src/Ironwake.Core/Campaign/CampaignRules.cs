@@ -290,12 +290,12 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
 
     /// <summary>
     /// What repairing one use of <paramref name="weapon"/> costs: its price over its durability,
-    /// at least 1; half that, at least 1, for a glass weapon (issue 1403), so a full repair is a real
-    /// spend every map and still cheaper than another. Null for a weapon that cannot be repaired: a
+    /// at least 1; a quarter of that, at least 1, for a glass weapon (issue 1403, Lotus; DECISIONS/0368), so a
+    /// full repair is a felt spend every camp and still far cheaper than another. Null for a weapon that cannot be repaired: a
     /// spell, which refreshes every map (section 5), or a weapon without a price, which no shop has ever sold.
     /// </summary>
     public static int? RepairPricePerUse(Weapon weapon) =>
-        weapon.IsMagic || weapon.Price is not { } price ? null : Math.Max(1, price / weapon.Durability / (weapon.Glass ? 2 : 1));
+        weapon.IsMagic || weapon.Price is not { } price ? null : Math.Max(1, price / weapon.Durability / (weapon.Glass ? 4 : 1));
 }
 
 /// <summary>

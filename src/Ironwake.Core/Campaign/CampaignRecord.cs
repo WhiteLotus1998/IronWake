@@ -1164,7 +1164,7 @@ public sealed partial record CampaignRecord(
     /// Repairs the weapon in <paramref name="slot"/> (0-based) of <paramref name="unitId"/> to its
     /// full durability at <see cref="CampaignRules.RepairPricePerUse"/> for every missing use, a
     /// broken weapon included, since repair is what makes broken a state and not a slot (section 5).
-    /// A glass weapon pays half the rate (issue 1403). Refused for an empty slot, a consumable, a spell,
+    /// A glass weapon pays a quarter of the rate (issue 1403). Refused for an empty slot, a consumable, a spell,
     /// a weapon without a price, a weapon already at full uses, or a purse short of the cost.
     /// </summary>
     public ScreenResult Repair(string unitId, int slot, GameContent content)
