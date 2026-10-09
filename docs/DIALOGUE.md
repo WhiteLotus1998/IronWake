@@ -12,7 +12,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **Lists for Lotus (485, 486):** departures from his rulings go at the top as changes to approve; a partners' lean is never written in a ruling's voice.
 - **`end` names the lethal** (158, 159; #558): a line per unit `threat` kills. It asks only if Options say so on Recruit or Captain, never on Tactician (0260, #1120). An attack whose counter kills still asks; `attack ... !` swings (336; #975).
 - **The claimant's death prints first** (372, #1068): `<name> falls for good (the claimant)`; no veto, no ending named.
-- **Rules on screen, geometry not** (42, 44); under gate 1's 60, `tuned` only by a DESIGN 11 clause (0100, 0250). A map's price is a body, a Recall or a turn (68). A boss acting only in reach is scenery (39, 72).
+- **Rules on screen, geometry not** (42, 44); under gate 1's 60, `tuned` only by a DESIGN 11 clause (0100, 0250). A boss acting only in reach is scenery (39, 72).
 
 ## Rules, settled (details in DESIGN and the records)
 
@@ -32,13 +32,13 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **The Tollgate** (0073), **Brackwater Cut at dusk** (0078): `tuned`.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). A crest mass freezing the Foreman is a solve (#1087); lever: the archer out of Pell's turn-5 reach.
 - **Saltmarsh Ford:** not tuned (0093, 0095). Samples: `wakes fort` (0339), the east pair (0340, `arrivals: wait`); overlap under `wakes` is pace (475-479); the pincer is both chairs' best turn; `thins` killed (0341). A sample until #1377 traces the stall; 40 is never reinterpreted without a record (482).
-- **The Rookery (0208):** no lever before a cold chair. **The Counting House (311-321):** archer 11,2, limit 11. 441 covers the clock, not who can win: the house's Sworn Captain at Def 5, the card names his armour (#1375, 0343). Kill: a cold non-Lore chair leaves him unhit.
-- **Sallow Grange:** the Reeve's walk-off is a fault; going home over `hold`, so a bait buys one open phase (482). `goes_home:` (0342) kept on a sample; 3400 still seizes. The hold (487) killed (0345): free on the Gate's 30 avoid, the hole.
+- **The Rookery (0208):** no lever before a cold chair. **The Counting House (311-321):** archer 11,2, limit 11; the Sworn Captain at Def 5, his card names the armour (0343). Kill: a cold non-Lore chair leaves him unhit.
+- **Sallow Grange:** the Reeve's walk-off is a fault; going home over `hold`, so a bait buys one open phase (482). `goes_home:` (0342) kept on a sample. The hold (487) killed (0345).
 - **The Mill:** `holds:` (0279), limit 9 (0280), fort south (#1210). 0338 stays (503: Chat 3407 8/7/6). 107 traced (0367): no planner fault. **511:** a Mill-only DESIGN 11 clause (one lever's gap, its kill unmet, no planner fault, every hand play won, one cold, Fun Gate); tripwire: a cold floor loss reopens 0338, never the limit; the Critic's cold chair first. Sim arts: Phase 3; Parked-at-half heal: own issue.
 - **The First Shrine (406-455; 0283, 0304, 0306):** south start, limit 10, the loft archer on the door's death, a held altar. **Kept, no lever, no chair owed** (455): the doorway cork (7,2) decides the held phase.
 - **The Undercroft (431):** the middle wins (4,4 corks the stair); the lector is scenery off the north route. Held for a cold chair: his reach over the desk, or 13,4.
 - **The Lazar House (420-440):** held bars, the queue (0303), limit 5 (0305); No lever before the Critic's cold chair.
-- **The raid and the keep:** acceptance is play. Raid: floor 3100, no lever (461); cold floor chair owed. The keep (0265): levers 0284-0287, 0293 in; range +2 parked; fresh chair owed. **Hask (Lotus, 487-8):** lance, two stages; line strike (0346): reach 4, stops at walls, skips his side. Stage 2 (0362, 0363): the swallow at 0, Def/Res +3, Frozen Iron 2 +2 to 10, each round at his phase start; the veto counts it (0364). Gate: both stages (491). **Shape (501, 502, 0364):** no turn-5 assault; Hask anchors turn 3; stage 1 bulk, lance A, line, stage 2 HP 24, heal 4. 120 stays the gate (505, 506). (c) rooted (0366), (b) the late clock (0369, 33 % under its 40 % trip) stay. 513 (0370): depleted's stage-1 timeouts spend phases on the fronts. **Lotus (514): rooted ruled; the dose uncapped, Hask exempt, a race** (0371: 38/28). No limit after the swallow (514, 515; 0372, Lotus to see). Stage 2 HP 20, heal 2 (516; 0373): 78/49. Next: the step. Open: clock-death gate on won games. L8 chair owed (#1424). `Exposure.Plan` swallows a certain kill (next Exposure PR).
+- **The raid and the keep:** Raid: floor 3100, no lever (461); cold floor chair owed. The keep (0265): levers 0284-0287, 0293 in; range +2 parked; fresh chair owed. **Hask (Lotus, 487-8):** lance, two stages; line strike (0346): reach 4, stops at walls. Stage 2 (0362-0364): the swallow at 0, Def/Res +3, the veto counts the dose. Gate 120, both stages, both arms (491, 505). (c) rooted (0366), (b) the late clock (0369) stay. **Lotus (514): the dose climbs uncapped, Hask exempt, a race** (0371); no limit after the swallow (0372, Lotus to see). Stage 2 HP 20, heal 2 (0373; the heal is ruled). **518:** the clock-death gate reads won games: 2+ at most 10 % (6 %). Next: start x step (2,2; 0,3; 1,3; 0,4) at 20/2; most wins with 2/3 of kills in 2-4 phases, the gate and 508's 40 % reach trip per cell. Full's gap is stage 2's conversion (47 %; 73 % needed); depleted's (110 swallows) is stage 1's, the struck-no-one split first. L8 play owed (#1424). **The Kin's wave (514; leans for Lotus, 518):** down the printed columns; sworn and fliers ride, the drake immune, Keziah not; every second Kin phase, warned, before Frozen Iron; ice holds; new water shown with the warning. `Exposure.Plan` swallows a certain kill (next Exposure PR).
 
 ## Experiments (state and kill criterion)
 
@@ -49,7 +49,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **13.7 Dusk: kept** on Escape; Brackwater at `dusk: 5` (0062), Sallow in daylight. Sight and hearing `?`, never stacked; hearing 4, printed (#765).
 - **13.10 Retreat (0037, #215):** a refugee holds to half HP; killed if Chat's cold `river_refuge_hold.map` moves no turn.
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
-- 13.15 Wildfire kept on samples (0085); 13.11-13.13 kept; 13.16, 13.17, 13.19 killed.
+- 13.15 Wildfire on samples (0085); 13.11-13.13 kept; 13.16, 13.17, 13.19 killed.
 - **13.21 Tide (0111):** kept if a journal shows a ford tile taken, refused or crossed for it (Chat cold).
 - **13.22 The break (0112):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for it; on Saltmarsh (#606).
 - **13.24 Messenger (0135):** kept if a strike or blocker goes to the runner (Chat's cold #680).
