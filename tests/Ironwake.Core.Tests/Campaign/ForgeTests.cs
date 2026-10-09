@@ -192,18 +192,18 @@ public class ForgeTests
         Assert.NotNull(Forge.MaterialFor(Content.Weapon("obsidian_sword") with { Glass = false }, Content).Material);
     }
 
-    /// <summary>Issue 1403: glass is repaired at half the per-use rate, so a full repair of 8 uses costs 896, not the 1800 of another.</summary>
+    /// <summary>Issue 1403 (Lotus, DECISIONS/0368): glass is repaired at a quarter of the per-use rate, so a full repair of 8 uses costs 448, not the 1800 of another.</summary>
     [Fact]
-    public void AGlassWeaponIsRepairedAtHalfTheRate()
+    public void AGlassWeaponIsRepairedAtAQuarterOfTheRate()
     {
         var record = AtTheForge(pack: new ItemStack("obsidian_sword", 0)) with { Purse = 1000 };
 
         var repair = record.Repair("captain", 0, Content);
 
-        Assert.Equal(112, CampaignRules.RepairPricePerUse(Content.Weapon("obsidian_sword")));
+        Assert.Equal(56, CampaignRules.RepairPricePerUse(Content.Weapon("obsidian_sword")));
         Assert.Equal(225, CampaignRules.RepairPricePerUse(Content.Weapon("obsidian_sword") with { Glass = false }));
         Assert.True(repair.Accepted);
-        Assert.Equal(104, repair.Record.Purse);
+        Assert.Equal(552, repair.Record.Purse);
         Assert.Equal(8, repair.Record.Find("captain")!.Inventory.Items.Single(s => s.ItemId == "obsidian_sword").Uses);
     }
 
