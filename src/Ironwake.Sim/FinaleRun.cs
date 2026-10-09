@@ -99,9 +99,19 @@ public static class FinaleRun
                 yield return "  " + idle;
             }
 
+            if (HealerFallLine(Games) is { } healerFalls)
+            {
+                yield return "  " + healerFalls;
+            }
+
             if (StageLine(Games) is { } stage)
             {
                 yield return "  " + stage;
+            }
+
+            if (ShapeLine(Games) is { } shape)
+            {
+                yield return "  " + shape;
             }
 
             if (RaceLine(Games) is { } race)
@@ -287,6 +297,51 @@ public static class FinaleRun
         var beyond = reached.Sum(s => s.DamageBeyond);
         var share = inReach + beyond == 0 ? "none dealt" : $"{beyond * 100 / (inReach + beyond)} % from tiles he cannot reach ({beyond} of {inReach + beyond})";
         return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (data; the gate reads won games); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP, company at {Median(reached.Select(s => s.CompanyMaxHp == 0 ? 0 : s.CompanyHp * 100 / s.CompanyMaxHp))} % HP; damage on him, {share}";
+    }
+
+    /// <summary>
+    /// Issue 1441's read 2: the unarmed healers' stage-1 falls over the games, by what she did in the last player phase that
+    /// closed (heal, walk, wait, or she fell in her own phase) and by whether what struck her stood on the board as that
+    /// phase closed or arrived after it (<see cref="StageOne.HealerFallsBy"/>). Null when none fell.
+    /// </summary>
+    public static string? HealerFallLine(IReadOnlyList<GameResult> games)
+    {
+        var by = games.Where(g => g.StageOne is not null).SelectMany(g => g.StageOne!.HealerFallsBy)
+            .GroupBy(p => p.Key, StringComparer.Ordinal).ToDictionary(g => g.Key, g => g.Sum(p => p.Value), StringComparer.Ordinal);
+        var total = by.Values.Sum();
+        if (total == 0)
+        {
+            return null;
+        }
+
+        int Where(string where) => by.Where(p => p.Key.StartsWith(where + ",", StringComparison.Ordinal)).Sum(p => p.Value);
+        int Who(string who) => by.Where(p => p.Key.EndsWith(", " + who, StringComparison.Ordinal)).Sum(p => p.Value);
+        var cells = string.Join(", ", by.OrderByDescending(p => p.Value).ThenBy(p => p.Key, StringComparer.Ordinal).Select(p => $"{p.Key} {p.Value}"));
+        return $"unarmed healer falls in stage 1 {total}, by her last closed phase: after a heal {Where("heal")}, after a walk {Where("walk")}, after a wait {Where("wait")}, in her own phase {Where("her phase")}; struck by a unit on the board as it closed {Who("on the board")}, by one that arrived after {Who("arrived after")}, unread {Who("unread")} ({cells})";
+    }
+
+    /// <summary>
+    /// Issue 1441's read 1: the company's shape as the swallow found it and who dealt the stage-2 damage. Over the games
+    /// that reached the stage: the median of each game's median and farthest distance to him, the median count of units
+    /// on tiles he reached; then by unit, its median distance at the swallow and its stage-2 damage on him from tiles he
+    /// reached and from tiles he did not (<see cref="StageTwo.DamageBy"/>), most damage first. Null when no game reached it.
+    /// </summary>
+    public static string? ShapeLine(IReadOnlyList<GameResult> games)
+    {
+        var reached = games.Where(g => g.Stage is { AtSwallow.Count: > 0 }).Select(g => g.Stage!).ToList();
+        if (reached.Count == 0)
+        {
+            return null;
+        }
+
+        var units = reached.SelectMany(s => s.AtSwallow.Keys).Concat(reached.SelectMany(s => s.DamageBy.Keys)).Distinct(StringComparer.Ordinal)
+            .Select(id => (Id: id,
+                Distance: reached.Where(s => s.AtSwallow.ContainsKey(id)).Select(s => s.AtSwallow[id].Distance).ToList(),
+                InReach: reached.Sum(s => s.DamageBy.TryGetValue(id, out var d) ? d.InReach : 0),
+                Beyond: reached.Sum(s => s.DamageBy.TryGetValue(id, out var d) ? d.Beyond : 0)))
+            .OrderByDescending(u => u.InReach + u.Beyond).ThenBy(u => u.Id, StringComparer.Ordinal)
+            .Select(u => $"{u.Id} {(u.Distance.Count == 0 ? "-" : Median(u.Distance).ToString(System.Globalization.CultureInfo.InvariantCulture))} tiles in {u.Distance.Count}, dealt {u.InReach} in reach {u.Beyond} beyond");
+        return $"stage 2 shape: at the swallow, median distance to him {Median(reached.Select(s => Median(s.AtSwallow.Values.Select(p => p.Distance))))}, farthest {Median(reached.Select(s => s.AtSwallow.Values.Max(p => p.Distance)))}, on tiles he reaches {Median(reached.Select(s => s.AtSwallow.Values.Count(p => p.InReach)))}; by unit: {string.Join(", ", units)}";
     }
 
     /// <summary>

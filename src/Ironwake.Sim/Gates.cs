@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Globalization;
 using Ironwake.Content.Protocol;
 using Ironwake.Core;
@@ -1250,6 +1251,21 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
     public int DamageBeyond { get; init; }
 
     /// <summary>
+    /// Issue 1441's read 1: each player unit's distance to the boss as the swallow found the company, by unit id, and
+    /// whether its tile was one an action of his reached (<see cref="Reaches"/>).
+    /// </summary>
+    public System.Collections.Immutable.ImmutableDictionary<string, Placed> AtSwallow { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, Placed>.Empty;
+
+    /// <summary>A unit's distance to the boss at the swallow and whether he reached its tile.</summary>
+    public sealed record Placed(int Distance, bool InReach);
+
+    /// <summary>Issue 1441's read 1: <see cref="DamageInReach"/> and <see cref="DamageBeyond"/> by the unit that dealt it.</summary>
+    public System.Collections.Immutable.ImmutableDictionary<string, Dealt> DamageBy { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, Dealt>.Empty;
+
+    /// <summary>A unit's stage-2 damage on the boss, from tiles he reached and from tiles he did not.</summary>
+    public sealed record Dealt(int InReach, int Beyond);
+
+    /// <summary>
     /// Whether <paramref name="tile"/> is one an action of <paramref name="boss"/> standing where he stands reaches on
     /// <paramref name="state"/>: in range of a weapon he carries, or on the cross his line strike falls on
     /// (<see cref="LineStrike.Cross"/>).
@@ -1272,9 +1288,11 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
             && before.UnitsOf(Side.Player).FirstOrDefault(u => !u.Acted && after.Find(u.Id) is not { Acted: false }) is { } actor)
         {
             var taken = boss.Hp - left;
-            stage = Reaches(before, content, boss, actor.At)
-                ? stage with { DamageInReach = stage.DamageInReach + taken }
-                : stage with { DamageBeyond = stage.DamageBeyond + taken };
+            var reached = Reaches(before, content, boss, actor.At);
+            var was = stage.DamageBy.TryGetValue(actor.Id, out var d) ? d : new Dealt(0, 0);
+            stage = reached
+                ? stage with { DamageInReach = stage.DamageInReach + taken, DamageBy = stage.DamageBy.SetItem(actor.Id, was with { InReach = was.InReach + taken }) }
+                : stage with { DamageBeyond = stage.DamageBeyond + taken, DamageBy = stage.DamageBy.SetItem(actor.Id, was with { Beyond = was.Beyond + taken }) };
         }
 
         foreach (var e in read)
@@ -1288,6 +1306,9 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
                         Boss = swallowed.UnitId,
                         CompanyHp = content is null ? 0 : company.Sum(u => u.Hp),
                         CompanyMaxHp = content is null ? 0 : company.Sum(u => u.MaxHp(content)),
+                        AtSwallow = content is null || after.Find(swallowed.UnitId) is not { } hask
+                            ? System.Collections.Immutable.ImmutableDictionary<string, Placed>.Empty
+                            : company.ToImmutableDictionary(u => u.Id, u => new Placed(u.At.DistanceTo(hask.At), Reaches(after, content, hask, u.At)), StringComparer.Ordinal),
                     };
                     break;
                 case PhaseBegan began when stage is not null:
@@ -1385,6 +1406,21 @@ public sealed record StageOne(string Boss, int Arrived)
     /// <summary>Unarmed healers (<see cref="LookAt"/>'s kind) that fell before the swallow (round 525: the walk's price).</summary>
     public int HealerFalls { get; init; }
 
+    /// <summary>
+    /// Issue 1441's read 2: the unarmed healers' stage-1 falls, keyed by what the healer did in the last player phase that
+    /// closed before she fell (<c>heal</c>: an item used; <c>walk</c>: a move and no item; <c>wait</c>: neither; <c>her
+    /// phase</c>: she fell in a player phase) and by whether the unit that struck her stood on the board as that phase
+    /// closed (<c>on the board</c>), arrived after it (<c>arrived after</c>), or was not read from the events (<c>unread</c>):
+    /// the read that says whether a wave the exposure read did not price is what reaches her.
+    /// </summary>
+    public System.Collections.Immutable.ImmutableDictionary<string, int> HealerFallsBy { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, int>.Empty;
+
+    /// <summary>What each unarmed healer did in the last player phase that closed: heal, walk, or wait.</summary>
+    private System.Collections.Immutable.ImmutableDictionary<string, string> HealerStood { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, string>.Empty;
+
+    /// <summary>The enemy units standing as the last player phase closed.</summary>
+    private System.Collections.Immutable.ImmutableHashSet<string> BoardAtClose { get; init; } = System.Collections.Immutable.ImmutableHashSet<string>.Empty;
+
     /// <summary>The idle unit-phases with an enemy seen out of reach, by unit id.</summary>
     public System.Collections.Immutable.ImmutableDictionary<string, Held> HeldBy { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, Held>.Empty;
 
@@ -1451,10 +1487,19 @@ public sealed record StageOne(string Boss, int Arrived)
             stage = stage with { Reading = open };
         }
 
-        var healerFalls = before.UnitsOf(Side.Player).Count(u => after.Find(u.Id) is not { Hp: > 0 } && Unarmed(content, u) && HeuristicPlayer.Healer(content, u));
-        if (healerFalls > 0)
+        var fallen = before.UnitsOf(Side.Player).Where(u => after.Find(u.Id) is not { Hp: > 0 } && Unarmed(content, u) && HeuristicPlayer.Healer(content, u)).ToList();
+        if (fallen.Count > 0)
         {
-            stage = stage with { HealerFalls = stage.HealerFalls + healerFalls };
+            var by = stage.HealerFallsBy;
+            foreach (var healer in fallen)
+            {
+                var where = before.Phase == Side.Player ? "her phase" : stage.HealerStood.GetValueOrDefault(healer.Id, "wait");
+                var who = StrikerOf(read, healer.Id) is not { } striker ? "unread" : stage.BoardAtClose.Contains(striker) ? "on the board" : "arrived after";
+                var key = $"{where}, {who}";
+                by = by.SetItem(key, by.GetValueOrDefault(key) + 1);
+            }
+
+            stage = stage with { HealerFalls = stage.HealerFalls + fallen.Count, HealerFallsBy = by };
         }
 
         foreach (var e in read)
@@ -1516,6 +1561,14 @@ public sealed record StageOne(string Boss, int Arrived)
         var (healed, refused, moved, idle) = (0, 0, 0, 0);
         var (fell, unseen, heldCount, unread) = (0, 0, 0, 0);
         var heldBy = stage.HeldBy;
+        var stood = stage.HealerStood;
+        foreach (var id in open.Roster)
+        {
+            if (state.Find(id) is { Side: Side.Player } healer && Unarmed(content, healer) && HeuristicPlayer.Healer(content, healer))
+            {
+                stood = stood.SetItem(id, open.Used.Contains(id) ? "heal" : open.Moved.Contains(id) ? "walk" : "wait");
+            }
+        }
         foreach (var id in open.Roster.Where(id => !open.Struck.Contains(id)))
         {
             var standing = state.Find(id) is { Side: Side.Player } found ? found : null;
@@ -1569,9 +1622,23 @@ public sealed record StageOne(string Boss, int Arrived)
             IdleHeld = stage.IdleHeld + heldCount,
             IdleUnread = stage.IdleUnread + unread,
             HeldBy = heldBy,
+            HealerStood = stood,
+            BoardAtClose = state.UnitsOf(Side.Enemy).Select(u => u.Id).ToImmutableHashSet(StringComparer.Ordinal),
             Reading = null,
         };
     }
+
+    /// <summary>The unit whose combat, area cast, line strike or watch shot in <paramref name="events"/> struck <paramref name="target"/>, the last one read; null when none did.</summary>
+    private static string? StrikerOf(IReadOnlyList<GameEvent> events, string target) =>
+        events.Select(e => e switch
+        {
+            CombatFought f when f.TargetId == target => f.AttackerId,
+            CombatFought f when f.AttackerId == target => f.TargetId,
+            AreaCastAt c when c.Struck.Contains(target) => c.CasterId,
+            LineStruck l when l.Struck.Contains(target) => l.UnitId,
+            WatchFired w when w.TargetId == target => w.UnitId,
+            _ => null,
+        }).LastOrDefault(id => id is not null);
 
     /// <summary>
     /// Whether <paramref name="unit"/> has a strike on offer on <paramref name="state"/>: an enemy its side sees, in range
