@@ -1,0 +1,1120 @@
+Under the Hill (the Kin), seed 1549, scheme TwoRollAverage
+Objective: Defeat the boss by the end of turn 12. Captain Fenn must survive.
+Under the Hill (the Kin)  turn 1 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#...d....#
+ 2 #.e.b........D
+ 3 ##...##.....B.
+ 4 .!..a##....GA.
+ 5 ##...##.....C.
+ 6 #...c........E
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           2,2    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          8,1    hp 22/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+E  pell             Pell L1 adept              13,6   hp 16/16  Plain
+b  soldier-1        Soldier L1 pikeman         4,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         4,6    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   4,4    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him from the enemy phase after next, 3 more each time, then the Kin heals him 2
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 6,2
+Archer moves 2,2 -> 6,2 via 3,2 4,2 5,2
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 9,4
+Brigand moves 8,1 -> 9,4 via 9,1 9,2 9,3
+enemy: wait brigand-1
+Brigand waits
+enemy: wait hask_warden-1
+Hask waits
+enemy: move soldier-1 8,2
+Soldier 1 moves 4,2 -> 8,2 via 5,2 6,2 7,2
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: move soldier-2 7,5
+Soldier 2 moves 4,6 -> 7,5 via 5,6 6,6 7,6
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: move sworn_captain-1 6,6
+Sworn Captain moves 4,4 -> 6,6 via 4,5 4,6 5,6
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Under the Hill (the Kin)  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.....e.b....D
+ 3 ##...##.....B.
+ 4 .!...##..d.GA.
+ 5 ##...##c....C.
+ 6 #.....a......E
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+E  pell             Pell L1 adept              13,6   hp 16/16  Plain
+b  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         7,5    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   6,6    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move pell 10,5
+Pell moves 13,6 -> 10,5 via 13,5 12,5 11,5
+Under the Hill (the Kin)  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.....e.b....D
+ 3 ##...##.....B.
+ 4 .!...##..d.GA.
+ 5 ##...##c..E.C.
+ 6 #.....a.......
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+E  pell             Pell L1 adept              10,5   hp 16/16  Plain
+b  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         7,5    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   6,6    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> attack pell brigand-1
+Forecast Pell -> Brigand: acc 99% dmg 13 crit 3%; counter: none
+Pell attacks Brigand
+  Pell hits Brigand for 13 (hp 9)
+  Pell hp 16, Brigand hp 9
+Pell gains 10 exp (10)
+Under the Hill (the Kin)  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.....e.b....D
+ 3 ##...##.....B.
+ 4 .!...##..d.GA.
+ 5 ##...##c..E.C.
+ 6 #.....a.......
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 9/22   Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
+b  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         7,5    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   6,6    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move teodor 10,4
+Teodor moves 12,5 -> 10,4 via 12,4 11,4
+Under the Hill (the Kin)  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.....e.b....D
+ 3 ##...##.....B.
+ 4 .!...##..dCGA.
+ 5 ##...##c..E...
+ 6 #.....a.......
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 9/22   Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
+b  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         7,5    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   6,6    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> attack teodor brigand-1
+Forecast Teodor -> Brigand: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
+Teodor attacks Brigand
+  Teodor hits Brigand for 12 (hp 0)
+  Teodor hp 21, Brigand hp 0
+Teodor gains 30 exp (30)
+Brigand falls at 9,4
+Under the Hill (the Kin)  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.....e.b....D
+ 3 ##...##.....B.
+ 4 .!...##...CGA.
+ 5 ##...##c..E...
+ 6 #.....a.......
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
+b  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         7,5    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   6,6    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; the Kin re-takes Brigand at 9,4 next
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> wait dunstan
+Dunstan waits
+Under the Hill (the Kin)  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.....e.b....D
+ 3 ##...##.....B.
+ 4 .!...##...CGA.
+ 5 ##...##c..E...
+ 6 #.....a.......
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
+b  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         7,5    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   6,6    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; the Kin re-takes Brigand at 9,4 next
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> wait wren
+Wren waits
+Under the Hill (the Kin)  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.....e.b....D
+ 3 ##...##.....B.
+ 4 .!...##...CGA.
+ 5 ##...##c..E...
+ 6 #.....a.......
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
+b  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         7,5    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   6,6    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain  done
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; the Kin re-takes Brigand at 9,4 next
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> wait captain
+Alder Fenn waits
+Under the Hill (the Kin)  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.....e.b....D
+ 3 ##...##.....B.
+ 4 .!...##...CGA.
+ 5 ##...##c..E...
+ 6 #.....a.......
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
+b  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         7,5    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   6,6    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain  done
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; the Kin re-takes Brigand at 9,4 next
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> wait ottilie
+Ottilie waits
+Under the Hill (the Kin)  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.....e.b....D
+ 3 ##...##.....B.
+ 4 .!...##...CGA.
+ 5 ##...##c..E...
+ 6 #.....a.......
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain  done
+E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
+b  soldier-1        Soldier L1 pikeman         8,2    hp 20/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         7,5    hp 20/20  Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   6,6    hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain  done
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; the Kin re-takes Brigand at 9,4 next
+Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> end !
+Lethal if all land: Pell (Soldier 1 for 11, Sworn Captain for 15, against 16 hp)
+Lethal if all land: Teodor (Archer for 5, Brigand for 10, Soldier 1 for 8, against 21 hp)
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Frozen Iron falls on every unit but him for 0, past Def and Res: Archer (hp 17), Alder Fenn (hp 22), Dunstan (hp 23), Ottilie (hp 17), Pell (hp 16), Soldier 1 (hp 20), Soldier 2 (hp 20), Sworn Captain (hp 27), Teodor (hp 21), Wren (hp 20)
+The Kin re-takes Brigand through the shard: they stand again on 9,4 (hp 11) and act from the next enemy phase
+enemy: move archer-1 8,4
+Archer moves 6,2 -> 8,4 via 7,2 8,2 8,3
+enemy: attack archer-1 teodor
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer attacks Teodor
+  Archer crits Teodor for 15 (hp 6)
+  Archer hp 17, Teodor hp 6
+enemy: wait hask_warden-1
+Hask waits
+enemy: move soldier-1 10,3
+Soldier 1 moves 8,2 -> 10,3 via 9,2 10,2
+enemy: attack soldier-1 teodor
+Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
+Soldier 1 attacks Teodor
+  Soldier 1 misses Teodor
+  Teodor hits Soldier 1 for 10 (hp 10)
+  Soldier 1 hp 10, Teodor hp 6
+Teodor gains 10 exp (40)
+enemy: move soldier-2 9,5
+Soldier 2 moves 7,5 -> 9,5 via 8,5
+enemy: attack soldier-2 pell
+Forecast Soldier 2 -> Pell: acc 80% dmg 11 crit 0%; counter: acc 99% dmg 12 crit 2% (Cinder 7 of 8 left)
+Soldier 2 attacks Pell
+  Soldier 2 hits Pell for 11 (hp 5)
+  Pell hits Soldier 2 for 12 (hp 8)
+  Soldier 2 hp 8, Pell hp 5
+Pell gains 10 exp (20)
+enemy: move sworn_captain-1 10,6
+Sworn Captain moves 6,6 -> 10,6 via 7,6 8,6 9,6
+enemy: attack sworn_captain-1 pell
+Forecast Sworn Captain -> Pell: acc 89% dmg 15 crit 2%; counter: acc 99% dmg 11 crit 0% (Cinder 6 of 8 left)
+Sworn Captain attacks Pell
+  Sworn Captain hits Pell for 15 (hp 0)
+  Sworn Captain hp 27, Pell hp 0
+Pell falls at 10,5
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #............D
+ 3 ##...##...b.B.
+ 4 .!...##.edCGA.
+ 5 ##...##..c....
+ 6 #.........a...
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         11,4   hp 23/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+b  soldier-1        Soldier L1 pikeman         10,3   hp 10/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move dunstan 10,5
+Dunstan moves 11,4 -> 10,5 via 10,4
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #............D
+ 3 ##...##...b.B.
+ 4 .!...##.edC.A.
+ 5 ##...##..cG...
+ 6 #.........a...
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         10,5   hp 23/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+b  soldier-1        Soldier L1 pikeman         10,3   hp 10/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> attack dunstan sworn_captain-1
+Forecast Dunstan -> Sworn Captain: acc 77% dmg 6 crit 0%; counter: acc 91% dmg 10 crit 3%
+Dunstan attacks Sworn Captain
+  Dunstan misses Sworn Captain
+  Sworn Captain hits Dunstan for 10 (hp 13)
+  Dunstan hp 13, Sworn Captain hp 27
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #............D
+ 3 ##...##...b.B.
+ 4 .!...##.edC.A.
+ 5 ##...##..cG...
+ 6 #.........a...
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         10,5   hp 13/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+b  soldier-1        Soldier L1 pikeman         10,3   hp 10/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move captain 11,6
+Alder Fenn moves 12,4 -> 11,6 via 11,4 11,5
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #............D
+ 3 ##...##...b.B.
+ 4 .!...##.edC...
+ 5 ##...##..cG...
+ 6 #.........aA..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         10,5   hp 13/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+b  soldier-1        Soldier L1 pikeman         10,3   hp 10/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 27/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> attack captain sworn_captain-1
+Forecast Alder Fenn -> Sworn Captain: acc 90% dmg 6 x2 crit 2%; counter: acc 74% dmg 12 crit 0%
+Alder Fenn attacks Sworn Captain
+  Alder Fenn hits Sworn Captain for 6 (hp 21)
+  Sworn Captain misses Alder Fenn
+  Alder Fenn hits Sworn Captain for 6 (hp 15)
+  Alder Fenn hp 22, Sworn Captain hp 15
+Alder Fenn gains 14 exp (14)
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #............D
+ 3 ##...##...b.B.
+ 4 .!...##.edC...
+ 5 ##...##..cG...
+ 6 #.........aA..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 13/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          13,2   hp 17/17  Plain
+b  soldier-1        Soldier L1 pikeman         10,3   hp 10/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 15/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move ottilie 11,2
+Ottilie moves 13,2 -> 11,2 via 12,2
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #..........D..
+ 3 ##...##...b.B.
+ 4 .!...##.edC...
+ 5 ##...##..cG...
+ 6 #.........aA..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 13/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain
+b  soldier-1        Soldier L1 pikeman         10,3   hp 10/20  Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 15/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> attack ottilie soldier-1
+Forecast Ottilie -> Soldier 1: acc 82% dmg 6 crit 4%; counter: none
+Ottilie attacks Soldier 1
+  Ottilie hits Soldier 1 for 6 (hp 4)
+  Ottilie hp 17, Soldier 1 hp 4
+Ottilie gains 10 exp (10)
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #..........D..
+ 3 ##...##...b.B.
+ 4 .!...##.edC...
+ 5 ##...##..cG...
+ 6 #.........aA..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 13/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain  done
+b  soldier-1        Soldier L1 pikeman         10,3   hp 4/20   Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 15/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move wren 11,3
+Wren moves 12,3 -> 11,3
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #..........D..
+ 3 ##...##...bB..
+ 4 .!...##.edC...
+ 5 ##...##..cG...
+ 6 #.........aA..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 13/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain  done
+b  soldier-1        Soldier L1 pikeman         10,3   hp 4/20   Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 15/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> attack wren soldier-1
+Forecast Wren -> Soldier 1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
+Wren attacks Soldier 1
+  Wren misses Soldier 1
+  Soldier 1 misses Wren
+  Wren hp 20, Soldier 1 hp 4
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #..........D..
+ 3 ##...##...bB..
+ 4 .!...##.edC...
+ 5 ##...##..cG...
+ 6 #.........aA..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 13/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain  done
+b  soldier-1        Soldier L1 pikeman         10,3   hp 4/20   Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 15/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move teodor 12,4
+Teodor moves 10,4 -> 12,4 via 11,4
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #..........D..
+ 3 ##...##...bB..
+ 4 .!...##.ed..C.
+ 5 ##...##..cG...
+ 6 #.........aA..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 13/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain  done
+b  soldier-1        Soldier L1 pikeman         10,3   hp 4/20   Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 15/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          12,4   hp 6/21   Plain
+B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> wait teodor
+Teodor waits
+Under the Hill (the Kin)  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #..........D..
+ 3 ##...##...bB..
+ 4 .!...##.ed..C.
+ 5 ##...##..cG...
+ 6 #.........aA..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           8,4    hp 17/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          9,4    hp 11/22  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 13/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain  done
+b  soldier-1        Soldier L1 pikeman         10,3   hp 4/20   Plain  group sworn, aggressive
+c  soldier-2        Soldier L1 pikeman         9,5    hp 8/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 15/27  Plain  group sworn, aggressive
+C  teodor           Teodor L1 pikeman          12,4   hp 6/21   Plain  done
+B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; no fallen sworn waits
+Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> end !
+Lethal if all land: Alder Fenn (Archer for 5, Brigand for 10, Soldier 1 for 8, Soldier 2 for 8, Sworn Captain for 12, against 22 hp)
+Lethal if all land: Dunstan (Archer for 3, Brigand for 8, Soldier 1 for 6, Soldier 2 for 6, Sworn Captain for 10, against 13 hp)
+Lethal if all land: Ottilie (Archer for 7, Brigand for 12, Soldier 1 for 10, against 17 hp)
+Lethal if all land: Teodor (Archer for 5, Brigand for 10, Soldier 1 for 8, against 6 hp)
+Lethal if all land: Wren (Archer for 6, Brigand for 11, Soldier 1 for 9, against 20 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Frozen Iron falls on every unit but him for 3, past Def and Res: Archer (hp 14), Brigand (hp 8), Alder Fenn (hp 19), Dunstan (hp 10), Ottilie (hp 14), Soldier 1 (hp 1), Soldier 2 (hp 5), Sworn Captain (hp 12), Teodor (hp 3), Wren (hp 17)
+enemy: move archer-1 10,4
+Archer moves 8,4 -> 10,4 via 9,4
+enemy: attack archer-1 teodor
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer attacks Teodor
+  Archer hits Teodor for 5 (hp 0)
+  Archer hp 14, Teodor hp 0
+Teodor falls at 12,4
+enemy: move brigand-1 10,2
+Brigand moves 9,4 -> 10,2 via 9,3 9,2
+enemy: attack brigand-1 ottilie
+Forecast Brigand -> Ottilie: acc 58% dmg 12 crit 0%; counter: none
+Brigand attacks Ottilie
+  Brigand hits Ottilie for 12 (hp 2)
+  Brigand hp 8, Ottilie hp 2
+enemy: wait hask_warden-1
+Hask waits
+enemy: move soldier-1 11,1
+Soldier 1 moves 10,3 -> 11,1 via 10,2 10,1
+enemy: attack soldier-1 ottilie
+Forecast Soldier 1 -> Ottilie: acc 70% dmg 10 crit 0%; counter: none
+Soldier 1 attacks Ottilie
+  Soldier 1 misses Ottilie
+  Soldier 1 hp 1, Ottilie hp 2
+enemy: move soldier-2 10,3
+Soldier 2 moves 9,5 -> 10,3 via 9,4 9,3
+enemy: attack soldier-2 wren
+Forecast Soldier 2 -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
+Soldier 2 attacks Wren
+  Soldier 2 hits Wren for 9 (hp 8)
+  Wren hits Soldier 2 for 8 (hp 0)
+  Soldier 2 hp 0, Wren hp 8
+Wren gains 30 exp (30)
+Soldier 2 falls at 10,3
+enemy: attack sworn_captain-1 dunstan
+Forecast Sworn Captain -> Dunstan: acc 91% dmg 10 crit 3%; counter: acc 77% dmg 6 crit 0%
+Sworn Captain attacks Dunstan
+  Sworn Captain misses Dunstan
+  Dunstan hits Sworn Captain for 6 (hp 6)
+  Sworn Captain hp 6, Dunstan hp 10
+Dunstan gains 14 exp (14)
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Under the Hill (the Kin)  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#......b.#
+ 2 #.........dD..
+ 3 ##...##....B..
+ 4 .!...##...e...
+ 5 ##...##...G...
+ 6 #.........aA..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           10,4   hp 14/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          10,2   hp 8/22   Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 19/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         10,5   hp 10/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 2/17   Plain
+b  soldier-1        Soldier L1 pikeman         11,1   hp 1/20   Plain  group sworn, aggressive
+a  sworn_captain-1  Sworn Captain L3 pikeman   10,6   hp 6/27   Plain  group sworn, aggressive
+B  wren             Wren L1 cadet              11,3   hp 8/20   Plain
+Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls; the Kin re-takes Soldier 2 at 10,3 next
+Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> attack captain sworn_captain-1
+Forecast Alder Fenn -> Sworn Captain: acc 90% dmg 6 x2 crit 2%; counter: acc 74% dmg 12 crit 0%
+Alder Fenn attacks Sworn Captain
+  Alder Fenn hits Sworn Captain for 6 (hp 0)
+  Alder Fenn hp 19, Sworn Captain hp 0
+Alder Fenn gains 40 exp (54)
+Sworn Captain falls at 10,6
+Sworn Captain falls, and the shard rolls from his hand onto 10,6 (take it from on or beside it: take <unit> shard)
+Under the Hill (the Kin)  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#......b.#
+ 2 #.........dD..
+ 3 ##...##....B..
+ 4 .!...##...e...
+ 5 ##...##...G...
+ 6 #..........A..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           10,4   hp 14/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          10,2   hp 8/22   Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 19/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 10/23  Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 2/17   Plain
+b  soldier-1        Soldier L1 pikeman         11,1   hp 1/20   Plain  group sworn, aggressive
+B  wren             Wren L1 cadet              11,3   hp 8/20   Plain
+The shard lies on 10,6: take it from on or beside it (take <unit> shard); the Kin re-takes no one while it lies; at the enemy phase the nearest sworn who reaches it picks it up
+Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> take dunstan shard
+Dunstan takes up the shard on 10,6 and breaks it on the stone: the Kin re-takes no one now
+Under the Hill (the Kin)  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#......b.#
+ 2 #.........dD..
+ 3 ##...##....B..
+ 4 .!...##...e...
+ 5 ##...##...G...
+ 6 #..........A..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           10,4   hp 14/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          10,2   hp 8/22   Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 19/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 10/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 2/17   Plain
+b  soldier-1        Soldier L1 pikeman         11,1   hp 1/20   Plain  group sworn, aggressive
+B  wren             Wren L1 cadet              11,3   hp 8/20   Plain
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move wren 10,3
+Wren moves 11,3 -> 10,3
+Under the Hill (the Kin)  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#......b.#
+ 2 #.........dD..
+ 3 ##...##...B...
+ 4 .!...##...e...
+ 5 ##...##...G...
+ 6 #..........A..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           10,4   hp 14/17  Plain  group sworn, aggressive
+d  brigand-1        Brigand L1 reaver          10,2   hp 8/22   Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 19/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 10/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 2/17   Plain
+b  soldier-1        Soldier L1 pikeman         11,1   hp 1/20   Plain  group sworn, aggressive
+B  wren             Wren L1 cadet              10,3   hp 8/20   Plain
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> attack wren brigand-1 !
+Forecast Wren -> Brigand: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
+  Kills if the first strike lands (88)
+  Counter: lethal to Wren only if the first round misses (12 in 100) (11 against 8 hp)
+Wren attacks Brigand
+  Wren crits Brigand for 30 (hp 0)
+  Wren hp 8, Brigand hp 0
+Wren gains 30 exp (60)
+Brigand falls at 10,2
+Under the Hill (the Kin)  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#......b.#
+ 2 #..........D..
+ 3 ##...##...B...
+ 4 .!...##...e...
+ 5 ##...##...G...
+ 6 #..........A..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           10,4   hp 14/17  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 19/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 10/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          11,2   hp 2/17   Plain
+b  soldier-1        Soldier L1 pikeman         11,1   hp 1/20   Plain  group sworn, aggressive
+B  wren             Wren L1 cadet              10,3   hp 8/20   Plain  done
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move ottilie 12,4
+Ottilie moves 11,2 -> 12,4 via 12,2 12,3
+Under the Hill (the Kin)  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#......b.#
+ 2 #.............
+ 3 ##...##...B...
+ 4 .!...##...e.D.
+ 5 ##...##...G...
+ 6 #..........A..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           10,4   hp 14/17  Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 19/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 10/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+D  ottilie          Ottilie L1 bowman          12,4   hp 2/17   Plain
+b  soldier-1        Soldier L1 pikeman         11,1   hp 1/20   Plain  group sworn, aggressive
+B  wren             Wren L1 cadet              10,3   hp 8/20   Plain  done
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> attack ottilie archer-1 !
+Forecast Ottilie -> Archer: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
+  Counter: lethal to Ottilie (7 against 2 hp)
+Ottilie attacks Archer
+  Ottilie hits Archer for 8 (hp 6)
+  Archer hits Ottilie for 7 (hp 0)
+  Ottilie hp 0, Archer hp 6
+Ottilie falls at 12,4
+Under the Hill (the Kin)  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#......b.#
+ 2 #.............
+ 3 ##...##...B...
+ 4 .!...##...e...
+ 5 ##...##...G...
+ 6 #..........A..
+ 7 #...#........#
+ 8 #####....#####
+
+e  archer-1         Archer L1 bowman           10,4   hp 6/17   Plain  group sworn, aggressive
+A  captain          Alder Fenn L1 cadet        11,6   hp 19/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 10/23  Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+b  soldier-1        Soldier L1 pikeman         11,1   hp 1/20   Plain  group sworn, aggressive
+B  wren             Wren L1 cadet              10,3   hp 8/20   Plain  done
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> end !
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Frozen Iron falls on every unit but him for 6, past Def and Res: Archer (hp 0), Alder Fenn (hp 13), Dunstan (hp 4), Soldier 1 (hp 0), Wren (hp 2)
+Archer falls at 10,4
+Soldier 1 falls at 11,1
+enemy: wait hask_warden-1
+Hask waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Under the Hill (the Kin)  turn 5 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##...B...
+ 4 .!...##.......
+ 5 ##...##...G...
+ 6 #..........A..
+ 7 #...#........#
+ 8 #####....#####
+
+A  captain          Alder Fenn L1 cadet        11,6   hp 13/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         10,5   hp 4/23   Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+B  wren             Wren L1 cadet              10,3   hp 2/20   Plain
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 9 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move captain 7,6
+Alder Fenn moves 11,6 -> 7,6 via 10,6 9,6 8,6
+Under the Hill (the Kin)  turn 5 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##...B...
+ 4 .!...##.......
+ 5 ##...##...G...
+ 6 #......A......
+ 7 #...#........#
+ 8 #####....#####
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 13/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         10,5   hp 4/23   Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+B  wren             Wren L1 cadet              10,3   hp 2/20   Plain
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 9 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> wait captain
+Alder Fenn waits
+Under the Hill (the Kin)  turn 5 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##...B...
+ 4 .!...##.......
+ 5 ##...##...G...
+ 6 #......A......
+ 7 #...#........#
+ 8 #####....#####
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 13/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 4/23   Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+B  wren             Wren L1 cadet              10,3   hp 2/20   Plain
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 9 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move wren 8,3
+Wren moves 10,3 -> 8,3 via 9,3
+Under the Hill (the Kin)  turn 5 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##.B.....
+ 4 .!...##.......
+ 5 ##...##...G...
+ 6 #......A......
+ 7 #...#........#
+ 8 #####....#####
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 13/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 4/23   Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+B  wren             Wren L1 cadet              8,3    hp 2/20   Plain
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 9 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> wait wren
+Wren waits
+Under the Hill (the Kin)  turn 5 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##.B.....
+ 4 .!...##.......
+ 5 ##...##...G...
+ 6 #......A......
+ 7 #...#........#
+ 8 #####....#####
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 13/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         10,5   hp 4/23   Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+B  wren             Wren L1 cadet              8,3    hp 2/20   Plain  done
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 9 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> move dunstan 9,5
+Dunstan moves 10,5 -> 9,5
+Under the Hill (the Kin)  turn 5 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##.B.....
+ 4 .!...##.......
+ 5 ##...##..G....
+ 6 #......A......
+ 7 #...#........#
+ 8 #####....#####
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 13/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         9,5    hp 4/23   Plain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+B  wren             Wren L1 cadet              8,3    hp 2/20   Plain  done
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 9 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> wait dunstan
+Dunstan waits
+Under the Hill (the Kin)  turn 5 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##.B.....
+ 4 .!...##.......
+ 5 ##...##..G....
+ 6 #......A......
+ 7 #...#........#
+ 8 #####....#####
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 13/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         9,5    hp 4/23   Plain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+B  wren             Wren L1 cadet              8,3    hp 2/20   Plain  done
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 9 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> end !
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Frozen Iron falls on every unit but him for 9, past Def and Res: Alder Fenn (hp 4), Dunstan (hp 0), Wren (hp 0)
+Dunstan falls at 9,5
+Wren falls at 8,3
+enemy: wait hask_warden-1
+Hask waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Under the Hill (the Kin)  turn 6 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##.......
+ 4 .!...##.......
+ 5 ##...##.......
+ 6 #......A......
+ 7 #...#........#
+ 8 #####....#####
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 4/22   Plain  captain
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 12 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> wait captain
+Alder Fenn waits
+Under the Hill (the Kin)  turn 6 (the limit ends nothing now)  player phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##.......
+ 4 .!...##.......
+ 5 ##...##.......
+ 6 #......A......
+ 7 #...#........#
+ 8 #####....#####
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 4/22   Plain  captain  done
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 12 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+> end !
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+Frozen Iron falls on every unit but him for 12, past Def and Res: Alder Fenn (hp 0)
+Alder Fenn falls at 7,6
+Under the Hill (the Kin)  turn 6 (the limit ends nothing now)  enemy phase  defeat_boss  recall 3
+   01234567890123
+ 0 #####....#####
+ 1 #...#........#
+ 2 #.............
+ 3 ##...##.......
+ 4 .!...##.......
+ 5 ##...##.......
+ 6 #.............
+ 7 #...#........#
+ 8 #####....#####
+
+!  hask_warden-1    Hask L14 iron warden       1,4    hp 20/20  Hill  group kin, boss
+The shard is broken: the Kin re-takes no one
+Hask stands swallowed: Frozen Iron lands for 15 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+Battle lost: the captain is dead; only recall is left
+Lost because the captain, Alder Fenn, fell.
+Battle lost: the captain is dead

@@ -100,6 +100,39 @@ public static class Swallow
     }
 
     /// <summary>
+    /// The opening <paramref name="state"/> with the map's <c>swallowed:</c> boss (issue 1386 slice 3b',
+    /// <see cref="MapDefinition.Swallowed"/>) already in his second stage, as <see cref="Take"/> leaves a boss who
+    /// swallowed: on the stage's bar, full, with its Def and Res, rooted if the stage is, and Frozen Iron set to the
+    /// stage's dose, held a phase for a late stage. No event: he begins the map so, and the board's row says so (<see cref="Line"/>). Unchanged on a
+    /// map without the header.
+    /// </summary>
+    public static BattleState Opening(BattleState state, GameContent content)
+    {
+        if (state.Map.Swallowed is not { } at || state.UnitAt(at) is not { Kin: not null, Swallowed: false } boss)
+        {
+            return state;
+        }
+
+        return Take(state, content, boss.Id, new List<GameEvent>());
+    }
+
+    /// <summary>
+    /// The board's row for a boss who began the map swallowed (issue 1386 slice 3b', <see cref="MapDefinition.Swallowed"/>),
+    /// where no swallow announced the clock: what Frozen Iron lands for next, when, its step, and the Kin's heal. Null on
+    /// a map without the header, or once he has fallen.
+    /// </summary>
+    public static string? Line(BattleState state, UnitNames names)
+    {
+        if (state.Map.Swallowed is null || state.Units.FirstOrDefault(u => u is { Swallowed: true, Kin: not null, Retreated: false } && u.Side == Side.Enemy) is not { } kin)
+        {
+            return null;
+        }
+
+        var when = state.FrozenIronHeld ? "from the enemy phase after next" : "at each enemy phase start";
+        return $"{names[kin.Id]} stands swallowed: Frozen Iron lands for {state.FrozenIron} on every unit but him {when}, {kin.Kin!.Step} more each time, then the Kin heals him {kin.Kin.Heal}";
+    }
+
+    /// <summary>
     /// The phase start's Frozen Iron and the Kin's heal (issue 1385), after the terrain's heal and burn: while
     /// <paramref name="side"/> is his (<see cref="Casts"/>), every unit
     /// on the board but a swallowed unit (<see cref="Spared"/>) takes it, never below 0, unless the landing is held (<see cref="BattleState.FrozenIronHeld"/>), when this
