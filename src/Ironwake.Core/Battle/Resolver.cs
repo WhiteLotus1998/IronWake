@@ -630,7 +630,7 @@ public static class Resolver
 
         if (art is not null)
         {
-            events.Add(state.Map.FormsEnabled ? new ArtDeclared(unit.Id, attack.Art!, weapon.Id, 0) { Grit = art.Grit } : new ArtDeclared(unit.Id, attack.Art!, weapon.Id, art.Cost));
+            events.Add(state.Map.FormsEnabled ? new FormDeclared(unit.Id, attack.Art!, weapon.Id, 0) { Grit = art.Grit } : new FormDeclared(unit.Id, attack.Art!, weapon.Id, art.Cost));
         }
 
         if (Windup.Raises(state, weapon))
@@ -996,19 +996,19 @@ public static class Resolver
         var known = content.FormsOf(unit, forms).FirstOrDefault(a => a.Ability.Id == artId);
         if (known.Art is null)
         {
-            return (null, new Rejection(RejectionReason.NoSuchArt, $"{unit.Id} knows no technique '{artId}'"));
+            return (null, new Rejection(RejectionReason.NoSuchArt, $"{unit.Id} knows no form '{artId}'"));
         }
 
         var (ability, art) = known;
         var uses = unit.Unit.Inventory.Items[unit.EquippedSlot(content)].Uses;
-        var why = weapon.Type != art.Weapon ? $"{ability.Name} is a {Lower(art.Weapon)} technique and {weapon.Name} is a {Lower(weapon.Type)}"
+        var why = weapon.Type != art.Weapon ? $"{ability.Name} is a {Lower(art.Weapon)} form and {weapon.Name} is a {Lower(weapon.Type)}"
             : art.Item is { } item && item != weapon.Id ? $"{ability.Name} is declared only with {content.ItemName(item)}"
             : art.Woken && !Heirloom.ArtOpen(content.Weapon(unit.Unit.Inventory.Items[unit.EquippedSlot(content)].ItemId), unit.Unit.Inventory.Items[unit.EquippedSlot(content)]) ? $"{ability.Name} waits until {weapon.Name} is woken and named"
             : unit.Unit.Skill.Rank(art.Weapon) < art.Rank ? $"rank {unit.Unit.Skill.Rank(art.Weapon)} in {Lower(art.Weapon)}, and {ability.Name} needs {art.Rank}"
             : art.PerMap is { } cap && unit.TimesDeclared(artId) >= cap ? $"{ability.Name} is {Times(cap)} a map and is spent"
             : forms && unit.Grit < art.Grit ? $"{ability.Name} costs {art.Grit} Grit and {unit.Id} has {unit.Grit}"
             : forms ? null
-            : uses == 0 ? $"{weapon.Name} is broken and cannot pay for a technique"
+            : uses == 0 ? $"{weapon.Name} is broken and cannot pay for a form"
             : uses < art.UsesNeeded ? $"{ability.Name} costs {art.UsesNeeded} uses with the strike and {weapon.Name} has {uses} left"
             : null;
         return why is null ? (art, null) : (null, new Rejection(RejectionReason.ArtRefused, $"{unit.Id} cannot use {ability.Name}: {why}"));
@@ -1084,7 +1084,7 @@ public static class Resolver
         {
             if (use.Art is not null)
             {
-                return (state, new Rejection(RejectionReason.ArtRefused, $"{item.Name} is not a healing spell; no art is declared with it"));
+                return (state, new Rejection(RejectionReason.ArtRefused, $"{item.Name} is not a healing spell; no form is declared with it"));
             }
 
             if (item.Teaches is { } school)
@@ -1206,7 +1206,7 @@ public static class Resolver
                 return (state, refused);
             }
 
-            events.Add(new ArtDeclared(unit.Id, use.Art, spell.Id, 0));
+            events.Add(new FormDeclared(unit.Id, use.Art, spell.Id, 0));
         }
 
         var healed = Math.Min(targetMax, target.Hp + Combat.Heal(unit.ToCombatant(state.Map, content), spell) * (art?.Factor ?? 1));
@@ -1241,7 +1241,7 @@ public static class Resolver
     {
         if (use.Art is not null)
         {
-            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} cleanses; no art is declared with it"));
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} cleanses; no form is declared with it"));
         }
 
         if (!Cleanse.Afflicted(target))
@@ -1274,7 +1274,7 @@ public static class Resolver
     {
         if (use.Art is not null)
         {
-            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} heals around its caster; no art is declared with it"));
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} heals around its caster; no form is declared with it"));
         }
 
         if (use.TargetId is not null)
@@ -1322,7 +1322,7 @@ public static class Resolver
     {
         if (use.Art is not null)
         {
-            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} strikes an area; no art is declared with it"));
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} strikes an area; no form is declared with it"));
         }
 
         if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
@@ -1444,7 +1444,7 @@ public static class Resolver
     {
         if (use.Art is not null)
         {
-            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} raises ground; no art is declared with it"));
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} raises ground; no form is declared with it"));
         }
 
         if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
@@ -1494,7 +1494,7 @@ public static class Resolver
     {
         if (use.Art is not null)
         {
-            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} is worn; no art is declared with it"));
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} is worn; no form is declared with it"));
         }
 
         if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
@@ -1534,7 +1534,7 @@ public static class Resolver
     {
         if (use.Art is not null)
         {
-            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} raises the dead; no art is declared with it"));
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} raises the dead; no form is declared with it"));
         }
 
         if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
@@ -1585,7 +1585,7 @@ public static class Resolver
     {
         if (use.Art is not null)
         {
-            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} drops raised ground; no art is declared with it"));
+            return (state, new Rejection(RejectionReason.ArtRefused, $"{spell.Name} drops raised ground; no form is declared with it"));
         }
 
         if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
@@ -1641,11 +1641,11 @@ public static class Resolver
         var known = content.AbilitiesOf(healer.Unit).FirstOrDefault(a => a.Id == artId && a.Effect is HealArtEffect);
         if (known is null)
         {
-            return (null, new Rejection(RejectionReason.NoSuchArt, $"{healer.Id} knows no heal art '{artId}'"));
+            return (null, new Rejection(RejectionReason.NoSuchArt, $"{healer.Id} knows no heal form '{artId}'"));
         }
 
         var art = (HealArtEffect)known.Effect;
-        var why = spell.Type != art.Weapon ? $"{known.Name} is a {art.Weapon.Label()} art and {spell.Name} is a {spell.Type.Label()}"
+        var why = spell.Type != art.Weapon ? $"{known.Name} is a {art.Weapon.Label()} form and {spell.Name} is a {spell.Type.Label()}"
             : art.Item is { } item && item != spell.Id ? $"{known.Name} is declared only with {content.ItemName(item)}"
             : healer.Unit.Skill.Rank(art.Weapon) < art.Rank ? $"rank {healer.Unit.Skill.Rank(art.Weapon)} in {art.Weapon.Label()}, and {known.Name} needs {art.Rank}"
             : target.Id == healer.Id ? $"{known.Name} is cast on an ally, never the healer"

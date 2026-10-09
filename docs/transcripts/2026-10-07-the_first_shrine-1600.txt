@@ -330,7 +330,7 @@ a  soldier-1        Soldier L2 pikeman         7,1    hp 9/20   Plain  group san
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack ottilie hexer-1 art aimed_shot
 Forecast Ottilie -> Hexer: acc 90% dmg 9 x2 crit 15%; counter: acc 98% dmg 10 crit 0% (Cinder 7 of 8 left)
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 4 of 40 uses, 2 of them hit or miss
+  Form Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 4 of 40 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Hexer
   Ottilie crits Hexer for 27 (hp 0)

@@ -2049,7 +2049,7 @@ B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack captain bandit_leader-1 art full_measure
 Forecast Alder Fenn -> Bandit Leader: acc 98% dmg 15 crit 23%; counter with Toll Axe: acc 43% dmg 11 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Bandit Leader
   Alder Fenn crits Bandit Leader for 45 (hp 0)

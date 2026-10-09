@@ -96,7 +96,7 @@ B  wren             Wren L4 cadet              8,7    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1 family_lance art long_thrust
 Forecast Teodor -> Soldier 1: acc 83% dmg 11 crit 2%; counter: none
-  Technique Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 40 uses, 2 of them hit or miss
+  Form Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 40 uses, 2 of them hit or miss
   Fighting here wakes: the east group (noise, heard from 7,4 and 7,2), the west group (noise, heard from 7,4 and 7,2)
 Teodor equips Family Lance
 Teodor declares Long Thrust with Family Lance, spending 2 extra uses
@@ -410,7 +410,7 @@ A  teodor           Teodor L4 pikeman          7,4    hp 21/22  Road  captain
 B  wren             Wren L4 cadet              7,5    hp 18/21  Road  done
 > attack teodor soldier-1 family_lance art long_thrust
 Forecast Teodor -> Soldier 1: acc 83% dmg 11 crit 2%; counter: none
-  Technique Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 36 uses, 2 of them hit or miss
+  Form Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 36 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Family Lance, spending 2 extra uses
 Teodor attacks Soldier 1
   Teodor hits Soldier 1 for 11 (hp 0)
@@ -515,7 +515,7 @@ A  teodor           Teodor L4 pikeman          7,4    hp 21/22  Road  captain
 B  wren             Wren L4 cadet              7,5    hp 7/21   Road  done
 > attack teodor brigand-2 family_lance art long_thrust
 Forecast Teodor -> Brigand 2: acc 87% dmg 13 crit 3%; counter: none
-  Technique Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 33 uses, 2 of them hit or miss
+  Form Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 33 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Family Lance, spending 2 extra uses
 Teodor attacks Brigand 2
   Teodor hits Brigand 2 for 13 (hp 9)
@@ -600,7 +600,7 @@ Teodor, Pikeman L4, at 7,4 on Road
   Weapon: Family Lance (acc 75 power 9 crit 0 wt 10 range 1-1)
   Items: 1: Family Lance x28, 2: Iron Lance x40, 3: Field Dressing x2
   Ranks: lance E (22)
-  Techniques: Long Thrust (long_thrust) (lance E, cost 2): +1 range, -3 Power. Reaches past a sword's answer.
+  Forms: Long Thrust (long_thrust) (lance E, cost 2): +1 range, -3 Power. Reaches past a sword's answer.
   Mastery: Horsebane (6 of 12 combats)
   Family Lance, sound: Placeholder. Balanced now, or he has learned it. He will not say which. Placeholder. The rust holds; it waits on Teodor.
   Targets from here: Sworn Captain (sworn_captain-1)
@@ -991,7 +991,7 @@ A  teodor           Teodor L4 pikeman          7,5    hp 11/22  Road  captain
 B  wren             Wren L4 cadet              7,4    hp 14/21  Road  done
 > attack teodor sworn_captain-1 family_lance art long_thrust
 Forecast Teodor -> Sworn Captain: acc 87% dmg 8 crit 0%; counter: none
-  Technique Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 26 uses, 2 of them hit or miss
+  Form Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 26 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Family Lance, spending 2 extra uses
 Teodor attacks Sworn Captain
   Teodor hits Sworn Captain for 8 (hp 13)
@@ -1159,7 +1159,7 @@ A  teodor           Teodor L4 pikeman          8,1    hp 11/22  Plain  captain
 B  wren             Wren L4 cadet              7,2    hp 14/21  Plain
 > attack teodor sworn_captain-1 family_lance art long_thrust
 Forecast Teodor -> Sworn Captain: acc 67% dmg 6 crit 0%; counter: none
-  Technique Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 23 uses, 2 of them hit or miss
+  Form Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 23 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Family Lance, spending 2 extra uses
 Teodor attacks Sworn Captain
   Teodor misses Sworn Captain
@@ -1198,7 +1198,7 @@ A  teodor           Teodor L4 pikeman          8,1    hp 11/22  Plain  captain  
 B  wren             Wren L4 cadet              7,1    hp 14/21  Plain
 > attack wren sworn_captain-1 art heavy_cut
 Forecast Wren -> Sworn Captain: acc 52% dmg 8 x2 crit 2%; counter: acc 73% dmg 13 crit 0%
-  Technique Heavy Cut: Iron Sword at acc 65 power 9 crit 0 wt 8 range 1-1; spends up to 4 of 29 uses, 2 of them hit or miss
+  Form Heavy Cut: Iron Sword at acc 65 power 9 crit 0 wt 8 range 1-1; spends up to 4 of 29 uses, 2 of them hit or miss
 Wren declares Heavy Cut with Iron Sword, spending 2 extra uses
 Wren attacks Sworn Captain
   Wren hits Sworn Captain for 8 (hp 10)
@@ -1260,7 +1260,7 @@ B  wren             Wren L4 cadet              7,1    hp 14/21  Plain
 > attack wren sworn_captain-1 art heavy_cut
 Forecast Wren -> Sworn Captain: acc 52% dmg 8 x2 crit 2%; counter: acc 73% dmg 13 crit 0%
   Seen before the recall: Wren hits, Sworn Captain hits
-  Technique Heavy Cut: Iron Sword at acc 65 power 9 crit 0 wt 8 range 1-1; spends up to 4 of 29 uses, 2 of them hit or miss
+  Form Heavy Cut: Iron Sword at acc 65 power 9 crit 0 wt 8 range 1-1; spends up to 4 of 29 uses, 2 of them hit or miss
 Wren declares Heavy Cut with Iron Sword, spending 2 extra uses
 Wren attacks Sworn Captain
   Wren hits Sworn Captain for 8 (hp 10)
@@ -1303,7 +1303,7 @@ B  wren             Wren L4 cadet              7,1    hp 1/21   Plain  done
 > attack teodor sworn_captain-1 family_lance art long_thrust
 Forecast Teodor -> Sworn Captain: acc 67% dmg 6 crit 0%; counter: none
   Seen before the recall: Teodor misses
-  Technique Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 23 uses, 2 of them hit or miss
+  Form Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 23 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Family Lance, spending 2 extra uses
 Teodor attacks Sworn Captain
   Teodor misses Sworn Captain

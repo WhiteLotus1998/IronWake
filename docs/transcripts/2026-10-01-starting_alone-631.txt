@@ -181,7 +181,7 @@ Threat on Alder Fenn at 5,4 (Fort):
 Forecast Alder Fenn -> Hexer from 5,3 (Plain): acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 7 of 8 left)
 > forecast captain hexer-1 1 art feint from 5,3
 Forecast Alder Fenn -> Hexer from 5,3 (Plain): acc 100% dmg 10 x2 crit 4%; counter: acc 98% dmg 10 crit 0% (Cinder 7 of 8 left)
-  Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 3 of 38 uses, 1 of them hit or miss
+  Form Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 3 of 38 uses, 1 of them hit or miss
 > threat captain from 5,3
 Threat on Alder Fenn at 5,3 (Plain):
   Archer from 5,1 with Iron Bow (slot 1): acc 68% dmg 5 crit 0%; counter: none
@@ -259,7 +259,7 @@ Threat on Alder Fenn at 5,3 (Plain):
 Forecast Alder Fenn -> Archer from 5,2 (Plain): acc 87% dmg 11 crit 4%; counter: none
 > forecast captain archer-1 1 art feint from 5,2
 Forecast Alder Fenn -> Archer from 5,2 (Plain): acc 99% dmg 9 crit 4%; counter: none
-  Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 2 of 36 uses, 1 of them hit or miss
+  Form Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 2 of 36 uses, 1 of them hit or miss
 > move captain 5,2
 Alder Fenn moves 5,3 -> 5,2
 Starting Alone  turn 4 of 10  player phase  rout  recall 3

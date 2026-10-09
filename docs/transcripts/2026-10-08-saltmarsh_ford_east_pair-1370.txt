@@ -548,7 +548,7 @@ Forecast Ottilie -> Wingrider from 11,5 (Plain): acc 77% dmg 9 grounds 23%; coun
 Forecast Teodor -> Wingrider with Iron Lance: acc 70% dmg 13 crit 0%; counter: acc 76% dmg 6 crit 2%
 > forecast teodor archer-1 art long_thrust
 Forecast Teodor -> Archer: acc 76% dmg 9 crit 1%; counter: acc 80% dmg 5 crit 3%
-  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 39 uses, 2 of them hit or miss
+  Form Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 39 uses, 2 of them hit or miss
 > forecast wren wingrider-1 from 11,4
 Forecast Wren -> Wingrider from 11,4 (Plain): acc 80% dmg 11 crit 2%; counter: acc 65% dmg 7 crit 0%
 > move ottilie 11,5
@@ -707,7 +707,7 @@ B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor archer-1 art long_thrust
 Forecast Teodor -> Archer: acc 76% dmg 9 crit 1%; counter: acc 80% dmg 5 crit 3%
-  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 39 uses, 2 of them hit or miss
+  Form Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 39 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
 Teodor attacks Archer
   Teodor hits Archer for 9 (hp 8)
@@ -985,7 +985,7 @@ B  wren             Wren L1 cadet              10,4   hp 11/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor soldier-1 art long_thrust
 Forecast Teodor -> Soldier 1: acc 76% dmg 7 crit 1%; counter: none
-  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 36 uses, 2 of them hit or miss
+  Form Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 36 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
 Teodor attacks Soldier 1
   Teodor hits Soldier 1 for 7 (hp 7)
@@ -1648,7 +1648,7 @@ B  wren             Wren L1 cadet              11,2   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack ottilie bandit_leader-1 art aimed_shot
 Forecast Ottilie -> Bandit Leader: acc 88% dmg 4 crit 13%; counter: acc 60% dmg 13 crit 0%
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 37 uses, 2 of them hit or miss
+  Form Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 37 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Bandit Leader
   Ottilie crits Bandit Leader for 12 (hp 14)
@@ -1745,7 +1745,7 @@ B  wren             Wren L2 cadet              11,0   hp 9/21   Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack captain bandit_leader-1 art full_measure
 Forecast Alder Fenn -> Bandit Leader: acc 98% dmg 15 crit 23%; counter with Toll Axe: acc 43% dmg 11 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 39 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 39 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Bandit Leader
   Alder Fenn hits Bandit Leader for 15 (hp 0)

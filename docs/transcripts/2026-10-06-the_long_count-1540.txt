@@ -362,7 +362,7 @@ exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its ac
 count: Ottilie 3 turns to an exit (last start: turn 5), Pell 3 turns to an exit (last start: turn 5)
 > attack ottilie rider-1 art aimed_shot
 Forecast Ottilie -> Rider: acc 98% dmg 8 crit 16%; counter: none
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 40 uses, 2 of them hit or miss
+  Form Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 40 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Rider
   Ottilie hits Rider for 8 (hp 14)
@@ -732,7 +732,7 @@ exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its ac
 count: Ottilie 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7)
 > attack pell archer-1 art overcast
 Forecast Pell -> Archer with Cinder: acc 99% dmg 20 crit 3%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 5 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 5 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Archer
   Pell hits Archer for 20 (hp 0)

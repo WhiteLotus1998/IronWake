@@ -1282,7 +1282,7 @@ Pell, Adept L1, at 5,9 on Plain
   Weapon: Cinder (acc 90 power 5 crit 0 wt 3 range 1-2)
   Items: 1: Cinder x7, 2: Gust x6
   Ranks: lore E (3)
-  Techniques: Overcast (lore E, cost 2): +5 Power, +4 Wt. More fire than the caster can carry., Read Ahead (read_ahead) (lore E, cost 2, with Pell's Commonplace, not carried): +1 range, -2 Power. She has read how far it goes.
+  Forms: Overcast (lore E, cost 2): +5 Power, +4 Wt. More fire than the caster can carry., Read Ahead (read_ahead) (lore E, cost 2, with Pell's Commonplace, not carried): +1 range, -2 Power. She has read how far it goes.
   Mastery: Deep Study (1 of 12 combats)
   Targets from here: none
 > forecast teodor brawler-1
@@ -2750,14 +2750,14 @@ Alder Fenn (captain), Cadet L1, at 12,9 on Plain
   Weapon: Iron Sword (acc 75 power 5 crit 0 wt 5 range 1-1)
   Items: 1: Iron Sword x38, 2: Field Dressing x3
   Ranks: sword E (10), lance E (0), axe E (0)
-  Techniques: Feint (sword E, cost 1): +25 Acc, -2 Power. For the strike you cannot afford to miss., Full Measure (full_measure) (sword E, cost 2): +30 Acc, +8 Power, +20 Crit. Strikes once, never doubles. Once a map, and it costs the next phase: no move, no act.
+  Forms: Feint (sword E, cost 1): +25 Acc, -2 Power. For the strike you cannot afford to miss., Full Measure (full_measure) (sword E, cost 2): +30 Acc, +8 Power, +20 Crit. Strikes once, never doubles. Once a map, and it costs the next phase: no move, no act.
   Mastery: Fundamentals (2 of 12 combats)
   Targets from here: none
 > forecast captain weir_foreman-1 from 13,7
 Forecast Alder Fenn -> Weir Foreman from 13,7 (Plain): acc 74% dmg 8 crit 3%; counter: acc 45% dmg 10 crit 0%
 > forecast captain weir_foreman-1 art full_measure from 13,7
 Forecast Alder Fenn -> Weir Foreman from 13,7 (Plain): acc 99% dmg 16 crit 23%; counter: acc 45% dmg 10 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 38 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 38 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 > forecast keziah weir_foreman-1 from 13,7
 Forecast Keziah -> Weir Foreman from 13,7 (Plain) with Iron Axe: acc 49% dmg 11 crit 0%; counter: acc 60% dmg 12 crit 1%
 > forecast ottilie weir_foreman-1 from 13,8
@@ -2800,7 +2800,7 @@ B  teodor           Teodor L1 pikeman          12,10  hp 11/21  Plain
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack captain weir_foreman-1 art full_measure
 Forecast Alder Fenn -> Weir Foreman: acc 99% dmg 16 crit 23%; counter: acc 45% dmg 10 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 38 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 38 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Weir Foreman
   Alder Fenn hits Weir Foreman for 16 (hp 12)

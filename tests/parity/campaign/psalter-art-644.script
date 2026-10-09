@@ -336,7 +336,7 @@ wait teodor
 move wren 9,4
 wait wren
 end
-item maud maud_psalter teodor art unasked
+item maud maud_psalter teodor form unasked
 move captain 8,4
 attack captain archer-1
 move ottilie 9,6

@@ -381,7 +381,7 @@ exits (>): 14,3 14,4 14,5 (a unit that starts its turn on one may exit as its ac
 count: Ottilie 3 turns to an exit (last start: turn 5), Wren 4 turns to an exit (last start: turn 4)
 > attack ottilie hexer-1 art aimed_shot
 Forecast Ottilie -> Hexer 1: acc 99% dmg 11 x2 crit 16%; counter: acc 83% dmg 11 crit 0% (Cinder 7 of 8 left)
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 4 of 39 uses, 2 of them hit or miss
+  Form Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 4 of 39 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Hexer 1
   Ottilie crits Hexer 1 for 33 (hp 0)

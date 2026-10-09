@@ -34,14 +34,20 @@ public class EnemyFormTests
     }
 
     [Fact]
-    public void OnAFormsMapAnEnemyKnowsTheBasicFormOfItsWeaponTypeAndAPlayerUnitDoesNot()
+    public void OnAFormsMapEveryUnitOfEitherSideKnowsTheBasicFormOfItsWeaponType()
     {
         var state = Begin();
         var brigand = state.Find("brigand-1")!;
+        var hale = state.Find("hale")!;
+        var haleBasics = hale.Unit.Inventory.Items.Where(i => Forms.Weapons.ContainsKey(i.ItemId)).Select(i => Forms.Weapons[i.ItemId].Type).Distinct()
+            .SelectMany(type => Forms.Abilities.Values.Where(a => a.Effect is CombatArtEffect { Basic: true } art && art.Weapon == type).Select(a => a.Id))
+            .Except(Forms.ArtsOf(hale.Unit).Select(a => a.Ability.Id));
 
         Assert.Equal(new[] { BasicOfBrigand(state) }, Forms.FormsOf(brigand, forms: true).Select(f => f.Ability.Id));
         Assert.Empty(Forms.FormsOf(brigand, forms: false));
-        Assert.Empty(Forms.FormsOf(state.Find("hale")!, forms: true));
+        Assert.NotEmpty(haleBasics);
+        Assert.Equal(Forms.ArtsOf(hale.Unit).Select(a => a.Ability.Id).Concat(haleBasics), Forms.FormsOf(hale, forms: true).Select(f => f.Ability.Id));
+        Assert.Equal(Forms.ArtsOf(hale.Unit).Select(a => a.Ability.Id), Forms.FormsOf(hale, forms: false).Select(f => f.Ability.Id));
     }
 
     [Fact]
@@ -56,7 +62,7 @@ public class EnemyFormTests
         Assert.Equal(BasicOfBrigand(state), attack.Art);
         var result = Resolver.Apply(state, Forms, attack);
         Assert.True(result.Accepted, result.Rejection?.Message);
-        Assert.Equal(2, result.Events.OfType<ArtDeclared>().Single().Grit);
+        Assert.Equal(2, result.Events.OfType<FormDeclared>().Single().Grit);
     }
 
     [Fact]

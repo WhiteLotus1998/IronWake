@@ -691,7 +691,7 @@ deaf: group loft hears and sees nothing; it wakes only when a unit of group sanc
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack ottilie archer-1 art aimed_shot
 Forecast Ottilie -> Archer 1: acc 98% dmg 9 crit 15%; counter: acc 76% dmg 7 crit 1%
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 38 uses, 2 of them hit or miss
+  Form Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 38 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Archer 1
   Ottilie hits Archer 1 for 9 (hp 8)
@@ -960,7 +960,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 Acc u
 > attack ottilie archer-1 art aimed_shot
 Forecast Ottilie -> Archer 1: acc 98% dmg 9 crit 15%; counter: acc 76% dmg 7 crit 1%
   Seen before the recall: Ottilie hits, Archer 1 hits
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 38 uses, 2 of them hit or miss
+  Form Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 38 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Archer 1
   Ottilie hits Archer 1 for 9 (hp 8)

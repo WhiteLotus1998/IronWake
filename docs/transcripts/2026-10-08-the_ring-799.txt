@@ -7712,7 +7712,7 @@ A  brannock         Brannock L4 cadet          5,3    hp 10/19  Plain  captain
 B  captain          Alder Fenn L5 vanguard     6,5    hp 24/24  Plain
 Battle won: rout; only recall is left, or leave
 > leave
-Brannock trained under Alder Fenn: L3 -> L4 (ceiling L4), sword E -> E (ceiling C).
+Brannock trained under Alder Fenn: L3 -> L4 (ceiling L4), sword E -> E (ceiling C); learned Feint.
 > show brannock
   Brannock: Cadet L4, EXP 35; 1: Hatchet 35/45 (repair 60), 2: Field Dressing 2/3
     HP 19  Str 7 Mag 0 Dex 5 Spd 7 Lck 4 Def 4 Res 1 Cha 3

@@ -173,7 +173,7 @@ public sealed class HeuristicPlayer : IPlayer
         var flush = unit with { Grit = Grit.Cap };
         string? pick = null;
         var pickHit = -1;
-        foreach (var (ability, art) in content.ArtsOf(unit.Unit))
+        foreach (var (ability, art) in content.FormsOf(unit, state.Map.FormsEnabled))
         {
             if (art.CostsNextPhase)
             {

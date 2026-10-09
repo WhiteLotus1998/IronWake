@@ -94,8 +94,8 @@ public sealed partial record CampaignRecord
     /// Why <paramref name="teacherId"/> cannot teach <paramref name="studentId"/> the weapon
     /// <paramref name="weaponName"/> at this camp, or null when they can: both on the roster and
     /// distinct, both free to take the yard duty (<see cref="DutyRefusal"/>), both of classes that
-    /// use the weapon, and the student under at least one of the teacher's ceilings, since a drill
-    /// that can raise nothing is not offered.
+    /// use the weapon, and the student under at least one of the teacher's ceilings or with a form
+    /// to learn (<see cref="YardRules.Teachable"/>), since a drill that can raise nothing is not offered.
     /// </summary>
     public string? YardRefusal(string teacherId, string studentId, string weaponName, GameContent content)
     {
@@ -141,7 +141,7 @@ public sealed partial record CampaignRecord
 
         var level = YardRules.LevelCeiling(teacher);
         var rank = YardRules.RankCeiling(teacher, weapon);
-        return student.Level >= level && student.Skill.Rank(weapon) >= rank
+        return student.Level >= level && student.Skill.Rank(weapon) >= rank && YardRules.Teachable(content, teacher, student, weapon, student.Skill.Rank(weapon)) is null
             ? $"{student.Name} stands at {teacher.Name}'s ceiling already: L{level}, {word} {rank}"
             : null;
     }
@@ -202,7 +202,8 @@ public sealed partial record CampaignRecord
     /// Whoever stands comes back as the drill left them, spells refreshed: the student with the EXP,
     /// levels and rank points it earned under the ceilings, the teacher with none (the battle never
     /// paid them). Who fell is fallen for good, or with <see cref="Permadeath"/> off back wounded,
-    /// as on a side map. The drill pays nothing else.
+    /// as on a side map. A won drill also teaches the student one form
+    /// (<see cref="YardRules.Teachable"/>, issue 1461 a3); it pays nothing else.
     /// </summary>
     public ScreenResult AfterYard(BattleState end, string teacherId, string studentId, WeaponType weapon, GameContent content)
     {
@@ -254,6 +255,12 @@ public sealed partial record CampaignRecord
         if (end.Outcome.Result != BattleResult.Won)
         {
             line += $"; the drill is lost: {Objective.Reason(end, content)}";
+        }
+        else if (roster.FindIndex(u => u.Id == studentId) is var at and >= 0
+            && YardRules.Teachable(content, teacher, roster[at], weapon, roster[at].Skill.Rank(weapon)) is { } form)
+        {
+            roster[at] = roster[at] with { Abilities = roster[at].Abilities.Add(form.Id) };
+            line += $"; learned {form.Name}";
         }
 
         line += lost.Count > 0 ? $"; fallen for good: {string.Join(", ", lost)}"

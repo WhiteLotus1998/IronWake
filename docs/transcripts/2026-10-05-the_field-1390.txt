@@ -1471,7 +1471,7 @@ seen far: Rook wakes a sleeper within 6 (seen for miles)
 drift: on turn 5's enemy phase the untaken route's group wakes and makes for your crossing: the south group for 12,8 if the line group wakes first, the line group for 12,14 if the south group does
 > attack pell soldier-3 art overcast
 Forecast Pell -> Soldier 3 with Cinder: acc 99% dmg 19 crit 3%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Soldier 3
   Pell hits Soldier 3 for 19 (hp 2)
@@ -2865,7 +2865,7 @@ seen far: Rook wakes a sleeper within 6 (seen for miles)
 drift: the line group is making for 12,14, the crossing you took
 > attack pell rider-1 art overcast
 Forecast Pell -> Rider with Cinder: acc 99% dmg 19 crit 3%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 5 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 5 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Rider
   Pell hits Rider for 19 (hp 2)
@@ -2947,7 +2947,7 @@ seen far: Rook wakes a sleeper within 6 (seen for miles)
 drift: the line group is making for 12,14, the crossing you took
 > attack captain rider-1 art feint
 Forecast Alder Fenn -> Rider: acc 100% dmg 9 x2 crit 5%; counter: acc 58% dmg 8 crit 0%
-  Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 3 of 37 uses, 1 of them hit or miss
+  Form Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 3 of 37 uses, 1 of them hit or miss
 Alder Fenn declares Feint with Iron Sword, spending 1 extra use
 Alder Fenn attacks Rider
   Alder Fenn hits Rider for 9 (hp 0)
@@ -3993,7 +3993,7 @@ seen far: Rook wakes a sleeper within 6 (seen for miles)
 drift: the line group is making for 12,14, the crossing you took
 > attack pell soldier-1 gust art overcast
 Forecast Pell -> Soldier 1 with Gust: acc 100% dmg 18 crit 8%; counter: none
-  Technique Overcast: Gust at acc 100 power 9 crit 5 wt 5 range 1-2; spends up to 3 of 5 uses, 2 of them hit or miss
+  Form Overcast: Gust at acc 100 power 9 crit 5 wt 5 range 1-2; spends up to 3 of 5 uses, 2 of them hit or miss
 Pell declares Overcast with Gust, spending 2 extra uses
 Pell attacks Soldier 1
   Pell hits Soldier 1 for 18 (hp 3)
@@ -6619,7 +6619,7 @@ g  sentry-1         Sentry L4 sentinel         15,7   hp 27/27  Plain  group bri
 B  teodor           Teodor L5 pikeman          18,7   hp 8/23   Plain  done
 > attack captain sworn_captain-1 art full_measure
 Forecast Alder Fenn -> Sworn Captain: acc 99% dmg 14 crit 24%; counter: acc 72% dmg 10 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 32 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 32 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Sworn Captain
   Alder Fenn hits Sworn Captain for 14 (hp 0)

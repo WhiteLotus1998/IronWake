@@ -225,7 +225,7 @@ public sealed record ItemUsed(string UnitId, string ItemId, string TargetId, int
 public sealed record WeaponEquipped(string UnitId, string ItemId) : GameEvent;
 
 /// <summary>An attack declared a combat art with the weapon it strikes with (issue 68), or a heal a heal art with its spell (issue 635, cost 0); <see cref="Cost"/> extra uses are spent whatever the rolls. Precedes the <see cref="CombatFought"/> or the <see cref="ItemUsed"/>.</summary>
-public sealed record ArtDeclared(string UnitId, string ArtId, string ItemId, int Cost) : GameEvent
+public sealed record FormDeclared(string UnitId, string ArtId, string ItemId, int Cost) : GameEvent
 {
     /// <summary>The Grit the form spent on a <c>forms: on</c> map (issue 1461, <see cref="Ironwake.Core.Grit"/>), where <see cref="Cost"/> is 0; 0 off the header.</summary>
     public int Grit { get; init; }

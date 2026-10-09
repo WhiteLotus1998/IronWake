@@ -82,7 +82,7 @@ public class UnaskedTests
         var result = Resolver.Apply(state, Shipped, new UseItem(healer, 0, ally, "unasked"));
 
         Assert.Equal(Shipped.Weapon("maud_psalter").Durability - 1, result.Next.Find(healer)!.Unit.Inventory.Items[0].Uses);
-        Assert.Contains(result.Events, e => e is ArtDeclared { ArtId: "unasked", ItemId: "maud_psalter", Cost: 0 });
+        Assert.Contains(result.Events, e => e is FormDeclared { ArtId: "unasked", ItemId: "maud_psalter", Cost: 0 });
     }
 
     [Fact]

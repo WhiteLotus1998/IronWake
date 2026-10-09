@@ -747,9 +747,9 @@ public static class ProtocolJson
                 w.WriteString("unit", q.UnitId);
                 w.WriteString("item", q.ItemId);
                 break;
-            case ArtDeclared a:
+            case FormDeclared a:
                 w.WriteString("unit", a.UnitId);
-                w.WriteString("art", a.ArtId);
+                w.WriteString("form", a.ArtId);
                 w.WriteString("item", a.ItemId);
                 w.WriteNumber("cost", a.Cost);
                 if (a.Grit != 0)
@@ -860,7 +860,7 @@ public static class ProtocolJson
                 WriteNullableNumber(w, "slot", a.Slot);
                 if (a.Art is not null)
                 {
-                    w.WriteString("art", a.Art);
+                    w.WriteString("form", a.Art);
                 }
 
                 break;
@@ -871,7 +871,7 @@ public static class ProtocolJson
                 w.WriteString("target", i.TargetId);
                 if (i.Art is not null)
                 {
-                    w.WriteString("art", i.Art);
+                    w.WriteString("form", i.Art);
                 }
 
                 break;
@@ -992,8 +992,8 @@ public static class ProtocolJson
         return type switch
         {
             "move" => new Move(RequiredString(e, "unit"), ReadCoord(e, "to"), e.TryGetProperty("via", out _) ? ReadCoord(e, "via") : null),
-            "attack" => new Attack(RequiredString(e, "unit"), RequiredString(e, "target"), OptionalInt(e, "slot"), OptionalString(e, "art")),
-            "item" => new UseItem(RequiredString(e, "unit"), RequiredInt(e, "slot"), OptionalString(e, "target"), OptionalString(e, "art")),
+            "attack" => new Attack(RequiredString(e, "unit"), RequiredString(e, "target"), OptionalInt(e, "slot"), OptionalString(e, "form") ?? OptionalString(e, "art")),
+            "item" => new UseItem(RequiredString(e, "unit"), RequiredInt(e, "slot"), OptionalString(e, "target"), OptionalString(e, "form") ?? OptionalString(e, "art")),
             "retreat" => new Retreat(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "wait" => new Wait(RequiredString(e, "unit")),
             "watch" => new Watch(RequiredString(e, "unit")),

@@ -140,8 +140,54 @@ public class YardTests
         Assert.Null(Camp(captainLevel: 3, wrenLevel: 2, captainSword: 80, wrenSword: 30).YardRefusal("captain", "wren", "sword", Content));
         Assert.Equal(
             "Wren stands at Alder Fenn's ceiling already: L2, sword D",
-            Camp(captainLevel: 3, wrenLevel: 2, captainSword: 30, wrenSword: 30).YardRefusal("captain", "wren", "sword", Content));
+            Knowing(Camp(captainLevel: 3, wrenLevel: 2, captainSword: 30, wrenSword: 30), "wren", "feint").YardRefusal("captain", "wren", "sword", Content));
     }
+
+    [Fact]
+    public void AStudentAtTheCeilingIsStillOfferedTheDrillWhenTheTeacherHasAFormToTeach()
+    {
+        var record = Camp(captainLevel: 3, wrenLevel: 2, captainSword: 30, wrenSword: 30);
+
+        Assert.Equal("feint", YardRules.Teachable(Content, record.Find("captain")!, record.Find("wren")!, WeaponType.Sword, WeaponRank.D)?.Id);
+        Assert.Null(record.YardRefusal("captain", "wren", "sword", Content));
+    }
+
+    [Fact]
+    public void TheYardNeverTeachesACharacterFormOrOneTheStudentKnowsOrOutranks()
+    {
+        var record = Camp();
+        var captain = record.Find("captain")!;
+        var wren = record.Find("wren")!;
+        var full = Content.Ability("full_measure");
+
+        Assert.Contains("full_measure", captain.Abilities);
+        Assert.NotNull(((CombatArtEffect)full.Effect).PerMap);
+        Assert.Null(YardRules.Teachable(Content, captain, Knowing(record, "wren", "feint").Find("wren")!, WeaponType.Sword, WeaponRank.E));
+        Assert.Contains("turn_the_key", record.Find("teodor")!.Abilities);
+        Assert.Null(YardRules.Teachable(Content, record.Find("teodor")!, Knowing(record, "captain", "long_thrust").Find("captain")!, WeaponType.Lance, WeaponRank.E));
+        Assert.Null(YardRules.Teachable(Content, captain, wren, WeaponType.Lance, WeaponRank.E));
+        Assert.Equal("feint", YardRules.Teachable(Content, captain, wren, WeaponType.Sword, WeaponRank.E)?.Id);
+    }
+
+    [Fact]
+    public void ALostDrillTeachesNothing()
+    {
+        var record = Camp();
+        var opening = record.BeginYard(Map, "captain", "wren", WeaponType.Sword, Content);
+        var end = opening with
+        {
+            Units = ValueList<BattleUnit>.From(opening.UnitsOf(Side.Player).Where(u => u.Id != "wren")),
+            History = ValueList<BattleState>.Of(opening),
+        };
+
+        var after = record.AfterYard(end, "captain", "wren", WeaponType.Sword, Content);
+
+        Assert.DoesNotContain("learned", after.Text);
+        Assert.DoesNotContain("feint", after.Record.Roster.Where(u => u.Id == "wren").SelectMany(u => u.Abilities));
+    }
+
+    private static CampaignRecord Knowing(CampaignRecord record, string id, string ability) =>
+        record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u.Id == id ? u with { Abilities = u.Abilities.Add(ability) } : u)) };
 
     [Fact]
     public void TheYardRefusesAWeaponEitherClassDoesNotUseAndAUnitTeachingItself()
@@ -293,7 +339,8 @@ public class YardTests
         var after = record.AfterYard(end, "captain", "wren", WeaponType.Sword, Content);
 
         Assert.True(after.Accepted);
-        Assert.Equal("Wren trained under Alder Fenn: L2 -> L2 (ceiling L5), sword E -> E (ceiling D).", after.Text);
+        Assert.Equal("Wren trained under Alder Fenn: L2 -> L2 (ceiling L5), sword E -> E (ceiling D); learned Feint.", after.Text);
+        Assert.Equal(new[] { "heavy_cut", "feint" }, after.Record.Find("wren")!.Abilities);
         Assert.Equal((Duty.Yard, Duty.Yard), (after.Record.DutyOf("captain"), after.Record.DutyOf("wren")));
         Assert.Equal("Wren drilled in the yard at this camp already; one duty a unit", after.Record.YardRefusal("teodor", "wren", "sword", Content));
         Assert.Equal("Alder Fenn took the yard duty at this camp; one duty a unit", after.Record.AssignDuty("captain", "forge").Text);

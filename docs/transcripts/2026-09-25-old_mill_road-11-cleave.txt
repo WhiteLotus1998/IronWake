@@ -121,7 +121,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 Forecast Alder Fenn -> Brigand: acc 90% dmg 11 x2 crit 5%; counter: acc 49% dmg 10 crit 0%
 > attack captain brigand-1 art cleave
 Forecast Alder Fenn -> Brigand: acc 90% dmg 16 crit 5%; counter: acc 56% dmg 10 crit 0%
-  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss
+  Form Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss
 Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Brigand
   Alder Fenn hits Brigand for 16 (hp 0)
@@ -556,7 +556,7 @@ d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mil
 B  wren             Wren L1 cadet              6,1    hp 10/20  Plain  done
 > attack captain mill_bandit-1 art cleave
 Forecast Alder Fenn -> Mill Bandit: acc 87% dmg 15 crit 3%; counter: acc 88% dmg 9 crit 2%
-  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 36 uses, 2 of them hit or miss
+  Form Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 36 uses, 2 of them hit or miss
 Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Mill Bandit
   Alder Fenn hits Mill Bandit for 15 (hp 9)
@@ -668,7 +668,7 @@ b  archer-1         Archer L1 bowman           8,1    hp 17/17  Hill  group mill
 A  captain          Alder Fenn L2 cadet        7,2    hp 9/23   Plain  captain
 > forecast captain archer-1 art cleave from 8,2
 Forecast Alder Fenn -> Archer 1 from 8,2 (Hill): acc 74% dmg 16 crit 4%; counter: none
-  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 32 uses, 2 of them hit or miss
+  Form Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 32 uses, 2 of them hit or miss
 > move captain 8,2
 Alder Fenn moves 7,2 -> 8,2
 Old Mill Road  turn 8 of 12  player phase  rout  recall 3
@@ -755,7 +755,7 @@ b  archer-1         Archer L1 bowman           6,2    hp 6/17   Fort (heals 20 p
 A  captain          Alder Fenn L2 cadet        7,2    hp 5/23   Plain  captain
 > forecast captain archer-1 art cleave
 Forecast Alder Fenn -> Archer 1: acc 67% dmg 15 crit 4%; counter: none
-  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 30 uses, 2 of them hit or miss
+  Form Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 30 uses, 2 of them hit or miss
 > attack captain archer-1
 Forecast Alder Fenn -> Archer 1: acc 67% dmg 10 x2 crit 4%; counter: none
 Alder Fenn attacks Archer 1

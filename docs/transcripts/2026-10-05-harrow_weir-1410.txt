@@ -1693,7 +1693,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 Forecast Pell -> Archer with Cinder: acc 99% dmg 17 crit 2%; counter: acc 92% dmg 8 x2 crit 2%
   Kills if the first strike lands (99)
   Counter: lethal to Pell only if the first round misses (1 in 100) (16 against 16 hp)
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 7 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 7 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Archer
   Pell hits Archer for 17 (hp 0)
@@ -2157,7 +2157,7 @@ B  teodor           Teodor L1 pikeman          11,2   hp 21/21  Road
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack ottilie weir_foreman-1 art aimed_shot
 Forecast Ottilie -> Weir Foreman: acc 92% dmg 5 crit 13%; counter: acc 62% dmg 12 crit 0%
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 39 uses, 2 of them hit or miss
+  Form Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 39 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Weir Foreman
   Ottilie hits Weir Foreman for 5 (hp 11)
@@ -2222,7 +2222,7 @@ B  teodor           Teodor L1 pikeman          11,2   hp 21/21  Road
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack captain weir_foreman-1 art full_measure
 Forecast Alder Fenn -> Weir Foreman: acc 99% dmg 16 crit 23%; counter: acc 45% dmg 10 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 39 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 39 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Weir Foreman
   Alder Fenn hits Weir Foreman for 16 (hp 0)

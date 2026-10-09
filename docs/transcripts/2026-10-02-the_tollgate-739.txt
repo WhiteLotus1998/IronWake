@@ -1407,10 +1407,10 @@ C  teodor           Teodor L1 pikeman          6,5    hp 9/21   Forest
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 > forecast captain bandit_leader-1 art full_measure
 Forecast Alder Fenn -> Bandit Leader: acc 100% dmg 17 crit 23%; counter with Toll Axe: acc 43% dmg 11 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 35 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 35 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 > attack captain bandit_leader-1 art full_measure
 Forecast Alder Fenn -> Bandit Leader: acc 100% dmg 17 crit 23%; counter with Toll Axe: acc 43% dmg 11 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 35 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 35 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Bandit Leader
   Alder Fenn hits Bandit Leader for 17 (hp 0)

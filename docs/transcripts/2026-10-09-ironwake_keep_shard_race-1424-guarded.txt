@@ -2786,7 +2786,7 @@ pair rule binds: Sworn Hunter, Hask
 Sworn Hunter is bound to Hask: freed when Hask falls
 > attack captain finale_hunter-1 art full_measure
 Forecast Alder Fenn -> Sworn Hunter: acc 99% dmg 15 crit 19%; counter with Iron Sword: acc 81% dmg 10 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 36 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 36 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
   Sworn Hunter is bound to Hask: freed when Hask falls
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Sworn Hunter

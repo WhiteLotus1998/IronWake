@@ -50,6 +50,22 @@ public static class YardRules
     public static int CapPoints(int points, WeaponRank ceiling) =>
         ceiling == WeaponRank.S ? points : Math.Min(points, WeaponRanks.Threshold(ceiling + 1) - 1);
 
+    /// <summary>
+    /// The form a drill in <paramref name="weapon"/> under <paramref name="teacher"/> teaches
+    /// <paramref name="student"/> (issue 1461 a3), or null: the first of the teacher's combat forms, in
+    /// its order, for that weapon that the student does not know and whose rank the student holds at
+    /// <paramref name="studentRank"/>. A form bound to an item or declared once a map is a character
+    /// form and is never taught.
+    /// </summary>
+    public static Ability? Teachable(GameContent content, Unit teacher, Unit student, WeaponType weapon, WeaponRank studentRank)
+    {
+        var known = content.ArtsOf(student).Select(a => a.Ability.Id).ToHashSet(StringComparer.Ordinal);
+        return content.ArtsOf(teacher)
+            .Where(a => a.Art.Weapon == weapon && a.Art.Item is null && a.Art.PerMap is null && a.Art.Rank <= studentRank && !known.Contains(a.Ability.Id))
+            .Select(a => a.Ability)
+            .FirstOrDefault();
+    }
+
     /// <summary>The student's and the teacher's hands for a drill in <paramref name="weapon"/> under <paramref name="teacher"/>.</summary>
     public static (YardHand Student, YardHand Teacher) Hands(Unit teacher, WeaponType weapon)
     {

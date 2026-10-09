@@ -1346,7 +1346,7 @@ public static class Program
         (command switch
         {
             Attack { Slot: { } slot } a when UniqueItemAt(state, a.UnitId, slot) is { } id => $"attack {a.UnitId} {a.TargetId} {id}",
-            UseItem u when UniqueItemAt(state, u.UnitId, u.Slot) is { } id => (u.TargetId is { } t ? $"item {u.UnitId} {id} {t}" : $"item {u.UnitId} {id}") + (u.Art is { } art ? $" art {art}" : ""),
+            UseItem u when UniqueItemAt(state, u.UnitId, u.Slot) is { } id => (u.TargetId is { } t ? $"item {u.UnitId} {id} {t}" : $"item {u.UnitId} {id}") + (u.Art is { } art ? $" form {art}" : ""),
             _ => Script(command),
         }) + (command switch
         {
@@ -1389,7 +1389,7 @@ public static class Program
     {
         Move m => m.Via is { } via ? $"move {m.UnitId} {m.To} via {via}" : $"move {m.UnitId} {m.To}",
         Attack a => a.Slot is { } slot ? $"attack {a.UnitId} {a.TargetId} {slot + 1}" : $"attack {a.UnitId} {a.TargetId}",
-        UseItem u => (u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}") + (u.Art is { } art ? $" art {art}" : ""),
+        UseItem u => (u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}") + (u.Art is { } art ? $" form {art}" : ""),
         Wait w => $"wait {w.UnitId}",
         Watch w => $"watch {w.UnitId}",
         Cover c => $"cover {c.UnitId} {c.AllyId}",
@@ -1716,7 +1716,7 @@ public static class Program
             foreach (var art in reading.Arts)
             {
                 yield return art.ByConstruction
-                    ? $"    {art.ArtId}: a heal art, costs the ally its phase; judged in play (0099)"
+                    ? $"    {art.ArtId}: a heal form, costs the ally its phase; judged in play (0099)"
                     : $"    {art.ArtId}: loses to the plain attack on {art.LosesTo} of {art.Targets} targets";
             }
         }

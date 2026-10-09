@@ -185,7 +185,7 @@ public class FullCampaignTests
 
         Assert.Null(written.LostOn);
         Assert.Contains("art", written.Touched);
-        Assert.Contains("\nitem maud maud_psalter teodor art unasked\n", written.Text);
+        Assert.Contains("\nitem maud maud_psalter teodor form unasked\n", written.Text);
         Assert.EndsWith("# stopped at the camp before sallow_grange: art taken\n", written.Text);
         Assert.Equal(File.ReadAllText(ArtScriptPath()), written.Text);
     }
