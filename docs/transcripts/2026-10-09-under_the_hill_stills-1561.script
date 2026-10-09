@@ -1,0 +1,99 @@
+move keziah 12,5
+wait keziah
+move dunstan 12,8
+wait dunstan
+move teodor 12,9
+wait teodor
+move captain 13,5
+wait captain
+move ottilie 13,4
+wait ottilie
+move pell 13,3
+wait pell
+move maud 14,5
+wait maud
+move brannock 12,4
+wait brannock
+move ansgar 13,7
+wait ansgar
+canto ansgar stay
+move rook 14,4
+wait rook
+move wren 12,3
+wait wren
+move corin 13,6
+wait corin
+end !
+move pell 11,4
+attack pell sworn_captain-1
+move rook 10,6
+attack rook sworn_captain-1
+move brannock 11,5
+attack brannock sworn_captain-1
+move ansgar 9,5
+take ansgar shard
+move keziah 12,5
+attack keziah soldier-1
+move captain 12,7
+attack captain soldier-1
+move maud 11,6
+item maud 2 rook
+move dunstan 15,9
+wait dunstan
+move teodor 12,8
+attack teodor soldier-2
+move ottilie 12,4
+attack ottilie archer-1
+move wren 10,3
+attack wren archer-1
+move corin 11,7
+attack corin soldier-2 !
+end !
+move keziah 12,8
+attack keziah brigand-2 !
+move ansgar 9,8
+attack ansgar hexer-1 !
+move pell 9,4
+wait pell
+move brannock 12,4
+attack brannock brigand-1
+move wren 12,2
+attack wren brigand-1
+item maud 2 rook
+move rook 8,6
+wait rook
+move captain 9,7
+wait captain
+move corin 10,7
+wait corin
+canto ansgar stay
+end !
+move pell 7,4
+wait pell
+move keziah 8,8
+wait keziah
+move captain 7,7
+wait captain
+move wren 9,3
+wait wren
+move rook 7,6
+wait rook
+move ansgar 8,7
+wait ansgar
+canto ansgar stay
+move maud 11,5
+move brannock 10,5
+wait brannock
+move corin 9,6
+wait corin
+end !
+move pell 5,5
+attack pell hask_warden-1
+move rook 4,5
+attack rook hask_warden-1 !
+move ansgar 4,7
+attack ansgar hask_warden-1 !
+move maud 7,5
+wait maud
+end !
+attack pell hask_warden-1
