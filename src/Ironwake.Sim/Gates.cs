@@ -55,6 +55,9 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// </summary>
     public StageTwo? Stage { get; init; }
 
+    /// <summary>The boss's first stage in this game (Table round 513, <see cref="Sim.StageOne"/>): null when no boss with a second stage stood.</summary>
+    public StageOne? StageOne { get; init; }
+
     /// <summary>
     /// What killed the captain on a captain loss (round 502's read of the finale's losses): the killer's name,
     /// or <c>frozen iron</c>, or <c>other</c>; with <see cref="CaptainFellInStageTwo"/> when the boss had swallowed. Null otherwise.
@@ -238,6 +241,7 @@ public static class Runner
         var covers = CoverCounts.Zero;
         var fired = new List<MapEventFired>();
         StageTwo? stage = null;
+        StageOne? stageOne = null;
         string? captainKiller = null;
         var captainSeen = false;
         var captainInStageTwo = false;
@@ -324,6 +328,7 @@ public static class Runner
                 }
 
                 stage = StageTwo.After(stage, state, result.Next, result.Events, content);
+                stageOne = StageOne.After(stageOne, state, result.Next, result.Events, content);
                 fired.AddRange(result.Events.OfType<MapEventFired>());
                 drifted |= result.Events.OfType<RouteDrifted>().Any();
                 if (result.Events.OfType<CombatFought>().Any())
@@ -358,6 +363,7 @@ public static class Runner
             Fired = fired,
             Bond = state.Bond,
             Stage = stage,
+            StageOne = stageOne,
             CaptainKiller = state.Outcome.Cause == LossCause.Captain ? captainKiller ?? "other" : null,
             CaptainFellInStageTwo = state.Outcome.Cause == LossCause.Captain && captainInStageTwo,
             CaptainPlanRead = state.Outcome.Cause == LossCause.Captain && captainInStageTwo ? captainPlanRead : null,
@@ -1283,6 +1289,97 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
 
         return stage is null ? null : stage with { BossHp = after.Find(stage.Boss)?.Hp ?? 0, StandingEnd = after.UnitsOf(Side.Player).Count() };
     }
+}
+
+/// <summary>
+/// A game's first stage (Table round 513, issue 1395): from the turn a boss carrying a second stage stood on the board,
+/// <paramref name="Arrived"/>, to his swallow or the game's end. It counts the player phases begun with him on the board and
+/// the player units standing as each began (the company's unit-phases), and splits the company's actions in them by
+/// target: a combat opened or an area cast that struck him, against one on any other enemy; the rest (heals, moves, waits)
+/// is what is left. With the turn of his first blow taken, the turn he swallowed, and his HP as the stage ended, a stage-1
+/// timeout reads as the fronts eating the company's phases (few on him) or a company that reaches him and cannot hurt him
+/// enough (many on him, his HP high).
+/// </summary>
+public sealed record StageOne(string Boss, int Arrived)
+{
+    /// <summary>The turn he swallowed, or null while he has not.</summary>
+    public int? SwallowTurn { get; init; }
+
+    /// <summary>The player phases begun with him on the board before the swallow.</summary>
+    public int PlayerPhases { get; init; }
+
+    /// <summary>The player units standing as each of those phases began, summed.</summary>
+    public int UnitPhases { get; init; }
+
+    /// <summary>The company's actions in those phases that struck him.</summary>
+    public int OnHim { get; init; }
+
+    /// <summary>The company's actions in those phases that struck another enemy and not him.</summary>
+    public int OnOthers { get; init; }
+
+    /// <summary>The turn of the first of the company's actions that struck him, or null when none did.</summary>
+    public int? FirstBlowTurn { get; init; }
+
+    /// <summary>His HP and max HP as stage 1 ended: at the swallow 0, else after the last command read.</summary>
+    public int BossHp { get; init; }
+
+    public int BossMaxHp { get; init; }
+
+    /// <summary>The player units on the board as stage 1 ended.</summary>
+    public int StandingEnd { get; init; }
+
+    /// <summary>
+    /// <paramref name="stage"/> after a command's <paramref name="events"/> on <paramref name="before"/>, leaving
+    /// <paramref name="after"/>: begun when a boss with a stage not yet swallowed stands on <paramref name="after"/>, then
+    /// counting until his swallow, after which it holds as it stood.
+    /// </summary>
+    public static StageOne? After(StageOne? stage, BattleState before, BattleState after, IEnumerable<GameEvent> events, GameContent content)
+    {
+        var read = events as IReadOnlyList<GameEvent> ?? events.ToList();
+        if (stage is null)
+        {
+            if (after.UnitsOf(Side.Enemy).FirstOrDefault(u => u.Kin is not null && !u.Swallowed) is not { } boss)
+            {
+                return null;
+            }
+
+            stage = new StageOne(boss.Id, after.Turn) { BossMaxHp = boss.MaxHp(content) };
+        }
+
+        if (stage.SwallowTurn is not null)
+        {
+            return stage;
+        }
+
+        foreach (var e in read)
+        {
+            switch (e)
+            {
+                case PhaseBegan { Side: Side.Player }:
+                    stage = stage with { PlayerPhases = stage.PlayerPhases + 1, UnitPhases = stage.UnitPhases + after.UnitsOf(Side.Player).Count() };
+                    break;
+                case CombatFought fought when fought.Phase == Side.Player && before.Find(fought.AttackerId) is { Side: Side.Player }:
+                    stage = Struck(stage, fought.TargetId == stage.Boss, before.Turn);
+                    break;
+                case AreaCastAt cast when before.Phase == Side.Player && before.Find(cast.CasterId) is { Side: Side.Player } && cast.Struck.Count > 0:
+                    stage = Struck(stage, cast.Struck.Contains(stage.Boss), before.Turn);
+                    break;
+                case ShardSwallowed swallowed when swallowed.UnitId == stage.Boss:
+                    stage = stage with { SwallowTurn = before.Turn };
+                    break;
+            }
+        }
+
+        return stage with
+        {
+            BossHp = stage.SwallowTurn is not null ? 0 : after.Find(stage.Boss)?.Hp ?? 0,
+            StandingEnd = after.UnitsOf(Side.Player).Count(),
+        };
+    }
+
+    private static StageOne Struck(StageOne stage, bool onHim, int turn) => onHim
+        ? stage with { OnHim = stage.OnHim + 1, FirstBlowTurn = stage.FirstBlowTurn ?? turn }
+        : stage with { OnOthers = stage.OnOthers + 1 };
 }
 
 /// <summary>

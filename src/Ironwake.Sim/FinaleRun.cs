@@ -84,6 +84,16 @@ public static class FinaleRun
                 yield return "  " + FallsLine(Falls, Games);
             }
 
+            if (PaceLine(Games) is { } pace)
+            {
+                yield return "  " + pace;
+            }
+
+            if (PaceStallLine(Games) is { } paceStall)
+            {
+                yield return "  " + paceStall;
+            }
+
             if (StageLine(Games) is { } stage)
             {
                 yield return "  " + stage;
@@ -163,6 +173,57 @@ public static class FinaleRun
             var fired = games.Select(g => g.Fired.FirstOrDefault(f => f.Name == name)).ToList();
             return $"{name} arrived {fired.Count(f => f is { Blocked: false })}, blocked {fired.Count(f => f is { Blocked: true })}, unfired {fired.Count(f => f is null)}";
         })) + $" of {games.Count} (data; all blocked is decoration)";
+
+    /// <summary>
+    /// Round 513's pace read of the boss's first stage (<see cref="StageOne"/>): the median turn he stood on the board, how
+    /// many games reached the swallow and its median turn (earliest, latest), the median turn of his first blow taken, and
+    /// the company's unit-phases from his arrival to the swallow or the end, split into actions that struck him, actions on
+    /// the others, and the rest; null when no game fielded such a boss.
+    /// </summary>
+    public static string? PaceLine(IReadOnlyList<GameResult> games)
+    {
+        var ones = games.Where(g => g.StageOne is not null).Select(g => g.StageOne!).ToList();
+        if (ones.Count == 0)
+        {
+            return null;
+        }
+
+        var swallowed = ones.Where(o => o.SwallowTurn is not null).Select(o => o.SwallowTurn!.Value).ToList();
+        var when = swallowed.Count == 0 ? "none" : $"median turn {Median(swallowed)} (earliest {swallowed.Min()}, latest {swallowed.Max()})";
+        var struck = ones.Where(o => o.FirstBlowTurn is not null).Select(o => o.FirstBlowTurn!.Value).ToList();
+        var first = struck.Count == 0 ? "never struck" : $"his first blow taken median turn {Median(struck)} in {struck.Count}";
+        return $"stage 1: on the board median turn {Median(ones.Select(o => o.Arrived))} in {ones.Count} of {games.Count}; swallowed in {swallowed.Count}, {when}; {first}; {Split(ones)}";
+    }
+
+    /// <summary>
+    /// Round 513's read of the games that ran out the clock in the boss's first stage: his median HP of his bar and the units
+    /// standing at the limit, the median actions a player phase on him and on the others, in tenths, and the same unit-phase
+    /// split as <see cref="PaceLine"/>; null when none did. Few on him is the fronts eating the phases; many on him with
+    /// his bar high is a company that cannot hurt him enough.
+    /// </summary>
+    public static string? PaceStallLine(IReadOnlyList<GameResult> games)
+    {
+        var stalled = games.Where(g => g.Cause == LossCause.Timeout && g.Stage is null && g.StageOne is not null).Select(g => g.StageOne!).ToList();
+        if (stalled.Count == 0)
+        {
+            return null;
+        }
+
+        static string Tenths(int t) => $"{t / 10}.{t % 10}";
+        var onHim = Median(stalled.Select(o => o.PlayerPhases == 0 ? 0 : o.OnHim * 10 / o.PlayerPhases));
+        var onOthers = Median(stalled.Select(o => o.PlayerPhases == 0 ? 0 : o.OnOthers * 10 / o.PlayerPhases));
+        return $"stage 1 timeouts: {stalled.Count}; at the limit, median boss HP {Median(stalled.Select(o => o.BossHp))} of {Median(stalled.Select(o => o.BossMaxHp))}, {Median(stalled.Select(o => o.StandingEnd))} standing; median actions a player phase on him {Tenths(onHim)}, on the others {Tenths(onOthers)}, over {Median(stalled.Select(o => o.PlayerPhases))} player phases; {Split(stalled)}";
+    }
+
+    private static string Split(IReadOnlyList<StageOne> ones)
+    {
+        var total = ones.Sum(o => o.UnitPhases);
+        var him = ones.Sum(o => o.OnHim);
+        var others = ones.Sum(o => o.OnOthers);
+        var rest = Math.Max(0, total - him - others);
+        string Share(int n) => total == 0 ? "0 %" : $"{n * 100 / total} %";
+        return $"unit-phases {total}: on him {him} ({Share(him)}), on the others {others} ({Share(others)}), the rest {rest} ({Share(rest)})";
+    }
 
     /// <summary>
     /// The boss's second stage over the games (issue 1385's Sim gate): how many reached it, its median length in phases
