@@ -1562,6 +1562,35 @@ public sealed record StageOne(string Boss, int Arrived)
     /// </summary>
     public System.Collections.Immutable.ImmutableDictionary<string, int> HealerFallsBy { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, int>.Empty;
 
+    /// <summary>
+    /// Issue 1441's split of the captain's stage-1 fall (round 539, 0366's split brought before the swallow): null while
+    /// he stands. Else <c>his own phase</c> when he fell in a player phase, or the veto's verdict on the tile he ended the
+    /// last player phase on (<c>passed</c>: its no-crit sum, the line counted, under his HP then; <c>cornered</c>: it did not,
+    /// and no tile he could end on did as the phase was first read; <c>failed</c>: it did not while one did; <c>unread</c>
+    /// when no phase closed with him read) and how the enemy phase killed him: <c>arrival</c> (the last blow from a unit
+    /// not on the board as that phase closed, which the sum does not price), <c>crit</c> (a crit landed on him in that
+    /// enemy phase), <c>line</c> (the last blow down a line strike), or <c>plain</c>.
+    /// </summary>
+    public string? CaptainFall { get; init; }
+
+    /// <summary>
+    /// The player units that fell in stage 1, in order, by kind (round 539's Tamsin-first read): <c>healer</c> (an unarmed
+    /// healer), <c>captain</c>, or <c>other</c>. Falls before he stood on the board are not read.
+    /// </summary>
+    public System.Collections.Immutable.ImmutableList<string> Fallen { get; init; } = System.Collections.Immutable.ImmutableList<string>.Empty;
+
+    /// <summary>The captain's end tile as the last player phase closed: whether its no-crit sum stayed under his HP; null before one closed.</summary>
+    private bool? CaptainEndPassed { get; init; }
+
+    /// <summary>Whether any tile the captain could end on passed the veto's no-crit sum as his last player phase was first read (<see cref="CaptainPlan.Read"/>).</summary>
+    private bool CaptainAnyPass { get; init; }
+
+    /// <summary>The turn <see cref="CaptainAnyPass"/> was read on.</summary>
+    private int CaptainAnyPassTurn { get; init; }
+
+    /// <summary>Whether a crit landed on the captain since the last player phase closed.</summary>
+    private bool CaptainCrit { get; init; }
+
     /// <summary>What each unarmed healer did in the last player phase that closed: heal, walk, or wait.</summary>
     private System.Collections.Immutable.ImmutableDictionary<string, string> HealerStood { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, string>.Empty;
 
@@ -1658,6 +1687,34 @@ public sealed record StageOne(string Boss, int Arrived)
             stage = stage with { HealerFalls = stage.HealerFalls + fallen.Count, HealerFallsBy = by };
         }
 
+        if (before.UnitsOf(Side.Player).FirstOrDefault(u => u.IsCaptain) is { } captain)
+        {
+            if (read.OfType<CombatFought>().Any(f => f.Strikes.Any(s => s.TargetId == captain.Id && s.Hit && s.Crit)))
+            {
+                stage = stage with { CaptainCrit = true };
+            }
+
+            if (before.Phase == Side.Player && (CaptainPlan.Begins(before, after) || (command is EndPhase && stage.CaptainAnyPassTurn != before.Turn)))
+            {
+                stage = stage with { CaptainAnyPass = CaptainPlan.Read(before, content).AnyPass, CaptainAnyPassTurn = before.Turn };
+            }
+
+            if (command is EndPhase && before.Phase == Side.Player)
+            {
+                stage = stage with { CaptainEndPassed = Exposure.Of(before, content, captain, captain.At).NoCrit < captain.Hp, CaptainCrit = false };
+            }
+        }
+
+        foreach (var down in before.UnitsOf(Side.Player).Where(u => after.Find(u.Id) is not { Hp: > 0 }))
+        {
+            var kind = down.IsCaptain ? "captain" : Unarmed(content, down) && HeuristicPlayer.Healer(content, down) ? "healer" : "other";
+            stage = stage with { Fallen = stage.Fallen.Add(kind) };
+            if (down.IsCaptain && stage.CaptainFall is null)
+            {
+                stage = stage with { CaptainFall = before.Phase == Side.Player ? "his own phase" : CaptainFallOf(stage, read, down.Id) };
+            }
+        }
+
         foreach (var e in read)
         {
             switch (e)
@@ -1698,6 +1755,18 @@ public sealed record StageOne(string Boss, int Arrived)
             BossHp = stage.SwallowTurn is not null ? 0 : after.Find(stage.Boss)?.Hp ?? 0,
             StandingEnd = after.UnitsOf(Side.Player).Count(),
         };
+    }
+
+    /// <summary>The verdict and cause of the captain's enemy-phase fall (<see cref="CaptainFall"/>) in <paramref name="events"/>.</summary>
+    private static string CaptainFallOf(StageOne stage, IReadOnlyList<GameEvent> events, string captain)
+    {
+        var verdict = stage.CaptainEndPassed switch { true => "passed", false when !stage.CaptainAnyPass => "cornered", false => "failed", null => "unread" };
+        var striker = StrikerOf(events, captain);
+        var cause = striker is not null && !stage.BoardAtClose.Contains(striker) ? "arrival"
+            : stage.CaptainCrit ? "crit"
+            : events.OfType<LineStruck>().Any(l => l.Struck.Contains(captain)) ? "line"
+            : "plain";
+        return $"{verdict}, {cause}";
     }
 
     private static StageOne Struck(StageOne stage, bool onHim, int turn, string striker)

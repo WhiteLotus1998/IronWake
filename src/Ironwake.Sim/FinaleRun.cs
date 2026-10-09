@@ -148,6 +148,16 @@ public static class FinaleRun
             {
                 yield return "  " + front;
             }
+
+            if (VetoSplitLine(Games) is { } split)
+            {
+                yield return "  " + split;
+            }
+
+            if (FirstFallLine(Games) is { } first)
+            {
+                yield return "  " + first;
+            }
         }
     }
 
@@ -505,6 +515,52 @@ public static class FinaleRun
             .Select(name => (Name: name, Games: before.Where(g => g.CaptainFront == name).ToList()))
             .Where(c => c.Games.Count > 0)
             .Select(c => $"{c.Name} {c.Games.Count} ({By(c.Games)})")) + $"; down a line {before.Count(g => g.CaptainByLine)}";
+    }
+
+    /// <summary>
+    /// Issue 1441's split of the captain's stage-1 falls (round 539, <see cref="StageOne.CaptainFall"/>): by the veto's
+    /// verdict on the tile he ended his last player phase on, then by how the enemy phase killed him. A fall on a tile that
+    /// failed while another passed, or one that passed and fell with no crit and no arrival, is the planner's; a cornered
+    /// one is the board's, a crit the dice's. Null when he
+    /// never fell in stage 1.
+    /// </summary>
+    public static string? VetoSplitLine(IReadOnlyList<GameResult> games)
+    {
+        var falls = games.Select(g => g.StageOne?.CaptainFall).OfType<string>().ToList();
+        if (falls.Count == 0)
+        {
+            return null;
+        }
+
+        var verdicts = new[] { "passed", "cornered", "failed", "unread" };
+        var causes = new[] { "plain", "crit", "line", "arrival" };
+        string Of(string verdict)
+        {
+            var some = falls.Where(f => f.StartsWith(verdict + ",", StringComparison.Ordinal)).ToList();
+            return $"{verdict} {some.Count} ({string.Join(", ", causes.Select(c => $"{c} {some.Count(f => f == $"{verdict}, {c}")}"))})";
+        }
+
+        return $"stage 1 captain falls {falls.Count}, by the veto on his end tile: {string.Join("; ", verdicts.Select(Of))}; his own phase {falls.Count(f => f == "his own phase")}";
+    }
+
+    /// <summary>
+    /// Round 539's healer-first read: in the games lost before the swallow, who of the company fell first in stage 1
+    /// (<see cref="StageOne.Fallen"/>), and of the captain's stage-1 falls, how many came after an unarmed healer's in the
+    /// same game. Null when no game read stage 1.
+    /// </summary>
+    public static string? FirstFallLine(IReadOnlyList<GameResult> games)
+    {
+        var reads = games.Where(g => g.StageOne is not null).ToList();
+        if (reads.Count == 0)
+        {
+            return null;
+        }
+
+        var lost = reads.Where(g => !g.Won && g.StageOne!.SwallowTurn is null).ToList();
+        string First(string kind) => lost.Count(g => g.StageOne!.Fallen.FirstOrDefault() == kind).ToString(System.Globalization.CultureInfo.InvariantCulture);
+        var captained = reads.Where(g => g.StageOne!.Fallen.Contains("captain")).ToList();
+        var afterHer = captained.Count(g => g.StageOne!.Fallen.IndexOf("healer") is var h and >= 0 && h < g.StageOne!.Fallen.IndexOf("captain"));
+        return $"stage 1 first fall, in the {lost.Count} games lost before the swallow: an unarmed healer {First("healer")}, the captain {First("captain")}, another {First("other")}, none {lost.Count(g => g.StageOne!.Fallen.Count == 0)}; the captain's stage-1 falls after a healer's in the same game {afterHer} of {captained.Count}";
     }
 
     private static int Median(IEnumerable<int> values)

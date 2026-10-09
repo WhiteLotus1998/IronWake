@@ -574,6 +574,56 @@ public class SwallowTests
     }
 
     [Fact]
+    public void TheStageOneCaptainFallIsSplitByTheVetoOnHisEndTileThenByACritOrAnArrival()
+    {
+        var state = Start();
+        var captain = Captain(state);
+        var hask = Hask(state);
+        var passed = Exposure.Of(state, Starter, captain, captain.At).NoCrit < captain.Hp;
+        var verdict = passed ? "passed" : Ironwake.Sim.CaptainPlan.Read(state, Starter).AnyPass ? "failed" : "cornered";
+        var closed = Ironwake.Sim.StageOne.After(null, state, state, new GameEvent[] { new PhaseBegan(Side.Player, 1) }, Starter);
+        closed = Ironwake.Sim.StageOne.After(closed, state, state, Array.Empty<GameEvent>(), Starter, new EndPhase());
+        Assert.Null(closed!.CaptainFall);
+
+        var enemy = state with { Phase = Side.Enemy };
+        var fell = enemy.WithUnit(captain with { Hp = 0 });
+        var crit = ValueList<StrikeEvent>.Of(new StrikeEvent(0, hask.Id, captain.Id, true, true, 40, 0));
+        var critted = Ironwake.Sim.StageOne.After(closed, enemy, fell, new GameEvent[] { new CombatFought(hask.Id, captain.Id, 1, Side.Enemy, crit, hask.Hp, 0) }, Starter);
+        Assert.Equal($"{verdict}, crit", critted!.CaptainFall);
+        Assert.Equal(new[] { "captain" }, critted.Fallen);
+
+        var arrived = Ironwake.Sim.StageOne.After(closed, enemy, fell, new GameEvent[] { new CombatFought("stranger", captain.Id, 1, Side.Enemy, ValueList<StrikeEvent>.Empty, 20, 0) }, Starter);
+        Assert.Equal($"{verdict}, arrival", arrived!.CaptainFall);
+
+        var mine = Ironwake.Sim.StageOne.After(closed, state, state.WithUnit(captain with { Hp = 0 }), new GameEvent[] { new CombatFought(captain.Id, hask.Id, 1, Side.Player, ValueList<StrikeEvent>.Empty, 0, hask.Hp) }, Starter);
+        Assert.Equal("his own phase", mine!.CaptainFall);
+    }
+
+    [Fact]
+    public void TheVetoSplitAndFirstFallLinesCountTheStageOneFalls()
+    {
+        var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
+        Ironwake.Sim.GameResult Lost(string? fall, params string[] fallen) =>
+            new(BattleResult.Lost, 12, mix, LossCause.Timeout) { StageOne = new Ironwake.Sim.StageOne("h", 3) { CaptainFall = fall, Fallen = System.Collections.Immutable.ImmutableList.CreateRange(fallen) } };
+        var games = new[]
+        {
+            Lost("passed, crit", "healer", "captain"),
+            Lost("failed, plain", "other", "captain"),
+            Lost("cornered, line", "captain"),
+            Lost(null, "healer"),
+            Lost(null),
+        };
+        Assert.Equal(
+            "stage 1 captain falls 3, by the veto on his end tile: passed 1 (plain 0, crit 1, line 0, arrival 0); cornered 1 (plain 0, crit 0, line 1, arrival 0); failed 1 (plain 1, crit 0, line 0, arrival 0); unread 0 (plain 0, crit 0, line 0, arrival 0); his own phase 0",
+            Ironwake.Sim.FinaleRun.VetoSplitLine(games));
+        Assert.Equal(
+            "stage 1 first fall, in the 5 games lost before the swallow: an unarmed healer 2, the captain 1, another 1, none 1; the captain's stage-1 falls after a healer's in the same game 1 of 3",
+            Ironwake.Sim.FinaleRun.FirstFallLine(games));
+        Assert.Null(Ironwake.Sim.FinaleRun.VetoSplitLine(new[] { Lost(null) }));
+        Assert.Null(Ironwake.Sim.FinaleRun.FirstFallLine(new[] { new Ironwake.Sim.GameResult(BattleResult.Won, 5, mix) }));
+    }
+
+    [Fact]
     public void TheStageOneBaitReadCountsHisOwnPhaseStrikesByHowFarOffHisStartTile()
     {
         var state = Start();
