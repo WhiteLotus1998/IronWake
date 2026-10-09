@@ -1,0 +1,30 @@
+# issue 1395 (Table round 518; DECISIONS/0375): stage 1's unit-phases that struck no one, split. A read; no board change.
+# --finale docs/samples/ironwake_keep_warden.map --level 8 --seeds 200, two-roll average; the sample as 0374 left it (91 / 66).
+# 'the rest' (0370) is split by unit-phase: an item (a heal on an ally, or a potion); refused (an enemy the side sees in range
+# of a weapon the unit can strike with, from a tile it could end on, as its first command of the phase was read, and no strike
+# taken); move only (moved, none on offer); idle (did neither, none on offer: a wait, or a unit that fell before acting).
+# Refused is geometry only: what the strike would have cost is the planner's to price. The four sum to the rest within the
+# few unit-phases that struck twice.
+#
+# summary, shares of all stage-1 unit-phases (full / depleted):
+#                     on him   others   item   refused   move only   idle
+#   all games         24 / 14  22 / 28  6 / 4  9 / 9     34 / 22     3 / 20
+#   stage-1 timeouts  15 / 8   24 / 28  10 / 7 10 / 10   34 / 19     5 / 25
+#
+# Read: the veto's nerve is not where the phases go. A strike on offer and refused is 9 to 10 % on both arms, in the
+# timeouts too. Full's struck-no-one phases are walking: a third of all its stage-1 unit-phases move and reach nothing.
+# Depleted's split differently: a fifth to a quarter stand idle with nothing in reach, and in its timeouts idle is the
+# largest single share after the fronts. So stage 1's gap is distance (the company out of reach of anything), not the
+# planner refusing what it reaches; that is neither of round 513's two readings alone, and it comes back to the Table
+# before any stage-1 lever. Who stands idle in depleted is not yet read.
+
+finale full: 12 units at level 8, heuristic wins 91/200 (46 %), losses 25 timeout 84 captain 0 protected: FAILED
+  stage 1: on the board median turn 3 in 200 of 200; swallowed in 165, median turn 7 (earliest 5, latest 12); his first blow taken median turn 5 in 198; unit-phases 5951: on him 1447 (24 %), on the others 1361 (22 %), the rest 3143 (52 %: an item 386 (6 %), refused 544 (9 %), move only 2028 (34 %), idle 195 (3 %))
+  stage 1 timeouts: 25; at the limit, median boss HP 9 of 44, 1 standing; median actions a player phase on him 0.4, on the others 0.8, over 9 player phases; unit-phases 857: on him 130 (15 %), on the others 211 (24 %), the rest 516 (60 %: an item 92 (10 %), refused 88 (10 %), move only 292 (34 %), idle 44 (5 %))
+finale depleted: 12 units at level 8, heuristic wins 66/200 (33 %), losses 61 timeout 73 captain 0 protected: FAILED
+  stage 1: on the board median turn 3 in 199 of 200; swallowed in 110, median turn 8 (earliest 6, latest 12); his first blow taken median turn 6 in 181; unit-phases 6755: on him 998 (14 %), on the others 1914 (28 %), the rest 3843 (56 %: an item 325 (4 %), refused 646 (9 %), move only 1500 (22 %), idle 1384 (20 %))
+  stage 1 timeouts: 61; at the limit, median boss HP 12 of 44, 2 standing; median actions a player phase on him 0.3, on the others 1.1, over 9 player phases; unit-phases 2253: on him 193 (8 %), on the others 631 (28 %), the rest 1429 (63 %: an item 171 (7 %), refused 247 (10 %), move only 443 (19 %), idle 574 (25 %))
+finale floor: 11 units at level 8, heuristic wins 1/200 (1 %), losses 81 timeout 118 captain 0 protected: data, a cold chair's play decides (won at least once)
+  stage 1: on the board median turn 3 in 200 of 200; swallowed in 7, median turn 11 (earliest 7, latest 11); his first blow taken median turn 6 in 101; unit-phases 5437: on him 340 (6 %), on the others 2065 (37 %), the rest 3032 (55 %: an item 548 (10 %), refused 671 (12 %), move only 748 (13 %), idle 1065 (19 %))
+  stage 1 timeouts: 81; at the limit, median boss HP 25 of 44, 2 standing; median actions a player phase on him 0.2, on the others 1.2, over 9 player phases; unit-phases 2762: on him 219 (7 %), on the others 955 (34 %), the rest 1588 (57 %: an item 271 (9 %), refused 340 (12 %), move only 434 (15 %), idle 543 (19 %))
+[exited with code 0]

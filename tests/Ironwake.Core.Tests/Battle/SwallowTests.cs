@@ -487,6 +487,45 @@ public class SwallowTests
     }
 
     [Fact]
+    public void TheStageOneReadSplitsThePhasesThatStruckNoOne()
+    {
+        var state = Start();
+        var hask = Hask(state);
+        var captain = Captain(state);
+        var wren = state.Units.Single(u => u.Unit.Id == "wren");
+        var ivo = state.Units.Single(u => u.Unit.Id == "ivo");
+        var far = state.WithUnit(wren with { At = new Coord(0, 4), Moved = true }).WithUnit(ivo with { Moved = true });
+
+        var stage = Ironwake.Sim.StageOne.After(null, state, state, new GameEvent[] { new PhaseBegan(Side.Player, 1) }, Starter);
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, new GameEvent[] { new CombatFought(captain.Id, hask.Id, 1, Side.Player, ValueList<StrikeEvent>.Empty, 20, 30) }, Starter, new Attack(captain.Id, hask.Id));
+        stage = Ironwake.Sim.StageOne.After(stage, far, far, Array.Empty<GameEvent>(), Starter, new UseItem(wren.Id, 0, wren.Id));
+        stage = Ironwake.Sim.StageOne.After(stage, far, far, Array.Empty<GameEvent>(), Starter, new Wait(ivo.Id));
+        stage = Ironwake.Sim.StageOne.After(stage, far, far, Array.Empty<GameEvent>(), Starter, new EndPhase());
+        Assert.Equal((1, 0, 0, 1), (stage!.Healed, stage.Refused, stage.MovedOnly, stage.Idle));
+
+        var done = far.WithUnit(ivo with { Acted = true });
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, new GameEvent[] { new PhaseBegan(Side.Player, 2) }, Starter);
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, Array.Empty<GameEvent>(), Starter, new Wait(captain.Id));
+        stage = Ironwake.Sim.StageOne.After(stage, far, far, Array.Empty<GameEvent>(), Starter, new Move(wren.Id, new Coord(0, 4)));
+        stage = Ironwake.Sim.StageOne.After(stage, done, done, Array.Empty<GameEvent>(), Starter, new EndPhase());
+
+        Assert.Equal((1, 1, 1, 2), (stage!.Healed, stage.Refused, stage.MovedOnly, stage.Idle));
+        Assert.Equal(6, stage.UnitPhases);
+    }
+
+    [Fact]
+    public void AStrikeIsOnOfferOnlyToAUnitThatCanStillReachAnEnemyItSees()
+    {
+        var state = Start();
+        var captain = Captain(state);
+        var ivo = state.Units.Single(u => u.Unit.Id == "ivo");
+
+        Assert.True(Ironwake.Sim.StageOne.StrikeOnOffer(state, Starter, captain));
+        Assert.False(Ironwake.Sim.StageOne.StrikeOnOffer(state, Starter, captain with { Acted = true }));
+        Assert.False(Ironwake.Sim.StageOne.StrikeOnOffer(state, Starter, ivo with { Moved = true }));
+    }
+
+    [Fact]
     public void TheStageOneReadStopsAtTheSwallow()
     {
         var state = Start();
@@ -510,16 +549,16 @@ public class SwallowTests
         var swallowed = new Ironwake.Sim.GameResult(BattleResult.Won, 10, mix)
         {
             Stage = new Ironwake.Sim.StageTwo(3, 0),
-            StageOne = new Ironwake.Sim.StageOne("h", 3) { SwallowTurn = 7, FirstBlowTurn = 4, PlayerPhases = 5, UnitPhases = 50, OnHim = 20, OnOthers = 10, BossMaxHp = 44 },
+            StageOne = new Ironwake.Sim.StageOne("h", 3) { SwallowTurn = 7, FirstBlowTurn = 4, PlayerPhases = 5, UnitPhases = 50, OnHim = 20, OnOthers = 10, BossMaxHp = 44, Healed = 4, Refused = 10, MovedOnly = 6, Idle = 5 },
         };
         var stalled = new Ironwake.Sim.GameResult(BattleResult.Lost, 12, mix, LossCause.Timeout)
         {
-            StageOne = new Ironwake.Sim.StageOne("h", 3) { FirstBlowTurn = 8, PlayerPhases = 10, UnitPhases = 50, OnHim = 3, OnOthers = 12, BossHp = 12, BossMaxHp = 44, StandingEnd = 2 },
+            StageOne = new Ironwake.Sim.StageOne("h", 3) { FirstBlowTurn = 8, PlayerPhases = 10, UnitPhases = 50, OnHim = 3, OnOthers = 12, BossHp = 12, BossMaxHp = 44, StandingEnd = 2, Refused = 20, MovedOnly = 10, Idle = 5 },
         };
         var games = new[] { swallowed, stalled };
 
-        Assert.Equal("stage 1: on the board median turn 3 in 2 of 2; swallowed in 1, median turn 7 (earliest 7, latest 7); his first blow taken median turn 4 in 2; unit-phases 100: on him 23 (23 %), on the others 22 (22 %), the rest 55 (55 %)", Ironwake.Sim.FinaleRun.PaceLine(games));
-        Assert.Equal("stage 1 timeouts: 1; at the limit, median boss HP 12 of 44, 2 standing; median actions a player phase on him 0.3, on the others 1.2, over 10 player phases; unit-phases 50: on him 3 (6 %), on the others 12 (24 %), the rest 35 (70 %)", Ironwake.Sim.FinaleRun.PaceStallLine(games));
+        Assert.Equal("stage 1: on the board median turn 3 in 2 of 2; swallowed in 1, median turn 7 (earliest 7, latest 7); his first blow taken median turn 4 in 2; unit-phases 100: on him 23 (23 %), on the others 22 (22 %), the rest 55 (55 %: an item 4 (4 %), refused 30 (30 %), move only 16 (16 %), idle 10 (10 %))", Ironwake.Sim.FinaleRun.PaceLine(games));
+        Assert.Equal("stage 1 timeouts: 1; at the limit, median boss HP 12 of 44, 2 standing; median actions a player phase on him 0.3, on the others 1.2, over 10 player phases; unit-phases 50: on him 3 (6 %), on the others 12 (24 %), the rest 35 (70 %: an item 0 (0 %), refused 20 (40 %), move only 10 (20 %), idle 5 (10 %))", Ironwake.Sim.FinaleRun.PaceStallLine(games));
         Assert.Null(Ironwake.Sim.FinaleRun.PaceStallLine(new[] { swallowed }));
         Assert.Null(Ironwake.Sim.FinaleRun.PaceLine(new[] { new Ironwake.Sim.GameResult(BattleResult.Won, 5, mix) }));
     }

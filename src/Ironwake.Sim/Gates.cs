@@ -328,7 +328,7 @@ public static class Runner
                 }
 
                 stage = StageTwo.After(stage, state, result.Next, result.Events, content);
-                stageOne = StageOne.After(stageOne, state, result.Next, result.Events, content);
+                stageOne = StageOne.After(stageOne, state, result.Next, result.Events, content, command);
                 fired.AddRange(result.Events.OfType<MapEventFired>());
                 drifted |= result.Events.OfType<RouteDrifted>().Any();
                 if (result.Events.OfType<CombatFought>().Any())
@@ -1310,6 +1310,10 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
 /// is what is left. With the turn of his first blow taken, the turn he swallowed, and his HP as the stage ended, a stage-1
 /// timeout reads as the fronts eating the company's phases (few on him) or a company that reaches him and cannot hurt him
 /// enough (many on him, his HP high).
+/// The unit-phases that struck no one are split (round 518): a unit that used an item (a heal or a potion), one with a
+/// strike on offer that took none (refused: an enemy it sees in range of a weapon it can strike with, from a tile it
+/// could end on, as its first command of the phase was read), one that moved with none on offer (move only), and one
+/// that did neither (idle).
 /// </summary>
 public sealed record StageOne(string Boss, int Arrived)
 {
@@ -1339,12 +1343,39 @@ public sealed record StageOne(string Boss, int Arrived)
     /// <summary>The player units on the board as stage 1 ended.</summary>
     public int StandingEnd { get; init; }
 
+    /// <summary>Unit-phases that struck no one and used an item: a heal on an ally, or a potion.</summary>
+    public int Healed { get; init; }
+
+    /// <summary>Unit-phases that struck no one with a strike on offer (<see cref="StrikeOnOffer"/>): the planner refused it.</summary>
+    public int Refused { get; init; }
+
+    /// <summary>Unit-phases that struck no one, had none on offer, and moved.</summary>
+    public int MovedOnly { get; init; }
+
+    /// <summary>Unit-phases that struck no one, had none on offer, and stood: a wait, or a unit that fell before acting.</summary>
+    public int Idle { get; init; }
+
+    /// <summary>The player phase being read: the units standing as it began, and what each has done in it so far.</summary>
+    private PhaseRead? Reading { get; init; }
+
+    private sealed record PhaseRead(IReadOnlyList<string> Roster)
+    {
+        public System.Collections.Immutable.ImmutableHashSet<string> Struck { get; init; } = System.Collections.Immutable.ImmutableHashSet<string>.Empty;
+
+        public System.Collections.Immutable.ImmutableHashSet<string> Used { get; init; } = System.Collections.Immutable.ImmutableHashSet<string>.Empty;
+
+        public System.Collections.Immutable.ImmutableHashSet<string> Moved { get; init; } = System.Collections.Immutable.ImmutableHashSet<string>.Empty;
+
+        public System.Collections.Immutable.ImmutableDictionary<string, bool> Offer { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, bool>.Empty;
+    }
+
     /// <summary>
     /// <paramref name="stage"/> after a command's <paramref name="events"/> on <paramref name="before"/>, leaving
     /// <paramref name="after"/>: begun when a boss with a stage not yet swallowed stands on <paramref name="after"/>, then
-    /// counting until his swallow, after which it holds as it stood.
+    /// counting until his swallow, after which it holds as it stood. With the <paramref name="command"/> that made them,
+    /// the phase's unit-phases that struck no one are split as the phase ends, the stage swallows, or the game ends.
     /// </summary>
-    public static StageOne? After(StageOne? stage, BattleState before, BattleState after, IEnumerable<GameEvent> events, GameContent content)
+    public static StageOne? After(StageOne? stage, BattleState before, BattleState after, IEnumerable<GameEvent> events, GameContent content, Command? command = null)
     {
         var read = events as IReadOnlyList<GameEvent> ?? events.ToList();
         if (stage is null)
@@ -1362,23 +1393,49 @@ public sealed record StageOne(string Boss, int Arrived)
             return stage;
         }
 
+        if (stage.Reading is { } open && before.Phase == Side.Player && ActorOf(command) is { } actor && open.Roster.Contains(actor))
+        {
+            if (!open.Offer.ContainsKey(actor) && before.Find(actor) is { } unit)
+            {
+                open = open with { Offer = open.Offer.Add(actor, StrikeOnOffer(before, content, unit)) };
+            }
+
+            open = command switch
+            {
+                UseItem => open with { Used = open.Used.Add(actor) },
+                Move or Canto or Dash or Retreat or FallBack or Carry => open with { Moved = open.Moved.Add(actor) },
+                _ => open,
+            };
+            stage = stage with { Reading = open };
+        }
+
         foreach (var e in read)
         {
             switch (e)
             {
                 case PhaseBegan { Side: Side.Player }:
-                    stage = stage with { PlayerPhases = stage.PlayerPhases + 1, UnitPhases = stage.UnitPhases + after.UnitsOf(Side.Player).Count() };
+                    stage = Closed(stage, before, content) with
+                    {
+                        PlayerPhases = stage.PlayerPhases + 1,
+                        UnitPhases = stage.UnitPhases + after.UnitsOf(Side.Player).Count(),
+                        Reading = new PhaseRead(after.UnitsOf(Side.Player).Select(u => u.Id).ToList()),
+                    };
                     break;
                 case CombatFought fought when fought.Phase == Side.Player && before.Find(fought.AttackerId) is { Side: Side.Player }:
-                    stage = Struck(stage, fought.TargetId == stage.Boss, before.Turn);
+                    stage = Struck(stage, fought.TargetId == stage.Boss, before.Turn, fought.AttackerId);
                     break;
                 case AreaCastAt cast when before.Phase == Side.Player && before.Find(cast.CasterId) is { Side: Side.Player } && cast.Struck.Count > 0:
-                    stage = Struck(stage, cast.Struck.Contains(stage.Boss), before.Turn);
+                    stage = Struck(stage, cast.Struck.Contains(stage.Boss), before.Turn, cast.CasterId);
                     break;
                 case ShardSwallowed swallowed when swallowed.UnitId == stage.Boss:
                     stage = stage with { SwallowTurn = before.Turn };
                     break;
             }
+        }
+
+        if (stage.SwallowTurn is not null || after.Outcome.IsOver || (command is EndPhase && before.Phase == Side.Player))
+        {
+            stage = Closed(stage, before, content);
         }
 
         return stage with
@@ -1388,9 +1445,92 @@ public sealed record StageOne(string Boss, int Arrived)
         };
     }
 
-    private static StageOne Struck(StageOne stage, bool onHim, int turn) => onHim
-        ? stage with { OnHim = stage.OnHim + 1, FirstBlowTurn = stage.FirstBlowTurn ?? turn }
-        : stage with { OnOthers = stage.OnOthers + 1 };
+    private static StageOne Struck(StageOne stage, bool onHim, int turn, string striker)
+    {
+        stage = stage.Reading is { } open ? stage with { Reading = open with { Struck = open.Struck.Add(striker) } } : stage;
+        return onHim
+            ? stage with { OnHim = stage.OnHim + 1, FirstBlowTurn = stage.FirstBlowTurn ?? turn }
+            : stage with { OnOthers = stage.OnOthers + 1 };
+    }
+
+    /// <summary>
+    /// <paramref name="stage"/> with its open player phase's unit-phases that struck no one counted: an item used first,
+    /// then a strike on offer, then a move; a unit whose offer was never read (no command of its own) is read on
+    /// <paramref name="state"/>, and one no longer standing there counts idle.
+    /// </summary>
+    private static StageOne Closed(StageOne stage, BattleState state, GameContent content)
+    {
+        if (stage.Reading is not { } open)
+        {
+            return stage;
+        }
+
+        var (healed, refused, moved, idle) = (0, 0, 0, 0);
+        foreach (var id in open.Roster.Where(id => !open.Struck.Contains(id)))
+        {
+            var offer = open.Offer.TryGetValue(id, out var read) ? read : state.Find(id) is { Side: Side.Player, Acted: false } unit && StrikeOnOffer(state, content, unit);
+            if (open.Used.Contains(id))
+            {
+                healed++;
+            }
+            else if (offer)
+            {
+                refused++;
+            }
+            else if (open.Moved.Contains(id))
+            {
+                moved++;
+            }
+            else
+            {
+                idle++;
+            }
+        }
+
+        return stage with { Healed = stage.Healed + healed, Refused = stage.Refused + refused, MovedOnly = stage.MovedOnly + moved, Idle = stage.Idle + idle, Reading = null };
+    }
+
+    /// <summary>
+    /// Whether <paramref name="unit"/> has a strike on offer on <paramref name="state"/>: an enemy its side sees, in range
+    /// of a weapon it can strike with (<see cref="BattleUnit.UsableWeaponAt"/>), from a tile it could end on this phase
+    /// (<see cref="Queries.CanStandOn"/>'s tiles). Geometry only: what the strike would cost is the planner's to price.
+    /// </summary>
+    public static bool StrikeOnOffer(BattleState state, GameContent content, BattleUnit unit)
+    {
+        var weapons = Enumerable.Range(0, unit.Unit.Inventory.Count).Select(slot => unit.UsableWeaponAt(content, slot)).OfType<Weapon>().ToList();
+        if (unit.Acted || weapons.Count == 0)
+        {
+            return false;
+        }
+
+        var foes = state.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player).Where(e => Dusk.Sees(state, unit.Side, e.At)).ToList();
+        var tiles = unit.Moved ? new[] { unit.At } : Queries.Reachable(state, content, unit).Destinations.ToArray();
+        return tiles.Any(tile => foes.Any(foe => weapons.Any(w => w.InRange(tile.DistanceTo(foe.At)))));
+    }
+
+    private static string? ActorOf(Command? command) => command switch
+    {
+        Move c => c.UnitId,
+        Attack c => c.UnitId,
+        UseItem c => c.UnitId,
+        Retreat c => c.UnitId,
+        Canto c => c.UnitId,
+        Exit c => c.UnitId,
+        Recover c => c.UnitId,
+        Open c => c.UnitId,
+        Drop c => c.UnitId,
+        Shove c => c.UnitId,
+        Dash c => c.UnitId,
+        Carry c => c.UnitId,
+        Breathe c => c.UnitId,
+        Watch c => c.UnitId,
+        Cover c => c.UnitId,
+        Talk c => c.UnitId,
+        Wait c => c.UnitId,
+        FallBack c => c.UnitId,
+        StrikeLine c => c.UnitId,
+        _ => null,
+    };
 }
 
 /// <summary>
