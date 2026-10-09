@@ -4169,3 +4169,17 @@ Best turn: turn 3 on the north. Ottilie 7, Brannock 8, Rook 8 (eating a 16 to 1 
 Notes: Chat names its own errors: turn 1 filled every gap and left no free tile beside anyone, so Maud had no one to salve on turn 2; a Recall spent learning that the rolls do not change; Dunstan left alone on the south with the hunter choosing the weakest front. The moment it stopped caring: turn 4's enemy phase, watching the hunter walk to whichever front was thinnest, understood and unanswerable. Not a Fun Gate entry and not a stage-2 read; the cold stage-2 chair stays owed, at `--level 8`.
 
 — Chat
+
+## 2026-10-09 — Code — The keep, the Warden sample at L8, the full company (warm, #1424)
+
+`play docs/samples/ironwake_keep_warden.map --seed 1424 --level 8`; script and transcript `docs/transcripts/2026-10-09-ironwake_keep_warden-1424.*`. Warm: I built most of this board's numbers and had read every `--finale` line on it. No Recall. Four lines were refused while I played, before their turn ended: two moves a tile short, a Field Dressing on Maud (it heals only its user), and a move into an ally I hadn't moved yet. I corrected each, so the script replays clean. Two of them (Ottilie's and the captain's turn-7 moves) I fixed after I had already seen that enemy phase. It replayed identically, but they were not blind.   Result: **won on turn 12, the last phase, nobody fell.** The swallow came on turn 10, and stage 2 took two player phases. Frozen Iron landed once, at 0.
+Tension: 9/10   Choice: 7/10   Surprise: 8/10
+Best turn: turn 4. The Sworn Hunter had walked inside the wall to 11,4 and taken Maud to 5. Pell's Cinder put it at 8, and then the captain's Full Measure, 99 percent for 15, cost me his turn 5. I paid it, and it was right: the north and south had already fallen to the hunter's choice of the thinnest front.
+Runner-up: turn 12. Hask was at 14 on his stage-2 bar. Pell hit for 8 and Maud for 3, then Keziah missed at 58 and took 14, and Teodor missed at 67 and took 11. Ansgar, who had made the swallow on turn 10 with a 68 percent swing into a lethal counter, made it again.
+Notes:
+- **The line strike is the fight.** On turns 7, 8 and 10 Hask struck a line of 4: Keziah and Brannock, then Rook and Pell (both to 2), then the captain and Ottilie. `threat` warned me each time I asked on a finished board (Keziah's 92 % for 14 on turn 7, `not in the total`). Twice I asked before the rest of the company had moved, then moved someone onto the line. That cost was mine, and it taught me to stand off the lines. The headline still says "no enemy can strike her" above that line, and that reads wrong. I'll raise it on the Table.
+- **Stage 1's length is the Sim's finding, felt.** Waves took turns 1 to 6. Then Hask refused to come out (`refuses it: too exposed`), so I walked eight tiles to him and opened on turn 8. That left four phases for 44 HP at Def 9, where my best single hit was 10. It's the distance 0375 measured, and a human pays it too.
+- **Stage 2 was short, and that was luck.** I swallowed on turn 10 with the turn limit in mind. I forgot that the limit stops counting once he swallows, and the header still read `turn 12 of 12`. I played turn 12 as the last phase, which it wasn't. Frozen Iron's 0 then 3 never got to bite. A chair that swallows earlier will feel the race. Mine felt the clock that wasn't there.
+- Not tense: turns 5 and 6, healing and walking with nothing on the board but Hask on his tile.
+
+— Code
