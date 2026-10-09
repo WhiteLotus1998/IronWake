@@ -2281,7 +2281,8 @@ public static class Resolver
     /// Then the map events whose turn trigger names the phase that has begun fire, in
     /// file order (issue 32). The enemy phase of the last turn ends the battle (DESIGN.md
     /// section 7), so past the turn limit the turn still advances, which decides the outcome,
-    /// but no phase begins: no <see cref="PhaseBegan"/>, no heal, no event (issue 374).
+    /// but no phase begins: no <see cref="PhaseBegan"/>, no heal, no event (issue 374), unless the board is
+    /// <see cref="BattleState.Racing"/> (issue 1395), when the phases run on past it.
     /// </summary>
     private static (BattleState, Rejection?) ApplyEndPhase(BattleState state, GameContent content, List<GameEvent> events)
     {
@@ -2294,7 +2295,7 @@ public static class Resolver
         }
 
         events.Add(new PhaseEnded(ended, state.Turn));
-        if (nextTurn > state.Map.TurnLimit)
+        if (nextTurn > state.Map.TurnLimit && !state.Racing)
         {
             var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false, Pressed = false, FallingBack = false, FlewFrom = null, Open = null });
             return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared), LitGroups = ValueList<string>.Empty }, null);

@@ -1,0 +1,76 @@
+# issue 1395 (Table rounds 514, 515; DECISIONS/0372): the race stage, the turn limit ends no map while Hask stands swallowed
+# (`race` on hask_warden's swallow block), on the Warden sample (rooted, late, uncapped, Hask exempt; 0366, 0369, 0371).
+# --finale docs/samples/ironwake_keep_warden.map --level 8 --seeds 200, two-roll average. Wins full / depleted; gate 1 is 120 on both.
+# The losses line reads `losses A timeout B captain`. 'length' clamps a game's turns at the limit, so a race past it reads 12.
+#
+# summary (full / depleted):                       wins       stage-2 losses        timeouts (all stage 1)
+#   0371, stage-2 HP 24, limit binds                38 / 28    127 / 82 (92 / 79 timeouts)
+#   race, stage-2 HP 24 (shipped)                   39 / 33    126 / 77 (all to the dose)   25 / 61
+#   scratch: race, stage-2 HP 16                    85 / 53    (0371 scratch: 85 / 52)
+#   scratch: race, stage-2 HP 12                   110 / 70    (0371 scratch: 110 / 68)
+#
+# Read: the limit was not the binding constraint. Lifting it turns the stage-2 timeouts into deaths to the dose almost one
+# for one (+1 / +5 wins at HP 24, +0 / +1 at 16, +0 / +2 at 12): the races the limit cut off were already lost, a company of
+# 5 with its HP spent cannot out-hit 24 + 4 a round at Def/Res +3, and the dose finishes it at landing 4 to 7. Captain falls
+# after the swallow: 126 / 77, 'cornered' by frozen iron in all but 2. The race stage is kept (it is Lotus's one clock per
+# fight: the dose is the clock), and the gap is his bar and the heal, Chat's lever order.
+#
+# scratch screens: content copies with `swallow.hp` edited, same binary; not shipped.
+
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 39/200 (20 %), losses 25 timeout 136 captain 0 protected: FAILED
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 66 ms: ok
+  bond: hunter killed 197, freed 0, standing 3 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 18, blocked 7, unfired 175, gate_in1 arrived 6, blocked 0, unfired 194, gate_in2 arrived 2, blocked 4, unfired 194, south_in arrived 5, blocked 0, unfired 195 of 200 (data; all blocked is decoration)
+  stage 1: on the board median turn 3 in 200 of 200; swallowed in 165, median turn 7 (earliest 5, latest 12); his first blow taken median turn 5 in 198; unit-phases 5951: on him 1447 (24 %), on the others 1361 (22 %), the rest 3143 (52 %)
+  stage 1 timeouts: 25; at the limit, median boss HP 9 of 44, 1 standing; median actions a player phase on him 0.4, on the others 0.8, over 9 player phases; unit-phases 857: on him 130 (15 %), on the others 211 (24 %), the rest 516 (60 %)
+  stage 2: reached 165 of 200, won 39; median 13 phases; clock deaths 0 in 23, 1 in 23, 2+ in 119 (gate: at most 1); at the swallow, median 5 standing, captain at 15 HP; damage on him, 36 % from tiles he cannot reach (1234 of 3384)
+  stage 2 race: won 39, player phases to the kill 1: 5, 2: 12, 3: 15, 4: 7; landings before it 0: 5, 1: 13, 2: 14, 3: 7; clock deaths 0 in 22, 1 in 11, 2+ in 6; lost 126, the dose's first kill at landing 1: 41, 2: 44, 3: 3, 4: 27, 5: 3, 6: 6, 7: 1, none: 1
+  captain falls: 10 before the swallow (Hexer 4, Hask 2, Hask (countering) 1, Soldier 1, Sworn Hunter 1, Sworn Hunter (countering) 1), 126 after (frozen iron 124, Hask 2)
+  after the swallow, by his last plan: cornered 125 (frozen iron 124, Hask 1); read safe, crit-lethal 1 (Hask 1)
+  before the swallow, by the hunt: hunted, alone 4 (Hexer 2, Soldier 1, Sworn Hunter 1); hunted, behind the fronts 3 (Hask 2, Hexer 1); not hunted, behind the fronts 1 (Hexer 1); his own phase 2 (Hask (countering) 1, Sworn Hunter (countering) 1); down a line 0
+finale depleted: 12 units at level 8, heuristic wins 33/200 (17 %), losses 61 timeout 106 captain 0 protected: FAILED
+  length: median 12 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 67 ms: ok
+  bond: hunter killed 186, freed 0, standing 14 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 34, blocked 4, unfired 162, gate_in1 arrived 21, blocked 5, unfired 174, gate_in2 arrived 23, blocked 3, unfired 174, south_in arrived 7, blocked 0, unfired 193 of 200 (data; all blocked is decoration)
+  stage 1: on the board median turn 3 in 199 of 200; swallowed in 110, median turn 8 (earliest 6, latest 12); his first blow taken median turn 6 in 181; unit-phases 6755: on him 998 (14 %), on the others 1914 (28 %), the rest 3843 (56 %)
+  stage 1 timeouts: 61; at the limit, median boss HP 12 of 44, 2 standing; median actions a player phase on him 0.3, on the others 1.1, over 9 player phases; unit-phases 2253: on him 193 (8 %), on the others 631 (28 %), the rest 1429 (63 %)
+  stage 2: reached 110 of 200, won 33; median 11 phases; clock deaths 0 in 20, 1 in 10, 2+ in 80 (gate: at most 1); at the swallow, median 5 standing, captain at 14 HP; damage on him, 46 % from tiles he cannot reach (958 of 2066)
+  stage 2 race: won 33, player phases to the kill 0: 1, 1: 4, 2: 13, 3: 9, 4: 5, 5: 1; landings before it 0: 6, 1: 12, 2: 9, 3: 6; clock deaths 0 in 20, 1 in 10, 2+ in 3; lost 77, the dose's first kill at landing 1: 41, 2: 17, 3: 2, 4: 17
+  captain falls: 29 before the swallow (Hask 16, Sworn Hunter 5, Hexer 4, Soldier 2, Brigand 1, Sworn Hunter (countering) 1), 77 after (frozen iron 76, Hask 1)
+  after the swallow, by his last plan: cornered 76 (frozen iron 76); read safe, crit-lethal 1 (Hask 1)
+  before the swallow, by the hunt: hunted, alone 8 (Sworn Hunter 5, Hask 1, Hexer 1, Soldier 1); hunted, paired 1 (Hexer 1); hunted, behind the fronts 10 (Hask 7, Brigand 1, Hexer 1, Soldier 1); not hunted, behind the fronts 9 (Hask 8, Hexer 1); his own phase 1 (Sworn Hunter (countering) 1); down a line 5
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 81 timeout 119 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 11 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 41 ms: ok
+  bond: hunter killed 116, freed 0, standing 84 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 118, blocked 4, unfired 78, gate_in1 arrived 84, blocked 21, unfired 95, gate_in2 arrived 90, blocked 15, unfired 95, south_in arrived 38, blocked 4, unfired 158 of 200 (data; all blocked is decoration)
+  stage 1: on the board median turn 3 in 200 of 200; swallowed in 7, median turn 11 (earliest 7, latest 11); his first blow taken median turn 6 in 101; unit-phases 5437: on him 340 (6 %), on the others 2065 (37 %), the rest 3032 (55 %)
+  stage 1 timeouts: 81; at the limit, median boss HP 25 of 44, 2 standing; median actions a player phase on him 0.2, on the others 1.2, over 9 player phases; unit-phases 2762: on him 219 (7 %), on the others 955 (34 %), the rest 1588 (57 %)
+  stage 2: reached 7 of 200, won 0; median 11 phases; clock deaths 0 in 0, 1 in 2, 2+ in 5 (gate: at most 1); at the swallow, median 3 standing, captain at 20 HP; damage on him, 0 % from tiles he cannot reach (0 of 13)
+  stage 2 race: won 0, none won; lost 7, the dose's first kill at landing 1: 2, 2: 1, 4: 3, 7: 1
+  captain falls: 112 before the swallow (Hexer 34, Hask 33, Sworn Hunter 28, Soldier 10, Brigand 3, Archer 2, Sworn Hunter (countering) 2), 7 after (frozen iron 6, Hask 1)
+  after the swallow, by his last plan: cornered 6 (frozen iron 6); read safe, crit-lethal 1 (Hask 1)
+  before the swallow, by the hunt: hunted, alone 18 (Hexer 8, Sworn Hunter 5, Soldier 4, Hask 1); hunted, behind the fronts 45 (Sworn Hunter 16, Hask 13, Hexer 12, Soldier 2, Archer 1, Brigand 1); not hunted, alone 7 (Brigand 2, Hexer 2, Hask 1, Soldier 1, Sworn Hunter 1); not hunted, behind the fronts 40 (Hask 18, Hexer 12, Sworn Hunter 6, Soldier 3, Archer 1); his own phase 2 (Sworn Hunter (countering) 2); down a line 2
+finale: FAILED
+
+# scratch, race, stage-2 HP 16 (full, depleted)
+finale full: 12 units at level 8, heuristic wins 85/200 (42 %), losses 25 timeout 90 captain 0 protected: FAILED
+  stage 2: reached 165 of 200, won 85; median 6 phases; clock deaths 0 in 73, 1 in 20, 2+ in 72 (gate: at most 1); at the swallow, median 5 standing, captain at 15 HP; damage on him, 32 % from tiles he cannot reach (836 of 2603)
+  stage 2 race: won 85, player phases to the kill 0: 4, 1: 39, 2: 32, 3: 9, 4: 1; landings before it 0: 44, 1: 32, 2: 9; clock deaths 0 in 72, 1 in 10, 2+ in 3; lost 80, the dose's first kill at landing 1: 23, 2: 24, 3: 2, 4: 22, 5: 3, 6: 4, 7: 1, none: 1
+finale depleted: 12 units at level 8, heuristic wins 53/200 (27 %), losses 61 timeout 86 captain 0 protected: FAILED
+  stage 2: reached 110 of 200, won 53; median 7 phases; clock deaths 0 in 44, 1 in 9, 2+ in 57 (gate: at most 1); at the swallow, median 5 standing, captain at 14 HP; damage on him, 40 % from tiles he cannot reach (623 of 1556)
+  stage 2 race: won 53, player phases to the kill 0: 1, 1: 28, 2: 20, 3: 2, 4: 2; landings before it 0: 30, 1: 20, 2: 2, 3: 1; clock deaths 0 in 44, 1 in 9, 2+ in 0; lost 57, the dose's first kill at landing 1: 27, 2: 13, 3: 1, 4: 16
+  stage 2: reached 7 of 200, won 0; median 11 phases; clock deaths 0 in 0, 1 in 2, 2+ in 5 (gate: at most 1); at the swallow, median 3 standing, captain at 20 HP; damage on him, 0 % from tiles he cannot reach (0 of 13)
+  stage 2 race: won 0, none won; lost 7, the dose's first kill at landing 1: 2, 2: 1, 4: 3, 7: 1
+# scratch, race, stage-2 HP 12 (full, depleted)
+finale full: 12 units at level 8, heuristic wins 110/200 (55 %), losses 25 timeout 65 captain 0 protected: FAILED
+  stage 2: reached 165 of 200, won 110; median 2 phases; clock deaths 0 in 109, 1 in 9, 2+ in 47 (gate: at most 1); at the swallow, median 5 standing, captain at 15 HP; damage on him, 29 % from tiles he cannot reach (608 of 2029)
+  stage 2 race: won 110, player phases to the kill 0: 15, 1: 70, 2: 22, 3: 2, 4: 1; landings before it 0: 87, 1: 22, 3: 1; clock deaths 0 in 108, 1 in 2, 2+ in 0; lost 55, the dose's first kill at landing 1: 15, 2: 16, 3: 1, 4: 17, 5: 3, 6: 2, none: 1
+finale depleted: 12 units at level 8, heuristic wins 70/200 (35 %), losses 61 timeout 69 captain 0 protected: FAILED
+  stage 2: reached 110 of 200, won 70; median 2 phases; clock deaths 0 in 67, 1 in 3, 2+ in 40 (gate: at most 1); at the swallow, median 5 standing, captain at 14 HP; damage on him, 40 % from tiles he cannot reach (495 of 1233)
+  stage 2 race: won 70, player phases to the kill 0: 3, 1: 54, 2: 10, 3: 2, 4: 1; landings before it 0: 57, 1: 12, 3: 1; clock deaths 0 in 67, 1 in 3, 2+ in 0; lost 40, the dose's first kill at landing 1: 16, 2: 8, 3: 1, 4: 15
+  stage 2: reached 7 of 200, won 1; median 11 phases; clock deaths 0 in 1, 1 in 1, 2+ in 5 (gate: at most 1); at the swallow, median 3 standing, captain at 20 HP; damage on him, 0 % from tiles he cannot reach (0 of 13)
+  stage 2 race: won 1, player phases to the kill 0: 1; landings before it 0: 1; clock deaths 0 in 1, 1 in 0, 2+ in 0; lost 6, the dose's first kill at landing 1: 1, 2: 1, 4: 3, 7: 1

@@ -564,6 +564,53 @@ public class SwallowTests
     }
 
     [Fact]
+    public void ARaceStageEndsNoMapAtTheTurnLimitWhileHeStandsSwallowed()
+    {
+        var past = Swallowed(Start()) with { Turn = 11 };
+        var walking = past.WithUnit(Hask(past) with { Kin = Hask(past).Kin! with { Race = false } });
+
+        Assert.True(Hask(past).Kin!.Race);
+        Assert.True(past.Racing);
+        Assert.False(past.Outcome.IsOver);
+        Assert.False(walking.Racing);
+        Assert.Equal(LossCause.Timeout, walking.Outcome.Cause);
+    }
+
+    [Fact]
+    public void TheTurnLimitStillEndsTheMapBeforeTheSwallow()
+    {
+        var past = Start() with { Turn = 11 };
+
+        Assert.False(past.Racing);
+        Assert.Equal(LossCause.Timeout, past.Outcome.Cause);
+    }
+
+    [Fact]
+    public void ARacingBoardRunsItsPhasesPastTheLimit()
+    {
+        var last = Swallowed(Start()) with { Turn = 10, Phase = Side.Enemy };
+
+        var result = last.Try(new EndPhase());
+
+        Assert.Null(result.Rejection);
+        Assert.Contains(new PhaseBegan(Side.Player, 11), result.Events);
+        Assert.False(result.Next.Outcome.IsOver);
+        Assert.Contains("turn 11, past the limit: the race", MapRenderer.Render(result.Next, Starter));
+        var his = result.Next.Try(new EndPhase());
+        Assert.Contains(new PhaseBegan(Side.Enemy, 11), his.Events);
+        Assert.Contains(his.Events, e => e is FrozenIronFell);
+    }
+
+    [Fact]
+    public void TheCardSaysTheRaceHasNoTurnLimit()
+    {
+        var state = Start();
+        Assert.Contains(Ironwake.Cli.PlaySession.ShowLines(state, Starter, Hask(state)), l => l.Contains("from then the turn limit ends nothing"));
+        var swallowed = Swallowed(state);
+        Assert.Contains(Ironwake.Cli.PlaySession.ShowLines(swallowed, Starter, Hask(swallowed)), l => l.Contains("no turn limit while he stands"));
+    }
+
+    [Fact]
     public void RecallRestoresTheFirstStage()
     {
         for (ulong seed = 1; seed <= 40; seed++)
@@ -629,10 +676,10 @@ public class SwallowTests
     {
         var units = Ironwake.Core.Tests.Content.Fixture.Units.Replace(
             "\"inventory\": [ { \"item\": \"iron_sword\" } ] }",
-            "\"inventory\": [ { \"item\": \"iron_sword\" } ], \"swallow\": { \"hp\": 40, \"def\": 3, \"res\": 3, \"heal\": 6, \"late\": true } }");
+            "\"inventory\": [ { \"item\": \"iron_sword\" } ], \"swallow\": { \"hp\": 40, \"def\": 3, \"res\": 3, \"heal\": 6, \"late\": true, \"race\": true } }");
         var content = ContentLoader.Parse(Ironwake.Core.Tests.Content.Fixture.Files(units: units));
 
-        Assert.Equal(new KinStage(40, 3, 3, 6, Late: true), content.Unit("recruit").Swallow);
+        Assert.Equal(new KinStage(40, 3, 3, 6, Late: true, Race: true), content.Unit("recruit").Swallow);
         Assert.Equal(content, ContentLoader.Parse(ContentSerializer.Write(content)));
     }
 }

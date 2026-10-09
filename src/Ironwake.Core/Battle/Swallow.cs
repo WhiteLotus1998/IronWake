@@ -8,10 +8,12 @@ namespace Ironwake.Core;
 /// (<paramref name="Description"/>, the empty pommel), or null to keep his own. <paramref name="Rooted"/> roots him on
 /// the tile he swallowed on (Table round 505, issue 1395): from the swallow he holds (<see cref="Behavior.Hold"/>), striking
 /// only what his lance and line reach from there. <paramref name="Late"/> starts the clock a phase late (Table rounds 507,
-/// 508, issue 1423): Frozen Iron first lands at his side's second phase start after the swallow, not its first. Read from
-/// a template's <c>swallow</c> block in <c>units/</c>.
+/// 508, issue 1423): Frozen Iron first lands at his side's second phase start after the swallow, not its first. <paramref name="Race"/>
+/// makes stage 2 a race with no turn limit (Table rounds 514, 515, issue 1395): while he stands swallowed, the map's limit ends
+/// nothing, and stage 2 ends when he falls or the company does (<see cref="BattleState.Racing"/>). Read from a template's
+/// <c>swallow</c> block in <c>units/</c>.
 /// </summary>
-public sealed record KinStage(int Hp, int Def, int Res, int Heal, string? Description = null, bool Rooted = false, bool Late = false);
+public sealed record KinStage(int Hp, int Def, int Res, int Heal, string? Description = null, bool Rooted = false, bool Late = false, bool Race = false);
 
 /// <summary>Stage 1's bar reached 0 and <paramref name="UnitId"/> swallowed the shard (issue 1385): stage 2 begins on <paramref name="Hp"/>, a fresh bar, on <paramref name="At"/>.</summary>
 public sealed record ShardSwallowed(string UnitId, Coord At, int Hp) : GameEvent;
