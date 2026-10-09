@@ -490,6 +490,63 @@ public class SwallowTests
     }
 
     [Fact]
+    public void TheCaptainReadOpensEachStageTwoPhaseWithHisOffersAndFilesWhereHeEnded()
+    {
+        var after = Swallowed(Start());
+        var hask = Hask(after);
+        var captain = Captain(after);
+        var measured = after.WithUnit(captain with { Unit = captain.Unit with { Abilities = ValueList<string>.Of("full_measure") } });
+        var stage = Ironwake.Sim.StageTwo.After(null, measured, measured, new GameEvent[] { new ShardSwallowed(hask.Id, hask.At, 20) }, Starter);
+        stage = Ironwake.Sim.StageTwo.After(stage, measured with { Phase = Side.Enemy }, measured, new GameEvent[] { new PhaseBegan(Side.Player, 5) }, Starter);
+
+        Assert.Equal(2, stage!.Captain.Phases);
+        Assert.Equal((2, 2), (stage.Captain.Offer, stage.Captain.ArtOffer));
+
+        var waited = measured.WithUnit(Captain(measured) with { Acted = true });
+        stage = Ironwake.Sim.StageTwo.After(stage, measured, waited, Array.Empty<GameEvent>(), Starter);
+        Assert.Equal(1, stage!.Captain.EndedInReach["stood"]);
+        Assert.Equal(0, stage.Captain.EndedClear);
+
+        var unread = Ironwake.Sim.StageTwo.After(stage, measured, waited, Array.Empty<GameEvent>(), Starter);
+        Assert.Equal(1, unread!.Captain.EndedInReach["stood"]);
+    }
+
+    [Fact]
+    public void TheCaptainReadFilesAStrikeOnHimAndAMarkCarriedThroughTheSwallow()
+    {
+        var start = Start();
+        var marked = start.WithUnit(Hask(start) with { Mark = MagicSchool.Lightning });
+        var after = Swallowed(marked);
+        var hask = Hask(after);
+        var captain = Captain(after);
+        var stage = Ironwake.Sim.StageTwo.After(null, after, after, new GameEvent[] { new ShardSwallowed(hask.Id, hask.At, 20) }, Starter);
+        Assert.Equal(1, stage!.Captain.MarkedAtSwallow);
+
+        var struck = after.WithUnit(captain with { Acted = true, Moved = true });
+        var fought = new CombatFought(captain.Id, hask.Id, 5, Side.Player, ValueList<StrikeEvent>.Empty, captain.Hp, hask.Hp);
+        stage = Ironwake.Sim.StageTwo.After(stage, after, struck, new GameEvent[] { fought, new MarkCashed(hask.Id, captain.Id, MagicSchool.Lightning) }, Starter);
+
+        Assert.Equal((1, 0, 1), (stage!.Captain.StruckHim, stage.Captain.StruckHimArt, stage.Captain.MarksCashed));
+        Assert.Equal(1, stage.Captain.EndedInReach["struck him"]);
+    }
+
+    [Fact]
+    public void TheLeaderLineSumsTheCaptainReadOverTheGamesThatReachedTheStage()
+    {
+        var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
+        var read = new Ironwake.Sim.StageTwo.CaptainRead
+        {
+            Phases = 3, Offer = 2, PlainLethal = 1, ArtOffer = 2, ArtLethal = 1, ArtLethalHit = System.Collections.Immutable.ImmutableList.Create(99),
+            StruckHim = 1, EndedInReach = System.Collections.Immutable.ImmutableDictionary<string, int>.Empty.Add("moved", 2), EndedClear = 1, MarkedAtSwallow = 1,
+        };
+        var lost = new Ironwake.Sim.GameResult(BattleResult.Lost, 12, mix, LossCause.Captain) { Stage = new Ironwake.Sim.StageTwo(4, 1) { Captain = read } };
+        Assert.Equal(
+            "stage 2 captain: player phases 3 (resting 0); a strike on him on offer in 2, lethal if all land in 1; an art on offer in 2, lethal on its hit in 1 (from a tile the veto allows 0, median best hit 99 %; in 1 of the 1 games lost in the stage); he struck him in 1 (with an art 0), another in 0; ended in his reach 2 (after moved 2), clear 1; marks on him: at the swallow in 1 of 1, laid in the stage 0, cashed 0",
+            Ironwake.Sim.FinaleRun.LeaderLine(new[] { lost }));
+        Assert.Null(Ironwake.Sim.FinaleRun.LeaderLine(new[] { new Ironwake.Sim.GameResult(BattleResult.Won, 5, mix) }));
+    }
+
+    [Fact]
     public void TheStageOneReadSplitsAnUnarmedHealersFallsByHerLastPhaseAndWhoStruckHer()
     {
         var start = Start();
