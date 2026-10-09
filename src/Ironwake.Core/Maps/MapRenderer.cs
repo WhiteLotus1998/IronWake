@@ -367,7 +367,8 @@ public static class MapRenderer
     /// no usable weapon, since the enemy planner prices such a unit as free damage (issue
     /// 101) and seeing it coming is the player's whole defence. The turn line names the phase and
     /// the Recall charges left; past the turn limit, where only a battle the clock decided stands, it
-    /// says the battle is over after the last turn (issue 252) rather than naming a turn the map never had. Given a <see cref="Reach"/>, the tiles that unit may end on
+    /// says the battle is over after the last turn (issue 252) rather than naming a turn the map never had; while a boss's race runs
+    /// (<see cref="BattleState.Racing"/>) it reads <c>turn 11 (the limit ends nothing now)</c> from the swallow on (issue 1448). Given a <see cref="Reach"/>, the tiles that unit may end on
     /// are marked as in the map view. On a dusk map (DESIGN.md 13.7) an enemy no player unit
     /// sees is drawn as <see cref="Dusk.Unseen"/> with no row of its own, only its tile on the
     /// unseen line, and <see cref="Dusk.Line"/> gives the sight now and next turn.
@@ -377,9 +378,9 @@ public static class MapRenderer
         var map = state.Map;
         var sb = new StringBuilder();
         sb.Append(map.Name);
-        if (state.Turn > map.TurnLimit && state.Racing)
+        if (state.Racing)
         {
-            sb.Append("  turn ").Append(state.Turn).Append(", past the limit: the race").Append("  ").Append(state.Phase.ToString().ToLowerInvariant()).Append(" phase");
+            sb.Append("  turn ").Append(state.Turn).Append(" (the limit ends nothing now)").Append("  ").Append(state.Phase.ToString().ToLowerInvariant()).Append(" phase");
         }
         else if (state.Turn > map.TurnLimit)
         {

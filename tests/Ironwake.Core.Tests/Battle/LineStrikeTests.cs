@@ -289,6 +289,84 @@ public class LineStrikeTests
         Assert.Contains("no counter; not in the total", line);
     }
 
+    /// <summary>Hask holds his tile, so Ivo two tiles off is out of his plain reach and caught only by the line.</summary>
+    private const string Gallery = """
+        name: Gallery
+        size: 10x3
+        win: rout
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+
+        ..........
+        ..........
+        ..........
+
+        units:
+        P captain 3,1
+        P recruit:ivo 1,1
+        P recruit:wren 0,2
+        E hask_warden 4,1 group:lord behavior:hold
+        """;
+
+    private static BattleState Gallery_(int ivoHp)
+    {
+        var state = BattleFixture.Start(1448, ValueList<Unit>.Of(Hale, Wren, Ivo), Gallery);
+        return state.WithUnit(state.Find("ivo")! with { Hp = ivoHp });
+    }
+
+    [Fact]
+    public void EndsLethalGuardCountsALineStrikeThatAloneKills()
+    {
+        var state = Gallery_(1);
+        var ivo = state.Find("ivo")!;
+        Assert.NotNull(LineStrike.Through(state, Starter, ivo, ivo.At));
+        Assert.DoesNotContain(Queries.Threats(state, Starter, ivo, ivo.At)!, l => !l.Raises);
+
+        var lethal = Queries.Lethal(state, Starter).Single(l => l.Unit.Id == "ivo");
+
+        var striker = Assert.Single(lethal.Strikers);
+        Assert.True(striker.Line);
+        Assert.Equal(Hask(state).Id, striker.Enemy.Id);
+        Assert.Contains("Lethal if all land: ivo (Hask's line for ", Ironwake.Cli.PlaySession.LethalLine(lethal, UnitNames.Of(state, Starter)));
+    }
+
+    [Fact]
+    public void EndsLethalGuardLeavesAUnitTheLineCannotKill()
+    {
+        var struck = Gallery_(1);
+        var through = LineStrike.Through(struck, Starter, struck.Find("ivo")!, new Coord(1, 1))!.Value;
+        var damage = LineStrike.Forecast(struck.WithUnit(through.Striker), Starter, through.Striker, struck.Find("ivo")!).Attacker.Damage;
+        var state = Gallery_(damage + 1);
+
+        Assert.DoesNotContain(Queries.Lethal(state, Starter), l => l.Unit.Id == "ivo");
+    }
+
+    [Fact]
+    public void TheLineStrikersPlainStrikeIsNotCountedBesideItsLine()
+    {
+        var state = Gallery_(1);
+        var captain = state.Find(state.Units.Single(u => u.IsCaptain).Id)!;
+        state = state.WithUnit(captain with { Hp = 1 });
+
+        var lethal = Queries.Lethal(state, Starter).Single(l => l.Unit.IsCaptain);
+
+        var striker = Assert.Single(lethal.Strikers);
+        Assert.True(striker.Line);
+    }
+
+    [Fact]
+    public void ThreatsHeadlineNamesTheLineWhenNoStrikeIsCounted()
+    {
+        var state = Gallery_(1);
+        var ivo = state.Find("ivo")!;
+
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, ivo, ivo.At, Queries.Threats(state, Starter, ivo, ivo.At)!, Queries.SleepingThreats(state, Starter, ivo, ivo.At)!);
+
+        Assert.StartsWith("Threat on ivo at 1,1 (Plain): no strike counted; Hask's line strike reaches", text);
+        Assert.DoesNotContain("no enemy", text);
+    }
+
     [Fact]
     public void ThreatPrintsNoLineWhenItWouldCatchOnlyTheUnit()
     {

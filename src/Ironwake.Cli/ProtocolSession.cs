@@ -236,6 +236,11 @@ public sealed class ProtocolSession
                 w.WriteStartObject();
                 w.WriteString("enemy", striker.Enemy.Id);
                 w.WriteNumber("damage", striker.Damage);
+                if (striker.Line)
+                {
+                    w.WriteBoolean("line", true);
+                }
+
                 w.WriteEndObject();
             }
 

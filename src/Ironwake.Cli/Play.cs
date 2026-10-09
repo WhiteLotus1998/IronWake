@@ -1897,7 +1897,7 @@ public sealed class PlaySession
     /// <c>Lethal if all land: Teodor (Brigand 1 for 9, Brigand 2 for 9 on 4,0 if Teodor's counter kills Brigand 1 (81 hit), against 13 hp)</c>.
     /// </summary>
     public static string LethalLine(LethalThreat lethal, UnitNames names) =>
-        $"Lethal if all land: {names[lethal.Unit.Id]} ({string.Join(", ", lethal.Strikers.Select(s => $"{names[s.Enemy.Id]} for {s.Damage}").Concat(lethal.Freed.Select(f => $"{names[f.Follower.Id]} for {f.Damage} on {f.Tile} if {names[lethal.Unit.Id]}'s counter kills {names[f.Freer.Id]} {FreedChance(f)}")))}, against {lethal.Unit.Hp} hp)";
+        $"Lethal if all land: {names[lethal.Unit.Id]} ({string.Join(", ", lethal.Strikers.Select(s => $"{names[s.Enemy.Id]}{(s.Line ? "'s line" : "")} for {s.Damage}").Concat(lethal.Freed.Select(f => $"{names[f.Follower.Id]} for {f.Damage} on {f.Tile} if {names[lethal.Unit.Id]}'s counter kills {names[f.Freer.Id]} {FreedChance(f)}")))}, against {lethal.Unit.Hp} hp)";
 
     /// <summary>
     /// The chance a freeing counter (issue 1191) is read at: its displayed hit, <c>(81 hit)</c> when one
@@ -2182,6 +2182,8 @@ public sealed class PlaySession
     /// <c>from 8,3 (counted from 9,4)</c>, and a priced line the seating drops says
     /// <c>(not counted: 8,3 taken)</c> (<see cref="Queries.CountedFrom"/>, issue 1237); the
     /// printed tile stays the enemy's own, and the covered case prints no seat.
+    /// With no strike priced but a line struck through the unit (<see cref="LineStrike.Through"/>, issue 1448) the headline
+    /// names the line rather than claiming no enemy can strike: <c>no strike counted; Hask's line strike reaches him (below)</c>.
     /// </summary>
     public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null, IReadOnlyList<GroupWoke>? wakes = null, IReadOnlyList<RefusalLine>? refusals = null)
     {
@@ -2198,7 +2200,11 @@ public sealed class PlaySession
         asleep = asleep.Select(g => g with { Members = ValueList<BattleUnit>.From(g.Members.Where(m => Dusk.Seen(state, m))) }).Where(g => g.Members.Count > 0).ToList();
         var dark = Dusk.Sight(state) is not null && state.UnitsOf(Side.Enemy).Any(e => !Dusk.Seen(state, e));
         var blow = Queries.RaisedBlowOn(state, content, unit, tile);
-        if (lines.Count == 0 && blow is null)
+        if (lines.Count == 0 && blow is null && LineStrike.Through(state, content, unit, tile) is { } through)
+        {
+            rows.Add($"threat on {name} at {where}: no strike counted; {names[through.Striker.Id]}'s line strike reaches {names.Refer(unit.Id).Object} (below)");
+        }
+        else if (lines.Count == 0 && blow is null)
         {
             rows.Add($"threat on {name} at {where}: no enemy {(dark ? "in sight " : "")}can strike {names.Refer(unit.Id).Object} next phase");
         }

@@ -1,0 +1,212 @@
+move wren 11,1
+wait wren
+move pell 12,1
+wait pell
+move ines 12,2
+wait ines
+move corin 11,5
+wait corin
+move bet 11,6
+wait bet
+move ottilie 12,6
+wait ottilie
+move mattias 12,7
+wait mattias
+move dunstan 11,10
+wait dunstan
+move teodor 11,9
+wait teodor
+move wat 12,9
+wait wat
+canto wat stay
+move tamsin 13,4
+wait tamsin
+wait captain
+end
+move corin 11,4
+wait corin
+move captain 10,5
+attack captain soldier-1
+move ottilie 11,5
+attack ottilie soldier-1
+move bet 11,7
+wait bet
+move teodor 10,6
+attack teodor brigand-1
+move mattias 11,6
+attack mattias brigand-1
+move pell 11,2
+attack pell finale_hunter-1 2
+move wat 12,10
+wait wat
+canto wat stay
+wait dunstan
+move tamsin 12,5
+wait tamsin
+wait wren
+wait ines
+end
+attack ines brigand-2
+move pell 13,2
+wait pell
+move tamsin 13,3
+item tamsin 1 pell
+attack dunstan soldier-2
+move wat 10,9
+attack wat soldier-2
+canto wat 12,10
+move corin 12,4
+wait corin
+move mattias 11,4
+attack mattias archer-1
+move captain 11,6
+wait captain
+move ottilie 10,5
+attack ottilie archer-1
+move bet 11,5
+wait bet
+wait wren
+wait teodor
+end
+move ottilie 12,5
+wait ottilie
+move teodor 9,6
+attack teodor finale_hunter-1
+move mattias 10,6
+attack mattias finale_hunter-1
+move bet 10,5
+attack bet finale_hunter-1
+move tamsin 11,5
+item tamsin 1 bet
+item captain 2
+move corin 11,7
+wait corin
+wait ines
+wait pell
+wait wren
+wait wat
+canto wat stay
+wait dunstan
+end !
+attack mattias finale_hunter-1
+move teodor 12,6
+wait teodor
+move corin 9,6
+attack corin archer-2
+attack wren brigand-3
+attack pell brigand-3 cinder
+move ines 14,1
+wait ines
+move ottilie 13,6
+wait ottilie
+move bet 12,4
+wait bet
+move captain 10,5
+wait captain
+move tamsin 11,6
+item tamsin 1 mattias
+wait wat
+canto wat stay
+wait dunstan
+end !
+move wat 9,7
+attack wat archer-2
+move mattias 9,5
+attack mattias soldier-3
+canto wat stay
+move captain 9,6
+attack captain soldier-3
+item teodor 2
+item tamsin 1 teodor
+move ottilie 11,5
+item ottilie 2
+item wren 2
+move pell 11,4
+wait pell
+move ines 13,3
+wait ines
+move bet 12,5
+wait bet
+end !
+move captain 9,8
+attack captain hexer-1
+move ottilie 8,6
+attack ottilie archer-2
+move mattias 5,5
+wait mattias
+move pell 9,4
+wait pell
+move teodor 9,6
+wait teodor
+move bet 9,5
+wait bet
+move tamsin 10,5
+item tamsin 1 bet
+wait ines
+wait wat
+canto wat stay
+wait wren
+wait dunstan
+threat mattias
+end
+move teodor 5,6
+item teodor 2
+move mattias 5,5
+wait mattias
+move pell 6,4
+wait pell
+move tamsin 7,4
+item tamsin 1 pell
+move bet 6,6
+wait bet
+move ottilie 6,7
+item ottilie 2
+item captain 2
+wait wat
+canto wat stay
+wait ines
+wait wren
+wait dunstan
+end
+move tamsin 5,4
+item tamsin 1 mattias
+move pell 3,5
+attack pell hask_warden-1 bolt art overcast
+move mattias 4,6
+attack mattias hask_warden-1
+move ottilie 3,7
+attack ottilie hask_warden-1 art aimed_shot
+move bet 9,6
+wait bet
+move teodor 4,5
+wait teodor
+move captain 6,7
+wait captain
+wait wat
+canto wat stay
+wait ines
+wait wren
+wait dunstan
+end
+move teodor 1,6
+attack teodor hask_warden-1
+move mattias 2,6
+attack mattias hask_warden-1
+move ottilie 1,7
+attack ottilie hask_warden-1 art aimed_shot
+move pell 1,5
+item pell 3 hask_warden-1
+move captain 3,7
+wait captain
+move tamsin 2,5
+wait tamsin
+wait bet
+wait wat
+canto wat stay
+wait ines
+wait wren
+wait dunstan
+end !
+attack pell hask_warden-1 bolt
+move captain 0,7
+attack captain hask_warden-1 art full_measure
