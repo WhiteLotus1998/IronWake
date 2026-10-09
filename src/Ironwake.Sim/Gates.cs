@@ -1863,6 +1863,7 @@ public sealed record StageOne(string Boss, int Arrived)
         Watch c => c.UnitId,
         Cover c => c.UnitId,
         Talk c => c.UnitId,
+        TakeShard c => c.UnitId,
         Wait c => c.UnitId,
         FallBack c => c.UnitId,
         StrikeLine c => c.UnitId,

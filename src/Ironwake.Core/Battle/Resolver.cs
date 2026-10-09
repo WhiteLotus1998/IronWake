@@ -75,6 +75,9 @@ public static class Resolver
             case Talk talk:
                 (next, rejection) = ApplyTalk(state, talk, events);
                 break;
+            case TakeShard take:
+                (next, rejection) = ApplyTakeShard(state, take, events);
+                break;
             case Dash dash:
                 (next, rejection) = ApplyDash(state, content, dash, events);
                 if (rejection is null)
@@ -578,6 +581,11 @@ public static class Resolver
         if (target.Side == unit.Side)
         {
             return (state, new Rejection(RejectionReason.NotAnEnemy, $"{target.Id} is on {unit.Id}'s own side"));
+        }
+
+        if (ShardRun.AttackRefusal(unit, target) is { } running)
+        {
+            return (state, new Rejection(RejectionReason.CannotTakeShard, running));
         }
 
         var (armed, weapon, choice) = ChooseWeapon(unit, content, attack.Slot);
@@ -2143,6 +2151,27 @@ public static class Resolver
     }
 
     /// <summary>
+    /// Issue 1386's take: a company unit, not yet acted, beside a boss running with the shard, takes it and breaks it as
+    /// its action, in place of Attack, Item or Wait, after its Move or without one (<see cref="ShardRun"/>). He leaves
+    /// the board alive, which is not a kill. No Canto follows.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyTakeShard(BattleState state, TakeShard take, List<GameEvent> events)
+    {
+        var unit = Acting(state, take.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (ShardRun.Refusal(state, unit, take.BossId) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotTakeShard, refusal));
+        }
+
+        return (ShardRun.TakeShard(state, unit, take.BossId, events), null);
+    }
+
+    /// <summary>
     /// Why <paramref name="unit"/> cannot open a chest at <paramref name="at"/> (issue 649), in the
     /// order the rules are checked, or null when it can. Whether the unit may act at all is the
     /// caller's check.
@@ -2357,6 +2386,7 @@ public static class Resolver
         next = Kinsbane.AtPhaseStart(next, content, nextPhase, events);
         next = LandBlows(next, content, nextPhase, events);
         next = Swallow.Fall(next, content, nextPhase, events, (board, fallen) => LeaveKeepsake(board, fallen, content, events).WithoutUnit(fallen.Id));
+        next = ShardRun.AtPhaseStart(next, content, nextPhase, events);
         if (nextPhase == Side.Player)
         {
             next = Wildfire.Spread(next, events);
@@ -2525,6 +2555,14 @@ public static class Resolver
                 yield return new Talk(unit.Id, returned.Id);
             }
 
+            foreach (var runner in state.Units.Where(ShardRun.Running))
+            {
+                if (ShardRun.Refusal(state, unit, runner.Id) is null)
+                {
+                    yield return new TakeShard(unit.Id, runner.Id);
+                }
+            }
+
             if (unit.Side == Side.Player && state.Map.ShoveEnabled)
             {
                 foreach (var other in state.Units.OrderBy(u => u.Id, StringComparer.Ordinal))
@@ -2576,7 +2614,7 @@ public static class Resolver
             }
         }
 
-        var targets = state.UnitsOf(state.Phase == Side.Player ? Side.Enemy : Side.Player).Where(t => Dusk.Sees(state, unit.Side, t.At)).ToList();
+        var targets = state.UnitsOf(state.Phase == Side.Player ? Side.Enemy : Side.Player).Where(t => Dusk.Sees(state, unit.Side, t.At) && !ShardRun.Running(t)).ToList();
         foreach (var slot in slots)
         {
             var weapon = unit.UsableWeaponAt(content, slot)!;

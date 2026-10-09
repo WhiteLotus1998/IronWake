@@ -401,6 +401,13 @@ public sealed class ClientSession
             rows.Add(new ActionRow($"Talk to {names[returned.Id]}", fate, talk, refusal));
         }
 
+        foreach (var runner in State.Units.Where(u => ShardRun.Running(u) && u.At.DistanceTo(unit.At) == 1))
+        {
+            var take = new TakeShard(unit.Id, runner.Id);
+            var refusal = Resolver.Apply(State, Content, take).Rejection is { } rejected ? names.Message(rejected.Message) : null;
+            rows.Add(new ActionRow($"Take the shard from {names[runner.Id]}", "breaks it: he leaves the field alive, in the coma", take, refusal));
+        }
+
         if (unit.IsCaptain && State.OrdersOpen && State.OrderCalled is null)
         {
             var at = from is { } tile && (tile == unit.At || Reach?.CanEnd(tile) == true) ? tile : (Coord?)null;

@@ -203,6 +203,12 @@ public sealed record BattleState(
     public bool FrozenIronHeld { get; init; }
 
     /// <summary>
+    /// The bosses whose shard the company took and broke on a shard race (issue 1386, <see cref="ShardRun"/>): off the
+    /// board alive, in the coma, in the order they left. A Recall restores it with the board.
+    /// </summary>
+    public ValueList<string> Coma { get; init; }
+
+    /// <summary>
     /// Whether Commander's Word is open on this battle (issue 85): on a map with <c>orders: on</c>,
     /// and on every campaign map from the second, where it is the captain's from Maud's arrival.
     /// </summary>
@@ -585,9 +591,10 @@ public sealed record BattleState(
 
     /// <summary>
     /// Whether a swallowed unit whose stage is a race (<see cref="KinStage.Race"/>, Table rounds 514, 515, issue 1395)
-    /// stands on the board: while one does, the turn limit ends nothing, and stage 2 ends when he falls or the company does.
+    /// stands on the board, or a beaten boss runs with the shard (issue 1386, <see cref="ShardRun.Running"/>): while one
+    /// does, the turn limit ends nothing, and the fight ends when he falls, is taken, or the company falls.
     /// </summary>
-    public bool Racing => Units.Any(u => u is { Swallowed: true, Kin.Race: true });
+    public bool Racing => Units.Any(u => u is { Swallowed: true, Kin.Race: true } || ShardRun.Running(u));
 
     /// <summary>Whether the turn limit has passed and ends the map: past <see cref="MapDefinition.TurnLimit"/> and not <see cref="Racing"/>.</summary>
     public bool PastLimit => Turn > Map.TurnLimit && !Racing;
@@ -948,6 +955,11 @@ public sealed record BattleState(
             sb.Append("frozeniron ").Append(FrozenIron).Append(FrozenIronHeld ? " held" : "").Append('\n');
         }
 
+        if (Coma.Count > 0)
+        {
+            sb.Append("coma ").Append(string.Join(' ', Coma)).Append('\n');
+        }
+
         if (Map.Fronts.Count > 0)
         {
             sb.Append("fallen");
@@ -1051,6 +1063,11 @@ public sealed record BattleState(
             if (unit.Swallowed)
             {
                 sb.Append(" swallowed");
+            }
+
+            if (unit.ShardIn is { } shardIn)
+            {
+                sb.Append(" shard ").Append(shardIn);
             }
 
             if (unit.Side == Side.Enemy)

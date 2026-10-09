@@ -418,6 +418,21 @@ public static class ProtocolJson
                 w.WriteString("unit", cd.UnitId);
                 WriteCoord(w, "at", cd.At);
                 break;
+            case ShardRaceBegan sr:
+                w.WriteString("unit", sr.UnitId);
+                WriteCoord(w, "from", sr.From);
+                WriteCoord(w, "to", sr.To);
+                w.WriteNumber("phases", sr.Phases);
+                break;
+            case ShardCountdown sc:
+                w.WriteString("unit", sc.UnitId);
+                w.WriteNumber("left", sc.Left);
+                break;
+            case ShardBroken sb:
+                w.WriteString("unit", sb.UnitId);
+                w.WriteString("boss", sb.BossId);
+                WriteCoord(w, "at", sb.At);
+                break;
             case ArmorShattered ash:
                 w.WriteString("unit", ash.UnitId);
                 w.WriteString("item", ash.SpellId);
@@ -868,6 +883,11 @@ public static class ProtocolJson
                 w.WriteString("unit", talk.UnitId);
                 w.WriteString("target", talk.TargetId);
                 break;
+            case TakeShard take:
+                w.WriteString("type", "takeShard");
+                w.WriteString("unit", take.UnitId);
+                w.WriteString("boss", take.BossId);
+                break;
             case Shove shove:
                 w.WriteString("type", "shove");
                 w.WriteString("unit", shove.UnitId);
@@ -952,6 +972,7 @@ public static class ProtocolJson
             "open" => new Open(RequiredString(e, "unit"), ReadCoord(e, "at")),
             "drop" => new Drop(RequiredString(e, "unit")),
             "talk" => new Talk(RequiredString(e, "unit"), RequiredString(e, "target")),
+            "takeShard" => new TakeShard(RequiredString(e, "unit"), RequiredString(e, "boss")),
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
             "carry" => new Carry(RequiredString(e, "unit"), RequiredString(e, "ally"), ReadCoord(e, "to"), ReadCoord(e, "setDown")),
             "breathe" => new Breathe(RequiredString(e, "unit"), ReadCoord(e, "toward")),

@@ -37,6 +37,7 @@ public enum RejectionReason
     CannotWatch,
     CannotCover,
     CannotTalk,
+    CannotTakeShard,
     SignatureRefused,
     CannotOrder,
     NoFallBack,

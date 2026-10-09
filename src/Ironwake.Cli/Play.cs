@@ -48,6 +48,7 @@ public sealed class PlaySession
           open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
           drop <unit>              On a ledge, bring the rock down as the action: each tile below takes 10 to anyone on it, and closes unless someone stands there
           talk <unit> <target>     Beside the claimant who came back as a foe: the pick's talk turns them, the captain's spares them
+          take <unit> <boss>       Beside a beaten boss running with the shard: take it and break it, as the action
           dash <unit> <x,y>        On a dash map, a unit not yet moved or acted moves with Move +2 (terrain costs the extra), as its whole turn; struck at +15 Acc until its next phase
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
           carry <unit> <ally> <x,y> <x,y>  In the campaign, a grown drake lifts an adjacent ally, flies to the first tile and sets it down on the second, as the rider's whole turn
@@ -781,6 +782,12 @@ public sealed class PlaySession
                 break;
             case "talk":
                 Error("usage: talk <unit> <target>");
+                break;
+            case "take" when words.Length == 3:
+                Apply(new TakeShard(words[1], words[2]));
+                break;
+            case "take":
+                Error("usage: take <unit> <boss>");
                 break;
             case "order":
                 OrderWords(words);
@@ -2347,6 +2354,11 @@ public sealed class PlaySession
             rows.Add($"  {returnRow}");
         }
 
+        foreach (var runner in state.Units.Where(ShardRun.Running))
+        {
+            rows.Add($"  {ShardRun.Line(runner, names)}");
+        }
+
         if (wakes is { Count: > 0 })
         {
             rows.Add($"  stopping here wakes: {string.Join(", ", wakes.Select(w => $"{UnitNames.Group(w.Group)} ({(w.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(w))})"))}");
@@ -3231,6 +3243,7 @@ public sealed class PlaySession
         Open o => $"open {o.UnitId} {o.At}",
         Drop d => $"drop {d.UnitId}",
         Talk t => $"talk {t.UnitId} {t.TargetId}",
+        TakeShard t => $"take {t.UnitId} {t.BossId}",
         Order o => $"order {Orders.Word(o.Kind)}",
         FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
@@ -3398,6 +3411,13 @@ public sealed class PlaySession
                 return $"Frozen Iron falls on every unit but him for {fi.Amount}, past Def and Res: " + string.Join(", ", fi.Struck.Select((id, i) => $"{names[id]} (hp {fi.HpAfter[i]})"));
             case KinHealed kh:
                 return $"The Kin heals {names[kh.UnitId]} {kh.Amount} (hp {kh.HpAfter})";
+            case ShardRaceBegan sr:
+                return (sr.From == sr.To ? $"{names[sr.UnitId]} does not swallow: he stays on his knees at {sr.To}" : $"{names[sr.UnitId]} does not swallow: he breaks from {sr.From} to {sr.To}")
+                    + $" with the shard in his fist. Swallows in {sr.Phases} (take it from beside him)";
+            case ShardCountdown sc:
+                return sc.Left == 0 ? $"{names[sc.UnitId]}'s race is run" : $"{names[sc.UnitId]} holds the shard: swallows in {sc.Left}";
+            case ShardBroken broken:
+                return $"{names[broken.UnitId]} wrenches the shard from {names[broken.BossId]} and breaks it on the stone. He drops where he stands, alive, in a sleep nothing wakes (off the field; his waking waits on Lotus)";
             case ColdDrained cd:
                 return $"The cold drains out of {names[cd.UnitId]}; for a breath he is himself (his last line waits on Lotus). The shard lies on {cd.At}";
             case ArmorShattered ash:

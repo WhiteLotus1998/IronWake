@@ -64,11 +64,22 @@ public static class Swallow
     /// stage's, its max HP becomes the stage's bar, it stands on that bar full, a <see cref="KinStage.Rooted"/> stage
     /// holds its tile from then on, and Frozen Iron is set to land for the stage's <see cref="KinStage.Dose"/> from the next
     /// phase start, or the one after for a <see cref="KinStage.Late"/> stage (<see cref="BattleState.FrozenIronHeld"/>),
-    /// unless a swallow on this board already set it.
+    /// unless a swallow on this board already set it. On a shard race (issue 1386, <see cref="ShardRun"/>) the first fall
+    /// starts the race instead, and a hit while he runs leaves him on 1 HP; he swallows here when the race runs out.
     /// </summary>
     public static BattleState Take(BattleState state, GameContent content, string unitId, List<GameEvent> events)
     {
         var unit = state.Find(unitId)!;
+        if (ShardRun.Running(unit))
+        {
+            return state.WithUnit(unit with { Hp = 1 });
+        }
+
+        if (ShardRun.Starts(state, unit))
+        {
+            return ShardRun.Begin(state, content, unitId, events);
+        }
+
         var stage = unit.Kin!;
         var stats = unit.Unit.Stats;
         var raised = stats with { Hp = stats.Hp + stage.Hp - unit.MaxHp(content), Def = stats.Def + stage.Def, Res = stats.Res + stage.Res };

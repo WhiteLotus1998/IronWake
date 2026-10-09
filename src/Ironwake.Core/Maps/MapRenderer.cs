@@ -722,6 +722,11 @@ public static class MapRenderer
             sb.Append(returnLine).Append('\n');
         }
 
+        foreach (var runner in state.Units.Where(ShardRun.Running))
+        {
+            sb.Append(ShardRun.Line(runner, UnitNames.Of(state, content))).Append('\n');
+        }
+
         if (MessengerLine(state, content) is { } messengerLine)
         {
             sb.Append(MessengerRule).Append('\n');

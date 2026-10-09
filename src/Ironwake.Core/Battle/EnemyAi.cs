@@ -296,6 +296,11 @@ public static class EnemyAi
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
         var known = Hunt.Narrow(state, unit, players.Where(p => Dusk.Knows(state, content, unit, p)).ToList());
 
+        if (ShardRun.Running(unit))
+        {
+            return new Command[] { new Wait(unit.Id) };
+        }
+
         if (RetreatRule.Choose(state, content, unit) is { } refuge)
         {
             return new Command[] { new Retreat(unit.Id, refuge) };
@@ -747,7 +752,7 @@ public static class EnemyAi
     {
         var behavior = state.EffectiveBehavior(unit, content)
             ?? throw new ArgumentException($"{unit.Id} is a player unit and has no behavior", nameof(unit));
-        if (unit.EquippedWeapon(content) is null || Stun.Skipping(unit) || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit))
+        if (unit.EquippedWeapon(content) is null || Stun.Skipping(unit) || ShardRun.Running(unit) || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit))
         {
             return null;
         }
