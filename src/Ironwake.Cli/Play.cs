@@ -2361,7 +2361,7 @@ public sealed class PlaySession
             rows.Add($"  {ShardRun.Line(runner, names)}");
         }
 
-        if (KinShard.Line(state, names) is { } shardRow)
+        if (KinShard.Line(state, content, names) is { } shardRow)
         {
             rows.Add($"  {shardRow}");
         }

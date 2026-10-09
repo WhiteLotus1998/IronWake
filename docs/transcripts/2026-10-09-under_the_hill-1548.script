@@ -1,0 +1,39 @@
+move dunstan 9,4
+wait dunstan
+move teodor 9,5
+wait teodor
+move captain 10,3
+wait captain
+move wren 10,2
+wait wren
+move ottilie 11,3
+wait ottilie
+move pell 11,5
+wait pell
+end !
+attack wren brigand-1
+move captain 11,1
+attack captain brigand-1
+move pell 12,2
+attack pell brigand-1
+wait dunstan
+wait teodor
+move ottilie 12,4
+wait ottilie
+end !
+move pell 11,5
+attack pell sworn_captain-1
+move wren 10,5
+attack wren sworn_captain-1
+attack dunstan sworn_captain-1
+attack captain brigand-1
+move ottilie 10,4
+attack ottilie sworn_captain-1
+end !
+take wren shard
+attack captain brigand-1
+move dunstan 9,3
+attack dunstan archer-1
+move ottilie 12,3
+attack ottilie archer-1
+end !
