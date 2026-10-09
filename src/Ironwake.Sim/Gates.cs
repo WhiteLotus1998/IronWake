@@ -59,6 +59,9 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// <summary>The boss's first stage in this game (Table round 513, <see cref="Sim.StageOne"/>): null when no boss with a second stage stood.</summary>
     public StageOne? StageOne { get; init; }
 
+    /// <summary>The shard race in this game (issue 1386, <see cref="ShardRun"/>): null when no beaten boss ran with the shard.</summary>
+    public ShardRaceRead? ShardRace { get; init; }
+
     /// <summary>
     /// What killed the captain on a captain loss (round 502's read of the finale's losses): the killer's name,
     /// or <c>frozen iron</c>, or <c>other</c>; with <see cref="CaptainFellInStageTwo"/> when the boss had swallowed. Null otherwise.
@@ -250,6 +253,7 @@ public static class Runner
         string? captainPlanRead = null;
         string? captainFront = null;
         var captainByLine = false;
+        ShardRaceRead? shard = null;
         while (!state.Outcome.IsOver)
         {
             if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
@@ -328,6 +332,7 @@ public static class Runner
                     captainByLine = result.Events.OfType<LineStruck>().Any(l => state.UnitsOf(Side.Player).Any(c => c.IsCaptain && l.Struck.Contains(c.Id)));
                 }
 
+                shard = ShardRaceRead.After(shard, state, result.Events);
                 stage = StageTwo.After(stage, state, result.Next, result.Events, content);
                 stageOne = StageOne.After(stageOne, state, result.Next, result.Events, content, command);
                 fired.AddRange(result.Events.OfType<MapEventFired>());
@@ -365,6 +370,7 @@ public static class Runner
             Bond = state.Bond,
             Stage = stage,
             StageOne = stageOne,
+            ShardRace = shard,
             CaptainKiller = state.Outcome.Cause == LossCause.Captain ? captainKiller ?? "other" : null,
             CaptainFellInStageTwo = state.Outcome.Cause == LossCause.Captain && captainInStageTwo,
             CaptainPlanRead = state.Outcome.Cause == LossCause.Captain && captainInStageTwo ? captainPlanRead : null,
@@ -1477,6 +1483,32 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
         }
 
         return stage is null ? null : stage with { BossHp = after.Find(stage.Boss)?.Hp ?? 0, StandingEnd = after.UnitsOf(Side.Player).Count() };
+    }
+}
+
+/// <summary>
+/// A game's shard race (issue 1386): the turn the beaten boss ran, the phases he was given, the phases left when the shard
+/// was taken (null when it was not), whether the countdown ran out into the swallow, and the player units that fell while
+/// he ran.
+/// </summary>
+public sealed record ShardRaceRead(int Turn, int Phases, int Left, bool Taken = false, bool RanOut = false, int Falls = 0)
+{
+    /// <summary>The read after one command's <paramref name="events"/> on <paramref name="before"/>.</summary>
+    public static ShardRaceRead? After(ShardRaceRead? read, BattleState before, IReadOnlyList<GameEvent> events)
+    {
+        foreach (var e in events)
+        {
+            read = e switch
+            {
+                ShardRaceBegan b => new ShardRaceRead(before.Turn, b.Phases, b.Phases),
+                ShardCountdown c when read is not null => read with { Left = c.Left, RanOut = c.Left == 0 },
+                ShardBroken when read is not null => read with { Taken = true },
+                UnitDied { Side: Side.Player } when read is { Taken: false, RanOut: false } => read with { Falls = read.Falls + 1 },
+                _ => read,
+            };
+        }
+
+        return read;
     }
 }
 

@@ -347,6 +347,7 @@ public static class MapFormat
             MessengerTrigger => "messenger",
             FallsTrigger f => "falls " + f.Front,
             DropTrigger d => "drop " + d.Ledge,
+            RaceTrigger r => "race " + r.Phases,
             _ => throw new ArgumentOutOfRangeException(nameof(mapEvent), mapEvent.Trigger, "unknown map event trigger"),
         };
         var action = mapEvent.Action switch
@@ -1461,6 +1462,11 @@ public static class MapFormat
         {
             if (!header.TryGetValue("shard_race", out var entry))
             {
+                if (map.Events.FirstOrDefault(e => e.Trigger is RaceTrigger) is { } orphan)
+                {
+                    throw new MapException(_file, 0, $"event '{orphan.Name}' uses the race trigger but the map has no shard_race: header");
+                }
+
                 return null;
             }
 
@@ -1490,6 +1496,11 @@ public static class MapFormat
             if (phases < 1 || phases > ShardRace.MaxPhases)
             {
                 throw ErrorAt(entry.Line, $"shard_race: phases {phases} must be 1 to {ShardRace.MaxPhases}");
+            }
+
+            if (map.Events.FirstOrDefault(e => e.Trigger is RaceTrigger r && r.Phases >= phases) is { } late)
+            {
+                throw ErrorAt(entry.Line, $"event '{late.Name}' fires {((RaceTrigger)late.Trigger).Phases} phases into the race, but he swallows after {phases}; a race trigger is 0 to {phases - 1}");
             }
 
             return new ShardRace(inner, phases);
@@ -1864,7 +1875,7 @@ public static class MapFormat
 
                 names[name] = LineNumber;
                 var (trigger, rest) = ParseTrigger(tokens, width, height, turnLimit);
-                var action = ParseAction(rest, width, height, terrain, edgeOnly: trigger is not FallsTrigger, retiled);
+                var action = ParseAction(rest, width, height, terrain, edgeOnly: trigger is not (FallsTrigger or RaceTrigger), retiled);
                 if (action is SpawnEnemy { Placement.IsBoss: true } && trigger is not TurnTrigger)
                 {
                     throw Error("a boss spawn needs a turn trigger, so the boss's arrival is a turn the board can name: 'assault turn 9 enemy spawn boss bandit_leader 0,5 group:assault'");
@@ -1997,8 +2008,15 @@ public static class MapFormat
                     }
 
                     return (new DropTrigger(ParseCoord(tokens[2], width, height)), tokens[3..]);
+                case "race":
+                    if (tokens.Length < 3 || !int.TryParse(tokens[2], out var into) || into < 0 || into >= ShardRace.MaxPhases)
+                    {
+                        throw Error($"race trigger needs the phases into the shard race, 0 to {ShardRace.MaxPhases - 1}: 'race 2'");
+                    }
+
+                    return (new RaceTrigger(into), tokens[3..]);
                 default:
-                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn, enter, wakes, messenger, falls or drop");
+                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn, enter, wakes, messenger, falls, drop or race");
             }
         }
 

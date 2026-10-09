@@ -345,13 +345,18 @@ public sealed class HeuristicPlayer : IPlayer
             return WithMove(unit, stand, new Wait(unit.Id));
         }
 
+        if (TakeTile(state, unit, tiles) is { } take)
+        {
+            return WithMove(unit, take.Tile, new TakeShard(unit.Id, take.BossId));
+        }
+
         var seized = SeizeTile(state, content, unit, tiles);
         if (seized is { } throne)
         {
             tiles = new List<Coord> { throne };
         }
 
-        var enemies = state.UnitsOf(Side.Enemy).ToList();
+        var enemies = state.UnitsOf(Side.Enemy).Where(e => !ShardRun.Running(e)).ToList();
         var enemyReach = enemies.Select(e => state.ReachOf(e, content)).ToList();
 
         var arms = Arms(content, unit);
@@ -454,6 +459,33 @@ public sealed class HeuristicPlayer : IPlayer
         }
 
         return WithMove(unit, destination ?? unit.At, Idle(state, content, unit, destination));
+    }
+
+    /// <summary>
+    /// The take (issue 1386): a unit that has not acted and can end on a tile beside a boss running with the shard takes
+    /// it from there, ahead of every other plan, since the take ends the race and, on Defeat Boss, the map. The tile is
+    /// the first of <paramref name="tiles"/> beside the first runner in unit order; null when no runner is beside any of
+    /// <paramref name="tiles"/>.
+    /// </summary>
+    public static (Coord Tile, string BossId)? TakeTile(BattleState state, BattleUnit unit, IReadOnlyList<Coord> tiles)
+    {
+        if (unit.Acted)
+        {
+            return null;
+        }
+
+        foreach (var runner in state.UnitsOf(Side.Enemy).Where(ShardRun.Running))
+        {
+            foreach (var tile in tiles)
+            {
+                if (tile.DistanceTo(runner.At) == 1)
+                {
+                    return (tile, runner.Id);
+                }
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -1195,7 +1227,8 @@ public sealed class HeuristicPlayer : IPlayer
     /// that tile's no-crit exposure reaches its HP, when it takes the veto's key with lethal
     /// tiles last and crit-lethal ones after the rest (issue 1044). It never ends on one of
     /// <paramref name="captains"/>, the tiles left free for a corked captain (issue 1206), and when
-    /// section 8's tile is one of them it takes the veto's key as for a lethal one.
+    /// section 8's tile is one of them it takes the veto's key as for a lethal one. While a beaten boss runs with the
+    /// shard (issue 1386), every unit, armed or not, walks toward the tiles beside him instead, by the same key.
     /// </summary>
     private static Coord? Approach(
         BattleState state, GameContent content, BattleUnit unit, Weapon? weapon, Reach reach,
@@ -1230,27 +1263,42 @@ public sealed class HeuristicPlayer : IPlayer
         }
 
         Distances? toward = null;
-        switch (state.Map.Win)
+        var runners = state.UnitsOf(Side.Enemy).Where(ShardRun.Running).ToList();
+        if (runners.Count > 0)
         {
-            case WinCondition.Seize:
-                toward = Movement.DistancesTo(state.Map, content, state.Map.TilesOf(MapDefinition.ThroneTerrainId), movement, OccupantAt, footing);
-                break;
-            case WinCondition.Escape:
-                toward = Movement.DistancesTo(state.Map, content, state.Map.Exits, movement, OccupantAt, footing);
-                break;
-            default:
-                if (weapon is null)
-                {
-                    return null;
-                }
+            // A beaten boss runs with the shard (issue 1386): the way is to a tile beside him, armed or not.
+            var beside = runners.SelectMany(r => r.At.Neighbors()).Where(t => state.Map.Contains(t) && (t == unit.At || state.UnitAt(t) is null)).Distinct().ToList();
+            toward = Movement.DistancesTo(state.Map, content, beside, movement, OccupantAt, footing);
+            if (toward.From(unit.At) is null)
+            {
+                toward = null;
+            }
+        }
 
-                if (!LosesTheMap(state, unit) && Blind(weapon) is var blind && !blind.Lethal)
-                {
-                    return blind.At;
-                }
+        if (toward is null)
+        {
+            switch (state.Map.Win)
+            {
+                case WinCondition.Seize:
+                    toward = Movement.DistancesTo(state.Map, content, state.Map.TilesOf(MapDefinition.ThroneTerrainId), movement, OccupantAt, footing);
+                    break;
+                case WinCondition.Escape:
+                    toward = Movement.DistancesTo(state.Map, content, state.Map.Exits, movement, OccupantAt, footing);
+                    break;
+                default:
+                    if (weapon is null)
+                    {
+                        return null;
+                    }
 
-                toward = TowardNearestEnemy(weapon);
-                break;
+                    if (!LosesTheMap(state, unit) && Blind(weapon) is var blind && !blind.Lethal)
+                    {
+                        return blind.At;
+                    }
+
+                    toward = TowardNearestEnemy(weapon);
+                    break;
+            }
         }
 
         if (toward is not null && weapon is not null && toward.From(unit.At) is null)

@@ -1,3 +1,4 @@
+using Ironwake.Sim;
 using Ironwake.Content;
 using Ironwake.Core.Tests.Content;
 using Ironwake.Core.Tests.Maps;
@@ -221,6 +222,114 @@ public class ShardRunTests
     {
         var map = MapFiles.Load(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples", "ironwake_keep_shard_race.map"), MapFixture.Content);
 
-        Assert.Equal(new ShardRace(new Coord(0, 6), 5), map.ShardRace);
+        Assert.Equal(new ShardRace(new Coord(15, 6), 5), map.ShardRace);
+        Assert.Equal(new[] { 0, 2, 2 }, map.Events.Select(e => e.Trigger).OfType<RaceTrigger>().Select(r => r.Phases));
+    }
+
+    private const string Guarded = Hall + "\n\nevents:\nguard race 0 spawn soldier 5,0 group:shard behavior:hold\nwave race 2 spawn brigand 9,4 group:shard behavior:aggressive\n";
+
+    [Fact]
+    public void ARaceTriggerRoundTripsAndNeedsTheHeaderAndAPhaseBeforeTheSwallow()
+    {
+        var map = MapFixture.Parse(Guarded, "hall.map");
+        Assert.Equal(new RaceTrigger(0), map.Events[0].Trigger);
+        Assert.Equal(new RaceTrigger(2), map.Events[1].Trigger);
+        var written = MapFormat.Write(map, Starter);
+        Assert.Contains("guard race 0 spawn soldier 5,0 group:shard behavior:hold", written);
+        Assert.Contains("wave race 2 spawn brigand 9,4 group:shard behavior:aggressive", written);
+
+        var orphan = Assert.Throws<MapException>(() => MapFixture.Parse(Guarded.Replace("shard_race: 9,2 3\n", ""), "hall.map"));
+        Assert.Contains("event 'guard' uses the race trigger but the map has no shard_race: header", orphan.Message);
+        var late = Assert.Throws<MapException>(() => MapFixture.Parse(Guarded.Replace("race 2", "race 3"), "hall.map"));
+        Assert.Contains("event 'wave' fires 3 phases into the race, but he swallows after 3", late.Message);
+        var bare = Assert.Throws<MapException>(() => MapFixture.Parse(Guarded.Replace("race 2", "race x"), "hall.map"));
+        Assert.Contains("race trigger needs the phases into the shard race", bare.Message);
+    }
+
+    [Fact]
+    public void ARaceZeroEventFiresAsHeRunsOffTheEdge()
+    {
+        var (state, events) = Felled(Start(map: Guarded));
+
+        Assert.Equal(new[] { "guard" }, events.OfType<MapEventFired>().Select(f => f.Name));
+        Assert.Equal(Side.Enemy, state.UnitAt(new Coord(5, 0))!.Side);
+        Assert.IsType<ShardRaceBegan>(events[0]);
+    }
+
+    [Fact]
+    public void ARaceEventFiresAtItsTickAndNotBefore()
+    {
+        var (state, _) = Felled(Start(map: Guarded));
+        var first = state.Try(new EndPhase());
+        Assert.DoesNotContain(first.Events, e => e is MapEventFired { Name: "wave" });
+
+        var player = first.Next.Try(new EndPhase());
+        var second = player.Next.Try(new EndPhase());
+        var tick = second.Events.ToList().FindIndex(e => e is ShardCountdown { Left: 1 });
+        var fired = second.Events.ToList().FindIndex(e => e is MapEventFired { Name: "wave" });
+        Assert.True(tick >= 0 && fired > tick);
+        Assert.Equal(Side.Enemy, second.Next.UnitAt(new Coord(9, 4))!.Side);
+    }
+
+    [Fact]
+    public void WithNoRaceTheRaceEventsNeverFire()
+    {
+        var state = Start(map: Guarded);
+        var events = new List<GameEvent>();
+        var board = state;
+        for (var i = 0; i < 6; i++)
+        {
+            var step = board.Try(new EndPhase());
+            events.AddRange(step.Events);
+            board = step.Next;
+        }
+
+        Assert.DoesNotContain(events, e => e is MapEventFired);
+    }
+
+    [Fact]
+    public void TheSimTakesTheShardFromATileBeside()
+    {
+        var state = RunningWithCaptainAt(new Coord(6, 2));
+        var captain = Captain(state) with { Moved = false, Acted = false };
+        var plan = HeuristicPlayer.PlanUnit(state.WithUnit(captain), Starter, captain);
+
+        var move = Assert.IsType<Move>(plan[0]);
+        Assert.Equal(1, move.To.DistanceTo(new Coord(9, 2)));
+        Assert.Equal(new TakeShard(captain.Id, Hask(state).Id), plan[^1]);
+    }
+
+    private const string Long = """
+        name: Long hall
+        size: 16x5
+        win: defeat_boss
+        shard_race: 15,2 3
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+
+        ................
+        ................
+        ................
+        ................
+        ................
+
+        units:
+        P captain 6,2
+        P recruit:wren 6,4
+        P recruit:ivo 6,0
+        B hask_warden 10,2 group:lord behavior:boss
+        E soldier 0,0 group:lord behavior:hold
+        """;
+
+    [Fact]
+    public void WithNoTakeInReachTheSimWalksTowardTheRunnerNotTheNearestEnemy()
+    {
+        var (state, _) = Felled(Start(map: Long));
+        var captain = Captain(state) with { Moved = false, Acted = false };
+        var plan = HeuristicPlayer.PlanUnit(state.WithUnit(captain), Starter, captain);
+
+        Assert.DoesNotContain(plan, c => c is Attack or TakeShard);
+        Assert.True(Assert.IsType<Move>(plan[0]).To.X > 6);
     }
 }

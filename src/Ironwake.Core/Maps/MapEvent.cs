@@ -52,6 +52,15 @@ public sealed record DropTrigger(Coord Ledge) : MapEventTrigger;
 public sealed record WakesTrigger(string Group, bool Late = false) : MapEventTrigger;
 
 /// <summary>
+/// When a beaten boss's shard race (issue 1386, <see cref="ShardRun"/>) is <paramref name="Phases"/> of his side's
+/// phases old: 0 fires with the run itself (<see cref="ShardRaceBegan"/>), k at the countdown's k-th tick, after it.
+/// The race's resistance: the shard calls the sworn already inside, so a spawn under it may land off the edge, as a
+/// <c>falls</c> spawn does. A map without a <c>shard_race:</c> header may not use it; the trigger never fires on a
+/// board where no race runs.
+/// </summary>
+public sealed record RaceTrigger(int Phases) : MapEventTrigger;
+
+/// <summary>
 /// The <c>messenger:</c> header (DESIGN.md 13.24): the enemy placed at <paramref name="From"/>
 /// is the messenger, and <paramref name="Road"/> is the edge tile it runs for.
 /// </summary>

@@ -124,6 +124,11 @@ public static class FinaleRun
                 yield return "  " + leader;
             }
 
+            if (ShardLine(Games) is { } shard)
+            {
+                yield return "  " + shard;
+            }
+
             if (RaceLine(Games) is { } race)
             {
                 yield return "  " + race;
@@ -414,6 +419,25 @@ public static class FinaleRun
             .Select(g => (g.Key, Count: g.Sum(p => p.Value))).OrderByDescending(p => p.Count).ThenBy(p => p.Key, StringComparer.Ordinal).ToList();
         var split = inReach.Count == 0 ? "none" : string.Join(", ", inReach.Select(p => $"after {p.Key} {p.Count}"));
         return $"stage 2 captain: player phases {Sum(r => r.Phases)} (resting {Sum(r => r.Resting)}); a strike on him on offer in {Sum(r => r.Offer)}, lethal if all land in {Sum(r => r.PlainLethal)}; an art on offer in {Sum(r => r.ArtOffer)}, lethal on its hit in {Sum(r => r.ArtLethal)} (from a tile the veto allows {Sum(r => r.ArtLethalSafe)}, median best hit {(hits.Count == 0 ? "-" : Median(hits).ToString(System.Globalization.CultureInfo.InvariantCulture) + " %")}; in {lostWithKill} of the {lost.Count} games lost in the stage); he struck him in {Sum(r => r.StruckHim)} (with an art {Sum(r => r.StruckHimArt)}), another in {Sum(r => r.StruckOther)}; ended in his reach {Sum(r => r.EndedInReach.Values.Sum())} ({split}), clear {Sum(r => r.EndedClear)}; marks on him: at the swallow in {Sum(r => r.MarkedAtSwallow)} of {reads.Count}, laid in the stage {Sum(r => r.MarksLaid)}, cashed {Sum(r => r.MarksCashed)}";
+    }
+
+    /// <summary>
+    /// Issue 1386's shard race read: of the games where a beaten boss ran with the shard, how many took it, by the phases
+    /// left on the countdown when it went, how many let it run out into the swallow, how many ended otherwise while he ran,
+    /// and the player units that fell during the run. Null when no game ran a race.
+    /// </summary>
+    public static string? ShardLine(IReadOnlyList<GameResult> games)
+    {
+        var races = games.Where(g => g.ShardRace is not null).Select(g => g.ShardRace!).ToList();
+        if (races.Count == 0)
+        {
+            return null;
+        }
+
+        var taken = races.Where(r => r.Taken).ToList();
+        var left = taken.Count == 0 ? "-" : string.Join(", ", taken.GroupBy(r => r.Left).OrderByDescending(g => g.Key).Select(g => $"{g.Key}: {g.Count()}"));
+        var falls = string.Join(", ", races.GroupBy(r => Math.Min(r.Falls, 2)).OrderBy(g => g.Key).Select(g => $"{(g.Key == 2 ? "2+" : g.Key.ToString(System.Globalization.CultureInfo.InvariantCulture))}: {g.Count()}"));
+        return $"shard race: ran in {races.Count} of {games.Count}, run median turn {Median(races.Select(r => r.Turn))}; taken {taken.Count} (phases left {left}); ran out {races.Count(r => r.RanOut)}; ended while he ran {races.Count(r => !r.Taken && !r.RanOut)}; falls in the run {falls}";
     }
 
     /// <summary>

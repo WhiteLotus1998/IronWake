@@ -1,0 +1,31 @@
+# issue 1386 slice 2a, the shard race's first Sim read. A baseline, not a tuning: the Sim's player is art-less, and no race
+# number moves until #1453's read is in (Table round 542). --finale <map> --level 8 --seeds 200, two-roll average.
+#
+# Three boards, each the Warden sample plus `shard_race:`; the race's columns come from the new `shard race` line.
+#   slice 1:     inner tile 0,6 (his hold), no resistance (docs/samples/ironwake_keep_shard_race_1424.map)
+#   inner only:  inner tile 15,6 (the keep's heart, behind the gate), no resistance
+#   guarded:     inner tile 15,6; `race 0` a held soldier on 11,6 (the gate lane), `race 2` a brigand on 15,0 and a
+#                soldier on 15,11 (docs/samples/ironwake_keep_shard_race.map, as shipped)
+#
+# | board | arm | wins | ran | taken | phases left at the take (5..1) | ran out | falls in the run (0/1/2+) |
+# |---|---|---|---|---|---|---|---|
+# | slice 1 | full | 164 | 164 | 164 | 96/65/3/0/0 | 0 | 164/0/0 |
+# | slice 1 | depleted | 127 | 127 | 127 | 54/68/5/0/0 | 0 | 126/1/0 |
+# | slice 1 | floor | 10 | 10 | 10 | 5/5/0/0/0 | 0 | 10/0/0 |
+# | inner only | full | 162 | 164 | 162 | 0/20/52/74/16 | 2 | 164/0/0 |
+# | inner only | depleted | 126 | 127 | 126 | 3/12/35/59/17 | 1 | 126/1/0 |
+# | inner only | floor | 9 | 10 | 9 | 0/0/2/4/3 | 1 | 10/0/0 |
+# | guarded | full | 132 | 164 | 128 | 0/9/34/43/42 | 33 | 86/54/24 |
+# | guarded | depleted | 91 | 127 | 87 | 2/3/18/26/38 | 39 | 59/54/14 |
+# | guarded | floor | 4 | 10 | 4 | 0/0/0/2/2 | 6 | 6/4/0 |
+#
+# Against the Warden sample with no race (127 / 107 / 0, 0380), the race's own share: on slice 1's board the take is
+# free (164 of 164 at 5 or 4 left), so the race only converts every stage-1 fall into a win. Moving the inner tile to
+# the keep's heart makes it a walk: a median 2 phases left, the straight walk Lotus asked for at about 3 phases, and it
+# is forgiving (2 of 164 run out). The guard and the wave make it a fight: the take comes with 1 or 2 left, 33 of 164
+# full races and 39 of 127 depleted run out into stage 2, which then wins 4 of 33 and 4 of 39, and units fall in the run.
+# Lotus's "forgiving, about five turns, the fight makes it 4" sits between the two boards. Which one is the race, and
+# where the guard and the wave go, is the race's tuning: after #1453 reports, and against a warm and a cold chair.
+#
+# Code's warm hand play on the guarded board (seed 1424, 0384) took the shard on turn 11 with 4 left: Rook, a flier,
+# went over the held guard. The Sim's take has no flier-first rule; its fliers walk the same key as everyone.
