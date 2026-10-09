@@ -13,8 +13,9 @@ public class EnemyFormTests
 {
     private static GameContent Forms => Starter;
 
-    private static BattleState Begin(bool forms = true) =>
-        BattleState.From(forms ? YardMap with { FormsEnabled = true } : YardMap, Forms, ValueList<Unit>.Of(Hale, Wren), 7).WithoutUnit("wren");
+    /// <summary>The yard with Hale against the brigand; these tests read 0400's lethal rule unless <paramref name="lethal"/> is false.</summary>
+    private static BattleState Begin(bool forms = true, bool lethal = true) =>
+        BattleState.From(forms ? YardMap with { FormsEnabled = true, FormRuleLethal = lethal } : YardMap, Forms, ValueList<Unit>.Of(Hale, Wren), 7).WithoutUnit("wren");
 
     /// <summary>Hale beside the brigand in the enemy phase, at one HP more than the brigand's plain hit, the brigand holding <paramref name="grit"/>.</summary>
     private static BattleState Exposed(int grit, bool forms = true, int spare = 1)
@@ -71,9 +72,10 @@ public class EnemyFormTests
         var state = Exposed(grit: 1);
         var brigand = state.Find("brigand-1")!;
 
-        var offers = EnemyAi.LethalForms(state, Forms, brigand, brigand.At, state.Find("hale")!, 0);
+        var offers = FormChoice.Offers(state, Forms, brigand, brigand.At, state.Find("hale")!, 0);
 
-        Assert.Equal(new[] { new FormOffer(BasicOfBrigand(state), 2, false, offers.Single().Hit) }, offers);
+        var offer = Assert.Single(offers);
+        Assert.Equal((BasicOfBrigand(state), 2, false), (offer.Id, offer.Grit, offer.Affordable));
         Assert.Null(EnemyAi.Form(state, Forms, brigand, brigand.At, state.Find("hale")!, 0));
         Assert.All(EnemyAi.PlanUnit(state, Forms, brigand).OfType<Attack>(), a => Assert.Null(a.Art));
     }
@@ -84,7 +86,7 @@ public class EnemyFormTests
         var state = Exposed(grit: 3, spare: 0);
         var brigand = state.Find("brigand-1")!;
 
-        Assert.Empty(EnemyAi.LethalForms(state, Forms, brigand, brigand.At, state.Find("hale")!, 0));
+        Assert.Empty(FormChoice.Offers(state, Forms, brigand, brigand.At, state.Find("hale")!, 0));
     }
 
     [Fact]
@@ -93,7 +95,7 @@ public class EnemyFormTests
         var state = Exposed(grit: 3, forms: false);
         var brigand = state.Find("brigand-1")!;
 
-        Assert.Empty(EnemyAi.LethalForms(state, Forms, brigand, brigand.At, state.Find("hale")!, 0));
+        Assert.Empty(FormChoice.Offers(state, Forms, brigand, brigand.At, state.Find("hale")!, 0));
         Assert.All(EnemyAi.PlanUnit(state, Forms, brigand).OfType<Attack>(), a => Assert.Null(a.Art));
     }
 

@@ -4,7 +4,8 @@ namespace Ironwake.Core.Tests.Content;
 
 /// <summary>
 /// Code's warm hand play of Grit on both sides (issue 1461 a2): the Tollgate under <c>forms: on</c>
-/// (<c>docs/samples/the_tollgate_forms.map</c>), seed 1461. Pell's Overcast takes the woods archer on
+/// (<c>docs/samples/the_tollgate_forms_1461.map</c>, the sample as it stood under 0400: Grit refilled at each phase start and
+/// the lethal declaration rule, <c>form_rule: lethal</c>), seed 1461. Pell's Overcast takes the woods archer on
 /// turn 2, Teodor falls to the keep archer's crit on turn 6, the Bandit Leader declares Cleave on Pell
 /// on turn 7 (the form `threat` and `end` priced) and misses, and the captain takes the gate on turn 8.
 /// </summary>
@@ -16,7 +17,7 @@ public class TollgateFormsReplayTests
     {
         var root = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(root, "docs", "transcripts", "2026-10-09-the_tollgate_forms-1461.script");
-        var map = Path.Combine(root, "docs", "samples", "the_tollgate_forms.map");
+        var map = Path.Combine(root, "docs", "samples", "the_tollgate_forms_1461.map");
         var args = new[] { "play", map, "--seed", "1461", "--strict", "--script", script, "--content", Fixture.RealContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Program.Main(args));

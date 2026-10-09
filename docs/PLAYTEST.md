@@ -4304,9 +4304,19 @@ Notes: I wasn't tense, because this was a replay. What it shows is what 0395 pre
 
 ## 2026-10-09 — Code — The Tollgate under `forms: on`, Grit on both sides (warm, #1461 a2, 0400)
 
-`play docs/samples/the_tollgate_forms.map --seed 1461 --strict --script docs/transcripts/2026-10-09-the_tollgate_forms-1461.script`; transcript beside it. Warm: I know the Tollgate well. No Recall.   Result: **won on turn 8, the captain on the gate at 14 HP; Teodor fell.**
+`play docs/samples/the_tollgate_forms_1461.map --seed 1461 --strict --script docs/transcripts/2026-10-09-the_tollgate_forms-1461.script`; transcript beside it. Warm: I know the Tollgate well. No Recall.   Result: **won on turn 8, the captain on the gate at 14 HP; Teodor fell.**
 Tension: 7/10   Choice: 5/10   Surprise: 6/10
 Best turn: turn 7. The keep archer was down, and Pell stood in the gap at 6,3, where the Bandit Leader could reach her. `threat` priced him at Cleave, 2 of his 3 Grit: 25 % for 20 against her 17. `end` stopped me on that line, and it would not have stopped me on his plain 14. I ended anyway, because a 25 % swing he only takes to kill is the bet I wanted him to make. He missed, Pell's counter took him to 14, and the captain walked through the gap onto the gate.
 Notes: Grit was never the reason I did or didn't do something. By turn 3 every unit on both sides sat at 3/3 and stayed there, because a phase start refills what a form spends. I read the `Grit n/3` column twice in eight turns, both times to confirm it said 3. The form choices that mattered were all about the numbers: Overcast's +5 turned Pell's 12 into a kill on the woods archer at 86 %, with a 14 % miss that let the archer double her. Long Thrust's range let Teodor poke the warden from the forest. The price never came into it. The enemy side's one form came out as a worse swing than his plain strike (25 % against 45 %: Cleave is -20 hit), because the rule only asks whether the form kills on its own. Teodor died to the keep archer's 3 % crit, not to a form. On this board Grit reads as bookkeeping with a meter that's always full, and that's the hand-play half of the kill criterion.
 
 — Code
+
+## 2026-10-09 — Code — The Tollgate under `grit_gain: hits` and the capped rule (warm, #1489, 0402)
+
+`play docs/samples/the_tollgate_forms.map --seed 1489 --strict --script docs/transcripts/2026-10-09-the_tollgate_forms-1489.script`; transcript beside it. Warm: I know the Tollgate well. No Recall. Not clean on turn 2: I tried Pell first into the woods archer, saw it leave her at 8 against a 99 % Aimed Shot, and replayed the turn with Pell held back, knowing Wren's roll would miss.   Result: **won on turn 10, the captain on the gate at 16 HP; Pell fell on turn 9.**
+Tension: 7/10   Choice: 7/10   Surprise: 7/10
+Best turn: turn 5. The archer's Aimed Shot had hit Teodor for 4 on turn 3, which put him at 2 Grit. That paid for Long Thrust at the warden from the forest at 6,4, where his plain lance couldn't reach. It missed, but it was a choice I only had because something had hit him. Turn 2 had already shown the other side of the rule: Pell's hit on the archer would have armed its Aimed Shot against her.
+Notes: The column changed decisions three times. I held Pell off the archer so I wouldn't arm it. Teodor spent the hit he took. And the captain reached 3/3 after the keep put him at 7, but he never had a tile to spend it from. The price is real, and it was mostly a price: Pell's Overcast and Wren's Heavy Cut were never affordable all game, and Feint now costs 2. The Sim says the same thing at scale: 78 % of offers unaffordable, Reason at 81 to 100 %. Under the capped rule the enemy swung its forms well. The archer's Aimed Shot came at 81 % where the plain shot would have been lower, and the Leader swung plain at Pell at 3 HP where 0400 would have swung Cleave. I wasn't tense about Grit, I was tense about the keep. Turn 9 was my mistake: I left Pell at 3 HP in reach, and the Leader's plain swing took her.
+
+— Code
+

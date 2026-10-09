@@ -77,7 +77,7 @@ public static class Program
 
             if (scheme is { } full && taxFloor is { } floor)
             {
-                return Full(args[1], seeds, full, floor, difficulty, lead, origin, args.Contains("--forms"));
+                return Full(args[1], seeds, full, floor, difficulty, lead, origin, args.Contains("--forms"), args.Contains("--screen"));
             }
         }
 
@@ -1424,7 +1424,7 @@ public static class Program
     /// <paramref name="origin"/> (issue 681), the captain is played on that origin's card, so the
     /// four origins can be held within 5 points of each other on gate 1.
     /// </summary>
-    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null, IReadOnlyList<string>? lead = null, string? origin = null, bool forms = false)
+    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null, IReadOnlyList<string>? lead = null, string? origin = null, bool forms = false, bool screen = false)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -1493,6 +1493,11 @@ public static class Program
             maps = maps.Select(m => (m.Id, m.Map.Under(chosen))).ToList();
         }
 
+        if (forms && screen)
+        {
+            return FormsScreen(content, maps, seeds, scheme);
+        }
+
         if (forms)
         {
             maps = maps.Select(m => (m.Id, m.Map with { FormsEnabled = true })).ToList();
@@ -1539,7 +1544,7 @@ public static class Program
                 {
                     var player = new HeuristicPlayer();
                     Runner.Play(content, map, (ulong)seed, player, scheme: scheme, enemyForms: mapEnemy);
-                    mapOffers.Add(player.FormOffers, player.FormOffersUnaffordable, player.TwoCostOffers, player.TwoCostAffordable);
+                    mapOffers.Add(player.Forms);
                 }
 
                 Console.WriteLine($"  forms {id}, player: {mapOffers.Line}");
@@ -1556,11 +1561,75 @@ public static class Program
             both.Add(enemyOffers);
             Console.WriteLine($"forms, all maps, player: {offers.Line}");
             Console.WriteLine($"forms, all maps, enemy: {enemyOffers.Line}");
+            Console.WriteLine($"forms, all maps, both sides, by type: {both.TypeLine}");
             Console.WriteLine($"forms, all maps, both sides: {both.Line}; Grit {(both.Kills ? "fails its kill criterion" : "passes its kill criterion")}");
         }
 
         Console.WriteLine(failed ? "full: FAILED" : "full: ok");
         return failed ? 1 : 0;
+    }
+
+    /// <summary>
+    /// Issue 1489's screen (<c>--full &lt;map|--all&gt; --forms --screen</c>): every map read once with forms off and then under
+    /// <c>forms: on</c> in four rows, {refill, hits} x {0400's lethal rule, the capped rule}, the same seeds and the same
+    /// player. Each row prints the player's, the enemy's and both sides' form offers, the both-sides split by weapon
+    /// type, and gate 1's wins on every map beside the forms-off wins. 0386's kill criterion is read on the hits and
+    /// capped row only, the shape that would ship; the other rows say which change moved the number.
+    /// </summary>
+    private static int FormsScreen(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps, int seeds, RollScheme scheme)
+    {
+        var rows = new (string Name, bool Forms, bool Hits, bool Lethal)[]
+        {
+            ("forms off", false, false, false),
+            ("refill, lethal rule", true, false, true),
+            ("refill, capped rule", true, false, false),
+            ("hits, lethal rule", true, true, true),
+            ("hits, capped rule", true, true, false),
+        };
+        var player = rows.Select(_ => new FormCount()).ToArray();
+        var enemy = rows.Select(_ => new FormCount()).ToArray();
+        var wins = rows.Select(_ => new int[maps.Count]).ToArray();
+        Console.WriteLine($"forms screen: {maps.Count} maps, {seeds} seeds, {Gates.Name(scheme)}");
+        Parallel.For(0, rows.Length, r =>
+        {
+            var row = rows[r];
+            for (var m = 0; m < maps.Count; m++)
+            {
+                var map = maps[m].Map with { FormsEnabled = row.Forms, GritFromHitsOnly = row.Hits, FormRuleLethal = row.Lethal };
+                for (var seed = 1; seed <= seeds; seed++)
+                {
+                    var heuristic = new HeuristicPlayer();
+                    var game = Runner.Play(content, map, (ulong)seed, heuristic, scheme: scheme, enemyForms: row.Forms ? enemy[r] : null);
+                    wins[r][m] += game.Won ? 1 : 0;
+                    player[r].Add(heuristic.Forms);
+                }
+            }
+        });
+
+        for (var m = 0; m < maps.Count; m++)
+        {
+            Console.WriteLine($"  gate 1 {maps[m].Id}: " + string.Join(", ", rows.Select((row, r) => $"{row.Name} {wins[r][m]}/{seeds}")));
+        }
+
+        for (var r = 1; r < rows.Length; r++)
+        {
+            var both = new FormCount();
+            both.Add(player[r]);
+            both.Add(enemy[r]);
+            Console.WriteLine($"row {rows[r].Name}:");
+            Console.WriteLine($"  player: {player[r].Line}");
+            Console.WriteLine($"    by type: {player[r].TypeLine}");
+            Console.WriteLine($"  enemy: {enemy[r].Line}");
+            Console.WriteLine($"    by type: {enemy[r].TypeLine}");
+            Console.WriteLine($"  both sides: {both.Line}");
+            Console.WriteLine($"  wins: {wins[r].Sum()} of {maps.Count * seeds} (forms off {wins[0].Sum()})");
+        }
+
+        var shipped = new FormCount();
+        shipped.Add(player[^1]);
+        shipped.Add(enemy[^1]);
+        Console.WriteLine($"forms screen, hits and capped rule, both sides: Grit {(shipped.Kills ? "fails its kill criterion" : "passes its kill criterion")}");
+        return 0;
     }
 
     /// <summary>

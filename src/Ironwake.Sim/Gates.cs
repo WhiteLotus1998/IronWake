@@ -218,11 +218,14 @@ public sealed record GateResult(string Line, bool Passed);
 
 /// <summary>Plays whole games, a player controller against <see cref="EnemyAi"/>, and tallies them.</summary>
 /// <summary>
-/// Lethal form offers counted for Grit's kill criterion (issue 1461, DECISIONS/0386): every offer, those the
-/// unit's Grit could not pay, and the 2-cost ones with how many of them it could.
+/// Form offers counted for Grit's kill criterion (issues 1461, 1489, DECISIONS/0386): every offer, those the
+/// unit's Grit could not pay, and the 2-cost ones with how many of them it could; and the same by the form's
+/// weapon type, read beside the total for the chair, never as a line of its own.
 /// </summary>
 public sealed class FormCount
 {
+    private readonly SortedDictionary<WeaponType, FormCount> _byType = new();
+
     public int Offers { get; private set; }
 
     public int Unaffordable { get; private set; }
@@ -235,24 +238,54 @@ public sealed class FormCount
     {
         foreach (var offer in offers)
         {
-            Add(1, offer.Affordable ? 0 : 1, offer.Grit == 2 ? 1 : 0, offer.Grit == 2 && offer.Affordable ? 1 : 0);
+            Add(offer.Weapon, 1, offer.Affordable ? 0 : 1, offer.Grit == 2 ? 1 : 0, offer.Grit == 2 && offer.Affordable ? 1 : 0);
         }
     }
 
-    public void Add(FormCount other) => Add(other.Offers, other.Unaffordable, other.TwoCost, other.TwoCostAffordable);
+    public void Add(FormCount other)
+    {
+        Offers += other.Offers;
+        Unaffordable += other.Unaffordable;
+        TwoCost += other.TwoCost;
+        TwoCostAffordable += other.TwoCostAffordable;
+        foreach (var (type, count) in other._byType)
+        {
+            Type(type).Add(count);
+        }
+    }
 
-    public void Add(int offers, int unaffordable, int twoCost, int twoCostAffordable)
+    private void Add(WeaponType type, int offers, int unaffordable, int twoCost, int twoCostAffordable)
     {
         Offers += offers;
         Unaffordable += unaffordable;
         TwoCost += twoCost;
         TwoCostAffordable += twoCostAffordable;
+        var typed = Type(type);
+        typed.Offers += offers;
+        typed.Unaffordable += unaffordable;
+        typed.TwoCost += twoCost;
+        typed.TwoCostAffordable += twoCostAffordable;
+    }
+
+    private FormCount Type(WeaponType type)
+    {
+        if (!_byType.TryGetValue(type, out var count))
+        {
+            count = new FormCount();
+            _byType[type] = count;
+        }
+
+        return count;
     }
 
     /// <summary>Whether Grit fails its kill criterion: over a third unaffordable, or over 80 percent of 2-cost offers affordable.</summary>
     public bool Kills => Unaffordable * 3 > Offers || TwoCostAffordable * 5 > TwoCost * 4;
 
-    public string Line => $"{Offers} lethal form offers, {Unaffordable} unaffordable ({Percent(Unaffordable, Offers)}, kill over 33%); 2-cost {TwoCostAffordable} of {TwoCost} affordable ({Percent(TwoCostAffordable, TwoCost)}, kill over 80%)";
+    public string Line => $"{Offers} form offers, {Unaffordable} unaffordable ({Percent(Unaffordable, Offers)}, kill over 33%); 2-cost {TwoCostAffordable} of {TwoCost} affordable ({Percent(TwoCostAffordable, TwoCost)}, kill over 80%)";
+
+    /// <summary>One line per weapon type met: its offers, unaffordable ones, and 2-cost affordability.</summary>
+    public string TypeLine => _byType.Count == 0 ? "none"
+        : string.Join("; ", _byType.Select(t => $"{t.Key.ToString().ToLowerInvariant()} {t.Value.Offers} offers, {Percent(t.Value.Unaffordable, t.Value.Offers)} unaffordable, 2-cost {Percent(t.Value.TwoCostAffordable, t.Value.TwoCost)} affordable"));
 
     private static string Percent(int part, int whole) => whole == 0 ? "-" : $"{100.0 * part / whole:0}%";
 }
@@ -263,7 +296,7 @@ public static class Runner
     /// A full game from the opening state until the battle is decided. With
     /// <paramref name="turns"/>, each player phase is read by <see cref="TurnState"/> at its
     /// start (issue 47). With <paramref name="enemyForms"/>, every enemy attack is read for its
-    /// lethal form offers before it resolves (<see cref="EnemyAi.LethalForms"/>, issue 1461 a2).
+    /// form offers before it resolves (<see cref="FormChoice.Offers"/>, issues 1461 a2, 1489).
     /// </summary>
     public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null, List<TurnReading>? turns = null, FormCount? enemyForms = null)
     {
@@ -324,7 +357,7 @@ public static class Runner
                 hits?.Record(state, content, command);
                 if (enemyForms is not null && state.Phase == Side.Enemy && command is Attack strike && state.Find(strike.UnitId) is { } striker && state.Find(strike.TargetId) is { } struck)
                 {
-                    enemyForms.Add(EnemyAi.LethalForms(state, content, striker, striker.At, struck, strike.Slot ?? striker.EquippedSlot(content)));
+                    enemyForms.Add(FormChoice.Offers(state, content, striker, striker.At, struck, strike.Slot ?? striker.EquippedSlot(content)));
                 }
 
                 if (stage is not null && state.Phase == Side.Player && command is EndPhase && plan is { Turn: var planned } && planned == state.Turn)

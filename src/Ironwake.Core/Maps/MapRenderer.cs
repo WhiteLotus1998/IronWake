@@ -271,7 +271,7 @@ public static class MapRenderer
 
         if (map.FormsEnabled)
         {
-            sb.Append(Grit.Legend).Append('\n');
+            sb.Append(Grit.LegendOf(map)).Append('\n');
         }
 
         if (map.OneAnswerEnabled)
@@ -686,7 +686,7 @@ public static class MapRenderer
 
         if (map.FormsEnabled)
         {
-            sb.Append(Grit.Legend).Append('\n');
+            sb.Append(Grit.LegendOf(map)).Append('\n');
         }
 
         if (map.OneAnswerEnabled)

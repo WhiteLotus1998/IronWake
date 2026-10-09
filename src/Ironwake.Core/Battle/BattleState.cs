@@ -407,7 +407,7 @@ public sealed record BattleState(
                         break;
                     }
 
-                    units.Add(Place(unit, Side.Player, p.At, map, content) with { IsCaptain = p.Slot == PlayerSlot.Captain, PlacementIndex = index, Grit = map.FormsEnabled ? 1 : 0 });
+                    units.Add(Place(unit, Side.Player, p.At, map, content) with { IsCaptain = p.Slot == PlayerSlot.Captain, PlacementIndex = index });
                     break;
                 case EnemyPlacement e:
                     var count = perTemplate.GetValueOrDefault(e.TemplateId) + 1;
@@ -526,7 +526,7 @@ public sealed record BattleState(
             throw new ArgumentException(Movement.CannotStandMessage(at, terrain, unitClass.Movement), nameof(unit));
         }
 
-        return new BattleUnit(RefreshSpells(unit, content), side, at, content.StatsOf(unit).Hp, false, false) { Kin = unit.Swallow };
+        return new BattleUnit(RefreshSpells(unit, content), side, at, content.StatsOf(unit).Hp, false, false) { Kin = unit.Swallow, Grit = Grit.AtPlacement(map, side) };
     }
 
     /// <summary>Section 5: spells have uses per battle, so every Reason or Faith weapon starts a map at its full durability. Physical weapons carry what they have.</summary>
