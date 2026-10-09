@@ -5,10 +5,11 @@ namespace Ironwake.Core;
 /// fresh bar <paramref name="Hp"/> the swallow sets his max HP to, the <paramref name="Def"/> and
 /// <paramref name="Res"/> it adds, the HP the Kin heals him at each of his side's phase starts
 /// (<paramref name="Heal"/>), and the line his card prints under his name from then on
-/// (<paramref name="Description"/>, the empty pommel), or null to keep his own. Read from a template's
-/// <c>swallow</c> block in <c>units/</c>.
+/// (<paramref name="Description"/>, the empty pommel), or null to keep his own. <paramref name="Rooted"/> roots him on
+/// the tile he swallowed on (Table round 505, issue 1395): from the swallow he holds (<see cref="Behavior.Hold"/>), striking
+/// only what his lance and line reach from there. Read from a template's <c>swallow</c> block in <c>units/</c>.
 /// </summary>
-public sealed record KinStage(int Hp, int Def, int Res, int Heal, string? Description = null);
+public sealed record KinStage(int Hp, int Def, int Res, int Heal, string? Description = null, bool Rooted = false);
 
 /// <summary>Stage 1's bar reached 0 and <paramref name="UnitId"/> swallowed the shard (issue 1385): stage 2 begins on <paramref name="Hp"/>, a fresh bar, on <paramref name="At"/>.</summary>
 public sealed record ShardSwallowed(string UnitId, Coord At, int Hp) : GameEvent;
@@ -54,8 +55,8 @@ public static class Swallow
 
     /// <summary>
     /// The unit <paramref name="unitId"/>, at 0 HP on <paramref name="state"/>, swallows: its Def and Res rise by the
-    /// stage's, its max HP becomes the stage's bar, it stands on that bar full, and Frozen Iron is set to land from the
-    /// next phase start.
+    /// stage's, its max HP becomes the stage's bar, it stands on that bar full, a <see cref="KinStage.Rooted"/> stage
+    /// holds its tile from then on, and Frozen Iron is set to land from the next phase start.
     /// </summary>
     public static BattleState Take(BattleState state, GameContent content, string unitId, List<GameEvent> events)
     {
@@ -67,6 +68,7 @@ public static class Swallow
         {
             Unit = unit.Unit with { Stats = raised, Description = stage.Description ?? unit.Unit.Description },
             Swallowed = true,
+            Behavior = stage.Rooted ? Behavior.Hold : unit.Behavior,
         };
         swallowed = swallowed with { Hp = swallowed.MaxHp(content) };
         events.Add(new ShardSwallowed(unitId, unit.At, swallowed.Hp));

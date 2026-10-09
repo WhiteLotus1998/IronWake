@@ -1565,6 +1565,11 @@ public static class ProtocolJson
                 w.WriteString("description", kin.Description);
             }
 
+            if (kin.Rooted)
+            {
+                w.WriteBoolean("rooted", true);
+            }
+
             w.WriteEndObject();
         }
 
@@ -1839,7 +1844,7 @@ public static class ProtocolJson
             Stun = OptionalInt(e, "stun") ?? 0,
             StunSpent = e.TryGetProperty("stunSpent", out _) && RequiredBool(e, "stunSpent"),
             RaiseSpent = e.TryGetProperty("raiseSpent", out _) && RequiredBool(e, "raiseSpent"),
-            Kin = e.TryGetProperty("kin", out var kin) ? new KinStage(RequiredInt(kin, "hp"), RequiredInt(kin, "def"), RequiredInt(kin, "res"), RequiredInt(kin, "heal"), OptionalString(kin, "description")) : null,
+            Kin = e.TryGetProperty("kin", out var kin) ? new KinStage(RequiredInt(kin, "hp"), RequiredInt(kin, "def"), RequiredInt(kin, "res"), RequiredInt(kin, "heal"), OptionalString(kin, "description"), kin.TryGetProperty("rooted", out _) && RequiredBool(kin, "rooted")) : null,
             Swallowed = e.TryGetProperty("swallowed", out _) && RequiredBool(e, "swallowed"),
             Hollow = e.TryGetProperty("hollow", out var hollow) ? new HollowMark(RequiredString(hollow, "by"), RequiredString(hollow, "fallen"), RequiredInt(hollow, "phases")) : null,
             LockedBy = OptionalString(e, "lockedBy"),
