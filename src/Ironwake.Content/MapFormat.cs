@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "goes_home", "seize_name", "seize_hold", "shard_race", "kin_shard", "swallowed", "drops", "arrivals", "wake_on_death" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "goes_home", "seize_name", "seize_hold", "shard_race", "kin_shard", "swallowed", "shard_breaks", "drops", "arrivals", "wake_on_death" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -50,6 +50,11 @@ public static class MapFormat
         if (map.Swallowed is { } swallowed)
         {
             sb.Append("swallowed: ").Append(swallowed).Append('\n');
+        }
+
+        if (map.ShardBreaks != ShardBreak.None)
+        {
+            sb.Append("shard_breaks: ").Append(map.ShardBreaks == ShardBreak.Stills ? "stills" : "turns").Append('\n');
         }
 
         if ((map.ShardRace ?? map.SecretRace?.Race) is { } race)
@@ -498,6 +503,7 @@ public static class MapFormat
             }
             map = map with { KinShard = ParseKinShard(header, map) };
             map = map with { Swallowed = ParseSwallowed(header, map) };
+            map = map with { ShardBreaks = ParseShardBreaks(header, map) };
             map = map with { Drops = ParseDrops(header, map), ArrivalsWait = ParseArrivals(header, map), DeathWakes = ParseDeathWakes(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
@@ -702,6 +708,32 @@ public static class MapFormat
             }
 
             return at;
+        }
+
+        /// <summary>
+        /// The <c>shard_breaks:</c> header (issue 1386 slice 3e): <c>stills</c> or <c>turns</c>, only on a map that carries
+        /// both a Kin shard (<c>kin_shard:</c>) and a boss who begins swallowed (<c>swallowed:</c>), since it changes that
+        /// boss's frost when that shard breaks.
+        /// </summary>
+        private ShardBreak ParseShardBreaks(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("shard_breaks", out var entry))
+            {
+                return ShardBreak.None;
+            }
+
+            var rule = entry.Value.Trim() switch
+            {
+                "stills" => ShardBreak.Stills,
+                "turns" => ShardBreak.Turns,
+                _ => throw ErrorAt(entry.Line, $"shard_breaks names 'stills' or 'turns', got '{entry.Value}'"),
+            };
+            if (map.KinShard is null || map.Swallowed is null)
+            {
+                throw ErrorAt(entry.Line, "shard_breaks: needs both kin_shard: and swallowed:; it changes a swallowed boss's frost when the Kin's shard breaks");
+            }
+
+            return rule;
         }
 
         /// <summary>

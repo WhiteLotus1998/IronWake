@@ -2366,7 +2366,7 @@ public sealed class PlaySession
             rows.Add($"  {shardRow}");
         }
 
-        if (Swallow.Line(state, names) is { } swallowRow)
+        if (Swallow.Line(state, content, names) is { } swallowRow)
         {
             rows.Add($"  {swallowRow}");
         }
@@ -3420,7 +3420,7 @@ public sealed class PlaySession
             case ShardSwallowed ss:
                 return $"{names[ss.UnitId]} pulls the shard from the lance's pommel and swallows it: stage 2 on a fresh bar (hp {ss.Hp}); Frozen Iron falls on every unit but him from his next phase";
             case FrozenIronFell fi:
-                return $"Frozen Iron falls on every unit but him for {fi.Amount}, past Def and Res: " + string.Join(", ", fi.Struck.Select((id, i) => $"{names[id]} (hp {fi.HpAfter[i]})"));
+                return $"Frozen Iron falls on every unit{(fi.Turned ? ", him included above half his bar," : " but him")} for {fi.Amount}, past Def and Res: " + string.Join(", ", fi.Struck.Select((id, i) => $"{names[id]} (hp {fi.HpAfter[i]})"));
             case KinHealed kh:
                 return $"The Kin heals {names[kh.UnitId]} {kh.Amount} (hp {kh.HpAfter})";
             case ShardRaceBegan sr:
@@ -3436,6 +3436,10 @@ public sealed class PlaySession
                 return $"The Kin re-takes {names[st.UnitId]} through the shard: they stand again on {st.At} (hp {st.Hp}) and act from the next enemy phase";
             case KinShardBroken kb:
                 return $"{names[kb.UnitId]} takes up the shard on {kb.At} and breaks it on the stone: the Kin re-takes no one now";
+            case FrozenIronStilled fs:
+                return $"The frost stops climbing: Frozen Iron holds at {fs.Dose}";
+            case FrozenIronTurned ft:
+                return $"The frost turns: Frozen Iron now lands on {names[ft.UnitId]} too, never taking him below {ft.Floor}";
             case ShardBroken broken:
                 return $"{names[broken.UnitId]} wrenches the shard from {names[broken.BossId]} and breaks it on the stone. He drops where he stands, alive, in a sleep nothing wakes (off the field; his waking waits on Lotus)";
             case ColdDrained cd:

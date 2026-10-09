@@ -1,0 +1,17 @@
+finale: docs/samples/under_the_hill_turns.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 185/200 (93 %), losses 0 timeout 15 captain 0 protected: ok
+  length: median 5 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 51 ms: ok
+  captain falls: 15 before the swallow (frozen iron 15), 0 after (none)
+  before the swallow, by the hunt: his own phase 15 (frozen iron 15); down a line 0
+finale depleted: 12 units at level 8, heuristic wins 146/200 (73 %), losses 0 timeout 54 captain 0 protected: ok
+  length: median 5 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 26 ms: ok
+  captain falls: 54 before the swallow (frozen iron 54), 0 after (none)
+  before the swallow, by the hunt: his own phase 54 (frozen iron 54); down a line 0
+finale floor: 11 units at level 8, heuristic wins 44/200 (22 %), losses 0 timeout 156 captain 0 protected: data, a cold chair's play decides (won at least once)
+  length: median 7 turns over every game, limit 12: ok
+  time: 5 AI-vs-AI games, slowest 22 ms: ok
+  captain falls: 156 before the swallow (frozen iron 154, Brigand 1, Sworn Captain 1), 0 after (none)
+  before the swallow, by the hunt: not hunted, behind the fronts 2 (Brigand 1, Sworn Captain 1); his own phase 154 (frozen iron 154); down a line 0
+finale: ok

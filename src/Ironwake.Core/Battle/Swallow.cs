@@ -24,11 +24,19 @@ public sealed record ShardSwallowed(string UnitId, Coord At, int Hp) : GameEvent
 /// Frozen Iron landed at his side's phase start (issues 1385, 1395): <paramref name="Amount"/> on every unit on the board, either
 /// side, but the swallowed boss who casts it (Lotus, 2026-10-09), flat past Def and Res; <paramref name="Struck"/> names them in unit order and <paramref name="HpAfter"/> gives
 /// each one's HP after it. A <see cref="UnitDied"/> or <see cref="ShardSwallowed"/> follows for each it takes to 0.
+/// <paramref name="Turned"/> says the frost has turned (issue 1386 slice 3e, <see cref="Swallow.Turned"/>), so the Kin
+/// is among the struck while he stands above his floor.
 /// </summary>
-public sealed record FrozenIronFell(int Amount, ValueList<string> Struck, ValueList<int> HpAfter) : GameEvent;
+public sealed record FrozenIronFell(int Amount, ValueList<string> Struck, ValueList<int> HpAfter, bool Turned = false) : GameEvent;
 
 /// <summary>The Kin healed <paramref name="UnitId"/> <paramref name="Amount"/> at its side's phase start (issue 1385), to <paramref name="HpAfter"/>.</summary>
 public sealed record KinHealed(string UnitId, int Amount, int HpAfter) : GameEvent;
+
+/// <summary>The shard under the hill broke on a <c>shard_breaks: stills</c> map while a swallowed boss stood (issue 1386 slice 3e): Frozen Iron holds at <paramref name="Dose"/>, the dose it had reached or the stage's step if that is more, and climbs no more.</summary>
+public sealed record FrozenIronStilled(int Dose) : GameEvent;
+
+/// <summary>The shard under the hill broke on a <c>shard_breaks: turns</c> map while the swallowed <paramref name="UnitId"/> stood (issue 1386 slice 3e): Frozen Iron lands on him too from now, climbing as before, never taking him below <paramref name="Floor"/>.</summary>
+public sealed record FrozenIronTurned(string UnitId, int Floor) : GameEvent;
 
 /// <summary>The swallowed boss <paramref name="UnitId"/> fell (issue 1385): the cold drains out of him and the shard lies on <paramref name="At"/>, his tile.</summary>
 public sealed record ColdDrained(string UnitId, Coord At) : GameEvent;
@@ -53,8 +61,33 @@ public static class Swallow
     /// <summary>What each later landing adds when the stage names none (issue 1385, <see cref="KinStage.Step"/>).</summary>
     public const int DoseStep = 2;
 
-    /// <summary>Whether Frozen Iron passes <paramref name="unit"/> by: the swallowed boss who casts it (Lotus, 2026-10-09).</summary>
-    public static bool Spared(BattleUnit unit) => unit.Swallowed;
+    /// <summary>
+    /// Whether the frost is stilled on <paramref name="state"/> (issue 1386 slice 3e, Code's lean, round 550, on a sample):
+    /// the map carries <c>shard_breaks: stills</c> and the Kin's shard is broken, so each landing holds the dose set at the
+    /// break (<see cref="KinShard.Take"/>: the dose reached, never below the stage's <see cref="KinStage.Step"/>) instead of climbing.
+    /// </summary>
+    public static bool Stilled(BattleState state) => state.Map.ShardBreaks == ShardBreak.Stills && KinShard.Of(state) is { Broken: true };
+
+    /// <summary>
+    /// Whether the frost has turned on the Kin on <paramref name="state"/> (issue 1386 slice 3e, Chat's lean, rounds 551 and
+    /// 555, on a sample; it ends Lotus's exemption on the hill, so it goes on his sign-off): the map carries
+    /// <c>shard_breaks: turns</c> and the Kin's shard is broken, so Frozen Iron lands on the swallowed boss too, down to
+    /// his <see cref="Floor"/> and no lower.
+    /// </summary>
+    public static bool Turned(BattleState state) => state.Map.ShardBreaks == ShardBreak.Turns && KinShard.Of(state) is { Broken: true };
+
+    /// <summary>
+    /// The HP the turned frost never takes <paramref name="unit"/> below (Table round 555): half his current stage's max HP,
+    /// rounded up, the rule anything that stands back up stands by. The frost alone never wins the hill.
+    /// </summary>
+    public static int Floor(BattleUnit unit, GameContent content) => Hollow.RisenHp(unit.MaxHp(content));
+
+    /// <summary>
+    /// Whether Frozen Iron passes <paramref name="unit"/> by on <paramref name="state"/>: the swallowed boss who casts it
+    /// (Lotus, 2026-10-09), unless the frost has turned (<see cref="Turned"/>) and he stands above his <see cref="Floor"/>.
+    /// </summary>
+    public static bool Spared(BattleState state, BattleUnit unit, GameContent content) =>
+        unit.Swallowed && (!Turned(state) || unit.Hp <= Floor(unit, content));
 
     /// <summary>Whether a hit taking <paramref name="unit"/> to 0 HP makes it swallow rather than die: it carries a stage and has not swallowed.</summary>
     public static bool Takes(BattleUnit unit) => unit is { Kin: not null, Swallowed: false };
@@ -121,7 +154,7 @@ public static class Swallow
     /// where no swallow announced the clock: what Frozen Iron lands for next, when, its step, and the Kin's heal. Null on
     /// a map without the header, or once he has fallen.
     /// </summary>
-    public static string? Line(BattleState state, UnitNames names)
+    public static string? Line(BattleState state, GameContent content, UnitNames names)
     {
         if (state.Map.Swallowed is null || state.Units.FirstOrDefault(u => u is { Swallowed: true, Kin: not null, Retreated: false } && u.Side == Side.Enemy) is not { } kin)
         {
@@ -129,7 +162,9 @@ public static class Swallow
         }
 
         var when = state.FrozenIronHeld ? "from the enemy phase after next" : "at each enemy phase start";
-        return $"{names[kin.Id]} stands swallowed: Frozen Iron lands for {state.FrozenIron} on every unit but him {when}, {kin.Kin!.Step} more each time, then the Kin heals him {kin.Kin.Heal}";
+        var climb = Stilled(state) ? "and climbs no more (the shard is broken)" : $"{kin.Kin!.Step} more each time";
+        var whom = Turned(state) ? $"on every unit, him included but never below {Floor(kin, content)} (the shard is broken)" : "on every unit but him";
+        return $"{names[kin.Id]} stands swallowed: Frozen Iron lands for {state.FrozenIron} {whom} {when}, {climb}, then the Kin heals him {kin.Kin!.Heal}";
     }
 
     /// <summary>
@@ -151,12 +186,13 @@ public static class Swallow
         {
             var dose = state.FrozenIron;
             var step = Step(state, side);
-            var struck = state.Units.Where(u => !u.Retreated && !Spared(u)).ToList();
-            events.Add(new FrozenIronFell(dose, ValueList<string>.From(struck.Select(u => u.Id)), ValueList<int>.From(struck.Select(u => Math.Max(0, u.Hp - dose)))));
+            var struck = state.Units.Where(u => !u.Retreated && !Spared(state, u, content)).ToList();
+            int After(BattleUnit u) => u.Swallowed ? Math.Max(Floor(u, content), u.Hp - dose) : Math.Max(0, u.Hp - dose);
+            events.Add(new FrozenIronFell(dose, ValueList<string>.From(struck.Select(u => u.Id)), ValueList<int>.From(struck.Select(After)), Turned(state)));
             foreach (var aimed in struck)
             {
                 var unit = state.Find(aimed.Id)!;
-                var hp = Math.Max(0, unit.Hp - dose);
+                var hp = After(unit);
                 state = state.WithUnit(unit with { Hp = hp });
                 if (hp > 0)
                 {
@@ -173,7 +209,7 @@ public static class Swallow
                 state = died(state, unit with { Hp = 0 });
             }
 
-            state = state with { FrozenIron = dose + step };
+            state = state with { FrozenIron = Stilled(state) ? dose : dose + step };
         }
 
         foreach (var healed in state.Units.Where(u => u is { Swallowed: true, Kin: not null } && u.Side == side).ToList())
@@ -191,10 +227,6 @@ public static class Swallow
     }
 
     /// <summary>
-    /// Whether Frozen Iron lands at <paramref name="side"/>'s phase start (issue 1395): he casts it, so it lands at his
-    /// own side's phase start alone, once a round, the landing the Kin's heal answers.
-    /// </summary>
-    /// <summary>
     /// The Frozen Iron that lands on a unit of <paramref name="side"/> at the other side's next phase start (round 502):
     /// the set dose while a swallowed unit of the other side stands (<see cref="Casts"/>) and the landing is not held
     /// (<see cref="BattleState.FrozenIronHeld"/>), else 0. It lands before that
@@ -207,6 +239,10 @@ public static class Swallow
     public static int Step(BattleState state, Side side) =>
         state.Units.FirstOrDefault(u => u is { Swallowed: true, Retreated: false } && u.Side == side)?.Kin?.Step ?? DoseStep;
 
+    /// <summary>
+    /// Whether Frozen Iron lands at <paramref name="side"/>'s phase start (issue 1395): he casts it, so it lands at his
+    /// own side's phase start alone, once a round, the landing the Kin's heal answers.
+    /// </summary>
     public static bool Casts(BattleState state, Side side) => state.Units.Any(u => u is { Swallowed: true, Retreated: false } && u.Side == side);
 
     /// <summary>
