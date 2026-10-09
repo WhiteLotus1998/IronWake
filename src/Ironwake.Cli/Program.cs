@@ -72,6 +72,12 @@ public static class Program
                 }
             }
 
+            if (content.Campaign.Hill is { } hill && !File.Exists(MapFiles.CampaignPath(contentDir, content, hill.MapId)))
+            {
+                throw new ContentException(ContentFiles.CampaignName, "secret", "hill.map", $"no file {MapFiles.HillDirectory}/{hill.MapId}.map under {contentDir}");
+            }
+
+            MapFiles.LoadDirectory(contentDir, MapFiles.HillDirectory, content);
             foreach (var trial in content.Campaign.Trials)
             {
                 if (!trials.Any(t => t.Id == trial.MapId))

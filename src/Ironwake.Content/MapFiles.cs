@@ -8,6 +8,12 @@ public static class MapFiles
     public const string MapsDirectory = "maps";
     public const string Extension = ".map";
     public const string KeepDirectory = "keep";
+
+    /// <summary>
+    /// The hill after the keep (issue 1386 slice 3d, <see cref="UnderTheHill.Hill"/>): apart from <see cref="MapsDirectory"/>
+    /// so the main maps' reads (<c>--full --all</c>, the art spec) see only the main line while its boss is a stand-in.
+    /// </summary>
+    public const string HillDirectory = "hill";
     public const string TrialsDirectory = "trials";
     public const string QuestsDirectory = "quests";
 
@@ -19,7 +25,7 @@ public static class MapFiles
     /// and its raid (issue 288), under <c>content/maps</c> for every other map.
     /// </summary>
     public static string CampaignPath(string contentRoot, GameContent content, string mapId) =>
-        Path.Combine(contentRoot, content.Campaign.Keep.IsKeepMap(mapId) ? KeepDirectory : MapsDirectory, mapId + Extension);
+        Path.Combine(contentRoot, content.Campaign.Keep.IsKeepMap(mapId) ? KeepDirectory : content.Campaign.Hill?.MapId == mapId ? HillDirectory : MapsDirectory, mapId + Extension);
 
     /// <summary>Loads one map file. Errors name the file as given.</summary>
     public static MapDefinition Load(string path, GameContent content)

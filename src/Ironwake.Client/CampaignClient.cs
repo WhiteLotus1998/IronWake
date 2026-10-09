@@ -141,6 +141,29 @@ public sealed class CampaignClient
     /// <summary>Picks <paramref name="unitId"/> for the branch's seat (issue 633).</summary>
     public bool Pick(string unitId) => Screen(() => Record.PickClaimant(unitId, Content));
 
+    /// <summary>
+    /// Answers the hill's card after the keep (issue 1386 slice 3d): <c>reseal</c> ends the campaign at this camp, won,
+    /// with its ending written as a won map's would be; <c>fight</c> leaves the hill to march to.
+    /// </summary>
+    public bool Hill(HillChoice choice)
+    {
+        if (!Screen(() => Record.ChooseHill(choice, Content)))
+        {
+            return false;
+        }
+
+        if (Record.IsFinished(Content))
+        {
+            _log.Add(CampaignSession.CampaignWonLine(Record, Content));
+            QueueCard(CampaignSession.EndingLines(Record, Content));
+            Over = true;
+            _saves?.WriteEnding(Record, Content);
+            _saves?.RecordWin(Record.Difficulty);
+        }
+
+        return true;
+    }
+
     /// <summary>Meets the side character <paramref name="unitId"/> at the camp (issue 633 slice 3).</summary>
     public bool Meet(string unitId) => Screen(() => Record.Meet(unitId, Content));
 

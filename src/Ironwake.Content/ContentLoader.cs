@@ -551,6 +551,36 @@ public static class ContentLoader
                 {
                     throw node.Error("secret.bearer", $"'{secret.Bearer}' is not in the cast");
                 }
+
+                if (secretNode.OptionalObject("hill") is { } hillNode)
+                {
+                    var hillId = hillNode.String("map");
+                    if (hillId.Length == 0 || maps.Any(m => m.MapId == hillId) || hillId == mapId)
+                    {
+                        throw node.Error("secret.hill.map", $"'{hillId}' must name a map of its own, not one of the campaign's main maps");
+                    }
+
+                    var hillLevel = hillNode.Int("enemyLevel");
+                    if (hillLevel < Unit.MinLevel || hillLevel > Unit.MaxLevel)
+                    {
+                        throw node.Error("secret.hill.enemyLevel", $"must be between {Unit.MinLevel} and {Unit.MaxLevel}");
+                    }
+
+                    var keepers = hillNode.StringArrayOrEmpty("keepers");
+                    foreach (var keeper in keepers)
+                    {
+                        if (!cast.Contains(keeper))
+                        {
+                            throw node.Error("secret.hill.keepers", $"'{keeper}' is not in the cast");
+                        }
+                    }
+
+                    secret = secret with
+                    {
+                        Hill = new CampaignMap(hillId, 0, ValueList<string>.From(stock)) { EnemyLevel = hillLevel, Before = Card(hillNode, "before") },
+                        Keepers = ValueList<string>.From(keepers),
+                    };
+                }
             }
 
             maps.Add(new CampaignMap(mapId, reward, ValueList<string>.From(stock))

@@ -166,6 +166,22 @@ public static class ContentSerializer
                     writer.WriteStartObject("secret");
                     writer.WriteString("bearer", secret.Bearer);
                     writer.WriteString("quest", secret.Quest);
+                    if (secret.Hill is { } hill)
+                    {
+                        writer.WriteStartObject("hill");
+                        writer.WriteString("map", hill.MapId);
+                        writer.WriteNumber("enemyLevel", hill.EnemyLevel ?? 1);
+                        writer.WriteStartArray("keepers");
+                        foreach (var keeper in secret.Keepers)
+                        {
+                            writer.WriteStringValue(keeper);
+                        }
+
+                        writer.WriteEndArray();
+                        WriteCard(writer, "before", hill.Before);
+                        writer.WriteEndObject();
+                    }
+
                     writer.WriteEndObject();
                 }
                 writer.WriteEndObject();

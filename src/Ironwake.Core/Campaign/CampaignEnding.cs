@@ -30,13 +30,15 @@ public sealed record CampaignEnding(
     EndingKinsbane? Kinsbane,
     EndingDrake? Drake,
     ValueList<string> Rooms,
-    ValueList<string> Coma)
+    ValueList<string> Coma,
+    HillChoice? Hill)
 {
     /// <summary>
     /// The shape's version: a sequel reads the fields of the version it knows and refuses a newer one. 2 added
-    /// <see cref="Coma"/> (issue 1386 slice 2b).
+    /// <see cref="Coma"/> (issue 1386 slice 2b); 3 added <see cref="Hill"/> (slice 3d): how the hill's card was answered,
+    /// <c>reseal</c> or <c>fight</c> (and won, since a lost hill writes no ending), or null off the secret path.
     /// </summary>
-    public const int CurrentVersion = 2;
+    public const int CurrentVersion = 3;
 
     /// <summary>The ending's word until the endings are built (#634): the campaign was won, which scene it closed on is not yet recorded.</summary>
     public const string Pending = "pending";
@@ -46,8 +48,8 @@ public sealed record CampaignEnding(
     /// pronoun and class; the branch's pick, the passed claimant and their fate on the return; who lived
     /// (the roster's ids in roster order) and who fell; whether the bound enemy fell (<see cref="CampaignRecord.FreedUnitFell"/>);
     /// Kinsbane's bearer, fed count and teeth when a living member carries it; the drake's stage and
-    /// whether its rider lived, when the rider ever joined; the keep's rooms; and who was left in the coma
-    /// (<see cref="CampaignRecord.Coma"/>). Refused for a campaign
+    /// whether its rider lived, when the rider ever joined; the keep's rooms; who was left in the coma
+    /// (<see cref="CampaignRecord.Coma"/>); and how the hill's card was answered (<see cref="CampaignRecord.HillChose"/>). Refused for a campaign
     /// still marching, since the ending is written once, when it ends.
     /// </summary>
     public static CampaignEnding Of(CampaignRecord record, GameContent content)
@@ -77,7 +79,8 @@ public sealed record CampaignEnding(
             KinsbaneOf(record, content),
             DrakeOf(record),
             record.Rooms,
-            record.Coma);
+            record.Coma,
+            record.HillChose);
     }
 
     private static EndingKinsbane? KinsbaneOf(CampaignRecord record, GameContent content)

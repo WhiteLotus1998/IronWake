@@ -287,6 +287,8 @@ public static class Script
                 ["hire", var hire] => campaign.Hire(hire),
                 ["pick", var claimant] => campaign.Pick(claimant),
                 ["meet", var side] => campaign.Meet(side),
+                ["reseal"] => campaign.Hill(HillChoice.Reseal),
+                ["fight"] => campaign.Hill(HillChoice.Fight),
                 ["build", var room] when campaign.Content.Campaign.Keep.Edit(room) is null => campaign.BuildRoom(room),
                 ["build", var edit, var at] when TryCoord(at, out var tile) => campaign.Build(edit, tile),
                 ["bench", var unit] => campaign.Bench(unit),

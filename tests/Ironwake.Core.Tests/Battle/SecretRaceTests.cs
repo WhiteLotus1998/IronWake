@@ -128,7 +128,8 @@ public class SecretRaceTests
         Assert.Null(keep.ShardRace);
         Assert.Equal(new ShardRace(new Coord(15, 6), 5, Secret: true), keep.SecretRace!.Race);
         Assert.DoesNotContain(keep.Events, e => e.Trigger is RaceTrigger);
-        Assert.Equal(new UnderTheHill("keziah", "pell_2"), content.Campaign.Maps.Single(m => m.MapId == "ironwake_keep").Secret);
+        var secret = content.Campaign.Maps.Single(m => m.MapId == "ironwake_keep").Secret!;
+        Assert.Equal(("keziah", "pell_2"), (secret.Bearer, secret.Quest));
         Assert.Contains(content.Campaign.Quests, q => q.Id == "pell_2" && q.MemberId == "pell" && q.Part == 2);
     }
 
@@ -189,7 +190,7 @@ public class SecretRaceTests
     {
         var dir = Fixture.CopyRealContent();
         var path = Path.Combine(dir, "campaign.json");
-        File.WriteAllText(path, File.ReadAllText(path).Replace("\"secret\": { \"bearer\": \"keziah\"", "\"secret\": { \"bearer\": \"nobody\""));
+        File.WriteAllText(path, File.ReadAllText(path).Replace("\"bearer\": \"keziah\"", "\"bearer\": \"nobody\""));
 
         var e = Assert.Throws<ContentException>(() => ContentLoader.Load(dir));
         Assert.Contains("secret.bearer", e.Message);
@@ -223,10 +224,11 @@ public class SecretRaceTests
         {
             MapIndex = content.Campaign.Maps.Count,
             Coma = ValueList<string>.Of("hask"),
+            HillChose = HillChoice.Reseal,
         };
 
         var ending = CampaignEnding.Of(record, content);
-        Assert.Equal(2, ending.Version);
+        Assert.Equal(3, ending.Version);
         Assert.Equal(new[] { "hask" }, ending.Coma);
 
         var json = ProtocolJson.Campaign(record, ending);

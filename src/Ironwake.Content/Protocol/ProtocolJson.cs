@@ -2176,6 +2176,11 @@ public static class ProtocolJson
             WriteStrings(w, "coma", record.Coma);
         }
 
+        if (record.HillChose is { } chose)
+        {
+            w.WriteString("hillChose", HillChoiceName(chose));
+        }
+
         if (record.DrakeFlew is { } flew)
         {
             w.WriteString("drakeFlew", Drake.Word(flew));
@@ -2410,6 +2415,7 @@ public static class ProtocolJson
 
         WriteStrings(w, "rooms", ending.Rooms);
         WriteStrings(w, "coma", ending.Coma);
+        WriteStringOrNull(w, "hill", ending.Hill is { } hill ? HillChoiceName(hill) : null);
         w.WriteEndObject();
     }
 
@@ -2494,7 +2500,22 @@ public static class ProtocolJson
             kinsbane,
             drake,
             ReadStrings(e, "rooms"),
-            ReadStrings(e, "coma"));
+            ReadStrings(e, "coma"),
+            ReadHillChoice(e, "hill", "ending.hill"));
+    }
+
+    /// <summary>The protocol's word for the hill's card as answered (issue 1386 slice 3d).</summary>
+    public static string HillChoiceName(HillChoice choice) => choice == HillChoice.Reseal ? "reseal" : "fight";
+
+    private static HillChoice? ReadHillChoice(JsonElement e, string name, string field)
+    {
+        if (OptionalString(e, name) is not { } text)
+        {
+            return null;
+        }
+
+        return Enum.GetValues<HillChoice>().Where(c => HillChoiceName(c) == text).Select(c => (HillChoice?)c).FirstOrDefault()
+            ?? throw new ProtocolException($"{field} '{text}' is not one of reseal, fight");
     }
 
     /// <summary>Reads a campaign record written by <see cref="Campaign(CampaignRecord)"/>; another protocol version is refused.</summary>
@@ -2550,6 +2571,7 @@ public static class ProtocolJson
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
             FreedUnitFell = e.TryGetProperty("freedUnitFell", out _) && RequiredBool(e, "freedUnitFell"),
             Coma = e.TryGetProperty("coma", out _) ? ReadStrings(e, "coma") : ValueList<string>.Empty,
+            HillChose = ReadHillChoice(e, "hillChose", "hillChose"),
             DrakeFlew = e.TryGetProperty("drakeFlew", out _) ? ReadStage(e, "drakeFlew") : null,
             KeziahOath = e.TryGetProperty("keziahOath", out _) ? ReadOath(e) : null,
             Rapport = e.TryGetProperty("rapport", out var rapport) ? ReadRapport(rapport) : ValueList<Rapport>.Empty,

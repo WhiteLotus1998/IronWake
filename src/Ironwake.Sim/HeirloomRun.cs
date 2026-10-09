@@ -54,7 +54,7 @@ public static class HeirloomRun
             int? lost = null;
             int? questWon = null;
             var questTries = 0;
-            while (!record.IsFinished(content) && record.MapIndex + 1 <= LastMap)
+            while (SimPick.Marching(record, content) && record.MapIndex + 1 <= LastMap)
             {
                 record = SimPick.Made(record, content);
                 var number = record.MapIndex + 1;

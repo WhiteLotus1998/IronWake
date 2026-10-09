@@ -801,14 +801,80 @@ public sealed partial record CampaignRecord(
     public IReadOnlyList<string> TurnedAway(GameContent content) =>
         Arriving(content).Skip(Room(content)).ToList();
 
-    /// <summary>Whether every map of the campaign has been won.</summary>
-    public bool IsFinished(GameContent content) => MapIndex >= content.Campaign.Maps.Count;
+    /// <summary>
+    /// Whether the campaign is over: every map won, and on the secret path the hill too, or its card answered with
+    /// <c>reseal</c> (issue 1386 slice 3d).
+    /// </summary>
+    public bool IsFinished(GameContent content) =>
+        MapIndex > content.Campaign.Maps.Count
+        || (MapIndex == content.Campaign.Maps.Count && (Hill(content) is null || HillChose == HillChoice.Reseal));
 
-    /// <summary>The next map's campaign entry: its id, reward and the stock sold before it.</summary>
+    /// <summary>The next map's campaign entry: its id, reward and the stock sold before it; the hill after the keep on the secret path.</summary>
     public CampaignMap NextMap(GameContent content) =>
         IsFinished(content)
             ? throw new InvalidOperationException("the campaign is finished")
-            : content.Campaign.Maps[MapIndex];
+            : MapIndex < content.Campaign.Maps.Count ? content.Campaign.Maps[MapIndex] : Hill(content)!;
+
+    /// <summary>
+    /// How the hill's card was answered (issue 1386 slice 3d), or null before then and in every campaign that never
+    /// reaches it. <see cref="HillChoice.Reseal"/> ends the campaign at the card; <see cref="HillChoice.Fight"/> marches
+    /// to the hill. The ending reads it.
+    /// </summary>
+    public HillChoice? HillChose { get; init; }
+
+    /// <summary>
+    /// The hill after the keep (issue 1386 slice 3d, <see cref="UnderTheHill.Hill"/>) when this record stands at its card:
+    /// every main map won and a boss left in the coma (the keep's shard taken, so the secret race ran, which it does only
+    /// with STORY's four conditions met). Null otherwise, and in a campaign whose secret path names no hill.
+    /// </summary>
+    public CampaignMap? Hill(GameContent content) =>
+        MapIndex >= content.Campaign.Maps.Count && Coma.Count > 0 && Secret(content)?.Hill is { } hill ? hill : null;
+
+    private static UnderTheHill? Secret(GameContent content) =>
+        content.Campaign.Maps.Select(m => m.Secret).FirstOrDefault(s => s is not null);
+
+    /// <summary>Whether the hill's card waits on its answer: the record stands at the hill and neither <c>reseal</c> nor <c>fight</c> is chosen.</summary>
+    public bool HillWaits(GameContent content) => !IsFinished(content) && Hill(content) is not null && HillChose is null;
+
+    /// <summary>
+    /// Why the hill's card cannot be answered <paramref name="choice"/> now, or null when it can (issue 1386 slice 3d):
+    /// the card is offered only at the hill and only until it is answered; <c>reseal</c> needs a rite-keeper standing in
+    /// the company (STORY: from memory shuts a door, never an open one).
+    /// </summary>
+    public string? HillRefusal(HillChoice choice, GameContent content)
+    {
+        if (IsFinished(content) || Hill(content) is null)
+        {
+            return "no card waits; the hill is offered after the keep, on the secret path";
+        }
+
+        if (HillChose is not null)
+        {
+            return $"the card is answered: {HillChose.Value.ToString().ToLowerInvariant()}";
+        }
+
+        var keepers = Secret(content)!.Keepers;
+        return choice == HillChoice.Reseal && !keepers.Any(k => Find(k) is not null)
+            ? $"nobody left can read the rite ({string.Join(" or ", keepers)}); the card offers only fight"
+            : null;
+    }
+
+    /// <summary>
+    /// Answers the hill's card (issue 1386 slice 3d): <c>reseal</c> shuts the door and ends the campaign here, the held
+    /// ending; <c>fight</c> marches to the hill next. Refused as <see cref="HillRefusal"/> says.
+    /// </summary>
+    public ScreenResult ChooseHill(HillChoice choice, GameContent content)
+    {
+        if (HillRefusal(choice, content) is { } refusal)
+        {
+            return ScreenResult.Refused(this, refusal);
+        }
+
+        var next = this with { HillChose = choice };
+        return new ScreenResult(next, choice == HillChoice.Reseal
+            ? "the door is resealed; the campaign ends at the keep"
+            : "the company goes under the hill", true);
+    }
 
     /// <summary>
     /// The seed the next map's battle runs on: the campaign seed plus the map's index. Combat
@@ -1503,11 +1569,11 @@ public sealed partial record CampaignRecord(
     /// before ahead of one in <see cref="QuestsSeen"/> (issue 1129), then earliest opening first
     /// and then in file order, at most <see cref="SideMapsPerInterlude"/> less the ones already won
     /// here. A quest tried here and lost stays in its seat, closed until the next map, and reopens
-    /// behind the fresh ones. Empty once the campaign is finished.
+    /// behind the fresh ones. Empty once the campaign is finished, and at the hill after the keep (issue 1386 slice 3d).
     /// </summary>
     public IReadOnlyList<CampaignQuest> QuestsOffered(GameContent content)
     {
-        if (IsFinished(content))
+        if (IsFinished(content) || MapIndex >= content.Campaign.Maps.Count)
         {
             return Array.Empty<CampaignQuest>();
         }
@@ -1935,6 +2001,13 @@ public sealed partial record CampaignRecord(
             return $"the seat is not filled; pick {string.Join(" or ", branch)} first";
         }
 
+        if (HillWaits(content))
+        {
+            return HillRefusal(HillChoice.Reseal, content) is null
+                ? "the card waits; answer it with reseal or fight first"
+                : "the card waits; answer it with fight first";
+        }
+
         try
         {
             Begin(map, content);
@@ -1965,7 +2038,9 @@ public sealed partial record CampaignRecord(
             return $"the keep's menu opens after the raid on it ({menu.RaidId}, map {raid + 1}) is fought";
         }
 
-        return IsFinished(content) ? "the campaign is finished" : null;
+        return IsFinished(content) ? "the campaign is finished"
+            : MapIndex >= content.Campaign.Maps.Count ? "the keep is fought; nothing built now stands in a battle"
+            : null;
     }
 
     /// <summary>
