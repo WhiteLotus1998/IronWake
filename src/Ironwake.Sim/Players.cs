@@ -345,7 +345,7 @@ public sealed class HeuristicPlayer : IPlayer
             return WithMove(unit, stand, new Wait(unit.Id));
         }
 
-        if (TakeTile(state, unit, tiles) is { } take)
+        if (TakeTile(state, content, unit, tiles) is { } take)
         {
             return WithMove(unit, take.Tile, new TakeShard(unit.Id, take.BossId));
         }
@@ -464,14 +464,49 @@ public sealed class HeuristicPlayer : IPlayer
     /// <summary>
     /// The take (issue 1386): a unit that has not acted and can end on a tile beside a boss running with the shard takes
     /// it from there, ahead of every other plan, since the take ends the race and, on Defeat Boss, the map. The tile is
-    /// the first of <paramref name="tiles"/> beside the first runner in unit order; null when no runner is beside any of
-    /// <paramref name="tiles"/>.
+    /// the first of <paramref name="tiles"/> beside the first runner in unit order. With no runner, a shard lying under
+    /// the hill (<see cref="KinShard"/>, slice 3b) is taken from the tile of <paramref name="tiles"/> on or beside it whose
+    /// no-crit exposure is lowest, then nearest, then first, and only from one whose exposure stays under the unit's HP:
+    /// that take ends nothing, so it is not exempt from the veto. The boss id is then <see cref="KinShard.Ground"/>. Null
+    /// when neither is on offer.
     /// </summary>
-    public static (Coord Tile, string BossId)? TakeTile(BattleState state, BattleUnit unit, IReadOnlyList<Coord> tiles)
+    public static (Coord Tile, string BossId)? TakeTile(BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles)
     {
         if (unit.Acted)
         {
             return null;
+        }
+
+        if (KinShard.Of(state) is { Lies: { } lies })
+        {
+            (int, int, int)? bestKey = null;
+            Coord? best = null;
+            for (var i = 0; i < tiles.Count; i++)
+            {
+                var tile = tiles[i];
+                if (tile.DistanceTo(lies) > 1)
+                {
+                    continue;
+                }
+
+                var exposure = Exposure.Of(state, content, unit, tile).NoCrit;
+                if (exposure >= unit.Hp)
+                {
+                    continue;
+                }
+
+                var key = (exposure, tile.DistanceTo(unit.At), i);
+                if (bestKey is null || key.CompareTo(bestKey.Value) < 0)
+                {
+                    bestKey = key;
+                    best = tile;
+                }
+            }
+
+            if (best is { } taken)
+            {
+                return (taken, KinShard.Ground);
+            }
         }
 
         foreach (var runner in state.UnitsOf(Side.Enemy).Where(ShardRun.Running))
@@ -1228,7 +1263,8 @@ public sealed class HeuristicPlayer : IPlayer
     /// tiles last and crit-lethal ones after the rest (issue 1044). It never ends on one of
     /// <paramref name="captains"/>, the tiles left free for a corked captain (issue 1206), and when
     /// section 8's tile is one of them it takes the veto's key as for a lethal one. While a beaten boss runs with the
-    /// shard (issue 1386), every unit, armed or not, walks toward the tiles beside him instead, by the same key.
+    /// shard (issue 1386), every unit, armed or not, walks toward the tiles beside him instead, by the same key, and while
+    /// the shard lies under the hill (slice 3b), toward its tile and the tiles beside it.
     /// </summary>
     private static Coord? Approach(
         BattleState state, GameContent content, BattleUnit unit, Weapon? weapon, Reach reach,
@@ -1268,6 +1304,16 @@ public sealed class HeuristicPlayer : IPlayer
         {
             // A beaten boss runs with the shard (issue 1386): the way is to a tile beside him, armed or not.
             var beside = runners.SelectMany(r => r.At.Neighbors()).Where(t => state.Map.Contains(t) && (t == unit.At || state.UnitAt(t) is null)).Distinct().ToList();
+            toward = Movement.DistancesTo(state.Map, content, beside, movement, OccupantAt, footing);
+            if (toward.From(unit.At) is null)
+            {
+                toward = null;
+            }
+        }
+        else if (KinShard.Of(state) is { Lies: { } lies })
+        {
+            // The shard lies under the hill (issue 1386 slice 3b): the way is to its tile or a tile beside it, armed or not.
+            var beside = lies.Neighbors().Append(lies).Where(t => state.Map.Contains(t) && (t == unit.At || state.UnitAt(t) is null)).Distinct().ToList();
             toward = Movement.DistancesTo(state.Map, content, beside, movement, OccupantAt, footing);
             if (toward.From(unit.At) is null)
             {
