@@ -183,7 +183,8 @@ public static class FinaleRun
     /// Round 513's pace read of the boss's first stage (<see cref="StageOne"/>): the median turn he stood on the board, how
     /// many games reached the swallow and its median turn (earliest, latest), the median turn of his first blow taken, and
     /// the company's unit-phases from his arrival to the swallow or the end, split into actions that struck him, actions on
-    /// the others, and the rest; null when no game fielded such a boss.
+    /// the others, and the rest, the rest split as <see cref="StageOne"/> splits it (round 518); null when no game fielded
+    /// such a boss.
     /// </summary>
     public static string? PaceLine(IReadOnlyList<GameResult> games)
     {
@@ -227,7 +228,11 @@ public static class FinaleRun
         var others = ones.Sum(o => o.OnOthers);
         var rest = Math.Max(0, total - him - others);
         string Share(int n) => total == 0 ? "0 %" : $"{n * 100 / total} %";
-        return $"unit-phases {total}: on him {him} ({Share(him)}), on the others {others} ({Share(others)}), the rest {rest} ({Share(rest)})";
+        var healed = ones.Sum(o => o.Healed);
+        var refused = ones.Sum(o => o.Refused);
+        var moved = ones.Sum(o => o.MovedOnly);
+        var idle = ones.Sum(o => o.Idle);
+        return $"unit-phases {total}: on him {him} ({Share(him)}), on the others {others} ({Share(others)}), the rest {rest} ({Share(rest)}: an item {healed} ({Share(healed)}), refused {refused} ({Share(refused)}), move only {moved} ({Share(moved)}), idle {idle} ({Share(idle)}))";
     }
 
     /// <summary>
