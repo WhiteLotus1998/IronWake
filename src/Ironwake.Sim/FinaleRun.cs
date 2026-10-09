@@ -114,6 +114,11 @@ public static class FinaleRun
                 yield return "  " + shape;
             }
 
+            if (LeaderLine(Games) is { } leader)
+            {
+                yield return "  " + leader;
+            }
+
             if (RaceLine(Games) is { } race)
             {
                 yield return "  " + race;
@@ -342,6 +347,32 @@ public static class FinaleRun
             .OrderByDescending(u => u.InReach + u.Beyond).ThenBy(u => u.Id, StringComparer.Ordinal)
             .Select(u => $"{u.Id} {(u.Distance.Count == 0 ? "-" : Median(u.Distance).ToString(System.Globalization.CultureInfo.InvariantCulture))} tiles in {u.Distance.Count}, dealt {u.InReach} in reach {u.Beyond} beyond");
         return $"stage 2 shape: at the swallow, median distance to him {Median(reached.Select(s => Median(s.AtSwallow.Values.Select(p => p.Distance))))}, farthest {Median(reached.Select(s => s.AtSwallow.Values.Max(p => p.Distance)))}, on tiles he reaches {Median(reached.Select(s => s.AtSwallow.Values.Count(p => p.InReach)))}; by unit: {string.Join(", ", units)}";
+    }
+
+    /// <summary>
+    /// Issue 1441's captain read (Table round 533), over the games that reached the second stage: his stage-2 player
+    /// phases (a swallow in his own phase before he acted opens one), those he began resting, those with a plain strike on
+    /// the boss on offer and those it kills if every strike lands; those with an art on offer, those it kills on its hit,
+    /// from a tile his veto allows, the median best hit chance of that kill, and the games lost in the stage that had one; what he struck; where each phase left him
+    /// against the boss's reach, by what he did; and the marks on the boss (<see cref="StageTwo.Captain"/>). Null when no
+    /// game reached the stage.
+    /// </summary>
+    public static string? LeaderLine(IReadOnlyList<GameResult> games)
+    {
+        var reads = games.Where(g => g.Stage is not null).Select(g => g.Stage!.Captain).ToList();
+        if (reads.Count == 0)
+        {
+            return null;
+        }
+
+        int Sum(Func<StageTwo.CaptainRead, int> of) => reads.Sum(of);
+        var lost = games.Where(g => g.Stage is not null && !g.Won).ToList();
+        var lostWithKill = lost.Count(g => g.Stage!.Captain.ArtLethal > 0);
+        var hits = reads.SelectMany(r => r.ArtLethalHit).ToList();
+        var inReach = reads.SelectMany(r => r.EndedInReach).GroupBy(p => p.Key, StringComparer.Ordinal)
+            .Select(g => (g.Key, Count: g.Sum(p => p.Value))).OrderByDescending(p => p.Count).ThenBy(p => p.Key, StringComparer.Ordinal).ToList();
+        var split = inReach.Count == 0 ? "none" : string.Join(", ", inReach.Select(p => $"after {p.Key} {p.Count}"));
+        return $"stage 2 captain: player phases {Sum(r => r.Phases)} (resting {Sum(r => r.Resting)}); a strike on him on offer in {Sum(r => r.Offer)}, lethal if all land in {Sum(r => r.PlainLethal)}; an art on offer in {Sum(r => r.ArtOffer)}, lethal on its hit in {Sum(r => r.ArtLethal)} (from a tile the veto allows {Sum(r => r.ArtLethalSafe)}, median best hit {(hits.Count == 0 ? "-" : Median(hits).ToString(System.Globalization.CultureInfo.InvariantCulture) + " %")}; in {lostWithKill} of the {lost.Count} games lost in the stage); he struck him in {Sum(r => r.StruckHim)} (with an art {Sum(r => r.StruckHimArt)}), another in {Sum(r => r.StruckOther)}; ended in his reach {Sum(r => r.EndedInReach.Values.Sum())} ({split}), clear {Sum(r => r.EndedClear)}; marks on him: at the swallow in {Sum(r => r.MarkedAtSwallow)} of {reads.Count}, laid in the stage {Sum(r => r.MarksLaid)}, cashed {Sum(r => r.MarksCashed)}";
     }
 
     /// <summary>

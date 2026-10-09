@@ -1266,6 +1266,125 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
     public sealed record Dealt(int InReach, int Beyond);
 
     /// <summary>
+    /// Issue 1441's captain read (Table round 533): what the captain had and did in each stage-2 player phase he began
+    /// standing. <see cref="CaptainRead.Offer"/> counts the phases a plain strike on the boss was on offer from a tile he
+    /// could end on; <see cref="CaptainRead.ArtOffer"/> those Full Measure (or any art he knows with a per-map charge
+    /// left) was; <see cref="CaptainRead.ArtLethal"/> those it kills on its hit from some tile, and
+    /// <see cref="CaptainRead.ArtLethalSafe"/> those it does from a tile whose no-crit exposure after a plain strike on him
+    /// (<see cref="Exposure.Of"/>, the veto's own sum, which counts an art as no surer a kill) stays under his HP. The Sim's
+    /// player never declares an art (its <see cref="Attack"/> names none), so the art counts are what a chair could have had. What he
+    /// did is split by the command that closed his phase, and where he ended against the boss's reach (<see cref="Reaches"/>).
+    /// </summary>
+    public CaptainRead Captain { get; init; } = new();
+
+    /// <summary>The counts of <see cref="Captain"/>; <see cref="EndedInReach"/> keys the phases he ended in the boss's reach by what he did.</summary>
+    public sealed record CaptainRead
+    {
+        public int Phases { get; init; }
+
+        public int Resting { get; init; }
+
+        public int Offer { get; init; }
+
+        public int PlainLethal { get; init; }
+
+        public int ArtOffer { get; init; }
+
+        public int ArtLethal { get; init; }
+
+        public int ArtLethalSafe { get; init; }
+
+        public System.Collections.Immutable.ImmutableList<int> ArtLethalHit { get; init; } = System.Collections.Immutable.ImmutableList<int>.Empty;
+
+        public int StruckHim { get; init; }
+
+        public int StruckHimArt { get; init; }
+
+        public int StruckOther { get; init; }
+
+        public System.Collections.Immutable.ImmutableDictionary<string, int> EndedInReach { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, int>.Empty;
+
+        public int EndedClear { get; init; }
+
+        /// <summary>The marks on the boss: carried through the swallow (0 or 1 a game), laid in the stage, cashed in it.</summary>
+        public int MarkedAtSwallow { get; init; }
+
+        public int MarksLaid { get; init; }
+
+        public int MarksCashed { get; init; }
+
+        /// <summary>The tile he began the open phase on, null when no phase of his is open; and what he has struck in it.</summary>
+        internal Coord? OpenAt { get; init; }
+
+        internal string? OpenStruck { get; init; }
+    }
+
+    /// <summary>
+    /// <paramref name="read"/> as a player phase begins on <paramref name="state"/>: his offers against <paramref name="boss"/>
+    /// (a plain strike, and an art with a charge left, each from any tile he could end on), or a resting phase.
+    /// </summary>
+    private static CaptainRead PhaseOpens(CaptainRead read, BattleState state, GameContent content, BattleUnit captain, BattleUnit boss)
+    {
+        read = read with { Phases = read.Phases + 1, OpenAt = null, OpenStruck = null };
+        if (captain.Resting || captain.Acted)
+        {
+            return read with { Resting = read.Resting + 1 };
+        }
+
+        var tiles = Queries.Reachable(state, content, captain).Destinations.ToList();
+        var plain = tiles.Select(t => Queries.Forecast(state, content, captain, boss, t)).OfType<CombatForecast>().ToList();
+        var arts = content.ArtsOf(captain.Unit).Select(a => a.Ability.Id).ToList();
+        var artRows = tiles.SelectMany(t => arts.Select(a => (Tile: t, Forecast: Queries.Forecast(state, content, captain, boss, t, art: a))))
+            .Where(r => r.Forecast is not null).ToList();
+        var lethal = artRows.Where(r => !r.Forecast!.Attacker.Doubles && r.Forecast.Attacker.FirstHit(false) >= boss.Hp).ToList();
+        return read with
+        {
+            OpenAt = captain.At,
+            Offer = read.Offer + (plain.Count > 0 ? 1 : 0),
+            PlainLethal = read.PlainLethal + (plain.Any(f => f.Attacker.FirstHit(false) * (f.Attacker.Doubles ? 2 : 1) >= boss.Hp) ? 1 : 0),
+            ArtOffer = read.ArtOffer + (artRows.Count > 0 ? 1 : 0),
+            ArtLethal = read.ArtLethal + (lethal.Count > 0 ? 1 : 0),
+            ArtLethalSafe = read.ArtLethalSafe + (lethal.Any(r => Exposure.Of(state, content, captain, r.Tile, boss).NoCrit < captain.Hp) ? 1 : 0),
+            ArtLethalHit = lethal.Count > 0 ? read.ArtLethalHit.Add(lethal.Max(r => r.Forecast!.Attacker.HitChance)) : read.ArtLethalHit,
+        };
+    }
+
+    /// <summary>
+    /// <paramref name="read"/> after a player-phase command: a combat he opened is kept as the phase's strike; when the
+    /// command closes his phase (he acted, or he fell) the phase is filed by what he did and where he ended.
+    /// </summary>
+    private static CaptainRead PhaseCommand(CaptainRead read, BattleState before, BattleState after, IReadOnlyList<GameEvent> events, GameContent content, string bossId)
+    {
+        if (read.OpenAt is not { } from || before.UnitsOf(Side.Player).FirstOrDefault(u => u.IsCaptain) is not { Acted: false } was)
+        {
+            return read;
+        }
+
+        if (events.OfType<CombatFought>().FirstOrDefault(c => c.Phase == Side.Player && c.AttackerId == was.Id) is { } fought)
+        {
+            var art = (after.Find(was.Id)?.ArtsDeclared?.Count ?? 0) > (was.ArtsDeclared?.Count ?? 0);
+            read = fought.TargetId == bossId
+                ? read with { StruckHim = read.StruckHim + 1, StruckHimArt = read.StruckHimArt + (art ? 1 : 0), OpenStruck = "struck him" }
+                : read with { StruckOther = read.StruckOther + 1, OpenStruck = "struck another" };
+        }
+
+        if (after.Find(was.Id) is { } now && !now.Acted)
+        {
+            return read;
+        }
+
+        if (after.Find(was.Id) is { } done && after.Find(bossId) is { } boss)
+        {
+            var did = read.OpenStruck ?? (done.At != from ? "moved" : "stood");
+            read = Reaches(after, content, boss, done.At)
+                ? read with { EndedInReach = read.EndedInReach.SetItem(did, read.EndedInReach.GetValueOrDefault(did) + 1) }
+                : read with { EndedClear = read.EndedClear + 1 };
+        }
+
+        return read with { OpenAt = null, OpenStruck = null };
+    }
+
+    /// <summary>
     /// Whether <paramref name="tile"/> is one an action of <paramref name="boss"/> standing where he stands reaches on
     /// <paramref name="state"/>: in range of a weapon he carries, or on the cross his line strike falls on
     /// (<see cref="LineStrike.Cross"/>).
@@ -1327,6 +1446,34 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
                     };
                     break;
             }
+        }
+
+        if (stage is not null && content is not null)
+        {
+            var captain = stage.Captain;
+            if (before.Phase == Side.Player && !read.OfType<ShardSwallowed>().Any())
+            {
+                captain = PhaseCommand(captain, before, after, read, content, stage.Boss);
+            }
+
+            if (read.OfType<ShardSwallowed>().Any() && after.Find(stage.Boss) is { Mark: not null })
+            {
+                captain = captain with { MarkedAtSwallow = captain.MarkedAtSwallow + 1 };
+            }
+
+            captain = captain with
+            {
+                MarksLaid = captain.MarksLaid + read.OfType<UnitMarked>().Count(m => m.UnitId == stage.Boss && !read.OfType<ShardSwallowed>().Any()),
+                MarksCashed = captain.MarksCashed + read.OfType<MarkCashed>().Count(m => m.UnitId == stage.Boss && !read.OfType<ShardSwallowed>().Any()),
+            };
+            var swallowedNow = read.OfType<ShardSwallowed>().Any() && after.UnitsOf(Side.Player).Any(u => u.IsCaptain && !u.Acted);
+            if ((swallowedNow || read.OfType<PhaseBegan>().Any(p => p.Side == Side.Player)) && after.Phase == Side.Player
+                && after.UnitsOf(Side.Player).FirstOrDefault(u => u.IsCaptain) is { } leader && after.Find(stage.Boss) is { } hask)
+            {
+                captain = PhaseOpens(captain, after, content, leader, hask);
+            }
+
+            stage = stage with { Captain = captain };
         }
 
         return stage is null ? null : stage with { BossHp = after.Find(stage.Boss)?.Hp ?? 0, StandingEnd = after.UnitsOf(Side.Player).Count() };
