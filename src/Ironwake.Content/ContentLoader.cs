@@ -538,8 +538,24 @@ public static class ContentLoader
                 back = new CampaignReturn(new Coord(rx, ry), group, behavior);
             }
 
+            UnderTheHill? secret = null;
+            if (node.OptionalObject("secret") is { } secretNode)
+            {
+                if (maps.Any(m => m.Secret is not null))
+                {
+                    throw node.Error("secret", "only one map may carry the secret path's conditions");
+                }
+
+                secret = new UnderTheHill(secretNode.String("bearer"), secretNode.String("quest"));
+                if (!cast.Contains(secret.Bearer))
+                {
+                    throw node.Error("secret.bearer", $"'{secret.Bearer}' is not in the cast");
+                }
+            }
+
             maps.Add(new CampaignMap(mapId, reward, ValueList<string>.From(stock))
             {
+                Secret = secret,
                 Before = Card(node, "before"),
                 After = Card(node, "after"),
                 Arrives = ValueList<string>.From(arrives),

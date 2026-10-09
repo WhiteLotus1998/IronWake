@@ -30,7 +30,7 @@
         "Past Hollin the keep is in sight across a field and a river. The rime on its walls has started to run.",
         "(Placeholder card until the writing pass. Defeat the Sworn Captain. Each group sleeps until a fight comes within its hearing.)"
       ] },
-    { "map": "ironwake_keep", "reward": 2000, "enemyLevel": 8, "swap": { "6,4": "veteran", "6,7": "marauder", "4,5": "longbowman" },
+    { "map": "ironwake_keep", "reward": 2000, "enemyLevel": 8, "swap": { "6,4": "veteran", "6,7": "marauder", "4,5": "longbowman" }, "secret": { "bearer": "keziah", "quest": "pell_2" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "beacon", "field_dressing"] }
   ],
   "issues": { "keziah": "kinsbane" },

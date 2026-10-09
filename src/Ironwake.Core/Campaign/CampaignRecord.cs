@@ -289,6 +289,32 @@ public sealed partial record CampaignRecord(
     public ClaimantFate? Returned { get; init; }
 
     /// <summary>
+    /// The bosses a won map left in the coma (issue 1386 slice 2b, <see cref="BattleState.Coma"/>): the shard taken and
+    /// broken, alive and off the field, in the order taken. Empty until then. The epilogue, where he wakes, reads it (#634).
+    /// </summary>
+    public ValueList<string> Coma { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
+    /// Whether the record meets the next map's secret path before it is fought (issue 1386 slice 2b, STORY's Under the
+    /// Hill): the map names the conditions (<see cref="CampaignMap.Secret"/>); the claimant it names stands in the company
+    /// carrying the hungering weapon woken; both claimants stand in it, the pick and the passed one turned on the return;
+    /// and the side map it names is won. The fourth condition, the guide held, not killed, is the battle's
+    /// (<see cref="ShardRun.Starts"/>). False on a finished campaign and on a map without conditions.
+    /// </summary>
+    public bool UnderTheHill(GameContent content)
+    {
+        if (IsFinished(content) || NextMap(content).Secret is not { } secret)
+        {
+            return false;
+        }
+
+        var woken = Find(secret.Bearer) is { } bearer && bearer.Inventory.Items.Any(stack =>
+            content.Weapons.TryGetValue(stack.ItemId, out var weapon) && weapon.Hungers && Core.Kinsbane.Woken(stack.Fed));
+        var claimants = Pick is { } pick && Find(pick) is not null && Returned == ClaimantFate.Turned && Passed(content) is { } passed && Find(passed) is not null;
+        return woken && claimants && QuestsWon.Any(w => w.QuestId == secret.Quest);
+    }
+
+    /// <summary>
     /// The side characters met so far (issue 633 slice 3, DESIGN section 14), cast ids in the order met,
     /// each from some map's <see cref="CampaignMap.Meets"/>. A side character met joins at that map's
     /// camp like a joiner; one never met never joins. The endings read it.
@@ -819,6 +845,10 @@ public sealed partial record CampaignRecord(
     public BattleState Begin(MapDefinition map, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         map = Seated(NextMap(content).Prepare(map), content);
+        if (UnderTheHill(content))
+        {
+            map = map.ArmSecretRace();
+        }
         var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
         var roster = SeatOrder(map, content);
         var turnedAway = TurnedAway(content);
@@ -1012,6 +1042,7 @@ public sealed partial record CampaignRecord(
             QuestsSeen = SeenAfterCamp(content),
             Wagon = ValueList<string>.From(Wagon.Concat(end.Wagon)),
             FreedUnitFell = FreedUnitFell || end.Bond == BondFate.Fell,
+            Coma = ValueList<string>.From(Coma.Concat(end.Coma)),
             Rapport = end.Rapport,
         };
         return end.Return is { } bond ? won.AfterReturn(bond, opening, end, content) : won;

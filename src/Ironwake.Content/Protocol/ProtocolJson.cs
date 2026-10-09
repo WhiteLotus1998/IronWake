@@ -2129,6 +2129,11 @@ public static class ProtocolJson
             w.WriteBoolean("freedUnitFell", true);
         }
 
+        if (record.Coma.Count > 0)
+        {
+            WriteStrings(w, "coma", record.Coma);
+        }
+
         if (record.DrakeFlew is { } flew)
         {
             w.WriteString("drakeFlew", Drake.Word(flew));
@@ -2362,6 +2367,7 @@ public static class ProtocolJson
         }
 
         WriteStrings(w, "rooms", ending.Rooms);
+        WriteStrings(w, "coma", ending.Coma);
         w.WriteEndObject();
     }
 
@@ -2445,7 +2451,8 @@ public static class ProtocolJson
             RequiredBool(e, "freedUnitFell"),
             kinsbane,
             drake,
-            ReadStrings(e, "rooms"));
+            ReadStrings(e, "rooms"),
+            ReadStrings(e, "coma"));
     }
 
     /// <summary>Reads a campaign record written by <see cref="Campaign(CampaignRecord)"/>; another protocol version is refused.</summary>
@@ -2500,6 +2507,7 @@ public static class ProtocolJson
             Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
             FreedUnitFell = e.TryGetProperty("freedUnitFell", out _) && RequiredBool(e, "freedUnitFell"),
+            Coma = e.TryGetProperty("coma", out _) ? ReadStrings(e, "coma") : ValueList<string>.Empty,
             DrakeFlew = e.TryGetProperty("drakeFlew", out _) ? ReadStage(e, "drakeFlew") : null,
             KeziahOath = e.TryGetProperty("keziahOath", out _) ? ReadOath(e) : null,
             Rapport = e.TryGetProperty("rapport", out var rapport) ? ReadRapport(rapport) : ValueList<Rapport>.Empty,

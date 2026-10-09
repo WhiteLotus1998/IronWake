@@ -365,6 +365,20 @@ public sealed record MapDefinition(
     public ShardRace? ShardRace { get; init; }
 
     /// <summary>
+    /// The <c>shard_race:</c> header with <c>secret</c> (issue 1386 slice 2b): the campaign's secret-path race, held
+    /// apart with its <c>race</c> events until <see cref="ArmSecretRace"/>; the map plays as if it had no race. Null
+    /// when the map has none.
+    /// </summary>
+    public SecretRace? SecretRace { get; init; }
+
+    /// <summary>
+    /// This map with its <see cref="SecretRace"/> on the board (issue 1386 slice 2b): the race becomes
+    /// <see cref="ShardRace"/> and its events join the map's after the others. A map without one is returned as is.
+    /// </summary>
+    public MapDefinition ArmSecretRace() =>
+        SecretRace is { } secret ? this with { ShardRace = secret.Race, Events = ValueList<MapEvent>.From(Events.Concat(secret.Events)), SecretRace = null } : this;
+
+    /// <summary>
     /// The <c>drops:</c> header (issue 1246): the tiles of placed enemies whose Lore tomes go to the
     /// wagon when they die (<see cref="TomeDrop"/>), kept only if the map is won, as a chest's overflow
     /// is. Each tile places an enemy that carries a Lore tome. Empty for none.
