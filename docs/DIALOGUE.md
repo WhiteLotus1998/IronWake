@@ -5,7 +5,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 ## How we work (standing agreements)
 
 - **Lotus's roadmap (`docs/ROADMAP.md`):** all but art first; no new scenes, supports or cards on the old text while he rewrites the story (#1144; hooks fine); then his story, his beta, art.
-- **Fun Gate entries.** Blind, Code's first; a disclosed warm chair counts (0073); tricks unnamed till both are in. Each chair its own seed; a retried roll is one read (0238, #963). A branch-changed board is gated per arm (334, 364).
+- **Fun Gate entries.** Blind, Code's first; a disclosed warm chair counts (0073). Each chair its own seed; a retried roll is one read (0238, #963). A branch-changed board is gated per arm (334, 364).
 - **A map is retuned only after both entries are in**, one lever at a time, Sim-measured first; content first.
 - **Queue order (61, 184, 188):** bugs, Lotus's notes, campaign issues, experiment plays, retunes with both entries in, Phase 3. #1308 (client verbs, click parity) precedes warm plays (436). Cold chairs owed: the Oath Stone; the Rookery, fresh seed (341); Rook's field (0250).
 - **Experiments.** At most three spikes wait on a deciding play (330, 0237); nothing `ready`: the Builder plays the weakest untuned map warm, at the floor (0278, 402, 459). A header lives on a sample until a keep round ships it. A kill criterion comes first; a new player action names its cost.
@@ -21,10 +21,11 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **Enemy AI** (DESIGN 8, 0016): Chat's approach rule; prices crit; every weapon carried, counters with its last swing (#174); prefers a foe that can't counter. A `defeat_boss` boss plans under the exposure veto, plain weapons only, arts unpriced (372, 0251); a refused guard boss goes home and holds (0077-0080, #1138); a throne-holder steps off only to strike (0063). A `holds:` member stays where it struck; its line says so (410, #1216).
 - **The Sim's veto** covers every unit whose death loses the map, no-crit worst case, a certain kill removed (0024-0026). A recruit on a lethal approach tile takes the captain's (368). Gate 4 is relative ablation (0019, 0020), pairing units out on Escape (0068).
 - **`threat`** prices the enemy phase as the planner would (DESIGN 8): one enemy per strike tile, announced spawns (0045), sleepers unnumbered, dusk only the seen (#403), `from <tile>` names what a stop wakes (#458). **A freed tile** (404, #1191): priced one wave deep; `end` asks on it at any counter chance, printed. A spell counter prints uses left (0282); explains, never predicts (0294). A strike whose noise wakes a group names it (#1290).
-- **Escape:** `exit` is an action (0056). **Recall** restores the rolls: knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75); its story reason is Lotus's. Forecast and `threat` print discarded first strikes whose outcome follows (0337).
+- **Escape:** `exit` is an action (0056). **Recall** restores the rolls: knowledge, never a change (DESIGN 7); player-phase states only (0032); prints what it undoes (#75). Forecast and `threat` print discarded first strikes whose outcome follows (0337).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no needless between-map screen; a spend wanted and feared at once is a signature with its cliff printed, never a hidden gauge.
 - **Content:** a Lore or Faith unit ships an unconditional cast; an unarmed one says so; one contested place per two deployed; a sleeper in the open can be slipped past, in a corridor only woken.
-- **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill, the raid's wall; protection is a terrain feature or map event, never a unit action.
+- **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill, the raid's wall; protection is a terrain feature or map event, never a unit action, **except forms** (0385, pending #1466).
+- **Forms replace arts** (Lotus, 2026-10-09; 544-545; 0385): basic on Grit (start 0, +1 a phase and a hit taken, cap 3; costs 1/2/3), character on cooldowns; Grit's measured kill in #1461. Enemies carry forms, priced in `threat`. Brace beside Defend, unstacked. Slices #1461-#1465; sign-off #1466.
 - **Battalions dropped** (0044); a boss stun, if asked, is a captain's order.
 
 ## Maps
@@ -34,11 +35,11 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **Saltmarsh Ford:** not tuned (0093, 0095). Samples: `wakes fort` (0339), the east pair (0340, `arrivals: wait`); overlap under `wakes` is pace (475-479); the pincer is both chairs' best turn; `thins` killed (0341). A sample until #1377 traces the stall; 40 is never reinterpreted without a record (482).
 - **The Rookery (0208):** no lever before a cold chair. **The Counting House (311-321):** archer 11,2, limit 11; the Sworn Captain at Def 5 (0343). Kill: a cold non-Lore chair leaves him unhit.
 - **Sallow Grange:** the Reeve's walk-off is a fault; going home over `hold`, so a bait buys one open phase (482). `goes_home:` (0342) kept on a sample. The hold (487) killed (0345).
-- **The Mill:** `holds:` (0279), limit 9 (0280), fort south (#1210). 0338 stays (503: Chat 3407 8/7/6). 107 traced (0367): no planner fault. **511:** a Mill-only DESIGN 11 clause (one lever's gap, its kill unmet, no planner fault, every hand play won, one cold, Fun Gate); tripwire: a cold floor loss reopens 0338, never the limit; the Critic's cold chair first. Sim arts: Phase 3; Parked-at-half heal: own issue.
+- **The Mill:** `holds:` (0279), limit 9 (0280), fort south (#1210). 0338 stays (503: Chat 3407 8/7/6). 107 traced (0367): no planner fault. **511:** a Mill-only DESIGN 11 clause (one lever's gap, its kill unmet, no planner fault, every hand play won, one cold, Fun Gate); tripwire: a cold floor loss reopens 0338, never the limit; the Critic's cold chair first. Parked-at-half heal: own issue.
 - **The First Shrine (406-455; 0283, 0304, 0306):** south start, limit 10, the loft archer on the door's death, a held altar. **Kept, no lever, no chair owed** (455): the doorway cork (7,2) decides the held phase.
 - **The Undercroft (431):** the middle wins (4,4 corks the stair); the lector is scenery off the north route. Held for a cold chair: his reach over the desk, or 13,4.
 - **The Lazar House (420-440):** held bars, the queue (0303), limit 5 (0305); no lever before a cold chair.
-- **The raid and the keep:** Raid: floor 3100, no lever (461). The keep (0265): levers 0284-7, 0293; range +2 parked; fresh chair owed. **Hask (Lotus, 487-8):** lance, two stages; line reach 4 (0346). Stage 2 (0362-4, 0366, 0369, 0373): Def/Res +3, HP 20, heal 2, rooted; the veto counts the dose. Gate 120, both arms (491, 505). **Lotus (514): dose uncapped, Hask exempt, a race**. Clock deaths 2+ in at most 10 % of won games. **0377:** an unarmed healer walks to the hurt at exposure 0. A tuned map moving 10+/200 or past 60: Table. **#1441:** a lever per arm. **0378:** `end` counts the line. **0380:** the stage-2 captain's finisher (hit 90+ or he survives two phases), else out of lance and line. **0381, 0383:** entry and spacing kept; depleted's stage-1 falls are crits and corners, the healer rarely first; no scaling (#692); the swarm unbuilt. Gate waits on #1453 (542): 120 with arts stands; else down against chairs. **#1453 ends in a decision (542):** if cells move, the kill-only art rule becomes the Sim's default, cells past 526's band re-screened in phase order and marked `stale` in STATE until then; only the keep moving: a recorded exception. **#1386 (542, 543):** engine slices proceed; the race is read, not tuned, until #1453 (0384). **The Kin's wave (514; leans for Lotus, 518-520):** `column N`; base 2, collision 3, bottom-up, the struck +1, no slam unthrown; water as Shallows; sworn and fliers ride, the drake immune, Keziah not; every second Kin phase, warned, before Frozen Iron; ice lasts a wave; new water warned. `Exposure.Plan` swallows a certain kill (next Exposure PR).
+- **The raid and the keep:** Raid: floor 3100, no lever (461). The keep (0265): levers 0284-7, 0293; range +2 parked; fresh chair owed. **Hask (Lotus, 487-8):** lance, two stages; line reach 4 (0346). Stage 2 (0362-0373): Def/Res +3, HP 20, heal 2, rooted. Gate 120, both arms (491, 505). **Lotus (514): dose uncapped, Hask exempt, a race**; clock deaths 2+ at most 10 % of wins. **0377:** an unarmed healer walks to the hurt at exposure 0. A tuned map moving 10+/200 or past 60: Table. **0378:** `end` counts the line. **0380:** the stage-2 captain's finisher (hit 90+ or he survives; Exhausted rewrites it, #1464), else out of lance and line. **0381, 0383:** entry and spacing kept; no planner fault; no scaling (#692); the swarm unbuilt. Gate waits on #1453, run once on forms after #1461 (542, 0385): 120 with arts stands; else down against chairs. **#1453 ends in a decision (542):** if cells move, its rule becomes the Sim's default, cells past 526's band `stale` in STATE until re-screened; only the keep moving: a recorded exception. **#1386 (542, 543):** engine slices proceed; the race is read, not tuned, until #1453 (0384). **The Kin's wave (514, 518-520):** `column N`; base 2, collision 3, bottom-up, the struck +1; water as Shallows; sworn and fliers ride, the drake immune; every second Kin phase, warned, before Frozen Iron; ice lasts a wave. `Exposure.Plan` swallows a certain kill.
 
 ## Experiments (state and kill criterion)
 
@@ -99,9 +100,8 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 ## Open, the Table's
 
 - The campaign's numbers (0051): prices, rewards, stock, the seal; steel's place in the stock is the first lever.
-- The class ladder's numbers (0058); which combat arts exist.
-- Rout ends Seize (#374)? Sim Canto on a clock map (#262)? A trial fall's cost?
-- The wake tax floor (0040, 0.25 provisional).
+- The class ladder's numbers (0058).
+- Rout ends Seize (#374)? Sim Canto on a clock map (#262)? A trial fall's cost? The wake tax floor (0040)?
 
 ## Plumbing
 
@@ -110,4 +110,4 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 
 ## Round index
 
-1-118 rules; 119-342 story; 343-359 writing; 360-419; 420-432 (#1251); 433-443 (#1287); 444-473 (#1334); 474 on (#1368), last 532.
+1-118 rules; 119-342 story; 343-359 writing; 360-419; 420-432 (#1251); 433-443 (#1287); 444-473 (#1334); 474 on (#1368), last 545.
