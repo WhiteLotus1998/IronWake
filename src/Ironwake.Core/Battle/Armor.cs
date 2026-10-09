@@ -39,14 +39,36 @@ public sealed record ArmorMark(string SpellId, int Def, int Mov, int Phases)
 /// Obsidian Armor) is no bonus to the wearer's stats: its Def counts against the first hit that lands on the wearer
 /// alone (<see cref="Combatant.Shell"/>, <see cref="SideForecast.Shelled"/>), and that hit breaks it, a 0-damage hit
 /// and an area or caught hit too; a miss, the wearer's own strikes and burn or curse ticks never do. A recast replaces it. Sunder does not strip it. It is
-/// board state, so Recall restores it. The enemy dons it only when it has no strike (<see cref="EnemyAi.Don"/>, issue 1286); <see cref="Resolver.Legal"/> and the Sim's
-/// player do not offer it.
+/// board state, so Recall restores it. The enemy dons it only when it has no strike (<see cref="EnemyAi.Don"/>, issue 1286); <see cref="Resolver.Legal"/> lists it
+/// on the caster and each ally in range (<see cref="Casts"/>, issue 1403).
 /// </summary>
 public static class Armor
 {
     /// <summary>Whether <paramref name="weapon"/> is an armor tome: it names armor and carries its numbers.</summary>
     public static bool Armors(GameContent content, Weapon? weapon) =>
         weapon?.Armor is not null && content.RiderOf(weapon) is { Kind: RiderKind.Armor };
+
+    /// <summary>
+    /// The casts of the armor tome in <paramref name="slot"/> that <see cref="Resolver.Legal"/> lists (issue 1403): none
+    /// when <paramref name="unit"/> cannot wield it or has no use left; else on itself (no target), then on each other
+    /// unit of its side within the tome's <see cref="ArmorSpell.Range"/> of where it stands, in id order.
+    /// </summary>
+    public static IEnumerable<UseItem> Casts(BattleState state, BattleUnit unit, int slot, Weapon spell, UnitClass unitClass)
+    {
+        if (unit.Unit.Inventory.Items[slot].Uses == 0 || !unit.Unit.CanWield(spell, unitClass))
+        {
+            yield break;
+        }
+
+        yield return new UseItem(unit.Id, slot);
+        foreach (var ally in state.UnitsOf(unit.Side).Where(a => a.Id != unit.Id).OrderBy(a => a.Id, StringComparer.Ordinal))
+        {
+            if (unit.At.DistanceTo(ally.At) <= spell.Armor!.Range)
+            {
+                yield return new UseItem(unit.Id, slot, ally.Id);
+            }
+        }
+    }
 
     /// <summary>What the unit's armor adds to its stats in a combat: its Def, nothing else; zero when it wears none.</summary>
     public static Stats Bonus(BattleUnit unit) =>

@@ -108,6 +108,25 @@ public static class Program
             }
         }
 
+        if (args.Length > 1 && args[0] == "--shell")
+        {
+            var seeds = 100;
+            var level = FinaleRun.DefaultLevel;
+            for (var i = 2; i < args.Length - 1; i++)
+            {
+                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                {
+                    seeds = n;
+                }
+                else if (args[i] == "--level" && int.TryParse(args[i + 1], out var l) && l >= Unit.MinLevel && l <= Unit.MaxLevel)
+                {
+                    level = l;
+                }
+            }
+
+            return Shell(args[1], seeds, level);
+        }
+
         if (args.Length > 1 && args[0] == "--heirloom")
         {
             var seeds = Gates.DefaultSeeds;
@@ -316,7 +335,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] [--lead <id>]... | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>[,<id>]...] [--until-certify <unit> <class>] [--deploy <unit>[,<unit>]...] [--stop-after <kind>[,<kind>]...] [--no-casts] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip|--drill|--finale-ranks] | --supports [--seeds N] [--pair <a> <b>] | --yard [--seeds N] [--map <id>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] [--lead <id>]... | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] [--quest <id>[,<id>]...] [--until-certify <unit> <class>] [--deploy <unit>[,<unit>]...] [--stop-after <kind>[,<kind>]...] [--no-casts] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] [--gates] | --shell <map|file> [--seeds N] [--level N] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] [--even|--focused|--rank-trace|--gate|--chip|--drill|--finale-ranks] | --supports [--seeds N] [--pair <a> <b>] | --yard [--seeds N] [--map <id>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -385,6 +404,46 @@ public static class Program
 
         Console.WriteLine(failed ? "finale: FAILED" : "finale: ok");
         return failed ? 1 : 0;
+    }
+
+    /// <summary>
+    /// The shell read (issue 1403 slice 3, <see cref="ShellRun"/>): the full finale company on a <c>deploy: all</c> board,
+    /// Pell holding a fixture Obsidian Armor, once per target arm. Data only; exits 0 unless the map cannot be read.
+    /// </summary>
+    public static int Shell(string mapId, int seeds, int level)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("shell: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        MapDefinition? map = MapFiles.LoadAll(contentDir, content).FirstOrDefault(m => m.Id == mapId).Map;
+        if (map is null && content.Campaign.Keep.IsKeepMap(mapId))
+        {
+            map = MapFiles.Load(MapFiles.CampaignPath(contentDir, content, mapId), content);
+        }
+
+        if (map is null && File.Exists(mapId))
+        {
+            map = MapFiles.Load(mapId, content);
+        }
+
+        if (map is null || FinaleRun.Refusal(map, mapId) is not null)
+        {
+            Console.WriteLine(map is null ? $"shell: no map '{mapId}' under {contentDir}, and no such file" : FinaleRun.Refusal(map, mapId));
+            return 2;
+        }
+
+        Console.WriteLine($"shell: {mapId}, {seeds} seeds, the full company at level {level}, {ShellRun.CasterId} holding a fixture Obsidian Armor (+{ShellRun.Tome.Def} Def against the first hit, {ShellRun.Tome.Phases} phases, range {ShellRun.Tome.Range}, one use); a jab is a breaking hit under a quarter of the wearer's max HP on bare Def (data)");
+        foreach (var reading in ShellRun.Measure(content, map, level, seeds))
+        {
+            Console.WriteLine(reading.Line());
+        }
+
+        return 0;
     }
 
     /// <summary>

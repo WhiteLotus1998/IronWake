@@ -264,7 +264,7 @@ public sealed record BattleUnit(
 
     /// <summary>
     /// The weapon in a slot if the unit can strike with it: a weapon its class can use at a
-    /// rank the unit has reached (issue 67) that is not a healing spell nor an area tome (issue 1329), skipping a spell with no uses left this battle
+    /// rank the unit has reached (issue 67) that is not a healing spell, an area tome (issue 1329) nor an armor tome (issue 1403: worn, never struck with), skipping a spell with no uses left this battle
     /// (section 5: a physical weapon at zero uses still fights, broken; a spent spell
     /// does not). Null for an empty slot, an item, a healing spell, or a spent spell.
     /// </summary>
@@ -277,7 +277,7 @@ public sealed record BattleUnit(
 
         var item = Unit.Inventory.Items[slot];
         var unitClass = content.Class(Unit.ClassId);
-        return content.Weapons.TryGetValue(item.ItemId, out var weapon) && Unit.CanWield(weapon, unitClass) && !weapon.Heals && weapon.Area == 0
+        return content.Weapons.TryGetValue(item.ItemId, out var weapon) && Unit.CanWield(weapon, unitClass) && !weapon.Heals && weapon.Area == 0 && weapon.Armor is null
             && (item.Uses > 0 || !weapon.IsMagic)
             ? content.WeaponOf(Unit, Frost.Shape(Forge.Shape(Heirloom.Shape(Kinsbane.Shape(weapon, item), item), item), item, content))
             : null;

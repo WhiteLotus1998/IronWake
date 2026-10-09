@@ -14,6 +14,20 @@ public interface IPlayer
     IReadOnlyList<Command> Next(BattleState state, GameContent content);
 }
 
+/// <summary>
+/// Whom the heuristic lays a one-hit shell on (issue 1403, Lotus asked for the read on three targets): the most exposed
+/// ally or the caster, or only the drake rider, only a healer, or only the ally of the highest Def other than the caster;
+/// or no one, the tome held and never laid, the read's baseline for what holding it costs the plan order.
+/// </summary>
+public enum ShellAim
+{
+    Exposed,
+    Never,
+    Drake,
+    Healer,
+    Front,
+}
+
 /// <summary>Gate 2's player: one uniformly random command from <see cref="Resolver.Legal"/> each step.</summary>
 public sealed class RandomLegalPlayer : IPlayer
 {
@@ -77,6 +91,9 @@ public sealed class HeuristicPlayer : IPlayer
     /// </summary>
     public bool Casts { get; init; } = true;
 
+    /// <summary>Whom this player lays a one-hit shell on (issue 1403, <see cref="ShellAim"/>); the most exposed ally unless a caller names a target.</summary>
+    public ShellAim Shell { get; init; } = ShellAim.Exposed;
+
     public IReadOnlyList<Command> Next(BattleState state, GameContent content)
     {
         if (state.Outcome.IsOver || state.Phase != Side.Player)
@@ -102,7 +119,7 @@ public sealed class HeuristicPlayer : IPlayer
             return new Command[] { new EndPhase() };
         }
 
-        var plan = PlanUnit(state, content, unit, out var refused, Casts);
+        var plan = PlanUnit(state, content, unit, out var refused, Casts, Shell);
         if (refused is { } p && (HighestRefusedKill is null || p > HighestRefusedKill))
         {
             HighestRefusedKill = p;
@@ -136,14 +153,15 @@ public sealed class HeuristicPlayer : IPlayer
     /// a counter, the captain plans last, so the cork's other attackers strike first and the
     /// captain finishes from the safe tile. Ahead of either, a unit that can feed a hungering weapon
     /// this turn (<see cref="CanFeed"/>, issue 1395) plans first, so the kill its hunt would take is
-    /// not taken by an ally planning before it; the rest keep their order.
+    /// not taken by an ally planning before it; the rest keep their order. A unit holding a shell it can lay
+    /// (<see cref="ShellTome"/>, issue 1403) plans after the rest, so the allies it may shell stand where they end.
     /// </summary>
     public static IEnumerable<BattleUnit> PlanOrder(BattleState state, GameContent content)
     {
         var order = Corked(state, content) is { } captain && !captain.Acted && SafeStrikeTiles(state, content, captain).Count > 0
             ? state.UnitsOf(Side.Player).OrderBy(u => u.IsCaptain)
             : PlanOrder(state);
-        return order.OrderBy(u => !CanFeed(state, content, u));
+        return order.OrderBy(u => !CanFeed(state, content, u)).ThenBy(u => ShellTome(content, u) is not null);
     }
 
     /// <summary>
@@ -304,8 +322,9 @@ public sealed class HeuristicPlayer : IPlayer
     /// One player unit's commands on the board as it stands. <paramref name="refusedKill"/>
     /// is the highest kill probability among the attacks the veto refused for this unit,
     /// or null when it refused none. With <paramref name="casts"/> off it never casts an area tome.
+    /// <paramref name="shell"/> names whom it lays a one-hit shell on (<see cref="LayShell"/>).
     /// </summary>
-    public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit, out double? refusedKill, bool casts = true)
+    public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit, out double? refusedKill, bool casts = true, ShellAim shell = ShellAim.Exposed)
     {
         refusedKill = null;
         var weapon = unit.EquippedWeapon(content);
@@ -394,6 +413,12 @@ public sealed class HeuristicPlayer : IPlayer
             return WithMove(unit, cast.From, new UseItem(unit.Id, cast.Slot, cast.At.ToString()));
         }
 
+        if ((best is null || (!best.Hunt && KillProbability(state, content, arms.First(a => a.Slot == best.Slot).Armed, best.Tile, state.Find(best.TargetId)!) < ShellOverKill))
+            && LayShell(state, content, unit, tiles.Where(t => !captains.Contains(t)).ToList(), shell) is { } laid)
+        {
+            return laid;
+        }
+
         if (best is not null)
         {
             return WithMove(unit, best.Tile, new Attack(unit.Id, best.TargetId, best.Slot == unit.EquippedSlot(content) ? null : best.Slot));
@@ -436,6 +461,92 @@ public sealed class HeuristicPlayer : IPlayer
         var seen = enemies.Where(e => Dusk.Sees(state, unit.Side, e.At)).ToList();
         return AreaCast.Best(state, content, unit, tiles.Where(t => !captains.Contains(t)), seen, tile => Exposure.Of(state, content, unit, tile).NoCrit >= unit.Hp);
     }
+
+    /// <summary>
+    /// The kill probability under which the heuristic lays a shell rather than take its best attack (issue 1403): a strike
+    /// likely to kill is taken, one likely to leave the target standing gives way to the shell.
+    /// </summary>
+    public const double ShellOverKill = 0.5;
+
+    /// <summary>The slot and tome of a one-hit shell <paramref name="unit"/> can lay now (issue 1403, <see cref="Armor"/>): one it can wield with a use left; null when it holds none.</summary>
+    public static (int Slot, Weapon Spell)? ShellTome(GameContent content, BattleUnit unit)
+    {
+        var unitClass = content.Class(unit.Unit.ClassId);
+        for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
+        {
+            var stack = unit.Unit.Inventory.Items[slot];
+            if (stack.Uses == 0 || !content.Weapons.ContainsKey(stack.ItemId))
+            {
+                continue;
+            }
+
+            var spell = content.Weapon(stack.ItemId);
+            if (Armor.Armors(content, spell) && spell.Armor!.Shell && unit.Unit.CanWield(spell, unitClass))
+            {
+                return (slot, spell);
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// The heuristic's one-hit shell (issue 1403, Lotus's Sim read): with a shell tome it can lay, on an ally
+    /// <paramref name="aim"/> admits that wears no armor, has already acted (so the tile it meets the enemy phase on is
+    /// known) and stands where some enemy can strike it this coming phase (no-crit exposure above 0), within the tome's
+    /// range of a tile the caster may end on; or on the caster itself at that tile when the aim admits it. Among them the
+    /// most exposed, from the tile where the caster's own exposure is least, row order breaking ties. Null when none qualifies.
+    /// </summary>
+    private static IReadOnlyList<Command>? LayShell(BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, ShellAim aim)
+    {
+        if (ShellTome(content, unit) is not var (slot, spell))
+        {
+            return null;
+        }
+
+        var allies = state.UnitsOf(unit.Side).ToList();
+        var wearers = allies.Where(a => a.Armor is null && (a.Id == unit.Id || a.Acted) && Aimed(content, unit, a, allies, aim)).ToList();
+        if (wearers.Count == 0)
+        {
+            return null;
+        }
+
+        var exposed = wearers.Where(w => w.Id != unit.Id).ToDictionary(w => w.Id, w => Exposure.Of(state, content, w, w.At).NoCrit);
+        foreach (var (tile, own) in tiles.Select(t => (Tile: t, Own: Exposure.Of(state, content, unit, t).NoCrit)).OrderBy(t => t.Own).ThenBy(t => t.Tile))
+        {
+            BattleUnit? pick = null;
+            var most = 0;
+            foreach (var wearer in wearers)
+            {
+                var exposure = wearer.Id == unit.Id ? own : tile.DistanceTo(wearer.At) <= spell.Armor!.Range ? exposed[wearer.Id] : 0;
+                if (exposure > most)
+                {
+                    (pick, most) = (wearer, exposure);
+                }
+            }
+
+            if (pick is not null)
+            {
+                return WithMove(unit, tile, new UseItem(unit.Id, slot, pick.Id == unit.Id ? null : pick.Id));
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>Whether <paramref name="aim"/> admits <paramref name="ally"/> as the wearer of <paramref name="caster"/>'s shell.</summary>
+    private static bool Aimed(GameContent content, BattleUnit caster, BattleUnit ally, IReadOnlyList<BattleUnit> allies, ShellAim aim) => aim switch
+    {
+        ShellAim.Drake => ally.Unit.Drake is not null,
+        ShellAim.Healer => Healer(content, ally),
+        ShellAim.Never => false,
+        ShellAim.Front => ally.Id == allies.Where(a => a.Id != caster.Id).OrderByDescending(a => content.StatsOf(a.Unit).Def).ThenBy(a => a.Id, StringComparer.Ordinal).FirstOrDefault()?.Id,
+        _ => true,
+    };
+
+    /// <summary>Whether <paramref name="unit"/> carries a healing spell it can wield (issue 1403's healer target).</summary>
+    public static bool Healer(GameContent content, BattleUnit unit) =>
+        unit.Unit.Inventory.Items.Any(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Heals && unit.Unit.CanWield(w, content.Class(unit.Unit.ClassId)));
 
     /// <summary>
     /// The heuristic's action with no strike and no heal: Watch on an <c>overwatch: on</c> map when

@@ -2421,7 +2421,7 @@ public static class Resolver
     /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
     /// slot when it carries more than one), its item uses
     /// (slots in order; a spell once per ally in range, allies in id order; only where
-    /// something would heal), its Retreats (best tile first, issue 33), its Exit when it stands on an Escape exit (issue 269), its Recover when it stands on a keepsake with room for it (13.8), its Opens of the chests it can open (file order, issue 649), its Shoves on a <c>shove: on</c> map (targets in id order, 13.12), then Wait; then EndPhase. Empty once the battle is over.
+    /// something would heal; an armor tome on its caster, then on each ally its range reaches, issue 1403), its Retreats (best tile first, issue 33), its Exit when it stands on an Escape exit (issue 269), its Recover when it stands on a keepsake with room for it (13.8), its Opens of the chests it can open (file order, issue 649), its Shoves on a <c>shove: on</c> map (targets in id order, 13.12), then Wait; then EndPhase. Empty once the battle is over.
     /// The random player of gates 2 and 8 draws from this list, so a command it picks is
     /// legal by construction.
     /// </summary>
@@ -2633,6 +2633,16 @@ public static class Resolver
             if (spell.Area > 0)
             {
                 foreach (var cast in LegalAreaCasts(state, content, unit, slot, spell))
+                {
+                    yield return cast;
+                }
+
+                continue;
+            }
+
+            if (Armor.Armors(content, spell))
+            {
+                foreach (var cast in Armor.Casts(state, unit, slot, spell, unitClass))
                 {
                     yield return cast;
                 }
