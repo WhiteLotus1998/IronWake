@@ -1,4 +1,4 @@
-# 0387: the shard under the hill (the bearer, the drop, the take, the pickup, the re-take)
+# 0386: the shard under the hill (the bearer, the drop, the take, the pickup, the re-take)
 
 Date: 2026-10-09. Issue #1386, slice 3a. Builds on 0382 (the keep's take), 0385 (the secret path's flag). STORY's Under the Hill, Fight (Chat's lean, round 487, in the issue body): the Kin's shard is carried by a sworn, dropped on his fall, taken with the same verb, picked up by the nearest sworn if nobody takes it by the next enemy phase, and while whole the Kin re-takes one sworn a turn. Engine only, on a sample.
 
