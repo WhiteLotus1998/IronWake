@@ -1263,7 +1263,7 @@ public sealed class PlaySession
                     _out.WriteLine($"  Cover: {names[swap.Struck.Id]} takes the strike aimed at {names[aimed!.Id]}");
                 }
 
-                var forecast = attacker is null || target is null ? null : Queries.Forecast(board, _content, attacker, target, attacker.At, attack.Slot);
+                var forecast = attacker is null || target is null ? null : Queries.Forecast(board, _content, attacker, target, attacker.At, attack.Slot, attack.Art);
                 if (forecast is null)
                 {
                     throw new InvalidOperationException($"the enemy AI's {command} has no forecast");
@@ -2196,6 +2196,10 @@ public sealed class PlaySession
     /// With no strike priced but a line struck through the unit (<see cref="LineStrike.Through"/>, issue 1448) the headline
     /// names the line rather than claiming no enemy can strike: <c>no strike counted; Hask's line strike reaches him (below)</c>.
     /// </summary>
+    /// <summary>A threat line's form (issue 1461 a2): " as Heavy Cut (2 of its 3 Grit)", or empty for a plain strike.</summary>
+    private static string FormNote(GameContent content, ThreatLine line) =>
+        line.Form is { } form ? $" as {content.Ability(form).Name} ({((CombatArtEffect)content.Ability(form).Effect).Grit} of its {line.Enemy.Grit} Grit)" : "";
+
     public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null, IReadOnlyList<GroupWoke>? wakes = null, IReadOnlyList<RefusalLine>? refusals = null)
     {
         var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
@@ -2250,7 +2254,7 @@ public sealed class PlaySession
 
                 var answers = caught ?? line.CoveredBy ?? unit;
                 var answerDistance = caught is null ? line.From.DistanceTo(tile) : line.From.DistanceTo(caught.At);
-                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From}{(counted is null ? "" : CountedNote(line, counted[index], names))} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, answerDistance) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
+                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From}{(counted is null ? "" : CountedNote(line, counted[index], names))} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}){FormNote(content, line)}: {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, answerDistance) + ": " + StrikeText(line.Forecast.Defender) + CounterUses(content, answers, line.Forecast.Defender) : ": none"))}");
                 if (!line.Raises && line.Arrives is null && line.Forecast.CaughtBy is null
                     && SeenRolls.Line(state, state.Turn, Side.Enemy, line.Enemy.Id, names[line.Enemy.Id], line.Forecast.Attacker.HitChance, answers.Id, names[answers.Id], line.Forecast.Defender.Strikes ? line.Forecast.Defender.HitChance : null) is { } seen)
                 {

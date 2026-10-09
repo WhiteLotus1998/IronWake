@@ -548,6 +548,11 @@ public sealed class ProtocolSession
 
                 w.WriteNumber("slot", line.Slot);
                 w.WriteString("weapon", line.Weapon.Id);
+                if (line.Form is { } form)
+                {
+                    w.WriteString("form", form);
+                }
+
                 w.WriteNumber("ifAllLand", line.IfAllLand);
                 if (counted[index] is { } seat)
                 {

@@ -144,6 +144,12 @@ public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cos
     /// </summary>
     public int Grit { get; init; }
 
+    /// <summary>
+    /// Whether this is its weapon type's basic form (issue 1461 a2): on a <c>forms: on</c> map every enemy
+    /// knows the basic form of each weapon type it carries (<see cref="GameContent.FormsOf"/>). At most one a weapon type.
+    /// </summary>
+    public bool Basic { get; init; }
+
     /// <summary>Whether the attack never doubles, whatever the speed gap (issue 739); the counter is unchanged.</summary>
     public bool Single { get; init; }
 

@@ -251,7 +251,7 @@ public static class EnemyAi
                     commands.Add(new Move(unit.Id, tile));
                 }
 
-                commands.Add(strike is null ? new Wait(unit.Id) : new Attack(unit.Id, strike.TargetId, strike.Slot == equipped ? null : strike.Slot));
+                commands.Add(strike is null ? new Wait(unit.Id) : Declared(state, content, unit, tile, new Attack(unit.Id, strike.TargetId, strike.Slot == equipped ? null : strike.Slot), strike.Slot));
                 chosen = new AnvilPlan(tile, pinned!.Id, follower.Id, bonus, ValueList<Command>.From(commands));
             }
         }
@@ -344,7 +344,7 @@ public static class EnemyAi
 
         if (best is not null)
         {
-            var attack = new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot);
+            var attack = Declared(state, content, unit, best.Tile, new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot), best.Slot);
             return best.Tile == unit.At
                 ? new Command[] { attack }
                 : new Command[] { new Move(unit.Id, best.Tile), attack };
@@ -364,7 +364,7 @@ public static class EnemyAi
         var veto = BossVetoApplies(state, content, unit);
         var end = End(state, content, unit, weapon, tiles, reach, known, playerReach, sworn, veto);
         var swing = veto ? Choose(state, content, unit, new[] { end }, reach, known, playerReach, sworn, unvetoed: true).Best : null;
-        var last = swing is null ? Don(state, content, unit, end) ?? Idle(state, content, unit) : new Attack(unit.Id, swing.TargetId, swing.Slot == equipped ? null : swing.Slot);
+        var last = swing is null ? Don(state, content, unit, end) ?? Idle(state, content, unit) : Declared(state, content, unit, end, new Attack(unit.Id, swing.TargetId, swing.Slot == equipped ? null : swing.Slot), swing.Slot);
         return end != unit.At
             ? new Command[] { new Move(unit.Id, end), last }
             : new Command[] { last };
@@ -792,8 +792,61 @@ public static class EnemyAi
             best = SwingFromEnd(state, content, unit, tiles, reach, known, playerReach, target, inDaylight);
         }
 
-        return best is null ? null : new EnemyStrike(best.Tile, best.Slot);
+        return best is null ? null : new EnemyStrike(best.Tile, best.Slot) { Art = Form(state, content, unit, best.Tile, target, best.Slot) };
     }
+
+    /// <summary>
+    /// The forms that would make <paramref name="unit"/>'s strike on <paramref name="target"/> from
+    /// <paramref name="from"/> with <paramref name="slot"/>'s weapon kill on its hit where the plain strike does not
+    /// (issue 1461 a2, the #1453 rule the Sim's player follows), in the order the unit knows them
+    /// (<see cref="GameContent.FormsOf"/>), each with whether the unit's Grit pays for it now. Every lethal
+    /// form is listed whatever its Grit, so Grit's kill criterion can count the ones it priced out.
+    /// Empty off a <c>forms: on</c> map, for a boss under the veto (which prices plain weapons only,
+    /// DECISIONS/0251), and when the plain strike already kills. A form that costs the next phase is never listed.
+    /// </summary>
+    public static IReadOnlyList<FormOffer> LethalForms(BattleState state, GameContent content, BattleUnit unit, Coord from, BattleUnit target, int slot)
+    {
+        if (!state.Map.FormsEnabled || BossVetoApplies(state, content, unit))
+        {
+            return Array.Empty<FormOffer>();
+        }
+
+        var plain = Queries.Forecast(state, content, unit, target, from, slot);
+        if (plain is null || plain.Attacker.Strikes && plain.Attacker.Damage >= target.Hp)
+        {
+            return Array.Empty<FormOffer>();
+        }
+
+        var flush = unit with { Grit = Grit.Cap };
+        var board = state.WithUnit(flush);
+        var offers = new List<FormOffer>();
+        foreach (var (ability, art) in content.FormsOf(unit, true))
+        {
+            if (art.CostsNextPhase)
+            {
+                continue;
+            }
+
+            var forecast = Queries.Forecast(board, content, flush, target, from, slot, ability.Id);
+            if (forecast is not null && forecast.Attacker.Strikes && forecast.Attacker.Damage >= target.Hp)
+            {
+                offers.Add(new FormOffer(ability.Id, art.Grit, unit.Grit >= art.Grit, forecast.Attacker.HitChance));
+            }
+        }
+
+        return offers;
+    }
+
+    /// <summary>
+    /// The form an enemy declares on a strike (issue 1461 a2): of <see cref="LethalForms"/> the affordable one with
+    /// the best hit, the first known on a tie; null when none is.
+    /// </summary>
+    public static string? Form(BattleState state, GameContent content, BattleUnit unit, Coord from, BattleUnit target, int slot) =>
+        LethalForms(state, content, unit, from, target, slot).Where(o => o.Affordable).OrderByDescending(o => o.Hit).FirstOrDefault()?.Id;
+
+    /// <summary><paramref name="attack"/> from <paramref name="tile"/> with the form <see cref="Form"/> picks declared on it.</summary>
+    private static Attack Declared(BattleState state, GameContent content, BattleUnit unit, Coord tile, Attack attack, int slot) =>
+        state.Find(attack.TargetId) is { } target && Form(state, content, unit, tile, target, slot) is { } form ? attack with { Art = form } : attack;
 
     /// <summary>
     /// Why a boss under the veto does not strike <paramref name="target"/> this phase, when the
@@ -1428,7 +1481,14 @@ public static class EnemyAi
 }
 
 /// <summary>An enemy's strike as the planner would make it: the tile it strikes from and the inventory slot of the weapon it swings.</summary>
-public sealed record EnemyStrike(Coord From, int Slot);
+public sealed record EnemyStrike(Coord From, int Slot)
+{
+    /// <summary>The form the strike declares on a <c>forms: on</c> map (issue 1461 a2, <see cref="EnemyAi.Form"/>), or null.</summary>
+    public string? Art { get; init; }
+}
+
+/// <summary>One lethal form <see cref="EnemyAi.LethalForms"/> lists: its id, its Grit, whether the unit can pay it now, and its hit.</summary>
+public sealed record FormOffer(string Id, int Grit, bool Affordable, int Hit);
 
 /// <summary>
 /// A boss's refusal <see cref="EnemyAi.Refusal"/> names (issue 565): the nearest tile it could

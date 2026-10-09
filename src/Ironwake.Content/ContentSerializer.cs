@@ -516,6 +516,11 @@ public static class ContentSerializer
                 writer.WriteNumber("wt", art.Wt);
                 writer.WriteNumber("range", art.Range);
                 writer.WriteNumber("grit", art.Grit);
+                if (art.Basic)
+                {
+                    writer.WriteBoolean("basic", true);
+                }
+
                 if (art.PerMap is { } perMap)
                 {
                     writer.WriteNumber("perMap", perMap);
