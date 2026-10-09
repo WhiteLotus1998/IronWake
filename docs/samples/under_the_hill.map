@@ -1,0 +1,31 @@
+name: Under the Hill (the shard)
+size: 14x9
+win: defeat_boss
+kin_shard: 4,4
+turn_limit: 12
+recall: 3
+enemy_level: 1
+
+#####....#####
+#...#........#
+#.............
+##...##.......
+.n...##.......
+##...##.......
+#.............
+#...#........#
+#####....#####
+
+units:
+P captain 12,4
+P recruit 12,3
+P recruit 12,5
+P recruit 13,2
+P recruit 13,6
+P recruit 11,4
+B hask 1,4 group:kin behavior:guard
+E sworn_captain 4,4 group:sworn behavior:aggressive
+E soldier 4,2 group:sworn behavior:aggressive
+E soldier 4,6 group:sworn behavior:aggressive
+E brigand 8,1 group:sworn behavior:aggressive
+E archer 2,2 group:sworn behavior:aggressive

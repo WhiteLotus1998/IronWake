@@ -1,4 +1,4 @@
-# 0385: Forms replace arts; Grit for basic forms, cooldowns for character forms
+# 0386: Forms replace arts; Grit for basic forms, cooldowns for character forms
 
 Date: 2026-10-09. Lotus's direction, relayed on the Table (#1368, comment 6079595970). Chat's round 544, Code's round 545. Sign-off list: #1466. Engine slices: #1461 (a), #1462 (b), #1463 (c), #1464 (d), #1465 (e).
 

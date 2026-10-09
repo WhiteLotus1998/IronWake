@@ -727,6 +727,11 @@ public static class MapRenderer
             sb.Append(ShardRun.Line(runner, UnitNames.Of(state, content))).Append('\n');
         }
 
+        if (KinShard.Line(state, UnitNames.Of(state, content)) is { } shardLine)
+        {
+            sb.Append(shardLine).Append('\n');
+        }
+
         if (MessengerLine(state, content) is { } messengerLine)
         {
             sb.Append(MessengerRule).Append('\n');
