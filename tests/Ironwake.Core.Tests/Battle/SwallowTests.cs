@@ -814,10 +814,31 @@ public class SwallowTests
         Assert.Null(result.Rejection);
         Assert.Contains(new PhaseBegan(Side.Player, 11), result.Events);
         Assert.False(result.Next.Outcome.IsOver);
-        Assert.Contains("turn 11, past the limit: the race", MapRenderer.Render(result.Next, Starter));
+        Assert.Contains("turn 11 (the limit ends nothing now)", MapRenderer.Render(result.Next, Starter));
         var his = result.Next.Try(new EndPhase());
         Assert.Contains(new PhaseBegan(Side.Enemy, 11), his.Events);
         Assert.Contains(his.Events, e => e is FrozenIronFell);
+    }
+
+    [Fact]
+    public void TheStatusLineSaysTheLimitEndsNothingFromTheSwallowOn()
+    {
+        var state = Start() with { Turn = 7 };
+
+        Assert.Contains("turn 7 of 10", MapRenderer.Render(state, Starter));
+        var swallowed = Swallowed(state);
+        Assert.Contains("turn 7 (the limit ends nothing now)", MapRenderer.Render(swallowed, Starter));
+        Assert.DoesNotContain("of 10", MapRenderer.Render(swallowed, Starter));
+    }
+
+    [Fact]
+    public void TheSwallowKeepsEveryStatusOnHimSoAMarkRidesOntoTheFreshBar()
+    {
+        var state = Start();
+        var marked = state.WithUnit(Hask(state) with { Mark = MagicSchool.Lightning });
+
+        Assert.Equal(MagicSchool.Lightning, Hask(Taken(marked)).Mark);
+        Assert.True(Hask(Taken(marked)).Swallowed);
     }
 
     [Fact]

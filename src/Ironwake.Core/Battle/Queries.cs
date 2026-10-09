@@ -640,7 +640,10 @@ public static class Queries
     /// when the strikes its own counter-kills would seat (<see cref="FreedStrikes"/>, issue 1191,
     /// round 404) bring the total to its HP, at any chance of that counter, with those strikes
     /// as <see cref="LethalThreat.Freed"/>. A strike a cover would swap onto the coverer (DESIGN.md
-    /// 13.19) is not in the unit's own total. In deployment order; empty off the player phase or
+    /// 13.19) is not in the unit's own total. A line strike the planner would strike through the unit
+    /// (<see cref="LineStrike.Through"/>, issue 1448) counts its one strike as that striker's whole share,
+    /// in place of any plain strike <see cref="Threats"/> prices for the same enemy, marked
+    /// <see cref="LethalStriker.Line"/>. In deployment order; empty off the player phase or
     /// when the map is over. Read-only.
     /// </summary>
     public static IReadOnlyList<LethalThreat> Lethal(BattleState state, GameContent content, bool playerView = true)
@@ -658,7 +661,8 @@ public static class Queries
                 continue;
             }
 
-            var lines = all.Where(l => !l.Raises && l.HeldBy is null && l.CoveredBy is null && (!playerView || l.Arrives is not null || Dusk.Seen(state, l.Enemy))).ToList();
+            var through = LineStrike.Through(state, content, unit, unit.At) is { } strike && (!playerView || Dusk.Seen(state, strike.Striker)) ? strike : ((BattleUnit Striker, LineStrike.Choice Line)?)null;
+            var lines = all.Where(l => !l.Raises && l.HeldBy is null && l.CoveredBy is null && (!playerView || l.Arrives is not null || Dusk.Seen(state, l.Enemy)) && l.Enemy.Id != through?.Striker.Id).ToList();
             var seated = Exposure.Seated(lines.Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
             var strikers = new List<LethalStriker>();
             if (RaisedBlowOn(state, content, unit, unit.At) is { } blow)
@@ -667,6 +671,15 @@ public static class Queries
             }
 
             strikers.AddRange(seated.Select(i => new LethalStriker(lines[i].Enemy, lines[i].IfAllLand)).Where(s => s.Damage > 0));
+            if (through is { } line)
+            {
+                var damage = LineStrike.Forecast(state.WithUnit(line.Striker), content, line.Striker, unit).Attacker.Damage;
+                if (damage > 0)
+                {
+                    strikers.Add(new LethalStriker(line.Striker, damage) { Line = true });
+                }
+            }
+
             var total = strikers.Sum(s => s.Damage);
             if (strikers.Count > 0 && total >= unit.Hp)
             {
@@ -1153,7 +1166,11 @@ public sealed record LethalThreat(BattleUnit Unit, int Total, ValueList<LethalSt
 public sealed record FreedStrike(BattleUnit Freer, CombatForecast Counter, BattleUnit Follower, Coord Tile, int Damage);
 
 /// <summary>One enemy in a <see cref="LethalThreat"/>'s total, and the damage it deals if every strike lands.</summary>
-public sealed record LethalStriker(BattleUnit Enemy, int Damage);
+public sealed record LethalStriker(BattleUnit Enemy, int Damage)
+{
+    /// <summary>Whether <see cref="Damage"/> is the enemy's line strike through the unit (<see cref="LineStrike.Through"/>, issue 1448) rather than a plain strike.</summary>
+    public bool Line { get; init; }
+}
 
 /// <summary>
 /// One row of the attack menu (issue 611, <see cref="Queries.AttackOptions"/>): the attack it

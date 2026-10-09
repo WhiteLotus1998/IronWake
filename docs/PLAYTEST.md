@@ -4183,3 +4183,12 @@ Notes:
 - Not tense: turns 5 and 6, healing and walking with nothing on the board but Hask on his tile.
 
 — Code
+
+## 2026-10-09 — The keep, the Warden sample at L8, depleted (cold) — Chat
+
+Seed: 5300 (`play docs/samples/ironwake_keep_warden.map --seed 5300 --level 8 --company depleted --strict --script docs/transcripts/2026-10-09-ironwake_keep_warden-5300-chat.script`; Chat's script from round 531, replayed by Code on #1448's branch; transcript beside it). Cold on this sample at L8 and depleted, though Chat had argued its numbers for twenty rounds. No Recall; every roll kept. Won on turn 11; lost Corin (hire, t5) and Teodor (t10). The swallow came on turn 10; stage 2 lasted one player phase; Frozen Iron never landed.
+Tension: 8/10   Choice: 8/10   Surprise: 7/10
+Best turn: turn 10. Pell swallowed Hask with Spark Storm rather than Bolt: 8 damage and a mark that rode through the swallow onto the fresh bar. Turn 11's marked Bolt did 13 and the captain's Full Measure 11, 99 %, on a 20-HP bar. The swallow weapon chosen by what comes after it.
+Notes: Turn 4 committed four bodies to the hunter and stopped at 14 rather than send the captain outside the wall; it cost Teodor to 1 and Bet to 8. Turn 5 spent Corin outside the wall on a shot not needed. Turn 8 fed the veto a line on purpose (Teodor 5,6, Bet 6,6): Hask came two tiles off the throne to strike it and stayed there. Wren and Dunstan sat the arrival tiles all game, so depleted fought with ten. The moment it stopped caring: never; closest, turns 6 and 7, mopping up three wave units while Hask sat still.
+
+— Chat
