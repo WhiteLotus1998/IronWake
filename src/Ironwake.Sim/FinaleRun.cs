@@ -99,6 +99,11 @@ public static class FinaleRun
                 yield return "  " + stage;
             }
 
+            if (RaceLine(Games) is { } race)
+            {
+                yield return "  " + race;
+            }
+
             if (StallLine(Games) is { } stall)
             {
                 yield return "  " + stall;
@@ -244,6 +249,29 @@ public static class FinaleRun
         var beyond = reached.Sum(s => s.DamageBeyond);
         var share = inReach + beyond == 0 ? "none dealt" : $"{beyond * 100 / (inReach + beyond)} % from tiles he cannot reach ({beyond} of {inReach + beyond})";
         return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (gate: at most 1); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP; damage on him, {share}";
+    }
+
+    /// <summary>
+    /// The race read (Table round 514, Lotus's uncapped dose): in the games won in the second stage, how many player phases
+    /// the kill took and how many Frozen Iron landings fell before it, each as a count by value, and the games won with no
+    /// clock death, one, and two or more; in the games lost in it, the landing whose dose first killed a player unit, by
+    /// value (none when the dose killed no one). Null when no game reached the stage. Data; round 514's target is a kill
+    /// in rounds 3 to 4 against the dose's first kill in rounds 5 to 6.
+    /// </summary>
+    public static string? RaceLine(IReadOnlyList<GameResult> games)
+    {
+        var won = games.Where(g => g.Stage is not null && g.Won).Select(g => g.Stage!).ToList();
+        var lost = games.Where(g => g.Stage is not null && !g.Won).Select(g => g.Stage!).ToList();
+        if (won.Count + lost.Count == 0)
+        {
+            return null;
+        }
+
+        static string By(IEnumerable<int?> values) =>
+            string.Join(", ", values.GroupBy(v => v).OrderBy(g => g.Key ?? int.MaxValue).Select(g => $"{(g.Key is { } k ? k.ToString(System.Globalization.CultureInfo.InvariantCulture) : "none")}: {g.Count()}"));
+        var kills = won.Count == 0 ? "none won" : $"player phases to the kill {By(won.Select(s => (int?)s.PlayerPhases))}; landings before it {By(won.Select(s => (int?)s.Landings))}; clock deaths 0 in {won.Count(s => s.ClockDeaths == 0)}, 1 in {won.Count(s => s.ClockDeaths == 1)}, 2+ in {won.Count(s => s.ClockDeaths >= 2)}";
+        var deaths = lost.Count == 0 ? "none lost" : $"the dose's first kill at landing {By(lost.Select(s => s.FirstClockKill))}";
+        return $"stage 2 race: won {won.Count}, {kills}; lost {lost.Count}, {deaths}";
     }
 
     /// <summary>
