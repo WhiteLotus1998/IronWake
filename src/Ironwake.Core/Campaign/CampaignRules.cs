@@ -133,7 +133,29 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
 /// second, the understanding) is won. Both claimants standing in the company is read from the branch itself, and
 /// the guide held, not killed, from the battle's bond (<see cref="ShardRun.Starts"/>).
 /// </summary>
-public sealed record UnderTheHill(string Bearer, string Quest);
+public sealed record UnderTheHill(string Bearer, string Quest)
+{
+    /// <summary>
+    /// The map after the keep on the secret path (issue 1386 slice 3d, STORY's "one extra map after the keep"), or null
+    /// for a campaign that ends at the keep whatever happens there: played when the keep is won with a boss left in the
+    /// coma (<see cref="CampaignRecord.Hill"/>), once the card is answered with <c>fight</c>. It is an entry of its own,
+    /// never one of <see cref="CampaignRules.Maps"/>, so no seed that reads the maps' count moves.
+    /// </summary>
+    public CampaignMap? Hill { get; init; }
+
+    /// <summary>
+    /// The rite-keepers (issue 1386 slice 3d, STORY: "Maud, or Pell reading"), cast ids: while one stands in the
+    /// company the hill's card offers <c>reseal</c> beside <c>fight</c>; with none, it offers only Fight. Empty without a hill.
+    /// </summary>
+    public ValueList<string> Keepers { get; init; } = ValueList<string>.Empty;
+}
+
+/// <summary>The hill's card as answered (issue 1386 slice 3d): the door shut on the half-woken god, or the fight under the hill.</summary>
+public enum HillChoice
+{
+    Reseal,
+    Fight,
+}
 
 /// <summary>A campaign-only template swap (issue 704): the enemy placement on <see cref="At"/> fields <see cref="TemplateId"/>.</summary>
 public sealed record TemplateSwap(Coord At, string TemplateId);
@@ -246,6 +268,9 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
 
     /// <summary>The side maps of the members' stories (issue 635), in file order, which breaks ties in the order they are offered.</summary>
     public ValueList<CampaignQuest> Quests { get; init; } = ValueList<CampaignQuest>.Empty;
+
+    /// <summary>The hill after the keep on the secret path (issue 1386 slice 3d, <see cref="UnderTheHill.Hill"/>), or null when no map names one.</summary>
+    public CampaignMap? Hill => Maps.Select(m => m.Secret?.Hill).FirstOrDefault(h => h is not null);
 
     /// <summary>The side map <paramref name="questId"/>, or null when the campaign has none by that id.</summary>
     public CampaignQuest? Quest(string questId) => Quests.FirstOrDefault(q => q.Id == questId);

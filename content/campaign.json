@@ -30,7 +30,20 @@
         "Past Hollin the keep is in sight across a field and a river. The rime on its walls has started to run.",
         "(Placeholder card until the writing pass. Defeat the Sworn Captain. Each group sleeps until a fight comes within its hearing.)"
       ] },
-    { "map": "ironwake_keep", "reward": 2000, "enemyLevel": 8, "swap": { "6,4": "veteran", "6,7": "marauder", "4,5": "longbowman" }, "secret": { "bearer": "keziah", "quest": "pell_2" },
+    { "map": "ironwake_keep", "reward": 2000, "enemyLevel": 8, "swap": { "6,4": "veteran", "6,7": "marauder", "4,5": "longbowman" }, "secret": {
+        "bearer": "keziah",
+        "quest": "pell_2",
+        "hill": {
+          "map": "under_the_hill",
+          "enemyLevel": 8,
+          "keepers": ["maud", "pell"],
+          "before": [
+            "(Placeholder card, until Lotus's story pass.) Hask sleeps with his eyes open. The door is shut and the cold has come back to every sworn man on the field, except it hasn't: the frost on the inner stair is climbing, not falling.",
+            "Marrit drops her sword and doesn't pick it up. \"It's cold. I'd forgotten it was cold. ... It's awake, Alder. I can hear it looking for me.\" She knows where it listens from. She can take us down.",
+            "Reseal: the rite shuts the door on it from memory, while it is still only half awake. Fight: we go under the hill and end it."
+          ]
+        }
+      },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "beacon", "field_dressing"] }
   ],
   "issues": { "keziah": "kinsbane" },

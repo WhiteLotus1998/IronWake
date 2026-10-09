@@ -58,7 +58,7 @@ public static class CampaignScript
         };
         var touched = new HashSet<string>(StringComparer.Ordinal);
         var maps = 0;
-        while (!client.Over && !client.Record.IsFinished(content))
+        while (!client.Over && SimPick.Marching(client.Record, content))
         {
             var mapId = client.Record.NextMap(content).MapId;
             var hand = handPlays is not null && handPlays.TryGetValue(mapId, out var played) ? played : null;
@@ -140,7 +140,7 @@ public static class CampaignScript
             Leave(client, lines);
         }
 
-        int? lostOn = client.Record.IsFinished(content) ? null : maps;
+        int? lostOn = SimPick.Marching(client.Record, content) ? maps : null;
         if (until is { } never)
         {
             var refusal = client.Record.Certify(never.Unit, never.Class, content).Text.Replace('\n', ' ').Trim();

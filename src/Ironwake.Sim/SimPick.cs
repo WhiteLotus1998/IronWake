@@ -33,6 +33,14 @@ public static class SimPick
         return record.NextMap(content).Meets is { Count: > 0 } meets ? record.Meet(meets[0], content).Record : record;
     }
 
+    /// <summary>
+    /// Whether a Sim campaign still has a main map to fight (issue 1386 slice 3d): the Sim's campaigns end at the keep,
+    /// as they did before the hill, so a run that leaves the keep's boss in the coma stops at the hill's card unanswered
+    /// and no campaign read moves. The hill is read on its own board (<c>--finale</c>).
+    /// </summary>
+    public static bool Marching(CampaignRecord record, GameContent content) =>
+        !record.IsFinished(content) && record.MapIndex < content.Campaign.Maps.Count;
+
     /// <summary>The side character the Sim meets at its next camp, or null when none is offered, one is met, or no bed is free.</summary>
     public static string? Meeting(CampaignRecord record, GameContent content) =>
         !record.IsFinished(content) && record.NextMap(content).Meets is { Count: > 0 } meets && record.Meet(meets[0], content).Accepted ? meets[0] : null;

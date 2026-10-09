@@ -75,7 +75,7 @@ public static class KinsbaneRun
             int? lost = null;
             var questsWon = 0;
             ShrineRead? shrine = null;
-            while (!record.IsFinished(content))
+            while (SimPick.Marching(record, content))
             {
                 if (record.Pick is null && record.NextMap(content).Branch.Contains(Owner))
                 {

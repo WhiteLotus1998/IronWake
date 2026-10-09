@@ -1,0 +1,71 @@
+fight
+march
+move ottilie 11,5
+attack ottilie soldier-1
+move captain 10,5
+attack captain soldier-1
+move teodor 10,7
+attack teodor soldier-2
+move keziah 11,7
+wait keziah
+move ansgar 11,6
+wait ansgar
+move dunstan 11,8
+wait dunstan
+move maud 12,5
+wait maud
+move pell 13,3
+wait pell
+move wren 12,3
+wait wren
+move brannock 12,6
+wait brannock
+end !
+move pell 11,2
+attack pell soldier-1
+attack teodor sworn_captain-1
+attack captain sworn_captain-1
+move ansgar 13,7
+wait ansgar
+move brannock 11,6
+take brannock shard
+move dunstan 13,6
+wait dunstan
+move maud 13,5
+item maud 1 dunstan
+move ottilie 12,4
+wait ottilie
+move wren 12,3
+wait wren
+move keziah 13,4
+wait keziah
+end !
+attack brannock soldier-2
+move keziah 11,3
+attack keziah brigand-1
+move ottilie 13,4
+attack ottilie brigand-1
+move wren 12,6
+attack wren hexer-1
+move maud 13,6
+attack maud hexer-1
+move pell 9,3
+wait pell
+move captain 8,5
+wait captain
+end !
+move pell 6,4
+wait pell
+move captain 5,5
+attack captain hask_warden-1
+move ottilie 13,2
+wait ottilie
+attack brannock brigand-2
+attack maud brigand-2
+end !
+move pell 5,4
+attack pell hask_warden-1
+attack captain hask_warden-1
+end !
+leave
+quit

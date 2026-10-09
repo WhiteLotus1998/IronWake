@@ -45,6 +45,7 @@ public sealed class CampaignSession
           build <room>             Buy a room for the keep from the purse; each adds beds, and no bed free means a recruit will not join
           hire [<id>]              List the barracks' hires, or hire one into the company from the purse (once the barracks is built)
           pick <unit>              Fill the last seat with one of the two claimants; the other rides home (final)
+          reseal | fight           Answer the card after the keep on the secret path: shut the door here, or go under the hill (final)
           meet <unit>              Take on the side character met at this camp, if a bed is free (final; one a map)
           support <unit> <unit>    Hear a support pair's waiting conversation, once each (listed on the Roster)
           build <edit> <x,y>       Buy one edit of the keep's menu at one of its placements
@@ -690,7 +691,9 @@ public sealed class CampaignSession
 
     /// <summary>The line that opens a campaign battle: which map of how many, and the seed it plays on.</summary>
     public static string MapLine(CampaignRecord record, GameContent content, MapDefinition map) =>
-        $"Map {record.MapIndex + 1} of {content.Campaign.Maps.Count}: {map.Name}, seed {record.BattleSeed}";
+        record.MapIndex >= content.Campaign.Maps.Count
+            ? $"After the keep: {map.Name}, seed {record.BattleSeed}"
+            : $"Map {record.MapIndex + 1} of {content.Campaign.Maps.Count}: {map.Name}, seed {record.BattleSeed}";
 
     /// <summary>The lines that open a certification trial: the map and its seed, then who plays it as what.</summary>
     public static IReadOnlyList<string> TrialLines(CampaignRecord record, GameContent content, MapDefinition trial, string unitId, string classId) => new[]
@@ -728,7 +731,14 @@ public sealed class CampaignSession
 
     /// <summary>The line once every map is won.</summary>
     public static string CampaignWonLine(CampaignRecord record, GameContent content) =>
-        $"Campaign won: all {content.Campaign.Maps.Count} maps, the purse holds {record.Purse}";
+        $"Campaign won: all {content.Campaign.Maps.Count} maps"
+        + record.HillChose switch
+        {
+            HillChoice.Reseal => ", the door resealed",
+            HillChoice.Fight => ", and the hill",
+            _ => "",
+        }
+        + $", the purse holds {record.Purse}";
 
     /// <summary>
     /// The lines after the campaign is won for those without an epilogue card (issue 690): one
@@ -907,6 +917,7 @@ public sealed class CampaignSession
         lines.AddRange(WarningLines(record, content, map));
         lines.AddRange(LowLines(record, content));
         lines.AddRange(BranchLines(record, content));
+        lines.AddRange(HillLines(record, content));
         lines.AddRange(MeetingLines(record, content));
         lines.AddRange(ConversationWaitingLines(record, content));
         lines.AddRange(ContestLines(record, content, map));
@@ -974,6 +985,28 @@ public sealed class CampaignSession
             .Concat(pitch.Select((text, i) => $"{content.Unit(branch[i]).Name}: \"{text}\""))
             .Append("They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.")
             .ToList();
+    }
+
+    /// <summary>
+    /// The hill's card as the Roster panel prints it at its camp (issue 1386 slice 3d, STORY's one extra map after the
+    /// keep): before it is answered, the two commands, or <c>fight</c> alone with the reason <c>reseal</c> is closed; after
+    /// <c>fight</c>, the march it waits on. Empty at every other camp.
+    /// </summary>
+    public static IReadOnlyList<string> HillLines(CampaignRecord record, GameContent content)
+    {
+        if (record.IsFinished(content) || record.Hill(content) is null)
+        {
+            return Array.Empty<string>();
+        }
+
+        if (record.HillChose == HillChoice.Fight)
+        {
+            return new[] { "The card: fight. The company goes under the hill (march)." };
+        }
+
+        return record.HillRefusal(HillChoice.Reseal, content) is { } closed
+            ? new[] { $"The card: fight (the only answer: {closed})." }
+            : new[] { "The card: reseal (shut the door here; the campaign ends) or fight (go under the hill)." };
     }
 
     /// <summary>
@@ -1148,7 +1181,9 @@ public sealed class CampaignSession
     /// </summary>
     public static string MarchLine(CampaignRecord record, GameContent content, MapDefinition map)
     {
-        var line = $"March (march): map {record.MapIndex + 1}, {map.Name}.";
+        var line = record.MapIndex >= content.Campaign.Maps.Count
+            ? $"March (march): after the keep, {map.Name}."
+            : $"March (march): map {record.MapIndex + 1}, {map.Name}.";
         try
         {
             return line + " " + Objective.Line(record.Begin(map, content), content);
@@ -1401,6 +1436,11 @@ public sealed class CampaignSession
             else
             {
                 Execute(words, text, map);
+                if (_record.IsFinished(_content))
+                {
+                    // Issue 1386 slice 3d: reseal answers the hill's card and ends the campaign at this camp.
+                    return false;
+                }
             }
 
             if (strict && _rejections.Count > 0)
@@ -1510,6 +1550,12 @@ public sealed class CampaignSession
                 break;
             case ["meet", var side]:
                 Take(_record.Meet(side, _content), text);
+                break;
+            case ["reseal"]:
+                Take(_record.ChooseHill(HillChoice.Reseal, _content), text);
+                break;
+            case ["fight"]:
+                Take(_record.ChooseHill(HillChoice.Fight, _content), text);
                 break;
             case ["support", var a, var b]:
                 if (Take(_record.SeeSupport(a, b, _content), text))
@@ -1684,7 +1730,9 @@ public sealed class CampaignSession
     public static string SaveLine(CampaignRecord record, GameContent content) =>
         record.IsFinished(content)
             ? $"every map won, the purse holds {record.Purse}"
-            : $"before map {record.MapIndex + 1} of {content.Campaign.Maps.Count}, {record.NextMap(content).MapId}, the purse holds {record.Purse}";
+            : record.MapIndex >= content.Campaign.Maps.Count
+                ? $"after the keep, {record.NextMap(content).MapId}, the purse holds {record.Purse}"
+                : $"before map {record.MapIndex + 1} of {content.Campaign.Maps.Count}, {record.NextMap(content).MapId}, the purse holds {record.Purse}";
 
     private void PrintSaves()
     {
@@ -2457,7 +2505,9 @@ public sealed class CampaignSession
 
     /// <summary>The heading the screen opens with before <paramref name="map"/>.</summary>
     public static string ScreenHeading(CampaignRecord record, GameContent content, MapDefinition map) =>
-        $"-- Before map {record.MapIndex + 1} of {content.Campaign.Maps.Count}: {map.Name}; the purse holds {record.Purse} --";
+        record.MapIndex >= content.Campaign.Maps.Count
+            ? $"-- After the keep: {map.Name}; the purse holds {record.Purse} --"
+            : $"-- Before map {record.MapIndex + 1} of {content.Campaign.Maps.Count}: {map.Name}; the purse holds {record.Purse} --";
 }
 
 /// <summary>A writer that drops what it is given while <see cref="Quiet"/>, so a resumed battle replays unseen (issue 663).</summary>

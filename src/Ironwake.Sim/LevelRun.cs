@@ -276,7 +276,7 @@ public static class LevelRun
             var drills = new List<YardRun.Drill>();
             int? lost = null;
             int? lastPoints = null;
-            while (!record.IsFinished(content))
+            while (SimPick.Marching(record, content))
             {
                 record = SimPick.Made(record, content);
                 var priorPoints = FedPoints(record.Present(content), content);
@@ -329,7 +329,7 @@ public static class LevelRun
                 var fought = record.Fought(won, content);
                 exp.Add(FedExp.Of(record, fought, deployed, content));
                 record = fought.Drill(content);
-                if (yard != YardRun.Arm.Off && !record.IsFinished(content))
+                if (yard != YardRun.Arm.Off && SimPick.Marching(record, content))
                 {
                     var (drilled, drill) = YardRun.Camp(record, contentRoot, content, pull: yard == YardRun.Arm.On);
                     record = drilled;
