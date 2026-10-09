@@ -1,0 +1,906 @@
+The Mill, seed 3407, scheme TwoRollAverage
+Objective: Defeat every enemy by the end of turn 9. Captain Fenn and Maud must survive.
+The Mill  turn 1 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~....d
+ 5 ..^...~....c
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 .A....~.....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           11,4   hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     11,5   hp 22/22  Plain  group road, aggressive
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move captain 4,9
+Alder Fenn moves 1,8 -> 4,9 via 2,8 3,8 4,8
+The Mill  turn 1 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~....d
+ 5 ..^...~....c
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 ....A..B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           11,4   hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     11,5   hp 22/22  Plain  group road, aggressive
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> wait captain
+Alder Fenn waits
+The Mill  turn 1 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~....d
+ 5 ..^...~....c
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 ....A..B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           11,4   hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     11,5   hp 22/22  Plain  group road, aggressive
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> wait maud
+Maud waits
+The Mill  turn 1 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~....d
+ 5 ..^...~....c
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 ....A..B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           11,4   hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)  done
+c  road_brigand-1   Road Brigand L1 reaver     11,5   hp 22/22  Plain  group road, aggressive
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: move archer-2 7,4
+Archer 2 moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait archer-2
+Archer 2 waits
+enemy: move road_brigand-1 7,5
+Road Brigand moves 11,5 -> 7,5 via 10,5 9,5 8,5
+enemy: wait road_brigand-1
+Road Brigand waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Mill  turn 2 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~d....
+ 5 ..^...~c....
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 ....A..B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,4    hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     7,5    hp 22/22  Plain  group road, aggressive
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move captain 7,8
+Alder Fenn moves 4,9 -> 7,8 via 5,9 6,9 7,9
+The Mill  turn 2 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~d....
+ 5 ..^...~c....
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~A....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,4    hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     7,5    hp 22/22  Plain  group road, aggressive
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> wait captain
+Alder Fenn waits
+The Mill  turn 2 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~d....
+ 5 ..^...~c....
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~A....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,4    hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     7,5    hp 22/22  Plain  group road, aggressive
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> wait maud
+Maud waits
+The Mill  turn 2 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~d....
+ 5 ..^...~c....
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~A....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,4    hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)  done
+c  road_brigand-1   Road Brigand L1 reaver     7,5    hp 22/22  Plain  group road, aggressive
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: move archer-2 7,6
+Archer 2 moves 7,4 -> 7,6 via 7,5
+enemy: attack archer-2 captain
+Forecast Archer 2 -> Alder Fenn: acc 68% dmg 5 crit 0%; counter: none
+Archer 2 attacks Alder Fenn
+  Archer 2 hits Alder Fenn for 5 (hp 17)
+  Archer 2 hp 17, Alder Fenn hp 17
+enemy: move road_brigand-1 7,7
+Road Brigand moves 7,5 -> 7,7 via 7,6
+enemy: attack road_brigand-1 captain
+Forecast Road Brigand -> Alder Fenn: acc 49% dmg 10 crit 0%; counter: acc 88% dmg 11 crit 5%
+Road Brigand attacks Alder Fenn
+  Road Brigand hits Alder Fenn for 10 (hp 7)
+  Alder Fenn hits Road Brigand for 11 (hp 11)
+  Road Brigand hp 11, Alder Fenn hp 7
+Alder Fenn gains 10 exp (10)
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Mill  turn 3 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~d.^..
+ 7 ..^...~c....
+ 8 ......~A....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,6    hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        7,8    hp 7/22   Plain  captain
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+c  road_brigand-1   Road Brigand L1 reaver     7,7    hp 11/22  Plain  group road, aggressive
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> attack maud road_brigand-1
+Forecast Maud -> Road Brigand: acc 97% dmg 11 crit 3%; counter: none
+Maud attacks Road Brigand
+  Maud hits Road Brigand for 11 (hp 0)
+  Maud hp 17, Road Brigand hp 0
+Maud gains 30 exp (30)
+Road Brigand falls at 7,7
+The Mill  turn 3 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~d.^..
+ 7 ..^...~.....
+ 8 ......~A....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,6    hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        7,8    hp 7/22   Plain  captain
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)  done
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move captain 7,7
+Alder Fenn moves 7,8 -> 7,7
+The Mill  turn 3 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~d.^..
+ 7 ..^...~A....
+ 8 ......~.....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,6    hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        7,7    hp 7/22   Plain  captain
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)  done
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> attack captain archer-2
+Forecast Alder Fenn -> Archer 2: acc 87% dmg 11 crit 4%; counter: none
+Alder Fenn attacks Archer 2
+  Alder Fenn hits Archer 2 for 11 (hp 6)
+  Alder Fenn hp 7, Archer 2 hp 6
+Alder Fenn gains 10 exp (20)
+The Mill  turn 3 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~d.^..
+ 7 ..^...~A....
+ 8 ......~.....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,6    hp 6/17   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        7,7    hp 7/22   Plain  captain  done
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)  done
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: move archer-2 7,5
+Archer 2 moves 7,6 -> 7,5
+enemy: attack archer-2 captain
+Forecast Archer 2 -> Alder Fenn: acc 68% dmg 5 crit 0%; counter: none
+Archer 2 attacks Alder Fenn
+  Archer 2 hits Alder Fenn for 5 (hp 2)
+  Archer 2 hp 6, Alder Fenn hp 2
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Mill  turn 4 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~d....
+ 6 ......~..^..
+ 7 ..^...~A....
+ 8 ......~.....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,5    hp 6/17   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        7,7    hp 2/22   Plain  captain
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move captain 7,6
+Alder Fenn moves 7,7 -> 7,6
+The Mill  turn 4 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~d....
+ 6 ......~A.^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+d  archer-2         Archer L1 bowman           7,5    hp 6/17   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 2/22   Plain  captain
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> attack captain archer-2
+Forecast Alder Fenn -> Archer 2: acc 87% dmg 11 crit 4%; counter: none
+Alder Fenn attacks Archer 2
+  Alder Fenn hits Archer 2 for 11 (hp 0)
+  Alder Fenn hp 2, Archer 2 hp 0
+Alder Fenn gains 30 exp (50)
+Archer 2 falls at 7,5
+The Mill  turn 4 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~A.^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......B....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,6    hp 2/22   Plain  captain  done
+B  maud             Maud L1 chaplain           7,9    hp 17/17  Fort (heals 20 percent, 3 hp)
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move maud 7,7
+Maud moves 7,9 -> 7,7 via 7,8
+The Mill  turn 4 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~A.^..
+ 7 ..^...~B....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,6    hp 2/22   Plain  captain  done
+B  maud             Maud L1 chaplain           7,7    hp 17/17  Plain
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> item maud salve captain
+Maud uses Salve on captain (7 left)
+Alder Fenn heals 7 (hp 9)
+Maud gains 16 exp (46)
+The Mill  turn 4 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~A.^..
+ 7 ..^...~B....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,6    hp 9/22   Plain  captain  done
+B  maud             Maud L1 chaplain           7,7    hp 17/17  Plain  done
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Mill  turn 5 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~A.^..
+ 7 ..^...~B....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,6    hp 9/22   Plain  captain
+B  maud             Maud L1 chaplain           7,7    hp 17/17  Plain
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> item maud salve captain
+Maud uses Salve on captain (6 left)
+Alder Fenn heals 7 (hp 16)
+Maud gains 16 exp (62)
+The Mill  turn 5 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~A.^..
+ 7 ..^...~B....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,6    hp 16/22  Plain  captain
+B  maud             Maud L1 chaplain           7,7    hp 17/17  Plain  done
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The Mill  turn 6 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ============
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~A.^..
+ 7 ..^...~B....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,6    hp 16/22  Plain  captain
+B  maud             Maud L1 chaplain           7,7    hp 17/17  Plain
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move captain 8,3
+Alder Fenn moves 7,6 -> 8,3 via 7,5 7,4 7,3
+The mill group wakes (proximity)
+The Mill  turn 6 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ========A===
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~..^..
+ 7 ..^...~B....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        8,3    hp 16/22  Road  captain
+B  maud             Maud L1 chaplain           7,7    hp 17/17  Plain
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, awake
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> wait captain
+Alder Fenn waits
+The Mill  turn 6 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ========A===
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~..^..
+ 7 ..^...~B....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        8,3    hp 16/22  Road  captain  done
+B  maud             Maud L1 chaplain           7,7    hp 17/17  Plain
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, awake
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move maud 8,5
+Maud moves 7,7 -> 8,5 via 7,6 7,5
+The Mill  turn 6 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ========A===
+ 4 ......~.....
+ 5 ..^...~.B...
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        8,3    hp 16/22  Road  captain  done
+B  maud             Maud L1 chaplain           8,5    hp 17/17  Plain
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, awake
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> wait maud
+Maud waits
+The Mill  turn 6 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nab
+ 2 .^^...~..n..
+ 3 ========A===
+ 4 ......~.....
+ 5 ..^...~.B...
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           11,1   hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        8,3    hp 16/22  Road  captain  done
+B  maud             Maud L1 chaplain           8,5    hp 17/17  Plain  done
+a  soldier-1        Soldier L1 pikeman         10,1   hp 20/20  Hill  group mill, guard, awake
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: move archer-1 9,2
+Archer 1 moves 11,1 -> 9,2 via 11,2 10,2
+enemy: attack archer-1 captain
+Forecast Archer 1 -> Alder Fenn: acc 68% dmg 5 crit 0%; counter: none
+Archer 1 attacks Alder Fenn
+  Archer 1 hits Alder Fenn for 5 (hp 11)
+  Archer 1 hp 17, Alder Fenn hp 11
+enemy: move soldier-1 9,3
+Soldier moves 10,1 -> 9,3 via 10,2 10,3
+enemy: attack soldier-1 captain
+Forecast Soldier -> Alder Fenn: acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%
+Soldier attacks Alder Fenn
+  Soldier hits Alder Fenn for 8 (hp 3)
+  Alder Fenn hits Soldier for 9 (hp 11)
+  Soldier hp 11, Alder Fenn hp 3
+Alder Fenn gains 10 exp (60)
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+The Mill  turn 7 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~..b..
+ 3 ========Aa==
+ 4 ......~.....
+ 5 ..^...~.B...
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        8,3    hp 3/22   Road  captain
+B  maud             Maud L1 chaplain           8,5    hp 17/17  Plain
+a  soldier-1        Soldier L1 pikeman         9,3    hp 11/20  Road  group mill, guard, awake
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move captain 9,4
+Alder Fenn moves 8,3 -> 9,4 via 8,4
+The Mill  turn 7 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~..b..
+ 3 =========a==
+ 4 ......~..A..
+ 5 ..^...~.B...
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,4    hp 3/22   Plain  captain
+B  maud             Maud L1 chaplain           8,5    hp 17/17  Plain
+a  soldier-1        Soldier L1 pikeman         9,3    hp 11/20  Road  group mill, guard, awake
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> attack captain soldier-1 art full_measure
+Forecast Alder Fenn -> Soldier: acc 100% dmg 17 crit 24%; counter: acc 62% dmg 8 crit 0%
+  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 36 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
+Alder Fenn attacks Soldier
+  Alder Fenn hits Soldier for 17 (hp 0)
+  Alder Fenn hp 3, Soldier hp 0
+Alder Fenn gains 30 exp (90)
+Soldier falls at 9,3
+The Mill  turn 7 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~..b..
+ 3 ============
+ 4 ......~..A..
+ 5 ..^...~.B...
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,4    hp 3/22   Plain  captain  done
+B  maud             Maud L1 chaplain           8,5    hp 17/17  Plain
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move maud 9,5
+Maud moves 8,5 -> 9,5
+The Mill  turn 7 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~..b..
+ 3 ============
+ 4 ......~..A..
+ 5 ..^...~..B..
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,4    hp 3/22   Plain  captain  done
+B  maud             Maud L1 chaplain           9,5    hp 17/17  Plain
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> item maud salve captain
+Maud uses Salve on captain (5 left)
+Alder Fenn heals 7 (hp 10)
+Maud gains 16 exp (78)
+The Mill  turn 7 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~..b..
+ 3 ============
+ 4 ......~..A..
+ 5 ..^...~..B..
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,4    hp 10/22  Plain  captain  done
+B  maud             Maud L1 chaplain           9,5    hp 17/17  Plain  done
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: attack archer-1 captain
+Forecast Archer 1 -> Alder Fenn: acc 68% dmg 5 crit 0%; counter: none
+Archer 1 attacks Alder Fenn
+  Archer 1 hits Alder Fenn for 5 (hp 5)
+  Archer 1 hp 17, Alder Fenn hp 5
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+Alder Fenn is spent from the strike and cannot move or act this phase
+The Mill  turn 8 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~..b..
+ 3 ============
+ 4 ......~..A..
+ 5 ..^...~..B..
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,4    hp 5/22   Plain  captain  done
+B  maud             Maud L1 chaplain           9,5    hp 17/17  Plain
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> item maud salve captain
+Maud uses Salve on captain (4 left)
+Alder Fenn heals 7 (hp 12)
+Maud gains 16 exp (94)
+The Mill  turn 8 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~..b..
+ 3 ============
+ 4 ......~..A..
+ 5 ..^...~..B..
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,4    hp 12/22  Plain  captain  done
+B  maud             Maud L1 chaplain           9,5    hp 17/17  Plain  done
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> end
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
+enemy: attack archer-1 captain
+Forecast Archer 1 -> Alder Fenn: acc 68% dmg 5 crit 0%; counter: none
+Archer 1 attacks Alder Fenn
+  Archer 1 hits Alder Fenn for 5 (hp 7)
+  Archer 1 hp 17, Alder Fenn hp 7
+enemy: end
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
+The Mill  turn 9 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~..b..
+ 3 ============
+ 4 ......~..A..
+ 5 ..^...~..B..
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,4    hp 7/22   Plain  captain
+B  maud             Maud L1 chaplain           9,5    hp 17/17  Plain
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move maud 8,2
+Maud moves 9,5 -> 8,2 via 9,4 9,3 8,3
+The Mill  turn 9 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~.Bb..
+ 3 ============
+ 4 ......~..A..
+ 5 ..^...~.....
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,4    hp 7/22   Plain  captain
+B  maud             Maud L1 chaplain           8,2    hp 17/17  Plain
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> attack maud archer-1
+Forecast Maud -> Archer 1: acc 91% dmg 10 crit 2%; counter: none
+Maud attacks Archer 1
+  Maud hits Archer 1 for 10 (hp 7)
+  Maud hp 17, Archer 1 hp 7
+Maud gains 10 exp (4)
+Maud reaches level 2: hp +1
+The Mill  turn 9 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~.Bb..
+ 3 ============
+ 4 ......~..A..
+ 5 ..^...~.....
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 7/17   Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,4    hp 7/22   Plain  captain
+B  maud             Maud L2 chaplain           8,2    hp 18/18  Plain  done
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> move captain 9,3
+Alder Fenn moves 9,4 -> 9,3
+The Mill  turn 9 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~.Bb..
+ 3 =========A==
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+b  archer-1         Archer L1 bowman           9,2    hp 7/17   Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        9,3    hp 7/22   Road  captain
+B  maud             Maud L2 chaplain           8,2    hp 18/18  Plain  done
+holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
+> attack captain archer-1 art feint
+Forecast Alder Fenn -> Archer 1: acc 98% dmg 8 crit 4%; counter: none
+  Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 2 of 33 uses, 1 of them hit or miss
+Alder Fenn declares Feint with Iron Sword, spending 1 extra use
+Alder Fenn attacks Archer 1
+  Alder Fenn hits Archer 1 for 8 (hp 0)
+  Alder Fenn hp 7, Archer 1 hp 0
+Alder Fenn gains 30 exp (20)
+Alder Fenn reaches level 2: str +1 lck +1
+Archer 1 falls at 9,2
+The Mill  turn 9 of 9  player phase  rout  recall 3
+   012345678901
+ 0 ......~.....
+ 1 .^^...~..nn.
+ 2 .^^...~.Bn..
+ 3 =========A==
+ 4 ......~.....
+ 5 ..^...~.....
+ 6 ......~..^..
+ 7 ..^...~.....
+ 8 ......~.....
+ 9 .......F....
+
+A  captain          Alder Fenn L2 cadet        9,3    hp 7/22   Road  captain  done
+B  maud             Maud L2 chaplain           8,2    hp 18/18  Plain  done
+Battle won: rout; only recall is left
+Battle won: rout

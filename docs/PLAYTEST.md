@@ -4151,3 +4151,21 @@ Notes:
 - Not tense: turn 1, walking around the ford.
 
 — Code
+
+## 2026-10-08 — The Mill under 0338 — Chat
+
+Seed: 3407 (`play the_mill --seed 3407 --strict --script docs/transcripts/2026-10-08-the_mill-3407-chat.script`; Chat's script from round 503, played on ec39f7c and replayed by Code on main; transcript beside it). Floor: the captain and Maud at L1. Disclosed warm (0073): Chat sat the pre-0338 Mill (2250) and had read 0338's account of the cork, but found the cork itself on turn 2 with one `threat` call.   Result: **won by rout on turn 9 of 9.** Nobody fell, no Recall; three Salves and both of the captain's arts spent. The enemy landed all seven strikes; the captain went 22, 7, 2, 9, 16, 3, 10, 5, 7.
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 7. Full Measure was the only way to kill the soldier without a lethal counter, and it cost turn 8. That left turn 9 needing Maud and the captain both to land on the archer, and Feint was the right tool because of what turn 7 had cost. Two arts, each chosen for what it gives up.
+Notes: The cork at 7,8 is still the answer, but it is no longer free: the brigand's 10 and the archer's 5 on turn 2 set the captain's HP, and that HP decided turns 3, 4, 5, 7 and 8. A lesson that lasts seven turns, not one. 0338's kill criterion is not met; the lever stays. The turn-6 wake of the mill pair was deliberate, with Maud parked where `threat` showed the pair could not reach. The gate 1 shortfall goes to a planner trace first (#1418). Surprise is the short cell on both chairs (Code 1820 7/7/5), and the surprise here is learning that the cork has a bill; a 6, not a flaw.
+
+— Chat
+
+## 2026-10-09 — The keep, the Warden sample with a rooted stage 2 — Chat
+
+Seed: 5071 (`play docs/samples/ironwake_keep_warden.map --seed 5071 --strict --script docs/transcripts/2026-10-09-ironwake_keep_warden-5071-chat.script`; Chat's script from round 508, played on main after #1422 and replayed by Code; transcript beside it, stops at the start of turn 5).   **Played without `--level 8`:** all eleven at L1 against the sample's L6 enemies and an L14 Hask. The Sim reads this board at L8 (`--finale --level 8`), and Chat's earlier keep chairs (2300, 2410) used `--level 8`. So this is not a chair on the finale's front half either; it reads a company seven levels under the fight.   Result: stopped at the start of turn 5, five of eleven down (Keziah t2; Dunstan and Ansgar t3; Pell and Teodor t4), all three fronts fallen, the captain at 9/22 on 10,5 boxed by the hunter, soldier-4 and brigand-5. Hask never moved from 0,6, 44/44.
+Tension: 8/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 3 on the north. Ottilie 7, Brannock 8, Rook 8 (eating a 16 to 1 HP), then Wren's 86 % swing into a lethal counter to drop brigand-2 from 24 to 0 inside the wall.
+Notes: Chat names its own errors: turn 1 filled every gap and left no free tile beside anyone, so Maud had no one to salve on turn 2; a Recall spent learning that the rolls do not change; Dunstan left alone on the south with the hunter choosing the weakest front. The moment it stopped caring: turn 4's enemy phase, watching the hunter walk to whichever front was thinnest, understood and unanswerable. Not a Fun Gate entry and not a stage-2 read; the cold stage-2 chair stays owed, at `--level 8`.
+
+— Chat

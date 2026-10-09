@@ -1,0 +1,94 @@
+move wren 11,1
+move rook 11,2
+wait rook
+move pell 12,2
+wait pell
+move brannock 11,5
+wait brannock
+move keziah 11,6
+wait keziah
+move captain 12,5
+wait captain
+move maud 12,4
+wait maud
+move ottilie 12,6
+wait ottilie
+move dunstan 11,9
+wait dunstan
+move teodor 12,10
+wait teodor
+move ansgar 11,10
+wait ansgar
+wait wren
+end
+move keziah 10,6
+attack keziah brigand-1
+move ottilie 11,6
+attack ottilie brigand-1
+move brannock 10,5
+attack brannock soldier-1
+move pell 11,5
+attack pell soldier-1
+move ansgar 9,7
+attack ansgar brigand-1
+canto ansgar 9,8
+move rook 9,6
+attack rook soldier-1
+recall 36
+move brannock 11,4
+move keziah 10,6
+attack keziah brigand-1
+move ottilie 11,6
+attack ottilie brigand-1
+move ansgar 9,7
+attack ansgar brigand-1
+canto ansgar stay
+move pell 11,5
+attack pell soldier-1
+move captain 10,5
+wait captain
+wait brannock
+move maud 12,5
+wait maud
+move rook 12,4
+wait rook
+move wren 12,3
+wait wren
+move dunstan 10,9
+wait dunstan
+move teodor 10,10
+wait teodor
+end !
+move pell 10,6
+attack pell soldier-1
+move ottilie 11,3
+attack ottilie brigand-2
+move brannock 10,1
+attack brannock brigand-2
+move rook 11,2
+attack rook brigand-2
+move maud 13,3
+item maud salve wren
+move ansgar 9,8
+attack ansgar soldier-2
+move teodor 9,10
+attack teodor soldier-2 !
+move wren 12,1
+attack wren brigand-2 !
+move dunstan 12,9
+wait dunstan
+wait captain
+end !
+move maud 12,2
+item maud salve rook
+move ottilie 9,2
+attack ottilie brigand-3
+move brannock 9,1
+attack brannock brigand-3
+move pell 9,7
+attack pell soldier-2
+attack teodor soldier-2 !
+move wren 10,1
+wait wren
+wait captain
+end !
