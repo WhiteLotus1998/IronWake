@@ -186,6 +186,16 @@ public sealed class PlaySession
     /// <summary>The fielded finale company's header line under <c>--company</c> (issue 1217), printed after the map line; null otherwise.</summary>
     internal string? CompanyLine { get; init; }
 
+    /// <summary>
+    /// The line under the map line when a <c>deploy: all</c> map opens without <c>--level</c> (issue 1424):
+    /// the Sim reads such a board only at the finale's level, so a chair at the file levels is told so
+    /// before its first turn. Null otherwise. Presentation only; the play is not refused.
+    /// </summary>
+    internal string? LevelNote { get; init; }
+
+    /// <summary>The <see cref="LevelNote"/> text for a <c>deploy: all</c> map opened without <c>--level</c>.</summary>
+    internal static string FinaleLevelNote => $"note: this map is read at --level {FinaleCompanies.DefaultLevel} (the finale); the company is at its file levels";
+
     /// <summary>The board as it stands.</summary>
     internal BattleState State => _state;
 
@@ -407,7 +417,7 @@ public sealed class PlaySession
             return new ProtocolSession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, omniscient) { ConfirmLethal = confirmLethal }.Run(input);
         }
 
-        var session = new PlaySession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, scripted: script is not null) { ConfirmLethal = confirmLethal, CompanyLine = companyLine };
+        var session = new PlaySession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, scripted: script is not null) { ConfirmLethal = confirmLethal, CompanyLine = companyLine, LevelNote = map.DeploysAll && level is null ? FinaleLevelNote : null };
         var code = session.Play(input, strict, seed);
         if (log is not null)
         {
@@ -569,6 +579,11 @@ public sealed class PlaySession
         if (CompanyLine is not null)
         {
             _out.WriteLine(CompanyLine);
+        }
+
+        if (LevelNote is not null)
+        {
+            _out.WriteLine(LevelNote);
         }
 
         if (_state.Map.Certification is { } trialHeader)

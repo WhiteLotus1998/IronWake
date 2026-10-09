@@ -17,7 +17,7 @@ namespace Ironwake.Sim;
 public static class FinaleRun
 {
     /// <summary>The level the company is expected to stand at on the keep (provisional; FinaleStrengthTests holds the bosses to it).</summary>
-    public const int DefaultLevel = 8;
+    public const int DefaultLevel = FinaleCompanies.DefaultLevel;
 
     /// <summary>Story members beside the captain in the depleted company (issue 692; <see cref="FinaleCompanies.DepletedStory"/>).</summary>
     public const int DepletedStory = FinaleCompanies.DepletedStory;

@@ -19,6 +19,9 @@ public enum FinaleCompany
 /// </summary>
 public static class FinaleCompanies
 {
+    /// <summary>The level the company is expected to stand at on the keep, and the level the Sim reads every <c>deploy: all</c> map at (provisional).</summary>
+    public const int DefaultLevel = 8;
+
     /// <summary>Story members beside the captain in the depleted company (issue 692).</summary>
     public const int DepletedStory = 5;
 

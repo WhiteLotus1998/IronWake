@@ -227,4 +227,40 @@ public class PlayCompanyTests
         Assert.DoesNotContain("company:", output);
         Assert.Matches(@"(?m)^\S\s+maud\s+Maud L8 ", output);
     }
+    private const string LevelNote = "note: this map is read at --level 8 (the finale); the company is at its file levels";
+
+    private static string Warden => Path.Combine(Repo, "docs", "samples", "ironwake_keep_warden.map");
+
+    [Fact]
+    public void PlayOnADeployAllMapWithoutLevelNamesTheFinaleLevelUnderTheMapLine()
+    {
+        foreach (var map in new[] { Warden, CampaignKeep })
+        {
+            var output = Play(out var exit, map, "--seed", "5071");
+
+            Assert.NotEqual(2, exit);
+            Assert.Matches($@"(?m)^.+, seed 5071, scheme \S+\n{System.Text.RegularExpressions.Regex.Escape(LevelNote)}\n", output.ReplaceLineEndings("\n"));
+            Assert.Matches(@"(?m)^\S\s+maud\s+Maud L[1-7] ", output);
+        }
+    }
+
+    [Fact]
+    public void PlayOnADeployAllMapWithLevelPrintsNoLevelNote()
+    {
+        Assert.DoesNotContain(LevelNote, Play(out _, Warden, "--seed", "5071", "--level", "8"));
+        Assert.DoesNotContain(LevelNote, Play(out _, CampaignKeep, "--seed", "3", "--level", "8", "--company", "depleted"));
+    }
+
+    [Fact]
+    public void PlayOnAMapWithoutDeployAllPrintsNoLevelNote()
+    {
+        Assert.DoesNotContain("note: this map is read at", Play(out _, "the_tollgate", "--seed", "3"));
+    }
+
+    [Fact]
+    public void FinaleLevelNoteNamesTheSimsFinaleLevel()
+    {
+        Assert.Equal(FinaleRun.DefaultLevel, FinaleCompanies.DefaultLevel);
+        Assert.Contains($"--level {FinaleRun.DefaultLevel} ", LevelNote);
+    }
 }
