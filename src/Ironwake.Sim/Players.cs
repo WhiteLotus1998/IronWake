@@ -356,6 +356,11 @@ public sealed class HeuristicPlayer : IPlayer
 
         var arms = Arms(content, unit);
         var captains = CaptainsTiles(state, content, unit);
+        if (Finisher(state, content, unit, tiles.Where(t => !captains.Contains(t)).ToList(), enemies) is { } finish)
+        {
+            return WithMove(unit, finish.Tile, new Attack(unit.Id, finish.TargetId, finish.Slot == unit.EquippedSlot(content) ? null : finish.Slot, finish.Art));
+        }
+
         Option? best = null;
         if (arms.Count > 0)
         {
@@ -443,7 +448,154 @@ public sealed class HeuristicPlayer : IPlayer
         var destination = weapon is null && arms.Count == 0 && state.Map.Win is not (WinCondition.Seize or WinCondition.Escape) && Healer(content, unit)
             ? HealerWalk(state, content, unit, reach, enemies, Grounding.MovementOf(unit, content), captains)
             : Approach(state, content, unit, weapon, reach, enemies, enemyReach, Grounding.MovementOf(unit, content), CaptainsTiles(state, content, unit));
+        if (Clear(state, content, unit, tiles.Where(t => !captains.Contains(t)).ToList(), enemies, destination ?? unit.At) is { } clear)
+        {
+            destination = clear;
+        }
+
         return WithMove(unit, destination ?? unit.At, Idle(state, content, unit, destination));
+    }
+
+    /// <summary>
+    /// The hit at or above which the finisher is declared whatever the veto's sum says (issue 1441, Table round 535;
+    /// Code's number, open): a miss leaves him where the sum prices, and at this hit the miss is rare enough to take.
+    /// </summary>
+    public const int FinisherHit = 90;
+
+    /// <summary>A finisher <see cref="Finisher"/> found: the art, the slot it strikes from, the tile and the boss.</summary>
+    public sealed record Finish(string Art, int Slot, Coord Tile, string TargetId, int Hit);
+
+    /// <summary>
+    /// Whether <paramref name="boss"/>'s fall ends the map (issue 1441): on Defeat Boss, a boss that would not swallow
+    /// (<see cref="Swallow.Takes"/>: it carries no stage, or has swallowed), the only boss standing, with every boss spawn
+    /// fired. Stage 1 Hask is not one; his fall is the swallow.
+    /// </summary>
+    public static bool EndsTheMap(BattleState state, BattleUnit boss) =>
+        state.Map.Win == WinCondition.DefeatBoss && boss is { IsBoss: true, Side: Side.Enemy } && !Swallow.Takes(boss)
+        && state.UnitsOf(Side.Enemy).Count(u => u.IsBoss) == 1 && state.Map.BossSpawns().All(e => state.HasFired(e.Name));
+
+    /// <summary>
+    /// The finisher (issue 1441, Table round 535): an art <paramref name="unit"/> knows with a per-map charge
+    /// (Full Measure) that kills a swallowed boss whose fall ends the map (<see cref="EndsTheMap"/>, stage 2) on its one hit, a single strike
+    /// whose non-crit first hit reaches his HP, from a tile in <paramref name="tiles"/>. The Sim never declared an art
+    /// before, and on the Warden sample the captain had this kill on offer in 172 of full's stage-2 phases and swung
+    /// none (`keep-1441-captain.txt`). A landed hit ends the map, so only the miss is priced: for a unit the veto covers,
+    /// a tile is taken when it survives the miss there (<see cref="MissPrice"/>: two enemy phases for Full Measure, which
+    /// costs the next phase) or the hit is at least <see cref="FinisherHit"/>. The best hit wins, then the lower no-crit exposure, then row order. Null when none.
+    /// Stage 2 alone (DECISIONS/0380): on every Defeat Boss map it moved Harrow Weir, a tuned map, from 132 to 164 of 200,
+    /// which waits on the Table.
+    /// </summary>
+    public static Finish? Finisher(BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, IReadOnlyList<BattleUnit> enemies)
+    {
+        var arts = content.ArtsOf(unit.Unit).Where(a => a.Art.PerMap is not null).ToDictionary(a => a.Ability.Id, a => a.Art.CostsNextPhase);
+        var bosses = enemies.Where(e => e.Swallowed && EndsTheMap(state, e)).ToList();
+        if (arts.Count == 0 || bosses.Count == 0)
+        {
+            return null;
+        }
+
+        Finish? best = null;
+        var bestExposure = 0;
+        foreach (var boss in bosses)
+        {
+            foreach (var tile in tiles)
+            {
+                foreach (var (slot, _, _) in Arms(content, unit))
+                {
+                    foreach (var (art, costs) in arts)
+                    {
+                        if (Queries.Forecast(state, content, unit, boss, tile, slot, art) is not { } forecast
+                            || forecast.Attacker is not { Strikes: true, Doubles: false } side
+                            || side.FirstHit(crit: false) + side.Stoop < boss.Hp)
+                        {
+                            continue;
+                        }
+
+                        var exposure = LosesTheMap(state, unit) ? MissPrice(state, content, unit, tile, boss, slot, costs) : 0;
+                        if (exposure >= unit.Hp && side.HitChance < FinisherHit)
+                        {
+                            continue;
+                        }
+
+                        var finish = new Finish(art, slot, tile, boss.Id, side.HitChance);
+                        if (best is null || finish.Hit > best.Hit || (finish.Hit == best.Hit && (exposure < bestExposure
+                            || (exposure == bestExposure && (tile.Y, tile.X).CompareTo((best.Tile.Y, best.Tile.X)) < 0))))
+                        {
+                            (best, bestExposure) = (finish, exposure);
+                        }
+                    }
+                }
+            }
+        }
+
+        return best;
+    }
+
+    /// <summary>
+    /// What a missed finisher from <paramref name="tile"/> costs <paramref name="unit"/> (Table rounds 536, 537): the veto's
+    /// no-crit sum after a plain strike on <paramref name="boss"/>, and for an art that costs the next phase, which leaves
+    /// him on that tile through two enemy phases (<c>Resolver</c>'s <c>Spent</c>), the sum twice with the second phase's
+    /// Frozen Iron landing in place of the first's (the dose climbs a step a landing, <see cref="Swallow.Step"/>; a held
+    /// first landing lands the set dose second).
+    /// </summary>
+    public static int MissPrice(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit boss, int slot, bool costsNextPhase)
+    {
+        var sum = Exposure.Of(state, content, unit, tile, boss, slot).NoCrit;
+        if (!costsNextPhase)
+        {
+            return sum;
+        }
+
+        var enemy = unit.Side == Side.Player ? Side.Enemy : Side.Player;
+        var first = Swallow.NextLanding(state, unit.Side);
+        var second = Swallow.Casts(state, enemy) ? state.FrozenIron + (state.FrozenIronHeld ? 0 : Swallow.Step(state, enemy)) : 0;
+        return 2 * sum - first + second;
+    }
+
+    /// <summary>
+    /// The captain standing clear in stage 2 (issue 1441, Table round 535): with a swallowed boss standing whose fall ends
+    /// the map, when the captain's walk (or his stand) ends on <paramref name="end"/>, a tile that boss's arms or line strike
+    /// reach (<see cref="InBossReach"/>), the tile of <paramref name="tiles"/> the boss does not reach and whose no-crit sum
+    /// stays under his HP, nearest <paramref name="end"/>, then the lower sum, then row order. On the Warden sample he ended
+    /// 198 stage-2 phases in Hask's reach, 129 of them walked in, and dealt him 27 damage in 164 games: the dose's
+    /// body, not a striker. Null for anyone else, outside stage 2, when <paramref name="end"/> is already clear, or when
+    /// no tile is.
+    /// </summary>
+    public static Coord? Clear(BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, IReadOnlyList<BattleUnit> enemies, Coord end)
+    {
+        if (!unit.IsCaptain || unit.Moved || enemies.FirstOrDefault(e => e.Swallowed && EndsTheMap(state, e)) is not { } boss
+            || !InBossReach(state, content, boss, end))
+        {
+            return null;
+        }
+
+        return tiles
+            .Where(t => !InBossReach(state, content, boss, t))
+            .Select(t => (Tile: t, Sum: Exposure.Of(state, content, unit, t).NoCrit))
+            .Where(t => t.Sum < unit.Hp)
+            .OrderBy(t => t.Tile.DistanceTo(end))
+            .ThenBy(t => t.Sum)
+            .ThenBy(t => t.Tile.Y)
+            .ThenBy(t => t.Tile.X)
+            .Select(t => (Coord?)t.Tile)
+            .FirstOrDefault();
+    }
+
+    /// <summary>
+    /// Whether <paramref name="boss"/> can strike <paramref name="tile"/> in his coming phase (issue 1441): an arm in range
+    /// from his tile or, unless he holds, from any tile he can end on, or his line strike's cross (<see cref="LineStrike"/>).
+    /// </summary>
+    public static bool InBossReach(BattleState state, GameContent content, BattleUnit boss, Coord tile)
+    {
+        var arms = Arms(content, boss);
+        if (arms.Any(a => a.Weapon.InRange(tile.DistanceTo(boss.At)))
+            || (LineStrike.Of(content, boss) is { } line && LineStrike.Cross(state, content, boss.At, line.Reach).Contains(tile)))
+        {
+            return true;
+        }
+
+        return boss.Behavior != Behavior.Hold
+            && state.ReachOf(boss, content).Destinations.Any(d => arms.Any(a => a.Weapon.InRange(tile.DistanceTo(d))));
     }
 
     /// <summary>
