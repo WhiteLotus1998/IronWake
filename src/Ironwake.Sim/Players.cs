@@ -837,11 +837,21 @@ public sealed class HeuristicPlayer : IPlayer
     public static bool LosesTheMap(BattleState state, BattleUnit unit) =>
         unit.IsCaptain || (state.Map.ProtectId is { } protectId && string.Equals(unit.Id, protectId, StringComparison.Ordinal));
 
-    /// <summary>A heal when one is wanted: a healing spell on the most wounded ally below half, else a consumable on itself below half, from the safest tile that allows it.</summary>
+    /// <summary>
+    /// A heal when one is wanted: a healing spell on the most wounded ally below half, else a consumable on itself below
+    /// half, from the safest tile that allows it. Safest is the lowest no-crit exposure for a unit the veto covers, and the
+    /// fewest enemies able to end beside the tile for the rest; a healer with no weapon (issue 1441, Table rounds 533 and
+    /// 534) ranks by the no-crit exposure first and never casts from a tile whose no-crit sum reaches her HP, so with only
+    /// lethal tiles in reach of the patient she heals no one and walks instead. Without the rule the keep's chaplain healed
+    /// from the tile the fewest enemies reached, however hard one of them hit, and 40 of her 83 depleted falls came after a heal.
+    /// </summary>
     private static IReadOnlyList<Command>? Heal(BattleState state, GameContent content, BattleUnit unit, List<Coord> tiles, List<Reach> enemyReach)
     {
         var unitClass = content.Class(unit.Unit.ClassId);
-        var safest = tiles.OrderBy(t => LosesTheMap(state, unit) ? Exposure.Of(state, content, unit, t).NoCrit : enemyReach.Count(r => r.CanEnd(t))).ThenBy(t => t).ToList();
+        var careful = LosesTheMap(state, unit) || (Arms(content, unit).Count == 0 && Healer(content, unit));
+        var exposure = careful ? tiles.ToDictionary(t => t, t => Exposure.Of(state, content, unit, t).NoCrit) : null;
+        var guarded = !LosesTheMap(state, unit) && exposure is not null;
+        var safest = tiles.OrderBy(t => exposure is null ? 0 : exposure[t]).ThenBy(t => LosesTheMap(state, unit) ? 0 : enemyReach.Count(r => r.CanEnd(t))).ThenBy(t => t).ToList();
         for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
         {
             var stack = unit.Unit.Inventory.Items[slot];
@@ -863,6 +873,11 @@ public sealed class HeuristicPlayer : IPlayer
 
             foreach (var tile in safest)
             {
+                if (guarded && exposure![tile] >= unit.Hp)
+                {
+                    break;
+                }
+
                 BattleUnit? wounded = null;
                 foreach (var ally in state.UnitsOf(Side.Player))
                 {
@@ -975,6 +990,40 @@ public sealed class HeuristicPlayer : IPlayer
             var key = tending
                 ? (remaining, 0, cost, tile)
                 : (remaining <= unitClass.Mov ? 0 : 1, remaining, cost, tile);
+            if (destination is null || key.CompareTo(bestKey) < 0)
+            {
+                bestKey = key;
+                destination = tile;
+            }
+        }
+
+        return destination ?? StepBack(state, content, unit, reach, toward, captains);
+    }
+
+    /// <summary>
+    /// Where a healer with no weapon goes when no exposure-0 tile closes on the ally she walks to (issue 1441, Table rounds
+    /// 533 and 534): when some enemy's no-crit strike reaches the tile she stands on, the exposure-0 tile nearest that ally
+    /// by the steps left, then the cheapest, then row order; null when she already stands at exposure 0 or no tile in her
+    /// reach is, and she waits. Without it she waited on the tile her last heal left her on, and 42 of her 83 depleted
+    /// falls came after such a wait. No exposed fallback: 0377's screen showed a healer who arrives hurt does not pay.
+    /// </summary>
+    private static Coord? StepBack(BattleState state, GameContent content, BattleUnit unit, Reach reach, Distances toward, IReadOnlySet<Coord> captains)
+    {
+        if (Exposure.Of(state, content, unit, unit.At).NoCrit == 0)
+        {
+            return null;
+        }
+
+        Coord? destination = null;
+        (int, int, Coord) bestKey = default;
+        foreach (var tile in reach.Destinations)
+        {
+            if (tile == unit.At || !MayEndOn(state, content, unit, tile) || captains.Contains(tile) || Exposure.Of(state, content, unit, tile).NoCrit > 0)
+            {
+                continue;
+            }
+
+            var key = (toward.From(tile) ?? int.MaxValue, reach.CostTo(tile)!.Value, tile);
             if (destination is null || key.CompareTo(bestKey) < 0)
             {
                 bestKey = key;

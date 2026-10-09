@@ -20,6 +20,8 @@ public class FullCampaignTests
     private const string Difficulty = "recruit";
     /// <summary>The camp variant: 20 lost the field once the Mill's fort went south (issue 1210), 30 map 6 once the planner left a corked captain its no-counter tile (issue 1206); 44 keeps its side map and its spent purse.</summary>
     private const int Variant = 44;
+    /// <summary>The committed script's variant: 44 lost the field once the unarmed healer stepped back from exposed tiles (issue 1441), and 6 wins it; the other reads keep <see cref="Variant"/>.</summary>
+    private const int ScriptVariant = 6;
 
     /// <summary>The side map the script takes (issue 1166): at levy floor three only a quest-off variant wins seed 644, so it names one.</summary>
     private const string Quest = "pell_1";
@@ -110,7 +112,7 @@ public class FullCampaignTests
     [Fact]
     public void CommittedScriptIsWhatTheSimWrites()
     {
-        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, Variant, Quest);
+        var written = CampaignScript.Write(Content, Fixture.RealContentDirectory(), Seed, Ironwake.Sim.Program.HandPlays(Fixture.RealContentDirectory()), Difficulty, permadeath: false, ScriptVariant, Quest);
 
         Assert.Null(written.LostOn);
         Assert.Equal(File.ReadAllText(ScriptPath()), written.Text);
