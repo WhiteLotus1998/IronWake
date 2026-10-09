@@ -32,10 +32,9 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **The Tollgate** (0073), **Brackwater Cut at dusk** (0078): `tuned`.
 - **Harrow Weir: `tuned` on the crest** (0088, 0100; limit 15). A crest mass freezing the Foreman is a solve (#1087); lever: the archer out of Pell's turn-5 reach.
 - **Saltmarsh Ford:** not tuned (0093, 0095). Samples: `wakes fort` (0339), the east pair (0340, `arrivals: wait`); overlap under `wakes` is pace (475-479); the pincer is both chairs' best turn; `thins` killed (0341). A sample until #1377 traces the stall; 40 is never reinterpreted without a record (482).
-- **The Rookery (0208):** no lever before a cold chair.
-- **The Counting House (311-321):** archer 11,2, limit 11. 441 covers the clock, not who can win: the house's Sworn Captain at Def 5, the card names his armour (#1375, 0343). Kill: a cold non-Lore chair leaves him unhit.
+- **The Rookery (0208):** no lever before a cold chair. **The Counting House (311-321):** archer 11,2, limit 11. 441 covers the clock, not who can win: the house's Sworn Captain at Def 5, the card names his armour (#1375, 0343). Kill: a cold non-Lore chair leaves him unhit.
 - **Sallow Grange:** the Reeve's walk-off is a fault; going home over `hold`, so a bait buys one open phase (482). `goes_home:` (0342) kept on a sample; 3400 still seizes. The hold (487) killed (0345): free on the Gate's 30 avoid, the hole.
-- **The Mill:** `holds:` (0279), limit 9 (0280), fort south (#1210). A free lesson is a tile (466, 467): the road brigand undoubled at L1 (0338); Chat's cold floor chair reads it.
+- **The Mill:** `holds:` (0279), limit 9 (0280), fort south (#1210). The road brigand undoubled at L1 (0338) stays (503: Chat 3407 8/7/6, the cork has a bill). 107 traced (0367): no planner fault; reading at the Table.
 - **The First Shrine (406-455; 0283, 0304, 0306):** south start, limit 10, the loft archer on the door's death, a held altar. **Kept, no lever, no chair owed** (455): the doorway cork (7,2) decides the held phase.
 - **The Undercroft (431):** the middle wins (4,4 corks the stair); the lector is scenery off the north route. Held for a cold chair: his reach over the desk, or 13,4.
 - **The Lazar House (420-440):** held bars, the queue (0303), limit 5 (0305); No lever before the Critic's cold chair.
@@ -48,19 +47,18 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **13.4 Grudges (0065, 0066):** a veto, -20 crit avoid on the sworn unit; killed if Chat's seed 23 replay (#331) changes no decision.
 - **13.5 the keep, 13.6 trials: provisional** (0059, 0057); Chat's camp play, cold Outrider trial (#73).
 - **13.7 Dusk: kept** on Escape; Brackwater at `dusk: 5` (0062), Sallow in daylight. Sight and hearing `?`, never stacked; hearing 4, printed (#765).
-- **13.10 Retreat (0037, #215):** a refugee holds until half HP; killed if Chat's cold `river_refuge_hold.map` changes no turn.
+- **13.10 Retreat (0037, #215):** a refugee holds to half HP; killed if Chat's cold `river_refuge_hold.map` moves no turn.
 - **13.14 Brace: kept** (0084; DESIGN 13.14): Wait on the start tile, struck at -15 hit until the side's next phase; pin and brace cancel, tuned in displayed numbers. Holds unread. Shipped on Saltmarsh (0091).
-- **13.15 Wildfire: kept on samples** (0085). 13.11-13.13 kept; 13.16, 13.17, 13.19 killed.
-- **13.21 The tide (0111):** kept if a journal shows a ford tile taken, refused or crossed for it (Chat's cold play).
+- 13.15 Wildfire kept on samples (0085); 13.11-13.13 kept; 13.16, 13.17, 13.19 killed.
+- **13.21 Tide (0111):** kept if a journal shows a ford tile taken, refused or crossed for it (Chat cold).
 - **13.22 The break (0112):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for it; on Saltmarsh (#606).
-- **13.24 The messenger (0135):** kept if a strike or blocker is spent on the runner (Chat's cold #680).
+- **13.24 Messenger (0135):** kept if a strike or blocker goes to the runner (Chat's cold #680).
 - **13.18 Lines on the board (#486):** one printed fact a line; killed if no play takes a command for it. Cadets (0097): Teodor and Wren's Canto kept. Talk kept on `saltmarsh_ford_talk.map` (378, 0258): binds, not yet costs. Next (264, lean): she won't shoot what another struck this phase.
-- **13.25 Rotten planks (0179):** killed if no play chooses the wear (Chat's cold #783).
+- **13.25 Planks (0179):** killed if no play picks the wear (Chat's cold #783).
 - **13.27 The dash: kept on its sample** (374, 0255). No borrowed step unless a `tuned` re-read shows it beat the clock. At dusk, winded is a bet.
 - **13.28 The wind: samples only, never the campaign** (Lotus, 0260). His beta play keeps or kills it.
 - **13.29 The one answer: kept on its sample** (376, 0257). Decides who enters the enemy phase whole; swarm lever unbuilt; a campaign `one_answer:` map fields a 1-2 answerer at a choke.
-- **13.30 The bell** (0267): parked.
-- **13.20 The keep as a home (0137, #687):** rooms cost repair budget; beds gate arrivals, a death frees none. Killed if the raid purse buys every room and wall in both plays.
+- 13.30 the bell parked (0267). **13.20 The keep as a home (0137, #687):** rooms cost repair budget; beds gate arrivals, a death frees none. Killed if the raid purse buys every room and wall in both plays.
 
 ## The campaign's story (186-211; 0121; DESIGN 14)
 
