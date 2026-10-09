@@ -466,6 +466,79 @@ public class SwallowTests
     }
 
     [Fact]
+    public void TheStageReadPlacesTheCompanyAtTheSwallowAndKeepsTheDamageByUnit()
+    {
+        var after = Swallowed(Start());
+        var hask = Hask(after);
+        var wren = after.Units.Single(u => u.Unit.Id == "wren");
+        var captain = Captain(after);
+
+        var stage = Ironwake.Sim.StageTwo.After(null, after, after, new GameEvent[] { new ShardSwallowed(hask.Id, hask.At, 20) }, Starter);
+        Assert.Equal(new Ironwake.Sim.StageTwo.Placed(captain.At.DistanceTo(hask.At), true), stage!.AtSwallow[captain.Id]);
+        Assert.Equal(after.UnitsOf(Side.Player).Count(), stage.AtSwallow.Count);
+
+        var diagonal = after.WithUnit(wren with { At = new Coord(5, 3) });
+        var struck = diagonal.WithUnit(Hask(diagonal) with { Hp = 16 }).WithUnit(wren with { At = new Coord(5, 3), Acted = true, Moved = true });
+        stage = Ironwake.Sim.StageTwo.After(stage, diagonal, struck, Array.Empty<GameEvent>(), Starter);
+        var beside = struck.WithUnit(Captain(struck) with { At = new Coord(3, 2) });
+        var hit = beside.WithUnit(Hask(beside) with { Hp = 9 }).WithUnit(Captain(beside) with { Acted = true, Moved = true });
+        stage = Ironwake.Sim.StageTwo.After(stage, beside, hit, Array.Empty<GameEvent>(), Starter);
+
+        Assert.Equal(new Ironwake.Sim.StageTwo.Dealt(0, 4), stage!.DamageBy[wren.Id]);
+        Assert.Equal(new Ironwake.Sim.StageTwo.Dealt(7, 0), stage.DamageBy[captain.Id]);
+        Assert.Empty(Ironwake.Sim.StageTwo.After(null, after, after, new GameEvent[] { new ShardSwallowed(hask.Id, hask.At, 20) })!.AtSwallow);
+    }
+
+    [Fact]
+    public void TheStageOneReadSplitsAnUnarmedHealersFallsByHerLastPhaseAndWhoStruckHer()
+    {
+        var start = Start();
+        var ivo = start.Units.Single(u => u.Unit.Id == "ivo");
+        var state = start.WithUnit(ivo with { Unit = Recruit("ivo", "chaplain", new Stats(19, 0, 6, 5, 7, 4, 4, 6, 4), "salve") });
+        var healer = state.Find(ivo.Id)!;
+        var soldier = state.Units.Single(u => u.Unit.ClassId != "iron_warden" && u.Side == Side.Enemy);
+        Assert.True(Ironwake.Sim.HeuristicPlayer.Healer(Starter, healer));
+
+        var stage = Ironwake.Sim.StageOne.After(null, state, state, new GameEvent[] { new PhaseBegan(Side.Player, 1) }, Starter);
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, Array.Empty<GameEvent>(), Starter, new Move(healer.Id, healer.At));
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, Array.Empty<GameEvent>(), Starter, new EndPhase());
+        var enemy = state with { Phase = Side.Enemy };
+        var fell = enemy.WithoutUnit(healer.Id);
+        stage = Ironwake.Sim.StageOne.After(stage, enemy, fell, new GameEvent[] { new CombatFought(soldier.Id, healer.Id, 1, Side.Enemy, ValueList<StrikeEvent>.Empty, 20, 0) }, Starter);
+        stage = Ironwake.Sim.StageOne.After(stage, fell, fell, Array.Empty<GameEvent>(), Starter);
+
+        Assert.Equal(1, stage!.HealerFalls);
+        Assert.Equal(1, stage.HealerFallsBy["walk, on the board"]);
+
+        var waited = Ironwake.Sim.StageOne.After(null, state, state, new GameEvent[] { new PhaseBegan(Side.Player, 1) }, Starter);
+        waited = Ironwake.Sim.StageOne.After(waited, state, state, Array.Empty<GameEvent>(), Starter, new EndPhase());
+        waited = Ironwake.Sim.StageOne.After(waited, enemy, fell, new GameEvent[] { new CombatFought("stranger", healer.Id, 1, Side.Enemy, ValueList<StrikeEvent>.Empty, 20, 0) }, Starter);
+        Assert.Equal(1, waited!.HealerFallsBy["wait, arrived after"]);
+    }
+
+    [Fact]
+    public void TheHealerFallLineSumsTheSplitAndTheShapeLineNamesWhoDealtTheStageTwoDamage()
+    {
+        var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
+        var falls = System.Collections.Immutable.ImmutableDictionary<string, int>.Empty.Add("heal, on the board", 3).Add("wait, arrived after", 1).Add("walk, on the board", 1);
+        var fallen = new Ironwake.Sim.GameResult(BattleResult.Lost, 12, mix, LossCause.Timeout) { StageOne = new Ironwake.Sim.StageOne("h", 3) { HealerFalls = 5, HealerFallsBy = falls } };
+        Assert.Equal(
+            "unarmed healer falls in stage 1 5, by her last closed phase: after a heal 3, after a walk 1, after a wait 1, in her own phase 0; struck by a unit on the board as it closed 4, by one that arrived after 1, unread 0 (heal, on the board 3, wait, arrived after 1, walk, on the board 1)",
+            Ironwake.Sim.FinaleRun.HealerFallLine(new[] { fallen }));
+        Assert.Null(Ironwake.Sim.FinaleRun.HealerFallLine(new[] { new Ironwake.Sim.GameResult(BattleResult.Won, 5, mix) }));
+
+        var placed = System.Collections.Immutable.ImmutableDictionary<string, Ironwake.Sim.StageTwo.Placed>.Empty
+            .Add("captain", new Ironwake.Sim.StageTwo.Placed(1, true)).Add("pell", new Ironwake.Sim.StageTwo.Placed(3, false)).Add("maud", new Ironwake.Sim.StageTwo.Placed(5, false));
+        var dealt = System.Collections.Immutable.ImmutableDictionary<string, Ironwake.Sim.StageTwo.Dealt>.Empty
+            .Add("pell", new Ironwake.Sim.StageTwo.Dealt(4, 10)).Add("captain", new Ironwake.Sim.StageTwo.Dealt(6, 0));
+        var reached = new Ironwake.Sim.GameResult(BattleResult.Won, 9, mix) { Stage = new Ironwake.Sim.StageTwo(4, 0) { AtSwallow = placed, DamageBy = dealt } };
+        Assert.Equal(
+            "stage 2 shape: at the swallow, median distance to him 3, farthest 5, on tiles he reaches 1; by unit: pell 3 tiles in 1, dealt 4 in reach 10 beyond, captain 1 tiles in 1, dealt 6 in reach 0 beyond, maud 5 tiles in 1, dealt 0 in reach 0 beyond",
+            Ironwake.Sim.FinaleRun.ShapeLine(new[] { reached }));
+        Assert.Null(Ironwake.Sim.FinaleRun.ShapeLine(new[] { new Ironwake.Sim.GameResult(BattleResult.Won, 5, mix) }));
+    }
+
+    [Fact]
     public void TheStageOneReadSplitsTheCompanysActionsByWhetherTheyStruckHim()
     {
         var state = Start();
