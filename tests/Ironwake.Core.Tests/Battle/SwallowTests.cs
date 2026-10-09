@@ -7,7 +7,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// Hask's second stage (issue 1385, Lotus's rework, Table round 487; numbers provisional on #1247), on the pitched
 /// Iron Warden (<c>hask_warden</c>) alone. Stage 1's bar reaching 0 is the swallow: he stays on his tile on a fresh
 /// bar of 20 with Def and Res +3 (issue 1395; 24 in round 502, 40 before), and from his next phase start Frozen Iron lands on every unit on the board, his
-/// side too but never him (Lotus, 2026-10-09), flat past Def and Res, 2 and then 2 more each of his phases, uncapped; it lands at his side's phase
+/// side too but never him (Lotus, 2026-10-09), flat past Def and Res, 0 and then 3 more each of his phases (issue 1395, round 518; 2 and 2 before), uncapped; it lands at his side's phase
 /// start alone (issue 1395). The Kin heals him 2 at his phase start (issue 1395; 4 in round 502, 6 before), after the Frozen Iron. His fall in stage 2 drains the cold and leaves the shard on his tile.
 /// </summary>
 public class SwallowTests
@@ -37,6 +37,11 @@ public class SwallowTests
     private static BattleState Start(ulong seed = 1385) =>
         BattleFixture.Start(seed, ValueList<Unit>.Of(Hale, Wren, Ivo), Hall);
 
+    /// <summary>The Warden's first Frozen Iron landing and its step (Table round 518).</summary>
+    private static int Dose => Starter.Unit("hask_warden").Swallow!.Dose;
+
+    private static int Step => Starter.Unit("hask_warden").Swallow!.Step;
+
     private static BattleUnit Captain(BattleState state) => state.Units.Single(u => u.IsCaptain);
 
     private static BattleUnit Hask(BattleState state) => state.Units.Single(u => u.Unit.ClassId == "iron_warden");
@@ -52,6 +57,7 @@ public class SwallowTests
         var stage = Starter.Unit("hask_warden").Swallow!;
 
         Assert.Equal((20, 3, 3, 2), (stage.Hp, stage.Def, stage.Res, stage.Heal));
+        Assert.Equal((0, 3), (stage.Dose, stage.Step));
         Assert.True(stage.Rooted);
         Assert.True(stage.Late);
         Assert.Contains("pommel is empty", stage.Description);
@@ -82,7 +88,7 @@ public class SwallowTests
             Assert.Equal(Starter.StatsOf(Starter.Unit("hask_warden")).Def + 3, Starter.StatsOf(hask.Unit).Def);
             Assert.Equal(Starter.StatsOf(Starter.Unit("hask_warden")).Res + 3, Starter.StatsOf(hask.Unit).Res);
             Assert.Contains("pommel is empty", hask.Unit.Description);
-            Assert.Equal(Swallow.FirstDose, result.Next.FrozenIron);
+            Assert.Equal(Dose, result.Next.FrozenIron);
             Assert.False(result.Next.Outcome.IsOver);
         }
 
@@ -112,7 +118,7 @@ public class SwallowTests
     [Fact]
     public void FrozenIronLandsOnEveryUnitAtHisNextPhaseStartPastDefAndRes()
     {
-        var state = Swallowed(Start()) with { Phase = Side.Player };
+        var state = Swallowed(Start()) with { Phase = Side.Player, FrozenIron = 2 };
         var before = state.Units.ToDictionary(u => u.Id, u => u.Hp);
 
         var result = state.Try(new EndPhase());
@@ -122,11 +128,11 @@ public class SwallowTests
         Assert.Equal(before.Keys.Where(id => id != Hask(state).Id).Order(StringComparer.Ordinal), fell.Struck.Order(StringComparer.Ordinal));
         Assert.Equal(fell.Struck.Select(id => before[id] - 2), fell.HpAfter);
         Assert.All(result.Next.Units.Where(u => !u.Swallowed), u => Assert.Equal(before[u.Id] - 2, u.Hp));
-        Assert.Equal(4, result.Next.FrozenIron);
+        Assert.Equal(2 + Step, result.Next.FrozenIron);
     }
 
     [Fact]
-    public void FrozenIronClimbsByTwoWithNoCap()
+    public void FrozenIronClimbsByItsStepWithNoCap()
     {
         var state = Swallowed(Start()) with { FrozenIron = 10 };
 
@@ -136,8 +142,8 @@ public class SwallowTests
 
         Assert.Equal(10, once.Events.OfType<FrozenIronFell>().Single().Amount);
         Assert.Equal(Side.Enemy, twice.Next.Phase);
-        Assert.Equal(12, twice.Events.OfType<FrozenIronFell>().Single().Amount);
-        Assert.Equal(14, twice.Next.FrozenIron);
+        Assert.Equal(10 + Step, twice.Events.OfType<FrozenIronFell>().Single().Amount);
+        Assert.Equal(10 + 2 * Step, twice.Next.FrozenIron);
     }
 
     [Fact]
@@ -164,7 +170,7 @@ public class SwallowTests
         var state = Taken(Start()) with { Phase = Side.Player };
         state = state.WithUnit(Hask(state) with { Hp = 18 });
         Assert.True(state.FrozenIronHeld);
-        Assert.Equal(Swallow.FirstDose, state.FrozenIron);
+        Assert.Equal(Dose, state.FrozenIron);
         var before = state.Units.ToDictionary(u => u.Id, u => u.Hp);
 
         var held = state.Try(new EndPhase());
@@ -174,14 +180,14 @@ public class SwallowTests
         Assert.Contains(new KinHealed(Hask(state).Id, 2, 20), held.Events);
         Assert.All(held.Next.Units.Where(u => !u.Swallowed), u => Assert.Equal(before[u.Id], u.Hp));
         Assert.False(held.Next.FrozenIronHeld);
-        Assert.Equal(Swallow.FirstDose, held.Next.FrozenIron);
+        Assert.Equal(Dose, held.Next.FrozenIron);
 
         var between = held.Next.Try(new EndPhase());
         var lands = between.Next.Try(new EndPhase());
 
         Assert.DoesNotContain(between.Events, e => e is FrozenIronFell);
-        Assert.Equal(Swallow.FirstDose, lands.Events.OfType<FrozenIronFell>().Single().Amount);
-        Assert.Equal(Swallow.FirstDose + Swallow.DoseStep, lands.Next.FrozenIron);
+        Assert.Equal(Dose, lands.Events.OfType<FrozenIronFell>().Single().Amount);
+        Assert.Equal(Dose + Step, lands.Next.FrozenIron);
     }
 
     [Fact]
@@ -194,7 +200,41 @@ public class SwallowTests
         var result = state.Try(new EndPhase());
 
         Assert.False(state.FrozenIronHeld);
-        Assert.Equal(Swallow.FirstDose, result.Events.OfType<FrozenIronFell>().Single().Amount);
+        Assert.Equal(Dose, result.Events.OfType<FrozenIronFell>().Single().Amount);
+    }
+
+    [Fact]
+    public void TheStagesDoseAndStepSetTheClimbAndADoseOfZeroStillLands()
+    {
+        var start = Start();
+        start = start.WithUnit(Hask(start) with { Kin = Hask(start).Kin! with { Late = false, Dose = 0, Step = 3 } });
+        var state = Taken(start) with { Phase = Side.Player };
+        var before = state.Units.ToDictionary(u => u.Id, u => u.Hp);
+        Assert.Equal(0, state.FrozenIron);
+
+        var first = state.Try(new EndPhase());
+
+        Assert.Equal(0, first.Events.OfType<FrozenIronFell>().Single().Amount);
+        Assert.All(first.Next.Units.Where(u => !u.Swallowed), u => Assert.Equal(before[u.Id], u.Hp));
+        Assert.Equal(3, first.Next.FrozenIron);
+
+        var second = first.Next.Try(new EndPhase()).Next.Try(new EndPhase());
+
+        Assert.Equal(3, second.Events.OfType<FrozenIronFell>().Single().Amount);
+        Assert.Equal(6, second.Next.FrozenIron);
+    }
+
+    [Fact]
+    public void AHeldDoseOfZeroRoundTripsThroughTheProtocol()
+    {
+        var start = Start();
+        start = start.WithUnit(Hask(start) with { Kin = Hask(start).Kin! with { Dose = 0, Step = 4 } });
+        var taken = Taken(start);
+
+        var read = Ironwake.Content.Protocol.ProtocolJson.ReadState(Ironwake.Content.Protocol.ProtocolJson.State(taken, Starter), Starter);
+
+        Assert.Equal((0, true), (read.FrozenIron, read.FrozenIronHeld));
+        Assert.Equal(Hask(taken).Kin, Hask(read).Kin);
     }
 
     [Fact]
@@ -203,7 +243,7 @@ public class SwallowTests
         var held = Taken(Start()) with { Phase = Side.Player };
 
         Assert.Equal(0, Swallow.NextLanding(held, Side.Player));
-        Assert.Equal(Swallow.FirstDose, Swallow.NextLanding(held with { FrozenIronHeld = false }, Side.Player));
+        Assert.Equal(Dose, Swallow.NextLanding(held with { FrozenIronHeld = false }, Side.Player));
     }
 
     [Fact]
@@ -217,7 +257,7 @@ public class SwallowTests
     [Fact]
     public void FrozenIronCanKill()
     {
-        var state = Swallowed(Start());
+        var state = Swallowed(Start()) with { FrozenIron = 2 };
         var wren = state.Units.Single(u => u.Unit.Id == "wren");
         state = state.WithUnit(wren with { Hp = 2 });
 
@@ -325,9 +365,21 @@ public class SwallowTests
         };
 
         Assert.Equal(
-            "stage 2 race: won 2, player phases to the kill 3: 1, 4: 1; landings before it 3: 1, 4: 1; clock deaths 0 in 1, 1 in 1, 2+ in 0; lost 2, the dose's first kill at landing 5: 1, none: 1",
+            "stage 2 race: won 2, player phases to the kill 3: 1, 4: 1; landings before it 3: 1, 4: 1; clock deaths 0 in 1, 1 in 1, 2+ in 0 (gate: 2+ in at most 10 %: ok); lost 2, the dose's first kill at landing 5: 1, none: 1",
             Ironwake.Sim.FinaleRun.RaceLine(games));
         Assert.Null(Ironwake.Sim.FinaleRun.RaceLine(new List<Ironwake.Sim.GameResult> { new(BattleResult.Won, 9, mix) }));
+    }
+
+    [Fact]
+    public void TheClockDeathGateFailsPastATenthOfWonGamesWithTwoDoseDeaths()
+    {
+        var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
+        var games = Enumerable.Range(0, 9).Select(_ => new Ironwake.Sim.GameResult(BattleResult.Won, 9, mix) { Stage = new Ironwake.Sim.StageTwo(6, 0) { PlayerPhases = 3, Landings = 3 } }).ToList();
+        games.Add(new(BattleResult.Won, 9, mix) { Stage = new Ironwake.Sim.StageTwo(6, 2) { PlayerPhases = 3, Landings = 3 } });
+
+        Assert.Contains("(gate: 2+ in at most 10 %: ok)", Ironwake.Sim.FinaleRun.RaceLine(games));
+        games.Add(new(BattleResult.Won, 9, mix) { Stage = new Ironwake.Sim.StageTwo(6, 2) { PlayerPhases = 3, Landings = 3 } });
+        Assert.Contains("(gate: 2+ in at most 10 %: FAILED)", Ironwake.Sim.FinaleRun.RaceLine(games));
     }
 
     [Theory]
@@ -538,7 +590,7 @@ public class SwallowTests
     [Fact]
     public void ADeathBeforeTheSwallowDrainsNoCold()
     {
-        var state = Swallowed(Start());
+        var state = Swallowed(Start()) with { FrozenIron = 2 };
         var wren = state.Units.Single(u => u.Unit.Id == "wren");
         state = state.WithUnit(wren with { Hp = 2 });
 
@@ -656,7 +708,7 @@ public class SwallowTests
         var swallowed = Swallowed(state);
         var lines = Ironwake.Cli.PlaySession.ShowLines(swallowed, Starter, Hask(swallowed));
         Assert.Contains(lines, l => l.Contains("pommel is empty"));
-        Assert.Contains(lines, l => l.Contains("Frozen Iron lands for 2"));
+        Assert.Contains(lines, l => l.Contains("Frozen Iron lands for 0, 3 more each time"));
     }
 
     [Fact]
@@ -672,14 +724,26 @@ public class SwallowTests
     }
 
     [Fact]
+    public void ANegativeDoseIsRefusedNamingTheField()
+    {
+        var units = Ironwake.Core.Tests.Content.Fixture.Units.Replace(
+            "\"inventory\": [ { \"item\": \"iron_sword\" } ] }",
+            "\"inventory\": [ { \"item\": \"iron_sword\" } ], \"swallow\": { \"hp\": 20, \"def\": 3, \"res\": 3, \"heal\": 2, \"dose\": -1 } }");
+
+        var e = Assert.Throws<ContentException>(() => ContentLoader.Parse(Ironwake.Core.Tests.Content.Fixture.Files(units: units)));
+
+        Assert.Equal(("recruit", "swallow.dose"), (e.Entry, e.Field));
+    }
+
+    [Fact]
     public void ASwallowRoundTripsThroughTheContentWriter()
     {
         var units = Ironwake.Core.Tests.Content.Fixture.Units.Replace(
             "\"inventory\": [ { \"item\": \"iron_sword\" } ] }",
-            "\"inventory\": [ { \"item\": \"iron_sword\" } ], \"swallow\": { \"hp\": 40, \"def\": 3, \"res\": 3, \"heal\": 6, \"late\": true, \"race\": true } }");
+            "\"inventory\": [ { \"item\": \"iron_sword\" } ], \"swallow\": { \"hp\": 40, \"def\": 3, \"res\": 3, \"heal\": 6, \"late\": true, \"race\": true, \"dose\": 0, \"step\": 3 } }");
         var content = ContentLoader.Parse(Ironwake.Core.Tests.Content.Fixture.Files(units: units));
 
-        Assert.Equal(new KinStage(40, 3, 3, 6, Late: true, Race: true), content.Unit("recruit").Swallow);
+        Assert.Equal(new KinStage(40, 3, 3, 6, Late: true, Race: true, Dose: 0, Step: 3), content.Unit("recruit").Swallow);
         Assert.Equal(content, ContentLoader.Parse(ContentSerializer.Write(content)));
     }
 }

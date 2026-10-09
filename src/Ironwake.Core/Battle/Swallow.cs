@@ -10,10 +10,12 @@ namespace Ironwake.Core;
 /// only what his lance and line reach from there. <paramref name="Late"/> starts the clock a phase late (Table rounds 507,
 /// 508, issue 1423): Frozen Iron first lands at his side's second phase start after the swallow, not its first. <paramref name="Race"/>
 /// makes stage 2 a race with no turn limit (Table rounds 514, 515, issue 1395): while he stands swallowed, the map's limit ends
-/// nothing, and stage 2 ends when he falls or the company does (<see cref="BattleState.Racing"/>). Read from a template's
+/// nothing, and stage 2 ends when he falls or the company does (<see cref="BattleState.Racing"/>). <paramref name="Dose"/> is
+/// what Frozen Iron lands for the first time and <paramref name="Step"/> what each later landing adds (Table round 518, issue
+/// 1395: the start against the step); a first dose of 0 still lands, the dose naming itself. Read from a template's
 /// <c>swallow</c> block in <c>units/</c>.
 /// </summary>
-public sealed record KinStage(int Hp, int Def, int Res, int Heal, string? Description = null, bool Rooted = false, bool Late = false, bool Race = false);
+public sealed record KinStage(int Hp, int Def, int Res, int Heal, string? Description = null, bool Rooted = false, bool Late = false, bool Race = false, int Dose = Swallow.FirstDose, int Step = Swallow.DoseStep);
 
 /// <summary>Stage 1's bar reached 0 and <paramref name="UnitId"/> swallowed the shard (issue 1385): stage 2 begins on <paramref name="Hp"/>, a fresh bar, on <paramref name="At"/>.</summary>
 public sealed record ShardSwallowed(string UnitId, Coord At, int Hp) : GameEvent;
@@ -38,17 +40,17 @@ public sealed record ColdDrained(string UnitId, Coord At) : GameEvent;
 /// tile, and takes the stage's numbers on a fresh bar (<see cref="Take"/>). That hit pays no kill EXP, frees no bond,
 /// swears no grudge and drops nothing; the hit's riders land on him as they would on a survivor. From his side's next
 /// phase start, at each of his side's phase starts (<see cref="Casts"/>, issue 1395), Frozen Iron lands on every unit
-/// on the board but him (Lotus, 2026-10-09: he is exempt, his own side is not), flat past Def and Res: <see cref="FirstDose"/>
-/// at the first, <see cref="DoseStep"/> more each after, with no cap (Lotus, 2026-10-09: it climbs until he dies) (<see cref="Fall"/>). It can kill; a unit it kills dies as any other. Then the Kin heals
+/// on the board but him (Lotus, 2026-10-09: he is exempt, his own side is not), flat past Def and Res: the stage's
+/// <see cref="KinStage.Dose"/> at the first, its <see cref="KinStage.Step"/> more each after, with no cap (Lotus, 2026-10-09: it climbs until he dies) (<see cref="Fall"/>). It can kill; a unit it kills dies as any other. Then the Kin heals
 /// him <see cref="KinStage.Heal"/> at his side's phase start, to max. When he falls in stage 2, the cold drains out
 /// of him and the shard lies on his tile (<see cref="ColdDrained"/>). Everything is board state, so Recall restores it.
 /// </summary>
 public static class Swallow
 {
-    /// <summary>Frozen Iron at its first landing (issue 1385).</summary>
+    /// <summary>Frozen Iron at its first landing when the stage names none (issue 1385, <see cref="KinStage.Dose"/>).</summary>
     public const int FirstDose = 2;
 
-    /// <summary>What each later landing adds (issue 1385).</summary>
+    /// <summary>What each later landing adds when the stage names none (issue 1385, <see cref="KinStage.Step"/>).</summary>
     public const int DoseStep = 2;
 
     /// <summary>Whether Frozen Iron passes <paramref name="unit"/> by: the swallowed boss who casts it (Lotus, 2026-10-09).</summary>
@@ -60,8 +62,9 @@ public static class Swallow
     /// <summary>
     /// The unit <paramref name="unitId"/>, at 0 HP on <paramref name="state"/>, swallows: its Def and Res rise by the
     /// stage's, its max HP becomes the stage's bar, it stands on that bar full, a <see cref="KinStage.Rooted"/> stage
-    /// holds its tile from then on, and Frozen Iron is set to land from the next phase start, or the one after for a
-    /// <see cref="KinStage.Late"/> stage (<see cref="BattleState.FrozenIronHeld"/>).
+    /// holds its tile from then on, and Frozen Iron is set to land for the stage's <see cref="KinStage.Dose"/> from the next
+    /// phase start, or the one after for a <see cref="KinStage.Late"/> stage (<see cref="BattleState.FrozenIronHeld"/>),
+    /// unless a swallow on this board already set it.
     /// </summary>
     public static BattleState Take(BattleState state, GameContent content, string unitId, List<GameEvent> events)
     {
@@ -80,29 +83,30 @@ public static class Swallow
         var set = state.FrozenIron > 0;
         return state.WithUnit(swallowed) with
         {
-            FrozenIron = set ? state.FrozenIron : FirstDose,
+            FrozenIron = set ? state.FrozenIron : stage.Dose,
             FrozenIronHeld = set ? state.FrozenIronHeld : stage.Late,
         };
     }
 
     /// <summary>
     /// The phase start's Frozen Iron and the Kin's heal (issue 1385), after the terrain's heal and burn: while
-    /// <see cref="BattleState.FrozenIron"/> is set and <paramref name="side"/> is his (<see cref="Casts"/>), every unit
+    /// <paramref name="side"/> is his (<see cref="Casts"/>), every unit
     /// on the board but a swallowed unit (<see cref="Spared"/>) takes it, never below 0, unless the landing is held (<see cref="BattleState.FrozenIronHeld"/>), when this
     /// phase start only lifts the hold; a unit it takes to 0 swallows if it may (<see cref="Takes"/>), else dies
     /// through <paramref name="died"/>; the next landing
-    /// climbs by <see cref="DoseStep"/>, uncapped. Then each swallowed unit of
+    /// climbs by the caster's <see cref="KinStage.Step"/>, uncapped. Then each swallowed unit of
     /// <paramref name="side"/> still standing heals its stage's <see cref="KinStage.Heal"/>, to max.
     /// </summary>
     public static BattleState Fall(BattleState state, GameContent content, Side side, List<GameEvent> events, Func<BattleState, BattleUnit, BattleState> died)
     {
-        if (state.FrozenIron > 0 && Casts(state, side) && state.FrozenIronHeld)
+        if (Casts(state, side) && state.FrozenIronHeld)
         {
             state = state with { FrozenIronHeld = false };
         }
-        else if (state.FrozenIron > 0 && Casts(state, side))
+        else if (Casts(state, side))
         {
             var dose = state.FrozenIron;
+            var step = Step(state, side);
             var struck = state.Units.Where(u => !u.Retreated && !Spared(u)).ToList();
             events.Add(new FrozenIronFell(dose, ValueList<string>.From(struck.Select(u => u.Id)), ValueList<int>.From(struck.Select(u => Math.Max(0, u.Hp - dose)))));
             foreach (var aimed in struck)
@@ -125,7 +129,7 @@ public static class Swallow
                 state = died(state, unit with { Hp = 0 });
             }
 
-            state = state with { FrozenIron = dose + DoseStep };
+            state = state with { FrozenIron = dose + step };
         }
 
         foreach (var healed in state.Units.Where(u => u is { Swallowed: true, Kin: not null } && u.Side == side).ToList())
@@ -153,7 +157,11 @@ public static class Swallow
     /// phase strikes, so <see cref="Exposure.Of"/> counts it.
     /// </summary>
     public static int NextLanding(BattleState state, Side side) =>
-        state.FrozenIron > 0 && !state.FrozenIronHeld && Casts(state, side == Side.Player ? Side.Enemy : Side.Player) ? state.FrozenIron : 0;
+        !state.FrozenIronHeld && Casts(state, side == Side.Player ? Side.Enemy : Side.Player) ? state.FrozenIron : 0;
+
+    /// <summary>What each landing adds while <paramref name="side"/> casts (Table round 518): the first standing swallowed unit's <see cref="KinStage.Step"/>.</summary>
+    public static int Step(BattleState state, Side side) =>
+        state.Units.FirstOrDefault(u => u is { Swallowed: true, Retreated: false } && u.Side == side)?.Kin?.Step ?? DoseStep;
 
     public static bool Casts(BattleState state, Side side) => state.Units.Any(u => u is { Swallowed: true, Retreated: false } && u.Side == side);
 

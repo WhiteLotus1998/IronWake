@@ -248,7 +248,7 @@ public static class FinaleRun
         var inReach = reached.Sum(s => s.DamageInReach);
         var beyond = reached.Sum(s => s.DamageBeyond);
         var share = inReach + beyond == 0 ? "none dealt" : $"{beyond * 100 / (inReach + beyond)} % from tiles he cannot reach ({beyond} of {inReach + beyond})";
-        return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (gate: at most 1); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP; damage on him, {share}";
+        return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (data; the gate reads won games); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP; damage on him, {share}";
     }
 
     /// <summary>
@@ -269,7 +269,7 @@ public static class FinaleRun
 
         static string By(IEnumerable<int?> values) =>
             string.Join(", ", values.GroupBy(v => v).OrderBy(g => g.Key ?? int.MaxValue).Select(g => $"{(g.Key is { } k ? k.ToString(System.Globalization.CultureInfo.InvariantCulture) : "none")}: {g.Count()}"));
-        var kills = won.Count == 0 ? "none won" : $"player phases to the kill {By(won.Select(s => (int?)s.PlayerPhases))}; landings before it {By(won.Select(s => (int?)s.Landings))}; clock deaths 0 in {won.Count(s => s.ClockDeaths == 0)}, 1 in {won.Count(s => s.ClockDeaths == 1)}, 2+ in {won.Count(s => s.ClockDeaths >= 2)}";
+        var kills = won.Count == 0 ? "none won" : $"player phases to the kill {By(won.Select(s => (int?)s.PlayerPhases))}; landings before it {By(won.Select(s => (int?)s.Landings))}; clock deaths 0 in {won.Count(s => s.ClockDeaths == 0)}, 1 in {won.Count(s => s.ClockDeaths == 1)}, 2+ in {won.Count(s => s.ClockDeaths >= 2)} (gate: 2+ in at most 10 %: {(won.Count(s => s.ClockDeaths >= 2) * 10 <= won.Count ? "ok" : "FAILED")})";
         var deaths = lost.Count == 0 ? "none lost" : $"the dose's first kill at landing {By(lost.Select(s => s.FirstClockKill))}";
         return $"stage 2 race: won {won.Count}, {kills}; lost {lost.Count}, {deaths}";
     }

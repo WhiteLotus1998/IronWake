@@ -192,7 +192,7 @@ public sealed record BattleState(
 
     /// <summary>
     /// What Frozen Iron lands for at the swallowed boss's side's next phase start (issues 1385, 1395, <see cref="Swallow"/>), or 0 while no boss has
-    /// swallowed: set by the swallow, it climbs after each landing.
+    /// swallowed: set by the swallow to its stage's <see cref="KinStage.Dose"/>, which may be 0, it climbs after each landing.
     /// </summary>
     public int FrozenIron { get; init; }
 
@@ -943,7 +943,7 @@ public sealed record BattleState(
             sb.Append("order ").Append(Orders.Word(order)).Append('\n');
         }
 
-        if (FrozenIron > 0)
+        if (FrozenIron > 0 || FrozenIronHeld)
         {
             sb.Append("frozeniron ").Append(FrozenIron).Append(FrozenIronHeld ? " held" : "").Append('\n');
         }
