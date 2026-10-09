@@ -104,6 +104,11 @@ public static class FinaleRun
                 yield return "  " + healerFalls;
             }
 
+            if (BaitLine(Games) is { } bait)
+            {
+                yield return "  " + bait;
+            }
+
             if (StageLine(Games) is { } stage)
             {
                 yield return "  " + stage;
@@ -302,6 +307,32 @@ public static class FinaleRun
         var beyond = reached.Sum(s => s.DamageBeyond);
         var share = inReach + beyond == 0 ? "none dealt" : $"{beyond * 100 / (inReach + beyond)} % from tiles he cannot reach ({beyond} of {inReach + beyond})";
         return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (data; the gate reads won games); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP, company at {Median(reached.Select(s => s.CompanyMaxHp == 0 ? 0 : s.CompanyHp * 100 / s.CompanyMaxHp))} % HP; damage on him, {share}";
+    }
+
+    /// <summary>
+    /// Issue 1441's bait read (Table round 530): how often the boss struck out of stage 1 in his own phases and from how far
+    /// off the tile he began on, over every game and over the games lost before the swallow. Null when no boss had a stage.
+    /// </summary>
+    public static string? BaitLine(IReadOnlyList<GameResult> games)
+    {
+        var reads = games.Where(g => g.StageOne is not null).ToList();
+        if (reads.Count == 0)
+        {
+            return null;
+        }
+
+        static string Cells(IEnumerable<GameResult> of)
+        {
+            var list = of.ToList();
+            var strikes = list.SelectMany(g => g.StageOne!.BossStrikes).ToList();
+            var struck = list.Count(g => g.StageOne!.BossStrikes.Count > 0);
+            var off = strikes.GroupBy(p => p.Off).OrderBy(p => p.Key).Select(p => $"{p.Key}: {p.Count()}");
+            var kinds = strikes.GroupBy(p => p.Kind, StringComparer.Ordinal).OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => $"{p.Key} {p.Count()}");
+            return $"struck in {struck} of {list.Count}, strikes {strikes.Count} ({(strikes.Count == 0 ? "none" : string.Join(", ", kinds))}), tiles off his start {(strikes.Count == 0 ? "-" : string.Join(", ", off))}";
+        }
+
+        var lostBefore = reads.Where(g => !g.Won && g.StageOne!.SwallowTurn is null);
+        return $"stage 1 bait: every game {Cells(reads)}; lost before the swallow {Cells(lostBefore)}";
     }
 
     /// <summary>

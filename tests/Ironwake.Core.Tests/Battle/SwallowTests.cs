@@ -574,6 +574,34 @@ public class SwallowTests
     }
 
     [Fact]
+    public void TheStageOneBaitReadCountsHisOwnPhaseStrikesByHowFarOffHisStartTile()
+    {
+        var state = Start();
+        var hask = Hask(state);
+        var captain = Captain(state);
+        var stage = Ironwake.Sim.StageOne.After(null, state, state, Array.Empty<GameEvent>(), Starter);
+        Assert.Equal(hask.At, stage!.Home);
+
+        var enemy = state with { Phase = Side.Enemy };
+        var stepped = enemy.WithUnit(hask with { At = new Coord(hask.At.X + 2, hask.At.Y) });
+        var lance = new CombatFought(hask.Id, captain.Id, 3, Side.Enemy, ValueList<StrikeEvent>.Empty, hask.Hp, captain.Hp);
+        var line = new LineStruck(hask.Id, new Coord(hask.At.X + 2, hask.At.Y), ValueList<Coord>.Empty, ValueList<string>.Of(captain.Id));
+        var missed = new LineStruck(hask.Id, hask.At, ValueList<Coord>.Empty, ValueList<string>.Empty);
+        var countered = new CombatFought(captain.Id, hask.Id, 3, Side.Enemy, ValueList<StrikeEvent>.Empty, captain.Hp, hask.Hp);
+        stage = Ironwake.Sim.StageOne.After(stage, enemy, stepped, new GameEvent[] { lance, line, missed, countered }, Starter);
+
+        Assert.Equal(new[] { ("lance", 2), ("line", 2) }, stage!.BossStrikes);
+
+        var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
+        var lost = new Ironwake.Sim.GameResult(BattleResult.Lost, 12, mix, LossCause.Timeout) { StageOne = stage };
+        var quiet = new Ironwake.Sim.GameResult(BattleResult.Won, 9, mix) { StageOne = new Ironwake.Sim.StageOne("h", 3) { SwallowTurn = 7 } };
+        Assert.Equal(
+            "stage 1 bait: every game struck in 1 of 2, strikes 2 (lance 1, line 1), tiles off his start 2: 2; lost before the swallow struck in 1 of 1, strikes 2 (lance 1, line 1), tiles off his start 2: 2",
+            Ironwake.Sim.FinaleRun.BaitLine(new[] { lost, quiet }));
+        Assert.Null(Ironwake.Sim.FinaleRun.BaitLine(new[] { new Ironwake.Sim.GameResult(BattleResult.Won, 5, mix) }));
+    }
+
+    [Fact]
     public void TheHealerFallLineSumsTheSplitAndTheShapeLineNamesWhoDealtTheStageTwoDamage()
     {
         var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
