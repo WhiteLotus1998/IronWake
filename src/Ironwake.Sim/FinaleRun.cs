@@ -250,7 +250,8 @@ public static class FinaleRun
             .Select(u => $"{u.Id} {u.Distances.Count} ({u.Kind}, median {Median(u.Distances)} tiles, could close {u.CouldClose})");
         var could = ones.Sum(o => o.HeldBy.Values.Sum(h => h.CouldClose));
         var byUnit = string.Join(", ", held);
-        return $"stage 1 idle {idle}: fell before acting {ones.Sum(o => o.IdleFell)}, no enemy seen {ones.Sum(o => o.IdleUnseen)}, an enemy seen out of reach {ones.Sum(o => o.IdleHeld)} (could close {could}); unread {ones.Sum(o => o.IdleUnread)}; out of reach by unit: {(byUnit.Length == 0 ? "none" : byUnit)}";
+        var healerWaits = ones.Sum(o => o.HeldBy.Values.Where(h => h.Kind == "healer").Sum(h => h.Distances.Count));
+        return $"stage 1 idle {idle}: fell before acting {ones.Sum(o => o.IdleFell)}, no enemy seen {ones.Sum(o => o.IdleUnseen)}, an enemy seen out of reach {ones.Sum(o => o.IdleHeld)} (could close {could}; an unarmed healer's {healerWaits}, the walk finding no safe tile that closes); unread {ones.Sum(o => o.IdleUnread)}; unarmed healers fallen in stage 1 {ones.Sum(o => o.HealerFalls)}; out of reach by unit: {(byUnit.Length == 0 ? "none" : byUnit)}";
     }
 
     private static string Split(IReadOnlyList<StageOne> ones)
@@ -285,7 +286,7 @@ public static class FinaleRun
         var inReach = reached.Sum(s => s.DamageInReach);
         var beyond = reached.Sum(s => s.DamageBeyond);
         var share = inReach + beyond == 0 ? "none dealt" : $"{beyond * 100 / (inReach + beyond)} % from tiles he cannot reach ({beyond} of {inReach + beyond})";
-        return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (data; the gate reads won games); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP; damage on him, {share}";
+        return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (data; the gate reads won games); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP, company at {Median(reached.Select(s => s.CompanyMaxHp == 0 ? 0 : s.CompanyHp * 100 / s.CompanyMaxHp))} % HP; damage on him, {share}";
     }
 
     /// <summary>

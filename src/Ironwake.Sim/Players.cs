@@ -440,7 +440,9 @@ public sealed class HeuristicPlayer : IPlayer
             return new Command[] { Idle(state, content, unit) };
         }
 
-        var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, Grounding.MovementOf(unit, content), CaptainsTiles(state, content, unit));
+        var destination = weapon is null && arms.Count == 0 && state.Map.Win is not (WinCondition.Seize or WinCondition.Escape) && Healer(content, unit)
+            ? HealerWalk(state, content, unit, reach, enemies, Grounding.MovementOf(unit, content), captains)
+            : Approach(state, content, unit, weapon, reach, enemies, enemyReach, Grounding.MovementOf(unit, content), CaptainsTiles(state, content, unit));
         return WithMove(unit, destination ?? unit.At, Idle(state, content, unit, destination));
     }
 
@@ -879,6 +881,108 @@ public sealed class HeuristicPlayer : IPlayer
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Where a healer with no weapon walks when it has no heal to give (issue 1395, Table rounds 524 and 525, DECISIONS/0377):
+    /// on a Rout or Defeat Boss map section 8's approach has no destination for a unit that cannot strike, and without this
+    /// rule the keep's chaplain stood where she deployed all game. Toward the nearest ally below half HP (the heal's own
+    /// threshold) when one has a path, by the fewest steps left to a tile her heal reaches it from; else behind the ally
+    /// standing nearest a seen enemy (any enemy when none is seen): a tile from which that ally is within her Move and her
+    /// heal's range next phase first, then the fewest steps left. Only a tile that closes on the ally, where no enemy's
+    /// no-crit strike reaches her (exposure 0), and that is not left free for a corked captain counts; null when none
+    /// does, and she waits: the idle read counts that wait apart, as a healer's. Round 525's fallback to the least
+    /// exposed tile was screened and lost (0377): she fell more and the company won less.
+    /// </summary>
+    private static Coord? HealerWalk(BattleState state, GameContent content, BattleUnit unit, Reach reach, List<BattleUnit> enemies, MovementType movement, IReadOnlySet<Coord> captains)
+    {
+        var allies = state.UnitsOf(unit.Side).Where(a => a.Id != unit.Id).OrderBy(a => a.Id, StringComparer.Ordinal).ToList();
+        if (allies.Count == 0)
+        {
+            return null;
+        }
+
+        var unitClass = content.Class(unit.Unit.ClassId);
+        var heals = unit.Unit.Inventory.Items
+            .Where(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Heals && unit.Unit.CanWield(w, unitClass))
+            .Select(s => content.Weapon(s.ItemId))
+            .ToList();
+        Occupant OccupantAt(Coord at) => at == unit.At ? Occupant.None : state.OccupantAt(at, unit.Side);
+        var footing = content.AbilitiesOf(unit.Unit);
+        Distances Toward(BattleUnit ally)
+        {
+            var from = new List<Coord>();
+            for (var y = 0; y < state.Map.Height; y++)
+            {
+                for (var x = 0; x < state.Map.Width; x++)
+                {
+                    var tile = new Coord(x, y);
+                    if (heals.Any(h => h.InRange(tile.DistanceTo(ally.At))))
+                    {
+                        from.Add(tile);
+                    }
+                }
+            }
+
+            return Movement.DistancesTo(state.Map, content, from, movement, OccupantAt, footing);
+        }
+
+        var hurt = allies.Where(a => a.Hp * 2 < a.MaxHp(content))
+            .Select(a => (Ally: a, Toward: Toward(a)))
+            .Where(a => a.Toward.From(unit.At) is not null)
+            .OrderBy(a => a.Toward.From(unit.At))
+            .Select(a => ((BattleUnit, Distances)?)a)
+            .FirstOrDefault();
+        var tending = hurt is not null;
+        Distances toward;
+        if (hurt is { } h)
+        {
+            toward = h.Item2;
+        }
+        else
+        {
+            var seen = enemies.Where(e => Dusk.Sees(state, unit.Side, e.At)).ToList();
+            var foes = seen.Count > 0 ? seen : enemies;
+            if (foes.Count == 0)
+            {
+                return null;
+            }
+
+            var front = allies.OrderBy(a => foes.Min(f => a.At.DistanceTo(f.At))).First();
+            toward = Toward(front);
+        }
+
+        if (toward.From(unit.At) is not { } now)
+        {
+            return null;
+        }
+
+        Coord? destination = null;
+        (int, int, int, Coord) bestKey = default;
+        foreach (var tile in reach.Destinations)
+        {
+            if (toward.From(tile) is not { } remaining || remaining >= now || !MayEndOn(state, content, unit, tile) || captains.Contains(tile))
+            {
+                continue;
+            }
+
+            if (Exposure.Of(state, content, unit, tile).NoCrit > 0)
+            {
+                continue;
+            }
+
+            var cost = reach.CostTo(tile)!.Value;
+            var key = tending
+                ? (remaining, 0, cost, tile)
+                : (remaining <= unitClass.Mov ? 0 : 1, remaining, cost, tile);
+            if (destination is null || key.CompareTo(bestKey) < 0)
+            {
+                bestKey = key;
+                destination = tile;
+            }
+        }
+
+        return destination;
     }
 
     /// <summary>
