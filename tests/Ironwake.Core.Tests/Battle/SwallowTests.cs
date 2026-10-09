@@ -362,6 +362,65 @@ public class SwallowTests
     }
 
     [Fact]
+    public void TheStageOneReadSplitsTheCompanysActionsByWhetherTheyStruckHim()
+    {
+        var state = Start();
+        var hask = Hask(state);
+        var captain = Captain(state);
+        var wren = state.Units.Single(u => u.Unit.Id == "wren");
+        var soldier = state.Units.Single(u => u.Unit.ClassId != "iron_warden" && u.Side == Side.Enemy);
+
+        var stage = Ironwake.Sim.StageOne.After(null, state, state, new GameEvent[] { new PhaseBegan(Side.Player, 1) }, Starter);
+        Assert.Equal((hask.Id, 1, 1, 3), (stage!.Boss, stage.Arrived, stage.PlayerPhases, stage.UnitPhases));
+
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, new GameEvent[] { new CombatFought(captain.Id, hask.Id, 1, Side.Player, ValueList<StrikeEvent>.Empty, 20, 30) }, Starter);
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, new GameEvent[] { new CombatFought(wren.Id, soldier.Id, 1, Side.Player, ValueList<StrikeEvent>.Empty, 20, 10) }, Starter);
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, new GameEvent[] { new AreaCastAt(wren.Id, "spark_storm", hask.At, ValueList<string>.Of(hask.Id, soldier.Id), 2) }, Starter);
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, new GameEvent[] { new CombatFought(hask.Id, captain.Id, 1, Side.Enemy, ValueList<StrikeEvent>.Empty, 30, 15) }, Starter);
+
+        Assert.Equal((2, 1, 1), (stage!.OnHim, stage.OnOthers, stage.FirstBlowTurn));
+        Assert.Null(stage.SwallowTurn);
+    }
+
+    [Fact]
+    public void TheStageOneReadStopsAtTheSwallow()
+    {
+        var state = Start();
+        var hask = Hask(state);
+        var captain = Captain(state);
+        var after = Swallowed(state);
+
+        var stage = Ironwake.Sim.StageOne.After(null, state, state, Array.Empty<GameEvent>(), Starter);
+        stage = Ironwake.Sim.StageOne.After(stage, state, after, new GameEvent[] { new CombatFought(captain.Id, hask.Id, 1, Side.Player, ValueList<StrikeEvent>.Empty, 20, 0), new ShardSwallowed(hask.Id, hask.At, 24) }, Starter);
+        var held = Ironwake.Sim.StageOne.After(stage, after, after, new GameEvent[] { new PhaseBegan(Side.Player, 2), new CombatFought(captain.Id, hask.Id, 2, Side.Player, ValueList<StrikeEvent>.Empty, 20, 10) }, Starter);
+
+        Assert.Equal((1, 1, 0), (stage!.SwallowTurn, stage.OnHim, stage.BossHp));
+        Assert.Equal(stage, held);
+        Assert.Null(Ironwake.Sim.StageOne.After(null, after, after, Array.Empty<GameEvent>(), Starter));
+    }
+
+    [Fact]
+    public void TheFinalePaceReadNamesTheSwallowTurnAndTheStageOneStall()
+    {
+        var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
+        var swallowed = new Ironwake.Sim.GameResult(BattleResult.Won, 10, mix)
+        {
+            Stage = new Ironwake.Sim.StageTwo(3, 0),
+            StageOne = new Ironwake.Sim.StageOne("h", 3) { SwallowTurn = 7, FirstBlowTurn = 4, PlayerPhases = 5, UnitPhases = 50, OnHim = 20, OnOthers = 10, BossMaxHp = 44 },
+        };
+        var stalled = new Ironwake.Sim.GameResult(BattleResult.Lost, 12, mix, LossCause.Timeout)
+        {
+            StageOne = new Ironwake.Sim.StageOne("h", 3) { FirstBlowTurn = 8, PlayerPhases = 10, UnitPhases = 50, OnHim = 3, OnOthers = 12, BossHp = 12, BossMaxHp = 44, StandingEnd = 2 },
+        };
+        var games = new[] { swallowed, stalled };
+
+        Assert.Equal("stage 1: on the board median turn 3 in 2 of 2; swallowed in 1, median turn 7 (earliest 7, latest 7); his first blow taken median turn 4 in 2; unit-phases 100: on him 23 (23 %), on the others 22 (22 %), the rest 55 (55 %)", Ironwake.Sim.FinaleRun.PaceLine(games));
+        Assert.Equal("stage 1 timeouts: 1; at the limit, median boss HP 12 of 44, 2 standing; median actions a player phase on him 0.3, on the others 1.2, over 10 player phases; unit-phases 50: on him 3 (6 %), on the others 12 (24 %), the rest 35 (70 %)", Ironwake.Sim.FinaleRun.PaceStallLine(games));
+        Assert.Null(Ironwake.Sim.FinaleRun.PaceStallLine(new[] { swallowed }));
+        Assert.Null(Ironwake.Sim.FinaleRun.PaceLine(new[] { new Ironwake.Sim.GameResult(BattleResult.Won, 5, mix) }));
+    }
+
+    [Fact]
     public void TheFinaleReadNamesTheStallAndWhatKilledTheCaptain()
     {
         var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
