@@ -94,6 +94,11 @@ public static class FinaleRun
                 yield return "  " + paceStall;
             }
 
+            if (IdleLine(Games) is { } idle)
+            {
+                yield return "  " + idle;
+            }
+
             if (StageLine(Games) is { } stage)
             {
                 yield return "  " + stage;
@@ -219,6 +224,33 @@ public static class FinaleRun
         var onHim = Median(stalled.Select(o => o.PlayerPhases == 0 ? 0 : o.OnHim * 10 / o.PlayerPhases));
         var onOthers = Median(stalled.Select(o => o.PlayerPhases == 0 ? 0 : o.OnOthers * 10 / o.PlayerPhases));
         return $"stage 1 timeouts: {stalled.Count}; at the limit, median boss HP {Median(stalled.Select(o => o.BossHp))} of {Median(stalled.Select(o => o.BossMaxHp))}, {Median(stalled.Select(o => o.StandingEnd))} standing; median actions a player phase on him {Tenths(onHim)}, on the others {Tenths(onOthers)}, over {Median(stalled.Select(o => o.PlayerPhases))} player phases; {Split(stalled)}";
+    }
+
+    /// <summary>
+    /// Round 523's split of the boss's first stage's idle unit-phases (<see cref="StageOne"/>): fell before acting, no enemy
+    /// seen, an enemy seen out of reach, and how many of those had a nearer tile the unit could end on; the unread ones
+    /// (no command of their own in the phase) beside them; then the out-of-reach ones by unit, most first, each with its
+    /// kind, its median distance to the nearest enemy it saw, and how many could have closed. Null when no game fielded
+    /// such a boss or none stood idle.
+    /// </summary>
+    public static string? IdleLine(IReadOnlyList<GameResult> games)
+    {
+        var ones = games.Where(g => g.StageOne is not null).Select(g => g.StageOne!).ToList();
+        var idle = ones.Sum(o => o.Idle);
+        if (idle == 0)
+        {
+            return null;
+        }
+
+        var held = ones.SelectMany(o => o.HeldBy)
+            .GroupBy(p => p.Key, StringComparer.Ordinal)
+            .Select(g => (Id: g.Key, Kind: g.First().Value.Kind, Distances: g.SelectMany(p => p.Value.Distances).ToList(), CouldClose: g.Sum(p => p.Value.CouldClose)))
+            .OrderByDescending(u => u.Distances.Count)
+            .ThenBy(u => u.Id, StringComparer.Ordinal)
+            .Select(u => $"{u.Id} {u.Distances.Count} ({u.Kind}, median {Median(u.Distances)} tiles, could close {u.CouldClose})");
+        var could = ones.Sum(o => o.HeldBy.Values.Sum(h => h.CouldClose));
+        var byUnit = string.Join(", ", held);
+        return $"stage 1 idle {idle}: fell before acting {ones.Sum(o => o.IdleFell)}, no enemy seen {ones.Sum(o => o.IdleUnseen)}, an enemy seen out of reach {ones.Sum(o => o.IdleHeld)} (could close {could}); unread {ones.Sum(o => o.IdleUnread)}; out of reach by unit: {(byUnit.Length == 0 ? "none" : byUnit)}";
     }
 
     private static string Split(IReadOnlyList<StageOne> ones)
