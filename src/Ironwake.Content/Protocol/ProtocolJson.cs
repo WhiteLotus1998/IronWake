@@ -408,6 +408,11 @@ public static class ProtocolJson
                 }
 
                 w.WriteEndArray();
+                if (fi.Turned)
+                {
+                    w.WriteBoolean("turned", true);
+                }
+
                 break;
             case KinHealed kh:
                 w.WriteString("unit", kh.UnitId);
@@ -450,6 +455,13 @@ public static class ProtocolJson
             case KinShardBroken kb:
                 w.WriteString("unit", kb.UnitId);
                 WriteCoord(w, "at", kb.At);
+                break;
+            case FrozenIronStilled fs:
+                w.WriteNumber("dose", fs.Dose);
+                break;
+            case FrozenIronTurned ft:
+                w.WriteString("unit", ft.UnitId);
+                w.WriteNumber("floor", ft.Floor);
                 break;
             case ArmorShattered ash:
                 w.WriteString("unit", ash.UnitId);

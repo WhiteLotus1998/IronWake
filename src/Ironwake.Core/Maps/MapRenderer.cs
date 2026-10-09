@@ -732,7 +732,7 @@ public static class MapRenderer
             sb.Append(shardLine).Append('\n');
         }
 
-        if (Swallow.Line(state, UnitNames.Of(state, content)) is { } swallowLine)
+        if (Swallow.Line(state, content, UnitNames.Of(state, content)) is { } swallowLine)
         {
             sb.Append(swallowLine).Append('\n');
         }

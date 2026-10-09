@@ -1,0 +1,45 @@
+name: Under the Hill
+size: 16x12
+win: defeat_boss
+kin_shard: 7,6
+swallowed: 4,6
+shard_breaks: stills
+turn_limit: 12
+recall: 3
+enemy_level: 8
+deploy: all
+
+####........####
+#...............
+#...#....#......
+#...#...........
+#...............
+#...............
+................
+#...............
+#...#...........
+#...#....#......
+#...............
+####........####
+
+units:
+P captain 13,5
+P recruit 12,2
+P recruit 12,9
+P recruit 13,6
+P recruit 14,2
+P recruit 14,9
+P recruit 12,4
+P recruit 12,7
+P recruit 14,4
+P recruit 14,7
+P recruit 15,5
+P recruit 15,6
+B hask_warden 4,6 group:kin behavior:guard
+E sworn_captain 7,6 group:sworn behavior:guard
+E soldier 9,5 group:sworn behavior:aggressive
+E soldier 9,7 group:sworn behavior:aggressive
+E archer 6,4 group:sworn behavior:aggressive
+E hexer 6,8 group:sworn behavior:aggressive
+E brigand 7,1 group:sworn behavior:aggressive
+E brigand 7,10 group:sworn behavior:aggressive

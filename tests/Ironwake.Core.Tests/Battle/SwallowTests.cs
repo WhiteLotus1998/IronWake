@@ -158,8 +158,8 @@ public class SwallowTests
         var fell = result.Events.OfType<FrozenIronFell>().Single();
         Assert.DoesNotContain(Hask(state).Id, fell.Struck);
         Assert.Contains(soldier.Id, fell.Struck);
-        Assert.True(Swallow.Spared(Hask(state)));
-        Assert.False(Swallow.Spared(Hask(Start())));
+        Assert.True(Swallow.Spared(state, Hask(state), Starter));
+        Assert.False(Swallow.Spared(Start(), Hask(Start()), Starter));
         Assert.Equal(3, Hask(result.Next).Hp);
         Assert.Equal(soldier.Hp - 6, result.Next.Find(soldier.Id)!.Hp);
     }

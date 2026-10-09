@@ -76,7 +76,7 @@ public static class Resolver
                 (next, rejection) = ApplyTalk(state, talk, events);
                 break;
             case TakeShard take:
-                (next, rejection) = ApplyTakeShard(state, take, events);
+                (next, rejection) = ApplyTakeShard(state, content, take, events);
                 break;
             case Dash dash:
                 (next, rejection) = ApplyDash(state, content, dash, events);
@@ -2157,7 +2157,7 @@ public static class Resolver
     /// the board alive, which is not a kill. No Canto follows. Naming <see cref="KinShard.Ground"/> in place of the boss
     /// takes the shard under the hill off the ground (issue 1386 slice 3a, <see cref="KinShard"/>).
     /// </summary>
-    private static (BattleState, Rejection?) ApplyTakeShard(BattleState state, TakeShard take, List<GameEvent> events)
+    private static (BattleState, Rejection?) ApplyTakeShard(BattleState state, GameContent content, TakeShard take, List<GameEvent> events)
     {
         var unit = Acting(state, take.UnitId, out var rejection);
         if (unit is null)
@@ -2169,7 +2169,7 @@ public static class Resolver
         {
             return KinShard.Refusal(state, unit) is { } ground
                 ? (state, new Rejection(RejectionReason.CannotTakeShard, ground))
-                : (KinShard.Take(state, unit, events), null);
+                : (KinShard.Take(state, content, unit, events), null);
         }
 
         if (ShardRun.Refusal(state, unit, take.BossId) is { } refusal)

@@ -114,14 +114,14 @@ public class SwallowedOpeningTests
     {
         var state = Start();
         var names = UnitNames.Of(state, Starter);
-        Assert.Equal("Hask stands swallowed: Frozen Iron lands for 0 on every unit but him from the enemy phase after next, 3 more each time, then the Kin heals him 2", Swallow.Line(state, names));
+        Assert.Equal("Hask stands swallowed: Frozen Iron lands for 0 on every unit but him from the enemy phase after next, 3 more each time, then the Kin heals him 2", Swallow.Line(state, Starter, names));
         var lifted = state with { FrozenIronHeld = false, FrozenIron = 3 };
-        Assert.Contains("lands for 3 on every unit but him at each enemy phase start", Swallow.Line(lifted, names));
-        Assert.Null(Swallow.Line(state.WithoutUnit(Kin(state).Id), names));
+        Assert.Contains("lands for 3 on every unit but him at each enemy phase start", Swallow.Line(lifted, Starter, names));
+        Assert.Null(Swallow.Line(state.WithoutUnit(Kin(state).Id), Starter, names));
 
         var keep = Start(Hill.Replace("swallowed: 9,2\n", ""));
         var taken = Swallow.Take(keep.WithUnit(Kin(keep) with { Hp = 0 }), Starter, Kin(keep).Id, new List<GameEvent>());
         Assert.True(Kin(taken).Swallowed);
-        Assert.Null(Swallow.Line(taken, UnitNames.Of(taken, Starter)));
+        Assert.Null(Swallow.Line(taken, Starter, UnitNames.Of(taken, Starter)));
     }
 }
