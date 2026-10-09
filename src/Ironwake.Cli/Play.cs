@@ -522,6 +522,8 @@ public sealed class PlaySession
             MessengerTrigger => "if the messenger reaches the road",
             FallsTrigger falls => $"if {falls.Front.Replace('_', ' ')} falls",
             DropTrigger drop => $"when one of yours drops the rock from {drop.Ledge}",
+            RaceTrigger { Phases: 0 } => "if a beaten boss runs with the shard, as he runs",
+            RaceTrigger race => $"if a beaten boss runs with the shard, {race.Phases} of his phases into the run",
             _ => throw new InvalidOperationException("unknown trigger " + mapEvent.Trigger.GetType().Name),
         };
         var what = mapEvent.Action switch

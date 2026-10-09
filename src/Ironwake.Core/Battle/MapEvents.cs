@@ -3,7 +3,7 @@ namespace Ironwake.Core;
 /// <summary>
 /// Fires a map's scripted events (issue 32, DESIGN.md section 10). The resolver asks
 /// after every accepted command: at a phase start for turn triggers, after a player Move
-/// for enter triggers, after a wake for wakes triggers (issue 1365). Events fire in file order, each at most once per battle. A fired
+/// for enter triggers, after a wake for wakes triggers (issue 1365), as a shard race runs and ticks for race triggers (issue 1386). Events fire in file order, each at most once per battle. A fired
 /// event emits <see cref="MapEventFired"/> and then its action's own event. An event whose
 /// tile is barred is blocked and spent, with no action: a spawn tile with any unit on it or
 /// terrain the template cannot stand on (the event names that terrain, issue 655), or a
@@ -71,6 +71,10 @@ public static class MapEvents
     /// <summary>The events whose trigger is the fall of <paramref name="front"/> (issue 692).</summary>
     public static BattleState AfterFall(BattleState state, GameContent content, string front, List<GameEvent> events) =>
         Fire(state, content, events, t => t is FallsTrigger falls && falls.Front == front);
+
+    /// <summary>The events whose <see cref="RaceTrigger"/> names a shard race <paramref name="phases"/> of his side's phases old (issue 1386).</summary>
+    public static BattleState AfterRace(BattleState state, GameContent content, int phases, List<GameEvent> events) =>
+        Fire(state, content, events, t => t is RaceTrigger race && race.Phases == phases);
 
     private static BattleState Fire(BattleState state, GameContent content, List<GameEvent> events, Func<MapEventTrigger, bool> triggered)
     {
