@@ -65,6 +65,15 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     public bool CaptainFellInStageTwo { get; init; }
 
     /// <summary>
+    /// On a captain fall before any swallow, where the hunt stood as it came (issue 1423, <see cref="Gates.CaptainFrontOf"/>):
+    /// whether the hunter hunted him and whether he held his front alone, beside a defender, or behind the fronts. Null otherwise.
+    /// </summary>
+    public string? CaptainFront { get; init; }
+
+    /// <summary>Whether the blow that felled the captain came down a line strike (issue 1423: stage 1's line catching him).</summary>
+    public bool CaptainByLine { get; init; }
+
+    /// <summary>
     /// On a captain fall after the swallow, what his last player phase offered (round 505, <see cref="CaptainPlan"/>):
     /// whether any tile in his reach passed the veto's sum and whether the tile he ended on did. Null otherwise.
     /// </summary>
@@ -234,6 +243,8 @@ public static class Runner
         var captainInStageTwo = false;
         CaptainPlan? plan = null;
         string? captainPlanRead = null;
+        string? captainFront = null;
+        var captainByLine = false;
         while (!state.Outcome.IsOver)
         {
             if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
@@ -308,6 +319,8 @@ public static class Runner
                     captainSeen = true;
                     captainInStageTwo = stage is not null;
                     captainPlanRead = stage is null ? null : CaptainPlan.Name(plan, state);
+                    captainFront = stage is null ? Gates.CaptainFrontOf(state) : null;
+                    captainByLine = result.Events.OfType<LineStruck>().Any(l => state.UnitsOf(Side.Player).Any(c => c.IsCaptain && l.Struck.Contains(c.Id)));
                 }
 
                 stage = StageTwo.After(stage, state, result.Next, result.Events, content);
@@ -348,6 +361,8 @@ public static class Runner
             CaptainKiller = state.Outcome.Cause == LossCause.Captain ? captainKiller ?? "other" : null,
             CaptainFellInStageTwo = state.Outcome.Cause == LossCause.Captain && captainInStageTwo,
             CaptainPlanRead = state.Outcome.Cause == LossCause.Captain && captainInStageTwo ? captainPlanRead : null,
+            CaptainFront = state.Outcome.Cause == LossCause.Captain ? captainFront : null,
+            CaptainByLine = state.Outcome.Cause == LossCause.Captain && captainByLine,
             Weapons = weapons,
             Items = items,
             Camp = state.Outcome.Result == BattleResult.Won ? LevelRun.Read(start, state, content) : null,
@@ -572,6 +587,28 @@ public static class Gates
     /// <summary>The survivors row and a separator on an Escape map; nothing on any other.</summary>
     private static string EscapeSurvivors(IReadOnlyList<GameResult> games, MapDefinition map) =>
         map.Win == WinCondition.Escape ? $"{Survivors(games)}, " : "";
+
+    /// <summary>
+    /// Where the hunt stood as the captain fell on <paramref name="before"/> (issue 1423): <c>his own phase</c> when he fell
+    /// attacking; else <c>hunted</c> or <c>not hunted</c> (the hunter's <see cref="Hunt.Prey"/> named him, or no hunter
+    /// stood), then <c>alone</c> when no other player unit defends his front, <c>paired</c> when one does, and
+    /// <c>behind the fronts</c> when he defends none.
+    /// </summary>
+    public static string CaptainFrontOf(BattleState before)
+    {
+        var captain = before.UnitsOf(Side.Player).First(u => u.IsCaptain);
+        if (before.Phase == Side.Player)
+        {
+            return "his own phase";
+        }
+
+        var hunted = Hunt.Prey(before)?.Any(p => p.Id == captain.Id) == true;
+        var front = Hunt.DefendedFrom(before.Map, captain.At);
+        var where = front is null
+            ? "behind the fronts"
+            : before.UnitsOf(Side.Player).Any(p => p.Id != captain.Id && Hunt.DefendedFrom(before.Map, p.At) == front) ? "paired" : "alone";
+        return $"{(hunted ? "hunted" : "not hunted")}, {where}";
+    }
 
     /// <summary>The captain's killer in <paramref name="events"/> on <paramref name="before"/>: a combat's other side by name, marked when it was countering the captain, or Frozen Iron; null when the captain did not fall.</summary>
     public static string? CaptainKillerOf(BattleState before, IReadOnlyList<GameEvent> events)

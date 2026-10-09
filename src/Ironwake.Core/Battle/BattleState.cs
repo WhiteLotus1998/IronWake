@@ -197,6 +197,12 @@ public sealed record BattleState(
     public int FrozenIron { get; init; }
 
     /// <summary>
+    /// Whether the first Frozen Iron landing waits one more of the swallowed boss's phase starts (issue 1423, a
+    /// <see cref="KinStage.Late"/> stage): set by the swallow, lifted by the phase start it skips.
+    /// </summary>
+    public bool FrozenIronHeld { get; init; }
+
+    /// <summary>
     /// Whether Commander's Word is open on this battle (issue 85): on a map with <c>orders: on</c>,
     /// and on every campaign map from the second, where it is the captain's from Maud's arrival.
     /// </summary>
@@ -930,7 +936,7 @@ public sealed record BattleState(
 
         if (FrozenIron > 0)
         {
-            sb.Append("frozeniron ").Append(FrozenIron).Append('\n');
+            sb.Append("frozeniron ").Append(FrozenIron).Append(FrozenIronHeld ? " held" : "").Append('\n');
         }
 
         if (Map.Fronts.Count > 0)

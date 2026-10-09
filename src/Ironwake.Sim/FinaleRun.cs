@@ -103,6 +103,11 @@ public static class FinaleRun
             {
                 yield return "  " + plan;
             }
+
+            if (FrontLine(Games) is { } front)
+            {
+                yield return "  " + front;
+            }
         }
     }
 
@@ -234,6 +239,28 @@ public static class FinaleRun
             .Select(name => (Name: name, Games: after.Where(g => g.CaptainPlanRead == name).ToList()))
             .Where(c => c.Games.Count > 0)
             .Select(c => $"{c.Name} {c.Games.Count} ({By(c.Games)})"));
+    }
+
+    /// <summary>
+    /// Issue 1423's read of the captain's falls before the swallow, by where the hunt stood as he fell
+    /// (<see cref="GameResult.CaptainFront"/>), each class by what struck the last blow, and how many of those blows came
+    /// down a line strike; null when he never fell before one. Hunted and alone is the hunter's weakest-front pick finding
+    /// a lone defender (round 508); a line is stage 1's reach catching him (round 505).
+    /// </summary>
+    public static string? FrontLine(IReadOnlyList<GameResult> games)
+    {
+        var before = games.Where(g => g.CaptainKiller is not null && !g.CaptainFellInStageTwo && g.CaptainFront is not null).ToList();
+        if (before.Count == 0)
+        {
+            return null;
+        }
+
+        string By(IEnumerable<GameResult> some) => string.Join(", ", some.GroupBy(g => g.CaptainKiller!).OrderByDescending(k => k.Count()).ThenBy(k => k.Key, StringComparer.Ordinal).Select(k => $"{k.Key} {k.Count()}"));
+        var order = new[] { "hunted, alone", "hunted, paired", "hunted, behind the fronts", "not hunted, alone", "not hunted, paired", "not hunted, behind the fronts", "his own phase" };
+        return "before the swallow, by the hunt: " + string.Join("; ", order
+            .Select(name => (Name: name, Games: before.Where(g => g.CaptainFront == name).ToList()))
+            .Where(c => c.Games.Count > 0)
+            .Select(c => $"{c.Name} {c.Games.Count} ({By(c.Games)})")) + $"; down a line {before.Count(g => g.CaptainByLine)}";
     }
 
     private static int Median(IEnumerable<int> values)

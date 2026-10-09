@@ -1088,6 +1088,10 @@ public static class ProtocolJson
         if (state.FrozenIron > 0)
         {
             w.WriteNumber("frozenIron", state.FrozenIron);
+            if (state.FrozenIronHeld)
+            {
+                w.WriteBoolean("frozenIronHeld", true);
+            }
         }
 
         if (state.OrderCalled is { } order)
@@ -1349,6 +1353,7 @@ public static class ProtocolJson
             SideMap = e.TryGetProperty("sideMap", out _) && RequiredBool(e, "sideMap"),
             OrderCalled = OptionalString(e, "order") is { } order ? ReadOrderKind(order) : null,
             FrozenIron = OptionalInt(e, "frozenIron") ?? 0,
+            FrozenIronHeld = e.TryGetProperty("frozenIronHeld", out _) && RequiredBool(e, "frozenIronHeld"),
             Opened = e.TryGetProperty("chests", out var chests)
                 ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
                 : ValueList<Coord>.Empty,
@@ -1568,6 +1573,11 @@ public static class ProtocolJson
             if (kin.Rooted)
             {
                 w.WriteBoolean("rooted", true);
+            }
+
+            if (kin.Late)
+            {
+                w.WriteBoolean("late", true);
             }
 
             w.WriteEndObject();
@@ -1844,7 +1854,7 @@ public static class ProtocolJson
             Stun = OptionalInt(e, "stun") ?? 0,
             StunSpent = e.TryGetProperty("stunSpent", out _) && RequiredBool(e, "stunSpent"),
             RaiseSpent = e.TryGetProperty("raiseSpent", out _) && RequiredBool(e, "raiseSpent"),
-            Kin = e.TryGetProperty("kin", out var kin) ? new KinStage(RequiredInt(kin, "hp"), RequiredInt(kin, "def"), RequiredInt(kin, "res"), RequiredInt(kin, "heal"), OptionalString(kin, "description"), kin.TryGetProperty("rooted", out _) && RequiredBool(kin, "rooted")) : null,
+            Kin = e.TryGetProperty("kin", out var kin) ? new KinStage(RequiredInt(kin, "hp"), RequiredInt(kin, "def"), RequiredInt(kin, "res"), RequiredInt(kin, "heal"), OptionalString(kin, "description"), kin.TryGetProperty("rooted", out _) && RequiredBool(kin, "rooted"), kin.TryGetProperty("late", out _) && RequiredBool(kin, "late")) : null,
             Swallowed = e.TryGetProperty("swallowed", out _) && RequiredBool(e, "swallowed"),
             Hollow = e.TryGetProperty("hollow", out var hollow) ? new HollowMark(RequiredString(hollow, "by"), RequiredString(hollow, "fallen"), RequiredInt(hollow, "phases")) : null,
             LockedBy = OptionalString(e, "lockedBy"),

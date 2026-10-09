@@ -44,6 +44,21 @@ public class HuntTests
     }
 
     [Fact]
+    public void TheCaptainsFallIsReadByWhereTheHuntStood()
+    {
+        var alone = Board(hale: 10, wren: 20).Do(new EndPhase());
+        var paired = Start(map: Field(extra: "P recruit 5,2\n"), roster: Three);
+        paired = Hurt(paired.WithUnit(paired.Find("ivo")! with { At = new Coord(5, 2), Hp = 3 }), 10, 20).Do(new EndPhase());
+        var behind = Board(hale: 10, wren: 5);
+        behind = behind.WithUnit(behind.Find("hale")! with { At = new Coord(0, 3) }).Do(new EndPhase());
+
+        Assert.Equal("hunted, alone", Ironwake.Sim.Gates.CaptainFrontOf(alone));
+        Assert.Equal("hunted, paired", Ironwake.Sim.Gates.CaptainFrontOf(paired));
+        Assert.Equal("not hunted, behind the fronts", Ironwake.Sim.Gates.CaptainFrontOf(behind));
+        Assert.Equal("his own phase", Ironwake.Sim.Gates.CaptainFrontOf(Board()));
+    }
+
+    [Fact]
     public void ATieGoesToTheEarlierFront()
     {
         Assert.Equal("north", Hunt.Hunted(Board(hale: 20, wren: 20))!.Name);

@@ -41,7 +41,10 @@ public class SwallowTests
 
     private static BattleUnit Hask(BattleState state) => state.Units.Single(u => u.Unit.ClassId == "iron_warden");
 
-    private static BattleState Swallowed(BattleState state) => Swallow.Take(state.WithUnit(Hask(state) with { Hp = 0 }), Starter, Hask(state).Id, new List<GameEvent>());
+    private static BattleState Taken(BattleState state) => Swallow.Take(state.WithUnit(Hask(state) with { Hp = 0 }), Starter, Hask(state).Id, new List<GameEvent>());
+
+    /// <summary>Swallowed with the clock running: the late stage's held first landing already lifted.</summary>
+    private static BattleState Swallowed(BattleState state) => Taken(state) with { FrozenIronHeld = false };
 
     [Fact]
     public void TheWardenCarriesTheSecondStagesNumbers()
@@ -50,6 +53,7 @@ public class SwallowTests
 
         Assert.Equal((24, 3, 3, 4), (stage.Hp, stage.Def, stage.Res, stage.Heal));
         Assert.True(stage.Rooted);
+        Assert.True(stage.Late);
         Assert.Contains("pommel is empty", stage.Description);
         Assert.Null(Starter.Unit("hask").Swallow);
         Assert.Equal(stage, Hask(Start()).Kin);
@@ -134,6 +138,54 @@ public class SwallowTests
         Assert.Equal(Side.Enemy, twice.Next.Phase);
         Assert.Equal(10, twice.Events.OfType<FrozenIronFell>().Single().Amount);
         Assert.Equal(Swallow.MostDose, twice.Next.FrozenIron);
+    }
+
+    [Fact]
+    public void ALateStageHoldsTheFirstLandingOneOfHisPhaseStarts()
+    {
+        var state = Taken(Start()) with { Phase = Side.Player };
+        state = state.WithUnit(Hask(state) with { Hp = 20 });
+        Assert.True(state.FrozenIronHeld);
+        Assert.Equal(Swallow.FirstDose, state.FrozenIron);
+        var before = state.Units.ToDictionary(u => u.Id, u => u.Hp);
+
+        var held = state.Try(new EndPhase());
+
+        Assert.Equal(Side.Enemy, held.Next.Phase);
+        Assert.DoesNotContain(held.Events, e => e is FrozenIronFell);
+        Assert.Contains(new KinHealed(Hask(state).Id, 4, 24), held.Events);
+        Assert.All(held.Next.Units.Where(u => !u.Swallowed), u => Assert.Equal(before[u.Id], u.Hp));
+        Assert.False(held.Next.FrozenIronHeld);
+        Assert.Equal(Swallow.FirstDose, held.Next.FrozenIron);
+
+        var between = held.Next.Try(new EndPhase());
+        var lands = between.Next.Try(new EndPhase());
+
+        Assert.DoesNotContain(between.Events, e => e is FrozenIronFell);
+        Assert.Equal(Swallow.FirstDose, lands.Events.OfType<FrozenIronFell>().Single().Amount);
+        Assert.Equal(Swallow.FirstDose + Swallow.DoseStep, lands.Next.FrozenIron);
+    }
+
+    [Fact]
+    public void AStageThatIsNotLateHoldsNoLanding()
+    {
+        var start = Start();
+        start = start.WithUnit(Hask(start) with { Kin = Hask(start).Kin! with { Late = false } });
+
+        var state = Taken(start) with { Phase = Side.Player };
+        var result = state.Try(new EndPhase());
+
+        Assert.False(state.FrozenIronHeld);
+        Assert.Equal(Swallow.FirstDose, result.Events.OfType<FrozenIronFell>().Single().Amount);
+    }
+
+    [Fact]
+    public void AHeldLandingIsNotCountedInTheExposureSum()
+    {
+        var held = Taken(Start()) with { Phase = Side.Player };
+
+        Assert.Equal(0, Swallow.NextLanding(held, Side.Player));
+        Assert.Equal(Swallow.FirstDose, Swallow.NextLanding(held with { FrozenIronHeld = false }, Side.Player));
     }
 
     [Fact]
@@ -274,6 +326,18 @@ public class SwallowTests
     }
 
     [Fact]
+    public void TheFinaleReadSplitsThePreSwallowFallsByWhereTheHuntStood()
+    {
+        var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
+        Ironwake.Sim.GameResult Fell(string killer, string front, bool line = false, bool after = false) =>
+            new(BattleResult.Lost, 6, mix, LossCause.Captain) { CaptainKiller = killer, CaptainFront = after ? null : front, CaptainFellInStageTwo = after, CaptainByLine = line };
+        var games = new[] { Fell("Sworn Hunter", "hunted, alone"), Fell("Hask", "not hunted, behind the fronts", line: true), Fell("Hask", "hunted, alone"), Fell("Hask", "", after: true) };
+
+        Assert.Equal("before the swallow, by the hunt: hunted, alone 2 (Hask 1, Sworn Hunter 1); not hunted, behind the fronts 1 (Hask 1); down a line 1", Ironwake.Sim.FinaleRun.FrontLine(games));
+        Assert.Null(Ironwake.Sim.FinaleRun.FrontLine(new[] { Fell("Hask", "", after: true) }));
+    }
+
+    [Fact]
     public void TheStageReadSplitsDamageOnHimByWhetherHeReachesTheStrikersTile()
     {
         var after = Swallowed(Start());
@@ -411,13 +475,17 @@ public class SwallowTests
         Assert.True(Hask(read).Swallowed);
         Assert.Equal(Hask(state).Kin, Hask(read).Kin);
         Assert.Equal(state.FrozenIron, read.FrozenIron);
+        Assert.False(read.FrozenIronHeld);
+        Assert.True(Ironwake.Content.Protocol.ProtocolJson.ReadState(Ironwake.Content.Protocol.ProtocolJson.State(Taken(Start()), Starter), Starter).FrozenIronHeld);
     }
 
     [Fact]
     public void TheCardSaysWhatTheStageDoes()
     {
         var state = Start();
-        Assert.Contains(Ironwake.Cli.PlaySession.ShowLines(state, Starter, Hask(state)), l => l.Contains("At 0 HP he swallows the shard"));
+        Assert.Contains(Ironwake.Cli.PlaySession.ShowLines(state, Starter, Hask(state)), l => l.Contains("At 0 HP he swallows the shard") && l.Contains("phase starts from the second"));
+        var taken = Taken(state);
+        Assert.Contains(Ironwake.Cli.PlaySession.ShowLines(taken, Starter, Hask(taken)), l => l.Contains("at his side's phase start after next"));
 
         var swallowed = Swallowed(state);
         var lines = Ironwake.Cli.PlaySession.ShowLines(swallowed, Starter, Hask(swallowed));
@@ -442,10 +510,10 @@ public class SwallowTests
     {
         var units = Ironwake.Core.Tests.Content.Fixture.Units.Replace(
             "\"inventory\": [ { \"item\": \"iron_sword\" } ] }",
-            "\"inventory\": [ { \"item\": \"iron_sword\" } ], \"swallow\": { \"hp\": 40, \"def\": 3, \"res\": 3, \"heal\": 6 } }");
+            "\"inventory\": [ { \"item\": \"iron_sword\" } ], \"swallow\": { \"hp\": 40, \"def\": 3, \"res\": 3, \"heal\": 6, \"late\": true } }");
         var content = ContentLoader.Parse(Ironwake.Core.Tests.Content.Fixture.Files(units: units));
 
-        Assert.Equal(new KinStage(40, 3, 3, 6), content.Unit("recruit").Swallow);
+        Assert.Equal(new KinStage(40, 3, 3, 6, Late: true), content.Unit("recruit").Swallow);
         Assert.Equal(content, ContentLoader.Parse(ContentSerializer.Write(content)));
     }
 }

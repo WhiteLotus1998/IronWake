@@ -3456,7 +3456,8 @@ public static class ContentLoader
     /// <summary>
     /// A template's <c>swallow</c> block (issue 1385, <see cref="Core.Swallow"/>): <c>hp</c> at least 1, <c>def</c>,
     /// <c>res</c> and <c>heal</c> at least 0, an optional one-line <c>description</c>, and an optional <c>rooted</c>
-    /// (round 505: stage 2 holds the tile he swallowed on).
+    /// (round 505: stage 2 holds the tile he swallowed on), and an optional <c>late</c> (round 508: Frozen Iron first
+    /// lands at his second phase start after the swallow).
     /// </summary>
     private static KinStage ParseSwallow(EntryNode node, EntryNode swallow)
     {
@@ -3472,6 +3473,6 @@ public static class ContentLoader
             throw node.Error("swallow.description", $"must be one line of at most {DescriptionMax} characters");
         }
 
-        return new KinStage(Read("hp", 1), Read("def", 0), Read("res", 0), Read("heal", 0), description, swallow.BoolOr("rooted", false));
+        return new KinStage(Read("hp", 1), Read("def", 0), Read("res", 0), Read("heal", 0), description, swallow.BoolOr("rooted", false), swallow.BoolOr("late", false));
     }
 }
