@@ -18,7 +18,7 @@ public sealed record ShardSwallowed(string UnitId, Coord At, int Hp) : GameEvent
 
 /// <summary>
 /// Frozen Iron landed at his side's phase start (issues 1385, 1395): <paramref name="Amount"/> on every unit on the board, either
-/// side, flat past Def and Res; <paramref name="Struck"/> names them in unit order and <paramref name="HpAfter"/> gives
+/// side, but the swallowed boss who casts it (Lotus, 2026-10-09), flat past Def and Res; <paramref name="Struck"/> names them in unit order and <paramref name="HpAfter"/> gives
 /// each one's HP after it. A <see cref="UnitDied"/> or <see cref="ShardSwallowed"/> follows for each it takes to 0.
 /// </summary>
 public sealed record FrozenIronFell(int Amount, ValueList<string> Struck, ValueList<int> HpAfter) : GameEvent;
@@ -36,8 +36,8 @@ public sealed record ColdDrained(string UnitId, Coord At) : GameEvent;
 /// tile, and takes the stage's numbers on a fresh bar (<see cref="Take"/>). That hit pays no kill EXP, frees no bond,
 /// swears no grudge and drops nothing; the hit's riders land on him as they would on a survivor. From his side's next
 /// phase start, at each of his side's phase starts (<see cref="Casts"/>, issue 1395), Frozen Iron lands on every unit
-/// on the board, him too, flat past Def and Res: <see cref="FirstDose"/> at the first, <see cref="DoseStep"/> more each after, at most
-/// <see cref="MostDose"/> (<see cref="Fall"/>). It can kill; a unit it kills dies as any other. Then the Kin heals
+/// on the board but him (Lotus, 2026-10-09: he is exempt, his own side is not), flat past Def and Res: <see cref="FirstDose"/>
+/// at the first, <see cref="DoseStep"/> more each after, with no cap (Lotus, 2026-10-09: it climbs until he dies) (<see cref="Fall"/>). It can kill; a unit it kills dies as any other. Then the Kin heals
 /// him <see cref="KinStage.Heal"/> at his side's phase start, to max. When he falls in stage 2, the cold drains out
 /// of him and the shard lies on his tile (<see cref="ColdDrained"/>). Everything is board state, so Recall restores it.
 /// </summary>
@@ -49,8 +49,8 @@ public static class Swallow
     /// <summary>What each later landing adds (issue 1385).</summary>
     public const int DoseStep = 2;
 
-    /// <summary>The most Frozen Iron lands for (issue 1385's 2, 4, 6, 8, 10; a lean: it climbs no further).</summary>
-    public const int MostDose = 10;
+    /// <summary>Whether Frozen Iron passes <paramref name="unit"/> by: the swallowed boss who casts it (Lotus, 2026-10-09).</summary>
+    public static bool Spared(BattleUnit unit) => unit.Swallowed;
 
     /// <summary>Whether a hit taking <paramref name="unit"/> to 0 HP makes it swallow rather than die: it carries a stage and has not swallowed.</summary>
     public static bool Takes(BattleUnit unit) => unit is { Kin: not null, Swallowed: false };
@@ -86,10 +86,10 @@ public static class Swallow
     /// <summary>
     /// The phase start's Frozen Iron and the Kin's heal (issue 1385), after the terrain's heal and burn: while
     /// <see cref="BattleState.FrozenIron"/> is set and <paramref name="side"/> is his (<see cref="Casts"/>), every unit
-    /// on the board takes it, never below 0, unless the landing is held (<see cref="BattleState.FrozenIronHeld"/>), when this
+    /// on the board but a swallowed unit (<see cref="Spared"/>) takes it, never below 0, unless the landing is held (<see cref="BattleState.FrozenIronHeld"/>), when this
     /// phase start only lifts the hold; a unit it takes to 0 swallows if it may (<see cref="Takes"/>), else dies
     /// through <paramref name="died"/>; the next landing
-    /// climbs by <see cref="DoseStep"/> to <see cref="MostDose"/>. Then each swallowed unit of
+    /// climbs by <see cref="DoseStep"/>, uncapped. Then each swallowed unit of
     /// <paramref name="side"/> still standing heals its stage's <see cref="KinStage.Heal"/>, to max.
     /// </summary>
     public static BattleState Fall(BattleState state, GameContent content, Side side, List<GameEvent> events, Func<BattleState, BattleUnit, BattleState> died)
@@ -101,7 +101,7 @@ public static class Swallow
         else if (state.FrozenIron > 0 && Casts(state, side))
         {
             var dose = state.FrozenIron;
-            var struck = state.Units.Where(u => !u.Retreated).ToList();
+            var struck = state.Units.Where(u => !u.Retreated && !Spared(u)).ToList();
             events.Add(new FrozenIronFell(dose, ValueList<string>.From(struck.Select(u => u.Id)), ValueList<int>.From(struck.Select(u => Math.Max(0, u.Hp - dose)))));
             foreach (var aimed in struck)
             {
@@ -123,7 +123,7 @@ public static class Swallow
                 state = died(state, unit with { Hp = 0 });
             }
 
-            state = state with { FrozenIron = Math.Min(MostDose, dose + DoseStep) };
+            state = state with { FrozenIron = dose + DoseStep };
         }
 
         foreach (var healed in state.Units.Where(u => u is { Swallowed: true, Kin: not null } && u.Side == side).ToList())

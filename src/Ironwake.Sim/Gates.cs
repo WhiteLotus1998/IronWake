@@ -1229,6 +1229,12 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
     /// <summary>The player units on the board after the last command read.</summary>
     public int StandingEnd { get; init; }
 
+    /// <summary>The Frozen Iron landings in the stage (Table round 514): the race's rounds, as the dose counts them.</summary>
+    public int Landings { get; init; }
+
+    /// <summary>The landing whose dose first killed a player unit, 1 for the first, or null while none has (round 514).</summary>
+    public int? FirstClockKill { get; init; }
+
     /// <summary>
     /// The damage the player side dealt the boss in the stage's player phases from a tile some action of his reaches
     /// (<see cref="Reaches"/>): round 506's kill criterion for a rooted stage 2 reads it against <see cref="DamageBeyond"/>.
@@ -1282,7 +1288,12 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
                     break;
                 case FrozenIronFell fell when stage is not null:
                     var killed = fell.Struck.Where((id, i) => fell.HpAfter[i] == 0 && before.Find(id) is { Side: Side.Player, Kin: null }).Count();
-                    stage = stage with { ClockDeaths = stage.ClockDeaths + killed };
+                    stage = stage with
+                    {
+                        ClockDeaths = stage.ClockDeaths + killed,
+                        Landings = stage.Landings + 1,
+                        FirstClockKill = stage.FirstClockKill ?? (killed > 0 ? stage.Landings + 1 : null),
+                    };
                     break;
             }
         }
