@@ -133,6 +133,29 @@ public sealed record GameContent(
     public IEnumerable<(Ability Ability, CombatArtEffect Art)> ArtsOf(Unit unit) =>
         AbilitiesOf(unit).Where(a => a.Effect is CombatArtEffect).Select(a => (a, (CombatArtEffect)a.Effect));
 
+    /// <summary>
+    /// The forms a unit may declare (issue 1461 a2): <see cref="ArtsOf"/>, and with <paramref name="forms"/>
+    /// (a <c>forms: on</c> map) an enemy also knows the basic form (<see cref="CombatArtEffect.Basic"/>) of each
+    /// weapon type it carries that it does not already know, in inventory order.
+    /// </summary>
+    public IEnumerable<(Ability Ability, CombatArtEffect Art)> FormsOf(BattleUnit unit, bool forms)
+    {
+        var known = ArtsOf(unit.Unit).ToList();
+        if (!forms || unit.Side != Side.Enemy)
+        {
+            return known;
+        }
+
+        var basics = unit.Unit.Inventory.Items
+            .Where(i => Weapons.ContainsKey(i.ItemId))
+            .Select(i => Weapons[i.ItemId].Type)
+            .Distinct()
+            .SelectMany(type => Abilities.Values.Where(a => a.Effect is CombatArtEffect { Basic: true } art && art.Weapon == type))
+            .Where(a => known.All(k => k.Ability.Id != a.Id))
+            .Select(a => (a, (CombatArtEffect)a.Effect));
+        return known.Concat(basics).ToList();
+    }
+
     /// <summary>The heal arts a unit knows (issue 635, <see cref="HealArtEffect"/>): the arts an item use declares with a healing spell, in its order; a combat art is declared on an attack instead.</summary>
     public IEnumerable<(Ability Ability, HealArtEffect Art)> HealArtsOf(Unit unit) =>
         AbilitiesOf(unit).Where(a => a.Effect is HealArtEffect).Select(a => (a, (HealArtEffect)a.Effect));

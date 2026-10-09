@@ -296,7 +296,7 @@ public static class Queries
                 ? StrikeForecast(swapped, content, carrier, coverer, strike)
                 : StrikeForecast(on, content, carrier, moved, strike);
             Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
-            return new ThreatLine(carrier, strike.From, strike.Slot, weapon, forecast, arrives, StrikeTiles(board, content, enemy, moved), Windup.Raises(on, weapon)) { CoveredBy = covered?.Struck };
+            return new ThreatLine(carrier, strike.From, strike.Slot, weapon, forecast, arrives, StrikeTiles(board, content, enemy, moved), Windup.Raises(on, weapon)) { CoveredBy = covered?.Struck, Form = strike.Art };
         }
 
         foreach (var (enemy, lighter, lit, strike) in LitStrikes(board, content, moved, lines.Where(l => l.HeldBy is null).ToList()))
@@ -304,7 +304,7 @@ public static class Queries
             var carrier = lit.Carrying(enemy, strike.From);
             var weapon = carrier.UsableWeaponAt(content, strike.Slot)!;
             Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
-            lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, StrikeForecast(lit, content, carrier, moved, strike), arrives, StrikeTiles(lit, content, enemy, moved), Windup.Raises(lit, weapon)) { LitBy = lighter });
+            lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, StrikeForecast(lit, content, carrier, moved, strike), arrives, StrikeTiles(lit, content, enemy, moved), Windup.Raises(lit, weapon)) { LitBy = lighter, Form = strike.Art });
         }
 
         return lines
@@ -530,7 +530,7 @@ public static class Queries
     /// and throws <see cref="InvalidOperationException"/> naming both units and the tile.
     /// </summary>
     public static CombatForecast StrikeForecast(BattleState board, GameContent content, BattleUnit enemy, BattleUnit target, EnemyStrike strike) =>
-        Forecast(board, content, enemy, target, strike.From, strike.Slot)
+        Forecast(board, content, enemy, target, strike.From, strike.Slot, strike.Art)
             ?? throw new InvalidOperationException($"the planner's strike of {enemy.Id} on {target.Id} from {strike.From} has no forecast");
 
     /// <summary>
@@ -1088,6 +1088,12 @@ public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon W
     /// unit's tile, when a cover would swap them; <see cref="Forecast"/> is then against it. Null otherwise.
     /// </summary>
     public BattleUnit? CoveredBy { get; init; }
+
+    /// <summary>
+    /// The form the enemy declares on the strike on a <c>forms: on</c> map (issue 1461 a2, <see cref="EnemyAi.Form"/>),
+    /// priced in <see cref="Forecast"/>; null for a plain strike.
+    /// </summary>
+    public string? Form { get; init; }
 
     /// <summary>
     /// On a dusk map (DESIGN.md 13.7), the side-mate that lights the unit for this strike (issue

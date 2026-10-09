@@ -41,15 +41,15 @@ public class AttackMenuTests
     }
 
     [Theory]
-    [InlineData("feint", WeaponType.Sword, 1, -2, 25, 0, 0, 0)]
-    [InlineData("heavy_cut", WeaponType.Sword, 2, 4, -10, 0, 3, 0)]
-    [InlineData("long_thrust", WeaponType.Lance, 2, -3, 0, 0, 0, 1)]
-    [InlineData("cleave", WeaponType.Axe, 3, 6, -20, 10, 0, 0)]
-    [InlineData("aimed_shot", WeaponType.Bow, 2, 0, 20, 10, 2, 0)]
-    [InlineData("overcast", WeaponType.Reason, 2, 5, 0, 0, 4, 0)]
-    public void TheShippedArtsCarryTheIssuesNumbers(string id, WeaponType weapon, int cost, int mt, int hit, int crit, int wt, int range)
+    [InlineData("feint", WeaponType.Sword, 1, -2, 25, 0, 0, 0, false)]
+    [InlineData("heavy_cut", WeaponType.Sword, 2, 4, -10, 0, 3, 0, true)]
+    [InlineData("long_thrust", WeaponType.Lance, 2, -3, 0, 0, 0, 1, true)]
+    [InlineData("cleave", WeaponType.Axe, 3, 6, -20, 10, 0, 0, true)]
+    [InlineData("aimed_shot", WeaponType.Bow, 2, 0, 20, 10, 2, 0, true)]
+    [InlineData("overcast", WeaponType.Reason, 2, 5, 0, 0, 4, 0, true)]
+    public void TheShippedArtsCarryTheIssuesNumbers(string id, WeaponType weapon, int cost, int mt, int hit, int crit, int wt, int range, bool basic)
     {
-        Assert.Equal(new CombatArtEffect(weapon, WeaponRank.E, cost, mt, hit, crit, wt, range) { Grit = 2 }, Shipped.Ability(id).Effect);
+        Assert.Equal(new CombatArtEffect(weapon, WeaponRank.E, cost, mt, hit, crit, wt, range) { Grit = 2, Basic = basic }, Shipped.Ability(id).Effect);
     }
 
     [Theory]

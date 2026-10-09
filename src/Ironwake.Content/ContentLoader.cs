@@ -1402,7 +1402,14 @@ public static class ContentLoader
                 throw node.Error("text", "must be one line of text");
             }
 
-            builder.Add(node.Entry!, new Ability(node.Entry!, node.String("name"), text, ParseEffect(node, node.Object("effect"))));
+            var ability = new Ability(node.Entry!, node.String("name"), text, ParseEffect(node, node.Object("effect")));
+            if (ability.Effect is CombatArtEffect { Basic: true } basic
+                && builder.Values.FirstOrDefault(a => a.Effect is CombatArtEffect { Basic: true } other && other.Weapon == basic.Weapon) is { } first)
+            {
+                throw node.Error("effect.basic", $"{first.Id} is already the basic form for {basic.Weapon.ToString().ToLowerInvariant()}; a weapon type has one");
+            }
+
+            builder.Add(node.Entry!, ability);
         }
 
         return builder.ToImmutable();
@@ -1451,7 +1458,7 @@ public static class ContentLoader
 
                 return modifier;
             case "art":
-                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase", "single", "item", "woken", "locks", "grit");
+                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase", "single", "item", "woken", "locks", "grit", "basic");
                 var art = new CombatArtEffect(
                     entry.ParseEnum<WeaponType>("effect.weapon", effect.String("weapon")),
                     entry.ParseEnum<WeaponRank>("effect.rank", effect.String("rank")),
@@ -1469,7 +1476,13 @@ public static class ContentLoader
                     Woken = effect.BoolOr("woken", false),
                     Locks = effect.BoolOr("locks", false),
                     Grit = effect.Has("grit") ? effect.Int("grit") : effect.Has("perMap") ? 0 : 2,
+                    Basic = effect.BoolOr("basic", false),
                 };
+                if (art.Basic && (art.Item is not null || art.PerMap is not null || art.Woken || art.CostsNextPhase))
+                {
+                    throw entry.Error("effect.basic", "a basic form is any weapon's of its type: no item, perMap, woken or costsNextPhase");
+                }
+
                 if (art.Grit is < 0 or > Grit.Cap)
                 {
                     throw entry.Error("effect.grit", $"must be 0 to {Grit.Cap}: what the form costs on a forms: on map");

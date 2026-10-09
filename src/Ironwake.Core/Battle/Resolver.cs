@@ -993,7 +993,7 @@ public static class Resolver
     /// </summary>
     public static (CombatArtEffect? Art, Rejection? Rejection) ChooseArt(BattleUnit unit, GameContent content, Weapon weapon, string artId, bool forms = false)
     {
-        var known = content.ArtsOf(unit.Unit).FirstOrDefault(a => a.Ability.Id == artId);
+        var known = content.FormsOf(unit, forms).FirstOrDefault(a => a.Ability.Id == artId);
         if (known.Art is null)
         {
             return (null, new Rejection(RejectionReason.NoSuchArt, $"{unit.Id} knows no technique '{artId}'"));
@@ -2651,7 +2651,7 @@ public static class Resolver
                 }
             }
 
-            foreach (var (ability, _) in content.ArtsOf(unit.Unit))
+            foreach (var (ability, _) in content.FormsOf(unit, state.Map.FormsEnabled))
             {
                 var (art, refused) = ChooseArt(unit.WithSlotInFront(slot), content, weapon, ability.Id, state.Map.FormsEnabled);
                 if (refused is not null)

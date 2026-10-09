@@ -1500,7 +1500,8 @@ public static class Program
 
         Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds, {Gates.Name(scheme)}" + (difficulty is null ? "" : $", difficulty {difficulty}") + (forms ? ", forms: on" : ""));
         var failed = false;
-        var offers = new FormTally();
+        var offers = new FormCount();
+        var enemyOffers = new FormCount();
         foreach (var (id, map) in maps)
         {
             var one = new[] { (id, map) };
@@ -1532,64 +1533,34 @@ public static class Program
 
             if (forms)
             {
-                var mapOffers = new FormTally();
+                var mapOffers = new FormCount();
+                var mapEnemy = new FormCount();
                 for (var seed = 1; seed <= seeds; seed++)
                 {
                     var player = new HeuristicPlayer();
-                    Runner.Play(content, map, (ulong)seed, player, scheme: scheme);
-                    mapOffers.Add(player);
+                    Runner.Play(content, map, (ulong)seed, player, scheme: scheme, enemyForms: mapEnemy);
+                    mapOffers.Add(player.FormOffers, player.FormOffersUnaffordable, player.TwoCostOffers, player.TwoCostAffordable);
                 }
 
-                Console.WriteLine($"  forms {id}: {mapOffers.Line}");
+                Console.WriteLine($"  forms {id}, player: {mapOffers.Line}");
+                Console.WriteLine($"  forms {id}, enemy: {mapEnemy.Line}");
                 offers.Add(mapOffers);
+                enemyOffers.Add(mapEnemy);
             }
         }
 
         if (forms)
         {
-            Console.WriteLine($"forms, all maps: {offers.Line}; Grit {(offers.Kills ? "fails its kill criterion" : "passes its kill criterion")} (player side only until enemies carry forms)");
+            var both = new FormCount();
+            both.Add(offers);
+            both.Add(enemyOffers);
+            Console.WriteLine($"forms, all maps, player: {offers.Line}");
+            Console.WriteLine($"forms, all maps, enemy: {enemyOffers.Line}");
+            Console.WriteLine($"forms, all maps, both sides: {both.Line}; Grit {(both.Kills ? "fails its kill criterion" : "passes its kill criterion")}");
         }
 
         Console.WriteLine(failed ? "full: FAILED" : "full: ok");
         return failed ? 1 : 0;
-    }
-
-    /// <summary>
-    /// Grit's kill criterion (issue 1461, DECISIONS/0386): the lethal form offers the heuristic player
-    /// met on <c>forms: on</c> maps. Grit dies when over a third of them were unaffordable, or when
-    /// over 80 percent of the 2-cost ones were affordable (a free button).
-    /// </summary>
-    private sealed class FormTally
-    {
-        public int Offers { get; private set; }
-
-        public int Unaffordable { get; private set; }
-
-        public int TwoCost { get; private set; }
-
-        public int TwoCostAffordable { get; private set; }
-
-        public void Add(HeuristicPlayer player)
-        {
-            Offers += player.FormOffers;
-            Unaffordable += player.FormOffersUnaffordable;
-            TwoCost += player.TwoCostOffers;
-            TwoCostAffordable += player.TwoCostAffordable;
-        }
-
-        public void Add(FormTally other)
-        {
-            Offers += other.Offers;
-            Unaffordable += other.Unaffordable;
-            TwoCost += other.TwoCost;
-            TwoCostAffordable += other.TwoCostAffordable;
-        }
-
-        public bool Kills => Unaffordable * 3 > Offers || TwoCostAffordable * 5 > TwoCost * 4;
-
-        public string Line => $"{Offers} lethal form offers, {Unaffordable} unaffordable ({Percent(Unaffordable, Offers)}, kill over 33%); 2-cost {TwoCostAffordable} of {TwoCost} affordable ({Percent(TwoCostAffordable, TwoCost)}, kill over 80%)";
-
-        private static string Percent(int part, int whole) => whole == 0 ? "-" : $"{100.0 * part / whole:0}%";
     }
 
     /// <summary>
