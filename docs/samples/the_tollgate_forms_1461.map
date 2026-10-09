@@ -5,7 +5,7 @@ turn_limit: 10
 recall: 3
 enemy_level: 3
 forms: on
-grit_gain: hits
+form_rule: lethal
 
 MM############
 MM#....T.....#

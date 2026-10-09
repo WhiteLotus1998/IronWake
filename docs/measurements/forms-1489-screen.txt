@@ -1,0 +1,39 @@
+forms screen: 9 maps, 200 seeds, two-roll average
+  gate 1 brackwater_cut: forms off 133/200, refill, lethal rule 134/200, refill, capped rule 135/200, hits, lethal rule 131/200, hits, capped rule 132/200
+  gate 1 harrow_weir: forms off 132/200, refill, lethal rule 153/200, refill, capped rule 148/200, hits, lethal rule 139/200, hits, capped rule 142/200
+  gate 1 old_mill_road: forms off 58/200, refill, lethal rule 69/200, refill, capped rule 34/200, hits, lethal rule 64/200, hits, capped rule 53/200
+  gate 1 sallow_grange: forms off 173/200, refill, lethal rule 175/200, refill, capped rule 180/200, hits, lethal rule 173/200, hits, capped rule 176/200
+  gate 1 saltmarsh_ford: forms off 54/200, refill, lethal rule 64/200, refill, capped rule 60/200, hits, lethal rule 62/200, hits, capped rule 65/200
+  gate 1 starting_alone: forms off 1/200, refill, lethal rule 0/200, refill, capped rule 0/200, hits, lethal rule 1/200, hits, capped rule 1/200
+  gate 1 the_field: forms off 104/200, refill, lethal rule 129/200, refill, capped rule 123/200, hits, lethal rule 114/200, hits, capped rule 118/200
+  gate 1 the_mill: forms off 115/200, refill, lethal rule 115/200, refill, capped rule 76/200, hits, lethal rule 115/200, hits, capped rule 108/200
+  gate 1 the_tollgate: forms off 191/200, refill, lethal rule 194/200, refill, capped rule 192/200, hits, lethal rule 192/200, hits, capped rule 193/200
+row refill, lethal rule:
+  player: 765 form offers, 15 unaffordable (2%, kill over 33%); 2-cost 750 of 765 affordable (98%, kill over 80%)
+    by type: sword 396 offers, 0% unaffordable, 2-cost 100% affordable; axe 38 offers, 0% unaffordable, 2-cost 100% affordable; reason 331 offers, 5% unaffordable, 2-cost 95% affordable
+  enemy: 2744 form offers, 454 unaffordable (17%, kill over 33%); 2-cost 2290 of 2744 affordable (83%, kill over 80%)
+    by type: axe 2401 offers, 15% unaffordable, 2-cost 85% affordable; reason 343 offers, 31% unaffordable, 2-cost 69% affordable
+  both sides: 3509 form offers, 469 unaffordable (13%, kill over 33%); 2-cost 3040 of 3509 affordable (87%, kill over 80%)
+  wins: 1033 of 1800 (forms off 961)
+row refill, capped rule:
+  player: 8027 form offers, 1286 unaffordable (16%, kill over 33%); 2-cost 6741 of 8027 affordable (84%, kill over 80%)
+    by type: sword 4143 offers, 13% unaffordable, 2-cost 87% affordable; axe 70 offers, 0% unaffordable, 2-cost 100% affordable; bow 2469 offers, 21% unaffordable, 2-cost 79% affordable; reason 1345 offers, 19% unaffordable, 2-cost 81% affordable
+  enemy: 5617 form offers, 1655 unaffordable (29%, kill over 33%); 2-cost 3962 of 5617 affordable (71%, kill over 80%)
+    by type: axe 59 offers, 0% unaffordable, 2-cost 100% affordable; bow 5099 offers, 28% unaffordable, 2-cost 72% affordable; reason 459 offers, 46% unaffordable, 2-cost 54% affordable
+  both sides: 13644 form offers, 2941 unaffordable (22%, kill over 33%); 2-cost 10703 of 13644 affordable (78%, kill over 80%)
+  wins: 948 of 1800 (forms off 961)
+row hits, lethal rule:
+  player: 737 form offers, 528 unaffordable (72%, kill over 33%); 2-cost 209 of 737 affordable (28%, kill over 80%)
+    by type: sword 388 offers, 75% unaffordable, 2-cost 25% affordable; axe 39 offers, 38% unaffordable, 2-cost 62% affordable; reason 310 offers, 72% unaffordable, 2-cost 28% affordable
+  enemy: 3124 form offers, 1948 unaffordable (62%, kill over 33%); 2-cost 1176 of 3124 affordable (38%, kill over 80%)
+    by type: axe 2445 offers, 52% unaffordable, 2-cost 48% affordable; reason 679 offers, 100% unaffordable, 2-cost 0% affordable
+  both sides: 3861 form offers, 2476 unaffordable (64%, kill over 33%); 2-cost 1385 of 3861 affordable (36%, kill over 80%)
+  wins: 991 of 1800 (forms off 961)
+row hits, capped rule:
+  player: 8343 form offers, 6058 unaffordable (73%, kill over 33%); 2-cost 2285 of 8343 affordable (27%, kill over 80%)
+    by type: sword 4321 offers, 72% unaffordable, 2-cost 28% affordable; axe 79 offers, 14% unaffordable, 2-cost 86% affordable; bow 2528 offers, 71% unaffordable, 2-cost 29% affordable; reason 1415 offers, 81% unaffordable, 2-cost 19% affordable
+  enemy: 6210 form offers, 5269 unaffordable (85%, kill over 33%); 2-cost 941 of 6210 affordable (15%, kill over 80%)
+    by type: axe 86 offers, 43% unaffordable, 2-cost 57% affordable; bow 5153 offers, 83% unaffordable, 2-cost 17% affordable; reason 971 offers, 100% unaffordable, 2-cost 0% affordable
+  both sides: 14553 form offers, 11327 unaffordable (78%, kill over 33%); 2-cost 3226 of 14553 affordable (22%, kill over 80%)
+  wins: 988 of 1800 (forms off 961)
+forms screen, hits and capped rule, both sides: Grit fails its kill criterion

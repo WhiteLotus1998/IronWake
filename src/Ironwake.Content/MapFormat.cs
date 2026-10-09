@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "forms", "wind", "one_answer", "seen_far", "holds", "goes_home", "seize_name", "seize_hold", "shard_race", "kin_shard", "swallowed", "shard_breaks", "drops", "arrivals", "wake_on_death" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "forms", "grit_gain", "form_rule", "wind", "one_answer", "seen_far", "holds", "goes_home", "seize_name", "seize_hold", "shard_race", "kin_shard", "swallowed", "shard_breaks", "drops", "arrivals", "wake_on_death" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -129,6 +129,16 @@ public static class MapFormat
         if (map.FormsEnabled)
         {
             sb.Append("forms: on\n");
+        }
+
+        if (map.GritFromHitsOnly)
+        {
+            sb.Append("grit_gain: hits\n");
+        }
+
+        if (map.FormRuleLethal)
+        {
+            sb.Append("form_rule: lethal\n");
         }
 
         if (map.OneAnswerEnabled)
@@ -511,6 +521,7 @@ public static class MapFormat
             map = map with { Swallowed = ParseSwallowed(header, map) };
             map = map with { ShardBreaks = ParseShardBreaks(header, map) };
             map = map with { Drops = ParseDrops(header, map), ArrivalsWait = ParseArrivals(header, map), DeathWakes = ParseDeathWakes(header, map) };
+            map = map with { GritFromHitsOnly = ParseFormsWord(header, map, "grit_gain", "hits"), FormRuleLethal = ParseFormsWord(header, map, "form_rule", "lethal") };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
                 throw ErrorAt(header["keziah_warning"].Line, warning);
@@ -569,6 +580,30 @@ public static class MapFormat
             }
 
             return ValueList<DeathWake>.From(wakes);
+        }
+
+        /// <summary>
+        /// A forms header that takes one word (issue 1489): <c>grit_gain: hits</c> or <c>form_rule: lethal</c>,
+        /// only on a <c>forms: on</c> map, or absent.
+        /// </summary>
+        private bool ParseFormsWord(Dictionary<string, (string Value, int Line)> header, MapDefinition map, string key, string word)
+        {
+            if (!header.TryGetValue(key, out var entry))
+            {
+                return false;
+            }
+
+            if (entry.Value != word)
+            {
+                throw ErrorAt(entry.Line, $"{key} may only be '{word}' (or absent), got '{entry.Value}'");
+            }
+
+            if (!map.FormsEnabled)
+            {
+                throw ErrorAt(entry.Line, $"{key}: {word} needs forms: on");
+            }
+
+            return true;
         }
 
         /// <summary>

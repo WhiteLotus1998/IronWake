@@ -796,53 +796,11 @@ public static class EnemyAi
     }
 
     /// <summary>
-    /// The forms that would make <paramref name="unit"/>'s strike on <paramref name="target"/> from
-    /// <paramref name="from"/> with <paramref name="slot"/>'s weapon kill on its hit where the plain strike does not
-    /// (issue 1461 a2, the #1453 rule the Sim's player follows), in the order the unit knows them
-    /// (<see cref="GameContent.FormsOf"/>), each with whether the unit's Grit pays for it now. Every lethal
-    /// form is listed whatever its Grit, so Grit's kill criterion can count the ones it priced out.
-    /// Empty off a <c>forms: on</c> map, for a boss under the veto (which prices plain weapons only,
-    /// DECISIONS/0251), and when the plain strike already kills. A form that costs the next phase is never listed.
-    /// </summary>
-    public static IReadOnlyList<FormOffer> LethalForms(BattleState state, GameContent content, BattleUnit unit, Coord from, BattleUnit target, int slot)
-    {
-        if (!state.Map.FormsEnabled || BossVetoApplies(state, content, unit))
-        {
-            return Array.Empty<FormOffer>();
-        }
-
-        var plain = Queries.Forecast(state, content, unit, target, from, slot);
-        if (plain is null || plain.Attacker.Strikes && plain.Attacker.Damage >= target.Hp)
-        {
-            return Array.Empty<FormOffer>();
-        }
-
-        var flush = unit with { Grit = Grit.Cap };
-        var board = state.WithUnit(flush);
-        var offers = new List<FormOffer>();
-        foreach (var (ability, art) in content.FormsOf(unit, true))
-        {
-            if (art.CostsNextPhase)
-            {
-                continue;
-            }
-
-            var forecast = Queries.Forecast(board, content, flush, target, from, slot, ability.Id);
-            if (forecast is not null && forecast.Attacker.Strikes && forecast.Attacker.Damage >= target.Hp)
-            {
-                offers.Add(new FormOffer(ability.Id, art.Grit, unit.Grit >= art.Grit, forecast.Attacker.HitChance));
-            }
-        }
-
-        return offers;
-    }
-
-    /// <summary>
-    /// The form an enemy declares on a strike (issue 1461 a2): of <see cref="LethalForms"/> the affordable one with
-    /// the best hit, the first known on a tie; null when none is.
+    /// The form an enemy declares on a strike (issues 1461 a2, 1489): <see cref="FormChoice.Pick"/> of
+    /// <see cref="FormChoice.Offers"/>, the rule the Sim's player follows; null when none is offered and affordable.
     /// </summary>
     public static string? Form(BattleState state, GameContent content, BattleUnit unit, Coord from, BattleUnit target, int slot) =>
-        LethalForms(state, content, unit, from, target, slot).Where(o => o.Affordable).OrderByDescending(o => o.Hit).FirstOrDefault()?.Id;
+        FormChoice.Pick(state.Map, FormChoice.Offers(state, content, unit, from, target, slot));
 
     /// <summary><paramref name="attack"/> from <paramref name="tile"/> with the form <see cref="Form"/> picks declared on it.</summary>
     private static Attack Declared(BattleState state, GameContent content, BattleUnit unit, Coord tile, Attack attack, int slot) =>
@@ -1487,8 +1445,18 @@ public sealed record EnemyStrike(Coord From, int Slot)
     public string? Art { get; init; }
 }
 
-/// <summary>One lethal form <see cref="EnemyAi.LethalForms"/> lists: its id, its Grit, whether the unit can pay it now, and its hit.</summary>
-public sealed record FormOffer(string Id, int Grit, bool Affordable, int Hit);
+/// <summary>
+/// One form <see cref="FormChoice.Offers"/> lists: its id, its Grit, whether the unit can pay it now, its hit, its
+/// weapon type, and its capped expected damage.
+/// </summary>
+public sealed record FormOffer(string Id, int Grit, bool Affordable, int Hit)
+{
+    /// <summary>The weapon type the form is for.</summary>
+    public WeaponType Weapon { get; init; }
+
+    /// <summary>The form's expected damage, each outcome capped at the target's HP (<see cref="FormChoice.CappedExpected"/>).</summary>
+    public double Expected { get; init; }
+}
 
 /// <summary>
 /// A boss's refusal <see cref="EnemyAi.Refusal"/> names (issue 565): the nearest tile it could

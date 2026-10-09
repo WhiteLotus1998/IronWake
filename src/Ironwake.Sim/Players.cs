@@ -142,63 +142,20 @@ public sealed class HeuristicPlayer : IPlayer
         return plan;
     }
 
-    /// <summary>Lethal form offers this player met on a <c>forms: on</c> map (issue 1461, <see cref="FormOffer"/>).</summary>
-    public int FormOffers { get; private set; }
-
-    /// <summary>Of <see cref="FormOffers"/>, those the unit's Grit could not pay.</summary>
-    public int FormOffersUnaffordable { get; private set; }
-
-    /// <summary>Of <see cref="FormOffers"/>, those of a form that costs 2 Grit.</summary>
-    public int TwoCostOffers { get; private set; }
-
-    /// <summary>Of <see cref="TwoCostOffers"/>, those the unit's Grit could pay.</summary>
-    public int TwoCostAffordable { get; private set; }
+    /// <summary>The form offers this player met on a <c>forms: on</c> map (issues 1461, 1489, <see cref="FormOffer"/>).</summary>
+    public FormCount Forms { get; } = new();
 
     /// <summary>
-    /// The form a planned plain attack declares on a <c>forms: on</c> map (issue 1461, the #1453
-    /// rule carried over): one that kills on its hit from <paramref name="tile"/> where the plain
-    /// strike does not, the best hit first, then content order; null when none is lethal or none
-    /// is affordable. Every form that would be lethal is counted as an offer, whatever its Grit,
-    /// for Grit's kill criterion. A form that costs the next phase is left to <see cref="Finisher"/>.
+    /// The form a planned plain attack declares on a <c>forms: on</c> map (issues 1461, 1489): the enemy's rule,
+    /// <see cref="FormChoice.Pick"/> of <see cref="FormChoice.Offers"/> from <paramref name="tile"/>; null when none
+    /// is offered and affordable. Every offer is counted in <see cref="Forms"/>, whatever its Grit, for Grit's kill
+    /// criterion. A form that costs the next phase is left to <see cref="Finisher"/>.
     /// </summary>
     private string? FormOffer(BattleState state, GameContent content, BattleUnit unit, Coord tile, Attack attack)
     {
-        var target = state.Find(attack.TargetId)!;
-        var plain = Queries.Forecast(state, content, unit, target, tile, attack.Slot);
-        if (plain is null || plain.Attacker.Strikes && plain.Attacker.Damage >= target.Hp)
-        {
-            return null;
-        }
-
-        var flush = unit with { Grit = Grit.Cap };
-        string? pick = null;
-        var pickHit = -1;
-        foreach (var (ability, art) in content.FormsOf(unit, state.Map.FormsEnabled))
-        {
-            if (art.CostsNextPhase)
-            {
-                continue;
-            }
-
-            var forecast = Queries.Forecast(state.WithUnit(flush), content, flush, target, tile, attack.Slot, ability.Id);
-            if (forecast is null || !forecast.Attacker.Strikes || forecast.Attacker.Damage < target.Hp)
-            {
-                continue;
-            }
-
-            var affordable = unit.Grit >= art.Grit;
-            FormOffers++;
-            FormOffersUnaffordable += affordable ? 0 : 1;
-            TwoCostOffers += art.Grit == 2 ? 1 : 0;
-            TwoCostAffordable += art.Grit == 2 && affordable ? 1 : 0;
-            if (affordable && forecast.Attacker.HitChance > pickHit)
-            {
-                pick = ability.Id;
-                pickHit = forecast.Attacker.HitChance;
-            }
-        }
-
-        return pick;
+        var offers = FormChoice.Offers(state, content, unit, tile, state.Find(attack.TargetId)!, attack.Slot ?? unit.EquippedSlot(content));
+        Forms.Add(offers);
+        return FormChoice.Pick(state.Map, offers);
     }
 
     /// <summary>

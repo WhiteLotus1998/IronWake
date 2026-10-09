@@ -231,6 +231,21 @@ public sealed record MapDefinition(
     public bool FormsEnabled { get; init; }
 
     /// <summary>
+    /// The <c>grit_gain: hits</c> header (issue 1489, the one reshape 0386 allowed): on a <c>forms: on</c> map every
+    /// unit starts with 1 Grit and gains it only from hits taken, never at a phase start. Off by default, when
+    /// a phase start gains 1 (<see cref="Grit.AtPhaseStart"/>).
+    /// </summary>
+    public bool GritFromHitsOnly { get; init; }
+
+    /// <summary>
+    /// The <c>form_rule: lethal</c> header (issue 1489): on a <c>forms: on</c> map a unit declares a form under
+    /// 0400's rule, when the form kills on its hit and the plain strike does not, instead of the capped
+    /// expected-damage rule (<see cref="FormChoice"/>). Kept for the plays journaled under that rule and for
+    /// the screen's comparison rows. Off by default.
+    /// </summary>
+    public bool FormRuleLethal { get; init; }
+
+    /// <summary>
     /// The <c>arrivals: wait</c> header (issue 1259, experiment, samples): a non-boss spawn whose tile is
     /// held or impassable is not spent but waits at its tile, and lands at the first enemy phase that
     /// starts with the tile open, one a tile a phase, the oldest first (<see cref="MapEvents"/>). Off by
