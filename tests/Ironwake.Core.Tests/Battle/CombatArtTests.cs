@@ -90,8 +90,8 @@ public class CombatArtTests
         var result = Try(state, new Attack("hale", "brigand-1", null, "sunder"));
 
         Assert.True(result.Accepted, result.Rejection?.Message);
-        Assert.Equal(new ArtDeclared("hale", "sunder", "iron_sword", 2), result.Events.OfType<ArtDeclared>().Single());
-        Assert.IsType<CombatFought>(result.Events[result.Events.ToList().FindIndex(e => e is ArtDeclared) + 1]);
+        Assert.Equal(new FormDeclared("hale", "sunder", "iron_sword", 2), result.Events.OfType<FormDeclared>().Single());
+        Assert.IsType<CombatFought>(result.Events[result.Events.ToList().FindIndex(e => e is FormDeclared) + 1]);
         foreach (var strike in result.Events.OfType<CombatFought>().Single().Strikes.Where(s => s.AttackerId == "hale" && s.Hit && !s.Crit))
         {
             Assert.Equal(forecast.Attacker.Damage, strike.Damage);
@@ -121,7 +121,7 @@ public class CombatArtTests
 
         var result = Try(state, new Attack("hale", "brigand-1"));
 
-        Assert.Empty(result.Events.OfType<ArtDeclared>());
+        Assert.Empty(result.Events.OfType<FormDeclared>());
         Assert.Equal(before - result.Events.OfType<CombatFought>().Single().Strikes.Count(s => s.AttackerId == "hale"), Uses(result.Next));
     }
 
@@ -162,7 +162,7 @@ public class CombatArtTests
         var rejection = Refused(state, new Attack("hale", "brigand-1", null, "sunder"));
 
         Assert.Equal(RejectionReason.NoSuchArt, rejection.Reason);
-        Assert.Equal("hale knows no technique 'sunder'", rejection.Message);
+        Assert.Equal("hale knows no form 'sunder'", rejection.Message);
         Assert.Equal(RejectionReason.NoSuchArt, Refused(Beside(), new Attack("hale", "brigand-1", null, "vigilance")).Reason);
     }
 
@@ -172,7 +172,7 @@ public class CombatArtTests
         var rejection = Refused(Beside(), new Attack("hale", "brigand-1", null, "pike"));
 
         Assert.Equal(RejectionReason.ArtRefused, rejection.Reason);
-        Assert.Equal("hale cannot use pike: pike is a lance technique and Iron Sword is a sword", rejection.Message);
+        Assert.Equal("hale cannot use pike: pike is a lance form and Iron Sword is a sword", rejection.Message);
     }
 
     [Fact]
@@ -194,7 +194,7 @@ public class CombatArtTests
         var rejection = Refused(state, new Attack("hale", "brigand-1", null, "sunder"));
 
         Assert.Equal(RejectionReason.ArtRefused, rejection.Reason);
-        Assert.Equal("hale cannot use sunder: Iron Sword is broken and cannot pay for a technique", rejection.Message);
+        Assert.Equal("hale cannot use sunder: Iron Sword is broken and cannot pay for a form", rejection.Message);
         Assert.True(Try(state, new Attack("hale", "brigand-1")).Accepted);
     }
 

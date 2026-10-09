@@ -915,7 +915,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 Forecast Pell -> Archer 2 with Cinder: acc 99% dmg 19 crit 3%; counter: acc 92% dmg 9 x2 crit 2%
   Kills if the first strike lands (99)
   Counter: lethal to Pell only if the first round misses (1 in 100) (18 against 17 hp)
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Archer 2
   Pell hits Archer 2 for 19 (hp 0)
@@ -1046,7 +1046,7 @@ C  wren             Wren L5 cadet              3,4    hp 22/22  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brawler-1 art full_measure
 Forecast Alder Fenn -> Brawler: acc 100% dmg 19 crit 26%; counter: acc 81% dmg 7 x2 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Brawler
   Alder Fenn hits Brawler for 19 (hp 0)
@@ -1349,11 +1349,11 @@ Recall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the
   State 32  turn 2  after wait teodor  undoes: gives back 2 kills (Archer 2, Brawler), 68 exp, 50 enemy hp; returns Pell alive at 17 hp
   State 41  turn 3  turn start  undoes: gives back 2 kills (Archer 2, Brawler), 68 exp, 50 enemy hp; returns Pell alive at 17 hp
   State 42  turn 3  after move pell 7,7  undoes: gives back 2 kills (Archer 2, Brawler), 68 exp, 50 enemy hp; returns Pell alive at 17 hp
-  State 43  turn 3  after attack pell archer-2 art overcast  undoes: gives back 1 kill (Brawler), 68 exp, 31 enemy hp; returns Pell alive at 17 hp
+  State 43  turn 3  after attack pell archer-2 form overcast  undoes: gives back 1 kill (Brawler), 68 exp, 31 enemy hp; returns Pell alive at 17 hp
   State 44  turn 3  after move ottilie 6,7  undoes: gives back 1 kill (Brawler), 68 exp, 31 enemy hp; returns Pell alive at 17 hp
   State 45  turn 3  after attack ottilie brawler-1  undoes: gives back 1 kill (Brawler), 54 exp, 23 enemy hp; returns Pell alive at 17 hp
   State 46  turn 3  after move captain 6,6  undoes: gives back 1 kill (Brawler), 54 exp, 23 enemy hp; returns Pell alive at 17 hp
-  State 47  turn 3  after attack captain brawler-1 art full_measure  undoes: gives back 14 exp, 6 enemy hp; returns Pell alive at 17 hp
+  State 47  turn 3  after attack captain brawler-1 form full_measure  undoes: gives back 14 exp, 6 enemy hp; returns Pell alive at 17 hp
   State 48  turn 3  after move teodor 6,5  undoes: gives back 14 exp, 6 enemy hp; returns Pell alive at 17 hp
   State 49  turn 3  after attack teodor veteran-1  undoes: gives back 14 exp, 6 enemy hp; returns Pell alive at 17 hp
   State 50  turn 3  after move wren 7,4  undoes: gives back 14 exp, 6 enemy hp; returns Pell alive at 17 hp
@@ -1495,7 +1495,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 > attack captain brawler-1 art full_measure
 Forecast Alder Fenn -> Brawler: acc 100% dmg 19 crit 26%; counter: acc 81% dmg 7 x2 crit 0%
   Seen before the recall: Alder Fenn hits
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Brawler
   Alder Fenn hits Brawler for 19 (hp 0)
@@ -1703,7 +1703,7 @@ C  wren             Wren L5 cadet              7,4    hp 22/22  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell veteran-1 art overcast
 Forecast Pell -> Veteran with Cinder: acc 99% dmg 19 crit 3%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Veteran
   Pell hits Veteran for 19 (hp 0)

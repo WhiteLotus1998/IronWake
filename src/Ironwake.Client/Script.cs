@@ -32,7 +32,7 @@ public static class Script
         string? art = null;
         if (words[0] is "attack" or "item" && words.Length > 3)
         {
-            var at = Array.IndexOf(words, "art", 3);
+            var at = Array.IndexOf(words, "form", 3) is >= 0 and var form ? form : Array.IndexOf(words, "art", 3);
             if (at >= 0 && at + 1 < words.Length)
             {
                 art = words[at + 1];

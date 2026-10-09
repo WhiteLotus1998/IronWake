@@ -341,7 +341,7 @@ deaf: group loft hears and sees nothing; it wakes only when a unit of group sanc
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack ottilie hexer-1 art aimed_shot
 Forecast Ottilie -> Hexer: acc 90% dmg 9 x2 crit 15%; counter: acc 98% dmg 10 crit 0% (Cinder 7 of 8 left)
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 4 of 40 uses, 2 of them hit or miss
+  Form Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 4 of 40 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Hexer
   Ottilie crits Hexer for 27 (hp 0)
@@ -478,7 +478,7 @@ Recall: 2 of 2 charges left, 0 spent; a spent charge does not come back, and the
   State 13  turn 2  after wait ottilie  undoes: gives back 2 kills (Hexer, Soldier 1), 26 exp, 25 enemy hp; returns Maud alive at 18 hp, Archer 2 not yet arrived
   State 21  turn 3  turn start  undoes: gives back 2 kills (Hexer, Soldier 1), 26 exp, 18 enemy hp; returns Maud alive at 14 hp, Archer 2 not yet arrived
   State 22  turn 3  after move ottilie 7,4  undoes: gives back 2 kills (Hexer, Soldier 1), 26 exp, 18 enemy hp; returns Maud alive at 14 hp, Archer 2 not yet arrived
-  State 23  turn 3  after attack ottilie hexer-1 art aimed_shot  undoes: gives back 1 kill (Soldier 1), 6 exp, 9 enemy hp; returns Maud alive at 14 hp, Archer 2 not yet arrived
+  State 23  turn 3  after attack ottilie hexer-1 form aimed_shot  undoes: gives back 1 kill (Soldier 1), 6 exp, 9 enemy hp; returns Maud alive at 14 hp, Archer 2 not yet arrived
   State 24  turn 3  after move maud 7,2  undoes: gives back 1 kill (Soldier 1), 6 exp, 9 enemy hp; returns Maud alive at 14 hp, Archer 2 not yet arrived
   State 25  turn 3  after attack maud soldier-1  undoes: gives back 6 exp; returns Maud alive at 14 hp, Archer 2 not yet arrived
 > recall 23
@@ -621,7 +621,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 Acc u
 Forecast Ottilie -> Archer 2: acc 98% dmg 9 crit 15%; counter: acc 76% dmg 7 crit 1%
   Kills if the first strike lands (98)
   Counter: lethal to Ottilie only if the first round misses (2 in 100) (7 against 6 hp)
-  Technique Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 37 uses, 2 of them hit or miss
+  Form Aimed Shot: Iron Bow at acc 90 power 5 crit 10 wt 7 range 2-2; spends up to 3 of 37 uses, 2 of them hit or miss
 Ottilie declares Aimed Shot with Iron Bow, spending 2 extra uses
 Ottilie attacks Archer 2
   Ottilie crits Archer 2 for 27 (hp 0)

@@ -38,7 +38,7 @@ public sealed class PlaySession
           move <unit> <x,y>        Move a unit to a tile in its reach
           move <unit> <x,y> via <x,y>  Move by way of a tile: the cheapest route to it, then on, within the unit's Mov
           move <unit> <x,y> [via <x,y>] preview  The route the move would walk and the planks it would wear, without moving
-          attack <unit> <target> [slot|weapon] [art <id>] [!]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first); a swing whose counter is lethal to the attacker is refused unless the line ends in !
+          attack <unit> <target> [slot|weapon] [form <id>] [!]  Attack an enemy in range, with the weapon in a slot or named, declaring a form by its id (the forecast prints first); a swing whose counter is lethal to the attacker is refused unless the line ends in !
           item <unit> <slot|item> [ally] Use the item in a slot or named by id; a healing spell names the ally, and so does a tome that raises ground (earthwork under the ally until the caster's next phase ends); a tome that raises the dead names a fallen foe or its tile; an area heal names no one, and `item <unit> <slot> preview` lists whom it would heal; an area tome names a unit or a tile, and `item <unit> <slot> <unit|x,y> preview` lists every strike it would make
           wait <unit>              End the unit's action
           undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
@@ -62,7 +62,7 @@ public sealed class PlaySession
           recall <n>               Rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              Every state recall can return to, the command that made it, and what a rewind there gives back
           recall                   List the state each player turn started at, and the charges left
-          forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  Show the forecast without attacking, from any tile the unit can reach
+          forecast <unit> <target> [slot|weapon] [form <id>] [from <x,y>]  Show the forecast without attacking, from any tile the unit can reach
           threat <unit> [from <x,y>]  What each enemy would strike it with next enemy phase, from where it stands or a tile it can reach, on the board as it stands now (a foe freed by a kill mid-phase is not counted, except a tile the unit's own counter-kill frees, one wave deep)
           reach <unit>             Show the board with the unit's reachable tiles marked
           show <unit>              Show a unit's numbers
@@ -722,7 +722,7 @@ public sealed class PlaySession
 
                 break;
             case "attack":
-                Error("usage: attack <unit> <target> [slot|weapon] [art <id>] [!]");
+                Error("usage: attack <unit> <target> [slot|weapon] [form <id>] [!]");
                 break;
             case "wait" when words.Length == 2:
                 Apply(new Wait(words[1]));
@@ -902,7 +902,7 @@ public sealed class PlaySession
 
                 break;
             case "item":
-                Error("usage: item <unit> <slot|item id> [ally] [art <id>]");
+                Error("usage: item <unit> <slot|item id> [ally] [form <id>]");
                 break;
             case "forecast" when TryForecastWords(words, out var slotText, out var from):
                 if (TrySlot(words[1], slotText, out var forecastSlot))
@@ -912,7 +912,7 @@ public sealed class PlaySession
 
                 break;
             case "forecast":
-                Error("usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]");
+                Error("usage: forecast <unit> <target> [slot|weapon] [form <id>] [from <x,y>]");
                 break;
             case "threat" when words.Length == 2:
                 PrintThreat(words[1], null);
@@ -1600,15 +1600,16 @@ public sealed class PlaySession
             : AbilityName(art, _content);
 
     /// <summary>
-    /// Takes <c>art &lt;id&gt;</c> out of an <c>attack</c>, <c>forecast</c> or <c>item</c> line (issues 68, 635),
+    /// Takes <c>form &lt;id&gt;</c> out of an <c>attack</c>, <c>forecast</c> or <c>item</c> line (issues 68, 635),
     /// after the unit and the target, and returns the id; the remaining words parse as
-    /// before. A trailing <c>art</c> with no id is left for the usage error.
+    /// before. A trailing <c>form</c> with no id is left for the usage error. <c>art</c> is still read
+    /// in its place, never printed (issue 1461 a3), because journaled scripts spell it.
     /// </summary>
     private static string? TakeArt(ref string[] words)
     {
         for (var i = 3; i + 1 < words.Length; i++)
         {
-            if (words[i] == "art")
+            if (words[i] is "form" or "art")
             {
                 var id = words[i + 1];
                 words = words.Take(i).Concat(words.Skip(i + 2)).ToArray();
@@ -1627,7 +1628,7 @@ public sealed class PlaySession
     private static bool IsSlotText(string[] words) =>
         words.Length == 0
         || (words.Length == 1 && int.TryParse(words[0], out _))
-        || words.All(word => word is not ("from" or "art") && word.All(c => char.IsAsciiLetter(c) || c is '_' or '-' or '\''));
+        || words.All(word => word is not ("from" or "form" or "art") && word.All(c => char.IsAsciiLetter(c) || c is '_' or '-' or '\''));
 
     /// <summary>The slot words joined with one space, or null when there are none.</summary>
     private static string? SlotText(string[] words) => words.Length == 0 ? null : string.Join(' ', words);
@@ -1990,7 +1991,7 @@ public sealed class PlaySession
         var ability = content.Ability(art);
         var struck = ((CombatArtEffect)ability.Effect).Apply(weapon!);
         var uses = armed.Unit.Inventory.Items[armed.EquippedSlot(content)].Uses;
-        return $"  technique {ability.Name}: {struck.Name} at acc {struck.Hit} power {struck.Mt} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; "
+        return $"  form {ability.Name}: {struck.Name} at acc {struck.Hit} power {struck.Mt} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; "
             + (forms ? $"costs {((CombatArtEffect)ability.Effect).Grit} of {unit.Grit} Grit, hit or miss; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses" : $"spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss")
             + (((CombatArtEffect)ability.Effect).PerMap is { } cap ? $"; {cap - unit.TimesDeclared(art)} of {cap} left this map" : "")
             + (((CombatArtEffect)ability.Effect).Single ? "; x1, never doubles" : "")
@@ -2737,11 +2738,11 @@ public sealed class PlaySession
         var ranks = content.Class(unit.Unit.ClassId).Weapons
             .Select(type => $"{type.Label()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
         lines.Add($"  Ranks: {string.Join(", ", ranks)}");
-        var arts = content.ArtsOf(unit.Unit).Select(a =>
+        var arts = content.FormsOf(unit, state.Map.FormsEnabled).Select(a =>
             $"{Named(a.Ability.Name, a.Ability.Id)} ({a.Art.Weapon.Label()} {a.Art.Rank}, cost {a.Art.Cost}{(ArtItemTag(a.Art.Item, unit, content) is { } tag ? ", " + tag : "")}): {a.Ability.Text}").ToList();
         if (arts.Count > 0)
         {
-            lines.Add($"  Techniques: {string.Join(", ", arts)}");
+            lines.Add($"  Forms: {string.Join(", ", arts)}");
         }
 
         var held = content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect && !(a.Effect is DrakeFrostEffect && unit.Unit.Drake is null) && !(a.Effect is StoopEffect && unit.Unit.Drake is not null))
@@ -3251,7 +3252,7 @@ public sealed class PlaySession
     public static string CommandText(Command command) => command switch
     {
         Move m => m.Via is { } via ? $"move {m.UnitId} {m.To} via {via}" : $"move {m.UnitId} {m.To}",
-        Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)) + (a.Art is null ? "" : " art " + a.Art),
+        Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)) + (a.Art is null ? "" : " form " + a.Art),
         MoveAgain c => $"again {c.UnitId} {c.To}",
         Wait w => $"wait {w.UnitId}",
         Watch w => $"watch {w.UnitId}",
@@ -3539,7 +3540,7 @@ public sealed class PlaySession
                 return $"{names[i.UnitId]} uses {content.ItemName(i.ItemId)}" + (i.TargetId == i.UnitId ? "" : " on " + i.TargetId) + $" ({i.UsesLeft} left)";
             case WeaponEquipped w:
                 return $"{names[w.UnitId]} equips {content.ItemName(w.ItemId)}";
-            case ArtDeclared a:
+            case FormDeclared a:
                 return a.Cost == 0 && a.Grit > 0
                     ? $"{names[a.UnitId]} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Grit} Grit"
                     : $"{names[a.UnitId]} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Cost} extra {(a.Cost == 1 ? "use" : "uses")}";

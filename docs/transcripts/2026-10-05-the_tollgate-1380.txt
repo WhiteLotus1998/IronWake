@@ -606,7 +606,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
 > attack captain toll_brigand-1 art feint
 Forecast Alder Fenn -> Toll Brigand: acc 94% dmg 8 x2 crit 5%; counter: acc 39% dmg 10 crit 0%
-  Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 3 of 40 uses, 1 of them hit or miss
+  Form Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 3 of 40 uses, 1 of them hit or miss
 Alder Fenn declares Feint with Iron Sword, spending 1 extra use
 Alder Fenn attacks Toll Brigand
   Alder Fenn hits Toll Brigand for 8 (hp 3)
@@ -978,7 +978,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack teodor toll_warden-1 art long_thrust
 Forecast Teodor -> Toll Warden: acc 76% dmg 7 crit 1%; counter: acc 31% dmg 6 crit 1%
-  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 39 uses, 2 of them hit or miss
+  Form Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 39 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
 Teodor attacks Toll Warden
   Teodor hits Toll Warden for 7 (hp 14)
@@ -1211,7 +1211,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 14/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 > attack teodor toll_warden-1 art long_thrust
 Forecast Teodor -> Toll Warden: acc 76% dmg 7 crit 1%; counter: acc 31% dmg 6 crit 1%
-  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 35 uses, 2 of them hit or miss
+  Form Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 35 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
 Teodor attacks Toll Warden
   Teodor hits Toll Warden for 7 (hp 7)
@@ -1423,7 +1423,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 7/21   Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 > attack captain toll_warden-1 art feint
 Forecast Alder Fenn -> Toll Warden: acc 99% dmg 7 crit 4%; counter: acc 52% dmg 7 crit 0%
-  Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 2 of 37 uses, 1 of them hit or miss
+  Form Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 2 of 37 uses, 1 of them hit or miss
 Alder Fenn declares Feint with Iron Sword, spending 1 extra use
 Alder Fenn attacks Toll Warden
   Alder Fenn hits Toll Warden for 7 (hp 0)
@@ -1655,7 +1655,7 @@ C  teodor           Teodor L1 pikeman          8,4    hp 15/21  Plain
 B  wren             Wren L1 cadet              6,2    hp 20/20  Plain  done
 > attack captain archer-1 art full_measure
 Forecast Alder Fenn -> Archer 1: acc 100% dmg 19 crit 24%; counter: none
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 35 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 35 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Archer 1
   Alder Fenn crits Archer 1 for 57 (hp 0)

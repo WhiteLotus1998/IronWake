@@ -40,7 +40,7 @@ public class TraceSlotNameTests
 
         Assert.Equal("carry rook wren 4,2 4,3", Ironwake.Sim.Program.Script(new Carry("rook", "wren", new Coord(4, 2), new Coord(4, 3))));
         Assert.Equal("breathe rook 5,5", Ironwake.Sim.Program.Script(new Breathe("rook", new Coord(5, 5))));
-        Assert.Equal("item maud 2 wren art unasked", Ironwake.Sim.Program.Script(new UseItem("maud", 1, "wren", "unasked")));
-        Assert.Equal("item captain field_dressing captain art unasked", Ironwake.Sim.Program.Script(state, MapFixture.Content, new UseItem("captain", 1, "captain", "unasked")));
+        Assert.Equal("item maud 2 wren form unasked", Ironwake.Sim.Program.Script(new UseItem("maud", 1, "wren", "unasked")));
+        Assert.Equal("item captain field_dressing captain form unasked", Ironwake.Sim.Program.Script(state, MapFixture.Content, new UseItem("captain", 1, "captain", "unasked")));
     }
 }

@@ -165,7 +165,7 @@ public static class Queries
             Add(slot, null);
         }
 
-        foreach (var (ability, art) in content.ArtsOf(unit.Unit))
+        foreach (var (ability, art) in content.FormsOf(unit, state.Map.FormsEnabled))
         {
             var matching = slots.Where(slot => content.Weapon(unit.Unit.Inventory.Items[slot].ItemId).Type == art.Weapon
                 && (art.Item is null || unit.Unit.Inventory.Items[slot].ItemId == art.Item)).ToList();

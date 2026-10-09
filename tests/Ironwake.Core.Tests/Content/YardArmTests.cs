@@ -57,7 +57,7 @@ public class YardArmTests
     public void TheYardArmNamesNoDrillWhenNobodyCanRaiseAnyone()
     {
         var record = Camp(captain: 1, wren: 1, others: 1);
-        record = record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u with { Skill = Enum.GetValues<WeaponType>().Aggregate(u.Skill, (skill, t) => skill.With(t, 0)) })) };
+        record = record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u with { Skill = Enum.GetValues<WeaponType>().Aggregate(u.Skill, (skill, t) => skill.With(t, 0)), Abilities = ValueList<string>.Empty })) };
 
         Assert.Null(YardRun.Pick(record, Shipped));
         Assert.Equal((record, (YardRun.Drill?)null), YardRun.Camp(record, Root, Shipped));

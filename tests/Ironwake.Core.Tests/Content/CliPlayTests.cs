@@ -118,10 +118,10 @@ public class CliPlayTests
     [InlineData("recall x", "ERROR: Usage: recall <n>")]
     [InlineData("item captain", "ERROR: Usage: item <unit> <slot|item id> [ally]")]
     [InlineData("item captain 1", "ERROR: Iron Sword is a weapon, not an item; attack with it")]
-    [InlineData("forecast captain", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 from", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 from 1,4 2", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 at 1,4", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
+    [InlineData("forecast captain", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [form <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [form <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from 1,4 2", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [form <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 at 1,4", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [form <id>] [from <x,y>]")]
     [InlineData("forecast captain brigand-1 from 9,9", "ERROR: Alder Fenn cannot move to 9,9")]
     [InlineData("show", "ERROR: Usage: show <unit>")]
     [InlineData("threat", "ERROR: Usage: threat <unit> [from <x,y>]")]
@@ -266,7 +266,7 @@ public class CliPlayTests
         Assert.Contains("> show wren\nWren, Cadet L1, at 2,6 on Plain\n", output);
         Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: Wren has already moved this phase; forecast from 3,7\n", output);
         Assert.Contains("> forecast wren brigand-1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%\n", output);
-        Assert.Contains("  forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  Show the forecast", Play(out _, "help\n"));
+        Assert.Contains("  forecast <unit> <target> [slot|weapon] [form <id>] [from <x,y>]  Show the forecast", Play(out _, "help\n"));
     }
 
     /// <summary>

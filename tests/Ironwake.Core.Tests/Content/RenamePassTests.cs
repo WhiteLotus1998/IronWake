@@ -70,16 +70,16 @@ public class RenamePassTests
 
     /// <summary>
     /// The guard: the help, every unit card, a forecast, a threat and the item cards carry none
-    /// of the old labels, and the forecast puts the resolved Acc before the damage on both sides.
+    /// of the old labels (issue 1461 a3: no technique, no art), and the forecast puts the resolved Acc before the damage on both sides.
     /// </summary>
     [Fact]
     public void NoPlayerFacingLineCarriesAnOldLabel()
     {
-        var output = RunInline(Yard, "help\nshow captain\nshow ansgar\nshow pell\nshow brigand-1\nforecast captain brigand-1 from 1,1\nforecast pell brigand-1 from 0,1\nthreat pell\nabout cinder\nabout iron_bow\nabout salve\n");
+        var output = RunInline(Yard, "help\nshow captain\nshow ansgar\nshow pell\nshow brigand-1\nforecast captain brigand-1 from 1,1\nforecast captain brigand-1 form feint from 1,1\nforecast pell brigand-1 from 0,1\nthreat pell\nabout cinder\nabout iron_bow\nabout salve\n");
 
         // Command words are ids and stay, so the echoed commands are not read.
         var shown = string.Join("\n", output.Split('\n').Where(line => !line.StartsWith("> ", StringComparison.Ordinal)));
-        foreach (var old in new[] { "breaker", "Canto", "canto", "Deadeye", "Reason", " Mt ", " Hit ", " mt ", "Avoid", "avoid", "Arts:", " Avo " })
+        foreach (var old in new[] { "breaker", "Canto", "canto", "Deadeye", "Reason", " Mt ", " Hit ", " mt ", "Avoid", "avoid", "Arts:", " Avo ", "Technique", "technique", " art ", "[art " })
         {
             Assert.DoesNotContain(old, shown);
         }
@@ -88,6 +88,9 @@ public class RenamePassTests
         Assert.Contains("; counter: acc ", output);
         Assert.Contains("  Abilities: Move Again (", output);
         Assert.Contains("  Ranks: lore E (0)", output);
+        Assert.Contains("  Forms: Feint (", output);
+        Assert.Contains("  Form Feint: ", output);
+        Assert.Contains("[form <id>]", output);
     }
 
     private static string RunInline(string mapText, string scriptText)

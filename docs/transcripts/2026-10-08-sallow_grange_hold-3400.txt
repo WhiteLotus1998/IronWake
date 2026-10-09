@@ -544,7 +544,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 goes_home: the hall group strikes out from its posts, and off them walks home and strikes only from there
 > attack pell brawler-1 cinder art overcast
 Forecast Pell -> Brawler with Cinder: acc 99% dmg 19 crit 3%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Brawler
   Pell hits Brawler for 19 (hp 6)
@@ -929,7 +929,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 goes_home: the hall group strikes out from its posts, and off them walks home and strikes only from there
 > attack pell veteran-1 cinder art overcast
 Forecast Pell -> Veteran with Cinder: acc 99% dmg 18 crit 2%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 5 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 5 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Veteran
   Pell hits Veteran for 18 (hp 0)

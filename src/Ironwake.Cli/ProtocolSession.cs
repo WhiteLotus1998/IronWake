@@ -394,14 +394,14 @@ public sealed class ProtocolSession
     /// <summary>
     /// The forecast query: <see cref="Queries.Forecast(BattleState, GameContent, BattleUnit, BattleUnit, Coord, int?, string?)"/>
     /// from the unit's tile or <c>from</c>, with the weapon in <c>slot</c> (0-based) or the
-    /// equipped one, and the combat art named by <c>art</c> when given (issue 68). Refused
+    /// equipped one, and the form named by <c>form</c> when given (issue 68; <c>art</c> still read, issue 1461 a3). Refused
     /// with the console's reasons when there is no forecast.
     /// </summary>
     private string Forecast(JsonElement request, BattleUnit unit)
     {
         var targetId = ProtocolJson.RequiredString(request, "target");
         var slot = ProtocolJson.OptionalInt(request, "slot");
-        var art = ProtocolJson.OptionalString(request, "art");
+        var art = ProtocolJson.OptionalString(request, "form") ?? ProtocolJson.OptionalString(request, "art");
         var from = ProtocolJson.OptionalCoord(request, "from");
         var tile = from ?? unit.At;
         if (tile != unit.At && !Queries.CanStandOn(_state, _content, unit, tile))

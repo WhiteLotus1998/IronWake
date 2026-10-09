@@ -1448,7 +1448,7 @@ C  teodor           Teodor L4 pikeman          11,4   hp 16/22  Plain
 B  wren             Wren L4 cadet              9,3    hp 11/21  Plain
 > attack pell brigand-2 art overcast
 Forecast Pell -> Brigand 2 with Cinder: acc 99% dmg 19 crit 3%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 6 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 6 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Brigand 2
   Pell hits Brigand 2 for 19 (hp 5)
@@ -1763,7 +1763,7 @@ B  wren             Wren L5 cadet              9,3    hp 12/22  Plain  done
 > attack pell brigand-2 art overcast
 Forecast Pell -> Brigand 2 with Cinder: acc 99% dmg 19 crit 3%; counter: none
   Seen before the recall: Pell hits
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 6 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 6 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Brigand 2
   Pell hits Brigand 2 for 19 (hp 5)

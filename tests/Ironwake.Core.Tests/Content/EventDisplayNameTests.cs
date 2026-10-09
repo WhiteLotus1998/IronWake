@@ -75,19 +75,19 @@ public class EventDisplayNameTests
     [Fact]
     public void AnArtDeclaredReadsTheArtAndTheWeaponByTheirDisplayNames()
     {
-        Assert.Equal("Ansgar declares Move Again with Iron Lance, spending 2 extra uses", Line(new ArtDeclared("ansgar", "move_again", "iron_lance", 2)));
+        Assert.Equal("Ansgar declares Move Again with Iron Lance, spending 2 extra uses", Line(new FormDeclared("ansgar", "move_again", "iron_lance", 2)));
     }
 
     [Fact]
     public void AnArtTheContentDoesNotKnowFallsBackToTheId()
     {
-        Assert.Equal("Captain declares sunder with Iron Sword, spending 2 extra uses", Line(new ArtDeclared("captain", "sunder", "iron_sword", 2)));
+        Assert.Equal("Captain declares sunder with Iron Sword, spending 2 extra uses", Line(new FormDeclared("captain", "sunder", "iron_sword", 2)));
     }
 
     [Fact]
     public void AnArtCostingOneUseSaysOneUseNotUses()
     {
-        Assert.Equal("Captain declares Feint with Iron Sword, spending 1 extra use", Line(new ArtDeclared("captain", "feint", "iron_sword", 1)));
+        Assert.Equal("Captain declares Feint with Iron Sword, spending 1 extra use", Line(new FormDeclared("captain", "feint", "iron_sword", 1)));
     }
 
     [Fact]

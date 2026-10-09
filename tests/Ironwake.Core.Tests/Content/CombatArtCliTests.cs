@@ -83,8 +83,8 @@ public class CombatArtCliTests : IDisposable
     {
         var output = Play(out _, "show captain\nshow wren\n");
 
-        Assert.Contains("  Ranks: sword E (0), lance E (0), axe E (0)\n  Techniques: Cleave (sword E, cost 2): +5 Power and +5 Wt; two extra uses, hit or miss.\n", output);
-        Assert.DoesNotContain("  Techniques: ", output[output.IndexOf("> show wren", StringComparison.Ordinal)..]);
+        Assert.Contains("  Ranks: sword E (0), lance E (0), axe E (0)\n  Forms: Cleave (sword E, cost 2): +5 Power and +5 Wt; two extra uses, hit or miss.\n", output);
+        Assert.DoesNotContain("  Forms: ", output[output.IndexOf("> show wren", StringComparison.Ordinal)..]);
     }
 
     [Fact]
@@ -99,7 +99,7 @@ public class CombatArtCliTests : IDisposable
         Assert.Contains(
             "> forecast captain brigand-1\nForecast Alder Fenn -> Brigand: acc 90% dmg 11 x2 crit 5%; counter: acc 49% dmg 10 crit 0%\n"
             + "> attack captain brigand-1 art cleave\nForecast Alder Fenn -> Brigand: acc 90% dmg 16 crit 5%; counter: acc 56% dmg 10 crit 0%\n"
-            + "  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss\n"
+            + "  Form Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss\n"
             + "Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses\n",
             output);
         Assert.EndsWith("Battle won: rout\n", output);
@@ -112,9 +112,9 @@ public class CombatArtCliTests : IDisposable
     {
         var output = Play(out _, "move captain 2,6\nmove wren 3,7\nend\nforecast wren brigand-1 art cleave\nattack captain brigand-1 art sunder\nattack captain brigand-1 art\n");
 
-        Assert.Contains("> forecast wren brigand-1 art cleave\nERROR: Wren knows no technique 'cleave'\n", output);
-        Assert.Contains("> attack captain brigand-1 art sunder\nERROR: Alder Fenn knows no technique 'sunder'\n", output);
-        Assert.Contains("> attack captain brigand-1 art\nERROR: Usage: attack <unit> <target> [slot|weapon] [art <id>] [!]\n", output);
+        Assert.Contains("> forecast wren brigand-1 art cleave\nERROR: Wren knows no form 'cleave'\n", output);
+        Assert.Contains("> attack captain brigand-1 art sunder\nERROR: Alder Fenn knows no form 'sunder'\n", output);
+        Assert.Contains("> attack captain brigand-1 art\nERROR: Usage: attack <unit> <target> [slot|weapon] [form <id>] [!]\n", output);
     }
 
     [Fact]
@@ -125,7 +125,7 @@ public class CombatArtCliTests : IDisposable
             """{"type":"move","unit":"wren","to":{"x":3,"y":7}}""",
             """{"type":"end"}""",
             """{"query":"forecast","unit":"captain","target":"brigand-1","art":"cleave"}""",
-            """{"type":"attack","unit":"captain","target":"brigand-1","slot":null,"art":"cleave"}""") + "\n";
+            """{"type":"attack","unit":"captain","target":"brigand-1","slot":null,"form":"cleave"}""") + "\n";
         var path = Path.Combine(Path.GetTempPath(), "ironwake-arts-" + Guid.NewGuid().ToString("N") + ".jsonl");
         File.WriteAllText(path, script);
         try
@@ -133,8 +133,8 @@ public class CombatArtCliTests : IDisposable
             var output = Run(out _, "play", "old_mill_road", "--seed", "11", "--protocol", "--script", path, "--content", _content);
 
             Assert.Contains("\"scheme\":\"twoRollAverage\",\"artCost\":2}", output);
-            Assert.Contains("\\n  Technique Cleave: Iron Sword at acc ", output);
-            Assert.Contains("{\"type\":\"artDeclared\",\"unit\":\"captain\",\"art\":\"cleave\",\"item\":\"iron_sword\",\"cost\":2,\"text\":\"Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses\"}", output);
+            Assert.Contains("\\n  Form Cleave: Iron Sword at acc ", output);
+            Assert.Contains("{\"type\":\"formDeclared\",\"unit\":\"captain\",\"form\":\"cleave\",\"item\":\"iron_sword\",\"cost\":2,\"text\":\"Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses\"}", output);
         }
         finally
         {

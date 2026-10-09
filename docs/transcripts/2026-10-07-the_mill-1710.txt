@@ -292,7 +292,7 @@ a  soldier-1        Soldier L1 pikeman         7,1    hp 20/20  Plain  group mil
 holds: the mill group strikes out from 0,0 to 11,2, stays where it struck, and goes back when nothing is in reach
 > attack captain archer-2 art full_measure
 Forecast Alder Fenn -> Archer 2: acc 100% dmg 19 crit 24%; counter: none
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 38 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 38 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Archer 2
   Alder Fenn hits Archer 2 for 19 (hp 0)

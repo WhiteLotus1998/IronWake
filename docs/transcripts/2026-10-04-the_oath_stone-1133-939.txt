@@ -1477,11 +1477,11 @@ B  maud             Maud L7 chaplain           11,4   hp 7/19   Plain  unarmed
 Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > forecast keziah sworn_captain-1 art cleave
 Forecast Keziah -> Sworn Captain with Kinsbane: acc 21% dmg 22 crit 10%; counter: acc 81% dmg 14 crit 1%
-  Technique Cleave: Kinsbane at acc 50 power 20 crit 10 wt 10 range 1-1; spends up to 4 of 19 uses, 3 of them hit or miss
+  Form Cleave: Kinsbane at acc 50 power 20 crit 10 wt 10 range 1-1; spends up to 4 of 19 uses, 3 of them hit or miss
   Joab is bound to Sworn Captain: freed when Sworn Captain falls
 > attack keziah sworn_captain-1 art cleave
 Forecast Keziah -> Sworn Captain with Kinsbane: acc 21% dmg 22 crit 10%; counter: acc 81% dmg 14 crit 1%
-  Technique Cleave: Kinsbane at acc 50 power 20 crit 10 wt 10 range 1-1; spends up to 4 of 19 uses, 3 of them hit or miss
+  Form Cleave: Kinsbane at acc 50 power 20 crit 10 wt 10 range 1-1; spends up to 4 of 19 uses, 3 of them hit or miss
   Joab is bound to Sworn Captain: freed when Sworn Captain falls
 Keziah declares Cleave with Kinsbane, spending 3 extra uses
 Keziah attacks Sworn Captain

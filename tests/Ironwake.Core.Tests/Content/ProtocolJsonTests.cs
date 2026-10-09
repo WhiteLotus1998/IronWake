@@ -137,7 +137,7 @@ public class ProtocolJsonTests
         { new MoveUndone("wren", B, A), """{"type":"moveUndone","unit":"wren","from":{"x":3,"y":4},"to":{"x":1,"y":2}}""" },
         { new ItemUsed("wren", "field_dressing", "wren", 0), """{"type":"itemUsed","unit":"wren","item":"field_dressing","target":"wren","usesLeft":0}""" },
         { new WeaponEquipped("wren", "steel_sword"), """{"type":"weaponEquipped","unit":"wren","item":"steel_sword"}""" },
-        { new ArtDeclared("wren", "sunder", "iron_sword", 2), """{"type":"artDeclared","unit":"wren","art":"sunder","item":"iron_sword","cost":2}""" },
+        { new FormDeclared("wren", "sunder", "iron_sword", 2), """{"type":"formDeclared","unit":"wren","form":"sunder","item":"iron_sword","cost":2}""" },
         { new WeaponBroke("wren", "iron_sword"), """{"type":"weaponBroke","unit":"wren","item":"iron_sword"}""" },
         { new SpellSpent("mira", "mend"), """{"type":"spellSpent","unit":"mira","item":"mend"}""" },
         { new GroupWoke("fort", WakeCause.Proximity), """{"type":"groupWoke","group":"fort","cause":"proximity"}""" },
@@ -205,10 +205,10 @@ public class ProtocolJsonTests
         { new Move("wren", B, A), """{"type":"move","unit":"wren","to":{"x":3,"y":4},"via":{"x":1,"y":2}}""" },
         { new Attack("wren", "brigand-1"), """{"type":"attack","unit":"wren","target":"brigand-1","slot":null}""" },
         { new Attack("wren", "brigand-1", 1), """{"type":"attack","unit":"wren","target":"brigand-1","slot":1}""" },
-        { new Attack("wren", "brigand-1", null, "sunder"), """{"type":"attack","unit":"wren","target":"brigand-1","slot":null,"art":"sunder"}""" },
+        { new Attack("wren", "brigand-1", null, "sunder"), """{"type":"attack","unit":"wren","target":"brigand-1","slot":null,"form":"sunder"}""" },
         { new UseItem("wren", 1), """{"type":"item","unit":"wren","slot":1,"target":null}""" },
         { new UseItem("mira", 0, "wren"), """{"type":"item","unit":"mira","slot":0,"target":"wren"}""" },
-        { new UseItem("maud", 0, "wren", "unasked"), """{"type":"item","unit":"maud","slot":0,"target":"wren","art":"unasked"}""" },
+        { new UseItem("maud", 0, "wren", "unasked"), """{"type":"item","unit":"maud","slot":0,"target":"wren","form":"unasked"}""" },
         { new Retreat("brigand-1", A), """{"type":"retreat","unit":"brigand-1","to":{"x":1,"y":2}}""" },
         { new Wait("wren"), """{"type":"wait","unit":"wren"}""" },
         { new Cover("teodor", "pell"), """{"type":"cover","unit":"teodor","ally":"pell"}""" },
@@ -447,6 +447,19 @@ public class ProtocolJsonTests
 
         Assert.Equal(new MoveAgain("ansgar", new Coord(3, 4)), command);
         Assert.Contains("\"type\":\"moveAgain\"", ProtocolJson.Command(command));
+    }
+
+    /// <summary>Issue 1461 a3: the retired field <c>art</c> on an attack and an item still reads as the form; the protocol writes <c>form</c>.</summary>
+    [Fact]
+    public void TheRetiredArtFieldReadsAsTheForm()
+    {
+        var attack = ProtocolJson.ReadCommand("""{"type":"attack","unit":"wren","target":"brigand-1","slot":null,"art":"sunder"}""");
+        var item = ProtocolJson.ReadCommand("""{"type":"item","unit":"maud","slot":0,"target":"wren","art":"unasked"}""");
+
+        Assert.Equal(new Attack("wren", "brigand-1", null, "sunder"), attack);
+        Assert.Equal(new UseItem("maud", 0, "wren", "unasked"), item);
+        Assert.Contains("\"form\":\"sunder\"", ProtocolJson.Command(attack));
+        Assert.DoesNotContain("\"art\"", ProtocolJson.Command(attack));
     }
 
     /// <summary>Issue 1446: no retired ability id is an id in the shipped content, so nothing but an old save can name one.</summary>

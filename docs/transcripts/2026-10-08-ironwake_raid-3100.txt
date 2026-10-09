@@ -1403,7 +1403,7 @@ B  wren             Wren L3 cadet              11,4   hp 11/21  Plain
 > attack pell soldier-1 1 art overcast
 Forecast Pell -> Soldier 1 with Cinder: acc 99% dmg 18 crit 2%; counter: none
   Seen before the recall: Pell hits
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 8 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Soldier 1
   Pell hits Soldier 1 for 18 (hp 0)
@@ -2138,7 +2138,7 @@ C  teodor           Teodor L3 pikeman          9,7    hp 22/22  Plain
 B  wren             Wren L3 cadet              10,4   hp 8/21   Plain
 > attack pell soldier-2 1 art overcast
 Forecast Pell -> Soldier 2 with Cinder: acc 99% dmg 18 crit 2%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 4 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 4 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Soldier 2
   Pell hits Soldier 2 for 18 (hp 4)

@@ -104,7 +104,7 @@ public class GritTests
         var taken = fought.Count(s => s.TargetId == "hale" && s.Hit);
         Assert.Equal(before - mine.Count, Uses(result.Next));
         Assert.Equal(Math.Min(Grit.Cap, 3 - 2 + taken), result.Next.Find("hale")!.Grit);
-        Assert.Equal(new ArtDeclared("hale", "wild", "iron_sword", 0) { Grit = 2 }, result.Events.OfType<ArtDeclared>().Single());
+        Assert.Equal(new FormDeclared("hale", "wild", "iron_sword", 0) { Grit = 2 }, result.Events.OfType<FormDeclared>().Single());
     }
 
     [Fact]

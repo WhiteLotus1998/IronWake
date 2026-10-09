@@ -134,7 +134,7 @@ public class AttackMenuTests
         var row = Queries.AttackOptions(state, Shipped, state.Find("captain")!, EnemyAt(state, Brigand)).Single(r => r.Art is not null);
 
         Assert.Equal(RejectionReason.ArtRefused, row.Refusal!.Reason);
-        Assert.Contains("Long Thrust is a lance technique and Iron Sword is a sword", row.Refusal.Message);
+        Assert.Contains("Long Thrust is a lance form and Iron Sword is a sword", row.Refusal.Message);
         Assert.Null(row.Forecast);
     }
 
@@ -168,7 +168,7 @@ public class AttackMenuTests
         var rows = Queries.AttackOptions(state, Shipped, state.Find("captain")!, EnemyAt(state, Brigand));
 
         Assert.True(rows.Single(r => r.Art is null).Legal);
-        Assert.Contains("Iron Sword is broken and cannot pay for a technique", rows.Single(r => r.Art?.Id == "feint").Refusal!.Message);
+        Assert.Contains("Iron Sword is broken and cannot pay for a form", rows.Single(r => r.Art?.Id == "feint").Refusal!.Message);
     }
 
     private static ClientSession Selected(BattleState state, string id)

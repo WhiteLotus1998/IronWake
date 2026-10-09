@@ -8935,7 +8935,7 @@ B  captain          Alder Fenn L6 vanguard     5,4    hp 11/24  Plain  done
 A  corin            Corin Ashby L1 cadet       6,3    hp 8/19   Plain  captain  done
 Battle won: rout; only recall is left, or leave
 > leave
-Corin Ashby trained under Alder Fenn: L1 -> L1 (ceiling L5), sword E -> E (ceiling C).
+Corin Ashby trained under Alder Fenn: L1 -> L1 (ceiling L5), sword E -> E (ceiling C); learned Feint.
 > show corin
   Corin Ashby (corin): Cadet L1, EXP 90; 1: Iron Sword 37/40 (repair 30)
     HP 19  Str 6 Mag 0 Dex 5 Spd 7 Lck 4 Def 4 Res 1 Cha 3

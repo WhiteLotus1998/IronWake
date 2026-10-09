@@ -135,13 +135,14 @@ public sealed record GameContent(
 
     /// <summary>
     /// The forms a unit may declare (issue 1461 a2): <see cref="ArtsOf"/>, and with <paramref name="forms"/>
-    /// (a <c>forms: on</c> map) an enemy also knows the basic form (<see cref="CombatArtEffect.Basic"/>) of each
-    /// weapon type it carries that it does not already know, in inventory order.
+    /// (a <c>forms: on</c> map) a unit of either side also knows the basic form (<see cref="CombatArtEffect.Basic"/>)
+    /// of each weapon type it carries that it does not already know, in inventory order (a3: every unit
+    /// starts with one basic form for its weapon type).
     /// </summary>
     public IEnumerable<(Ability Ability, CombatArtEffect Art)> FormsOf(BattleUnit unit, bool forms)
     {
         var known = ArtsOf(unit.Unit).ToList();
-        if (!forms || unit.Side != Side.Enemy)
+        if (!forms)
         {
             return known;
         }

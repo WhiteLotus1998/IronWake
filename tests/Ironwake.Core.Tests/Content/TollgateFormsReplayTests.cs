@@ -23,7 +23,7 @@ public class TollgateFormsReplayTests
 
         Assert.Contains("  Bandit Leader from 7,2 with Toll Axe (slot 1) as Cleave (2 of its 3 Grit): acc 25% dmg 20 crit 9%;", output);
         Assert.Contains("Lethal if all land: Pell (Bandit Leader for 20, against 17 hp)\n", output);
-        Assert.Contains("enemy: attack bandit_leader-1 pell art cleave\nForecast Bandit Leader -> Pell: acc 25% dmg 20 crit 9%;", output);
+        Assert.Contains("enemy: attack bandit_leader-1 pell form cleave\nForecast Bandit Leader -> Pell: acc 25% dmg 20 crit 9%;", output);
         Assert.Contains("Bandit Leader declares Cleave with Toll Axe, spending 2 Grit\n", output);
         Assert.Contains("Battle won: seize\n", output);
         Assert.Equal(File.ReadAllText(Path.Combine(root, "docs", "transcripts", "2026-10-09-the_tollgate_forms-1461.txt")).ReplaceLineEndings("\n"), output);

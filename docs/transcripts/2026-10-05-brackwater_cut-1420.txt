@@ -889,7 +889,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an exit (last start: turn 5), Pell 2 turns to an exit (last start: turn 6), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > attack pell shieldbearer-1 art overcast
 Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 18 crit 3%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 7 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 7 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Shieldbearer
   Pell hits Shieldbearer for 18 (hp 3)
@@ -1234,7 +1234,7 @@ count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 3 turns to an
 > attack pell shieldbearer-1 art overcast
 Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 18 crit 3%; counter: none
   Seen before the recall: Pell hits
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 7 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 7 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Shieldbearer
   Pell hits Shieldbearer for 18 (hp 3)
@@ -1560,7 +1560,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > attack pell brawler-1 art overcast
 Forecast Pell -> Brawler with Cinder: acc 86% dmg 18 crit 3%; counter: none
-  Technique Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 4 uses, 2 of them hit or miss
+  Form Overcast: Cinder at acc 90 power 10 crit 0 wt 7 range 1-2; spends up to 3 of 4 uses, 2 of them hit or miss
 Pell declares Overcast with Cinder, spending 2 extra uses
 Pell attacks Brawler
   Pell hits Brawler for 18 (hp 5)
@@ -1624,7 +1624,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 count: Alder Fenn 2 turns to an exit (last start: turn 6), Dunstan 2 turns to an exit (last start: turn 6), Pell 1 turn to an exit (last start: turn 7), Rook 2 turns to an exit (last start: turn 6), Wren 2 turns to an exit (last start: turn 6)
 > attack captain brawler-1 art feint
 Forecast Alder Fenn -> Brawler: acc 92% dmg 8 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
-  Technique Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 2 of 40 uses, 1 of them hit or miss
+  Form Feint: Iron Sword at acc 100 power 3 crit 0 wt 5 range 1-1; spends up to 2 of 40 uses, 1 of them hit or miss
 Alder Fenn declares Feint with Iron Sword, spending 1 extra use
 Alder Fenn attacks Brawler
   Alder Fenn misses Brawler

@@ -35,21 +35,21 @@ public class SignatureArtCardTests
     [InlineData("pell", "Read Ahead (lore E, cost 2, with Pell's Commonplace, not carried): ")]
     [InlineData("ottilie", "Paid in Full (bow E, cost 4, with Ottilie's Tally, not carried): ")]
     public void ASignatureArtWhoseItemIsNotCarriedSaysSoOnTheCard(string id, string expected) =>
-        Assert.Contains(expected, Line(id, "  Techniques: "), StringComparison.Ordinal);
+        Assert.Contains(expected, Line(id, "  Forms: "), StringComparison.Ordinal);
 
     [Theory]
     [InlineData("pell", "pell_commonplace", "Read Ahead (lore E, cost 2, with Pell's Commonplace): ")]
     [InlineData("ottilie", "ottilie_tally", "Paid in Full (bow E, cost 4, with Ottilie's Tally): ")]
     public void ASignatureArtWhoseItemIsCarriedNamesItWithoutTheWarning(string id, string item, string expected)
     {
-        var line = Line(id, "  Techniques: ", item);
+        var line = Line(id, "  Forms: ", item);
         Assert.Contains(expected, line, StringComparison.Ordinal);
         Assert.DoesNotContain("not carried", line, StringComparison.Ordinal);
     }
 
     [Fact]
     public void AnArtAnyWeaponOfItsTypeDeclaresCarriesNoItemTag() =>
-        Assert.Contains("Overcast (lore E, cost 2): ", Line("pell", "  Techniques: "), StringComparison.Ordinal);
+        Assert.Contains("Overcast (lore E, cost 2): ", Line("pell", "  Forms: "), StringComparison.Ordinal);
 
     [Fact]
     public void AnItemBoundHealArtSaysOnTheCardWhetherItsItemIsCarried()

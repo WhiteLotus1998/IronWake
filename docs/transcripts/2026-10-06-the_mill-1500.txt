@@ -501,10 +501,10 @@ Threat on Maud at 7,5 (Plain):
   If all land: 19 against 9 hp
 > forecast captain soldier-1 art full_measure
 Forecast Alder Fenn -> Soldier: acc 100% dmg 17 crit 24%; counter: acc 34% dmg 6 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 > attack captain soldier-1 art full_measure
 Forecast Alder Fenn -> Soldier: acc 100% dmg 17 crit 24%; counter: acc 34% dmg 6 crit 0%
-  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
+  Form Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 3 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; x1, never doubles; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Soldier
   Alder Fenn hits Soldier for 17 (hp 3)

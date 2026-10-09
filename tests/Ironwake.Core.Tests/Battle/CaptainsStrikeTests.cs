@@ -130,7 +130,7 @@ public class CaptainsStrikeTests
     {
         var struck = Struck(Placed());
 
-        Assert.Equal(new ArtDeclared("captain", "full_measure", "iron_sword", 2), Apply(Placed(), new Attack("captain", BrigandId(Placed()), null, "full_measure")).Events.OfType<ArtDeclared>().Single());
+        Assert.Equal(new FormDeclared("captain", "full_measure", "iron_sword", 2), Apply(Placed(), new Attack("captain", BrigandId(Placed()), null, "full_measure")).Events.OfType<FormDeclared>().Single());
         Assert.Equal(1, struck.Find("captain")!.TimesDeclared("full_measure"));
     }
 
