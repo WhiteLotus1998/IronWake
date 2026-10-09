@@ -7,7 +7,7 @@ namespace Ironwake.Core;
 /// </summary>
 public enum SignatureKind
 {
-    /// <summary>Wren: counts tiles (Canto after any action) and talks (a combat she is in wakes at <see cref="Signatures.TalkRadius"/>).</summary>
+    /// <summary>Wren: counts tiles (Move Again after any action) and talks (a combat she is in wakes at <see cref="Signatures.TalkRadius"/>).</summary>
     Counting,
 
     /// <summary>Teodor: an ally within 2 acting after him strikes at +5; his own strike with an ally within 2 is at -10.</summary>
@@ -21,7 +21,7 @@ public enum SignatureKind
 /// The three cadets' signatures (DESIGN.md 13.18, rounds 117 and 118, issue 486), behind a
 /// map's <c>signatures: on</c> header. Each is read where the rule it bends is read, so the
 /// forecast, the resolver and the planners cannot drift: Teodor's two hit modifiers sit in the
-/// striker's hit slot through <see cref="StrikeHit"/>, Wren's Canto in <see cref="HasCanto"/>,
+/// striker's hit slot through <see cref="StrikeHit"/>, Wren's Move Again in <see cref="HasMoveAgain"/>,
 /// her noise in <see cref="NoiseRadius"/>, and Ottilie's refusal in <see cref="Refuses"/>, on the
 /// displayed hit after rounding and every modifier.
 /// </summary>
@@ -46,9 +46,9 @@ public static class Signatures
     public static SignatureKind? Of(BattleState state, GameContent content, BattleUnit unit) =>
         state.Map.SignaturesEnabled && unit.Side == Side.Player && content.Signatures.TryGetValue(unit.Id, out var kind) ? kind : null;
 
-    /// <summary>Whether <paramref name="unit"/> has Canto: an ability that grants it, or Wren's counting on a <c>signatures: on</c> map.</summary>
-    public static bool HasCanto(BattleState state, GameContent content, BattleUnit unit) =>
-        AbilityRules.HasCanto(content.AbilitiesOf(unit.Unit)) || Of(state, content, unit) == SignatureKind.Counting;
+    /// <summary>Whether <paramref name="unit"/> has Move Again: an ability that grants it, or Wren's counting on a <c>signatures: on</c> map.</summary>
+    public static bool HasMoveAgain(BattleState state, GameContent content, BattleUnit unit) =>
+        AbilityRules.HasMoveAgain(content.AbilitiesOf(unit.Unit)) || Of(state, content, unit) == SignatureKind.Counting;
 
     /// <summary>
     /// The noise radius of a combat between <paramref name="a"/> and <paramref name="b"/>, read from

@@ -10,7 +10,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// Rook's Drover (issue 872, DECISIONS/0217): the class never doubles, striking or countering; the drake bites
 /// once after an adjacent exchange in which one of her strikes hit and both stand, for 3 while Half-grown and
-/// 5 from Grown, as added damage, never a strike; from Grown a carry leaves her a Canto; at Unbroken her
+/// 5 from Grown, as added damage, never a strike; from Grown a carry leaves her a Move Again; at Unbroken her
 /// breath's ice holds one more round.
 /// </summary>
 public class DroverTests
@@ -215,15 +215,15 @@ public class DroverTests
         BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Rook with { ClassId = classId }, Wren), string.Format(River, header, rookAt, wrenAt));
 
     [Fact]
-    public void TheLongCarryLeavesTheDroverACantoOfWhatTheFlightLeft()
+    public void TheLongCarryLeavesTheDroverAMoveAgainOfWhatTheFlightLeft()
     {
         var state = OnRiver("carry: rook", "drover");
         var mov = state.ReachOf(state.Find("rook")!, Starter).Mov;
 
         var rook = state.Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!;
 
-        Assert.Equal(mov - 4, rook.Canto);
-        Assert.Null(OnRiver("carry: rook", "skycaptain").Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!.Canto);
+        Assert.Equal(mov - 4, rook.MoveAgain);
+        Assert.Null(OnRiver("carry: rook", "skycaptain").Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!.MoveAgain);
     }
 
     [Fact]
@@ -235,8 +235,8 @@ public class DroverTests
         var fromSample = sample.Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!;
         var fromCampaign = campaign.Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3))).Find("rook")!;
 
-        Assert.NotNull(fromCampaign.Canto);
-        Assert.Equal(fromSample.Canto, fromCampaign.Canto);
+        Assert.NotNull(fromCampaign.MoveAgain);
+        Assert.Equal(fromSample.MoveAgain, fromCampaign.MoveAgain);
     }
 
     [Fact]
@@ -244,7 +244,7 @@ public class DroverTests
     {
         var state = OnRiver("carry: rook", "drover").Do(new Carry("rook", "wren", new Coord(5, 2), new Coord(5, 3)));
 
-        var result = state.Try(new Canto("rook", new Coord(6, 2)));
+        var result = state.Try(new MoveAgain("rook", new Coord(6, 2)));
 
         Assert.True(result.Accepted, result.Rejection?.Message);
         Assert.Equal(new Coord(6, 2), result.Next.Find("rook")!.At);

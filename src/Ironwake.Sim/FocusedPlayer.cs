@@ -170,7 +170,7 @@ public sealed class FocusedPlayer : IPlayer
         var planned = state.Find(attack.UnitId);
         var target = state.Find(attack.TargetId);
         var fed = state.Find(Fed);
-        if (planned is null || target is null || fed is null || fed.Side != Side.Player || fed.Acted || state.CantoReachOf(fed, content) is not null)
+        if (planned is null || target is null || fed is null || fed.Side != Side.Player || fed.Acted || state.MoveAgainReachOf(fed, content) is not null)
         {
             return (plan, null);
         }
@@ -237,7 +237,7 @@ public sealed class FocusedPlayer : IPlayer
         var planned = state.Find(attack.UnitId);
         var target = state.Find(attack.TargetId);
         var fed = state.Find(Fed);
-        if (planned is null || target is null || fed is null || fed.Side != Side.Player || fed.Acted || state.CantoReachOf(fed, content) is not null)
+        if (planned is null || target is null || fed is null || fed.Side != Side.Player || fed.Acted || state.MoveAgainReachOf(fed, content) is not null)
         {
             return null;
         }
@@ -292,7 +292,7 @@ public sealed class FocusedPlayer : IPlayer
 
     /// <summary>
     /// The chipping line's chip (issue 1178, round 395): when <paramref name="plan"/> is a plain attack by another
-    /// unit on a target <see cref="Fed"/> (unacted, no Canto pending) cannot kill on a hit from any tile, a strike
+    /// unit on a target <see cref="Fed"/> (unacted, no Move Again pending) cannot kill on a hit from any tile, a strike
     /// on it by a non-captain other than him, the planned attacker first and then the roster in order, from that
     /// unit's best-scoring tile that the paying guard allows against the planned tile's exposure (<see cref="ChipFrom"/>);
     /// else null.
@@ -313,7 +313,7 @@ public sealed class FocusedPlayer : IPlayer
         var planned = state.Find(attack.UnitId);
         var target = state.Find(attack.TargetId);
         var fed = state.Find(Fed);
-        if (planned is null || target is null || fed is null || fed.Side != Side.Player || fed.Acted || state.CantoReachOf(fed, content) is not null)
+        if (planned is null || target is null || fed is null || fed.Side != Side.Player || fed.Acted || state.MoveAgainReachOf(fed, content) is not null)
         {
             return null;
         }
@@ -326,7 +326,7 @@ public sealed class FocusedPlayer : IPlayer
 
         var exposure = enemyReach.Count(r => r.CanEnd(move?.To ?? planned.At)) + PayingReach;
         var chippers = new[] { planned }.Concat(state.UnitsOf(Side.Player).Where(u => u.Id != planned.Id))
-            .Where(u => u.Id != Fed && !u.Acted && !CampaignRecord.IsCaptain(u.Unit, content) && state.CantoReachOf(u, content) is null);
+            .Where(u => u.Id != Fed && !u.Acted && !CampaignRecord.IsCaptain(u.Unit, content) && state.MoveAgainReachOf(u, content) is null);
         foreach (var chipper in chippers)
         {
             if (ChipFrom(state, content, chipper, fed, target, exposure, enemyReach) is { } chip)

@@ -28,7 +28,7 @@ public class MasteryTests
     [Fact]
     public void ACombatEarnsOneMasteryPointInTheUnitsClass()
     {
-        var content = WithCadetMastery("axebreaker", 10);
+        var content = WithCadetMastery("axe_sense", 10);
         var cadet = content.Class("cadet");
 
         var (unit, mastered) = Masteries.ForCombat(Hale, cadet);
@@ -36,7 +36,7 @@ public class MasteryTests
         Assert.Equal(1, Masteries.PerCombat);
         Assert.Equal(1, unit.Mastery.Points("cadet"));
         Assert.Null(mastered);
-        Assert.DoesNotContain("axebreaker", unit.Abilities);
+        Assert.DoesNotContain("axe_sense", unit.Abilities);
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public class MasteryTests
     [Fact]
     public void ReachingTheRequirementGrantsTheAbility()
     {
-        var cadet = WithCadetMastery("axebreaker", 3).Class("cadet");
+        var cadet = WithCadetMastery("axe_sense", 3).Class("cadet");
         var unit = Hale;
         string? mastered = null;
         for (var combat = 0; combat < 3; combat++)
@@ -60,28 +60,28 @@ public class MasteryTests
             (unit, mastered) = Masteries.ForCombat(unit, cadet);
         }
 
-        Assert.Equal("axebreaker", mastered);
-        Assert.Contains("axebreaker", unit.Abilities);
+        Assert.Equal("axe_sense", mastered);
+        Assert.Contains("axe_sense", unit.Abilities);
         Assert.Equal(3, unit.Mastery.Points("cadet"));
     }
 
     [Fact]
     public void AMasteredClassEarnsNothingMore()
     {
-        var cadet = WithCadetMastery("axebreaker", 1).Class("cadet");
+        var cadet = WithCadetMastery("axe_sense", 1).Class("cadet");
         var (once, _) = Masteries.ForCombat(Hale, cadet);
 
         var (twice, again) = Masteries.ForCombat(once, cadet);
 
         Assert.Equal(once, twice);
         Assert.Null(again);
-        Assert.Single(twice.Abilities, "axebreaker");
+        Assert.Single(twice.Abilities, "axe_sense");
     }
 
     [Fact]
     public void MasteryPointsAreEarnedOnlyInTheUnitsOwnClass()
     {
-        var content = WithCadetMastery("axebreaker", 3);
+        var content = WithCadetMastery("axe_sense", 3);
 
         Assert.Throws<ArgumentException>(() => Masteries.ForCombat(Hale, content.Class("pikeman")));
     }
@@ -89,13 +89,13 @@ public class MasteryTests
     [Fact]
     public void AMasteryIsRetainedAfterAClassChange()
     {
-        var content = WithCadetMastery("axebreaker", 1);
+        var content = WithCadetMastery("axe_sense", 1);
         var (mastered, _) = Masteries.ForCombat(Hale, content.Class("cadet"));
 
         var pikeman = mastered with { ClassId = "pikeman" };
 
-        Assert.Contains("axebreaker", pikeman.Abilities);
-        Assert.Contains(content.AbilitiesOf(pikeman), a => a.Id == "axebreaker");
+        Assert.Contains("axe_sense", pikeman.Abilities);
+        Assert.Contains(content.AbilitiesOf(pikeman), a => a.Id == "axe_sense");
         Assert.Equal(1, pikeman.Mastery.Points("cadet"));
         Assert.Equal(0, pikeman.Mastery.Points("pikeman"));
     }
@@ -103,7 +103,7 @@ public class MasteryTests
     [Fact]
     public void BothSidesOfACombatEarnAPointAndAnEnemyEarnsNothing()
     {
-        var content = WithCadetMastery("axebreaker", 10);
+        var content = WithCadetMastery("axe_sense", 10);
         var state = Beside(content) with { Phase = Side.Enemy };
 
         var result = Resolver.Apply(state, content, new Attack("brigand-1", "hale"));
@@ -119,16 +119,16 @@ public class MasteryTests
     }
 
     [Fact]
-    public void TheCombatThatReachesTheRequirementEmitsMasteryEarnedAndTheBreakerIsLiveAtOnce()
+    public void TheCombatThatReachesTheRequirementEmitsMasteryEarnedAndTheSenseIsLiveAtOnce()
     {
-        var content = WithCadetMastery("axebreaker", 1);
+        var content = WithCadetMastery("axe_sense", 1);
         var state = Beside(content);
         var before = Queries.Forecast(state, content, state.Find("hale")!, state.Find("brigand-1")!)!;
 
         var result = Resolver.Apply(state, content, new Attack("hale", "brigand-1"));
 
         Assert.True(result.Accepted, result.Rejection?.Message);
-        Assert.Contains(new MasteryEarned("hale", "cadet", "axebreaker"), result.Events);
+        Assert.Contains(new MasteryEarned("hale", "cadet", "axe_sense"), result.Events);
         if (result.Next.Find("brigand-1") is { } brigand)
         {
             var after = Queries.Forecast(result.Next, content, result.Next.Find("hale")!, brigand)!;
@@ -269,7 +269,7 @@ public class MasteryTests
     {
         var content = Starter with
         {
-            Classes = Starter.Classes.Values.Aggregate(Starter.Classes, (all, c) => all.SetItem(c.Id, c with { Mastery = "axebreaker", MasteryPoints = 2 })),
+            Classes = Starter.Classes.Values.Aggregate(Starter.Classes, (all, c) => all.SetItem(c.Id, c with { Mastery = "axe_sense", MasteryPoints = 2 })),
         };
         var map = MapFixture.Parse(File.ReadAllText(Path.Combine(MapFixture.MapsDirectory, "old_mill_road.map")), "old_mill_road.map");
 
@@ -284,10 +284,10 @@ public class MasteryTests
     [Fact]
     public void ShowPrintsTheMasteryAgainstItsRequirementThenMastered()
     {
-        var content = WithCadetMastery("axebreaker", 12);
+        var content = WithCadetMastery("axe_sense", 12);
         var hale = BattleState.From(YardMap, content, ValueList<Unit>.Of(Hale, Wren), 7).Find("hale")!;
         var three = hale with { Unit = hale.Unit with { Mastery = MasteryProgress.Empty.With("cadet", 3) } };
-        var done = hale with { Unit = hale.Unit with { Abilities = ValueList<string>.Of("axebreaker") } };
+        var done = hale with { Unit = hale.Unit with { Abilities = ValueList<string>.Of("axe_sense") } };
 
         Assert.Null(Ironwake.Cli.PlaySession.MasteryLine(hale, WithoutCadetMastery()));
         Assert.Equal("  mastery: Axe Sense (3 of 12 combats)", Ironwake.Cli.PlaySession.MasteryLine(three, content));
@@ -297,6 +297,6 @@ public class MasteryTests
     [Fact]
     public void TheConsoleNamesAMasteryEarned()
     {
-        Assert.Equal("Hale masters the Cadet class and keeps Axe Sense", Ironwake.Cli.PlaySession.Describe(new MasteryEarned("hale", "cadet", "axebreaker"), Starter, UnitNames.None));
+        Assert.Equal("Hale masters the Cadet class and keeps Axe Sense", Ironwake.Cli.PlaySession.Describe(new MasteryEarned("hale", "cadet", "axe_sense"), Starter, UnitNames.None));
     }
 }

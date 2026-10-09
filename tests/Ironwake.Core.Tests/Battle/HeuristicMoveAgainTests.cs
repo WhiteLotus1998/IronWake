@@ -5,13 +5,13 @@ using static Ironwake.Core.Tests.Battle.BattleFixture;
 namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
-/// The Sim's heuristic takes Canto (issue 262): after a unit's Attack, Item or Wait, when a
-/// Canto is owed, it rides to the tile in its Canto reach with the lowest no-crit
+/// The Sim's heuristic takes Move Again (issue 262): after a unit's Attack, Item or Wait, when a
+/// Move Again is owed, it rides to the tile in its Move Again reach with the lowest no-crit
 /// <see cref="Exposure"/> sum, stays when its own tile is already that low, refuses a tile
 /// the veto refuses for a unit whose death loses the map, and never leaves an Escape exit
 /// for a tile that is not one.
 /// </summary>
-public class HeuristicCantoTests
+public class HeuristicMoveAgainTests
 {
     /// <summary>A 12x4 field: Hale at 0,1, a rider at 6,2 beside a holding soldier at 7,2, a forest at 7,1 on the soldier's shoulder.</summary>
     private const string Field = """
@@ -46,59 +46,59 @@ public class HeuristicCantoTests
         return result.Next;
     }
 
-    /// <summary>The rider has waited where it stands at <paramref name="hp"/> HP and is owed its full Canto.</summary>
+    /// <summary>The rider has waited where it stands at <paramref name="hp"/> HP and is owed its full Move Again.</summary>
     private static (BattleState State, BattleUnit Rider) Waited(string map = Field, int hp = 1)
     {
         var state = Start(map);
         state = state.WithUnit(state.Find("rider")! with { Hp = hp });
         state = Do(state, new Wait("rider"));
         var rider = state.Find("rider")!;
-        Assert.NotNull(state.CantoReachOf(rider, Starter));
+        Assert.NotNull(state.MoveAgainReachOf(rider, Starter));
         return (state, rider);
     }
 
     [Fact]
-    public void ACantoThatLeavesALethalTileIsTaken()
+    public void AMoveAgainThatLeavesALethalTileIsTaken()
     {
         var (state, rider) = Waited();
         Assert.True(Exposure.Of(state, Starter, rider, rider.At).NoCrit >= rider.Hp, "the rider's own tile is lethal");
 
-        var canto = HeuristicPlayer.PlanCanto(state, Starter, rider);
+        var moveAgain = HeuristicPlayer.PlanMoveAgain(state, Starter, rider);
 
-        Assert.NotEqual(rider.At, canto.To);
-        Assert.Equal(0, Exposure.Of(state, Starter, rider, canto.To).NoCrit);
+        Assert.NotEqual(rider.At, moveAgain.To);
+        Assert.Equal(0, Exposure.Of(state, Starter, rider, moveAgain.To).NoCrit);
     }
 
     [Fact]
-    public void TheHeuristicTakesAnOwedCantoBeforeAnyOtherUnitActs()
+    public void TheHeuristicTakesAnOwedMoveAgainBeforeAnyOtherUnitActs()
     {
         var (state, rider) = Waited();
 
         var next = new HeuristicPlayer().Next(state, Starter);
 
-        Assert.Equal(new Command[] { HeuristicPlayer.PlanCanto(state, Starter, rider) }, next);
+        Assert.Equal(new Command[] { HeuristicPlayer.PlanMoveAgain(state, Starter, rider) }, next);
         var after = Do(state, next[0]);
-        Assert.Null(after.CantoReachOf(after.Find("rider")!, Starter));
+        Assert.Null(after.MoveAgainReachOf(after.Find("rider")!, Starter));
     }
 
     /// <summary>
-    /// The forest at 7,1 is the best tile by avoid and is inside the Canto reach, but the
+    /// The forest at 7,1 is the best tile by avoid and is inside the Move Again reach, but the
     /// soldier reaches it for more than the rider's HP, so the veto refuses it for a rider
     /// the map's <c>protect:</c> header names.
     /// </summary>
     [Fact]
-    public void ACantoThatWouldEnterALethalTileIsRefused()
+    public void AMoveAgainThatWouldEnterALethalTileIsRefused()
     {
         var (state, rider) = Waited(Field.Replace("enemy_level: 1\n", "enemy_level: 1\nprotect: rider\n"));
         Assert.True(HeuristicPlayer.LosesTheMap(state, rider));
         var forest = new Coord(7, 1);
-        Assert.True(state.CantoReachOf(rider, Starter)!.CanEnd(forest));
+        Assert.True(state.MoveAgainReachOf(rider, Starter)!.CanEnd(forest));
         Assert.True(Exposure.Of(state, Starter, rider, forest).NoCrit >= rider.Hp);
 
-        var canto = HeuristicPlayer.PlanCanto(state, Starter, rider);
+        var moveAgain = HeuristicPlayer.PlanMoveAgain(state, Starter, rider);
 
-        Assert.NotEqual(forest, canto.To);
-        Assert.True(Exposure.Of(state, Starter, rider, canto.To).NoCrit < rider.Hp);
+        Assert.NotEqual(forest, moveAgain.To);
+        Assert.True(Exposure.Of(state, Starter, rider, moveAgain.To).NoCrit < rider.Hp);
     }
 
     [Fact]
@@ -107,21 +107,21 @@ public class HeuristicCantoTests
         var (state, rider) = Waited(Field.Replace("P recruit:rider 6,2", "P recruit:rider 2,2"));
         Assert.Equal(0, Exposure.Of(state, Starter, rider, rider.At).NoCrit);
 
-        Assert.Equal(new Canto("rider", rider.At), HeuristicPlayer.PlanCanto(state, Starter, rider));
+        Assert.Equal(new MoveAgain("rider", rider.At), HeuristicPlayer.PlanMoveAgain(state, Starter, rider));
     }
 
     /// <summary>
-    /// The rider stands on the only exit in its Canto reach, beside the soldier, a lethal
+    /// The rider stands on the only exit in its Move Again reach, beside the soldier, a lethal
     /// tile, and every safer tile in reach is off an exit, so it stays: leaving would undo
     /// the escape.
     /// </summary>
     [Fact]
-    public void ACantoNeverLeavesAnEscapeExitForATileThatIsNotOne()
+    public void AMoveAgainNeverLeavesAnEscapeExitForATileThatIsNotOne()
     {
         var escape = Field.Replace("win: rout", "win: escape").Replace("enemy_level: 1\n", "enemy_level: 1\nexit: 0,0 6,2\n");
         var (state, rider) = Waited(escape);
         Assert.True(Exposure.Of(state, Starter, rider, rider.At).NoCrit >= rider.Hp);
 
-        Assert.Equal(new Canto("rider", rider.At), HeuristicPlayer.PlanCanto(state, Starter, rider));
+        Assert.Equal(new MoveAgain("rider", rider.At), HeuristicPlayer.PlanMoveAgain(state, Starter, rider));
     }
 }

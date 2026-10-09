@@ -9,7 +9,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// The hunt runs on (issue 804 item 4, round 251; DESIGN.md 13.23): once a battle, a kill with
 /// the scythe on its carrier's own Attack that leaves it woken, the waking kill included, owes the
-/// carrier a Canto of its full Move, with no second strike. Played on the spike's sample,
+/// carrier a Move Again of its full Move, with no second strike. Played on the spike's sample,
 /// <c>docs/samples/the_gleaning_kinsbane.map</c>, where Keziah carries it.
 /// </summary>
 public class KinsbaneHuntTests
@@ -52,15 +52,15 @@ public class KinsbaneHuntTests
     }
 
     [Fact]
-    public void AWokenKillOnHerOwnAttackOwesHerACantoOfHerFullMove()
+    public void AWokenKillOnHerOwnAttackOwesHerAMoveAgainOfHerFullMove()
     {
         var (_, result) = Kill(fed: 12, moved: true);
         var keziah = Keziah(result.Next);
 
         Assert.Contains(new HuntRanOn("keziah", FullMov(keziah)), result.Events);
-        Assert.Equal(FullMov(keziah), keziah.Canto);
+        Assert.Equal(FullMov(keziah), keziah.MoveAgain);
         Assert.True(keziah.HuntRan);
-        Assert.NotNull(result.Next.CantoReachOf(keziah, Shipped));
+        Assert.NotNull(result.Next.MoveAgainReachOf(keziah, Shipped));
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class KinsbaneHuntTests
         var (_, result) = Kill(fed: 5);
 
         Assert.DoesNotContain(result.Events, e => e is HuntRanOn);
-        Assert.Null(Keziah(result.Next).Canto);
+        Assert.Null(Keziah(result.Next).MoveAgain);
         Assert.False(Keziah(result.Next).HuntRan);
     }
 
@@ -88,8 +88,8 @@ public class KinsbaneHuntTests
         var (_, result) = Kill(fed: 13, huntRan: true);
 
         Assert.DoesNotContain(result.Events, e => e is HuntRanOn);
-        Assert.Null(Keziah(result.Next).Canto);
-        Assert.Null(result.Next.CantoReachOf(Keziah(result.Next), Shipped));
+        Assert.Null(Keziah(result.Next).MoveAgain);
+        Assert.Null(result.Next.MoveAgainReachOf(Keziah(result.Next), Shipped));
     }
 
     [Fact]
@@ -101,11 +101,11 @@ public class KinsbaneHuntTests
 
         Assert.False(Resolver.Apply(result.Next, Shipped, new Attack("keziah", other.Id)).Accepted);
 
-        var to = result.Next.CantoReachOf(keziah, Shipped)!.Entries.Where(e => e.CanEnd && e.At != keziah.At).First().At;
-        var moved = Resolver.Apply(result.Next, Shipped, new Canto("keziah", to));
+        var to = result.Next.MoveAgainReachOf(keziah, Shipped)!.Entries.Where(e => e.CanEnd && e.At != keziah.At).First().At;
+        var moved = Resolver.Apply(result.Next, Shipped, new MoveAgain("keziah", to));
         Assert.True(moved.Accepted, moved.Rejection?.Message);
         Assert.Equal(to, Keziah(moved.Next).At);
-        Assert.Null(moved.Next.CantoReachOf(Keziah(moved.Next), Shipped));
+        Assert.Null(moved.Next.MoveAgainReachOf(Keziah(moved.Next), Shipped));
     }
 
     [Fact]

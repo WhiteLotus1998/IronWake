@@ -11,7 +11,7 @@ namespace Ironwake.Sim;
 /// beside the partner from which the same weapon strikes the same target at a score no lower than the
 /// heuristic's tile; for a plain Wait, the tile beside the partner nearest the heuristic's
 /// destination. A unit whose death loses the map keeps the veto on every tile it ends on: the
-/// no-crit sum of what could strike it there over the cycle stays under its HP. A heal, an exit, a Canto, a Wait on
+/// no-crit sum of what could strike it there over the cycle stays under its HP. A heal, an exit, a Move Again, a Wait on
 /// an exit tile and a unit that has already moved are left as the heuristic planned them. Rapport
 /// accrues only on a threatened phase (0042), so this reads how fast a player who keeps the pair
 /// together climbs, not a strategy. A measurement only.
@@ -33,7 +33,7 @@ public sealed class PairingPlayer : IPlayer
         var plan = _inner.Next(state, content);
         if (UnitOf(plan) is { } id && (id == _a || id == _b) && plan[^1] is not Attack
             && state.Find(id == _a ? _b : _a) is { Side: Side.Player, Acted: false } partner
-            && state.CantoReachOf(partner, content) is null)
+            && state.MoveAgainReachOf(partner, content) is null)
         {
             var partnerPlan = HeuristicPlayer.PlanUnit(state, content, partner);
             if (partnerPlan.Count > 0 && partnerPlan[^1] is Attack)

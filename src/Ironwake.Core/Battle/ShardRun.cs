@@ -47,7 +47,7 @@ public sealed record ShardBroken(string UnitId, string BossId, Coord At) : GameE
 /// each of his side's phase starts the race ticks; when it reaches 0 he swallows there, the normal stage 2
 /// (<see cref="AtPhaseStart"/>). A player unit orthogonally beside him, not yet acted, may take the shard as its
 /// action (<see cref="TakeShard"/>): it is broken, and he leaves the board alive, in the coma
-/// (<see cref="BattleState.Coma"/>), which is not a kill, so a Defeat Boss map is won. No Canto follows. While
+/// (<see cref="BattleState.Coma"/>), which is not a kill, so a Defeat Boss map is won. No Move Again follows. While
 /// he runs, the map's turn limit ends nothing (<see cref="BattleState.Racing"/>). The race's resistance is the map's
 /// <see cref="RaceTrigger"/> events, fired as he runs and at each tick (<see cref="MapEvents.AfterRace"/>). Everything
 /// is board state, so Recall restores it.
@@ -74,7 +74,7 @@ public static class ShardRun
         var race = state.Map.ShardRace!;
         var to = RunTo(state, content, unit, race.Inner);
         events.Add(new ShardRaceBegan(unitId, unit.At, to, race.Phases));
-        state = state.WithUnit(unit with { At = to, Hp = 1, ShardIn = race.Phases, Moved = true, Acted = true, Behavior = Behavior.Hold, Canto = null });
+        state = state.WithUnit(unit with { At = to, Hp = 1, ShardIn = race.Phases, Moved = true, Acted = true, Behavior = Behavior.Hold, MoveAgain = null });
         return MapEvents.AfterRace(state, content, 0, events);
     }
 
@@ -163,7 +163,7 @@ public static class ShardRun
     {
         var boss = state.Find(bossId)!;
         events.Add(new ShardBroken(unit.Id, boss.Id, boss.At));
-        var next = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null }).WithoutUnit(boss.Id);
+        var next = state.WithUnit(unit with { Moved = true, Acted = true, MoveAgain = null }).WithoutUnit(boss.Id);
         return next with { Coma = next.Coma.Add(boss.Id) };
     }
 

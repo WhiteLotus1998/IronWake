@@ -711,7 +711,7 @@ pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 5 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 5 movement: again ansgar <x,y|stay>
 Ironwake Keep  turn 1 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -727,7 +727,7 @@ Ironwake Keep  turn 1 of 12  player phase  defeat_boss  recall 3
 10 ...e......C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  canto 5
+I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  again 5
 L  brannock         Brannock L8 cadet          15,5   hp 22/22  Plain
 d  brigand-1        Brigand L8 reaver          3,1    hp 25/25  Plain  group van, aggressive
 A  captain          Alder Fenn L8 cadet        11,5   hp 25/25  Plain  captain  done
@@ -769,7 +769,7 @@ Ironwake Keep  turn 1 of 12  player phase  defeat_boss  recall 3
 10 ...e......C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  canto 5
+I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  again 5
 L  brannock         Brannock L8 cadet          15,5   hp 22/22  Plain
 d  brigand-1        Brigand L8 reaver          3,1    hp 25/25  Plain  group van, aggressive
 A  captain          Alder Fenn L8 cadet        11,5   hp 25/25  Plain  captain  done
@@ -811,7 +811,7 @@ Ironwake Keep  turn 1 of 12  player phase  defeat_boss  recall 3
 10 ...e......C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  canto 5
+I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  again 5
 L  brannock         Brannock L8 cadet          15,5   hp 22/22  Plain
 d  brigand-1        Brigand L8 reaver          3,1    hp 25/25  Plain  group van, aggressive
 A  captain          Alder Fenn L8 cadet        11,5   hp 25/25  Plain  captain  done
@@ -853,7 +853,7 @@ Ironwake Keep  turn 1 of 12  player phase  defeat_boss  recall 3
 10 ...e......C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  canto 5
+I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  again 5
 L  brannock         Brannock L8 cadet          15,5   hp 22/22  Plain
 d  brigand-1        Brigand L8 reaver          3,1    hp 25/25  Plain  group van, aggressive
 A  captain          Alder Fenn L8 cadet        11,5   hp 25/25  Plain  captain  done
@@ -895,7 +895,7 @@ Ironwake Keep  turn 1 of 12  player phase  defeat_boss  recall 3
 10 ...e......C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  canto 5
+I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  again 5
 L  brannock         Brannock L8 cadet          15,5   hp 22/22  Plain
 d  brigand-1        Brigand L8 reaver          3,1    hp 25/25  Plain  group van, aggressive
 A  captain          Alder Fenn L8 cadet        11,5   hp 25/25  Plain  captain  done
@@ -937,7 +937,7 @@ Ironwake Keep  turn 1 of 12  player phase  defeat_boss  recall 3
 10 ...e......C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  canto 5
+I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  again 5
 L  brannock         Brannock L8 cadet          13,6   hp 22/22  Plain
 d  brigand-1        Brigand L8 reaver          3,1    hp 25/25  Plain  group van, aggressive
 A  captain          Alder Fenn L8 cadet        11,5   hp 25/25  Plain  captain  done
@@ -979,7 +979,7 @@ Ironwake Keep  turn 1 of 12  player phase  defeat_boss  recall 3
 10 ...e......C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  canto 5
+I  ansgar           Ansgar L8 outrider         12,6   hp 23/23  Plain  again 5
 L  brannock         Brannock L8 cadet          13,6   hp 22/22  Plain  done
 d  brigand-1        Brigand L8 reaver          3,1    hp 25/25  Plain  group van, aggressive
 A  captain          Alder Fenn L8 cadet        11,5   hp 25/25  Plain  captain  done
@@ -1138,7 +1138,7 @@ Ansgar attacks Longbowman
   Ansgar hits Longbowman for 13 (hp 6)
   Ansgar hp 23, Longbowman hp 6
 Ansgar gains 10 exp (10)
-Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: again ansgar <x,y|stay>
 Ironwake Keep  turn 2 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1154,7 +1154,7 @@ Ironwake Keep  turn 2 of 12  player phase  defeat_boss  recall 3
 10 .......e..C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         8,6    hp 23/23  Plain  canto 2
+I  ansgar           Ansgar L8 outrider         8,6    hp 23/23  Plain  again 2
 L  brannock         Brannock L8 cadet          13,6   hp 22/22  Plain
 d  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group van, aggressive
 A  captain          Alder Fenn L8 cadet        11,5   hp 16/25  Plain  captain
@@ -2014,7 +2014,7 @@ Ansgar attacks Marauder
   Ansgar hp 23, Marauder hp 0
 Ansgar gains 30 exp (50)
 Marauder falls at 9,6
-Ansgar may move again up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 6 movement: again ansgar <x,y|stay>
 Ironwake Keep  turn 3 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2030,7 +2030,7 @@ Ironwake Keep  turn 3 of 12  player phase  defeat_boss  recall 3
 10 ....h.....C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         10,6   hp 23/23  Plain  canto 6
+I  ansgar           Ansgar L8 outrider         10,6   hp 23/23  Plain  again 6
 h  archer-1         Archer L8 bowman           4,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          4,1    hp 25/25  Plain  group wave, aggressive
@@ -2782,7 +2782,7 @@ pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 4 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 4 movement: again ansgar <x,y|stay>
 Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#...J.
@@ -2798,7 +2798,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........h.C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -2841,7 +2841,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........h.C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -2884,7 +2884,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........h.C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -2927,7 +2927,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........h.C.....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -2970,7 +2970,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........hC......
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -3018,7 +3018,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........hC......
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -3060,7 +3060,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........hC......
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -3103,7 +3103,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........hC......
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -3145,7 +3145,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........hC......
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -3187,7 +3187,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........hC......
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -3229,7 +3229,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........hC......
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain  done
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -3271,7 +3271,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........hC......
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain  done
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive
@@ -3313,7 +3313,7 @@ Ironwake Keep  turn 4 of 12  player phase  defeat_boss  recall 3
 10 ........hC......
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,5   hp 23/23  Plain  again 4
 h  archer-1         Archer L8 bowman           8,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          11,7   hp 22/22  Plain  done
 g  brigand-2        Brigand L8 reaver          8,1    hp 25/25  Plain  group wave, aggressive

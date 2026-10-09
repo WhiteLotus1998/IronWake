@@ -26,7 +26,7 @@ public class ProtocolJsonTests
         { new ExpGained("wren", 30, 72), """{"type":"expGained","unit":"wren","amount":30,"expAfter":72}""" },
         { new LeveledUp("wren", 4, new Stats(1, 0, 0, 1, 1, 0, 0, 0, 1)), """{"type":"leveledUp","unit":"wren","newLevel":4,"gains":{"hp":1,"str":0,"mag":0,"dex":1,"spd":1,"lck":0,"def":0,"res":0,"cha":1}}""" },
         { new RankRaised("wren", WeaponType.Sword, WeaponRank.D), """{"type":"rankRaised","unit":"wren","weaponType":"sword","rank":"d"}""" },
-        { new MasteryEarned("wren", "cadet", "axebreaker"), """{"type":"masteryEarned","unit":"wren","class":"cadet","ability":"axebreaker"}""" },
+        { new MasteryEarned("wren", "cadet", "axe_sense"), """{"type":"masteryEarned","unit":"wren","class":"cadet","ability":"axe_sense"}""" },
         { new UnitWaited("wren"), """{"type":"unitWaited","unit":"wren"}""" },
         { new UnitExited("wren", new Coord(19, 3)), """{"type":"unitExited","unit":"wren","at":{"x":19,"y":3}}""" },
         { new UnitLeftBehind("dunstan", new Coord(12, 3)), """{"type":"unitLeftBehind","unit":"dunstan","at":{"x":12,"y":3}}""" },
@@ -42,7 +42,7 @@ public class ProtocolJsonTests
         { new KeepsakeLost("teodor", "iron_lance", new Coord(12, 3), "brigand-2"), """{"type":"keepsakeLost","fallen":"teodor","item":"iron_lance","at":{"x":12,"y":3},"carrier":"brigand-2"}""" },
         { new OrderCalled("alder", OrderKind.FallBack, 4, ValueList<string>.Of("teodor", "wren"), 3, 4, 12), """{"type":"orderCalled","unit":"alder","kind":"fallBack","radius":4,"reached":["teodor","wren"],"inRadius":3,"alive":4,"exposure":12}""" },
         { new FellBack("wren", A, B, ValueList<Coord>.Of(new Coord(2, 2), B)), """{"type":"fellBack","unit":"wren","from":{"x":1,"y":2},"to":{"x":3,"y":4},"path":[{"x":2,"y":2},{"x":3,"y":4}]}""" },
-        { new Cantoed("ansgar", A, B, ValueList<Coord>.Of(new Coord(2, 2), B)), """{"type":"cantoed","unit":"ansgar","from":{"x":1,"y":2},"to":{"x":3,"y":4},"path":[{"x":2,"y":2},{"x":3,"y":4}]}""" },
+        { new MovedAgain("ansgar", A, B, ValueList<Coord>.Of(new Coord(2, 2), B)), """{"type":"movedAgain","unit":"ansgar","from":{"x":1,"y":2},"to":{"x":3,"y":4},"path":[{"x":2,"y":2},{"x":3,"y":4}]}""" },
         { new UnitRetreated("brigand-1", A, B), """{"type":"unitRetreated","unit":"brigand-1","from":{"x":1,"y":2},"to":{"x":3,"y":4}}""" },
         { new MessengerEscaped("rider-1", A), """{"type":"messengerEscaped","unit":"rider-1","at":{"x":1,"y":2}}""" },
         { new UnitBroke("soldier-1", A, 4), """{"type":"unitBroke","unit":"soldier-1","at":{"x":1,"y":2},"hp":4}""" },
@@ -221,7 +221,7 @@ public class ProtocolJsonTests
         { new StrikeLine("hask", new Coord(3, 2)), """{"type":"strikeLine","unit":"hask","toward":{"x":3,"y":2}}""" },
         { new Breathe("rook", new Coord(3, 2)), """{"type":"breathe","unit":"rook","toward":{"x":3,"y":2}}""" },
         { new Dash("wren", B), """{"type":"dash","unit":"wren","to":{"x":3,"y":4}}""" },
-        { new Canto("ansgar", B), """{"type":"canto","unit":"ansgar","to":{"x":3,"y":4}}""" },
+        { new MoveAgain("ansgar", B), """{"type":"moveAgain","unit":"ansgar","to":{"x":3,"y":4}}""" },
         { new EndPhase(), """{"type":"end"}""" },
         { new Recall(4), """{"type":"recall","toIndex":4}""" },
         { new Undo("wren"), """{"type":"undo","unit":"wren"}""" },
@@ -402,22 +402,65 @@ public class ProtocolJsonTests
         Assert.Equal(plain, ProtocolJson.ReadState(ProtocolJson.State(plain, content), content));
     }
 
-    /// <summary>Issue 71: a Canto owed travels in <c>canto</c>, null when none is, and a state written before the field existed reads as none.</summary>
+    /// <summary>Issue 71: a Move Again owed travels in <c>moveAgain</c>, null when none is, and a state written before the field existed reads as none.</summary>
     [Fact]
-    public void AStateReadsBackEqualWithACantoOwed()
+    public void AStateReadsBackEqualWithAMoveAgainOwed()
     {
         var (content, state) = PlayedTollgate();
         var captain = state.UnitsOf(Side.Player).First();
-        var owed = (state with { History = ValueList<BattleState>.Empty }).WithUnit(captain with { Acted = true, Canto = 3 });
+        var owed = (state with { History = ValueList<BattleState>.Empty }).WithUnit(captain with { Acted = true, MoveAgain = 3 });
 
         var json = ProtocolJson.State(owed, content);
-        Assert.Contains("\"canto\":3", json);
-        Assert.Contains("\"canto\":null", json);
+        Assert.Contains("\"moveAgain\":3", json);
+        Assert.Contains("\"moveAgain\":null", json);
         Assert.Equal(owed, ProtocolJson.ReadState(json, content));
 
-        var older = json.Replace(",\"canto\":null", string.Empty);
-        Assert.DoesNotContain("\"canto\":null", older);
+        var older = json.Replace(",\"moveAgain\":null", string.Empty);
+        Assert.DoesNotContain("\"moveAgain\":null", older);
         Assert.Equal(owed, ProtocolJson.ReadState(older, content));
+    }
+
+    /// <summary>Issue 1446: a state written before the rename, with <c>canto</c> for the Move Again owed and the retired ability ids, reads as the same state under the new words.</summary>
+    [Fact]
+    public void AStateWrittenWithTheRetiredWordsReadsUnderTheNewOnes()
+    {
+        var (content, state) = PlayedTollgate();
+        var captain = state.UnitsOf(Side.Player).First();
+        var renamed = captain with { Acted = true, MoveAgain = 2, Unit = captain.Unit with { Abilities = ValueList<string>.Of("move_again", "steady_aim", "lore_sense") } };
+        var owed = (state with { History = ValueList<BattleState>.Empty }).WithUnit(renamed);
+
+        var older = ProtocolJson.State(owed, content)
+            .Replace("\"moveAgain\":", "\"canto\":")
+            .Replace("\"move_again\"", "\"canto\"")
+            .Replace("\"steady_aim\"", "\"deadeye\"")
+            .Replace("\"lore_sense\"", "\"reasonbreaker\"");
+
+        Assert.Contains("\"canto\":2", older);
+        Assert.Contains("\"reasonbreaker\"", older);
+        Assert.Equal(owed, ProtocolJson.ReadState(older, content));
+    }
+
+    /// <summary>Issue 1446: the retired command type <c>canto</c> still reads as a Move Again; the protocol writes <c>moveAgain</c>.</summary>
+    [Fact]
+    public void TheRetiredCantoCommandTypeReadsAsAMoveAgain()
+    {
+        var command = ProtocolJson.ReadCommand("""{"type":"canto","unit":"ansgar","to":{"x":3,"y":4}}""");
+
+        Assert.Equal(new MoveAgain("ansgar", new Coord(3, 4)), command);
+        Assert.Contains("\"type\":\"moveAgain\"", ProtocolJson.Command(command));
+    }
+
+    /// <summary>Issue 1446: no retired ability id is an id in the shipped content, so nothing but an old save can name one.</summary>
+    [Fact]
+    public void NoRetiredAbilityIdShipsInContent()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+
+        Assert.All(ProtocolJson.RetiredAbilityIds, pair =>
+        {
+            Assert.False(content.Abilities.ContainsKey(pair.Key), pair.Key);
+            Assert.True(content.Abilities.ContainsKey(pair.Value), pair.Value);
+        });
     }
 
     /// <summary>Issue 67: a unit's rank points travel in <c>weaponPoints</c>, and a state written before the field existed reads as rank E.</summary>

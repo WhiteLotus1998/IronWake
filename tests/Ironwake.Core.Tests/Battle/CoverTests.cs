@@ -113,7 +113,7 @@ public class CoverTests
     }
 
     [Fact]
-    public void CoverIsAnActionWithNoCantoAndNoBrace()
+    public void CoverIsAnActionWithNoMoveAgainAndNoBrace()
     {
         var state = Start(extra: "brace: on");
 
@@ -125,7 +125,7 @@ public class CoverTests
         Assert.True(tank.Acted);
         Assert.True(tank.Moved);
         Assert.False(tank.Braced);
-        Assert.Null(tank.Canto);
+        Assert.Null(tank.MoveAgain);
         Assert.Empty(result.Events.OfType<UnitWaited>());
     }
 

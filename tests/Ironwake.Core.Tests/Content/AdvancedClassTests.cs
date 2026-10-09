@@ -63,7 +63,7 @@ public class AdvancedClassTests
         Assert.True(Content.Class("lancer").CanUse(WeaponType.Axe));
         Assert.True(Content.Class("warden").CanUse(WeaponType.Sword));
         Assert.True(Content.Class("sentinel").CanUse(WeaponType.Bow));
-        Assert.Contains("canto", Content.Class("lancer").Abilities);
+        Assert.Contains("move_again", Content.Class("lancer").Abilities);
     }
 
     [Fact]

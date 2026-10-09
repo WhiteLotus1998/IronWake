@@ -54,7 +54,7 @@ Rewritten when the Table moves; under 150 lines, 19 KB.
 - **13.21 Tide (0111):** kept if a journal shows a ford tile taken, refused or crossed for it.
 - **13.22 The break (0112):** a boss's death sends his group at or below half HP off the board. Kept if a journal shows a strike taken for it; on Saltmarsh (#606).
 - **13.24 Messenger (0135):** kept if a strike or blocker goes to the runner (Chat's cold #680).
-- **13.18 Lines on the board (#486):** one printed fact a line; killed if no play takes a command for it. Cadets (0097): Teodor and Wren's Canto kept. Talk kept on its sample (378, 0258): binds, not yet costs. Next (264): she won't shoot what another struck this phase.
+- **13.18 Lines on the board (#486):** one printed fact a line; killed if no play takes a command for it. Cadets (0097): Teodor and Wren's Move Again kept. Talk kept on its sample (378, 0258): binds, not yet costs. Next (264): she won't shoot what another struck this phase.
 - **13.25 Planks (0179):** killed if no play picks the wear.
 - **13.27 The dash: kept on its sample** (374, 0255). No borrowed step unless a `tuned` re-read shows it beat the clock. At dusk, winded is a bet.
 - **13.28 The wind: samples only, never the campaign** (Lotus, 0260); his beta play decides.

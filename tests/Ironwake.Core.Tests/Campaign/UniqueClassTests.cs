@@ -311,8 +311,8 @@ public class UniqueClassTests
         var result = Resolver.Apply(state, Shipped, new UseItem(healer, 0, ally));
 
         Assert.True(result.Accepted, result.Rejection?.Message);
-        Assert.NotNull(result.Next.CantoReachOf(result.Next.Find(healer)!, Shipped));
-        Assert.True(Resolver.Apply(result.Next, Shipped, new Canto(healer, new Coord(2, 9))).Accepted);
+        Assert.NotNull(result.Next.MoveAgainReachOf(result.Next.Find(healer)!, Shipped));
+        Assert.True(Resolver.Apply(result.Next, Shipped, new MoveAgain(healer, new Coord(2, 9))).Accepted);
     }
 
     [Fact]
@@ -323,7 +323,7 @@ public class UniqueClassTests
         var result = Resolver.Apply(state, Shipped, new Wait(healer));
 
         Assert.True(result.Accepted);
-        Assert.Null(result.Next.CantoReachOf(result.Next.Find(healer)!, Shipped));
+        Assert.Null(result.Next.MoveAgainReachOf(result.Next.Find(healer)!, Shipped));
     }
 
     [Fact]
@@ -375,7 +375,7 @@ public class UniqueClassTests
     }
 
     [Fact]
-    public void AHealOnlyCantoRoundTripsThroughTheSerializer()
+    public void AHealOnlyMoveAgainRoundTripsThroughTheSerializer()
     {
         var reloaded = ContentLoader.Parse(ContentSerializer.Write(Shipped));
 

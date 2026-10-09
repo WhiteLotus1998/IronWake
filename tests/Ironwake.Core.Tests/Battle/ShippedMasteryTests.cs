@@ -21,12 +21,12 @@ public class ShippedMasteryTests
     [InlineData("cadet", "fundamentals", 12)]
     [InlineData("pikeman", "horsebane", 12)]
     [InlineData("reaver", "bloodrush", 12)]
-    [InlineData("bowman", "deadeye", 12)]
+    [InlineData("bowman", "steady_aim", 12)]
     [InlineData("adept", "deep_study", 12)]
     [InlineData("chaplain", "grace", 12)]
-    [InlineData("outrider", "swordbreaker", 12)]
-    [InlineData("skyrider", "bowbreaker", 12)]
-    [InlineData("bulwark", "reasonbreaker", 12)]
+    [InlineData("outrider", "sword_sense", 12)]
+    [InlineData("skyrider", "bow_sense", 12)]
+    [InlineData("bulwark", "lore_sense", 12)]
     [InlineData("sergeant", "unsworn", 12)]
     public void EveryStarterClassMastersOneAbilityAtItsRequirement(string classId, string ability, int points)
     {
@@ -83,7 +83,7 @@ public class ShippedMasteryTests
     public void SteadyAimAddsTenHitAndTenCrit()
     {
         var plain = Forecast(Beside(Hale));
-        var aimed = Forecast(Beside(Knowing("deadeye")));
+        var aimed = Forecast(Beside(Knowing("steady_aim")));
 
         Assert.Equal(Math.Clamp(plain.Attacker.HitChance + 10, 0, 100), aimed.Attacker.HitChance);
         Assert.Equal(Math.Clamp(plain.Attacker.CritChance + 10, 0, 100), aimed.Attacker.CritChance);

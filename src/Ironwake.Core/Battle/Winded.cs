@@ -4,7 +4,7 @@ namespace Ironwake.Core;
 /// The dash (DESIGN.md 13.27, experiment), behind a map's <c>dash: on</c> header. Brace prices
 /// standing still; the dash prices running. A player unit that has neither moved nor acted may
 /// move with its Move plus <see cref="ExtraMov"/> (<see cref="Dash"/>), measured in movement so
-/// terrain costs on the extra as on the rest, and that is its Move and its action both: no strike, no item, no exit, no Canto. Until its side's next phase
+/// terrain costs on the extra as on the rest, and that is its Move and its action both: no strike, no item, no exit, no Move Again. Until its side's next phase
 /// begins it is winded, and every strike against it is at <see cref="Hit"/> more hit. The winded
 /// mark sits in the striker's hit slot beside the pin and the brace (<see cref="Brace.StrikeHit"/>),
 /// so every forecast, <c>threat</c>, the planner's score and the resolver read one number. The

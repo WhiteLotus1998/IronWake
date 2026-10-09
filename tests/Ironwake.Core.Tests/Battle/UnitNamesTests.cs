@@ -266,8 +266,8 @@ public class UnitNamesTests
     {
         var state = Start(map: Field);
 
-        Assert.Equal("wren cannot Canto: she has no Canto", Resolver.Apply(state, Starter, new Canto("wren", new Coord(1, 2))).Rejection!.Message);
-        Assert.Equal("wren cannot Canto: they have no Canto", Resolver.Apply(state, With(Pronoun.They), new Canto("wren", new Coord(1, 2))).Rejection!.Message);
+        Assert.Equal("wren cannot move again: she has no Move Again", Resolver.Apply(state, Starter, new MoveAgain("wren", new Coord(1, 2))).Rejection!.Message);
+        Assert.Equal("wren cannot move again: they have no Move Again", Resolver.Apply(state, With(Pronoun.They), new MoveAgain("wren", new Coord(1, 2))).Rejection!.Message);
     }
 
     [Fact]

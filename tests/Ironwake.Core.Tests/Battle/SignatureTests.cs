@@ -8,7 +8,7 @@ namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
 /// The cadets' signatures (DESIGN.md 13.18, experiment; issue 486 as rounds 117, 118 and 124
-/// specify it), behind a map's <c>signatures: on</c> header: Wren counts tiles (Canto after any
+/// specify it), behind a map's <c>signatures: on</c> header: Wren counts tiles (Move Again after any
 /// action) and talks (a combat she is in wakes a group at 8); Teodor orders (an ally within 2
 /// acting after him strikes at +5) and is watched (his own strike with an ally within 2 is at
 /// -10); Ottilie keeps a ledger (a strike or watch shot under 65 displayed is refused). Every
@@ -86,26 +86,26 @@ public class SignatureTests
         """;
 
     [Fact]
-    public void WrenCantosAfterAnActionOnTheMovHerMoveLeft()
+    public void WrenMovesAgainAfterAnActionOnTheMovHerMoveLeft()
     {
         var state = Start(true, Road, WrenLine);
         state = Step(state, new Move("wren", new Coord(2, 1))).Next;
         state = Step(state, new Attack("wren", "brigand-1")).Next;
 
-        Assert.Equal(3, state.Find("wren")!.Canto);
-        var cantoed = Step(state, new Canto("wren", new Coord(2, 0)));
-        Assert.Equal(new Coord(2, 0), cantoed.Next.Find("wren")!.At);
+        Assert.Equal(3, state.Find("wren")!.MoveAgain);
+        var movedAgain = Step(state, new MoveAgain("wren", new Coord(2, 0)));
+        Assert.Equal(new Coord(2, 0), movedAgain.Next.Find("wren")!.At);
     }
 
     [Fact]
-    public void WrenHasNoCantoWithoutTheHeader()
+    public void WrenHasNoMoveAgainWithoutTheHeader()
     {
         var state = Start(false, Road, WrenLine);
         state = Step(state, new Move("wren", new Coord(2, 1))).Next;
         state = Step(state, new Attack("wren", "brigand-1")).Next;
 
-        Assert.Null(state.Find("wren")!.Canto);
-        Assert.Equal(RejectionReason.NoCanto, state.Refused(new Canto("wren", new Coord(2, 0))).Reason);
+        Assert.Null(state.Find("wren")!.MoveAgain);
+        Assert.Equal(RejectionReason.NoMoveAgain, state.Refused(new MoveAgain("wren", new Coord(2, 0))).Reason);
     }
 
     // Wren: talks. The watch group sleeps 7 from the brigand's tile and 8 from Wren's, past the

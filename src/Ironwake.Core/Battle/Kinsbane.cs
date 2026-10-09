@@ -23,7 +23,7 @@ namespace Ironwake.Core;
 /// a kill still counts and restores its uses.</item>
 /// <item>The hunt runs on (issue 804, round 251): once a battle, a kill with it on its carrier's own
 /// Attack that leaves it woken, the waking kill included, gives the carrier its full Move again as a
-/// Canto, with no second strike (<see cref="RunsOn"/>).</item>
+/// Move Again, with no second strike (<see cref="RunsOn"/>).</item>
 /// <item>The voice (issue 804 item 3): it speaks to its carrier when a drain starves it, when a kill
 /// grows a tooth, and on the kill that wakes it, at most <see cref="VoiceCap"/> lines a battle
 /// (<see cref="Speak"/>).</item>
@@ -370,9 +370,9 @@ public static class Kinsbane
     /// <summary>
     /// The hunt runs on (issue 804, round 251; DESIGN.md 13.23): after <paramref name="unitId"/>'s own
     /// Attack, if <paramref name="events"/> hold a feed of its weapon that left it woken and the unit
-    /// has not run the hunt this battle, the unit is owed a Canto of its full Move
-    /// (<see cref="HuntMov"/>; never less than a Canto it was already owed), the charge is spent
-    /// (<see cref="BattleUnit.HuntRan"/>) and <see cref="HuntRanOn"/> is emitted. The Canto moves
+    /// has not run the hunt this battle, the unit is owed a Move Again of its full Move
+    /// (<see cref="HuntMov"/>; never less than a Move Again it was already owed), the charge is spent
+    /// (<see cref="BattleUnit.HuntRan"/>) and <see cref="HuntRanOn"/> is emitted. The Move Again moves
     /// only, so there is no second strike. Any other command, a counter-kill, or a dead carrier: unchanged.
     /// </summary>
     public static BattleState RunsOn(BattleState state, GameContent content, string unitId, List<GameEvent> events)
@@ -383,9 +383,9 @@ public static class Kinsbane
             return state;
         }
 
-        var mov = Math.Max(HuntMov(state, content, unit), unit.Canto ?? 0);
+        var mov = Math.Max(HuntMov(state, content, unit), unit.MoveAgain ?? 0);
         events.Add(new HuntRanOn(unitId, mov));
-        return state.WithUnit(unit with { Canto = mov, HuntRan = true });
+        return state.WithUnit(unit with { MoveAgain = mov, HuntRan = true });
     }
 
     /// <summary>

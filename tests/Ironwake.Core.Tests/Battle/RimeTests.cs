@@ -96,7 +96,7 @@ public class RimeTests
 
         Assert.True(rook.Acted);
         Assert.True(rook.Breathed);
-        Assert.Null(rook.Canto);
+        Assert.Null(rook.MoveAgain);
     }
 
     [Fact]

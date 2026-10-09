@@ -8,7 +8,7 @@ namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
 /// The Sky Captain's passives (issue 1127, DECISIONS/0262). Drake frost, Rook's alone: a Move she flew that lands
-/// beside enemies strikes each for 1, never below 1, and holds each but a boss to Mov 1 with no Canto through its
+/// beside enemies strikes each for 1, never below 1, and holds each but a boss to Mov 1 with no Move Again through its
 /// next phase; then it rests a turn. Stoop, every other Sky Captain's: after flying 4 or more tiles, the first
 /// strike deals 2 more when it hits.
 /// </summary>
@@ -156,16 +156,16 @@ public class SkyCaptainTests
     }
 
     [Fact]
-    public void AHeldUnitIsOwedNoCanto()
+    public void AHeldUnitIsOwedNoMoveAgain()
     {
         var lancer = Recruit("wren", "lancer", Wren.Stats, "iron_lance");
         var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Rook, lancer), string.Format(Field, "0,4", ""));
         var held = state.WithUnit(state.Find("wren")! with { Frosted = 2 });
 
         Assert.Equal(1, held.ReachOf(held.Find("wren")!, Starter).Mov);
-        Assert.Null(held.Do(new Move("wren", new Coord(1, 4))).Find("wren")!.Canto);
-        Assert.Null(held.Do(new Wait("wren")).Find("wren")!.Canto);
-        Assert.NotNull(state.Do(new Move("wren", new Coord(1, 4))).Find("wren")!.Canto);
+        Assert.Null(held.Do(new Move("wren", new Coord(1, 4))).Find("wren")!.MoveAgain);
+        Assert.Null(held.Do(new Wait("wren")).Find("wren")!.MoveAgain);
+        Assert.NotNull(state.Do(new Move("wren", new Coord(1, 4))).Find("wren")!.MoveAgain);
     }
 
     [Fact]
@@ -251,7 +251,7 @@ public class SkyCaptainTests
     {
         var names = UnitNames.Of(OnField(Riding(DrakeStage.Grown)), Starter);
 
-        Assert.Equal("The drake's frost strikes Brigand 1 for 1 (hp 7); held to 1 tile, no Canto, until enemy phase ends", PlaySession.Describe(new UnitFrosted("brigand-1", "rook", 1, 7, true, false, Side.Enemy), Starter, names));
+        Assert.Equal("The drake's frost strikes Brigand 1 for 1 (hp 7); held to 1 tile, no Move Again, until enemy phase ends", PlaySession.Describe(new UnitFrosted("brigand-1", "rook", 1, 7, true, false, Side.Enemy), Starter, names));
     }
 
     [Fact]

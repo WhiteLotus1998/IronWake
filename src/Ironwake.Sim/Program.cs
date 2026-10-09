@@ -1403,7 +1403,7 @@ public static class Program
         FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
-        Canto c => $"canto {c.UnitId} {c.To}",
+        MoveAgain c => $"again {c.UnitId} {c.To}",
         Carry c => $"carry {c.UnitId} {c.AllyId} {c.To} {c.SetDown}",
         Breathe b => $"breathe {b.UnitId} {b.Toward}",
         StrikeLine l => $"strikeline {l.UnitId} {l.Toward}",

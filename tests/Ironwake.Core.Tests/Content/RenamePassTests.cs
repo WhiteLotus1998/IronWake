@@ -5,8 +5,8 @@ namespace Ironwake.Core.Tests.Content;
 
 /// <summary>
 /// Issue 701, the rename pass: a distinctive coinage taken from another series goes and an
-/// ordinary English word stays. Labels change, ids do not: <c>canto</c>, <c>reason</c> and the
-/// <c>-breaker</c> ids stay in content and scripts, and every number is the same.
+/// ordinary English word stays, and every number is the same. Issue 1446 took the ids too: the
+/// Senses, Steady Aim and Move Again have ids of their own words, and the command is <c>again</c>.
 /// </summary>
 [Collection("console")]
 public class RenamePassTests
@@ -14,15 +14,15 @@ public class RenamePassTests
     private static GameContent Content => MapFixture.Content;
 
     [Theory]
-    [InlineData("swordbreaker", "Sword Sense")]
-    [InlineData("lancebreaker", "Lance Sense")]
-    [InlineData("axebreaker", "Axe Sense")]
-    [InlineData("bowbreaker", "Bow Sense")]
-    [InlineData("fistbreaker", "Fist Sense")]
-    [InlineData("faithbreaker", "Faith Sense")]
-    [InlineData("reasonbreaker", "Lore Sense")]
-    [InlineData("canto", "Move Again")]
-    [InlineData("deadeye", "Steady Aim")]
+    [InlineData("sword_sense", "Sword Sense")]
+    [InlineData("lance_sense", "Lance Sense")]
+    [InlineData("axe_sense", "Axe Sense")]
+    [InlineData("bow_sense", "Bow Sense")]
+    [InlineData("fist_sense", "Fist Sense")]
+    [InlineData("faith_sense", "Faith Sense")]
+    [InlineData("lore_sense", "Lore Sense")]
+    [InlineData("move_again", "Move Again")]
+    [InlineData("steady_aim", "Steady Aim")]
     public void EachRenamedAbilityShowsItsPlainName(string id, string name)
     {
         Assert.Equal(name, Content.Ability(id).Name);
@@ -79,7 +79,7 @@ public class RenamePassTests
 
         // Command words are ids and stay, so the echoed commands are not read.
         var shown = string.Join("\n", output.Split('\n').Where(line => !line.StartsWith("> ", StringComparison.Ordinal)));
-        foreach (var old in new[] { "breaker", "Canto", "Deadeye", "Reason", " Mt ", " Hit ", " mt ", "Avoid", "avoid", "Arts:", " Avo " })
+        foreach (var old in new[] { "breaker", "Canto", "canto", "Deadeye", "Reason", " Mt ", " Hit ", " mt ", "Avoid", "avoid", "Arts:", " Avo " })
         {
             Assert.DoesNotContain(old, shown);
         }

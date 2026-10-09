@@ -2896,7 +2896,7 @@ Kinsbane feeds: fed 12, power +5, a tooth grows (teeth 5/5); Keziah heals 10 (hp
 Kinsbane, to Keziah: "Keziah. I remember what I'm for."
 Archer 1 falls at 10,6
 The hunt runs on: Keziah may move again, 4 movement
-Keziah may move again up to 4 movement: canto keziah <x,y|stay>
+Keziah may move again up to 4 movement: again keziah <x,y|stay>
 The Field Before the Keep  turn 6 of 20  player phase  defeat_boss  recall 3
    01234567890123456789
  0 .....^^....~~~~~~MMM
@@ -2919,7 +2919,7 @@ The Field Before the Keep  turn 6 of 20  player phase  defeat_boss  recall 3
 i  archer-3         Archer L4 bowman           17,8   hp 18/18  Plain  group camp, guard, asleep
 h  brigand-2        Brigand L4 reaver          17,5   hp 23/23  Plain  group camp, guard, asleep
 A  captain          Alder Fenn L5 cadet        9,5    hp 12/24  Plain  captain  done
-G  keziah           Keziah L5 reaver           10,7   hp 19/25  Plain  canto 4
+G  keziah           Keziah L5 reaver           10,7   hp 19/25  Plain  again 4
 E  maud             Maud L5 chaplain           10,11  hp 18/18  Plain
 C  ottilie          Ottilie L5 bowman          12,10  hp 18/18  Plain
 D  pell             Pell L5 adept              10,10  hp 17/17  Plain

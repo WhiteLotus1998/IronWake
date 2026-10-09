@@ -5,7 +5,7 @@ namespace Ironwake.Sim;
 /// <summary>
 /// The even-company chair (issue 1150, rounds 385 and 387): <see cref="HeuristicPlayer"/> with one
 /// change, in who takes a kill. When the heuristic's next plan is a plain attack (no art) that kills
-/// its target on a hit, every other unacted player unit not owed a Canto is checked for the same kill
+/// its target on a hit, every other unacted player unit not owed a Move Again is checked for the same kill
 /// on the same target from a tile the heuristic itself would accept (<see cref="KillFrom"/>). The
 /// kill goes to the lowest level among the planned attacker and those that qualify, then the fewest
 /// rank points in the unit's main weapon (<see cref="LevelRun.MainType"/>), ties to the planned
@@ -72,7 +72,7 @@ public sealed class EvenPlayer : IPlayer
         var best = (Unit: planned, Plan: plan);
         foreach (var other in state.UnitsOf(Side.Player))
         {
-            if (other.Id == planned.Id || other.Acted || state.CantoReachOf(other, content) is not null || !Lower(other, best.Unit, content))
+            if (other.Id == planned.Id || other.Acted || state.MoveAgainReachOf(other, content) is not null || !Lower(other, best.Unit, content))
             {
                 continue;
             }

@@ -8,7 +8,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// Overwatch redrafted (DESIGN.md 13.17b, issue 556): on an <c>overwatch: hold</c> map only a
 /// player unit that has not moved this turn may watch; the watch is its action and ends its turn
-/// with no Canto; the ring is its equipped weapon's whole reach on tiles a unit can stand on; the
+/// with no Move Again; the ring is its equipped weapon's whole reach on tiles a unit can stand on; the
 /// enemy never watches; the event names the move the watch gives up.
 /// </summary>
 public class OverwatchHoldTests
@@ -93,16 +93,16 @@ public class OverwatchHoldTests
     }
 
     [Fact]
-    public void NoCantoFollowsAWatch()
+    public void NoMoveAgainFollowsAWatch()
     {
         var waited = Step(Start(), new Wait("ou")).Next;
-        Assert.True(waited.Try(new Canto("ou", new Coord(0, 3))).Accepted);
+        Assert.True(waited.Try(new MoveAgain("ou", new Coord(0, 3))).Accepted);
 
         var watched = Step(Start(), new Watch("ou")).Next;
 
-        var canto = watched.Try(new Canto("ou", new Coord(0, 3)));
-        Assert.False(canto.Accepted);
-        Assert.Equal(RejectionReason.NoCanto, canto.Rejection!.Reason);
+        var moveAgain = watched.Try(new MoveAgain("ou", new Coord(0, 3)));
+        Assert.False(moveAgain.Accepted);
+        Assert.Equal(RejectionReason.NoMoveAgain, moveAgain.Rejection!.Reason);
     }
 
     [Fact]

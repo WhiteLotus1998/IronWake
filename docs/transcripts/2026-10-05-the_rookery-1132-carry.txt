@@ -1116,7 +1116,7 @@ The Rookery  turn 8 of 9  enemy phase  escape  recall 2
  8 ####..^~~^..MMM
  9 ....^^.~~.^MMMM
 
-g  rider-1          Rider L6 outrider          14,5   hp 22/22  Road  group pursuit, aggressive  canto 4
+g  rider-1          Rider L6 outrider          14,5   hp 22/22  Road  group pursuit, aggressive  again 4
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 a  wing_captain-1   Wing Captain L6 sky captain 5,1    hp 19/19  Mountain  group loft, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
@@ -1223,7 +1223,7 @@ The Rookery  turn 8 of 9  enemy phase  escape  recall 1
  8 ####..^~~^..MMM
  9 ....^^.~~.^MMMM
 
-g  rider-1          Rider L6 outrider          13,5   hp 22/22  Road  group pursuit, aggressive  canto 5
+g  rider-1          Rider L6 outrider          13,5   hp 22/22  Road  group pursuit, aggressive  again 5
 d  sentry-1         Sentry L6 sentinel         13,3   hp 29/29  Plain  group pass, hold
 a  wing_captain-1   Wing Captain L6 sky captain 5,1    hp 19/19  Mountain  group loft, guard, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies

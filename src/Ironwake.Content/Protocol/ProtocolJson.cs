@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text;
 using System.Text.Json;
 using Ironwake.Core;
@@ -184,7 +185,7 @@ public static class ProtocolJson
                 }
 
                 break;
-            case Cantoed c:
+            case MovedAgain c:
                 w.WriteString("unit", c.UnitId);
                 WriteCoord(w, "from", c.From);
                 WriteCoord(w, "to", c.To);
@@ -945,10 +946,10 @@ public static class ProtocolJson
                 WriteCoord(w, "to", carry.To);
                 WriteCoord(w, "setDown", carry.SetDown);
                 break;
-            case Canto canto:
-                w.WriteString("type", "canto");
-                w.WriteString("unit", canto.UnitId);
-                WriteCoord(w, "to", canto.To);
+            case MoveAgain moveAgain:
+                w.WriteString("type", "moveAgain");
+                w.WriteString("unit", moveAgain.UnitId);
+                WriteCoord(w, "to", moveAgain.To);
                 break;
             case Order order:
                 w.WriteString("type", "order");
@@ -996,7 +997,7 @@ public static class ProtocolJson
             "wait" => new Wait(RequiredString(e, "unit")),
             "watch" => new Watch(RequiredString(e, "unit")),
             "cover" => new Cover(RequiredString(e, "unit"), RequiredString(e, "ally")),
-            "canto" => new Canto(RequiredString(e, "unit"), ReadCoord(e, "to")),
+            "moveAgain" or "canto" => new MoveAgain(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "exit" => new Exit(RequiredString(e, "unit")),
             "recover" => new Recover(RequiredString(e, "unit")),
             "open" => new Open(RequiredString(e, "unit"), ReadCoord(e, "at")),
@@ -1013,7 +1014,7 @@ public static class ProtocolJson
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
             "undo" => new Undo(RequiredString(e, "unit")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, watch, cover, canto, exit, recover, open, drop, talk, shove, carry, breathe, dash, order, fallBack, end, recall, or undo"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, watch, cover, moveAgain, exit, recover, open, drop, talk, shove, carry, breathe, dash, order, fallBack, end, recall, or undo"),
         };
     }
 
@@ -1532,7 +1533,7 @@ public static class ProtocolJson
         w.WriteBoolean("isCaptain", unit.IsCaptain);
         w.WriteNumber("placementIndex", unit.PlacementIndex);
         w.WriteBoolean("retreated", unit.Retreated);
-        WriteNullableNumber(w, "canto", unit.Canto);
+        WriteNullableNumber(w, "moveAgain", unit.MoveAgain);
         if (unit.Grudge is { } grudge)
         {
             w.WriteString("grudge", grudge);
@@ -1920,7 +1921,7 @@ public static class ProtocolJson
             RequiredBool(e, "isCaptain"),
             RequiredInt(e, "placementIndex"),
             RequiredBool(e, "retreated"),
-            OptionalInt(e, "canto"),
+            OptionalInt(e, "moveAgain") ?? OptionalInt(e, "canto"),
             OptionalString(e, "grudge"),
             e.TryGetProperty("shoved", out _) && RequiredBool(e, "shoved"),
             e.TryGetProperty("braced", out _) && RequiredBool(e, "braced"),
@@ -2078,7 +2079,7 @@ public static class ProtocolJson
                 ReadStats(Required(e, "stats")),
                 ReadStats(Required(e, "growths")),
                 new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved"), Combats = OptionalInt(s, "combats") ?? 0, Stage = OptionalInt(s, "stage") ?? 0, GateOpen = s.TryGetProperty("gateOpen", out _) && RequiredBool(s, "gateOpen"), Named = s.TryGetProperty("named", out _) && RequiredBool(s, "named"), Refines = OptionalInt(s, "refines") ?? 0, RefineMt = OptionalInt(s, "refineMt") ?? 0, RefineHit = OptionalInt(s, "refineHit") ?? 0 }))),
-                ReadStrings(e, "abilities"),
+                ValueList<string>.From(ReadStrings(e, "abilities").Select(RenamedAbility)),
                 OptionalString(e, "region"),
                 OptionalString(e, "personality"))
             {
@@ -3100,6 +3101,25 @@ public static class ProtocolJson
 
         return progress;
     }
+
+    /// <summary>
+    /// The ability ids issue 1446 retired, each with the id that replaced it: a save written before the
+    /// rename reads its roster's abilities under the new ids, and nothing writes the old ones.
+    /// </summary>
+    public static readonly ImmutableSortedDictionary<string, string> RetiredAbilityIds = new Dictionary<string, string>
+    {
+        ["swordbreaker"] = "sword_sense",
+        ["lancebreaker"] = "lance_sense",
+        ["axebreaker"] = "axe_sense",
+        ["bowbreaker"] = "bow_sense",
+        ["reasonbreaker"] = "lore_sense",
+        ["faithbreaker"] = "faith_sense",
+        ["fistbreaker"] = "fist_sense",
+        ["deadeye"] = "steady_aim",
+        ["canto"] = "move_again",
+    }.ToImmutableSortedDictionary(StringComparer.Ordinal);
+
+    private static string RenamedAbility(string id) => RetiredAbilityIds.GetValueOrDefault(id, id);
 
     private static ValueList<string> ReadStrings(JsonElement e, string name) =>
         ValueList<string>.From(Array(Required(e, name), name).Select(v => v.ValueKind == JsonValueKind.String ? v.GetString()! : throw new ProtocolException($"field '{name}' holds a value that is not a string")));

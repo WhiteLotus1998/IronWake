@@ -8578,7 +8578,7 @@ Wren attacks Hexer
 Wren gains 15 exp (15)
 Hexer falls at 3,2
 No enemy is left, but the map is not won: the captain, Wren, must still stand on the gate at any tile from 0,0 to 6,0 by the end of turn 1 (now turn 1).
-Wren may move again up to 3 movement: canto wren <x,y|stay>
+Wren may move again up to 3 movement: again wren <x,y|stay>
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456
  0 TTTTTTT
@@ -8588,7 +8588,7 @@ Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
  4 .......
  5 .......
 
-A  wren             Wren L4 outrider           3,3    hp 12/22  Forest  captain  canto 3
+A  wren             Wren L4 outrider           3,3    hp 12/22  Forest  captain  again 3
 > canto wren 3,3
 Wren stays at 3,3 (move again)
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0

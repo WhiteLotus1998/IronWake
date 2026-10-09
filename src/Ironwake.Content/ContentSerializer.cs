@@ -557,9 +557,9 @@ public static class ContentSerializer
                 }
 
                 break;
-            case CantoEffect canto:
-                writer.WriteString("kind", "canto");
-                if (canto.AfterHeal)
+            case MoveAgainEffect moveAgain:
+                writer.WriteString("kind", "move_again");
+                if (moveAgain.AfterHeal)
                 {
                     writer.WriteString("after", "heal");
                 }

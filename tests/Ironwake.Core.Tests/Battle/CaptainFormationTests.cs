@@ -195,7 +195,7 @@ public class CaptainFormationTests
     {
         Assert.Equal("shoulder_to_shoulder", Shipped.Class("vanguard").Mastery);
         Assert.Equal("command_presence", Shipped.Class("marshal").Mastery);
-        Assert.Equal("canto", Shipped.Class("ranger").Mastery);
+        Assert.Equal("move_again", Shipped.Class("ranger").Mastery);
         Assert.Equal("breakthrough", Shipped.Class("champion").Mastery);
         Assert.Equal("field_command", Shipped.Class("commander").Mastery);
         Assert.Equal("light_step", Shipped.Class("pathfinder").Mastery);

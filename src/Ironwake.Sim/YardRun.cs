@@ -175,7 +175,7 @@ public sealed class YardPlayer : IPlayer
         if (state.Outcome.IsOver || state.Phase != Side.Player
             || state.UnitsOf(Side.Player).FirstOrDefault(u => u.Id == _teacher) is not { Acted: false } teacher
             || state.UnitsOf(Side.Player).FirstOrDefault(u => u.Id == _student) is not { } student
-            || state.UnitsOf(Side.Player).Any(u => state.CantoReachOf(u, content) is not null))
+            || state.UnitsOf(Side.Player).Any(u => state.MoveAgainReachOf(u, content) is not null))
         {
             return _heuristic.Next(state, content);
         }

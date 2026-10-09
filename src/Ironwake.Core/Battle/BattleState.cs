@@ -745,12 +745,12 @@ public sealed record BattleState(
     }
 
     /// <summary>
-    /// Where a unit's Canto may take it (issue 71): the same section 4 reach from where it
-    /// stands on the budget its first move left, or null when no Canto is owed.
+    /// Where a unit's Move Again may take it (issue 71): the same section 4 reach from where it
+    /// stands on the budget its first move left, or null when no Move Again is owed.
     /// </summary>
-    public Reach? CantoReachOf(BattleUnit unit, GameContent content)
+    public Reach? MoveAgainReachOf(BattleUnit unit, GameContent content)
     {
-        if (!unit.Acted || unit.Canto is not { } budget)
+        if (!unit.Acted || unit.MoveAgain is not { } budget)
         {
             return null;
         }
@@ -1047,9 +1047,9 @@ public sealed record BattleState(
                 sb.Append(" captain");
             }
 
-            if (unit.Canto is { } canto)
+            if (unit.MoveAgain is { } moveAgain)
             {
-                sb.Append(" canto ").Append(canto);
+                sb.Append(" again ").Append(moveAgain);
             }
 
             if (unit.Pressed)

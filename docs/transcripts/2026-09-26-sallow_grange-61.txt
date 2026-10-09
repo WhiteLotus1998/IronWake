@@ -421,7 +421,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: again ansgar <x,y|stay>
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -437,7 +437,7 @@ Sallow Grange  turn 2 of 10  player phase  seize  recall 3
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         2,8    hp 20/20  Plain  canto 2
+B  ansgar           Ansgar L1 outrider         2,8    hp 20/20  Plain  again 2
 a  archer-1         Archer L3 bowman           4,2    hp 17/17  Fort (heals 20 percent, 3 hp)  group fort, hold
 d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, asleep
 c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, asleep
@@ -847,7 +847,7 @@ C  wren             Wren L1 cadet              2,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: again ansgar <x,y|stay>
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -863,7 +863,7 @@ Sallow Grange  turn 3 of 10  player phase  seize  recall 3
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         1,5    hp 20/20  Plain  canto 2
+B  ansgar           Ansgar L1 outrider         1,5    hp 20/20  Plain  again 2
 d  archer-2         Archer L3 bowman           8,6    hp 17/17  Plain  group field, guard, awake
 c  brawler-1        Brawler L3 reaver          7,6    hp 23/23  Plain  group field, guard, awake
 A  captain          Alder Fenn L1 cadet        4,3    hp 22/22  Plain  captain  done
@@ -1063,7 +1063,7 @@ Ansgar attacks Brawler
   Brawler hits Ansgar for 8 (hp 12)
   Brawler hits Ansgar for 8 (hp 4)
   Ansgar hp 4, Brawler hp 23
-Ansgar may move again up to 0 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 0 movement: again ansgar <x,y|stay>
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -1079,7 +1079,7 @@ Sallow Grange  turn 4 of 10  player phase  seize  recall 3
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         6,4    hp 4/20   Plain  canto 0
+B  ansgar           Ansgar L1 outrider         6,4    hp 4/20   Plain  again 0
 d  archer-2         Archer L3 bowman           7,3    hp 17/17  Plain  group field, guard, awake
 c  brawler-1        Brawler L3 reaver          6,3    hp 23/23  Plain  group field, guard, awake
 A  captain          Alder Fenn L1 cadet        4,3    hp 22/22  Plain  captain
@@ -1108,7 +1108,7 @@ Sallow Grange  turn 4 of 10  player phase  seize  recall 3
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         6,4    hp 4/20   Plain  canto 0
+B  ansgar           Ansgar L1 outrider         6,4    hp 4/20   Plain  again 0
 d  archer-2         Archer L3 bowman           7,3    hp 17/17  Plain  group field, guard, awake
 c  brawler-1        Brawler L3 reaver          6,3    hp 23/23  Plain  group field, guard, awake
 A  captain          Alder Fenn L1 cadet        5,3    hp 22/22  Plain  captain
@@ -1143,7 +1143,7 @@ Sallow Grange  turn 4 of 10  player phase  seize  recall 3
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         6,4    hp 4/20   Plain  canto 0
+B  ansgar           Ansgar L1 outrider         6,4    hp 4/20   Plain  again 0
 d  archer-2         Archer L3 bowman           7,3    hp 17/17  Plain  group field, guard, awake
 c  brawler-1        Brawler L3 reaver          6,3    hp 12/23  Plain  group field, guard, awake
 A  captain          Alder Fenn L1 cadet        5,3    hp 16/22  Plain  captain  done
@@ -1822,7 +1822,7 @@ C  wren             Wren L1 cadet              4,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: again ansgar <x,y|stay>
 Sallow Grange  turn 4 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -1838,7 +1838,7 @@ Sallow Grange  turn 4 of 10  player phase  seize  recall 0
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  canto 2
+B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  again 2
 d  archer-2         Archer L3 bowman           7,3    hp 17/17  Plain  group field, guard, awake
 A  captain          Alder Fenn L1 cadet        5,3    hp 22/22  Plain  captain  done
 !  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
@@ -2073,7 +2073,7 @@ Ansgar attacks Archer 2
   Ansgar hp 20, Archer 2 hp 0
 Ansgar gains 40 exp (40)
 Archer 2 falls at 6,4
-Ansgar may move again up to 1 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 1 movement: again ansgar <x,y|stay>
 Sallow Grange  turn 5 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2089,7 +2089,7 @@ Sallow Grange  turn 5 of 10  player phase  seize  recall 0
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         7,4    hp 20/20  Plain  canto 1
+B  ansgar           Ansgar L1 outrider         7,4    hp 20/20  Plain  again 1
 A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
 !  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
 f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
@@ -2579,7 +2579,7 @@ C  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: again ansgar <x,y|stay>
 Sallow Grange  turn 6 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2595,7 +2595,7 @@ Sallow Grange  turn 6 of 10  player phase  seize  recall 0
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  canto 2
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  again 2
 A  captain          Alder Fenn L1 cadet        9,2    hp 22/22  Plain  captain  done
 !  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
 f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
@@ -2888,7 +2888,7 @@ C  wren             Wren L1 cadet              9,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 6 movement: again ansgar <x,y|stay>
 Sallow Grange  turn 7 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2904,7 +2904,7 @@ Sallow Grange  turn 7 of 10  player phase  seize  recall 0
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  canto 6
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  again 6
 A  captain          Alder Fenn L1 cadet        12,1   hp 22/22  Plain  captain  done
 !  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
 f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
@@ -2930,7 +2930,7 @@ Sallow Grange  turn 7 of 10  player phase  seize  recall 0
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  canto 6
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  again 6
 A  captain          Alder Fenn L1 cadet        12,1   hp 22/22  Plain  captain  done
 !  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
 f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold
@@ -2956,7 +2956,7 @@ Sallow Grange  turn 7 of 10  player phase  seize  recall 0
 10 ......^^^.........
 11 ....^^^^^^^.......
 
-B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  canto 6
+B  ansgar           Ansgar L1 outrider         9,1    hp 20/20  Plain  again 6
 A  captain          Alder Fenn L1 cadet        12,1   hp 22/22  Plain  captain  done
 !  grange_reeve-1   Grange Reeve L3 pikeman    15,6   hp 26/26  Plain  group hall, boss, asleep
 f  hexer-1          Hexer L3 adept             13,7   hp 16/16  Plain  group yard, hold

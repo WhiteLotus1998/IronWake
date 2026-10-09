@@ -142,7 +142,7 @@ public static class LineStrike
         var line = LineOf(state, content, unit.At, toward, Of(content, unit)!.Reach);
         var struck = Struck(state, unit, line);
         events.Add(new LineStruck(unit.Id, unit.At, ValueList<Coord>.From(line), ValueList<string>.From(struck.Select(t => t.Id))));
-        var striker = unit with { Moved = true, Acted = true, Canto = null, Braced = false };
+        var striker = unit with { Moved = true, Acted = true, MoveAgain = null, Braced = false };
         var next = state.WithUnit(striker);
         foreach (var aimed in struck)
         {

@@ -10,7 +10,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// Chests (issue 649): a <c>chests:</c> block puts a chest on a tile with its contents; a player
 /// unit on the tile or orthogonally beside it opens it as its action, after a Move or without one,
 /// unless an enemy stands on the tile; what fits goes to its pack in file order and the rest to
-/// the wagon (issue 679); the chest stays open; no Canto follows; a Recall restores it shut and
+/// the wagon (issue 679); the chest stays open; no Move Again follows; a Recall restores it shut and
 /// the wagon as it was; the enemy never opens one; the board prints each closed chest and what is
 /// in it.
 /// </summary>
@@ -232,13 +232,13 @@ public class ChestTests
     }
 
     [Fact]
-    public void OpeningIsTheUnitsActionAndNoCantoFollows()
+    public void OpeningIsTheUnitsActionAndNoMoveAgainFollows()
     {
         var hale = Opened(Start(map: Vault)).Find("hale")!;
 
         Assert.True(hale.Moved);
         Assert.True(hale.Acted);
-        Assert.Null(hale.Canto);
+        Assert.Null(hale.MoveAgain);
     }
 
     [Fact]

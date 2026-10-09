@@ -122,14 +122,14 @@ public class CertificationTests
     [Fact]
     public void MasteryIsRetainedAcrossCertification()
     {
-        var content = Starter with { Classes = Starter.Classes.SetItem("cadet", Starter.Class("cadet") with { Mastery = "axebreaker", MasteryPoints = 2 }) };
+        var content = Starter with { Classes = Starter.Classes.SetItem("cadet", Starter.Class("cadet") with { Mastery = "axe_sense", MasteryPoints = 2 }) };
         var unit = Ready;
         (unit, _) = Masteries.ForCombat(unit, content.Class("cadet"));
         (unit, _) = Masteries.ForCombat(unit, content.Class("cadet"));
 
         var certified = Certifications.Certify(unit, Free("outrider"));
 
-        Assert.Contains("axebreaker", certified.Abilities);
+        Assert.Contains("axe_sense", certified.Abilities);
         Assert.Equal(2, certified.Mastery.Points("cadet"));
         Assert.Equal(unit.Mastery, certified.Mastery);
     }

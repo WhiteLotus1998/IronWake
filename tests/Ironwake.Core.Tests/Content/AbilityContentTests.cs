@@ -5,9 +5,9 @@ namespace Ironwake.Core.Tests.Content;
 /// <summary>Issue 66's content half: abilities.json loads, validates each field, round-trips, and every ability id elsewhere must name an entry of it.</summary>
 public class AbilityContentTests
 {
-    private const string Breakers = """
+    private const string Senses = """
         { "abilities": [
-          { "id": "axebreaker", "name": "Axe Sense", "text": "+20 Acc and Evade against axes.",
+          { "id": "axe_sense", "name": "Axe Sense", "text": "+20 Acc and Evade against axes.",
             "effect": { "kind": "combat", "against": { "weapon": "axe" }, "hit": 20, "avoid": 20 } },
           { "id": "skyward", "name": "Skyward", "text": "+10 crit against fliers on foot.",
             "effect": { "kind": "combat", "against": { "weapon": "lance", "movement": "flying" }, "crit": 10 } },
@@ -39,24 +39,24 @@ public class AbilityContentTests
     [Fact]
     public void AbilitiesLoadWithTheirEffects()
     {
-        var content = ContentLoader.Parse(Fixture.Files(abilities: Breakers));
+        var content = ContentLoader.Parse(Fixture.Files(abilities: Senses));
 
         Assert.Equal(
             new CombatModifierEffect(new OpponentCondition(WeaponType.Axe, null), 20, 20, 0, 0),
-            content.Ability("axebreaker").Effect);
+            content.Ability("axe_sense").Effect);
         Assert.Equal(new OpponentCondition(WeaponType.Lance, MovementType.Flying), ((CombatModifierEffect)content.Ability("skyward").Effect).Against);
         Assert.Equal(OpponentCondition.Any, ((CombatModifierEffect)content.Ability("steady").Effect).Against);
         Assert.Equal(new StatDeltaEffect(Stats.Zero with { Def = 2, Hp = 1 }), content.Ability("vigilance").Effect);
-        Assert.Equal("+20 Acc and Evade against axes.", content.Ability("axebreaker").Text);
+        Assert.Equal("+20 Acc and Evade against axes.", content.Ability("axe_sense").Text);
     }
 
     [Fact]
     public void AUnitsAbilitiesAreResolvedAndItsPassiveDeltaIsItsStats()
     {
-        var content = ContentLoader.Parse(Fixture.Files(abilities: Breakers, units: RecruitWithAbilities("[\"vigilance\", \"axebreaker\"]")));
+        var content = ContentLoader.Parse(Fixture.Files(abilities: Senses, units: RecruitWithAbilities("[\"vigilance\", \"axe_sense\"]")));
         var recruit = content.Unit("recruit");
 
-        Assert.Equal(new[] { "vigilance", "axebreaker" }, content.AbilitiesOf(recruit).Select(a => a.Id));
+        Assert.Equal(new[] { "vigilance", "axe_sense" }, content.AbilitiesOf(recruit).Select(a => a.Id));
         Assert.Equal(21, content.StatsOf(recruit).Hp);
         Assert.Equal(6, content.StatsOf(recruit).Def);
     }
@@ -64,10 +64,10 @@ public class AbilityContentTests
     [Fact]
     public void AnUnknownAbilityOnAUnitNamesFileEntryAndField()
     {
-        var e = Fails(Fixture.Files(units: RecruitWithAbilities("[\"vigilance\", \"lancebreaker\"]")));
+        var e = Fails(Fixture.Files(units: RecruitWithAbilities("[\"vigilance\", \"lance_sense\"]")));
 
         AssertNames(e, "units/units.json", "recruit", "abilities[1]");
-        Assert.Contains("lancebreaker", e.Message);
+        Assert.Contains("lance_sense", e.Message);
     }
 
     [Fact]
@@ -104,12 +104,12 @@ public class AbilityContentTests
     }
 
     [Fact]
-    public void ACantoEffectLoadsAndReadsNothingButItsKind()
+    public void AMoveAgainEffectLoadsAndReadsNothingButItsKind()
     {
-        var content = ContentLoader.Parse(Fixture.Files(abilities: One("{ \"kind\": \"canto\" }")));
-        Assert.IsType<CantoEffect>(content.Ability("a").Effect);
+        var content = ContentLoader.Parse(Fixture.Files(abilities: One("{ \"kind\": \"move_again\" }")));
+        Assert.IsType<MoveAgainEffect>(content.Ability("a").Effect);
 
-        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"canto\", \"mov\": 2 }"))), ContentFiles.AbilitiesName, "a", "effect.mov");
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"move_again\", \"mov\": 2 }"))), ContentFiles.AbilitiesName, "a", "effect.mov");
     }
 
     [Fact]
@@ -191,7 +191,7 @@ public class AbilityContentTests
     [Fact]
     public void AnArtLoadsWithItsWeaponRankCostAndDeltas()
     {
-        var content = ContentLoader.Parse(Fixture.Files(abilities: Breakers));
+        var content = ContentLoader.Parse(Fixture.Files(abilities: Senses));
 
         Assert.Equal(new CombatArtEffect(WeaponType.Sword, WeaponRank.D, 2, 4, 0, 0, 2, 1), content.Ability("sunder").Effect);
         Assert.Equal(AbilityTrigger.Declared, content.Ability("sunder").Trigger);
@@ -200,7 +200,7 @@ public class AbilityContentTests
     [Fact]
     public void AnArtKnownByAUnitIsListedAmongItsArtsAndChangesNoStat()
     {
-        var content = ContentLoader.Parse(Fixture.Files(abilities: Breakers, units: RecruitWithAbilities("[\"sunder\", \"vigilance\"]")));
+        var content = ContentLoader.Parse(Fixture.Files(abilities: Senses, units: RecruitWithAbilities("[\"sunder\", \"vigilance\"]")));
         var recruit = content.Unit("recruit");
 
         Assert.Equal(new[] { "sunder" }, content.ArtsOf(recruit).Select(a => a.Ability.Id));
@@ -263,16 +263,16 @@ public class AbilityContentTests
     [Fact]
     public void AbilityIdsAreUnique()
     {
-        var twice = Breakers.Replace("\"id\": \"steady\"", "\"id\": \"axebreaker\"");
+        var twice = Senses.Replace("\"id\": \"steady\"", "\"id\": \"axe_sense\"");
 
-        AssertNames(Fails(Fixture.Files(abilities: twice)), ContentFiles.AbilitiesName, "axebreaker", "id");
+        AssertNames(Fails(Fixture.Files(abilities: twice)), ContentFiles.AbilitiesName, "axe_sense", "id");
     }
 
     [Fact]
     public void AbilitiesAndMasteryRoundTrip()
     {
-        var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"axebreaker\", \"masteryPoints\": 12");
-        var content = ContentLoader.Parse(Fixture.Files(abilities: Breakers, classes: classes, units: RecruitWithAbilities("[\"steady\"]")));
+        var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"axe_sense\", \"masteryPoints\": 12");
+        var content = ContentLoader.Parse(Fixture.Files(abilities: Senses, classes: classes, units: RecruitWithAbilities("[\"steady\"]")));
 
         var written = ContentSerializer.Write(content);
         var reloaded = ContentLoader.Parse(written);
@@ -284,6 +284,6 @@ public class AbilityContentTests
     [Fact]
     public void ContentWithDifferentAbilitiesIsNotEqual()
     {
-        Assert.NotEqual(ContentLoader.Parse(Fixture.Files(abilities: Breakers)), ContentLoader.Parse(Fixture.Files()));
+        Assert.NotEqual(ContentLoader.Parse(Fixture.Files(abilities: Senses)), ContentLoader.Parse(Fixture.Files()));
     }
 }

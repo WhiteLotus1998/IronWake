@@ -61,7 +61,7 @@ public class CertificationTrialCliTests
     }
 
     [Fact]
-    public void TheOutriderTrialIsWonFromTheForestInFrontWhoseCantoReachesTheThrone()
+    public void TheOutriderTrialIsWonFromTheForestInFrontWhoseMoveAgainReachesTheThrone()
     {
         var script = Transcript("2026-09-26-outrider_trial-12.script");
 
@@ -87,14 +87,14 @@ public class CertificationTrialCliTests
     }
 
     [Fact]
-    public void AFlankOfTheGuardLeavesTheCantoOneShortOfTheThrone()
+    public void AFlankOfTheGuardLeavesTheMoveAgainOneShortOfTheThrone()
     {
         var script = Transcript("2026-09-26-outrider_trial-13-flank.script");
 
         var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "13", "--script", script, "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(1, exit);
-        Assert.Contains("Alder Fenn cannot Canto to 3,0: not within the 1 movement his Canto has left from 2,2", output);
+        Assert.Contains("Alder Fenn cannot move again to 3,0: not within the 1 movement his Move Again has left from 2,2", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 

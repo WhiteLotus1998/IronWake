@@ -29,7 +29,7 @@ public enum ReturnFate
 /// Attack, Item or Wait, after its Move or without one, whether the group is awake or not. The pick's
 /// talk turns them; the captain's spares them (STORY draft 6: only the pick's talk wins them back).
 /// Either way they leave the board, which is not a kill: no EXP, no <see cref="UnitDied"/>, one
-/// <see cref="UnitTalked"/>. No Canto follows. The board and <c>threat</c> print the bond
+/// <see cref="UnitTalked"/>. No Move Again follows. The board and <c>threat</c> print the bond
 /// (<see cref="Line"/>).
 /// </summary>
 public static class Returned

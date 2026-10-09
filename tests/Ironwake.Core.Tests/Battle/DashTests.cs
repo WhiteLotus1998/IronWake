@@ -71,7 +71,7 @@ public class DashTests
         var hale = result.Next.Find("hale")!;
         Assert.Equal(far, hale.At);
         Assert.True(hale.Moved && hale.Acted && hale.Winded);
-        Assert.Null(hale.Canto);
+        Assert.Null(hale.MoveAgain);
         Assert.Contains(result.Events, e => e is UnitMoved { UnitId: "hale" });
         Assert.Contains(new UnitWinded("hale"), result.Events);
         Assert.Equal(RejectionReason.AlreadyActed, result.Next.Try(new Wait("hale")).Rejection?.Reason);

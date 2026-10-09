@@ -38,7 +38,7 @@ public sealed record KinShardBroken(string UnitId, Coord At) : GameEvent;
 /// (<see cref="Next"/>). The bearer leaving the board by any way drops the shard on
 /// the tile he fell on (<see cref="After"/>). A company unit on that tile or orthogonally beside it, not yet acted, takes
 /// it and breaks it as its action (<c>take &lt;unit&gt; shard</c>, <see cref="TakeShard"/> naming <see cref="Ground"/>),
-/// after its Move or without one, no Canto after; broken, it re-takes no one. A shard still lying at an enemy phase start
+/// after its Move or without one, no Move Again after; broken, it re-takes no one. A shard still lying at an enemy phase start
 /// goes to the nearest sworn, not a boss, whose Move reaches its tile (then the lowest id): he walks onto it and spends
 /// that phase holding it, moved and acted. None reaches it: it lies another phase. Everything is board state, so Recall
 /// restores it.
@@ -112,7 +112,7 @@ public static class KinShard
             if (picker is not null)
             {
                 events.Add(new ShardPicked(picker.Id, picker.At, lies));
-                state = state.WithUnit(picker with { At = lies, Moved = true, Acted = true, Canto = null }) with { Shard = ShardHold.Carried(picker.Id) };
+                state = state.WithUnit(picker with { At = lies, Moved = true, Acted = true, MoveAgain = null }) with { Shard = ShardHold.Carried(picker.Id) };
             }
 
             return state;
@@ -206,7 +206,7 @@ public static class KinShard
     public static BattleState Take(BattleState state, GameContent content, BattleUnit unit, List<GameEvent> events)
     {
         events.Add(new KinShardBroken(unit.Id, Of(state)!.Lies!.Value));
-        state = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null }) with { Shard = ShardHold.Gone };
+        state = state.WithUnit(unit with { Moved = true, Acted = true, MoveAgain = null }) with { Shard = ShardHold.Gone };
         if (Swallow.Stilled(state) && Swallow.Casts(state, Side.Enemy))
         {
             // A broken shard stills the frost but never ends it: the held dose is at least one step, so a race with no limit still closes.

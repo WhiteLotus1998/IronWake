@@ -97,7 +97,7 @@ public class RouteWearTests
     }
 
     [Fact]
-    public void AMoveViaCountsBothLegsAgainstMovAndCantoReadsTheTotal()
+    public void AMoveViaCountsBothLegsAgainstMovAndMoveAgainReadsTheTotal()
     {
         var state = Start(".....", "P captain 0,0");
         var mov = state.ReachOf(state.Find("hale")!, Starter).Mov;

@@ -44,17 +44,17 @@ public sealed record UseItem(string UnitId, int Slot, string? TargetId = null, s
 public sealed record Retreat(string UnitId, Coord To) : Command;
 
 /// <summary>
-/// Canto (issue 71): after its Attack, Item or Wait, a unit with Canto moves to a tile
+/// Move Again (issue 71): after its Attack, Item or Wait, a unit with Move Again moves to a tile
 /// within what its first move left of its Mov. Its own tile is a legal destination, so a
-/// Canto declined is this command with the unit's own tile, and the transcript says so.
+/// Move Again declined is this command with the unit's own tile, and the transcript says so.
 /// After it the unit is done for the phase.
 /// </summary>
-public sealed record Canto(string UnitId, Coord To) : Command;
+public sealed record MoveAgain(string UnitId, Coord To) : Command;
 
 /// <summary>
 /// Leave the board through an exit (issue 269): on an Escape map, a unit standing on an
 /// exit tile takes this as its action, in place of Attack, Item or Wait, after its Move or
-/// without one. The unit is gone and safe for the rest of the battle, and no Canto follows.
+/// without one. The unit is gone and safe for the rest of the battle, and no Move Again follows.
 /// The captain's exit ends the battle, and every player unit still on the board is left behind.
 /// </summary>
 public sealed record Exit(string UnitId) : Command;
@@ -63,7 +63,7 @@ public sealed record Exit(string UnitId) : Command;
 /// Recover the keepsake on the unit's tile (DESIGN.md 13.8, experiment): on a <c>keepsakes: on</c>
 /// map, a player unit standing where an ally fell takes that ally's weapon as its action, in place
 /// of Attack, Item or Wait, after its Move or without one. It needs a free inventory slot, and no
-/// Canto follows.
+/// Move Again follows.
 /// </summary>
 public sealed record Recover(string UnitId) : Command;
 
@@ -71,7 +71,7 @@ public sealed record Recover(string UnitId) : Command;
 /// Open the chest at <paramref name="At"/> (issue 649): a player unit on the chest's tile or
 /// orthogonally beside it opens it as its action, in place of Attack, Item or Wait, after its
 /// Move or without one, unless an enemy stands on the chest's tile. What fits goes to its pack in
-/// the chest's order and the rest to the wagon (issue 679). No Canto follows. The enemy never
+/// the chest's order and the rest to the wagon (issue 679). No Move Again follows. The enemy never
 /// opens a chest.
 /// </summary>
 public sealed record Open(string UnitId, Coord At) : Command;
@@ -80,7 +80,7 @@ public sealed record Open(string UnitId, Coord At) : Command;
 /// Drop the rock (DESIGN.md 13.26, experiment): a player unit standing on a ledge whose drop
 /// events have not fired brings the rock down as its action, in place of Attack, Item or Wait,
 /// after its Move or without one. Every event on the ledge fires (<see cref="Rockfall"/>). No
-/// Canto follows. The enemy never drops.
+/// Move Again follows. The enemy never drops.
 /// </summary>
 public sealed record Drop(string UnitId) : Command;
 
@@ -89,7 +89,7 @@ public sealed record Drop(string UnitId) : Command;
 /// a player unit pushes an ally one tile directly away from itself, as its action in place of
 /// Attack, Item or Wait, after its Move or without one. The tile beyond must be on the map,
 /// passable for the pushed unit and empty. An enemy is never pushed (issue 355). The pushed ally
-/// fires the enter events of the tile it lands on. No Canto follows. The AI never shoves.
+/// fires the enter events of the tile it lands on. No Move Again follows. The AI never shoves.
 /// </summary>
 public sealed record Shove(string UnitId, string TargetId) : Command;
 
@@ -97,7 +97,7 @@ public sealed record Shove(string UnitId, string TargetId) : Command;
 /// Dash to <paramref name="To"/> (DESIGN.md 13.27, experiment): on a <c>dash: on</c> map, a player
 /// unit that has neither moved nor acted moves up to <see cref="Winded.ExtraMov"/> tiles past its
 /// Move, as its Move and its action both. It is winded until its side's next phase begins: every
-/// strike against it is at <see cref="Winded.Hit"/> more hit (<see cref="Winded"/>). No Canto
+/// strike against it is at <see cref="Winded.Hit"/> more hit (<see cref="Winded"/>). No Move Again
 /// follows, so it neither strikes nor exits that phase. The AI never dashes.
 /// </summary>
 public sealed record Dash(string UnitId, Coord To) : Command;
@@ -106,7 +106,7 @@ public sealed record Dash(string UnitId, Coord To) : Command;
 /// Carry an ally on a grown drake (issue 805, experiment): on a <c>carry:</c> map, a rider whose drake
 /// is Grown or more, unmoved and not acted, lifts the orthogonally adjacent ally <paramref name="AllyId"/>,
 /// flies to <paramref name="To"/> as a Move of its own, and sets the ally down on <paramref name="SetDown"/>,
-/// beside it (<see cref="DrakeCarry"/>). The rider's whole turn; no Canto follows. The AI never carries.
+/// beside it (<see cref="DrakeCarry"/>). The rider's whole turn; no Move Again follows. The AI never carries.
 /// </summary>
 public sealed record Carry(string UnitId, string AllyId, Coord To, Coord SetDown) : Command;
 
@@ -122,7 +122,7 @@ public sealed record Breathe(string UnitId, Coord Toward) : Command;
 /// Watch (DESIGN.md 13.17, experiment): on an <c>overwatch: on</c> map, a unit whose equipped
 /// weapon reaches range 2 takes this as its action, in place of Attack, Item or Wait, after its
 /// Move or without one, and watches the tiles two steps from it until its side's next phase
-/// (<see cref="Overwatch"/>). No Canto follows. It is not a Wait, so it never braces.
+/// (<see cref="Overwatch"/>). No Move Again follows. It is not a Wait, so it never braces.
 /// </summary>
 public sealed record Watch(string UnitId) : Command;
 
@@ -131,7 +131,7 @@ public sealed record Watch(string UnitId) : Command;
 /// beside an ally takes this as its action, in place of Attack, Item or Wait, after its Move or
 /// without one. Until the ally's side's next phase, the first Attack aimed at the ally while the
 /// two stand side by side swaps them and strikes the coverer (<see cref="CoverRule"/>).
-/// No Canto follows. It is not a Wait, so it never braces.
+/// No Move Again follows. It is not a Wait, so it never braces.
 /// </summary>
 public sealed record Cover(string UnitId, string AllyId) : Command;
 
@@ -139,14 +139,14 @@ public sealed record Cover(string UnitId, string AllyId) : Command;
 /// Talk to the claimant who came back as a foe (issue 633, <see cref="Returned"/>): the pick or the
 /// captain, orthogonally beside them, takes this as its action, in place of Attack, Item or Wait,
 /// after its Move or without one. The pick's talk turns them, the captain's spares them; either way
-/// they leave the board. No Canto follows. The enemy never talks.
+/// they leave the board. No Move Again follows. The enemy never talks.
 /// </summary>
 public sealed record Talk(string UnitId, string TargetId) : Command;
 
 /// <summary>
 /// Take the shard (issue 1386, <see cref="ShardRun"/>): a company unit beside <paramref name="BossId"/>, a beaten boss
 /// running with the shard, takes it and breaks it as its action, in place of Attack, Item or Wait, after its Move or
-/// without one. He leaves the board alive, in the coma; no Canto follows. Naming <see cref="KinShard.Ground"/> as
+/// without one. He leaves the board alive, in the coma; no Move Again follows. Naming <see cref="KinShard.Ground"/> as
 /// <paramref name="BossId"/> takes the shard under the hill off the ground and breaks it (issue 1386 slice 3a, <see cref="KinShard"/>).
 /// </summary>
 public sealed record TakeShard(string UnitId, string BossId) : Command;
@@ -186,6 +186,6 @@ public sealed record FallBack(string UnitId, Coord To) : Command;
 /// <summary>
 /// The line strike (issue 1384, <see cref="LineStrike"/>): a unit holding <see cref="LineStrikeEffect"/> strikes, as its
 /// action after a move or without one, every unit of another side on the line out through <paramref name="Toward"/>,
-/// the tile orthogonally beside it. No Canto follows. Only the enemy holds one; the enemy planner issues it.
+/// the tile orthogonally beside it. No Move Again follows. Only the enemy holds one; the enemy planner issues it.
 /// </summary>
 public sealed record StrikeLine(string UnitId, Coord Toward) : Command;
