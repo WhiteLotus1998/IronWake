@@ -727,7 +727,7 @@ public static class MapRenderer
             sb.Append(ShardRun.Line(runner, UnitNames.Of(state, content))).Append('\n');
         }
 
-        if (KinShard.Line(state, UnitNames.Of(state, content)) is { } shardLine)
+        if (KinShard.Line(state, content, UnitNames.Of(state, content)) is { } shardLine)
         {
             sb.Append(shardLine).Append('\n');
         }

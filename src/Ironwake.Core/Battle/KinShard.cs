@@ -30,10 +30,12 @@ public sealed record KinShardBroken(string UnitId, Coord At) : GameEvent;
 
 /// <summary>
 /// The shard under the hill (issue 1386 slice 3a; STORY's Under the Hill, Fight; Lotus 2026-10-08, Chat's round 487).
-/// A map's <c>kin_shard: x,y</c> header names the enemy placement that carries it. While it is whole, carried or lying,
-/// the Kin re-takes one sworn each enemy phase start: the oldest enemy body on the map that was neither a boss nor a
-/// Hollow stands again where it fell, or on the free tile nearest it, on full HP under its own id, moved and acted, so it
-/// acts from the next enemy phase (<see cref="AtPhaseStart"/>). The bearer leaving the board by any way drops the shard on
+/// A map's <c>kin_shard: x,y</c> header names the enemy placement that carries it. While a sworn hand holds it at an
+/// enemy phase start, the Kin re-takes one sworn: the oldest enemy body on the map that was neither a boss nor a Hollow
+/// stands again where it fell, or on the free tile nearest it, on half its max HP rounded up (the Hollow's rule, Chat's
+/// round 548) under its own id, moved and acted, so it acts from the next enemy phase (<see cref="AtPhaseStart"/>). A
+/// shard lying at the phase start re-takes no one that phase, picked up or not. The next body and its tile are printed
+/// (<see cref="Next"/>). The bearer leaving the board by any way drops the shard on
 /// the tile he fell on (<see cref="After"/>). A company unit on that tile or orthogonally beside it, not yet acted, takes
 /// it and breaks it as its action (<c>take &lt;unit&gt; shard</c>, <see cref="TakeShard"/> naming <see cref="Ground"/>),
 /// after its Move or without one, no Canto after; broken, it re-takes no one. A shard still lying at an enemy phase start
@@ -89,8 +91,8 @@ public static class KinShard
 
     /// <summary>
     /// The shard at <paramref name="side"/>'s phase start: on an enemy phase, a lying shard goes to the nearest sworn
-    /// that reaches it (<see cref="ShardPicked"/>), then, while it is whole, the Kin re-takes the oldest sworn body
-    /// (<see cref="SwornRetaken"/>).
+    /// that reaches it (<see cref="ShardPicked"/>); a shard carried when the phase began has the Kin re-take the oldest
+    /// sworn body (<see cref="SwornRetaken"/>), and one lying when it began re-takes no one that phase.
     /// </summary>
     public static BattleState AtPhaseStart(BattleState state, GameContent content, Side side, List<GameEvent> events)
     {
@@ -101,6 +103,7 @@ public static class KinShard
 
         if (shard.Lies is { } lies)
         {
+            // The Kin reaches through a sworn hand on the stone: the re-take reads the shard as the phase began.
             var picker = state.UnitsOf(Side.Enemy)
                 .Where(u => Sworn(u) && (state.UnitAt(lies) is not { } standing || standing.Id == u.Id) && state.ReachOf(u, content).Destinations.Contains(lies))
                 .OrderBy(u => u.At.DistanceTo(lies))
@@ -111,20 +114,37 @@ public static class KinShard
                 events.Add(new ShardPicked(picker.Id, picker.At, lies));
                 state = state.WithUnit(picker with { At = lies, Moved = true, Acted = true, Canto = null }) with { Shard = ShardHold.Carried(picker.Id) };
             }
+
+            return state;
         }
 
-        var body = state.Bodies.FirstOrDefault(b => b.Side == Side.Enemy && Sworn(b) && state.Find(b.Id) is null);
-        if (body is null || RiseOn(state, content, body) is not { } at)
+        if (Next(state, content) is not { } next)
         {
             return state;
         }
 
-        var hp = body.MaxHp(content);
+        var (body, at) = next;
+        var hp = Hollow.RisenHp(body.MaxHp(content));
         var bodies = state.Bodies.ToList();
         bodies.Remove(body);
         var risen = new BattleUnit(body.Unit, Side.Enemy, at, hp, Moved: true, Acted: true, body.Group, body.Behavior, PlacementIndex: body.PlacementIndex);
         events.Add(new SwornRetaken(body.Id, at, hp));
         return (state with { Bodies = ValueList<BattleUnit>.From(bodies) }).WithRisen(risen);
+    }
+
+    /// <summary>
+    /// The body the Kin re-takes at the next enemy phase start on <paramref name="state"/> and the tile it stands on, or
+    /// null when none would: the shard lies or is broken, no sworn body waits, or no free tile takes it.
+    /// </summary>
+    public static (BattleUnit Body, Coord At)? Next(BattleState state, GameContent content)
+    {
+        if (Of(state) is not { Bearer: not null })
+        {
+            return null;
+        }
+
+        var body = state.Bodies.FirstOrDefault(b => b.Side == Side.Enemy && Sworn(b) && state.Find(b.Id) is null);
+        return body is not null && RiseOn(state, content, body) is { } at ? (body, at) : null;
     }
 
     private static bool Sworn(BattleUnit unit) => !unit.IsBoss && unit.Hollow is null;
@@ -186,13 +206,17 @@ public static class KinShard
         return state.WithUnit(unit with { Moved = true, Acted = true, Canto = null }) with { Shard = ShardHold.Gone };
     }
 
-    /// <summary>The line the board and <c>threat</c> print about the shard, or null on a map without one.</summary>
-    public static string? Line(BattleState state, UnitNames names) => Of(state) switch
+    /// <summary>
+    /// The line the board and <c>threat</c> print about the shard, or null on a map without one. While a sworn carries it,
+    /// it names the body the Kin re-takes next and its tile (<see cref="Next"/>), a certainty with a tile on it.
+    /// </summary>
+    public static string? Line(BattleState state, GameContent content, UnitNames names) => Of(state) switch
     {
         null => null,
         { Broken: true } => "The shard is broken: the Kin re-takes no one",
-        { Lies: { } at } => $"The shard lies on {at}: take it from on or beside it (take <unit> {Ground}); at the enemy phase the nearest sworn who reaches it picks it up",
-        { Bearer: { } bearer } => $"{names[bearer]} carries the shard: while it is whole the Kin re-takes one fallen sworn each enemy phase; it drops where he falls",
+        { Lies: { } at } => $"The shard lies on {at}: take it from on or beside it (take <unit> {Ground}); the Kin re-takes no one while it lies; at the enemy phase the nearest sworn who reaches it picks it up",
+        { Bearer: { } bearer } => $"{names[bearer]} carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls"
+            + (Next(state, content) is { } next ? $"; the Kin re-takes {names[next.Body.Id]} at {next.At} next" : "; no fallen sworn waits"),
         _ => null,
     };
 }

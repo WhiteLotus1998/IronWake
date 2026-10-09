@@ -70,7 +70,7 @@ public class KinShardTests
 
         Assert.Null(state.Shard);
         Assert.Equal(ShardHold.Carried(At(state, 5, 2).Id), KinShard.Of(state));
-        Assert.Contains("carries the shard", KinShard.Line(state, UnitNames.Of(state, Starter)));
+        Assert.Contains("carries the shard", KinShard.Line(state, Starter, UnitNames.Of(state, Starter)));
         Assert.Null(KinShard.Of(BattleFixture.Start(1386, ValueList<Unit>.Of(Hale, Wren, Ivo), Hill.Replace("kin_shard: 5,2\n", ""))));
     }
 
@@ -92,7 +92,7 @@ public class KinShardTests
 
             Assert.Contains(new ShardDropped(bearer.Id, new Coord(5, 2)), result.Events);
             Assert.Equal(ShardHold.Lying(new Coord(5, 2)), result.Next.Shard);
-            Assert.Contains("lies on 5,2", KinShard.Line(result.Next, UnitNames.Of(result.Next, Starter)));
+            Assert.Contains("lies on 5,2", KinShard.Line(result.Next, Starter, UnitNames.Of(result.Next, Starter)));
             return;
         }
 
@@ -111,7 +111,7 @@ public class KinShardTests
         Assert.Equal(new KinShardBroken(Captain(state).Id, new Coord(5, 2)), Assert.Single(result.Events));
         Assert.Equal(ShardHold.Gone, result.Next.Shard);
         Assert.True(Captain(result.Next).Acted);
-        Assert.Contains("broken", KinShard.Line(result.Next, UnitNames.Of(result.Next, Starter)));
+        Assert.Contains("broken", KinShard.Line(result.Next, Starter, UnitNames.Of(result.Next, Starter)));
 
         var on = Dropped(Start()).WithUnit(Captain(Start()) with { At = new Coord(5, 2) });
         Assert.Null(on.Try(new TakeShard(Captain(on).Id, KinShard.Ground)).Rejection);
@@ -160,7 +160,7 @@ public class KinShardTests
     }
 
     [Fact]
-    public void WhileTheShardIsWholeTheKinRetakesTheOldestFallenSworn()
+    public void WhileASwornCarriesTheShardTheKinRetakesTheOldestFallenSwornAtHalfHp()
     {
         var start = Start();
         var first = At(start, 7, 2);
@@ -169,11 +169,44 @@ public class KinShardTests
         var result = state.Try(new EndPhase());
 
         var risen = result.Next.Find(first.Id)!;
-        Assert.Contains(new SwornRetaken(first.Id, new Coord(7, 2), risen.MaxHp(Starter)), result.Events);
-        Assert.Equal(risen.MaxHp(Starter), risen.Hp);
+        Assert.Contains(new SwornRetaken(first.Id, new Coord(7, 2), Hollow.RisenHp(risen.MaxHp(Starter))), result.Events);
+        Assert.Equal((risen.MaxHp(Starter) + 1) / 2, risen.Hp);
         Assert.Equal(Side.Enemy, risen.Side);
         Assert.True(risen.Moved && risen.Acted);
         Assert.Empty(result.Next.Bodies);
+    }
+
+    [Fact]
+    public void ALyingShardRetakesNoOneThatPhaseEvenWhenPickedUpAndTheNextPhaseItDoes()
+    {
+        var state = Dropped(Start());
+        var bearer = At(Start(), 5, 2);
+        var names = UnitNames.Of(state, Starter);
+        Assert.Null(KinShard.Next(state, Starter));
+        Assert.Contains("the Kin re-takes no one while it lies", KinShard.Line(state, Starter, names));
+
+        var pickup = new List<GameEvent>();
+        var picked = KinShard.AtPhaseStart(state, Starter, Side.Enemy, pickup);
+        Assert.Contains(pickup, e => e is ShardPicked);
+        Assert.DoesNotContain(pickup, e => e is SwornRetaken);
+        Assert.Contains(picked.Bodies, b => b.Id == bearer.Id);
+
+        var after = new List<GameEvent>();
+        KinShard.AtPhaseStart(picked, Starter, Side.Enemy, after);
+        Assert.Contains(after, e => e is SwornRetaken st && st.UnitId == bearer.Id);
+    }
+
+    [Fact]
+    public void TheShardsLineNamesTheBodyTheKinRetakesNextAndItsTile()
+    {
+        var start = Start();
+        var first = At(start, 7, 2);
+        var state = Hollow.LeaveBody(start, first).WithoutUnit(first.Id);
+        var names = UnitNames.Of(state, Starter);
+
+        Assert.Equal((first.Id, new Coord(7, 2)), KinShard.Next(state, Starter) is { } next ? (next.Body.Id, next.At) : default);
+        Assert.Contains($"the Kin re-takes {names[first.Id]} at 7,2 next", KinShard.Line(state, Starter, names));
+        Assert.Contains("no fallen sworn waits", KinShard.Line(start, Starter, UnitNames.Of(start, Starter)));
     }
 
     [Fact]
