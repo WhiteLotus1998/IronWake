@@ -119,14 +119,14 @@ public static class Resolver
             case StrikeLine strikeLine:
                 (next, rejection) = ApplyStrikeLine(state, content, strikeLine, events);
                 break;
-            case Canto canto:
-                (next, rejection) = ApplyCanto(state, content, canto, events);
+            case MoveAgain moveAgain:
+                (next, rejection) = ApplyMoveAgain(state, content, moveAgain, events);
                 if (rejection is null)
                 {
-                    next = MapEvents.AfterMove(next, content, next.Find(canto.UnitId)!, events);
-                    if (next.Find(canto.UnitId) is { } cantoed && cantoed.At != state.Find(canto.UnitId)!.At)
+                    next = MapEvents.AfterMove(next, content, next.Find(moveAgain.UnitId)!, events);
+                    if (next.Find(moveAgain.UnitId) is { } movedAgain && movedAgain.At != state.Find(moveAgain.UnitId)!.At)
                     {
-                        next = FireWatches(next, content, canto.UnitId, events);
+                        next = FireWatches(next, content, moveAgain.UnitId, events);
                     }
                 }
 
@@ -181,7 +181,7 @@ public static class Resolver
 
         if (acted is not null)
         {
-            next = OpenCanto(next, content, acted, healed: command is UseItem && events.OfType<UnitHealed>().Any(h => h.UnitId != acted));
+            next = OpenMoveAgain(next, content, acted, healed: command is UseItem && events.OfType<UnitHealed>().Any(h => h.UnitId != acted));
         }
 
         Swallow.AfterFall(state, events);
@@ -324,9 +324,9 @@ public static class Resolver
         }
 
         events.Add(new UnitMoved(unit.Id, unit.At, move.To, entry.Path));
-        int? canto = Signatures.HasCanto(state, content, unit) && unit.Frosted == 0 ? reach.Mov - entry.Cost : null;
+        int? moveAgain = Signatures.HasMoveAgain(state, content, unit) && unit.Frosted == 0 ? reach.Mov - entry.Cost : null;
         var flewFrom = move.To != unit.At && Grounding.MovementOf(unit, content) == MovementType.Flying ? unit.At : (Coord?)null;
-        var moved = EndMove(state, unit, unit with { At = move.To, Moved = true, Canto = canto, FlewFrom = flewFrom }, events);
+        var moved = EndMove(state, unit, unit with { At = move.To, Moved = true, MoveAgain = moveAgain, FlewFrom = flewFrom }, events);
         moved = Planks.AfterWalk(moved, content, unit, unit.At, entry.Path, events);
         return (DrakeFrost.AfterMove(moved, content, unit, move.To, events), null);
     }
@@ -335,7 +335,7 @@ public static class Resolver
     /// DESIGN.md 13.27 (the dash, experiment): on a <c>dash: on</c> map a player unit that has
     /// neither moved nor acted moves within <see cref="BattleState.DashReachOf"/>, its Move plus
     /// <see cref="Winded.ExtraMov"/>, as its Move and its action both. It is left moved, acted and
-    /// winded (<see cref="UnitWinded"/>), with no Canto; the brace a Wait would have given is not
+    /// winded (<see cref="UnitWinded"/>), with no Move Again; the brace a Wait would have given is not
     /// on offer. Planks wear under the path as under a Move.
     /// </summary>
     private static (BattleState, Rejection?) ApplyDash(BattleState state, GameContent content, Dash dash, List<GameEvent> events)
@@ -363,7 +363,7 @@ public static class Resolver
 
         events.Add(new UnitMoved(unit.Id, unit.At, dash.To, entry.Path));
         events.Add(new UnitWinded(unit.Id));
-        var moved = EndMove(state, unit, unit with { At = dash.To, Moved = true, Acted = true, Canto = null, Braced = false, Winded = true }, events);
+        var moved = EndMove(state, unit, unit with { At = dash.To, Moved = true, Acted = true, MoveAgain = null, Braced = false, Winded = true }, events);
         return (Planks.AfterWalk(moved, content, unit, unit.At, entry.Path, events), null);
     }
 
@@ -417,35 +417,35 @@ public static class Resolver
     }
 
     /// <summary>
-    /// Owes a Canto (issue 71) to a unit that has just attacked, used an item or waited and
+    /// Owes a Move Again (issue 71) to a unit that has just attacked, used an item or waited and
     /// is still on the board: what its Move left, set by <see cref="ApplyMove"/>, or its
-    /// full Mov when it acted without moving. A unit without Canto is left as it is; one whose Canto
+    /// full Mov when it acted without moving. A unit without Move Again is left as it is; one whose Move Again
     /// is owed only after a heal (issue 706) is owed it when <paramref name="healed"/>, its spell having healed an ally.
     /// </summary>
-    private static BattleState OpenCanto(BattleState state, GameContent content, string unitId, bool healed)
+    private static BattleState OpenMoveAgain(BattleState state, GameContent content, string unitId, bool healed)
     {
         if (state.Find(unitId) is not { } unit
             || unit.Frosted > 0
-            || !(Signatures.HasCanto(state, content, unit) || (healed && AbilityRules.HasCantoAfterHeal(content.AbilitiesOf(unit.Unit)))))
+            || !(Signatures.HasMoveAgain(state, content, unit) || (healed && AbilityRules.HasMoveAgainAfterHeal(content.AbilitiesOf(unit.Unit)))))
         {
             return state;
         }
 
-        return unit.Canto is null
-            ? state.WithUnit(unit with { Canto = Freeze.Mov(Armor.Mov(Frost.Mov(content.Class(unit.Unit.ClassId).Mov, unit), unit), unit) })
+        return unit.MoveAgain is null
+            ? state.WithUnit(unit with { MoveAgain = Freeze.Mov(Armor.Mov(Frost.Mov(content.Class(unit.Unit.ClassId).Mov, unit), unit), unit) })
             : state;
     }
 
     /// <summary>
-    /// Canto (issue 71): a unit that has acted and is owed a Canto moves within the reach
-    /// <see cref="BattleState.CantoReachOf"/> gives, its own tile included, and is done.
+    /// Move Again (issue 71): a unit that has acted and is owed a Move Again moves within the reach
+    /// <see cref="BattleState.MoveAgainReachOf"/> gives, its own tile included, and is done.
     /// </summary>
-    private static (BattleState, Rejection?) ApplyCanto(BattleState state, GameContent content, Canto canto, List<GameEvent> events)
+    private static (BattleState, Rejection?) ApplyMoveAgain(BattleState state, GameContent content, MoveAgain moveAgain, List<GameEvent> events)
     {
-        var unit = state.Find(canto.UnitId);
+        var unit = state.Find(moveAgain.UnitId);
         if (unit is null)
         {
-            return (state, new Rejection(RejectionReason.NoSuchUnit, $"no living unit '{canto.UnitId}'"));
+            return (state, new Rejection(RejectionReason.NoSuchUnit, $"no living unit '{moveAgain.UnitId}'"));
         }
 
         if (unit.Side != state.Phase)
@@ -453,36 +453,36 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NotThisSide, $"{unit.Id} is a {unit.Side} unit and it is the {state.Phase} phase"));
         }
 
-        if (state.CantoReachOf(unit, content) is not { } reach)
+        if (state.MoveAgainReachOf(unit, content) is not { } reach)
         {
             var who = Referent.For(content, unit.Unit);
-            var why = !Signatures.HasCanto(state, content, unit) ? $"{who.Subject} {who.Verb("has", "have")} no Canto"
+            var why = !Signatures.HasMoveAgain(state, content, unit) ? $"{who.Subject} {who.Verb("has", "have")} no Move Again"
                 : !unit.Acted ? $"{who.Subject} {who.Verb("has", "have")} not acted yet this phase"
-                : $"{who.Possessive} Canto is spent this phase";
-            return (state, new Rejection(RejectionReason.NoCanto, $"{unit.Id} cannot Canto: {why}"));
+                : $"{who.Possessive} Move Again is spent this phase";
+            return (state, new Rejection(RejectionReason.NoMoveAgain, $"{unit.Id} cannot move again: {why}"));
         }
 
-        var entry = reach.EntryAt(canto.To);
+        var entry = reach.EntryAt(moveAgain.To);
         if (entry is not { CanEnd: true })
         {
-            var why = !state.Map.Contains(canto.To) ? "outside the map"
-                : entry is null ? $"not within the {reach.Mov} movement {Referent.For(content, unit.Unit).Possessive} Canto has left from {unit.At}"
+            var why = !state.Map.Contains(moveAgain.To) ? "outside the map"
+                : entry is null ? $"not within the {reach.Mov} movement {Referent.For(content, unit.Unit).Possessive} Move Again has left from {unit.At}"
                 : "occupied by an ally";
-            return (state, new Rejection(RejectionReason.OutOfReach, $"{unit.Id} cannot Canto to {canto.To}: {why}"));
+            return (state, new Rejection(RejectionReason.OutOfReach, $"{unit.Id} cannot move again to {moveAgain.To}: {why}"));
         }
 
-        events.Add(new Cantoed(unit.Id, unit.At, canto.To, entry.Path));
-        // A Canto that leaves the tile takes a brace off (DESIGN 13.14); staying keeps it.
-        var braced = unit.Braced && canto.To == unit.At;
-        var cantoed = state.WithUnit(unit with { At = canto.To, Canto = null, Braced = braced });
-        return (Planks.AfterWalk(cantoed, content, unit, unit.At, entry.Path, events), null);
+        events.Add(new MovedAgain(unit.Id, unit.At, moveAgain.To, entry.Path));
+        // A Move Again that leaves the tile takes a brace off (DESIGN 13.14); staying keeps it.
+        var braced = unit.Braced && moveAgain.To == unit.At;
+        var movedAgain = state.WithUnit(unit with { At = moveAgain.To, MoveAgain = null, Braced = braced });
+        return (Planks.AfterWalk(movedAgain, content, unit, unit.At, entry.Path, events), null);
     }
 
     /// <summary>
     /// Commander's Word (DESIGN.md 13.2, issue 85): the captain's action, after his Move or
     /// without one, once a map. Press gives +1 Mov this phase to the allies in his radius who
     /// have not moved; Rally heals those in it <see cref="Orders.RallyHeal"/>; Fall back owes
-    /// those in it who have acted one <see cref="FallBack"/> move. No Canto follows.
+    /// those in it who have acted one <see cref="FallBack"/> move. No Move Again follows.
     /// </summary>
     private static (BattleState, Rejection?) ApplyOrder(BattleState state, GameContent content, Order order, List<GameEvent> events)
     {
@@ -496,7 +496,7 @@ public static class Resolver
         var reached = Orders.Reached(state, content, captain, captain.At, order.Kind);
         var exposure = Exposure.Of(state, content, captain, captain.At).NoCrit;
         events.Add(new OrderCalled(captain.Id, order.Kind, Orders.Radius(captain, content), ValueList<string>.From(reached.Select(u => u.Id)), inRadius.Count, Orders.Allies(state).Count, exposure));
-        var next = state.WithUnit(captain with { Moved = true, Acted = true, Canto = null }) with { OrderCalled = order.Kind };
+        var next = state.WithUnit(captain with { Moved = true, Acted = true, MoveAgain = null }) with { OrderCalled = order.Kind };
         foreach (var ally in reached)
         {
             switch (order.Kind)
@@ -773,7 +773,7 @@ public static class Resolver
 
     /// <summary>
     /// DESIGN.md 13.17: a unit taking Watch. It needs the header and an equipped weapon reaching
-    /// range 2; the event names the best strike it passes up. No Canto follows. Under
+    /// range 2; the event names the best strike it passes up. No Move Again follows. Under
     /// <c>overwatch: hold</c> (13.17b) only an unmoved player unit watches, with any weapon, and the
     /// event also names the move it gives up.
     /// </summary>
@@ -793,13 +793,13 @@ public static class Resolver
         var passed = Overwatch.PassedUp(state, content, unit);
         var hold = state.Map.OverwatchHold;
         events.Add(new WatchTaken(unit.Id, unit.At, passed?.TargetId, passed?.Hit, hold, hold ? Overwatch.GivesUp(state, content, unit) : null));
-        return (state.WithUnit(unit with { Moved = true, Acted = true, Watching = true, Canto = null }), null);
+        return (state.WithUnit(unit with { Moved = true, Acted = true, Watching = true, MoveAgain = null }), null);
     }
 
     /// <summary>
     /// DESIGN.md 13.19: a unit taking Cover on an ally beside it, refused by
     /// <see cref="CoverRule.Refusal"/>. The event names where the ally lands if the swap
-    /// fires and the best strike the coverer passes up. No Canto follows.
+    /// fires and the best strike the coverer passes up. No Move Again follows.
     /// </summary>
     private static (BattleState, Rejection?) ApplyCover(BattleState state, GameContent content, Cover cover, List<GameEvent> events)
     {
@@ -821,7 +821,7 @@ public static class Resolver
 
         var passed = Overwatch.PassedUp(state, content, unit);
         events.Add(new CoverTaken(unit.Id, ally.Id, unit.At, passed?.TargetId, passed?.Hit));
-        return (state.WithUnit(unit with { Moved = true, Acted = true, Canto = null }).WithUnit(ally with { CoveredBy = unit.Id }), null);
+        return (state.WithUnit(unit with { Moved = true, Acted = true, MoveAgain = null }).WithUnit(ally with { CoveredBy = unit.Id }), null);
     }
 
     /// <summary>
@@ -1863,7 +1863,7 @@ public static class Resolver
 
         var to = Beyond(unit.At, target.At);
         events.Add(new Shoved(unit.Id, target.Id, target.At, to));
-        var next = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null });
+        var next = state.WithUnit(unit with { Moved = true, Acted = true, MoveAgain = null });
         return (next.WithUnit(target with { At = to, Shoved = true, Braced = false }), null);
     }
 
@@ -1872,7 +1872,7 @@ public static class Resolver
     /// to <see cref="Carry.To"/> on its own Move with the ally lifted, and sets the ally down beside it
     /// (<see cref="DrakeCarry"/>). The rider's whole turn. The ally lands marked as shoved, unmoved and
     /// free to move and act (issue 1094, the setting <c>free</c>). A rider holding the
-    /// long carry (issue 872, <see cref="AbilityRules.LongCarry"/>) keeps a Canto of the Move the flight left.
+    /// long carry (issue 872, <see cref="AbilityRules.LongCarry"/>) keeps a Move Again of the Move the flight left.
     /// </summary>
     private static (BattleState, Rejection?) ApplyCarry(BattleState state, GameContent content, Carry carry, List<GameEvent> events)
     {
@@ -1892,8 +1892,8 @@ public static class Resolver
         var entry = lifted.ReachOf(rider, content).EntryAt(carry.To)!;
         events.Add(new UnitMoved(rider.Id, rider.At, carry.To, entry.Path));
         events.Add(new Carried(rider.Id, ally.Id, rider.At, carry.To, ally.At, carry.SetDown));
-        int? canto = AbilityRules.LongCarry(content.AbilitiesOf(rider.Unit), rider.Unit) ? lifted.ReachOf(rider, content).Mov - entry.Cost : null;
-        var next = state.WithUnit(rider with { At = carry.To, Moved = true, Acted = true, Canto = canto, Braced = false });
+        int? moveAgain = AbilityRules.LongCarry(content.AbilitiesOf(rider.Unit), rider.Unit) ? lifted.ReachOf(rider, content).Mov - entry.Cost : null;
+        var next = state.WithUnit(rider with { At = carry.To, Moved = true, Acted = true, MoveAgain = moveAgain, Braced = false });
         var landed = ally with { At = carry.SetDown, Shoved = true, Braced = false };
         return (next.WithUnit(landed), null);
     }
@@ -2003,7 +2003,7 @@ public static class Resolver
     /// DESIGN.md 13.8's recovery: a player unit that has not acted, standing on a keepsake's
     /// tile with a free inventory slot, takes the newest keepsake of the tile's stack (issue 295) as its action, in place of Attack,
     /// Item or Wait, after its Move or without one. The stack goes to the end of the inventory
-    /// under the fallen's name, and no Canto follows.
+    /// under the fallen's name, and no Move Again follows.
     /// </summary>
     private static (BattleState, Rejection?) ApplyRecover(BattleState state, GameContent content, Recover recover, List<GameEvent> events)
     {
@@ -2034,7 +2034,7 @@ public static class Resolver
             Unit = unit.Unit with { Inventory = unit.Unit.Inventory.Add(keepsake.Item) },
             Moved = true,
             Acted = true,
-            Canto = null,
+            MoveAgain = null,
         };
         var top = state.Keepsakes.Count - 1;
         while (state.Keepsakes[top].At != unit.At)
@@ -2051,7 +2051,7 @@ public static class Resolver
     /// beside it, with no enemy on that tile, opens it as its action, in place of Attack, Item or
     /// Wait, after its Move or without one. The chest always opens (issue 679): its stacks go to the
     /// end of the opener's inventory at full uses in file order while there is room, and the rest
-    /// to the state's <see cref="BattleState.Wagon"/>. The chest stays open, and no Canto follows.
+    /// to the state's <see cref="BattleState.Wagon"/>. The chest stays open, and no Move Again follows.
     /// </summary>
     private static (BattleState, Rejection?) ApplyOpen(BattleState state, GameContent content, Open open, List<GameEvent> events)
     {
@@ -2093,7 +2093,7 @@ public static class Resolver
             Unit = unit.Unit with { Inventory = inventory },
             Moved = true,
             Acted = true,
-            Canto = null,
+            MoveAgain = null,
         };
         var next = state.WithUnit(opener) with
         {
@@ -2106,7 +2106,7 @@ public static class Resolver
     /// <summary>
     /// DESIGN.md 13.26's drop: a player unit that has not acted, on a ledge whose rock is still up,
     /// brings it down as its action, in place of Attack, Item or Wait, after its Move or without
-    /// one. Every event on the ledge fires through <see cref="MapEvents.AfterDrop"/>. No Canto follows.
+    /// one. Every event on the ledge fires through <see cref="MapEvents.AfterDrop"/>. No Move Again follows.
     /// </summary>
     private static (BattleState, Rejection?) ApplyDrop(BattleState state, GameContent content, Drop drop, List<GameEvent> events)
     {
@@ -2121,7 +2121,7 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.CannotDrop, refusal));
         }
 
-        var next = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null });
+        var next = state.WithUnit(unit with { Moved = true, Acted = true, MoveAgain = null });
         next = MapEvents.AfterDrop(next, content, unit.At, events);
         return (next, null);
     }
@@ -2129,7 +2129,7 @@ public static class Resolver
     /// <summary>
     /// Issue 633's talk: the pick or the captain, not yet acted, beside the returned claimant, talks
     /// them round as its action, in place of Attack, Item or Wait, after its Move or without one
-    /// (<see cref="Returned"/>). They leave the board, which is not a kill. No Canto follows.
+    /// (<see cref="Returned"/>). They leave the board, which is not a kill. No Move Again follows.
     /// </summary>
     private static (BattleState, Rejection?) ApplyTalk(BattleState state, Talk talk, List<GameEvent> events)
     {
@@ -2147,14 +2147,14 @@ public static class Resolver
         var target = state.Find(talk.TargetId)!;
         var fate = Returned.FateOf(state, unit);
         events.Add(new UnitTalked(unit.Id, target.Id, target.At, target.Hp, fate));
-        var next = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null });
+        var next = state.WithUnit(unit with { Moved = true, Acted = true, MoveAgain = null });
         return (next.WithoutUnit(target.Id) with { ReturnGone = fate }, null);
     }
 
     /// <summary>
     /// Issue 1386's take: a company unit, not yet acted, beside a boss running with the shard, takes it and breaks it as
     /// its action, in place of Attack, Item or Wait, after its Move or without one (<see cref="ShardRun"/>). He leaves
-    /// the board alive, which is not a kill. No Canto follows. Naming <see cref="KinShard.Ground"/> in place of the boss
+    /// the board alive, which is not a kill. No Move Again follows. Naming <see cref="KinShard.Ground"/> in place of the boss
     /// takes the shard under the hill off the ground (issue 1386 slice 3a, <see cref="KinShard"/>).
     /// </summary>
     private static (BattleState, Rejection?) ApplyTakeShard(BattleState state, GameContent content, TakeShard take, List<GameEvent> events)
@@ -2258,7 +2258,7 @@ public static class Resolver
         }
 
         events.Add(new UnitExited(unit.Id, unit.At));
-        var next = state.WithoutUnit(unit.Id) with { Escaped = state.Escaped.Add(unit with { Moved = true, Acted = true, Canto = null }) };
+        var next = state.WithoutUnit(unit.Id) with { Escaped = state.Escaped.Add(unit with { Moved = true, Acted = true, MoveAgain = null }) };
         if (unit.IsCaptain)
         {
             foreach (var left in next.UnitsOf(Side.Player))
@@ -2335,7 +2335,7 @@ public static class Resolver
         events.Add(new PhaseEnded(ended, state.Turn));
         if (nextTurn > state.Map.TurnLimit && !state.Racing)
         {
-            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false, Pressed = false, FallingBack = false, FlewFrom = null, Open = null });
+            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, MoveAgain = null, Shoved = false, Pressed = false, FallingBack = false, FlewFrom = null, Open = null });
             return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared), LitGroups = ValueList<string>.Empty }, null);
         }
 
@@ -2380,7 +2380,7 @@ public static class Resolver
 
             var ticked = unit.Side == nextPhase && unit.BurnPhases > 0 ? Burning.Ticked(unit) : unit;
             ticked = unit.Side == nextPhase && unit.CursePhases > 0 ? Curse.Ticked(ticked) : ticked;
-            units.Add(ticked with { Armor = Armor.AtPhaseChange(unit, ended, nextPhase, events), Hp = hp, Moved = resting || stunned, Acted = resting || stunned, Stun = stun, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), Frozen = Frost.AtPhaseChange(unit.Frozen, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
+            units.Add(ticked with { Armor = Armor.AtPhaseChange(unit, ended, nextPhase, events), Hp = hp, Moved = resting || stunned, Acted = resting || stunned, Stun = stun, Spent = spent, MoveAgain = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Winded = unit.Winded && unit.Side != nextPhase, Answered = false, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Frosted = Frost.AtPhaseChange(unit.Frosted, unit.Side, ended, nextPhase), Frozen = Frost.AtPhaseChange(unit.Frozen, unit.Side, ended, nextPhase), FlewFrom = null, Open = null });
         }
 
         var next = Curse.PayCasters(state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) }, content, cursed, events);
@@ -2457,7 +2457,7 @@ public static class Resolver
     /// <summary>
     /// Every command other than Recall and Undo that <see cref="Apply"/> would accept in a state,
     /// in a fixed order: for each unit of the acting side in id order, if it has acted, its
-    /// Cantos (row-major, own tile included, issue 71) and its Fall back moves (issue 85, those
+    /// Moves again (row-major, own tile included, issue 71) and its Fall back moves (issue 85, those
     /// that wake no one), else, for the captain while an order is open, the three orders, then its Moves
     /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
     /// slot when it carries more than one), its item uses
@@ -2477,11 +2477,11 @@ public static class Resolver
         {
             if (unit.Acted)
             {
-                if (state.CantoReachOf(unit, content) is { } canto)
+                if (state.MoveAgainReachOf(unit, content) is { } moveAgain)
                 {
-                    foreach (var to in canto.Destinations)
+                    foreach (var to in moveAgain.Destinations)
                     {
-                        yield return new Canto(unit.Id, to);
+                        yield return new MoveAgain(unit.Id, to);
                     }
                 }
 

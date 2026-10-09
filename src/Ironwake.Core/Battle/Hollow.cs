@@ -54,7 +54,7 @@ public static class Hollow
 
     /// <summary>
     /// Why <paramref name="command"/> is refused because the unit it names is a Hollow: a Hollow moves, strikes and
-    /// waits (Move, Dash, Canto, Fall back, Shove, Attack, Wait), and nothing else. Null when it is allowed.
+    /// waits (Move, Dash, Move Again, Fall back, Shove, Attack, Wait), and nothing else. Null when it is allowed.
     /// </summary>
     public static Rejection? Refusal(BattleState state, Command command)
     {

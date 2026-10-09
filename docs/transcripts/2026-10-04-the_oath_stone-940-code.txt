@@ -906,7 +906,7 @@ Kinsbane feeds: fed 12, power +5, a tooth grows (teeth 5/5); Keziah heals 10 (hp
 Kinsbane, to Keziah: "Keziah. I remember what I'm for."
 Archer falls at 11,5
 The hunt runs on: Keziah may move again, 4 movement
-Keziah may move again up to 4 movement: canto keziah <x,y|stay>
+Keziah may move again up to 4 movement: again keziah <x,y|stay>
 The Oath Stone  turn 7 of 10  player phase  defeat_boss  recall 2
    012345678901234
  0 ^^..n....######
@@ -922,7 +922,7 @@ The Oath Stone  turn 7 of 10  player phase  defeat_boss  recall 2
 
 f  brigand-2        Brigand L6 reaver          5,8    hp 24/24  Plain  group rear, aggressive
 a  joab-1           Joab L6 berserker          9,4    hp 26/26  Plain  group oath, hold
-A  keziah           Keziah L7 reaver           11,6   hp 21/26  Plain  captain  canto 4
+A  keziah           Keziah L7 reaver           11,6   hp 21/26  Plain  captain  again 4
 B  maud             Maud L7 chaplain           11,7   hp 7/19   Plain
 e  rider-1          Rider L6 outrider          8,4    hp 22/22  Plain  group rear, aggressive
 !  sworn_captain-1  Sworn Captain L6 pikeman   12,3   hp 28/28  Fort (heals 20 percent, 5 hp)  group envoy, boss

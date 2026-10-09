@@ -33,14 +33,14 @@ public class DeterminismTests
         Assert.True(attacks > 0, "the random player never attacked, so the rolls were never exercised");
     }
 
-    /// <summary>Issue 71: the same gate with an outrider on the roster, so Canto commands are in the random stream.</summary>
+    /// <summary>Issue 71: the same gate with an outrider on the roster, so Move Again commands are in the random stream.</summary>
     [Fact]
-    public void AHundredSeedsWithCantoInTheRandomStreamReplayByteIdentical()
+    public void AHundredSeedsWithMoveAgainInTheRandomStreamReplayByteIdentical()
     {
         var map = MapFixture.Parse(MapFixture.OldMillRoad);
         var rider = Recruit("wren", "outrider", Wren.Stats, "iron_lance");
         var roster = ValueList<Unit>.Of(Hale, rider);
-        var cantos = 0;
+        var movesAgain = 0;
         for (var seed = 1; seed <= Seeds; seed++)
         {
             var (commands, first) = Play(map, roster, (ulong)seed, new Random(seed));
@@ -48,10 +48,10 @@ public class DeterminismTests
 
             Assert.Equal(first.Canonical, second.Canonical);
             Assert.Equal(first.Events, second.Events);
-            cantos += commands.Count(c => c is Canto);
+            movesAgain += commands.Count(c => c is MoveAgain);
         }
 
-        Assert.True(cantos > 0, "the random player never took a Canto, so the gate never exercised it");
+        Assert.True(movesAgain > 0, "the random player never took a Move Again, so the gate never exercised it");
     }
 
     [Fact]

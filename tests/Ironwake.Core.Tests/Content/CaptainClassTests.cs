@@ -55,7 +55,7 @@ public class CaptainClassTests
         Assert.Equal(new[] { WeaponType.Sword, WeaponType.Reason }, Content.Class("marshal").Weapons);
         Assert.Equal(new[] { WeaponType.Sword, WeaponType.Bow }, Content.Class("ranger").Weapons);
         Assert.Equal(5, Content.Class("ranger").Mov);
-        Assert.Equal("canto", Content.Class("ranger").Mastery);
+        Assert.Equal("move_again", Content.Class("ranger").Mastery);
         Assert.True(Content.Class("champion").CanUse(WeaponType.Axe));
         Assert.Equal(MovementType.Cavalry, Content.Class("commander").Movement);
         Assert.Equal(6, Content.Class("commander").Mov);

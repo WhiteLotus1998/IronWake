@@ -386,7 +386,7 @@ leave
 trial wren outrider
 move wren 3,3
 attack wren hexer-1 iron_sword
-canto wren 3,3
+again wren 3,3
 end
 leave
 march
@@ -588,7 +588,7 @@ repair brannock 1
 march
 move ansgar 8,6
 attack ansgar finale_hunter-1
-canto ansgar 8,6
+again ansgar 8,6
 move brannock 12,5
 wait brannock
 move captain 10,5

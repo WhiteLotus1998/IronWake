@@ -76,7 +76,7 @@ C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 5 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 5 movement: again ansgar <x,y|stay>
 Hit and Run Raid  turn 1 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -86,7 +86,7 @@ Hit and Run Raid  turn 1 of 10  player phase  rout  recall 3
  4 .......b....
  5 ...........d
 
-B  ansgar           Ansgar L1 outrider         0,3    hp 20/20  Plain  canto 5
+B  ansgar           Ansgar L1 outrider         0,3    hp 20/20  Plain  again 5
 b  archer-1         Archer L1 bowman           7,4    hp 17/17  Fort (heals 20 percent, 3 hp)  group road, aggressive
 a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Plain  group road, aggressive
 A  captain          Alder Fenn L1 cadet        2,2    hp 22/22  Plain  captain
@@ -225,7 +225,7 @@ Ansgar attacks Archer
   Ansgar hits Archer for 11 (hp 6)
   Ansgar hp 20, Archer hp 6
 Ansgar gains 10 exp (10)
-Ansgar may move again up to 1 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 1 movement: again ansgar <x,y|stay>
 Hit and Run Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -235,7 +235,7 @@ Hit and Run Raid  turn 2 of 10  player phase  rout  recall 3
  4 ....B..F....
  5 ...........d
 
-B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  canto 1
+B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  again 1
 b  archer-1         Archer L1 bowman           4,3    hp 6/17   Plain  group road, aggressive
 A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain  done
 c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
@@ -353,7 +353,7 @@ Ansgar attacks Archer
   Ansgar hp 20, Archer hp 0
 Ansgar gains 30 exp (40)
 Archer falls at 4,3
-Ansgar may move again up to 5 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 5 movement: again ansgar <x,y|stay>
 Hit and Run Raid  turn 3 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -363,7 +363,7 @@ Hit and Run Raid  turn 3 of 10  player phase  rout  recall 3
  4 ....B..F....
  5 ...........d
 
-B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  canto 5
+B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  again 5
 A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain
 c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
 d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
@@ -379,7 +379,7 @@ Hit and Run Raid  turn 3 of 10  player phase  rout  recall 3
  4 ****B*****..
  5 *********..d
 
-B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  canto 5
+B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  again 5
 A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain
 c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
 d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
@@ -520,7 +520,7 @@ Ansgar attacks Soldier 2
   Soldier 2 misses Ansgar
   Ansgar hp 20, Soldier 2 hp 11
 Ansgar gains 10 exp (50)
-Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: again ansgar <x,y|stay>
 Hit and Run Raid  turn 4 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -530,7 +530,7 @@ Hit and Run Raid  turn 4 of 10  player phase  rout  recall 3
  4 .......A....
  5 ..........Bd
 
-B  ansgar           Ansgar L1 outrider         10,5   hp 20/20  Plain  canto 2
+B  ansgar           Ansgar L1 outrider         10,5   hp 20/20  Plain  again 2
 A  captain          Alder Fenn L1 cadet        7,4    hp 12/22  Fort (heals 20 percent, 4 hp)  captain
 c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, awake
 d  soldier-2        Soldier L1 pikeman         11,5   hp 11/20  Plain  group watch, guard, awake
@@ -594,7 +594,7 @@ Ansgar attacks Soldier 2
   Ansgar hp 10, Soldier 2 hp 0
 Ansgar gains 30 exp (90)
 Soldier 2 falls at 9,5
-Ansgar may move again up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 6 movement: again ansgar <x,y|stay>
 Hit and Run Raid  turn 5 of 10  player phase  rout  recall 3
    012345678901
  0 ............
@@ -604,7 +604,7 @@ Hit and Run Raid  turn 5 of 10  player phase  rout  recall 3
  4 .......A...c
  5 ........B...
 
-B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain  canto 6
+B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain  again 6
 A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
@@ -732,7 +732,7 @@ Ansgar attacks Soldier 2
   Ansgar hp 10, Soldier 2 hp 0
 Ansgar gains 30 exp (90)
 Soldier 2 falls at 9,5
-Ansgar may move again up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 6 movement: again ansgar <x,y|stay>
 Hit and Run Raid  turn 5 of 10  player phase  rout  recall 2
    012345678901
  0 ............
@@ -742,7 +742,7 @@ Hit and Run Raid  turn 5 of 10  player phase  rout  recall 2
  4 .......A...c
  5 ........B...
 
-B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain  canto 6
+B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain  again 6
 A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
@@ -847,7 +847,7 @@ Ansgar attacks Soldier 2
   Ansgar hp 10, Soldier 2 hp 0
 Ansgar gains 30 exp (90)
 Soldier 2 falls at 9,5
-Ansgar may move again up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 6 movement: again ansgar <x,y|stay>
 Hit and Run Raid  turn 5 of 10  player phase  rout  recall 1
    012345678901
  0 ............
@@ -857,7 +857,7 @@ Hit and Run Raid  turn 5 of 10  player phase  rout  recall 1
  4 .......A...c
  5 ........B...
 
-B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain  canto 6
+B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain  again 6
 A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain

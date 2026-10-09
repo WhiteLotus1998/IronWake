@@ -11,7 +11,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// Brace (DESIGN.md 13.14, experiment; issue 425's acceptance): on a <c>brace: on</c> map a
 /// unit that waits on the tile it began its phase on is struck at <see cref="Brace.Hit"/> less
 /// hit until its side's next phase begins. A unit that moved or was shoved first, a sleeping
-/// Guard, or a map without the header braces nothing; a shove or a Canto off the tile after
+/// Guard, or a map without the header braces nothing; a shove or a Move Again off the tile after
 /// the Wait takes the brace off.
 /// </summary>
 public class BraceTests
@@ -253,21 +253,21 @@ public class BraceTests
         """));
 
     [Fact]
-    public void ACantoOffTheTileTakesTheBraceOff()
+    public void AMoveAgainOffTheTileTakesTheBraceOff()
     {
         var state = Apply(RiderStart(), new Wait("rider"));
         Assert.True(state.Find("rider")!.Braced);
 
-        state = Apply(state, new Canto("rider", new Coord(2, 3)));
+        state = Apply(state, new MoveAgain("rider", new Coord(2, 3)));
 
         Assert.Equal(new Coord(2, 3), state.Find("rider")!.At);
         Assert.False(state.Find("rider")!.Braced);
     }
 
     [Fact]
-    public void ACantoThatStaysKeepsTheBrace()
+    public void AMoveAgainThatStaysKeepsTheBrace()
     {
-        var state = Apply(RiderStart(), new Wait("rider"), new Canto("rider", new Coord(2, 2)));
+        var state = Apply(RiderStart(), new Wait("rider"), new MoveAgain("rider", new Coord(2, 2)));
 
         Assert.True(state.Find("rider")!.Braced);
     }

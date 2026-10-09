@@ -9,11 +9,11 @@ namespace Ironwake.Core;
 public static class Queries
 {
     /// <summary>
-    /// Where the unit may move, section 4, on the board as it stands: its Canto's reach
+    /// Where the unit may move, section 4, on the board as it stands: its Move Again's reach
     /// when it has acted and is owed one (issue 71), else its full reach.
     /// </summary>
     public static Reach Reachable(BattleState state, GameContent content, BattleUnit unit) =>
-        state.CantoReachOf(unit, content) ?? state.ReachOf(unit, content);
+        state.MoveAgainReachOf(unit, content) ?? state.ReachOf(unit, content);
 
     /// <summary>
     /// What a move would walk and wear without making it (13.25, issue 782): the move applied to
@@ -226,7 +226,7 @@ public static class Queries
     /// any other and carries the tile it arrives on (issue 248); an unannounced one is not
     /// on the board the query reads (DECISIONS/0045). Each line reads that phase-start
     /// board; an earlier enemy's move or kill in the phase is not played out. A unit owed a
-    /// Canto (issue 71) is asked from any tile its Canto can end on, since that is where it
+    /// Move Again (issue 71) is asked from any tile its Move Again can end on, since that is where it
     /// still chooses to stand. A strike a cover would swap onto the coverer (DESIGN.md 13.19)
     /// is priced against the coverer on the unit's tile and carries it as <see cref="ThreatLine.CoveredBy"/>.
     /// On a <c>dash: on</c> map a tile only a dash reaches (DESIGN.md 13.27) is priced with the unit
@@ -926,7 +926,7 @@ public static class Queries
     /// </summary>
     public static IReadOnlyList<GroupWoke>? StopWakes(BattleState state, GameContent content, BattleUnit unit, Coord from)
     {
-        var standable = CanStandOn(state, content, unit, from) || state.CantoReachOf(unit, content)?.CanEnd(from) == true;
+        var standable = CanStandOn(state, content, unit, from) || state.MoveAgainReachOf(unit, content)?.CanEnd(from) == true;
         if (state.Phase != Side.Player || unit.Side != Side.Player || !standable)
         {
             return null;
@@ -971,7 +971,7 @@ public static class Queries
     /// </summary>
     public static bool MoveWins(BattleState state, GameContent content, BattleUnit unit, Coord from)
     {
-        var standable = CanStandOn(state, content, unit, from) || state.CantoReachOf(unit, content)?.CanEnd(from) == true;
+        var standable = CanStandOn(state, content, unit, from) || state.MoveAgainReachOf(unit, content)?.CanEnd(from) == true;
         if (state.Phase != Side.Player || unit.Side != Side.Player || !standable || state.Outcome.IsOver)
         {
             return false;
@@ -995,7 +995,7 @@ public static class Queries
     /// </summary>
     private static (BattleState Board, BattleUnit? Moved, IReadOnlyDictionary<string, Coord> Arrivals)? ThreatBoard(BattleState state, GameContent content, BattleUnit unit, Coord from)
     {
-        var standable = CanStandOn(state, content, unit, from) || state.CantoReachOf(unit, content)?.CanEnd(from) == true;
+        var standable = CanStandOn(state, content, unit, from) || state.MoveAgainReachOf(unit, content)?.CanEnd(from) == true;
         var dashed = !standable && Winded.CanDashTo(state, content, unit, from);
         if (state.Phase != Side.Player || unit.Side != Side.Player || !(standable || dashed))
         {

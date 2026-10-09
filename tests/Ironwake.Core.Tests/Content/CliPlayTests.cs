@@ -2883,16 +2883,16 @@ public class SimFullTests
     }
 
     /// <summary>
-    /// The heuristic's Canto (issue 262) prints as the CLI's own <c>canto</c> line, the tile
+    /// The heuristic's Move Again (issue 262) prints as the CLI's own <c>again</c> line, the tile
     /// even when it is a stay. Seed 3 on Sallow Grange has Ansgar ride south from 5,8 after
     /// striking; the trace replayed under --strict applies every line.
     /// </summary>
     [Fact]
-    public void ATraceWithACantoLineReplaysInTheCliUnderStrict()
+    public void ATraceWithAMoveAgainLineReplaysInTheCliUnderStrict()
     {
-        Assert.Equal("canto ansgar 3,7", Ironwake.Sim.Program.Script(new Canto("ansgar", new Coord(3, 7))));
+        Assert.Equal("again ansgar 3,7", Ironwake.Sim.Program.Script(new MoveAgain("ansgar", new Coord(3, 7))));
         var trace = Capture(() => Ironwake.Sim.Program.Trace("sallow_grange", 3));
-        Assert.Contains("\ncanto ansgar 4,10\n", trace);
+        Assert.Contains("\nagain ansgar 4,10\n", trace);
 
         var path = Path.Combine(Path.GetTempPath(), "ironwake-trace-" + Guid.NewGuid().ToString("N") + ".script");
         File.WriteAllText(path, trace);

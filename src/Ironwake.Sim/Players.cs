@@ -61,8 +61,8 @@ public sealed class RandomLegalPlayer : IPlayer
 /// takes the captain's approach key instead (issue 1044), so a fast recruit no longer
 /// outruns its party into a group it meets alone. The
 /// planner knows nothing of the wake rule and walks into sleeping groups; that is the
-/// baseline gate 1 measures. A unit owed a Canto takes it before any other unit acts, to
-/// the safest tile in its Canto reach by <see cref="PlanCanto"/> (issue 262).
+/// baseline gate 1 measures. A unit owed a Move Again takes it before any other unit acts, to
+/// the safest tile in its Move Again reach by <see cref="PlanMoveAgain"/> (issue 262).
 /// </summary>
 public sealed class HeuristicPlayer : IPlayer
 {
@@ -107,10 +107,10 @@ public sealed class HeuristicPlayer : IPlayer
             LastPhaseRefusedKill = null;
         }
 
-        var owed = state.UnitsOf(Side.Player).FirstOrDefault(u => state.CantoReachOf(u, content) is not null);
+        var owed = state.UnitsOf(Side.Player).FirstOrDefault(u => state.MoveAgainReachOf(u, content) is not null);
         if (owed is not null)
         {
-            return new Command[] { PlanCanto(state, content, owed) };
+            return new Command[] { PlanMoveAgain(state, content, owed) };
         }
 
         var unit = PlanOrder(state, content).FirstOrDefault(u => !u.Acted);
@@ -912,9 +912,9 @@ public sealed class HeuristicPlayer : IPlayer
     }
 
     /// <summary>
-    /// The Canto of a unit owed one after its Attack, Item or Wait (issue 262): the tile in
-    /// its Canto reach whose <see cref="Exposure"/> no-crit sum is lowest, priced on the
-    /// board the Canto itself certainly determines (a group its stop wakes by proximity is
+    /// The Move Again of a unit owed one after its Attack, Item or Wait (issue 262): the tile in
+    /// its Move Again reach whose <see cref="Exposure"/> no-crit sum is lowest, priced on the
+    /// board the Move Again itself certainly determines (a group its stop wakes by proximity is
     /// awake on it; a wake already fired is already on the state). Lowest first is the
     /// veto's refusal for a unit whose death loses the map (<see cref="LosesTheMap"/>): a
     /// tile whose sum reaches its HP is taken only when no tile in reach is below it. Then
@@ -922,12 +922,12 @@ public sealed class HeuristicPlayer : IPlayer
     /// is already as safe, then the approach's tile keys: avoid, fewer enemies reaching the
     /// tile, cost, row-major. A recruit never ends on a Seize throne (<see cref="MayEndOn"/>),
     /// and a unit standing on an Escape exit only moves between exits, since leaving one
-    /// undoes the escape. A stay is the Canto declined.
+    /// undoes the escape. A stay is the Move Again declined.
     /// </summary>
-    public static Canto PlanCanto(BattleState state, GameContent content, BattleUnit unit)
+    public static MoveAgain PlanMoveAgain(BattleState state, GameContent content, BattleUnit unit)
     {
-        var reach = state.CantoReachOf(unit, content)
-            ?? throw new ArgumentException($"{unit.Id} is not owed a Canto", nameof(unit));
+        var reach = state.MoveAgainReachOf(unit, content)
+            ?? throw new ArgumentException($"{unit.Id} is not owed a Move Again", nameof(unit));
         var movement = content.Class(unit.Unit.ClassId).Movement;
         var enemyReach = state.UnitsOf(Side.Enemy).Select(e => state.ReachOf(e, content)).ToList();
         var veto = LosesTheMap(state, unit);
@@ -959,7 +959,7 @@ public sealed class HeuristicPlayer : IPlayer
             }
         }
 
-        return new Canto(unit.Id, chosen);
+        return new MoveAgain(unit.Id, chosen);
     }
 
     /// <summary>

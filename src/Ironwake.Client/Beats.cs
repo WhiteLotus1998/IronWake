@@ -99,7 +99,7 @@ public sealed record Beat(
         {
             case UnitMoved m when m.From != m.To:
                 return new Beat(m.UnitId, m.From, m.Path, m.To, null, Array.Empty<Pop>(), NoHp, null);
-            case Cantoed m when m.From != m.To:
+            case MovedAgain m when m.From != m.To:
                 return new Beat(m.UnitId, m.From, m.Path, m.To, null, Array.Empty<Pop>(), NoHp, null);
             case CombatFought c when before.Find(c.AttackerId) is { } attacker && before.Find(c.TargetId) is { } target:
                 var at = new Dictionary<string, Coord> { [attacker.Id] = after.Find(attacker.Id)?.At ?? attacker.At, [target.Id] = after.Find(target.Id)?.At ?? target.At };
@@ -159,7 +159,7 @@ public static class ActCards
                 return new ActCard(a.Id, names[a.Id], a.Unit.ClassId, $"strikes {names[t.Id]}: {result}", Side(a, c.AttackerHpAfter), Side(t, c.TargetHpAfter), fallen);
             case UnitMoved m:
                 return Solo(m.UnitId, $"moves to {m.To.X},{m.To.Y}");
-            case Cantoed m:
+            case MovedAgain m:
                 return Solo(m.UnitId, $"moves on to {m.To.X},{m.To.Y}");
             case UnitWaited w:
                 return Solo(w.UnitId, w.Braced ? "waits, braced" : "waits");

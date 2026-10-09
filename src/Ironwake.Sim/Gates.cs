@@ -1698,7 +1698,7 @@ public sealed record StageOne(string Boss, int Arrived)
             open = command switch
             {
                 UseItem => open with { Used = open.Used.Add(actor) },
-                Move or Canto or Dash or Retreat or FallBack or Carry => open with { Moved = open.Moved.Add(actor) },
+                Move or MoveAgain or Dash or Retreat or FallBack or Carry => open with { Moved = open.Moved.Add(actor) },
                 _ => open,
             };
             stage = stage with { Reading = open };
@@ -1952,7 +1952,7 @@ public sealed record StageOne(string Boss, int Arrived)
         Attack c => c.UnitId,
         UseItem c => c.UnitId,
         Retreat c => c.UnitId,
-        Canto c => c.UnitId,
+        MoveAgain c => c.UnitId,
         Exit c => c.UnitId,
         Recover c => c.UnitId,
         Open c => c.UnitId,

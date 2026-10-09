@@ -153,7 +153,7 @@ public static class Objective
         var mover = command switch
         {
             Move m => m.UnitId,
-            Canto c => c.UnitId,
+            MoveAgain c => c.UnitId,
             _ => null,
         };
         if (mover is not null && after.Find(mover) is { Side: Side.Player, IsCaptain: false } unit && map.IsThrone(unit.At))

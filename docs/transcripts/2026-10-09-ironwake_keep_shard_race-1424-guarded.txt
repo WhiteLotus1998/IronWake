@@ -936,7 +936,7 @@ pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 3 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 3 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 1 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -952,7 +952,7 @@ Ironwake Keep (the shard race)  turn 1 of 12  player phase  defeat_boss  recall 
 10 ...e.......GI...
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         12,10  hp 23/23  Plain  canto 3
+I  ansgar           Ansgar L8 outrider         12,10  hp 23/23  Plain  again 3
 c  archer-1         Archer L6 bowman           4,5    hp 19/19  Plain  group van, aggressive
 L  brannock         Brannock L8 cadet          11,5   hp 22/22  Plain  done
 b  brigand-1        Brigand L6 reaver          6,7    hp 24/24  Plain  group van, aggressive
@@ -1724,7 +1724,7 @@ pair rule binds: Sworn Hunter
 Sworn Hunter is bound to Hask: freed when Hask falls
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 6 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 2 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1740,7 +1740,7 @@ Ironwake Keep (the shard race)  turn 2 of 12  player phase  defeat_boss  recall 
 10 .......e...GI...
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         12,10  hp 23/23  Plain  canto 6
+I  ansgar           Ansgar L8 outrider         12,10  hp 23/23  Plain  again 6
 c  archer-1         Archer L6 bowman           8,5    hp 19/19  Plain  group van, aggressive
 L  brannock         Brannock L8 cadet          11,2   hp 22/22  Plain  done
 d  brigand-2        Brigand L6 reaver          7,1    hp 24/24  Plain  group van, aggressive
@@ -2371,7 +2371,7 @@ Ansgar attacks Soldier 2
   Ansgar hp 23, Soldier 2 hp 0
 Ansgar gains 20 exp (20)
 Soldier 2 falls at 10,10
-Ansgar may move again up to 1 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 1 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 3 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2387,7 +2387,7 @@ Ironwake Keep (the shard race)  turn 3 of 12  player phase  defeat_boss  recall 
 10 ....h....I.G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         9,10   hp 23/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         9,10   hp 23/23  Plain  again 1
 h  archer-2         Archer L6 bowman           4,10   hp 19/19  Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          13,3   hp 10/22  Plain  done
 g  brigand-3        Brigand L6 reaver          4,1    hp 24/24  Plain  group wave, aggressive
@@ -2876,7 +2876,7 @@ Ansgar attacks Archer 2
   Ansgar hits Archer 2 for 13 (hp 6)
   Ansgar hp 23, Archer 2 hp 6
 Ansgar gains 6 exp (26)
-Ansgar may move again up to 5 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 5 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 4 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2892,7 +2892,7 @@ Ironwake Keep (the shard race)  turn 4 of 12  player phase  defeat_boss  recall 
 10 .......hI..G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         8,10   hp 23/23  Plain  canto 5
+I  ansgar           Ansgar L8 outrider         8,10   hp 23/23  Plain  again 5
 h  archer-2         Archer L6 bowman           7,10   hp 6/19   Plain  group wave, aggressive
 L  brannock         Brannock L8 cadet          13,3   hp 10/22  Plain
 g  brigand-3        Brigand L6 reaver          8,1    hp 24/24  Plain  group wave, aggressive
@@ -3568,7 +3568,7 @@ Ansgar attacks Hexer
   Ansgar misses Hexer
   Ansgar hp 11, Hexer hp 2
 Ansgar gains 6 exp (32)
-Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 5 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3584,7 +3584,7 @@ Ironwake Keep (the shard race)  turn 5 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  canto 2
+I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  again 2
 L  brannock         Brannock L8 cadet          13,3   hp 10/22  Plain
 A  captain          Alder Fenn L8 cadet        12,4   hp 18/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -3621,7 +3621,7 @@ Ironwake Keep (the shard race)  turn 5 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  canto 2
+I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  again 2
 L  brannock         Brannock L8 cadet          13,3   hp 10/22  Plain
 A  captain          Alder Fenn L8 cadet        12,4   hp 18/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -3662,7 +3662,7 @@ Ironwake Keep (the shard race)  turn 5 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  canto 2
+I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  again 2
 L  brannock         Brannock L8 cadet          13,3   hp 10/22  Plain
 A  captain          Alder Fenn L8 cadet        12,4   hp 18/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -3699,7 +3699,7 @@ Ironwake Keep (the shard race)  turn 5 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  canto 2
+I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  again 2
 L  brannock         Brannock L8 cadet          13,3   hp 10/22  Plain
 A  captain          Alder Fenn L8 cadet        12,4   hp 18/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -3741,7 +3741,7 @@ Ironwake Keep (the shard race)  turn 5 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  canto 2
+I  ansgar           Ansgar L8 outrider         7,8    hp 11/23  Plain  again 2
 L  brannock         Brannock L8 cadet          13,3   hp 10/22  Plain
 A  captain          Alder Fenn L8 cadet        12,4   hp 18/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -4587,7 +4587,7 @@ Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside
 pair rule binds: Hask
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 3 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 3 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 6 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4603,7 +4603,7 @@ Ironwake Keep (the shard race)  turn 6 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  canto 3
+I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  again 3
 L  brannock         Brannock L8 cadet          12,5   hp 18/22  Plain
 A  captain          Alder Fenn L8 cadet        12,4   hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -4638,7 +4638,7 @@ Ironwake Keep (the shard race)  turn 6 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  canto 3
+I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  again 3
 L  brannock         Brannock L8 cadet          8,5    hp 18/22  Plain
 A  captain          Alder Fenn L8 cadet        12,4   hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -4673,7 +4673,7 @@ Ironwake Keep (the shard race)  turn 6 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  canto 3
+I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  again 3
 L  brannock         Brannock L8 cadet          8,5    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        12,4   hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -4708,7 +4708,7 @@ Ironwake Keep (the shard race)  turn 6 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  canto 3
+I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  again 3
 L  brannock         Brannock L8 cadet          8,5    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        12,4   hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -4743,7 +4743,7 @@ Ironwake Keep (the shard race)  turn 6 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  canto 3
+I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  again 3
 L  brannock         Brannock L8 cadet          8,5    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        12,4   hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -4778,7 +4778,7 @@ Ironwake Keep (the shard race)  turn 6 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  canto 3
+I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  again 3
 L  brannock         Brannock L8 cadet          8,5    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        12,4   hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -4813,7 +4813,7 @@ Ironwake Keep (the shard race)  turn 6 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  canto 3
+I  ansgar           Ansgar L8 outrider         7,7    hp 11/23  Plain  again 3
 L  brannock         Brannock L8 cadet          8,5    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        12,4   hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain  done
@@ -5259,7 +5259,7 @@ Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside
 pair rule binds: Hask
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 0 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 0 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -5275,7 +5275,7 @@ Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  canto 0
+I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  again 0
 L  brannock         Brannock L8 cadet          5,6    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        12,4   hp 25/25  Plain  captain
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -5310,7 +5310,7 @@ Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  canto 0
+I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  again 0
 L  brannock         Brannock L8 cadet          5,6    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -5345,7 +5345,7 @@ Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  canto 0
+I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  again 0
 L  brannock         Brannock L8 cadet          5,6    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -5380,7 +5380,7 @@ Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  canto 0
+I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  again 0
 L  brannock         Brannock L8 cadet          5,6    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -5415,7 +5415,7 @@ Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  canto 0
+I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  again 0
 L  brannock         Brannock L8 cadet          5,6    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -5450,7 +5450,7 @@ Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  canto 0
+I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  again 0
 L  brannock         Brannock L8 cadet          5,6    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -5487,7 +5487,7 @@ Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  canto 0
+I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  again 0
 L  brannock         Brannock L8 cadet          5,6    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -5522,7 +5522,7 @@ Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  canto 0
+I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  again 0
 L  brannock         Brannock L8 cadet          5,6    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -5557,7 +5557,7 @@ Ironwake Keep (the shard race)  turn 7 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  canto 0
+I  ansgar           Ansgar L8 outrider         3,7    hp 11/23  Plain  again 0
 L  brannock         Brannock L8 cadet          5,6    hp 18/22  Plain  done
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain  done
@@ -5945,7 +5945,7 @@ Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside
 pair rule binds: Hask
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 1 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 1 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -5961,7 +5961,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -5996,7 +5996,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6031,7 +6031,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6066,7 +6066,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6101,7 +6101,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6136,7 +6136,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6171,7 +6171,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6206,7 +6206,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6241,7 +6241,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6276,7 +6276,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6311,7 +6311,7 @@ Ironwake Keep (the shard race)  turn 8 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         6,7    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          7,6    hp 6/22   Plain  done
 A  captain          Alder Fenn L8 cadet        5,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain  done
@@ -6781,7 +6781,7 @@ Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside
 pair rule binds: Hask
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 4 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 4 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 9 of 12  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -6797,7 +6797,7 @@ Ironwake Keep (the shard race)  turn 9 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  again 4
 L  brannock         Brannock L8 cadet          7,6    hp 14/22  Plain
 A  captain          Alder Fenn L8 cadet        3,3    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6832,7 +6832,7 @@ Ironwake Keep (the shard race)  turn 9 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  again 4
 L  brannock         Brannock L8 cadet          6,6    hp 14/22  Plain
 A  captain          Alder Fenn L8 cadet        3,3    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6867,7 +6867,7 @@ Ironwake Keep (the shard race)  turn 9 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  again 4
 L  brannock         Brannock L8 cadet          6,6    hp 14/22  Plain  done
 A  captain          Alder Fenn L8 cadet        3,3    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6902,7 +6902,7 @@ Ironwake Keep (the shard race)  turn 9 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  again 4
 L  brannock         Brannock L8 cadet          6,6    hp 14/22  Plain  done
 A  captain          Alder Fenn L8 cadet        3,3    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6937,7 +6937,7 @@ Ironwake Keep (the shard race)  turn 9 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  again 4
 L  brannock         Brannock L8 cadet          6,6    hp 14/22  Plain  done
 A  captain          Alder Fenn L8 cadet        3,3    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -6972,7 +6972,7 @@ Ironwake Keep (the shard race)  turn 9 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  again 4
 L  brannock         Brannock L8 cadet          6,6    hp 14/22  Plain  done
 A  captain          Alder Fenn L8 cadet        3,3    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain
@@ -7007,7 +7007,7 @@ Ironwake Keep (the shard race)  turn 9 of 12  player phase  defeat_boss  recall 
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         5,6    hp 11/23  Plain  again 4
 L  brannock         Brannock L8 cadet          6,6    hp 14/22  Plain  done
 A  captain          Alder Fenn L8 cadet        3,3    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain  done
@@ -7302,7 +7302,7 @@ Ansgar gains 22 exp (54)
 Hask does not swallow: he breaks from 0,5 to 15,6 with the shard in his fist. Swallows in 5 (take it from beside him)
 Reinforcements arrive
   Soldier 5 arrives at 11,6 with the shard group, hold
-Ansgar may move again up to 1 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 1 movement: again ansgar <x,y|stay>
 Ironwake Keep (the shard race)  turn 10 (the limit ends nothing now)  player phase  defeat_boss  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -7318,7 +7318,7 @@ Ironwake Keep (the shard race)  turn 10 (the limit ends nothing now)  player pha
 10 ...........G....
 11 ....^^....#.....
 
-I  ansgar           Ansgar L8 outrider         0,6    hp 11/23  Plain  canto 1
+I  ansgar           Ansgar L8 outrider         0,6    hp 11/23  Plain  again 1
 L  brannock         Brannock L8 cadet          6,6    hp 14/22  Plain
 A  captain          Alder Fenn L8 cadet        1,5    hp 14/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         11,10  hp 11/27  Plain

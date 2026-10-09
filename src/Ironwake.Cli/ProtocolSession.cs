@@ -513,10 +513,10 @@ public sealed class ProtocolSession
         var tile = ProtocolJson.OptionalCoord(request, "from") ?? unit.At;
         if (Queries.Threats(_state, _content, unit, tile) is not { } lines || Queries.SleepingThreats(_state, _content, unit, tile) is not { } asleep)
         {
-            var owed = unit.Canto is not null && unit.Acted;
+            var owed = unit.MoveAgain is not null && unit.Acted;
             return Error(
                 ProtocolJson.Name(unit.Moved && !owed ? RejectionReason.AlreadyMoved : RejectionReason.OutOfReach),
-                owed ? $"{unit.Id} cannot canto to {tile}" : unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
+                owed ? $"{unit.Id} cannot move again to {tile}" : unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
         }
 
         lines = lines.Where(line => line.Arrives is not null || !Hidden(line.Enemy)).ToList();

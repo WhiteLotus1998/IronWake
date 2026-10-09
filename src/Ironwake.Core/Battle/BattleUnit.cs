@@ -11,9 +11,9 @@ namespace Ironwake.Core;
 /// the map placement the unit filled, so a renderer draws it with the letter section 10
 /// gives that slot for the whole battle, wherever it has moved. <see cref="Retreated"/>
 /// is set by a <see cref="Retreat"/> and never cleared, so no unit retreats twice.
-/// <see cref="Canto"/> is what a Canto unit's Move left of its Mov this phase (issue 71),
-/// its full Mov when it acts without moving, and null once the Canto is taken or declined,
-/// at the end of the phase, and for a unit without Canto; a <see cref="Canto"/> command is
+/// <see cref="MoveAgain"/> is what a Move Again unit's Move left of its Mov this phase (issue 71),
+/// its full Mov when it acts without moving, and null once the Move Again is taken or declined,
+/// at the end of the phase, and for a unit without Move Again; a <see cref="MoveAgain"/> command is
 /// legal only while the unit has acted and this is not null.
 /// <see cref="Grudge"/> is the id of the player unit an enemy is sworn against on a
 /// <c>grudges: on</c> map (DESIGN.md 13.4, experiment): set when that unit kills one of the
@@ -59,7 +59,7 @@ public sealed record BattleUnit(
     bool IsCaptain = false,
     int PlacementIndex = -1,
     bool Retreated = false,
-    int? Canto = null,
+    int? MoveAgain = null,
     string? Grudge = null,
     bool Shoved = false,
     bool Braced = false,
@@ -141,7 +141,7 @@ public sealed record BattleUnit(
     /// The frost hold's clock (issue 1127, <see cref="DrakeFrost"/>), counted as the chill's is
     /// (<see cref="Frost.AtPhaseChange"/>): 0 not held; 1 struck by a drake's frost, its side's next phase
     /// not yet begun; 2 that phase under way, cleared when it ends. While it is not 0 the unit's Mov is at
-    /// most 1 and it is owed no Canto (<see cref="DrakeFrost.Mov"/>).
+    /// most 1 and it is owed no Move Again (<see cref="DrakeFrost.Mov"/>).
     /// </summary>
     public int Frosted { get; init; }
 
@@ -163,7 +163,7 @@ public sealed record BattleUnit(
 
     /// <summary>
     /// Set when the unit's woken hungering weapon ran the hunt on (issue 804, <see cref="Kinsbane.RunsOn"/>):
-    /// a Canto of its full Move after a kill, once a battle. Never cleared; board state, so Recall restores it.
+    /// a Move Again of its full Move after a kill, once a battle. Never cleared; board state, so Recall restores it.
     /// </summary>
     public bool HuntRan { get; init; }
 

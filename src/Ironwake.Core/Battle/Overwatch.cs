@@ -5,7 +5,7 @@ namespace Ironwake.Core;
 /// whose equipped weapon reaches range 2 may take <see cref="Watch"/> as its action. Until its
 /// side's next phase begins it watches its ring, the tiles exactly two steps away
 /// (<see cref="InRing(BattleUnit, Coord)"/>), never the tile beside it. The first unit of the other side to end a
-/// move (a Move or a Canto, never a shove or a spawn) on a ring tile its side can see is struck
+/// move (a Move or a Move Again, never a shove or a spawn) on a ring tile its side can see is struck
 /// once before it acts: the watcher's normal hit, damage and crit, no counter, no double, keyed
 /// under <see cref="RollKey.Watch"/>. The watch is then spent. A strike on the watcher, hit or
 /// miss, ends the watch. An arrival inside two rings is shot by each in id order until one kills.

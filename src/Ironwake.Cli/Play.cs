@@ -42,7 +42,7 @@ public sealed class PlaySession
           item <unit> <slot|item> [ally] Use the item in a slot or named by id; a healing spell names the ally, and so does a tome that raises ground (earthwork under the ally until the caster's next phase ends); a tome that raises the dead names a fallen foe or its tile; an area heal names no one, and `item <unit> <slot> preview` lists whom it would heal; an area tome names a unit or a tile, and `item <unit> <slot> <unit|x,y> preview` lists every strike it would make
           wait <unit>              End the unit's action
           undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
-          canto <unit> <x,y|stay>  After acting, a unit with Move Again moves on what its move left, or stays
+          again <unit> <x,y|stay>      After acting, a unit with Move Again moves on what its move left, or stays
           exit <unit>              On an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
           open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
@@ -742,18 +742,18 @@ public sealed class PlaySession
             case "cover":
                 Error("usage: cover <unit> <ally>");
                 break;
-            case "canto" when words.Length == 3 && TryCoord(words[2], out var cantoTo):
-                Apply(new Canto(words[1], cantoTo));
+            case "again" or "canto" when words.Length == 3 && TryCoord(words[2], out var moveAgainTo):
+                Apply(new MoveAgain(words[1], moveAgainTo));
                 break;
-            case "canto" when words.Length == 3 && words[2] == "stay":
+            case "again" or "canto" when words.Length == 3 && words[2] == "stay":
                 if (Find(words[1]) is { } stayer)
                 {
-                    Apply(new Canto(stayer.Id, stayer.At));
+                    Apply(new MoveAgain(stayer.Id, stayer.At));
                 }
 
                 break;
-            case "canto":
-                Error("usage: canto <unit> <x,y|stay>");
+            case "again" or "canto":
+                Error("usage: again <unit> <x,y|stay>");
                 break;
             case "exit" when words.Length == 2:
                 Apply(new Exit(words[1]), first: ExitLine(words[1]));
@@ -1161,9 +1161,9 @@ public sealed class PlaySession
             _out.WriteLine(after);
         }
 
-        if (CantoOwed(command) is { } owed)
+        if (MoveAgainOwed(command) is { } owed)
         {
-            _out.WriteLine($"{UnitNames.Of(_state, _content)[owed.Id]} may move again up to {owed.Canto} movement: canto {owed.Id} <x,y|stay>");
+            _out.WriteLine($"{UnitNames.Of(_state, _content)[owed.Id]} may move again up to {owed.MoveAgain} movement: again {owed.Id} <x,y|stay>");
         }
 
         if (command is not EndPhase)
@@ -1196,8 +1196,8 @@ public sealed class PlaySession
         return $"escaped: {List(escaped)}; left behind: {List(behind)}; fell: {List(fell)}";
     }
 
-    /// <summary>The player unit an Attack, Item or Wait just left owed a Canto (issue 71), or null.</summary>
-    private BattleUnit? CantoOwed(Command command)
+    /// <summary>The player unit an Attack, Item or Wait just left owed a Move Again (issue 71), or null.</summary>
+    private BattleUnit? MoveAgainOwed(Command command)
     {
         var id = command switch
         {
@@ -1206,7 +1206,7 @@ public sealed class PlaySession
             Wait w => w.UnitId,
             _ => null,
         };
-        return id is not null && _state.Find(id) is { Side: Side.Player } unit && _state.CantoReachOf(unit, _content) is not null ? unit : null;
+        return id is not null && _state.Find(id) is { Side: Side.Player } unit && _state.MoveAgainReachOf(unit, _content) is not null ? unit : null;
     }
 
     /// <summary>
@@ -2052,7 +2052,7 @@ public sealed class PlaySession
 
         if (Queries.Threats(board, _content, unit, tile) is not { } lines)
         {
-            Error(unit.Canto is not null && unit.Acted ? $"{unit.Id} cannot canto to {tile}" : unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
+            Error(unit.MoveAgain is not null && unit.Acted ? $"{unit.Id} cannot move again to {tile}" : unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
             return;
         }
 
@@ -2687,7 +2687,7 @@ public sealed class PlaySession
 
     /// <summary>
     /// The lines <c>show &lt;unit&gt;</c> prints: who and where, the unit's description if it has one (issue 806), stats, weapon, items, ranks,
-    /// arts, abilities, mastery, Canto, targets and rivalry. The Godot client's unit panel
+    /// arts, abilities, mastery, Move Again, targets and rivalry. The Godot client's unit panel
     /// shows the same lines (issue 349). Units and arts read by the names a reader sees, every
     /// line in sentence case (issue 615); with <paramref name="typed"/>, as the console prints
     /// them, each name a command types differently is followed by that id in parentheses:
@@ -2770,9 +2770,9 @@ public sealed class PlaySession
             lines.Add($"  {drake}");
         }
 
-        if (state.CantoReachOf(unit, content) is not null)
+        if (state.MoveAgainReachOf(unit, content) is not null)
         {
-            lines.Add($"  Move again: {unit.Canto} movement left this phase");
+            lines.Add($"  Move again: {unit.MoveAgain} movement left this phase");
         }
 
         if (unit.IsCaptain && state.OrdersOpen)
@@ -3246,7 +3246,7 @@ public sealed class PlaySession
     {
         Move m => m.Via is { } via ? $"move {m.UnitId} {m.To} via {via}" : $"move {m.UnitId} {m.To}",
         Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)) + (a.Art is null ? "" : " art " + a.Art),
-        Canto c => $"canto {c.UnitId} {c.To}",
+        MoveAgain c => $"again {c.UnitId} {c.To}",
         Wait w => $"wait {w.UnitId}",
         Watch w => $"watch {w.UnitId}",
         Cover c => $"cover {c.UnitId} {c.AllyId}",
@@ -3335,7 +3335,7 @@ public sealed class PlaySession
                 return k.CarrierId is { } carrier
                     ? $"{Keepsake.Name(k.ItemId, k.FallenId, content)} went with {names[carrier]}"
                     : $"{Keepsake.Name(k.ItemId, k.FallenId, content)} was left at {k.At}";
-            case Cantoed c:
+            case MovedAgain c:
                 return c.From == c.To
                     ? $"{names[c.UnitId]} stays at {c.To} (move again)"
                     : $"{names[c.UnitId]} moves again {c.From} -> {c.To}" + (c.Path.Count > 1 ? " via " + string.Join(" ", c.Path.Take(c.Path.Count - 1)) : "");
@@ -3472,7 +3472,7 @@ public sealed class PlaySession
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
             case UnitFrosted f:
                 return $"the drake's frost strikes {names[f.UnitId]} for {f.Damage} (hp {f.HpAfter})"
-                    + (f.Held ? $"; held to {DrakeFrost.HoldMov} tile, no Canto, until {Frost.Until(f.Side, f.Next)}" : f.Boss ? "; a boss: no hold" : "; already held");
+                    + (f.Held ? $"; held to {DrakeFrost.HoldMov} tile, no Move Again, until {Frost.Until(f.Side, f.Next)}" : f.Boss ? "; a boss: no hold" : "; already held");
             case UnitLocked l:
                 return $"{names[l.UnitId]} is locked by {names[l.ByUnitId]}: Mov 0 until {Frost.Until(l.Side, l.Next)} while {names[l.ByUnitId]} stands beside";
             case LockDropped d:

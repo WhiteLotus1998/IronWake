@@ -185,7 +185,7 @@ public class CampaignCliTests
     [Fact]
     public void ATrialOnTheScreenCertifiesOnAPassWithNoSealAndIsRefusedAfterward()
     {
-        const string script = "trial captain outrider\nmove captain 3,3\nattack captain hexer-1 2\ncanto captain 3,0\nleave\ntrial captain outrider\ntrial wren pikeman\n";
+        const string script = "trial captain outrider\nmove captain 3,3\nattack captain hexer-1 2\nagain captain 3,0\nleave\ntrial captain outrider\ntrial wren pikeman\n";
 
         var output = Play(out var exit, script, "--seed", "4");
 
@@ -202,7 +202,7 @@ public class CampaignCliTests
     [Fact]
     public void AFailedTrialOnTheScreenOpensAgainOnlyAfterTheNextMap()
     {
-        const string script = "trial captain outrider\nmove captain 3,3\nattack captain hexer-1 2\ncanto captain stay\nend\nleave\ntrial captain outrider\n";
+        const string script = "trial captain outrider\nmove captain 3,3\nattack captain hexer-1 2\nagain captain stay\nend\nleave\ntrial captain outrider\n";
 
         var output = Play(out _, script, "--seed", "5");
 

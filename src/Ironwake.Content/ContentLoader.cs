@@ -1387,7 +1387,7 @@ public static class ContentLoader
     /// <c>art</c> is a combat art (issue 68): a <c>weapon</c> type, the <c>rank</c> it needs,
     /// its extra <c>cost</c> in uses (at least 1), and optional <c>mt</c>, <c>hit</c>,
     /// <c>crit</c>, <c>wt</c> and <c>range</c> deltas, at least one non-zero and
-    /// <c>range</c> never negative; <c>canto</c> (issue 71) reads nothing but its kind.
+    /// <c>range</c> never negative; <c>move_again</c> (issue 71) reads nothing but its kind.
     /// </summary>
     private static ImmutableSortedDictionary<string, Ability> ParseAbilities(ContentFile file)
     {
@@ -1505,14 +1505,14 @@ public static class ContentLoader
                 }
 
                 return healArt;
-            case "canto":
+            case "move_again":
                 RequireOnly(entry, effect, "effect", "kind", "after");
                 if (effect.Has("after") && effect.String("after") != "heal")
                 {
-                    throw entry.Error("effect.after", "must be 'heal', or left out for a Canto after every action");
+                    throw entry.Error("effect.after", "must be 'heal', or left out for a Move Again after every action");
                 }
 
-                return new CantoEffect { AfterHeal = effect.Has("after") };
+                return new MoveAgainEffect { AfterHeal = effect.Has("after") };
             case "mending":
                 RequireOnly(entry, effect, "effect", "kind", "factor", "reach");
                 var mending = new MendingEffect(effect.Int("factor"), effect.Int("reach"));
@@ -1679,7 +1679,7 @@ public static class ContentLoader
 
                 return line;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, range, killheal, beside, aura, footing, opening, bite, long_carry, deep_rime, drake_frost, stoop, rod or line_strike");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, move_again, mending, brace, range, killheal, beside, aura, footing, opening, bite, long_carry, deep_rime, drake_frost, stoop, rod or line_strike");
         }
     }
 

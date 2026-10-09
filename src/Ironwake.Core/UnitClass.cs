@@ -5,7 +5,7 @@ namespace Ironwake.Core;
 /// in the class, usable weapon types, and growth modifiers. <see cref="Mastery"/> names the
 /// class's mastery ability in <c>abilities.json</c>, or null, and <see cref="MasteryPoints"/>
 /// the combats fought in the class that earn it (issue 69, <see cref="Masteries"/>).
-/// <see cref="Abilities"/> are held while in the class and lost on leaving it, as Canto on
+/// <see cref="Abilities"/> are held while in the class and lost on leaving it, as Move Again on
 /// the cavalry classes is (issue 71).
 /// </summary>
 public sealed record UnitClass(

@@ -50,7 +50,7 @@ public class HollowTests
             Assert.True(result.Accepted, result.Rejection?.Message);
             if (result.Next.Find(brigand.Id) is null && result.Next.Find("pell") is { } living)
             {
-                return (result.Next.WithUnit(living with { Moved = false, Acted = false, Canto = null }), brigand.Id);
+                return (result.Next.WithUnit(living with { Moved = false, Acted = false, MoveAgain = null }), brigand.Id);
             }
         }
 

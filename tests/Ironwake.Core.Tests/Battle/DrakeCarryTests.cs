@@ -74,7 +74,7 @@ public class DrakeCarryTests
 
         Assert.True(rook.Moved);
         Assert.True(rook.Acted);
-        Assert.Null(rook.Canto);
+        Assert.Null(rook.MoveAgain);
     }
 
     [Fact]

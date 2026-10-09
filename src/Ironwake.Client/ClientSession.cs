@@ -359,7 +359,7 @@ public sealed class ClientSession
 
     /// <summary>
     /// The selected unit's reach, as the core answers it, or null with no selection: the move a
-    /// Fall back order owes it while one is owed (issue 786), else its move or Canto.
+    /// Fall back order owes it while one is owed (issue 786), else its move or Move Again.
     /// </summary>
     public Reach? Reach => Selected is { } id && State.Find(id) is { } unit ? State.FallBackReachOf(unit, Content) ?? Queries.Reachable(State, Content, unit) : null;
 
@@ -753,13 +753,13 @@ public sealed class ClientSession
     public BattleUnit? UnitAt(Coord at) => State.Units.FirstOrDefault(u => u.At == at);
 
     /// <summary>
-    /// Selects the player unit on a tile, if it has not acted or is owed a Canto or a Fall back
+    /// Selects the player unit on a tile, if it has not acted or is owed a Move Again or a Fall back
     /// move (issue 786); anything
     /// else clears the selection. True when a unit is selected.
     /// </summary>
     public bool Select(Coord at)
     {
-        Selected = UnitAt(at) is { Side: Side.Player } unit && (!unit.Acted || State.CantoReachOf(unit, Content) is not null || unit.FallingBack) ? unit.Id : null;
+        Selected = UnitAt(at) is { Side: Side.Player } unit && (!unit.Acted || State.MoveAgainReachOf(unit, Content) is not null || unit.FallingBack) ? unit.Id : null;
         Inspected = Selected is null && UnitAt(at) is { Side: Side.Enemy } enemy && Dusk.Seen(State, enemy) ? enemy.Id : null;
         return Selected is not null;
     }
@@ -1100,7 +1100,7 @@ public sealed class ClientSession
     /// <summary>
     /// What a click on a tile does with a unit selected: a unit owed a Fall back move takes it to
     /// the tile, or declines it on its own tile (issue 786); otherwise the unit itself waits, a hostile unit
-    /// is attacked, through the attack menu when it has more than one legal row (issue 611) and at once otherwise, a tile it can end on is moved to (a Canto when one
+    /// is attacked, through the attack menu when it has more than one legal row (issue 611) and at once otherwise, a tile it can end on is moved to (a Move Again when one
     /// is owed); anything else selects what is there. Returns the command applied, or null.
     /// </summary>
     public Command? Click(Coord at)
@@ -1165,7 +1165,7 @@ public sealed class ClientSession
         }
         else if (Reach is { } reach && reach.CanEnd(at))
         {
-            command = unit.Acted ? new Canto(unit.Id, at) : new Move(unit.Id, at);
+            command = unit.Acted ? new MoveAgain(unit.Id, at) : new Move(unit.Id, at);
         }
 
         if (command is null)
@@ -1225,7 +1225,7 @@ public sealed class ClientSession
                 _enemy.Enqueue(enemy);
             }
         }
-        else if (Selected is { } id && State.Find(id) is { } unit && unit.Acted && State.CantoReachOf(unit, Content) is null && !unit.FallingBack)
+        else if (Selected is { } id && State.Find(id) is { } unit && unit.Acted && State.MoveAgainReachOf(unit, Content) is null && !unit.FallingBack)
         {
             Selected = null;
         }
@@ -1381,7 +1381,7 @@ public sealed class ClientSession
         return e switch
         {
             UnitMoved m => new Highlight(line, m.From, m.To, m.Path, null),
-            Cantoed m => new Highlight(line, m.From, m.To, m.Path, null),
+            MovedAgain m => new Highlight(line, m.From, m.To, m.Path, null),
             UnitRetreated r => new Highlight(line, r.From, r.To, none, null),
             CombatFought c => new Highlight(line, null, before.Find(c.AttackerId)?.At, none, before.Find(c.TargetId)?.At),
             UnitDied d => new Highlight(line, null, null, none, d.At),

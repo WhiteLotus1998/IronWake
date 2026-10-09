@@ -6,10 +6,10 @@ namespace Ironwake.Core;
 /// <list type="bullet">
 /// <item>It fires when a rider holding <see cref="DrakeFrostEffect"/> ends a Move it flew, at least one tile and
 /// not grounded, with at least one enemy orthogonally beside the tile it landed on. Standing still, a carry, a
-/// shove, a Canto, a dash or a Fall back never fires it, and a landing beside no enemy never spends it.</item>
+/// shove, a Move Again, a dash or a Fall back never fires it, and a landing beside no enemy never spends it.</item>
 /// <item>Order: the move, then the frost, then the rider's action, so it may attack a unit it just frosted.</item>
 /// <item>Each enemy on those four tiles takes <see cref="DrakeFrostEffect.Damage"/>, never below 1 (the frost
-/// never kills, as burn and the rock do not), and is held: Mov at most <see cref="HoldMov"/> and no Canto
+/// never kills, as burn and the rock do not), and is held: Mov at most <see cref="HoldMov"/> and no Move Again
 /// through its side's next phase, on the chill's clock (<see cref="BattleUnit.Frosted"/>). Allies are untouched.
 /// A boss takes the damage and is never held. A unit already held is not held again, and the hold does not stack
 /// with a chill: Mov 1 is Mov 1.</item>
@@ -107,9 +107,9 @@ public static class DrakeFrost
         return $"Frost: {status}; on a flown landing beside enemies, each takes {frost.Damage} and is held to {HoldMov} tile next phase (bosses: no hold)";
     }
 
-    /// <summary>The card line for a held unit: <c>frosted: Mov 1, no Canto, until enemy phase ends</c>; null when it is not held.</summary>
+    /// <summary>The card line for a held unit: <c>frosted: Mov 1, no Move Again, until enemy phase ends</c>; null when it is not held.</summary>
     public static string? HeldLine(BattleState state, BattleUnit unit) =>
-        unit.Frosted > 0 ? $"frosted: Mov {HoldMov}, no Canto, until {Frost.Until(unit.Side, unit.Frosted == 1 && unit.Side == state.Phase)}" : null;
+        unit.Frosted > 0 ? $"frosted: Mov {HoldMov}, no Move Again, until {Frost.Until(unit.Side, unit.Frosted == 1 && unit.Side == state.Phase)}" : null;
 
     /// <summary>
     /// What a Move of <paramref name="rider"/> to <paramref name="to"/> would frost, as the <c>move</c> preview and

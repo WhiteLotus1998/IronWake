@@ -4,7 +4,7 @@ namespace Ironwake.Core;
 /// An ability from <c>abilities.json</c> (issue 66): an id, a name, one line of text, and
 /// one typed effect. Abilities are data, never a handler per ability, so the forecast, the
 /// resolver and both planners price them through the same section 5 functions without
-/// knowing any ability by name. Adding a Breaker is a content entry; adding a new kind of
+/// knowing any ability by name. Adding a Sense is a content entry; adding a new kind of
 /// effect is a new <see cref="AbilityEffect"/> record and a case in <see cref="AbilityRules"/>.
 /// </summary>
 public sealed record Ability(string Id, string Name, string Text, AbilityEffect Effect)
@@ -27,7 +27,7 @@ public enum AbilityTrigger
     /// <summary>Declared with an attack command, before the roll: a combat art (issue 68).</summary>
     Declared,
 
-    /// <summary>After the unit's Attack, Item or Wait: Canto's second move (issue 71).</summary>
+    /// <summary>After the unit's Attack, Item or Wait: Move Again's second move (issue 71).</summary>
     AfterAction,
 
     /// <summary>When the unit takes Wait: a brace on any map (issue 691).</summary>
@@ -87,7 +87,7 @@ public sealed record StatDeltaEffect(Stats Delta) : AbilityEffect
 /// An on-combat modifier: hit and crit added to this side's strikes, avoid and crit avoid
 /// added against the opponent's, whenever the opponent matches <see cref="Against"/> and,
 /// when <see cref="Wielding"/> is set, the holder strikes or counters with a weapon of that
-/// type (issue 245). Lancebreaker (section 5) is <c>+20 hit, +20 avoid against lances</c>;
+/// type (issue 245). Lance Sense (section 5) is <c>+20 hit, +20 avoid against lances</c>;
 /// Bloodrush is <c>+15 crit, -10 avoid while wielding an axe</c>.
 /// </summary>
 public sealed record CombatModifierEffect(OpponentCondition Against, int Hit, int Avoid, int Crit, int CritAvoid) : AbilityEffect
@@ -175,11 +175,11 @@ public sealed record HealArtEffect(WeaponType Weapon, WeaponRank Rank, int Facto
 }
 
 /// <summary>
-/// Canto (issue 71, DESIGN.md section 7): after an Attack, Item or Wait the unit may move
+/// Move Again (issue 71, DESIGN.md section 7): after an Attack, Item or Wait the unit may move
 /// again on what its first move left of its Mov, through <see cref="Movement.Reach"/> from
 /// where it stands. The effect has no numbers; content decides which classes carry it.
 /// </summary>
-public sealed record CantoEffect : AbilityEffect
+public sealed record MoveAgainEffect : AbilityEffect
 {
     public override AbilityTrigger Trigger => AbilityTrigger.AfterAction;
 
@@ -289,7 +289,7 @@ public sealed record BiteEffect(int HalfGrown, int Grown) : AbilityEffect
 
 /// <summary>
 /// The Drake Warden's long carry (issue 872): from Grown, after the holder sets a carried ally down
-/// (<see cref="DrakeCarry"/>) it may move again on the Move the carry left, a Canto with no strike.
+/// (<see cref="DrakeCarry"/>) it may move again on the Move the carry left, a Move Again with no strike.
 /// </summary>
 public sealed record LongCarryEffect : AbilityEffect
 {
@@ -538,11 +538,11 @@ public static class AbilityRules
     /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>
     public static bool Braces(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is BraceEffect);
 
-    /// <summary>Whether any of <paramref name="abilities"/> is Canto after every action.</summary>
-    public static bool HasCanto(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is CantoEffect { AfterHeal: false });
+    /// <summary>Whether any of <paramref name="abilities"/> is Move Again after every action.</summary>
+    public static bool HasMoveAgain(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is MoveAgainEffect { AfterHeal: false });
 
-    /// <summary>Whether any of <paramref name="abilities"/> owes a Canto after a heal (issue 706): Canto of either kind.</summary>
-    public static bool HasCantoAfterHeal(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is CantoEffect);
+    /// <summary>Whether any of <paramref name="abilities"/> owes a Move Again after a heal (issue 706): Move Again of either kind.</summary>
+    public static bool HasMoveAgainAfterHeal(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is MoveAgainEffect);
 
     /// <summary>The aura <paramref name="self"/> fights under (<see cref="Combatant.Aura"/>, issue 705) plus the sum of its combat modifiers whose conditions hold: <paramref name="opponent"/> meets the opponent condition, and <paramref name="self"/>'s weapon the wielding one.</summary>
     public static CombatBonus Against(Combatant self, Combatant opponent)

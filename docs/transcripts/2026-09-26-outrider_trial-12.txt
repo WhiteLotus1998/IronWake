@@ -55,7 +55,7 @@ Alder Fenn attacks Hexer
 Alder Fenn gains 30 exp (30)
 Hexer falls at 3,2
 No enemy is left, but the map is not won: the captain, Alder Fenn, must still stand on the gate at any tile from 0,0 to 6,0 by the end of turn 1 (now turn 1).
-Alder Fenn may move again up to 3 movement: canto captain <x,y|stay>
+Alder Fenn may move again up to 3 movement: again captain <x,y|stay>
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456
  0 TTTTTTT
@@ -65,7 +65,7 @@ Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
  4 .......
  5 .......
 
-A  captain          Alder Fenn L1 outrider     3,3    hp 13/23  Forest  captain  canto 3
+A  captain          Alder Fenn L1 outrider     3,3    hp 13/23  Forest  captain  again 3
 > canto captain 3,0
 Alder Fenn moves again 3,3 -> 3,0 via 3,2 3,1
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0

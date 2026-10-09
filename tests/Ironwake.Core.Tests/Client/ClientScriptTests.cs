@@ -45,12 +45,24 @@ public class ClientScriptTests
     }
 
     [Fact]
-    public void CantoStayIsACantoToTheUnitsOwnTile()
+    public void MoveAgainStayIsAMoveAgainToTheUnitsOwnTile()
     {
         var state = Tollgate();
         var wren = state.Find("wren")!;
 
-        Assert.Equal(new Canto("wren", wren.At), Script.Parse("canto wren stay", state));
+        Assert.Equal(new MoveAgain("wren", wren.At), Script.Parse("again wren stay", state));
+    }
+
+    /// <summary>Issue 1446 renamed the command; <c>canto</c>, the word every older script uses, still parses to the same record.</summary>
+    [Fact]
+    public void TheRetiredCantoWordStillParsesAsAgain()
+    {
+        var state = Tollgate();
+        var wren = state.Find("wren")!;
+
+        Assert.Equal(Script.Parse("again wren stay", state), Script.Parse("canto wren stay", state));
+        Assert.Equal(new MoveAgain("wren", new Coord(3, 4)), Script.Parse("canto wren 3,4", state));
+        Assert.Equal(new MoveAgain("wren", wren.At), Script.Parse("canto wren stay", state));
     }
 
     [Fact]

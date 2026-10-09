@@ -74,8 +74,8 @@ public sealed record UnitExited(string UnitId, Coord At) : GameEvent;
 /// <summary>The captain's exit ended the battle with this player unit still on the board (issue 269); it counts as fallen.</summary>
 public sealed record UnitLeftBehind(string UnitId, Coord At) : GameEvent;
 
-/// <summary>A unit took its Canto (issue 71): <see cref="From"/> equal to <see cref="To"/> and an empty path is a Canto declined.</summary>
-public sealed record Cantoed(string UnitId, Coord From, Coord To, ValueList<Coord> Path) : GameEvent;
+/// <summary>A unit took its Move Again (issue 71): <see cref="From"/> equal to <see cref="To"/> and an empty path is a Move Again declined.</summary>
+public sealed record MovedAgain(string UnitId, Coord From, Coord To, ValueList<Coord> Path) : GameEvent;
 
 /// <summary>A unit pushed another one tile, from <paramref name="From"/> to <paramref name="To"/> (DESIGN.md 13.12).</summary>
 public sealed record Shoved(string UnitId, string TargetId, Coord From, Coord To) : GameEvent;
@@ -310,7 +310,7 @@ public sealed record HungerFed(string UnitId, string ItemId, int Fed, int Healed
 
 /// <summary>
 /// A woken hungering weapon's kill ran the hunt on (issue 804, DESIGN.md 13.23): once a battle, the
-/// carrier is owed a Canto of <paramref name="Mov"/>, its full Move, and strikes no second time.
+/// carrier is owed a Move Again of <paramref name="Mov"/>, its full Move, and strikes no second time.
 /// </summary>
 public sealed record HuntRanOn(string UnitId, int Mov) : GameEvent;
 
@@ -488,7 +488,7 @@ public sealed record UnitChilled(string UnitId, string ByUnitId, Side Side, bool
 /// <summary>
 /// A drake's frost struck an enemy beside the tile its rider landed on (issue 1127, <see cref="DrakeFrost"/>):
 /// <paramref name="Damage"/> taken, <paramref name="HpAfter"/> left, never below 1. <paramref name="Held"/> is true
-/// when it is held to Mov 1 with no Canto until <paramref name="Side"/>'s next phase ends; a boss
+/// when it is held to Mov 1 with no Move Again until <paramref name="Side"/>'s next phase ends; a boss
 /// (<paramref name="Boss"/>) never is. <paramref name="Next"/> is true when it was struck on its own side's phase.
 /// </summary>
 public sealed record UnitFrosted(string UnitId, string ByUnitId, int Damage, int HpAfter, bool Held, bool Boss, Side Side, bool Next = false) : GameEvent;

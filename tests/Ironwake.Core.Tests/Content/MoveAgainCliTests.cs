@@ -1,12 +1,12 @@
 namespace Ironwake.Core.Tests.Content;
 
 /// <summary>
-/// Canto at the console (issue 71): the <c>canto</c> command, its <c>stay</c> form, the
-/// line that says a Canto is owed, and the journaled hit-and-run on
+/// Move Again at the console (issue 71): the <c>again</c> command (and the retired <c>canto</c>, still read), its <c>stay</c> form, the
+/// line that says a Move Again is owed, and the journaled hit-and-run on
 /// <c>docs/samples/canto_raid.map</c>, replayed under <c>--strict</c> to its transcript.
 /// </summary>
 [Collection("console")]
-public class CantoCliTests
+public class MoveAgainCliTests
 {
     private static string Repo => Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
 
@@ -14,7 +14,7 @@ public class CantoCliTests
 
     private static string Play(out int exit, string script)
     {
-        var path = Path.Combine(Path.GetTempPath(), "ironwake-canto-" + Guid.NewGuid().ToString("N") + ".script");
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-moveAgain-" + Guid.NewGuid().ToString("N") + ".script");
         File.WriteAllText(path, script);
         try
         {
@@ -27,30 +27,30 @@ public class CantoCliTests
     }
 
     [Fact]
-    public void AnActionByACantoUnitSaysWhatItsCantoHasLeftAndTheRosterRowShowsIt()
+    public void AnActionByAMoveAgainUnitSaysWhatItsMoveAgainHasLeftAndTheRosterRowShowsIt()
     {
         var output = Play(out _, "move ansgar 4,4\nwait ansgar\n");
 
-        Assert.Contains("Ansgar waits\nAnsgar may move again up to 2 movement: canto ansgar <x,y|stay>\n", output);
-        Assert.Contains("Plain  canto 2\n", output);
+        Assert.Contains("Ansgar waits\nAnsgar may move again up to 2 movement: again ansgar <x,y|stay>\n", output);
+        Assert.Contains("Plain  again 2\n", output);
     }
 
     [Fact]
-    public void CantoStayIsTheCantoToTheUnitsOwnTileAndThenTheUnitIsDone()
+    public void MoveAgainStayIsTheMoveAgainToTheUnitsOwnTileAndThenTheUnitIsDone()
     {
-        var output = Play(out _, "wait ansgar\ncanto ansgar stay\ncanto ansgar 2,3\n");
+        var output = Play(out _, "wait ansgar\nagain ansgar stay\nagain ansgar 2,3\n");
 
-        Assert.Contains("> canto ansgar stay\nAnsgar stays at 1,3 (move again)\n", output);
-        Assert.Contains("> canto ansgar 2,3\nERROR: Ansgar cannot Canto: his Canto is spent this phase\n", output);
+        Assert.Contains("> again ansgar stay\nAnsgar stays at 1,3 (move again)\n", output);
+        Assert.Contains("> again ansgar 2,3\nERROR: Ansgar cannot move again: his Move Again is spent this phase\n", output);
     }
 
     [Fact]
-    public void ACantoCommandIsRefusedWithItsUsage()
+    public void AMoveAgainCommandIsRefusedWithItsUsage()
     {
-        var output = Play(out _, "canto ansgar\ncanto captain 1,1\n");
+        var output = Play(out _, "again ansgar\nagain captain 1,1\n");
 
-        Assert.Contains("> canto ansgar\nERROR: Usage: canto <unit> <x,y|stay>\n", output);
-        Assert.Contains("ERROR: Alder Fenn cannot Canto: he has no Canto\n", output);
+        Assert.Contains("> again ansgar\nERROR: Usage: again <unit> <x,y|stay>\n", output);
+        Assert.Contains("ERROR: Alder Fenn cannot move again: he has no Move Again\n", output);
     }
 
     [Fact]
@@ -62,6 +62,7 @@ public class CantoCliTests
 
         Assert.Equal(0, exit);
         Assert.Contains("Ansgar hits Archer for 11 (hp 6)", output);
+        // The script predates issue 1446 and spells the command `canto`, which is still read.
         Assert.Contains("> canto ansgar 4,5\nAnsgar moves again 4,4 -> 4,5\n", output);
         Assert.Contains("> canto ansgar 5,5\nAnsgar moves again 8,5 -> 5,5 via 7,5 6,5\n", output);
         Assert.Contains("Threat on Ansgar at 5,5 (Plain): no enemy can strike him next phase", output);

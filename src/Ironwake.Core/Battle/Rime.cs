@@ -24,7 +24,7 @@ public sealed record RimeTile(Coord At, Side Side, int Clock)
 /// (<see cref="Terrain.ThawsTo"/>) when the breather's side's next phase ends; a tile a unit stands
 /// on then holds until a phase change finds it empty, so nobody is left standing on water. The ice
 /// does not wear under feet, so both sides may cross it while it holds. No damage, no roll, no
-/// Canto after it. The breath makes no noise of its own; the wake check reads the board after it
+/// Move Again after it. The breath makes no noise of its own; the wake check reads the board after it
 /// like any command. The enemy never breathes, and the planner, <see cref="Resolver.Legal"/> and the
 /// Sim do not read it.
 /// </summary>
@@ -121,7 +121,7 @@ public static class Rime
         var frozen = line.Where(at => state.Map.TerrainAt(at, content).Id == WaterId).ToList();
         var struck = line.Select(state.UnitAt).OfType<BattleUnit>().ToList();
         events.Add(new Breathed(rider.Id, rider.At, ValueList<Coord>.From(line), ValueList<string>.From(struck.Select(u => u.Id)), ValueList<Coord>.From(frozen)));
-        state = state.WithUnit(rider with { Moved = true, Acted = true, Canto = null, Braced = false, Breathed = true });
+        state = state.WithUnit(rider with { Moved = true, Acted = true, MoveAgain = null, Braced = false, Breathed = true });
         foreach (var unit in struck)
         {
             events.Add(new UnitChilled(unit.Id, rider.Id, unit.Side, unit.Side == state.Phase));

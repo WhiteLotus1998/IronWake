@@ -55,7 +55,7 @@ public class ShoveTests
         Assert.Equal(new Coord(1, 1), hale.At);
         Assert.True(hale.Acted);
         Assert.True(hale.Moved);
-        Assert.Null(hale.Canto);
+        Assert.Null(hale.MoveAgain);
     }
 
     [Fact]

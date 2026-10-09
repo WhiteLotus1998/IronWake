@@ -23,7 +23,7 @@ public enum RejectionReason
     CannotRetreat,
     NoSuchArt,
     ArtRefused,
-    NoCanto,
+    NoMoveAgain,
     NotOnAnExit,
     MovedBeforeExit,
     NoKeepsake,
