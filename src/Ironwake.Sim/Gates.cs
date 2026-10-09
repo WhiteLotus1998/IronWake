@@ -1217,6 +1217,11 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
     /// <summary>The boss that swallowed the shard.</summary>
     public string Boss { get; init; } = "";
 
+    /// <summary>The company's HP summed as the swallow found it, and its max HP summed (round 525); both 0 when read without content.</summary>
+    public int CompanyHp { get; init; }
+
+    public int CompanyMaxHp { get; init; }
+
     /// <summary>The player phases begun in the stage.</summary>
     public int PlayerPhases { get; init; }
 
@@ -1278,7 +1283,12 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
             {
                 case ShardSwallowed swallowed when stage is null:
                     var company = after.UnitsOf(Side.Player).ToList();
-                    stage = new StageTwo(0, 0, company.Count, company.FirstOrDefault(u => u.IsCaptain)?.Hp ?? 0) { Boss = swallowed.UnitId };
+                    stage = new StageTwo(0, 0, company.Count, company.FirstOrDefault(u => u.IsCaptain)?.Hp ?? 0)
+                    {
+                        Boss = swallowed.UnitId,
+                        CompanyHp = content is null ? 0 : company.Sum(u => u.Hp),
+                        CompanyMaxHp = content is null ? 0 : company.Sum(u => u.MaxHp(content)),
+                    };
                     break;
                 case PhaseBegan began when stage is not null:
                     stage = stage with { Phases = stage.Phases + 1, PlayerPhases = stage.PlayerPhases + (began.Side == Side.Player ? 1 : 0) };
@@ -1372,6 +1382,9 @@ public sealed record StageOne(string Boss, int Arrived)
     /// <summary>Idle unit-phases whose unit had no command of its own in the phase, read as it closed.</summary>
     public int IdleUnread { get; init; }
 
+    /// <summary>Unarmed healers (<see cref="LookAt"/>'s kind) that fell before the swallow (round 525: the walk's price).</summary>
+    public int HealerFalls { get; init; }
+
     /// <summary>The idle unit-phases with an enemy seen out of reach, by unit id.</summary>
     public System.Collections.Immutable.ImmutableDictionary<string, Held> HeldBy { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, Held>.Empty;
 
@@ -1436,6 +1449,12 @@ public sealed record StageOne(string Boss, int Arrived)
                 _ => open,
             };
             stage = stage with { Reading = open };
+        }
+
+        var healerFalls = before.UnitsOf(Side.Player).Count(u => after.Find(u.Id) is not { Hp: > 0 } && Unarmed(content, u) && HeuristicPlayer.Healer(content, u));
+        if (healerFalls > 0)
+        {
+            stage = stage with { HealerFalls = stage.HealerFalls + healerFalls };
         }
 
         foreach (var e in read)
@@ -1581,8 +1600,7 @@ public sealed record StageOne(string Boss, int Arrived)
     public static Look LookAt(BattleState state, GameContent content, BattleUnit unit)
     {
         var foes = state.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player).Where(e => Dusk.Sees(state, unit.Side, e.At)).ToList();
-        var armed = Enumerable.Range(0, unit.Unit.Inventory.Count).Any(slot => unit.UsableWeaponAt(content, slot) is not null);
-        var kind = HeuristicPlayer.LosesTheMap(state, unit) ? "captain" : armed ? "armed" : HeuristicPlayer.Healer(content, unit) ? "healer" : "unarmed";
+        var kind = HeuristicPlayer.LosesTheMap(state, unit) ? "captain" : !Unarmed(content, unit) ? "armed" : HeuristicPlayer.Healer(content, unit) ? "healer" : "unarmed";
         if (foes.Count == 0)
         {
             return new Look(false, null, false, kind);
@@ -1593,6 +1611,10 @@ public sealed record StageOne(string Boss, int Arrived)
         var tiles = unit.Moved || unit.Acted ? new[] { unit.At } : Queries.Reachable(state, content, unit).Destinations.ToArray();
         return new Look(StrikeOnOffer(state, content, unit), nearest, tiles.Any(t => NearestFrom(t) < nearest), kind);
     }
+
+    /// <summary>Whether <paramref name="unit"/> carries no weapon it can strike with (<see cref="BattleUnit.UsableWeaponAt"/>).</summary>
+    private static bool Unarmed(GameContent content, BattleUnit unit) =>
+        !Enumerable.Range(0, unit.Unit.Inventory.Count).Any(slot => unit.UsableWeaponAt(content, slot) is not null);
 
     private static string? ActorOf(Command? command) => command switch
     {

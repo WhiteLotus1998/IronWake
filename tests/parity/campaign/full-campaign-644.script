@@ -677,16 +677,21 @@ wait wren
 end !
 move captain 3,5
 attack captain soldier-3
+move maud 8,4
 wait maud
 move wren 5,5
 wait wren
 end
+move captain 0,5
 attack captain hask-1
-move maud 4,5
+move maud 5,4
 item maud salve wren
-move wren 4,4
-attack wren hask-1
+move wren 1,5
+wait wren
 end
-move captain 1,5
 attack captain hask-1
+move maud 5,5
+wait maud
+move wren 1,6
+attack wren hask-1
 leave

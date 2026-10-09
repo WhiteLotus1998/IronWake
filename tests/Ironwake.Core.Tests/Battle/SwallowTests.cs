@@ -561,10 +561,10 @@ public class SwallowTests
             .Add("pell", new Ironwake.Sim.StageOne.Held("armed", System.Collections.Immutable.ImmutableList.Create(8), 0));
         var game = new Ironwake.Sim.GameResult(BattleResult.Lost, 12, mix, LossCause.Timeout)
         {
-            StageOne = new Ironwake.Sim.StageOne("h", 3) { Idle = 6, IdleFell = 1, IdleUnseen = 1, IdleHeld = 4, IdleUnread = 2, HeldBy = held },
+            StageOne = new Ironwake.Sim.StageOne("h", 3) { Idle = 6, IdleFell = 1, IdleUnseen = 1, IdleHeld = 4, IdleUnread = 2, HealerFalls = 1, HeldBy = held },
         };
 
-        Assert.Equal("stage 1 idle 6: fell before acting 1, no enemy seen 1, an enemy seen out of reach 4 (could close 3); unread 2; out of reach by unit: tamsin 3 (healer, median 13 tiles, could close 3), pell 1 (armed, median 8 tiles, could close 0)", Ironwake.Sim.FinaleRun.IdleLine(new[] { game }));
+        Assert.Equal("stage 1 idle 6: fell before acting 1, no enemy seen 1, an enemy seen out of reach 4 (could close 3; an unarmed healer's 3, the walk finding no safe tile that closes); unread 2; unarmed healers fallen in stage 1 1; out of reach by unit: tamsin 3 (healer, median 13 tiles, could close 3), pell 1 (armed, median 8 tiles, could close 0)", Ironwake.Sim.FinaleRun.IdleLine(new[] { game }));
         Assert.Null(Ironwake.Sim.FinaleRun.IdleLine(new[] { new Ironwake.Sim.GameResult(BattleResult.Won, 5, mix) }));
     }
 

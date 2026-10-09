@@ -1,0 +1,85 @@
+# issue 1395 (Table rounds 524, 525; DECISIONS/0377): the unarmed healer walks. A planner fix, not a lever.
+# --finale docs/samples/ironwake_keep_warden.map --level 8 --seeds 200, two-roll average; then --finale content/keep/ironwake_keep.map.
+# The walk (Players.cs, HealerWalk): a unit with a heal and no weapon, with no heal to give on a Rout or Defeat Boss map,
+# walks toward the nearest ally below half, else behind the ally nearest a seen enemy; only onto a tile that closes on
+# that ally and that no enemy's no-crit strike reaches (exposure 0); else it waits, counted apart in the idle line.
+#
+# Screen on the Warden sample, wins full / depleted / floor, unarmed healers fallen in stage 1 (depleted / floor),
+# company HP at the swallow (depleted), idle healer phases (depleted / floor):
+#   no walk (0376)                         91 / 66 / 1    19 / 107    61 %    1198 / 975
+#   (a) round 525 as agreed: least         91 / 67 / 0   101 / 176    58 %     170 / 171
+#       exposed closing tile, never lethal
+#   (b) exposure 0 with no one hurt,       91 / 68 / 0   103 / 174    59 %     208 / 194
+#       (a) toward the hurt
+#   (c) exposure 0 always (built)          91 / 84 / 0    83 / 170    60 %     239 / 222
+# Depleted under (c): swallowed 110 to 128, stage-1 timeouts 61 to 42; the race gate passes (2+ dose deaths in 0 of 84 won).
+# Full moves by a few unit-phases (an unarmed healer's idle 13 to 9); its wins do not move.
+# Her falls rise on every walk: she now stands near the company. Where they are taken is not traced; the walk's own
+# tiles are exposure 0 under (c), so the heal's tile (Heal, the safest of the tiles reaching the wounded) or a wave's
+# arrival is the likely place. (c) is the one walk that buys depleted's wins, and it kills her least of the three.
+#
+# --full --all (9 maps, 200 seeds): every gate cell unchanged against the walk off; timings only.
+# --finale content/keep/ironwake_keep.map (the campaign keep, the baseline 0353 to 0356): 148 / 114 / 0 to 149 / 142 / 0,
+#   finale: ok (depleted passes gate 1 at 142 of 120).
+#
+# The Warden sample under (c):
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 91/200 (46 %), losses 25 timeout 84 captain 0 protected: FAILED
+  length: median 11 turns over every game, limit 12: ok
+  bond: hunter killed 197, freed 0, standing 3 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 18, blocked 7, unfired 175, gate_in1 arrived 6, blocked 0, unfired 194, gate_in2 arrived 2, blocked 4, unfired 194, south_in arrived 5, blocked 0, unfired 195 of 200 (data; all blocked is decoration)
+  stage 1: on the board median turn 3 in 200 of 200; swallowed in 165, median turn 7 (earliest 5, latest 12); his first blow taken median turn 5 in 198; unit-phases 5951: on him 1447 (24 %), on the others 1361 (22 %), the rest 3143 (52 %: an item 387 (6 %), refused 544 (9 %), move only 2031 (34 %), idle 191 (3 %))
+  stage 1 timeouts: 25; at the limit, median boss HP 9 of 44, 1 standing; median actions a player phase on him 0.4, on the others 0.8, over 9 player phases; unit-phases 857: on him 130 (15 %), on the others 211 (24 %), the rest 516 (60 %: an item 92 (10 %), refused 88 (10 %), move only 292 (34 %), idle 44 (5 %))
+  stage 1 idle 191: fell before acting 0, no enemy seen 0, an enemy seen out of reach 191 (could close 185; an unarmed healer's 9, the walk finding no safe tile that closes); unread 57; unarmed healers fallen in stage 1 12; out of reach by unit: keziah 39 (armed, median 8 tiles, could close 39), pell 28 (armed, median 8 tiles, could close 28), maud 25 (armed, median 7 tiles, could close 22), brannock 24 (armed, median 8 tiles, could close 24), corin 22 (armed, median 7 tiles, could close 22), wren 18 (armed, median 5 tiles, could close 15), dunstan 12 (armed, median 8 tiles, could close 12), rook 7 (armed, median 9 tiles, could close 7), captain 6 (captain, median 6 tiles, could close 6), teodor 5 (armed, median 7 tiles, could close 5), ottilie 4 (armed, median 7 tiles, could close 4), ansgar 1 (armed, median 12 tiles, could close 1)
+  stage 2: reached 165 of 200, won 91; median 6 phases; clock deaths 0 in 92, 1 in 17, 2+ in 56 (data; the gate reads won games); at the swallow, median 5 standing, captain at 15 HP, company at 61 % HP; damage on him, 31 % from tiles he cannot reach (934 of 2929)
+  stage 2 race: won 91, player phases to the kill 0: 1, 1: 23, 2: 49, 3: 15, 4: 2, 5: 1; landings before it 0: 25, 1: 49, 2: 16, 4: 1; clock deaths 0 in 90, 1 in 1, 2+ in 0 (gate: 2+ in at most 10 %: ok); lost 74, the dose's first kill at landing 2: 11, 3: 23, 4: 6, 5: 24, 6: 8, none: 2
+  captain falls: 10 before the swallow (Hexer 4, Hask 2, Hask (countering) 1, Soldier 1, Sworn Hunter 1, Sworn Hunter (countering) 1), 74 after (frozen iron 69, Hask 5)
+  after the swallow, by his last plan: cornered 72 (frozen iron 69, Hask 3); read safe, crit-lethal 2 (Hask 2)
+  before the swallow, by the hunt: hunted, alone 4 (Hexer 2, Soldier 1, Sworn Hunter 1); hunted, behind the fronts 3 (Hask 2, Hexer 1); not hunted, behind the fronts 1 (Hexer 1); his own phase 2 (Hask (countering) 1, Sworn Hunter (countering) 1); down a line 0
+finale depleted: 12 units at level 8, heuristic wins 84/200 (42 %), losses 42 timeout 74 captain 0 protected: FAILED
+  length: median 12 turns over every game, limit 12: ok
+  bond: hunter killed 188, freed 0, standing 12 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 47, blocked 1, unfired 152, gate_in1 arrived 21, blocked 3, unfired 176, gate_in2 arrived 20, blocked 4, unfired 176, south_in arrived 11, blocked 0, unfired 189 of 200 (data; all blocked is decoration)
+  stage 1: on the board median turn 3 in 200 of 200; swallowed in 128, median turn 8 (earliest 6, latest 12); his first blow taken median turn 6 in 179; unit-phases 6246: on him 1079 (17 %), on the others 1995 (31 %), the rest 3172 (50 %: an item 536 (8 %), refused 590 (9 %), move only 1649 (26 %), idle 406 (6 %))
+  stage 1 timeouts: 42; at the limit, median boss HP 13 of 44, 1 standing; median actions a player phase on him 0.3, on the others 1.2, over 9 player phases; unit-phases 1406: on him 152 (10 %), on the others 473 (33 %), the rest 781 (55 %: an item 167 (11 %), refused 151 (10 %), move only 346 (24 %), idle 120 (8 %))
+  stage 1 idle 406: fell before acting 0, no enemy seen 0, an enemy seen out of reach 406 (could close 383; an unarmed healer's 239, the walk finding no safe tile that closes); unread 104; unarmed healers fallen in stage 1 83; out of reach by unit: tamsin 239 (healer, median 5 tiles, could close 219), pell 32 (armed, median 9 tiles, could close 32), bet 31 (armed, median 8 tiles, could close 31), mattias 25 (unarmed, median 7 tiles, could close 24), corin 20 (armed, median 8 tiles, could close 19), wren 18 (armed, median 6 tiles, could close 17), ines 14 (armed, median 9 tiles, could close 14), captain 9 (captain, median 6 tiles, could close 9), teodor 8 (armed, median 6 tiles, could close 8), wat 5 (armed, median 9 tiles, could close 5), dunstan 3 (armed, median 6 tiles, could close 3), ottilie 2 (armed, median 8 tiles, could close 2)
+  stage 2: reached 128 of 200, won 84; median 4 phases; clock deaths 0 in 77, 1 in 12, 2+ in 39 (data; the gate reads won games); at the swallow, median 4 standing, captain at 14 HP, company at 60 % HP; damage on him, 46 % from tiles he cannot reach (1066 of 2303)
+  stage 2 race: won 84, player phases to the kill 0: 1, 1: 22, 2: 43, 3: 12, 4: 6; landings before it 0: 23, 1: 44, 2: 11, 3: 6; clock deaths 0 in 76, 1 in 8, 2+ in 0 (gate: 2+ in at most 10 %: ok); lost 44, the dose's first kill at landing 2: 29, 3: 1, 4: 11, 5: 2, none: 1
+  captain falls: 30 before the swallow (Hask 16, Hexer 4, Soldier 4, Sworn Hunter 3, Brigand 2, Sworn Hunter (countering) 1), 44 after (frozen iron 42, Hask 2)
+  after the swallow, by his last plan: cornered 42 (frozen iron 42); read safe, crit-lethal 1 (Hask 1); unread 1 (Hask 1)
+  before the swallow, by the hunt: hunted, alone 6 (Hask 3, Hexer 1, Soldier 1, Sworn Hunter 1); hunted, paired 1 (Hask 1); hunted, behind the fronts 12 (Hask 6, Hexer 3, Sworn Hunter 2, Brigand 1); not hunted, alone 2 (Hask 1, Soldier 1); not hunted, behind the fronts 8 (Hask 5, Soldier 2, Brigand 1); his own phase 1 (Sworn Hunter (countering) 1); down a line 4
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 105 timeout 95 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 12 turns over every game, limit 12: ok
+  bond: hunter killed 136, freed 0, standing 64 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 89, blocked 4, unfired 107, gate_in1 arrived 49, blocked 18, unfired 133, gate_in2 arrived 54, blocked 13, unfired 133, south_in arrived 31, blocked 3, unfired 166 of 200 (data; all blocked is decoration)
+  stage 1: on the board median turn 3 in 199 of 200; swallowed in 14, median turn 10 (earliest 8, latest 12); his first blow taken median turn 6 in 118; unit-phases 5276: on him 466 (8 %), on the others 2214 (41 %), the rest 2596 (49 %: an item 689 (13 %), refused 661 (12 %), move only 950 (18 %), idle 296 (5 %))
+  stage 1 timeouts: 105; at the limit, median boss HP 23 of 44, 1 standing; median actions a player phase on him 0.2, on the others 1.3, over 9 player phases; unit-phases 3309: on him 280 (8 %), on the others 1288 (38 %), the rest 1741 (52 %: an item 434 (13 %), refused 391 (11 %), move only 696 (21 %), idle 220 (6 %))
+  stage 1 idle 296: fell before acting 0, no enemy seen 0, an enemy seen out of reach 296 (could close 250; an unarmed healer's 222, the walk finding no safe tile that closes); unread 2; unarmed healers fallen in stage 1 170; out of reach by unit: tamsin 222 (healer, median 3 tiles, could close 177), ines 24 (armed, median 9 tiles, could close 24), captain 12 (captain, median 6 tiles, could close 12), bet 10 (armed, median 9 tiles, could close 10), mattias 10 (unarmed, median 2 tiles, could close 9), ottilie 8 (armed, median 9 tiles, could close 8), wren 7 (armed, median 9 tiles, could close 7), teodor 2 (armed, median 6 tiles, could close 2), edda 1 (armed, median 8 tiles, could close 1)
+  stage 2: reached 14 of 200, won 0; median 11 phases; clock deaths 0 in 0, 1 in 5, 2+ in 9 (data; the gate reads won games); at the swallow, median 3 standing, captain at 17 HP, company at 45 % HP; damage on him, 0 % from tiles he cannot reach (0 of 23)
+  stage 2 race: won 0, none won; lost 14, the dose's first kill at landing 2: 6, 3: 4, 4: 4
+  captain falls: 81 before the swallow (Hask 37, Hexer 18, Sworn Hunter 16, Soldier 6, Brigand 2, Archer 1, Sworn Hunter (countering) 1), 14 after (frozen iron 14)
+  after the swallow, by his last plan: cornered 14 (frozen iron 14)
+  before the swallow, by the hunt: hunted, alone 22 (Sworn Hunter 8, Hexer 6, Hask 4, Soldier 3, Brigand 1); hunted, paired 2 (Hask 2); hunted, behind the fronts 40 (Hask 25, Hexer 7, Sworn Hunter 4, Soldier 2, Archer 1, Brigand 1); not hunted, alone 3 (Sworn Hunter 3); not hunted, behind the fronts 13 (Hask 6, Hexer 5, Soldier 1, Sworn Hunter 1); his own phase 1 (Sworn Hunter (countering) 1); down a line 1
+finale: FAILED
+#
+# The campaign keep under (c):
+finale: content/keep/ironwake_keep.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 149/200 (74 %), losses 45 timeout 6 captain 0 protected: ok
+  length: median 9 turns over every game, limit 12: ok
+  bond: hunter killed 197, freed 0, standing 3 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 20, blocked 7, unfired 173, gate_in1 arrived 6, blocked 2, unfired 192, gate_in2 arrived 7, blocked 1, unfired 192, south_in arrived 3, blocked 0, unfired 197 of 200 (data; all blocked is decoration)
+  captain falls: 6 before the swallow (Hask 2, Sworn Hunter (countering) 2, Hask (countering) 1, Sworn Hunter 1), 0 after (none)
+  before the swallow, by the hunt: hunted, alone 1 (Sworn Hunter 1); hunted, behind the fronts 1 (Hask 1); not hunted, behind the fronts 1 (Hask 1); his own phase 3 (Sworn Hunter (countering) 2, Hask (countering) 1); down a line 0
+finale depleted: 12 units at level 8, heuristic wins 142/200 (71 %), losses 44 timeout 14 captain 0 protected: ok
+  length: median 10 turns over every game, limit 12: ok
+  bond: hunter killed 191, freed 1, standing 8 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 51, blocked 0, unfired 149, gate_in1 arrived 19, blocked 4, unfired 177, gate_in2 arrived 20, blocked 3, unfired 177, south_in arrived 12, blocked 0, unfired 188 of 200 (data; all blocked is decoration)
+  captain falls: 14 before the swallow (Hask 6, Hask (countering) 3, Hexer 2, Sworn Hunter (countering) 2, Sworn Hunter 1), 0 after (none)
+  before the swallow, by the hunt: hunted, alone 2 (Hask 1, Hexer 1); hunted, paired 1 (Sworn Hunter 1); hunted, behind the fronts 4 (Hask 3, Hexer 1); not hunted, behind the fronts 2 (Hask 2); his own phase 5 (Hask (countering) 3, Sworn Hunter (countering) 2); down a line 0
+finale floor: 11 units at level 8, heuristic wins 0/200 (0 %), losses 130 timeout 70 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 12 turns over every game, limit 12: ok
+  bond: hunter killed 152, freed 0, standing 48 of 200 (data; the Sim does not price an ending)
+  falls: north_in arrived 97, blocked 4, unfired 99, gate_in1 arrived 54, blocked 16, unfired 130, gate_in2 arrived 62, blocked 8, unfired 130, south_in arrived 24, blocked 0, unfired 176 of 200 (data; all blocked is decoration)
+  captain falls: 70 before the swallow (Hask 17, Soldier 16, Sworn Hunter 14, Hexer 11, Brigand 9, Archer 2, Sworn Hunter (countering) 1), 0 after (none)
+  before the swallow, by the hunt: hunted, alone 16 (Soldier 5, Sworn Hunter 4, Brigand 3, Hexer 3, Hask 1); hunted, paired 2 (Sworn Hunter 2); hunted, behind the fronts 34 (Hask 12, Soldier 8, Sworn Hunter 6, Brigand 4, Hexer 4); not hunted, alone 4 (Brigand 2, Archer 1, Sworn Hunter 1); not hunted, behind the fronts 13 (Hask 4, Hexer 4, Soldier 3, Archer 1, Sworn Hunter 1); his own phase 1 (Sworn Hunter (countering) 1); down a line 0
+finale: ok
