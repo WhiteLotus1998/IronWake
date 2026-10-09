@@ -1314,6 +1314,11 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
 /// strike on offer that took none (refused: an enemy it sees in range of a weapon it can strike with, from a tile it
 /// could end on, as its first command of the phase was read), one that moved with none on offer (move only), and one
 /// that did neither (idle).
+/// The idle ones are split again (round 523): a unit that fell before acting (no longer standing as the phase closed), one
+/// that saw no enemy, and one that saw an enemy out of reach; the last is kept by unit, with its distance to the nearest
+/// enemy it saw, what kind of unit it is (the captain, an unarmed healer, unarmed, armed), and whether a tile it could end
+/// on stood nearer to one (<see cref="LookAt"/>). A unit with no command of its own in the phase is read as it closes
+/// (unread).
 /// </summary>
 public sealed record StageOne(string Boss, int Arrived)
 {
@@ -1355,6 +1360,30 @@ public sealed record StageOne(string Boss, int Arrived)
     /// <summary>Unit-phases that struck no one, had none on offer, and stood: a wait, or a unit that fell before acting.</summary>
     public int Idle { get; init; }
 
+    /// <summary>Idle unit-phases whose unit no longer stood as the phase closed: it fell before acting.</summary>
+    public int IdleFell { get; init; }
+
+    /// <summary>Idle unit-phases whose unit saw no enemy.</summary>
+    public int IdleUnseen { get; init; }
+
+    /// <summary>Idle unit-phases whose unit saw an enemy out of reach; <see cref="HeldBy"/> keeps them by unit.</summary>
+    public int IdleHeld { get; init; }
+
+    /// <summary>Idle unit-phases whose unit had no command of its own in the phase, read as it closed.</summary>
+    public int IdleUnread { get; init; }
+
+    /// <summary>The idle unit-phases with an enemy seen out of reach, by unit id.</summary>
+    public System.Collections.Immutable.ImmutableDictionary<string, Held> HeldBy { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, Held>.Empty;
+
+    /// <summary>A unit's idle unit-phases with an enemy seen out of reach: its kind, the distance to the nearest enemy it saw in each, and how many of them had a nearer tile it could end on.</summary>
+    public sealed record Held(string Kind, System.Collections.Immutable.ImmutableList<int> Distances, int CouldClose);
+
+    /// <summary>
+    /// What a unit had as a phase's command was read: a strike on offer (<see cref="StrikeOnOffer"/>), the distance to the
+    /// nearest enemy its side sees (null when none), whether a tile it could end on stands nearer to one, and its kind.
+    /// </summary>
+    public sealed record Look(bool Offer, int? Nearest, bool CanClose, string Kind);
+
     /// <summary>The player phase being read: the units standing as it began, and what each has done in it so far.</summary>
     private PhaseRead? Reading { get; init; }
 
@@ -1366,7 +1395,7 @@ public sealed record StageOne(string Boss, int Arrived)
 
         public System.Collections.Immutable.ImmutableHashSet<string> Moved { get; init; } = System.Collections.Immutable.ImmutableHashSet<string>.Empty;
 
-        public System.Collections.Immutable.ImmutableDictionary<string, bool> Offer { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, bool>.Empty;
+        public System.Collections.Immutable.ImmutableDictionary<string, Look> Looks { get; init; } = System.Collections.Immutable.ImmutableDictionary<string, Look>.Empty;
     }
 
     /// <summary>
@@ -1395,9 +1424,9 @@ public sealed record StageOne(string Boss, int Arrived)
 
         if (stage.Reading is { } open && before.Phase == Side.Player && ActorOf(command) is { } actor && open.Roster.Contains(actor))
         {
-            if (!open.Offer.ContainsKey(actor) && before.Find(actor) is { } unit)
+            if (!open.Looks.ContainsKey(actor) && before.Find(actor) is { } unit)
             {
-                open = open with { Offer = open.Offer.Add(actor, StrikeOnOffer(before, content, unit)) };
+                open = open with { Looks = open.Looks.Add(actor, LookAt(before, content, unit)) };
             }
 
             open = command switch
@@ -1466,9 +1495,13 @@ public sealed record StageOne(string Boss, int Arrived)
         }
 
         var (healed, refused, moved, idle) = (0, 0, 0, 0);
+        var (fell, unseen, heldCount, unread) = (0, 0, 0, 0);
+        var heldBy = stage.HeldBy;
         foreach (var id in open.Roster.Where(id => !open.Struck.Contains(id)))
         {
-            var offer = open.Offer.TryGetValue(id, out var read) ? read : state.Find(id) is { Side: Side.Player, Acted: false } unit && StrikeOnOffer(state, content, unit);
+            var standing = state.Find(id) is { Side: Side.Player } found ? found : null;
+            var look = open.Looks.TryGetValue(id, out var read) ? read : standing is null ? null : LookAt(state, content, standing);
+            var offer = look is { Offer: true };
             if (open.Used.Contains(id))
             {
                 healed++;
@@ -1484,10 +1517,41 @@ public sealed record StageOne(string Boss, int Arrived)
             else
             {
                 idle++;
+                if (read is null)
+                {
+                    unread++;
+                }
+
+                if (standing is null || look is null)
+                {
+                    fell++;
+                }
+                else if (look.Nearest is not { } distance)
+                {
+                    unseen++;
+                }
+                else
+                {
+                    heldCount++;
+                    var was = heldBy.TryGetValue(id, out var h) ? h : new Held(look.Kind, System.Collections.Immutable.ImmutableList<int>.Empty, 0);
+                    heldBy = heldBy.SetItem(id, was with { Distances = was.Distances.Add(distance), CouldClose = was.CouldClose + (look.CanClose ? 1 : 0) });
+                }
             }
         }
 
-        return stage with { Healed = stage.Healed + healed, Refused = stage.Refused + refused, MovedOnly = stage.MovedOnly + moved, Idle = stage.Idle + idle, Reading = null };
+        return stage with
+        {
+            Healed = stage.Healed + healed,
+            Refused = stage.Refused + refused,
+            MovedOnly = stage.MovedOnly + moved,
+            Idle = stage.Idle + idle,
+            IdleFell = stage.IdleFell + fell,
+            IdleUnseen = stage.IdleUnseen + unseen,
+            IdleHeld = stage.IdleHeld + heldCount,
+            IdleUnread = stage.IdleUnread + unread,
+            HeldBy = heldBy,
+            Reading = null,
+        };
     }
 
     /// <summary>
@@ -1506,6 +1570,28 @@ public sealed record StageOne(string Boss, int Arrived)
         var foes = state.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player).Where(e => Dusk.Sees(state, unit.Side, e.At)).ToList();
         var tiles = unit.Moved ? new[] { unit.At } : Queries.Reachable(state, content, unit).Destinations.ToArray();
         return tiles.Any(tile => foes.Any(foe => weapons.Any(w => w.InRange(tile.DistanceTo(foe.At)))));
+    }
+
+    /// <summary>
+    /// What <paramref name="unit"/> has on <paramref name="state"/> (round 523): <see cref="StrikeOnOffer"/>, the distance
+    /// from where it stands to the nearest enemy its side sees, whether a tile it could end on this phase stands nearer to
+    /// one, and its kind: the captain (a unit whose death loses the map), a healer with no weapon it can strike with,
+    /// unarmed, or armed.
+    /// </summary>
+    public static Look LookAt(BattleState state, GameContent content, BattleUnit unit)
+    {
+        var foes = state.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player).Where(e => Dusk.Sees(state, unit.Side, e.At)).ToList();
+        var armed = Enumerable.Range(0, unit.Unit.Inventory.Count).Any(slot => unit.UsableWeaponAt(content, slot) is not null);
+        var kind = HeuristicPlayer.LosesTheMap(state, unit) ? "captain" : armed ? "armed" : HeuristicPlayer.Healer(content, unit) ? "healer" : "unarmed";
+        if (foes.Count == 0)
+        {
+            return new Look(false, null, false, kind);
+        }
+
+        int NearestFrom(Coord tile) => foes.Min(f => tile.DistanceTo(f.At));
+        var nearest = NearestFrom(unit.At);
+        var tiles = unit.Moved || unit.Acted ? new[] { unit.At } : Queries.Reachable(state, content, unit).Destinations.ToArray();
+        return new Look(StrikeOnOffer(state, content, unit), nearest, tiles.Any(t => NearestFrom(t) < nearest), kind);
     }
 
     private static string? ActorOf(Command? command) => command switch

@@ -514,6 +514,61 @@ public class SwallowTests
     }
 
     [Fact]
+    public void TheStageOneReadSplitsTheIdleByWhatTheUnitSaw()
+    {
+        var state = Start();
+        var hask = Hask(state);
+        var captain = Captain(state);
+        var wren = state.Units.Single(u => u.Unit.Id == "wren");
+        var ivo = state.Units.Single(u => u.Unit.Id == "ivo");
+        var held = state.WithUnit(ivo with { Moved = true });
+        var gone = held.WithoutUnit(wren.Id);
+        var distance = state.UnitsOf(Side.Enemy).Min(e => ivo.At.DistanceTo(e.At));
+
+        var stage = Ironwake.Sim.StageOne.After(null, state, state, new GameEvent[] { new PhaseBegan(Side.Player, 1) }, Starter);
+        stage = Ironwake.Sim.StageOne.After(stage, state, state, new GameEvent[] { new CombatFought(captain.Id, hask.Id, 1, Side.Player, ValueList<StrikeEvent>.Empty, 20, 30) }, Starter, new Attack(captain.Id, hask.Id));
+        stage = Ironwake.Sim.StageOne.After(stage, held, held, Array.Empty<GameEvent>(), Starter, new Wait(ivo.Id));
+        stage = Ironwake.Sim.StageOne.After(stage, gone, gone, Array.Empty<GameEvent>(), Starter, new EndPhase());
+
+        Assert.Equal((2, 1, 0, 1, 1), (stage!.Idle, stage.IdleFell, stage.IdleUnseen, stage.IdleHeld, stage.IdleUnread));
+        var ivoHeld = stage.HeldBy[ivo.Id];
+        Assert.Equal(new[] { distance }, ivoHeld.Distances);
+        Assert.Equal(0, ivoHeld.CouldClose);
+    }
+
+    [Fact]
+    public void ALookNamesTheNearestEnemySeenAndWhetherTheUnitCouldClose()
+    {
+        var state = Start();
+        var captain = Captain(state);
+        var ivo = state.Units.Single(u => u.Unit.Id == "ivo");
+        var empty = state.UnitsOf(Side.Enemy).Aggregate(state, (s, e) => s.WithoutUnit(e.Id));
+
+        Assert.Equal("captain", Ironwake.Sim.StageOne.LookAt(state, Starter, captain).Kind);
+        Assert.False(Ironwake.Sim.StageOne.LookAt(state, Starter, ivo with { Moved = true }).CanClose);
+        Assert.Equal(state.UnitsOf(Side.Enemy).Min(e => ivo.At.DistanceTo(e.At)), Ironwake.Sim.StageOne.LookAt(state, Starter, ivo).Nearest);
+        var blind = Ironwake.Sim.StageOne.LookAt(empty, Starter, ivo);
+        Assert.Null(blind.Nearest);
+        Assert.False(blind.Offer);
+    }
+
+    [Fact]
+    public void TheIdleLineSplitsTheIdleAndNamesTheHeldByUnit()
+    {
+        var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
+        var held = System.Collections.Immutable.ImmutableDictionary<string, Ironwake.Sim.StageOne.Held>.Empty
+            .Add("tamsin", new Ironwake.Sim.StageOne.Held("healer", System.Collections.Immutable.ImmutableList.Create(13, 12, 14), 3))
+            .Add("pell", new Ironwake.Sim.StageOne.Held("armed", System.Collections.Immutable.ImmutableList.Create(8), 0));
+        var game = new Ironwake.Sim.GameResult(BattleResult.Lost, 12, mix, LossCause.Timeout)
+        {
+            StageOne = new Ironwake.Sim.StageOne("h", 3) { Idle = 6, IdleFell = 1, IdleUnseen = 1, IdleHeld = 4, IdleUnread = 2, HeldBy = held },
+        };
+
+        Assert.Equal("stage 1 idle 6: fell before acting 1, no enemy seen 1, an enemy seen out of reach 4 (could close 3); unread 2; out of reach by unit: tamsin 3 (healer, median 13 tiles, could close 3), pell 1 (armed, median 8 tiles, could close 0)", Ironwake.Sim.FinaleRun.IdleLine(new[] { game }));
+        Assert.Null(Ironwake.Sim.FinaleRun.IdleLine(new[] { new Ironwake.Sim.GameResult(BattleResult.Won, 5, mix) }));
+    }
+
+    [Fact]
     public void AStrikeIsOnOfferOnlyToAUnitThatCanStillReachAnEnemyItSees()
     {
         var state = Start();

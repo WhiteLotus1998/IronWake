@@ -1,0 +1,36 @@
+# issue 1395 (Table round 523; DECISIONS/0376): stage 1's idle unit-phases split three ways, by unit. A read; no board change.
+# --finale docs/samples/ironwake_keep_warden.map --level 8 --seeds 200, two-roll average; the sample as 0374 left it (91 / 66).
+# Idle (0375: struck no one, no strike on offer, did not move) is split: fell before acting (not standing as the phase
+# closed); no enemy seen; an enemy seen out of reach, kept by unit with its kind (the captain, a healer with no weapon it
+# can strike with, unarmed, armed), its median distance to the nearest enemy seen, and how many of its phases had a tile
+# it could end on nearer to one (could close). Unread: idle units with no command of their own, read as the phase closed.
+#
+# summary (full / depleted / floor):
+#   idle unit-phases               195 / 1384 / 1065
+#   fell before acting               0 /    0 /    0
+#   no enemy seen                    0 /    0 /    0
+#   an enemy seen out of reach     195 / 1384 / 1065   (could close 189 / 1379 / 1004)
+#   of which Tamsin (a chaplain, unarmed)  - / 1198 /  975   (median 13 / 8 tiles)
+#   unread                          57 /  108 /    8
+#
+# Read: the idle is neither attrition nor sight. On depleted and floor it is one unit: Tamsin, the hired chaplain, an
+# unarmed healer, stands 8 to 13 tiles from every enemy with a nearer tile open in nearly every phase. That is the
+# heuristic's approach: with no weapon it returns no destination on a Rout or Defeat Boss map (Players.cs, Approach,
+# `weapon is null`), so a healer with no one hurt in reach waits where she is. A planner hold, round 523's third bucket,
+# and the largest share by far: 1198 of depleted's 1384 (87 %), 975 of floor's 1065 (92 %). Every other unit stands idle
+# a few dozen phases at most. Full fields no unarmed unit; its 195 are armed units spread thin. Without Tamsin, depleted's
+# idle is about 3 % of its stage-1 unit-phases, full's shape; its distance is then its 22 % move only.
+finale: docs/samples/ironwake_keep_warden.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 91/200 (46 %), losses 25 timeout 84 captain 0 protected: FAILED
+  stage 1: on the board median turn 3 in 200 of 200; swallowed in 165, median turn 7 (earliest 5, latest 12); his first blow taken median turn 5 in 198; unit-phases 5951: on him 1447 (24 %), on the others 1361 (22 %), the rest 3143 (52 %: an item 386 (6 %), refused 544 (9 %), move only 2028 (34 %), idle 195 (3 %))
+  stage 1 timeouts: 25; at the limit, median boss HP 9 of 44, 1 standing; median actions a player phase on him 0.4, on the others 0.8, over 9 player phases; unit-phases 857: on him 130 (15 %), on the others 211 (24 %), the rest 516 (60 %: an item 92 (10 %), refused 88 (10 %), move only 292 (34 %), idle 44 (5 %))
+  stage 1 idle 195: fell before acting 0, no enemy seen 0, an enemy seen out of reach 195 (could close 189); unread 57; out of reach by unit: keziah 39 (armed, median 8 tiles, could close 39), maud 29 (armed, median 7 tiles, could close 26), pell 28 (armed, median 8 tiles, could close 28), brannock 24 (armed, median 8 tiles, could close 24), corin 22 (armed, median 7 tiles, could close 22), wren 18 (armed, median 5 tiles, could close 15), dunstan 12 (armed, median 8 tiles, could close 12), rook 7 (armed, median 9 tiles, could close 7), captain 6 (captain, median 6 tiles, could close 6), teodor 5 (armed, median 7 tiles, could close 5), ottilie 4 (armed, median 7 tiles, could close 4), ansgar 1 (armed, median 12 tiles, could close 1)
+finale depleted: 12 units at level 8, heuristic wins 66/200 (33 %), losses 61 timeout 73 captain 0 protected: FAILED
+  stage 1: on the board median turn 3 in 199 of 200; swallowed in 110, median turn 8 (earliest 6, latest 12); his first blow taken median turn 6 in 181; unit-phases 6755: on him 998 (14 %), on the others 1914 (28 %), the rest 3843 (56 %: an item 325 (4 %), refused 646 (9 %), move only 1500 (22 %), idle 1384 (20 %))
+  stage 1 timeouts: 61; at the limit, median boss HP 12 of 44, 2 standing; median actions a player phase on him 0.3, on the others 1.1, over 9 player phases; unit-phases 2253: on him 193 (8 %), on the others 631 (28 %), the rest 1429 (63 %: an item 171 (7 %), refused 247 (10 %), move only 443 (19 %), idle 574 (25 %))
+  stage 1 idle 1384: fell before acting 0, no enemy seen 0, an enemy seen out of reach 1384 (could close 1379); unread 108; out of reach by unit: tamsin 1198 (healer, median 13 tiles, could close 1194), pell 37 (armed, median 8 tiles, could close 37), mattias 30 (unarmed, median 9 tiles, could close 29), corin 27 (armed, median 9 tiles, could close 27), bet 24 (armed, median 9 tiles, could close 24), ines 21 (armed, median 9 tiles, could close 21), wren 21 (armed, median 9 tiles, could close 21), captain 12 (captain, median 6 tiles, could close 12), dunstan 6 (armed, median 8 tiles, could close 6), teodor 4 (armed, median 6 tiles, could close 4), wat 3 (armed, median 9 tiles, could close 3), ottilie 1 (armed, median 6 tiles, could close 1)
+finale floor: 11 units at level 8, heuristic wins 1/200 (1 %), losses 81 timeout 118 captain 0 protected: data, a cold chair's play decides (won at least once)
+  stage 1: on the board median turn 3 in 200 of 200; swallowed in 7, median turn 11 (earliest 7, latest 11); his first blow taken median turn 6 in 101; unit-phases 5437: on him 340 (6 %), on the others 2065 (37 %), the rest 3032 (55 %: an item 548 (10 %), refused 671 (12 %), move only 748 (13 %), idle 1065 (19 %))
+  stage 1 timeouts: 81; at the limit, median boss HP 25 of 44, 2 standing; median actions a player phase on him 0.2, on the others 1.2, over 9 player phases; unit-phases 2762: on him 219 (7 %), on the others 955 (34 %), the rest 1588 (57 %: an item 271 (9 %), refused 340 (12 %), move only 434 (15 %), idle 543 (19 %))
+  stage 1 idle 1065: fell before acting 0, no enemy seen 0, an enemy seen out of reach 1065 (could close 1004); unread 8; out of reach by unit: tamsin 975 (healer, median 8 tiles, could close 915), mattias 19 (unarmed, median 6 tiles, could close 18), wren 16 (armed, median 9 tiles, could close 16), captain 15 (captain, median 6 tiles, could close 15), ines 15 (armed, median 9 tiles, could close 15), bet 12 (armed, median 8 tiles, could close 12), teodor 6 (armed, median 6 tiles, could close 6), edda 4 (armed, median 9 tiles, could close 4), ottilie 3 (armed, median 9 tiles, could close 3)
+finale: FAILED
