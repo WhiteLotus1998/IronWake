@@ -208,7 +208,7 @@
       "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 20, "lck": 10, "def": 30, "res": 10, "cha": 10 },
       "ranks": { "lance": "A" },
       "inventory": [ { "item": "wardens_lance" } ],
-      "swallow": { "hp": 24, "def": 3, "res": 3, "heal": 4, "rooted": true, "late": true, "race": true, "description": "The Iron Warden. His lance's pommel is empty; the shard is in him now." }
+      "swallow": { "hp": 20, "def": 3, "res": 3, "heal": 2, "rooted": true, "late": true, "race": true, "description": "The Iron Warden. His lance's pommel is empty; the shard is in him now." }
     },
     {
       "id": "finale_hunter",
