@@ -1580,6 +1580,15 @@ public sealed record StageOne(string Boss, int Arrived)
     /// </summary>
     public sealed record Look(bool Offer, int? Nearest, bool CanClose, string Kind);
 
+    /// <summary>The tile he stood on as stage 1 began: his hold tile on a <c>holds:</c> map.</summary>
+    public Coord Home { get; init; }
+
+    /// <summary>
+    /// Issue 1441's bait read (Table round 530): each strike he made in an enemy phase of stage 1, by kind (<c>lance</c>: a
+    /// combat he opened; <c>line</c>: a line strike that struck someone) and the distance from <see cref="Home"/> he struck from.
+    /// </summary>
+    public System.Collections.Immutable.ImmutableList<(string Kind, int Off)> BossStrikes { get; init; } = System.Collections.Immutable.ImmutableList<(string Kind, int Off)>.Empty;
+
     /// <summary>The player phase being read: the units standing as it began, and what each has done in it so far.</summary>
     private PhaseRead? Reading { get; init; }
 
@@ -1610,7 +1619,7 @@ public sealed record StageOne(string Boss, int Arrived)
                 return null;
             }
 
-            stage = new StageOne(boss.Id, after.Turn) { BossMaxHp = boss.MaxHp(content) };
+            stage = new StageOne(boss.Id, after.Turn) { BossMaxHp = boss.MaxHp(content), Home = boss.At };
         }
 
         if (stage.SwallowTurn is not null)
@@ -1666,6 +1675,12 @@ public sealed record StageOne(string Boss, int Arrived)
                     break;
                 case AreaCastAt cast when before.Phase == Side.Player && before.Find(cast.CasterId) is { Side: Side.Player } && cast.Struck.Count > 0:
                     stage = Struck(stage, cast.Struck.Contains(stage.Boss), before.Turn, cast.CasterId);
+                    break;
+                case CombatFought fought when fought.Phase == Side.Enemy && fought.AttackerId == stage.Boss && after.Find(stage.Boss) is { } striking:
+                    stage = stage with { BossStrikes = stage.BossStrikes.Add(("lance", striking.At.DistanceTo(stage.Home))) };
+                    break;
+                case LineStruck line when before.Phase == Side.Enemy && line.UnitId == stage.Boss && line.Struck.Count > 0:
+                    stage = stage with { BossStrikes = stage.BossStrikes.Add(("line", line.From.DistanceTo(stage.Home))) };
                     break;
                 case ShardSwallowed swallowed when swallowed.UnitId == stage.Boss:
                     stage = stage with { SwallowTurn = before.Turn };
