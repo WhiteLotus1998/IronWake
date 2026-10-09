@@ -358,6 +358,13 @@ public sealed record MapDefinition(
     public bool SeizeHold { get; init; }
 
     /// <summary>
+    /// The <c>shard_race:</c> header (issue 1386, the secret path, <see cref="ShardRun"/>): on a Defeat Boss map, a
+    /// boss carrying a second stage does not swallow when his first bar falls; he runs back to the inner tile with
+    /// the shard and swallows only when the race's phases run out. Null for no race: the swallow is at once.
+    /// </summary>
+    public ShardRace? ShardRace { get; init; }
+
+    /// <summary>
     /// The <c>drops:</c> header (issue 1246): the tiles of placed enemies whose Lore tomes go to the
     /// wagon when they die (<see cref="TomeDrop"/>), kept only if the map is won, as a chest's overflow
     /// is. Each tile places an enemy that carries a Lore tome. Empty for none.

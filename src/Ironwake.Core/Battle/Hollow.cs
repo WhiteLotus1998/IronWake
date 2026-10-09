@@ -71,6 +71,7 @@ public static class Hollow
             Watch c => c.UnitId,
             Cover c => c.UnitId,
             Talk c => c.UnitId,
+            TakeShard c => c.UnitId,
             _ => null,
         };
         return unitId is not null && state.Find(unitId) is { Hollow: not null } hollow

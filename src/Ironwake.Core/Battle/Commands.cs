@@ -143,6 +143,13 @@ public sealed record Cover(string UnitId, string AllyId) : Command;
 /// </summary>
 public sealed record Talk(string UnitId, string TargetId) : Command;
 
+/// <summary>
+/// Take the shard (issue 1386, <see cref="ShardRun"/>): a company unit beside <paramref name="BossId"/>, a beaten boss
+/// running with the shard, takes it and breaks it as its action, in place of Attack, Item or Wait, after its Move or
+/// without one. He leaves the board alive, in the coma; no Canto follows.
+/// </summary>
+public sealed record TakeShard(string UnitId, string BossId) : Command;
+
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
 

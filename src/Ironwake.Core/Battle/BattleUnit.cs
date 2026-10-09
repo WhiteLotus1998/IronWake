@@ -227,6 +227,12 @@ public sealed record BattleUnit(
     /// <summary>Whether the unit has swallowed the shard and stands in its second stage (issue 1385, <see cref="Core.Swallow"/>).</summary>
     public bool Swallowed { get; init; }
 
+    /// <summary>
+    /// The shard race (issue 1386, <see cref="ShardRun"/>): null before his first bar falls on a race map, and on every other
+    /// map; above 0 the phases of his side left before he swallows while he runs with the shard; 0 once the race ran out.
+    /// </summary>
+    public int? ShardIn { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 

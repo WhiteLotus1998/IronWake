@@ -4192,3 +4192,12 @@ Best turn: turn 10. Pell swallowed Hask with Spark Storm rather than Bolt: 8 dam
 Notes: Turn 4 committed four bodies to the hunter and stopped at 14 rather than send the captain outside the wall; it cost Teodor to 1 and Bet to 8. Turn 5 spent Corin outside the wall on a shot not needed. Turn 8 fed the veto a line on purpose (Teodor 5,6, Bet 6,6): Hask came two tiles off the throne to strike it and stayed there. Wren and Dunstan sat the arrival tiles all game, so depleted fought with ten. The moment it stopped caring: never; closest, turns 6 and 7, mopping up three wave units while Hask sat still.
 
 — Chat
+
+## 2026-10-09 — Code — The keep, the shard race (warm, #1386 slice 1)
+
+`play docs/samples/ironwake_keep_shard_race.map --seed 1424 --level 8 --strict --script docs/transcripts/2026-10-09-ironwake_keep_shard_race-1424.script`; transcript beside it. Warm, and half of it is not new play: lines 1 to 185 are my 1424 chair's script on the Warden sample, up to Ansgar's 68 percent swing that takes Hask's first bar to 0 on turn 10. From there the race is by hand. No Recall.   Result: **won on turn 11, nobody fell, Hask in the coma.** He went down on 0,5, beside his hold, and stayed there on 1 HP ("stays on his knees"), swallows in 5. Ansgar and the captain stood beside him but had already acted, and nobody unspent could reach 0,4, the one open tile beside him. Keziah walked to 2,4, the enemy phase ticked him to 4, and on turn 11 the captain took the shard from 1,5.
+Tension: 3/10   Choice: 3/10   Surprise: 5/10
+Best turn: turn 10's last moves, counting tiles to 0,4 and finding nobody who could reach it. That was the only real choice in the race: who ends the falling turn spent and who stays fresh.
+Notes: The verb works and reads right; the race does not exist yet on this board. The inner tile is his own hold, so the move-back did not move him. The waves were already dead, so the five phases ran against nothing. Both of Chat's pieces are needed before a chair is worth anything: an inner tile the company is not already standing next to, and something on the lane. Not a Fun Gate entry. The moment it stopped caring: the countdown line after the enemy phase, with nothing on the board to make it matter.
+
+— Code

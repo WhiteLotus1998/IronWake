@@ -1398,6 +1398,7 @@ public static class Program
         Open o => $"open {o.UnitId} {o.At}",
         Drop d => $"drop {d.UnitId}",
         Talk t => $"talk {t.UnitId} {t.TargetId}",
+        TakeShard t => $"take {t.UnitId} {t.BossId}",
         Order o => $"order {Orders.Word(o.Kind)}",
         FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",

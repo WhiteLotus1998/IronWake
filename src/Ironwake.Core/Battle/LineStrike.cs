@@ -245,7 +245,7 @@ public static class LineStrike
     {
         var board = tile == unit.At ? state : state.WithUnit(unit with { At = tile });
         var other = unit.Side == Side.Player ? Side.Enemy : Side.Player;
-        foreach (var striker in board.UnitsOf(other).Where(u => Of(content, u) is not null))
+        foreach (var striker in board.UnitsOf(other).Where(u => Of(content, u) is not null && !ShardRun.Running(u)))
         {
             var planned = EnemyAi.PlanUnit(board with { Phase = other }, content, striker with { Moved = false, Acted = false });
             if (planned.OfType<StrikeLine>().SingleOrDefault() is not { } line)
