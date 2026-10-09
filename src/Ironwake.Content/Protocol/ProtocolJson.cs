@@ -457,9 +457,6 @@ public static class ProtocolJson
                 w.WriteString("unit", kb.UnitId);
                 WriteCoord(w, "at", kb.At);
                 break;
-            case FrozenIronStilled fs:
-                w.WriteNumber("dose", fs.Dose);
-                break;
             case FrozenIronTurned ft:
                 w.WriteString("unit", ft.UnitId);
                 w.WriteNumber("floor", ft.Floor);

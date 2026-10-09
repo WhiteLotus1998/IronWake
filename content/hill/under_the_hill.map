@@ -3,6 +3,7 @@ size: 16x12
 win: defeat_boss
 kin_shard: 7,6
 swallowed: 4,6
+shard_breaks: turns
 turn_limit: 12
 recall: 3
 enemy_level: 8

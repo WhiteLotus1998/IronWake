@@ -201,19 +201,13 @@ public static class KinShard
 
     /// <summary>
     /// <paramref name="unit"/> takes the lying shard and breaks it: the taker is done for the phase. On a
-    /// <c>shard_breaks: stills</c> map with a swallowed boss standing, the frost stills at its dose, or at the stage's step if that is more (<see cref="FrozenIronStilled"/>); on a <c>turns</c> map it turns on him (<see cref="FrozenIronTurned"/>).
+    /// <c>shard_breaks: turns</c> map with a swallowed boss standing, the frost turns on him (<see cref="FrozenIronTurned"/>).
     /// </summary>
     public static BattleState Take(BattleState state, GameContent content, BattleUnit unit, List<GameEvent> events)
     {
         events.Add(new KinShardBroken(unit.Id, Of(state)!.Lies!.Value));
         state = state.WithUnit(unit with { Moved = true, Acted = true, MoveAgain = null }) with { Shard = ShardHold.Gone };
-        if (Swallow.Stilled(state) && Swallow.Casts(state, Side.Enemy))
-        {
-            // A broken shard stills the frost but never ends it: the held dose is at least one step, so a race with no limit still closes.
-            state = state with { FrozenIron = Math.Max(state.FrozenIron, Swallow.Step(state, Side.Enemy)) };
-            events.Add(new FrozenIronStilled(state.FrozenIron));
-        }
-        else if (Swallow.Turned(state) && state.UnitsOf(Side.Enemy).FirstOrDefault(u => u is { Swallowed: true, Retreated: false }) is { } kin)
+        if (Swallow.Turned(state) && state.UnitsOf(Side.Enemy).FirstOrDefault(u => u is { Swallowed: true, Retreated: false }) is { } kin)
         {
             events.Add(new FrozenIronTurned(kin.Id, Swallow.Floor(kin, content)));
         }
@@ -228,8 +222,7 @@ public static class KinShard
     public static string? Line(BattleState state, GameContent content, UnitNames names) => Of(state) switch
     {
         null => null,
-        { Broken: true } => Swallow.Stilled(state) ? "The shard is broken: the Kin re-takes no one, and Frozen Iron climbs no more"
-            : Swallow.Turned(state) ? "The shard is broken: the Kin re-takes no one, and its frost lands on it too"
+        { Broken: true } => Swallow.Turned(state) ? "The shard is broken: the Kin re-takes no one, and its frost lands on it too"
             : "The shard is broken: the Kin re-takes no one",
         { Lies: { } at } => $"The shard lies on {at}: take it from on or beside it (take <unit> {Ground}); the Kin re-takes no one while it lies; at the enemy phase the nearest sworn who reaches it picks it up",
         { Bearer: { } bearer } => $"{names[bearer]} carries the shard: while a sworn holds it the Kin re-takes one fallen sworn each enemy phase, at half HP; it drops where he falls"

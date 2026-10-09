@@ -5,10 +5,10 @@ using static Ironwake.Core.Tests.Battle.BattleFixture;
 namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
-/// What a broken shard does to the frost (issue 1386 slice 3e, Table rounds 550 to 555, both on samples until Chat's cold
-/// chair). On a <c>shard_breaks: stills</c> map Frozen Iron holds at the dose it reached (never below the stage's step) and
-/// climbs no more. On a <c>shard_breaks: turns</c> map it keeps climbing and lands on the Kin too, never taking him below
-/// half his stage's bar, so the frost alone never wins the hill. Without the header it climbs as before.
+/// What a broken shard does to the frost (issue 1386 slices 3e and 3f, Table rounds 550 to 558, DECISIONS/0395). On a
+/// <c>shard_breaks: turns</c> map it keeps climbing and lands on the Kin too, never taking him below half his stage's bar,
+/// so the frost alone never wins the hill. Without the header it climbs as before. The held dose, <c>stills</c>, was
+/// killed (0395) and no longer parses.
 /// </summary>
 public class ShardBreaksTests
 {
@@ -18,7 +18,7 @@ public class ShardBreaksTests
         win: defeat_boss
         kin_shard: 5,2
         swallowed: 9,2
-        shard_breaks: stills
+        shard_breaks: turns
         turn_limit: 10
         recall: 3
         enemy_level: 1
@@ -38,9 +38,9 @@ public class ShardBreaksTests
         E soldier 7,2 group:sworn behavior:hold
         """;
 
-    private static string Turns => Hill.Replace("shard_breaks: stills", "shard_breaks: turns");
+    private static string Turns => Hill;
 
-    private static string Climbing => Hill.Replace("shard_breaks: stills\n", "");
+    private static string Climbing => Hill.Replace("shard_breaks: turns\n", "");
 
     private static KinStage Stage => Starter.Unit("hask_warden").Swallow!;
 
@@ -77,8 +77,6 @@ public class ShardBreaksTests
     [Fact]
     public void TheHeaderRoundTripsAndNeedsAKinShardAndASwallowedBoss()
     {
-        Assert.Equal(ShardBreak.Stills, MapFixture.Parse(Hill, "hill.map").ShardBreaks);
-        Assert.Contains("shard_breaks: stills\n", MapFormat.Write(MapFixture.Parse(Hill, "hill.map"), Starter));
         Assert.Equal(ShardBreak.Turns, MapFixture.Parse(Turns, "hill.map").ShardBreaks);
         Assert.Contains("shard_breaks: turns\n", MapFormat.Write(MapFixture.Parse(Turns, "hill.map"), Starter));
         Assert.Equal(ShardBreak.None, MapFixture.Parse(Climbing, "hill.map").ShardBreaks);
@@ -87,26 +85,15 @@ public class ShardBreaksTests
         Assert.Contains("needs both kin_shard: and swallowed:", noShard.Message);
         var noKin = Assert.Throws<MapException>(() => MapFixture.Parse(Turns.Replace("swallowed: 9,2\n", ""), "hill.map"));
         Assert.Contains("needs both kin_shard: and swallowed:", noKin.Message);
-        var word = Assert.Throws<MapException>(() => MapFixture.Parse(Hill.Replace("shard_breaks: stills", "shard_breaks: on"), "hill.map"));
-        Assert.Contains("names 'stills' or 'turns'", word.Message);
+        var word = Assert.Throws<MapException>(() => MapFixture.Parse(Turns.Replace("shard_breaks: turns", "shard_breaks: on"), "hill.map"));
+        Assert.Contains("names 'turns', got 'on'", word.Message);
     }
 
     [Fact]
-    public void StillsHoldsFrozenIronAtTheDoseItReached()
+    public void TheKilledStillsNoLongerParses()
     {
-        var take = Break(Dropped(Hill, 6));
-        Assert.Null(take.Rejection);
-        Assert.Equal(new FrozenIronStilled(6), Assert.Single(take.Events.OfType<FrozenIronStilled>()));
-        Assert.True(Swallow.Stilled(take.Next));
-        Assert.Equal(new[] { 6, 6, 6 }, Landings(take.Next, 3).Select(f => f.Amount));
-    }
-
-    [Fact]
-    public void StillsAtAnEarlyBreakHoldsOneStepNeverNone()
-    {
-        var take = Break(Dropped(Hill, 0));
-        Assert.Equal(new FrozenIronStilled(Stage.Step), Assert.Single(take.Events.OfType<FrozenIronStilled>()));
-        Assert.Equal(new[] { Stage.Step, Stage.Step }, Landings(take.Next, 2).Select(f => f.Amount));
+        var stills = Assert.Throws<MapException>(() => MapFixture.Parse(Turns.Replace("shard_breaks: turns", "shard_breaks: stills"), "hill.map"));
+        Assert.Contains("names 'turns', got 'stills'", stills.Message);
     }
 
     [Fact]
@@ -114,8 +101,7 @@ public class ShardBreaksTests
     {
         var take = Break(Dropped(Climbing, 6));
         Assert.Null(take.Rejection);
-        Assert.DoesNotContain(take.Events, e => e is FrozenIronStilled or FrozenIronTurned);
-        Assert.False(Swallow.Stilled(take.Next));
+        Assert.DoesNotContain(take.Events, e => e is FrozenIronTurned);
         Assert.False(Swallow.Turned(take.Next));
         var landed = Landings(take.Next, 2);
         Assert.Equal(new[] { 6, 9 }, landed.Select(f => f.Amount));
@@ -126,13 +112,11 @@ public class ShardBreaksTests
     [Fact]
     public void AWholeShardLeavesTheClimbAndSparesTheKin()
     {
-        var stills = Dropped(Hill, 6);
-        Assert.False(Swallow.Stilled(stills));
-        Assert.Equal(6 + Stage.Step, Landings(stills, 2)[1].Amount);
-
         var turns = Dropped(Turns, 6);
         Assert.False(Swallow.Turned(turns));
-        Assert.All(Landings(turns, 2), f => Assert.DoesNotContain(Kin(turns).Id, f.Struck));
+        var landed = Landings(turns, 2);
+        Assert.Equal(6 + Stage.Step, landed[1].Amount);
+        Assert.All(landed, f => Assert.DoesNotContain(Kin(turns).Id, f.Struck));
     }
 
     [Fact]
@@ -205,12 +189,9 @@ public class ShardBreaksTests
     [Fact]
     public void TheRowsSayWhatTheBreakDid()
     {
-        var stills = Dropped(Hill, 6);
-        var names = UnitNames.Of(stills, Starter);
-        Assert.Contains("3 more each time", Swallow.Line(stills, Starter, names));
-        var stilled = Break(stills).Next;
-        Assert.Equal("Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, and climbs no more (the shard is broken), then the Kin heals him 2", Swallow.Line(stilled, Starter, names));
-        Assert.Equal("The shard is broken: the Kin re-takes no one, and Frozen Iron climbs no more", KinShard.Line(stilled, Starter, names));
+        var whole = Dropped(Turns, 6);
+        var names = UnitNames.Of(whole, Starter);
+        Assert.Equal("Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2", Swallow.Line(whole, Starter, names));
 
         var turned = Break(Dropped(Turns, 6)).Next;
         Assert.Equal("Hask stands swallowed: Frozen Iron lands for 6 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2", Swallow.Line(turned, Starter, names));

@@ -54,7 +54,7 @@ public static class MapFormat
 
         if (map.ShardBreaks != ShardBreak.None)
         {
-            sb.Append("shard_breaks: ").Append(map.ShardBreaks == ShardBreak.Stills ? "stills" : "turns").Append('\n');
+            sb.Append("shard_breaks: ").Append("turns").Append('\n');
         }
 
         if ((map.ShardRace ?? map.SecretRace?.Race) is { } race)
@@ -717,7 +717,7 @@ public static class MapFormat
         }
 
         /// <summary>
-        /// The <c>shard_breaks:</c> header (issue 1386 slice 3e): <c>stills</c> or <c>turns</c>, only on a map that carries
+        /// The <c>shard_breaks:</c> header (issue 1386 slices 3e and 3f): <c>turns</c> (<c>stills</c> was killed, 0395), only on a map that carries
         /// both a Kin shard (<c>kin_shard:</c>) and a boss who begins swallowed (<c>swallowed:</c>), since it changes that
         /// boss's frost when that shard breaks.
         /// </summary>
@@ -730,9 +730,8 @@ public static class MapFormat
 
             var rule = entry.Value.Trim() switch
             {
-                "stills" => ShardBreak.Stills,
                 "turns" => ShardBreak.Turns,
-                _ => throw ErrorAt(entry.Line, $"shard_breaks names 'stills' or 'turns', got '{entry.Value}'"),
+                _ => throw ErrorAt(entry.Line, $"shard_breaks names 'turns', got '{entry.Value}'"),
             };
             if (map.KinShard is null || map.Swallowed is null)
             {
