@@ -429,7 +429,7 @@ public sealed record BattleState(
             }
         }
 
-        return new BattleState(map, ValueList<BattleUnit>.From(units), 1, Side.Player, seed, scheme, map.RecallCharges, ValueList<BattleState>.Empty);
+        return Swallow.Opening(new BattleState(map, ValueList<BattleUnit>.From(units), 1, Side.Player, seed, scheme, map.RecallCharges, ValueList<BattleState>.Empty), content);
     }
 
     /// <summary>

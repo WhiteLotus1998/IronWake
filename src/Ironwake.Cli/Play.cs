@@ -2366,6 +2366,11 @@ public sealed class PlaySession
             rows.Add($"  {shardRow}");
         }
 
+        if (Swallow.Line(state, names) is { } swallowRow)
+        {
+            rows.Add($"  {swallowRow}");
+        }
+
         if (wakes is { Count: > 0 })
         {
             rows.Add($"  stopping here wakes: {string.Join(", ", wakes.Select(w => $"{UnitNames.Group(w.Group)} ({(w.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(w))})"))}");

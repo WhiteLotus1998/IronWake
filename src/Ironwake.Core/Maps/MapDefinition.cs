@@ -371,6 +371,13 @@ public sealed record MapDefinition(
     public Coord? KinShard { get; init; }
 
     /// <summary>
+    /// The <c>swallowed:</c> header (issue 1386 slice 3b', under the hill, <see cref="Swallow.Opening"/>): the tile of the
+    /// boss placement whose template carries a second stage and who begins the map already in it, as the Kin under the
+    /// hill does. Null for none.
+    /// </summary>
+    public Coord? Swallowed { get; init; }
+
+    /// <summary>
     /// The <c>shard_race:</c> header with <c>secret</c> (issue 1386 slice 2b): the campaign's secret-path race, held
     /// apart with its <c>race</c> events until <see cref="ArmSecretRace"/>; the map plays as if it had no race. Null
     /// when the map has none.
