@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-10-09 (#1386 slice 3e: the shard breaks, stills or turns, 0393). Under 19 KB on a branch, 20 KB on main (#1291).
+Updated: 2026-10-09 (#1428: the Mill's lever-keyed DESIGN 11 clause, 0394). Under 19 KB on a branch, 20 KB on main (#1291).
 
 ## Where we are
 
@@ -29,7 +29,7 @@ No forks are open; Lotus takes `for-lotus` questions any time (0318). The chain 
 
 | Map | Status |
 |---|---|
-| the_mill | Map 2, Maud (0124, #632). Rout, limit 9 (0280), `protect: maud`, `holds:` (0279), the fort south (0289); the road brigand undoubled by the L1 captain (0338, #1362). Gate 1 107/200 (0367; limit 10: 113). Under 0338: Code 1820 floor 7/7/5, Chat 3407 floor 8/7/6, won T9 (lever stays). Before: Code 5/6/4 to 8/7/6, Chat 4/6/4. |
+| the_mill | Map 2, Maud (0124, #632). Rout, limit 9 (0280), `protect: maud`, `holds:` (0279), fort south (0289); road brigand Spd 5 (0338). Gate 1 107/200 (0367). DESIGN 11's lever clause (0394): not `tuned` until the Critic's cold floor chair (#1479; a cold floor loss reopens 0338). Code 1820 floor 7/7/5, Chat 3407 floor 8/7/6, won T9. |
 | the_cold_kitchen | Side map, Bet's request (0146, #691; was the Postern, 0247), under `content/quests/`. Seize, limit 10, Recall 2, 4 deployed. Sim gate 1 75/200 (0292). Code 718 warm 8/7/7. Cold chair owed. |
 | the_first_shrine | Side map, Maud's quest 2 (0198, #635), after map 5; pays the Psalter. Seize, limit 10, `brace: on`; starts south (0283); the sanctum archer wakes when the door soldier dies (0304); the altar is held through an enemy phase (0306, `seize_hold: 1`). Sim (one-shot): Pell 53, Teodor 2. Under 0304: Code 1600, 1610; Chat 4426 cold 7/7/6. Under 0306: Code 1610-hold, 1950 7/7/7; Critic 7070 8/7/7; Chat 5303 cold 8/7/6 (Ottilie, won t8). Kept, no lever (455). |
 | the_burned_school | Side map, Pell's quest 1 (0199, #635), after map 4; pays 2 common. Escape, limit 7, Recall 2; a shieldbearer corks the east gate, burners through the west from turn 1, three chests that turn you back. Sim gate 1 36/200. Code 884 7/6/4, 1490 8/7/7 (warm, t6; #1191). Cold chair owed. |
