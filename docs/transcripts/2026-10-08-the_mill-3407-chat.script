@@ -1,0 +1,35 @@
+move captain 4,9
+wait captain
+wait maud
+end
+move captain 7,8
+wait captain
+wait maud
+end
+attack maud road_brigand-1
+move captain 7,7
+attack captain archer-2
+end
+move captain 7,6
+attack captain archer-2
+move maud 7,7
+item maud salve captain
+end
+item maud salve captain
+end
+move captain 8,3
+wait captain
+move maud 8,5
+wait maud
+end
+move captain 9,4
+attack captain soldier-1 art full_measure
+move maud 9,5
+item maud salve captain
+end
+item maud salve captain
+end
+move maud 8,2
+attack maud archer-1
+move captain 9,3
+attack captain archer-1 art feint
