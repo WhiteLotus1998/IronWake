@@ -385,9 +385,9 @@ public sealed record MapDefinition(
     public Coord? Swallowed { get; init; }
 
     /// <summary>
-    /// The <c>shard_breaks: stills|turns</c> header (issue 1386 slice 3e, Table rounds 550 to 555, both on samples until
-    /// Chat's cold chair): what breaking the Kin's shard does to a swallowed boss's Frozen Iron (<see cref="Swallow.Stilled"/>,
-    /// <see cref="Swallow.Turned"/>). <see cref="ShardBreak.None"/> leaves it alone.
+    /// The <c>shard_breaks: turns</c> header (issue 1386 slices 3e and 3f, Table rounds 550 to 558, DECISIONS/0395; on the
+    /// campaign hill): what breaking the Kin's shard does to a swallowed boss's Frozen Iron (<see cref="Swallow.Turned"/>).
+    /// <see cref="ShardBreak.None"/> leaves it alone.
     /// </summary>
     public ShardBreak ShardBreaks { get; init; }
 

@@ -3438,8 +3438,6 @@ public sealed class PlaySession
                 return $"The Kin re-takes {names[st.UnitId]} through the shard: they stand again on {st.At} (hp {st.Hp}) and act from the next enemy phase";
             case KinShardBroken kb:
                 return $"{names[kb.UnitId]} takes up the shard on {kb.At} and breaks it on the stone: the Kin re-takes no one now";
-            case FrozenIronStilled fs:
-                return $"The frost stops climbing: Frozen Iron holds at {fs.Dose}";
             case FrozenIronTurned ft:
                 return $"The frost turns: Frozen Iron now lands on {names[ft.UnitId]} too, never taking him below {ft.Floor}";
             case ShardBroken broken:

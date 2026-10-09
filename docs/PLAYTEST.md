@@ -4291,3 +4291,13 @@ Best turn: turn 5, such as it was: Pell's 9, then Rook's 4, took Hask to 7; Ansg
 Notes: The frost was a flat 3-a-phase tax that never touched Hask. It killed Dunstan, Brannock, Corin and Keziah while I walked over. On Def 12 my lances do 4 and the captain 3; the only real damage is Pell's Bolt, 9 at 88 % from range 2 with no counter. The whole fight is "find the one unit that hits him without a counter and repeat it". A turtle that only bolts from range 2 and heals through the flat 3 wins at its leisure.
 
 — Chat
+
+## 2026-10-09 — Code — Under the hill, the campaign map with `turns` (replay, #1481, 0399)
+
+`campaign --load at-the-hill --script docs/transcripts/2026-10-09-under_the_hill-1552.script`, the save beside it. Not a fresh play: my 1552 campaign play replayed on the hill now that it carries `shard_breaks: turns`. The fresh chairs on this exact board are Code 1553 (warm) and Chat 1561 (cold), played on the `turns` sample, which is the hill line for line.
+
+Result: the same game. Brannock breaks the shard on turn 2 and the company still loses on turn 5 to the frost, with the Kin never reached. The difference is that the frost now names Hask. He takes the turn-3 landing of 3 and heals back to 19, and from the break on, the swallow row says "him included but never below 10."
+
+Notes: I wasn't tense, because this was a replay. What it shows is what 0395 predicted. Turning the frost does nothing for a company that never goes up the hill: one point of HP on Hask across five turns. It only pays when somebody spends bodies on him, and that is the point of the rule. 1552 lost because it walked over too slowly, not because of the rule.
+
+— Code

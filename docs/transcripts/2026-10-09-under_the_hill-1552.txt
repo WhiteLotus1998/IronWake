@@ -399,7 +399,7 @@ Sworn Captain carries the shard: while a sworn holds it the Kin re-takes one fal
 Hask stands swallowed: Frozen Iron lands for 0 on every unit but him from the enemy phase after next, 3 more each time, then the Kin heals him 2
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 4 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 4 movement: again ansgar <x,y|stay>
 Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  recall 3
    0123456789012345
  0 ####........####
@@ -415,7 +415,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          14,7   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -452,7 +452,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          14,7   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -489,7 +489,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          14,7   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -526,7 +526,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          14,7   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -563,7 +563,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          14,7   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -600,7 +600,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          14,7   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -637,7 +637,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          14,7   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -674,7 +674,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          14,7   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -711,7 +711,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          14,7   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -748,7 +748,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          12,6   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -785,7 +785,7 @@ Under the Hill  turn 1 (the limit ends nothing now)  player phase  defeat_boss  
 10 #......g........
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  canto 4
+I  ansgar           Ansgar L8 outrider         11,6   hp 23/23  Plain  again 4
 d  archer-1         Archer L8 bowman           6,4    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          12,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          7,1    hp 25/25  Plain  group sworn, aggressive
@@ -1104,7 +1104,7 @@ The shard lies on 10,6: take it from on or beside it (take <unit> shard); the Ki
 Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
 > wait ansgar
 Ansgar waits
-Ansgar may move again up to 3 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 3 movement: again ansgar <x,y|stay>
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
    0123456789012345
  0 ####........####
@@ -1120,7 +1120,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          12,6   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1155,7 +1155,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1175,6 +1175,7 @@ The shard lies on 10,6: take it from on or beside it (take <unit> shard); the Ki
 Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
 > take brannock shard
 Brannock takes up the shard on 10,6 and breaks it on the stone: the Kin re-takes no one now
+The frost turns: Frozen Iron now lands on Hask too, never taking him below 10
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
    0123456789012345
  0 ####........####
@@ -1190,7 +1191,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1206,8 +1207,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move dunstan 13,6
 Dunstan moves 11,8 -> 13,6 via 11,7 11,6 12,6
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1225,7 +1226,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1241,8 +1242,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > wait dunstan
 Dunstan waits
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1260,7 +1261,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1276,8 +1277,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move maud 13,5
 Maud moves 12,5 -> 13,5
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1295,7 +1296,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1311,8 +1312,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > item maud 1 dunstan
 ERROR: Radiance is a weapon, not an item; attack with it
 > move ottilie 12,4
@@ -1332,7 +1333,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1348,8 +1349,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > wait ottilie
 Ottilie waits
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1367,7 +1368,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1383,8 +1384,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move wren 12,3
 Wren moves 12,3 -> 12,3
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1402,7 +1403,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1418,8 +1419,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > wait wren
 Wren waits
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1437,7 +1438,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1453,8 +1454,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move keziah 13,4
 Keziah moves 14,4 -> 13,4
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1472,7 +1473,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1488,8 +1489,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > wait keziah
 Keziah waits
 Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1507,7 +1508,7 @@ Under the Hill  turn 2 (the limit ends nothing now)  player phase  defeat_boss  
 10 #..........g....
 11 ####........####
 
-I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  canto 3
+I  ansgar           Ansgar L8 outrider         13,7   hp 9/23   Plain  again 3
 d  archer-1         Archer L8 bowman           8,5    hp 19/19  Plain  group sworn, aggressive
 K  brannock         Brannock L8 cadet          11,6   hp 22/22  Plain  done
 f  brigand-1        Brigand L8 reaver          8,4    hp 25/25  Plain  group sworn, aggressive
@@ -1523,8 +1524,8 @@ E  pell             Pell L8 adept              11,2   hp 18/18  Plain  done
 c  soldier-2        Soldier L8 pikeman         11,9   hp 14/23  Plain  group sworn, aggressive
 C  teodor           Teodor L8 pikeman          10,7   hp 5/24   Plain  done
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 0 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 0 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > end !
 Lethal if all land: Ansgar (Brigand 2 for 14, Hexer for 13, Soldier 2 for 11, against 9 hp)
 Lethal if all land: Brannock (Archer for 6, Brigand 1 for 12, Brigand 2 for 12, Hexer for 13, Soldier 2 for 9, against 22 hp)
@@ -1538,7 +1539,7 @@ Rapport Keziah and Ottilie +5 (5)
 Rapport Ottilie and Wren +5 (5)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
-Frozen Iron falls on every unit but him for 0, past Def and Res: Ansgar (hp 9), Archer (hp 19), Brannock (hp 22), Brigand 1 (hp 25), Brigand 2 (hp 25), Alder Fenn (hp 14), Dunstan (hp 3), Hexer (hp 18), Keziah (hp 22), Maud (hp 19), Ottilie (hp 8), Pell (hp 18), Soldier 2 (hp 14), Teodor (hp 5), Wren (hp 23)
+Frozen Iron falls on every unit, him included above half his bar, for 0, past Def and Res: Ansgar (hp 9), Archer (hp 19), Brannock (hp 22), Brigand 1 (hp 25), Brigand 2 (hp 25), Alder Fenn (hp 14), Dunstan (hp 3), Hask (hp 20), Hexer (hp 18), Keziah (hp 22), Maud (hp 19), Ottilie (hp 8), Pell (hp 18), Soldier 2 (hp 14), Teodor (hp 5), Wren (hp 23)
 enemy: move archer-1 8,7
 Archer moves 8,5 -> 8,7 via 8,6
 enemy: attack archer-1 teodor
@@ -1613,8 +1614,8 @@ D  ottilie          Ottilie L8 bowman          12,4   hp 8/19   Plain
 E  pell             Pell L8 adept              11,2   hp 18/18  Plain
 c  soldier-2        Soldier L8 pikeman         11,7   hp 7/23   Plain  group sworn, aggressive
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > attack brannock soldier-2
 Forecast Brannock -> Soldier 2: acc 91% dmg 7 crit 8%; counter: acc 67% dmg 9 crit 0%
 Brannock attacks Soldier 2
@@ -1649,8 +1650,8 @@ H  maud             Maud L8 chaplain           13,5   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          12,4   hp 8/19   Plain
 E  pell             Pell L8 adept              11,2   hp 18/18  Plain
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move keziah 11,3
 Keziah moves 13,4 -> 11,3 via 13,3 12,3
 Under the Hill  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1680,8 +1681,8 @@ H  maud             Maud L8 chaplain           13,5   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          12,4   hp 8/19   Plain
 E  pell             Pell L8 adept              11,2   hp 18/18  Plain
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > attack keziah brigand-1
 Forecast Keziah -> Brigand 1 with Kinsbane: acc 80% dmg 18 crit 4%; counter: acc 60% dmg 14 crit 0%
   On a kill: Keziah +10 HP, to max 27 (Kinsbane feeds, fed 1)
@@ -1717,8 +1718,8 @@ H  maud             Maud L8 chaplain           13,5   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          12,4   hp 8/19   Plain
 E  pell             Pell L8 adept              11,2   hp 18/18  Plain
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move ottilie 13,4
 Ottilie moves 12,4 -> 13,4
 Under the Hill  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1748,8 +1749,8 @@ H  maud             Maud L8 chaplain           13,5   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 8/19   Plain
 E  pell             Pell L8 adept              11,2   hp 18/18  Plain
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > attack ottilie brigand-1
 Forecast Ottilie -> Brigand 1: acc 89% dmg 9 crit 8%; counter: none
 Ottilie attacks Brigand 1
@@ -1783,8 +1784,8 @@ H  maud             Maud L8 chaplain           13,5   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 8/19   Plain  done
 E  pell             Pell L8 adept              11,2   hp 18/18  Plain
 B  wren             Wren L8 cadet              12,3   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move wren 12,6
 Wren moves 12,3 -> 12,6 via 12,4 12,5
 Under the Hill  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1813,8 +1814,8 @@ H  maud             Maud L8 chaplain           13,5   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 8/19   Plain  done
 E  pell             Pell L8 adept              11,2   hp 18/18  Plain
 B  wren             Wren L8 cadet              12,6   hp 23/23  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > attack wren hexer-1
 Forecast Wren -> Hexer: acc 91% dmg 13 x2 crit 5%; counter: acc 98% dmg 12 crit 0% (Cinder 6 of 8 left)
 Wren attacks Hexer
@@ -1849,8 +1850,8 @@ H  maud             Maud L8 chaplain           13,5   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 8/19   Plain  done
 E  pell             Pell L8 adept              11,2   hp 18/18  Plain
 B  wren             Wren L8 cadet              12,6   hp 11/23  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move maud 13,6
 Maud moves 13,5 -> 13,6
 Under the Hill  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1878,8 +1879,8 @@ H  maud             Maud L8 chaplain           13,6   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 8/19   Plain  done
 E  pell             Pell L8 adept              11,2   hp 18/18  Plain
 B  wren             Wren L8 cadet              12,6   hp 11/23  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > attack maud hexer-1
 ERROR: No living unit 'hexer-1'
 > move pell 9,3
@@ -1909,8 +1910,8 @@ H  maud             Maud L8 chaplain           13,6   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 8/19   Plain  done
 E  pell             Pell L8 adept              9,3    hp 18/18  Plain
 B  wren             Wren L8 cadet              12,6   hp 11/23  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > wait pell
 Pell waits
 Under the Hill  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1938,8 +1939,8 @@ H  maud             Maud L8 chaplain           13,6   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 8/19   Plain  done
 E  pell             Pell L8 adept              9,3    hp 18/18  Plain  done
 B  wren             Wren L8 cadet              12,6   hp 11/23  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move captain 8,5
 Alder Fenn moves 10,5 -> 8,5 via 9,5
 Under the Hill  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1967,8 +1968,8 @@ H  maud             Maud L8 chaplain           13,6   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 8/19   Plain  done
 E  pell             Pell L8 adept              9,3    hp 18/18  Plain  done
 B  wren             Wren L8 cadet              12,6   hp 11/23  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > wait captain
 Alder Fenn waits
 Under the Hill  turn 3 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -1996,15 +1997,16 @@ H  maud             Maud L8 chaplain           13,6   hp 19/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 8/19   Plain  done
 E  pell             Pell L8 adept              9,3    hp 18/18  Plain  done
 B  wren             Wren L8 cadet              12,6   hp 11/23  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 3 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 3 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > end !
 Lethal if all land: Maud (Archer for 9, Brigand 2 for 15, against 19 hp)
 Lethal if all land: Wren (Archer for 7, Brigand 2 for 13, against 11 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
-Frozen Iron falls on every unit but him for 3, past Def and Res: Archer (hp 16), Brannock (hp 19), Brigand 2 (hp 22), Alder Fenn (hp 11), Keziah (hp 0), Maud (hp 16), Ottilie (hp 5), Pell (hp 15), Wren (hp 8)
+Frozen Iron falls on every unit, him included above half his bar, for 3, past Def and Res: Archer (hp 16), Brannock (hp 19), Brigand 2 (hp 22), Alder Fenn (hp 11), Hask (hp 17), Keziah (hp 0), Maud (hp 16), Ottilie (hp 5), Pell (hp 15), Wren (hp 8)
 Keziah falls at 11,3
+The Kin heals Hask 2 (hp 19)
 enemy: move archer-1 11,8
 Archer moves 8,7 -> 11,8 via 9,7 10,7 11,7
 enemy: attack archer-1 brannock
@@ -2044,12 +2046,12 @@ d  archer-1         Archer L8 bowman           11,8   hp 16/19  Plain  group swo
 K  brannock         Brannock L8 cadet          11,6   hp 13/22  Plain
 g  brigand-2        Brigand L8 reaver          12,7   hp 22/25  Plain  group sworn, aggressive
 A  captain          Alder Fenn L8 cadet        8,5    hp 11/25  Plain  captain
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 19/20  Plain  group kin, boss
 H  maud             Maud L8 chaplain           13,6   hp 16/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 5/19   Plain
 E  pell             Pell L8 adept              9,3    hp 15/18  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 6 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move pell 6,4
 Pell moves 9,3 -> 6,4 via 8,3 7,3 6,3
 Under the Hill  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -2071,12 +2073,12 @@ d  archer-1         Archer L8 bowman           11,8   hp 16/19  Plain  group swo
 K  brannock         Brannock L8 cadet          11,6   hp 13/22  Plain
 g  brigand-2        Brigand L8 reaver          12,7   hp 22/25  Plain  group sworn, aggressive
 A  captain          Alder Fenn L8 cadet        8,5    hp 11/25  Plain  captain
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 19/20  Plain  group kin, boss
 H  maud             Maud L8 chaplain           13,6   hp 16/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 5/19   Plain
 E  pell             Pell L8 adept              6,4    hp 15/18  Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 6 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > wait pell
 Pell waits
 Under the Hill  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -2098,12 +2100,12 @@ d  archer-1         Archer L8 bowman           11,8   hp 16/19  Plain  group swo
 K  brannock         Brannock L8 cadet          11,6   hp 13/22  Plain
 g  brigand-2        Brigand L8 reaver          12,7   hp 22/25  Plain  group sworn, aggressive
 A  captain          Alder Fenn L8 cadet        8,5    hp 11/25  Plain  captain
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 19/20  Plain  group kin, boss
 H  maud             Maud L8 chaplain           13,6   hp 16/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 5/19   Plain
 E  pell             Pell L8 adept              6,4    hp 15/18  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 6 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move captain 5,5
 Alder Fenn moves 8,5 -> 5,5 via 7,5 6,5
 Under the Hill  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -2125,12 +2127,12 @@ d  archer-1         Archer L8 bowman           11,8   hp 16/19  Plain  group swo
 K  brannock         Brannock L8 cadet          11,6   hp 13/22  Plain
 g  brigand-2        Brigand L8 reaver          12,7   hp 22/25  Plain  group sworn, aggressive
 A  captain          Alder Fenn L8 cadet        5,5    hp 11/25  Plain  captain
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 19/20  Plain  group kin, boss
 H  maud             Maud L8 chaplain           13,6   hp 16/19  Plain
 D  ottilie          Ottilie L8 bowman          13,4   hp 5/19   Plain
 E  pell             Pell L8 adept              6,4    hp 15/18  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 6 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > attack captain hask_warden-1
 ERROR: Alder Fenn cannot attack Hask from 5,5
 > move ottilie 13,2
@@ -2154,12 +2156,12 @@ d  archer-1         Archer L8 bowman           11,8   hp 16/19  Plain  group swo
 K  brannock         Brannock L8 cadet          11,6   hp 13/22  Plain
 g  brigand-2        Brigand L8 reaver          12,7   hp 22/25  Plain  group sworn, aggressive
 A  captain          Alder Fenn L8 cadet        5,5    hp 11/25  Plain  captain
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 19/20  Plain  group kin, boss
 H  maud             Maud L8 chaplain           13,6   hp 16/19  Plain
 D  ottilie          Ottilie L8 bowman          13,2   hp 5/19   Plain
 E  pell             Pell L8 adept              6,4    hp 15/18  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 6 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > wait ottilie
 Ottilie waits
 Under the Hill  turn 4 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -2181,12 +2183,12 @@ d  archer-1         Archer L8 bowman           11,8   hp 16/19  Plain  group swo
 K  brannock         Brannock L8 cadet          11,6   hp 13/22  Plain
 g  brigand-2        Brigand L8 reaver          12,7   hp 22/25  Plain  group sworn, aggressive
 A  captain          Alder Fenn L8 cadet        5,5    hp 11/25  Plain  captain
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 19/20  Plain  group kin, boss
 H  maud             Maud L8 chaplain           13,6   hp 16/19  Plain
 D  ottilie          Ottilie L8 bowman          13,2   hp 5/19   Plain  done
 E  pell             Pell L8 adept              6,4    hp 15/18  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 6 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > attack brannock brigand-2
 ERROR: Brannock cannot attack Brigand 2 from 11,6
 > attack maud brigand-2
@@ -2214,19 +2216,20 @@ d  archer-1         Archer L8 bowman           11,8   hp 16/19  Plain  group swo
 K  brannock         Brannock L8 cadet          11,6   hp 13/22  Plain
 g  brigand-2        Brigand L8 reaver          12,7   hp 9/25   Plain  group sworn, aggressive
 A  captain          Alder Fenn L8 cadet        5,5    hp 11/25  Plain  captain
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 19/20  Plain  group kin, boss
 H  maud             Maud L8 chaplain           13,6   hp 16/19  Plain  done
 D  ottilie          Ottilie L8 bowman          13,2   hp 5/19   Plain  done
 E  pell             Pell L8 adept              6,4    hp 15/18  Plain  done
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 6 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 6 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > end !
 Lethal if all land: Brannock (Archer for 6, Brigand 2 for 12, against 13 hp)
 Lethal if all land: Maud (Archer for 9, Brigand 2 for 15, against 16 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
-Frozen Iron falls on every unit but him for 6, past Def and Res: Archer (hp 10), Brannock (hp 7), Brigand 2 (hp 3), Alder Fenn (hp 5), Maud (hp 10), Ottilie (hp 0), Pell (hp 9)
+Frozen Iron falls on every unit, him included above half his bar, for 6, past Def and Res: Archer (hp 10), Brannock (hp 7), Brigand 2 (hp 3), Alder Fenn (hp 5), Hask (hp 13), Maud (hp 10), Ottilie (hp 0), Pell (hp 9)
 Ottilie falls at 13,2
+The Kin heals Hask 2 (hp 15)
 enemy: attack archer-1 brannock
 Forecast Archer -> Brannock: acc 74% dmg 6 crit 2%; counter: none
 Archer attacks Brannock
@@ -2264,10 +2267,10 @@ d  archer-1         Archer L8 bowman           11,8   hp 10/19  Plain  group swo
 K  brannock         Brannock L8 cadet          11,6   hp 1/22   Plain
 g  brigand-2        Brigand L8 reaver          12,6   hp 3/25   Plain  group sworn, aggressive
 A  captain          Alder Fenn L8 cadet        5,5    hp 5/25   Plain  captain
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 15/20  Plain  group kin, boss
 E  pell             Pell L8 adept              6,4    hp 9/18   Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 9 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 9 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > move pell 5,4
 Pell moves 6,4 -> 5,4
 Under the Hill  turn 5 (the limit ends nothing now)  player phase  defeat_boss  recall 3
@@ -2289,10 +2292,10 @@ d  archer-1         Archer L8 bowman           11,8   hp 10/19  Plain  group swo
 K  brannock         Brannock L8 cadet          11,6   hp 1/22   Plain
 g  brigand-2        Brigand L8 reaver          12,6   hp 3/25   Plain  group sworn, aggressive
 A  captain          Alder Fenn L8 cadet        5,5    hp 5/25   Plain  captain
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 15/20  Plain  group kin, boss
 E  pell             Pell L8 adept              5,4    hp 9/18   Plain
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 9 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 9 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 > attack pell hask_warden-1
 ERROR: Pell cannot attack Hask from 5,4
 > attack captain hask_warden-1
@@ -2300,11 +2303,12 @@ ERROR: Alder Fenn cannot attack Hask from 5,5
 > end !
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
-Frozen Iron falls on every unit but him for 9, past Def and Res: Archer (hp 1), Brannock (hp 0), Brigand 2 (hp 0), Alder Fenn (hp 0), Pell (hp 0)
+Frozen Iron falls on every unit, him included above half his bar, for 9, past Def and Res: Archer (hp 1), Brannock (hp 0), Brigand 2 (hp 0), Alder Fenn (hp 0), Hask (hp 10), Pell (hp 0)
 Brannock falls at 11,6
 Brigand 2 falls at 12,6
 Alder Fenn falls at 5,5
 Pell falls at 5,4
+The Kin heals Hask 2 (hp 12)
 Under the Hill  turn 5 (the limit ends nothing now)  enemy phase  defeat_boss  recall 3
    0123456789012345
  0 ####........####
@@ -2321,9 +2325,9 @@ Under the Hill  turn 5 (the limit ends nothing now)  enemy phase  defeat_boss  r
 11 ####........####
 
 d  archer-1         Archer L8 bowman           11,8   hp 1/19   Plain  group sworn, aggressive
-!  hask_warden-1    Hask L14 iron warden       4,6    hp 20/20  Plain  group kin, boss
-The shard is broken: the Kin re-takes no one
-Hask stands swallowed: Frozen Iron lands for 12 on every unit but him at each enemy phase start, 3 more each time, then the Kin heals him 2
+!  hask_warden-1    Hask L14 iron warden       4,6    hp 12/20  Plain  group kin, boss
+The shard is broken: the Kin re-takes no one, and its frost lands on it too
+Hask stands swallowed: Frozen Iron lands for 12 on every unit, him included but never below 10 (the shard is broken) at each enemy phase start, 3 more each time, then the Kin heals him 2
 Battle lost: the captain is dead; only recall is left, or leave
 Lost because the captain, Alder Fenn, fell.
 > leave

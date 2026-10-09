@@ -32,9 +32,6 @@ public sealed record FrozenIronFell(int Amount, ValueList<string> Struck, ValueL
 /// <summary>The Kin healed <paramref name="UnitId"/> <paramref name="Amount"/> at its side's phase start (issue 1385), to <paramref name="HpAfter"/>.</summary>
 public sealed record KinHealed(string UnitId, int Amount, int HpAfter) : GameEvent;
 
-/// <summary>The shard under the hill broke on a <c>shard_breaks: stills</c> map while a swallowed boss stood (issue 1386 slice 3e): Frozen Iron holds at <paramref name="Dose"/>, the dose it had reached or the stage's step if that is more, and climbs no more.</summary>
-public sealed record FrozenIronStilled(int Dose) : GameEvent;
-
 /// <summary>The shard under the hill broke on a <c>shard_breaks: turns</c> map while the swallowed <paramref name="UnitId"/> stood (issue 1386 slice 3e): Frozen Iron lands on him too from now, climbing as before, never taking him below <paramref name="Floor"/>.</summary>
 public sealed record FrozenIronTurned(string UnitId, int Floor) : GameEvent;
 
@@ -62,15 +59,8 @@ public static class Swallow
     public const int DoseStep = 2;
 
     /// <summary>
-    /// Whether the frost is stilled on <paramref name="state"/> (issue 1386 slice 3e, Code's lean, round 550, on a sample):
-    /// the map carries <c>shard_breaks: stills</c> and the Kin's shard is broken, so each landing holds the dose set at the
-    /// break (<see cref="KinShard.Take"/>: the dose reached, never below the stage's <see cref="KinStage.Step"/>) instead of climbing.
-    /// </summary>
-    public static bool Stilled(BattleState state) => state.Map.ShardBreaks == ShardBreak.Stills && KinShard.Of(state) is { Broken: true };
-
-    /// <summary>
-    /// Whether the frost has turned on the Kin on <paramref name="state"/> (issue 1386 slice 3e, Chat's lean, rounds 551 and
-    /// 555, on a sample; it ends Lotus's exemption on the hill, so it goes on his sign-off): the map carries
+    /// Whether the frost has turned on the Kin on <paramref name="state"/> (issue 1386 slices 3e and 3f, Chat's lean, rounds 551
+    /// and 555, shipped to the hill in 0395; it ends Lotus's exemption there, so it goes on his sign-off, #1482): the map carries
     /// <c>shard_breaks: turns</c> and the Kin's shard is broken, so Frozen Iron lands on the swallowed boss too, down to
     /// his <see cref="Floor"/> and no lower.
     /// </summary>
@@ -162,7 +152,7 @@ public static class Swallow
         }
 
         var when = state.FrozenIronHeld ? "from the enemy phase after next" : "at each enemy phase start";
-        var climb = Stilled(state) ? "and climbs no more (the shard is broken)" : $"{kin.Kin!.Step} more each time";
+        var climb = $"{kin.Kin!.Step} more each time";
         var whom = Turned(state) ? $"on every unit, him included but never below {Floor(kin, content)} (the shard is broken)" : "on every unit but him";
         return $"{names[kin.Id]} stands swallowed: Frozen Iron lands for {state.FrozenIron} {whom} {when}, {climb}, then the Kin heals him {kin.Kin!.Heal}";
     }
@@ -209,7 +199,7 @@ public static class Swallow
                 state = died(state, unit with { Hp = 0 });
             }
 
-            state = state with { FrozenIron = Stilled(state) ? dose : dose + step };
+            state = state with { FrozenIron = dose + step };
         }
 
         foreach (var healed in state.Units.Where(u => u is { Swallowed: true, Kin: not null } && u.Side == side).ToList())

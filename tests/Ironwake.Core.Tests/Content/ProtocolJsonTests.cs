@@ -101,7 +101,6 @@ public class ProtocolJsonTests
         { new ShardPicked("soldier-3", new Coord(7, 2), new Coord(5, 2)), """{"type":"shardPicked","unit":"soldier-3","from":{"x":7,"y":2},"at":{"x":5,"y":2}}""" },
         { new SwornRetaken("soldier-2", new Coord(5, 2), 18), """{"type":"swornRetaken","unit":"soldier-2","at":{"x":5,"y":2},"hp":18}""" },
         { new KinShardBroken("hale", new Coord(5, 2)), """{"type":"kinShardBroken","unit":"hale","at":{"x":5,"y":2}}""" },
-        { new FrozenIronStilled(6), """{"type":"frozenIronStilled","dose":6}""" },
         { new FrozenIronTurned("hask_warden-1", 10), """{"type":"frozenIronTurned","unit":"hask_warden-1","floor":10}""" },
         { new RodCaught("wren", "pell", "mage-1"), """{"type":"rodCaught","unit":"wren","aimed":"pell","by":"mage-1"}""" },
         { new RodCharged("wren", MagicSchool.Lightning), """{"type":"rodCharged","unit":"wren","school":"lightning"}""" },
