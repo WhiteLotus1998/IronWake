@@ -98,6 +98,11 @@ public static class FinaleRun
             {
                 yield return "  " + captain;
             }
+
+            if (PlanLine(Games) is { } plan)
+            {
+                yield return "  " + plan;
+            }
         }
     }
 
@@ -169,7 +174,10 @@ public static class FinaleRun
         }
 
         var won = games.Count(g => g.Stage is not null && g.Won);
-        return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (gate: at most 1); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP";
+        var inReach = reached.Sum(s => s.DamageInReach);
+        var beyond = reached.Sum(s => s.DamageBeyond);
+        var share = inReach + beyond == 0 ? "none dealt" : $"{beyond * 100 / (inReach + beyond)} % from tiles he cannot reach ({beyond} of {inReach + beyond})";
+        return $"stage 2: reached {reached.Count} of {games.Count}, won {won}; median {Median(reached.Select(s => s.Phases))} phases; clock deaths 0 in {reached.Count(s => s.ClockDeaths == 0)}, 1 in {reached.Count(s => s.ClockDeaths == 1)}, 2+ in {reached.Count(s => s.ClockDeaths >= 2)} (gate: at most 1); at the swallow, median {Median(reached.Select(s => s.Standing))} standing, captain at {Median(reached.Select(s => s.CaptainHp))} HP; damage on him, {share}";
     }
 
     /// <summary>
@@ -205,6 +213,27 @@ public static class FinaleRun
         var before = fell.Where(g => !g.CaptainFellInStageTwo).ToList();
         var after = fell.Where(g => g.CaptainFellInStageTwo).ToList();
         return $"captain falls: {before.Count} before the swallow ({(before.Count == 0 ? "none" : By(before))}), {after.Count} after ({(after.Count == 0 ? "none" : By(after))})";
+    }
+
+    /// <summary>
+    /// Round 505's split of the captain's falls after the swallow by his last player phase (<see cref="CaptainPlan"/>), each
+    /// class by what struck the last blow; null when he never fell after one. Cornered is the board's; a lethal tile taken
+    /// while one passed, or a tile read safe that was not, is the planner's.
+    /// </summary>
+    public static string? PlanLine(IReadOnlyList<GameResult> games)
+    {
+        var after = games.Where(g => g.CaptainFellInStageTwo && g.CaptainPlanRead is not null).ToList();
+        if (after.Count == 0)
+        {
+            return null;
+        }
+
+        string By(IEnumerable<GameResult> some) => string.Join(", ", some.GroupBy(g => g.CaptainKiller!).OrderByDescending(k => k.Count()).ThenBy(k => k.Key, StringComparer.Ordinal).Select(k => $"{k.Key} {k.Count()}"));
+        var order = new[] { "cornered", "lethal tile", "read safe", "read safe, crit-lethal", "own phase", "unread" };
+        return "after the swallow, by his last plan: " + string.Join("; ", order
+            .Select(name => (Name: name, Games: after.Where(g => g.CaptainPlanRead == name).ToList()))
+            .Where(c => c.Games.Count > 0)
+            .Select(c => $"{c.Name} {c.Games.Count} ({By(c.Games)})"));
     }
 
     private static int Median(IEnumerable<int> values)

@@ -64,6 +64,12 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// <summary>Whether the captain fell after the swallow (<see cref="Stage"/> begun).</summary>
     public bool CaptainFellInStageTwo { get; init; }
 
+    /// <summary>
+    /// On a captain fall after the swallow, what his last player phase offered (round 505, <see cref="CaptainPlan"/>):
+    /// whether any tile in his reach passed the veto's sum and whether the tile he ended on did. Null otherwise.
+    /// </summary>
+    public string? CaptainPlanRead { get; init; }
+
     /// <summary>How the enemy a <c>freed:</c> header binds left the board (issue 750): null while she stood at the end or on a map without one.</summary>
     public BondFate? Bond { get; init; }
 
@@ -226,6 +232,8 @@ public static class Runner
         string? captainKiller = null;
         var captainSeen = false;
         var captainInStageTwo = false;
+        CaptainPlan? plan = null;
+        string? captainPlanRead = null;
         while (!state.Outcome.IsOver)
         {
             if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
@@ -253,6 +261,10 @@ public static class Runner
             foreach (var command in commands)
             {
                 hits?.Record(state, content, command);
+                if (stage is not null && state.Phase == Side.Player && command is EndPhase && plan is { Turn: var planned } && planned == state.Turn)
+                {
+                    plan = plan.Ended(state, content);
+                }
                 if (state.Phase == Side.Enemy && CoverRule.PassedLine(state, content, command) is not null)
                 {
                     covers = covers with { Passed = covers.Passed + 1 };
@@ -285,14 +297,20 @@ public static class Runner
                     covers = covers.After(e);
                 }
 
+                if (stage is not null && state.Phase == Side.Player && CaptainPlan.Begins(state, result.Next))
+                {
+                    plan = CaptainPlan.Read(state, content);
+                }
+
                 captainKiller ??= Gates.CaptainKillerOf(state, result.Events);
                 if (captainKiller is not null && !captainSeen)
                 {
                     captainSeen = true;
                     captainInStageTwo = stage is not null;
+                    captainPlanRead = stage is null ? null : CaptainPlan.Name(plan, state);
                 }
 
-                stage = StageTwo.After(stage, state, result.Next, result.Events);
+                stage = StageTwo.After(stage, state, result.Next, result.Events, content);
                 fired.AddRange(result.Events.OfType<MapEventFired>());
                 drifted |= result.Events.OfType<RouteDrifted>().Any();
                 if (result.Events.OfType<CombatFought>().Any())
@@ -329,6 +347,7 @@ public static class Runner
             Stage = stage,
             CaptainKiller = state.Outcome.Cause == LossCause.Captain ? captainKiller ?? "other" : null,
             CaptainFellInStageTwo = state.Outcome.Cause == LossCause.Captain && captainInStageTwo,
+            CaptainPlanRead = state.Outcome.Cause == LossCause.Captain && captainInStageTwo ? captainPlanRead : null,
             Weapons = weapons,
             Items = items,
             Camp = state.Outcome.Result == BattleResult.Won ? LevelRun.Read(start, state, content) : null,
@@ -1167,10 +1186,44 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
     /// <summary>The player units on the board after the last command read.</summary>
     public int StandingEnd { get; init; }
 
-    /// <summary><paramref name="stage"/> after a command's <paramref name="events"/> on <paramref name="before"/>, leaving <paramref name="after"/>: begun by a swallow, counting phases and Frozen Iron's player kills.</summary>
-    public static StageTwo? After(StageTwo? stage, BattleState before, BattleState after, IEnumerable<GameEvent> events)
+    /// <summary>
+    /// The damage the player side dealt the boss in the stage's player phases from a tile some action of his reaches
+    /// (<see cref="Reaches"/>): round 506's kill criterion for a rooted stage 2 reads it against <see cref="DamageBeyond"/>.
+    /// </summary>
+    public int DamageInReach { get; init; }
+
+    /// <summary>The same damage dealt from a tile no action of his reaches: a rooted boss struck from there is a turret beside the company.</summary>
+    public int DamageBeyond { get; init; }
+
+    /// <summary>
+    /// Whether <paramref name="tile"/> is one an action of <paramref name="boss"/> standing where he stands reaches on
+    /// <paramref name="state"/>: in range of a weapon he carries, or on the cross his line strike falls on
+    /// (<see cref="LineStrike.Cross"/>).
+    /// </summary>
+    public static bool Reaches(BattleState state, GameContent content, BattleUnit boss, Coord tile) =>
+        HeuristicPlayer.Arms(content, boss).Any(arm => arm.Weapon.InRange(tile.DistanceTo(boss.At)))
+        || (LineStrike.Of(content, boss) is { } line && LineStrike.Cross(state, content, boss.At, line.Reach).Contains(tile));
+
+    /// <summary>
+    /// <paramref name="stage"/> after a command's <paramref name="events"/> on <paramref name="before"/>, leaving <paramref name="after"/>:
+    /// begun by a swallow, counting phases and Frozen Iron's player kills; with <paramref name="content"/>, the boss HP a
+    /// player-phase command took (a phase change's Frozen Iron and heal aside) by whether the tile of the unit that acted is
+    /// one he reaches.
+    /// </summary>
+    public static StageTwo? After(StageTwo? stage, BattleState before, BattleState after, IEnumerable<GameEvent> events, GameContent? content = null)
     {
-        foreach (var e in events)
+        var read = events as IReadOnlyList<GameEvent> ?? events.ToList();
+        if (stage is not null && content is not null && before.Phase == Side.Player && !read.OfType<PhaseBegan>().Any()
+            && before.Find(stage.Boss) is { } boss && (after.Find(stage.Boss)?.Hp ?? 0) is var left && left < boss.Hp
+            && before.UnitsOf(Side.Player).FirstOrDefault(u => !u.Acted && after.Find(u.Id) is not { Acted: false }) is { } actor)
+        {
+            var taken = boss.Hp - left;
+            stage = Reaches(before, content, boss, actor.At)
+                ? stage with { DamageInReach = stage.DamageInReach + taken }
+                : stage with { DamageBeyond = stage.DamageBeyond + taken };
+        }
+
+        foreach (var e in read)
         {
             switch (e)
             {
@@ -1193,4 +1246,55 @@ public sealed record StageTwo(int Phases, int ClockDeaths, int Standing = 0, int
 
         return stage is null ? null : stage with { BossHp = after.Find(stage.Boss)?.Hp ?? 0, StandingEnd = after.UnitsOf(Side.Player).Count() };
     }
+}
+
+/// <summary>
+/// The captain's last player phase in the boss's second stage (round 505's split of the post-swallow falls): on
+/// <paramref name="Turn"/>, as his first command of the phase was applied, whether any tile in his reach kept the veto's
+/// no-crit sum (<see cref="Exposure.Of"/>, no attack) under his HP; then, as the phase ended, whether the tile he stood on
+/// did, and whether its crit sum did. Cornered (no tile passed) names the board; a lethal tile taken while one passed, or a
+/// tile read safe that was not, names the planner.
+/// </summary>
+public sealed record CaptainPlan(int Turn, bool AnyPass, bool? EndSafe = null, bool? EndCritSafe = null)
+{
+    /// <summary>Whether the command leaving <paramref name="after"/> was the captain's first of the phase: he had neither moved nor acted on <paramref name="before"/>, and has now.</summary>
+    public static bool Begins(BattleState before, BattleState after) =>
+        before.UnitsOf(Side.Player).FirstOrDefault(u => u.IsCaptain) is { Moved: false, Acted: false } captain
+        && after.Find(captain.Id) is not { Moved: false, Acted: false };
+
+    /// <summary>The read on <paramref name="state"/>, before the captain's first command: whether any tile he can end on passes.</summary>
+    public static CaptainPlan Read(BattleState state, GameContent content)
+    {
+        var captain = state.UnitsOf(Side.Player).First(u => u.IsCaptain);
+        var pass = state.ReachOf(captain, content).Destinations.Append(captain.At)
+            .Any(tile => Exposure.Of(state, content, captain, tile).NoCrit < captain.Hp);
+        return new CaptainPlan(state.Turn, pass);
+    }
+
+    /// <summary>This read with the tile the captain ends the phase on, on <paramref name="state"/> before the phase ends.</summary>
+    public CaptainPlan Ended(BattleState state, GameContent content)
+    {
+        if (state.UnitsOf(Side.Player).FirstOrDefault(u => u.IsCaptain) is not { } captain)
+        {
+            return this;
+        }
+
+        var sum = Exposure.Of(state, content, captain, captain.At);
+        return this with { EndSafe = sum.NoCrit < captain.Hp, EndCritSafe = sum.WithCrit < captain.Hp };
+    }
+
+    /// <summary>
+    /// The class of a fall on <paramref name="state"/>: <c>cornered</c>, <c>lethal tile</c> (one passed, he ended on
+    /// another), <c>read safe, crit-lethal</c>, <c>read safe</c>, <c>own phase</c> (he fell in the phase the read began),
+    /// or <c>unread</c>.
+    /// </summary>
+    public static string Name(CaptainPlan? plan, BattleState state) => plan switch
+    {
+        null => "unread",
+        { AnyPass: false } => "cornered",
+        { EndSafe: null } => "own phase",
+        { EndSafe: false } => "lethal tile",
+        { EndCritSafe: false } => "read safe, crit-lethal",
+        _ => "read safe",
+    };
 }

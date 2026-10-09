@@ -49,6 +49,7 @@ public class SwallowTests
         var stage = Starter.Unit("hask_warden").Swallow!;
 
         Assert.Equal((24, 3, 3, 4), (stage.Hp, stage.Def, stage.Res, stage.Heal));
+        Assert.True(stage.Rooted);
         Assert.Contains("pommel is empty", stage.Description);
         Assert.Null(Starter.Unit("hask").Swallow);
         Assert.Equal(stage, Hask(Start()).Kin);
@@ -225,6 +226,77 @@ public class SwallowTests
         Assert.Equal((2, 1, 1, 20, 3), (stage!.Phases, stage.PlayerPhases, stage.Blows, stage.BossHp, stage.StandingEnd));
     }
 
+    [Theory]
+    [InlineData(false, null, null, "cornered")]
+    [InlineData(true, null, null, "own phase")]
+    [InlineData(true, false, false, "lethal tile")]
+    [InlineData(true, true, false, "read safe, crit-lethal")]
+    [InlineData(true, true, true, "read safe")]
+    public void TheCaptainsLastPlanNamesCorneredApartFromThePlannersFault(bool anyPass, bool? endSafe, bool? endCritSafe, string name)
+    {
+        Assert.Equal(name, Ironwake.Sim.CaptainPlan.Name(new Ironwake.Sim.CaptainPlan(5, anyPass, endSafe, endCritSafe), Start()));
+        Assert.Equal("unread", Ironwake.Sim.CaptainPlan.Name(null, Start()));
+    }
+
+    [Fact]
+    public void ACaptainTheComingFrozenIronKillsAnywhereIsCornered()
+    {
+        var after = Swallowed(Start()) with { FrozenIron = 4 };
+        var doomed = after.WithUnit(Captain(after) with { Hp = 4 });
+        var hale = after.WithUnit(Captain(after) with { Hp = Captain(after).MaxHp(Starter) });
+
+        Assert.False(Ironwake.Sim.CaptainPlan.Read(doomed, Starter).AnyPass);
+        Assert.True(Ironwake.Sim.CaptainPlan.Read(hale, Starter).AnyPass);
+        Assert.False(Ironwake.Sim.CaptainPlan.Read(doomed, Starter).Ended(doomed, Starter).EndSafe);
+    }
+
+    [Fact]
+    public void TheCaptainsPlanReadBeginsWithHisFirstCommandOfThePhase()
+    {
+        var state = Start();
+        var moved = state.Try(new Move(Captain(state).Id, new Coord(3, 3))).Next;
+        var waited = state.Try(new Wait(Captain(state).Id)).Next;
+
+        Assert.True(Ironwake.Sim.CaptainPlan.Begins(state, moved));
+        Assert.True(Ironwake.Sim.CaptainPlan.Begins(state, waited));
+        Assert.False(Ironwake.Sim.CaptainPlan.Begins(moved, moved.Try(new Wait(Captain(moved).Id)).Next));
+    }
+
+    [Fact]
+    public void TheFinaleReadSplitsThePostSwallowFallsByTheCaptainsLastPlan()
+    {
+        var mix = new Dictionary<string, Ironwake.Sim.ActionMix>();
+        Ironwake.Sim.GameResult Fell(string killer, string? plan) => new(BattleResult.Lost, 11, mix, LossCause.Captain) { CaptainKiller = killer, CaptainFellInStageTwo = plan is not null, CaptainPlanRead = plan };
+        var games = new[] { Fell("Hask", "cornered"), Fell("frozen iron", "cornered"), Fell("Hask", "cornered"), Fell("Hask", "read safe"), Fell("Hexer", null) };
+
+        Assert.Equal("after the swallow, by his last plan: cornered 3 (Hask 2, frozen iron 1); read safe 1 (Hask 1)", Ironwake.Sim.FinaleRun.PlanLine(games));
+        Assert.Null(Ironwake.Sim.FinaleRun.PlanLine(new[] { Fell("Hexer", null) }));
+    }
+
+    [Fact]
+    public void TheStageReadSplitsDamageOnHimByWhetherHeReachesTheStrikersTile()
+    {
+        var after = Swallowed(Start());
+        var hask = Hask(after);
+        var wren = after.Units.Single(u => u.Unit.Id == "wren");
+
+        Assert.True(Ironwake.Sim.StageTwo.Reaches(after, Starter, hask, new Coord(3, 2)));
+        Assert.True(Ironwake.Sim.StageTwo.Reaches(after, Starter, hask, new Coord(4, 4)));
+        Assert.False(Ironwake.Sim.StageTwo.Reaches(after, Starter, hask, new Coord(5, 3)));
+        Assert.False(Ironwake.Sim.StageTwo.Reaches(after, Starter, hask, new Coord(6, 4)));
+
+        var stage = Ironwake.Sim.StageTwo.After(null, after, after, new GameEvent[] { new ShardSwallowed(hask.Id, hask.At, 24) });
+        var diagonal = after.WithUnit(wren with { At = new Coord(5, 3) });
+        var struck = diagonal.WithUnit(Hask(diagonal) with { Hp = 20 }).WithUnit(wren with { At = new Coord(5, 3), Acted = true, Moved = true });
+        stage = Ironwake.Sim.StageTwo.After(stage, diagonal, struck, Array.Empty<GameEvent>(), Starter);
+        var beside = struck.WithUnit(Captain(struck) with { At = new Coord(3, 2) });
+        var hit = beside.WithUnit(Hask(beside) with { Hp = 13 }).WithUnit(Captain(beside) with { Acted = true, Moved = true });
+        stage = Ironwake.Sim.StageTwo.After(stage, beside, hit, Array.Empty<GameEvent>(), Starter);
+
+        Assert.Equal((7, 4), (stage!.DamageInReach, stage.DamageBeyond));
+        Assert.Equal((0, 0), (Ironwake.Sim.StageTwo.After(stage with { DamageInReach = 0, DamageBeyond = 0 }, beside, hit, Array.Empty<GameEvent>())!.DamageInReach, 0));
+    }
+
     [Fact]
     public void TheFinaleReadNamesTheStallAndWhatKilledTheCaptain()
     {
@@ -290,6 +362,22 @@ public class SwallowTests
         var result = state.Try(new EndPhase());
 
         Assert.DoesNotContain(result.Events, e => e is ColdDrained);
+    }
+
+    [Fact]
+    public void ARootedStageHoldsTheTileHeSwallowedOn()
+    {
+        var start = Start();
+        var roaming = start.WithUnit(Hask(start) with { Behavior = Behavior.Aggressive });
+        var rooted = Swallowed(roaming);
+        var unrooted = Swallowed(roaming.WithUnit(Hask(roaming) with { Kin = Hask(roaming).Kin! with { Rooted = false } }));
+
+        Assert.Equal(Behavior.Hold, Hask(rooted).Behavior);
+        Assert.Equal(Behavior.Aggressive, Hask(unrooted).Behavior);
+        var far = rooted.WithUnit(Captain(rooted) with { At = new Coord(0, 4) }) with { Phase = Side.Enemy };
+        Assert.DoesNotContain(EnemyAi.Plan(far, Starter), c => c is Move m && m.UnitId == Hask(far).Id);
+        var chased = unrooted.WithUnit(Captain(unrooted) with { At = new Coord(0, 4) }) with { Phase = Side.Enemy };
+        Assert.Contains(EnemyAi.Plan(chased, Starter), c => c is Move m && m.UnitId == Hask(chased).Id);
     }
 
     [Fact]

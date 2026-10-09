@@ -1336,6 +1336,11 @@ public static class ContentSerializer
                 writer.WriteString("description", swallow.Description);
             }
 
+            if (swallow.Rooted)
+            {
+                writer.WriteBoolean("rooted", true);
+            }
+
             writer.WriteEndObject();
         }
 
