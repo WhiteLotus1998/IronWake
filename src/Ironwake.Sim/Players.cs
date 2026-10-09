@@ -1059,7 +1059,7 @@ public sealed class HeuristicPlayer : IPlayer
     /// <summary>
     /// Whether <paramref name="unit"/> is wounded enough for the heuristic to heal it: at half its max HP or below (issue 1429).
     /// The threshold was below half, and on the Mill 20 of 41 timeouts were the captain parked at exactly 11/22 with every
-    /// approach lethal at 11 and his own Field Dressing and Maud's Salve unused to the turn limit (DECISIONS/0367).
+    /// approach lethal at 11 and his own Field Dressing and Maud's Salve unused to the turn limit (DECISIONS/0367, 0396).
     /// </summary>
     public static bool Wounded(GameContent content, BattleUnit unit) => unit.Hp * 2 <= unit.MaxHp(content);
 

@@ -1,0 +1,25 @@
+The Sim's heal threshold at half HP or below (issue 1429, DECISIONS/0396). Main at b71637a against the branch,
+Release, heuristic player, 200 seeds, two-roll average. `--full --all` (before) and `--full <map>` per map (after),
+then `--finale content/keep/ironwake_keep.map`. Gate 1 losses as timeout / captain / protected.
+
+map              before                      after                       moved
+the_tollgate     191   9 / 0 / 0             191   9 / 0 / 0             0      tuned
+brackwater_cut   133   0 / 67 / 0 (exits)    133   0 / 67 / 0            0      tuned
+harrow_weir      132  43 / 25 / 0            132  43 / 25 / 0            0      tuned
+the_field        103  56 / 41 / 0            104  54 / 42 / 0            +1     tuned (Keziah's pick)
+the_mill         107  41 /  5 / 47           115  30 /  8 / 47           +8     not tuned (0394)
+saltmarsh_ford    50 133 / 17 / 0             54 131 / 15 / 0            +4     not tuned
+sallow_grange    175  22 /  3 / 0            173  25 /  2 / 0            -2     not tuned
+old_mill_road     57  36 / 107 / 0            58  36 / 106 / 0           +1     fixture
+starting_alone     1   0 / 199 / 0             1   0 / 199 / 0            0     lesson
+
+gate 4, median drop: unchanged on every map but saltmarsh_ford 0.075 FAILED to 0.090 ok,
+old_mill_road 0.275 to 0.280, sallow_grange 0.395 to 0.390 (still FAILED on Wren, 0.120 to 0.110).
+
+finale (L8)      full 149 / depleted 135 / floor 0   ->   full 150 / depleted 134 / floor 0, ok
+
+Reading. No tuned cell moves past noise (0, 0, 0, +1). The Mill gains 8: 11 of its 41 timeouts
+unpark (the captain at exactly 11/22 now takes Field Dressing or Maud's Salve), 8 of them into wins
+and 3 into captain deaths; Maud's 47 deaths are untouched. 115 is still under gate 1's 120, so
+0394's condition 3 (every screen under the gate) still holds. 0367's "fixing the park moves no wins"
+was read on screen A (103), which also changed the consumable rule; the bare threshold moves 8.
