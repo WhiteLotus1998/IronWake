@@ -209,6 +209,13 @@ public sealed record BattleState(
     public ValueList<string> Coma { get; init; }
 
     /// <summary>
+    /// Where the shard under the hill is (issue 1386 slice 3a, <see cref="KinShard"/>): null while the bearer the map's
+    /// <c>kin_shard:</c> header names still carries it, else who carries it, the tile it lies on, or that it is broken.
+    /// A Recall restores it with the board.
+    /// </summary>
+    public ShardHold? Shard { get; init; }
+
+    /// <summary>
     /// Whether Commander's Word is open on this battle (issue 85): on a map with <c>orders: on</c>,
     /// and on every campaign map from the second, where it is the captain's from Maud's arrival.
     /// </summary>
@@ -958,6 +965,11 @@ public sealed record BattleState(
         if (Coma.Count > 0)
         {
             sb.Append("coma ").Append(string.Join(' ', Coma)).Append('\n');
+        }
+
+        if (Shard is { } shard)
+        {
+            sb.Append("shard ").Append(KinShard.Word(shard)).Append('\n');
         }
 
         if (Map.Fronts.Count > 0)

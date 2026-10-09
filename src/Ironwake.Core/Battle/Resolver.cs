@@ -189,6 +189,7 @@ public static class Resolver
         next = HeldBars.After(next, events);
         next = Lock.After(next, events);
         next = Freed.After(state, next, events);
+        next = KinShard.After(state, next, events);
         next = Break.After(state, next, content, events);
         next = Fronts.After(state, next, content, events);
         next = WakeGroups(state, next, content, events);
@@ -2153,7 +2154,8 @@ public static class Resolver
     /// <summary>
     /// Issue 1386's take: a company unit, not yet acted, beside a boss running with the shard, takes it and breaks it as
     /// its action, in place of Attack, Item or Wait, after its Move or without one (<see cref="ShardRun"/>). He leaves
-    /// the board alive, which is not a kill. No Canto follows.
+    /// the board alive, which is not a kill. No Canto follows. Naming <see cref="KinShard.Ground"/> in place of the boss
+    /// takes the shard under the hill off the ground (issue 1386 slice 3a, <see cref="KinShard"/>).
     /// </summary>
     private static (BattleState, Rejection?) ApplyTakeShard(BattleState state, TakeShard take, List<GameEvent> events)
     {
@@ -2161,6 +2163,13 @@ public static class Resolver
         if (unit is null)
         {
             return (state, rejection);
+        }
+
+        if (take.BossId == KinShard.Ground)
+        {
+            return KinShard.Refusal(state, unit) is { } ground
+                ? (state, new Rejection(RejectionReason.CannotTakeShard, ground))
+                : (KinShard.Take(state, unit, events), null);
         }
 
         if (ShardRun.Refusal(state, unit, take.BossId) is { } refusal)
@@ -2387,6 +2396,7 @@ public static class Resolver
         next = LandBlows(next, content, nextPhase, events);
         next = Swallow.Fall(next, content, nextPhase, events, (board, fallen) => LeaveKeepsake(board, fallen, content, events).WithoutUnit(fallen.Id));
         next = ShardRun.AtPhaseStart(next, content, nextPhase, events);
+        next = KinShard.AtPhaseStart(next, content, nextPhase, events);
         if (nextPhase == Side.Player)
         {
             next = Wildfire.Spread(next, events);
@@ -2561,6 +2571,11 @@ public static class Resolver
                 {
                     yield return new TakeShard(unit.Id, runner.Id);
                 }
+            }
+
+            if (KinShard.Of(state) is { Lies: not null } && KinShard.Refusal(state, unit) is null)
+            {
+                yield return new TakeShard(unit.Id, KinShard.Ground);
             }
 
             if (unit.Side == Side.Player && state.Map.ShoveEnabled)

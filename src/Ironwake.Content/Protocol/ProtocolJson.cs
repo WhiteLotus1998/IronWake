@@ -433,6 +433,24 @@ public static class ProtocolJson
                 w.WriteString("boss", sb.BossId);
                 WriteCoord(w, "at", sb.At);
                 break;
+            case ShardDropped sd:
+                w.WriteString("unit", sd.UnitId);
+                WriteCoord(w, "at", sd.At);
+                break;
+            case ShardPicked sp:
+                w.WriteString("unit", sp.UnitId);
+                WriteCoord(w, "from", sp.From);
+                WriteCoord(w, "at", sp.At);
+                break;
+            case SwornRetaken st:
+                w.WriteString("unit", st.UnitId);
+                WriteCoord(w, "at", st.At);
+                w.WriteNumber("hp", st.Hp);
+                break;
+            case KinShardBroken kb:
+                w.WriteString("unit", kb.UnitId);
+                WriteCoord(w, "at", kb.At);
+                break;
             case ArmorShattered ash:
                 w.WriteString("unit", ash.UnitId);
                 w.WriteString("item", ash.SpellId);
@@ -1120,6 +1138,27 @@ public static class ProtocolJson
             w.WriteString("order", OrderName(order));
         }
 
+        if (state.Shard is { } shard)
+        {
+            w.WriteStartObject("shard");
+            if (shard.Bearer is { } bearer)
+            {
+                w.WriteString("bearer", bearer);
+            }
+
+            if (shard.Lies is { } lies)
+            {
+                WriteCoord(w, "at", lies);
+            }
+
+            if (shard.Broken)
+            {
+                w.WriteBoolean("broken", true);
+            }
+
+            w.WriteEndObject();
+        }
+
         w.WriteStartArray("units");
         foreach (var unit in state.Units.Where(u => !hidden.Contains(u)))
         {
@@ -1375,6 +1414,9 @@ public static class ProtocolJson
             OrderCalled = OptionalString(e, "order") is { } order ? ReadOrderKind(order) : null,
             FrozenIron = OptionalInt(e, "frozenIron") ?? 0,
             FrozenIronHeld = e.TryGetProperty("frozenIronHeld", out _) && RequiredBool(e, "frozenIronHeld"),
+            Shard = e.TryGetProperty("shard", out var shard)
+                ? new ShardHold(OptionalString(shard, "bearer"), shard.TryGetProperty("at", out _) ? ReadCoord(shard, "at") : null, shard.TryGetProperty("broken", out _) && RequiredBool(shard, "broken"))
+                : null,
             Opened = e.TryGetProperty("chests", out var chests)
                 ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
                 : ValueList<Coord>.Empty,

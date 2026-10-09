@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "goes_home", "seize_name", "seize_hold", "shard_race", "drops", "arrivals", "wake_on_death" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "hunt_waits", "pair_rule", "freed", "keziah_warning", "carry", "breath", "route_drift", "region", "dash", "wind", "one_answer", "seen_far", "holds", "goes_home", "seize_name", "seize_hold", "shard_race", "kin_shard", "drops", "arrivals", "wake_on_death" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -40,6 +40,11 @@ public static class MapFormat
         if (map.SeizeHold)
         {
             sb.Append("seize_hold: 1\n");
+        }
+
+        if (map.KinShard is { } kinShard)
+        {
+            sb.Append("kin_shard: ").Append(kinShard).Append('\n');
         }
 
         if ((map.ShardRace ?? map.SecretRace?.Race) is { } race)
@@ -486,6 +491,7 @@ public static class MapFormat
                     Events = ValueList<MapEvent>.From(map.Events.Where(e => e.Trigger is not RaceTrigger)),
                 };
             }
+            map = map with { KinShard = ParseKinShard(header, map) };
             map = map with { Drops = ParseDrops(header, map), ArrivalsWait = ParseArrivals(header, map), DeathWakes = ParseDeathWakes(header, map) };
             if (Kinsbane.WarningRefusal(map, _content) is { } warning)
             {
@@ -612,6 +618,42 @@ public static class MapFormat
             }
 
             return new FreedBond(at, group);
+        }
+
+        /// <summary>
+        /// The <c>kin_shard:</c> header (issue 1386 slice 3a): <c>x,y</c>, the tile of the enemy placement that carries
+        /// the shard under the hill, neither a boss nor the messenger.
+        /// </summary>
+        private Coord? ParseKinShard(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("kin_shard", out var entry))
+            {
+                return null;
+            }
+
+            var tile = entry.Value.Trim().Split(',');
+            if (tile.Length != 2 || !int.TryParse(tile[0], out var x) || !int.TryParse(tile[1], out var y))
+            {
+                throw ErrorAt(entry.Line, $"kin_shard: needs the bearer's tile: 'kin_shard: 7,6', got '{entry.Value}'");
+            }
+
+            var at = new Coord(x, y);
+            if (map.Placements.FirstOrDefault(p => p.At == at) is not EnemyPlacement enemy)
+            {
+                throw ErrorAt(entry.Line, $"kin_shard names {at} but no E line places an enemy there");
+            }
+
+            if (enemy.IsBoss)
+            {
+                throw ErrorAt(entry.Line, $"kin_shard: the enemy at {at} is a boss; a sworn carries the shard");
+            }
+
+            if (map.Messenger is { } route && route.From == at)
+            {
+                throw ErrorAt(entry.Line, $"kin_shard: the enemy at {at} is the messenger");
+            }
+
+            return at;
         }
 
         /// <summary>

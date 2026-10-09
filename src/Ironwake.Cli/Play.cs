@@ -789,7 +789,7 @@ public sealed class PlaySession
                 Apply(new TakeShard(words[1], words[2]));
                 break;
             case "take":
-                Error("usage: take <unit> <boss>");
+                Error($"usage: take <unit> <boss>, or take <unit> {KinShard.Ground}");
                 break;
             case "order":
                 OrderWords(words);
@@ -2361,6 +2361,11 @@ public sealed class PlaySession
             rows.Add($"  {ShardRun.Line(runner, names)}");
         }
 
+        if (KinShard.Line(state, names) is { } shardRow)
+        {
+            rows.Add($"  {shardRow}");
+        }
+
         if (wakes is { Count: > 0 })
         {
             rows.Add($"  stopping here wakes: {string.Join(", ", wakes.Select(w => $"{UnitNames.Group(w.Group)} ({(w.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(w))})"))}");
@@ -3418,6 +3423,14 @@ public sealed class PlaySession
                     + $" with the shard in his fist. Swallows in {sr.Phases} (take it from beside him)";
             case ShardCountdown sc:
                 return sc.Left == 0 ? $"{names[sc.UnitId]}'s race is run" : $"{names[sc.UnitId]} holds the shard: swallows in {sc.Left}";
+            case ShardDropped sd:
+                return $"{names[sd.UnitId]} falls, and the shard rolls from his hand onto {sd.At} (take it from on or beside it: take <unit> {KinShard.Ground})";
+            case ShardPicked sp:
+                return $"{names[sp.UnitId]} goes from {sp.From} to {sp.At} and closes his hand on the shard";
+            case SwornRetaken st:
+                return $"The Kin re-takes {names[st.UnitId]} through the shard: they stand again on {st.At} (hp {st.Hp}) and act from the next enemy phase";
+            case KinShardBroken kb:
+                return $"{names[kb.UnitId]} takes up the shard on {kb.At} and breaks it on the stone: the Kin re-takes no one now";
             case ShardBroken broken:
                 return $"{names[broken.UnitId]} wrenches the shard from {names[broken.BossId]} and breaks it on the stone. He drops where he stands, alive, in a sleep nothing wakes (off the field; his waking waits on Lotus)";
             case ColdDrained cd:

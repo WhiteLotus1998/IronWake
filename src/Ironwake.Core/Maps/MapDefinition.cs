@@ -365,6 +365,12 @@ public sealed record MapDefinition(
     public ShardRace? ShardRace { get; init; }
 
     /// <summary>
+    /// The <c>kin_shard:</c> header (issue 1386 slice 3a, under the hill, <see cref="KinShard"/>): the tile of the enemy
+    /// placement that carries the shard the Kin re-takes its sworn through. Null for none.
+    /// </summary>
+    public Coord? KinShard { get; init; }
+
+    /// <summary>
     /// The <c>shard_race:</c> header with <c>secret</c> (issue 1386 slice 2b): the campaign's secret-path race, held
     /// apart with its <c>race</c> events until <see cref="ArmSecretRace"/>; the map plays as if it had no race. Null
     /// when the map has none.
